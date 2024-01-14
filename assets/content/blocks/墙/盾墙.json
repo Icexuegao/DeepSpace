@@ -1,0 +1,29 @@
+{
+"name":"盾墙",
+    "details":"没错就是盾墙，那个敌人能造我们不能造的墙。",
+	"description":"保护己方建筑，挡下敌方炮弹,生成立场。",
+	"type":"ShieldWall",
+	"health":1800,
+"shieldHealth":1500,
+	//盾容
+	"regenSpeed":2.5,
+	"category":"defense",
+	//护盾再生速度
+	"breakCooldown":1200,
+	//护盾破碎后的冷却
+	"conductivePower":true,
+	"consumes": {
+		"power": 0.06666666
+		},
+		"research": {
+	"parent":"大型冰晶墙"},
+
+"requirements": [
+	    "phase-fabric/16"
+	    "silicon/20",
+	    "titanium/12"
+	    ],
+
+
+
+}

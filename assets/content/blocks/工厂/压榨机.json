@@ -1,0 +1,41 @@
+{
+	"name":"压榨机",
+	"type":"GenericCrafter",/*类型，目前本人就会这一个*/
+	"description":"压榨Cryospore，生产Frozenparticle流体",
+	"itemCapacity":50,//物品容量，数字都能改别的
+	"health":350,
+	"size":3,/*最高16，不然会崩*/
+	"drawer": {
+		"type": "DrawMulti",
+		"drawers": [
+	{"type":"DrawPistons",
+	"sinMag":1},
+	"DrawDefault",
+	{"type": "DrawLiquidRegion",
+	"drawLiquid": "oil"},
+	{"type": "DrawRegion",
+	"suffix": "-top"}
+	]},
+	
+	"hasPower":true,//是否需要电
+    "outputLiquids":["Frozenparticle流体/0.1"]
+	"hasLiquids":true,/*是否需要液体*/
+    "hasItems":true,/*是否需要物品*/
+    "craftTime":30,
+    
+    "updateEffect":"mineBig",
+    
+	"consumes":{
+		"power":1.5,/*游戏里会乘60*/
+"items":{"items":[{"item":"活性Cryospore", "amount":1}]}},
+  	"liquidCapacity":60,//容量
+	"requirements":[
+	    "silicon/60",
+	    "titanium/80",
+	    "lead/30",
+	    "copper/50"
+	],
+	"category":"crafting",
+	"research":"Cryospore培养基",/*前置研究*/
+	"activeSoundVolume":900
+}

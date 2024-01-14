@@ -1,0 +1,33 @@
+{
+	"name":"集成电路配装器"
+	"type":"GenericCrafter"/*类型，目前本人就会这一个*/
+	"description":"由AI控制,快捷配装集成电路,异常脆弱",
+	"itemCapacity":5,/*物品容量，数字都能改别的*/
+	"health":100,
+	"size":3,/*最高16，不然会崩*/
+	"hasPower": true,/*是否需要电*/
+	"hasItems": true,/*是否需要物品*/
+	"craftTime":30,
+				"drawer":{
+        "type":"DrawMulti",
+        "drawers":[
+            "DrawDefault",
+            "DrawFlame"
+            ]
+    },
+	"consumes": {
+		"power":2,
+		"items": {
+			"items":["copper/1"]}},
+	  	"outputItems":["copper/1"],
+	"requirements": [
+		{ "item": "graphite", "amount":30 },
+        {"item":"copper","amount":60},
+		{ "item": "silicon", "amount":150 },
+	    {"item":"metaglass","amount":20},
+		{ "item": "titanium", "amount":40 },
+		{ "item": "lead", "amount": 125 }/*建造所用物品*/
+	],
+	"category":"crafting",
+	"research": "硅精炼厂"
+}

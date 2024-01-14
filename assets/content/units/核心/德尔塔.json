@@ -1,0 +1,77 @@
+{
+	"type":"flying",/*种类 */
+	"name":"德尔塔",/*名称，它叫什么名字！ */
+	"description": "保护中型量子核心，可建造建筑",/*描述，简介！ */
+	"ammoCapacity":20,/*弹药容量 */
+    "ammoResupplyAmount":1,/*弹药补给倍率 */
+    "speed":3.33333,/*速度一格=7.5*/
+    "research":"西格玛",
+	"flying":true,/*能否飞行，true为能飞 */
+	"turnCursor":false,/*转动光标 */
+	"engineOffset":5,/*发动机偏移 */
+	"engineSize":2,/*发动机大小 */
+    "hitSize":10,/*被击中大小，你的大小 */
+    "targetAir":"true",/*目标航空 */
+    "health":180,/*血量 */
+    "armor":2,/*装甲 */
+    "mineSpeed":7,/*挖矿速度 1=100% */
+    "mineTier":3,/*挖矿等级，你可以挖什么矿 */
+    "buildSpeed":0.8,/*构建速度 1=100%*/
+    "rotateSpeed":15,/*转速，旋转的速度 */
+    "itemCapacity":20,/*容量，字面意思 */
+    "commandLimit":0,/*命令限制，能让多少单位跟着你！ */
+    "rotateShooting":"true",/*旋转射击，是否旋转射击 */
+    	"weapons":[ 
+    	{"name":"武器1",/*贴图的名字 */
+	"x":0,"y":-3,/*位置 x为上下y为左右 */
+	"mirror":"false",/*镜像，是否对称 */
+	"rotateSpeed":0,/*旋转速度*/
+	"reload":45,/*重新装弹速度 */
+    "recoil":0,//后坐力
+    	"shoot":{
+	"type":"ShootBarrel",
+	"barrels":[
+        0,-3,0
+    ]},
+	"rotate":"true",/*是否旋转 */
+    "parts":[{
+                "type":"RegionPart",
+                "mirror":false,
+                "x":-3.3,
+                "y":7,
+                "suffix":"-左1",
+                "layer":50,
+                "moveX":0,
+                "moveY":0,
+                "moveRot":90
+               },{
+                "type":"RegionPart",
+                "mirror":false,
+                "x":3.3,
+                "y":7,
+                "suffix":"-右1",
+                "layer":50,
+                "moveX":0,
+                "moveY":0,
+                "moveRot":-90
+               }],
+	"shootEffect":"none",/*射击效果 */
+	"shootSound":"missile",/*射击声 */
+	"bullet":{
+	"type":"MissileBulletType",/*子弹类型 */
+	"damage":66,/*伤害*/
+	"frontColor":"#00ffff",/*子弹颜色 正面颜色*/
+    "collidesTiles":true,//是否碰撞方块
+	"backColor":"#00ffff",/*背景色 */
+	"status":"freezing",
+	"statusDuration":180,
+	"width":5,/*子弹宽度 */
+    "homingRange":180,//追踪范围，
+	"height": 5,/*子弹长度 */
+	"speed":3,/*子弹速度 */
+	"lifetime":66.666666666,//存在时间，帧
+	"buildingDamageMultiplier":0.01/*对建筑物伤害/乘*/
+	} 	
+	},
+    ]
+}

@@ -1,0 +1,15 @@
+{
+	"name": "大型孢子墙",
+	"description":"利用两种孢子的依附性，制成大型防御墙，性能比大型相织布墙要优越 ",
+	"type": "Wall",
+	"health":2800,
+	"deflect" :true
+	"flashHit":true
+	"chanceDeflect":60,
+	"size":2,
+	"requirements": [
+		{ "item": "活性Cryospore", "amount":24}
+		{ "item":"spore-pod", "amount":24}],
+	"category": "defense",
+	"research": "小型孢子墙"
+}

@@ -1,0 +1,165 @@
+{
+  "type":"ItemTurret",//种类
+  "name":"破碎",//名称
+  "description":"向敌人发射破碎子弹，分裂造成伤害，并带有制退",//描述
+  "health":2500,//生命
+  "liquidCapacity":50,//液体容量
+  "size":4,//大小
+  "consumes":{ "coolant": {
+            "amount": 0.1,
+            "optional": true}},
+  
+  
+      "shoot": {
+        "shots":2,//开火炮口数
+        	"type":"ShootBarrel",
+	"barrels":[
+        -4,0,0,
+       
+        4,0,0
+    ],
+        "shotDelay":10//多个炮口之间发射延迟。
+    },
+  "requirements":["graphite/100",
+                  "lead/40",
+                  "thorium/50"
+                  
+                  
+ 
+  ],//建造消耗的材料
+  
+  "category":"turret",//游戏界面分类
+  "research":"流星",//科技树前一项
+  "rebuildable":true,//是否能重建
+  "canOverdrive":true,//超频是否应用
+  "breakSound":"fire",//方块破坏音效
+  "buildCostMultiplier":1,//建造时间倍率
+  "heatColor":"e3e3ff",//过热颜色
+  
+  "shootEffect":{"type":"WaveEffect",
+"colorFrom":"b01cff",//颜色从
+"colorTo":"b01cff",//颜色至
+"lightColor":"b01cff",//浅色
+"sizeFrom":0,//开始时圆环直径
+"waveLife":12,
+"lifetime":12,
+"sizeTo":6,//结束时圆环直径
+"lightScl":3.0,//轻量级
+"lightOpacity":0.4,//光不透明
+"sides":-1,//双方//效果不明
+"rotation":-1,//回转//效果不明
+"strokeFrom":1,//开始时圆形宽度
+"strokeTo":0,//结束时圆环宽度
+"offsetX":0.0,//偏转x
+"offsetY":0.0//偏转y
+},
+  
+  "smokeEffect":"none",//冒烟特效
+  "ammoPerShot":1,//射击一次消耗子弹
+  "range":360,//范围
+  "reload":7.5,//装弹时间
+  "inaccuracy":1,//精准度
+  "shots":1,//一次射出子弹数
+  "spread":1,//散弹散布
+  "recoil":4,//后坐力
+    "drawSize":1,//子弹碰撞箱
+   		"collidesTiles":true,//是否与单位碰撞。
+  "rotatespeed":5,//转速
+  "shootCone":1,//瞄准射击最大误差
+  "shootShake":0.5,//射击摇晃屏
+  "targetAir":true,//瞄准空军
+  "shootSound":"blaster",
+  "targetGround":true,//瞄准陆军
+ 
+  "coolEffect":"none",//液体加速特效
+  "maxAmmo":100,//弹夹容量
+  "ammoTypes":{
+    "copper":{
+      "type":"BasicBulletType",//种类
+      "backColor":"b01cff",//后贴图颜色
+      "frontColor":"b01cff",//前贴图颜色
+      "bulletSprite":"源计划-破碎子弹",//子弹贴图
+            "width":4,
+            "height":28,
+                        "fragBullets":3,//破片出多少颗子弹
+          
+            
+            "fragBullet":{
+		    "fragVelocityMin":2,//破片速度最小值
+	    	"speed":3,
+	    	 "backColor":"b01cff",//子弹背景颜色
+	    	"sprite":"源计划-破碎子弹",
+             "frontColor":"b01cff",//子弹颜色
+	     	"damage":10,//伤害
+	     	"trailColor":"b01cff",//尾迹颜色
+	   	               "width":4,
+            "height":28,
+		    "homingPower":0.2,//追踪力度
+        "homingRange":160,//追踪范围
+	    "lifetime":120,//子弹消失延迟
+		"fragVelocityMax":5,//破片速度最大值
+		"type":"MissileBulletType",
+		"fragLifeMin":1,//破片最小声明值
+		"fragLifeMax":1,//破片最大生命值
+		"hitColor":"b01cff",//命中颜色
+         },
+      "lifetime":40,//子弹消失延迟
+      "speed":9,//子弹速度
+      "damage":100,//子弹伤害
+      "pierceCap":4,
+      "pierce":true,//是否穿透单位
+      "hitEffect":"none",//击中特效
+      "despawnEffect":"none",//子弹消失特效
+      "inaccuracy":1,//补充精准度
+      "ammoMultiplier":1,//一个物品打几发
+      "reloadMultiplier":1,//装弹速度倍率
+      "knockback":4,//击退力
+      "trailEffect":"none"//尾迹特效
+      
+    },
+  
+   "thorium":{
+      "type":"BasicBulletType",//种类
+      "backColor":"b01cff",//后贴图颜色
+      "frontColor":"b01cff",//前贴图颜色
+      "bulletSprite":"源计划-破碎子弹",//子弹贴图
+            "width":4,
+            "height":28,
+                        "fragBullets":2,//破片出多少颗子弹
+          
+            
+            "fragBullet":{
+		    "fragVelocityMin":1,//破片速度最小值
+	    	"speed":2,
+	    	 "backColor":"b01cff",//子弹背景颜色
+	    	"sprite":"源计划-破碎子弹",
+             "frontColor":"b01cff",//子弹颜色
+	     	"damage":12,//伤害
+	     	"trailColor":"b01cff",//尾迹颜色
+	   	               "width":4,
+            "height":28,
+		    "homingPower":0.2,//追踪力度
+        "homingRange":160,//追踪范围
+	    "lifetime":120,//子弹消失延迟
+		"fragVelocityMax":3,//破片速度最大值
+		"type":"MissileBulletType",
+		"fragLifeMin":1,//破片最小声明值
+		"fragLifeMax":1,//破片最大生命值
+		"hitColor":"b01cff",//命中颜色
+         },
+      "lifetime":40,//子弹消失延迟
+      "speed":8,//子弹速度
+      "damage":150,//子弹伤害
+      "pierceCap":4,
+      "pierce":true,//是否穿透单位
+      "hitEffect":"none",//击中特效
+      "despawnEffect":"none",//子弹消失特效
+      "inaccuracy":5,//补充精准度
+      "ammoMultiplier":1,//一个物品打几发
+      "reloadMultiplier":1,//装弹速度倍率
+      "knockback":6,//击退力
+      "trailEffect":"none"//尾迹特效
+      
+    }
+  }
+  }

@@ -1,0 +1,18 @@
+{
+	"type": "Router",//类型
+	"size":2,//平方大小
+	"category":"distribution",//菜单栏
+	"details":"努力成为路由器邪教吧",
+	"name": "电子路由器",//名字
+	"description": "向三个方向运输物品，加快运输速度，由于速度太快，只能放一个。",//介绍
+	"research":"钛晶传送带"//前置科技树
+	"alwaysUnlocked":false,//科技树默认解锁
+	"health":100,
+	//"regionRotated":1,//区域旋转
+	"solid":true,//实体
+	"requirements": ["copper/10","lead/10"
+			],
+	"speed":1000000000000,//运输速度
+	"itemCapacity":10,
+	"displayedSpeed":100000000000,//显示速度
+}

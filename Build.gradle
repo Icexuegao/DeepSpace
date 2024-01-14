@@ -1,0 +1,150 @@
+apply plugin: "java"
+//配置buildGradle的信息或依赖
+buildscript {
+    //项目的仓库
+    ext {
+        //这个mod的构建号
+        jabelVersion = "93fde537c7"
+        sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
+    }
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        google()
+        maven { url 'https://maven.aliyun.com/repos\n' +
+                '        mindustryVersion = \'v146\'itory/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter/' }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+    maven { url 'https://www.jitpack.io' }
+}
+
+//构建使用的jar包，一些依赖或者库
+dependencies {
+    compileOnly files("D:\\biancheng\\luanqibazaode\\lib\\Mindustry.jar")
+}
+version '1.0'
+
+//源代码
+sourceSets.main.java.srcDirs = ["javasrc"]
+
+
+//输出路径
+File buildFile = file("builds")
+project.buildDir(buildFile)
+DirectoryProperty m = getLayout().getBuildDirectory()
+def getMyBuildDir = m.get()
+
+
+//Gradle遇到中文报错解决方法
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
+//java版本
+java {
+    targetCompatibility = 8
+    sourceCompatibility = JavaVersion.VERSION_16
+}
+
+//java 8向后兼容标志
+allprojects {
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.compilerArgs.addAll(['--release', '8'])
+        }
+    }
+}
+
+//ARC版本
+configurations.configureEach {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'com.github.Anuken.Arc') {
+            details.useVersion "$mindustryVersion"
+        }
+    }
+}
+
+jar {
+    //解决相同java识别文件报错
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes('Main-Class': 'com.example.backendapp.BackendAppApplication')
+    }
+    //存档文件名
+    //${project.name}指IceMods
+    archiveFileName = "${project.name}Desktop.jar"//jar文件名
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    from(rootDir) {
+        include "mod.hjson"
+    }
+    from("assets/") {
+        include "**"
+    }
+}
+
+tasks.register('jarAndroid') {
+    dependsOn jar
+    doLast {
+        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
+
+        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
+
+        if (!platformRoot) throw new GradleException("sb 没装sdk和d8编译你老母")
+
+        //收集脱糖所需的依赖项
+        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
+
+        //dex 和 desugar 文件 - 这需要 PATH 中包含 d8
+        "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktop.jar"
+                .execute(null, new File("$getMyBuildDir/libs")).waitForProcessOutput(System.out, System.err)
+    }
+}
+tasks.register('deploy', Jar) {
+    dependsOn jarAndroid
+    dependsOn jar
+    archiveFileName = "${project.name}.jar"//存档文件名
+    from {
+        [zipTree("$getMyBuildDir/libs/${project.name}Desktop.jar"),
+         zipTree("$getMyBuildDir/libs/${project.name}Android.jar")]
+    }
+    doLast {
+        delete {
+            delete "$getMyBuildDir/libs/${project.name}Desktop.jar"
+            delete "$getMyBuildDir/libs/${project.name}Android.jar"
+        }
+    }
+
+}
+//给文件打印一个字符节，防止相同文件报错。
+tasks.register('a', Copy) {
+    FileInputStream fis = new FileInputStream(new File("assets\\ceshi.txt"))
+    byte[] byt = new byte[10]
+    int g = fis.read(byt, 0, byt.length)
+    fis.close()
+    if (g < 5) {
+        FileOutputStream i = new FileOutputStream(new File("assets\\ceshi.txt"), true)
+        i.write(1)
+        i.close()
+    } else {
+        FileOutputStream i = new FileOutputStream(new File("assets\\ceshi.txt"), false)
+        i.write(1)
+        i.close()
+    }
+}
+//copy复制模组到指定文件夹并替换
+//dependsOn依赖项只有依赖项执行完之后复制才会执行
+tasks.register('mycopy', Copy) {
+    dependsOn a
+    dependsOn deploy
+    from "$getMyBuildDir/libs/$project.name" + ".jar"//源
+    into 'C:\\Users\\28947\\AppData\\Roaming\\Mindustry\\mods'//目的
+}

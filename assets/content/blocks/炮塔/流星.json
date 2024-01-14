@@ -1,0 +1,105 @@
+{
+    "type": "ItemTurret",//类型
+    "name": "流星",//名字
+    "description": "发射高穿导弹，适合对付群体且血量较少的空中单位",//介绍
+    "health":1400,//血量
+    "size":2,//炮台大小
+    "reload":25,//子弹发射间隔
+    "range":300,//自动攻击范围(10=1格)
+    "maxAmmo":50,//最大弹药数
+        "consumes": {"power":3,
+        "coolant": {
+            "amount": 0.1,
+            "optional": true
+        }
+    },
+    "recoilTime":20,//后坐力恢复时间
+    "recoil":2,//后坐力
+    "shoot": {
+        "shots":3,//开火炮口数
+        	"type":"ShootBarrel",
+	"barrels":[
+        -4,0,0,
+        0,0,0,
+        4,0,0
+    ],
+        "shotDelay":6//多个炮口之间发射延迟。
+    },
+    "ammoPerShot":1,//弹药消耗倍数。
+    "shootSound":"missile",//子弹音效
+    "targetGround": false,//可以攻击陆地单位
+    "targetAir": true,//可以攻击天空单位
+    "inaccuracy":1,//误差角度
+    "shake":1,//振动
+    "shootCone":20,
+    "ammoTypes": {
+        "copper": {
+            "type":"MissileBulletType",/*子弹类型*/
+            "reloadMultiplier":1,
+           
+            "width":5,
+            "height":5,
+           
+            "sprite":"源计划-流星小弹",
+            "damage":36,//伤害
+                        "trailColor":"#ffffff",//尾迹颜色
+                                     "frontColor":"#ffffff",//子弹颜色
+                                     "fromColor":"#ffffff",//开火颜色
+             
+       "toColor":"#ffffff",//开火后渐变至颜色            
+            "backColor":"#ffffff",//子弹背景颜色
+            "lifetime":80,//子弹消失延
+            "speed":4,//子弹速度
+          
+           
+            "ammoMultiplier":1,//物品装弹倍数
+            "pierce":true,//穿透单位
+            },
+                    "surge-alloy": {
+            "type":"MissileBulletType",
+            "reloadMultiplier": 1,
+       "fromColor":"#ffffff",//开火颜色
+       "toColor":"#ffffff",//开火后渐变至颜色            
+            "backColor":"#ffffff",//子弹背景颜色
+	    	"sprite":"源计划-流星弹",
+             "frontColor":"#ffffff",//子弹颜色
+            "lifetime":80,//子弹消失延
+            "trailColor":"#ffffff",//尾迹颜色
+            "fragRandomSpread":90,//破碎角度
+	       	"fragAngle":0,//碎片角度
+            "damage":45,//伤害
+            "fragBullets":3,//破片出多少颗子弹
+            "speed":4,//子弹速度"fragBullets":8
+            
+            "fragBullet":{
+		    "fragVelocityMin":2,//破片速度最小值
+	    	"speed":3,
+	    	 "backColor":"#ffffff",//子弹背景颜色
+	    	"sprite":"源计划-流星小弹",
+             "frontColor":"#ffffff",//子弹颜色
+	     	"damage":10,//伤害
+	     	"trailColor":"#ffffff",//尾迹颜色
+	   	   
+		    "homingPower":0.2,//追踪力度
+        "homingRange":160,//追踪范围
+	    "lifetime":180,//子弹消失延迟
+		"fragVelocityMax":5,//破片速度最大值
+		"type":"MissileBulletType",
+		"fragLifeMin":1,//破片最小声明值
+		"fragLifeMax":1,//破片最大生命值
+		"hitColor":"ffffffff"//命中颜色
+         },
+      
+            "ammoMultiplier":1,//物品装弹倍数
+            "pierce":true,//穿透单位
+            }
+            },
+    "rotateSpeed":10,//炮台转头速度
+    "requirements": [
+        {"item": "graphite","amount":150},
+        {"item": "copper","amount":50},
+        {"item": "lead","amount":40},
+        {"item": "silicon", "amount": 150}],
+    "category": "turret",
+    "research": "量子核心"//科技树的位置(上一个要研究的东西)
+}

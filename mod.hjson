@@ -1,0 +1,7 @@
+displayName: Deep Space
+name: ice-java-mod
+author: Alone
+main: Iceconent.Icejavamod
+description: 2
+minGameVersion: 146
+java: true

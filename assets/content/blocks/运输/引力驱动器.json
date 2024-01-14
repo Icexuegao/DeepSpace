@@ -1,0 +1,21 @@
+{
+    "type":"LaunchPad", 
+    "name":"引力驱动器", 
+    "description":"利用行星旋转时的引力激增发射物资", 
+    "health":1800,
+    	"consumes":{
+		"power":3.333333},
+    "size":3, 
+    "itemCapacity":200, 
+    "launchTime":480
+    "hasPower":true, 
+	"requirements":[
+"graphite/40",
+"silicon/200",
+"thorium/50",
+"metaglass/130"
+		],
+	"category": "effect",
+	"research":"钛晶传送带"
+	
+}
