@@ -66,7 +66,7 @@ public class IcePlanet {
                 enemyBuildSpeedMultiplier = 1;/**  敌人建筑倍率 这里不做处理 */
                 landCloudColor = Pal.spore.cpy().a(0.5F);/** 核心着陆烟尘的颜色  */
                 prebuildBase = false;/**  是否需要像e星那样帅气地着陆建筑特效 */
-                /**  add允许这些材料的建筑  remove删除 */
+                /**  add删除这些材料的建筑  remove添加 */
             }
         };
     }

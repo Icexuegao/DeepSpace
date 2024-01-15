@@ -28,7 +28,7 @@ repositories {
 //构建使用的jar包，一些依赖或者库
 dependencies {
     //传像素工厂的本地jar包路径自己改
-    compileOnly files("D:\\biancheng\\luanqibazaode\\lib\\Mindustry.jar")
+    compileOnly files("D:/biancheng/lib/Mindustry.jar")
 }
 version '1.0'
 6666666
