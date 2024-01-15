@@ -10,6 +10,7 @@ public class Icejavamod extends Mod {
 
     @Override
     public void loadContent() {
+        IceUnitTypes.load();
         IceStatus.load();
         IceItems.load();
         IceFloor.load();
@@ -17,6 +18,5 @@ public class Icejavamod extends Mod {
         IcePlanet.load();
         IceTechTree.load();
         IceSectorPresets.load();
-        IceUnitTypes.load();
     }
 }

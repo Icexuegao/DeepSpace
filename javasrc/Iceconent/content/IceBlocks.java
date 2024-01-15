@@ -25,11 +25,11 @@ public class IceBlocks {
     /**
      * 60/(挖掘时间+50*矿物硬度)*钻头大小的平方  等于钻头速度
      */
-    public static Block  container, zhanshuhexin, chaoxichongjidui, guijinglianchang, dianzixiezaiqi, drillMiniv;
+    public static Block container, zhanshuhexin, chaoxichongjidui, monocrystallineSiliconFactory, electronicUninstaller, drillMiniv;
 
     public static void load() {
 
-        guijinglianchang = new GenericCrafter("gjlc") {{
+        monocrystallineSiliconFactory = new GenericCrafter("monocrystalline-Silicon-Factory") {{
             requirements(Category.crafting, ItemStack.with(Items.copper, 60, Items.lead, 45, Items.silicon, 50, Items.graphite, 20));
             outputItem = new ItemStack(IceItems.monocrystallineSilicon, 1);
             craftTime = 36f;
@@ -37,7 +37,7 @@ public class IceBlocks {
             health = 260;
             size = 3;
             hasPower = true;
-            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawRegion("-z", 9, true), new DrawDefault(), new DrawFlame(Color.valueOf("ff9c71")));
+            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawRegion("-rotate", 9, true), new DrawDefault(), new DrawFlame(Color.valueOf("ff9c71")));
             consumeItems(ItemStack.with(Items.pyratite, 1, Items.silicon, 2));
             consumePower(1.8f);
         }};
@@ -53,9 +53,9 @@ public class IceBlocks {
             ambientSoundVolume = 0.07f;
             consumePower(63.1666666f);
         }};
-        dianzixiezaiqi = new Unloader("dzxzq") {{
+        electronicUninstaller = new Unloader("electronic-Uninstaller") {{
             requirements(Category.effect, ItemStack.with(Items.titanium, 15, IceItems.redIce, 10, IceItems.monocrystallineSilicon, 5));
-            speed = 1.0f;
+            speed = 1.7142f;
             health = 100;
             size = 1;
             itemCapacity = 10;
