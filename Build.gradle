@@ -31,7 +31,7 @@ dependencies {
     compileOnly files("D:\\biancheng\\luanqibazaode\\lib\\Mindustry.jar")
 }
 version '1.0'
-
+6666666
 //源代码
 sourceSets.main.java.srcDirs = ["javasrc"]
 
