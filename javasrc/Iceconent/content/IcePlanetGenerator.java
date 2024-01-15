@@ -27,7 +27,7 @@ import mindustry.game.Team;
 import mindustry.game.Waves;
 import mindustry.graphics.g3d.PlanetGrid;
 import mindustry.maps.generators.BaseGenerator;
-import mindustry.maps.planet.SerpuloPlanetGenerator;
+import mindustry.maps.generators.PlanetGenerator;
 import mindustry.type.Sector;
 import mindustry.world.Block;
 import mindustry.world.Tile;
@@ -37,7 +37,7 @@ import mindustry.world.blocks.environment.Floor;
 
 import static mindustry.Vars.*;
 
-public class IcePlanetGenerator extends SerpuloPlanetGenerator {
+public class IcePlanetGenerator extends PlanetGenerator {
     public static boolean alt = false;
     BaseGenerator basegen = new BaseGenerator();
     float scl = 5.0F;
@@ -49,10 +49,10 @@ public class IcePlanetGenerator extends SerpuloPlanetGenerator {
     float water;
 
     public IcePlanetGenerator() {
-        this.arr = new Block[][]{{Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone}, {Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone}, {Blocks.tar, Blocks.tar, Blocks.tar, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone}, {Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone}};
-        this.dec = ObjectMap.of(new Object[]{Blocks.redStone});
-        this.tars = ObjectMap.of(new Object[]{Blocks.redStone});
-        this.water = 2.0F / (float) this.arr[0].length;
+        arr = new Block[][]{{Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone}, {Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone}, {Blocks.tar, Blocks.tar, Blocks.tar, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone}, {Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone, Blocks.redStone}};
+        dec = ObjectMap.of(new Object[]{Blocks.redStone});
+        tars = ObjectMap.of(new Object[]{Blocks.redStone});
+        water = 2.0F / (float) this.arr[0].length;
     }
 
     float rawHeight(Vec3 position) {

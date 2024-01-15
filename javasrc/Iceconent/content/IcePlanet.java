@@ -51,12 +51,12 @@ public class IcePlanet {
                     r.showSpawns = false;/** 在地图上不显示出怪点  */
                 };
                 atmosphereColor = Color.valueOf("3c1b8f");/**环境色 */
-                atmosphereRadIn = 2F;/** 光照(进入)  */
-                atmosphereRadOut = 0.3F;/**光照(输出)   */
+                atmosphereRadIn = 2F;/** 大气层 */
+                atmosphereRadOut = 0.3F;
                 defaultCore = IceBlocks.zhanshuhexin;/**默认的核心 这里不做处理, // 默认的核心 这里不做处理// 默认的核心 这里不做处理   */
                 startSector = 0;/** 开始区块(类似零号地区) (这个的查看可以用我的mod<显示星球区块id>)  */
                 alwaysUnlocked = true;/**是否默认解锁 */
-                lightDstFrom = 0;/**光照数值 这里不做处理  */
+                lightDstFrom = 0;/**日夜更周 */
                 lightDstTo = 1f;
                 lightSrcFrom = 0;
                 lightSrcTo = 0.8f;
