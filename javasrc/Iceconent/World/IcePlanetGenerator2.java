@@ -1,4 +1,4 @@
-package Iceconent.content;
+package Iceconent.World;
 
 import arc.graphics.Color;
 import arc.math.geom.Vec3;

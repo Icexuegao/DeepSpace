@@ -1,5 +1,6 @@
 package Iceconent.content;
 
+import Iceconent.World.IcePlanetGenerator;
 import arc.Core;
 import arc.graphics.Color;
 import arc.scene.style.TextureRegionDrawable;
