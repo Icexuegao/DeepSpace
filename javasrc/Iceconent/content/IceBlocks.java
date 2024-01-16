@@ -25,7 +25,7 @@ public class IceBlocks {
     /**
      * 60/(挖掘时间+50*矿物硬度)*钻头大小的平方  等于钻头速度
      */
-    public static Block container, zhanshuhexin, chaoxichongjidui, monocrystallineSiliconFactory, electronicUninstaller, drillMiniv;
+    public static Block container, zhanshuhexin, tidalImpactReactor, monocrystallineSiliconFactory, electronicUninstaller, drillMiniv;
 
     public static void load() {
 
@@ -41,7 +41,7 @@ public class IceBlocks {
             consumeItems(ItemStack.with(Items.pyratite, 1, Items.silicon, 2));
             consumePower(1.8f);
         }};
-        chaoxichongjidui = new ImpactReactor("cxcjd") {{
+        tidalImpactReactor = new ImpactReactor("tidal-ImpactReactor") {{
             requirements(Category.power, ItemStack.with(Items.lead, 4590, Items.copper, 4170, Items.thorium, 175, Items.graphite, 716, Items.plastanium, 120, Items.titanium, 510, Items.metaglass, 1400, Items.silicon, 1616));
             size = 4;
             health = 1000;
