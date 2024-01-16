@@ -1,5 +1,6 @@
 package Iceconent;
 
+import Iceconent.World.DestroyBullet;
 import Iceconent.content.*;
 import mindustry.mod.Mod;
 
@@ -10,6 +11,7 @@ public class Icejavamod extends Mod {
 
     @Override
     public void loadContent() {
+        DestroyBullet.load();
         IceUnitTypes.load();
         IceStatus.load();
         IceItems.load();

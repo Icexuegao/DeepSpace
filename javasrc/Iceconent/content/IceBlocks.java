@@ -3,9 +3,16 @@ package Iceconent.content;
 import Iceconent.World.Block.chaixiehexin;
 import Iceconent.World.Block.haodiancnagku;
 import Iceconent.World.Block.wakuangpaota;
+import Iceconent.World.DestroyBullet;
 import arc.graphics.Color;
+import arc.math.Interp;
+import mindustry.Vars;
 import mindustry.content.Items;
 import mindustry.content.UnitTypes;
+import mindustry.entities.bullet.BasicBulletType;
+import mindustry.entities.effect.MultiEffect;
+import mindustry.entities.effect.ParticleEffect;
+import mindustry.entities.effect.WaveEffect;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
@@ -67,6 +74,7 @@ public class IceBlocks {
             hasPower = true;
             consumePower(1f);
             requirements(Category.production, with(Items.copper, 30, Items.graphite, 25, Items.titanium, 10, Items.silicon, 15));
+            destroyBullet = DestroyBullet.basicBulletType1;
         }};
         zhanshuhexin = new chaixiehexin("zhanshuhexin") {{
             update = true;
