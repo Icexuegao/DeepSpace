@@ -9,6 +9,7 @@ import arc.util.Nullable;
 import mindustry.entities.Units;
 import mindustry.game.Team;
 import mindustry.graphics.Drawf;
+import mindustry.logic.Ranged;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.Tile;
@@ -51,6 +52,12 @@ public class chaixiehexin extends CoreBlock {
     }
 
     @Override
+    public void setBars() {
+        /** 信息显示  */
+        super.setBars();
+    }
+
+    @Override
     public void setStats() {
         super.setStats();
         stats.timePeriod = craftTime;
@@ -88,7 +95,7 @@ public class chaixiehexin extends CoreBlock {
         return state.teams.cores(team).size < 3;
     }
 
-    public class chaixiehexinbuild extends CoreBuild {
+    public  class chaixiehexinbuild extends CoreBuild  {
         /**
          * Build代表实体一般不用调用Aunken用反射调用，所以Build一般是类名加Build
          */
@@ -97,7 +104,7 @@ public class chaixiehexin extends CoreBlock {
 
         @Override
         /** 鼠标放上去显示  */ public void drawSelect() {
-            Drawf.dashRect(Color.white, x, y, 80, 160);
+            //Drawf.dashRect(Color.white, x, y, 80, 160);
         }
 
         public int xunhuan() {
@@ -120,13 +127,13 @@ public class chaixiehexin extends CoreBlock {
          */
         @Override
         public void draw() {
-            Drawf.dashRect(Color.white, x, y, 80, 160);
+           // Drawf.dashRect(Color.white, x, y, 80, 160);
             Drawf.dashCircle(x, y, range, Color.valueOf("ffffff"));
             if (timer.get(7.5f)) {
                 i = xunhuan();
-                Draw.rect(new TextureRegion(Core.atlas.find("ice-java-mod-chaofeng" + i)), x, y);
+                Draw.rect(new TextureRegion(Core.atlas.find("ice-mod-chaofeng" + i)), x, y);
             } else {
-                Draw.rect(new TextureRegion(Core.atlas.find("ice-java-mod-chaofeng" + i)), x, y);
+                Draw.rect(new TextureRegion(Core.atlas.find("ice-mod-chaofeng" + i)), x, y);
             }
         }
 
@@ -143,8 +150,11 @@ public class chaixiehexin extends CoreBlock {
             }
         }
 
+
+
         @Override
         /** updateTile在update里执行 写机制的地方   */ public void updateTile() {
+
             /** 检测单位并索引  */
             Units.nearbyEnemies(team, x, y, range, unit -> {
                 /** 范围圆  */

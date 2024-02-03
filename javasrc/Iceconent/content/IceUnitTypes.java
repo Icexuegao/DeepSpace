@@ -14,7 +14,7 @@ import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.ammo.PowerAmmoType;
 
-public class IceUnitTypes {
+public @SuppressWarnings("unchecked") class IceUnitTypes {
     public static UnitType ars;
 
     public static void load() {
