@@ -8,14 +8,15 @@ public class IceFloor {
     public static Block oreIceCrystals;
 
     public static void load() {
-        oreIceCrystals = new OreBlock("ore-ice-crystals", IceItems.iceCrystals) {{
-            playerUnmineable =false;
+        oreIceCrystals = new OreBlock("ore-Ice-Crystals", IceItems.iceCrystals) {{
+            playerUnmineable = false;
             mapColor = Color.white;
-            useColor=true;
-            oreDefault=true;
-            oreThreshold =0.8f;
-            oreScale =20;
-            variants =0;
+            wallOre=false;/**  墙矿？ */
+            useColor = true;
+            oreDefault = true;
+            oreThreshold = 0.8f;
+            oreScale = 20;
+            variants=3;
         }};
     }
 }

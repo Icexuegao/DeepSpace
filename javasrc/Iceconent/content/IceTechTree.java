@@ -1,12 +1,15 @@
 package Iceconent.content;
 
-import mindustry.content.TechTree;
+import static mindustry.content.TechTree.*;
 
 public class IceTechTree {
+    public static TechNode k;
 
     public static void load() {
-        IcePlanet.IcePlanet.techTree = TechTree.nodeRoot("IcePlanet", IceBlocks.monocrystallineSiliconFactory, () -> {
-
+        IcePlanet.aDri.techTree = nodeRoot("aDri", IceBlocks.monocrystallineSiliconFactory, () -> {
+        });
+        k = nodeRoot("d", IceItems.redIce, () -> {
+            node(IceSectorPresets.s1);
         });
     }
 }

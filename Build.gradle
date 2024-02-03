@@ -12,8 +12,9 @@ buildscript {
         mavenCentral()
         mavenLocal()
         google()
-        maven { url 'https://maven.aliyun.com/repos\n' +
-                '        mindustryVersion = \'v146\'itory/public/' }
+        maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
         maven { url 'https://maven.aliyun.com/repository/google/' }
         maven { url 'https://maven.aliyun.com/repository/jcenter/' }
     }
@@ -27,11 +28,10 @@ repositories {
 
 //构建使用的jar包，一些依赖或者库
 dependencies {
-    //传像素工厂的本地jar包路径自己改
-    compileOnly files("D:/biancheng/lib/Mindustry.jar")
+    compileOnly files("lib\\Mindustry.jar")
 }
 version '1.0'
-6666666
+
 //源代码
 sourceSets.main.java.srcDirs = ["javasrc"]
 
@@ -67,7 +67,7 @@ allprojects {
 configurations.configureEach {
     resolutionStrategy.eachDependency { details ->
         if (details.requested.group == 'com.github.Anuken.Arc') {
-            details.useVersion "$mindustryVersion"
+            details.useVersion 146 as String
         }
     }
 }
@@ -93,8 +93,10 @@ jar {
 }
 
 tasks.register('jarAndroid') {
+
     dependsOn jar
     doLast {
+
         if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
 
         def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
