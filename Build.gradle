@@ -1,56 +1,64 @@
 apply plugin: "java"
+//apply plugin: "scala"
 //配置buildGradle的信息或依赖
 buildscript {
     //项目的仓库
     ext {
-        //这个mod的构建号
-        jabelVersion = "93fde537c7"
         sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
     }
-
+    dependencies {
+    //    classpath "org.scala-lang:scala-library:2.12.9"
+        //  classpath project(":")
+        //  classpath files("lib/$project.name"+".jar")
+        // classpath fileTree(dir: 'lib', includes: ['*.jar'])
+    }
     repositories {
-        mavenCentral()
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         mavenLocal()
         google()
         maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
         maven { url 'https://www.jitpack.io' }
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url 'https://maven.aliyun.com/repository/google/' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter/' }
     }
-}
 
+}
+//自定义虚拟机参数防止gradle中文乱码-Dfile.encoding=UTF-8
+//./gradlew clean  清理
 repositories {
     mavenCentral()
     maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
     maven { url 'https://www.jitpack.io' }
 }
-
 //构建使用的jar包，一些依赖或者库
 dependencies {
-    compileOnly files("lib\\Mindustry.jar")
+ //   implementation "org.scala-lang:scala-library:2.12.9"
+    //compileOnly files("lib/$project.name"+".jar")
+    annotationProcessor "com.github.Anuken:jabel:93fde537c7"
+    //compileOnly files("D:\\Programming\\luanqibazaode\\lib\\Mindustry.jar")
+    compileOnly "com.github.Tinylake:MindustryX:v146.004"
 }
-version '1.0'
-
 //源代码
-sourceSets.main.java.srcDirs = ["javasrc"]
-
-
+sourceSets {
+    main {
+        java.srcDir('javasrc')
+        resources {
+            srcDirs = ['assets']
+        }
+    }
+}
 //输出路径
 File buildFile = file("builds")
 project.buildDir(buildFile)
-DirectoryProperty m = getLayout().getBuildDirectory()
-def getMyBuildDir = m.get()
+def getMyBuildDir = getLayout().getBuildDirectory().get()
 
 
-//Gradle遇到中文报错解决方法
+//编译java代码遇到中文报错解决方法
 tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
 
 //java版本
 java {
-    targetCompatibility = 8
+    targetCompatibility = 8//目标的兼容性
     sourceCompatibility = JavaVersion.VERSION_16
 }
 
@@ -62,16 +70,6 @@ allprojects {
         }
     }
 }
-
-//ARC版本
-configurations.configureEach {
-    resolutionStrategy.eachDependency { details ->
-        if (details.requested.group == 'com.github.Anuken.Arc') {
-            details.useVersion 146 as String
-        }
-    }
-}
-
 jar {
     //解决相同java识别文件报错
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -84,7 +82,10 @@ jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
-    from(rootDir) {
+    /* from(rootDir) {
+         include "mod.hjson"
+     }*/
+    from("assets\\mod.hjson") {
         include "mod.hjson"
     }
     from("assets/") {
@@ -95,8 +96,7 @@ jar {
 tasks.register('jarAndroid') {
 
     dependsOn jar
-    doLast {
-
+   /* doLast {
         if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
 
         def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
@@ -107,6 +107,20 @@ tasks.register('jarAndroid') {
         def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
 
         //dex 和 desugar 文件 - 这需要 PATH 中包含 d8
+        "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktop.jar"
+                .execute(null, new File("$getMyBuildDir/libs")).waitForProcessOutput(System.out, System.err)
+    }*/
+    doLast {
+        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
+
+        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
+
+        if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
+
+        //collect dependencies needed for desugaring
+        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
+
+        //dex and desugar files - this requires d8 in your PATH
         "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktop.jar"
                 .execute(null, new File("$getMyBuildDir/libs")).waitForProcessOutput(System.out, System.err)
     }
@@ -129,16 +143,16 @@ tasks.register('deploy', Jar) {
 }
 //给文件打印一个字符节，防止相同文件报错。
 tasks.register('a', Copy) {
-    FileInputStream fis = new FileInputStream(new File("assets\\ceshi.txt"))
+    FileInputStream fis = new FileInputStream(new File("assets\\test.txt"))
     byte[] byt = new byte[10]
     int g = fis.read(byt, 0, byt.length)
     fis.close()
     if (g < 5) {
-        FileOutputStream i = new FileOutputStream(new File("assets\\ceshi.txt"), true)
+        FileOutputStream i = new FileOutputStream(new File("assets\\test.txt"), true)
         i.write(1)
         i.close()
     } else {
-        FileOutputStream i = new FileOutputStream(new File("assets\\ceshi.txt"), false)
+        FileOutputStream i = new FileOutputStream(new File("assets\\test.txt"), false)
         i.write(1)
         i.close()
     }
@@ -149,5 +163,7 @@ tasks.register('mycopy', Copy) {
     dependsOn a
     dependsOn deploy
     from "$getMyBuildDir/libs/$project.name" + ".jar"//源
-    into 'C:\\Users\\28947\\AppData\\Roaming\\Mindustry\\mods'//目的
+    into {
+        'C:\\Users\\Alon\\AppData\\Roaming\\Mindustry\\mods'
+    }
 }

@@ -1,7 +1,7 @@
 //蓝钢模板
 Events.on(EventType.ClientLoadEvent, cons(e => {
-    var dialog = new BaseDialog("[#1c99ff]源计划简介栏");
-    dialog.cont.image(Core.atlas.find("源计划-logo")).row();;
+    var dialog = new BaseDialog("");
+    dialog.cont.image(Core.atlas.find("")).row();;
     dialog.buttons.defaults().size(210, 64);
     dialog.buttons.button("@close", run(() => {
         dialog.hide();
@@ -10,7 +10,7 @@ Events.on(EventType.ClientLoadEvent, cons(e => {
     dialog.cont.pane((() => {
         var table = new Table();   
         
-         table.add("\n[blue]你已添加源计划模组                           \n[]                                                                      \n[red]当前您游玩的模组版本为:1.0                                      \n建议横屏浏览                                                  \n有bug请联系我\n贴图征集!                                            \n[]————联系方式—————                            \n[white]QQ:2894761300(冰洁雪糕)\n\n\n\n").left().growX().wrap().width(600).maxWidth(1000).pad(4).labelAlign(Align.left);
+         table.add("\n[                           \n[]                                                                      \n[red]当前您游玩的模组版本为:1.0                                      \n建议横屏浏览                                                  \n有bug请联系我\n贴图征集!                                            \n[]————联系方式—————                            \n[white]QQ:2894761300(冰洁雪糕)\n\n\n\n").left().growX().wrap().width(600).maxWidth(1000).pad(4).labelAlign(Align.left);
         table.row();
         
         

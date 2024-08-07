@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="PROJECT" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assets/IceContent/units/boss/戈浮.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assets/IceContent/units/boss/格式塔零.json" charset="UTF-8" />
   </component>
 </project>
