@@ -27,6 +27,7 @@ public class Ice extends Mod {
 
     @Override
     public void loadContent() {
+
         IceItems.load();
         IceLiquids.load();
         IceStatus.load();
