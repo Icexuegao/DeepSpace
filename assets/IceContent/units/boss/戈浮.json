@@ -1,0 +1,64 @@
+{
+  "type": "flying",
+  "ammoCapacity": 10,
+  "ammoResupplyAmount": 10,
+  "speed": 3,
+  "flying": true,
+  "turnCursor": false,
+  "playerControllable": false,
+  "engineOffset": 0,
+  "engineSize": 0,
+  "hitSize": 15,
+  "targetAir":true,
+  "circleTarget": true,
+  "faceTarget": true,
+  "destructibleWreck": true,
+  "targetFlag": "factory",
+  "health": 150,
+  "armor": 5,
+  "rotateSpeed": 18,
+  "itemCapacity": 10,
+  "commandLimit": 50,
+  "rotateShooting":true,
+  "weapons": [
+    {
+      "x": 0,
+      "y": 0,
+      "mirror": true,
+      "reload": 6,
+      "rotate": true,
+      "rotateSpeed": 1818464,
+      "shootEffect": "none",
+      "shoot": {
+        "shots": 6,
+        "shotDelay": 0,
+        "type": "ShootBarrel",
+        "barrels": [
+          -6, -6, -8,
+          -4, -4, -8,
+          -2, -2, -8,
+          2, 2, 8,
+          4, 4, 8,
+          6, 6, 8
+        ]
+      },
+      "bullet": {
+        "type": "MissileBulletType",
+        "damage": 10,
+        "frontColor": "ff7171",
+        "backColor": "ff7171",
+        "width": 5,
+        "height": 5,
+        "speed": 3.5,
+        "lifetime": 60,
+        "status": "sapped",
+        "splashDamageRadius": 40,
+        "splashDamage": 30,
+        "weaveScale": 4,
+        "weaveMag": 4,
+        "reloadTime": 20,
+        "buildingDamageMultiplier": 1
+      }
+    }
+  ]
+}

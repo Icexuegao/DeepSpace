@@ -1,0 +1,8 @@
+{
+  "name": "wewd",
+  "description": "逐步摧毁敌人的身体，同时衰弱敌人",
+  "speedMultiplier": 0.6,
+  "healthMultiplier": 0.6,
+  "damageMultiplier": 0.6,
+  "effectChance": 0.6
+}
