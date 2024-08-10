@@ -10,7 +10,6 @@ import mindustry.Vars;
 import mindustry.mod.Mod;
 
 import java.util.Properties;
-
 public class Ice extends Mod {
     public static final String MOD_NAME = "ice";
     public static String Display_Name;
@@ -18,6 +17,7 @@ public class Ice extends Mod {
 
     public Ice() {
     }
+
 
     @Override
     public void init() {
