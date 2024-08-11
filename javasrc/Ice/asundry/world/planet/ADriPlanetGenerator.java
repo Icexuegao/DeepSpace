@@ -80,7 +80,8 @@ public class ADriPlanetGenerator extends PlanetGenerator {
 
     float rawHeight(Vec3 position) {
         position = Tmp.v33.set(position).scl(scl);
-        return (Mathf.pow(Simplex.noise3d(seed, /**星球山峰高度约小越高*/5, /**缩放，越大山峰越小数量越多*/0.5f, /**生成山峰的概率，约小山峰约少*/0.8f, position.x, position.y, position.z), 2.3f) + waterOffset) / (1f + waterOffset);
+        return (Mathf.pow(Simplex.noise3d(seed, /**星球山峰高度约小越高*/5, /**缩放，越大山峰越小数量越多*/0.5f, /**生成山峰的概率，约小山峰约少*/0.8f,
+                position.x, position.y, position.z), 2.3f) + waterOffset) / (1f + waterOffset);
     }
 
     @Override

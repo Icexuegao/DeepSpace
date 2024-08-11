@@ -1,0 +1,11 @@
+apply plugin: "java"
+sourceSets {
+    main {
+        java.srcDir("D:\\Programming\\luanqibazaode\\Icemods\\tool")
+    }
+}
+File buildFile = file("D:\\Programming\\luanqibazaode\\Icemods\\build")
+project.buildDir(buildFile)
+tasks.register('123'){
+
+}

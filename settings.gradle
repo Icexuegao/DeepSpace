@@ -1,2 +1,3 @@
-rootProject.name ="Icemods"
+include("javasrc")
+include("tool")
 

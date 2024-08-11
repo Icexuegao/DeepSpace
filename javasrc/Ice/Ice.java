@@ -8,6 +8,7 @@ import Ice.content.IceStatus;
 import Ice.ui.IceContentInfoDialog;
 import mindustry.Vars;
 import mindustry.mod.Mod;
+import universecore.UncCore;
 
 import java.util.Properties;
 public class Ice extends Mod {
@@ -24,7 +25,6 @@ public class Ice extends Mod {
         Vars.ui.content = new IceContentInfoDialog();
         super.init();
     }
-
     @Override
     public void loadContent() {
         IceItems.load();
