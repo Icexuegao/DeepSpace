@@ -1,0 +1,74 @@
+apply plugin: "java"
+buildscript {
+    //项目的仓库
+    ext {
+        uncVersion = '2.1.1'
+    }
+    dependencies {
+    }
+    repositories {
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        mavenCentral()
+        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+        mavenLocal()
+        google()
+        maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url 'https://jitpack.io' }
+    }
+}
+dependencies {
+}
+File buildFile = file("D:\\Programming\\luanqibazaode\\Icemods\\build")
+project.buildDir(buildFile)
+jar{
+
+    //解决相同java识别文件报错
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes('Main-Class': 'com.example.backendapp.BackendAppApplication')
+    }
+    //存档文件名
+    //${project.name}指IceMods
+    archiveFileName = "${project.name}Desktop.jar"//jar文件名
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+tasks.register("d345"){
+    dependsOn project("tool").getTasks().named("classes")
+    dependsOn project("javasrc").getTasks().named("classes")
+    dependsOn jar
+}
+tasks.register("lk"){
+    dependsOn project("tool").getTasks().named("classes")
+    dependsOn project("javasrc").getTasks().named("classes")
+}
+tasks.register('deploy123', Jar) {
+    dependsOn d345
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes('Main-Class': 'Ice')
+    }
+
+    //存档文件名
+    //${project.name}指IceMods
+    archiveFileName = "${project.name}Desktop.jar"//jar文件名
+
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
+tasks.register('ded', Jar) {
+    dependsOn lk
+    from layout.projectDirectory.file("build\\classes\\java\\main")
+    from{
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
