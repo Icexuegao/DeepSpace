@@ -31,8 +31,6 @@ public class Ice extends Mod {
         IceLiquids.load();
         IceStatus.load();
         IceBlocks.load();
-
-
        /* IcePlanets.load();
         Tool.load();
         stone();
