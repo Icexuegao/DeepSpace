@@ -3,14 +3,18 @@ package scala
 import mindustry.`type`.Item
 
 class SCItems {
-  var i, r: Item
+  object SCItems {
+    var i, r: Item = _
 
-  def df(): Unit = {
-    i = new Item("i") {
-      flammability = 1
-    }
-    r = new Item("r") {
-      flammability = 1
+    def load(): Unit = {
+      i = new Item("i") {
+        flammability = 1
+      }
+      r = new Item("r") {
+        flammability = 1
+      }
     }
   }
 }
+
+

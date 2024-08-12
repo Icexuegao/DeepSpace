@@ -1,6 +1,5 @@
 package Ice;
 
-import Ice.asundry.BaseTool.io.FileTool;
 import Ice.content.IceBlocks;
 import Ice.content.IceItems;
 import Ice.content.IceLiquids;
@@ -9,8 +8,6 @@ import Ice.ui.IceContentInfoDialog;
 import mindustry.Vars;
 import mindustry.mod.Mod;
 import scala.SCItems;
-
-import java.util.Properties;
 
 public class Ice extends Mod {
     public static final String MOD_NAME = "ice";
@@ -29,9 +26,7 @@ public class Ice extends Mod {
 
     @Override
     public void loadContent() {
-        SCItems sc =new SCItems();
-        sc.df();
-
+        SCItems.SCItems$.MODULE$.load();
         IceItems.load();
         IceLiquids.load();
         IceStatus.load();
@@ -50,8 +45,8 @@ public class Ice extends Mod {
         return "{" + MOD_NAME + "-" + Author + "}";
     }
 
-    protected void stone() {
+   /* protected void stone() {
         Properties properties = FileTool.getJarFileProperties("mod.hjson");
         Display_Name = properties.getProperty("displayName");
-    }
+    }*/
 }

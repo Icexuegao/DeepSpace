@@ -7,17 +7,10 @@
     <option name="askBeforeDeletingLists" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8433f078-cf38-4d7f-a3af-52e9fb603eba" name="更改" comment="多模块启动!">
-      <change afterPath="$PROJECT_DIR$/scalasrc/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scalasrc/scala/SCItems.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/scala_compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/scala_compiler.xml" afterDir="false" />
+    <list default="true" id="8433f078-cf38-4d7f-a3af-52e9fb603eba" name="更改" comment="实验项目 build不稳定!!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javasrc/Ice/Ice.java" beforeDir="false" afterPath="$PROJECT_DIR$/javasrc/Ice/Ice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javasrc/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/javasrc/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scalasrc/scala/SCItems.scala" beforeDir="false" afterPath="$PROJECT_DIR$/scalasrc/scala/SCItems.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -925,7 +918,7 @@
       <workItem from="1723351414732" duration="8381000" />
       <workItem from="1723382230471" duration="1355000" />
       <workItem from="1723433334372" duration="12341000" />
-      <workItem from="1723464213052" duration="1070000" />
+      <workItem from="1723464213052" duration="4445000" />
     </task>
     <task id="LOCAL-00001" summary="mod">
       <option name="closed" value="true" />
@@ -1127,7 +1120,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723346477690</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="实验项目 build不稳定!!!">
+      <option name="closed" value="true" />
+      <created>1723466913188</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1723466913188</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1186,7 +1187,8 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
     <MESSAGE value="clear" />
     <MESSAGE value="多模块启动!" />
-    <option name="LAST_COMMIT_MESSAGE" value="多模块启动!" />
+    <MESSAGE value="实验项目 build不稳定!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="实验项目 build不稳定!!!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
