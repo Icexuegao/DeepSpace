@@ -8,9 +8,10 @@ import Ice.content.IceStatus;
 import Ice.ui.IceContentInfoDialog;
 import mindustry.Vars;
 import mindustry.mod.Mod;
-import universecore.UncCore;
+import scala.SCItems;
 
 import java.util.Properties;
+
 public class Ice extends Mod {
     public static final String MOD_NAME = "ice";
     public static String Display_Name;
@@ -25,8 +26,12 @@ public class Ice extends Mod {
         Vars.ui.content = new IceContentInfoDialog();
         super.init();
     }
+
     @Override
     public void loadContent() {
+        SCItems sc =new SCItems();
+        sc.df();
+
         IceItems.load();
         IceLiquids.load();
         IceStatus.load();

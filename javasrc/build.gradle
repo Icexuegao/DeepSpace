@@ -8,7 +8,6 @@ buildscript {
         sdkRoot = System.getenv("ANDROID_HOME")
     }
     dependencies {
-        //classpath project("tool")
         //    classpath "org.scala-lang:scala-library:2.12.9"
         //  classpath project(":")
         //  classpath files("lib/$project.name"+".jar")
@@ -41,8 +40,8 @@ repositories {
 }
 //构建使用的jar包，一些依赖或者库
 dependencies {
-  //  compileOnly("tool")
-
+    //  compileOnly("tool")
+    compileOnly project(":scalasrc")
     compileOnly "com.github.EB-wilson.UniverseCore:core:$uncVersion"//涵盖了大部分mod制作相关的工具
     compileOnly "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//包括组件化接口在内的注解处理器
     annotationProcessor "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//使用注解处理器
@@ -151,6 +150,7 @@ tasks.register('deploy', Jar) {
         delete {
             delete "$getMyBuildDir/libs/${project.name}Desktop.jar"
             delete "$getMyBuildDir/libs/${project.name}Android.jar"
+            delete "$getMyBuildDir/libs/scalasrc-1.0.jar"
         }
     }
 

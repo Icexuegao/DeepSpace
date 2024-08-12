@@ -1,0 +1,80 @@
+version '1.0'
+
+buildscript{
+    repositories{
+        mavenCentral()
+    }
+    ext{
+        //the build number that this mod is made for
+        scalaVersion = "3.2.2-RC2"
+        sdkRoot = System.getenv("ANDROID_HOME")
+    }
+
+    dependencies{
+        classpath "org.scala-lang:scala3-library_3:$scalaVersion"
+    }
+}
+
+apply plugin: "scala"
+
+sourceSets.main.scala.srcDirs = ["D:\\Programming\\luanqibazaode\\Icemods\\scalasrc"]
+
+//ef scalaClasspath = scalaRuntime.inferScalaClasspath(configurations.compileClasspath)
+File buildFile = file("D:\\Programming\\luanqibazaode\\Icemods\\build")
+project.buildDir(buildFile)
+repositories{
+    mavenCentral()
+    maven{ url 'https://www.jitpack.io' }
+}
+
+dependencies{
+    compileOnly "com.github.Tinylake:MindustryX:v146.004"
+    compileOnly "org.scala-lang:scala3-library_3:$scalaVersion"
+}
+
+compileScala{
+    sourceCompatibility = 1.8
+    targetCompatibility = JavaVersion.VERSION_16
+}
+
+allprojects{
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.compilerArgs.addAll(['--release', '8'])
+        }
+    }
+}
+
+tasks.register('jarAndroid') {
+    dependsOn "jar"
+
+    doLast {
+        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
+
+        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
+
+        if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
+
+        //collect dependencies needed for desugaring
+        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
+
+        //dex and desugar files - this requires d8 in your PATH
+        "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 14 --output ${project.archivesBaseName}Android.jar ${project.archivesBaseName}Desktop.jar"
+                .execute(null, new File("$buildDir/libs")).waitForProcessOutput(System.out, System.err)
+    }
+}
+tasks.register('deploy', Jar) {
+    dependsOn jarAndroid
+    dependsOn jar
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName = "${project.name}.jar"
+
+    from { [zipTree("$buildDir/libs/${project.name}Desktop.jar"), zipTree("$buildDir/libs/${project.archivesBaseName}Android.jar")] }
+
+    doLast {
+        delete {
+            delete "$buildDir/libs/${project.name}Desktop.jar"
+            delete "$buildDir/libs/${project.name}Android.jar"
+        }
+    }
+}

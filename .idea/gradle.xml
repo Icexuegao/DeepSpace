@@ -13,6 +13,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/javasrc" />
+            <option value="$PROJECT_DIR$/scalasrc" />
             <option value="$PROJECT_DIR$/tool" />
           </set>
         </option>

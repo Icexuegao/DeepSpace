@@ -3,9 +3,10 @@ buildscript {
     //项目的仓库
     ext {
         uncVersion = '2.1.1'
+        sdkRoot = System.getenv("ANDROID_HOME")
+
     }
-    dependencies {
-    }
+    dependencies {}
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
@@ -18,57 +19,103 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
 }
+repositories {
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    mavenCentral()
+    maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+    mavenLocal()
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url "https://maven.aliyun.com/repository/public" }
+    maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+    maven { url 'https://jitpack.io' }
+}
 dependencies {
+    compileOnly "com.github.EB-wilson.UniverseCore:core:$uncVersion"//涵盖了大部分mod制作相关的工具
+    compileOnly "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//包括组件化接口在内的注解处理器
+    annotationProcessor "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//使用注解处理器
+//   implementation "org.scala-lang:scala-library:2.12.9"
+    //compileOnly files("lib/$project.name"+".jar")
+    annotationProcessor "com.github.Anuken:jabel:93fde537c7"
+    compileOnly "com.github.Anuken:jabel:93fde537c7"
+    compileOnly "com.github.Tinylake:MindustryX:v146.004"
 }
 File buildFile = file("D:\\Programming\\luanqibazaode\\Icemods\\build")
 project.buildDir(buildFile)
-jar{
-
-    //解决相同java识别文件报错
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest {
-        attributes('Main-Class': 'com.example.backendapp.BackendAppApplication')
-    }
-    //存档文件名
-    //${project.name}指IceMods
-    archiveFileName = "${project.name}Desktop.jar"//jar文件名
-
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+tasks.register("delete"){
+   println(buildFile.delete())
 }
-tasks.register("d345"){
+
+tasks.register("lk") {
     dependsOn project("tool").getTasks().named("classes")
     dependsOn project("javasrc").getTasks().named("classes")
-    dependsOn jar
-}
-tasks.register("lk"){
-    dependsOn project("tool").getTasks().named("classes")
-    dependsOn project("javasrc").getTasks().named("classes")
-}
-tasks.register('deploy123', Jar) {
-    dependsOn d345
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest {
-        attributes('Main-Class': 'Ice')
-    }
-
-    //存档文件名
-    //${project.name}指IceMods
-    archiveFileName = "${project.name}Desktop.jar"//jar文件名
-
-    from {
-        configurations.runtimeClasspath.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
+    dependsOn project("scalasrc").getTasks().named("classes")
 }
 tasks.register('ded', Jar) {
+
+    dependsOn a
     dependsOn lk
-    from layout.projectDirectory.file("build\\classes\\java\\main")
-    from{
+    archiveFileName = "${project.name}Desktop.jar"//jar文件名
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from layout.projectDirectory.files("build\\classes\\java\\main", "build\\classes\\scala\\main")
+
+    from {
         configurations.runtimeClasspath.collect {
             it.isDirectory() ? it : zipTree(it)
         }
     }
+
+}
+tasks.register('jarAndroids') {
+    layout.projectDirectory.file("build\\classes\\java\\main")
+    doLast {
+        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
+
+        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
+
+        if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
+
+        //collect dependencies needed for desugaring
+        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
+
+        //dex and desugar files - this requires d8 in your PATH
+        "$sdkRoot\\build-tools\\34.0.0\\d8.bat $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktop.jar"
+                .execute(null, new File("build/libs")).waitForProcessOutput(System.out, System.err)
+    }
+}
+tasks.register('a', Copy) {
+    FileInputStream fis = new FileInputStream(new File("assets\\test.txt"))
+    byte[] byt = new byte[10]
+    int g = fis.read(byt, 0, byt.length)
+    fis.close()
+    if (g < 5) {
+        FileOutputStream i = new FileOutputStream(new File("assets\\test.txt"), true)
+        i.write(1)
+        i.close()
+    } else {
+        FileOutputStream i = new FileOutputStream(new File("assets\\test.txt"), false)
+        i.write(1)
+        i.close()
+    }
+}
+tasks.register('Alon', Jar) {
+    dependsOn jarAndroids
+    dependsOn ded
+    archiveFileName = "${project.name}.jar"//存档文件名
+    from {
+
+        [zipTree("build/libs/${project.name}Desktop.jar"),
+         zipTree("build/libs/${project.name}Android.jar")]
+    }
+    from("assets/") {
+        include "**"
+    }
+    doLast {
+        delete {
+            delete "build/libs/${project.name}Desktop.jar"
+            delete "build/libs/${project.name}Android.jar"
+            delete "build/classes"
+        }
+    }
+
 }

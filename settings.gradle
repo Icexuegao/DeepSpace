@@ -1,3 +1,2 @@
-include("javasrc")
-include("tool")
+include "javasrc","scalasrc","tool"
 
