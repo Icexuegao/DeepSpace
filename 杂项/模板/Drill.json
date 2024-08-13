@@ -1,0 +1,39 @@
+/**
+146的Drill模板
+钻头的生产时间由多种因素组成 计算时间为
+ (drillTime + hardnessDrillMultiplier * item.hardness) / drillMultipliers.get(item, 1f);单位为帧!!!
+注意block的public接口都可以写在钻头里面,下面只是把基础钻头的接口写出来了
+Alon著
+*/
+
+
+{
+  "type": "Drill",
+  //类型
+  "health": 10,
+  //建筑血量,填-1的话会根据大小给你选一个合适的数值(迫真)
+  "size": 2,
+  //方块的大小
+  "itemCapacity": 10,
+  //物品容量 我已经不想说了
+  "hardnessDrillMultiplier": 0,
+  //该数值参与时间计算详细看上述公式,默认是0,
+  "tier": 1,
+  //这台钻机能开采的最大层数,也就是所谓的硬度
+  "drillTime": 300,
+  //基础时间钻一个矿石，以帧为单位。
+  "liquidBoostIntensity": 1.6,
+  //在液体的推动下，钻头的速度会提高多少倍。
+  "warmupSpeed": 0.015,
+  //钻头加速的速度,(渐变):每帧预热,当该数值累计到1时钻头达到最大速度(这个数值*60就是钻头达到满效率所需时间:秒)
+  "drawMineItem": true,
+  //是否显示该钻机正在开采的项目,绘制相关,默认是true,可以无视他
+  "drillEffect": "mine",
+  //生产出物品时候的特效 不是挖掘随机产出的特效
+  "drillEffectRnd": -1,
+  //挖掘效果随机性范围,默认为方块大小   填小于0的数值就是和size一样大
+  "rotateSpeed": 2,
+  //钻头旋转速度,注意是贴图的 不会参与物品产出速度计算
+  "updateEffect": "pulverizeSmall"
+  //挖掘途中生产的特效
+}

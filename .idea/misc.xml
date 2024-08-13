@@ -1,9 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
-  </component>
-  <component name="LibGDXSkins">
-    <file url="file://$PROJECT_DIR$/builds/libs/Icemods.jar" />
   </component>
   <component name="PWA">
     <option name="wasEnabledAtLeastOnce" value="true" />

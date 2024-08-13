@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ScalaProjectSettings">
+    <option name="compilerHighlightingScala2" value="true" />
+    <option name="implicitParametersSearchDepth" value="10" />
     <option name="intInjectionMapping">
       <map>
         <entry key="css" value="CSS" />
@@ -21,6 +23,7 @@
         <entry key="yaml" value="yaml" />
       </map>
     </option>
+    <option name="projectViewHighlighting" value="true" />
     <option name="scala3DisclaimerShown" value="true" />
   </component>
 </project>

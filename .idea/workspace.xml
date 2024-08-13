@@ -8,9 +8,695 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8433f078-cf38-4d7f-a3af-52e9fb603eba" name="更改" comment="实验项目 build不稳定!!!">
+      <change afterPath="$PROJECT_DIR$/javasrc/IceKotlin/KTItems.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scalasrc/IceScala/ScalaLoad.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/environment/血沙.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/environment/血蚀囊胚.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/environment/血蚀墙.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/environment/血蚀岩.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/environment/骸骨地.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/仓储/核心/先遣核心.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/单位/巨兽级.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/单位/高级装配模块.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/墙体/生物钢墙.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/墙体/生物钢墙大.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/墙体/相位合金墙.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/墙体/陶钢墙.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/冲压锻炉.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/大/冷却液大.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/大/分子破碎炉.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/大/孢子培养机大.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/大/玻璃窑大.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/大/粉碎机大.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/密匙编译器.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/工厂.js-on" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/液体焚化炉.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/血浆过滤器.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/工厂/铈提取器大.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/杂项/旋转.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/液体/动脉导管桥.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/喧嚣.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/曙光.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/洪流.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/流火.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/涌泉.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/清算.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/烈焰.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/碎爆.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/箴言.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/罪碑.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/腥风.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/裂颅.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/炮塔/隧穿.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/电力/solar-panel.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/电力/改进型太阳能板.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/辅助/修3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/辅助/超1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/运输/生物钢传送带.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/钻头/抽水机大.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/blocks/钻头/离子钻机.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/items/低温化合物.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/items/肃正协议.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/items/铈.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/items/铈凝块.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/liquids/废水.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/sectors/遗落要塞.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/status/庇护.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/status/狂乱.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/status/破甲.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/status/秽蚀.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/特种/剑戟.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/特种/沧溟.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/特种/炸蛛.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/特种/雨燕.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/空军/导弹/火花.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/空军/导弹/火苗.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/空军/橙/AI控制/飞蠓.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/空军/橙/无畏.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/空军/橙/空雷4.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/空军/绿/蜂后.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/units/陆军/陆战5.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/weathers/复苏之风.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/content/weathers/闪电风暴.js-on" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/maps/灾变河谷.msav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/maps/遗落要塞.msav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/base/ability.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/base/bullet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/base/effect/normalFx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/base/math.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/base/uib.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/base/地形.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/base/物品.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/工厂/装卸器资源.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/杂项/偏转力场.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/杂项/拆墙器.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/核心.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/炮塔/test2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/炮塔/test4.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/炮塔/散华.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/炮塔/洪流.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/炮塔/解脱.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/block/炮塔/诏书.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/other/作弊菜单.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/planet/透视.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/unit/斑蟒.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/unit/致胜.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/scripts/unit/观察者.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/shaders/bloodShallow.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/shaders/lava.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sounds/beamLoop.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sounds/棱镜.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sounds/能量释放.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sounds/速射.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites-override/block/error.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/失稳晶簇-shadow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/精钢甲板2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/精钢甲板4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/血沙3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/血沙墙1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/血蚀囊胚-shadow2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/血蚀墙2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/血蚀岩2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/诅咒之地3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/诅咒之墙2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/诅咒血晶-shadow1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/诅咒血晶-shadow3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/铌矿3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/铱矿2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/骸骨地2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/environment/骸骨墙1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/仓库/晶格数据矩阵.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/仓库/核心卸载器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/仓库/核心装载器-center.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/仓库/盒子-team.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/仓库/装卸器机械.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/仓库/装卸器极速.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/仓库/资源卸载器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/仓库/资源装载器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/核心/Ω.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/核心/先遣核心-thruster1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/核心/最终教条-team.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/仓储/核心/终极核心.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/作弊/超级修复器-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/作弊/超级加速器-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/作弊/超级加速器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/作弊/超级源.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/单位/区块重构塔.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/单位/巨兽培育-side1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/墙体/装甲闸门.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/以太封装器-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/以太封装器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/冲压锻炉.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/大/合金冶炼炉大.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/大/塑钢大-piston-t.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/大/孢子压缩机大-piston-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/大/熔炉大-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/大/爆混大.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/大/相位物大.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/大/粉碎机大-rotate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/大/粉碎机大.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/密匙编译器-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/密匙编译器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/小型导热器-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/小型导热器-top1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/小型导热器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/生物钢重组器-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/生物钢重组器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/血浆过滤器-middle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/血肉分离机.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/造物的奇迹-frame4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/造物的奇迹-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/铈提取器-middle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/铈提取器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/铈提取器大-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/铈提取器大-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/铱板滤压机-frame0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/铱板滤压机大-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/陶钢熔炼炉.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/工厂/陶钢熔炼炉大-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/杂项/照明器大-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/杂项/照明器大.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/杂项/相位发射台-pod.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/杂项/破冰器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/液体/动脉导管-top-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/液体/装甲储液罐-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/液体/装甲液体路由器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/bases/block-6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/bases/block-8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/传送奇点.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/信标/信标-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/光谱/光谱-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/光谱/光谱-top-r.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/冲穿/冲穿-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/冲穿/冲穿-side-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/冲穿/冲穿-top-l.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/处决/处决-glow-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/处决/处决.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/撕裂/撕裂-side-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/攫取.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/暮光-aim-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/极光-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/洪流/洪流-mid-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/洪流/洪流-shot-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/洪流/洪流-wing-l.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/洪流/洪流-wing-side-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/洪流/洪流-wing-side-l.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/流火-liquid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/流火-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/涌泉-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/清算/清算-side-l-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/烈焰-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/碎爆.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/箴言-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/终焉/终焉-side2-l.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/罪碑/罪碑-barrel-r-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/罪碑/罪碑-barrel-r.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/罪碑/罪碑-bottom-l.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/罪碑/罪碑-column2-l.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/罪碑/罪碑-shot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/罪碑/罪碑.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/聚焦.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/脉冲/脉冲-back-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/脉冲/脉冲-front-glow-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/脉冲放射塔/脉冲放射塔-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/脉冲放射塔/脉冲放射塔-plasma-0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/脉冲放射塔/脉冲放射塔-plasma-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/脉冲星/脉冲星-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/腥风/腥风-ll-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/腥风/腥风-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/腥风/腥风-r-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/腥风/腥风-r.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/血雨-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/裂颅/裂颅-side-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/解脱/解脱-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/解脱/解脱-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/解脱/解脱-side-r.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/解脱/解脱-top2-l.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/解脱/解脱.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/诏书/诏书-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/贯通.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/重拳/重拳-side2-r.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/隧穿/隧穿-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/隧穿/隧穿-shot-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/隧穿/隧穿-shot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/震击-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/炮塔/震击.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/冷核聚变反应堆-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/地热大-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/终归/终归反应堆-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/终归/终归反应堆-plasma-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/节点大.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/节点巨.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/血肉/血肉反应堆-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/血肉/血肉反应堆-plasma-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/血肉/血肉反应堆-plasma-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/电力/血肉/血肉反应堆.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/辅助/修4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/辅助/区块修复塔.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/辅助/爆破反应塔-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/辅助/盾5-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/辅助/超1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/辅助/超4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/运输/增生传送带桥-arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/运输/增生传送带桥-bridge.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/运输/血肉装甲传送带/血肉装甲传送带-1-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/运输/血肉装甲传送带/血肉装甲传送带-2-0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/运输/血肉装甲传送带/血肉装甲传送带-2-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/运输/血肉装甲传送带/血肉装甲传送带-3-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/运输/血肉装甲传送带/血肉装甲传送带-4-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/运输/装甲传送带桥-bridge.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/运输/载荷/大型载荷路由器-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/钻头/热熔钻井-item.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/钻头/相位钻井.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/钻头/离子钻机-rim.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/blocks/钻头/血肉钻井-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/effects/arrows-back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/effects/arrows.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/effects/crystal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/effects/none.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/effects/plasma.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/effects/stardart-back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/effects/wide-thin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/effects/弹壳.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/items/以太能1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/items/生物钢2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/items/陶钢.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/others/team-parasite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/others/观测系统.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/rubble/rubble-11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/rubble/rubble-16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/status/反扑.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/status/封冻.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/status/熔融.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/status/突袭.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/status/蚀骨.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/status/辐射.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/崔文甘/摧枯/摧枯炮.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/崔文甘/文漪/文漪-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/崔文甘/文漪/文漪-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/崔文甘/文漪/文漪副本-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/崔文甘/甘霖/甘霖-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/悲鸣/悲鸣-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/悲鸣/悲鸣炮-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/悲鸣/悲鸣速射-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/悲鸣/悲鸣速射.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/罗织构陷/构陷/构陷-leg-base.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/罗织构陷/构陷/构陷导弹-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/致胜/致胜-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/致胜/致胜.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/致胜/致胜副炮-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/致胜/致胜追踪-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/观察者-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/否决/否决-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/否决/否决-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/否决/否决.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/否决/否决炮-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/陨星/陨星-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/陨星/陨星-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/陨星/陨星.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/陨石/陨石-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/陨石/陨石.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/BOSS/陨落/陨铁/陨铁.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/海军/海战/海战2/海战2炮.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/海军/海战/海战3/海战3炮-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/爬爬/异种/异种-armor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/爬虫/绒刺/绒刺-segment1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/爬虫/绒刺/绒刺-segment3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/爬虫/绒刺/绒刺-segment6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/冥刻/冥刻-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/剑戟/剑戟-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/剑戟/剑戟点防.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/攻城/攻城-foot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/斑蟒/snake-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/沧溟/沧溟鱼雷-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/炸蛛/炸蛛.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/重压/重压-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/雨燕/雨燕-主螺旋桨1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/雨燕/雨燕-副螺旋桨1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/特种/雨燕/雨燕.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/导弹/战斧.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/导弹/火狱-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/导弹/火花-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/导弹/火花.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/导弹/重创.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/导弹/雷精.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/AI控制/工蜂/工蜂.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/AI控制/疟蚊/疟蚊-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/AI控制/疟蚊/疟蚊-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/AI控制/飞蠓/飞蠓.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/冥/冥-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/噬星/噬星副炮-top-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/无畏/无畏炮-barrel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/渊狱/聚能炮.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/渊狱/速射-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/渊狱/速射.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/玄/玄.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空炸/空炸1/空炸1-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空炸/空炸2/空炸2-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空炸/空炸2/空炸2-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空炸/空炸2/空炸2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空炸/空炸3/空炸3-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空炸/空炸4/空炸4激光.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空炸/空炸5/空炸5机炮.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空炸/空炸5/空炸5炮-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空炸/空炸6/空炸6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空雷/空雷2/空雷2-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空雷/空雷2/空雷2-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空雷/空雷3/空雷3-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空雷/空雷3/空雷3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/空雷/空雷5/空雷5主炮-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/风暴/风暴-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/风暴/风暴-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/风暴/风暴近防.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/黑棘/黑棘-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/黑棘/黑棘-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/黑棘/黑棘.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/橙/黑棘/黑棘主炮-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/黄/泽塔/泽塔-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/空军/黄/泽塔/泽塔-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战2/陆战2炮.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战3/陆战3-base.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战4/陆战4-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战4/陆战4-leg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战4/陆战4炮-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战4/陆战4近防.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战5/陆战5-base.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战5/陆战5-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战5/陆战5炮-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战6/陆战6-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战6/陆战6-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战6/陆战6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战6/陆战6炮-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/2.9.5/sprites/units/陆军/陆战6/陆战6炮.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/zhushi/星球.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/凯赫米特/墙/哨站.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/凯赫米特/辅助/核心/特级核心.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/凯赫米特/钻头/钻银机.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/瑞赫凯勒/兵种/T2/兵种强化扩展台.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/瑞赫凯勒/墙/虚空墙.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/瑞赫凯勒/炮台/振击.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/瑞赫凯勒/炮台/苦痛.json重做中" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/瑞赫凯勒/辅助/仓库/轻型仓库.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/瑞赫凯勒/运输/虚空管道.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/瑞赫凯勒/钻头/虚空钻头.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/environment/矿/绯红矿.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/兵种/T6/重构型模块.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/兵种/载荷带/重载型载荷带.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/兵种/载荷带/重载型载荷路由器.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/工厂/专业级研究中心.json施工中" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/工厂/中级研究中心.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/工厂/快捷硅炼制厂.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/炮台/失联.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/炮台/潮溯.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/炮台/爆裂.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/炮台/突击.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/电力/化钢节点.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/辅助/核心/强化核心.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/运输/化钢质量驱动器.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/运输/钛制分类器.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/blocks/迫普思/运输（水）/化钢储液罐.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/items/三级研究协议.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/items/虚铁.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/items/裂位合金.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/items/银.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/liquids/二氧化碳.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/planets/瑞赫凯勒.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/sectors/伊甸园.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/sectors/新起点.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/sectors/火山口.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/sectors/荒石山脉.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/status/破裂.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/units/空军/T2空军/消逝.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/units/空军/T5空军/流逝.json建设中" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/content/units/陆军/核心兵/米勒.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/maps/时空裂缝•迫普思.msav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/maps/荒石山脉.msav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/maps/虚空哨所.msav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/maps/虚空裂谷.msav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/maps/试验区.msav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/maps/遗弃哨站.msav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/schematics/特级核心.msch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/environment/地形/地板/高温地2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/environment/地形/地板/黑石地1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/environment/矿/地矿/火石矿/火石矿3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/environment/矿/地矿/绯红矿/绯红矿1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/environment/矿/地矿/绯红矿/绯红矿3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/environment/矿/地矿/虚铁矿/虚铁矿2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/environment/矿/地矿/铀/铀1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/environment/矿/墙矿/绯红矿/绯红矿(墙)1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/兵种/T1工厂/克隆尖刀制厂-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/兵种/T3工厂/重载型再构厂.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/兵种/T4工厂/召唤祭坛-side1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/兵种/T4工厂/召唤祭坛-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/兵种/T5工厂/基础型模块-side2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/兵种/T5工厂/基础型模块.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/兵种/载荷带/重载型载荷路由器-over.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/墙/化钢自动门-open.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/墙/化钢自动门.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/墙/大型化钢自动门.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/墙/虚空墙-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/凝聚器/凝聚器-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/凝聚器/凝聚器-liquid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/初级研究中心/初级研究中心.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/化钢液混合器/化钢液混合器-liquid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/化钢液混合器/化钢液混合器-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/化钢液混合器/化钢液混合器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/核燃料棒制造厂/核燃料棒制造厂-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/绯红合金炼制厂/绯红合金炼制厂-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/裂位合金治炼厂/裂位合金治炼厂.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/钛板压制厂/钛板压制厂.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/工厂/黑核混合器/黑核混合器-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/抽水/虚空抽水泵/虚空抽水泵.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/炮台/光刃/光刃-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/炮台/振击/振击-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/炮台/振击/振击1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/炮台/潮溯/潮溯-liquid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/炮台/爆裂/爆裂.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/炮台/碎击/碎击.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/炮台/突击/突击-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/炮台/集群/集群.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/电力/化钢节点.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/电力/基础发电机/基础发电机-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/电力/核能反应堆/核能反应堆-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/电力/核能反应堆/核能反应堆-plasma-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/辅助/仓库/化钢仓库.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/辅助/仓库/轻型仓库.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/辅助/强力超速穹顶-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/辅助/核心/强化核心-team.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/辅助/核心/强化核心-thruster2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/辅助/核心/特级核心-team.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/辅助/核心/特级核心-thruster2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/辅助/核心/轻型核心-team.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/化钢传送带/化钢传送带-0-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/化钢传送带/化钢传送带-1-0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/化钢传送带/化钢传送带-2-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/化钢传送带/化钢传送带-4-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/化钢传送桥/化钢传送桥-end.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/化钢装载带/化钢装载带-0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/化钢装载带/化钢装载带-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/化钢质量驱动器/化钢质量驱动器-base.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/化钢质量驱动器/化钢质量驱动器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/虚空管道/虚空管道-top-0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/虚空管道桥/虚空管道桥-arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/虚空管道桥/虚空管道桥-bridge-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制传送带/钛制传送带-0-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制传送带/钛制传送带-1-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制传送带/钛制传送带-4-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制传送桥/钛制传送桥-arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制传送桥/钛制传送桥-bridge.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制分类器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制分配器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制反向分类器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制反向溢流门.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制溢流门.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输/钛制连接器.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输（水）/化钢导管/化钢导管-top-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/运输（水）/虚空导管/虚空导管-top-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/钻头/光束钻头/光束钻头-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/钻头/光束钻头/光束钻头.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/钻头/强压钻机/强压钻机-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/钻头/急速钻机/急速钻机-rotator.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/blocks/钻头/虚空钻头/虚空钻头-rotator.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/items/虚空石/虚空石2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/items/虚空质/虚空质1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/items/虚铁.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/items/铀.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/status/湮灭.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/兵种武器/失衡1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/兵种武器/寂冥1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/兵种武器/虚主1-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/兵种武器/虚主2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/兵种武器/虚寂1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/导弹/晦暗.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/导弹/陨石B.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/核心机/死寂-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/空/合适祭品-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/空/组装无人机-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/空/衡守-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/空/逝去.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/陆/克隆尖刀-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/陆/厌恶-segment1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/陆/寂冥-leg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/陆/量子-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/units/陆/量子-leg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虚无2.1(1)/sprites/黑洞.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/mod.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/scripts/base/ability.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/scripts/block/core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/scripts/block/liquidBlock.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/scripts/block/other.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/scripts/block/power.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/scripts/block/unitFactory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/scripts/report.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/scripts/unit/tank.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/ammo/wave.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/core/albus-team.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/core/annular-team.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/armored-conveyor-0-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/armored-conveyor-1-0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/armored-conveyor-1-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/armored-conveyor-3-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/armored-conveyor-3-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/armored-conveyor-4-0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/armored-conveyor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/biomass-conveyor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/manganese-conveyor-1-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/manganese-conveyor-2-0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/manganese-conveyor-2-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/manganese-conveyor-4-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/manganese-conveyor-4-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/manganese-conveyor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/nickel-conveyor-0-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/nickel-conveyor-2-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/nickel-conveyor-3-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/nickel-conveyor-4-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/conveyor/nickel-conveyor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/heat-pipe-top1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/heat-router-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/junction.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/sorter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/distribution/underflow-gate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/drills/biomass-drill-axis.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/drills/biomass-drill-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/drills/crystal-collector-glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/drills/crystal-drill.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/drills/manganese-drill.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/acid-pool.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/arkycite-sand-wall-large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/arkycite-sand-wall2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/arkycite-sand2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/crystalline-wall1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/flower4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/hypha-wall1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/neoplasm-sand1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/neoplasm-stone3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/neoplasm-wall-large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/ore-chromium3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/ore-manganese2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/ore-nickel1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/tundra-wall-large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/tundra-wall1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/environment/tundra3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/conduits/armored-conduit-cap.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/conduits/armored-conduit-top-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/conduits/armored-conduit-top-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/conduits/manganese-conduit-top-0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/conduits/manganese-conduit-top-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/crystal-conduit-bridge-arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/crystal-conduit-bridge-bridge.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/crystal-liquid-tank-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/crystal-liquid-tank.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/liquid/nickel-pump.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/logic/message.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/other/catalyzer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/other/clan-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/other/frame-team.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/other/resurrection.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/biomass-reactor-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/biomass-reactor-middle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/biomass-reactor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/deflagration-generator-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/extreme-generator-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/full-effect-generator-liquid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/full-effect-generator-rotator3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/full-effect-generator-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/nickel-battery-large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/nickel-power-node-large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/nickel-power-node.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/pyrolysis-piston-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/pyrolysis-piston1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/pyrolysis-rotator1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/power/pyrolysis.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/production/biomass-dissociator-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/production/biomass-dissociator-piston0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/production/biomass-smelter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/production/charger-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/production/charger.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/production/compressor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/production/incubator-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/production/incubator-large-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/production/oil-refinery.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/turret/lacerate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/turret/lumen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/turret/midnight/bottle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/turret/nexus.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/turret/soak-liquid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/turret/soak-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/turret/soak.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/turret/spiral.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/unit/air-factory-out.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/unit/laboratory.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/unit/payload-conveyor-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/unit/reconstructor-out.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/unit/reincubator-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/unit/reincubator.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/unit/tank-factory.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/unit/unit-incubator-out.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/walls/chromium-wall.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/blocks/walls/energic-wall.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/factory.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/items/biomass-steel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/items/chromium.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/items/energic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/egg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/group-leg-base.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/group-leg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/mosquito-weapon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/mosquito-wing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/spread-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/spread-segment1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/tarantula-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/tarantula-leg-base.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/insect/tarantula.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/alter-treads.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/brigadier-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/gale-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/gale-treads.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/kibbler-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/kibbler.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/meteorite-weapon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/meteorite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/pioneer-weapon-heat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/purge-cell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他模组/虫族r0.15/sprites/units/tank/purge-full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/杂项/sundry/mineral-Processor-piston5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/杂项/模板/Drill.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/scala_compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/scala_compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/scala_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/scala_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javasrc/Ice/Ice.java" beforeDir="false" afterPath="$PROJECT_DIR$/javasrc/Ice/Ice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scalasrc/scala/SCItems.scala" beforeDir="false" afterPath="$PROJECT_DIR$/scalasrc/scala/SCItems.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javasrc/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/javasrc/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scalasrc/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/scalasrc/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scalasrc/scala/SCItems.scala" beforeDir="false" afterPath="$PROJECT_DIR$/scalasrc/IceScala/SCItems.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tool/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tool/tool/Tool.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tool/tool/dwd.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +726,9 @@
         <task path="$PROJECT_DIR$/scalasrc">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/kotlinsrc">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -54,11 +743,18 @@
       <list>
         <option value="package.json" />
         <option value="Interface" />
+        <option value="Kotlin File" />
+        <option value="Kotlin Class" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="IceAlone &lt;143903441+icexuegao@users.noreply.github.com&gt;" />
+      </list>
+    </option>
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="PUSH_TAGS">
       <GitPushTagMode>
@@ -120,51 +816,52 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Gradle.Icemods [mycopy].executor&quot;: &quot;Run&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Material Theme Notifications&quot;: &quot;Material theme UI notifications&quot;,
-    &quot;Notification.DoNotAsk-Material Theme Notifications&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;java.suggest.annotation.dependency&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.19.1&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.19.1&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Programming/luanqibazaode/Icemods/javasrc&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;D:/Programming/Node/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.28320312&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.6248295&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;scala_project_settings_configurable.last_selected_tab_index&quot;: &quot;0&quot;,
-    &quot;settings.build.tools.auto.reload&quot;: &quot;SELECTIVE&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.scala.compiler.ScalaCompileServerForm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Programming\\IDEA\\IntelliJ IDEA 2023.2.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Gradle.Icemods [mycopy].executor": "Run",
+    "Notification.DisplayName-DoNotAsk-Material Theme Notifications": "Material theme UI notifications",
+    "Notification.DoNotAsk-Material Theme Notifications": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "full.screen.before.presentation.mode": "false",
+    "java.suggest.annotation.dependency": "false",
+    "javascript.nodejs.core.library.configured.version": "18.19.1",
+    "javascript.nodejs.core.library.typings.version": "18.19.1",
+    "jdk.selected.JAVA_MODULE": "17",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Programming/luanqibazaode/xuexi",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "D:/Programming/Node/node",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.28320312",
+    "project.structure.side.proportion": "0.6248295",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "scala_project_settings_configurable.last_selected_tab_index": "6",
+    "settings.build.tools.auto.reload": "SELECTIVE",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Issue.Navigation",
+    "ts.external.directory.path": "D:\\Programming\\IDEA\\IntelliJ IDEA 2023.2.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;redshift&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "redshift"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
@@ -172,23 +869,24 @@
       <recent name="ice.BaseTool.io" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programming\luanqibazaode\Icemods\javasrc\Ice\type" />
       <recent name="D:\Programming\luanqibazaode\Icemods\javasrc" />
       <recent name="D:\Programming\luanqibazaode\Icemods\assets\sprites\blocks\effect\fleshAndBloodhinge" />
       <recent name="D:\Programming\luanqibazaode\Icemods\assets\shaders" />
       <recent name="D:\Programming\luanqibazaode\Icemods\javasrc\Ice\shader" />
-      <recent name="D:\Programming\luanqibazaode\Icemods\assets\sprites\items\SpinalCordEnding" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programming\luanqibazaode\Icemods\kotlinsrc" />
       <recent name="D:\Programming\luanqibazaode\Icemods\tool\tool" />
       <recent name="D:\Programming\luanqibazaode\Icemods\assets\sprites\blocks\effect\fleshAndBloodhinge" />
       <recent name="D:\Programming\luanqibazaode\Icemods\assets\sprites\blocks\liquids\pumpChamber" />
       <recent name="D:\Programming\luanqibazaode\Icemods\assets\sprites\liquids" />
-      <recent name="D:\Programming\luanqibazaode\Icemods\assets\sprites\items" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="Ice.ui.IceStat" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="IceKotlin" />
       <recent name="Iceconent.content.Items" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -206,7 +904,7 @@
       <command value="gradle mycopy" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.Icemods [Alon]">
+  <component name="RunManager" selected="Gradle.Icemods [Alons]">
     <configuration default="true" type="tests" factoryName="Autodetect">
       <module name="luanqibazaode.Icemods" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -263,12 +961,83 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="Icemods [clean]" type="GradleRunConfiguration" factoryName="Gradle">
+    <configuration name="Icemods [Alons]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="env">
+          <map>
+            <entry key="-Dorg.gradle.warning.mode" value="all" />
+          </map>
+        </option>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="Alons" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Icemods [Jars]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="Jars" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Icemods [allClasses]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="allClasses" />
+          </list>
+        </option>
+        <option name="vmOptions" value="-Dorg.gradle.warning.mode=all" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Icemods [clean]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -285,10 +1054,10 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="Icemods [ded]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Icemods:javasrc [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/javasrc" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -296,7 +1065,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="ded" />
+            <option value="compileJava" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -307,10 +1076,10 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="Icemods [delet]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Icemods:kotlinsrc [IceJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/kotlinsrc" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -318,51 +1087,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="delet" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Icemods [delete]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="delete" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Icemods [lk]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="lk" />
+            <option value="IceJar" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -387,24 +1112,27 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Gradle.Icemods [allClasses]" />
       <item itemvalue="Gradle.Icemods [clean]" />
-      <item itemvalue="Gradle.Icemods [delete]" />
-      <item itemvalue="Gradle.Icemods [delet]" />
-      <item itemvalue="Gradle.Icemods [lk]" />
+      <item itemvalue="Gradle.Icemods [Alons]" />
+      <item itemvalue="Gradle.Icemods [Jars]" />
+      <item itemvalue="Gradle.Icemods:javasrc [compileJava]" />
+      <item itemvalue="Gradle.Icemods:kotlinsrc [IceJar]" />
       <item itemvalue="Gradle.Icemods [Alon]" />
-      <item itemvalue="Gradle.Icemods [ded]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Icemods [Alons]" />
         <item itemvalue="Gradle.Icemods [Alon]" />
-        <item itemvalue="Gradle.Icemods [lk]" />
-        <item itemvalue="Gradle.Icemods [delete]" />
-        <item itemvalue="Gradle.Icemods [delet]" />
-        <item itemvalue="Gradle.Icemods [ded]" />
+        <item itemvalue="Gradle.Icemods [Jars]" />
+        <item itemvalue="Gradle.Icemods:kotlinsrc [IceJar]" />
+        <item itemvalue="Gradle.Icemods:javasrc [compileJava]" />
       </list>
     </recent_temporary>
   </component>
   <component name="ScalaProjectSettings">
+    <option name="compilerHighlightingScala2" value="true" />
+    <option name="implicitParametersSearchDepth" value="10" />
     <option name="intInjectionMapping">
       <map>
         <entry key="css" value="CSS" />
@@ -425,6 +1153,7 @@
         <entry key="yaml" value="yaml" />
       </map>
     </option>
+    <option name="projectViewHighlighting" value="true" />
     <option name="scala3DisclaimerShown" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -918,7 +1647,35 @@
       <workItem from="1723351414732" duration="8381000" />
       <workItem from="1723382230471" duration="1355000" />
       <workItem from="1723433334372" duration="12341000" />
-      <workItem from="1723464213052" duration="4445000" />
+      <workItem from="1723464213052" duration="7017000" />
+      <workItem from="1723473219104" duration="164000" />
+      <workItem from="1723473385502" duration="466000" />
+      <workItem from="1723473859178" duration="207000" />
+      <workItem from="1723474069001" duration="2665000" />
+      <workItem from="1723477298803" duration="98000" />
+      <workItem from="1723477399720" duration="92000" />
+      <workItem from="1723477494941" duration="168000" />
+      <workItem from="1723477666752" duration="47000" />
+      <workItem from="1723477716363" duration="524000" />
+      <workItem from="1723478248361" duration="102000" />
+      <workItem from="1723478353387" duration="113000" />
+      <workItem from="1723478468616" duration="439000" />
+      <workItem from="1723478914363" duration="1193000" />
+      <workItem from="1723480112786" duration="813000" />
+      <workItem from="1723531053851" duration="1562000" />
+      <workItem from="1723532850689" duration="2302000" />
+      <workItem from="1723535252416" duration="413000" />
+      <workItem from="1723535679229" duration="899000" />
+      <workItem from="1723536637385" duration="182000" />
+      <workItem from="1723536821708" duration="1017000" />
+      <workItem from="1723537896323" duration="1663000" />
+      <workItem from="1723543528674" duration="2132000" />
+      <workItem from="1723545711643" duration="4384000" />
+      <workItem from="1723552451955" duration="417000" />
+      <workItem from="1723552878982" duration="49000" />
+      <workItem from="1723552931667" duration="3037000" />
+      <workItem from="1723556044103" duration="340000" />
+      <workItem from="1723556387945" duration="2542000" />
     </task>
     <task id="LOCAL-00001" summary="mod">
       <option name="closed" value="true" />
@@ -1128,7 +1885,31 @@
       <option name="project" value="LOCAL" />
       <updated>1723466913188</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="实验项目 build不稳定!!!">
+      <option name="closed" value="true" />
+      <created>1723470762068</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1723470762068</updated>
+    </task>
+    <task id="LOCAL-00028" summary="实验项目 build不稳定!!!">
+      <option name="closed" value="true" />
+      <created>1723470823474</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1723470823474</updated>
+    </task>
+    <task id="LOCAL-00029" summary="实验项目 build不稳定!!!">
+      <option name="closed" value="true" />
+      <created>1723470847973</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1723470847973</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1161,7 +1942,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
@@ -1189,6 +1970,9 @@
     <MESSAGE value="多模块启动!" />
     <MESSAGE value="实验项目 build不稳定!!!" />
     <option name="LAST_COMMIT_MESSAGE" value="实验项目 build不稳定!!!" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
