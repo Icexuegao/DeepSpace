@@ -28,8 +28,6 @@ public class Ice extends Mod {
         Vars.ui.content = new IceContentInfoDialog();
         super.init();
     }
-
-
     @Override
     public void loadContent() {
         ScalaContentLoad load = new ScalaContentLoad();
