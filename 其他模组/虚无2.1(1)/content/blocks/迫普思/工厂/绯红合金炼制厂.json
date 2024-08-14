@@ -1,0 +1,66 @@
+{
+  "type": "GenericCrafter",
+  "health": 1000,
+  "name": "绯红合金炼制厂",
+  "description": "将化钢与绯红之石练制成为绯红合金",
+  "outputItem": {
+    "item": "绯红合金",
+    "amount": 6
+  },
+  "itemCapacity": 60,
+  "size": 4,
+  "hasPower": true,
+  "hasLiquids": false,
+  "hasItems": true,
+  "craftTime": 85,
+  "updateEffect": "smeltsmoke",
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault"
+    ]
+  },
+  "consumes": {
+    "power": 10.0,
+    "items": {
+      "items": [
+        {
+          "item": "化钢",
+          "amount": 5
+        },
+        {
+          "item": "绯红之石",
+          "amount": 10
+        }
+      ]
+    }
+  },
+  "requirements": [
+    {
+      "item": "铀",
+      "amount": 250
+    },
+    {
+      "item": "绯红之石",
+      "amount": 250
+    },
+    {
+      "item": "silicon",
+      "amount": 350
+    },
+    {
+      "item": "化钢",
+      "amount": 250
+    }
+  ],
+  "category": "crafting",
+  "research": {
+    "parent": "化钢压制厂",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "绯红矿区"
+      }
+    ]
+  }
+}

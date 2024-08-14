@@ -1,0 +1,8 @@
+{
+  "wall": "血沙墙",
+  "attributes": {
+    "heat": 0.1,
+    "water": -0.2,
+    "spores": -0.2
+  }
+}

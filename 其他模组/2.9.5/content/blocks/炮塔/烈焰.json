@@ -1,0 +1,265 @@
+{
+  "type": "ItemTurret",
+  "health": 1228,
+  "armor": 5,
+  "size": 2,
+  "reload": 5,
+  "range": 120,
+  "recoil": 2,
+  "recoilTime": 120,
+  "maxAmmo": 60,
+  "rotateSpeed": 8,
+  "consumes": {
+    "coolant": {
+      "amount": 0.3
+    }
+  },
+  "coolantMultiplier": 1.5,
+  "cooldownTime": 120,
+  "shootSound": "flame",
+  "ammoTypes": {
+    "coal": {
+      "type": "BulletType",
+      "damage": 47,
+      "lifetime": 15,
+      "speed": 8,
+      "hitSize": 7,
+      "pierce": true,
+      "hittable": false,
+      "absorbable": false,
+      "pierceBuilding": true,
+      "status": "burning",
+      "statusDuration": 360,
+      "ammoMultiplier": 6,
+      "shootEffect": {
+        "type": "ParticleEffect",
+        "particles": 8,
+        "lifetime": 33,
+        "sizeFrom": 2,
+        "sizeTo": 0,
+        "length": 128,
+        "interp": "pow5Out",
+        "sizeInterp": "pow10In",
+        "colorFrom": "FFDD55",
+        "colorTo": "DB401C",
+        "cone": 8
+      },
+      "smokeEffect": {
+        "type": "ParticleEffect",
+        "particles": 12,
+        "lifetime": 55,
+        "length": 136,
+        "sizeFrom": 3,
+        "sizeTo": 0,
+        "cone": 12,
+        "layer": 109,
+        "interp": "pow5Out",
+        "sizeInterp": "pow10In",
+        "colorFrom": "DB401C",
+        "colorTo": "454545"
+      },
+      "hitEffect": {
+        "type": "MultiEffect",
+        "effects": [
+          {
+            "type": "ParticleEffect",
+            "particles": 2,
+            "line": true,
+            "lifetime": 15,
+            "length": 24,
+            "strokeFrom": 1.3,
+            "strokeTo": 0,
+            "lenFrom": 8,
+            "lenTo": 8,
+            "cone": 23,
+            "colorFrom": "F8AD42",
+            "colorTo": "FFE176"
+          },
+          {
+            "type": "ParticleEffect",
+            "particles": 4,
+            "lifetime": 10,
+            "sizeFrom": 3,
+            "sizeTo": 0,
+            "colorFrom": "FF8C00",
+            "colorTo": "FF8C00"
+          }
+        ]
+      },
+      "despawnEffect": "none"
+    },
+    "pyratite": {
+      "type": "BulletType",
+      "damage": 82,
+      "lifetime": 18,
+      "speed": 8,
+      "hitSize": 10,
+      "pierce": true,
+      "hittable": false,
+      "absorbable": false,
+      "pierceBuilding": true,
+      "rangeChange": 24,
+      "status": "melting",
+      "statusDuration": 360,
+      "ammoMultiplier": 8,
+      "shootEffect": {
+        "type": "ParticleEffect",
+        "particles": 12,
+        "lifetime": 33,
+        "length": 152,
+        "sizeFrom": 3,
+        "sizeTo": 0,
+        "cone": 8,
+        "interp": "pow3Out",
+        "sizeInterp": "pow5In",
+        "colorFrom": "FFB855",
+        "colorTo": "DB401C"
+      },
+      "smokeEffect": {
+        "type": "ParticleEffect",
+        "particles": 12,
+        "lifetime": 55,
+        "length": 160,
+        "sizeFrom": 4,
+        "sizeTo": 0,
+        "cone": 12,
+        "layer": 109,
+        "interp": "pow3Out",
+        "sizeInterp": "pow5In",
+        "colorFrom": "DB401C",
+        "colorTo": "3F3F3F"
+      },
+      "hitEffect": {
+        "type": "MultiEffect",
+        "effects": [
+          {
+            "type": "ParticleEffect",
+            "particles": 4,
+            "lifetime": 16,
+            "length": 16,
+            "sizeFrom": 3,
+            "sizeTo": 0,
+            "cone": 360,
+            "colorFrom": "F8AD42",
+            "colorTo": "F68021"
+          }
+        ]
+      },
+      "despawnEffect": "none"
+    },
+    "铈凝块": {
+      "type": "BulletType",
+      "damage": 163,
+      "lifetime": 22.5,
+      "speed": 8,
+      "hitSize": 16,
+      "pierce": true,
+      "hittable": false,
+      "absorbable": false,
+      "pierceBuilding": true,
+      "rangeChange": 60,
+      "status": "蚀骨",
+      "statusDuration": 360,
+      "ammoMultiplier": 10,
+      "reloadMultiplier": 1.5,
+      "shootEffect": {
+        "type": "multiEffect",
+        "effects": [
+          {
+            "type": "ParticleEffect",
+            "particles": 10,
+            "lifetime": 30,
+            "length": 120,
+            "sizeFrom": 4,
+            "sizeTo": 0,
+            "cone": 15,
+            "interp": "circleOut",
+            "sizeInterp": "pow5In",
+            "lightColor": "FF5845",
+            "colorFrom": "FF8663",
+            "colorTo": "FF5845"
+          },
+          {
+            "type": "ParticleEffect",
+            "particles": 10,
+            "lifetime": 35,
+            "length": 150,
+            "sizeFrom": 4,
+            "sizeTo": 0.5,
+            "cone": 15,
+            "interp": "fastSlow",
+            "lightColor": "FF5845",
+            "colorFrom": "FF8663",
+            "colorTo": "FF5845"
+          },
+          {
+            "type": "ParticleEffect",
+            "particles": 10,
+            "lifetime": 45,
+            "length": 160,
+            "sizeFrom": 4,
+            "sizeTo": 0.5,
+            "cone": 10,
+            "interp": "fastSlow",
+            "lightColor": "FF5845",
+            "colorFrom": "FF8663",
+            "colorTo": "FF5845"
+          },
+          {
+            "type": "ParticleEffect",
+            "particles": 10,
+            "lifetime": 25,
+            "length": 180,
+            "sizeFrom": 3,
+            "sizeTo": 0,
+            "cone": 10,
+            "interp": "circleOut",
+            "sizeInterp": "pow5In",
+            "lightColor": "FF5845",
+            "colorFrom": "FF8663",
+            "colorTo": "FF5845"
+          }
+        ]
+      },
+      "smokeEffect": {
+        "type": "ParticleEffect",
+        "particles": 20,
+        "lifetime": 55,
+        "length": 216,
+        "sizeFrom": 5,
+        "sizeTo": 0,
+        "cone": 10,
+        "layer": 109,
+        "interp": "circleOut",
+        "sizeInterp": "pow5In",
+        "colorFrom": "FF5845",
+        "colorTo": "3F3F3F"
+      },
+      "hitEffect": {
+        "type": "ParticleEffect",
+        "line": true,
+        "particles": 4,
+        "lifetime": 60,
+        "offset": 10,
+        "interp": "circleOut",
+        "length": 70,
+        "cone": -30,
+        "strokeFrom": 3,
+        "strokeTo": 0,
+        "lenFrom": 7,
+        "lenTo": 0,
+        "colorFrom": "FF5845",
+        "colorTo": "FF5845"
+      },
+      "despawnEffect": "none"
+    }
+  },
+  "requirements": [
+    "copper/135",
+    "lead/90",
+    "graphite/85",
+    "铱板/35"
+  ],
+  "category": "turret",
+  "research": "wave"
+}

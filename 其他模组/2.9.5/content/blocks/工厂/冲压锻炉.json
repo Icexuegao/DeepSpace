@@ -1,0 +1,59 @@
+{
+  "type": "GenericCrafter",
+  "size": 5,
+  "armor": 4,
+  "itemCapacity": 60,
+  "liquidCapacity": 60,
+  "consumes": {
+    "power": 27.5,
+    "items": {
+      "items": [
+        "sand/24",
+        "scrap/24"
+      ]
+    },
+    "liquid": "water/1"
+  },
+  "craftTime": 45,
+  "updateEffect": "fuelburn",
+  "craftEffect": "pulverizeMedium",
+  "outputItem": "铱板/15",
+  "outputLiquid": "废水/1",
+  "requirements": [
+    "graphite/450",
+    "铱板/275",
+    "silicon/180",
+    "导能回路/135",
+    "陶钢/85"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawPistons",
+        "sinMag": -2.6,
+        "sinScl": 3.5325,
+        "lenOffset": 0
+      },
+      "DrawDefault",
+      {
+        "type": "DrawGlowRegion",
+        "alpha": 1,
+        "glowScale": 3.53429173,
+        "color": "F0511D"
+      }
+    ]
+  },
+  "ambientSoundVolume": 0.07,
+  "category": "crafting",
+  "research": {
+    "parent": "铱板滤压机大",
+    "objectives": [
+      "液体焚化炉"
+    ]
+  }
+}

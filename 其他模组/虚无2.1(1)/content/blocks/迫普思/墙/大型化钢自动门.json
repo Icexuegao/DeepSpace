@@ -1,0 +1,29 @@
+{
+  "name": "大型化钢自动门",
+  "description": "有地面兵种经过时会自动打开，敌人攻击时会有几率反弹子弹",
+  "type": "AutoDoor",
+  "health": 7500,
+  "armor": 2,
+  "size": 2,
+  "group": "walls"
+  "insulated": false
+  "absorbLasers": true
+  "flashHit": true
+  "chanceDeflect": 25
+  "buildCostMultiplier": 1,
+  "requirements": [
+    {
+      "item": "化钢",
+      "amount": 12
+    },
+    {
+      "item": "silicon",
+      "amount": 24
+    }
+  ],
+  "category": "defense",
+  "research": {
+    "parent": "化钢自动门"
+    //科技树前置
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "type": "ConsumeGenerator"
+  "name": "黑核发电机"
+  "description": "通过燃烧黑核进行发电，且产能高",
+  "powerProduction": 2,
+  "itemDuration": 30,
+  "health": 1600,
+  "size": 2,
+  "ambientSound": "smelter",
+  "ambientSoundVolume": 0.03,
+  "generateEffect": "generatespark",
+  "powerProduction": 50,
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      "DrawWarmupRegion"
+    ]
+  },
+  "category": "power",
+  "research": "基础发电机",
+  "consumes": {
+    "items": {
+      "items": [
+        {
+          "item": "黑核",
+          "amount": 2
+        }
+      ]
+    }
+  }
+  "requirements": [
+    {
+      "item": "化钢",
+      "amount": 250
+    },
+    {
+      "item": "铀",
+      "amount": 250
+    },
+    {
+      "item": "火石矿",
+      "amount": 150
+    }
+  ]
+}

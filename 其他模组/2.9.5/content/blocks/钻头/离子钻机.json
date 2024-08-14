@@ -1,0 +1,30 @@
+{
+  "type": "Drill",
+  "health": 500,
+  "size": 4,
+  "tier": 5,
+  "drillTime": 320,
+  "itemCapacity": 36,
+  "liquidCapacity": 30,
+  "consumes": {
+    "power": 2,
+    "liquid": {
+      "liquid": "water",
+      "amount": 0.1,
+      "booster": true,
+      "optional": true
+    }
+  },
+  "drawRim": true,
+  "warmupSpeed": 0.06,
+  "updateEffect": "mineBig",
+  "liquidBoostIntensity": 1.732,
+  "requirements": [
+    "copper/75",
+    "graphite/55",
+    "titanium/35",
+    "silicon/50"
+  ],
+  "category": "production",
+  "research": "laser-drill"
+}

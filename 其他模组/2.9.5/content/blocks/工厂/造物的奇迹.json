@@ -1,0 +1,50 @@
+{
+  "type": "GenericCrafter",
+  "size": 2,
+  "armor": 4,
+  "itemCapacity": 24,
+  "liquidCapacity": 360,
+  "hasLiquids": true,
+  "craftTime": 30,
+  "outputItem": "生物钢/1",
+  "outputLiquid": "cryofluid/1",
+  "updateEffect": {
+    "type": "WaveEffect",
+    "lifetime": 40,
+    "sides": 6,
+    "sizeTo": 6,
+    "strokeFrom": 2,
+    "rotation": 90,
+    "colorFrom": "FF5845",
+    "colorTo": "FF8663"
+  },
+  "requirements": [
+    "铱板/225",
+    "导能回路/135",
+    "陶钢/85",
+    "生物钢/55",
+    "肃正协议/1"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      {
+        "type": "DrawLiquidRegion",
+        "drawLiquid": "cryofluid"
+      },
+      {
+        "type": "DrawRegion",
+        "suffix": "-top"
+      },
+      {
+        "type": "DrawFrames",
+        "frames": 5,
+        "interval": 4
+      }
+    ]
+  },
+  "ambientSound": "shield",
+  "category": "crafting",
+  "research": "生物钢重组器"
+}

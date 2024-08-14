@@ -14,7 +14,7 @@
     <option name="explainTypeErrors" value="true" />
     <option name="specialization" value="false" />
     <option name="incrementalityType" value="IDEA" />
-    <profile name="Gradle 1" modules="Icemods.main,Icemods.scalasrc.main,Icemods.scalasrc.test,Icemods.test">
+    <profile name="Gradle 1" modules="DeepSpace.scalaSrc.main,DeepSpace.scalaSrc.test,DeepSpace.scalasrc.main,DeepSpace.scalasrc.test,Icemods.main,Icemods.scalasrc.main,Icemods.scalasrc.test,Icemods.test">
       <option name="deprecationWarnings" value="true" />
       <option name="uncheckedWarnings" value="true" />
     </profile>

@@ -1,0 +1,137 @@
+{
+  "type": "payload",
+  "research": {
+    "parent": "爆蚊",
+    "objectives": [
+      "multiplicative-reconstructor"
+    ]
+  },
+  "coreUnitDock": true,
+  "lowAltitude": true,
+  "isEnemy": false,
+  "flying": true,
+  "health": 1080,
+  "armor": 8,
+  "hitSize": 20,
+  "speed": 4.8,
+  "drag": 0.15,
+  "rotateSpeed": 20,
+  "mineTier": 8,
+  "mineSpeed": 16,
+  "buildSpeed": 6,
+  "engineOffset": 14,
+  "engineSize": 3.5,
+  "itemCapacity": 125,
+  "ammoType": 5000,
+  "ammoCapacity": 250,
+  "payloadCapacity": 576,
+  "immunities": [
+    "wet",
+    "burning",
+    "spore-slowed",
+    "辐射"
+  ],
+  "weapons": [
+    {
+      "name": "伊普西龙机枪",
+      "x": 8,
+      "y": -2,
+      "reload": 16,
+      "shoot": {
+        "shots": 2,
+        "shotDelay": 2
+      },
+      "ejectEffect": "casing2",
+      "shootSound": "shootSnap",
+      "bullet": {
+        "damage": 25,
+        "lifetime": 40,
+        "speed": 8,
+        "height": 8,
+        "width": 3,
+        "shrinkY": 0,
+        "weaveMag": 1,
+        "weaveScale": 5,
+        "trailLength": 15,
+        "trailWidth": 1.5,
+        "trailColor": "FAAF87",
+        "keepVelocity": false,
+        "status": "熔融",
+        "statusDuration": 30,
+        "homingRange": 80,
+        "homingPower": 0.06,
+        "splashDamage": 20,
+        "splashDamageRadius": 10,
+        "buildingDamageMultiplier": 0.2
+      }
+    },
+    {
+      "name": "伊普西龙激光",
+      "x": 8,
+      "y": -2,
+      "reload": 120,
+      "shootSound": "laser",
+      "bullet": {
+        "type": "LaserBulletType",
+        "damage": 50,
+        "length": 288,
+        "width": 12,
+        "colors": [
+          "FAAF87",
+          "EBBD86",
+          "FFF0F0"
+        ],
+        "buildingDamageMultiplier": 0.05,
+        "hitEffect": "hitLancer"
+      }
+    },
+    {
+      "name": "伊普西龙炮",
+      "x": 0,
+      "y": 0,
+      "reload": 360,
+      "shootY": 8,
+      "recoil": 0,
+      "shake": 2,
+      "mirror": false,
+      "shootCone": 2.5,
+      "cooldownTime": 210,
+      "shootSound": "railgun",
+      "bullet": {
+        "type": "RailBulletType",
+        "damage": 600,
+        "length": 364,
+        "recoil": 2,
+        "knockback": 8,
+        "status": "熔融",
+        "statusDuration": 300,
+        "pierceDamageFactor": 0.2,
+        "buildingDamageMultiplier": 0.05,
+        "shootEffect": "railShoot",
+        "hitEffect": "railHit",
+        "hitColor": "D86E56",
+        "pointEffectSpace": 36,
+        "pointEffect": "railTrail",
+        "pierceEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 120,
+          "offset": 0,
+          "lifetime": 15,
+          "length": 40,
+          "cone": -7.5,
+          "lenFrom": 6,
+          "lenTo": 0,
+          "colorFrom": "D86E56",
+          "colorTo": "FFFFFF"
+        }
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "ArmorPlateAbility",
+      "healthMultiplier": 0.25
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.EB-wilson.UniverseCore/annotations/2.1.1/d12e35a995197b6cfe3c8efc180157b17c28b536/annotations-2.1.1.jar" />
+          <entry name="$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.Anuken/jabel/93fde537c7/f04617218b023d54c8361bcf52098ea494c63d3a/jabel-93fde537c7.jar" />
+        </processorPath>
+        <module name="DeepSpace.javaSrc.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="DeepSpace" target="17" />
+      <module name="DeepSpace.main" target="17" />
+      <module name="DeepSpace.scalaSrc" target="17" />
+      <module name="DeepSpace.scalasrc" target="17" />
+      <module name="DeepSpace.scalasrc.main" target="17" />
+      <module name="DeepSpace.scalaSrc.main" target="17" />
+      <module name="DeepSpace.scalaSrc.test" target="17" />
+      <module name="DeepSpace.scalasrc.test" target="17" />
+      <module name="DeepSpace.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

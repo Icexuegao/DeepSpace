@@ -1,0 +1,73 @@
+{
+  "type": "Reconstructor",
+  "name": "重载型再构厂",
+  "description": "将T2重构升级为T3",
+  "health": 3000,
+  "size": 5,
+  "hasliquid": true,
+  "liquidCapacity": 800,
+  "buildCostMultiplier": 1,
+  "consumes": {
+    "power": 10,
+    "items": {
+      "items": [
+        {
+          "item": "silicon",
+          "amount": 100
+        },
+        {
+          "item": "裂位合金",
+          "amount": 120
+        },
+        {
+          "item": "钛板",
+          "amount": 200
+        },
+        {
+          "item": "化钢",
+          "amount": 100
+        }
+      ]
+    }
+  },
+  "upgrades": [
+    [
+      "衡守",
+      "聚衡"
+    ]
+  ],
+  "constructTime": 1240,
+  "requirements": [
+    {
+      "item": "裂位合金",
+      "amount": 200
+    },
+    {
+      "item": "化钢",
+      "amount": 200
+    },
+    {
+      "item": "钛板",
+      "amount": 320
+    },
+    {
+      "item": "黑核",
+      "amount": 50
+    },
+    {
+      "item": "silicon",
+      "amount": 200
+    }
+  ],
+  "category": "units",
+  "buildVisibility": "shown",
+  "research": {
+    "parent": "重载型重构厂",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "前哨基地"
+      }
+    ]
+  }
+}

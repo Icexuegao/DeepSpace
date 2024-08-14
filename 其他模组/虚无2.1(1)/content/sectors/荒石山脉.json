@@ -1,0 +1,20 @@
+{
+  "localizedName": "荒石山脉",
+  "name": "荒石山脉",
+  "description": "一个十分复杂的山脉，这里有敌人进攻，守住这里",
+  //"details":"",
+  "planet": "凯赫米特"
+  //母星名字。
+  "sector": 78//区块坐标
+  "captureWave": 10//胜利波次
+  "difficulty": 5//难度1一5
+  "research": {
+    "parent": "风沙地",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "风沙地"
+      }
+    ]
+  }
+}

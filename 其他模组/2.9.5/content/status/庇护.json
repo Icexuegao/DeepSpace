@@ -1,0 +1,34 @@
+{
+  "reloadMultiplier": 1.1,
+  "healthMultiplier": 3,
+  "speedMultiplier": 0.9,
+  "color": "FFE18F",
+  "applyExtend": true,
+  "applyEffect": {
+    "type": "WaveEffect",
+    "lifetime": 60,
+    "sides": 4,
+    "sizeFrom": 48,
+    "sizeTo": 0,
+    "strokeFrom": 0,
+    "strokeTo": 3,
+    "interp": "exp10Out",
+    "colorFrom": "FFD37F",
+    "colorTo": "FFD37F"
+  },
+  "effectChance": 0.1,
+  "effect": {
+    "type": "ParticleEffect",
+    "lifetime": 30,
+    "particles": 3,
+    "line": true,
+    "strokeFrom": 2,
+    "strokeTo": 0,
+    "lenFrom": 6,
+    "lenTo": 6,
+    "cone": 360,
+    "length": 40,
+    "colorFrom": "FFE18F",
+    "colorTo": "F8C26600"
+  }
+}

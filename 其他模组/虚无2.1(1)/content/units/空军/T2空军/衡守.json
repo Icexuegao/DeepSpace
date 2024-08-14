@@ -1,0 +1,116 @@
+{
+  "type": "flying",
+  "name": "衡守",
+  "description": "失衡的进阶版本，将修复炮台更换为更强劲的喷火器，拥有很好的机动性",
+  "speed": 2.4,
+  "drag": 0.15,
+  "accel": 0.1,
+  "rotateSpeed": 10,
+  "ammoType": {
+    "type": "PowerAmmoType",
+    "totalPower": 100
+  },
+  "ammoCapacity": 300,
+  "hitSize": 12,
+  "buildSpeed": 0.75,
+  "flying": true,
+  "faceTarget": true,
+  "drawMinimap": true,
+  "health": 1500,
+  "armor": 8,
+  "engineColor": "BF92F8FF",
+  "engineOffset": 8,
+  "engineSize": 2,
+  "itemCapacity": 500,
+  "immunities": [
+    "freezing"
+  ],
+  "research": "失衡",
+  "requirements": {
+    "block": "重载型重构厂",
+    "previous": "失衡"
+    "time": 1500,
+    "requirements": [
+      "silicon/1500",
+      "化钢/2000"
+      "黑核/100"
+      "thorium/1000"
+      "火石矿/500"
+    ]
+  },
+  "weapons": [
+    {
+      "name": "衡守1",
+      "x": 0,
+      "y": 1,
+      "shootY": 8,
+      "mirror": true,
+      "rotate": false,
+      //转头
+      "alternate": false,
+      "top": false,
+      "under": true,
+      "recoil": 0,
+      //后坐力
+      "shootSound": "none",
+      //设计音效
+      "loopSound": "torch",
+      //攻击时的循环音效
+
+      "bullet": {
+        "type": "ContinuousFlameBulletType",
+        //
+        "damage": 7,
+        //帧伤
+        "length": 142,
+        //长度
+        "pierceCap": 8,
+        //穿透能力
+        "status": "melting",
+        "statusDuration": 1200
+      }
+    },
+    {
+      "name": "导弹底座",
+      "x": 0,
+      "y": 0,
+      "reload": 20,
+      "shootSound": "missile",
+      "inaccuracy": 15,
+      "bullet": {
+        "type": "MissileBulletType",
+        "damage": 35,
+        "trailLength": 6,
+        "trailWidth": 1,
+        "backColor": "FF8C00",
+        "frontColor": "FFB90F",
+        "trailEffect": "smoke",
+        "trailColor": "FF8C00",
+        "buildingDamageMultiplier": 1,
+        "splashDamageRadius": 18,
+        "splashDamage": 12,
+        "homingRange": 40,
+        "homingPower": 0.06,
+        "hitEffect": "explosion",
+        "despawnEffect": "explosion",
+        "width": 8,
+        "height": 9,
+        "speed": 6,
+        "lifetime": 53
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "ForceFieldAbility",
+      "radius": 40,
+      "regen": 2,
+      "max": 1500,
+      "cooldown": 60
+    }
+    {
+      "type": "RegenAbility",
+      "percentAmount": 0.05
+    }
+  ]
+}

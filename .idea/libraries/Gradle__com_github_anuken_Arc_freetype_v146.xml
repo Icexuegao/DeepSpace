@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.anuken.Arc:freetype:v146" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.anuken.Arc" artifactId="freetype" version="v146" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.anuken.Arc/freetype/v146/c79be45006335d5a6e833b5443dd60aed4369f0b/freetype-v146.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.anuken.Arc/freetype/v146/de9be9378483ae2028888b95ff3ebe9c7c84e462/freetype-v146-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

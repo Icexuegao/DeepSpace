@@ -1,0 +1,13 @@
+{
+  "research": {
+    "parent": "处决",
+    "objectives": [
+      "最终教条"
+      /*{
+          "type": "SectorComplete",
+          "preset": "nuclearComplex"
+      }*/
+    ]
+  },
+  "buildVisibility": "sandboxOnly"
+}

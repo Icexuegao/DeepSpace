@@ -1,0 +1,19 @@
+{
+  "type": "crawl",
+  "name": "绒刺",
+  "health": 120,
+  "armor": 2,
+  "hitSize": 8,
+  "speed": 1.3,
+  "rotateSpeed": 2.4,
+  "omniMovement": false,
+  "segments": 8,
+  "segmentScl": 3,
+  "segmentPhase": 5,
+  "segmentMag": 0.5,
+  "drawBody": false,
+  "drawCell": false,
+  "hidden": false,
+  "crushDamage": 0.2,
+  "hovering": true
+}

@@ -1,0 +1,15 @@
+{
+  "name": "轻型仓库",
+  "description": "体形小，容量大的仓库"
+  "health": 150,
+  "type": "StorageBlock",
+  "requirements": [
+    "虚空石/100"
+  ],
+  "size": 1,
+  "itemCapacity": 200,
+  "research": "轻型核心",
+  "researchCostMultiplier": 1,
+  "category": "effect"
+  "canOverdrive": false
+}

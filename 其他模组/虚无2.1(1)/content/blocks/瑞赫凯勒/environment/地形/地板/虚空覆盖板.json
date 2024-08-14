@@ -1,0 +1,14 @@
+{
+  "type": "floor",
+  "name": "虚空覆盖板",
+  "variants": 0
+  "placeableLiquid": true,
+  "requirements": [
+    {
+      "item": "虚空石",
+      "amount": 10
+    }
+  ],
+  "category": "effect",
+  "research": "轻型核心"
+}

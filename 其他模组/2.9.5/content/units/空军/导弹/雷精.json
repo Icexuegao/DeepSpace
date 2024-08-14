@@ -1,0 +1,156 @@
+{
+  "type": "missile",
+  "template": "MissileUnitType",
+  "health": 480,
+  "armor": 8,
+  "hitSize": 0,
+  "speed": 0,
+  "range": 240,
+  "lifetime": 1800,
+  "hittable": false,
+  "targetable": false,
+  "drawCell": false,
+  "drawBody": false,
+  "lowAltitude": true,
+  "engineSize": 0,
+  "lightRadius": 240,
+  "lightColor": "FF5845",
+  "immunities": [
+    "寄生"
+  ],
+  "parts": [
+    {
+      "type": "HaloPart",
+      "tri": true,
+      "shapes": 6,
+      "stroke": 1,
+      "radius": 4.5,
+      "triLength": 9,
+      "haloRadius": 18,
+      "haloRotateSpeed": 0.5,
+      "color": "FF5845",
+      "layer": 110
+    },
+    {
+      "type": "HaloPart",
+      "tri": true,
+      "shapeRotation": 180,
+      "shapes": 6,
+      "radius": 4.5,
+      "triLength": 2,
+      "haloRadius": 18,
+      "haloRotateSpeed": 0.5,
+      "color": "FF5845",
+      "layer": 110
+    },
+    {
+      "type": "HaloPart",
+      "tri": true,
+      "shapeRotation": 180,
+      "shapes": 6,
+      "radius": 4.5,
+      "triLength": 4,
+      "haloRadius": 12,
+      "haloRotation": -7.2,
+      "haloRotateSpeed": -0.5,
+      "color": "FF5845",
+      "layer": 110
+    },
+    {
+      "type": "HaloPart",
+      "tri": true,
+      "shapes": 6,
+      "radius": 4.5,
+      "triLength": 2,
+      "haloRadius": 12,
+      "haloRotation": -7.2,
+      "haloRotateSpeed": -0.5,
+      "color": "FF5845",
+      "layer": 110
+    }
+  ],
+  "weapons": [
+    {
+      "type": "RepairBeamWeapon",
+      "mirror": false,
+      "x": 0,
+      "shootY": 0,
+      "reload": 1,
+      "recoil": 0,
+      "shake": 0,
+      "rotate": true,
+      "rotateSpeed": 3,
+      "laserColor": "FF5845",
+      "controllable": false,
+      "autoTarget": true,
+      "beamWidth": 0.9,
+      "pulseRadius": 6,
+      "pulseStroke": 2,
+      "repairSpeed": 5,
+      "bullet": {
+        "maxRange": 120,
+        "shootEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 20,
+          "offset": 35,
+          "lifetime": 22,
+          "length": 35,
+          "cone": -360,
+          "lenFrom": 5,
+          "lenTo": 0,
+          "colorFrom": "FF5845",
+          "colorTo": "FFDCD8"
+        }
+      }
+    },
+    {
+      "type": "PointDefenseWeapon",
+      "x": 0,
+      "recoil": 0,
+      "reload": 2,
+      "color": "FF5845",
+      "targetInterval": 2,
+      "targetSwitchInterval": 2,
+      "shootSound": "lasershoot",
+      "bullet": {
+        "damage": 150,
+        "maxRange": 240,
+        "shootEffect": "sparkShoot",
+        "hitEffect": "pointHit"
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "EnergyFieldAbility",
+      "damage": 445,
+      "reload": 60,
+      "range": 240,
+      "maxTargets": 20,
+      "status": "熔融",
+      "statusDuration": 30,
+      "healPercent": 4,
+      "sectors": 6,
+      "sectorRad": 0.12,
+      "color": "FF5845",
+      "effectRadius": 4,
+      "rotateSpeed": 0.5
+    }
+  ],
+  "deathExplosionEffect": {
+    "type": "ParticleEffect",
+    "line": true,
+    "particles": 24,
+    "lifetime": 20,
+    "length": 75,
+    "cone": -360,
+    "lenFrom": 8,
+    "lenTo": 4,
+    "strokeFrom": 3,
+    "strokeTo": 0,
+    "lightColor": "FF5845",
+    "colorFrom": "FF5845",
+    "colorTo": "FFDCD8"
+  }
+}

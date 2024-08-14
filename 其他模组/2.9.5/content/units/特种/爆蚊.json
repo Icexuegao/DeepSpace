@@ -1,0 +1,83 @@
+{
+  "type": "flying",
+  "flying": true,
+  "research": {
+    "parent": "幻影",
+    "objectives": [
+      "crawler"
+    ]
+  },
+  "health": 270,
+  "hitSize": 11,
+  "armor": 1,
+  "speed": 2.4,
+  "accel": 0.08,
+  "drag": 0.04,
+  "engineSize": 3,
+  "trailLength": 3,
+  "engineOffset": 7,
+  "createScorch": false,
+  "immunities": [
+    "burning",
+    "wet",
+    "spore-slowed"
+  ],
+  "targetFlags": [
+    "reactor",
+    "generator",
+    "turret"
+  ],
+  "weapons": [
+    {
+      "x": 0,
+      "reload": 600,
+      "mirror": false,
+      "shootCone": 360,
+      "shootOnDeath": true,
+      "shootSound": "explosion",
+      "bullet": {
+        "damage": 0,
+        "speed": 8,
+        "lifetime": 5,
+        "collides": false,
+        "hittable": false,
+        "killShooter": true,
+        "instantDisappear": true,
+        "shootEffect": "none",
+        "despawnEffect": {
+          "type": "ExplosionEffect",
+          "sparkColor": "F6E096",
+          "lifetime": 30,
+          "smokes": 30,
+          "smokeSize": 13,
+          "smokeSizeBase": 0.6,
+          "smokeRad": 32,
+          "waveLife": 30,
+          "waveStroke": 2,
+          "waveRad": 73,
+          "waveRadBase": 2,
+          "sparkRad": 64,
+          "sparkLen": 13,
+          "sparkStroke": 4,
+          "sparks": 40
+        },
+        "status": "蚀骨",
+        "statusDuration": 240,
+        "splashDamage": 210,
+        "splashDamageRadius": 80,
+        "hitEffect": "pulverize",
+        "despawnSound": "explosion"
+      }
+    }
+  ],
+  "deathExplosionEffect": "none",
+  "abilities": [
+    {
+      "type": "MoveEffectAbility",
+      "y": -10,
+      "interval": 4,
+      "teamColor": true,
+      "effect": "missileTrailShort"
+    }
+  ]
+}

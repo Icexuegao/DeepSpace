@@ -1,0 +1,176 @@
+{
+  "name": "惧怕"
+  "type": "ItemTurret",
+  "health": 5600,
+  "size": 5,
+  "range": 720,
+  "reload": 300,
+  "shake": 5,
+  "recoil": 4,
+  "recoilTime": 300,
+  "ammoPerShot": 15,
+  "cooldownTime": 300,
+  "shootSound": "railgun",
+  "unitSort": "strongest",
+  "shootCone": 2,
+  "rotateSpeed": 1.4,
+  "minWarmup": 0.99,
+  "shootWarmupSpeed": 0.08,
+  "shoot": {
+    "type": "ShootSpread",
+    "shots": 5,
+    "spread": 1
+  },
+  "liquidCapacity": 30,
+  "consumes": {
+    "power": 25,
+    "coolant": {
+      "amount": 1.5,
+      "optional": true
+    }
+  },
+  "coolantMultiplier": 0.6666666667,
+  "ammoTypes": {
+    "裂位合金": {
+      "type": "PointBulletType",
+      "splashDamage": 750,
+      "splashDamageRadius": 80,
+      "knockback": 10,
+      "lifetime": 8,
+      "speed": 81,
+      "ammoMultiplier": 1,
+      "shootEffect": "instShoot",
+      "smokeEffect": "smokeCloud",
+      "trailEffect": "instTrail",
+      "trailSpacing": 20,
+      "hitEffect": "instHit",
+      "despawnEffect": "instBomb",
+      "status": "破裂",
+      "statusDuration": 600,
+      "fragBullets": 10,
+      "fragBullet": {
+        "type": "PointBulletType",
+        "speed": 8,
+        "lifetime": 15,
+        "splashDamage": 75,
+        "splashDamageRadius": 40,
+        "status": "破裂",
+        "statusDuration": 600,
+        "trailEffect": "instTrail",
+        "trailSpacing": 20,
+        "despawnEffect": {
+          "type": "MultiEffect",
+          "lifetime": 60,
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "particles": 1,
+              "sizeFrom": 2,
+              "sizeTo": 15,
+              "length": 0,
+              "spin": 10,
+              "layer": 109,
+              "lifetime": 10,
+              "region": "curse-of-flesh-star",
+              "colorFrom": "BF92F8",
+              "colorTo": "BF92F8"
+            },
+            {
+              "type": "WaveEffect",
+              "lifetime": 10,
+              "sizeFrom": 0,
+              "sizeTo": 20,
+              "strokeFrom": 3,
+              "strokeTo": 0,
+              "colorFrom": "BF92F8",
+              "colorTo": "BF92F8"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "requirements": [
+    "copper/1800",
+    "graphite/840"
+  ],
+  "drawer": {
+    "type": "DrawTurret",
+    "parts": [
+      {
+        "type": "HaloPart",
+        "hollow": false,
+        //空心
+        "mirror": false,
+        "tri": true,
+        //三角形
+        "x": 0,
+        "y": -16,
+        "shapeRotation": 0,
+        //图形初始角度
+        "moveX": 0,
+        "moveY": 0,
+        "shapeMoveRot": 0,
+        "shapes": 4,
+        //围绕个数
+        "sides": 5,
+        //边数
+        "radius": 3,
+        //半径/粗细
+        "radiusTo": -1,
+        "stroke": 1,
+        //粗细
+        "strokeTo": -1,
+        "triLength": 0,
+        //初始长度
+        "triLengthTo": 6,
+        //最终长度
+        "haloRadius": 12,
+        //围绕半径
+        "haloRadiusTo": -1,
+        //最终围绕半径
+        "haloRotateSpeed": 1,
+        //公转速度
+        "haloRotation": 0,
+        //环初始角度
+        "rotateSpeed": 0,
+        //自转速度
+        "color": "665C9FFF",
+        "colorTo": "BF92F8",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "tri": true,
+        "y": -16,
+        "shapeRotation": 180,
+        "shapes": 4,
+        "radius": 3,
+        "triLength": 0,
+        "triLengthTo": 1,
+        "haloRadius": 12,
+        "haloRotateSpeed": 1,
+        "color": "665C9FFF",
+        "colorTo": "BF92F8",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "tri": true,
+        "y": -16,
+        "shapes": 4,
+        "radius": 3,
+        "triLength": 0,
+        "triLengthTo": 2,
+        "haloRadius": 8,
+        "haloRotation": 45,
+        "haloRotateSpeed": -1,
+        "color": "665C9FFF",
+        "colorTo": "BF92F8",
+        "layer": 110
+      }
+    ]
+  },
+  "category": "turret",
+  "research": "恐惧"
+}

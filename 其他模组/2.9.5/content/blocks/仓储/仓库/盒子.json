@@ -1,0 +1,11 @@
+{
+  "type": "StorageBlock",
+  "health": 180,
+  "itemCapacity": 60,
+  "requirements": [
+    "copper/50",
+    "lead/50"
+  ],
+  "category": "effect",
+  "research": "conveyor"
+}

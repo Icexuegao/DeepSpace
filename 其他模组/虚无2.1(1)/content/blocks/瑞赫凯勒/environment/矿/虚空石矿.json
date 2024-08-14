@@ -1,0 +1,22 @@
+{
+  "name": "虚空石矿",
+  "type": "OreBlock",
+  "emitLight": true,
+  "lightRadius": 18,
+  "lightColor": "DEDEDE50",
+  "playerUnmineable": true,
+  "itemDrop": "虚空石",
+  "mapColor": "DEDEDEFF",
+  "useColor": true,
+  "oreDefault": true,
+  "oreThreshold": 0.9,
+  "oreScale": 35
+  "requirements": [
+    {
+      "item": "虚空石",
+      "amount": 100
+    }
+  ],
+  "category": "effect",
+  "research": "虚空覆盖板"
+}

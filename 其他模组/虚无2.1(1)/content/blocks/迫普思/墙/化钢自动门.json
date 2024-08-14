@@ -1,0 +1,34 @@
+{
+  "name": "化钢自动门",
+  "description": "有地面兵种经过时会自动打开，敌人攻击时会有几率反弹子弹",
+  "type": "AutoDoor",
+  "health": 1500,
+  "armor": 2,
+  "size": 1,
+  "group": "walls"
+  "insulated": false
+  "absorbLasers": true
+  "flashHit": true
+  "chanceDeflect": 25
+  "buildCostMultiplier": 1,
+  "requirements": [
+    {
+      "item": "化钢",
+      "amount": 24
+    },
+    {
+      "item": "silicon",
+      "amount": 8
+    }
+  ],
+  "category": "defense",
+  "research": {
+    "parent": "化钢墙",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "遗弃哨站"
+      }
+    ]
+  }
+}

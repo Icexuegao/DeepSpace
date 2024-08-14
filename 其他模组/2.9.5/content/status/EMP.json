@@ -1,0 +1,20 @@
+{
+  "disarm": true,
+  "speedMultiplier": 0,
+  "dragMultiplier": 1,
+  "buildSpeedMultiplier": 0,
+  "color": "5A58C4",
+  "effectChance": 0.25,
+  "effect": {
+    "type": "ParticleEffect",
+    "particles": 3,
+    "lifetime": 30,
+    "line": true,
+    "length": 0.01,
+    "strokeFrom": 2,
+    "strokeTo": 0,
+    "lenFrom": 16,
+    "lenTo": 16,
+    "colorTo": "5A58C4"
+  }
+}

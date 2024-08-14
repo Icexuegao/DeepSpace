@@ -1,0 +1,18 @@
+{
+  "type": "Pump",
+  "size": 4,
+  "pumpAmount": 0.625,
+  "liquidCapacity": 240,
+  "consumes": {
+    "power": 8
+  },
+  "requirements": [
+    "metaglass/120",
+    "铱板/120",
+    "导能回路/85",
+    "陶钢/45",
+    "生物钢/15"
+  ],
+  "category": "liquid",
+  "research": "thermal-pump"
+}

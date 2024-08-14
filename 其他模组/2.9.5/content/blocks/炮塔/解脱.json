@@ -1,0 +1,42 @@
+{
+  //"type": "PowerTurret",
+  "health": 29160,
+  //"size": 9,
+  //"range": 960,
+  "reload": 900,
+  "shake": 6,
+  "recoil": 8,
+  "recoilTime": 210,
+  "cooldownTime": 600,
+  "shootCone": 10,
+  "rotateSpeed": 0.8,
+  "minWarmup": 0.99,
+  "shootWarmupSpeed": 0.03,
+  "itemCapacity": 8,
+  "liquidCapacity": 120,
+  "consumes": {
+    "power": 680,
+    "items": {
+      "items": [
+        "肃正协议/8"
+      ]
+    },
+    "liquid": "cryofluid/8"
+  },
+  "canOverdrive": false,
+  "accurateDelay": false,
+  "moveWhileCharging": false,
+  "chargeSound": "lasercharge",
+  "shootSound": "能量释放",
+  "requirements": [
+    "copper/8800",
+    "graphite/5400",
+    "铱板/4200",
+    "导能回路/3600",
+    "陶钢/2660",
+    "生物钢/1570"
+    "肃正协议/4"
+  ],
+  "category": "turret",
+  "research": "撕裂"
+}

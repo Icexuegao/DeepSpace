@@ -1,0 +1,17 @@
+{
+  "localizedName": "迫降",
+  "name": "迫降",
+  "description": "一个奇怪的行星，上面有许多没见过的矿石以及建筑，我们决定在这里迫降，殖民者占领这颗星球",
+  //"details":"",
+  "planet": "迫普思"
+  //母星名字。
+  "sector": 1//区块坐标
+  "captureWave": 30//胜利波次
+  "difficulty": 5//难度1一5
+  "alwaysUnlocked": true,
+  "overrideLaunchDefaults": true
+  ，
+  "research": {
+    "parent": "强化核心"
+  }
+}

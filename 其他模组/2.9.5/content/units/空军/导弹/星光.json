@@ -1,0 +1,89 @@
+{
+  "type": "missile",
+  "template": "MissileUnitType",
+  "health": 130,
+  "hitSize": 4,
+  "speed": 7,
+  "lifetime": 185,
+  "rotateSpeed": 3.6,
+  "engineColor": "FEB380",
+  "trailColor": "FEB380",
+  "engineLayer": 110,
+  "engineSize": 2,
+  "trailLength": 6,
+  "lowAltitude": false,
+  "parts": [
+    {
+      "type": "FlarePart",
+      "progress": {
+        "type": "life",
+        "op": "curve",
+        "interp": "pow3Out"
+      },
+      "color1": "FEB380",
+      "stroke": 4.5,
+      "radius": 0,
+      "radiusTo": 30
+    }
+  ],
+  "weapons": [
+    {
+      "mirror": false,
+      "shootCone": 360,
+      "shootOnDeath": true,
+      "shootSound": "none",
+      "bullet": {
+        "type": "ExplosionBulletType",
+        "splashDamageRadius": 72,
+        "splashDamage": 24,
+        "hitEffect": {
+          "type": "multiEffect",
+          "effects": [
+            {
+              "type": "WaveEffect",
+              "lifetime": 15,
+              "sizeFrom": 0,
+              "sizeTo": 30,
+              "strokeFrom": 3,
+              "strokeTo": 0,
+              "colorFrom": "FEB380",
+              "colorTo": "FF8663"
+            },
+            {
+              "type": "ParticleEffect",
+              "particles": 3,
+              "lifetime": 20,
+              "line": true,
+              "strokeFrom": 1.5,
+              "strokeTo": 1.5,
+              "lenFrom": 5,
+              "lenTo": 5,
+              "cone": 360,
+              "length": 50,
+              "interp": "circleOut",
+              "sizeInterp": "pow5In",
+              "colorFrom": "FEB380",
+              "colorTo": "FF8663"
+            },
+            {
+              "type": "ParticleEffect",
+              "particles": 3,
+              "lifetime": 25,
+              "line": true,
+              "strokeFrom": 1.5,
+              "strokeTo": 1.5,
+              "lenFrom": 7,
+              "lenTo": 7,
+              "cone": 360,
+              "length": 30,
+              "interp": "circleOut",
+              "sizeInterp": "pow5In",
+              "colorFrom": "FEB380",
+              "colorTo": "FF8663"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

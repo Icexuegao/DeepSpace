@@ -1,0 +1,128 @@
+{
+  "type": "legs",
+  "name": "罪孽",
+  "description": "爬虫单位，可快速进军敌方并完成自爆",
+  "speed": 1,
+  "hitSize": 7,
+  "health": 350
+  "armor": 2,
+  "research": ""
+  "legCount": 4,
+  "lockLegBase": true,
+  "legContinuousMove": true,
+  "legExtension": 5,
+  "maxStretch": 1,
+  "legLength": 6
+  "legBaseOffset": 3.5,
+  "legMaxLength": 1.8,
+  "legMinLength": 0.8,
+  "legMoveSpace": 1.7,
+  "immunities": [
+    "湮灭"
+    "失灵"
+  ]
+  "weapons": [
+    {
+      "name": "自爆",
+      "x": 0,
+      "y": 0,
+      "reload": 1,
+      "mirror": false,
+      "rotate": true,
+      "shake": 10,
+      "shootSound": "none",
+      "shootOnDeath": true,
+      "bullet": {
+        "collides": false,
+        "instantDisappear": true,
+        "ammoMultiplier": 1,
+        "hitSound": "titanExplosion",
+        "hitSoundVolume": 6,
+        "killShooter": true,
+        "splashDamageRadius": 66,
+        "splashDamage": 250,
+        "statusDuration": 600,
+        "hitShake": 15,
+        "shootEffect": "none",
+        "smokeEffect": "none",
+        "despawnEffect": "none",
+        "hitEffect": {
+          "type": "MultiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "particles": 26,
+              "sizeFrom": 13,
+              "sizeTo": 0,
+              "length": 56,
+              "baseLength": 20,
+              "interp": "pow10Out",
+              "sizeInterp": "pow10Out",
+              "lifetime": 85,
+              "colorFrom": "BF92F8",
+              "colorTo": "BF92F800",
+              "cone": 360
+            },
+            {
+              "type": "WaveEffect",
+              "interp": "circleOut",
+              "lifetime": 60,
+              "sizeFrom": 0,
+              "sizeTo": 70,
+              "strokeFrom": 10,
+              "strokeTo": 0,
+              "colorFrom": "BF92F8",
+              "colorTo": "BF92F8"
+            }
+          ]
+        }
+      }
+    }
+    {
+      "name": "罪孽1",
+      "reload": 60,
+      "shoot": {
+        "shots": 1,
+        "shotDelay": 3
+      },
+      "shootY": 1,
+      "recoil": 2,
+      "x": -3,
+      "y": 0,
+      "rotate": false,
+      "rotateSpeed": 0,
+      "shootSound": "laser",
+      "shake": 1,
+      "bullet": {
+        "type": "LaserBulletType",
+        "length": 100,
+        "damage": 50,
+        "colors": [
+          "835cc3"
+          "bc93ff"
+          "000000"
+        ],
+        "width": 19
+        "hitSize": 30,
+        "lifetime": 45.00,
+        "drawSize": 40.00,
+        "collidesAir": true,
+        "ammoMultiplier": 1.00
+        "statusDuration": 900,
+        "type": "LaserBulletType",
+        "length": 100,
+        //长
+        "damage": 50,
+        //伤害
+        "width": 20,
+        //宽
+        "despawnEffect": "none"
+        //特效
+        "lifetime": 65,
+        //存在时间
+        "hitEffect": "hitLancer"
+        //特效*
+      }
+    }
+  ]
+}

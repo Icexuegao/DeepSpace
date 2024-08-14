@@ -1,0 +1,65 @@
+{
+  "type": "mech",
+  "name": "量子",
+  "description": "小型陆军，配备小型喷火装置",
+  "speed": 0.9,
+  "drag": 0.05,
+  "accel": 0.1,
+  "rotateSpeed": 10,
+  "ammoType": {
+    "type": "PowerAmmoType",
+    "totalPower": 100
+  },
+  "ammoCapacity": 150,
+  "hitSize": 6,
+  "flying": false,
+  "faceTarget": true,
+  "drawMinimap": true,
+  "health": 150,
+  "armor": 2,
+  "engineOffset": 8,
+  "engineSize": 2,
+  "itemCapacity": 0,
+  "immunities": [
+    "freezing"
+  ],
+  "research": "重型陆军制造厂",
+  /*"requirements": {
+      "block": "air-factory",
+      "time": 1500,
+      "requirements": [
+          "titanium/15",
+          "silicon/20"]},*/
+  "weapons": [
+    {
+      "name": "量子1",
+      "x": -4,
+      "y": 0,
+      "mirror": true,
+      "rotate": false,
+      //转头
+      "alternate": false,
+      "top": false,
+      "under": true,
+      "recoil": 0,
+      //后坐力
+      "shootSound": "none",
+      //设计音效
+      "loopSound": "torch",
+      //攻击时的循环音效
+
+      "bullet": {
+        "type": "ContinuousFlameBulletType",
+        //
+        "damage": 3,
+        //帧伤
+        "length": 120,
+        //长度
+        "pierceCap": 8,
+        //穿透能力
+        "status": "melting",
+        "statusDuration": 1200
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+	"type": "PayloadAmmoTurret",
+	"health": 2080,
+	"size": 4,
+	"shake": 5,
+	"recoil": 5,
+	"reload": 300,
+	"range": 408,
+	"rotateSpeed": 1.8,
+	"consumes": {
+		"power": 20,
+	},
+	"liquidCapacity": 20,
+	"coolantMultiplier": 1,
+	"shootSound": "artillery",
+	"ammoUseEffect": "none",
+	"ammoTypes": {
+		"duo": {
+			"type": "ArtilleryBulletType",
+			"damage": 35,
+			"lifetime": 80,
+			"speed": 4.5,
+			"width": 12,
+			"height": 12,
+			"knockback": 1.2,
+			"ammoMultiplier": 3,
+			"reloadMultiplier": 1.2,
+			"splashDamage": 59,
+			"splashDamageRadius": 25
+		}
+	},
+	"requirements": [
+		"copper/1360",
+		"graphite/300",
+		"thorium/325",
+		"铱板/225",
+		"plastanium/180"
+	],
+	"category": "turret",
+	"research": "ripple"
+}

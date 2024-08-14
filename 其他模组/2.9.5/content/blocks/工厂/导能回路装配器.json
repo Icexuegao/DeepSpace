@@ -1,0 +1,67 @@
+{
+  "type": "GenericCrafter",
+  "size": 5,
+  "armor": 4,
+  "itemCapacity": 60,
+  "canOverdrive": false,
+  "consumes": {
+    "power": 15.25,
+    "items": {
+      "items": [
+        "thorium/6",
+        "silicon/8"
+      ]
+    }
+  },
+  "updateEffect": "mineBig",
+  "craftTime": 120,
+  "craftEffect": {
+    "type": "WaveEffect",
+    "lifetime": 180,
+    "sizeTo": 40,
+    "strokeFrom": 5,
+    "interp": "circleOut",
+    "colorFrom": "B7B9C2",
+    "colorTo": "B7B9C280"
+  },
+  "outputItem": "导能回路/6",
+  "requirements": [
+    "graphite/485",
+    "铱板/145",
+    "silicon/145",
+    "plastanium/85",
+    "phase-fabric/55"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      {
+        "type": "DrawFlame",
+        "flameColor": "B7B9C2",
+        "lightRadius": 60,
+        //灯光范围
+        "lightAlpha": 0.6,
+        //透明度
+        "lightSinScl": 9.42477795,
+        //灯光闪烁幅度
+        "lightSinMag": 6.2831853,
+        //灯光闪烁频率
+        "flameRadius": 5,
+        //外层火焰大小
+        "flameRadiusIn": 2,
+        //内层
+        "flameRadiusScl": 9.42477795,
+        //火焰闪烁频率
+        "flameRadiusMag": 3,
+        //外层火焰闪烁幅度
+        "flameRadiusInMag": 1.5
+        //内层
+      }
+    ]
+  },
+  "ambientSound": "extractLoop",
+  "ambientSoundVolume": 0.08,
+  "category": "crafting",
+  "research": "硅反应炉"
+}

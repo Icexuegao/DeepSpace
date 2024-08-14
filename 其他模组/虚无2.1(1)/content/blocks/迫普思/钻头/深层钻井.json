@@ -1,0 +1,56 @@
+{
+  "type": "Separator",
+  "name": "深层钻井",
+  "description": "在浅层土地上进行采集矿物",
+  "health": 750,
+  "spinnerSpeed": 3
+  "liquidCapacity": 50,
+  "itemCapacity": 300,
+  "size": 2,
+  "craftTime": 12,
+  "results": [
+    {
+      "item": "thorium",
+      "amount": 5
+    }
+    {
+      "item": "铀",
+      "amount": 5
+    }
+    {
+      "item": "火石矿",
+      "amount": 5
+    }
+    {
+      "item": "绯红之石",
+      "amount": 5
+    }
+    {
+      "item": "titanium",
+      "amount": 5
+    }
+  ],
+  "consumes": {
+    "power": 4,
+    "liquid": {
+      "liquid": "water",
+      "amount": 0.10
+    }
+  }
+  "requirements": [
+    {
+      "item": "titanium",
+      "amount": 200
+    }
+    {
+      "item": "silicon",
+      "amount": 150
+    }
+    {
+      "item": "thorium",
+      "amount": 100
+    }
+  ],
+  "category": "production",
+  "research": "浅层钻井"
+}

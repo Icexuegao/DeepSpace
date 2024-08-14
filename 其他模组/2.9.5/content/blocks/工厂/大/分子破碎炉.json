@@ -1,0 +1,57 @@
+{
+  "type": "Separator",
+  "size": 4,
+  "itemCapacity": 48,
+  "liquidCapacity": 48,
+  "consumes": {
+    "power": 13.9,
+    "liquid": "slag/1"
+  },
+  "craftTime": 15,
+  "results": [
+    "copper/10",
+    "lead/9",
+    "metaglass/8",
+    "graphite/8",
+    "titanium/6",
+    "thorium/5",
+    "silicon/5",
+    "铱板/4",
+    "plastanium/3",
+    "surge-alloy/2",
+    "phase-fabric/1"
+  ],
+  "requirements": [
+    "lead/230",
+    "graphite/180",
+    "metaglass/75",
+    "铱板/120",
+    "plastanium/70",
+    "导能回路/50"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawLiquidTile",
+        "drawLiquid": "slag"
+      },
+      {
+        "type": "DrawRegion",
+        "suffix": "-rotate",
+        "rotateSpeed": 6
+      },
+      "DrawDefault",
+      {
+        "type": "DrawRegion",
+        "suffix": "-top"
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": "disassembler"
+}

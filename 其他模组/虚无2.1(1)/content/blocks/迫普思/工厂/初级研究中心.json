@@ -1,0 +1,62 @@
+{
+  "type": "GenericCrafter",
+  "health": 1200,
+  "name": "初级研究中心",
+  "description": "将化钢进行特殊研究，从而获得一级研究协议",
+  "outputItem": {
+    "item": "一级研究协议",
+    "amount": 1
+  },
+  "itemCapacity": 60,
+  "size": 2,
+  "hasPower": true,
+  "hasLiquids": false,
+  "hasItems": true,
+  "craftTime": 960,
+  "updateEffect": "smeltsmoke",
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault"
+    ]
+  },
+  "consumes": {
+    "power": 25.0,
+    "items": {
+      "items": [
+        {
+          "item": "化钢",
+          "amount": 25
+        }
+      ]
+    }
+  },
+  "requirements": [
+    {
+      "item": "铀",
+      "amount": 150
+    },
+    {
+      "item": "绯红之石",
+      "amount": 450
+    },
+    {
+      "item": "silicon",
+      "amount": 150
+    },
+    {
+      "item": "化钢",
+      "amount": 250
+    }
+  ],
+  "category": "crafting",
+  "research": {
+    "parent": "绯红合金炼制厂",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "绯红矿区"
+      }
+    ]
+  }
+}

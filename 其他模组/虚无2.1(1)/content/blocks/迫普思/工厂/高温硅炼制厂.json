@@ -1,0 +1,41 @@
+{
+  "type": "AttributeCrafter",
+  "health": 1200,
+  "name": "高温硅炼制厂",
+  "description": "利用大量的煤来提升温度，从而练制出更多硅",
+  "outputItem": "silicon/30",
+  "itemCapacity": 60,
+  "size": 3,
+  "hasPower": true,
+  "hasLiquids": false,
+  "hasItems": true,
+  "craftTime": 300,
+  "updateEffect": "none",
+  "craftEffect": "smeltsmoke",
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      "DrawFlame"
+    ]
+  },
+  "consumes": {
+    "power": 10.5,
+    "items": [
+      "coal/20",
+      "sand/15"
+    ]
+  },
+  "requirements": [
+    "graphite/120",
+    "copper/150",
+    "lead/125",
+    "silicon/100",
+    "titanium/50"
+  ],
+  "attribute": "heat",
+  "baseEfficiency": 1,
+  "category": "crafting",
+  "ambientSound": "smelter",
+  "research": "化钢压制厂"
+}

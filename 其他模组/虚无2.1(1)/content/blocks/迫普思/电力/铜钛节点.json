@@ -1,0 +1,23 @@
+{
+  "type": "PowerNode",
+  "name": "铜钛节点",
+  "description": "铜和钛组成的电力节点，有着较远距离和较高生命",
+  "health": 300,
+  "size": 1,
+  "maxNodes": 10,
+  "laserRange": 15,
+  "research": "基础发电机",
+  "requirements": [
+    {
+      "item": "copper",
+      "amount": 10
+    },
+    {
+      "item": "titanium",
+      "amount": 20
+    }
+  ],
+  "category": "power"
+  "researchCostMultiplier": 0.2,
+  "canOverdrive": false
+}

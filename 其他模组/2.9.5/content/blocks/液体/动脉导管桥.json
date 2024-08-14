@@ -1,0 +1,22 @@
+{
+  //"type": "LiquidBridge",
+  "armor": 4,
+  "range": 37,
+  "liquidCapacity": 32,
+  "placeableLiquid": true,
+  "consumes": {
+    "power": 0.5
+  },
+  "requirements": [
+    "metaglass/20",
+    "导能回路/10",
+    "生物钢/5"
+  ],
+  "category": "liquid",
+  "research": {
+    "parent": "phase-conduit",
+    "objectives": [
+      "装甲导管桥"
+    ]
+  }
+}

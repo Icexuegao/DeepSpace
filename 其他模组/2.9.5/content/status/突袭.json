@@ -1,0 +1,27 @@
+{
+  "damageMultiplier": 1.6,
+  "healthMultiplier": 1.8,
+  "speedMultiplier": 2,
+  "reloadMultiplier": 1.4,
+  "applyEffect": {
+    "type": "WaveEffect",
+    "lifetime": 60,
+    "sides": 3,
+    "sizeTo": 24,
+    "strokeFrom": 6,
+    "baseRotation": -150,
+    "colorFrom": "FF5845",
+    "colorTo": "F15454"
+  },
+  "effect": {
+    "type": "ParticleEffect",
+    "lifetime": 25,
+    "particles": 3,
+    "sizeFrom": 3,
+    "cone": 360,
+    "length": 15,
+    "colorFrom": "FF5845",
+    "colorTo": "F15454"
+  },
+  "color": "F15454"
+}

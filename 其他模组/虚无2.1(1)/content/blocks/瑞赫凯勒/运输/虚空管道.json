@@ -1,0 +1,17 @@
+{
+  "type": "Duct"
+  "name": "虚空管道"
+  "description": "由虚空石制成的物品管道，有着较快的运输速度",
+  "requirements": [
+    {
+      "item": "虚空石",
+      "amount": 2
+    }
+  ]
+  "health": 100
+  "speed": 10
+  "alwaysUnlocked": true,
+  "category": "distribution",
+  "research": "轻型核心"
+  "bridgeReplacement": "虚空管道桥"
+}

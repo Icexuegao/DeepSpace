@@ -1,0 +1,17 @@
+{
+  "name": "虚空管道路由器",
+  "description": "由虚空石做成的管道路由器，有着较快的分类速",
+  "type": "DuctRouter",
+  "health": 120
+  "speed": 5
+  "regionRotated1": 1
+  "solid": false,
+  "requirements": [
+    {
+      "item": "虚空石",
+      "amount": 5
+    }
+  ],
+  "category": "distribution",
+  "research": "虚空管道"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "化钢仓库",
+  "type": "StorageBlock",
+  "description": "2.5m容器，以便宜好用为主\n可以贴核心扩展",
+  "itemCapacity": 25000,
+  "hasItems": true,
+  "health": 2500,
+  "size": 3,
+  "requirements": [
+    {
+      "item": "铀",
+      "amount": 300
+    },
+    "化钢/200",
+    {
+      "item": "silicon",
+      "amount": 300
+    },
+    {
+      "item": "graphite",
+      "amount": 250
+    }
+  ],
+  "category": "effect",
+  "researchCostMultiplier": 1,
+  "research": {
+    "parent": "化钢传送带"
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "遗弃哨站"
+      }
+    ]
+  }
+}

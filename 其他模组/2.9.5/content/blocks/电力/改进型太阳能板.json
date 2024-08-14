@@ -1,0 +1,12 @@
+{
+  "type": "SolarGenerator",
+  "size": 2,
+  "powerProduction": 9,
+  "requirements": [
+    "铈/15",
+    "导能回路/25",
+    "phase-fabric/15"
+  ],
+  "category": "power",
+  "research": "solar-panel-large"
+}

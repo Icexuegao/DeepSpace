@@ -1,0 +1,188 @@
+{
+  "type": "PowerTurret",
+  "health": 6350,
+  "armor": 6,
+  "size": 6,
+  "shake": 5,
+  "recoil": 6,
+  "range": 672,
+  "reload": 90,
+  "shootY": 8,
+  "recoilTime": 75,
+  "rotateSpeed": 1.6,
+  "cooldownTime": 120,
+  "shoot": {
+    "type": "ShootMulti",
+    "source": {
+      "type": "ShootHelix",
+      "scl": 3,
+      "mag": 0.75
+    },
+    "dest": [
+      {
+        "type": "ShootHelix",
+        "mag": 3,
+        "scl": 0.75
+      }
+    ]
+  },
+  "consumes": {
+    "power": 45,
+    "coolant": {
+      "amount": 2.5
+    }
+  },
+  "canOverdrive": false,
+  "coolantMultiplier": 0.2,
+  "minWarmup": 0.99,
+  "shootWarmupSpeed": 0.08,
+  "shootSound": "plasmadrop",
+  "shootType": {
+    "damage": 0,
+    "lifetime": 42,
+    "speed": 16,
+    "width": 16,
+    "height": 24,
+    "hitSize": 40,
+    "hittable": false,
+    "trailLength": 8,
+    "trailWidth": 3.6,
+    "trailColor": "FEB380",
+    "frontColor": "FFFFFF",
+    "backColor": "FEB380",
+    "hitColor": "FEB380",
+    "pierceCap": 2,
+    "ammoMultiplier": 1,
+    "status": "湍能",
+    "statusDuration": 150,
+    "shootEffect": "shootTitan",
+    "smokeEffect": "shootSmokeTitan",
+    "splashDamage": 325,
+    "splashDamageRadius": 68,
+    "trailChance": 1,
+    "trailInterval": 30,
+    "trailEffect": {
+      "type": "ParticleEffect",
+      "particles": 2,
+      "lifetime": 20,
+      "sizeFrom": 4,
+      "sizeTo": 0,
+      "cone": 360,
+      "length": 10,
+      "baseLength": 16,
+      "colorFrom": "FEB380",
+      "colorTo": "FEB380"
+    },
+    "hitShake": 7,
+    "hitSound": "plasmaboom",
+    "hitEffect": {
+      "type": "MultiEffect",
+      "effects": [
+        {
+          "type": "ParticleEffect",
+          "region": "blank",
+          "particles": 4,
+          "lifetime": 55,
+          "sizeFrom": 6,
+          "sizeTo": 0,
+          "cone": 360,
+          "length": 72,
+          "offset": 45,
+          "interp": "pow5Out",
+          "sizeInterp": "pow5In",
+          "colorFrom": "FEB380",
+          "colorTo": "FEB380"
+        },
+        {
+          "type": "ParticleEffect",
+          "particles": 23,
+          "lifetime": 35,
+          "line": true,
+          "strokeFrom": 3,
+          "strokeTo": 0,
+          "lenFrom": 20,
+          "lenTo": 0,
+          "cone": 360,
+          "length": 84,
+          "colorFrom": "FEB380",
+          "colorTo": "FEB380"
+        },
+        {
+          "type": "WaveEffect",
+          "lifetime": 30,
+          "sizeFrom": 0,
+          "sizeTo": 84,
+          "strokeFrom": 6,
+          "strokeTo": 0,
+          "colorFrom": "FEB380",
+          "colorTo": "FEB380"
+        }
+      ]
+    },
+    "fragBullets": 4,
+    "fragBullet": {
+      "sprite": "curse-of-flesh-crystal",
+      "damage": 73,
+      "lifetime": 90,
+      "drag": 0.035,
+      "speed": 5,
+      "width": 8,
+      "height": 12,
+      "shrinkY": 0,
+      "trailWidth": 2,
+      "trailLength": 12,
+      "trailColor": "FEB380",
+      "frontColor": "FFFFFF",
+      "backColor": "FEB380",
+      "hitColor": "FEB380",
+      "pierce": true,
+      "absorbable": false,
+      "homingRange": 60,
+      "homingPower": 0.08,
+      "status": "湍能",
+      "statusDuration": 60,
+      "hitSound": "bang",
+      "hitEffect": "hitSquaresColor",
+      "despawnEffect": "hitSquaresColor"
+    }
+  },
+  "requirements": [
+    "graphite/1080",
+    "铱板/840",
+    "metaglass/210",
+    "导能回路/480",
+    "陶钢/320"
+  ],
+  "drawer": {
+    "type": "DrawTurret",
+    "parts": [
+      {
+        "type": "RegionPart",
+        "suffix": "-glow",
+        "heatProgress": "warmup",
+        "drawRegion": false,
+        "heatColor": "F03B0E"
+      },
+      {
+        "type": "HoverPart",
+        "color": "FEB380",
+        "phase": 120,
+        "circles": 3,
+        "stroke": 1,
+        "y": -5.75,
+        "layer": 110
+      }
+    ]
+  },
+  "category": "turret",
+  "research": {
+    "parent": "灼烧",
+    "objectives": [
+      "喧嚣",
+      {
+        "type": "SectorComplete",
+        "preset": "着陆区"
+      }
+    ]
+  }
+}

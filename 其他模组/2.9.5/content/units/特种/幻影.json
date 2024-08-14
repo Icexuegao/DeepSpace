@@ -1,0 +1,48 @@
+{
+  "type": "flying",
+  "defaultController": "MinerAI",
+  "research": {
+    "parent": "核心工厂",
+    "objectives": [
+      "poly"
+    ]
+  },
+  "flying": true,
+  "isEnemy": false,
+  "health": 160,
+  "hitSize": 7.5,
+  "speed": 2,
+  "range": 200,
+  "itemCapacity": 80,
+  "engineOffset": 6,
+  "mineTier": 4,
+  "mineSpeed": 3,
+  "immunities": [
+    "burning",
+    "wet",
+    "spore-slowed",
+    "辐射"
+  ],
+  "weapons": [
+    {
+      "x": 3.5,
+      "y": -2.4,
+      "rotate": true,
+      "rotateSpeed": 6,
+      "reload": 60,
+      "shootSound": "lasershoot",
+      "inaccuracy": 3,
+      "alternate": false,
+      "bullet": {
+        "type": "LaserBoltBulletType",
+        "damage": 13,
+        "lifetime": 28,
+        "speed": 8,
+        "healPercent": 5,
+        "collidesTeam": true,
+        "frontColor": "FFFFFF",
+        "backColor": "98FFA9"
+      }
+    }
+  ]
+}

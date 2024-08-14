@@ -1,0 +1,70 @@
+{
+  "type": "ImpactReactor",
+  "size": 5,
+  "armor": 8,
+  "lightColor": "EBFFFE",
+  "itemDuration": 120,
+  "warmupSpeed": 0.0006,
+  "powerProduction": 800,
+  "itemCapacity": 20,
+  "liquidCapacity": 60,
+  "canOverdrive": false,
+  "consumes": {
+    "power": 100,
+    "items": {
+      "items": [
+        "生物钢/1"
+      ]
+    },
+    "liquid": "cryofluid/1.5"
+  },
+  "explosionShake": 8,
+  "explosionRadius": 40,
+  "explosionDamage": 4800,
+  "explodeSound": "largeExplosion",
+  "requirements": [
+    "graphite/815",
+    "metaglass/325",
+    "铱板/645",
+    "导能回路/475",
+    "陶钢/375",
+    "生物钢/225"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawSoftParticles",
+        "particles": 27,
+        "particleLife": 120,
+        "particleSize": 9,
+        "particleRad": 12,
+        "color": "FFDCD8",
+        "color2": "FF5845",
+        "alpha": 0.35
+      },
+      {
+        "type": "DrawRegion",
+        "suffix": "-mid"
+      },
+      {
+        "type": "DrawPlasma",
+        "plasma1": "FF5845",
+        "plasma2": "FFDCD8"
+      },
+      "DrawDefault",
+      {
+        "type": "DrawGlowRegion",
+        "suffix": "-glow"
+      }
+    ]
+  },
+  "category": "power",
+  "ambientSound": "pulse",
+  "ambientSoundVolume": 0.08,
+  "research": "impact-reactor"
+}

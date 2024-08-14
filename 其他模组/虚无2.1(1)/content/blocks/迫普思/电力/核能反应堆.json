@@ -1,0 +1,185 @@
+{
+  "type": "ImpactReactor",
+  "name": "核能反应堆",
+  "description": "通过添加核燃料棒，将其内部的能量转化为需电力，要大量的启动电力，但液体消耗不多",
+  "size": 4,
+  "armor": 2,
+  "health": 3000,
+  "liquidCapacity": 100,
+  "hasLiquids": true,
+  "liquidBoostIntensity": 200,
+  "powerProduction": 500,
+  "itemDuration": 300,
+  "itemCapacity": 100,
+  "consumes": {
+    "power": 50,
+    "liquid": {
+      "liquid": "化钢液",
+      "amount": "0.3",
+      "booster": false
+    },
+    "items": {
+      "items": [
+        {
+          "item": "核燃料棒",
+          "amount": "10"
+        }
+      ]
+    }
+  },
+  "requirements": [
+    {
+      "item": "化钢",
+      "amount": "200"
+    },
+    {
+      "item": "黑核",
+      "amount": 40
+    },
+    {
+      "item": "silicon",
+      "amount": "350"
+    },
+    "铀/250",
+    {
+      "item": "titanium",
+      "amount": 450
+    },
+    "plastanium/300",
+    {
+      "item": "metaglass",
+      "amount": 180
+    }
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawPlasma",
+        "suffix": "-plasma-",
+        "plasma1": "CFFF70FF",
+        "plasma2": "CFFF70FF"
+      },
+      {
+        "type": "DrawDefault"
+      },
+      {
+        "type": "DrawGlowRegion",
+        "suffix": "-qwq",
+        "color": "CFFF70FF"
+      }
+    ]
+  },
+  "category": "power",
+  "research": {
+    "parent": "黑核发电机",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "孢子平原"
+      }
+    ]
+  },
+  "ambientSound": "pulse",
+  "ambientSoundVolume": 1,
+  "explodeEffect": {
+    "type": "MultiEffect",
+    "effects": [
+      {
+        "type": "ParticleEffect",
+        "particles": 4,
+        "sizeFrom": 140,
+        "sizeTo": 0,
+        "length": 0,
+        "baseLength": 0,
+        "lifetime": 300,
+        "colorFrom": "CFFF70FF",
+        "colorTo": "CFFF70FF",
+        "cone": 360
+      },
+      {
+        "type": "ParticleEffect",
+        "particles": 800,
+        "sizeFrom": 30,
+        "sizeTo": 0,
+        "length": 300,
+        "baseLength": 420,
+        "lifetime": 180,
+        "colorFrom": "58585880",
+        "colorTo": "58585880",
+        "cone": 360
+      },
+      {
+        "type": "ParticleEffect",
+        "particles": 490,
+        "sizeFrom": 12,
+        "sizeTo": 0,
+        "length": 360,
+        "baseLength": 30,
+        "lifetime": 190,
+        "colorFrom": "585855",
+        "colorTo": "CFFF70FF",
+        "cone": 360
+      },
+      {
+        "type": "ParticleEffect",
+        "particles": 250,
+        "line": true,
+        "strokeFrom": 9,
+        "strokeTo": 0,
+        "lenFrom": 18,
+        "lenTo": 64,
+        "length": 180,
+        "baseLength": 40,
+        "lifetime": 35,
+        "colorFrom": "FFFFFF",
+        "colorTo": "FFE176FF",
+        "cone": 360
+      }
+    ]
+  },
+  "destroyBullet": {
+    "width": 0,
+    "height": 0,
+    "speed": 0,
+    "lifetime": 1,
+    "damage": 400,
+    "hitShake": 20,
+    "hitSound": "DBZ1",
+    "despawnEffect": "none",
+    "hitEffect": "none",
+    "lightningDamage": 400,
+    "lightning": 40,
+    "lightningLength": 30,
+    "lightningColor": "CFFF70FF",
+    "splashDamageRadius": 30,
+    "splashDamage": 200,
+    "fragLifeMin": 0,
+    "fragLifeMax": 5,
+    "fragBullets": 30,
+    "fragBullet": {
+      "width": 0,
+      "height": 0,
+      "speed": 0,
+      "lifetime": 30,
+      "damage": 200,
+      "hitShake": 20,
+      "hitSound": "DBZ1",
+      "hitEffect": "none",
+      "lightningDamage": 30,
+      "lightning": 30,
+      "lightningLength": 30,
+      "lightningColor": "CFFF70FF",
+      "splashDamageRadius": 30,
+      "splashDamage": 30,
+      "fragBullets": 30,
+      "fragLifeMin": 0,
+      "fragLifeMax": 1
+    },
+    "collidesAir": true
+  }
+}

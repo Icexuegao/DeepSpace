@@ -1,0 +1,18 @@
+{
+  "healthMultiplier": 0.7,
+  "speedMultiplier": 0.8,
+  "reloadMultiplier": 0.8,
+  "effect": {
+    "type": "ParticleEffect",
+    "particles": 3,
+    "lifetime": 20,
+    "sizeFrom": 3,
+    "sizeTo": 0,
+    "cone": 360,
+    "length": 30,
+    "interp": "fastSlow",
+    "colorFrom": "FF666680",
+    "colorTo": "FF6666"
+  },
+  "color": "FF6666"
+}

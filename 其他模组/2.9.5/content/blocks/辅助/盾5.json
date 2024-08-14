@@ -1,0 +1,45 @@
+{
+  //"type": "ForceProjector",
+  "size": 5,
+  "liquidCapacity": 60,
+  "consumes": {
+    "power": 25,
+    "coolant": {
+      "amount": 0.5,
+      "optional": false
+    }
+    /*,
+            "items": {
+                "itemConsumer": [
+                    "肃正协议/1"
+                ],
+                "booster": true,
+                "optional": false
+            }*/
+  },
+  "absorbEffect": {
+    "type": "WaveEffect",
+    "sides": 6,
+    "lifetime": 30,
+    "sizeFrom": 8,
+    "sizeTo": 8,
+    "colorFrom": "FFD37F",
+    "colorTo": "FFD37F"
+  },
+  "radius": 288,
+  "shieldHealth": 6000,
+  "phaseUseTime": 360,
+  "phaseRadiusBoost": 144,
+  "phaseShieldBoost": 6000,
+  "cooldownNormal": 15,
+  "cooldownLiquid": 1,
+  "cooldownBrokenBase": 6.25,
+  "requirements": [
+    "铱板/450",
+    "导能回路/150",
+    "陶钢/85",
+    "phase-fabric/55"
+  ],
+  "category": "effect",
+  "research": "盾3"
+}

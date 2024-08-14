@@ -1,0 +1,45 @@
+{
+  "name": "虚空钻头",
+  "type": "Drill",
+  "description": "体型小，挖掘速度极快",
+  "size": 2,
+  "health": 1200,
+  "tier": 4,
+  "drillTime": 50,
+  "liquidBoostIntensity": 2,
+  "canOverdrive": true,
+  "warmupSpeed": 1,
+  "drillEffect": "none",
+  "updateEffect": "none",
+  "rotateSpeed": 1.6,
+  "drawMineItem": false,
+  "idleSound": "DrillBit",
+  "idleSoundVolume": 0.1,
+  "drawMineItem": true,
+  //是否在中心绘画所采矿物的颜色
+  "drillEffect": "mineHuge",
+  "updateEffect": "pulverizeRed",
+  //    "drawRim":true,//钻探的时候出现的高亮
+  "heatColor": "FF5511",
+  "consumes": {
+    "liquid": {
+      "liquid": "虚空液",
+      "amount": 0.07,
+      "booster": true,
+      "optional": true
+    }
+  },
+  "itemCapacity": 10,
+  "liquidCapacity": 10,
+  "requirements": [
+    "虚空石/20"
+  ],
+  "category": "production",
+  "research": {
+    "requirements": [
+      //研究花费
+      "虚空石/30"
+    ]
+    "parent": "轻型核心"
+  }
+}

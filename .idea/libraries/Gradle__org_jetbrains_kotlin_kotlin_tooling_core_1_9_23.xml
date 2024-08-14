@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-tooling-core:1.9.23" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.kotlin" artifactId="kotlin-tooling-core" version="1.9.23" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-tooling-core/1.9.23/bdc01105250e7ecc8bbcf49a21805685cd557dda/kotlin-tooling-core-1.9.23.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-tooling-core/1.9.23/53686481e9ad8c89a21c20e18910e52a1593cd8b/kotlin-tooling-core-1.9.23-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

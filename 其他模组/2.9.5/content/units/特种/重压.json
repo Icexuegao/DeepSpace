@@ -1,0 +1,93 @@
+{
+  "type": "tank",
+  "template": "TankUnitType",
+  "research": {
+    "parent": "核心工厂",
+    "objectives": [
+      "陆战3",
+      "exponential-reconstructor"
+    ]
+  },
+  "health": 11400,
+  "armor": 37,
+  "hitSize": 24,
+  "speed": 0.6,
+  "range": 1,
+  "rotateSpeed": 1.2,
+  "outlineColor": "1F1F1F",
+  "treadRects": [
+    {
+      "x": -55,
+      "y": -61,
+      "width": 27,
+      "height": 130
+    }
+  ],
+  "hovering": true,
+  "targetAir": false,
+  "faceTarget": false,
+  "rotateMoveFirst": false,
+  "targetPriority": 4,
+  "treadFrames": 18,
+  "crushDamage": 20,
+  "treadPullOffset": 4,
+  "immunities": [
+    "burning",
+    "melting",
+    "blasted",
+    "wet",
+    "freezing",
+    "slow",
+    "tarred",
+    "muddy",
+    "electrified",
+    "spore-slowed",
+    "辐射"
+  ],
+  "targetFlags": [
+    "turret"
+  ],
+  "weapons": [
+    {
+      "x": 0,
+      "shake": 0,
+      "reload": 30,
+      "mirror": false,
+      "display": false,
+      "useAmmo": false,
+      "shootCone": 360,
+      "shootSound": "none",
+      "shootStatus": "突袭",
+      "shootStatusDuration": 60,
+      "bullet": {
+        "damage": 0,
+        "lifetime": 30,
+        "speed": 8,
+        "collidesAir": false,
+        "instantDisappear": true,
+        "shootEffect": "none",
+        "smokeEffect": "none",
+        "despawnEffect": "none",
+        "hitEffect": "none"
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "ShieldArcAbility",
+      "region": "curse-of-flesh-重压-shield",
+      "whenShooting": false,
+      "y": -6,
+      "max": 3600,
+      "regen": 3,
+      "cooldown": 600,
+      "radius": 30,
+      "angle": 80,
+      "width": 5
+    },
+    {
+      "type": "ArmorPlateAbility",
+      "healthMultiplier": 1
+    }
+  ]
+}

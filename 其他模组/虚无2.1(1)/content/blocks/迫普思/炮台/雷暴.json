@@ -1,0 +1,72 @@
+{
+  "type": "PowerTurret",
+  "name": " 雷暴",
+  "description": "能在短时间内快速且持续释放大量闪电攻击敌人",
+  "health": 1600,
+  "reload": 15,
+  "shootCone": 360,
+  "rotateSpeed": 2,
+  "hasLiquids": true,
+  "targetAir": true,
+  "targetGround": true,
+  "range": 240,
+  "shootEffect": {
+    "type": "ParticleEffect",
+    "particles": 4,
+    "length": 45,
+    "baseLength": 0,
+    "lifetime": 40,
+    "line": true,
+    "lenFrom": 8,
+    "lenTo": 18,
+    "strokeFrom": 2,
+    "strokeTo": 0,
+    "colorFrom": "ffffff",
+    "colorTo": "ffffff",
+    "cone": 360
+  },
+  "recoil": 4,
+  "size": 4,
+  "shoot": {
+    "type": "ShootSpread",
+    "shots": 20
+  },
+  "inaccuracy": 0,
+  "shootSound": "spark",
+  "shootY": 6,
+  "shootX": 0,
+  "recoil": 0.5,
+  "recoils": 2,
+  "shootType": {
+    "buildingDamageMultiplier": 0.01,
+    "type": "LightningBulletType",
+    "damage": 25
+    "lightningLength": 50,
+    "collidesAir": true
+  },
+  "consumes": {
+    "power": 15.5
+    "coolant": {
+      "amount": 0.1,
+      "optional": true
+    }
+  },
+  "requirements": [
+    {
+      "item": "lead",
+      "amount": 120
+    },
+    {
+      "item": "silicon",
+      "amount": 80
+    }
+    {
+      "item": "化钢",
+      "amount": 70
+    }
+  ],
+  "category": "turret",
+  "research": "碎击"
+  "researchCostMultiplier": 1,
+  "canOverdrive": false
+}

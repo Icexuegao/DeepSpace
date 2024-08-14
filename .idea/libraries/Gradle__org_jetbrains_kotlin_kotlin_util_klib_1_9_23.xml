@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-util-klib:1.9.23" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.kotlin" artifactId="kotlin-util-klib" version="1.9.23" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-util-klib/1.9.23/d1b0c2b4440959a324164d3a0c6af8c89c9c8cad/kotlin-util-klib-1.9.23.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-util-klib/1.9.23/68b7c0f88deda6da53ef83971725e1c933c1cf23/kotlin-util-klib-1.9.23-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

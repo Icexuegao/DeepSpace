@@ -1,0 +1,21 @@
+{
+  "localizedName": "绯红矿区",
+  "name": "绯红矿区",
+  "description": "我们根据遗弃哨站找到了一个坐标，这或许有我们需要的矿石和科技，但同时，这里也有敌人把守",
+  //"details":"",
+  "planet": "迫普思"
+  //母星名字。
+  "sector": 150//区块坐标
+  //"captureWave":31//胜利波次
+  "difficulty": 6//难度1一5
+  "research": {
+    "parent": "遗弃哨站",
+    "objectives": [
+      "突击"
+      {
+        "type": "SectorComplete",
+        "preset": "遗弃哨站"
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "Battery"
+  "health": 370
+  "name": "虚空电池"
+  "emptyLightColor": "BF92F8FF"
+  "fullLightColor": "665C9FFF"
+  "consumes": {
+    "powerBuffered": 750
+  }
+  "category": "power"
+  "research": "虚空发电机"
+  "requirements": [
+    "虚空石/20"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "虚空液",
+  "type": "Liquid",
+  "description": "属性极度异常，这不是我们能预测到的",
+  "alwaysUnlocked": false,
+  "color": "0D0C11FF",
+  "flammability": 0,
+  "temperature": 2.75,
+  "heatCapacity": 1.25,
+  "viscosity": 0.5,
+  "explosiveness": 0.5,
+  "research": "虚空石"
+}

@@ -1,0 +1,178 @@
+{
+  "type": "flying",
+  "research": "空炸3",
+  "circleTarget": true,
+  "lowAltitude": true,
+  "flying": true,
+  "health": 9700,
+  "hitSize": 42,
+  "armor": 14,
+  "range": 40,
+  "accel": 0.06,
+  "drag": 0.017,
+  "speed": 2,
+  "rotateSpeed": 3.6,
+  "engineSize": 4,
+  "engineOffset": 6,
+  "engines": [
+    {
+      "x": 9.75,
+      "y": -7,
+      "radius": 3,
+      "rotation": -90
+    },
+    {
+      "x": -9.75,
+      "y": -7,
+      "radius": 3,
+      "rotation": -90
+    }
+  ],
+  "ammoType": 4500,
+  "ammoCapacity": 30,
+  "immunities": [
+    "wet",
+    "burning",
+    "spore-slowed"
+  ],
+  "targetFlags": [
+    "reactor",
+    "generator"
+  ],
+  "weapons": [
+    {
+      "name": "空炸4炮",
+      "x": 21.25,
+      "y": -3,
+      "shake": 1,
+      "recoil": 2,
+      "shootY": 2,
+      "reload": 35,
+      "shoot": {
+        "shots": 3,
+        "shotDelay": 3
+      },
+      "rotate": true,
+      "rotateSpeed": 4,
+      "shootSound": "shoot",
+      "bullet": {
+        "damage": 55,
+        "speed": 5,
+        "lifetime": 48,
+        "width": 6,
+        "height": 9,
+        "splashDamage": 65,
+        "splashDamageRadius": 64,
+        "shootEffect": "shootBig",
+        "ammoMultiplier": 4,
+        "status": "blasted",
+        "statusDuration": 60,
+        "hitEffect": "flakExplosion"
+      }
+    },
+    {
+      "name": "空炸5机炮",
+      "x": 15.25,
+      "y": 3.75,
+      "shake": 2,
+      "recoil": 3,
+      "reload": 55,
+      "shootY": 7.25,
+      "shoot": {
+        "shots": 2,
+        "shotDelay": 3
+      },
+      "rotate": true,
+      "rotateSpeed": 2,
+      "rotationLimit": 45,
+      "shootSound": "shootBig",
+      "layerOffset": -0.001,
+      "bullet": {
+        "damage": 85,
+        "speed": 5,
+        "lifetime": 48,
+        "width": 9,
+        "height": 12,
+        "splashDamage": 35,
+        "splashDamageRadius": 32,
+        "shootEffect": "shootBig",
+        "ammoMultiplier": 4,
+        "status": "blasted",
+        "statusDuration": 60,
+        "hitEffect": "flakExplosionBig"
+      }
+    },
+    {
+      "name": "空炸4激光",
+      "x": 11,
+      "y": 2.75,
+      "shake": 3,
+      "recoil": 3,
+      "shootY": 7,
+      "reload": 180,
+      "rotate": true,
+      "rotateSpeed": 2,
+      "rotationLimit": 45,
+      "shootSound": "laser",
+      "bullet": {
+        "type": "LaserBulletType",
+        "damage": 135,
+        "length": 200,
+        "lifetime": 15,
+        "shootEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 12,
+          "lifetime": 20,
+          "length": 45,
+          "cone": 30,
+          "lenFrom": 6,
+          "lenTo": 6,
+          "strokeFrom": 3,
+          "strokeTo": 0,
+          "interp": "fastSlow",
+          "lightColor": "FF5845",
+          "colorFrom": "FF8663",
+          "colorTo": "FF5845"
+        },
+        "colors": [
+          "D75B6E",
+          "E78F92",
+          "FFF0F0"
+        ],
+        "status": "熔融",
+        "statusDuration": 180,
+        "ammoMultiplier": 1,
+        "hitEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 10,
+          "lifetime": 20,
+          "length": 75,
+          "cone": -360,
+          "lenFrom": 6,
+          "lenTo": 6,
+          "strokeFrom": 3,
+          "strokeTo": 0,
+          "lightColor": "FF5845",
+          "colorFrom": "FF8663",
+          "colorTo": "FF5845"
+        }
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "ArmorPlateAbility",
+      "healthMultiplier": 0.4
+    },
+    {
+      "type": "ForceFieldAbility",
+      "cooldown": 120,
+      "radius": 80,
+      "max": 1200,
+      "regen": 2,
+      "sides": 4
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "type": "DirectionalForceProjector",
+  //"health": 540,
+  "size": 2,
+  "consumes": {
+    "power": 10
+  },
+  "absorbEffect": {
+    "type": "WaveEffect",
+    "sides": 4,
+    "lifetime": 24,
+    "sizeFrom": 4,
+    "sizeTo": 4,
+    "strokeFrom": 1.6,
+    "colorFrom": "FFD37F",
+    "colorTo": "FFD37F"
+  },
+  "width": 160,
+  "length": 40,
+  "padSize": 40,
+  "shieldHealth": 3000,
+  "cooldownNormal": 2.5,
+  "cooldownLiquid": 1.5,
+  "cooldownBrokenBase": 6.25,
+  "requirements": [
+    "lead/325",
+    "titanium/175",
+    "silicon/275",
+    "plastanium/75"
+  ],
+  "category": "effect"
+  //"research": "盾1"
+}

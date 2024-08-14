@@ -1,0 +1,81 @@
+{
+  //"type": "GenericCrafter",
+  "size": 3,
+  "itemCapacity": 36,
+  "liquidCapacity": 36,
+  "consumes": {
+    "power": 7.6,
+    "items": {
+      "items": [
+        "thorium/5"
+      ]
+    },
+    "liquid": "water/0.25"
+  },
+  "craftTime": 80,
+  "outputItem": "铈/2",
+  "outputLiquid": "废水/0.2",
+  "requirements": [
+    "copper/230",
+    "metaglass/35",
+    "titanium/125",
+    "silicon/85",
+    "铱板/55"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawLiquidTile",
+        "drawLiquid": "water"
+      },
+      {
+        "type": "DrawCultivator",
+        "plantColor": "A24FAA",
+        "plantColorLight": "F9A3C7",
+        "bottomColor": "474747",
+        "bubbles": 12,
+        "sides": 16,
+        "strokeMin": 0,
+        "spread": 3,
+        "timeScl": 90,
+        "recurrence": 6,
+        "radius": 3
+      },
+      "DrawDefault",
+      {
+        "type": "DrawGlowRegion",
+        "alpha": 1,
+        "glowScale": 6.28,
+        "color": "F0511D"
+      },
+      {
+        "type": "DrawRegion",
+        "suffix": "-top"
+      },
+      {
+        "type": "DrawParticles",
+        "color": "F9A3C7",
+        "alpha": 0.6,
+        "particles": 15,
+        "particleLife": 300,
+        "particleRad": 12,
+        "particleSize": 2,
+        "fadeMargin": 0,
+        "rotateScl": 360,
+        "reverse": true
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": {
+    "parent": "先遣核心",
+    "objectives": [
+      "separator"
+    ]
+  }
+}

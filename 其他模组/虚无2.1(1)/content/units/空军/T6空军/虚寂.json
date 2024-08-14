@@ -1,0 +1,372 @@
+{
+  "type": "flying",
+  "name": "虚寂",
+  "description": "在虚空中错误之地由文明[red][信号丢失][white]所构成的未知战舰，虚空与科技的结合体，足以摧毁文明[red][信号丢失][white]，又有谁知道虚空[red][信号丢失][white]之中是否存在更恐怖的存在……",
+  "details": "之前的虚主也只不过是它的分身体罢了",
+  "speed": 1.4,
+  "drag": 0.15,
+  "accel": 0.05,
+  "rotateSpeed": 0.2,
+  "ammoType": {
+    "type": "PowerAmmoType",
+    "totalPower": 100
+    "fogRadius": 285
+  },
+  "ammoCapacity": 300,
+  "hitSize": 140,
+  "mass": 250,
+  "buildSpeed": 0.75,
+  "flying": true,
+  "faceTarget": true,
+  "lowAltitude": true,
+  "drawMinimap": true,
+  "health": 250000,
+  "armor": 35,
+  "engineColor": "BF92F8FF",
+  "engineOffset": 70,
+  "engineSize": 10,
+  "itemCapacity": 500,
+  "research": {
+    "parent": "虚主"
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "伊甸园"
+      }
+    ]
+  }
+  "immunities": [
+    "freezing"
+    "失灵"
+    "湮灭"
+  ],
+  "weapons": [
+    {
+      "name": "虚寂1",
+      "mirror": false,
+      "x": 0,
+      "y": -34,
+      "rotate": true,
+      "reload": 350,
+      "rotateSpeed": 0.1,
+      "shootSound": "plasmaboom"
+      "bullet": {
+        "type": "ArtilleryBulletType",
+        "inaccuracy": 3,
+        "speed": 25,
+        "lifetime": 41,
+        "width": 22,
+        "height": 32,
+        "shrinkX": 0,
+        "shrinkY": 0,
+        "scaleLife": true,
+        "sprite": "missile-large",
+        "backColor": "BF92F8FF",
+        "frontColor": "BF92F8FF",
+        "trailLength": 9,
+        "trailWidth": 2.5,
+        "trailColor": "BF92F8FF",
+        "splashDamageRadius": 95,
+        "splashDamage": 75000,
+        "buildingDamageMultiplier": 9,
+        "ammoMultiplier": 1,
+        "hitSound": "boom",
+        "hitShake": 9,
+        "status": "blasted",
+        "shootEffect": {
+          "type": "MultiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "particles": 10,
+              "sizeFrom": 10,
+              "sizeTo": 0,
+              "interp": "pow10Out",
+              "sizeInterp": "pow5In",
+              "length": 85,
+              "baseLength": 3,
+              "lifetime": 185,
+              "colorFrom": "BF92F8FF",
+              "colorTo": "737373FF",
+              "cone": 30
+            },
+            {
+              "type": "WaveEffect",
+              "lifetime": 9,
+              "sizeFrom": 1,
+              "sizeTo": 90,
+              "strokeFrom": 6,
+              "strokeTo": 0,
+              "colorFrom": "FFFFFF",
+              "colorTo": "FFFFFF"
+            }
+          ]
+        },
+        "smokeEffect": "none",
+        "trailChance": 1,
+        "trailInterval": 8,
+        "trailRotation": true,
+        "trailEffect": {
+          "type": "ParticleEffect",
+          "particles": 5,
+          "lifetime": 23,
+          "interp": "pow10Out",
+          "sizeInterp": "pow5In",
+          "sizeFrom": 8,
+          "sizeTo": 0,
+          "length": -50,
+          "baseLength": 3,
+          "colorFrom": "BF92F890",
+          "colorTo": "BF92F890",
+          "cone": 30
+        },
+        "hitEffect": {
+          "type": "MultiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "particles": 26,
+              "sizeFrom": 15,
+              "sizeTo": 0,
+              "interp": "pow10Out",
+              "sizeInterp": "pow5In",
+              "length": 90,
+              "baseLength": 3,
+              "lifetime": 180,
+              "colorFrom": "BF92F8",
+              "colorTo": "BF92F890",
+              "cone": 360
+            },
+            {
+              "type": "WaveEffect",
+              "lifetime": 13,
+              "sizeFrom": 1,
+              "sizeTo": 95,
+              "strokeFrom": 8,
+              "strokeTo": 0,
+              "colorFrom": "BF92F8",
+              "colorTo": "BF92F8"
+            }
+          ]
+        },
+        "despawnEffect": {
+          "type": "ParticleEffect",
+          "particles": 1,
+          "sizeFrom": 10,
+          "sizeTo": 0,
+          "sizeInterp": "pow5In",
+          "length": 0,
+          "baseLength": 0,
+          "lifetime": 120,
+          "colorFrom": "BF92F8",
+          "colorTo": "BF92F8"
+        },
+        "fragLifeMin": 0.1,
+        "fragBullets": 75,
+        "fragBullet": {
+          "type": "BasicBulletType",
+          "status": "blasted",
+          "speed": 8,
+          "lifetime": 11,
+          "backColor": "BF92F8FF",
+          "frontColor": "BF92F8FF",
+          "width": 16,
+          "height": 16,
+          "damage": 75000,
+          "splashDamageRadius": 48,
+          "splashDamage": 55000,
+          "buildingDamageMultiplier": 6,
+          "hitSound": "explosion",
+          "absorbable": false,
+          "sprite": "circle-bullet",
+          "shrinkY": 0,
+          "hitEffect": {
+            "type": "MultiEffect",
+            "effects": [
+              {
+                "type": "ParticleEffect",
+                "particles": 16,
+                "sizeFrom": 5,
+                "sizeTo": 0,
+                "interp": "pow5Out",
+                "sizeInterp": "pow5In",
+                "length": 45,
+                "baseLength": 0,
+                "lifetime": 60,
+                "colorFrom": "BF92F8",
+                "colorTo": "BF92F8",
+                "cone": 360
+              },
+              {
+                "type": "WaveEffect",
+                "lifetime": 8,
+                "sizeFrom": 0,
+                "sizeTo": 50,
+                "strokeFrom": 3,
+                "strokeTo": 0,
+                "colorFrom": "BF92F8",
+                "colorTo": "BF92F8"
+              }
+            ]
+          },
+          "despawnEffect": "none"
+        }
+      }
+    }
+    {
+      "name": "灰烬光束"
+      "mirror": false,
+      "x": 0,
+      "y": 36,
+      "rotate": false,
+      "rotateSpeed": 0,
+      "shootSound": "laser",
+      "reload": 600,
+      "shake": 30,
+      "shoot": {
+        "shots": 5
+      }
+      "bullet": {
+        "type": "LaserBulletType",
+        "length": 1500,
+        "damage": 35000,
+        "colors": [
+          "835cc3"
+          "bc93ff"
+          "000000"
+        ],
+        "width": 39
+        "hitSize": 30,
+        "lifetime": 45.00,
+        "drawSize": 40.00,
+        "collidesAir": true,
+        "ammoMultiplier": 1.00
+        "status": "湮灭"
+        "statusDuration": 900,
+        "type": "LaserBulletType",
+        "length": 800,
+        //长
+        "damage": 25000,
+        //伤害
+        "width": 75,
+        //宽
+        "despawnEffect": "none"
+        //特效
+        "lifetime": 70,
+        //存在时间
+        "hitEffect": "hitLancer"
+        //特效*
+      }
+    }
+    {
+      "name": "阴郁导弹",
+      "reload": 130,
+      "x": 80,
+      "y": 0,
+      "rotate": false,
+      "inaccuracy": 0,
+      "shootCone": 60,
+      "alternate": true,
+      "shootSound": "missileLaunch",
+      "shake": 5,
+      "bullet": {
+        "keepVelocity": false,
+        "speed": 0,
+        "shootEffect": "none",
+        "smokeEffect": "shootSmallFlame",
+        "spawnUnit": "阴郁"
+      }
+    }
+  ]
+  "abilities": [
+    {
+      "type": "ForceFieldAbility",
+      "radius": 200,
+      "regen": 1500,
+      "max": 105000,
+      "cooldown": 120
+    }
+    {
+      "type": "RegenAbility",
+      "percentAmount": 0.45
+    },
+    {
+      "type": "RepairFieldAbility"
+      "amount": 30000,
+      "reload": 60,
+      "range": 660
+    },
+    {
+      "type": "UnitSpawnAbility",
+      "unit": "聚衡",
+      "spawnX": -20,
+      "spawnY": -20,
+      "spawnTime": 600
+    }
+    {
+      "type": "UnitSpawnAbility",
+      "unit": "聚衡",
+      "spawnX": 20,
+      "spawnY": -20,
+      "spawnTime": 600
+    }
+    {
+      "type": "UnitSpawnAbility",
+      "unit": "虚主",
+      "spawnX": 0,
+      "spawnY": 0,
+      "spawnTime": 7200
+    }
+  ]
+  "parts": [
+    {
+      "type": "ShapePart",
+      "progress": "warmup",
+      "y": 0,
+      "x": 80,
+      "sides": 3,
+      "color": "BF92F8",
+      "rotateSpeed": 2,
+      "stroke": 0,
+      "strokeTo": 1,
+      "circle": false,
+      "hollow": true,
+      "mirror": true,
+      "radius": 0,
+      "radiusTo": 18,
+      "layer": 110
+    },
+    {
+      "type": "ShapePart",
+      "progress": "warmup",
+      "y": 0,
+      "x": 80,
+      "sides": 3,
+      "color": "BF92F8",
+      "rotateSpeed": 3,
+      "stroke": 0,
+      "strokeTo": 1,
+      "circle": false,
+      "hollow": true,
+      "mirror": true,
+      "radius": 0,
+      "radiusTo": 18,
+      "layer": 110
+    },
+    {
+      "type": "ShapePart",
+      "progress": "warmup",
+      "y": 0,
+      "x": 80,
+      "color": "BF92F8",
+      "stroke": 0,
+      "strokeTo": 1,
+      "circle": true,
+      "hollow": true,
+      "mirror": true,
+      "radius": 0,
+      "radiusTo": 20,
+      "layer": 110
+    }
+  ]
+}

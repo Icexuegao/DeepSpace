@@ -1,0 +1,138 @@
+{
+  "localizedName": "瑞赫凯勒",
+  "mesh": {
+    //行星的网格，仅支持NoiseMesh
+    "type": "NoiseMesh",
+    "planet": "瑞赫凯勒",
+    "seed": 6,
+    "divisions": 6,
+    //表面精细度
+    "color1": "0D0C11FF",
+    "color2": "0D0C11FF",
+    "color3": "1B191FFF"
+    "divisions": 4,
+    "radius": 0.8,
+    "octaves": 8,
+    "persistence": 1,
+    "scale": 2,
+    "mag": 1
+  },
+  //cloudMesh: {}, //用于云的网格
+  //您不能为此声明类型，但您至少可以修改现有类型的字段。不建议修改，除非你真的知道你在做什么，在此之前最好做一个备份
+  "generator": {
+    "min": 0,
+    //小行星数量
+    "max": 0,
+    "octaves": 2,
+    //噪音特性
+    "persistence": 0.4,
+    "scale": 30,
+    "mag": 0.4,
+    "thresh": 1,
+    "foct": 3,
+    "fmag": 0.5,
+    "fscl": 50,
+    "fper": 0.6,
+    "radMin": 0
+    //小行星半径
+    "radMax": 0,
+    "stoneChance": 0,
+    //石头地板概率
+    "iceChance": 1,
+    //地形生成几率，顺序为：冰>碳>绿柱石>铁
+    "carbonChance": 0,
+    "berylChance": 0,
+    "ferricChance": 0
+  },
+  "orbitSpacing": 18,
+  //父（this）和卫星之间的间距
+  "radius": 0.8,
+  //星球半径
+  "sectorSize": 3,
+  //区块大小
+  "minZoom": 0.99,
+  //最小缩放
+  "drawOrbit": true,
+  //是否绘制轨道
+  "atmosphereRadIn": 0,
+  //基本大气层偏移
+  "atmosphereRadOut": 0.1,
+  "accessible": true,
+  //是否可以登陆
+  "tidalLock": false,
+  "allowLaunchSchematics": false,
+  //允许核心蓝图
+  "alwaysUnlocked": true,
+  "allowSectorInvasion": false,
+  //存在区块入侵
+  "updateLighting": true,
+  //昼夜循环
+  "sectorSeed": 1,
+  //生成器的种子。 如果-1，则为小行星
+  "bloom": true,
+  //是否开启bloom渲染
+  "visible": true,
+  //是否显示
+  "hasAtmosphere": true,
+  //是否有大气层
+  "atmosphereColor": "1B191FFF",
+  //大气层颜色
+  "icon": "planet",
+  //左上角显示的图标文件
+  "iconColor": "1B191FFF",
+  ///左上角显示的行星图标的颜色
+  "startSector": 1,
+  //开始区块的序号
+  "allowWaveSimulation": true,
+  //在后台时是否模拟波次
+  "allowLaunchLoadout": true,
+  //允许选择落地资源
+  "launchCapacityMultiplier": 1,
+  //选择核心蓝图时核心能容纳的物品数量关于其实际数量的倍数。例：初代核心是4k容量，此值为1则发射时可以塞4k物品，如果为0.5只能塞2k。想一想，为2会发生什么？
+  "clearSectorOnLose": true,
+  //区块丢失时是否重置区块
+  "allowWaves": true,
+  //区块丢失时是否重置波次
+
+  "allowLaunchToNumbered": false
+
+  "defaultCore": "轻型核心",
+  //星球默认核心
+  "parent": "克米勒",
+  //星球绕什么公转
+  "solarSystem": "克米勒",
+  //星系系统
+  "launchCandidates": [],
+  //可以从这个星球前往的行星。 可能没用，因为行星际加速器仍然不工作
+  "hiddenItems": [
+    //这个星球上没有的物品
+    "copper",
+    "lead",
+    "metaglass",
+    "graphite",
+    "sand",
+    "coal",
+    "titanium",
+    "thorium",
+    "scrap",
+    "silicon",
+    "plastanium",
+    "phase-fabric",
+    "surge-alloy",
+    "spore-pod",
+    "blast-compound",
+    "pyratite",
+    "beryllium",
+    "tungsten",
+    "oxide",
+    "carbide",
+    "化钢",
+    "铀",
+    "绯红之石",
+    "绯红合金",
+    "火石矿",
+    "钛板",
+    "裂位合金",
+    "黑核"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "轻型核心",
+  "type": "CoreBlock",
+  "description": "这种核心可以适应这个充满虚空的星球",
+  "requirements": [
+    "虚空石/1000"
+  ],
+  "unitType": "米勒",
+  "health": 5000,
+  "size": 3,
+  "absorbLasers": true,
+  "itemCapacity": 5000,
+  "unitCapModifier": 15,
+  "category": "effect",
+  "research": {
+    "root": true
+    "name": "瑞赫凯勒"
+    "requiresUnlock": false
+    "planet": "瑞赫凯勒"
+  }
+  "alwaysUnlocked": true
+}

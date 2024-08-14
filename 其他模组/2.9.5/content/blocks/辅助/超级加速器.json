@@ -1,0 +1,10 @@
+{
+  "type": "OverdriveProjector",
+  "health": 999999999,
+  "size": 1,
+  "range": 9999,
+  "hasBoost": false,
+  "speedBoost": 500,
+  "category": "effect",
+  "buildVisibility": "sandboxOnly"
+}

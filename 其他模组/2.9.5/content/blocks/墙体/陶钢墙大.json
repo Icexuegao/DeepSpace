@@ -1,0 +1,14 @@
+{
+  "type": "Wall",
+  "health": 4800,
+  "armor": 12,
+  "size": 2,
+  "floating": true,
+  "insulated": true,
+  "absorbLasers": true,
+  "requirements": [
+    "陶钢/24"
+  ],
+  "category": "defense",
+  "research": "陶钢墙"
+}

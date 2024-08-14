@@ -1,0 +1,81 @@
+{
+  //"type": "GenericCrafter",
+  "size": 4,
+  "itemCapacity": 48,
+  "liquidCapacity": 48,
+  "consumes": {
+    "power": 13.85,
+    "items": {
+      "items": [
+        "thorium/7"
+      ]
+    },
+    "liquid": "water/0.6"
+  },
+  "craftTime": 35,
+  "outputItem": "铈/3",
+  "outputLiquid": "废水/0.5",
+  "requirements": [
+    "thorium/185",
+    "metaglass/45",
+    "铱板/115",
+    "导能回路/85",
+    "陶钢/55"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawLiquidTile",
+        "drawLiquid": "water"
+      },
+      {
+        "type": "DrawCultivator",
+        "plantColor": "A24FAA",
+        "plantColorLight": "F9A3C7",
+        "bottomColor": "474747",
+        "bubbles": 12,
+        "sides": 16,
+        "strokeMin": 0,
+        "spread": 3,
+        "timeScl": 90,
+        "recurrence": 6,
+        "radius": 4
+      },
+      "DrawDefault",
+      {
+        "type": "DrawGlowRegion",
+        "alpha": 1,
+        "glowScale": 6.28,
+        "color": "F0511D"
+      },
+      {
+        "type": "DrawRegion",
+        "suffix": "-top"
+      },
+      {
+        "type": "DrawParticles",
+        "color": "F9A3C7",
+        "alpha": 0.6,
+        "particles": 15,
+        "particleLife": 300,
+        "particleRad": 16,
+        "particleSize": 3,
+        "fadeMargin": 0,
+        "rotateScl": 360,
+        "reverse": true
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": {
+    "parent": "铈提取器",
+    "objectives": [
+      "液体焚化炉"
+    ]
+  }
+}

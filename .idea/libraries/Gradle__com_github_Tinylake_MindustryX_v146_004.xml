@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.Tinylake:MindustryX:v146.004" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.Tinylake" artifactId="MindustryX" version="v146.004" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.Tinylake/MindustryX/v146.004/d254a834eb616ccaca4791bc0a57897fb12e28aa/MindustryX-v146.004.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

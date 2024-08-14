@@ -1,0 +1,42 @@
+{
+  "type": "GenericCrafter",
+  "health": 1200,
+  "name": "钛板压制厂",
+  "description": "将钛压制成钛",
+  "outputItem": "钛板/3",
+  "itemCapacity": 10,
+  "size": 3,
+  "hasPower": true,
+  "hasLiquids": false,
+  "hasItems": true,
+  "craftTime": 120,
+  "updateEffect": "none",
+  "craftEffect": "smeltsmoke",
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault"
+    ]
+  },
+  "consumes": {
+    "power": 3.5,
+    "items": [
+      "titanium/10"
+    ]
+  },
+  "requirements": [
+    "copper/300",
+    "lead/250",
+    "silicon/500"
+    "titanium/200"
+    "化钢/200"
+  ],
+  "category": "crafting",
+  "ambientSound": "smelter",
+  "research": {
+    "parent": "化钢压制厂"
+    //科技树前置
+    "objectives": [
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.EB-wilson.UniverseCore:core:2.1.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.EB-wilson.UniverseCore" artifactId="core" version="2.1.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.EB-wilson.UniverseCore/core/2.1.1/f1efe2ca8cc19e0424ee96deb2ff356fdd0e6116/core-2.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.EB-wilson.UniverseCore/core/2.1.1/733d5181be4e6dc3df7c6037092e6361a32ceac9/core-2.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

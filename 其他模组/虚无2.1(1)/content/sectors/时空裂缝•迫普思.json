@@ -1,0 +1,20 @@
+{
+  "localizedName": "时空裂缝",
+  "name": "时空裂缝",
+  "description": "通过火山口后找到的一个区块，但貌似这里是通往另一颗星球的入口，同时，我们检测到了在火山口一样的异常信号，我们预计应该在20波会来一个寂冥，请及时占领这里",
+  //"details":"",
+  "planet": "迫普思"
+  //母星名字。
+  "sector": 46//区块坐标
+  "captureWave": 30//胜利波次
+  "difficulty": 6//难度1一5
+  "research": {
+    "parent": "火山口",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "火山口"
+      }
+    ]
+  }
+}

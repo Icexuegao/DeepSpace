@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":scalaSrc" external.linked.project.path="$MODULE_DIR$/../../../scalaSrc" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="DeepSpace" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../scalaSrc">
+      <excludeFolder url="file://$MODULE_DIR$/../../../scalaSrc/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../scalaSrc/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../scalaSrc/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -1,0 +1,264 @@
+{
+  "type": "ItemTurret",
+  "health": 5600,
+  "size": 5,
+  "range": 720,
+  "reload": 300,
+  "shake": 5,
+  "recoil": 4,
+  "recoilTime": 300,
+  "ammoPerShot": 15,
+  "cooldownTime": 300,
+  "shootSound": "railgun",
+  "unitSort": "strongest",
+  "shootCone": 2,
+  "rotateSpeed": 1.4,
+  "minWarmup": 0.96,
+  "shootWarmupSpeed": 0.08,
+  "warmupMaintainTime": 300,
+  "shoot": {
+    "type": "ShootSpread",
+    "shots": 5,
+    "spread": 1
+  },
+  "liquidCapacity": 30,
+  "consumes": {
+    "power": 25,
+    "coolant": {
+      "amount": 1.5
+    }
+  },
+  "coolantMultiplier": 0.333,
+  "ammoTypes": {
+    "phase-fabric": {
+      "type": "RailBulletType",
+      "damage": 720,
+      "knockback": 10,
+      "lifetime": 30,
+      "length": 720,
+      "ammoMultiplier": 1,
+      "pierce": true,
+      "pierceDamageFactor": 0.4,
+      "status": "unmoving",
+      "statusDuration": 900,
+      "shootEffect": "instShoot",
+      "pointEffect": "railTrail",
+      "hitEffect": "railHit"
+    },
+    "surge-alloy": {
+      "type": "RailBulletType",
+      "damage": 1200,
+      "knockback": 20,
+      "lifetime": 30,
+      "length": 720,
+      "ammoMultiplier": 1,
+      "pierce": true,
+      "pierceDamageFactor": 0.2,
+      "status": "熔融",
+      "statusDuration": 900,
+      "shootEffect": "instShoot",
+      "pointEffect": "railTrail",
+      "hitEffect": "railHit"
+    },
+    "铱板": {
+      "type": "RailBulletType",
+      "damage": 960,
+      "knockback": 15,
+      "lifetime": 30,
+      "length": 720,
+      "ammoMultiplier": 1,
+      "pierce": true,
+      "pierceDamageFactor": 0.3,
+      "status": "破甲",
+      "statusDuration": 900,
+      "shootEffect": "instShoot",
+      "pointEffect": "railTrail",
+      "hitEffect": "railHit",
+      "pierceEffect": {
+        "type": "ParticleEffect",
+        "line": true,
+        "particles": 60,
+        "offset": 0,
+        "lifetime": 15,
+        "length": 40,
+        "cone": -7.5,
+        "lenFrom": 6,
+        "lenTo": 0,
+        "colorFrom": "D86E56",
+        "colorTo": "FFFFFF"
+      }
+    }
+  },
+  "requirements": [
+    "copper/1800",
+    "graphite/840",
+    "铱板/630",
+    "导能回路/425",
+    "陶钢/225"
+  ],
+  "drawer": {
+    "type": "DrawTurret",
+    "parts": [
+      {
+        "type": "RegionPart",
+        "suffix": "-barrel",
+        "moveY": -1.5,
+        "moves": [
+          {
+            "progress": "recoil",
+            "y": -3
+          }
+        ],
+        "heatColor": "F03B0E"
+      },
+      {
+        "type": "RegionPart",
+        "suffix": "-top",
+        "heatProgress": "warmup",
+        "mirror": true,
+        "under": true,
+        "moveX": 4,
+        "moveY": 8.25,
+        "heatColor": "F03B0E"
+      },
+      {
+        "type": "RegionPart",
+        "suffix": "-side",
+        "heatProgress": "warmup",
+        "mirror": true,
+        "under": true,
+        "moveX": 4,
+        "moveY": 0,
+        "heatColor": "F03B0E"
+      },
+      {
+        "type": "HaloPart",
+        "tri": true,
+        "y": -16,
+        "shapes": 2,
+        "radius": 0,
+        "radiusTo": 3,
+        "triLength": 16,
+        "haloRadius": 15,
+        "haloRotation": 90,
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "tri": true,
+        "y": -16,
+        "shapeRotation": 180,
+        "shapes": 2,
+        "radius": 0,
+        "radiusTo": 3,
+        "triLength": 4,
+        "haloRadius": 15,
+        "haloRotation": 90,
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "ShapePart",
+        "y": -16,
+        "circle": true,
+        "hollow": true,
+        "radius": 4,
+        "stroke": 0,
+        "strokeTo": 1,
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "ShapePart",
+        "y": -16,
+        "circle": true,
+        "hollow": true,
+        "radius": 8,
+        "stroke": 0,
+        "strokeTo": 1,
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "hollow": false,
+        //空心
+        "mirror": false,
+        "tri": true,
+        //三角形
+        "x": 0,
+        "y": -16,
+        "shapeRotation": 0,
+        //图形初始角度
+        "moveX": 0,
+        "moveY": 0,
+        "shapeMoveRot": 0,
+        "shapes": 4,
+        //围绕个数
+        "sides": 5,
+        //边数
+        "radius": 0,
+        //半径/粗细
+        "radiusTo": 3,
+        "stroke": 1,
+        //粗细
+        "strokeTo": -1,
+        "triLength": 6,
+        //初始长度
+        "triLengthTo": -1,
+        //最终长度
+        "haloRadius": 12,
+        //围绕半径
+        "haloRadiusTo": -1,
+        //最终围绕半径
+        "haloRotateSpeed": 1,
+        //公转速度
+        "haloRotation": 0,
+        //环初始角度
+        "rotateSpeed": 0,
+        //自转速度
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "tri": true,
+        "y": -16,
+        "shapeRotation": 180,
+        "shapes": 4,
+        "radius": 0,
+        "radiusTo": 3,
+        "triLength": 2,
+        "haloRadius": 12,
+        "haloRotateSpeed": 1,
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "tri": true,
+        "y": -16,
+        "shapes": 4,
+        "radius": 3,
+        "triLength": 0,
+        "triLengthTo": 2,
+        "haloRadius": 8,
+        "haloRotateSpeed": -1,
+        "color": "FF5845",
+        "layer": 110
+      }
+    ]
+  },
+  "category": "turret",
+  "research": {
+    "parent": "裂颅",
+    "objectives": [
+      "震击",
+      {
+        "type": "SectorComplete",
+        "preset": "遗落要塞"
+      }
+    ]
+  }
+}

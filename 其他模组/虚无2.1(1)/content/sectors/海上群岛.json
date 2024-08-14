@@ -1,0 +1,19 @@
+{
+  "localizedName": "海上群岛",
+  "name": "海上群岛",
+  "description": "一个群岛，这里有我们值得研究的科技，但同时有敌人进攻",
+  "planet": "迫普思"
+  //母星名字。
+  "sector": 90//区块坐标
+  "captureWave": 30//胜利波次
+  "difficulty": 6//难度1一5
+  "research": {
+    "parent": "前线战区",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "前线战区"
+      }
+    ]
+  }
+}

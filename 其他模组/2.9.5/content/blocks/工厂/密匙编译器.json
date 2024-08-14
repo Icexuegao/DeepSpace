@@ -1,0 +1,429 @@
+{
+  "type": "GenericCrafter",
+  "size": 10,
+  "armor": 48,
+  "consumes": {
+    "power": 600,
+    "liquid": "cryofluid/4"
+  },
+  "liquidCapacity": 120,
+  "squareSprite": false,
+  "canOverdrive": false,
+  "updateEffectChance": 0.4,
+  "updateEffect": {
+    "type": "WrapEffect",
+    "effect": {
+      "type": "ParticleEffect",
+      "line": true,
+      "particles": 2,
+      "lifetime": 180,
+      "randLength": false,
+      "strokeFrom": 2,
+      "strokeTo": 0,
+      "lenFrom": 20,
+      "lenTo": 2,
+      "cone": 0,
+      "length": -180,
+      "baseLength": 170,
+      "colorFrom": "FF584500",
+      "colorTo": "FF5845"
+    },
+    "rotation": 90
+  },
+  "craftTime": 10800,
+  "outputItem": "肃正协议/1",
+  "craftEffect": {
+    "type": "multiEffect",
+    "effects": [
+      {
+        "type": "ParticleEffect",
+        "line": true,
+        "particles": 25,
+        "lifetime": 120,
+        "length": 120,
+        "cone": 360,
+        "strokeFrom": 2.5,
+        "lightColor": "FFDCD8",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      },
+      {
+        "type": "ExplosionEffect",
+        "waveColor": "FFDCD8",
+        "sparkColor": "FFDCD8",
+        "smokes": 20,
+        "smokeSize": 4.7,
+        "smokeSizeBase": 1.6,
+        "smokeRad": 36,
+        "waveLife": 30,
+        "waveStroke": 4,
+        "waveRad": 15,
+        "waveRadBase": 2.0,
+        "sparkLen": 7,
+        "sparks": 12
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 360,
+        "sizeTo": 40,
+        "strokeFrom": 14,
+        "interp": "pow2Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 360,
+        "sizeTo": 60,
+        "strokeFrom": 12,
+        "interp": "pow3Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 360,
+        "sizeTo": 80,
+        "strokeFrom": 10,
+        "interp": "pow4Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 360,
+        "sizeTo": 100,
+        "strokeFrom": 8,
+        "interp": "pow5Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 360,
+        "sizeTo": 120,
+        "strokeFrom": 6,
+        "interp": "pow10Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      }
+    ]
+  },
+  "destroyEffect": {
+    "type": "multiEffect",
+    "effects": [
+      {
+        "type": "ParticleEffect",
+        "particles": 30,
+        "length": 140,
+        "baseLength": 10,
+        "lifetime": 160,
+        "layer": 106,
+        "sizeFrom": 27,
+        "sizeTo": 16,
+        "interp": "circleOut",
+        "sizeInterp": "pow10Out",
+        "colorFrom": "3D3D3D",
+        "colorTo": "3D3D3D10"
+      },
+      {
+        "type": "ParticleEffect",
+        "particles": 10,
+        "length": 140,
+        "baseLength": 10,
+        "lifetime": 160,
+        "layer": 106,
+        "sizeFrom": 27,
+        "sizeTo": 16,
+        "interp": "circleOut",
+        "sizeInterp": "pow10Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD810"
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 840,
+        "sizeTo": 80,
+        "strokeFrom": 12,
+        "interp": "pow5Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 840,
+        "sizeTo": 100,
+        "strokeFrom": 10,
+        "interp": "pow5Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 840,
+        "sizeTo": 120,
+        "strokeFrom": 8,
+        "interp": "pow5Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 840,
+        "sizeTo": 140,
+        "strokeFrom": 6,
+        "interp": "pow5Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      },
+      {
+        "type": "WaveEffect",
+        "lifetime": 840,
+        "sizeTo": 160,
+        "strokeFrom": 4,
+        "interp": "pow5Out",
+        "colorFrom": "FF5845",
+        "colorTo": "FFDCD8"
+      }
+    ]
+  },
+  "destroyBullet": {
+    "sprite": "curse-of-flesh-star",
+    "damage": 0,
+    "splashDamage": 1250,
+    "splashDamageRadius": 120,
+    "lifetime": 600,
+    "speed": 0,
+    "height": 60,
+    "width": 60,
+    "spin": 2,
+    "shrinkY": 0,
+    "shrinkX": 0,
+    "collides": false,
+    "frontColor": "FFDCD8",
+    "backColor": "FF5845",
+    "lightRadius": 240,
+    "despawnShake": 12,
+    "bulletInterval": 4,
+    "intervalBullets": 4,
+    "intervalRandomSpread": 360,
+    "intervalBullet": {
+      "damage": 0,
+      "lifetime": 0,
+      "speed": 0,
+      "hitEffect": "none",
+      "despawnEffect": "none",
+      "fragBullets": 1,
+      "fragLifeMin": 1,
+      "fragLifeMax": 2,
+      "fragVelocityMin": 1,
+      "fragVelocityMax": 2,
+      "fragBullet": {
+        "sprite": "curse-of-flesh-star",
+        "damage": 225,
+        "lifetime": 60,
+        "speed": 8,
+        "height": 24,
+        "width": 24,
+        "spin": 2,
+        "shrinkY": 0,
+        "shrinkX": 0,
+        "pierce": true,
+        "pierceBuilding": true,
+        "status": "熔融",
+        "statusDuration": 120,
+        "splashDamage": 275,
+        "splashDamageRadius": 40,
+        "homingPower": 0.08,
+        "homingRange": 120,
+        "trailLength": 16,
+        "trailWidth": 2,
+        "trailSinScl": 0.7853981625,
+        "trailSinMag": 1.570796325,
+        "weaveMag": 5,
+        "weaveScale": 5,
+        "trailColor": "FF5845",
+        "trailEffect": "none",
+        "lightRadius": 40,
+        "impact": true,
+        "knockback": -48,
+        "hitShake": 2,
+        "despawnShake": 4,
+        "hitEffect": {
+          "type": "multiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "line": true,
+              "particles": 7,
+              "lifetime": 15,
+              "length": 45,
+              "cone": -360,
+              "strokeFrom": 3,
+              "strokeTo": 0,
+              "lenFrom": 7,
+              "lenTo": 0,
+              "colorFrom": "FF5845",
+              "colorTo": "FFDCD8"
+            }
+          ]
+        },
+        "despawnEffect": {
+          "type": "multiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "particles": 1,
+              "sizeFrom": 16,
+              "sizeTo": 0,
+              "length": 0,
+              "spin": 3,
+              "interp": "swing",
+              "lifetime": 80,
+              "region": "curse-of-flesh-star",
+              "lightColor": "FF5845",
+              "colorFrom": "FF5845",
+              "colorTo": "FFDCD8"
+            },
+            {
+              "type": "ParticleEffect",
+              "line": true,
+              "particles": 7,
+              "lifetime": 15,
+              "length": 45,
+              "cone": -360,
+              "strokeFrom": 3,
+              "strokeTo": 0,
+              "lenFrom": 7,
+              "lenTo": 0,
+              "colorFrom": "FF5845",
+              "colorTo": "FFDCD8"
+            }
+          ]
+        },
+        "frontColor": "FFDCD8",
+        "backColor": "FF5845"
+      }
+    },
+    "despawnEffect": {
+      "type": "multiEffect",
+      "effects": [
+        {
+          "type": "WaveEffect",
+          "lifetime": 20,
+          "sizeFrom": 0,
+          "sizeTo": 175,
+          "strokeFrom": 8,
+          "strokeTo": 0,
+          "lightColor": "FF5845",
+          "colorFrom": "FF5845",
+          "colorTo": "FFDCD8"
+        },
+        {
+          "type": "WaveEffect",
+          "lifetime": 20,
+          "sizeFrom": 0,
+          "sizeTo": 125,
+          "strokeFrom": 8,
+          "strokeTo": 0,
+          "lightColor": "FF5845",
+          "colorFrom": "FF5845",
+          "colorTo": "FFDCD8"
+        },
+        {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 11,
+          "lifetime": 40,
+          "length": 85,
+          "baseLength": 20,
+          "cone": -360,
+          "strokeFrom": 6,
+          "strokeTo": 0,
+          "lenFrom": 7,
+          "lenTo": 0,
+          "colorFrom": "FF5845",
+          "colorTo": "FFDCD8"
+        }
+      ]
+    }
+  },
+  "requirements": [
+    "graphite/1800",
+    "铱板/1200",
+    "导能回路/1080",
+    "陶钢/840",
+    "生物钢/480"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawArcSmelt",
+        "flameColor": "F58349",
+        "midColor": "F2D585",
+        "flameRad": 2,
+        //中心圆大小
+        "circleSpace": 2.6,
+        //中心圆环大小
+        "circleStroke": 1.5,
+        //中心圆环粗细
+        "flameRadiusScl": 3,
+        //中心抖动频率（越大越慢）
+        "flameRadiusMag": 0.3,
+        //中心抖动幅度
+        "alpha": 0.68,
+        //粒子透明度
+        "particles": 180,
+        //粒子数量
+        "particleLife": 90,
+        //粒子存在时间
+        "particleLen": 3,
+        //粒子长度
+        "particleRad": 36,
+        //粒子运动长度
+        "particleStroke": 1.1,
+        //粒子粗细
+        "drawCenter": true,
+        "blending": "additive"
+      },
+      "DrawDefault",
+      {
+        "type": "DrawParticles",
+        "color": "FF5845",
+        "alpha": 0.6,
+        "particles": 60,
+        "particleLife": 60,
+        "particleRad": 60,
+        "particleSize": 4,
+        "fadeMargin": 0.25,
+        "rotateScl": 3.6,
+        "blending": "additive",
+        "particleSizeInterp": "linear"
+      },
+      {
+        "type": "DrawGlowRegion",
+        "alpha": 1,
+        "glowScale": 18.84,
+        "color": "F0511D"
+      }
+    ]
+  },
+  "ambientSound": "electricHum",
+  "ambientSoundVolume": 0.2,
+  "category": "crafting",
+  "research": {
+    "parent": "先遣核心",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "实验室遗迹"
+      },
+      "终极核心"
+    ]
+  }
+}

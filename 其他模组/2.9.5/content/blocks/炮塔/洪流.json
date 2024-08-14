@@ -1,0 +1,60 @@
+{
+  //"type": "PowerTurret",
+  "size": 8,
+  "recoil": 0,
+  "shake": 4,
+  "reload": 10,
+  "range": 1280,
+  "shootCone": 30,
+  "inaccuracy": 30,
+  "rotateSpeed": 1,
+  "minWarmup": 0.99,
+  "canOverdrive": false,
+  "shootWarmupSpeed": 0.04,
+  "warmupMaintainTime": 300,
+  "shoot": {
+    "type": "ShootMulti",
+    "source": {
+      "type": "ShootSpread",
+      "shots": 2,
+      "spread": 90,
+      "shotDelay": 5
+    },
+    "dest": [
+      {
+        "type": "ShootSpread",
+        "shots": 4,
+        "spread": 10
+        "shotDelay": 5
+      }
+    ]
+  },
+  "consumes": {
+    "power": 480,
+    "items": {
+      "items": [
+        "肃正协议/8"
+      ]
+    },
+    "liquid": "cryofluid/4"
+  },
+  "itemCapacity": 8,
+  "liquidCapacity": 120,
+  "shootSound": "激射",
+  "requirements": [
+    "copper/12000",
+    "graphite/8400",
+    "铱板/5600",
+    "导能回路/4400",
+    "陶钢/3500",
+    "生物钢/2100"
+  ],
+  "category": "turret"
+  "research": {
+    "parent": "腥风",
+    "objectives": [
+      "脉冲星",
+      "终极核心"
+    ]
+  }
+}

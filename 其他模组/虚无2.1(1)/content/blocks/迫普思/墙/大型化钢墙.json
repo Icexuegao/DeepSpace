@@ -1,0 +1,19 @@
+{
+  "name": "大型化钢墙",
+  "description": "用化钢制成的墙能防护好你的建筑",
+  "type": "Wall",
+  "health": 8500,
+  "size": 2,
+  "absorbLasers": true
+  ，
+  "flashHit": true
+  "chanceDeflect": 25
+  "requirements": [
+    {
+      "item": "化钢",
+      "amount": 64
+    }
+  ],
+  "category": "defense",
+  "research": "化钢墙"
+}

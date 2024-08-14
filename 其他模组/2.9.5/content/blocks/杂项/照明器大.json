@@ -1,0 +1,25 @@
+{
+  "type": "LightBlock",
+  "size": 2,
+  "armor": 4,
+  "radius": 270,
+  "brightness": 1.6,
+  "consumes": {
+    "power": 0.5
+  },
+  "requirements": [
+    "铱板/25",
+    "铈/15",
+    "导能回路/10"
+  ],
+  "category": "effect",
+  "research": {
+    "parent": "illuminator",
+    "objectives": [
+      {
+        "type": "OnSector",
+        "preset": "冰封峡谷"
+      }
+    ]
+  }
+}

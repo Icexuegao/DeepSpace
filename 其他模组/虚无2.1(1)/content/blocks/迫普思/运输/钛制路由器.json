@@ -1,0 +1,18 @@
+{
+  "name": "钛制路由器"
+  "description": "由钛制成的路由器，分配速度一般",
+  "type": "Router",
+  "health": 120,
+  "size": 1,
+  "speed": 0.1
+  "itemCapacity": 1,
+  "speedBoost": 0.0001
+  "details": "原宇宙已有，研究费用降低",
+  "requirements": [
+    "titanium/10"
+  ],
+  "category": "distribution",
+  "research": "钛制连接器"
+  "researchCostMultiplier": 0.2,
+  "canOverdrive": false
+}

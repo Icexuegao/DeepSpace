@@ -1,0 +1,117 @@
+{
+  "type": "missile",
+  "template": "MissileUnitType",
+  "outlineColor": "383848",
+  "name": "阴郁-导弹",
+  "homingDelay": 90,
+  "speed": 6,
+  "lifetime": 290,
+  "rotateSpeed": 3,
+  "loopSoundVolume": 0.03,
+  "deathSound": "explosionbig",
+  "hidden": true,
+  "missileAccelTime": 100,
+  "hitSize": 18,
+  "health": 15000,
+  "armor": 35,
+  "fogRadius": 8,
+  "engineColor": "BF92F8",
+  "trailColor": "BF92F8",
+  "trailLength": 35,
+  "engineLayer": 110,
+  "engineOffset": 8,
+  "engineSize": 4,
+  "maxRange": 30,
+  "immunities": [
+    "freezing"
+    "失灵"
+  ],
+  "abilities": [
+    {
+      "type": "MoveEffectAbility",
+      "effect": {
+        "type": "ParticleEffect",
+        "sizeFrom": 3,
+        "sizeTo": 10,
+        "length": 32,
+        "baseLength": 0,
+        "lifetime": 33,
+        "colorFrom": "BF92F8",
+        "colorTo": "665C9FFF",
+        "cone": 28
+      },
+      "interval": 3,
+      "rotateEffect": true,
+      "y": -8,
+      "color": "BF92F8"
+    }
+  ],
+  "weapons": [
+    {
+      "name": "自爆",
+      "x": 0,
+      "y": 0,
+      "reload": 1,
+      "mirror": false,
+      "rotate": true,
+      "shake": 10,
+      "shootSound": "none",
+      "shootOnDeath": true,
+      "bullet": {
+        "collides": false,
+        "instantDisappear": true,
+        "ammoMultiplier": 1,
+        "hitSound": "titanExplosion",
+        "hitSoundVolume": 6,
+        "killShooter": true,
+        "splashDamageRadius": 66,
+        "splashDamage": 7550,
+        "statusDuration": 600,
+        "hitShake": 15,
+        "shootEffect": "none",
+        "smokeEffect": "none",
+        "despawnEffect": "none",
+        "hitEffect": {
+          "type": "MultiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "particles": 26,
+              "sizeFrom": 13,
+              "sizeTo": 0,
+              "length": 56,
+              "baseLength": 20,
+              "interp": "pow10Out",
+              "sizeInterp": "pow10Out",
+              "lifetime": 85,
+              "colorFrom": "BF92F8",
+              "colorTo": "BF92F800",
+              "cone": 360
+            },
+            {
+              "type": "WaveEffect",
+              "interp": "circleOut",
+              "lifetime": 60,
+              "sizeFrom": 0,
+              "sizeTo": 70,
+              "strokeFrom": 10,
+              "strokeTo": 0,
+              "colorFrom": "BF92F8",
+              "colorTo": "BF92F8"
+            }
+          ]
+        }
+      }
+    }
+  ]
+  "abilities": [
+    {
+      //死亡时产生单位
+      "type": "SpawnDeathAbility",
+      "unit": "晦暗",
+      "amount": 6,
+      //固定数量
+      "randAmount": 0//随机数量
+    }
+  ]
+}

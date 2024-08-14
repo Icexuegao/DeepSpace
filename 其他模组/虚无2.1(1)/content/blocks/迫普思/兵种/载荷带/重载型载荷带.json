@@ -1,0 +1,16 @@
+{
+  "name": "重载型载荷带"
+  //显示名字
+  "type": "PayloadConveyor",
+  "size": 5,
+  "moveTime": 60,
+  "moveForce": 500,
+  "payloadLimit": 11,
+  "requirements": [
+    "化钢/120",
+    "silicon/100",
+    "钛板/250"
+  ],
+  "category": "units",
+  "research": "召唤祭坛"
+}

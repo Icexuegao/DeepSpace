@@ -1,0 +1,58 @@
+{
+  "type": "AttributeCrafter",
+  "size": 3,
+  "itemCapacity": 36,
+  "liquidCapacity": 36,
+  "baseEfficiency": 0,
+  "boostScale": 0.16,
+  "minEfficiency": 1,
+  "maxBoost": 2,
+  "attribute": "sand",
+  "squareSprite": false,
+  "consumes": {
+    "power": 6.5,
+    "liquid": "water/0.5"
+  },
+  "craftTime": 40,
+  "craftEffect": "mineBig",
+  "outputItem": "铱板/1",
+  "requirements": [
+    "铱板/135",
+    "plastanium/85",
+    "导能回路/55"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawPistons",
+        "sinMag": 3,
+        "sinScl": 5
+      },
+      "DrawDefault",
+      {
+        "type": "DrawGlowRegion",
+        "alpha": 1,
+        "glowScale": 5,
+        "color": "F0511D"
+      },
+      {
+        "type": "DrawParticles",
+        "color": "7B7B7B",
+        "alpha": 0.6,
+        "particles": 30,
+        "particleLife": 120,
+        "particleRad": 18,
+        "particleSize": 1.5,
+        "fadeMargin": 0.5,
+        "rotateScl": 0.5
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": "铱板滤压机"
+}

@@ -1,0 +1,14 @@
+{
+  "type": "junction",
+  "health": 250,
+  "armor": 4,
+  "speed": 60,
+  "capacity": 36,
+  "placeableLiquid": true,
+  "requirements": [
+    "铱板/1",
+    "生物钢/1"
+  ],
+  "category": "distribution",
+  "research": "血肉装甲传送带"
+}

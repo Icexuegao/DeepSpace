@@ -1,0 +1,31 @@
+{
+  "type": "mendProjector",
+  "health": 640,
+  "size": 3,
+  "reload": 190,
+  "useTime": 300,
+  "range": 200,
+  "healPercent": 8,
+  "phaseBoost": 10,
+  "phaseRangeBoost": 56,
+  "consumes": {
+    "power": 10,
+    "items": {
+      "items": [
+        "silicon/1",
+        "phase-fabric/1"
+      ],
+      "booster": true,
+      "optional": true
+    }
+  },
+  "requirements": [
+    "copper/200",
+    "lead/130",
+    "silicon/130",
+    "titanium/80",
+    "plastanium/120"
+  ],
+  "category": "effect",
+  "research": "mend-projector"
+}

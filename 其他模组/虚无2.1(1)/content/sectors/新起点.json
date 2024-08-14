@@ -1,0 +1,20 @@
+{
+  "localizedName": "新起点",
+  "name": "新起点",
+  "description": "我们通过迫普思的时空裂缝后，来到了这颗星球，我们已经研究了他们的一些初始科技，我们现在来占领这里",
+  //"details":"",
+  "planet": "瑞赫凯勒"
+  //母星名字。
+  "sector": 1//区块坐标
+  "captureWave": 20//胜利波次
+  "difficulty": 4//难度1一5
+  "research": {
+    "parent": "轻型核心",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "时空裂缝•迫普思"
+      }
+    ]
+  }
+}

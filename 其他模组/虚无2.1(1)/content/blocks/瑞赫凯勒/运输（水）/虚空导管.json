@@ -1,0 +1,17 @@
+{
+  "type": "Conduit",
+  "name": "虚空导管",
+  "description": "用较快的速度运输液体",
+  "health": 200,
+  "liquidCapacity": 5,
+  "liquidPressure": 2,
+  "insulated": true,
+  "requirements": [
+    {
+      "item": "虚空石",
+      "amount": 5
+    }
+  ],
+  "category": "liquid",
+  "research": "虚空抽水泵"
+}

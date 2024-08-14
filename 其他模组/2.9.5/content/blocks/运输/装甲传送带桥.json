@@ -1,0 +1,19 @@
+{
+  "type": "ItemBridge",
+  "armor": 4,
+  "range": 10,
+  "fadeIn": false,
+  "bridgeWidth": 8,
+  "hasPower": false,
+  "arrowSpacing": 6,
+  "transportTime": 1.6,
+  "moveArrows": false,
+  "placeableLiquid": true,
+  "selectionColumns": 6,
+  "requirements": [
+    "铱板/4",
+    "陶钢/4"
+  ],
+  "category": "distribution",
+  "research": "交叉神经链路"
+}

@@ -1,0 +1,26 @@
+{
+  "type": "StackConveyor",
+  "name": "化钢装载带",
+  "description": "用化钢与其他物资组成的装载带，有着很大的容量与极高的运输速度",
+  "health": 1500,
+  "idleSound": "none",
+  "requirements": [
+    {
+      "item": "化钢",
+      "amount": 10
+    },
+    {
+      "item": "黑核",
+      "amount": 2
+    },
+    {
+      "item": "铀",
+      "amount": 10
+    }
+  ],
+  "category": "distribution",
+  "placeableLiquid": true,
+  "itemCapacity": 50,
+  "speed": "0.50",
+  "research": "化钢传送带"
+}

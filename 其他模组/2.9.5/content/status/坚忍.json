@@ -1,0 +1,16 @@
+{
+  "damageMultiplier": 1.15,
+  "reloadMultiplier": 1.4,
+  "speedMultiplier": 1.2,
+  "color": "FFA665",
+  "effect": {
+    "type": "ParticleEffect",
+    "particles": 1,
+    "lifetime": 25,
+    "length": 0,
+    "sizeFrom": 4,
+    "sizeTo": 0,
+    "colorFrom": "E8895C",
+    "colorTo": "FFA665"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "localizedName": "遗弃哨站",
+  "name": "遗弃哨站",
+  "description": "这里是前者留下来的一个废弃的哨站，这里有很多值得供我们开发的资源，[red]但同时，这里的敌人也会很强大",
+  //"details":"",
+  "planet": "迫普思"
+  //母星名字。
+  "sector": 40//区块坐标
+  "captureWave": 30//胜利波次
+  "difficulty": 6//难度1一5
+  "research": {
+    "parent": "冰原",
+    "objectives": [
+      "快捷硅炼制厂"
+      {
+        "type": "SectorComplete",
+        "preset": "冰原"
+      }
+    ]
+  }
+}

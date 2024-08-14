@@ -1,0 +1,71 @@
+{
+  "type": "ItemTurret",
+  "name": "悔恨"
+  "description": "远距离大喷",
+  "health": 1500,
+  "size": 2,
+  "reload": 20,
+  "range": 240,
+  "maxAmmo": 90,
+  "ammoPerShot": 4,
+  "consumes": {
+    "coolant": {
+      "amount": 0.3,
+      "optional": true
+    }
+  },
+  "ammoUseEffect": "casing2Double",
+  "inaccuracy": 7,
+  "rotateSpeed": 4,
+  "shake": 1,
+  "shoot": {
+    "type": "ShootSpread",
+    "shots": 20
+    "spread": 4
+  }
+  "shootSound": "shootBig",
+  "ammoTypes": {
+    "虚空石": {
+      "type": "BasicBulletType"
+      "speed": 8
+      "lifetime": 30
+      "damage": 25
+      "width": 7.5
+      "height": 12
+      "hitSize": 12
+      "despawnEffect": {
+        /*子弹消失特效*/
+        "type": "WaveEffect",
+        "colorFrom": "bf92f8",
+        //颜色从
+        "colorTo": "bf92f8",
+        //颜色至
+        "sizeFrom": 1,
+        //开始时圆环直径
+        "sizeTo": 6,
+        //结束时圆环直径
+        "strokeFrom": 4,
+        //开始时圆形宽度
+        "strokeTo": 1/*结束时圆环宽度*/
+      },
+      "trailColor": "bf92f8",
+      //拖尾颜色
+      "trailWidth": 2,
+      //拖尾宽度
+      "trailLength": 20,
+      //拖尾长度
+      "status": "burning",
+      "backColor": "665c9f"
+      "frontColor": "bf92f8"
+      "makeFire": true
+    }
+  }
+  "requirements": [
+    //建造消耗
+    "虚空石/100"
+  ],
+  "category": "turret",
+  "research": "轻型核心"
+  "researchCostMultiplier": 0.5,
+  "canOverdrive": false
+}

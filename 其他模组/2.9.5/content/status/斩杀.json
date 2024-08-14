@@ -1,0 +1,12 @@
+{
+  "color": "A04553",
+  "effect": {
+    "type": "WaveEffect",
+    "lifetime": 60,
+    "sides": 4,
+    "sizeTo": 9,
+    "strokeFrom": 2,
+    "colorFrom": "F15454",
+    "colorTo": "F15454"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "healthMultiplier": 0.6,
+  "speedMultiplier": 0.4,
+  "reloadMultiplier": 0.6,
+  "effect": {
+    "type": "ParticleEffect",
+    "region": "curse-of-flesh-crystal-back",
+    "particles": 3,
+    "lifetime": 120,
+    "sizeFrom": 4,
+    "cone": 360,
+    "length": 45,
+    "interp": "pow5Out",
+    "sizeInterp": "pow2In",
+    "colorFrom": "87CEEB",
+    "colorTo": "C0ECFF"
+  },
+  "effectChance": 0.05,
+  "color": "C0ECFF"
+}

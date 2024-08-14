@@ -1,0 +1,33 @@
+{
+  "type": "Conduit",
+  "name": "化钢导管",
+  "description": "用超快的速度运输液体，让你摆脱液体输送太慢的烦恼",
+  "health": 700,
+  "liquidCapacity": 32,
+  "liquidPressure": 2,
+  "insulated": true,
+  "requirements": [
+    {
+      "item": "lead",
+      "amount": 1
+    },
+    {
+      "item": "化钢",
+      "amount": 10
+    },
+    {
+      "item": "metaglass",
+      "amount": 2
+    }
+  ],
+  "category": "liquid",
+  "research": {
+    "parent": "化钢抽水泵",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "冰原"
+      }
+    ]
+  }
+}

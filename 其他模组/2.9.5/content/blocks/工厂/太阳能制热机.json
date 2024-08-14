@@ -1,0 +1,23 @@
+{
+  "type": "HeatProducer",
+  "heatOutput": 2,
+  "requirements": [
+    "copper/12",
+    "metaglass/8",
+    "graphite/8"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      "DrawHeatOutput"
+    ]
+  },
+  "category": "crafting",
+  "research": {
+    "parent": "铈提取器",
+    "objectives": [
+      "熔炉大"
+    ]
+  }
+}

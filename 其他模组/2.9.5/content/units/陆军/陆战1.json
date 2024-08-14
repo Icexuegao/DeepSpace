@@ -1,0 +1,66 @@
+{
+  "type": "mech",
+  "research": "dagger",
+  "health": 240,
+  "armor": 2,
+  "hitSize": 8,
+  "speed": 0.6,
+  "rotateSpeed": 4,
+  "lowAltitude": true,
+  "canBoost": true,
+  "boostMultiplier": 2,
+  "engineOffset": 4.5,
+  "engineSize": 2,
+  "mechLandShake": 1,
+  "riseSpeed": 0.05,
+  "mechFrontSway": 0.55,
+  "weapons": [
+    {
+      "name": "陆战1炮",
+      "x": 5.25,
+      "y": 0.75,
+      "top": false,
+      "shoot": {
+        "shots": 2,
+        "shotDelay": 5
+      },
+      "recoil": 1,
+      "shake": 0.5,
+      "reload": 25,
+      "ejectEffect": "casing1",
+      "shootSound": "shoot",
+      "bullet": {
+        "damage": 19,
+        "speed": 6,
+        "lifetime": 32
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "StatusFieldAbility",
+      "effect": "overclock",
+      "duration": 250,
+      "reload": 300,
+      "range": 30,
+      "activeEffect": {
+        "type": "WaveEffect",
+        "lifetime": 10,
+        "sizeFrom": 8,
+        "sizeTo": 40,
+        "strokeFrom": 2,
+        "strokeTo": 0,
+        "colorFrom": "FFFFFF",
+        "colorTo": "FFFFFF"
+      }
+    },
+    {
+      "type": "ArmorPlateAbility",
+      "healthMultiplier": 0.1
+    },
+    {
+      "type": "RegenAbility",
+      "percentAmount": 0.0125
+    }
+  ]
+}

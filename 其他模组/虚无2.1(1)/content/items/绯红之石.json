@@ -1,0 +1,24 @@
+{
+  "type": "material",
+  //类型（不能改）
+  "name": "绯红之石",
+  //名字
+  "description": "这种矿石中内含的能量将是不错的燃料，也是不错的炮弹",
+  //介绍
+  "details": "这种矿石将是不错的燃料",
+  //战役中解锁后最底下的介绍（？）
+  "color": "F36C62FF",
+  //物品源颜色
+  "radioactivity": 0,
+  //放射性
+  "flammability": 2.0,
+  //燃烧性
+  "charge": 1.0,
+  //放电性
+  "explosiveness": 1.5,
+  //爆炸性
+  "hardness": 4,
+  "Cost": 1,
+  "alwaysUnlocked": false,
+  "research": "火石矿"
+}    

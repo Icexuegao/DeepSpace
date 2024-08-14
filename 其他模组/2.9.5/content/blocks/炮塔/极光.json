@@ -1,0 +1,92 @@
+{
+  "type": "ItemTurret",
+  "health": 4320,
+  "armor": 11,
+  "size": 4,
+  "range": 168,
+  "reload": 35,
+  "recoil": 5,
+  "shake": 4,
+  "maxAmmo": 60,
+  "shootCone": 30,
+  "rotateSpeed": 6,
+  "recoilTime": 42,
+  "cooldownTime": 50,
+  "consumes": {
+    "coolant": {
+      "amount": 1
+    }
+  },
+  "shoot": {
+    "type": "ShootSpread",
+    "shots": 9,
+    "spread": 2
+  },
+  "liquidCapacity": 30,
+  "coolantMultiplier": 0.75,
+  "shootSound": "shotgun",
+  "ammoTypes": {
+    "titanium": {
+      "type": "shrapnelBulletType",
+      "damage": 90,
+      "lifetime": 15,
+      "speed": 0,
+      "width": 17,
+      "length": 168,
+      "ammoMultiplier": 3,
+      "reloadMultiplier": 1.3
+    },
+    "thorium": {
+      "type": "shrapnelBulletType",
+      "damage": 135,
+      "lifetime": 15,
+      "speed": 0,
+      "width": 17,
+      "length": 168,
+      "ammoMultiplier": 4,
+      "fromColor": "F9A3C7",
+      "toColor": "CB8EBF",
+      "status": "衰变",
+      "statusDuration": 60,
+      "shootEffect": "thoriumShoot",
+      "smokeEffect": "none"
+    },
+    "surge-alloy": {
+      "type": "shrapnelBulletType",
+      "damage": 180,
+      "lifetime": 15,
+      "speed": 0,
+      "width": 17,
+      "length": 168,
+      "fromColor": "FCF387",
+      "toColor": "E8D174",
+      "rangeChange": 24,
+      "ammoMultiplier": 3,
+      "shootEffect": {
+        "type": "ParticleEffect",
+        "particles": 6,
+        "lifetime": 20,
+        "line": true,
+        "strokeFrom": 4,
+        "strokeTo": 0,
+        "lenFrom": 8,
+        "lenTo": 8,
+        "cone": 30,
+        "length": 35,
+        "lightColor": "F3E979",
+        "colorFrom": "FCF387",
+        "colorTo": "E8D174"
+      },
+      "smokeEffect": "none"
+    }
+  },
+  "requirements": [
+    "copper/1200",
+    "graphite/325",
+    "thorium/275",
+    "plastanium/175",
+    "surge-alloy/75"
+  ],
+  "category": "turret",
+  "research": "fuse"
+}

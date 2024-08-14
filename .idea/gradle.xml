@@ -12,9 +12,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/javasrc" />
-            <option value="$PROJECT_DIR$/scalasrc" />
-            <option value="$PROJECT_DIR$/tool" />
+            <option value="$PROJECT_DIR$/javaSrc" />
+            <option value="$PROJECT_DIR$/scalaSrc" />
           </set>
         </option>
       </GradleProjectSettings>

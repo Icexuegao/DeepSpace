@@ -1,0 +1,33 @@
+{
+  "type": "NuclearReactor",
+  "health": 1200,
+  "size": 3,
+  "armor": 4,
+  "coolantPower": 1,
+  "heating": 0.00166,
+  "itemCapacity": 20,
+  "liquidCapacity": 36,
+  "itemDuration": 600,
+  "powerProduction": 42,
+  "explosionRadius": 21,
+  "explosionDamage": 7200,
+  "consumes": {
+    "items": {
+      "items": [
+        "thorium/1"
+      ]
+    },
+    "liquid": "cryofluid/0.036"
+  },
+  "requirements": [
+    "graphite/380",
+    "铱板/325",
+    "metaglass/75",
+    "plastanium/180",
+    "导能回路/120"
+  ],
+  "category": "power",
+  "ambientSound": "hum",
+  "ambientSoundVolume": 0.2,
+  "research": "thorium-reactor"
+}

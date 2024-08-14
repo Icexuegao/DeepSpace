@@ -1,0 +1,7 @@
+{
+  "type": "OreBlock",
+  "itemDrop": "铌",
+  "oreDefault": true,
+  "oreThreshold": 0.77,
+  "oreScale": 21
+}

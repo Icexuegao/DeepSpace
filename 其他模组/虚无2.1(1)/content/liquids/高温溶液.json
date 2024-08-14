@@ -1,0 +1,13 @@
+{
+  "name": "高温溶液",
+  "type": "Liquid",
+  "description": "温度十分高的溶液，",
+  "alwaysUnlocked": false,
+  "color": "EB564BFF",
+  "flammability": 3.5,
+  "temperature": 2.75,
+  "heatCapacity": 0,
+  "viscosity": 0,
+  "explosiveness": 0,
+  "research": "化钢液"
+}

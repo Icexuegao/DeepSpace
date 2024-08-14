@@ -1,0 +1,14 @@
+{
+  "sector": 8,
+  "difficulty": 4,
+  "planet": "serpulo",
+  "research": {
+    "parent": "overgrowth",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "overgrowth"
+      }
+    ]
+  }
+}

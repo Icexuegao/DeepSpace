@@ -1,0 +1,42 @@
+{
+  "type": "ConsumeGenerator"
+  "name": "基础发电机"
+  "description": "通过燃烧煤炭进行发电，产能一般",
+  "powerProduction": 2,
+  "itemDuration": 30,
+  "health": 600,
+  "size": 1,
+  "ambientSound": "smelter",
+  "ambientSoundVolume": 0.03,
+  "generateEffect": "generatespark",
+  "powerProduction": 7,
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      "DrawWarmupRegion"
+    ]
+  },
+  "category": "power",
+  "research": "强化核心",
+  "consumes": {
+    "items": {
+      "items": [
+        {
+          "item": "coal",
+          "amount": 1
+        }
+      ]
+    }
+  }
+  "requirements": [
+    {
+      "item": "copper",
+      "amount": 100
+    },
+    {
+      "item": "lead",
+      "amount": 100
+    }
+  ]
+}

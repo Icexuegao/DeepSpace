@@ -1,0 +1,104 @@
+{
+  "type": "missile",
+  "template": "MissileUnitType",
+  "health": 360,
+  "armor": 3,
+  "hitSize": 12,
+  "speed": 6,
+  "lifetime": 300,
+  "maxRange": 6,
+  "rotateSpeed": 1.2,
+  "missileAccelTime": 60,
+  "engineColor": "FEB380",
+  "trailColor": "FEB380",
+  "engineLayer": 100,
+  "engineOffset": 10,
+  "engineSize": 3.1,
+  "trailLength": 18,
+  "lowAltitude": true,
+  "fogRadius": 6,
+  "parts": [
+    {
+      "type": "RegionPart",
+      "suffix": "-heat",
+      "progress": "life",
+      "color": "F03B0E00",
+      "colorTo": "F03B0E"
+    }
+  ],
+  "weapons": [
+    {
+      "shake": 6,
+      "mirror": false,
+      "shootCone": 360,
+      "shootOnDeath": true,
+      "shootSound": "plasmaboom",
+      "bullet": {
+        "type": "ExplosionBulletType",
+        "hitColor": "FEB380",
+        "shootEffect": {
+          "type": "MultiEffect",
+          "effects": [
+            "massiveExplosion",
+            "scatheExplosion",
+            "scatheLight",
+            {
+              "type": "WaveEffect",
+              "lifetime": 10,
+              "strokeFrom": 4,
+              "sizeTo": 130
+            }
+          ]
+        },
+        "splashDamage": 750,
+        "splashDamageRadius": 96,
+        "buildingDamageMultiplier": 0.5,
+        "despawnShake": 3,
+        "despawnUnit": "疟蚊"
+        "fragVelocityMin": 1,
+        "fragSpread": 45,
+        "fragRandomSpread": 0
+        "fragBullets": 8,
+        "fragBullet": {
+          "type": "ArtilleryBulletType",
+          "damage": 40,
+          "speed": 3.5,
+          "lifetime": 24,
+          "width": 18,
+          "height": 18,
+          "drag": 0.02,
+          "impact": true,
+          "knockback": -5,
+          "hitEffect": "massiveExplosion",
+          "despawnEffect": "scatheSlash",
+          "knockback": 0.8,
+          "splashDamage": 80,
+          "splashDamageRadius": 40,
+          "frontColor": "FFFFFF",
+          "backColor": "FEB380",
+          "trailColor": "FEB380",
+          "hitColor": "FEB380",
+          "smokeEffect": "shootBigSmoke2",
+          "despawnShake": 7,
+          "lightColor": "FEB380",
+          "lightOpacity": 0.5,
+          "trailLength": 20,
+          "trailWidth": 3.5,
+          "trailEffect": "none",
+          "despawnUnit": "飞蠓"
+        }
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "MoveEffectAbility",
+      "y": -9,
+      "interval": 7,
+      "rotation": 180,
+      "color": "FEB38080",
+      "effect": "missileTrailSmoke"
+    }
+  ],
+  "deathExplosionEffect": "massiveExplosion"
+}

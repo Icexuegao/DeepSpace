@@ -1,0 +1,77 @@
+{
+  "type": "Reconstructor",
+  "name": "重载型重构厂",
+  "description": "将T1重构升级为T2",
+  "health": 2000,
+  "size": 3,
+  "hasliquid": true,
+  "liquidCapacity": 800,
+  "buildCostMultiplier": 1,
+  "consumes": {
+    "power": 10,
+    "items": {
+      "items": [
+        {
+          "item": "silicon",
+          "amount": 100
+        },
+        {
+          "item": "黑核",
+          "amount": 40
+        },
+        {
+          "item": "thorium",
+          "amount": 200
+        },
+        {
+          "item": "化钢",
+          "amount": 100
+        }
+      ]
+    }
+  },
+  "upgrades": [
+    [
+      "失衡",
+      "衡守"
+    ],
+    [
+      "逝去",
+      "消逝"
+    ]
+  ],
+  "constructTime": 700,
+  "requirements": [
+    {
+      "item": "火石矿",
+      "amount": 200
+    },
+    {
+      "item": "化钢",
+      "amount": 200
+    },
+    {
+      "item": "thorium",
+      "amount": 160
+    },
+    {
+      "item": "黑核",
+      "amount": 20
+    },
+    {
+      "item": "silicon",
+      "amount": 200
+    }
+  ],
+  "category": "units",
+  "buildVisibility": "shown",
+  "research": {
+    "parent": "轻型空军制造厂",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "遗弃哨站"
+      }
+    ]
+  }
+}

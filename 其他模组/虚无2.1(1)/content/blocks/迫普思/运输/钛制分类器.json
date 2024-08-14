@@ -1,0 +1,16 @@
+{
+  "name": "钛制分类器"
+  "description": "由钛制成的分类器，分类速度一般",
+  "type": "Sorter",
+  "health": 240,
+  "size": 1,
+  "speed": 0.1
+  "speedBoost": 0.2,
+  "requirements": [
+    "titanium/24"
+  ],
+  "category": "distribution",
+  "research": "钛制路由器"
+  "researchCostMultiplier": 0.2,
+  "canOverdrive": false
+}

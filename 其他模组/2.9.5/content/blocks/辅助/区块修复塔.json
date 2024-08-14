@@ -1,0 +1,50 @@
+{
+  "type": "RegenProjector",
+  "size": 5,
+  "itemCapacity": 1,
+  "liquidCapacity": 60,
+  "consumes": {
+    "power": 30,
+    "items": {
+      "items": [
+        "肃正协议/1"
+      ]
+    },
+    "liquid": "cryofluid/1"
+  },
+  "range": 8000,
+  "optionalUseTime": 600,
+  "healPercent": 0.4166666667,
+  "requirements": [
+    "graphite/1200",
+    "导能回路/810",
+    "陶钢/360",
+    "生物钢/225"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      {
+        "type": "DrawGlowRegion",
+        "color": "00FFFF"
+      },
+      {
+        "type": "DrawPulseShape",
+        "square": false,
+        "layer": 110,
+        "color": "8CA9E8"
+      },
+      {
+        "type": "DrawShape",
+        "useWarmupRadius": true,
+        "color": "8CA9E8",
+        "radius": 3.5,
+        "timeScl": 2,
+        "layer": 110
+      }
+    ]
+  },
+  "category": "effect",
+  "research": "修4"
+}

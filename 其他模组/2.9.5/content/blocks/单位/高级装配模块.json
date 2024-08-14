@@ -1,0 +1,13 @@
+{
+  "type": "UnitAssemblerModule",
+  "size": 5,
+  "tier": 1,
+  "requirements": [
+    "铱板/480",
+    "plastanium/360",
+    "导能回路/225",
+    "生物钢/75"
+  ],
+  "category": "units",
+  "research": "巨兽培育"
+}

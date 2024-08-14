@@ -1,0 +1,14 @@
+{
+  "healthMultiplier": 0.6,
+  "color": "A9D8FF",
+  "effect": {
+    "type": "WaveEffect",
+    "lifetime": 20,
+    "sides": 3,
+    "sizeTo": 6,
+    "strokeFrom": 4,
+    "baseRotation": 30,
+    "colorFrom": "A9D8FF",
+    "colorTo": "66B1FF"
+  }
+}

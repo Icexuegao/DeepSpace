@@ -1,0 +1,22 @@
+{
+  "localizedName": "火山口",
+  "name": "火山口",
+  "description": "根据熔岩矿区找到的坐标，没有敌人开发，但我们检测到了奇怪的信号，来到这的话，应该是一场恶战，让我们占领这里",
+  //"details":"",
+  "planet": "迫普思"
+  //母星名字。
+  "sector": 68//区块坐标
+  "captureWave": 50//胜利波次
+  "difficulty": 10//难度1一5
+  "research": {
+    "parent": "熔岩矿区",
+    "objectives": [
+      "爆裂"
+      "电光"
+      {
+        "type": "SectorComplete",
+        "preset": "熔岩矿区"
+      }
+    ]
+  }
+}

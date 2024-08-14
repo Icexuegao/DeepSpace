@@ -1,0 +1,24 @@
+{
+  "name": "湮灭",
+  "speedMultiplier": 0.6,
+  "healthMultiplier": 0.6,
+  "damageMultiplier": 0.6,
+  "effectChance": 0.6,
+  "description": "逐步摧毁敌人的身体，同时衰弱敌人\n[red]提供者:Space-time   蛇(已开学，勿扰)",
+  "damage": 20,
+  "transitionDamage": 200,
+  "effect": [
+    {
+      "type": "ParticleEffect",
+      "particles": 2,
+      "baseLength": 10,
+      "length": 8,
+      "lifetime": 300,
+      "sizeFrom": 1,
+      "sizeTo": 0,
+      "colorFrom": "665c9f",
+      "colorTo": "bf92f8",
+      "cone": 360
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "material",
+  //类型（不能改）
+  "name": "虚铁",
+  //名字
+  "description": "一种数据不可测的矿石",
+  //介绍
+  "color": "0D0C11FF",
+  //物品源颜色
+  "radioactivity": 0.5,
+  //放射性
+  "flammability": 0,
+  //燃烧性
+  "charge": 1.2,
+  //放电性
+  "explosiveness": 0.4,
+  //爆炸性
+  "hardness": 3,
+  "Cost": 5,
+  "alwaysUnlocked": false,
+  "research": "虚空石"
+} 

@@ -1,0 +1,22 @@
+{
+  "type": "Floor",
+  "name": "高温溶液块",
+  "speedMultiplier": 0.5,
+  //移动速率
+  "variants": 0,
+  "statusDuration": 90,
+  //效果时长
+  "cacheLayer": "slag",
+  "albedo": 0.9,
+  "damageTaken": 8,
+  "shallow": false,
+  //浅水
+  "drownTime": 1
+  "cacheLayer": "slag",
+  "isLiquid": true,
+  "liquidDrop": "高温溶液",
+  "liquidMultiplier": 1,
+  "placeableOn": true,
+  //是否能放置方块
+  "supportsOverlay": true
+}

@@ -1,0 +1,16 @@
+{
+  "type": "Constructor",
+  "size": 5,
+  "buildSpeed": 1.6,
+  "maxBlockSize": 4,
+  "selectionColumns": 6,
+  "requirements": [
+    "铱板/480",
+    "导能回路/360",
+    "陶钢/225",
+    "phase-fabric/85",
+    "生物钢/35"
+  ],
+  "category": "units",
+  "research": "巨兽培育"
+}

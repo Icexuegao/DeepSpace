@@ -1,0 +1,104 @@
+{
+  "type": "missile",
+  "template": "MissileUnitType",
+  "health": 385,
+  "hitSize": 11,
+  "armor": 1,
+  "speed": 9.6,
+  "lifetime": 150,
+  "maxRange": 10,
+  "rotateSpeed": 1.2,
+  "missileAccelTime": 60,
+  "engineColor": "FEB380",
+  "trailColor": "FEB380",
+  "engineLayer": 110,
+  "engineOffset": 9,
+  "engineSize": 2.3,
+  "trailLength": 12,
+  "lowAltitude": true,
+  "weapons": [
+    {
+      "mirror": false,
+      "shootCone": 360,
+      "shootOnDeath": true,
+      "shootSound": "none",
+      "bullet": {
+        "type": "ExplosionBulletType",
+        "splashDamageRadius": 55,
+        "splashDamage": 100,
+        "hitEffect": {
+          "type": "multiEffect",
+          "effects": [
+            {
+              "type": "WaveEffect",
+              "lifetime": 15,
+              "sizeFrom": 0,
+              "sizeTo": 30,
+              "strokeFrom": 7.5,
+              "strokeTo": 0,
+              "colorFrom": "FFDCD8",
+              "colorTo": "FF5845"
+            },
+            {
+              "type": "ParticleEffect",
+              "particles": 10,
+              "lifetime": 20,
+              "line": true,
+              "strokeFrom": 1.5,
+              "strokeTo": 1.5,
+              "lenFrom": 5,
+              "lenTo": 5,
+              "cone": 360,
+              "length": 50,
+              "interp": "circleOut",
+              "sizeInterp": "pow5In",
+              "lightColor": "FF5845",
+              "colorFrom": "FFDCD8",
+              "colorTo": "FF5845"
+            },
+            {
+              "type": "ParticleEffect",
+              "particles": 10,
+              "lifetime": 25,
+              "line": true,
+              "strokeFrom": 1.5,
+              "strokeTo": 1.5,
+              "lenFrom": 7,
+              "lenTo": 7,
+              "cone": 360,
+              "length": 30,
+              "interp": "circleOut",
+              "sizeInterp": "pow5In",
+              "lightColor": "FF5845",
+              "colorFrom": "FFDCD8",
+              "colorTo": "FF5845"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "MoveEffectAbility",
+      "y": -8,
+      "interval": 2,
+      "rotation": 180,
+      "rotateEffect": true,
+      "effect": {
+        "type": "ParticleEffect",
+        "particles": 4,
+        "sizeFrom": 4,
+        "sizeTo": 1,
+        "length": 30,
+        "lifetime": 30,
+        "lightOpacity": 0,
+        "interp": "circleOut",
+        "sizeInterp": "pow5In",
+        "colorFrom": "FF5845AA",
+        "colorTo": "78787870",
+        "cone": 9
+      }
+    }
+  ]
+}

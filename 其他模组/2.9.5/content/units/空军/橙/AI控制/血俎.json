@@ -1,0 +1,110 @@
+{
+  "type": "flying",
+  "health": 3240,
+  "armor": 3,
+  "hitSize": 24,
+  "range": 240,
+  "speed": 4,
+  "drag": 0.1,
+  "rotateSpeed": 20,
+  "engineOffset": 8,
+  "engineSize": 3,
+  "trailLength": 5,
+  "outlineColor": "1F1F1F",
+  "targetFlags": [
+    "reactor",
+    "generator",
+    "battery",
+    "factory"
+  ],
+  "weapons": [
+    {
+      "x": 0,
+      "y": 3,
+      "reload": 15,
+      "shootY": 0,
+      "mirror": false,
+      "autoTarget": true,
+      "shootSound": "laser",
+      "bullet": {
+        "type": "LaserBulletType",
+        "damage": 60,
+        "lifetime": 21,
+        "length": 80,
+        "width": 8,
+        "recoil": -1,
+        "colors": [
+          "D75B6E",
+          "E78F92",
+          "FFF0F0"
+        ],
+        "status": "熔融",
+        "statusDuration": 30,
+        "hitEffect": "hitLancer"
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 8,
+      "shootY": 0,
+      "reload": 6,
+      "rotate": true,
+      "shootCone": 45,
+      "alternate": false,
+      "shootSound": "sap",
+      "bullet": {
+        "type": "SapBulletType",
+        "damage": 60,
+        "length": 120,
+        "sapStrength": 1.5,
+        "color": "E88EC9",
+        "hitColor": "E88EC9",
+        "status": "sapped",
+        "statusDuration": 30,
+        "recoil": -1,
+        "knockback": -5,
+        "shootEffect": "shootSmall"
+      }
+    },
+    {
+      "x": 6.5,
+      "y": 7,
+      "shootY": 0,
+      "reload": 6,
+      "rotate": true,
+      "shootCone": 45,
+      "alternate": false,
+      "shootSound": "sap",
+      "bullet": {
+        "type": "SapBulletType",
+        "damage": 60,
+        "length": 120,
+        "sapStrength": 1.5,
+        "color": "E88EC9",
+        "hitColor": "E88EC9",
+        "status": "寄生",
+        "statusDuration": 30,
+        "recoil": -1,
+        "knockback": -5,
+        "shootEffect": "shootSmall"
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "LiquidExplodeAbility",
+      "liquid": "血水",
+      "amount": 24
+    },
+    {
+      "type": "SpawnDeathAbility",
+      "unit": "疟蚊",
+      "amount": 1
+    },
+    {
+      "type": "SpawnDeathAbility",
+      "unit": "飞蠓",
+      "randAmount": 1
+    }
+  ]
+}

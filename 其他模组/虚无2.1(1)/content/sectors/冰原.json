@@ -1,0 +1,20 @@
+{
+  "localizedName": "冰原",
+  "name": "冰原",
+  "description": "迫普思的极寒之地，建造防御，抵御敌人",
+  "planet": "迫普思"
+  //母星名字。
+  "sector": 105//区块坐标
+  "captureWave": 35//胜利波次
+  "difficulty": 6//难度1一5
+  "research": {
+    "parent": "迫降",
+    "objectives": [
+      "碎击"
+      {
+        "type": "SectorComplete",
+        "preset": "迫降"
+      }
+    ]
+  }
+}

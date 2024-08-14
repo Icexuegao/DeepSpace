@@ -1,0 +1,21 @@
+{
+  "size": 2,
+  "armor": 8,
+  "maxNodes": 24,
+  "laserRange": 24,
+  "outputsPower": true,
+  "consumesPower": true,
+  "placeableLiquid": true,
+  "laserColor1": "E78F92",
+  "laserColor2": "D75B6E",
+  "consumes": {
+    "powerBuffered": 80000
+  },
+  "requirements": [
+    "铱板/10",
+    "导能回路/5",
+    "生物钢/1"
+  ],
+  "category": "power",
+  "research": "节点"
+}

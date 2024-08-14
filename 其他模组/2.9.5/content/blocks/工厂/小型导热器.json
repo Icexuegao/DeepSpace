@@ -1,0 +1,22 @@
+{
+  "type": "HeatConductor",
+  "size": 2,
+  "regionRotated1": 1,
+  "requirements": [
+    "silicon/10",
+    "graphite/15"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      "DrawHeatOutput",
+      {
+        "type": "DrawHeatInput",
+        "suffix": "-heat"
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": "太阳能制热机"
+}

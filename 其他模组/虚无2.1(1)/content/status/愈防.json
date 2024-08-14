@@ -1,0 +1,8 @@
+{
+  "name": "愈防",
+  "color": "97FFA8",
+  "description": "治愈的同时带点防御",
+  "damage": -4,
+  "healthMultiplier": 1.2,
+  "effectChance": 0.3
+}

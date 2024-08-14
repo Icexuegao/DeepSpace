@@ -1,0 +1,12 @@
+{
+  "type": "StaticWall",
+  "name": "银沙墙",
+  "attributes": {
+    "oil": 0,
+    "water": 0,
+    "spores": 0,
+    "heat": 0
+    "银": 1
+  },
+  "variants": 2
+}

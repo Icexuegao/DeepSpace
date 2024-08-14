@@ -1,0 +1,20 @@
+{
+  "localizedName": "虚空哨所",
+  "name": "虚空哨所",
+  "description": "我们在这颗虚空星球中的一个裂谷发现了敌人的踪迹，我们顺着踪迹找到了这里，占领这里，并研究我们需要的科技",
+  "planet": "瑞赫凯勒"
+  //母星名字。
+  "sector": 105//区块坐标
+  "captureWave": 0//胜利波次
+  "difficulty": 6//难度1一5
+  "research": {
+    "parent": "虚空裂谷",
+    "objectives": [
+      "召唤台"
+      {
+        "type": "SectorComplete",
+        "preset": "虚空裂谷"
+      }
+    ]
+  }
+}

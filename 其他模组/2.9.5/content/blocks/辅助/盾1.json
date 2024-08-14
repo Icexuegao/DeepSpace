@@ -1,0 +1,42 @@
+{
+  //"type": "ForceProjector",
+  "health": 45,
+  "size": 1,
+  "liquidCapacity": 12,
+  "consumes": {
+    "power": 1/*,
+    "items": {
+      "items": [
+        "silicon/1"
+      ],
+      "booster": true,
+      "optional": true
+    }
+    */
+  },
+  "absorbEffect": {
+    "type": "WaveEffect",
+    "sides": 6,
+    "lifetime": 18,
+    "sizeFrom": 4,
+    "sizeTo": 4,
+    "strokeFrom": 1.2,
+    "colorFrom": "FFD37F",
+    "colorTo": "FFD37F"
+  },
+  "radius": 64,
+  "shieldHealth": 600,
+  "phaseUseTime": 360,
+  "phaseRadiusBoost": 32,
+  "phaseShieldBoost": 600,
+  "cooldownNormal": 2,
+  "cooldownLiquid": 1.25,
+  "cooldownBrokenBase": 2.5,
+  "requirements": [
+    "lead/55",
+    "titanium/25",
+    "silicon/35"
+  ],
+  "category": "effect",
+  "research": "force-projector"
+}

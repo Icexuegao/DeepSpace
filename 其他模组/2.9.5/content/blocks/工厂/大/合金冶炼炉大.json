@@ -1,0 +1,64 @@
+{
+  "type": "GenericCrafter",
+  "size": 4,
+  "itemCapacity": 48,
+  "consumes": {
+    "power": 13.7,
+    "items": {
+      "items": [
+        "copper/6",
+        "lead/6",
+        "titanium/6",
+        "silicon/6"
+      ]
+    }
+  },
+  "updateEffect": {
+    "type": "multiEffect",
+    "effects": [
+      "burning",
+      "lava",
+      "fire"
+    ]
+  },
+  "updateEffectChance": 0.1,
+  "craftTime": 45,
+  "outputItem": "surge-alloy/3",
+  "requirements": [
+    "铱板/225",
+    "plastanium/125",
+    "导能回路/85",
+    "surge-alloy/55"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      {
+        "type": "DrawFade",
+        "suffix": "-heat"
+      },
+      {
+        "type": "DrawParticles",
+        "color": "FFC999",
+        "alpha": 0.6,
+        "particles": 30,
+        "particleLife": 60,
+        "particleRad": 20,
+        //粒子起始范围
+        "particleSize": 2,
+        //粒子大小
+        "fadeMargin": 0.5,
+        //饱和度？越大颜色越淡
+        "rotateScl": 0.5,
+        //粒子转速(越大越慢)
+        "blending": "additive"
+      },
+      "DrawFlame"
+    ]
+  },
+  "ambientSound": "smelter",
+  "ambientSoundVolume": 0.07,
+  "category": "crafting",
+  "research": "surge-smelter"
+}

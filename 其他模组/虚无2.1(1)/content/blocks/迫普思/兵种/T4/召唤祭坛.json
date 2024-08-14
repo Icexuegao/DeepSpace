@@ -1,0 +1,77 @@
+{
+  "type": "UnitAssembler",
+  "name": "召唤祭坛",
+  "description": "召唤合适祭品，或者召唤虚主",
+  "category": "units",
+  "research": {
+    "requirements": [
+      //研究花费
+      "化钢/5500",
+      "graphite/2200",
+      "silicon/6000",
+      "铀/7500"
+      "绯红合金/6000"
+      "钛板/6500"
+      "裂位合金/4000"
+      "一级研究协议/100"
+    ]
+    "parent": "重载型重构厂",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "前哨基地"
+      }
+    ]
+  },
+  "health": 5600,
+  //血量
+  "size": 6,
+  //大小
+  "droneType": "组装无人机",
+  "areaSize": 24,
+  "consumes": {
+    "power": 25
+  },
+  //耗电量帧
+  "requirements": [
+    //制造材料
+    "化钢/5500",
+    "graphite/2200",
+    "silicon/6000",
+    "铀/7500"
+    "绯红合金/6000"
+    "钛板/6500"
+    "裂位合金/4000"
+  ]
+  "plans": [
+    {
+      "unit": "合适祭品",
+      "time": 7500,
+      //制造时间,帧
+      "requirements": [
+        "虚无-衡守/6",
+        "虚无-大型化钢墙/5"
+      ]
+    }
+    {
+      "unit": "虚主",
+      "time": 15000,
+      //制造时间,帧
+      "requirements": [
+        "虚无-衡守/8",
+        "虚无-合适祭品/1"
+        "虚无-大型化钢墙/10"
+      ]
+    }
+    {
+      "unit": "虚寂",
+      "time": 30000,
+      //制造时间,帧
+      "requirements": [
+        "虚无-聚衡/8",
+        "虚无-合适祭品/2"
+        "虚无-哨站/10"
+      ]
+    }
+  ]
+}

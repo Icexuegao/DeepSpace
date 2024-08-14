@@ -1,0 +1,217 @@
+{
+  "type": "ItemTurret",
+  "name": "焚毁",
+  "description": "向远距离敌人喷射火焰，并造成大量伤害",
+  "health": 1500,
+  "size": 3,
+  "reload": 1,
+  "range": 300,
+  "maxAmmo": 60,
+  "ammoPerShot": 3,
+  "shootSound": "flame",
+  "targetGround": true,
+  "targetAir": false,
+  "rotateSpeed": 8,
+  "recoil": 2,
+  "recoilTime": 105,
+  "cooldownTime": 105,
+  "heatColor": "f68021",
+  "shootY": 3.5,
+  "consumes": {
+    "coolant": {
+      "amount": 0.3,
+      "optional": true
+    }
+  },
+  "ammoTypes": {
+    "coal": {
+      "type": "BulletType",
+      "damage": 128,
+      "hitSize": 10,
+      "status": "burning",
+      "statusDuration": 180,
+      "speed": 25,
+      "lifetime": 10,
+      "ammoMultiplier": 15,
+      "collidesAir": false
+      "collidesGround": true
+      "pierceCap": 2,
+      "shootEffect": {
+        "type": "ParticleEffect",
+        "particles": 15,
+        "lifetime": 60,
+        "sizeFrom": 1.88,
+        "sizeTo": 0,
+        "interp": "pow5Out",
+        "sizeInterp": "pow10In",
+        "length": 300,
+        "baseLength": 0,
+        "colorFrom": "f68021",
+        "colorTo": "f68021A8",
+        "cone": 12
+      }
+    }
+    "graphite": {
+      "type": "BulletType",
+      "damage": 156,
+      "hitSize": 10,
+      "status": "burning",
+      "statusDuration": 180,
+      "speed": 25,
+      "lifetime": 10,
+      "ammoMultiplier": 3,
+      "collidesAir": false
+      "collidesGround": true
+      "pierceCap": 4,
+      "shootEffect": {
+        "type": "ParticleEffect",
+        "particles": 15,
+        "lifetime": 60,
+        "sizeFrom": 1.88,
+        "sizeTo": 0,
+        "interp": "pow5Out",
+        "sizeInterp": "pow10In",
+        "length": 300,
+        "baseLength": 0,
+        "colorFrom": "f68021",
+        "colorTo": "f68021A8",
+        "cone": 12
+      },
+      "smokeEffect": {
+        "type": "ParticleEffect",
+        "particles": 5,
+        "line": true,
+        "strokeFrom": 1.8,
+        "strokeTo": 0,
+        "lenFrom": 20,
+        "lenTo": 8,
+        "length": 86,
+        "baseLength": 0,
+        "lifetime": 12,
+        "colorFrom": "FFFFFF",
+        "colorTo": "FFE176FF",
+        "cone": 10
+      },
+      "hitEffect": {
+        "type": "MultiEffect",
+        "effects": [
+          {
+            "type": "ParticleEffect",
+            "particles": 2,
+            "line": true,
+            "strokeFrom": 1.3,
+            "strokeTo": 0,
+            "lenFrom": 8,
+            "lenTo": 8,
+            "length": 24,
+            "baseLength": 0,
+            "lifetime": 15,
+            "colorFrom": "f8ad42",
+            "colorTo": "FFE176FF",
+            "cone": 23
+          },
+          {
+            "type": "ParticleEffect",
+            "particles": 4,
+            "lifetime": 10,
+            "sizeFrom": 3,
+            "sizeTo": 0,
+            "colorFrom": "FF8C00",
+            "colorTo": "FF8C00"
+          }
+        ]
+      },
+      "despawnEffect": "none"
+    }
+    "pyratite": {
+      "type": "BulletType",
+      "damage": 218,
+      "hitSize": 10,
+      "status": "burning",
+      "statusDuration": 180,
+      "speed": 25,
+      "lifetime": 10,
+      "ammoMultiplier": 3,
+      "collidesAir": false
+      "collidesGround": true
+      "pierceCap": 4,
+      "shootEffect": {
+        "type": "ParticleEffect",
+        "particles": 13,
+        "lifetime": 33,
+        "sizeFrom": 1.88,
+        "sizeTo": 0,
+        "interp": "pow5Out",
+        "sizeInterp": "pow10In",
+        "length": 300,
+        "baseLength": 0,
+        "colorFrom": "f68021",
+        "colorTo": "f68021A8",
+        "cone": 12
+      },
+      "smokeEffect": {
+        "type": "ParticleEffect",
+        "particles": 3,
+        "line": true,
+        "strokeFrom": 1.8,
+        "strokeTo": 0,
+        "lenFrom": 20,
+        "lenTo": 8,
+        "length": 86,
+        "baseLength": 0,
+        "lifetime": 12,
+        "colorFrom": "FFFFFF",
+        "colorTo": "FFE176FF",
+        "cone": 10
+      },
+      "hitEffect": {
+        "type": "MultiEffect",
+        "effects": [
+          {
+            "type": "ParticleEffect",
+            "particles": 2,
+            "line": true,
+            "strokeFrom": 1.3,
+            "strokeTo": 0,
+            "lenFrom": 8,
+            "lenTo": 8,
+            "length": 24,
+            "baseLength": 0,
+            "lifetime": 15,
+            "colorFrom": "f8ad42",
+            "colorTo": "FFE176FF",
+            "cone": 23
+          },
+          {
+            "type": "ParticleEffect",
+            "particles": 4,
+            "lifetime": 10,
+            "sizeFrom": 3,
+            "sizeTo": 0,
+            "colorFrom": "FF8C00",
+            "colorTo": "FF8C00"
+          }
+        ]
+      },
+      "despawnEffect": "none"
+    }
+  }
+  "requirements": [
+    "绯红合金/135",
+    "化钢/90",
+    "silicon/80",
+    "graphite/30"
+  ],
+  "category": "turret",
+  "research": {
+    "parent": "突击"
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "遗弃哨站"
+      }
+    ]
+  }
+  "canOverdrive": true,
+  "researchCostMultiplier": 1
+}

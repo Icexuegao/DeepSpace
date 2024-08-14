@@ -1,0 +1,36 @@
+{
+  "type": "mindustry.world.blocks.defense.ShockwaveTower",
+  "range": 8000,
+  "reload": 30,
+  "bulletDamage": 750,
+  "falloffCount": 20,
+  "shake": 4,
+  "checkInterval": 8,
+  "shootSound": "artillery",
+  //"shapeColor": "F29C83",
+  "cooldownMultiplier": 1,
+  "shapeRotateSpeed": 1,
+  "shapeRadius": 4,
+  "shapeSides": 4,
+  //"waveColor": "Pal.accent",
+  //"heatColor": "Pal.turretHeat",
+  //"waveEffect": "Fx.pointShockwave",
+  "size": 5,
+  "consumes": {
+    "power": 30,
+    "items": {
+      "items": [
+        "肃正协议/1"
+      ]
+    },
+    "liquid": "cryofluid/1"
+  },
+  "requirements": [
+    "graphite/1200",
+    "plastanium/810",
+    "导能回路/360",
+    "生物钢/225"
+  ],
+  "category": "effect"
+  //"research": "先遣核心"
+}

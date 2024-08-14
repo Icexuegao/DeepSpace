@@ -1,0 +1,20 @@
+{
+	"type": "UnitCargoLoader",
+	"name": "哨所",
+	"description": "勤劳的兵蚁将任劳任怨地守卫周围。",
+	"size": 2,
+	"buildTime": 600,
+	"unitType": "欧米茄",
+	"consumes": {
+		"power": 40
+	},
+	"itemCapacity": 0,
+	"requirements": [
+		"copper/60",
+		"lead/70",
+		"silicon/60",
+		"titanium/30"
+	],
+	"category": "defense",
+	"research": "lancer",
+}

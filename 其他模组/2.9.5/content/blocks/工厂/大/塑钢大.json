@@ -1,0 +1,63 @@
+{
+  "type": "GenericCrafter",
+  "size": 3,
+  "hasLiquids": true,
+  "squareSprite": false,
+  "itemCapacity": 36,
+  "liquidCapacity": 36,
+  "consumes": {
+    "power": 7.5,
+    "items": {
+      "items": [
+        "titanium/4"
+      ]
+    },
+    "liquid": "oil/0.5"
+  },
+  "craftTime": 36,
+  "craftEffect": "formsmoke",
+  "updateEffect": "plasticburn",
+  "outputItem": "plastanium/3",
+  "requirements": [
+    "lead/180",
+    "graphite/135",
+    "thorium/60",
+    "silicon/100",
+    "plastanium/60"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawPistons",
+        "sinMag": 2.75,
+        "sinScl": 3,
+        "sides": 8,
+        "sideOffset": 1.57079633
+        //同向螺旋运动，3.14159265为反向螺旋运动，0为内缩
+      },
+      "DrawDefault",
+      {
+        "type": "DrawRegion",
+        "suffix": "-mid"
+      },
+      {
+        "type": "DrawLiquidRegion",
+        "drawLiquid": "oil"
+      },
+      "DrawFade",
+      {
+        "type": "DrawGlowRegion",
+        "alpha": 1,
+        "glowScale": 5.652,
+        "color": "F0511D"
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": "plastanium-compressor"
+}

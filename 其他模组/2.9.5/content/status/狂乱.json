@@ -1,0 +1,8 @@
+{
+  "damageMultiplier": 3,
+  "reloadMultiplier": 3,
+  "healthMultiplier": 0.2,
+  "speedMultiplier": 3,
+  "effect": "overdriven",
+  "color": "D75B6E"
+}

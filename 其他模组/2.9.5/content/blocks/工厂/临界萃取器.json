@@ -1,0 +1,50 @@
+{
+  "type": "GenericCrafter",
+  "size": 3,
+  "hasLiquids": true,
+  "liquidCapacity": 36,
+  "consumes": {
+    "power": 23.3,
+    "liquid": "血水/1"
+  },
+  "craftTime": 60,
+  "outputLiquid": "超临界流体/0.4",
+  "requirements": [
+    "铱板/115",
+    "metaglass/50",
+    "导能回路/85",
+    "陶钢/60",
+    "生物钢/35"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawLiquidRegion",
+        "drawLiquid": "血水"
+      },
+      {
+        "type": "DrawLiquidRegion",
+        "drawLiquid": "超临界流体"
+      },
+      "DrawDefault",
+      {
+        "type": "DrawGlowRegion",
+        "alpha": 1,
+        "glowScale": 6.28,
+        "color": "F0511D"
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": {
+    "parent": "血浆过滤器",
+    "objectives": [
+      "急冻液混合器"
+    ]
+  }
+}

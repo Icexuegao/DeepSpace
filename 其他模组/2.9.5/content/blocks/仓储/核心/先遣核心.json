@@ -1,0 +1,15 @@
+{
+  "health": 2400,
+  "armor": 12,
+  "size": 3,
+  "unitType": "gamma",
+  "unitCapModifier": 8,
+  "itemCapacity": 4000,
+  "requirements": [
+    "copper/2500",
+    "lead/2500",
+    "silicon/1500"
+  ],
+  "category": "effect",
+  "alwaysUnlocked": true
+}

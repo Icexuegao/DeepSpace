@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":scalaSrc:main" external.linked.project.path="$MODULE_DIR$/../../../scalaSrc" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="DeepSpace" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../../scalaSrc/out/production/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../scalaSrc/src">
+      <sourceFolder url="file://$MODULE_DIR$/../../../scalaSrc/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.Tinylake:MindustryX:v146.004" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala3-library_3:3.2.2-RC2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.Tinylake.MindustryX:core:v146.004" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.Tinylake.MindustryX:server:v146.004" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.scala-lang:scala-library:2.13.10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.lz4:lz4-java:1.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.anuken.Arc:arc-core:v146" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.anuken.Arc:flabel:v146" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.anuken.Arc:freetype:v146" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.anuken.Arc:g3d:v146" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.anuken.Arc:fx:v146" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.anuken.Arc:arcnet:v146" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.Anuken:rhino:73a812444ac388ac2d94013b5cadc8f70b7ea027" level="project" />
+  </component>
+</module>

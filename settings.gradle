@@ -1,2 +1,1 @@
-include "javasrc","scalasrc","tool"
-
+include(":javaSrc", ":scalaSrc")

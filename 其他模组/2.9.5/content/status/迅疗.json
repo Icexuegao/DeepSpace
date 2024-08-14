@@ -1,0 +1,14 @@
+{
+  "healthMultiplier": 1.2,
+  "speedMultiplier": 1.05,
+  "color": "73FFAE",
+  "effect": {
+    "type": "WaveEffect",
+    "lifetime": 20,
+    "sides": 4,
+    "sizeTo": 6,
+    "strokeFrom": 4,
+    "colorFrom": "73FFAE",
+    "colorTo": "50A385"
+  }
+}

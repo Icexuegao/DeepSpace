@@ -1,0 +1,28 @@
+{
+  "type": "flying",
+  "research": "flare",
+  "circleTarget": true,
+  "lowAltitude": true,
+  "flying": true,
+  "health": 155,
+  "hitSize": 7,
+  "speed": 3.1,
+  "accel": 0.08,
+  "drag": 0.04,
+  "engineOffset": 4.5,
+  "weapons": [
+    {
+      "x": 2,
+      "y": 4,
+      "reload": 5,
+      "shootCone": 360,
+      "shootSound": "spark",
+      "bullet": {
+        "type": "LightningBulletType",
+        "damage": 13,
+        "lightningLength": 10,
+        "lightningColor": "FEEBB3"
+      }
+    }
+  ]
+}

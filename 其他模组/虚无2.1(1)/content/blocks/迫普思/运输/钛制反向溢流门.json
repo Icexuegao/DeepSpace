@@ -1,0 +1,17 @@
+{
+  "name": "钛制反向溢流门"
+  "description": "由钛制成的方向溢流门，速度一般",
+  "type": "OverflowGate",
+  "health": 120,
+  "size": 1,
+  "speed": 0.1
+  "speedBoost": 0.20,
+  "invert": true,
+  "requirements": [
+    "titanium/15"
+  ],
+  "category": "distribution",
+  "research": "钛制溢流门"
+  "researchCostMultiplier": 0.2,
+  "canOverdrive": false
+}

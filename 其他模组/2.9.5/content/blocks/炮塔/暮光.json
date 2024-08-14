@@ -1,0 +1,11 @@
+{
+  "research": {
+    "parent": "曙光",
+    "objectives": [
+      {
+        "type": "OnSector",
+        "preset": "血湖矿区"
+      }
+    ]
+  }
+}

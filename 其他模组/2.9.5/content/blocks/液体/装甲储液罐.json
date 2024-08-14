@@ -1,0 +1,15 @@
+{
+  "health": 3200,
+  "armor": 8,
+  "size": 4,
+  "liquidPadding": 4,
+  "liquidCapacity": 6400,
+  "placeableLiquid": true,
+  "requirements": [
+    "铱板/85",
+    "陶钢/55",
+    "metaglass/35"
+  ],
+  "category": "liquid",
+  "research": "liquid-tank"
+}

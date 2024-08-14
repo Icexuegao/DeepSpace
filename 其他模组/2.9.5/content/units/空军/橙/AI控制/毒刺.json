@@ -1,0 +1,49 @@
+{
+  "type": "flying",
+  "health": 1270,
+  "hitSize": 16,
+  "armor": 4,
+  "speed": 4,
+  "drag": 0.04,
+  "accel": 0.08,
+  "rotateSpeed": 7.5,
+  "engineOffset": 11,
+  "engineSize": 2.5,
+  "trailLength": 8,
+  "outlineColor": "1F1F1F",
+  "targetFlags": [
+    "reactor",
+    "generator",
+    "factory"
+  ],
+  "weapons": [
+    {
+      "x": 0,
+      "shootY": 8,
+      "reload": 180,
+      "mirror": false,
+      "shootCone": 5,
+      "cooldownTime": 120,
+      "shootSound": "railgun",
+      "bullet": {
+        "type": "RailBulletType",
+        "damage": 325,
+        "length": 160,
+        "recoil": 1,
+        "pointEffectSpace": 36,
+        "pointEffect": "railTrail",
+        "shootEffect": "railShoot",
+        "hitEffect": "railHit",
+        "pierceDamageFactor": 0,
+        "buildingDamageMultiplier": 0.2
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "UnitSpawnAbility",
+      "unit": "毒刺",
+      "spawnTime": 1800
+    }
+  ]
+}

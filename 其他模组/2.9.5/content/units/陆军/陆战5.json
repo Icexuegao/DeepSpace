@@ -1,0 +1,212 @@
+{
+  "type": "mech",
+  "research": "陆战4",
+  "health": 29000,
+  "armor": 25,
+  "hitSize": 30,
+  "speed": 0.36,
+  "range": 388,
+  "rotateSpeed": 1.8,
+  "riseSpeed": 0.05,
+  "canBoost": true,
+  "lowAltitude": true,
+  "boostMultiplier": 2,
+  "mechLandShake": 4,
+  "stepShake": 0.75,
+  "mechSideSway": 0.6,
+  "mechFrontSway": 1.9,
+  "drownTimeMultiplier": 6,
+  "mechStepParticles": true,
+  "ammoType": "thorium",
+  "ammoCapacity": 240,
+  "engineSize": 6,
+  "engineOffset": 15,
+  "engines": [
+    {
+      "x": 15,
+      "y": -18,
+      "radius": 4,
+      "rotation": -90
+    },
+    {
+      "x": -15,
+      "y": -18,
+      "radius": 4,
+      "rotation": -90
+    }
+  ],
+  "immunities": [
+    "burning",
+    "wet",
+    "spore-slowed",
+    "tarred",
+    "muddy",
+    "辐射"
+  ],
+  "weapons": [
+    {
+      "name": "陆战5炮",
+      "top": false,
+      "x": 23,
+      "y": 1,
+      "recoil": 3,
+      "shake": 3,
+      "reload": 120,
+      "shootY": 24,
+      "shootCone": 5,
+      "alternate": false,
+      "cooldownTime": 150,
+      "ejectEffect": "casing3",
+      "shootSound": "plasmadrop",
+      "bullet": {
+        "damage": 585,
+        "lifetime": 33,
+        "speed": 12,
+        "width": 16,
+        "height": 25,
+        "pierce": true,
+        "pierceArmor": true,
+        "absorbable": false,
+        "reflectable": false,
+        "status": "湍能",
+        "statusDuration": 60,
+        "splashDamage": 195,
+        "splashDamageRadius": 80,
+        "lightColor": "FF8663",
+        "frontColor": "FFFFFF",
+        "backColor": "FF8663",
+        "hitColor": "FF8663",
+        "trailChance": 1,
+        "trailInterval": 24,
+        "trailEffect": {
+          "type": "ParticleEffect",
+          "particles": 7,
+          "lifetime": 25,
+          "baseLength": 9,
+          "length": 9,
+          "sizeFrom": 7,
+          "sizeTo": 0,
+          "cone": 360,
+          "interp": "circleOut",
+          "lightColor": "FF8663",
+          "colorFrom": "FF8663",
+          "colorTo": "FF8663"
+        },
+        "shootEffect": "shootSmokeTitan",
+        "despawnSound": "plasmaboom",
+        "despawnEffect": "bigShockwave",
+        "hitEffect": {
+          "type": "multiEffect",
+          "effects": [
+            {
+              "type": "ExplosionEffect",
+              "lifetime": 20,
+              "waveStroke": 2,
+              "waveColor": "FF8663",
+              "sparkColor": "FF8663",
+              "waveRad": 12,
+              "smokeSize": 0,
+              "smokeSizeBase": 0,
+              "sparks": 10,
+              "sparkRad": 35,
+              "sparkLen": 4,
+              "sparkStroke": 1.5
+            },
+            {
+              "type": "ParticleEffect",
+              "particles": 15,
+              "line": true,
+              "strokeFrom": 4,
+              "strokeTo": 0,
+              "lenFrom": 10,
+              "lenTo": 0,
+              "length": 70,
+              "baseLength": 0,
+              "lifetime": 10,
+              "colorFrom": "FF8663",
+              "colorTo": "FFFFFF",
+              "cone": 60
+            },
+            "hitSquaresColor"
+          ]
+        }
+      },
+      "parts": [
+        {
+          "type": "RegionPart",
+          "suffix": "-glow",
+          "outline": false,
+          "color": "F03B0E",
+          "blending": "additive"
+        }
+      ]
+    },
+    {
+      "name": "空炸4激光",
+      "x": 11.25,
+      "y": 1.25,
+      "shake": 3,
+      "recoil": 3,
+      "shootY": 7,
+      "reload": 60,
+      "rotate": true,
+      "rotateSpeed": 2,
+      "rotationLimit": 45,
+      "shootSound": "laser",
+      "bullet": {
+        "type": "LaserBulletType",
+        "damage": 235,
+        "length": 280,
+        "lifetime": 15,
+        "shootEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 12,
+          "lifetime": 20,
+          "length": 45,
+          "cone": 30,
+          "lenFrom": 6,
+          "lenTo": 6,
+          "strokeFrom": 3,
+          "strokeTo": 0,
+          "interp": "fastSlow",
+          "lightColor": "FF5845",
+          "colorFrom": "FF8663",
+          "colorTo": "FF5845"
+        },
+        "colors": [
+          "D75B6E",
+          "E78F92",
+          "FFF0F0"
+        ],
+        "status": "熔融",
+        "statusDuration": 90,
+        "hitEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 10,
+          "lifetime": 20,
+          "length": 75,
+          "cone": -360,
+          "lenFrom": 6,
+          "lenTo": 6,
+          "strokeFrom": 3,
+          "strokeTo": 0,
+          "lightColor": "FF5845",
+          "colorFrom": "FF8663",
+          "colorTo": "FF5845"
+        }
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "ArmorPlateAbility",
+      "healthMultiplier": 0.5
+    },
+    {
+      "type": "RegenAbility",
+      "percentAmount": 0.0125
+    }
+  ]
+}

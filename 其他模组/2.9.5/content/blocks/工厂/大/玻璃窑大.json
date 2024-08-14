@@ -1,0 +1,31 @@
+{
+  "type": "GenericCrafter",
+  "size": 3,
+  "itemCapacity": 36,
+  "consumes": {
+    "power": 2.75,
+    "items": {
+      "items": [
+        "lead/3",
+        "sand/4"
+      ]
+    }
+  },
+  "craftTime": 40,
+  "outputItem": "metaglass/4",
+  "requirements": [
+    "copper/85",
+    "graphite/60",
+    "titanium/55",
+    "silicon/35"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      "DrawFlame"
+    ]
+  },
+  "category": "crafting",
+  "research": "粉碎机大"
+}

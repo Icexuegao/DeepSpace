@@ -1,0 +1,36 @@
+{
+  "type": "GenericCrafter",
+  "size": 3,
+  "itemCapacity": 36,
+  "consumes": {
+    "power": 7.75,
+    "items": {
+      "items": [
+        "metaglass/1",
+        "plastanium/1",
+        "铈/2"
+      ]
+    }
+  },
+  "craftTime": 60,
+  "canOverdrive": false,
+  "updateEffect": "melting",
+  "outputItem": "陶钢/1",
+  "requirements": [
+    "graphite/230",
+    "plastanium/55",
+    "铱板/85",
+    "导能回路/45"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      "DrawFlame"
+    ]
+  },
+  "ambientSound": "beamLoop",
+  "ambientSoundVolume": 0.02,
+  "category": "crafting",
+  "research": "铈提取器"
+}

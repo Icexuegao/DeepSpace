@@ -1,0 +1,67 @@
+{
+  "type": "mech",
+  "research": "陆战2",
+  "health": 1270,
+  "hitSize": 14,
+  "armor": 11,
+  "speed": 0.5,
+  "rotateSpeed": 3,
+  "lowAltitude": true,
+  "canBoost": true,
+  "boostMultiplier": 2,
+  "engineOffset": 5,
+  "engineSize": 4,
+  "mechLandShake": 3,
+  "riseSpeed": 0.05,
+  "mechFrontSway": 0.55,
+  "ammoType": 2700,
+  "ammoCapacity": 12,
+  "weapons": [
+    {
+      "name": "陆战3炮",
+      "x": 9,
+      "shake": 2,
+      "top": false,
+      "shoot": {
+        "shots": 3,
+        "shotDelay": 10
+      },
+      "reload": 135,
+      "cooldownTime": 90,
+      "recoil": 4,
+      "shootSound": "laser",
+      "bullet": {
+        "type": "LaserBulletType",
+        "damage": 75,
+        "length": 168,
+        "recoil": 1,
+        "sideAngle": 30,
+        "sideWidth": 1,
+        "sideLength": 35,
+        "colors": [
+          "FF5845",
+          "FFDCD8",
+          "D1EFFF"
+        ]
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "ForceFieldAbility",
+      "cooldown": 240,
+      "radius": 60,
+      "max": 450,
+      "regen": 1.5,
+      "sides": 4
+    },
+    {
+      "type": "ArmorPlateAbility",
+      "healthMultiplier": 0.3
+    },
+    {
+      "type": "RegenAbility",
+      "percentAmount": 0.0125
+    }
+  ]
+}

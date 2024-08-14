@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.anuken.Arc:g3d:v146" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.anuken.Arc" artifactId="g3d" version="v146" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.anuken.Arc/g3d/v146/3ab6d0332a356ec1ab999c3dbf80e1996ccd0ccb/g3d-v146.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.anuken.Arc/g3d/v146/8c8c1480a1db891e2af8ac3b4d4c3f7ef3bf4291/g3d-v146-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

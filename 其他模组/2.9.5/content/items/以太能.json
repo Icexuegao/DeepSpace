@@ -1,0 +1,12 @@
+{
+  "color": "E6C4EE",
+  "frames": 3,
+  "transitionFrames": 6,
+  "frameTime": 6,
+  "radioactivity": 0.4,
+  "charge": 1,
+  "cost": 2.4,
+  "healthScaling": 0.8,
+  "hardness": 5,
+  "research": "phase-fabric"
+}

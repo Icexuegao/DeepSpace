@@ -1,0 +1,91 @@
+{
+  "type": "naval",
+  "research": "海战2",
+  "health": 1365,
+  "hitSize": 25,
+  "armor": 9,
+  "speed": 0.8,
+  "rotateSpeed": 1.8,
+  "trailLength": 32,
+  "waveTrailX": 8,
+  "waveTrailY": -9,
+  "trailScl": 2.2,
+  "faceTarget": false,
+  "ammoType": "thorium",
+  "ammoCapacity": 600,
+  "requirements": {
+    "block": "multiplicative-reconstructor",
+    "previous": "海战2"
+  },
+  "weapons": [
+    {
+      "name": "导弹",
+      "x": 6.5,
+      "y": -10,
+      "reload": 36,
+      "rotate": true,
+      "inaccuracy": 10,
+      "shootCone": 20,
+      "rotateSpeed": 4,
+      "shoot": {
+        "shots": 2,
+        "shotDelay": 3
+      },
+      "shootSound": "missile",
+      "bullet": {
+        "type": "MissileBulletType",
+        "damage": 40,
+        "lifetime": 60,
+        "speed": 4,
+        "weaveMag": 1,
+        "weaveScale": 8,
+        "homingRange": 80,
+        "splashDamage": 35,
+        "splashDamageRadius": 45,
+        "hitEffect": "flakExplosionBig",
+        "despawnEffect": "flakExplosionBig"
+      }
+    },
+    {
+      "name": "海战3炮",
+      "x": 0,
+      "shake": 2,
+      "recoil": 3,
+      "shootY": 7,
+      "reload": 65,
+      "rotate": true,
+      "mirror": false,
+      "inaccuracy": 2,
+      "shootCone": 20,
+      "rotateSpeed": 2,
+      "rotationLimit": 240,
+      "ejectEffect": "casing3",
+      "shootSound": "artillery",
+      "bullet": {
+        "type": "ArtilleryBulletType",
+        "lifetime": 90,
+        "speed": 4,
+        "width": 11,
+        "height": 12,
+        "trailSize": 6,
+        "trailMult": 0.8,
+        "hitShake": 4,
+        "knockback": 2,
+        "status": "blasted",
+        "splashDamage": 97,
+        "splashDamageRadius": 44,
+        "shootEffect": "shootBig2",
+        "buildingDamageMultiplier": 1.5
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "ShieldRegenFieldAbility",
+      "amount": 30,
+      "max": 240,
+      "reload": 120,
+      "range": 80
+    }
+  ]
+}

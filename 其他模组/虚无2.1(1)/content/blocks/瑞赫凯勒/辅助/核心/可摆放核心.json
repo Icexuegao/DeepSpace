@@ -1,0 +1,17 @@
+{
+  "name": "可摆放核心",
+  //"type":"CoreBlock",
+  "description": "可以随地摆放的核心，但是不加兵种上限",
+  "requirements": [
+    "虚空石/500"
+  ],
+  "unitType": "米勒",
+  "health": 2500,
+  "size": 2,
+  "unitCapModifier": 0,
+  "absorbLasers": true,
+  "itemCapacity": 2000,
+  "category": "effect",
+  "research": "轻型核心"
+  "alwaysUnlocked": true
+}

@@ -1,0 +1,18 @@
+{
+  "type": "LaunchPad",
+  "size": 5,
+  "itemCapacity": 500,
+  "launchTime": 1500,
+  "consumes": {
+    "power": 8
+  },
+  "requirements": [
+    "copper/475",
+    "thorium/350",
+    "silicon/270",
+    "phase-fabric/55"
+  ],
+  "category": "effect",
+  "research": "launch-pad",
+  "buildVisibility": "campaignOnly"
+}

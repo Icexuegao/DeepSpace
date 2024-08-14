@@ -1,0 +1,149 @@
+{
+  "type": "ItemTurret",
+  "name": "爆裂",
+  "description": "它发出的子弹击中敌人后会爆裂开来",
+  "shootSound": "missile",
+  "health": 1500,
+  "size": 4,
+  "reload": 2,
+  "range": 600,
+  "maxAmmo": 90,
+  "range": 360,
+  "minWarmup": 0.88,
+  "warmupMaintainTime": 360,
+  "shootWarmupSpeed": 0.008,
+  "ammoPerShot": 4,
+  "consumes": {
+    "coolant": {
+      "amount": 0.3,
+      "optional": true
+    }
+  },
+  "ammoUseEffect": "casing2Double",
+  "inaccuracy": 7,
+  "rotateSpeed": 4,
+  "shake": 1,
+  "shoot": {
+    "type": "ShootAlternate",
+    "barrels": 1,
+    "shots": 1
+  }
+  "ammoUseEffect": "casing2Double",
+  "targetGround": true,
+  "ammoTypes": {
+    "graphite": {
+      "buildingDamageMultiplier": 0.01,
+      "speed": 12,
+      "lifetime": 33,
+      "width": 15,
+      "height": 18,
+      "trailLength": 3,
+      "trailWidth": 4,
+      "trailColor": "BF92F8",
+      "backColor": "BF92F8",
+      "frontColor": "665C9F",
+      "lightningColor": "BF92F8",
+      "lightningDamage": 40,
+      "lightning": 2.5,
+      "lightningLength": 10,
+      "damage": 150,
+      "splashDamageRadius": 45,
+      "splashDamage": 95,
+      "hitSound": "explosion",
+      "shootEffect": "shootBig2",
+      "smokeEffect": "shootBigSmoke",
+      "hitEffect": "flakExplosionBig",
+      "fragBullets": 30,
+      "fragBullet": {
+        "buildingDamageMultiplier": 0.01,
+        "speed": 8,
+        "lifetime": 10,
+        "trailLength": 3,
+        "trailWidth": 2,
+        "trailColor": "BF92F8",
+        "backColor": "BF92F8",
+        "frontColor": "665C9F",
+        "lightningColor": "BF92F8",
+        "lightningDamage": 37,
+        "lightning": 1,
+        "lightningLength": 9,
+        "width": 8,
+        "height": 9,
+        "damage": 16,
+        "hitEffect": "flakExplosion",
+        "splashDamageRadius": 35,
+        "splashDamage": 35
+      }
+    }
+  }
+  "requirements": [
+    //建造消耗
+    "化钢/100",
+    "lead/300",
+    "silicon/360"
+    "metaglass/450"
+    "绯红合金/500"
+    "铀/600"
+    "钛板/150"
+  ],
+  "category": "turret",
+  "research": {
+    "parent": "光刃"
+    "objectives": [
+      {
+        "type": "OnSector",
+        "preset": "孢子平原"
+      }
+    ]
+  }
+  "researchCostMultiplier": 0.5,
+  "canOverdrive": false,
+  "drawer": {
+    "type": "DrawTurret",
+    "parts": [
+      {
+        "type": "ShapePart",
+        "progress": "warmup",
+        "y": -20,
+        "sides": 3,
+        "color": "6B6B9E",
+        "rotateSpeed": 2,
+        "stroke": 0,
+        "strokeTo": 1,
+        "circle": false,
+        "hollow": true,
+        "radius": 0,
+        "radiusTo": 9,
+        "layer": 110
+      },
+      {
+        "type": "ShapePart",
+        "progress": "warmup",
+        "y": -20,
+        "sides": 3,
+        "color": "6B6B9E",
+        "rotateSpeed": 3,
+        "stroke": 0,
+        "strokeTo": 1,
+        "circle": false,
+        "hollow": true,
+        "radius": 0,
+        "radiusTo": 9,
+        "layer": 110
+      },
+      {
+        "type": "ShapePart",
+        "progress": "warmup",
+        "y": -20,
+        "color": "6B6B9E",
+        "stroke": 0,
+        "strokeTo": 1,
+        "circle": true,
+        "hollow": true,
+        "radius": 0,
+        "radiusTo": 10,
+        "layer": 110
+      }
+    ]
+  }
+}

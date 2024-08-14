@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":javaSrc:test" external.linked.project.path="$MODULE_DIR$/../../../javaSrc" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="DeepSpace" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="JVM 16" allPlatforms="JVM [16]" useProjectSettings="false">
+        <additionalVisibleModuleNames>:javaSrc:main</additionalVisibleModuleNames>
+        <compilerSettings />
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="allowNoSourceFiles" arg="true" />
+            <flagArg name="noReflect" arg="true" />
+            <flagArg name="noStdlib" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="destination" arg="$MODULE_DIR$/../../../javaSrc/build/classes/kotlin/test" />
+            <stringArg name="jvmTarget" arg="16" />
+            <stringArg name="moduleName" arg="javaSrc_test" />
+            <stringArg name="apiVersion" arg="1.9" />
+            <stringArg name="languageVersion" arg="1.9" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="pluginClasspaths">
+              <args>
+                <arg>$MODULE_DIR$/../../../../../Gradle/huancun/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.9.23/12296ecbca7fc45d259e04cf8080bae89ca18a45/kotlin-scripting-jvm-1.9.23.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../Gradle/huancun/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-common/1.9.23/962df7abf28182fc9af5cddfa721766d9c3fe828/kotlin-scripting-common-1.9.23.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../Gradle/huancun/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.23/dbaadea1f5e68f790d242a91a38355a83ec38747/kotlin-stdlib-1.9.23.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../Gradle/huancun/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../Gradle/huancun/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.9.23/1375a7343d05891119fac57f8b50a7578420ac27/kotlin-script-runtime-1.9.23.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager">
+    <output-test url="file://$MODULE_DIR$/../../../javaSrc/out/test/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../javaSrc/src/test" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="DeepSpace.javaSrc.main" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.9.23" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+  </component>
+  <component name="TestModuleProperties" production-module="DeepSpace.javaSrc.main" />
+</module>

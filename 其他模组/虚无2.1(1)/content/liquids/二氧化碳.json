@@ -1,0 +1,16 @@
+{
+  "name": "二氧化碳",
+  "description": "一种不可供生物呼吸的气体，同时，不支持燃烧",
+  "alwaysUnlocked": false,
+  "color": "313131",
+  "flammability": -1,
+  //可燃性
+  "temperature": 0.3,
+  //温度
+  "heatCapacity": 0,
+  //热容量
+  "explosiveness": 0,
+  //爆炸性
+  "gas": true,
+  "research": "银"
+}

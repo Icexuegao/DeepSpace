@@ -1,0 +1,278 @@
+{
+  "type": "payload",
+  "research": {
+    "parent": "伊普西龙",
+    "objectives": [
+      "终极核心"
+    ]
+  },
+  "requirements": {
+    "block": "tetrative-reconstructor",
+    "previous": "伊普西龙"
+  },
+  "coreUnitDock": true,
+  "lowAltitude": true,
+  "isEnemy": false,
+  "flying": true,
+  "health": 7200,
+  "hitSize": 46,
+  "armor": 16,
+  "speed": 2.8,
+  "drag": 0.15,
+  "rotateSpeed": 10,
+  "engineSize": 0,
+  "range": 360,
+  "mineTier": 9,
+  "mineSpeed": 18,
+  "mineRange": 160,
+  "buildBeamOffset": -8,
+  "buildSpeed": 8,
+  "itemCapacity": 210,
+  "ammoType": 6000,
+  "ammoCapacity": 300,
+  "payloadCapacity": 2304,
+  "immunities": [
+    "wet",
+    "burning",
+    "freezing",
+    "spore-slowed",
+    "tarred",
+    "muddy",
+    "electrified",
+    "辐射"
+  ],
+  "engines": [
+    {
+      "x": 8.5,
+      "y": -26.875,
+      "radius": 6,
+      "rotation": -90
+    },
+    {
+      "x": -8.5,
+      "y": -26.875,
+      "radius": 6,
+      "rotation": -90
+    }
+  ],
+  "parts": [
+    {
+      "type": "RegionPart",
+      "suffix": "-glow",
+      "outline": false,
+      "color": "FF9C5A",
+      "blending": "additive"
+    }
+  ],
+  "weapons": [
+    {
+      "name": "泽塔炮",
+      "x": 0,
+      "y": -0.375,
+      "reload": 300,
+      "mirror": false,
+      "shake": 1,
+      "shootY": 0,
+      "shootCone": 20,
+      "cooldownTime": 145,
+      "shootSound": "laserbeam",
+      "alwaysContinuous": true,
+      "bullet": {
+        "type": "ContinuousFlameBulletType",
+        "colors": [
+          "FAAF878C",
+          "FAAF87B2",
+          "FAAF87CC",
+          "FAAF87",
+          "FFFFFFCC"
+        ],
+        "damage": 50,
+        "lifetime": 60,
+        "length": 240,
+        "width": 4.8,
+        "drawFlare": false,
+        "status": "melting",
+        "statusDuration": 150,
+        "buildingDamageMultiplier": 0.1,
+        "hitEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 7,
+          "lifetime": 15,
+          "length": 65,
+          "cone": -360,
+          "strokeFrom": 2.5,
+          "strokeTo": 0,
+          "lenFrom": 8,
+          "lenTo": 0,
+          "colorFrom": "FF5845",
+          "colorTo": "FF8663"
+        }
+      }
+    },
+    {
+      "name": "空炸5机炮",
+      "x": 15.75,
+      "y": 4.25,
+      "reload": 60,
+      "recoil": 3,
+      "shake": 1,
+      "shootY": 7.25,
+      "shootCone": 5,
+      "rotate": true,
+      "rotateSpeed": 3,
+      "rotationLimit": 45,
+      "layerOffset": -0.001,
+      "shootSound": "月隐发射",
+      "bullet": {
+        "type": "EmpBulletType",
+        "sprite": "circle-bullet",
+        "damage": 120,
+        "lifetime": 45,
+        "speed": 8,
+        "width": 12,
+        "height": 12,
+        "shrinkY": 0,
+        "scaleLife": true,
+        "frontColor": "FF8663",
+        "backColor": "FF5845",
+        "splashDamage": 60,
+        "splashDamageRadius": 80,
+        "buildingDamageMultiplier": 0.1,
+        "shootEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 12,
+          "lifetime": 20,
+          "length": 45,
+          "cone": 30,
+          "lenFrom": 6,
+          "lenTo": 6,
+          "strokeFrom": 3,
+          "strokeTo": 0,
+          "lightColor": "FF5845",
+          "colorFrom": "FFDCD8",
+          "colorTo": "FF5845"
+        },
+        "hitPowerEffect": {
+          "type": "ParticleEffect",
+          "particles": 7,
+          "lifetime": 22,
+          "line": true,
+          "lenFrom": 6,
+          "lenTo": 6,
+          "cone": 360,
+          "length": 80,
+          "colorFrom": "FF8663",
+          "colorTo": "FF5845"
+        },
+        "hitColor": "FF8663",
+        "radius": 80,
+        "timeIncrease": 1.5,
+        "powerDamageScl": 1.5,
+        "unitDamageScl": 0.5,
+        "homingPower": 0.08,
+        "homingRange": 180,
+        "trailColor": "FF5845",
+        "trailLength": 5,
+        "trailWidth": 4,
+        "trailInterval": 12,
+        "trailChance": 1,
+        "trailRotation": true,
+        "trailEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 3,
+          "lifetime": 25,
+          "length": 24,
+          "baseLength": 0,
+          "lenFrom": 12,
+          "lenTo": 0,
+          "cone": 15,
+          "offsetX": -15,
+          "lightColor": "FF8663",
+          "colorFrom": "FF5845",
+          "colorTo": "FF8663"
+        },
+        "hitEffect": {
+          "type": "multiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "line": true,
+              "particles": 30,
+              "lifetime": 45,
+              "length": 80,
+              "cone": 360,
+              "lenFrom": 12,
+              "lenTo": 0,
+              "interp": "exp10Out",
+              "colorFrom": "FF5845",
+              "colorTo": "FF8663"
+            },
+            {
+              "type": "ParticleEffect",
+              "particles": 1,
+              "lifetime": 60,
+              "length": 0,
+              "sizeFrom": 12,
+              "sizeTo": 0,
+              "colorFrom": "FF5845",
+              "colorTo": "FF8663"
+            },
+            {
+              "type": "ParticleEffect",
+              "particles": 1,
+              "lifetime": 15,
+              "sizeFrom": 80,
+              "sizeTo": 80,
+              "length": 0,
+              "colorFrom": "FF5845",
+              "colorTo": "FF866300"
+            },
+            {
+              "type": "WaveEffect",
+              "lifetime": 60,
+              "sizeFrom": 80,
+              "sizeTo": 80,
+              "strokeFrom": 4,
+              "strokeTo": 0,
+              "colorFrom": "FF5845",
+              "colorTo": "FF8663"
+            }
+          ]
+        },
+        "despawnEffect": "none"
+      }
+    },
+    {
+      "type": "RepairBeamWeapon",
+      "x": 18.75,
+      "y": -15.5,
+      "shootY": 0,
+      "reload": 20,
+      "beamWidth": 0.7,
+      "widthSinMag": 0.11,
+      "shootCone": 20,
+      "rotate": true,
+      "rotateSpeed": 3,
+      "repairSpeed": 5,
+      "fractionRepairSpeed": 0.05,
+      "autoTarget": true,
+      "controllable": false,
+      "targetUnits": false,
+      "targetBuildings": true,
+      "laserColor": "FFD37F",
+      "healColor": "FFD37F",
+      "bullet": {
+        "maxRange": 160
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "ArmorPlateAbility",
+      "healthMultiplier": 0.5
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "type": "ItemTurret",
+  "health": 2080,
+  "size": 4,
+  "shake": 2,
+  "recoil": 3,
+  "recoils": 2,
+  "reload": 55,
+  "range": 408,
+  "minRange": 80,
+  "inaccuracy": 8,
+  "maxAmmo": 60,
+  "targetAir": false,
+  "velocityRnd": 0.2,
+  "ammoPerShot": 3,
+  "shoot": {
+    "type": "ShootMulti",
+    "source": {
+      "type": "ShootAlternate",
+      "spread": 8
+    },
+    "dest": [
+      {
+        "shots": 5
+      }
+    ]
+  },
+  "consumes": {
+    "coolant": {
+      "amount": 1
+    }
+  },
+  "ammoEjectBack": 5,
+  "liquidCapacity": 20,
+  "coolantMultiplier": 1,
+  "shootSound": "artillery",
+  "ammoUseEffect": "casing4",
+  "ammoTypes": {
+    "graphite": {
+      "type": "ArtilleryBulletType",
+      "damage": 35,
+      "lifetime": 80,
+      "speed": 4.5,
+      "width": 12,
+      "height": 12,
+      "knockback": 1.2,
+      "splashDamage": 59,
+      "splashDamageRadius": 25
+    },
+    "silicon": {
+      "type": "ArtilleryBulletType",
+      "damage": 35,
+      "lifetime": 80,
+      "speed": 4.5,
+      "width": 12,
+      "height": 12,
+      "knockback": 1.2,
+      "homingPower": 0.1,
+      "homingRange": 60,
+      "ammoMultiplier": 3,
+      "reloadMultiplier": 1.2,
+      "splashDamage": 59,
+      "splashDamageRadius": 25
+    },
+    "pyratite": {
+      "type": "ArtilleryBulletType",
+      "damage": 43,
+      "lifetime": 80,
+      "speed": 4.5,
+      "width": 14,
+      "height": 14,
+      "knockback": 1.2,
+      "ammoMultiplier": 4,
+      "splashDamage": 81,
+      "splashDamageRadius": 25,
+      "makeFire": true,
+      "incendAmount": 3,
+      "status": "burning",
+      "statusDuration": 720,
+      "frontColor": "F8AD42",
+      "backColor": "F68021",
+      "trailEffect": "incendTrail",
+      "hitEffect": "blastExplosion"
+    },
+    "blast-compound": {
+      "type": "ArtilleryBulletType",
+      "damage": 35,
+      "lifetime": 80,
+      "speed": 3,
+      "width": 15,
+      "height": 15,
+      "knockback": 1.2,
+      "status": "blasted",
+      "statusDuration": 60,
+      "splashDamage": 99,
+      "splashDamageRadius": 45,
+      "frontColor": "FFD2AE",
+      "backColor": "E58956",
+      "hitEffect": "blastExplosion"
+    },
+    "plastanium": {
+      "type": "ArtilleryBulletType",
+      "damage": 35,
+      "lifetime": 80,
+      "speed": 5.1,
+      "width": 14,
+      "height": 14,
+      "knockback": 1.5,
+      "frontColor": "FFFAC6",
+      "backColor": "D8D97F",
+      "splashDamage": 81,
+      "splashDamageRadius": 35,
+      "hitEffect": "plasticExplosion",
+      "fragBullets": 8,
+      "fragBullet": {
+        "damage": 19,
+        "speed": 2.5,
+        "width": 11,
+        "height": 13,
+        "shrinkY": 1,
+        "lifetime": 15,
+        "frontColor": "FFFAC6",
+        "backColor": "D8D97F",
+        "hitEffect": "none",
+        "despawnEffect": "none",
+        "collidesAir": false,
+        "splashDamage": 7,
+        "splashDamageRadius": 4
+      }
+    },
+    "铱板": {
+      "type": "ArtilleryBulletType",
+      "damage": 59,
+      "lifetime": 80,
+      "speed": 4.5,
+      "width": 15,
+      "height": 15,
+      "knockback": 1.2,
+      "inaccuracy": -6,
+      "ammoMultiplier": 3,
+      "reloadMultiplier": 0.9,
+      "status": "破甲",
+      "statusDuration": 120,
+      "splashDamage": 83,
+      "splashDamageRadius": 19,
+      "hitEffect": "flakExplosion"
+    },
+    "铈凝块": {
+      "type": "ArtilleryBulletType",
+      "damage": 53,
+      "lifetime": 80,
+      "speed": 4.5,
+      "width": 14,
+      "height": 14,
+      "knockback": 1.2,
+      "inaccuracy": -3,
+      "makeFire": true,
+      "incendAmount": 7,
+      "status": "蚀骨",
+      "statusDuration": 600,
+      "frontColor": "BFC8E2",
+      "backColor": "929DB5",
+      "ammoMultiplier": 4,
+      "splashDamage": 95,
+      "splashDamageRadius": 25,
+      "hitEffect": "blastExplosion"
+    }
+  },
+  "requirements": [
+    "copper/1360",
+    "graphite/300",
+    "thorium/325",
+    "铱板/225",
+    "plastanium/180"
+  ],
+  "drawer": {
+    "type": "DrawTurret",
+    "parts": [
+      {
+        "type": "RegionPart",
+        "suffix": "-l",
+        "under": true,
+        "recoilIndex": 0,
+        "heatColor": "F03B0E",
+        "heatProgress": "recoil",
+        "moves": [
+          {
+            "progress": "recoil",
+            "y": -2
+          }
+        ]
+      },
+      {
+        "type": "RegionPart",
+        "suffix": "-r",
+        "under": true,
+        "recoilIndex": 1,
+        "heatColor": "F03B0E",
+        "heatProgress": "recoil",
+        "moves": [
+          {
+            "progress": "recoil",
+            "y": -2
+          }
+        ]
+      }
+    ]
+  },
+  "category": "turret",
+  "research": "ripple"
+}

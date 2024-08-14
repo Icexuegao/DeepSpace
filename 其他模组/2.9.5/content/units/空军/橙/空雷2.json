@@ -1,0 +1,39 @@
+{
+  "type": "flying",
+  "research": "空雷1",
+  "lowAltitude": true,
+  "flying": true,
+  "health": 455,
+  "hitSize": 15,
+  "armor": 3,
+  "speed": 1.7,
+  "engineSize": 3,
+  "engineOffset": 10.5,
+  "weapons": [
+    {
+      "name": "空雷2炮",
+      "x": 0,
+      "y": 0,
+      "recoil": 0,
+      "shootY": 6,
+      "reload": 145,
+      "mirror": false,
+      "shootSound": "laser",
+      "bullet": {
+        "type": "LaserBulletType",
+        "damage": 150,
+        "lifetime": 12,
+        "length": 200,
+        "width": 12,
+        "colors": [
+          "FAAF87",
+          "EBBD86",
+          "FFF0F0"
+        ],
+        "buildingDamageMultiplier": 0.8,
+        "hitEffect": "hitLancer",
+        "despawnEffect": "none"
+      }
+    }
+  ]
+}

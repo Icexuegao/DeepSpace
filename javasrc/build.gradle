@@ -1,23 +1,25 @@
+import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
 apply plugin: "java"
-//apply plugin: "scala"
+apply plugin: "kotlin"
 //配置buildGradle的信息或依赖
 buildscript {
     //项目的仓库
     ext {
+        kotlin_version = "1.9.23"
         uncVersion = '2.1.1'
         sdkRoot = System.getenv("ANDROID_HOME")
     }
     dependencies {
-        //    classpath "org.scala-lang:scala-library:2.12.9"
-        //  classpath project(":")
-        //  classpath files("lib/$project.name"+".jar")
-        // classpath fileTree(dir: 'lib', includes: ['*.jar'])
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
-        mavenCentral()
         maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+        mavenCentral()
         mavenLocal()
         google()
         maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
@@ -31,8 +33,8 @@ repositories {
     maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
     mavenCentral()
-    maven { url 'https://repo.huaweicloud.com/repository/maven/' }
     mavenLocal()
+    maven { url 'https://repo.huaweicloud.com/repository/maven/' }
     maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url "https://maven.aliyun.com/repository/public" }
     maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
@@ -40,40 +42,33 @@ repositories {
 }
 //构建使用的jar包，一些依赖或者库
 dependencies {
-    //  compileOnly("tool")
-    compileOnly project(":scalasrc")
+    compileOnly project(':scalaSrc')
     compileOnly "com.github.EB-wilson.UniverseCore:core:$uncVersion"//涵盖了大部分mod制作相关的工具
     compileOnly "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//包括组件化接口在内的注解处理器
     annotationProcessor "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//使用注解处理器
-//   implementation "org.scala-lang:scala-library:2.12.9"
-    //compileOnly files("lib/$project.name"+".jar")
     annotationProcessor "com.github.Anuken:jabel:93fde537c7"
     compileOnly "com.github.Anuken:jabel:93fde537c7"
     compileOnly "com.github.Tinylake:MindustryX:v146.004"
+    compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 }
 //源代码
-sourceSets {
-    main {
-        java.srcDir("D:\\Programming\\luanqibazaode\\Icemods\\javasrc")
-    }
-}
-//输出路径
-File buildFile = file("D:\\Programming\\luanqibazaode\\Icemods\\build")
-project.buildDir(buildFile)
-def getMyBuildDir = getLayout().getBuildDirectory().get()
-
-
+sourceSets.main.java.srcDir('src')
+sourceSets.main.kotlin.srcDir('src')
 //编译java代码遇到中文报错解决方法
 tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
-
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions.jvmTarget = 16
+}
 //java版本
 java {
     targetCompatibility = 8//目标的兼容性
-    sourceCompatibility = JavaVersion.VERSION_16
+    sourceCompatibility = JavaVersion.VERSION_17
 }
-
+tasks.withType(KotlinJvmCompile.class).configureEach {
+    jvmTargetValidationMode = JvmTargetValidationMode.WARNING
+}
 //java 8向后兼容标志
 allprojects {
     tasks.withType(JavaCompile).tap {
@@ -82,102 +77,14 @@ allprojects {
         }
     }
 }
-
-/*jar {
-    //解决相同java识别文件报错
+tasks.register('iceJar', Jar) {
+//解决相同java识别文件报错
+    dependsOn compileJava
+    dependsOn compileKotlin
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest {
-        attributes('Main-Class': 'com.example.backendapp.BackendAppApplication')
-    }
-    //存档文件名
-    //${project.name}指IceMods
-    archiveFileName = "${project.name}Desktop.jar"//jar文件名
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    *//* from(rootDir) {
-         include "mod.hjson"
-     }*//*
-   *//* from("assets\\mod.hjson") {
-        include "mod.hjson"
-    }
-    from("assets/") {
-        include "**"
-    }*//*
-}*/
-
-tasks.register('jarAndroid') {
-
-    dependsOn jar
-    /* doLast {
-         if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
-
-         def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
-
-         if (!platformRoot) throw new GradleException("sb 没装sdk和d8编译你老母")
-
-         //收集脱糖所需的依赖项
-         def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
-
-         //dex 和 desugar 文件 - 这需要 PATH 中包含 d8
-         "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktop.jar"
-                 .execute(null, new File("$getMyBuildDir/libs")).waitForProcessOutput(System.out, System.err)
+    archiveFileName = "${project.name}Desktop.jar"
+    from layout.projectDirectory.files("build\\classes\\java\\main", "build\\classes\\kotlin\\main", "D:\\Programming\\luanqibazaode\\DeepSpace\\test.txt")
+    /* from {
+         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
      }*/
-    doLast {
-        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
-
-        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
-
-        if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
-
-        //collect dependencies needed for desugaring
-        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
-
-        //dex and desugar files - this requires d8 in your PATH
-        "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktop.jar"
-                .execute(null, new File("$getMyBuildDir/libs")).waitForProcessOutput(System.out, System.err)
-    }
-}
-tasks.register('deploy', Jar) {
-    dependsOn jarAndroid
-    dependsOn jar
-    archiveFileName = "${project.name}.jar"//存档文件名
-    from {
-        [zipTree("$getMyBuildDir/libs/${project.name}Desktop.jar"),
-         zipTree("$getMyBuildDir/libs/${project.name}Android.jar")]
-    }
-    doLast {
-        delete {
-            delete "$getMyBuildDir/libs/${project.name}Desktop.jar"
-            delete "$getMyBuildDir/libs/${project.name}Android.jar"
-            delete "$getMyBuildDir/libs/scalasrc-1.0.jar"
-        }
-    }
-
-}
-//给文件打印一个字符节，防止相同文件报错。
-tasks.register('a', Copy) {
-    FileInputStream fis = new FileInputStream(new File("assets\\test.txt"))
-    byte[] byt = new byte[10]
-    int g = fis.read(byt, 0, byt.length)
-    fis.close()
-    if (g < 5) {
-        FileOutputStream i = new FileOutputStream(new File("assets\\test.txt"), true)
-        i.write(1)
-        i.close()
-    } else {
-        FileOutputStream i = new FileOutputStream(new File("assets\\test.txt"), false)
-        i.write(1)
-        i.close()
-    }
-}
-//copy复制模组到指定文件夹并替换
-//dependsOn依赖项只有依赖项执行完之后复制才会执行
-tasks.register('mycopy', Copy) {
-    dependsOn a
-    dependsOn deploy
-    from "$getMyBuildDir/libs/$project.name" + ".jar"//源
-    into {
-        'C:\\Users\\Alon\\AppData\\Roaming\\Mindustry\\mods'
-    }
 }

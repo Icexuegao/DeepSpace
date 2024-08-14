@@ -1,0 +1,19 @@
+{
+  "name": "重载型载荷路由器"
+  //显示名字
+  "type": "PayloadRouter",
+  "size": 5,
+  "moveTime": 60,
+  //移动时间
+  "moveForce": 500,
+  //移动力量，单位不在传送带里依然被移动的力量
+  "payloadLimit": 11,
+  //有效载荷限制
+  "requirements": [
+    "化钢/120",
+    "silicon/100",
+    "钛板/250"
+  ],
+  "category": "units",
+  "research": "重载型载荷带"
+}

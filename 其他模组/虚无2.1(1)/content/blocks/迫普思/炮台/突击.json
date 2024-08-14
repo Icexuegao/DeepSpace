@@ -1,0 +1,128 @@
+{
+  "type": "ItemTurret",
+  "name": "突击",
+  "description": "攻击敌方可以造成巨量伤害，在前期是个强大的存在",
+  "size": 2,
+  "health": 1200,
+  "ammoPerShot": 10,
+  "range": 360,
+  "reloadTime": 10,
+  "inaccuracy": 2,
+  "rotatespeed": 4,
+  "maxAmmo": 50,
+  "consumes": {
+    "coolant": {
+      "amount": 0.1,
+      "optional": true
+    }
+  },
+  "recoil": 0.5,
+  "recoils": 2,
+  "shootCone": 15,
+  "shoot": {
+    "shots": 4,
+    "shotDelay": 3,
+    "type": "ShootAlternate",
+    "barrels": 2,
+    "spread": 6.5
+  },
+  "ammoUseEffect": "casing2Double",
+  "targetGround": true,
+  "ammoTypes": {
+    "化钢": {
+      "speed": 5,
+      "damage": 40,
+      "lifetime": 80,
+      "width": 7,
+      "height": 8,
+      "ammoMultiplier": 8,
+      "shootEffect": "shootSmall"
+      "homingRange": 40,
+      "homingPower": 0.06
+    },
+    "黑核": {
+      "speed": 5,
+      "damage": 100,
+      "lifetime": 80,
+      "width": 7,
+      "height": 8,
+      "ammoMultiplier": 8,
+      "shootEffect": "shootSmall"
+    }
+  },
+  "researchCostMultiplier": 0.5,
+  "requirements": [
+    {
+      "item": "化钢",
+      "amount": 500
+    },
+    {
+      "item": "copper",
+      "amount": 150
+    },
+    {
+      "item": "silicon",
+      "amount": 100
+    },
+    {
+      "item": "铀",
+      "amount": 200
+    }
+  ],
+  "category": "turret",
+  "research": "碎击"
+  "drawer": {
+    "type": "DrawTurret",
+    "parts": [
+      {
+        "type": "RegionPart",
+        "mirror": false,
+        "recoilIndex": 0,
+        "x": 0,
+        "y": 0,
+        "suffix": "-1",
+        "layer": 49.99,
+        "moveX": 0,
+        "moveY": 0,
+        "under": true,
+        "progress": "recoil",
+        "moves": [
+          {
+            "progress": "recoil",
+            "y": -1.5
+          }
+        ]
+      },
+      {
+        "type": "RegionPart",
+        "mirror": false,
+        "recoilIndex": 1,
+        "x": 0,
+        "y": 0,
+        "suffix": "-3",
+        "layer": 49.99,
+        "moveX": 0,
+        "moveY": 0,
+        "under": true,
+        "progress": "recoil",
+        "moves": [
+          {
+            "progress": "recoil",
+            "y": -1.5
+          }
+        ]
+      },
+      {
+        "type": "RegionPart",
+        "mirror": false,
+        "x": 0,
+        "y": -1,
+        "suffix": "-2",
+        "layer": 49.9,
+        "moveX": 0,
+        "moveY": 1,
+        "under": true
+      }
+    ]
+  }
+}

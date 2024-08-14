@@ -1,0 +1,15 @@
+{
+  "health": 600,
+  "armor": 2,
+  "leaks": false,
+  "liquidCapacity": 60,
+  "liquidPressure": 1.1,
+  "placeableLiquid": true,
+  "requirements": [
+    "铱板/2",
+    "陶钢/1",
+    "生物钢/1"
+  ],
+  "category": "liquid",
+  "research": "plated-conduit"
+}

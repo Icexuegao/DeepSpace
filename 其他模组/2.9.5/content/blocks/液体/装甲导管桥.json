@@ -1,0 +1,20 @@
+{
+  "type": "LiquidBridge",
+  "armor": 4,
+  "range": 10,
+  "fadeIn": false,
+  "bridgeWidth": 8,
+  "hasPower": false,
+  "arrowSpacing": 6,
+  "liquidCapacity": 24,
+  "moveArrows": false,
+  "placeableLiquid": true,
+  "selectionColumns": 6,
+  "requirements": [
+    "metaglass/8",
+    "铱板/3",
+    "陶钢/3"
+  ],
+  "category": "liquid",
+  "research": "装甲液体路由器"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "zerg",
+  "displayName": "虫族",
+  "subtitle": "Welcome to Greavar……"
+  "description": "这个像素工厂模组允许玩家探索一个名为Greavar的行星，并在开发当地矿产、研究科技的同时防御原住民的进攻。",
+  "minGameVersion": 139,
+  "author": "pardon",
+  "version": 0.15,
+  "repo": "430230562/zerg",
+  "hideBrowser": false
+  //"dependencies":[]
+}

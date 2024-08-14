@@ -1,0 +1,17 @@
+{
+  "type": "LiquidBridge",
+  "name": "虚空导管桥",
+  "description": "利用碳纤维的延展性更快更远的传输液体",
+  "health": 180,
+  "range": 8,
+  "hasPower": false,
+  "liquidCapacity": 30,
+  "requirements": [
+    {
+      "item": "虚空石",
+      "amount": 25
+    }
+  ],
+  "category": "liquid",
+  "research": "虚空导管路由器"
+}

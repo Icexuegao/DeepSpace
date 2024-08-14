@@ -1,0 +1,23 @@
+{
+  //"type": "Wall",
+  "size": 12,
+  "rebuildable": false,
+  "destroyEffect": "none",
+  "requirements": [
+    "silicon/2900",
+    "铱板/1800",
+    "phase-fabric/840",
+    "导能回路/1080",
+    "陶钢/1200"
+  ],
+  "category": "units",
+  "destroySound": "none",
+  "buildCostMultiplier": 3,
+  "research": {
+    "parent": "巨兽培育",
+    "objectives": [
+      "异种",
+      "终极核心"
+    ]
+  }
+}

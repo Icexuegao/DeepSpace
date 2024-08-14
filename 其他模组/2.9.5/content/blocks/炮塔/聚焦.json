@@ -1,0 +1,81 @@
+{
+  "type": "ContinuousTurret",
+  "health": 1305,
+  "size": 3,
+  "armor": 2,
+  "range": 240,
+  "reload": 360,
+  "shootY": 7,
+  "rotateSpeed": 3,
+  "shootCone": 180,
+  "cooldownTime": 60,
+  "aimChangeSpeed": 3,
+  "unitSort": "strongest",
+  "liquidCapacity": 30,
+  "consumes": {
+    "power": 12.5,
+    "liquid": "slag/0.5"
+  },
+  "loopSoundVolume": 1,
+  "loopSound": "laserbeam",
+  "shootSound": "none",
+  "shootType": {
+    "type": "PointLaserBulletType",
+    "damage": 78,
+    "lifetime": 30,
+    "speed": 0,
+    "shake": 0.4,
+    "color": "FFFFFF",
+    "ammoMultiplier": 1,
+    "beamEffect": {
+      "type": "multiEffect",
+      "effects": [
+        {
+          "type": "ParticleEffect",
+          "particles": 6,
+          "lifetime": 26,
+          "length": 40,
+          "sizeFrom": 3.5,
+          "sizeTo": 0,
+          "interp": "circleOut",
+          "colorFrom": "F0A16D",
+          "colorTo": "F08B5E"
+        },
+        {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 5,
+          "lifetime": 25,
+          "length": 75,
+          "cone": 360,
+          "lenFrom": 8,
+          "lenTo": 0,
+          "colorFrom": "F0A16D",
+          "colorTo": "F08B5E"
+        }
+      ]
+    },
+    "damageInterval": 5,
+    "status": "melting",
+    "statusDuration": 30,
+    "beamEffectInterval": 3,
+    "beamEffectSize": 3.5,
+    "oscScl": 8,
+    //2抖动幅度
+    "oscMag": 0.3
+    //0.3频率
+  },
+  "requirements": [
+    "lead/380",
+    "metaglass/80",
+    "铱板/225",
+    "导能回路/185"
+  ],
+  "category": "turret",
+  "research": {
+    "parent": "流火",
+    "objectives": [
+      "地热大"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "PayloadRouter",
+  "size": 9,
+  "moveTime": 135,
+  "moveForce": 603,
+  "payloadLimit": 13,
+  "requirements": [
+    "titanium/150",
+    "thorium/100",
+    "graphite/250"
+  ],
+  "category": "units",
+  "research": "payload-router"
+}

@@ -1,0 +1,34 @@
+{
+  "type": "UnitAssemblerModule"
+  "name": "重构型模块",
+  "description": "",
+  "health": 2600,
+  //血量
+  "size": 3,
+  //大小
+  "tier": 2//模块等级
+  "consumes": {
+    "power": 25
+  },
+  //耗电量帧
+  "requirements": [
+    //制造材料
+    "化钢/5500",
+    "graphite/4500",
+    "silicon/5000",
+    "铀/7500"
+    "裂位合金/7500"
+    "绯红合金/5500"
+    "钛板/3000"
+  ]
+  "category": "units",
+  "research": {
+    "parent": "基础型模块",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "伊甸园"
+      }
+    ]
+  }
+}

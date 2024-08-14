@@ -1,0 +1,44 @@
+{
+  "type": "GenericCrafter",
+  "health": 2000,
+  "name": "裂位合金治炼厂",
+  "description": "将巨浪合金分子结构重新排列，从而获得裂位合金",
+  "outputItem": "裂位合金/3",
+  "itemCapacity": 10,
+  "size": 3,
+  "hasPower": true,
+  "hasLiquids": false,
+  "hasItems": true,
+  "craftTime": 120,
+  "updateEffect": "none",
+  "craftEffect": "smeltsmoke",
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      "DrawFlame"
+    ]
+  },
+  "consumes": {
+    "power": 6.5,
+    "items": [
+      "surge-alloy/3",
+      "一级研究协议/1"
+    ]
+  },
+  "requirements": [
+    "copper/200",
+    "lead/250",
+    "钛板/250"
+    "silicon/300"
+    "surge-alloy/200"
+  ],
+  "category": "crafting",
+  "ambientSound": "smelter",
+  "research": {
+    "parent": "钛板压制厂"
+    //科技树前置
+    "objectives": [
+    ]
+  }
+}

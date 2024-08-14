@@ -1,0 +1,23 @@
+{
+  "type": "material",
+  //类型（不能改）
+  "name": "虚空石",
+  //名字
+  "description": "一个石头，但性质与一般的石头不同，它有更特殊的性质",
+  //介绍
+  "frames": 5,
+  "color": "0D0C11FF",
+  //物品源颜色
+  "radioactivity": 0.2,
+  //放射性
+  "flammability": 0,
+  //燃烧性
+  "charge": 0.5,
+  //放电性
+  "explosiveness": 0.2,
+  //爆炸性
+  "hardness": 3,
+  "Cost": 3,
+  "alwaysUnlocked": false,
+  "research": "轻型核心"
+} 

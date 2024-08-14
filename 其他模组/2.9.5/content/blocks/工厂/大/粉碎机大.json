@@ -1,0 +1,43 @@
+{
+  "type": "GenericCrafter",
+  "size": 2,
+  "itemCapacity": 24,
+  "craftEffect": "pulverize",
+  "updateEffect": "pulverizeSmall",
+  "consumes": {
+    "power": 1,
+    "items": {
+      "items": [
+        "scrap/3"
+      ]
+    }
+  },
+  "craftTime": 10,
+  "outputItem": "sand/4",
+  "requirements": [
+    "copper/45",
+    "lead/30",
+    "graphite/25",
+    "silicon/15"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawRegion",
+        "suffix": "-rotate",
+        "spinSprite": true,
+        "rotateSpeed": 15
+      },
+      "DrawDefault"
+    ]
+  },
+  "ambientSound": "grinding",
+  "ambientSoundVolume": 0.025,
+  "category": "crafting",
+  "research": "熔炉大"
+}

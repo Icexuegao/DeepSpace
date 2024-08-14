@@ -1,0 +1,107 @@
+{
+  "type": "ItemTurret",
+  "name": "集群",
+  "description": "向敌人发射集群导弹",
+  "shootSound": "missile",
+  "shootEffect": "blastsmoke",
+  "health": 1500,
+  "size": 2,
+  "reload": 22,
+  "range": 600,
+  "maxAmmo": 90,
+  "ammoPerShot": 4,
+  "consumes": {
+    "coolant": {
+      "amount": 0.3,
+      "optional": true
+    }
+  },
+  "ammoUseEffect": "casing2Double",
+  "inaccuracy": 7,
+  "rotateSpeed": 4,
+  "shake": 1,
+  "shoot": {
+    "type": "ShootAlternate",
+    "barrels": 3,
+    "shotDelay": 5,
+    //炮口数量
+    "spread": 6,
+    //炮口间距设定
+    "shots": 12
+  }
+  "ammoUseEffect": "casing2Double",
+  "targetGround": true,
+  "ammoTypes": {
+    "graphite": {
+      "type": "MissileBulletType",
+      "damage": 80,
+      "trailLength": 8,
+      "trailWidth": 1,
+      "backColor": "BF92F8",
+      "frontColor": "665C9F",
+      "trailEffect": "smoke",
+      "trailColor": "BF92F8",
+      "buildingDamageMultiplier": 1,
+      "splashDamageRadius": 25,
+      "splashDamage": 20,
+      "homingRange": 60,
+      "homingPower": 0.1,
+      "hitEffect": "explosion",
+      "despawnEffect": "explosion",
+      "width": 8,
+      "height": 9,
+      "speed": 6,
+      "lifetime": 120
+    },
+    "pyratite": {
+      "type": "MissileBulletType",
+      "damage": 160,
+      "trailLength": 6,
+      "trailWidth": 1,
+      "backColor": "BF92F8",
+      "frontColor": "665C9F",
+      "trailEffect": "smoke",
+      "trailColor": "BF92F8",
+      "buildingDamageMultiplier": 1,
+      "splashDamageRadius": 18,
+      "splashDamage": 40,
+      "homingRange": 80,
+      "homingPower": 0.06,
+      "hitEffect": "explosion",
+      "despawnEffect": "explosion",
+      "width": 8,
+      "height": 9,
+      "speed": 6,
+      "lifetime": 140
+    }
+  },
+  "researchCostMultiplier": 0.5,
+  "requirements": [
+    {
+      "item": "化钢",
+      "amount": 250
+    },
+    {
+      "item": "graphite",
+      "amount": 500
+    },
+    {
+      "item": "silicon",
+      "amount": 100
+    },
+    {
+      "item": "绯红合金",
+      "amount": 200
+    }
+  ],
+  "category": "turret",
+  "research": {
+    "parent": "彗星"
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "孢子平原"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "OverdriveProjector",
+  "size": 4,
+  "range": 600,
+  "useTime": 300,
+  "speedBoost": 4,
+  "hasBoost": false,
+  "consumes": {
+    "power": 36,
+    "items": {
+      "items": [
+        "导能回路/2",
+        "phase-fabric/2"
+      ]
+    }
+  },
+  "requirements": [
+    "铱板/540",
+    "导能回路/160",
+    "phase-fabric/50",
+    "surge-alloy/250"
+  ],
+  "category": "effect",
+  "research": "overdrive-dome"
+}

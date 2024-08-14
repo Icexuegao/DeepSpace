@@ -1,0 +1,22 @@
+{
+  "name": "失灵",
+  "speedMultiplier": 0,
+  "reloadMultiplier": 0,
+  "effectChance": 0.6,
+  "description": "通过断开敌人神经网络，从而使敌人无法攻击与移动",
+  "transitionDamage": 0,
+  "effect": [
+    {
+      "type": "ParticleEffect",
+      "particles": 1,
+      "baseLength": 10,
+      "length": 8,
+      "lifetime": 20,
+      "sizeFrom": 1,
+      "sizeTo": 0,
+      "colorFrom": "6ecdec",
+      "colorTo": "ffffff",
+      "cone": 360
+    }
+  ]
+}

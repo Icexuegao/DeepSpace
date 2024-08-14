@@ -1,0 +1,24 @@
+{
+  "type": "material",
+  //类型（不能改）
+  "name": "化钢",
+  //名字
+  "description": "这种钢拥有强大的放射性与能量",
+  //介绍
+  "details": "放射性与能量极其强大的钢",
+  //战役中解锁后最底下的介绍（？）
+  "color": "3F3F65FF",
+  //物品源颜色
+  "radioactivity": 3.0,
+  //放射性
+  "flammability": 0,
+  //燃烧性
+  "charge": 2.0,
+  //放电性
+  "explosiveness": 0,
+  //爆炸性
+  "hardness": 0,
+  "Cost": 5,
+  "alwaysUnlocked": false,
+  "research": "铀"
+}    

@@ -1,0 +1,7 @@
+{
+  "type": "OreBlock",
+  "itemDrop": "铱板",
+  "oreDefault": true,
+  "oreThreshold": 0.89,
+  "oreScale": 26
+}

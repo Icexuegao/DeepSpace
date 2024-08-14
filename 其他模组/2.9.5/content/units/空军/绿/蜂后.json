@@ -1,0 +1,347 @@
+{
+  "type": "payload",
+  "controller": "DefenderAI",
+  "research": {
+    "parent": "oct",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "nuclearComplex"
+      },
+      "巨兽级"
+    ]
+  },
+  "researchCostMultiplier": 40,
+  "lowAltitude": true,
+  "faceTarget": false,
+  "flying": true,
+  "health": 138000,
+  "armor": 32,
+  "hitSize": 91,
+  "speed": 0.6,
+  "drag": 0.18,
+  "accel": 0.19,
+  "rotateSpeed": 0.9,
+  "buildSpeed": 8,
+  "engineSize": 10.6,
+  "engineOffset": 40,
+  "payloadCapacity": 16384,
+  "immunities": [
+    "burning",
+    "melting",
+    "blasted",
+    "wet",
+    "freezing",
+    "spore-slowed",
+    "slow",
+    "tarred",
+    "muddy",
+    "sapped",
+    "electrified",
+    "unmoving",
+    "熔融",
+    "湍能",
+    "EMP",
+    "辐射",
+    "衰变"
+  ],
+  "weapons": [
+    {
+      "x": 0,
+      "y": -0.7,
+      "shoot": {
+        "shots": 5,
+        "shotDelay": 5
+      },
+      "recoil": 0,
+      "reload": 90,
+      "rotate": true,
+      "mirror": false,
+      "shootCone": 5,
+      "inaccuracy": 15,
+      "rotateSpeed": 20,
+      "shootSound": "激射",
+      "bullet": {
+        "type": "MissileBulletType",
+        "sprite": "circle-bullet",
+        "damage": 88,
+        "lifetime": 60,
+        "speed": 12,
+        "drag": 0.015,
+        "width": 12,
+        "height": 12,
+        "shrinkY": 0,
+        "weaveMag": 2,
+        "weaveScale": 6,
+        "trailLength": 12,
+        "trailWidth": 4,
+        "trailColor": "84F491",
+        "backColor": "73D188",
+        "frontColor": "84F491",
+        "healPercent": 5,
+        "homingDelay": 20,
+        "homingRange": 80,
+        "homingPower": 0.04,
+        "status": "electrified",
+        "statusDuration": 90,
+        "splashDamage": 65,
+        "splashDamageRadius": 45,
+        "reflectable": false,
+        "collidesTeam": true,
+        "shootEffect": {
+          "type": "ParticleEffect",
+          "line": true,
+          "particles": 7,
+          "lifetime": 22,
+          "length": 35,
+          "cone": 60,
+          "lenFrom": 5,
+          "lenTo": 0,
+          "colorFrom": "84F491",
+          "colorTo": "73D188"
+        },
+        "hitSound": "plasmaboom",
+        "hitEffect": {
+          "type": "MultiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "particles": 5,
+              "lifetime": 25,
+              "line": true,
+              "sizeFrom": 4,
+              "sizeTo": 0,
+              "lenFrom": 6,
+              "lenTo": 0,
+              "length": 80,
+              "baseLength": 8,
+              "interp": "exp10Out",
+              "sizeInterp": "pow5In",
+              "colorFrom": "73D188",
+              "colorTo": "84F491"
+            },
+            {
+              "type": "WaveEffect",
+              "lifetime": 15,
+              "strokeFrom": 2,
+              "strokeTo": 0,
+              "sizeFrom": 0,
+              "sizeTo": 40,
+              "colorFrom": "73D188",
+              "colorTo": "84F491"
+            }
+          ]
+        },
+        "despawnEffect": {
+          "type": "MultiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "particles": 8,
+              "lifetime": 30,
+              "sizeFrom": 4,
+              "sizeTo": 0,
+              "length": 80,
+              "baseLength": 8,
+              "interp": "pow2Out",
+              "colorFrom": "73D188",
+              "colorTo": "84F491"
+            },
+            {
+              "type": "WaveEffect",
+              "lifetime": 10,
+              "sizeFrom": 8,
+              "sizeTo": 100,
+              "strokeFrom": 3,
+              "strokeTo": 0,
+              "colorFrom": "73D188",
+              "colorTo": "84F491"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "RepairBeamWeapon",
+      "name": "修复",
+      "x": 29.5,
+      "y": 46,
+      "shootY": 8,
+      "reload": 1,
+      "recoil": 0,
+      "shake": 0,
+      "mirror": true,
+      "rotate": true,
+      "rotateSpeed": 3,
+      "laserColor": "73FFAE",
+      "controllable": false,
+      "autoTarget": true,
+      "alternate": false,
+      "beamWidth": 0.9,
+      "pulseRadius": 6,
+      "pulseStroke": 2,
+      "repairSpeed": 13,
+      "bullet": {
+        "maxRange": 360
+      }
+    },
+    {
+      "type": "RepairBeamWeapon",
+      "name": "修复",
+      "x": 51,
+      "y": 27,
+      "shootY": 8,
+      "reload": 1,
+      "recoil": 0,
+      "shake": 0,
+      "mirror": true,
+      "rotate": true,
+      "rotateSpeed": 3,
+      "laserColor": "73FFAE",
+      "controllable": false,
+      "autoTarget": true,
+      "alternate": false,
+      "beamWidth": 0.9,
+      "pulseRadius": 6,
+      "pulseStroke": 2,
+      "repairSpeed": 13,
+      "bullet": {
+        "maxRange": 360
+      }
+    },
+    {
+      "type": "RepairBeamWeapon",
+      "name": "修复",
+      "x": 29.5,
+      "y": 22.5,
+      "shootY": 8,
+      "reload": 1,
+      "recoil": 0,
+      "shake": 0,
+      "mirror": true,
+      "rotate": true,
+      "rotateSpeed": 3,
+      "laserColor": "73FFAE",
+      "controllable": false,
+      "autoTarget": true,
+      "alternate": false,
+      "beamWidth": 0.9,
+      "pulseRadius": 6,
+      "pulseStroke": 2,
+      "repairSpeed": 13,
+      "bullet": {
+        "maxRange": 360
+      }
+    },
+    {
+      "type": "RepairBeamWeapon",
+      "name": "修复",
+      "x": 36.5,
+      "y": 2,
+      "shootY": 8,
+      "reload": 1,
+      "recoil": 0,
+      "shake": 0,
+      "mirror": true,
+      "rotate": true,
+      "rotateSpeed": 3,
+      "laserColor": "73FFAE",
+      "controllable": false,
+      "autoTarget": true,
+      "alternate": false,
+      "beamWidth": 0.9,
+      "pulseRadius": 6,
+      "pulseStroke": 2,
+      "repairSpeed": 13,
+      "bullet": {
+        "maxRange": 360
+      }
+    },
+    {
+      "type": "PointDefenseWeapon",
+      "name": "裂解",
+      "x": 0,
+      "y": -0.7,
+      "recoil": 0,
+      "reload": 6,
+      "color": "73FFAE",
+      "targetInterval": 6,
+      "targetSwitchInterval": 6,
+      "shootSound": "lasershoot",
+      "bullet": {
+        "maxRange": 360,
+        "damage": 225,
+        "shootEffect": "sparkShoot",
+        "hitEffect": "pointHit"
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "EnergyFieldAbility",
+      "y": -0.7,
+      "reload": 30,
+      "range": 240,
+      "damage": 225,
+      "rotateSpeed": 3,
+      "maxTargets": 50,
+      "healPercent": 2.5,
+      "status": "湍能",
+      "statusDuration": 120
+    },
+    {
+      "type": "StatusFieldAbility",
+      "effect": "迅疗",
+      "duration": 150,
+      "reload": 300,
+      "range": 320,
+      "activeEffect": {
+        "type": "WaveEffect",
+        "lifetime": 30,
+        "sizeTo": 320,
+        "strokeFrom": 2,
+        "colorFrom": "57D993",
+        "colorTo": "73FFAE"
+      },
+      "applyEffect": {
+        "type": "WaveEffect",
+        "sides": 4,
+        "lifetime": 30,
+        "sizeFrom": 8,
+        "sizeTo": 8,
+        "strokeFrom": 1.6,
+        "colorFrom": "57D993",
+        "colorTo": "73FFAE"
+      }
+    },
+    {
+      "type": "ShieldRegenFieldAbility",
+      "amount": 200,
+      "max": 4000,
+      "reload": 65,
+      "range": 240,
+      "activeEffect": {
+        "type": "WaveEffect",
+        "lifetime": 35,
+        "sizeFrom": 16,
+        "sizeTo": 240,
+        "strokeFrom": 10,
+        "strokeTo": 0,
+        "colorFrom": "FFD37F",
+        "colorTo": "FFD37F"
+      },
+      "applyEffect": {
+        "type": "WaveEffect",
+        "lifetime": 60,
+        "sides": 6,
+        "sizeFrom": 24,
+        "sizeTo": 0,
+        "strokeFrom": 0,
+        "strokeTo": 3,
+        "interp": "exp10Out",
+        "colorFrom": "FFD37F",
+        "colorTo": "FFD37F"
+      }
+    }
+  ]
+}

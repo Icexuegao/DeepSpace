@@ -1,0 +1,19 @@
+{
+  "damageMultiplier": 1.5,
+  "healthMultiplier": 0.8,
+  "speedMultiplier": 1.4,
+  "reloadMultiplier": 1.2,
+  "effectChance": 0.05,
+  "effect": {
+    "type": "ParticleEffect",
+    "particles": 3,
+    "lifetime": 30,
+    "length": 30,
+    "sizeFrom": 3,
+    "sizeTo": 0,
+    "cone": 360
+    "colorFrom": "E8D174",
+    "colorTo": "F3E979"
+  }
+  "color": "F3E979"
+}

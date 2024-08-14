@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.EB-wilson.UniverseCore:annotations:2.1.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.EB-wilson.UniverseCore" artifactId="annotations" version="2.1.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.EB-wilson.UniverseCore/annotations/2.1.1/d12e35a995197b6cfe3c8efc180157b17c28b536/annotations-2.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Gradle/huancun/caches/modules-2/files-2.1/com.github.EB-wilson.UniverseCore/annotations/2.1.1/8dc29e1a66865625867d9eefdbca3bd4d7089053/annotations-2.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

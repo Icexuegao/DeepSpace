@@ -1,0 +1,125 @@
+{
+  "health": 2240,
+  "size": 4,
+  "recoil": 3,
+  "shake": 4.5,
+  "range": 600,
+  "reload": 320,
+  "shootCone": 2,
+  "maxAmmo": 40,
+  "rotateSpeed": 3,
+  "ammoPerShot": 8,
+  "cooldownTime": 380,
+  "unitSort": "strongest",
+  "ammoUseEffect": "casing4",
+  "consumes": {
+    "power": 44.75,
+    "coolant": {
+      "amount": 1.5
+    }
+  },
+  "coolantMultiplier": 0.5,
+  "shootSound": "mediumCannon",
+  "requirements": [
+    "copper/1360",
+    "铱板/300",
+    "plastanium/180",
+    "surge-alloy/225",
+    "导能回路/75"
+  ],
+  "drawer": {
+    "type": "DrawTurret",
+    "parts": [
+      {
+        "type": "RegionPart",
+        "suffix": "-glow",
+        "heatProgress": "warmup",
+        "drawRegion": false,
+        "heatColor": "F03B0E"
+      },
+      {
+        "type": "HaloPart",
+        "hollow": true,
+        "y": -16,
+        "shapes": 1,
+        "sides": 5,
+        "radius": 4,
+        "stroke": 0,
+        "strokeTo": 0.8,
+        "haloRadius": 0,
+        "haloRotation": 180,
+        "rotateSpeed": 0.5,
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "hollow": true,
+        "y": -16,
+        "shapes": 1,
+        "sides": 5,
+        "radius": 6,
+        "stroke": 0,
+        "strokeTo": 1.2,
+        "haloRadius": 0,
+        "rotateSpeed": -0.5,
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "tri": true,
+        "y": -16,
+        "shapes": 1,
+        "radius": 3,
+        "triLength": 0,
+        "triLengthTo": 8,
+        "haloRadius": 5,
+        "haloRotateSpeed": -0.5,
+        "haloRotation": 36,
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "tri": true,
+        "y": -16,
+        "shapes": 1,
+        "radius": 3,
+        "triLength": 0,
+        "triLengthTo": 8,
+        "haloRadius": 5,
+        "haloRotateSpeed": -0.5,
+        "haloRotation": -36,
+        "color": "FF5845",
+        "layer": 110
+      },
+      {
+        "type": "HaloPart",
+        "tri": true,
+        "y": -16,
+        "shapes": 1,
+        "radius": 3,
+        "triLength": 0,
+        "triLengthTo": 8,
+        "haloRadius": 5,
+        "haloRotateSpeed": -0.5,
+        "haloRotation": 180,
+        "color": "FF5845",
+        "layer": 110
+      }
+    ]
+  },
+  "category": "turret",
+  "research": {
+    "parent": "月隐",
+    "objectives": [
+      "foreshadow",
+      //"苟责",
+      {
+        "type": "SectorComplete",
+        "preset": "nuclearComplex"
+      }
+    ]
+  }
+}

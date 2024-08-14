@@ -1,0 +1,54 @@
+{
+  "type": "GenericCrafter",
+  "size": 3,
+  "itemCapacity": 36,
+  "consumes": {
+    "power": 11,
+    "items": {
+      "items": [
+        "spore-pod/5",
+        "phase-fabric/1",
+        "surge-alloy/1",
+        "铱板/2",
+        "陶钢/1"
+      ]
+    }
+  },
+  "updateEffect": "burning",
+  "updateEffectChance": 0.1,
+  "craftTime": 120,
+  "outputItem": "生物钢/2",
+  "requirements": [
+    "铱板/235",
+    "silicon/85",
+    "plastanium/75",
+    "surge-alloy/35"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      {
+        "type": "DrawParticles",
+        "color": "D86E56FF",
+        "alpha": 0.6,
+        "particles": 30,
+        "particleLife": 60,
+        "particleRad": 8,
+        "particleSize": 2,
+        "fadeMargin": 0.5,
+        "rotateScl": 4
+      },
+      "DrawFlame"
+    ]
+  },
+  "ambientSound": "beamLoop",
+  "ambientSoundVolume": 0.06,
+  "category": "crafting",
+  "research": {
+    "parent": "陶钢熔炼炉",
+    "objectives": [
+      "surge-smelter"
+    ]
+  }
+}

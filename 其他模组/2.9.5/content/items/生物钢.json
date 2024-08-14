@@ -1,0 +1,14 @@
+{
+  "color": "D75B6E",
+  "frames": 3,
+  "transitionFrames": 3,
+  "frameTime": 5,
+  "explosiveness": 0.75,
+  "flammability": 0.5,
+  "radioactivity": 0.1,
+  "charge": 0.4,
+  "cost": 2.4,
+  "healthScaling": 2.4,
+  "hardness": 6,
+  "research": "phase-fabric"
+}

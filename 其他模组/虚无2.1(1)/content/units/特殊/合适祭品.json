@@ -1,0 +1,84 @@
+{
+  "type": "flying",
+  "name": "合适祭品",
+  "description": "它由虚空被传送到这个地方，且身体为黑色凝状物，内部构造更是琢磨不透",
+  "speed": 2.4,
+  "drag": 0.15,
+  "accel": 0.05,
+  "rotateSpeed": 0.5,
+  "ammoType": {
+    "type": "PowerAmmoType",
+    "totalPower": 100
+    "fogRadius": 285
+  },
+  "ammoCapacity": 300,
+  "hitSize": 80,
+  "mass": 250,
+  "buildSpeed": 0.75,
+  "flying": true,
+  "faceTarget": true,
+  "lowAltitude": true,
+  "drawMinimap": true,
+  "health": 7500,
+  "armor": 35,
+  "engineColor": "BF92F8FF",
+  "engineOffset": 50,
+  "engineSize": 10,
+  "itemCapacity": 500,
+  "research": {
+    "parent": "召唤祭坛"
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "海上群岛"
+      }
+    ]
+  }
+  "immunities": [
+    "freezing"
+    "失灵"
+  ],
+  "parts": [
+    {
+      "type": "HaloPart",
+      "progress": "recoil",
+      "shapeRotation": 0,
+      "y": -0.5,
+      "sides": 5,
+      "shapes": 8,
+      "color": "BF92F8FF",
+      "colorTo": "665C9FFF",
+      "tri": true,
+      "hollow": false,
+      "radius": 6,
+      "radiusTo": 6,
+      "triLength": 6,
+      "triLengthTo": 6,
+      "haloRadius": 12,
+      "haloRotation": -1,
+      "haloRotateSpeed": 1,
+      "layer": 110
+    }
+    {
+      "type": "HaloPart",
+      "progress": "recoil",
+      "shapeRotation": 0
+      "x": 0
+      "y": -13,
+      "sides": 99,
+      "shapes": 1,
+      "color": "BF92F8FF",
+      "colorTo": "665C9FFF",
+      "circle": true,
+      "hollow": false,
+      "radius": 6,
+      "radiusTo": 6,
+      "circleLength": 6,
+      "circleLengthTo": 6,
+      "haloRadius": 12,
+      "haloRotation": 0,
+      "haloRotateSpeed": 0,
+      "layer": 110
+    }
+  ]
+}

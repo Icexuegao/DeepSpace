@@ -1,0 +1,15 @@
+{
+  "name": "火石矿(墙)",
+  "wallOre": true,
+  "type": "OreBlock",
+  "vaviants": 3,
+  "hardness": 5,
+  //挖掘等级
+  "playerUnmineable": false,
+  "itemDrop": "火石矿",
+  "mapColor": "C9DDE3FF",
+  "useColor": true,
+  "oreDefault": true,
+  "oreThreshold": 4,
+  "oreScale": 20
+}

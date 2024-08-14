@@ -1,0 +1,11 @@
+{
+  "type": "Unloader",
+  "speed": 0.2,
+  "selectionColumns": 6,
+  "requirements": [
+    "铱板/25",
+    "导能回路/15"
+  ],
+  "category": "effect",
+  "research": "unloader"
+}

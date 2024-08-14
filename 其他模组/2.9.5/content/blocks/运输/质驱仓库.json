@@ -1,0 +1,31 @@
+{
+  "type": "MassDriver",
+  "size": 5,
+  "reload": 600,
+  "range": 1280,
+  "consumes": {
+    "power": 23.75
+  },
+  "dumpTime": 1,
+  "knockback": 4,
+  "translation": 2,
+  "bulletSpeed": 12,
+  "rotateSpeed": 2,
+  "itemCapacity": 2400,
+  "minDistribute": 600,
+  "bulletLifetime": 160,
+  "shootSound": "artillery",
+  "shootEffect": "shootBig2",
+  "smokeEffect": "shootSmokeTitan",
+  "receiveEffect": "hitSquaresColor",
+  "requirements": [
+    "thorium/335",
+    "铱板/285",
+    "导能回路/225",
+    "plastanium/175",
+    "surge-alloy/115",
+    "phase-fabric/85"
+  ],
+  "category": "distribution",
+  "research": "mass-driver"
+}

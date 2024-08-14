@@ -1,0 +1,79 @@
+{
+  "type": "mech",
+  "research": {
+    "parent": "陆战1",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "冰封峡谷"
+      }
+    ]
+  },
+  "health": 640,
+  "armor": 5,
+  "hitSize": 12,
+  "speed": 0.8,
+  "rotateSpeed": 4,
+  "lowAltitude": true,
+  "canBoost": true,
+  "boostMultiplier": 2,
+  "engineOffset": 5.5,
+  "engineSize": 3,
+  "mechLandShake": 2,
+  "riseSpeed": 0.05,
+  "mechFrontSway": 0.55,
+  "weapons": [
+    {
+      "name": "陆战2炮",
+      "x": 7.75,
+      "y": 1,
+      "shake": 1,
+      "top": false,
+      "shoot": {
+        "shots": 8
+      },
+      "inaccuracy": 30,
+      "reload": 50,
+      "recoil": 2,
+      "ejectEffect": "casing2",
+      "shootSound": "shotgun",
+      "bullet": {
+        "type": "shrapnelBulletType",
+        "damage": 43,
+        "lifetime": 15,
+        "speed": 0,
+        "length": 60,
+        "width": 6,
+        "recoil": 0.25,
+        "fromColor": "FFDCD8",
+        "toColor": "FF5845",
+        "serrations": 1,
+        "shootEffect": {
+          "type": "ParticleEffect",
+          "particles": 2,
+          "lifetime": 20,
+          "line": true,
+          "strokeFrom": 3,
+          "strokeTo": 0,
+          "lenFrom": 8,
+          "lenTo": 0,
+          "cone": 25,
+          "length": 30,
+          "colorFrom": "FF5845",
+          "colorTo": "FFDCD8"
+        },
+        "smokeEffect": "none"
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "ArmorPlateAbility",
+      "healthMultiplier": 0.2
+    },
+    {
+      "type": "RegenAbility",
+      "percentAmount": 0.0125
+    }
+  ]
+}

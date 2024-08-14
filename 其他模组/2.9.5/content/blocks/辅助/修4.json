@@ -1,0 +1,30 @@
+{
+  "type": "mendProjector",
+  "size": 4,
+  "reload": 130,
+  "range": 480,
+  "useTime": 300,
+  "healPercent": 5,
+  "canOverdrive": false,
+  "phaseBoost": 7,
+  "phaseRangeBoost": 120,
+  "consumes": {
+    "power": 36,
+    "items": {
+      "items": [
+        "导能回路/2",
+        "phase-fabric/2"
+      ],
+      "booster": true,
+      "optional": true
+    }
+  },
+  "requirements": [
+    "铱板/480",
+    "导能回路/95",
+    "phase-fabric/25",
+    "surge-alloy/150"
+  ],
+  "category": "effect",
+  "research": "修3"
+}

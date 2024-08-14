@@ -1,0 +1,396 @@
+{
+  "type": "flying",
+  "flying": true,
+  "hidden": true,
+  "health": "99e9",
+  "armor": 24,
+  "hitSize": 18,
+  "speed": 4,
+  "drag": 0.01,
+  "rotateSpeed": 1,
+  "engineOffset": 52,
+  "engineSize": 0,
+  "engines": [
+    {
+      "x": -15,
+      "y": 20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -25,
+      "y": 20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -35,
+      "y": 20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -40,
+      "y": 10,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -35,
+      "y": 0,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -25,
+      "y": 0,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -15,
+      "y": 0,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -10,
+      "y": -10,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -15,
+      "y": -20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -25,
+      "y": -20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": -35,
+      "y": -20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 10,
+      "y": 20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 10,
+      "y": 10,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 10,
+      "y": -10,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 10,
+      "y": -20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 20,
+      "y": 20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 30,
+      "y": 20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 35,
+      "y": 10,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 30,
+      "y": 0,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 35,
+      "y": -10,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 20,
+      "y": -20,
+      "radius": 5,
+      "rotation": -90
+    },
+    {
+      "x": 30,
+      "y": -20,
+      "radius": 5,
+      "rotation": -90
+    }
+  ],
+  "parts": [
+    {
+      "type": "HaloPart",
+      "progress": "smoothReload",
+      "mirror": true,
+      "tri": true,
+      "x": 2,
+      "y": -16,
+      "shapeRotation": -135,
+      "shapes": 1,
+      "radius": 3,
+      "triLength": 0,
+      "triLengthTo": 32,
+      "color": "FF5845",
+      "colorTo": "FFDCD8",
+      "layer": 110
+    },
+    {
+      "type": "HoverPart",
+      "color": "FF5845",
+      "phase": 120,
+      "circles": 3,
+      "stroke": 1,
+      "y": -2,
+      "layer": 100
+    }
+  ],
+  "lightColor": "FF5845",
+  "lowAltitude": true,
+  "faceTarget": false,
+  "ammoType": "生物钢",
+  "ammoCapacity": 9999,
+  "immunities": [
+    "wet",
+    "burning",
+    "melting",
+    "blasted",
+    "熔融"
+  ],
+  "targetFlags": [
+    "reactor",
+    "generator",
+    "battery",
+    "factory"
+  ],
+  "weapons": [
+    {
+      "name": "固守炮",
+      "x": 5,
+      "y": 0,
+      "shake": 0.5,
+      "top": false,
+      "rotate": true,
+      "shoot": {
+        "shots": 1,
+        "shotDelay": 5
+      },
+      "reload": 25,
+      "recoil": 1,
+      "ejectEffect": "casing1",
+      "shootSound": "shoot",
+      "bullet": {
+        "type": "EmpBulletType",
+        "damage": 60,
+        "speed": 10,
+        "lifetime": 128,
+        "ammoMultiplier": 1,
+        "scaleLife": true,
+        "splashDamage": 1,
+        "splashDamageRadius": 120,
+        "radius": 120,
+        "timeIncrease": 6,
+        "timeDuration": 600,
+        "powerDamageScl": 5,
+        //1=12
+        "powerSclDecrease": 0,
+        "hitPowerEffect": {
+          "type": "ParticleEffect",
+          "particles": 3,
+          "length": 0.01,
+          "line": true,
+          "lifetime": 30,
+          "strokeFrom": 2,
+          "strokeTo": 0,
+          "lenFrom": 12,
+          "lenTo": 12,
+          "colorTo": "FF5845",
+          "sizeInterp": "linear"
+        },
+        "chainEffect": {
+          "type": "WrapEffect",
+          "effect": "chainEmp",
+          "color": "FF5845"
+        },
+        "applyEffect": {
+          "type": "WrapEffect",
+          "effect": "heal",
+          "color": "FF5845"
+        },
+        "hitUnits": true,
+        "unitDamageScl": 2,
+        "trailLength": 15,
+        "trailWidth": 4.5,
+        "trailColor": "D86E56",
+        "trailChance": 1,
+        "trailInterval": 20,
+        "trailRotation": true,
+        "trailEffect": {
+          "type": "multiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "region": "curse-of-flesh-wide",
+              "particles": 1,
+              "length": 0,
+              "baseLength": 0,
+              "lifetime": 10,
+              "cone": 0,
+              "offset": 90,
+              "offsetX": 5,
+              "randLength": false,
+              "lightColor": "FF5845",
+              "colorFrom": "FFDCD8",
+              "colorTo": "FF5845",
+              "sizeFrom": 0,
+              "sizeTo": 24
+            },
+            {
+              "type": "ParticleEffect",
+              "region": "curse-of-flesh-wide",
+              "particles": 1,
+              "length": 0,
+              "baseLength": 0,
+              "lifetime": 10,
+              "cone": 0,
+              "offset": 90,
+              "offsetX": 5,
+              "startDelay": 10,
+              "randLength": false,
+              "lightColor": "FF5845",
+              "colorFrom": "FF5845",
+              "colorTo": "FFDCD8",
+              "sizeFrom": 24,
+              "sizeTo": 0
+            }
+          ]
+        },
+        "despawnEffect": {
+          "type": "multiEffect",
+          "effects": [
+            {
+              "type": "ParticleEffect",
+              "particles": 1,
+              "length": 0,
+              "lifetime": 15,
+              "interp": "circleOut",
+              "cone": 360,
+              "colorFrom": "FF5845",
+              "colorTo": "FFDCD800",
+              "sizeFrom": 120,
+              "sizeTo": 120
+            },
+            {
+              "type": "WaveEffect",
+              "lifetime": 30,
+              "sizeFrom": 120,
+              "sizeTo": 120,
+              "strokeFrom": 4,
+              "strokeTo": 0,
+              "colorFrom": "FF5845",
+              "colorTo": "FFDCD800"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "type": "MoveLightningAbility",
+      "minSpeed": -1,
+      "maxSpeed": 0,
+      "damage": 0,
+      "chance": 1,
+      "length": 0,
+      "y": -46,
+      "color": "00000000",
+      "shootSound": "none",
+      "shootEffect": "none",
+      "bulletAngle": 180,
+      "bullet": {
+        "type": "ContinuousFlameBulletType",
+        "length": 30,
+        "damage": 60,
+        "oscScl": 0.8,
+        //抖动频率
+        "oscMag": 0.02,
+        //抖动幅度
+        "drawFlare": false,
+        "flareColor": "FF5845",
+        "flareWidth": 3,
+        "flareLength": 40,
+        "lengthInterp": "slope",
+        //火焰特效类型
+        "flareInnerScl": 0.5,
+        //内层火焰根部粗细
+        "flareInnerLenScl": 0.5,
+        //外层火焰根部粗细
+        "rotateFlare": true,
+        "flareRotSpeed": 1.2,
+        "colors": [
+          "FF58458C",
+          "FF5845B2",
+          "FF5845CC",
+          "FF5845",
+          "FFFFFFCC"
+        ],
+        "lengthWidthPans": [
+          1.12,
+          1,
+          0.32,
+          1,
+          1,
+          0.3,
+          0.8,
+          0.9,
+          0.2,
+          0.5,
+          0.8,
+          0.15,
+          0.25,
+          0.7,
+          0.1
+        ]
+      }
+    }
+  ]
+}

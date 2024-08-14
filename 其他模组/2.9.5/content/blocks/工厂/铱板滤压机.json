@@ -1,0 +1,47 @@
+{
+  "type": "AttributeCrafter",
+  "size": 2,
+  "itemCapacity": 24,
+  "liquidCapacity": 24,
+  "baseEfficiency": 0,
+  "boostScale": 0.36,
+  "minEfficiency": 0.5,
+  "maxBoost": 2,
+  "attribute": "sand",
+  "consumes": {
+    "power": 3.5,
+    "liquid": "water/0.2"
+  },
+  "craftTime": 80,
+  "craftEffect": "mine",
+  "outputItem": "铱板/1",
+  "requirements": [
+    "copper/85",
+    "thorium/55",
+    "silicon/35"
+  ],
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault",
+      {
+        "type": "DrawFrames",
+        "frames": 5,
+        "interval": 4
+      },
+      {
+        "type": "DrawParticles",
+        "color": "7B7B7B",
+        "alpha": 0.6,
+        "particles": 30,
+        "particleLife": 120,
+        "particleRad": 12,
+        "particleSize": 1,
+        "fadeMargin": 0.5,
+        "rotateScl": 0.5
+      }
+    ]
+  },
+  "category": "crafting",
+  "research": "plastanium-compressor"
+}

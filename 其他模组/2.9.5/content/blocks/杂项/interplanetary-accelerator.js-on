@@ -1,0 +1,11 @@
+{
+	"research": {
+		"parent": "相位发射台",
+		"objectives": [
+			{
+				"type": "SectorComplete",
+				"preset": "planetaryTerminal"
+			}
+		]
+	}
+}

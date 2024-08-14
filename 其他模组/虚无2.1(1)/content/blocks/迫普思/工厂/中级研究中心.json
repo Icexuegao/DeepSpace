@@ -1,0 +1,70 @@
+{
+  "type": "GenericCrafter",
+  "health": 1500,
+  "name": "中级研究中心",
+  "description": "在一级研究协议的基础上再次进行特殊研究，从而获得二级研究协议",
+  "outputItem": {
+    "item": "二级研究协议",
+    "amount": 1
+  },
+  "itemCapacity": 60,
+  "size": 3,
+  "hasPower": true,
+  "hasLiquids": false,
+  "hasItems": true,
+  "craftTime": 960,
+  "updateEffect": "smeltsmoke",
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      "DrawDefault"
+    ]
+  },
+  "consumes": {
+    "power": 25.0,
+    "items": {
+      "items": [
+        {
+          "item": "化钢",
+          "amount": 25
+        },
+        {
+          "item": "一级研究协议",
+          "amount": 1
+        },
+        {
+          "item": "绯红合金",
+          "amount": 10
+        }
+      ]
+    }
+  },
+  "requirements": [
+    {
+      "item": "铀",
+      "amount": 150
+    },
+    {
+      "item": "绯红合金",
+      "amount": 120
+    },
+    {
+      "item": "silicon",
+      "amount": 250
+    },
+    {
+      "item": "化钢",
+      "amount": 150
+    }
+  ],
+  "category": "crafting",
+  "research": {
+    "parent": "绯红合金炼制厂",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "绯红矿区"
+      }
+    ]
+  }
+}

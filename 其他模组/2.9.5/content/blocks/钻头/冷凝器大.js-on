@@ -1,0 +1,22 @@
+{
+	"name": "强化冷凝器",
+	"description": "从蒸汽喷口凝结水，比冷凝器的效率更高。",
+	"type": "AttributeCrafter",
+	"size": 3,
+	"liquidCapacity": 120,
+	"baseEfficiency": 0,
+	"attribute": "steam",
+	"outputLiquid": "water/1",
+	"consumes": {
+		"power": 6
+	},
+	"requirements": [
+		"titanium/75",
+		"metaglass/75",
+		"silicon/60",
+		"thorium/40"
+	],
+	"category": "production",
+	//"research": "water-extractor"
+	"buildVisibility": "sandboxOnly"
+}

@@ -1,0 +1,76 @@
+{
+  "type": "GenericCrafter",
+  "name": "化钢液混合器",
+  "description": "将化钢转化为冷却效果更好的液体",
+  "health": 1000,
+  "outputLiquid": {
+    "liquid": "化钢液",
+    "amount": 0.3
+  },
+  "itemCapacity": 30,
+  "liquidCapacity": 100,
+  "size": 2,
+  "drawer": {
+    "type": "DrawMulti",
+    "drawers": [
+      {
+        "type": "DrawRegion",
+        "suffix": "-bottom"
+      },
+      {
+        "type": "DrawLiquidTile",
+        "drawLiquid": "化钢液"
+      },
+      "DrawDefault"
+    ]
+  },
+  "hasItems": true,
+  "hasLiquids": true,
+  "solid": true,
+  "outputsLiquid": true,
+  "hasPower": true,
+  "craftTime": 60,
+  "consumes": {
+    "power": 6,
+    "items": {
+      "items": [
+        {
+          "item": "化钢",
+          "amount": 2
+        }
+      ]
+    },
+    "liquid": {
+      "liquid": "cryofluid",
+      "amount": 0.3
+    }
+  },
+  "requirements": [
+    {
+      "item": "化钢",
+      "amount": 100
+    },
+    {
+      "item": "铀",
+      "amount": 100
+    },
+    {
+      "item": "metaglass",
+      "amount": 200
+    },
+    {
+      "item": "graphite",
+      "amount": 150
+    }
+  ],
+  "category": "crafting",
+  "research": {
+    "parent": "化钢压制厂",
+    "objectives": [
+      {
+        "type": "SectorComplete",
+        "preset": "冰原"
+      }
+    ]
+  }
+}
