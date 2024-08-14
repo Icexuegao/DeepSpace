@@ -1,7 +1,7 @@
 displayName: Deep Space
 name: ice
 author: Alon
-main: ice.Ice
+main: ice.Alon.Ice
 version: 2
 minGameVersion: 146
 java: true
