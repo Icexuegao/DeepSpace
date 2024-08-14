@@ -15,12 +15,9 @@ import java.util.Properties;
 public class Ice extends Mod {
     public static final String MOD_NAME = "ice";
     public static String Display_Name;
-    public static final String Author = "Alon";
-
 
     public Ice() {
     }
-
 
     @Override
     public void init() {
@@ -46,7 +43,7 @@ public class Ice extends Mod {
 
     @Override
     public String toString() {
-        return "{" + MOD_NAME + "-" + Author + "}";
+        return "{" + MOD_NAME + "}";
     }
 
     protected void stone() {
