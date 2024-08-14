@@ -7,8 +7,6 @@ import ice.content.IceLiquids;
 import ice.content.IceStatus;
 import ice.ui.IceContentInfoDialog;
 import iceKotlin.KtItems;
-import iceScala.ScalaContentLoad;
-import iceScala.ScalaItem;
 import mindustry.Vars;
 import mindustry.mod.Mod;
 
@@ -32,8 +30,6 @@ public class Ice extends Mod {
 
     @Override
     public void loadContent() {
-        ScalaContentLoad load =new ScalaContentLoad();
-        load.load();
         KtItems.KtItems.INSTANCE.load();
         IceItems.load();
         IceLiquids.load();

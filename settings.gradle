@@ -1,1 +1,1 @@
-include(":javaSrc", ":scalaSrc")
+include(":javaSrc")

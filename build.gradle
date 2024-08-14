@@ -2,6 +2,7 @@ apply plugin: "java"
 buildscript {
     //项目的仓库
     ext {
+        proUser = System.getProperty("user.name")
         sdkRoot = System.getenv("ANDROID_HOME")
     }
 }
@@ -22,14 +23,12 @@ tasks.register('allfg') {
 }
 tasks.register('DeepSpaceJar', Jar) {
     dependsOn allfg
-    DeepSpaceJar.dependsOn(project("javaSrc").getTasks().named("iceJar"))
+    DeepSpaceJar.dependsOn(project("javaSrc").getTasks().named("jar"))
 //解决相同java识别文件报错
-    DeepSpaceJar.dependsOn(project("scalaSrc").getTasks().named("jar"))
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName = "${project.name}Desktops.jar"
     from {
-        [zipTree("javaSrc\\build\\libs\\javaSrcDesktop.jar"),
-         zipTree("scalaSrc\\build\\libs\\scalaSrcDesktop.jar")]
+        [zipTree("javaSrc\\build\\libs\\javaSrcDesktop.jar")]
     }
 }
 tasks.register('jarAndroid') {
@@ -74,13 +73,13 @@ tasks.register('deploy', Jar) {
         }
     }
 }
+
 tasks.register("MYCOPY", Copy) {
     dependsOn deploy
     from "build/libs/$project.name" + ".jar"//源
     into {
-        'C:\\Users\\Alon\\AppData\\Roaming\\Mindustry\\mods'
+        "C:/Users/$proUser/AppData/Roaming/Mindustry/mods"
     }
-
 }
 /* manifest {
         attributes('Main-Class': 'scalasrc\\IceScala\\ScalaLoad')
