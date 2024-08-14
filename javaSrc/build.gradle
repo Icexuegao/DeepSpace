@@ -1,0 +1,90 @@
+import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
+apply plugin: "java"
+apply plugin: "kotlin"
+//配置buildGradle的信息或依赖
+buildscript {
+    //项目的仓库
+    ext {
+        kotlin_version = "1.9.23"
+        uncVersion = '2.1.1'
+        sdkRoot = System.getenv("ANDROID_HOME")
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+    repositories {
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+        mavenCentral()
+        mavenLocal()
+        google()
+        maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url 'https://jitpack.io' }
+    }
+}
+//自定义虚拟机参数防止gradle中文乱码-Dfile.encoding=UTF-8
+//./gradlew clean  清理
+repositories {
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    mavenCentral()
+    mavenLocal()
+    maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url "https://maven.aliyun.com/repository/public" }
+    maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+    maven { url 'https://jitpack.io' }
+}
+//构建使用的jar包，一些依赖或者库
+dependencies {
+    compileOnly project(':scalaSrc')
+    compileOnly "com.github.EB-wilson.UniverseCore:core:$uncVersion"//涵盖了大部分mod制作相关的工具
+    compileOnly "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//包括组件化接口在内的注解处理器
+    annotationProcessor "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//使用注解处理器
+    annotationProcessor "com.github.Anuken:jabel:93fde537c7"
+    compileOnly "com.github.Anuken:jabel:93fde537c7"
+    compileOnly "com.github.Tinylake:MindustryX:v146.004"
+    compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+}
+//源代码
+sourceSets.main.java.srcDir('src')
+sourceSets.main.kotlin.srcDir('src')
+//编译java代码遇到中文报错解决方法
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions.jvmTarget=16
+}
+//java版本
+java {
+    targetCompatibility = 8//目标的兼容性
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+tasks.withType(KotlinJvmCompile.class).configureEach {
+    jvmTargetValidationMode = JvmTargetValidationMode.WARNING
+}
+//java 8向后兼容标志
+allprojects {
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.compilerArgs.addAll(['--release', '8'])
+        }
+    }
+}
+tasks.register('iceJar',Jar) {
+//解决相同java识别文件报错
+    dependsOn compileJava
+    dependsOn compileKotlin
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName = "${project.name}Desktop.jar"
+    from layout.projectDirectory.files("build\\classes\\java\\main","build\\classes\\kotlin\\main","D:\\Programming\\luanqibazaode\\DeepSpace\\test.txt")
+   /* from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }*/
+}
