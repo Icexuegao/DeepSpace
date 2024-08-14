@@ -29,6 +29,7 @@ public class Ice extends Mod {
         super.init();
     }
 
+
     @Override
     public void loadContent() {
         ScalaContentLoad load = new ScalaContentLoad();
