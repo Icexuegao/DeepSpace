@@ -64,6 +64,9 @@ tasks.register('deploy', Jar) {
     from("assets") {
         include "**"
     }
+    from(rootDir) {
+        include "README.md"
+    }
     doLast {
         delete {
             delete "build/libs/${project.name}Desktops.jar"

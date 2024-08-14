@@ -7,7 +7,7 @@ import ice.content.IceLiquids;
 import ice.content.IceStatus;
 import ice.ui.IceContentInfoDialog;
 import iceKotlin.KtItems;
-import iceScala.ScalaItem;
+import iceScala.ScalaContentLoad;
 import mindustry.Vars;
 import mindustry.mod.Mod;
 
@@ -15,7 +15,7 @@ import java.util.Properties;
 
 public class Ice extends Mod {
     public static final String MOD_NAME = "ice";
-    public static final String Author = "Alon";
+    static final String Author = "Alon";
     public static String Display_Name;
 
 
@@ -31,8 +31,8 @@ public class Ice extends Mod {
 
     @Override
     public void loadContent() {
-        ScalaItem k = new ScalaItem();
-        k.load();
+        ScalaContentLoad load = new ScalaContentLoad();
+        load.load();
         KtItems.KtItems.INSTANCE.load();
         IceItems.load();
         IceLiquids.load();
