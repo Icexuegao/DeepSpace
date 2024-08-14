@@ -1,9 +1,0 @@
-{
-  "wall": "血蚀墙",
-  "decoration": "血蚀石块",
-  "attributes": {
-    "heat": 0.2,
-    "water": 0.2,
-    "spores": 0.1
-  }
-}

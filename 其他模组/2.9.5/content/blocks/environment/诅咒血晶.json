@@ -1,8 +1,0 @@
-{
-  "type": "TallBlock",
-  "variants": 3,
-  "clipSize": 160,
-  "emitLight": true,
-  "lightRadius": 40,
-  "lightColor": "D75B6E66"
-}

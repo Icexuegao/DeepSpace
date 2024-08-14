@@ -1,9 +1,0 @@
-{
-  "type": "StorageBlock",
-  "health": 999999999,
-  "size": 1,
-  "hasItems": true,
-  "itemCapacity": 999999999,
-  "category": "effect",
-  "buildVisibility": "sandboxOnly"
-}
