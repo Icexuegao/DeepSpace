@@ -1,12 +1,12 @@
 package ice.Alon.asundry.BaseTool;
 
-import ice.Alon.Ice;
+import ice.Ice;
 import mindustry.Vars;
 import mindustry.mod.Mods;
 
 import java.util.Random;
 
-import static ice.Alon.Ice.Display_Name;
+import static ice.Ice.Display_Name;
 
 public class DisplayName {
     public static String massageRand;

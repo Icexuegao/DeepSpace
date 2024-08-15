@@ -1,6 +1,6 @@
 package ice.Alon.asundry.BaseTool.io;
 
-import ice.Alon.Ice;
+import ice.Ice;
 
 import java.io.BufferedReader;
 import java.io.File;

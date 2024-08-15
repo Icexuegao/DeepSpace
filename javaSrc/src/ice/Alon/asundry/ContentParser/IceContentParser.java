@@ -1,7 +1,7 @@
 package ice.Alon.asundry.ContentParser;
 
 import ice.Alon.asundry.BaseTool.io.IceJval;
-import ice.Alon.Ice;
+import ice.Ice;
 import arc.Core;
 import arc.assets.AssetDescriptor;
 import arc.assets.loaders.SoundLoader.SoundParameter;
