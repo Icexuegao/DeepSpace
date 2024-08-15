@@ -18,7 +18,7 @@ public class AlonContentLoad {
     }
 
     public static void load() {
-        KtItems.KtItems.INSTANCE.load();
+        KtItems.Companion.load();
         IceItems.load();
         IceLiquids.load();
         IceStatus.load();

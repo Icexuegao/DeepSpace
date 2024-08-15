@@ -12,7 +12,9 @@ public class Ice extends Mod {
      * 游戏内显示的模组介绍
      */
     public static String Display_Name;
-    /**模组主要参与负责人 */
+    /**
+     * 模组主要参与负责人
+     */
     public static final String[] Author = {"Alon"};
 
 
@@ -34,8 +36,6 @@ public class Ice extends Mod {
     @Override
     public void loadContent() {
         AlonContentLoad.load();
-
-
     }
 
 
