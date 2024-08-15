@@ -12,6 +12,7 @@ import mindustry.Vars;
  * 用于辅助加载content内容防止主类紊乱
  */
 public class AlonContentLoad {
+
     public static void init() {
         Vars.ui.content = new IceContentInfoDialog();
     }
@@ -29,4 +30,8 @@ public class AlonContentLoad {
         Game.load();
         TreeTech.load();*/
     }
+    /*protected void stone() {
+        Properties properties = FileTool.getJarFileProperties("mod.hjson");
+        Display_Name = properties.getProperty("displayName");
+    }*/
 }
