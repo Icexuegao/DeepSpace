@@ -2,9 +2,27 @@ apply plugin: "java"
 buildscript {
     //项目的仓库
     ext {
+        kotlin_version = "1.9.23"
         proUser = System.getProperty("user.name")
         sdkRoot = System.getenv("ANDROID_HOME")
     }
+}
+repositories {
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+    mavenCentral()
+    mavenLocal()
+    google()
+    maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+    maven { url "https://maven.aliyun.com/repository/public" }
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    // compileOnly files("D:\\Programming\\luanqibazaode\\lib\\Mindustry.jar")
+    implementation "com.github.Anuken:jabel:93fde537c7"
+    compileOnly "com.github.Tinylake:MindustryX:v146.004"
+    compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 }
 tasks.register('allfg') {
     FileInputStream fis = new FileInputStream(new File("test.txt"))
@@ -34,14 +52,15 @@ tasks.register('DeepSpaceJar', Jar) {
 tasks.register('jarAndroid') {
     dependsOn DeepSpaceJar
     doLast {
-        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
+        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. ANDROID_HOME")
 
         def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
 
         if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
 
         //collect dependencies needed for desugaring
-        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
+        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() +
+                [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
 
         //dex and desugar files - this requires d8 in your PATH
         "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktops.jar"
