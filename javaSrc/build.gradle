@@ -50,6 +50,7 @@ dependencies {
     compileOnly "com.github.Anuken:jabel:93fde537c7"
     compileOnly "com.github.Tinylake:MindustryX:v146.004"
     compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.9.23"
 }
 //源代码
 sourceSets.main.java.srcDir('src')

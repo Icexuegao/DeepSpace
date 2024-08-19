@@ -13,14 +13,13 @@ import mindustry.ctype.UnlockableContent;
 import mindustry.gen.Iconc;
 import mindustry.graphics.Pal;
 import mindustry.input.Binding;
-import mindustry.ui.dialogs.ContentInfoDialog;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatCat;
 import mindustry.world.meta.StatValue;
 import mindustry.world.meta.Stats;
 
-public class IceContentInfoDialog extends ContentInfoDialog {
-    public IceContentInfoDialog() {
+public class ContentInfoDialog extends mindustry.ui.dialogs.ContentInfoDialog {
+    public ContentInfoDialog() {
         title.name = "@info.title";
         //  addCloseButton();
 
