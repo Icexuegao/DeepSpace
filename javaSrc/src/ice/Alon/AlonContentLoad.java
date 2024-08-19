@@ -4,6 +4,7 @@ import ice.Alon.content.IceBlocks;
 import ice.Alon.content.IceLiquids;
 import ice.Alon.content.IceStatus;
 import ice.Alon.content.items.IceItems;
+import ice.Alon.music.IceMusics;
 import ice.Alon.ui.ContentInfoDialog;
 import ice.Alon.ui.MenusDialogKt;
 import ice.Alon.content.items.KtItems;
@@ -21,6 +22,7 @@ public class AlonContentLoad {
     }
 
     public static void load() {
+        IceMusics.IceMusics.load();
         KtItems.Companion.load();
         IceItems.load();
         IceLiquids.load();

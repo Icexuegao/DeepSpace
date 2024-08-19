@@ -4,6 +4,5 @@ public class EGBlocks {
 
     public static void load() {
 
-
     }
 }

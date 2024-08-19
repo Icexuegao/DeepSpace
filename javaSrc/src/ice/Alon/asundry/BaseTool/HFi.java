@@ -2,6 +2,8 @@ package ice.Alon.asundry.BaseTool;
 
 import arc.Files.FileType;
 import arc.files.Fi;
+import ice.Ice;
+import mindustry.Vars;
 
 import java.io.*;
 
@@ -9,6 +11,9 @@ public class HFi extends Fi {
     public final ClassLoader loader;
     public HFi(ClassLoader loader) {
         this("", loader);
+    }
+    public HFi(String fi) {
+        this(fi, Vars.mods.getMod(Ice.MOD_NAME).loader);
     }
     private HFi(String path, ClassLoader loader) {
         this(new File(path), loader);
