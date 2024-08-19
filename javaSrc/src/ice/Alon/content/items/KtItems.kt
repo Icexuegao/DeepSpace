@@ -1,8 +1,8 @@
-package iceKotlin.Alon
+package ice.Alon.content.items
 
 import mindustry.type.Item
 
-class KtItems {
+class KtItems : Any() {
     companion object {
         lateinit var crystallineSpore: Item
         lateinit var pyroSpore: Item
@@ -15,14 +15,13 @@ class KtItems {
                 }
             }
             /** 灼热孢团 */
-            pyroSpore = object : Item("pyroSpora") {
+            pyroSpore = object : Item("pyroSpore") {
                 init {
                     explosiveness = 0.1f
                 }
             }
             /** 寂温疮体 */
-            lonelyHeatSoreSpore = object : Item("lonelyHeatSoreSpore") {
-            }
+            lonelyHeatSoreSpore = object : Item("lonelyHeatSoreSpore") {}
         }
     }
 }

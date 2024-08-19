@@ -36,6 +36,8 @@ public class ToolUi {
     public static boolean teamFirst = false;
     public static final float tableSize = 40;
 
+
+
     public static void toolUi() {
         Events.on(EventType.ClientLoadEvent.class, (e) -> {
             TextButton.TextButtonStyle text = new TextButton.TextButtonStyle() {{
@@ -158,6 +160,7 @@ public class ToolUi {
                 }
             });
         }
+
         public void clearLog() {
             Vars.ui.consolefrag.clearMessages();
         }
@@ -198,24 +201,24 @@ public class ToolUi {
     public static Drawable createFlatDown(String name) {
         TextureAtlas.AtlasRegion region = Core.atlas.find(name);
         int[] splits = region.splits;
+        ScaledNinePatchDrawable copy =
+                new ScaledNinePatchDrawable(new NinePatch(region, splits[0], splits[1], splits[2], splits[3])) {
+                    public float getLeftWidth() {
+                        return 0;
+                    }
 
-        ScaledNinePatchDrawable copy = new ScaledNinePatchDrawable(new NinePatch(region, splits[0], splits[1], splits[2], splits[3])) {
-            public float getLeftWidth() {
-                return 0;
-            }
+                    public float getRightWidth() {
+                        return 0;
+                    }
 
-            public float getRightWidth() {
-                return 0;
-            }
+                    public float getTopHeight() {
+                        return 0;
+                    }
 
-            public float getTopHeight() {
-                return 0;
-            }
-
-            public float getBottomHeight() {
-                return 0;
-            }
-        };
+                    public float getBottomHeight() {
+                        return 0;
+                    }
+                };
         copy.setMinWidth(0);
         copy.setMinHeight(0);
         copy.setTopHeight(0);

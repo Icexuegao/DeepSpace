@@ -9,7 +9,7 @@ import ice.Alon.asundry.world.content.block.turret.FindTargetTurret;
 import ice.Alon.asundry.world.draw.IceDrawLiquidOutputs;
 import ice.Alon.asundry.world.draw.IceDrawPistons;
 import ice.Alon.asundry.world.effect.MultipleCrafterRadialEffect;
-import ice.Alon.content.IceItems;
+import ice.Alon.content.items.IceItems;
 import arc.graphics.Color;
 import mindustry.content.*;
 import mindustry.entities.part.RegionPart;

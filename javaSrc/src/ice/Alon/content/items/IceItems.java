@@ -1,4 +1,4 @@
-package ice.Alon.content;
+package ice.Alon.content.items;
 
 import ice.Alon.type.IceItem;
 import arc.graphics.Color;

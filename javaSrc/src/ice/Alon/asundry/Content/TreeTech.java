@@ -1,6 +1,6 @@
 package ice.Alon.asundry.Content;
 
-import ice.Alon.content.IceItems;
+import ice.Alon.content.items.IceItems;
 import mindustry.content.TechTree;
 
 import static mindustry.content.TechTree.node;

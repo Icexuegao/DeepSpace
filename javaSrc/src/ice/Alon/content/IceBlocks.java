@@ -1,5 +1,6 @@
 package ice.Alon.content;
 
+import ice.Alon.content.items.IceItems;
 import ice.Alon.world.blocks.effect.fleshAndBloodCoreBlock;
 import ice.Alon.asundry.world.IceAttribute;
 import ice.Alon.world.blocks.pumpChamber;
