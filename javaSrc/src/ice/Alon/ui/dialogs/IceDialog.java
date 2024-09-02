@@ -1,4 +1,4 @@
-package ice.Alon.ui;
+package ice.Alon.ui.dialogs;
 
 import arc.Core;
 import arc.func.Prov;

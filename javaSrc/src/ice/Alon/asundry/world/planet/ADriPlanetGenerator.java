@@ -1,6 +1,5 @@
 package ice.Alon.asundry.world.planet;
 
-import ice.Alon.asundry.Content.IceBlocks;
 import arc.graphics.Color;
 import arc.math.Angles;
 import arc.math.Mathf;
@@ -18,6 +17,8 @@ import arc.util.Tmp;
 import arc.util.noise.Noise;
 import arc.util.noise.Ridged;
 import arc.util.noise.Simplex;
+import ice.Alon.asundry.Content.IceBlocks;
+import ice.Alon.content.blocks.EnvironmentBlocks;
 import mindustry.Vars;
 import mindustry.ai.Astar;
 import mindustry.ai.BaseRegistry.BasePart;
@@ -46,41 +47,40 @@ public class ADriPlanetGenerator extends PlanetGenerator {
     float scl = 5f;
     float waterOffset = 0.07f;
     boolean genLakes = false;
-    Block[][] arr = {{IceBlocks.thickBlood, IceBlocks.redSandWater, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce},
+    Block[][] arr = {{IceBlocks.thickBlood, IceBlocks.redSandWater, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce},
 
-            {IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.redSandWater, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood},
+            {IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.redSandWater, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood, IceBlocks.thickBlood},
 
-            {IceBlocks.iceRedIce, IceBlocks.redSandWater, IceBlocks.iceRedIce, IceBlocks.redSandWater, IceBlocks.iceRedIce, IceBlocks.redSandWater, IceBlocks.iceRedIce, IceBlocks.redSandWater},
+            {EnvironmentBlocks.redIce, IceBlocks.redSandWater, EnvironmentBlocks.redIce, IceBlocks.redSandWater, EnvironmentBlocks.redIce, IceBlocks.redSandWater, EnvironmentBlocks.redIce, IceBlocks.redSandWater},
 
-            {IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce},
+            {EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce},
 
-            {IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce},
+            {EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce},
 
-            {IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce, IceBlocks.iceRedIce},
+            {EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce, EnvironmentBlocks.redIce},
 
     };
     ObjectMap<Block, Block> dec = ObjectMap.of(
 
-            IceBlocks.iceRedIce, Blocks.redIceBoulder
+            EnvironmentBlocks.redIce, Blocks.redIceBoulder
 
     );
 
     ObjectMap<Block, Block> tars = ObjectMap.of(
 
-            IceBlocks.iceRedIce
+            EnvironmentBlocks.redIce
 
     );
 
     float water = 2f / arr[0].length;
 
     public ADriPlanetGenerator() {
-        defaultLoadout=Schematics.readBase64("bXNjaAF4nGNgYWBhZmDJS8xNZWBKTWTgTkktTi7KLCjJzM9jYGBgy0lMSs0pZmCKjmVkEMhMTtV9sbDhRVPnswU7nu5vBipgBCEgAQCvYxQu");
+        defaultLoadout = Schematics.readBase64("bXNjaAF4nGNgYWBhZmDJS8xNZWBKTWTgTkktTi7KLCjJzM9jYGBgy0lMSs0pZmCKjmVkEMhMTtV9sbDhRVPnswU7nu5vBipgBCEgAQCvYxQu");
     }
 
     float rawHeight(Vec3 position) {
         position = Tmp.v33.set(position).scl(scl);
-        return (Mathf.pow(Simplex.noise3d(seed, /**星球山峰高度约小越高*/5, /**缩放，越大山峰越小数量越多*/0.5f, /**生成山峰的概率，约小山峰约少*/0.8f,
-                position.x, position.y, position.z), 2.3f) + waterOffset) / (1f + waterOffset);
+        return (Mathf.pow(Simplex.noise3d(seed, /**星球山峰高度约小越高*/5, /**缩放，越大山峰越小数量越多*/0.5f, /**生成山峰的概率，约小山峰约少*/0.8f, position.x, position.y, position.z), 2.3f) + waterOffset) / (1f + waterOffset);
     }
 
     @Override
@@ -384,7 +384,7 @@ public class ADriPlanetGenerator extends PlanetGenerator {
         /** 随机红冰树*/
         pass((x, y) -> {
             if (Math.abs(0.5f - noise(x, y, 4/**密集程度越小越扎堆*/, 2/**放大缩小*/, 65)) > 0.35) {
-                if (floor == IceBlocks.iceRedIce && block == Blocks.air) {
+                if (floor == EnvironmentBlocks.redIce && block == Blocks.air) {
                     block = IceBlocks.iceRedTree;
                 }
             }
@@ -392,15 +392,15 @@ public class ADriPlanetGenerator extends PlanetGenerator {
         /**生成血孢子 */
         pass((x, y) -> {
             if (Math.abs(0.5f - noise(x, y, 6, 2, 111)) > 0.30) {
-                if (floor == IceBlocks.iceRedIce && block == Blocks.air) {
-                    block = ice.Alon.content.IceBlocks.bloodSporophore;
+                if (floor == EnvironmentBlocks.redIce && block == Blocks.air) {
+                    block = EnvironmentBlocks.bloodSporophore;
                 }
             }
         });
         /**水晶簇随机 */
         pass((x, y) -> {
             if (Math.abs(0.5f - noise(x - 90, y, 4, 0.8, 65)) > 0.30) {
-                if (floor == IceBlocks.iceRedIce) {
+                if (floor == EnvironmentBlocks.redIce) {
                     Random random = new Random();
                     int i = random.nextInt(3);
                     if (i != 0) {

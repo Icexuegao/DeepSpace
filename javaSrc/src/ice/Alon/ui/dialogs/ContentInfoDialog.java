@@ -1,6 +1,5 @@
-package ice.Alon.ui;
+package ice.Alon.ui.dialogs;
 
-import ice.Alon.ui.stat.IceStat;
 import arc.Core;
 import arc.flabel.FLabel;
 import arc.scene.ui.ScrollPane;
@@ -8,6 +7,7 @@ import arc.scene.ui.layout.Table;
 import arc.struct.OrderedMap;
 import arc.struct.Seq;
 import arc.util.Scaling;
+import ice.Alon.ui.stat.IceStat;
 import mindustry.Vars;
 import mindustry.ctype.UnlockableContent;
 import mindustry.gen.Iconc;
@@ -78,17 +78,24 @@ public class ContentInfoDialog extends mindustry.ui.dialogs.ContentInfoDialog {
                 table.table(inset -> {
                     inset.left();
 
-                    if (stat instanceof IceStat stat1) {
-                        FLabel label = new FLabel(stat1.color + stat1.localized() + ":[]");
-                        if (!stat1.defaultToken.isEmpty()) label.setDefaultToken(stat1.defaultToken);
-
-                        inset.add(label).left().top();
-                        Seq<StatValue> arr = map.get(stat);
-                        for (StatValue value : arr) {
-                            value.display(inset);
-                            inset.add().size(10f);
+                    if ((stat instanceof IceStat stat1)) {
+                        if (stat1.Flable) {
+                            FLabel label = new FLabel(stat1.color + stat1.localized() + ":[]");
+                            if (!stat1.defaultToken.isEmpty()) label.setDefaultToken(stat1.defaultToken);
+                            inset.add(label).left().top();
+                            Seq<StatValue> arr = map.get(stat);
+                            for (StatValue value : arr) {
+                                value.display(inset);
+                                inset.add().size(10f);
+                            }
+                        } else {
+                            inset.add("[lightgray]" + stat.localized() + ":[] ").left().top();
+                            Seq<StatValue> arr = map.get(stat);
+                            for (StatValue value : arr) {
+                                value.display(inset);
+                                inset.add().size(10f);
+                            }
                         }
-
                     } else {
                         inset.add("[lightgray]" + stat.localized() + ":[] ").left().top();
                         Seq<StatValue> arr = map.get(stat);

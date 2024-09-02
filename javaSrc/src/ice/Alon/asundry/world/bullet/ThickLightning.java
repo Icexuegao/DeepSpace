@@ -34,7 +34,7 @@ import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.endLine;
 
 public class ThickLightning {
-    private static final  Effect thickLightning = new Effect(12f, 1300f, e -> {
+    public static final  Effect thickLightning = new Effect(12f, 1300f, e -> {
         if(!(e.data instanceof Seq)) return;
         Seq<Vec2> lines = e.data();
         int n = Mathf.clamp(1 + (int)(e.fin() * lines.size), 1, lines.size);
@@ -55,8 +55,8 @@ public class ThickLightning {
                 Drawf.light(lines.get(i).x, lines.get(i).y, lines.get(i+1).x, lines.get(i+1).y, 40f, e.color, 0.9f);
             }
         }
-    }),
-            thickLightningHit = new Effect(80f, 100f, e -> {
+    });
+    public static final Effect thickLightningHit = new Effect(80f, 100f, e -> {
                 Draw.color(Color.white, e.color, e.fin());
 
                 for(int i = 2; i >= 0; i--){
@@ -74,9 +74,9 @@ public class ThickLightning {
                 Fill.light(e.x, e.y, Lines.circleVertices(r), r, Tmp.c4.set(e.color).a(0f), Tmp.c3.set(e.color).a(e.fout()));
                 Lines.circle(e.x, e.y, r);
                 if(Vars.renderer.lights.enabled()) Drawf.light(e.x, e.y, r * 3.5f, e.color, e.fout(0.5f));
-            }).layer(Layer.effect + 0.001f),
+            }).layer(Layer.effect + 0.001f);
 
-    thickLightningFade = new Effect(80f, 1300f, e -> {
+    private static final Effect thickLightningFade = new Effect(80f, 1300f, e -> {
         if(!(e.data instanceof Seq)) return;
         Seq<Vec2> lines = e.data();
         for(int i = 2; i >= 0; i--){
@@ -96,9 +96,9 @@ public class ThickLightning {
                 Drawf.light(lines.get(i).x, lines.get(i).y, lines.get(i+1).x, lines.get(i+1).y, 40f, e.color, 0.9f * e.fout());
             }
         }
-    }),
+    });
 
-    thickLightningStrike = new Effect(80f, 100f, e -> {
+    private static final Effect thickLightningStrike = new Effect(80f, 100f, e -> {
         Draw.color(Color.white, e.color, e.fin());
 
         for(int i = 2; i >= 0; i--){

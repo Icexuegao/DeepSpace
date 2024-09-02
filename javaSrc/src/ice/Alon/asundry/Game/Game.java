@@ -59,7 +59,6 @@ public class Game {
                     IceTile t =new IceTile(tile.x,tile.y+1);
                     t.setFloor(Vars.world.tile(tile.x,tile.y+1).floor());
                     Vars.world.tiles.set(tile.x,tile.y+1,t);
-                    t.set();
                     return super.init(tile, team, shouldAdd, rotation);
                 }
 

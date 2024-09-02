@@ -358,7 +358,7 @@ public class MultipleCrafter extends Block {
                 return super.getProgressIncrease(baseTime);
             }
 
-            //limit progress increase by maximum amount of liquid it can produce
+            //通过它可以产生的最大液体量来限制进度增加
             float scaling = 1f, max = 1f;
             if (outputLiquids != null) {
                 max = 0f;
@@ -369,7 +369,7 @@ public class MultipleCrafter extends Block {
                 }
             }
 
-            //when dumping excess take the maximum value instead of the minimum.
+            //当 dump excess 时，取最大值而不是最小值。
             return super.getProgressIncrease(baseTime) * (dumpExtraLiquid ? Math.min(max, 1f) : scaling);
         }
 

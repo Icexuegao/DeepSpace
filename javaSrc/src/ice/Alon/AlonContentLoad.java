@@ -1,23 +1,28 @@
 package ice.Alon;
 
-import ice.Alon.content.IceBlocks;
+import ice.Alon.asundry.BaseTool.Tool;
 import ice.Alon.content.IceLiquids;
 import ice.Alon.content.IceStatus;
+import ice.Alon.content.blocks.IceBlocks;
 import ice.Alon.content.items.IceItems;
-import ice.Alon.music.IceMusics;
-import ice.Alon.ui.ContentInfoDialog;
-import ice.Alon.ui.MenusDialogKt;
 import ice.Alon.content.items.KtItems;
-
-import static mindustry.Vars.ui;
+import ice.Alon.music.IceMusics;
+import ice.Alon.store.SerializationStore;
+import ice.Alon.ui.dialogs.ContentInfoDialog;
+import ice.Alon.ui.dialogs.MenusDialogKt;
+import mindustry.Vars;
 
 /**
  * 用于辅助加载content内容防止主类紊乱
  */
 public class AlonContentLoad {
-
     public static void init() {
-        ui.content = new ContentInfoDialog();
+        try {
+            SerializationStore.load();
+        } catch (Exception e) {
+            throw new RuntimeException("模组数据初始化错误!!!");
+        }
+        Vars.ui.content = new ContentInfoDialog();
         MenusDialogKt.init();
     }
 
@@ -28,8 +33,7 @@ public class AlonContentLoad {
         IceLiquids.load();
         IceStatus.load();
         IceBlocks.load();
-
-
+        Tool.load();
        /* Events.on(EventType.ClientLoadEvent.class, (e) -> {
             IceDialog j = new IceDialog();
             j.addListener(new ToolUi.MyInputListener(j));

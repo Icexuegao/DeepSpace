@@ -4,6 +4,7 @@ import ice.Alon.ui.stat.IceStat;
 import ice.Alon.ui.stat.IceStats;
 import arc.graphics.Color;
 import mindustry.type.Item;
+import mindustry.world.meta.Stat;
 
 public class IceItem extends Item {
     public float nutrientConcentration = 0;
@@ -38,10 +39,19 @@ public class IceItem extends Item {
     @Override
     public void setStats() {
         IceStats stats1 = (IceStats) stats;
+
+        stats1.addPercent(IceStat.explosiveness, explosiveness);
+        stats1.addPercent(IceStat.flammability, flammability);
+        stats1.addPercent(IceStat.radioactivity, radioactivity);
+        stats1.addPercent(IceStat.charge, charge);
+
         if (nutrientConcentration != 0) {
             stats1.addPercentThrob(IceStat.nutrientConcentration, nutrientConcentration, "[red]");
         }
-        super.setStats();
+        stats1.add(IceStat.cost, cost);
+        stats1.add(IceStat.hardness, hardness);
+        stats1.add(IceStat.healthScaling,healthScaling);
+        stats1.add(IceStat.buildable,buildable);
     }
 
     public interface ItemLambda {

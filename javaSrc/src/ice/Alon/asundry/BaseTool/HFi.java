@@ -13,7 +13,7 @@ public class HFi extends Fi {
         this("", loader);
     }
     public HFi(String fi) {
-        this(fi, Vars.mods.getMod(Ice.MOD_NAME).loader);
+        this(fi, Vars.mods.getMod(Ice.class).loader);
     }
     private HFi(String path, ClassLoader loader) {
         this(new File(path), loader);

@@ -1,4 +1,4 @@
-package ice.Alon.world.blocks;
+package ice.Alon.world.blocks.liquids;
 
 import ice.Alon.asundry.BaseTool.codebase.DrawTools;
 import arc.Core;
@@ -16,7 +16,7 @@ import mindustry.world.draw.*;
 
 public class pumpChamber extends Pump {
     TextureRegion[] arr = new TextureRegion[4];
-    DrawBlock drawer = new DrawMulti(new DrawRegion("-b2"), DrawTools.setLiquidTileSize(new DrawLiquidTile(), 2, 2, 2, 2), new DrawDefault() {
+    DrawBlock drawer = new DrawMulti(new DrawRegion("-bottom"), DrawTools.setLiquidTileSize(new DrawLiquidTile(), 2, 2, 2, 2), new DrawDefault() {
         public void draw(Building build) {
             IcetopmBuild building = (IcetopmBuild) build;
             float v = building.liquids.get(building.liquidDrop);

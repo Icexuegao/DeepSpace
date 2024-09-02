@@ -1,7 +1,7 @@
 package ice.Alon.content;
 
-import ice.Alon.type.IceStatusEffect;
 import arc.graphics.Color;
+import ice.Alon.type.IceStatusEffect;
 import mindustry.content.Fx;
 import mindustry.type.StatusEffect;
 
@@ -11,10 +11,12 @@ public class IceStatus {
 
     public static void load() {
         /**电磁脉冲 */
-        electromagneticPulse = new IceStatusEffect("electromagnetic-Pulse") {{
-            speedMultiplier = 0.2f;
-            healthMultiplier = 0.9f;
-        }};
+        electromagneticPulse = new IceStatusEffect("electromagnetic-Pulse") {
+            {
+                speedMultiplier = 0.2f;
+                healthMultiplier = 0.9f;
+            }
+        };
         /** 流血*/
         bleed = new IceStatusEffect("bleed") {{
             show = true;

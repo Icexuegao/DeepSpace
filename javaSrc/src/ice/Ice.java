@@ -7,7 +7,7 @@ public class Ice extends Mod {
     /**
      * 模组代码使用的name
      */
-    public static final String MOD_NAME = "ice";
+    public static final String NAME = "ice";
     /**
      * 游戏内显示的模组介绍
      */
@@ -15,7 +15,7 @@ public class Ice extends Mod {
     /**
      * 模组主要参与负责人
      */
-    public static final String[] Author = {"Alon"};
+    public static final String[] Author = {"Alon,洋葱,Elegy"};
 
 
     public Ice() {

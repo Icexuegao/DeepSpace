@@ -1,9 +1,9 @@
 package ice.Alon.asundry.Content;
 
-import ice.Alon.content.IceBlocks;
-import ice.Alon.asundry.world.planet.ADriPlanetGenerator;
 import arc.graphics.Color;
 import arc.struct.Seq;
+import ice.Alon.asundry.world.planet.ADriPlanetGenerator;
+import ice.Alon.content.blocks.EffectBlocks;
 import mindustry.content.Items;
 import mindustry.game.Team;
 import mindustry.graphics.g3d.HexMesh;
@@ -63,7 +63,7 @@ public class IcePlanets {
 
             allowLaunchSchematics = true;/**是否允许使用核心蓝图 */
             allowLaunchLoadout = true;/**是否允许发射时携带物资 */
-            defaultCore= IceBlocks.fleshAndBloodhinge;
+            defaultCore = EffectBlocks.fleshAndBloodhinge;
 
             iconColor = Color.valueOf("ff7070");/**星球面板(PlanetDialog)上的颜色*/
             enemyCoreSpawnReplace = true;/** 敌人最后的核心被摧毁后是否要生成一个出怪点  */
@@ -92,7 +92,7 @@ public class IcePlanets {
             enemyBuildSpeedMultiplier = 1;/**  敌人建筑倍率 这里不做处理 */
             landCloudColor = Color.valueOf("ffffff");/** 核心着陆烟尘的颜色  */
             prebuildBase = true;/**  是否需要像e星那样帅气地着陆建筑特效 */
-             hiddenItems.add(Items.serpuloItems).add(Items.erekirItems);
+            hiddenItems.add(Items.serpuloItems).add(Items.erekirItems);
         }};
     }
 }

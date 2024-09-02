@@ -1,6 +1,7 @@
 package ice.Alon.asundry.Content;
 
 
+import arc.graphics.Color;
 import ice.Alon.asundry.world.IceAttribute;
 import ice.Alon.asundry.world.bullet.IceMissileBulletTypes;
 import ice.Alon.asundry.world.bullet.ThickLightningBulletType;
@@ -10,8 +11,10 @@ import ice.Alon.asundry.world.draw.IceDrawLiquidOutputs;
 import ice.Alon.asundry.world.draw.IceDrawPistons;
 import ice.Alon.asundry.world.effect.MultipleCrafterRadialEffect;
 import ice.Alon.content.items.IceItems;
-import arc.graphics.Color;
-import mindustry.content.*;
+import mindustry.content.Blocks;
+import mindustry.content.Fx;
+import mindustry.content.Items;
+import mindustry.content.Liquids;
 import mindustry.entities.part.RegionPart;
 import mindustry.entities.pattern.ShootBarrel;
 import mindustry.gen.Sounds;
@@ -22,28 +25,24 @@ import mindustry.type.LiquidStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.blocks.distribution.Conveyor;
-import mindustry.world.blocks.environment.*;
+import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.production.WallCrafter;
-import mindustry.world.blocks.storage.Unloader;
 import mindustry.world.consumers.*;
 import mindustry.world.draw.*;
-import mindustry.world.meta.BlockGroup;
 import mindustry.world.meta.BuildVisibility;
 
 public class IceBlocks {
-    public static Block k, k1, k2, iceRedIce,
+    public static Block k1, k2, iceRedTree, bloodCrystalSpikes, redSandWater, thickBlood,
 
-    iceRedIceWall, iceRedTree, bloodCrystalSpikes, redSandWater, thickBlood,
-
-    deepThickBlood, oreIceCrystals, oreSphalerite, oreQuartz, taijing, tarnation, randomer,
+    deepThickBlood, oreIceCrystals, taijing, tarnation, randomer,
 
     mineralProcessor, paota1, tidalImpactReactor,
 
-    monocrystallineSiliconFactory, k3, electronicUninstaller, quantumCore;
+    monocrystallineSiliconFactory, k3, quantumCore;
 
     public static void load() {
-              k3 = new Conveyor("k3") {{
+        k3 = new Conveyor("k3") {{
             buildVisibility = BuildVisibility.shown;
             speed = 0.03f;
             requirements(Category.crafting, ItemStack.with(Items.copper, 1));
@@ -65,12 +64,6 @@ public class IceBlocks {
             ambientSound = Sounds.drill;
             ambientSoundVolume = 0.04f;
         }};
-
-        bloodCrystalSpikes = new TallBlock("blood-Crystal-Spikes") {{
-            variants = 3;
-            clipSize = 128f;
-        }};
-
         oreIceCrystals = new OreBlock("ore-src.Ice-Crystals", IceItems.iceCrystals) {{
             playerUnmineable = false;/**玩家能否挖掘 */
             mapColor = Color.white;/**地图颜色 */
@@ -80,16 +73,6 @@ public class IceBlocks {
             oreThreshold = 0.8f;
             oreScale = 20;
             variants = 3;/**贴图数量 */
-        }};
-        oreSphalerite = new OreBlock("oreSphalerite", IceItems.sphalerite) {{
-            wallOre = false;
-            playerUnmineable = false;
-            useColor = true;
-            mapColor = Color.valueOf("578c80");
-            variants = 3;
-        }};
-        oreQuartz = new OreBlock("oreQuartz", IceItems.quartz) {{
-
         }};
         taijing = new Conveyor("钛晶传送带") {{
             speed = 13;
@@ -123,14 +106,7 @@ public class IceBlocks {
             ambientSoundVolume = 0.07f;
             consumePower(63.1666666f);
         }};
-        electronicUninstaller = new Unloader("electronicUninstaller") {{
-            requirements(Category.effect, ItemStack.with(IceItems.redIce, 10, IceItems.monocrystallineSilicon, 5));
-            speed = 1.7142f;
-            health = 100;
-            size = 1;
-            itemCapacity = 10;
-            group = BlockGroup.transportation;
-        }};
+
         quantumCore = new PowerProductionCore("quantumCore") {{
             size = 3;
             health = 2500;
@@ -145,7 +121,6 @@ public class IceBlocks {
         tarnation = new PowerTurret("tarnation") {{
             requirements(Category.turret, ItemStack.with(Items.lead, 6000));
             range = 540f;
-
             shoot.firstShotDelay = 130f;
             recoil = 9f;
             reload = 60;
@@ -159,9 +134,7 @@ public class IceBlocks {
             shootSound = Sounds.plasmadrop;
             rotateSpeed = 2f;
             unitSort = (u, x, y) -> -u.maxHealth;
-
             consumePower(60f);
-
             shootType = new ThickLightningBulletType(3048, /**Pal.lancerLaser*/Color.valueOf("a9d8ff")) {{
                 buildingDamageMultiplier = 0.3f;
 
@@ -218,12 +191,7 @@ public class IceBlocks {
                 barrels = new float[]{-12, 3, 0, 0, 4, 0, 12, 3, 0};
             }};
         }};
-        randomer = new Randomer("randomer") {{
-            size = 2;
-            requirements(Category.distribution, ItemStack.with(Items.copper, 1));
-            alwaysUnlocked = true;
-            buildVisibility = BuildVisibility.shown;
-        }};
+
         mineralProcessor = new MultipleCrafter("mineralProcessor") {{
             outputsPower = true;
             requirements(Category.crafting, ItemStack.with(Items.copper, 20));

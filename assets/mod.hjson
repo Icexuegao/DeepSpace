@@ -1,6 +1,6 @@
 displayName: Deep Space
-name: ice
-author: Alon
+name: ice,
+author: 星渊连协
 main: ice.Ice
 version: 2
 minGameVersion: 146
