@@ -5,18 +5,17 @@ import mindustry.mod.Mod;
 
 public class Ice extends Mod {
     /**
-     * 模组代码使用的name
+     * 模组代码使用的name,切勿更改!!
      */
     public static final String NAME = "ice";
     /**
      * 游戏内显示的模组介绍
      */
-    public static String Display_Name;
+    public static String displayName;
     /**
-     * 模组主要参与负责人
+     * <老婆们可爱捏>模组主要参与负责人</老婆们可爱捏>
      */
-    public static final String[] Author = {"Alon,洋葱,Elegy"};
-
+    private static final String[] author = {"Alon,洋葱,Elegy"};
 
     public Ice() {
     }
@@ -27,7 +26,6 @@ public class Ice extends Mod {
     @Override
     public void init() {
         AlonContentLoad.init();
-        super.init();
     }
 
     /**

@@ -10,6 +10,7 @@ import mindustry.world.draw.DrawRegion;
 
 public class FactoryBlocks {
     public static Block integratedFactory;
+
     public static void load() {
         /**集成分发器*/
         integratedFactory = new GenericCrafter("integratedFactory") {{

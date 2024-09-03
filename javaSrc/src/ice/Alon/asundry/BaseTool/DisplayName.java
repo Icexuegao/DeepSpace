@@ -6,7 +6,6 @@ import mindustry.mod.Mods;
 
 import java.util.Random;
 
-import static ice.Ice.Display_Name;
 
 public class DisplayName {
     public static String massageRand;
@@ -27,7 +26,7 @@ public class DisplayName {
                 界限?狗都不玩!<喵喵怪>
                 """.split("@#@");
         massageRand = me[new Random().nextInt(me.length - 1)];
-        mod.meta.displayName = Display_Name + " - " + massageRand;
+        mod.meta.displayName = Ice.displayName + " - " + massageRand;
         /*  mod.meta.displayName = Display_Name + " - " + me[me.length - 1];*/
         mod.meta.description = """
                 a                aa

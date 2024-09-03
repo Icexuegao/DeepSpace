@@ -1,10 +1,11 @@
 package ice.Alon.type;
 
+import arc.graphics.Color;
 import ice.Alon.ui.stat.IceStat;
 import ice.Alon.ui.stat.IceStats;
-import arc.graphics.Color;
 import mindustry.type.Item;
-import mindustry.world.meta.Stat;
+
+import java.io.Serializable;
 
 public class IceItem extends Item {
     public float nutrientConcentration = 0;
@@ -50,8 +51,8 @@ public class IceItem extends Item {
         }
         stats1.add(IceStat.cost, cost);
         stats1.add(IceStat.hardness, hardness);
-        stats1.add(IceStat.healthScaling,healthScaling);
-        stats1.add(IceStat.buildable,buildable);
+        stats1.add(IceStat.healthScaling, healthScaling);
+        stats1.add(IceStat.buildable, buildable);
     }
 
     public interface ItemLambda {
