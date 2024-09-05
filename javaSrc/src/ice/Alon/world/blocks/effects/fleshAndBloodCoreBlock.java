@@ -1,4 +1,4 @@
-package ice.Alon.world.blocks.effect;
+package ice.Alon.world.blocks.effects;
 
 import mindustry.world.blocks.storage.CoreBlock;
 

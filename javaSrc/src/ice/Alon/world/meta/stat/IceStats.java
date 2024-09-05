@@ -1,4 +1,4 @@
-package ice.Alon.ui.stat;
+package ice.Alon.world.meta.stat;
 
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;

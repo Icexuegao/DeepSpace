@@ -15,6 +15,7 @@ import mindustry.Vars;
 /**
  * 用于辅助加载content内容防止主类紊乱
  */
+
 public class AlonContentLoad {
     public static void init() {
         SerializationStore.serializationStore.load();

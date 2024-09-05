@@ -1,7 +1,7 @@
 package ice.Alon.content.blocks;
 
 import ice.Alon.content.items.IceItems;
-import ice.Alon.world.blocks.effect.fleshAndBloodCoreBlock;
+import ice.Alon.world.blocks.effects.fleshAndBloodCoreBlock;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;

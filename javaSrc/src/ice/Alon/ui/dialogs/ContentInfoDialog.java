@@ -7,7 +7,7 @@ import arc.scene.ui.layout.Table;
 import arc.struct.OrderedMap;
 import arc.struct.Seq;
 import arc.util.Scaling;
-import ice.Alon.ui.stat.IceStat;
+import ice.Alon.world.meta.stat.IceStat;
 import mindustry.Vars;
 import mindustry.ctype.UnlockableContent;
 import mindustry.gen.Iconc;

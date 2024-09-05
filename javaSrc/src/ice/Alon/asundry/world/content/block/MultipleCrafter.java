@@ -1,7 +1,7 @@
 package ice.Alon.asundry.world.content.block;
 
-import ice.Alon.ui.stat.IceStat;
-import ice.Alon.ui.stat.IceStats;
+import ice.Alon.world.meta.stat.IceStat;
+import ice.Alon.world.meta.stat.IceStats;
 import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;

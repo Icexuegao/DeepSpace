@@ -22,7 +22,7 @@ public class DisplayName {
                 人生总有起落轻轻一笑,调整自我明天还是美好的<年年有鱼>@#@
                 JS异端<zxs>@#@
                 胡萝卜素星球<喵子>@#@
-                已经变成晓伟的形状了@#@
+                已经变成晓伟的形状了qwq@#@
                 界限?狗都不玩!<喵喵怪>
                 """.split("@#@");
         massageRand = me[new Random().nextInt(me.length - 1)];

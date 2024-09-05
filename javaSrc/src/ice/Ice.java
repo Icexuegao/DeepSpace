@@ -13,7 +13,7 @@ public class Ice extends Mod {
      */
     public static String displayName;
     /**
-     * <老婆们可爱捏>模组主要参与负责人</老婆们可爱捏>
+     * <老婆们可爱捏>模组主要参与负责人
      */
     private static final String[] author = {"Alon,洋葱,Elegy"};
 

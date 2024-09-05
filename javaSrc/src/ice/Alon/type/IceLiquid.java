@@ -1,7 +1,7 @@
 package ice.Alon.type;
 
-import ice.Alon.ui.stat.IceStat;
-import ice.Alon.ui.stat.IceStats;
+import ice.Alon.world.meta.stat.IceStat;
+import ice.Alon.world.meta.stat.IceStats;
 import arc.graphics.Color;
 import mindustry.type.Liquid;
 

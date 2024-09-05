@@ -1,11 +1,8 @@
-package ice.Alon.asundry.world.content.block;
+package ice.Alon.world.blocks.transport;
 
 
 import arc.Core;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
-import arc.math.geom.Point2;
 import arc.util.Strings;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
@@ -20,6 +17,9 @@ import mindustry.world.blocks.power.PowerGenerator;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 
+/**
+ * 物品液体电力热量源Text专属
+ */
 public class Randomer extends PowerGenerator {
     public static float heatOutput = 1000f;
     public float warmupRate = 1f;
@@ -41,17 +41,9 @@ public class Randomer extends PowerGenerator {
     }
 
     public void setBars() {
-        addBar("heat", (ItemSourceBuild entity) -> new Bar("bar.heat", Pal.lightOrange, () -> entity.heat / heatOutput));
+        addBar("heat", (ItemSourceBuild entity)->new Bar("bar.heat", Pal.lightOrange, ()->entity.heat / heatOutput));
         if (hasPower && outputsPower) {
-
-            addBar("power", (ItemSourceBuild entity) -> new Bar(() ->
-
-                    Core.bundle.format("bar.poweroutput", Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)),
-
-                    () -> Pal.powerBar,
-
-                    () -> 1));
-
+            addBar("power", (ItemSourceBuild entity)->new Bar(()->Core.bundle.format("bar.poweroutput", Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)), ()->Pal.powerBar, ()->1));
         }
     }
 
@@ -63,7 +55,6 @@ public class Randomer extends PowerGenerator {
 
     public class ItemSourceBuild extends Building implements HeatBlock {
         public float heat;
-        public TextureRegion f =Core.atlas.find("ice-Sprite-0001");
 
         @Override
         public float getPowerProduction() {
@@ -72,13 +63,11 @@ public class Randomer extends PowerGenerator {
 
         @Override
         public void draw() {
-            Draw.rect(f,x+8,y);
-
+            super.draw();
         }
 
         @Override
         public void updateTile() {
-
             heat = Mathf.approachDelta(heat, heatOutput * efficiency, warmupRate * delta());
             for (Liquid l : Vars.content.liquids()) {
                 if (liquids.get(l) < liquidCapacity) {
@@ -87,41 +76,15 @@ public class Randomer extends PowerGenerator {
                     liquids.clear();
                 }
             }
-            for (Item i : Vars.content.items()) {
-                if (items.get(i) < itemCapacity) {
-                    items.add(i, 1);
-                }
-                Point2[] nearby = {
-                        new Point2(tile.x, tile.y + 2),
-                        new Point2(tile.x + 1, tile.y + 2),
-                        new Point2(tile.x + 2, tile.y + 2),
-                        new Point2(tile.x + 3, tile.y + 2),
-
-                        new Point2(tile.x, tile.y -1),
-                        new Point2(tile.x + 1, tile.y -1),
-                        new Point2(tile.x + 2, tile.y -1),
-                        new Point2(tile.x + 3, tile.y -1),
-
-                        new Point2(tile.x-1,tile.y),
-                        new Point2(tile.x-1,tile.y+1),
-
-                        new Point2(tile.x+4,tile.y),
-                        new Point2(tile.x+4,tile.y+1)
-                };
-                for (Point2 p : nearby) {
-                    Building build = Vars.world.build(p.x, p.y);
-                    if (build!=null){
-                        if (build.items!=null){
-                            if (build.acceptItem(this, i) && this.canDump(build, i)) {
-                                build.handleItem(this, i);
-                                this.items.remove(i, 1);
-                            }
-                        }
-
-                    }
+            for (Item item : Vars.content.items()) {
+                if (items.get(item) < itemCapacity) {
+                    items.add(item, 100);
+                    dump(item);
+                    items.clear();
                 }
             }
         }
+
 
         @Override
         public float heat() {

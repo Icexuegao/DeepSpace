@@ -100,7 +100,7 @@ public class SerializationStore {
     /**
      * 序列化对象
      */
-    public static class SerializationStoreBuild implements Externalizable, Serializable {
+    private static class SerializationStoreBuild implements Externalizable, Serializable {
         /**
          * 不要更改!!!会导致设置失效嘎嘎报错
          */

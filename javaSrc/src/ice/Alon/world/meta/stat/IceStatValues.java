@@ -1,4 +1,4 @@
-package ice.Alon.ui.stat;
+package ice.Alon.world.meta.stat;
 
 import arc.flabel.FLabel;
 import mindustry.world.meta.Stat;
