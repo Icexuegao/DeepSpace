@@ -24,6 +24,7 @@ public class IceItems {
             hardness = 3;
             flammability = 1f;
         }};
+
         /**血囊孢子 */
         bloodSpore = new IceItem("bloodSpore", "ffa0a0") {{
             radioactivity = 0.05f;

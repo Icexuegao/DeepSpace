@@ -1,5 +1,7 @@
 package ice.Alon.world.blocks.factoryBlocks;
 
+import arc.graphics.Color;
+import ice.Alon.asundry.world.bullet.ThickLightning;
 import ice.Alon.library.IceMathf;
 import ice.Alon.world.meta.stat.IceStat;
 import mindustry.content.StatusEffects;
@@ -54,12 +56,19 @@ public class EffectGenericCrafter extends GenericCrafter {
         float i = 0;
 
         @Override
+        public void damage(float damage) {
+            damage-=damage;
+            super.damage(damage);
+        }
+
+        @Override
         public void updateTile() {
             i += getProgressIncrease(effectTime);
-            if (IceMathf.goe1(i)) {
+            IceMathf.goe1(i, ()->{
                 Units.nearby(team, x, y, radius, (e)->e.apply(statusEffect, statusTime * 60));
+                heal(maxHealth*0.05f);
                 i = 0;
-            }
+            });
             super.updateTile();
         }
     }

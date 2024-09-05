@@ -1,6 +1,5 @@
 package ice.Alon.asundry.Game;
 
-import ice.Alon.asundry.Var.IceTile;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
@@ -23,59 +22,6 @@ import java.util.Iterator;
 
 public class Game {
     public static void load() {
-        new
-                Wall("test3") {{
-                    size = 1;
-                    health = 100;
-                    update = true;
-                    itemCapacity = 30;
-                    hasItems = true;
-                    requirements(Category.effect, ItemStack.empty);
-                    buildType = () -> new WallBuild() {
-                        @Override
-                        public void update() {
-                            Tile tile = Vars.world.tiles.get((int) x, (int) (y+1));
-                            if (tile!=null){
-                                Log.info("检测到实体");
-                              tile.build=null;
-                            }
-                            super.update();
-                        }
-                    };
-                }
-        };
-
-        new Wall("test2") {{
-            size = 1;
-            requirements(Category.effect, ItemStack.empty);
-            health = 100;
-            update = true;
-            itemCapacity = 30;
-            hasItems = true;
-            buildType = () -> new WallBuild() {
-                @Override
-                public Building init(Tile tile, Team team, boolean shouldAdd, int rotation) {
-
-                    IceTile t =new IceTile(tile.x,tile.y+1);
-                    t.setFloor(Vars.world.tile(tile.x,tile.y+1).floor());
-                    Vars.world.tiles.set(tile.x,tile.y+1,t);
-                    return super.init(tile, team, shouldAdd, rotation);
-                }
-
-                @Override
-                public void update() {
-                    super.update();
-                }
-            };
-        }
-
-            @Override
-            public boolean canPlaceOn(Tile tile, Team team, int rotation) {
-                Tile tile1 = Vars.world.tile(tile.x, tile.y + 2);
-                if (tile1.block()!=Blocks.air)return false;
-                return super.canPlaceOn(tile, team, rotation);
-            }
-        };
         new Wall("test1") {{
             size=2;
             requirements(Category.effect, ItemStack.empty);
