@@ -2,10 +2,15 @@ package ice.Alon.content;
 
 import arc.graphics.Color;
 import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.Lines;
 import arc.math.Mathf;
+import arc.math.geom.Vec2;
+import arc.struct.Seq;
 import mindustry.entities.Effect;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
+
+import java.util.Random;
 
 import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.lineAngle;
@@ -25,6 +30,31 @@ public class IceEffects {
         color(Color.valueOf("ed90df"));
         Drawf.tri(x, y, width, length, e.rotation);
         Drawf.tri(x, y, width, length, 180 + e.rotation);
+    }),
+
+    /**
+     * 紫色闪电
+     */
+    lightning = new Effect(10f, 500f, e->{
+        if (!(e.data instanceof Seq)) return;
+        Seq<Vec2> lines = e.data();
+
+        stroke(3f * e.fout());
+        color(e.color, Color.white, e.fin());
+
+        for (int i = 0; i < lines.size - 1; i++) {
+            Vec2 cur = lines.get(i);
+            Vec2 next = lines.get(i + 1);
+
+            Lines.line(cur.x, cur.y, next.x, next.y, false);
+            if (i==lines.size-2){
+               IceEffects.lancerLaserShoot.at(next.x, next.y,  new Random().nextInt(360), Color.valueOf("ed90df"));
+            }
+        }
+
+        for (Vec2 p : lines) {
+            Fill.circle(p.x, p.y, Lines.getStroke() / 2f);
+        }
     }),
 
     /**

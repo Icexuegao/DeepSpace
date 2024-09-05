@@ -2,13 +2,17 @@ package ice.Alon.world.blocks.factoryBlocks;
 
 import arc.graphics.Color;
 import ice.Alon.asundry.world.bullet.ThickLightning;
+import ice.Alon.entities.IceLightning;
 import ice.Alon.library.IceMathf;
 import ice.Alon.world.meta.stat.IceStat;
 import mindustry.content.StatusEffects;
+import mindustry.entities.Lightning;
 import mindustry.entities.Units;
 import mindustry.graphics.Drawf;
 import mindustry.type.StatusEffect;
 import mindustry.world.blocks.production.GenericCrafter;
+
+import java.util.Random;
 
 /**
  * 状态工厂类,一段时间给予周围己方单位状态
@@ -56,18 +60,14 @@ public class EffectGenericCrafter extends GenericCrafter {
         float i = 0;
 
         @Override
-        public void damage(float damage) {
-            damage-=damage;
-            super.damage(damage);
-        }
-
-        @Override
         public void updateTile() {
             i += getProgressIncrease(effectTime);
             IceMathf.goe1(i, ()->{
                 Units.nearby(team, x, y, radius, (e)->e.apply(statusEffect, statusTime * 60));
-                heal(maxHealth*0.05f);
+                heal(maxHealth * 0.05f);
                 i = 0;
+                IceLightning.createLightningInternal(null,4,team,Color.valueOf("ed90df"),1,x,y,new Random().nextInt(360),8);
+
             });
             super.updateTile();
         }
