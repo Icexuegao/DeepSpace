@@ -16,12 +16,12 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
     repositories {
-        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
-        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
         mavenCentral()
         mavenLocal()
         google()
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
         maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
         maven { url "https://maven.aliyun.com/repository/public" }
         maven { url 'https://jitpack.io' }

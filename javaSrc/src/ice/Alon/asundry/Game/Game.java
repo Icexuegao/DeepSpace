@@ -102,7 +102,7 @@ public class Game {
                     Draw.color(Color.red);
                     Draw.alpha(0.4f);
                     for (Point2 e : visited) {
-                        Fill.crect(e.x * Vars.tilesize - Vars.tilesize / 2, e.y * Vars.tilesize - Vars.tilesize / 2, Vars.tilesize, Vars.tilesize);
+                        Fill.crect(e.x * Vars.tilesize - (float) Vars.tilesize / 2, e.y * Vars.tilesize - (float) Vars.tilesize / 2, Vars.tilesize, Vars.tilesize);
                     }
                     Draw.reset();
                 }

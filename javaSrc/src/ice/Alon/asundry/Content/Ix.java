@@ -1,6 +1,5 @@
 package ice.Alon.asundry.Content;
 
-import ice.Alon.asundry.world.draw.IceDraw;
 import arc.graphics.Blending;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -8,6 +7,7 @@ import arc.graphics.g2d.Fill;
 import arc.graphics.g2d.Lines;
 import arc.math.Angles;
 import arc.math.Mathf;
+import ice.Alon.asundry.world.draw.IceDraw;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.entities.effect.MultiEffect;
@@ -15,9 +15,6 @@ import mindustry.entities.effect.ParticleEffect;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
-
-import static arc.graphics.g2d.Draw.color;
-import static arc.math.Angles.randLenVectors;
 
 public class Ix {
     public static final Effect tarnationCharge = new Effect(130f, 180f, e -> {

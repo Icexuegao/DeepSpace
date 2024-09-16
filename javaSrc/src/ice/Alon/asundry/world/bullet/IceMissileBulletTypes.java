@@ -1,7 +1,7 @@
 package ice.Alon.asundry.world.bullet;
 
-import ice.Alon.asundry.Content.Ix;
 import arc.graphics.Color;
+import ice.Alon.asundry.Content.Ix;
 import mindustry.Vars;
 import mindustry.content.Blocks;
 import mindustry.content.Fx;

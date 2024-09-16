@@ -1,5 +1,6 @@
 package ice.Alon.asundry.world.content.block;
 
+import arc.graphics.Color;
 import arc.scene.ui.layout.Table;
 import arc.util.Nullable;
 import mindustry.content.Fx;
@@ -18,6 +19,7 @@ import mindustry.world.meta.Stats;
 import java.util.Arrays;
 
 public class Formula {
+    public Color formulaColor=Color.black;
     @Nullable
     public Consume[] input;
     @Nullable
@@ -47,10 +49,12 @@ public class Formula {
     }
 
     public void setOutput(ItemStack[] outputItems) {
+        formulaColor =outputItems[0].item.color;
         this.outputItems = outputItems;
     }
 
     public void setOutput(LiquidStack[] outputLiquids) {
+        formulaColor =outputLiquids[0].liquid.color;
         this.outputLiquids = outputLiquids;
     }
 
@@ -131,7 +135,7 @@ public class Formula {
 
     public void build(Building build, Table table) {
         if (input == null) return;
-        table.pane(t -> {
+        table.pane(t->{
             for (var c : input) {
                 c.build(build, t);
             }

@@ -1,10 +1,13 @@
 package ice.Alon.asundry.BaseTool.io;
 
-import arc.struct.*;
-import arc.util.*;
+import arc.struct.ArrayMap;
+import arc.struct.ObjectMap;
+import arc.struct.Seq;
+import arc.util.ArcRuntimeException;
+import arc.util.Nullable;
 
 import java.io.*;
-import java.util.regex.*;
+import java.util.regex.Pattern;
 
 /** An hsjon parser. Can be used as a standard json value.
  * Output can be converted to standard JSON. This class is heavily based upon the Hjson Java implementation.*/

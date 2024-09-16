@@ -12,17 +12,21 @@ import mindustry.world.meta.StatValue;
 import mindustry.world.meta.Stats;
 
 public class StatValues {
+
     public static StatValue formulas(FormulaStack formulas, Block block) {
-        return t -> t.table(table -> {
-            table.left();
-            for (int f = 0; f < formulas.size(); f++) {
-                int finalF = f;
-                table.table(Styles.grayPanel, tab -> {
-                    tab.left();
-                    formula(formulas.getFormula(finalF), block).display(tab);
-                }).growX().pad(5).row();
-            }
-        }).left();
+        StatValue statValue = t->{
+            t.table(table->{
+                table.left();
+                for (int f = 0; f < formulas.size(); f++) {
+                    int finalF = f;
+                    table.table(Styles.grayPanel, tab->{
+                        tab.left();
+                        formula(formulas.getFormula(finalF), block).display(tab);
+                    }).growX().pad(5).row();
+                }
+            }).left();
+        };
+        return statValue;
     }
 
     public static StatValue formula(Formula formula, Block block) {

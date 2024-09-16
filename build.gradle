@@ -2,24 +2,26 @@ apply plugin: "java"
 buildscript {
     //项目的仓库
     ext {
+        uncVersion='2.1.1'
         kotlin_version = "1.9.23"
         proUser = System.getProperty("user.name")
         sdkRoot = System.getenv("ANDROID_HOME")
     }
 }
 repositories {
+    mavenCentral()
+    mavenLocal()
     maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
     maven { url 'https://repo.huaweicloud.com/repository/maven/' }
-    mavenCentral()
-    mavenLocal()
     google()
     maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
     maven { url "https://maven.aliyun.com/repository/public" }
     maven { url 'https://jitpack.io' }
 }
 dependencies {
-    // compileOnly files("D:\\Programming\\luanqibazaode\\lib\\Mindustry.jar")
+    compileOnly "com.github.EB-wilson.UniverseCore:core:$uncVersion"//涵盖了大部分mod制作相关的工具
+    compileOnly "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//包括组件
     implementation "com.github.Anuken:jabel:93fde537c7"
     compileOnly "com.github.Tinylake:MindustryX:v146.004"
     compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -47,6 +49,13 @@ tasks.register('DeepSpaceJar', Jar) {
     archiveFileName = "${project.name}Desktops.jar"
     from {
         [zipTree("javaSrc\\build\\libs\\javaSrcDesktop.jar")]
+    }
+}
+tasks.register('MYCOPYJAR',Copy){
+    dependsOn DeepSpaceJar
+    from "build/libs/$project.name" + "Desktops.jar"//源
+    into {
+        "C:/Users/$proUser/AppData/Roaming/Mindustry/mods"
     }
 }
 tasks.register('jarAndroid') {

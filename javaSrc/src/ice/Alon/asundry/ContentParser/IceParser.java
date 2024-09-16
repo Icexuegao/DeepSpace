@@ -10,6 +10,7 @@ import mindustry.ctype.UnlockableContent;
 import mindustry.mod.Mod;
 import mindustry.mod.Mods;
 import mindustry.type.ErrorContent;
+
 import java.util.Locale;
 
 public class IceParser {

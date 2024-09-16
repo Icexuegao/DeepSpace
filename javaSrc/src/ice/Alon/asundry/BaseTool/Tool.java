@@ -30,7 +30,6 @@ public class Tool {
     }
 
 
-
     public static void blueprint() {
         ADriBaseRegistry base = ADriBaseGenerator.bases;
         base.load();
@@ -51,10 +50,9 @@ public class Tool {
     }
 
 
-
     public static void SectorID() {
         shown = Core.settings.getBool("planet-sector-id", true);
-        Events.on(ClientLoadEvent.class, (e) -> {
+        Events.on(ClientLoadEvent.class, (e)->{
             final Font font = Fonts.outline;
             final float fontScl = 0.6F / Scl.scl();
             Vars.ui.planet = new PlanetDialog() {
@@ -62,6 +60,7 @@ public class Tool {
                     shown(this::rebuildButton);
                 }
 
+                @Override
                 public void renderProjections(Planet planet) {
                     super.renderProjections(planet);
                     if (shown) {
@@ -69,7 +68,7 @@ public class Tool {
                         if (!(alpha < 1.0E-4F)) {
 
                             for (Sector sec : planet.sectors) {
-                                this.planets.drawPlane(sec, () -> font.draw(String.valueOf(sec.id), 0.0F, 0.0F, Color.white, fontScl, true, 1));
+                                this.planets.drawPlane(sec, ()->font.draw(String.valueOf(sec.id), 0.0F, 0.0F, Color.white, fontScl, true, 1));
                             }
                         }
                     }
@@ -79,10 +78,10 @@ public class Tool {
                     Stack stack = (Stack) this.getChildren().get(0);
                     Table table = (Table) stack.getChildren().get(3);
                     table.row();
-                    table.table(Styles.black6, (t) -> t.button("显示星球区块id", Styles.flatTogglet, () -> {
+                    table.table(Styles.black6, (t)->t.button("显示星球区块id", Styles.flatTogglet, ()->{
                         shown = !shown;
                         Core.settings.put("planet-sector-id", shown);
-                    }).height(43.333332F).growX().checked((b) -> shown)).fillX();
+                    }).height(43.333332F).growX().checked((b)->shown)).fillX();
                 }
             };
         });

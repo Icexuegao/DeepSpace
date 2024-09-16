@@ -1,26 +1,33 @@
 package ice.Alon.asundry.world.content.block;
 
-import ice.Alon.world.meta.stat.IceStat;
-import ice.Alon.world.meta.stat.IceStats;
 import arc.Core;
+import arc.graphics.Color;
+import arc.graphics.Texture;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.math.geom.Geometry;
-import arc.scene.ui.Button;
-import arc.scene.ui.ButtonGroup;
+import arc.scene.ui.Image;
+import arc.scene.ui.layout.Cell;
 import arc.scene.ui.layout.Table;
 import arc.struct.EnumSet;
 import arc.struct.Seq;
+import arc.util.Align;
 import arc.util.Eachable;
 import arc.util.Strings;
 import arc.util.Time;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
+import ice.Alon.File.IceFiles;
+import ice.Alon.content.items.IceItems;
+import ice.Alon.ui.dialogs.MenusDialogKt;
+import ice.Alon.world.meta.stat.IceStat;
+import ice.Alon.world.meta.stat.IceStats;
 import mindustry.Vars;
 import mindustry.core.UI;
 import mindustry.entities.units.BuildPlan;
 import mindustry.gen.Building;
+import mindustry.gen.Icon;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.logic.LAccess;
@@ -29,17 +36,22 @@ import mindustry.type.ItemStack;
 import mindustry.type.Liquid;
 import mindustry.type.LiquidStack;
 import mindustry.ui.Bar;
+import mindustry.ui.ItemImage;
 import mindustry.ui.Styles;
 import mindustry.world.Block;
 import mindustry.world.blocks.heat.HeatBlock;
 import mindustry.world.blocks.heat.HeatConsumer;
-import mindustry.world.consumers.ConsumeLiquid;
-import mindustry.world.consumers.ConsumeLiquids;
-import mindustry.world.consumers.ConsumePower;
+import mindustry.world.consumers.*;
 import mindustry.world.draw.*;
 import mindustry.world.meta.BlockFlag;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static mindustry.Vars.content;
+import static mindustry.gen.Tex.pane;
 
 public class MultipleCrafter extends Block {
     public FormulaStack formulas;
@@ -60,14 +72,14 @@ public class MultipleCrafter extends Block {
         drawArrow = false;
         formulas = new FormulaStack();
         configurable = true;
-        config(Integer.class, (build, value) -> ((MultipleCrafterBuilding) build).setIndex(value));
-        buildType = () -> heatBlock ? new HeatMultipleCrafterBuilding() : new MultipleCrafterBuilding();
+        config(Integer.class, (build, value)->((MultipleCrafterBuilding) build).setIndex(value));
+        buildType = ()->heatBlock ? new HeatMultipleCrafterBuilding() : new MultipleCrafterBuilding();
     }
 
     @Override
     public void setStats() {
         super.setStats();
-        stats.add(IceStat.nutrientConcentration,StatValues.formulas(formulas, this));
+        stats.add(IceStat.nutrientConcentration, StatValues.formulas(formulas, this));
     }
 
     @Override
@@ -105,21 +117,21 @@ public class MultipleCrafter extends Block {
                 addLiquidBar(out.liquid);
             }
             if (!added) {
-                addLiquidBar(build -> build.liquids.current());
+                addLiquidBar(build->build.liquids.current());
             }
         }
         if (outPower) {
-            addBar("outPower", (MultipleCrafterBuilding entity) -> new Bar(() -> Core.bundle.format("bar.poweroutput", Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)), () -> Pal.powerBar, () -> entity.efficiency));
+            addBar("outPower", (MultipleCrafterBuilding entity)->new Bar(()->Core.bundle.format("bar.poweroutput", Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)), ()->Pal.powerBar, ()->entity.efficiency));
         }
         if (consP) {
-            addBar("power", (MultipleCrafterBuilding entity) -> new Bar(() -> (entity.consPower != null && entity.consPower.buffered) ? Core.bundle.format("bar.poweramount", Float.isNaN(entity.power.status * entity.consPower.capacity) ? "<ERROR>" : UI.formatAmount((int) (entity.power.status * entity.consPower.capacity))) : Core.bundle.get("bar.power"), () -> Pal.powerBar, () -> Mathf.zero(entity.consPower == null ? 0 : entity.consPower.requestedPower(entity)) && entity.power.graph.getPowerProduced() + entity.power.graph.getBatteryStored() > 0f ? 1f : entity.power.status));
+            addBar("power", (MultipleCrafterBuilding entity)->new Bar(()->(entity.consPower != null && entity.consPower.buffered) ? Core.bundle.format("bar.poweramount", Float.isNaN(entity.power.status * entity.consPower.capacity) ? "<ERROR>" : UI.formatAmount((int) (entity.power.status * entity.consPower.capacity))) : Core.bundle.get("bar.power"), ()->Pal.powerBar, ()->Mathf.zero(entity.consPower == null ? 0 : entity.consPower.requestedPower(entity)) && entity.power.graph.getPowerProduced() + entity.power.graph.getBatteryStored() > 0f ? 1f : entity.power.status));
         }
         if (!heatBlock) return;
         if (outHeat) {
-            addBar("outHeat", (HeatMultipleCrafterBuilding entity) -> new Bar("bar.heat", Pal.lightOrange, () -> entity.heat / entity.formula.heatOutput));
+            addBar("outHeat", (HeatMultipleCrafterBuilding entity)->new Bar("bar.heat", Pal.lightOrange, ()->entity.heat / entity.formula.heatOutput));
         }
         if (needHeat) {
-            addBar("heat", (HeatMultipleCrafterBuilding entity) -> new Bar(() -> Core.bundle.format("bar.heatpercent", (int) entity.heatReq, (int) Math.min((entity.heatReq / entity.formula.heatRequirement * 100), entity.formula.maxHeatEfficiency)), () -> Pal.lightOrange, () -> entity.heatReq / entity.formula.heatRequirement));
+            addBar("heat", (HeatMultipleCrafterBuilding entity)->new Bar(()->Core.bundle.format("bar.heatpercent", (int) entity.heatReq, (int) Math.min((entity.heatReq / entity.formula.heatRequirement * 100), entity.formula.maxHeatEfficiency)), ()->Pal.lightOrange, ()->entity.heatReq / entity.formula.heatRequirement));
         }
     }
 
@@ -136,7 +148,7 @@ public class MultipleCrafter extends Block {
 
     @Override
     public void init() {
-        stats =new IceStats();
+        stats = new IceStats();
         super.init();
         formulas.apply(this);
         if (hasPower && consumesPower) {
@@ -303,6 +315,7 @@ public class MultipleCrafter extends Block {
             super.displayConsumption(table);
             formula.build(this, table);
         }
+
         @Override
         public void updateTile() {
             formula = formulas.getFormula(formulaIndex);
@@ -394,7 +407,6 @@ public class MultipleCrafter extends Block {
 
         public void craft() {
             formulas.trigger(this);
-
             if (outputItems != null) {
                 for (var output : outputItems) {
                     for (int i = 0; i < output.amount; i++) {
@@ -426,22 +438,308 @@ public class MultipleCrafter extends Block {
             }
         }
 
+        public static void getContent(Table ta, Consume[] consume) {
+            var k = new Object() {
+                int k = 0;
+            };
+            for (Consume consume1 : consume) {
+                ItemStack[] items;
+                if (consume1 instanceof ConsumeItems item) {
+                    items = item.items;
+                    for (ItemStack item2 : items) {
+                        ta.table((s)->{
+                            s.add(new ItemImage(item2.item.uiIcon, item2.amount));
+                        }).grow();
+                    }
+                }
+
+                LiquidStack[] Liquids;
+                if (consume1 instanceof ConsumeLiquids liquid) {
+                    Liquids = liquid.liquids;
+                    for (LiquidStack liquid2 : Liquids) {
+                        ta.table((t)->{
+                            t.add(new ItemImage(liquid2.liquid.uiIcon, (int) (liquid2.amount * 60)));
+                        });
+                    }
+                }
+
+                if (consume1 instanceof ConsumeLiquid liquid) {
+                    ta.table((s)->{
+                        s.add(new ItemImage(liquid.liquid.uiIcon, (int) (liquid.amount * 60)));
+                    }).grow();
+
+                }
+                Seq<Item> seq = new Seq<>();
+                if (consume1 instanceof ConsumeItemFlammable cf) {
+                    content.items().each(i->cf.filter.get(i) && i.unlockedNow(), (item)->{
+                        seq.add(item);
+                        if (k.k < 3) {
+                            ta.table((s)->{
+                                s.image(item.uiIcon).size(30);
+                                k.k++;
+                            }).grow();
+                        }
+
+                    });
+
+                    Table table = new Table();
+                    table.visible = false;
+                    seq.each((i)->{
+                        int i1 = seq.indexOf(i);
+                        table.image(i.uiIcon).size(30);
+                        if ((i1 + 1) % 4 == 0) table.row();
+                        table.setColor(1, 1, 1, 1);
+                        table.setBackground(MenusDialogKt.getCreateFlatDown());
+                        table.setSize(140, 140);
+                        table.margin(10);
+                    });
+
+                    ta.table((td)->{
+                        td.addChild(table);
+                        td.add("...");
+                        ta.hovered(()->{
+                            table.visible(()->true);
+                        });
+                        ta.exited(()->{
+                            table.visible(()->false);
+                        });
+                        table.update(()->{
+                            table.setPosition(300 - td.x, td.y + (td.getHeight() / 2), Align.left);
+                        });
+                    }).grow();
+
+                    // table.update(()->table.setPosition(ta.x + ta.getWidth(), ta.y + ta.getHeight(), Align.topLeft));
+
+                }
+            }
+        }
+
+        private Table add(Table t1) {
+            t1.row();
+            AtomicReference<Table> t4 = new AtomicReference<>();
+            t1.table((t2)->{
+                StringBuffer g = new StringBuffer("dfeeeeeee dddddddddddddddeeeeeeee你妈evgggggvvvvvvvvvvvvvvvvvvvvvvvvvedewwwwwwwddwedefrgg");
+                int s = 35;
+                int length = g.length();
+                int i = length / s;
+                for (int gh = 1; gh < i + 1; gh++) {
+                    g.insert(gh * s, "\n");
+                }
+                t2.add(g);
+                t4.set(t2);
+            }).expand().left();
+            return t4.get();
+        }
+
         @Override
         public void buildConfiguration(Table table) {
+
             super.buildConfiguration(table);
-            table.pane(t -> {
-                ButtonGroup<Button> group = new ButtonGroup<>();
-                for (int i = 0; i < formulas.size(); i++) {
-                    int finalI = i;
-                    var b = t.button(finalI + "g", Styles.squareTogglet, () -> {
-                        group.setChecked(finalI + "g");
-                        configure(finalI);
-                    }).size(45f).get();
-                    group.add(b);
-                }
-                group.setChecked(formulaIndex + "g");
+            for (int i = 0; i < formulas.size(); i++) {
+                int f = i;
+                Formula formula1 = formulas.getFormula(i);
+                table.button((t)->{
+                    t.setStyle(Styles.clearTogglei);
+                    t.setBackground(pane);
+                    t.table((t1)->{
+                        //  t1.setBackground(Tex.pane);
+                        t1.table((t2)->{
+                            /**输入ui*/
+                            t2.setBackground(pane);
+                            getContent(t2, formula1.getInputs());
+
+                        }).expand().size(207, 56);
+                        t1.table((t2)->{
+                            t2.table((t3)->{
+                                String[] progres = new String[22];
+                                Arrays.fill(progres, ">");
+                                for (int h = 0; h < progres.length; h++) {
+                                    int k = h;
+                                    t3.add(progres[h]).update((e)->{
+                                        if (formula1 == formula) {
+                                            if (progress > ((float) k / progres.length)) {
+                                                e.setColor(formula1.formulaColor);
+                                            } else {
+                                                e.setColor(new Color(1, 1, 1, 1));
+                                            }
+                                        }
+                                    });
+                                }
+                            }).expand();
+                            t2.row();
+                            t2.table((t3)->{
+                                t3.table(t4->{
+                                    t4.add("\ue810").size(22).color(Color.yellow);
+                                    t4.add(":" + (formula1.getConsPower() == null ? 0 : formula1.getConsPower().usage * 60));
+                                }).expand().left();
+                                t3.table(t4->{
+
+                                    t4.image(new TextureRegion(new Texture(IceFiles.find("time.png")))).size(22);
+                                    t4.add(":" + formula1.craftTime / 60 + "秒");
+                                }).expand().right();
+
+                            }).expand().fillX();
+                        }).expand();
+                        t1.table((t2)->{
+                            /**输出ui*/
+                            t2.setBackground(pane);
+
+                            if (formula1.outputItems != null) {
+                                for (ItemStack outputItem : formula1.outputItems) {
+                                    t2.add(new ItemImage(outputItem.item.uiIcon, outputItem.amount));
+                                }
+                            }
+                            if (formula1.outputLiquids != null) {
+                                for (LiquidStack outLiquid : formula1.getOutputLiquids()) {
+                                    t2.add(new ItemImage(outLiquid.liquid.uiIcon, (int) (outLiquid.amount * 60)));
+                                }
+                            }
+                        }).expand().size(207, 56);
+                    }).grow();
+                    t.row();
+                    AtomicBoolean g1 = new AtomicBoolean(false);
+                    AtomicReference<Table> add = new AtomicReference<>();
+                    t.table((t1)->{
+
+                        t1.button((t2)->{
+                            t2.setStyle(Styles.nonet);
+                            t2.add("工艺详情:");
+                            Cell<Image> size1 = t2.image(Icon.rightOpen).size(27);
+                            size1.update((u)->{
+                                if (g1.get()) {
+                                    u.setDrawable(Icon.downOpen);
+                                } else {
+                                    u.setDrawable(Icon.rightOpen);
+                                }
+                            });
+                        }, ()->{
+                            g1.set(!g1.get());
+                            if (g1.get()) {
+                                add.set(add(t1));
+                            } else {
+                                add.get().remove();
+                            }
+
+                        }).expand().left();
+                    }).grow();
+                    t.row();
+
+
+                }, ()->{
+                    configure(f);
+                }).update((b)->{
+                    b.setChecked(formulaIndex == f);
+                }).pad(5).margin(10);
+                table.row();
+            }
+          /*  table.table((ts)->{
+                ts.image(Icon.zoom);
+                TextField textField = new TextField() {{
+                }};
+
+                ts.add(textField);
+                var item = new Object() {
+                    Item item;
+                };
+                textField.update(()->{
+                    item.item = content.item(textField.getText());
+                });
+
+
+                ts.image().update((b)->{
+                    if (item.item != null) {
+                        b.setDrawable(item.item.uiIcon);
+                        b.setColor(1, 1, 1, 1f);
+                    } else {
+                        b.setColor(1, 1, 1, 0);
+                    }
+                }).size(64, 64);
+                ts.setBackground(getCreateFlatDown());
             });
+            table.row();
+            table.table((t)->{
+                for (int i = 0; i < formulas.size(); i++) {
+                    int f = i;
+                    Formula formula1 = formulas.getFormula(f);
+
+                    t.button((b)->{
+                        b.table((table1->{
+                            getContent(table1, formula1.input, formula1.craftTime);
+                            // table1.add(new ItemImage(formula1.content.uiIcon, 3));
+                        })).grow();
+
+                        b.table((t1)->{
+                            t1.table((a)->{
+                                for (Consume input : formula1.getInputs()) {
+                                    if (input instanceof ConsumePower pwr) {
+                                        a.add('\ue810' + ": " + pwr.usage * 60 + " 秒").color(Color.yellow);
+                                    }
+                                }
+                            }).grow();
+                            t1.row();
+                            t1.table((a)->{
+                                String[] values = {"=", "=", "=", "=", "=", "=", "=", "=", "=", "=", "=", "=", "=", "=", "=", ">"};
+                                for (int h = 0; h < values.length; h++) {
+                                    int k = h;
+                                    a.add(values[h]).update((e)->{
+                                        if (formula1 == formula) {
+                                            if (progress > ((float) k / values.length)) {
+                                                e.setColor(Color.red);
+                                            } else {
+                                                e.setColor(new Color(1, 1, 1, 1));
+                                            }
+                                        }
+                                    });
+                                }
+                              *//*  String s1="====",s4=">";
+                                a.add(s1).update((e)->{
+                                    if (progress>=0.3){e.setColor(Color.yellow);}else {
+                                        e.setColor(new Color(1, 1, 1, 1));
+                                    };
+                                });
+                                a.add(s1).update((e)->{
+                                    if (progress>=0.6){e.setColor(Color.yellow);}else {
+                                        e.setColor(new Color(1, 1, 1, 1));
+                                    };
+                                });
+                                a.add(s1).update((e)->{
+                                    if (progress>=0.9){e.setColor(Color.yellow);}else {
+                                        e.setColor(new Color(1, 1, 1, 1));
+                                    };
+                                });
+                                a.add(s4).update((e)->{
+
+                                });*//*
+                            }).grow();
+                            t1.row();
+                            t1.table((a)->{
+                                a.add('\ue830' + ": " + formula1.craftTime / 60 + "秒");
+                            }).grow();
+                        }).grow();
+
+                        b.table((table1->{
+                            if (formula1.outputItems != null) {
+                                for (ItemStack outputItem : formula1.outputItems) {
+                                    table1.add(new ItemImage(outputItem.item.uiIcon, outputItem.amount));
+                                }
+                            }
+                            if (formula1.outputLiquids != null) {
+                                for (LiquidStack outLiquid : formula1.getOutputLiquids()) {
+                                    table1.add(new ItemImage(outLiquid.liquid.uiIcon, (int) (outLiquid.amount * 60)));
+                                }
+                            }
+                        })).grow();
+
+                        b.setStyle(Styles.clearTogglei);
+                        b.update(()->b.setChecked(formulaIndex == f));
+                    }, ()->{
+                        configure(f);
+                    }).size(300, 124).pad(5);
+                    if (f % 2 == 1) t.row();
+                }
+            });*/
         }
+
 
         @Override
         public double sense(LAccess sensor) {

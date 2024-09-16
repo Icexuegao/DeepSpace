@@ -9,8 +9,6 @@ import mindustry.entities.effect.MultiEffect;
 import mindustry.entities.effect.RadialEffect;
 import mindustry.graphics.Pal;
 
-import static arc.graphics.g2d.Draw.color;
-
 public class MultipleCrafterRadialEffect extends RadialEffect{
     public float life;
     public MultipleCrafterRadialEffect(float life) {

@@ -2,7 +2,6 @@ package ice.Alon.asundry.Content;
 
 
 import arc.graphics.Color;
-import ice.Alon.asundry.world.IceAttribute;
 import ice.Alon.asundry.world.bullet.IceMissileBulletTypes;
 import ice.Alon.asundry.world.bullet.ThickLightningBulletType;
 import ice.Alon.asundry.world.content.block.*;
@@ -11,6 +10,7 @@ import ice.Alon.asundry.world.draw.IceDrawLiquidOutputs;
 import ice.Alon.asundry.world.draw.IceDrawPistons;
 import ice.Alon.asundry.world.effect.MultipleCrafterRadialEffect;
 import ice.Alon.content.items.IceItems;
+import ice.Alon.world.meta.IceAttribute;
 import mindustry.content.Blocks;
 import mindustry.content.Fx;
 import mindustry.content.Items;
@@ -42,17 +42,8 @@ public class IceBlocks {
     monocrystallineSiliconFactory, k3, quantumCore;
 
     public static void load() {
-        k3 = new Conveyor("k3") {{
-            buildVisibility = BuildVisibility.shown;
-            speed = 0.03f;
-            requirements(Category.crafting, ItemStack.with(Items.copper, 1));
-            junctionReplacement = Blocks.copperWall;
-        }};
-        k2 = new UnitCoreBlock("k2") {{
-            buildVisibility = BuildVisibility.shown;
-            size = 3;
-            health = 3;
-        }};
+
+
         k1 = new WallCrafter("2") {{
             requirements(Category.production, ItemStack.with(Items.graphite, 25, Items.beryllium, 20));
             consumePower(11 / 60f);
@@ -73,11 +64,6 @@ public class IceBlocks {
             oreThreshold = 0.8f;
             oreScale = 20;
             variants = 3;/**贴图数量 */
-        }};
-        taijing = new Conveyor("钛晶传送带") {{
-            speed = 13;
-            buildVisibility = BuildVisibility.shown;
-            health = 50;
         }};
         monocrystallineSiliconFactory = new GenericCrafter("monocrystallineSiliconFactory") {{
             requirements(Category.crafting, ItemStack.with(IceItems.redIce, 12));
@@ -191,7 +177,20 @@ public class IceBlocks {
                 barrels = new float[]{-12, 3, 0, 0, 4, 0, 12, 3, 0};
             }};
         }};
-
+        new MultipleCrafter("dd") {{
+            outputsPower = true;
+            requirements(Category.crafting, ItemStack.with(Items.copper, 20));
+            size = 3;
+            itemCapacity = 30;
+            liquidCapacity = 30;
+            formulas.addsFormulaArray(new Formula() {{
+                craftTime = 120;
+                craftEffect = new MultipleCrafterRadialEffect(craftTime);
+                setInput(new Consume[]{new ConsumeItems(ItemStack.with(Items.copper, 1)), new ConsumeLiquid(Liquids.cryofluid, 0.1f), new ConsumePower(0.1f, 0.0f, false)});
+                setOutput(ItemStack.with(Items.titanium, 2111));
+                setOutput(LiquidStack.with(Liquids.water, 0.05f));
+            }});
+        }};
         mineralProcessor = new MultipleCrafter("mineralProcessor") {{
             outputsPower = true;
             requirements(Category.crafting, ItemStack.with(Items.copper, 20));

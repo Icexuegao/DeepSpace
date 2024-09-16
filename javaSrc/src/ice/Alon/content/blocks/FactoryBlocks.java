@@ -22,7 +22,7 @@ public class FactoryBlocks {
             outputItem = new ItemStack(IceItems.integratedCircuit, 1);
             consumeItems(ItemStack.with(IceItems.monocrystallineSilicon, 1, IceItems.graphene, 2, IceItems.quartzGlass, 1));
             craftTime = 60;
-            craftEffect = new MultiEffect(/*IceEffects.lancerLaserShoot,*/ IceEffects.lancerLaserChargeBegin, IceEffects.hitLaserBlast);
+            craftEffect = new MultiEffect(IceEffects.lancerLaserShoot1,IceEffects.lancerLaserChargeBegin, IceEffects.hitLaserBlast);
             size = 3;
             requirements(Category.crafting, ItemStack.with(IceItems.copperIngot, 19));
         }};

@@ -1,8 +1,8 @@
 package ice.Alon.content.blocks;
 
 import arc.graphics.Color;
-import ice.Alon.asundry.world.IceAttribute;
 import ice.Alon.content.IceLiquids;
+import ice.Alon.world.meta.IceAttribute;
 import mindustry.content.Items;
 import mindustry.content.StatusEffects;
 import mindustry.gen.Sounds;
@@ -14,9 +14,25 @@ public class EnvironmentBlocks {
     /**
      * 环境
      */
-    public static Block bloodCrystalSpikes, bloodSporophore, bloodSporophoreTree, bloodShoal, redIce, redIceWall, thickBlood, deepThickBlood;
+    public static Block bloodCrystalSpikes, bloodSporophore, bloodSporophoreTree, bloodShoal, redIce,
+
+    redIceWall, thickBlood, deepThickBlood,goldPearlSand,goldPearlSandWall,liparite;
 
     public static void load() {
+
+        /**流纹岩*/
+        liparite =new Floor("liparite"){{
+            variants=3;
+        }};
+
+        /**金珀沙*/
+        goldPearlSand =new Floor("goldPearlSand"){{
+            variants=3;
+        }};
+        /**金珀沙墙*/
+        goldPearlSandWall =new StaticWall("goldPearlSandWall"){{
+            goldPearlSand.asFloor().wall=this;
+        }};
         /** 血晶尖刺*/
         bloodCrystalSpikes = new TallBlock("bloodCrystalSpikes") {{
             variants = 3;

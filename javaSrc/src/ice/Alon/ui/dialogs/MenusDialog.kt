@@ -25,7 +25,7 @@ val deepSpaceColor = arrayOf("#C384B7", "red", "#1DFF00", "#FFECF8FF")
 lateinit var cont: Table
 
 
-val createFlatDown = createFlatDown("ice-1")!!
+ val createFlatDown = createFlatDown("ice-1")!!
 lateinit var button: TextButtonStyle
 fun intro(table: Table) {
     deepSpace.show()
@@ -33,7 +33,7 @@ fun intro(table: Table) {
     table.add("DeepSpace")
 }
 
-fun init() {
+fun load() {
     button = object : TextButtonStyle() {}.apply {
         up = createFlatDown("ice-flat-up-base1")
         over = up
@@ -108,32 +108,24 @@ fun init() {
     }.width(200f).right().expandY().fillY()
 }
 
-fun close() {
+/**  每个按钮按下前要执行的方法,通常用于清空其他按钮的遗留问题*/
+private fun init() {
     cont.clear()
+}
+
+fun close() {
+    init()
     deepSpace.hide()
     IceMusics.expressOne.stop()
 }
 
 
 fun schedule() {
-    var jh = false
-    cont.clear()
-    cont.button("true") {
-        jh = !jh
-    }.size(128f, 64f).row()
-    cont.collapser({ t ->
-        run {
-            for (o in 1 until 110) {
-                t.button("$o") {
 
-                }.size(128f, 64f).row()
-            }
-        }
-    }, true, { jh }).expand().size(128f, graphicsSize[1]).top()
 }
 
 fun tree() {
-    cont.clear()/*
+    init()/*
 
      val l = ResearchDialog()
 
@@ -145,7 +137,7 @@ fun tree() {
 }
 
 fun achievement() {
-    cont.clear()
+    init()
     val t1 = Table()
     t1.margin(10f)
     t1.table { t ->

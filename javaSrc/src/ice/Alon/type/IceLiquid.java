@@ -1,8 +1,8 @@
 package ice.Alon.type;
 
+import arc.graphics.Color;
 import ice.Alon.world.meta.stat.IceStat;
 import ice.Alon.world.meta.stat.IceStats;
-import arc.graphics.Color;
 import mindustry.type.Liquid;
 
 public class IceLiquid extends Liquid {

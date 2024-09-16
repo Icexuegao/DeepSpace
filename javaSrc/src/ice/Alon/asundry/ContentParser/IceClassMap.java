@@ -1,7 +1,7 @@
 package ice.Alon.asundry.ContentParser;
 
-import ice.Alon.type.IceItem;
 import arc.struct.ObjectMap;
+import ice.Alon.type.IceItem;
 import mindustry.mod.ClassMap;
 
 /**

@@ -37,10 +37,22 @@ public class IceFiles {
     }
 
     /**
-     * 从模组目录开始获取文件 支持转义字符串 举例"sprites/xxx/xx.png"
+     * 从模组目录开始获取文件 支持转义字符串 举例"sprites/xxx/" 和"xxx\\xxx\\xx"
      */
     public static Fi pathFind(String pathFiName) {
-        return mod.root.child(pathFiName);
+        boolean contains = pathFiName.contains("\\");
+        String[] split;
+        if (contains) {
+            split = pathFiName.split("\\\\");
+        } else {
+            split = pathFiName.split("/");
+        }
+
+        Fi child = mod.root.child(split[0]);
+        for (int i = 1; i < split.length; i++) {
+            child = child.child(split[i]);
+        }
+        return child;
     }
 
     /**

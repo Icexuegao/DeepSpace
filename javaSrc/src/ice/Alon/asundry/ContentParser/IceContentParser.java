@@ -1,7 +1,5 @@
 package ice.Alon.asundry.ContentParser;
 
-import ice.Alon.asundry.BaseTool.io.IceJval;
-import ice.Ice;
 import arc.Core;
 import arc.assets.AssetDescriptor;
 import arc.assets.loaders.SoundLoader.SoundParameter;
@@ -25,6 +23,8 @@ import arc.util.serialization.Json.FieldMetadata;
 import arc.util.serialization.JsonValue;
 import arc.util.serialization.Jval.JsonParseException;
 import arc.util.serialization.SerializationException;
+import ice.Alon.asundry.BaseTool.io.IceJval;
+import ice.Ice;
 import mindustry.Vars;
 import mindustry.ai.UnitCommand;
 import mindustry.ai.types.FlyingAI;
@@ -92,7 +92,7 @@ public class IceContentParser {
     Seq<ContentParser.ParseListener> listeners = new Seq<>();
 
     ObjectMap<Class<?>, FieldParser> classParsers = new ObjectMap<>() {{
-        put(Effect.class, (type, data) -> {
+        put(Effect.class, (type, data)->{
             if (data.isString()) {
                 return field(Fx.class, data);
             }
@@ -105,17 +105,17 @@ public class IceContentParser {
             readFields(result, data);
             return result;
         });
-        put(Sortf.class, (type, data) -> field(UnitSorts.class, data));
-        put(Interp.class, (type, data) -> field(Interp.class, data));
-        put(Blending.class, (type, data) -> field(Blending.class, data));
-        put(CacheLayer.class, (type, data) -> field(CacheLayer.class, data));
-        put(Attribute.class, (type, data) -> {
+        put(Sortf.class, (type, data)->field(UnitSorts.class, data));
+        put(Interp.class, (type, data)->field(Interp.class, data));
+        put(Blending.class, (type, data)->field(Blending.class, data));
+        put(CacheLayer.class, (type, data)->field(CacheLayer.class, data));
+        put(Attribute.class, (type, data)->{
             String attr = data.asString();
             if (Attribute.exists(attr)) return Attribute.get(attr);
             return Attribute.add(attr);
         });
-        put(BuildVisibility.class, (type, data) -> field(BuildVisibility.class, data));
-        put(Schematic.class, (type, data) -> {
+        put(BuildVisibility.class, (type, data)->field(BuildVisibility.class, data));
+        put(Schematic.class, (type, data)->{
             Object result = fieldOpt(Loadouts.class, data);
             if (result != null) {
                 return result;
@@ -128,8 +128,8 @@ public class IceContentParser {
                 }
             }
         });
-        put(Color.class, (type, data) -> Color.valueOf(data.asString()));
-        put(StatusEffect.class, (type, data) -> {
+        put(Color.class, (type, data)->Color.valueOf(data.asString()));
+        put(StatusEffect.class, (type, data)->{
             if (data.isString()) {
                 StatusEffect result = locate(ContentType.status, data.asString());
                 if (result != null) return result;
@@ -140,9 +140,9 @@ public class IceContentParser {
             readFields(effect, data);
             return effect;
         });
-        put(UnitCommand.class, (type, data) -> {
+        put(UnitCommand.class, (type, data)->{
             if (data.isString()) {
-                var cmd = UnitCommand.all.find(u -> u.name.equals(data.asString()));
+                var cmd = UnitCommand.all.find(u->u.name.equals(data.asString()));
                 if (cmd != null) {
                     return cmd;
                 } else {
@@ -152,7 +152,7 @@ public class IceContentParser {
                 throw new IllegalArgumentException("单位命令必须为字符串");
             }
         });
-        put(BulletType.class, (type, data) -> {
+        put(BulletType.class, (type, data)->{
             if (data.isString()) {
                 return field(Bullets.class, data);
             }
@@ -162,7 +162,7 @@ public class IceContentParser {
             readFields(result, data);
             return result;
         });
-        put(AmmoType.class, (type, data) -> {
+        put(AmmoType.class, (type, data)->{
             //string -> item
             //if liquid ammo support is added, this should scan for liquids as well
             if (data.isString()) return new ItemAmmoType(find(ContentType.item, data.asString()));
@@ -175,7 +175,7 @@ public class IceContentParser {
             readFields(result, data);
             return result;
         });
-        put(DrawBlock.class, (type, data) -> {
+        put(DrawBlock.class, (type, data)->{
             if (data.isString()) {
                 //尝试实例化
                 return make(resolve(data.asString()));
@@ -190,14 +190,14 @@ public class IceContentParser {
             readFields(result, data);
             return result;
         });
-        put(ShootPattern.class, (type, data) -> {
+        put(ShootPattern.class, (type, data)->{
             var bc = resolve(data.getString("type", ""), ShootPattern.class);
             data.remove("type");
             var result = make(bc);
             readFields(result, data);
             return result;
         });
-        put(DrawPart.class, (type, data) -> {
+        put(DrawPart.class, (type, data)->{
             Class<?> bc = resolve(data.getString("type", ""), RegionPart.class);
             data.remove("type");
             var result = make(bc);
@@ -205,7 +205,7 @@ public class IceContentParser {
             return result;
         });
         //TODO this is untested
-        put(PartProgress.class, (type, data) -> {
+        put(PartProgress.class, (type, data)->{
             //简单的情况:它是一个字符串或数字常量
             if (data.isString()) return field(PartProgress.class, data.asString());
             if (data.isNumber()) return PartProgress.constant(data.asFloat());
@@ -244,12 +244,12 @@ public class IceContentParser {
 
             return parseProgressOp(base, op, data);
         });
-        put(PlanetGenerator.class, (type, data) -> {
+        put(PlanetGenerator.class, (type, data)->{
             var result = new AsteroidGenerator(); //目前只有一种类型
             readFields(result, data);
             return result;
         });
-        put(Mat3D.class, (type, data) -> {
+        put(Mat3D.class, (type, data)->{
             if (data == null) return new Mat3D();
 
             //转换x y z格式
@@ -280,11 +280,11 @@ public class IceContentParser {
 
             return mat;
         });
-        put(Vec3.class, (type, data) -> {
+        put(Vec3.class, (type, data)->{
             if (data.isArray()) return new Vec3(data.asFloatArray());
             return new Vec3(data.getFloat("x", 0f), data.getFloat("y", 0f), data.getFloat("z", 0f));
         });
-        put(Sound.class, (type, data) -> {
+        put(Sound.class, (type, data)->{
             if (fieldOpt(Sounds.class, data) != null) return fieldOpt(Sounds.class, data);
             if (Vars.headless) return new Sound();
 
@@ -298,7 +298,7 @@ public class IceContentParser {
             sounds.put(path, desc);
             return sound;
         });
-        put(Objectives.Objective.class, (type, data) -> {
+        put(Objectives.Objective.class, (type, data)->{
             if (data.isString()) {
                 var cont = locateAny(data.asString());
                 if (cont == null) throw new IllegalArgumentException("未知的目标内容: " + data.asString());
@@ -310,14 +310,14 @@ public class IceContentParser {
             readFields(obj, data);
             return obj;
         });
-        put(Ability.class, (type, data) -> {
+        put(Ability.class, (type, data)->{
             Class<? extends Ability> oc = resolve(data.getString("type", ""));
             data.remove("type");
             Ability obj = make(oc);
             readFields(obj, data);
             return obj;
         });
-        put(Weapon.class, (type, data) -> {
+        put(Weapon.class, (type, data)->{
             var oc = resolve(data.getString("type", ""), Weapon.class);
             data.remove("type");
             var weapon = make(oc);
@@ -325,14 +325,14 @@ public class IceContentParser {
             weapon.name = currentMod.name + "-" + weapon.name;
             return weapon;
         });
-        put(Consume.class, (type, data) -> {
+        put(Consume.class, (type, data)->{
             var oc = resolve(data.getString("type", ""), Consume.class);
             data.remove("type");
             var consume = make(oc);
             readFields(consume, data);
             return consume;
         });
-        put(ConsumeLiquidBase.class, (type, data) -> {
+        put(ConsumeLiquidBase.class, (type, data)->{
             var oc = resolve(data.getString("type", ""), ConsumeLiquidBase.class);
             data.remove("type");
             var consume = make(oc);
@@ -357,7 +357,7 @@ public class IceContentParser {
             T t = internalRead(type, elementType, jsonData, keyType);
             if (t != null && !Reflect.isWrapper(t.getClass()) && (type == null || !type.isPrimitive())) {
                 checkNullFields(t);
-                listeners.each(hook -> hook.parsed(type, jsonData, t));
+                listeners.each(hook->hook.parsed(type, jsonData, t));
             }
             return t;
         }
@@ -418,7 +418,7 @@ public class IceContentParser {
                 }
 
                 if (Content.class.isAssignableFrom(type)) {
-                    ContentType ctype = contentTypes.getThrow(type, () -> new IllegalArgumentException("该内容类型没有对应的类:" + type.getSimpleName()));
+                    ContentType ctype = contentTypes.getThrow(type, ()->new IllegalArgumentException("该内容类型没有对应的类:" + type.getSimpleName()));
                     String prefix = currentMod != null ? currentMod.name + "-" : "";
                     T one = (T) Vars.content.getByName(ctype, prefix + jsonData.asString());
                     if (one != null) return one;
@@ -458,7 +458,7 @@ public class IceContentParser {
     }
 
 
-    private final ObjectMap<ContentType, TypeParser<?>> parsers = ObjectMap.of(ContentType.block, (TypeParser<Block>) (mod, name, value) -> {
+    private final ObjectMap<ContentType, TypeParser<?>> parsers = ObjectMap.of(ContentType.block, (TypeParser<Block>) (mod, name, value)->{
                 readBundle(ContentType.block, name, value);
 
                 Block block;
@@ -476,7 +476,7 @@ public class IceContentParser {
 
                 currentContent = block;
 
-                read(() -> {
+                read(()->{
                     if (value.has("consumes") && value.get("consumes").isObject()) {
                         for (JsonValue child : value.get("consumes")) {
                             switch (child.name) {
@@ -527,7 +527,7 @@ public class IceContentParser {
                 });
 
                 return block;
-            }, ContentType.unit, (TypeParser<UnitType>) (mod, name, value) -> {
+            }, ContentType.unit, (TypeParser<UnitType>) (mod, name, value)->{
                 readBundle(ContentType.unit, name, value);
 
                 UnitType unit;
@@ -553,7 +553,7 @@ public class IceContentParser {
 
                 currentContent = unit;
                 //TODO test this!
-                read(() -> {
+                read(()->{
                     //add reconstructor type
                     if (value.has("requirements")) {
                         JsonValue rec = value.remove("requirements");
@@ -579,7 +579,7 @@ public class IceContentParser {
 
                     if (value.has("defaultController")) {
                         var sup = supply(resolve(value.getString("defaultController"), FlyingAI.class));
-                        unit.controller = u -> sup.get();
+                        unit.controller = u->sup.get();
                         value.remove("defaultController");
                     }
 
@@ -598,7 +598,7 @@ public class IceContentParser {
                 });
 
                 return unit;
-            }, ContentType.weather, (TypeParser<Weather>) (mod, name, value) -> {
+            }, ContentType.weather, (TypeParser<Weather>) (mod, name, value)->{
                 Weather item;
                 if (locate(ContentType.weather, name) != null) {
                     item = locate(ContentType.weather, name);
@@ -609,9 +609,9 @@ public class IceContentParser {
                     value.remove("type");
                 }
                 currentContent = item;
-                read(() -> readFields(item, value));
+                read(()->readFields(item, value));
                 return item;
-            }, ContentType.item,/* parser(ContentType.item,Item::new)*/ (TypeParser<Item>) (mod, name, value) -> {
+            }, ContentType.item,/* parser(ContentType.item,Item::new)*/ (TypeParser<Item>) (mod, name, value)->{
                 Item item;
                 if (locate(ContentType.item, name) != null) {
                     item = locate(ContentType.item, name);
@@ -622,9 +622,9 @@ public class IceContentParser {
                     value.remove("type");
                 }
                 currentContent = item;
-                read(() -> readFields(item, value));
+                read(()->readFields(item, value));
                 return item;
-            }, ContentType.liquid, (TypeParser<Liquid>) (mod, name, value) -> {
+            }, ContentType.liquid, (TypeParser<Liquid>) (mod, name, value)->{
                 Liquid liquid;
                 if (locate(ContentType.liquid, name) != null) {
                     liquid = locate(ContentType.liquid, name);
@@ -635,11 +635,11 @@ public class IceContentParser {
                     value.remove("type");
                 }
                 currentContent = liquid;
-                read(() -> readFields(liquid, value));
+                read(()->readFields(liquid, value));
                 return liquid;
             }, ContentType.status, parser(ContentType.status, StatusEffect::new),
 
-            ContentType.sector, (TypeParser<SectorPreset>) (mod, name, value) -> {
+            ContentType.sector, (TypeParser<SectorPreset>) (mod, name, value)->{
                 if (value.isString()) {
                     return locate(ContentType.sector, name);
                 }
@@ -650,7 +650,7 @@ public class IceContentParser {
                 SectorPreset out = new SectorPreset(mod + name, currentMod);
 
                 currentContent = out;
-                read(() -> {
+                read(()->{
                     Planet planet = locate(ContentType.planet, value.getString("planet", "serpulo"));
 
                     if (planet == null)
@@ -664,7 +664,7 @@ public class IceContentParser {
                     readFields(out, value);
                 });
                 return out;
-            }, ContentType.planet, (TypeParser<Planet>) (mod, name, value) -> {
+            }, ContentType.planet, (TypeParser<Planet>) (mod, name, value)->{
                 if (value.isString()) return locate(ContentType.planet, name);
 
                 Planet parent = locate(ContentType.planet, value.getString("parent"));
@@ -674,7 +674,7 @@ public class IceContentParser {
                     var mesh = value.get("mesh");
                     if (!mesh.isObject() && !mesh.isArray()) throw new RuntimeException("Meshes must be objects.");
                     value.remove("mesh");
-                    planet.meshLoader = () -> {
+                    planet.meshLoader = ()->{
                         //不要崩溃，只是记录一个错误
                         try {
                             return parseMesh(planet, mesh);
@@ -689,7 +689,7 @@ public class IceContentParser {
                     var mesh = value.get("cloudMesh");
                     if (!mesh.isObject() && !mesh.isArray()) throw new RuntimeException("Meshes must be objects.");
                     value.remove("cloudMesh");
-                    planet.cloudMeshLoader = () -> {
+                    planet.cloudMeshLoader = ()->{
                         //不要崩溃，只是记录一个错误
                         try {
                             return parseMesh(planet, mesh);
@@ -704,7 +704,7 @@ public class IceContentParser {
                 planet.sectors.add(new Sector(planet, Ptile.empty));
 
                 currentContent = planet;
-                read(() -> readFields(planet, value));
+                read(()->readFields(planet, value));
                 return planet;
             });
 
@@ -748,7 +748,7 @@ public class IceContentParser {
     }
 
     private <T extends Content> TypeParser<T> parser(ContentType type, Func<String, T> constructor) {
-        return (String mod, String name, JsonValue value) -> {
+        return (String mod, String name, JsonValue value)->{
             T item;
             if (locate(type, name) != null) {
                 item = (T) locate(type, name);
@@ -758,7 +758,7 @@ public class IceContentParser {
                 item = constructor.get(mod + name);
             }
             currentContent = item;
-            read(() -> readFields(item, value));
+            read(()->readFields(item, value));
             return item;
         };
     }
@@ -790,7 +790,7 @@ public class IceContentParser {
     private void read(Runnable run) {
         Content cont = currentContent;
         LoadedMod mod = currentMod;
-        reads.add(() -> {
+        reads.add(()->{
             this.currentMod = mod;
             this.currentContent = cont;
             run.run();
@@ -981,7 +981,7 @@ public class IceContentParser {
     private <T> Prov<T> supply(Class<T> type) {
         try {
             Constructor<T> cons = type.getDeclaredConstructor();
-            return () -> {
+            return ()->{
                 try {
                     return cons.newInstance();
                 } catch (Exception e) {
@@ -1022,7 +1022,7 @@ public class IceContentParser {
         if (object == null || object instanceof Number || object instanceof String || toBeParsed.contains(object) || object.getClass().getName().startsWith("arc."))
             return;
 
-        parser.getFields(object.getClass()).values().toSeq().each(field -> {
+        parser.getFields(object.getClass()).values().toSeq().each(field->{
             try {
                 if (field.field.getType().isPrimitive()) return;
 
@@ -1090,7 +1090,7 @@ public class IceContentParser {
             }
 
             //remove old node
-            TechNode lastNode = TechTree.all.find(t -> t.content == unlock);
+            TechNode lastNode = TechTree.all.find(t->t.content == unlock);
             if (lastNode != null) {
                 lastNode.remove();
             }
@@ -1098,7 +1098,7 @@ public class IceContentParser {
             TechNode node = new TechNode(null, unlock, customRequirements == null ? ItemStack.empty : customRequirements);
             LoadedMod cur = currentMod;
 
-            postreads.add(() -> {
+            postreads.add(()->{
                 currentContent = unlock;
                 currentMod = cur;
 
@@ -1108,7 +1108,7 @@ public class IceContentParser {
                 }
 
                 //所有“items”都有生产要求，除非已经明确说明//all 'items' have a produce requirement unless already specified
-                if (object instanceof Item i && !node.objectives.contains(o -> o instanceof Produce p && p.content == i)) {
+                if (object instanceof Item i && !node.objectives.contains(o->o instanceof Produce p && p.content == i)) {
                     node.objectives.add(new Produce(i));
                 }
 
@@ -1132,7 +1132,7 @@ public class IceContentParser {
                 } else {
                     if (researchName != null) {
                         //查找父节点。
-                        TechNode parent = TechTree.all.find(t -> t.content.name.equals(researchName) || t.content.name.equals(currentMod.name + "-" + researchName) || t.content.name.equals(SaveVersion.mapFallback(researchName)));
+                        TechNode parent = TechTree.all.find(t->t.content.name.equals(researchName) || t.content.name.equals(currentMod.name + "-" + researchName) || t.content.name.equals(SaveVersion.mapFallback(researchName)));
 
                         if (parent == null) {
                             Log.warn("Content '" + researchName + "' isn't in the tech tree, but '" + unlock.name + "' requires it to be researched.");

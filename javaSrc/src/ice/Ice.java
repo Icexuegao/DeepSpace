@@ -1,17 +1,23 @@
 package ice;
 
 import ice.Alon.AlonContentLoad;
+import mindustry.Vars;
 import mindustry.mod.Mod;
+import mindustry.mod.Mods;
+
+import static mindustry.Vars.ui;
 
 public class Ice extends Mod {
+    /**
+     * Mods的LoadedMod 直接使用
+     */
+    public static Mods.LoadedMod ice;
+
     /**
      * 模组代码使用的name,切勿更改!!
      */
     public static final String NAME = "ice";
-    /**
-     * 游戏内显示的模组介绍
-     */
-    public static String displayName;
+
     /**
      * <老婆们可爱捏>模组主要参与负责人
      */
@@ -21,11 +27,11 @@ public class Ice extends Mod {
     }
 
     /**
-     * 初始化mod内容 一般来说你们不用动
+     * 初始化mod内容
      */
     @Override
     public void init() {
-        AlonContentLoad.init();
+        AlonContentLoad.init();;
     }
 
     /**
@@ -33,6 +39,7 @@ public class Ice extends Mod {
      */
     @Override
     public void loadContent() {
+        ice = Vars.mods.getMod(this.getClass());
         AlonContentLoad.load();
     }
 

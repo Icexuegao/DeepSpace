@@ -1,5 +1,6 @@
 package ice.Alon.content.blocks;
 
+import ice.Alon.world.blocks.environment.IceOreBlock;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.OreBlock;
 
@@ -17,7 +18,7 @@ public class OreBlocks {
             mapColor = itemDrop.color;
             variants = 3;
         }};
-        oreSphalerite = new OreBlock("oreSphalerite", sphalerite) {{
+        oreSphalerite = new IceOreBlock("oreSphalerite", sphalerite) {{
             useColor = true;
             mapColor = itemDrop.color;
             variants = 3;
