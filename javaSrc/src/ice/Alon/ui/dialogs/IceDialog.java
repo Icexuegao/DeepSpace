@@ -71,8 +71,6 @@ public class IceDialog extends Table {
         add(titleTable).growX().row();*/
 
         setStyle(style);
-        setWidth(150);
-        setHeight(150);
 
         addCaptureListener(new InputListener() {
             @Override

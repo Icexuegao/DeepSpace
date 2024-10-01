@@ -20,6 +20,7 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
+  //  implementation  "com.alibaba:fastjson:2.0.28"
     compileOnly "com.github.EB-wilson.UniverseCore:core:$uncVersion"//涵盖了大部分mod制作相关的工具
     compileOnly "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//包括组件
     implementation "com.github.Anuken:jabel:93fde537c7"
@@ -72,7 +73,7 @@ tasks.register('jarAndroid') {
                 [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
 
         //dex and desugar files - this requires d8 in your PATH
-        "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktops.jar"
+        "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 26 --output ${project.name}Android.jar ${project.name}Desktops.jar"
                 .execute(null, new File("build/libs")).waitForProcessOutput(System.out, System.err)
     }
 }

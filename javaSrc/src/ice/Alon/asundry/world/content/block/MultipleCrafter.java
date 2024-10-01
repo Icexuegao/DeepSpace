@@ -19,8 +19,7 @@ import arc.util.Time;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
 import ice.Alon.File.IceFiles;
-import ice.Alon.content.items.IceItems;
-import ice.Alon.ui.dialogs.MenusDialogKt;
+import ice.Alon.ui.Ui;
 import ice.Alon.world.meta.stat.IceStat;
 import ice.Alon.world.meta.stat.IceStats;
 import mindustry.Vars;
@@ -489,7 +488,7 @@ public class MultipleCrafter extends Block {
                         table.image(i.uiIcon).size(30);
                         if ((i1 + 1) % 4 == 0) table.row();
                         table.setColor(1, 1, 1, 1);
-                        table.setBackground(MenusDialogKt.getCreateFlatDown());
+                        table.setBackground(Ui.INSTANCE.getMenusDialog().getCreateFlatDown());
                         table.setSize(140, 140);
                         table.margin(10);
                     });

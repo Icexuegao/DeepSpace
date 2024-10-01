@@ -8,6 +8,7 @@ import arc.math.Angles;
 import arc.math.geom.Rect;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
+import mindustry.Vars;
 import mindustry.entities.Units;
 import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
@@ -44,6 +45,13 @@ public class fleshAndBloodCoreBlock extends CoreBlock {
 
         @Override
         public void update() {
+
+            Units.nearby(new Rect(x - radius2 / 2f, y - radius2 / 2f, radius2, radius2), (u)->{
+                units.add(u);
+            });
+            if (units.size == 0) unit = null;
+            else unit = units.first();
+            units.clear();
             super.update();
         }
 
@@ -55,21 +63,11 @@ public class fleshAndBloodCoreBlock extends CoreBlock {
         @Override
         public void draw() {
             super.draw();
-            Units.nearby(new Rect(x - radius2 / 2f, y - radius2 / 2f, radius2, radius2), (u)->{
-                units.add(u);
-            });
-            if (units.size == 0) {
-                unit = null;
-            } else {
-                unit = units.first();
-            }
-            units.clear();
             if (unit == null) {
                 Draw.rect(eye, x, y);
             } else {
-                movement.setAngle(
-                        // 获得以(x,y)为起点，(aimX,aimY)到(x,y)矢量的角度
-                        Angles.angle(x, y, unit.x, unit.y));
+                //设置vec角度为 获得以(x,y)为起点，(aimX,aimY)到(x,y)矢量的角度
+                movement.setAngle(Angles.angle(x, y, unit.x, unit.y));
                 Draw.rect(eye, x + movement.x, y + movement.y);
             }
         }

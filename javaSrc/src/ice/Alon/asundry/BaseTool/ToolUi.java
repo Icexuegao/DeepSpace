@@ -13,7 +13,7 @@ import arc.scene.style.Drawable;
 import arc.scene.style.ScaledNinePatchDrawable;
 import arc.scene.ui.TextButton;
 import arc.scene.ui.layout.Table;
-import ice.Alon.AlonContentLoad;
+import ice.Alon.scene.MyInputListener;
 import mindustry.Vars;
 import mindustry.content.Items;
 import mindustry.content.TechTree;
@@ -24,11 +24,9 @@ import mindustry.gen.Building;
 import mindustry.gen.Groups;
 import mindustry.ui.Fonts;
 import mindustry.world.blocks.storage.CoreBlock;
-import universecore.world.lightnings.LightningContainer;
-import universecore.world.lightnings.generator.CircleGenerator;
 
 public class ToolUi {
-    public static final TestTool tool = new TestTool();
+/*
     public static final Table menu = new Table();
     public static boolean menuFirst = false;
     public static boolean modeFirst = false;
@@ -48,8 +46,8 @@ public class ToolUi {
                 font = Fonts.def;
                 fontColor = Color.valueOf("97abb7");
                 disabledFontColor = Color.gray;
-            }};/** 按一次不显示*/
-            TextButton.TextButtonStyle textBS = new TextButton.TextButtonStyle() {{/**按一次显示 */
+            }};*//** 按一次不显示*//*
+            TextButton.TextButtonStyle textBS = new TextButton.TextButtonStyle() {{*//**按一次显示 *//*
                 font = Fonts.def;
                 over = checked = createFlatDown("ice-flat-down-base");
                 down = up = createFlatDown("ice-flat-down-base1");
@@ -108,11 +106,11 @@ public class ToolUi {
             Vars.state.rules.waves = false;
         }
 
-        /**
+        *//**
          * public void liftProhibition() {
          * Vars.content.blocks().each((b) -> b.placeableOn = !b.placeableOn);
          * }
-         */
+         *//*
 
         public void Blueprints() {
             Vars.maxSchematicSize = 128;
@@ -168,64 +166,5 @@ public class ToolUi {
         }
     }
 
-
-    public static final class MyInputListener extends InputListener {
-        public final Element[] e;
-        float statX;
-        float statY;
-
-        public MyInputListener(Element... e) {
-            this.e = e;
-        }
-
-        @Override
-        public boolean touchDown(InputEvent event, float x, float y, int pointer, KeyCode button) {
-            statX = x;
-            statY = y;
-            return true;
-        }
-
-        @Override
-        public void touchDragged(InputEvent event, float x, float y, int pointer) {
-            for (Element e : e) {
-                e.x += x - statX;
-                e.y += y - statY;
-            }
-
-        }
-
-        @Override
-        public void touchUp(InputEvent event, float x, float y, int pointer, KeyCode button) {
-
-        }
-    }
-
-    public static Drawable createFlatDown(String name) {
-        TextureAtlas.AtlasRegion region = Core.atlas.find(name);
-        int[] splits = region.splits;
-        ScaledNinePatchDrawable copy = new ScaledNinePatchDrawable(new NinePatch(region, splits[0], splits[1], splits[2], splits[3])) {
-            public float getLeftWidth() {
-                return 0;
-            }
-
-            public float getRightWidth() {
-                return 0;
-            }
-
-            public float getTopHeight() {
-                return 0;
-            }
-
-            public float getBottomHeight() {
-                return 0;
-            }
-        };
-        copy.setMinWidth(0);
-        copy.setMinHeight(0);
-        copy.setTopHeight(0);
-        copy.setRightWidth(0);
-        copy.setBottomHeight(0);
-        copy.setLeftWidth(0);
-        return copy;
-    }
+   */
 }

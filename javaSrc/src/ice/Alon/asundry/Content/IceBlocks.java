@@ -4,14 +4,16 @@ package ice.Alon.asundry.Content;
 import arc.graphics.Color;
 import ice.Alon.asundry.world.bullet.IceMissileBulletTypes;
 import ice.Alon.asundry.world.bullet.ThickLightningBulletType;
-import ice.Alon.asundry.world.content.block.*;
+import ice.Alon.asundry.world.content.block.EffectImpactReactor;
+import ice.Alon.asundry.world.content.block.Formula;
+import ice.Alon.asundry.world.content.block.MultipleCrafter;
+import ice.Alon.asundry.world.content.block.PowerProductionCore;
 import ice.Alon.asundry.world.content.block.turret.FindTargetTurret;
 import ice.Alon.asundry.world.draw.IceDrawLiquidOutputs;
 import ice.Alon.asundry.world.draw.IceDrawPistons;
 import ice.Alon.asundry.world.effect.MultipleCrafterRadialEffect;
-import ice.Alon.content.items.IceItems;
+import ice.Alon.content.IceItems;
 import ice.Alon.world.meta.IceAttribute;
-import mindustry.content.Blocks;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -24,8 +26,6 @@ import mindustry.type.ItemStack;
 import mindustry.type.LiquidStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
-import mindustry.world.blocks.distribution.Conveyor;
-import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.production.WallCrafter;
 import mindustry.world.consumers.*;
@@ -33,17 +33,15 @@ import mindustry.world.draw.*;
 import mindustry.world.meta.BuildVisibility;
 
 public class IceBlocks {
-    public static Block k1, k2, iceRedTree, bloodCrystalSpikes, redSandWater, thickBlood,
+    public static Block k1, iceRedTree, bloodCrystalSpikes, redSandWater, thickBlood,
 
-    deepThickBlood, oreIceCrystals, taijing, tarnation, randomer,
+    deepThickBlood, tarnation,
 
     mineralProcessor, paota1, tidalImpactReactor,
 
-    monocrystallineSiliconFactory, k3, quantumCore;
+    monocrystallineSiliconFactory, quantumCore;
 
     public static void load() {
-
-
         k1 = new WallCrafter("2") {{
             requirements(Category.production, ItemStack.with(Items.graphite, 25, Items.beryllium, 20));
             consumePower(11 / 60f);
@@ -54,16 +52,6 @@ public class IceBlocks {
             fogRadius = 2;
             ambientSound = Sounds.drill;
             ambientSoundVolume = 0.04f;
-        }};
-        oreIceCrystals = new OreBlock("ore-src.Ice-Crystals", IceItems.iceCrystals) {{
-            playerUnmineable = false;/**玩家能否挖掘 */
-            mapColor = Color.white;/**地图颜色 */
-            wallOre = false;/**墙矿？ */
-            useColor = true;/**颜色用于小地图 */
-            oreDefault = true;
-            oreThreshold = 0.8f;
-            oreScale = 20;
-            variants = 3;/**贴图数量 */
         }};
         monocrystallineSiliconFactory = new GenericCrafter("monocrystallineSiliconFactory") {{
             requirements(Category.crafting, ItemStack.with(IceItems.redIce, 12));
@@ -119,7 +107,7 @@ public class IceBlocks {
             targetAir = true;
             shootSound = Sounds.plasmadrop;
             rotateSpeed = 2f;
-            unitSort = (u, x, y) -> -u.maxHealth;
+            unitSort = (u, x, y)->-u.maxHealth;
             consumePower(60f);
             shootType = new ThickLightningBulletType(3048, /**Pal.lancerLaser*/Color.valueOf("a9d8ff")) {{
                 buildingDamageMultiplier = 0.3f;
@@ -146,7 +134,7 @@ public class IceBlocks {
             consumeAmmoOnce = true;/** 消耗弹药  */
             shootSound = Sounds.missile;
             requirements(Category.turret, ItemStack.with(Items.copper, 350));
-            ammo(IceItems.redIce, IceMissileBulletTypes.lj, IceItems.iceCrystals);
+            ammo(IceItems.redIce, IceMissileBulletTypes.lj);
             drawer = new DrawTurret("reinforced-") {{
                 parts.add(new RegionPart("-g-r") {{
                     heatProgress = PartProgress.recoil.add(0.25f).min(PartProgress.warmup);

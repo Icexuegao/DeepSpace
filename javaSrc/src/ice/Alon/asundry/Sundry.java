@@ -1,10 +1,49 @@
 package ice.Alon.asundry;
 
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Lines;
 import arc.util.Log;
 import ice.Alon.asundry.BaseTool.io.IceJval;
+import mindustry.content.UnitTypes;
+import mindustry.gen.Groups;
+import mindustry.graphics.Layer;
 
 public class Sundry {
     public static void main(String[] args) {
+
+        /*  IceDrawUpdate.drawUpdate.add(new IceDrawUpdate.DrawUpdate() {
+            @Override
+            public void draw() {
+                Groups.unit.each((unit)->{
+                    if (unit.type == UnitTypes.omura) {
+                        Seq<Vec2> vec2s = new Seq<>();
+                        ObjectMap<Float, Float> fl =ObjectMap.of(45f, 0f,0f, 30f,-40f, 25f,-40f, -25f,0f, -30f);
+                        Log.info(fl.toString());
+                      fl.forEach((a)->vec2s.add(new Vec2(a.key,a.value)));
+
+                        vec2s.each(v->v.rotate(unit.rotation));
+                        Log.info(Arrays.toString(vec2s.toArray()));
+                        ObjectMap<Vec2, Vec2> entries = of(vec2s.items);
+                        entries.put(vec2s.first(),vec2s.get(vec2s.size-1));
+                        entries.forEach((v1)->{
+                            Vec2 key = v1.key;
+                            Vec2 value = v1.value;
+                            Lines.line(unit.x + key.x, unit.y + key.y, unit.x + value.x, unit.y + value.y);
+                        });
+
+                        //   Lines.line(unit.x + vec2.x, unit.y + vec2.y, unit.x + vec21.x, unit.y + vec21.y);
+                       *//* Lines.line(unit.x + 45, unit.y, unit.x, unit.y + 30);
+                        Lines.line(unit.x, unit.y + 30, unit.x - 40, unit.y + 25);
+                        Lines.line(unit.x - 40, unit.y + 25, unit.x - 40f, unit.y - 25f);
+                        Lines.line(unit.x - 40f, unit.y - 25f, unit.x, unit.y - 30f);
+                        Lines.line(unit.x, unit.y - 30f, unit.x + 45, unit.y);*//*
+                        Draw.z(Layer.weather);
+                    }
+                });
+            }
+        });*/
+      /*
+        });*/
        // arc.util.OS
  /* Events.on(EventType.ClientLoadEvent.class, (e) -> {
             BaseDialog baseDialog = new BaseDialog("121");
@@ -71,10 +110,8 @@ public class Sundry {
         UnitTypes.alpha.weapons.first().bullet = f;
         UnitTypes.alpha.weapons.first().bullet.lifetime += 600;*/
         String k = """
-                                
-                {"name":"dff",
-                "type#":"rt"
-                }
+                               
+                
                 """;
         IceJval read = IceJval.read(k);
         String string = read.toString();

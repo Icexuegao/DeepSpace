@@ -3,150 +3,104 @@ package ice.Alon.Text;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
-import arc.util.Log;
+import arc.math.geom.Point2;
+import arc.struct.Seq;
 import arc.util.Time;
-import ice.Alon.library.IceMathf;
-import ice.Alon.world.blocks.environment.IceOreBlock;
+import ice.Alon.library.PathfindAlgorithm.Pathfind;
+import mindustry.Vars;
+import mindustry.content.Blocks;
 import mindustry.content.Items;
+import mindustry.game.Team;
 import mindustry.gen.Building;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Layer;
-import mindustry.logic.Ranged;
 import mindustry.type.Category;
-import mindustry.type.Item;
 import mindustry.type.ItemStack;
+import mindustry.world.Block;
 import mindustry.world.Tile;
-import mindustry.world.blocks.defense.Wall;
 
-import static mindustry.Vars.world;
-
-public class Text extends Wall {
+public class Text extends Block {
 
     public Text(String name) {
         super(name);
         itemCapacity = 10;
-        liquidCapacity = 100;
-        hasItems = true;
-        hasPower = true;
-        hasLiquids = true;
-        hasConsumers = true;
         health = 100;
         size = 1;
-        saveConfig = true;
-        configurable = true;
         buildType = TextBuild::new;
         update = true;
-        requirements(Category.liquid, ItemStack.with(Items.copper, 10));
+        requirements(Category.effect, ItemStack.with(Items.copper, 10));
     }
 
-    public class TextBuild extends Wall.WallBuild implements Ranged {
-
-        public TextBuild() {
+    public static int rp(Point2 x, Point2 r) {
+        if (r.y > x.y) {
+            Vars.world.tile(x.x, x.y).build.rotation = 3;
+            return 3;
         }
+        if (r.y < x.y) {
+            Vars.world.tile(x.x, x.y).build.rotation = 1;
+            return 1;
+        }
+        if (r.x > x.x) {
+            Vars.world.tile(x.x, x.y).build.rotation = 2;
+            return 2;
+        }
+        if (r.x < x.x) {
+            Vars.world.tile(x.x, x.y).build.rotation =0;
+            return 0;
+        }
+        return 0;
+    }
+
+    public static class TextBuild extends Building {
+        Pathfind pathfind;
+        Seq<Point2> point2s;
 
         @Override
-        public void damage(float damage) {
-            damage -= damage;
-            super.damage(damage);
+        public Building init(Tile tile, Team team, boolean shouldAdd, int rotation) {
+            Point2 begin = new Point2(tile.x, tile.y);
+            pathfind = new Pathfind(begin);
+            pathfind.setDraw(false);
+            return super.init(tile, team, shouldAdd, rotation);
         }
 
-        boolean showOres = true;
-        float startTime;
 
-        public float curTime() {
-            return Time.time - startTime;
-        }
-
-        @Override
-        public void created() {
-            startTime = Time.time;
-        }
-
-        float range = 15f * 8f;
-
-        @Override
-        public float range() {
-            return range * potentialEfficiency;
-        }
-
-        public float radarRot() {
-            return (curTime() * speed) % 360f;
-        }
-
-        public float speed = 0.8f;
-        public Color effectColor = Color.valueOf("4b95ff");
+        Point2 start;
 
         @Override
         public void draw() {
-            Draw.z(Layer.light);
-            Draw.alpha(0.6f);
-            Lines.stroke(2.5f, effectColor);
-            if (showOres) {
-                Draw.alpha(1f - (curTime() % 120f) / 120f);
-                Lines.circle(x, y, (curTime() % 120f) / 120f * range());
-
-                Draw.alpha(0.3f);
-                Fill.arc(x, y, range(), 18 / 360f, radarRot());
+            if (start != null) {
+                Fill.crect(start.x * Vars.tilesize - (float) Vars.tilesize / 2, start.y * Vars.tilesize - (float) Vars.tilesize / 2, Vars.tilesize, Vars.tilesize);
+                Draw.color(Color.red);
+                Draw.alpha(0.5f);
             }
-
-            Draw.alpha(0.2f);
-            Lines.circle(x, y, range());
-            Lines.circle(x, y, range() * 0.95f);
-
-            Draw.reset();
-            if (showOres) {
-            } //locateOres(range());
-
-
-            //  Drawf.dashRect(Color.red, x - radius / 2, y - radius / 2, radius, radius);
+            Draw.rect(Blocks.copperWall.region, x, y);
         }
 
-        @Override
-        public boolean acceptItem(Building source, Item item) {
-            return true;
-        }
-
-        float radius = 40;
-        float v = radius / 2;
-        int i = 0;
+        float o = 0;
+        float f = 0;
+        int c = 0;
 
         @Override
-        public void drawSelect() {
-            Drawf.dashRect(Color.red, x - radius / 2, y - radius / 2, radius, radius);
-        }
-
-        @Override
-        public void update() {
-            i++;
-            IceMathf.goe60(i, ()->{
-                i = 0;
-                Tile[] tiles = {
-
-                        world.tile(tile.x - 1, tile.y),
-
-                        world.tile(tile.x + 1, tile.y),
-
-                        world.tile(tile.x, tile.y - 1),
-
-                        world.tile(tile.x, tile.y + 1)};
-
-                for (Tile tile : tiles) {
-                    if (tile.overlay() instanceof IceOreBlock ice) {
-                        Log.info("设置了一个块");
-                        if (tile.block() != null) {
-                            Draw.z(Layer.max);
-                            Draw.alpha(1f);
-                            Draw.rect(ice.itemDrop.uiIcon, tile.x * 8, tile.y * 8 + 8);
-                        }
+        public void updateTile() {
+            if (point2s != null) {
+                f += Time.delta;
+                if (f >= 15) {
+                    f = 0;
+                    if (c >= 1) {
+                        c--;
+                    } else {
+                        c = point2s.size - 2;
                     }
-
-
+                    start = point2s.get(c);
+                    int r = rp(point2s.get(c + 1), start);
+                    Vars.world.tile(start.x, start.y).setBlock(Blocks.conveyor, team, r);
                 }
-
-            });
-
-            super.update();
+            }
+            if (pathfind.getPathFirst()) {
+                point2s = pathfind.getPath();
+            }
+            o += Time.delta;
+            if (o >= 10) {
+                o = 0;
+            }
         }
     }
 }

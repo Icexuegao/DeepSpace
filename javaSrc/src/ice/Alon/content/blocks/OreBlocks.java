@@ -4,7 +4,7 @@ import ice.Alon.world.blocks.environment.IceOreBlock;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.OreBlock;
 
-import static ice.Alon.content.items.IceItems.*;
+import static ice.Alon.content.IceItems.*;
 
 public class OreBlocks {
     public static Block oreGalena, oreSphalerite, oreQuartz;

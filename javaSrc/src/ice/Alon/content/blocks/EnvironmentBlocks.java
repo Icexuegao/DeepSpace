@@ -1,6 +1,7 @@
 package ice.Alon.content.blocks;
 
 import arc.graphics.Color;
+import arc.graphics.g2d.TextureRegion;
 import ice.Alon.content.IceLiquids;
 import ice.Alon.world.meta.IceAttribute;
 import mindustry.content.Items;
@@ -16,22 +17,43 @@ public class EnvironmentBlocks {
      */
     public static Block bloodCrystalSpikes, bloodSporophore, bloodSporophoreTree, bloodShoal, redIce,
 
-    redIceWall, thickBlood, deepThickBlood,goldPearlSand,goldPearlSandWall,liparite;
+    redIceWall, thickBlood, deepThickBlood, goldPearlGrit, goldPearlGritWall, liparite;
 
     public static void load() {
 
         /**流纹岩*/
-        liparite =new Floor("liparite"){{
-            variants=3;
+        liparite = new Floor("liparite") {{
+            variants = 3;
         }};
-
+        /**流纹岩墙*/
+        liparite = new StaticWall("lipariteWall") {{
+            liparite.asFloor().wall = this;
+        }};
         /**金珀沙*/
-        goldPearlSand =new Floor("goldPearlSand"){{
-            variants=3;
+        goldPearlGrit = new Floor("goldPearlGrit") {{
+            variants = 3;
         }};
         /**金珀沙墙*/
-        goldPearlSandWall =new StaticWall("goldPearlSandWall"){{
-            goldPearlSand.asFloor().wall=this;
+        goldPearlGritWall = new StaticWall("goldPearlGritWall") {{
+            goldPearlGrit.asFloor().wall = this;
+        }};
+        /**红冰 */
+        redIce = new Floor("redIce") {
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{region};
+            }
+
+            {
+                variants = 3;
+                dragMultiplier = 0.35f;
+                speedMultiplier = 0.9f;
+                albedo = 0.65f;
+            }
+        };
+        /**红冰墙 */
+        redIceWall = new StaticWall("redIceWall") {{
+            redIce.asFloor().wall = this;
         }};
         /** 血晶尖刺*/
         bloodCrystalSpikes = new TallBlock("bloodCrystalSpikes") {{
@@ -47,16 +69,6 @@ public class EnvironmentBlocks {
             hasShadow = true;
             variants = 3;
             breakSound = Sounds.plantBreak;
-        }};
-        /**红冰 */
-        redIce = new Floor("redIce") {{
-            dragMultiplier = 0.35f;
-            speedMultiplier = 0.9f;
-            albedo = 0.65f;
-        }};
-        /**红冰墙 */
-        redIceWall = new StaticWall("redIceWall") {{
-            redIce.asFloor().wall = this;
         }};
         /**血水池*/
         thickBlood = new Floor("thickBlood") {{

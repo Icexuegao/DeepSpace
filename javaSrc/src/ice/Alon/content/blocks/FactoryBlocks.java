@@ -1,7 +1,7 @@
 package ice.Alon.content.blocks;
 
 import ice.Alon.content.IceEffects;
-import ice.Alon.content.items.IceItems;
+import ice.Alon.content.IceItems;
 import ice.Alon.world.blocks.factoryBlocks.EffectGenericCrafter;
 import mindustry.entities.effect.MultiEffect;
 import mindustry.type.Category;

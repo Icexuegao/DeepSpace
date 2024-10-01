@@ -6,9 +6,9 @@ import static arc.graphics.Color.valueOf;
 
 public class IceColors {
     /**
-     * 甘城蓝
+     * 甘城灰蓝
      */
-    public static final Color bule = valueOf("bf3e47"),
+    public static final Color bule = valueOf("cfecf1"),
 
     /**
      * 洋葱紫

@@ -27,6 +27,10 @@ public class IceItem extends Item {
         super.init();
     }
 
+    @Override
+    public boolean isHidden() {
+        return false;
+    }
 
     @Override
     public void setStats() {

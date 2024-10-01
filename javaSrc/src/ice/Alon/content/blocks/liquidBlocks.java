@@ -1,6 +1,6 @@
 package ice.Alon.content.blocks;
 
-import ice.Alon.content.items.IceItems;
+import ice.Alon.content.IceItems;
 import ice.Alon.world.blocks.liquids.LiquidClassifier;
 import ice.Alon.world.blocks.liquids.MultipleLiquidBlock;
 import ice.Alon.world.blocks.liquids.pumpChamber;

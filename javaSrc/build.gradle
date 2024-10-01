@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 apply plugin: "java"
 apply plugin: "kotlin"
 //配置buildGradle的信息或依赖
+
 buildscript {
     //项目的仓库
     ext {
@@ -13,6 +14,8 @@ buildscript {
         sdkRoot = System.getenv("ANDROID_HOME")
     }
     dependencies {
+       // classpath "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+        //classpath 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
     repositories {
@@ -42,7 +45,11 @@ repositories {
 }
 //构建使用的jar包，一些依赖或者库
 dependencies {
-   // compileOnly files("D:\\Programming\\luanqibazaode\\lib\\Mindustry.jar")
+    //implementation "com.alibaba:fastjson:2.0.28"
+
+   // implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3'
+    implementation "org.jbox2d:jbox2d-library:2.2.1.1"
+    // compileOnly files("D:\\Programming\\luanqibazaode\\lib\\Mindustry.jar")
     compileOnly "com.github.EB-wilson.UniverseCore:core:$uncVersion"//涵盖了大部分mod制作相关的工具
     compileOnly "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//包括组件化接口在内的注解处理器
     annotationProcessor "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//使用注解处理器
@@ -50,7 +57,8 @@ dependencies {
     compileOnly "com.github.Anuken:jabel:93fde537c7"
     compileOnly "com.github.Tinylake:MindustryX:v146.004"
     compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.9.23"
+    implementation "org.jetbrains.kotlin:kotlin-script-runtime:$kotlin_version"
+   // implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
 //源代码
 sourceSets.main.java.srcDir('src')
@@ -78,13 +86,10 @@ allprojects {
         }
     }
 }
-tasks.register("text"){
-    println("")
-}
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName = "${project.name}Desktop.jar"
-    from layout.projectDirectory.files{getProjectDir().path.replace("\\javaSrc","")+"\\test.txt"}
+    from layout.projectDirectory.files { getProjectDir().path.replace("\\javaSrc", "") + "\\test.txt" }
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }

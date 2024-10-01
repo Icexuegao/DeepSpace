@@ -22,8 +22,7 @@ public class ContentInfoDialog extends mindustry.ui.dialogs.ContentInfoDialog {
     public ContentInfoDialog() {
         title.name = "@info.title";
         //  addCloseButton();
-
-        keyDown(key -> {
+        keyDown(key->{
             if (key == Core.keybinds.get(Binding.block_info).key) {
                 Core.app.post(this::hide);
             }
@@ -38,7 +37,7 @@ public class ContentInfoDialog extends mindustry.ui.dialogs.ContentInfoDialog {
         //initialize stats if they haven't been yet
         content.checkStats();
 
-        table.table(title1 -> {
+        table.table(title1->{
             title1.image(content.uiIcon).size(Vars.iconXLarge).scaling(Scaling.fit);
             title1.add("[accent]" + content.localizedName + (Core.settings.getBool("console") ? "\n[gray]" + content.name : "")).padLeft(5);
         });
@@ -75,7 +74,7 @@ public class ContentInfoDialog extends mindustry.ui.dialogs.ContentInfoDialog {
             }
 
             for (Stat stat : map.keys()) {
-                table.table(inset -> {
+                table.table(inset->{
                     inset.left();
 
                     if ((stat instanceof IceStat stat1)) {
