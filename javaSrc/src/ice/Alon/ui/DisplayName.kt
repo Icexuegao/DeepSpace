@@ -7,7 +7,7 @@ class DisplayName internal constructor(){
         lateinit var massageRand: String
         fun load() {
             /**直接硬编码防止煞笔从bundle更改,直接替换原本的description,这非常简单,至于massageRand我打算整体ui写完后在修改*/
-            val me = """                  
+            val me = """
                 你知道吗,模组作者在QQ短视频上推过意义不明的奥特曼视频<ZL洋葱>@#@
                 *大屠戮的最后一刀刺向了自己的心脏 污浊随之翻滚喷涌<GRACHA>@#@
                 [#A4A5F5FF]我爱[][#F5BAE9FF]玲纱![]<维生素X>@#@

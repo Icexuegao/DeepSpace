@@ -9,11 +9,10 @@ class MyInputListener {
 
 
     /**拖动侦测,给元素添加检测器,参数传table*/
-    class DragInputListener(vararg e: Element) : InputListener() {
+   open class DragInputListener(vararg e: Element) : InputListener() {
         lateinit var e: Array<out Element>
         private var statX = 0f
         private var statY = 0f
-
         init {
             if (e.isArrayOf<Element>()) {
                 this.e = e

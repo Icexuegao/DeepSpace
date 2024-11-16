@@ -8,7 +8,8 @@ class UnitTypeTool {
     companion object {
         fun entityConstructor(name: String): Prov<Unit>? {
             val map = EntityMapping.map(name)
-            return if (map.get() is Unit) Prov { map.get() as Unit } else null
+            val unit = map.get()
+            return if (unit is Unit) Prov { unit } else null
         }
     }
 }

@@ -21,18 +21,18 @@ import org.jbox2d.dynamics.*;
 public class CeProcess implements AsyncProcess {
     private static final Vec2 vec = new Vec2();
     private static final org.jbox2d.common.Vec2 b2vec = new org.jbox2d.common.Vec2();
-    private static final org.jbox2d.common.Vec2[] polyVecs;
+    public static final org.jbox2d.common.Vec2[] polyVecs;
 
     static {
-        polyVecs = new org.jbox2d.common.Vec2[]{new org.jbox2d.common.Vec2(45f, 0),
-
+        polyVecs = new org.jbox2d.common.Vec2[]{new org.jbox2d.common.Vec2(45f, +5),
                 new org.jbox2d.common.Vec2(0, 30f),
 
                 new org.jbox2d.common.Vec2(-40f, 25f),
 
                 new org.jbox2d.common.Vec2(-40f, -25f),
 
-                new org.jbox2d.common.Vec2(0, -30f)};
+                new org.jbox2d.common.Vec2(0, -30f),
+                new org.jbox2d.common.Vec2(45f, -5)};
     }
 
     private static final int layers = 4, layerAll = 0, layerGround = 0b0001, layerLegs = 0b0010, layerFlying = 0b0100;
@@ -47,7 +47,6 @@ public class CeProcess implements AsyncProcess {
     public void begin() {
         if (physics == null) return;
         //boolean local = !Vars.net.client();
-
         //remove stale entities
         refs.removeAll(ref->{
             if (!ref.entity.isAdded()) {
@@ -61,13 +60,14 @@ public class CeProcess implements AsyncProcess {
         //find Units without bodies and assign them
         for (Unit entity : group) {
             if (entity == null || entity.type == null || !entity.type.physics) continue;
-
             if (entity.physref == null) {
+                //源
                 CircleShape cs = new CircleShape();
                 cs.m_radius = entity.hitSize / 2f;
+                //改
                 PolygonShape ps = new PolygonShape();
                 ps.set(polyVecs, polyVecs.length);
-                /**指定type*/
+                //判断返回
                 Shape s = (entity.type == UnitTypes.omura) ? ps : cs;
 
                 BodyDef bd = new BodyDef();

@@ -2,11 +2,8 @@ package ice;
 
 import ice.Alon.AlonContentLoad;
 import mindustry.Vars;
-import mindustry.gen.EntityMapping;
-import mindustry.gen.Unit;
 import mindustry.mod.Mod;
 import mindustry.mod.Mods;
-import mindustry.type.UnitType;
 
 public class Ice extends Mod {
     /**
@@ -30,7 +27,7 @@ public class Ice extends Mod {
      */
     @Override
     public void init() {
-        AlonContentLoad.Content.init();
+        AlonContentLoad.INSTANCE.init();
     }
 
     /**
@@ -39,7 +36,7 @@ public class Ice extends Mod {
     @Override
     public void loadContent() {
         ice = Vars.mods.getMod(this.getClass());
-        AlonContentLoad.Content.load();
+        AlonContentLoad.INSTANCE.load();
     }
 
 

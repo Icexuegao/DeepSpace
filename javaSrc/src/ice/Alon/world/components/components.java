@@ -23,7 +23,6 @@ public class components<Build extends Building> {
                     b.health -= 0.01f;
                 }
             }
-
         }
     }
 }

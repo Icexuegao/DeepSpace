@@ -15,7 +15,7 @@ import mindustry.content.Blocks
 import mindustry.content.Items
 
 
-class Pathfind() : DrawUpdates.DrawUpdate {
+class Pathfind() : DrawUpdates.DrawUpdate() {
     var draw = true
 
     /**
@@ -89,6 +89,9 @@ class Pathfind() : DrawUpdates.DrawUpdate {
             path(map[end])
         }
     }
+
+    override var overall=false
+
 
     /**
      * 绘制遍历过的区块
@@ -172,11 +175,11 @@ class Pathfind() : DrawUpdates.DrawUpdate {
     /**
      * 删除建筑时调用否则会虚空绘制
      */
-    fun kill() {
+    override fun kill() {
         map.clear()
         visited.clear()
         queue.clear()
         path.clear()
-        updateSeq.remove(this)
+        super.kill()
     }
 }

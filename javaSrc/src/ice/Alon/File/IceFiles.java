@@ -25,7 +25,7 @@ public class IceFiles {
 
     /**
      * 存在同名文件时,请不要使用该方法 请使用
-     * {pathFind} 方法
+     * pathFind
      */
     public static Fi find(String fiName) {
         init();
@@ -72,6 +72,7 @@ public class IceFiles {
     public static void recursion(Fi root) {
         for (Fi fi : root.list()) {
             if (fi.isDirectory()) {
+                fis.put(fi.name(), fi);
                 recursion(fi);
             } else {
                 fis.put(fi.name(), fi);

@@ -14,9 +14,10 @@ public class IceStat extends Stat {
         color = "[red]";
         Flable = true;
         defaultToken = "{shake}";
-    }},
-
-    /**
+    }}, /**
+     * 配方
+     */
+    formulas = new IceStat("formulas"), /**
      * 建造时间花费
      */
     cost = new IceStat("cost"),
@@ -46,10 +47,12 @@ public class IceStat extends Stat {
      */
     effect = new IceStat("effect", IceStatCat.special),
 
+    /** 破甲 */
+    armorBreak = new IceStat("armorBreak"),
+
     /**
      * 状态持续时间
      */
-
     statusTime = new IceStat("statusTime", IceStatCat.special),
 
     /**
@@ -76,11 +79,13 @@ public class IceStat extends Stat {
     }
 
     public IceStat(String name) {
-        super(name);
+        this(name, StatCat.general);
     }
 
     @Override
     public String localized() {
-        return Core.bundle.get("stat." + name);
+        String s = Core.bundle.get("IceStat." + name);
+        if (s.equals("???" + name + "???")) return Core.bundle.get("stat." + name);
+        return s;
     }
 }

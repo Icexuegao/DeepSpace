@@ -20,6 +20,7 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
+    implementation 'org.tomlj:tomlj:1.1.1'
   //  implementation  "com.alibaba:fastjson:2.0.28"
     compileOnly "com.github.EB-wilson.UniverseCore:core:$uncVersion"//涵盖了大部分mod制作相关的工具
     compileOnly "com.github.EB-wilson.UniverseCore:annotations:$uncVersion"//包括组件

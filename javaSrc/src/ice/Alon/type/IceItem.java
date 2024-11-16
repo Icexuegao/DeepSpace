@@ -1,11 +1,15 @@
 package ice.Alon.type;
 
 import arc.graphics.Color;
+import arc.struct.Seq;
 import ice.Alon.world.meta.stat.IceStat;
 import ice.Alon.world.meta.stat.IceStats;
 import mindustry.type.Item;
 
 public class IceItem extends Item {
+    /** 物品合集 */
+    public static Seq<IceItem> items = new Seq<>();
+    /** 营养浓度 */
     public float nutrientConcentration = 0;
 
     public IceItem(String name) {
@@ -15,6 +19,7 @@ public class IceItem extends Item {
     public IceItem(String name, Color color) {
         super(name);
         this.color = color;
+        items.add(this);
     }
 
     public IceItem(String name, String color) {
