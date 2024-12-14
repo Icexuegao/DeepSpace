@@ -1,0 +1,145 @@
+import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
+apply plugin: "java"
+apply plugin: "kotlin"
+
+buildscript {
+    ext {
+        proUser = System.getProperty("user.name")
+        sdkRoot = System.getenv("ANDROID_HOME")
+        kotlinVersion = "1.9.23"
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+        maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url 'https://jitpack.io' }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url "https://maven.aliyun.com/repository/public" }
+    maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'org.tomlj:tomlj:1.1.1'
+    implementation "org.jbox2d:jbox2d-library:2.2.1.1"
+    compileOnly "com.github.Tinylake:MindustryX:v146.004"
+    compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+}
+
+sourceSets {
+    main {
+        java.srcDir('src')
+        kotlin.srcDir('src')
+        resources.srcDir('assets')
+    }
+}
+def buildLibDir = project.layout.buildDirectory.asFile.get().name + "\\libs"
+
+tasks.register("iceJar", org.gradle.jvm.tasks.Jar) {
+    manifest.attributes('Main-Class': 'ice.Ice')
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName = "${project.name}.jar"
+    from files("README.md", "LICENSE")
+    def path = "${project.layout.buildDirectory.asFile.get().name}\\classes"
+    from("${path}\\java\\main")
+    from("${path}\\kotlin\\main")
+    from(sourceSets.main.resources.srcDirs)
+    from {
+        //noinspection GroovyMissingReturnStatement
+        configurations.runtimeClasspath.collect {
+            def name = ["tomlj-1.1.1", "kotlin-stdlib-1.9.23", "jbox2d-library-2.2.1.1"]
+            if (name.contains(it.name.replace(".jar", ""))) {
+                it.isDirectory() ? it : zipTree(it)
+            }
+        }
+    }
+}
+
+tasks.register("myCopyJar", Copy) {
+    dependsOn(iceJar)
+    from "${buildLibDir}\\$project.name" + ".jar"
+    into {
+        "C:/Users/$proUser/AppData/Roaming/Mindustry/mods"
+    }
+    delete "C:/Users/$proUser/AppData/Roaming/Mindustry/mods/${project.name}-mater.jar"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    targetCompatibility = 17//目标的兼容性
+    sourceCompatibility = JavaVersion.VERSION_17
+    options.encoding = "UTF-8"
+}
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions.jvmTarget = 17
+}
+tasks.withType(KotlinJvmCompile).configureEach {
+    jvmTargetValidationMode = JvmTargetValidationMode.ERROR
+}
+
+tasks.register('jarAndroid') {
+    dependsOn iceJar
+    doLast {
+        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. ANDROID_HOME")
+
+        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
+
+        if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
+
+        //collect dependencies needed for desugaring
+        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
+
+        //dex and desugar files - this requires d8 in your PATH
+        "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 26 --output ${project.name}Android.jar ${project.name}.jar"
+                .execute(null, new File(buildLibDir)).waitForProcessOutput(System.out, System.err)
+    }
+}
+
+tasks.register('deploy', Jar) {
+    dependsOn(jarAndroid)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName = "${project.name}-mater.jar"//存档文件名
+    from {
+        [zipTree("${buildLibDir}\\${project.name}.jar"),
+         zipTree("${buildLibDir}\\${project.name}Android.jar")]
+    }
+    doLast {
+        delete {
+            delete "${buildLibDir}\\${project.name}.jar"
+            delete "${buildLibDir}\\${project.name}Android.jar"
+        }
+    }
+}
+
+tasks.register("myCopy", Copy) {
+    dependsOn(deploy)
+    from "${buildLibDir}\\$project.name" + "-mater.jar"//源
+    into {
+        "C:/Users/$proUser/AppData/Roaming/Mindustry/mods"
+    }
+    doLast {
+        delete {
+            delete "C:/Users/$proUser/AppData/Roaming/Mindustry/mods/${project.name}.jar"
+        }
+    }
+}
