@@ -1,8 +1,0 @@
-displayName: Deep Space
-name: ice
-author: 星渊连协
-main: ice.Ice
-version:0.12
-minGameVersion: 146
-java: true
-hidden: false
