@@ -24,7 +24,7 @@ public class IceEffects {
         if (e.rotation == 0) {
             e.rotation = 45;
         }
-        color(IceColors.sp);
+        color(IceColors.紫色);
         Drawf.tri(x, y, width, length, e.rotation);
         Drawf.tri(x, y, width, length, 180 + e.rotation);
     }), /**
@@ -35,7 +35,7 @@ public class IceEffects {
                 float fin = Math.min(margin, e.fin());
                 color(Pal.spore);
                 Fill.circle(e.x, e.y, fin * 4f);
-                color(IceColors.sp);
+                color(IceColors.紫色);
                 Fill.circle(e.x, e.y, fin * 2f);
             }), /**
      * 紫色粒子效果
@@ -43,7 +43,7 @@ public class IceEffects {
     hitLaserBlast = new Effect(12, e->{
                 stroke(e.fout() * 1.5f);
                 randLenVectors(e.id, 8, e.finpow() * 17f, (x, y)->{
-                    color(IceColors.sp);
+                    color(IceColors.紫色);
                     float ang = Mathf.angle(x, y);
                     lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 3f);
                 });

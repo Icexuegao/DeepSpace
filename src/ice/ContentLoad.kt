@@ -1,21 +1,54 @@
 package ice
 
-import ice.content.blocks.IceBlocks
-import ice.library.drawUpdate.DrawUpdates
-import ice.music.IceMusics
+import arc.Core
+import arc.scene.ui.layout.Table
 import ice.content.*
+import ice.content.blocks.IceBlocks
 import ice.parse.JTContents
+import ice.scene.MyInputListener
+import ice.type.Incident
 import ice.ui.Ui
+import ice.ui.menus.MenusDialog
+import ice.ui.menus.SettingValue
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.world.meta.BuildVisibility
 
-/**
- * 用于辅助加载kotlin内容防止主类紊乱
- */
 object ContentLoad {
-    /**来点单例*/
     fun init() {
+        SettingValue.init()
+
+
+        val t1 = Table()
+        t1.x += 500
+        t1.y +=100
+        t1.button("传教") {
+            Incident.announce("[red]<<传教>> 你的信仰疑似有点动摇[]", 9f)
+        }
+        Vars.ui.hudGroup.addChild(t1)
+        val table = Table()
+        table.table {
+            it.add("窗口大小设置")
+            it.addListener(MyInputListener.DragInputListener(table))
+        }.row()
+        table.x = 500f
+        table.y = 500f
+        table.slider(0f, Core.graphics.width.toFloat() - 10, 1f) {
+            if (Vars.mobile) {
+                MenusDialog.deepSpace.tableCell.height(it)
+            } else {
+                MenusDialog.deepSpace.tableCell.width(it)
+            }
+        }.with { it.name = "宽度" }.size(500f, 60f).row()
+        table.slider(0f, Core.graphics.height.toFloat() - 10, 1f) {
+            if (Vars.mobile) {
+                MenusDialog.deepSpace.tableCell.width(it)
+            } else {
+                MenusDialog.deepSpace.tableCell.height(it)
+            }
+
+        }.with { it.name = "长度" }.size(500f, 60f).row()
+        Vars.ui.menuGroup.addChild(table)
         //  Vars.asyncCore.processes.clear().add(CeProcess())
         /*  Events.on(EventType.WorldLoadEndEvent::class.java) {
               object : DrawUpdate() {
@@ -50,16 +83,15 @@ object ContentLoad {
               }
           }*/
         Ui.load()
-        DrawUpdates.load()
         Vars.content.each {
             if (it is UnlockableContent) {
                 it.unlock()
             }
         }
+
     }
 
     fun load() {
-        IceMusics.load()
         IceItems.load()
         IceLiquids.load()
         IceStatus.load()

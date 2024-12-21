@@ -4,7 +4,6 @@ import arc.Core;
 import arc.func.Prov;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Font;
 import arc.input.KeyCode;
 import arc.math.Interp;
 import arc.math.Mathf;
@@ -14,10 +13,9 @@ import arc.scene.Element;
 import arc.scene.Scene;
 import arc.scene.actions.Actions;
 import arc.scene.event.*;
-import arc.scene.style.Drawable;
-import arc.scene.style.Style;
 import arc.scene.ui.Dialog;
 import arc.scene.ui.ScrollPane;
+import arc.scene.ui.layout.Cell;
 import arc.scene.ui.layout.Table;
 import arc.util.Align;
 import arc.util.pooling.Pools;
@@ -25,7 +23,7 @@ import arc.util.pooling.Pools;
 import static arc.Core.scene;
 
 public class IceDialog extends Table {
-    private static Prov<Action> defaultShowAction = () -> Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.4f, Interp.fade)), defaultHideAction = () -> Actions.fadeOut(0.4f, Interp.fade);
+    private static Prov<Action> defaultShowAction = ()->Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.4f, Interp.fade)), defaultHideAction = ()->Actions.fadeOut(0.4f, Interp.fade);
     protected InputListener ignoreTouchDown = new InputListener() {
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, KeyCode button) {
@@ -40,18 +38,23 @@ public class IceDialog extends Table {
 
     protected int edge;
     protected boolean dragging;
-    boolean isMovable = false, isModal = true, isResizable = false, center = true;
+    public boolean isMovable = false, isModal = true, isResizable = false, center = true;
     int resizeBorder = 8;
     boolean keepWithinStage = true;
-
+   public Cell<Table> tableCell;
     public Dialog.DialogStyle style;
     private float lastWidth = -1f, lastHeight = -1f;
 
     Element previousKeyboardFocus, previousScrollFocus;
     FocusListener focusListener;
     public final Table cont;
+
     public IceDialog() {
         this("");
+    }
+
+    public IceDialog show() {
+        return show(Core.scene);
     }
 
     public IceDialog(String title) {
@@ -62,16 +65,7 @@ public class IceDialog extends Table {
         if (title == null) throw new IllegalArgumentException("title cannot be null.");
         this.touchable = Touchable.enabled;
         setClip(true);
-
-       /* this.title = new Label(title, new Label.LabelStyle(style.titleFont, style.titleFontColor));
-        this.title.setEllipsis(true);*/
-
-       /* titleTable = new Table();
-        titleTable.add(this.title).expandX().fillX().minWidth(0);
-        add(titleTable).growX().row();*/
-
         setStyle(style);
-
         addCaptureListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, KeyCode button) {
@@ -193,7 +187,7 @@ public class IceDialog extends Table {
             }
         });
         setOrigin(Align.center);
-        add(cont = new Table()).expand().fill();
+        tableCell= add(cont = new Table()).expand().fill();
         row();
         // add(buttons = new Table()).fillX();
         //  buttons.defaults().pad(20);
@@ -297,54 +291,10 @@ public class IceDialog extends Table {
         setPosition(Math.round(((Core.scene.getWidth() - scene.marginLeft - scene.marginRight) - getWidth()) / 2), Math.round(((Core.scene.getHeight() - scene.marginTop - scene.marginBottom) - getHeight()) / 2));
     }
 
-    public boolean isMovable() {
-        return isMovable;
-    }
-
-    public void setMovable(boolean isMovable) {
-        this.isMovable = isMovable;
-    }
-
-    public boolean isModal() {
-        return isModal;
-    }
-
-    public void setModal(boolean isModal) {
-        this.isModal = isModal;
-    }
-
-    public void setKeepWithinStage(boolean keepWithinStage) {
-        this.keepWithinStage = keepWithinStage;
-    }
-
-    public boolean isCentered() {
-        return center;
-    }
-
-    public void setCentered(boolean center) {
-        this.center = center;
-    }
-
-    public boolean isResizable() {
-        return isResizable;
-    }
-
-    public void setResizable(boolean isResizable) {
-        this.isResizable = isResizable;
-    }
-
-    public void setResizeBorder(int resizeBorder) {
-        this.resizeBorder = resizeBorder;
-    }
-
-    public boolean isDragging() {
-        return dragging;
-    }
-
     public void updateScrollFocus() {
         boolean[] done = {false};
 
-        Core.app.post(() -> forEach(child -> {
+        Core.app.post(()->forEach(child->{
             if (done[0]) return;
 
             if (child instanceof ScrollPane) {
@@ -352,14 +302,6 @@ public class IceDialog extends Table {
                 done[0] = true;
             }
         }));
-    }
-
-    public static void setHideAction(Prov<Action> prov) {
-        defaultHideAction = prov;
-    }
-
-    public static void setShowAction(Prov<Action> prov) {
-        defaultShowAction = prov;
     }
 
     @Override
@@ -437,20 +379,10 @@ public class IceDialog extends Table {
         setOrigin(Align.center);
         setClip(false);
         setTransform(true);
-
         hide(defaultHideAction.get());
     }
-
-    /**
-     * Adds a listener for back/escape keys to hide this dialog.
-     */
-    public void closeOnBack() {
-        closeOnBack(() -> {
-        });
-    }
-
     public void closeOnBack(Runnable callback) {
-        keyDown(key -> {
+        keyDown(key->{
             if (key == KeyCode.escape || key == KeyCode.back) {
                 Core.app.post(this::hide);
                 callback.run();
@@ -505,9 +437,6 @@ public class IceDialog extends Table {
         }
     }
 
-    public IceDialog show() {
-        return show(Core.scene);
-    }
 
     /**
      * {@link #pack() Packs} the dialog and adds it to the stage, centered with default fadeIn action
@@ -541,20 +470,4 @@ public class IceDialog extends Table {
         } else remove();
     }
 
-
-    public static class DialogStyle extends Style {
-        /**
-         * Optional.
-         */
-        public Drawable background;
-        public Font titleFont;
-        /**
-         * Optional.
-         */
-        public Color titleFontColor = new Color(1, 1, 1, 1);
-        /**
-         * Optional.
-         */
-        public Drawable stageBackground;
-    }
 }

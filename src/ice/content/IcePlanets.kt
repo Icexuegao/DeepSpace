@@ -122,7 +122,7 @@ class IcePlanets {
 
                     override fun getColor(position: Vec3?): Color {
                         return if (position!!.z > -0.05f && position.z < 0.05f) {
-                            IceColors.b
+                            IceColors.b2
                         } else {
                             Color(Rand().nextFloat(), Rand().nextFloat(), Rand().nextFloat(), 0.3f)
                         }

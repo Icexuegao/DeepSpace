@@ -1,22 +1,22 @@
 package ice.world.blocks.ore
 
 import arc.func.Prov
-import arc.util.Log
 import arc.util.Strings
 import ice.graphics.IceColors
-import ice.ui.Tex.IceTex
+import ice.ui.tex.IceTex
 import ice.world.meta.stat.IceStat
 import mindustry.content.Items
 import mindustry.gen.Building
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.ui.ItemDisplay
+import mindustry.ui.Styles
 import mindustry.world.Block
 import mindustry.world.meta.StatValue
 
 open class OreBlock(name: String) : Block(name) {
     private val interval = 807f
-    var formula = OreFormulaStack()
+    var formula = OreFormula.OreFormulaStack()
 
     init {
         health = 500
@@ -25,7 +25,7 @@ open class OreBlock(name: String) : Block(name) {
         update = true
         itemCapacity = 50
         buildType = Prov(OreBlock::OreBlockBuild)
-        requirements(Category.crafting, ItemStack.with(Items.copper, 1))
+        this.requirements(Category.crafting, ItemStack.with(Items.copper, 1))
     }
 
     override fun setStats() {
@@ -36,6 +36,7 @@ open class OreBlock(name: String) : Block(name) {
     private fun formulasUi(): StatValue {
         return StatValue { table ->
             table.table { pan ->
+                pan.margin(10f)
                 formula.oreFormula.each { ore ->
                     pan.table { t ->
                         t.table { input ->
@@ -52,7 +53,7 @@ open class OreBlock(name: String) : Block(name) {
                             }.grow().row()
                             time.table {
                                 it.table { it1 ->
-                                    it1.image(IceTex.arrow).color(IceColors.black1).grow()
+                                    it1.image(IceTex.arrow).color(IceColors.灰色).grow()
                                 }.size(275f / 2, 79f / 2f).expandY().top()
                             }.grow()
                         }.grow().padRight(5f).width(interval / 3).margin(10f)
@@ -69,8 +70,7 @@ open class OreBlock(name: String) : Block(name) {
                         }.grow().right().margin(10f).width(interval / 3)
 
                         t.cells.each {
-                            it.table.background = IceTex.background
-                            Log.info(it.get() == t)
+                            it.table.background =Styles.grayPanel
                         }
 
                     }.padBottom(10f).row()

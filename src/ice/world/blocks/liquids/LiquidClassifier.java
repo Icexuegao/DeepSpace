@@ -14,7 +14,7 @@ import mindustry.world.blocks.ItemSelection;
 import mindustry.world.blocks.liquid.LiquidBlock;
 import mindustry.world.meta.Stat;
 
-import static ice.library.draw.IceDraw.*;
+import static ice.library.drawf.IceDraw.*;
 import static mindustry.Vars.content;
 
 public class LiquidClassifier extends Block {

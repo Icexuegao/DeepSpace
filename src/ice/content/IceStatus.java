@@ -1,7 +1,7 @@
 package ice.content;
 
 import arc.graphics.Color;
-import ice.type.IceStatusEffect;
+import ice.type.content.IceStatusEffect;
 import mindustry.content.Fx;
 import mindustry.type.StatusEffect;
 

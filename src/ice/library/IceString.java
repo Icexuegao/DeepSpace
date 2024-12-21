@@ -1,5 +1,6 @@
 package ice.library;
 
+import java.text.DecimalFormat;
 import java.util.regex.Pattern;
 
 /**
@@ -27,5 +28,10 @@ public class IceString {
         } else {
             return pattern.matcher(str).matches();
         }
+    }
+
+    /** 返回float保存x位数的字符串 */
+    public static String decimalFormat(float value, int i) {
+        return new DecimalFormat("#0." + "0".repeat(Math.max(0, i))).format(value);
     }
 }

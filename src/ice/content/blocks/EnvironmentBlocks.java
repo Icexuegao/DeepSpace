@@ -4,8 +4,6 @@ import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.math.Mathf;
 import ice.content.IceLiquids;
-import ice.world.blocks.environment.IceFloor;
-import ice.world.blocks.environment.IceStaticWall;
 import ice.world.meta.IceAttribute;
 import mindustry.Vars;
 import mindustry.content.Items;
@@ -17,6 +15,9 @@ import mindustry.graphics.Layer;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.environment.*;
+
+import static ice.type.IceBlocks.IceFloor;
+import static ice.type.IceBlocks.IceStaticWall;
 
 public class EnvironmentBlocks {
     /**

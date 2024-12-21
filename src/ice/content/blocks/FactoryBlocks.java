@@ -3,7 +3,7 @@ package ice.content.blocks;
 import arc.graphics.Color;
 import ice.content.IceEffects;
 import ice.content.IceItems;
-import ice.library.draw.DrawLiquidOutputs;
+import ice.library.drawf.DrawLiquidOutputs;
 import ice.world.blocks.factoryBlocks.EffectGenericCrafter;
 import ice.world.blocks.factoryBlocks.multipleCrafter.Formula;
 import ice.world.blocks.factoryBlocks.multipleCrafter.MultipleCrafter;

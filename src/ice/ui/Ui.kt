@@ -1,25 +1,16 @@
 package ice.ui
 
-import ice.ui.dialogs.ContentInfoDialog
-import ice.ui.dialogs.IcePausedDialog
-import ice.ui.dialogs.MenusDialog
+import ice.ui.dialogs.IceContentInfoDialog
+import ice.ui.dialogs.SectorID
+import ice.ui.menus.MenusDialog
 import mindustry.Vars
 
 
 object Ui {
     fun load() {
-        Vars.ui.paused = IcePausedDialog()
-        Vars.ui.content = ContentInfoDialog()
-        MenusDialog().load()
+        DisplayName.flun()
+        Vars.ui.content = IceContentInfoDialog()
+        MenusDialog.show()
         SectorID.load()
-        updateZoom()
-    }
-
-    private fun updateZoom() {
-        val minZoomLim = 0.5f
-        val maxZoomLim = 40f
-        Vars.renderer.minZoom = minZoomLim
-        Vars.renderer.maxZoom = maxZoomLim
     }
 }
-

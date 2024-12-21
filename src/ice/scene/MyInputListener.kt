@@ -9,8 +9,8 @@ class MyInputListener {
 
 
     /**拖动侦测,给元素添加检测器,参数传table*/
-    open class DragInputListener(vararg e: Element) : InputListener() {
-        private var e: Array<out Element>
+    open class DragInputListener( e: Element) : InputListener() {
+        private var e: Element
         private var statX = 0f
         private var statY = 0f
 
@@ -25,14 +25,14 @@ class MyInputListener {
         }
 
         override fun touchDragged(event: InputEvent, x: Float, y: Float, pointer: Int) {
-            for (e in e) {
                 e.x += x - statX
                 e.y += y - statY
-            }
         }
+
         override fun touchUp(event: InputEvent, x: Float, y: Float, pointer: Int, button: KeyCode) {}
     }
-    open class TouchDownInputListener(private val runnable: Runnable):InputListener(){
+
+    open class TouchDownInputListener(private val runnable: Runnable) : InputListener() {
         override fun touchDown(event: InputEvent, x: Float, y: Float, pointer: Int, button: KeyCode): Boolean {
             runnable.run()
             return false

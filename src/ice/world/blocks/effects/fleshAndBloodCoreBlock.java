@@ -70,5 +70,7 @@ public class fleshAndBloodCoreBlock extends CoreBlock {
                 Draw.rect(eye, x + movement.x, y + movement.y);
             }
         }
+
+
     }
 }

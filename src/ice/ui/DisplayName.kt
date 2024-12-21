@@ -24,10 +24,9 @@ object DisplayName {
         Ice.ice.meta.author = Ice.author.random()
         Ice.ice.meta.version = "0.12"
         Ice.ice.meta.java = true
+        Ice.ice.meta.description = "一个多方位内容的模组,从星球到建筑,摒弃过量数值内容,争取用机制来减少同质化问题"
+
         massageRand = me[Random().nextInt(me.size)]
-        Ice.ice.meta.description = """
-                一个多方位内容的模组,从星球到建筑,摒弃过量数值内容,争取用机制来减少同质化问题
-                """.trimIndent()
     }
 
     fun flun() {

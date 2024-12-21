@@ -2,9 +2,9 @@ package ice.library.file
 
 import arc.util.Log
 import ice.content.blocks.IceBlocks
-import ice.type.IceItem
-import ice.type.IceLiquid
-import ice.type.IceStatusEffect
+import ice.type.content.IceItem
+import ice.type.content.IceLiquid
+import ice.type.content.IceStatusEffect
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import java.util.*
@@ -14,7 +14,7 @@ object BundleDetection {
     private val file = IceFiles.fis["bundle_zh_CN.properties"]
 
     /**过滤掉不需要检测的key*/
-    private val filtration = arrayOf("category", "IceStat")
+    private val filtration = arrayOf("category", "iceStat")
     private val properties = Properties()
 
     init {

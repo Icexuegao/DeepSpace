@@ -7,7 +7,6 @@ import arc.scene.ui.layout.Table;
 import arc.struct.ObjectMap;
 import arc.util.noise.Simplex;
 import ice.library.IceString;
-import ice.ui.Tex.IceTex;
 import mindustry.content.Items;
 import mindustry.game.Team;
 import mindustry.gen.Building;
@@ -42,7 +41,7 @@ public class Noise2dBlock extends Block {
 
         @Override
         public void buildConfiguration(Table table) {
-            table.setBackground(IceTex.background);
+            //table.setBackground(IceTex.background);
             TextField octavest = new TextField("");
             TextField persistencet = new TextField("");
             TextField scalet = new TextField("");

@@ -13,9 +13,6 @@ public class Ice extends Mod {
      * 模组代码使用的name,切勿更改!!
      */
     public final static String NAME = "ice";
-    /**
-     * 模组主要参与负责人 ps:老婆们可爱捏
-     */
     public static final String[] author = {"Alon", "洋葱", "Elegy"};
 
     public Ice() {

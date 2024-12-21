@@ -19,7 +19,7 @@ class JTContents {
             class LoadRun(var type: ContentType, var file: Fi)
 
             val runs = Seq<LoadRun>()
-            val contentRoot = IceFiles.find("IceContent", true) ?: return
+            val contentRoot = IceFiles.find("IceContent",true) ?: return
             for (type in ContentType.all) {
                 val folder = contentRoot.child("${type.name}s") //units,items....
                 if (folder.exists()) {

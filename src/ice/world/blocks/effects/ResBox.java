@@ -5,7 +5,7 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Rand;
 import arc.struct.ObjectMap;
-import ice.type.IceItem;
+import ice.type.content.IceItem;
 import mindustry.Vars;
 import mindustry.game.Team;
 import mindustry.gen.Building;

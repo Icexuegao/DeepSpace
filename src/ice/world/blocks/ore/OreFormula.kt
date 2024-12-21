@@ -4,7 +4,7 @@ import arc.struct.Seq
 import mindustry.type.Item
 import mindustry.type.ItemStack
 
-open class OreFormula {
+ open class OreFormula {
     var crftTime = 60
     var input = Seq<ItemStack>()
     var output = HashMap<ItemStack, Int>()
@@ -23,11 +23,12 @@ open class OreFormula {
     fun addInput(items: ItemStack) {
         input.add(items)
     }
+     class OreFormulaStack {
+         val oreFormula = Seq<OreFormula>()
+         fun with(vararg formulas: OreFormula) {
+             oreFormula.add(formulas)
+         }
+     }
 }
 
-class OreFormulaStack {
-    val oreFormula = Seq<OreFormula>()
-    fun with(vararg formulas: OreFormula) {
-        oreFormula.add(formulas)
-    }
-}
+
