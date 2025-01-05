@@ -1,8 +1,8 @@
 package ice.content;
 
+import arc.graphics.Color;
 import arc.graphics.g2d.Fill;
 import arc.math.Mathf;
-import ice.graphics.IceColors;
 import mindustry.entities.Effect;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
@@ -11,11 +11,19 @@ import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.lineAngle;
 import static arc.graphics.g2d.Lines.stroke;
 import static arc.math.Angles.randLenVectors;
+import static ice.ui.tex.Colors.INSTANCE;
 
 public class IceEffects {
     /**
-     * 两个紫色三角
+     * @param lengthSize 该值决定火焰最终长度 子弹的话一般是速度*时间
      */
+    public static Effect changeFlame(float lengthSize) {
+        return new Effect(32f, 80f, e->{
+            color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
+            randLenVectors(e.id, 8, e.finpow() * lengthSize, e.rotation, 10f, (x, y)->Fill.circle(e.x + x, e.y + y, 0.65f + e.fout() * 1.5f));
+        });
+    }
+
     public static final Effect lancerLaserShoot1 = new Effect(21, e->{
         float x = e.x;
         float y = e.y;
@@ -24,7 +32,7 @@ public class IceEffects {
         if (e.rotation == 0) {
             e.rotation = 45;
         }
-        color(IceColors.紫色);
+        color(INSTANCE.get紫色());
         Drawf.tri(x, y, width, length, e.rotation);
         Drawf.tri(x, y, width, length, 180 + e.rotation);
     }), /**
@@ -35,7 +43,7 @@ public class IceEffects {
                 float fin = Math.min(margin, e.fin());
                 color(Pal.spore);
                 Fill.circle(e.x, e.y, fin * 4f);
-                color(IceColors.紫色);
+                color(INSTANCE.get紫色());
                 Fill.circle(e.x, e.y, fin * 2f);
             }), /**
      * 紫色粒子效果
@@ -43,7 +51,7 @@ public class IceEffects {
     hitLaserBlast = new Effect(12, e->{
                 stroke(e.fout() * 1.5f);
                 randLenVectors(e.id, 8, e.finpow() * 17f, (x, y)->{
-                    color(IceColors.紫色);
+                    color(INSTANCE.get紫色());
                     float ang = Mathf.angle(x, y);
                     lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 3f);
                 });

@@ -8,7 +8,7 @@ import arc.graphics.g2d.TextureRegion;
 import arc.scene.style.Drawable;
 import arc.scene.style.ScaledNinePatchDrawable;
 import ice.Ice;
-import ice.library.file.IceFiles;
+import ice.library.IFiles;
 import mindustry.world.draw.DrawLiquidTile;
 
 import static arc.util.Tmp.v1;
@@ -92,6 +92,6 @@ public class IceDraw {
     }
 
     public static TextureRegion LoadText(String name) {
-        return new TextureAtlas.AtlasRegion(IceFiles.findPng(name.replace(Ice.NAME + "-", "")));
+        return new TextureAtlas.AtlasRegion(IFiles.INSTANCE.findPng(name.replace(Ice.NAME + "-", "")));
     }
 }

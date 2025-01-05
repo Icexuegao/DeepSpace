@@ -9,7 +9,7 @@ import arc.math.geom.Vec3
 import arc.util.Tmp
 import arc.util.noise.Simplex
 import ice.content.blocks.EnvironmentBlocks
-import ice.graphics.IceColors
+import ice.ui.tex.Colors
 import mindustry.content.Blocks
 import mindustry.content.Planets
 import mindustry.game.Rules
@@ -26,9 +26,8 @@ import mindustry.world.Tiles
 import mindustry.world.blocks.environment.Floor
 import kotlin.math.max
 
-class IcePlanets {
 
-    companion object {
+     object IcePlanets{
         lateinit var alon: Planet
 
         fun load() {
@@ -122,7 +121,7 @@ class IcePlanets {
 
                     override fun getColor(position: Vec3?): Color {
                         return if (position!!.z > -0.05f && position.z < 0.05f) {
-                            IceColors.b2
+                            Colors.b2
                         } else {
                             Color(Rand().nextFloat(), Rand().nextFloat(), Rand().nextFloat(), 0.3f)
                         }
@@ -172,4 +171,3 @@ class IcePlanets {
             }
         }
     }
-}

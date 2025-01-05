@@ -4,39 +4,99 @@ import arc.graphics.Color
 import arc.graphics.g2d.TextureRegion
 import arc.scene.style.Drawable
 import arc.scene.style.TextureRegionDrawable
+import arc.scene.ui.Button
 import arc.scene.ui.CheckBox
+import arc.scene.ui.ImageButton.ImageButtonStyle
 import arc.scene.ui.Slider.SliderStyle
-import arc.scene.ui.TextButton
-import ice.graphics.IceColors
+import arc.scene.ui.TextButton.TextButtonStyle
 import ice.library.drawf.IceDraw
-import ice.library.file.IceFiles
+import ice.library.IFiles
+import mindustry.gen.Tex
 import mindustry.ui.Fonts
+import mindustry.ui.Styles
 
 object IceTex {
     val background: Drawable = IceDraw.create9("background")
     val frameButtonUp: Drawable = IceDraw.create9("frameButtonUp")
     val frameButtonDown: Drawable = IceDraw.create9("frameButtonDown")
     val barTop: Drawable = IceDraw.create9("barTop")
-    val bar: Drawable = IceDraw.create9("bar")
-    val sliderFrame:Drawable= IceDraw.create9("sliderFrame")
-    val sliderKnob:Drawable=TextureRegionDrawable(IceFiles.findPng("sliderKnob"))
-
-    val barBackground: TextureRegion = IceFiles.findPng("barBackground")
-    val whiteui: TextureRegion = IceFiles.findPng("whiteui")
-    val time: TextureRegion = IceFiles.findPng("time")
-    val arrow: TextureRegion = IceFiles.findPng("arrow")
-    val flower: TextureRegion = IceFiles.findPng("flower")
-    val buttonDown: TextureRegion = IceFiles.findPng("buttonDown")
-    val buttonUp: TextureRegion = IceFiles.findPng("buttonUp")
-    val deepSpaceVer: TextureRegion = IceFiles.findPng("deepSpaceVer")
+    val sliderFrame: Drawable = IceDraw.create9("sliderFrame")
+    val sliderKnob: Drawable = TextureRegionDrawable(IFiles.findPng("sliderKnob"))
+    val black8: Drawable = (Tex.whiteui as TextureRegionDrawable).tint(0f, 0f, 0f, 0.8f)
+    val pane2: Drawable = IceDraw.create9("pane2")
 
 
-    val rootButton = TextButton.TextButtonStyle().apply {
+    val barBackground: TextureRegion = IFiles.findPng("barBackground")
+    val whiteui: TextureRegion = IFiles.findPng("whiteui")
+    val time: TextureRegion = IFiles.findPng("time")
+    val arrow: TextureRegion = IFiles.findPng("arrow")
+    val flower: TextureRegion = IFiles.findPng("flower")
+    val buttonDown: TextureRegion = IFiles.findPng("buttonDown")
+    val buttonUp: TextureRegion = IFiles.findPng("buttonUp")
+    val deepSpaceVer: TextureRegion = IFiles.findPng("deepSpaceVer")
+
+    fun getWhiteui(color: Color): Drawable {
+        return (Tex.whiteui as TextureRegionDrawable).tint(color)
+    }
+
+    fun getBlack(float: Float): Drawable {
+        return (Tex.whiteui as TextureRegionDrawable).tint(0f, 0f, 0f, float)
+    }
+
+    val imageCleari = ImageButtonStyle().apply {
+        down = Styles.flatDown
+        up = black8
+        over = Styles.flatOver
+        disabled = Styles.black8
+        imageDisabledColor = Color.lightGray
+        imageUpColor = Color.white
+    }
+
+    fun getColorImageCleari(float: Float): ImageButtonStyle {
+        return ImageButtonStyle().apply {
+            down = Styles.flatDown
+            up = (Tex.whiteui as TextureRegionDrawable).tint(0f, 0f, 0f, float)
+            over = Styles.flatOver
+            disabled = Styles.black8
+            imageDisabledColor = Color.lightGray
+            imageUpColor = Color.white
+        }
+
+    }
+
+
+    val txtCleari = TextButtonStyle().apply {
+        down = Styles.flatDown
+        up = black8
+        over = Styles.flatOver
+        disabled = Styles.black8
+
+        font = Fonts.def
+        fontColor = Color.white
+        overFontColor = Colors.b4
+        disabledFontColor = Color.gray/*  imageDisabledColor = Color.lightGray
+          imageUpColor = */
+    }
+
+    val cleari = Button.ButtonStyle().apply {
+        down = Styles.flatDown
+        up = black8
+        over = Styles.flatOver
+        disabled = Styles.black8
+
+        /* font = Fonts.outline
+         fontColor = Color.white
+         overFontColor = Pal.accent
+         disabledFontColor = Color.gray*//*  imageDisabledColor = Color.lightGray
+          imageUpColor = */
+    }
+
+    val rootButton = TextButtonStyle().apply {
         up = frameButtonUp
         over = up
         down = frameButtonDown
         font = Fonts.def
-        fontColor = IceColors.b3
+        fontColor = Colors.b4
         disabledFontColor = Color.gray
     }
 
@@ -50,10 +110,10 @@ object IceTex {
         checkboxOver = off
         checkboxOffDisabled = off
         font = Fonts.def
-        fontColor = IceColors.b1
+        fontColor = Colors.b1
     }
     val defaultSlider = SliderStyle().apply {
-        background =sliderFrame
+        background = sliderFrame
         knob = sliderKnob
         knobOver = sliderKnob
         knobDown = sliderKnob

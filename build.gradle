@@ -2,8 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
-apply plugin: "java"
-apply plugin: "kotlin"
 
 buildscript {
     ext {
@@ -27,7 +25,10 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
-
+plugins {
+    id("java")
+    id "org.jetbrains.kotlin.jvm" version "1.9.23"
+}
 repositories {
     mavenCentral()
     mavenLocal()
@@ -41,7 +42,6 @@ repositories {
 }
 
 dependencies {
-
     implementation 'org.tomlj:tomlj:1.1.1'
     implementation "org.jbox2d:jbox2d-library:2.2.1.1"
     compileOnly "com.github.Tinylake:MindustryX:v146.004"
@@ -49,15 +49,19 @@ dependencies {
 }
 
 sourceSets {
+    s
     main {
-        java.srcDir('src')
-        kotlin.srcDir('src')
+        java.srcDirs = ['src']
+        //noinspection GrUnresolvedAccess
+        kotlin.srcDir('src/scala')
         resources.srcDir('assets')
     }
 }
+
 def buildLibDir = project.layout.buildDirectory.asFile.get().name + "\\libs"
 
 tasks.register("iceJar", org.gradle.jvm.tasks.Jar) {
+    // dependsOn compileScala
     dependsOn jar
     manifest.attributes('Main-Class': 'ice.Ice')
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -66,18 +70,16 @@ tasks.register("iceJar", org.gradle.jvm.tasks.Jar) {
     def path = "${project.layout.buildDirectory.asFile.get().name}\\classes"
     from("${path}\\java\\main")
     from("${path}\\kotlin\\main")
+    from("${path}\\scala\\main")
     from(sourceSets.main.resources.srcDirs)
     from {
         //noinspection GroovyMissingReturnStatement
         configurations.runtimeClasspath.collect {
-            def name = ["tomlj-1.1.1", "kotlin-stdlib-1.9.23", "jbox2d-library-2.2.1.1"]
-            if (name.contains(it.name.replace(".jar", ""))) {
-                it.isDirectory() ? it : zipTree(it)
-            }
+            print(it.name)
+            it.isDirectory() ? it : zipTree(it)
         }
     }
 }
-
 tasks.register("myCopyJar", Copy) {
     dependsOn(iceJar)
     from "${buildLibDir}\\$project.name" + ".jar"
@@ -86,6 +88,10 @@ tasks.register("myCopyJar", Copy) {
     }
     delete "C:/Users/$proUser/AppData/Roaming/Mindustry/mods/${project.name}-mater.jar"
 }
+tasks.register("text") {
+
+}
+
 
 tasks.withType(JavaCompile).configureEach {
     targetCompatibility = 17//目标的兼容性
@@ -93,16 +99,18 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
 tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions.noJdk = false
     kotlinOptions.jvmTarget = 17
 }
 tasks.withType(KotlinJvmCompile).configureEach {
+
     jvmTargetValidationMode = JvmTargetValidationMode.ERROR
 }
 
 tasks.register('jarAndroid') {
     dependsOn iceJar
     doLast {
-        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. ANDROID_HOME")
+        if (!sdkRoot || !new File("$sdkRoot").exists()) throw new GradleException("No valid Android SDK found. ANDROID_HOME")
 
         def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
 
@@ -112,7 +120,7 @@ tasks.register('jarAndroid') {
         def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
 
         //dex and desugar files - this requires d8 in your PATH
-        "$sdkRoot/build-tools/34.0.0/d8.bat $dependencies --min-api 26 --output ${project.name}Android.jar ${project.name}.jar"
+        "$sdkRoot/build-tools/35.0.0/d8.bat $dependencies --min-api 26 --output ${project.name}Android.jar ${project.name}.jar"
                 .execute(null, new File(buildLibDir)).waitForProcessOutput(System.out, System.err)
     }
 }

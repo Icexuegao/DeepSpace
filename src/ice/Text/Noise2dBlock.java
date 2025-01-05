@@ -6,7 +6,7 @@ import arc.scene.ui.TextField;
 import arc.scene.ui.layout.Table;
 import arc.struct.ObjectMap;
 import arc.util.noise.Simplex;
-import ice.library.IceString;
+import ice.library.tool.StringTool;
 import mindustry.content.Items;
 import mindustry.game.Team;
 import mindustry.gen.Building;
@@ -49,7 +49,7 @@ public class Noise2dBlock extends Block {
 
             table.add("octaves:" + octaves).update((s)->{
                 String o = octavest.getText();
-                boolean numeric4 = IceString.isNumeric(o);
+                boolean numeric4 = StringTool.isNumeric(o);
                 if (!o.isEmpty() && numeric4) octaves = Float.parseFloat(o);
                 s.setText("octaves:" + octaves);
             });
@@ -57,14 +57,14 @@ public class Noise2dBlock extends Block {
             table.row();
             table.add("persistence:" + persistence).update((s)->{
                 String o = persistencet.getText();
-                boolean numeric4 = IceString.isNumeric(o);
+                boolean numeric4 = StringTool.isNumeric(o);
                 if (!o.isEmpty() && numeric4) persistence = Float.parseFloat(o);
                 s.setText("persistence:" + persistence);
             });
             table.row();
             table.add("scale:" + scale).update((s)->{
                 String o = scalet.getText();
-                boolean numeric4 = IceString.isNumeric(o);
+                boolean numeric4 = StringTool.isNumeric(o);
                 if (!o.isEmpty() && numeric4) scale = Float.parseFloat(o);
                 s.setText("scale:" + scale);
             });
@@ -72,7 +72,7 @@ public class Noise2dBlock extends Block {
 
             table.add("fs:" + fs).update((s)->{
                 String o = fst.getText();
-                boolean numeric4 = IceString.isNumeric(o);
+                boolean numeric4 = StringTool.isNumeric(o);
                 if (!o.isEmpty() && numeric4) fs = Float.parseFloat(o);
                 s.setText("fs:" + fs);
             });

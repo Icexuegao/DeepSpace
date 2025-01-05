@@ -2,7 +2,6 @@ package ice.world.blocks.factoryBlocks.multipleCrafter;
 
 import arc.Core;
 import arc.graphics.Color;
-import arc.graphics.Texture;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
@@ -18,7 +17,7 @@ import arc.util.Strings;
 import arc.util.Time;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
-import ice.library.file.IceFiles;
+import ice.library.IFiles;
 import ice.world.consumers.ConsumePowerMultiple;
 import ice.world.meta.stat.IceStat;
 import ice.world.meta.stat.IceStatValues;
@@ -574,7 +573,7 @@ public class MultipleCrafter extends Block {
                                 }).expand().left();
                                 t3.table(t4->{
 
-                                    t4.image(new TextureRegion(new Texture(IceFiles.find("time.png")))).size(22);
+                                    t4.image(IFiles.INSTANCE.findPng("time")).size(22);
                                     t4.add(":" + formula1.craftTime / 60 + "秒");
                                 }).expand().right();
 

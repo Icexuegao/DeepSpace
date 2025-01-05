@@ -2,7 +2,8 @@ package ice.world.blocks.ore
 
 import arc.func.Prov
 import arc.util.Strings
-import ice.graphics.IceColors
+import ice.ui.menus.MenusDialog.update
+import ice.ui.tex.Colors
 import ice.ui.tex.IceTex
 import ice.world.meta.stat.IceStat
 import mindustry.content.Items
@@ -12,7 +13,9 @@ import mindustry.type.ItemStack
 import mindustry.ui.ItemDisplay
 import mindustry.ui.Styles
 import mindustry.world.Block
+import mindustry.world.meta.Stat.itemCapacity
 import mindustry.world.meta.StatValue
+
 
 open class OreBlock(name: String) : Block(name) {
     private val interval = 807f
@@ -53,7 +56,7 @@ open class OreBlock(name: String) : Block(name) {
                             }.grow().row()
                             time.table {
                                 it.table { it1 ->
-                                    it1.image(IceTex.arrow).color(IceColors.灰色).grow()
+                                    it1.image(IceTex.arrow).color(Colors.灰色).grow()
                                 }.size(275f / 2, 79f / 2f).expandY().top()
                             }.grow()
                         }.grow().padRight(5f).width(interval / 3).margin(10f)
@@ -79,8 +82,6 @@ open class OreBlock(name: String) : Block(name) {
         }
     }
 
-    class OreBlockBuild : Building() {
-
-    }
+    class OreBlockBuild : Building()
 }
 

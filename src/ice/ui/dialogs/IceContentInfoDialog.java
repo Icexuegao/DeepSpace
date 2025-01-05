@@ -12,7 +12,6 @@ import mindustry.Vars;
 import mindustry.ctype.UnlockableContent;
 import mindustry.gen.Iconc;
 import mindustry.graphics.Pal;
-import mindustry.input.Binding;
 import mindustry.ui.dialogs.ContentInfoDialog;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatCat;
@@ -20,16 +19,6 @@ import mindustry.world.meta.StatValue;
 import mindustry.world.meta.Stats;
 
 public class IceContentInfoDialog extends ContentInfoDialog {
-    public IceContentInfoDialog() {
-        title.name = "@info.title";
-        //  addCloseButton();
-        keyDown(key->{
-            if (key == Core.keybinds.get(Binding.block_info).key) {
-                Core.app.post(this::hide);
-            }
-        });
-    }
-
     @Override
     public void show(UnlockableContent content) {
         cont.clear();

@@ -1,0 +1,4 @@
+attribute = "aa"
+type = "AttributeCrafter"
+[consumes]
+items = ["sand/1"]
