@@ -9,7 +9,6 @@ buildscript {
         sdkRoot = System.getenv("ANDROID_HOME")
         kotlinVersion = "1.9.23"
     }
-
     repositories {
         mavenLocal()
         mavenCentral()
@@ -49,28 +48,22 @@ dependencies {
 }
 
 sourceSets {
-    s
     main {
         java.srcDirs = ['src']
         //noinspection GrUnresolvedAccess
-        kotlin.srcDir('src/scala')
+        kotlin.srcDirs = ['src']
         resources.srcDir('assets')
     }
 }
 
 def buildLibDir = project.layout.buildDirectory.asFile.get().name + "\\libs"
 
-tasks.register("iceJar", org.gradle.jvm.tasks.Jar) {
-    // dependsOn compileScala
-    dependsOn jar
+jar {
     manifest.attributes('Main-Class': 'ice.Ice')
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "${project.name}.jar"
+    archiveFileName = "${project.name}Desktop.jar"
     from files("README.md", "LICENSE")
-    def path = "${project.layout.buildDirectory.asFile.get().name}\\classes"
-    from("${path}\\java\\main")
-    from("${path}\\kotlin\\main")
-    from("${path}\\scala\\main")
+
     from(sourceSets.main.resources.srcDirs)
     from {
         //noinspection GroovyMissingReturnStatement
@@ -80,13 +73,13 @@ tasks.register("iceJar", org.gradle.jvm.tasks.Jar) {
         }
     }
 }
+
 tasks.register("myCopyJar", Copy) {
-    dependsOn(iceJar)
-    from "${buildLibDir}\\$project.name" + ".jar"
+    dependsOn(jar)
+    from "${buildLibDir}\\$project.name" + "Desktop.jar"
     into {
         "C:/Users/$proUser/AppData/Roaming/Mindustry/mods"
     }
-    delete "C:/Users/$proUser/AppData/Roaming/Mindustry/mods/${project.name}-mater.jar"
 }
 tasks.register("text") {
 
@@ -103,12 +96,11 @@ tasks.withType(KotlinCompile).configureEach {
     kotlinOptions.jvmTarget = 17
 }
 tasks.withType(KotlinJvmCompile).configureEach {
-
     jvmTargetValidationMode = JvmTargetValidationMode.ERROR
 }
 
 tasks.register('jarAndroid') {
-    dependsOn iceJar
+    dependsOn(jar)
     doLast {
 
         if (!sdkRoot || !new File("$sdkRoot").exists()) throw new GradleException("No valid Android SDK found. ANDROID_HOME")
@@ -121,7 +113,7 @@ tasks.register('jarAndroid') {
         def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
 
         //dex and desugar files - this requires d8 in your PATH
-        "$sdkRoot/build-tools/35.0.0/d8.bat $dependencies --min-api 26 --output ${project.name}Android.jar ${project.name}.jar"
+        "$sdkRoot/build-tools/35.0.0/d8.bat $dependencies --min-api 26 --output ${project.name}Android.jar ${project.name}Desktop.jar"
                 .execute(null, new File(buildLibDir)).waitForProcessOutput(System.out, System.err)
     }
 }
@@ -129,22 +121,16 @@ tasks.register('jarAndroid') {
 tasks.register('deploy', Jar) {
     dependsOn(jarAndroid)
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "${project.name}-mater.jar"//存档文件名
+    archiveFileName = "${project.name}.jar"//存档文件名
     from {
-        [zipTree("${buildLibDir}\\${project.name}.jar"),
+        [zipTree("${buildLibDir}\\${project.name}Desktop.jar"),
          zipTree("${buildLibDir}\\${project.name}Android.jar")]
-    }
-    doLast {
-        delete {
-            delete "${buildLibDir}\\${project.name}.jar"
-            delete "${buildLibDir}\\${project.name}Android.jar"
-        }
     }
 }
 
 tasks.register("myCopy", Copy) {
     dependsOn(deploy)
-    from "${buildLibDir}\\$project.name" + "-mater.jar"//源
+    from "${buildLibDir}\\$project.name" + ".jar"//源
     into {
         "C:/Users/$proUser/AppData/Roaming/Mindustry/mods"
     }

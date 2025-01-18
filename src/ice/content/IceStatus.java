@@ -6,13 +6,12 @@ import mindustry.content.Fx;
 import mindustry.type.StatusEffect;
 
 public class IceStatus {
-    public static StatusEffect 电磁脉冲, 破甲1, 破甲2, 破甲3, 穿甲;
-    public static StatusEffect 搏动, 回想, 流血;
+    public static StatusEffect 电磁脉冲, 破甲1, 破甲2, 破甲3, 穿甲, 搏动, 回想, 流血;
 
     public static void load() {
         穿甲 = new IceStatusEffect("armorPiercing") {{
             speedMultiplier = 1.5f;
-            armorBreakPercent=0.8f;
+            armorBreakPercent = 0.8f;
         }};
         破甲3 = new IceStatusEffect("armorBreak3") {{
             speedMultiplier = 1.1f;

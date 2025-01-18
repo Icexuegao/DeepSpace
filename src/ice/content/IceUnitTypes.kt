@@ -104,6 +104,7 @@ object IceUnitTypes {
                     hitSize = 7f
                     lifetime = 18f
                     pierce = true
+                    pierceBuilding=true
                     statusDuration = 60f * 10
                     shootEffect = IceEffects.changeFlame(lifetime * speed)
                     hitEffect = Fx.hitFlameSmall
@@ -118,6 +119,7 @@ object IceUnitTypes {
                 y = 8f
                 bullet = BulletType(6.7f, 17f).apply {
                     inaccuracy = 32f
+                    pierceBuilding=true
                     ammoMultiplier = 3f
                     hitSize = 7f
                     lifetime = 18f

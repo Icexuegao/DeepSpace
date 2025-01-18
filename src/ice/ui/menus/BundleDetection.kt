@@ -1,7 +1,7 @@
 package ice.ui.menus
 
 import arc.scene.ui.layout.Table
-import ice.content.blocks.IceBlocks
+import ice.content.IceBlocks
 import ice.library.IFiles
 import ice.type.content.IceItem
 import ice.type.content.IceLiquid

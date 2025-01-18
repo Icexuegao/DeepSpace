@@ -31,7 +31,9 @@ public class ContentTypeParsers {
         T parse(String name, JsonValue value) throws Exception;
     }
 
-    public static final ObjectMap<ContentType, TypeParser<?>> contentParser = ObjectMap.of(ContentType.block, (TypeParser<Block>) (name, value)->{
+    public static final ObjectMap<ContentType, TypeParser<?>> contentParser = ObjectMap.of(
+
+            ContentType.block, (TypeParser<Block>) (name, value) -> {
                 readBundle(ContentType.block, name, value);
 
                 Block block;
@@ -49,7 +51,7 @@ public class ContentTypeParsers {
                 currentContent = block;
                 /**设置默认可见,之后可能会被替换*/
                 block.buildVisibility = BuildVisibility.shown;
-                read(()->{
+                read(() -> {
                     if (value.has("consumes") && value.get("consumes").isObject()) {
                         for (JsonValue child : value.get("consumes")) {
                             switch (child.name) {
@@ -68,10 +70,13 @@ public class ContentTypeParsers {
                                         block.consume(child.isArray() ? new ConsumeItems(parserJson.readValue(ItemStack[].class, child)) : parserJson.readValue(ConsumeItems.class, child));
                                 case "liquidFlammable" ->
                                         block.consume((Consume) parserJson.readValue(ConsumeLiquidFlammable.class, child));
-                                case "liquid" -> block.consume((Consume) parserJson.readValue(ConsumeLiquid.class, child));
+                                case "liquid" ->
+                                        block.consume((Consume) parserJson.readValue(ConsumeLiquid.class, child));
                                 case "liquids" ->
                                         block.consume(child.isArray() ? new ConsumeLiquids(parserJson.readValue(LiquidStack[].class, child)) : parserJson.readValue(ConsumeLiquids.class, child));
-                                case "coolant" -> block.consume((Consume) parserJson.readValue(ConsumeCoolant.class, child));
+
+                                case "coolant" ->
+                                        block.consume((Consume) parserJson.readValue(ConsumeCoolant.class, child));
                                 case "power" -> {
                                     if (child.isNumber()) {
                                         block.consumePower(child.asFloat());
@@ -81,7 +86,7 @@ public class ContentTypeParsers {
                                 }
                                 case "powerBuffered" -> block.consumePowerBuffered(child.asFloat());
                                 default ->
-                                        throw new IllegalArgumentException("Unknown consumption type: '" + child.name + "' for block '" + block.name + "'.");
+                                        throw new IllegalArgumentException("未知消费类型: [" + child.name + "] 在block:[" + block.name + "].");
                             }
                         }
                         value.remove("consumes");
@@ -97,7 +102,9 @@ public class ContentTypeParsers {
                 });
 
                 return block;
-            }, ContentType.unit, (TypeParser<IceUnitType>) (name, value)->{
+            },
+
+            ContentType.unit, (TypeParser<IceUnitType>) (name, value) -> {
                 readBundle(ContentType.unit, name, value);
 
                 IceUnitType unit;
@@ -123,7 +130,7 @@ public class ContentTypeParsers {
 
                 currentContent = unit;
                 //TODO test this!
-                read(()->{
+                read(() -> {
                     //添加 reconstructor 类型
                     if (value.has("requirements")) {
                         JsonValue rec = value.remove("requirements");
@@ -149,7 +156,7 @@ public class ContentTypeParsers {
 
                     if (value.has("defaultController")) {
                         var sup = supply(resolve(value.getString("defaultController"), FlyingAI.class));
-                        unit.controller = u->sup.get();
+                        unit.controller = u -> sup.get();
                         value.remove("defaultController");
                     }
 
@@ -168,7 +175,9 @@ public class ContentTypeParsers {
                 });
 
                 return unit;
-            }, ContentType.weather, (TypeParser<Weather>) (name, value)->{
+            },
+
+            ContentType.weather, (TypeParser<Weather>) (name, value) -> {
                 Weather weather;
                 if (locate(ContentType.weather, name) != null) {
                     weather = locate(ContentType.weather, name);
@@ -179,11 +188,13 @@ public class ContentTypeParsers {
                     value.remove("type");
                 }
                 currentContent = weather;
-                read(()->readFields(weather, value));
+                read(() -> readFields(weather, value));
                 return weather;
-            }, ContentType.item, parser(ContentType.item, IceItem::new),
+            },
 
-            ContentType.liquid, (TypeParser<IceLiquid>) (name, value)->{
+            ContentType.item, parser(ContentType.item, IceItem::new),
+
+            ContentType.liquid, (TypeParser<IceLiquid>) (name, value) -> {
                 IceLiquid liquid;
                 if (locate(ContentType.liquid, name) != null) {
                     liquid = locate(ContentType.liquid, name);
@@ -194,9 +205,13 @@ public class ContentTypeParsers {
                     value.remove("type");
                 }
                 currentContent = liquid;
-                read(()->readFields(liquid, value));
+                read(() -> readFields(liquid, value));
                 return liquid;
-            }, ContentType.status, parser(ContentType.status, IceStatusEffect::new), ContentType.sector, (TypeParser<SectorPreset>) (name, value)->{
+            },
+
+            ContentType.status, parser(ContentType.status, IceStatusEffect::new),
+
+            ContentType.sector, (TypeParser<SectorPreset>) (name, value) -> {
                 if (value.isString()) {
                     return locate(ContentType.sector, name);
                 }
@@ -207,7 +222,7 @@ public class ContentTypeParsers {
                 SectorPreset out = new SectorPreset(name, currentMod);
 
                 currentContent = out;
-                read(()->{
+                read(() -> {
                     Planet planet = locate(ContentType.planet, value.getString("planet", "serpulo"));
 
                     if (planet == null)
@@ -223,7 +238,7 @@ public class ContentTypeParsers {
                 return out;
             });
 
-    //intermediate class for parsing
+    //用于解析的 intermediate 类
     static class UnitReq {
         public Block block;
         public ItemStack[] requirements = {};

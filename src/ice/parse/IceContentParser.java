@@ -5,11 +5,8 @@ import arc.assets.AssetDescriptor;
 import arc.files.Fi;
 import arc.func.Func;
 import arc.func.Prov;
-import arc.graphics.Color;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Interp;
-import arc.math.geom.Mat3D;
-import arc.math.geom.Rect;
 import arc.struct.ObjectMap;
 import arc.struct.ObjectSet;
 import arc.struct.Seq;
@@ -21,8 +18,10 @@ import arc.util.serialization.Jval;
 import arc.util.serialization.Jval.Jformat;
 import arc.util.serialization.Jval.JsonParseException;
 import arc.util.serialization.SerializationException;
-import ice.parse.parses.ContentTypeParsers;
 import ice.Ice;
+import ice.parse.parses.ContentTypeParsers;
+import ice.parse.parses.IceClassMap;
+import ice.parse.parses.IceJsonIO;
 import mindustry.Vars;
 import mindustry.content.Blocks;
 import mindustry.content.TechTree;
@@ -34,11 +33,11 @@ import mindustry.ctype.UnlockableContent;
 import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.game.Objectives.Objective;
 import mindustry.game.Objectives.Produce;
-import mindustry.graphics.g3d.*;
 import mindustry.io.SaveVersion;
 import mindustry.mod.Mods.LoadedMod;
-import mindustry.type.*;
-import mindustry.world.consumers.ConsumeLiquid;
+import mindustry.type.Item;
+import mindustry.type.ItemStack;
+import mindustry.type.PayloadStack;
 import mindustry.world.meta.Env;
 
 import java.lang.reflect.Constructor;
@@ -98,6 +97,9 @@ public class IceContentParser {
 
         @Override
         public <T> T readValue(Class<T> type, Class elementType, JsonValue jsonData, Class keyType) {
+            {
+                IceJsonIO.INSTANCE.apply(this);
+            }
             T t = internalRead(type, elementType, jsonData, keyType);
             /**t不等于null 不是包装器       type==null或者不是基元类型*/
             if (t != null && !Reflect.isWrapper(t.getClass()) && (type == null || !type.isPrimitive())) {
@@ -108,7 +110,6 @@ public class IceContentParser {
         }
 
         public <T> T internalRead(Class<T> type, Class elementType, JsonValue jsonData, Class keyType) {
-
             if (type != null) {
                 /**从classmap解析对象*/
                 if (classPar.containsKey(type)) {
@@ -124,7 +125,7 @@ public class IceContentParser {
                     int value = 0;
                     for (var str : jsonData) {
                         if (!str.isString())
-                            throw new SerializationException("Integer bitfield values must all be strings. Found: " + str);
+                            throw new SerializationException("整数位域值必须全部为字符串。发现： " + str);
                         String field = str.asString();
                         value |= Reflect.<Integer>get(Env.class, field);
                     }
@@ -132,11 +133,7 @@ public class IceContentParser {
                     return (T) (Integer) value;
                 }
 
-                //尝试解析 “item/amount” 语法
-                if (type == ItemStack.class && jsonData.isString() && jsonData.asString().contains("/")) {
-                    String[] split = jsonData.asString().split("/");
-                    return (T) fromJson(ItemStack.class, "{item: " + split[0] + ", amount: " + split[1] + "}");
-                }
+
                 //try to parse "payloaditem/amount" syntax
                 if (type == PayloadStack.class && jsonData.isString() && jsonData.asString().contains("/")) {
                     String[] split = jsonData.asString().split("/");
@@ -145,24 +142,10 @@ public class IceContentParser {
                     return (T) new PayloadStack(cont == null ? Blocks.router : cont, number);
                 }
 
-                //尝试解析 “liquid/amount” 语法
-                if (jsonData.isString() && jsonData.asString().contains("/")) {
-                    String[] split = jsonData.asString().split("/");
-                    if (type == LiquidStack.class) {
-                        return (T) fromJson(LiquidStack.class, "{liquid: " + split[0] + ", amount: " + split[1] + "}");
-                    } else if (type == ConsumeLiquid.class) {
-                        return (T) fromJson(ConsumeLiquid.class, "{liquid: " + split[0] + ", amount: " + split[1] + "}");
-                    }
-                }
-
-                //try to parse Rect as array
-                if (type == Rect.class && jsonData.isArray() && jsonData.size == 4) {
-                    return (T) new Rect(jsonData.get(0).asFloat(), jsonData.get(1).asFloat(), jsonData.get(2).asFloat(), jsonData.get(3).asFloat());
-                }
-
+                //解析基本类型
                 if (Content.class.isAssignableFrom(type)) {
-                    ContentType ctype = contentTypes.getThrow(type, ()->new IllegalArgumentException("No content type for class: " + type.getSimpleName()));
-                    String prefix = currentMod != null ? currentMod.name + "-" : "";
+                    ContentType ctype = contentTypes.getThrow(type, () -> new IllegalArgumentException("No content type for class: " + type.getSimpleName()));
+                    String prefix = currentMod.name + "-";
                     T one = (T) Vars.content.getByName(ctype, prefix + jsonData.asString());
                     if (one != null) return one;
                     T two = (T) Vars.content.getByName(ctype, jsonData.asString());
@@ -196,7 +179,7 @@ public class IceContentParser {
     }
 
     public static <T extends Content> ContentTypeParsers.TypeParser<T> parser(ContentType type, Func<String, T> constructor) {
-        return (name, value)->{
+        return (name, value) -> {
             T item;
             if (locate(type, name) != null) {
                 item = (T) locate(type, name);
@@ -206,7 +189,7 @@ public class IceContentParser {
                 item = constructor.get(name);
             }
             currentContent = item;
-            read(()->readFields(item, value));
+            read(() -> readFields(item, value));
             return item;
         };
     }
@@ -241,7 +224,7 @@ public class IceContentParser {
     public static void read(Runnable run) {
         Content cont = currentContent;
         LoadedMod mod = currentMod;
-        reads.add(()->{
+        reads.add(() -> {
             currentMod = mod;
             currentContent = cont;
             run.run();
@@ -333,44 +316,6 @@ public class IceContentParser {
         return null;
     }
 
-    public static GenericMesh[] parseMeshes(Planet planet, JsonValue array) {
-        var res = new GenericMesh[array.size];
-        for (int i = 0; i < array.size; i++) {
-            //yes get is O(n) but it's practically irrelevant here
-            res[i] = parseMesh(planet, array.get(i));
-        }
-        return res;
-    }
-
-    public static GenericMesh parseMesh(Planet planet, JsonValue data) {
-        if (data.isArray()) {
-            return new MultiMesh(parseMeshes(planet, data));
-        }
-
-        String tname = Strings.capitalize(data.getString("type", "NoiseMesh"));
-
-        return switch (tname) {
-            //TODO NoiseMesh is bad
-            case "NoiseMesh" ->
-                    new NoiseMesh(planet, data.getInt("seed", 0), data.getInt("divisions", 1), data.getFloat("范围", 1f), data.getInt("octaves", 1), data.getFloat("persistence", 0.5f), data.getFloat("scale", 1f), data.getFloat("mag", 0.5f), Color.valueOf(data.getString("color1", data.getString("color", "ffffff"))), Color.valueOf(data.getString("color2", data.getString("color", "ffffff"))), data.getInt("colorOct", 1), data.getFloat("colorPersistence", 0.5f), data.getFloat("colorScale", 1f), data.getFloat("colorThreshold", 0.5f));
-            case "SunMesh" -> {
-                var cvals = data.get("colors").asStringArray();
-                var colors = new Color[cvals.length];
-                for (int i = 0; i < cvals.length; i++) {
-                    colors[i] = Color.valueOf(cvals[i]);
-                }
-
-                yield new SunMesh(planet, data.getInt("divisions", 1), data.getInt("octaves", 1), data.getFloat("persistence", 0.5f), data.getFloat("scl", 1f), data.getFloat("pow", 1f), data.getFloat("mag", 0.5f), data.getFloat("colorScale", 1f), colors);
-            }
-            case "HexSkyMesh" ->
-                    new HexSkyMesh(planet, data.getInt("seed", 0), data.getFloat("speed", 0), data.getFloat("范围", 1f), data.getInt("divisions", 3), Color.valueOf(data.getString("color", "ffffff")), data.getInt("octaves", 1), data.getFloat("persistence", 0.5f), data.getFloat("scale", 1f), data.getFloat("thresh", 0.5f));
-            case "MultiMesh" -> new MultiMesh(parseMeshes(planet, data.get("meshes")));
-            case "MatMesh" ->
-                    new MatMesh(parseMesh(planet, data.get("mesh")), parserJson.readValue(Mat3D.class, data.get("mat")));
-            default -> throw new RuntimeException("Unknown mesh type: " + tname);
-        };
-    }
-
     public static PartProgress parseProgressOp(PartProgress base, String op, JsonValue data) {
         //I have to hard-code this, no easy way of getting parameter names, unfortunately
         return switch (op) {
@@ -422,11 +367,11 @@ public class IceContentParser {
     public static <T> Prov<T> supply(Class<T> type) {
         try {
             Constructor<T> cons = type.getDeclaredConstructor();
-            return ()->{
+            return () -> {
                 try {
                     return cons.newInstance();
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException(e + "构造函数不可发访问！！！");
                 }
             };
         } catch (Exception e) {
@@ -438,13 +383,11 @@ public class IceContentParser {
         return field(type, value.asString());
     }
 
-    /**
-     * Gets a field from a static class by name, throwing a descriptive exception if not found.
-     */
+    /** 按名称从静态类中获取字段，如果未找到，则引发描述性异常。 */
     public static Object field(Class<?> type, String name) {
         try {
             Object b = type.getField(name).get(null);
-            if (b == null) throw new IllegalArgumentException(type.getSimpleName() + ": not found: '" + name + "'");
+            if (b == null) throw new IllegalArgumentException(type.getSimpleName() + ": 没有找到: " + name + " 属性");
             return b;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -463,7 +406,7 @@ public class IceContentParser {
         if (object == null || object instanceof Number || object instanceof String || toBeParsed.contains(object) || object.getClass().getName().startsWith("arc."))
             return;
 
-        parserJson.getFields(object.getClass()).values().toSeq().each(field->{
+        parserJson.getFields(object.getClass()).values().toSeq().each(field -> {
             try {
                 if (field.field.getType().isPrimitive()) return;
 
@@ -531,7 +474,7 @@ public class IceContentParser {
             }
 
             //remove old node
-            TechNode lastNode = TechTree.all.find(t->t.content == unlock);
+            TechNode lastNode = TechTree.all.find(t -> t.content == unlock);
             if (lastNode != null) {
                 lastNode.remove();
             }
@@ -539,7 +482,7 @@ public class IceContentParser {
             TechNode node = new TechNode(null, unlock, customRequirements == null ? ItemStack.empty : customRequirements);
             LoadedMod cur = currentMod;
 
-            postreads.add(()->{
+            postreads.add(() -> {
                 currentContent = unlock;
                 currentMod = cur;
 
@@ -549,7 +492,7 @@ public class IceContentParser {
                 }
 
                 //all items have a produce requirement unless already specified
-                if (object instanceof Item i && !node.objectives.contains(o->o instanceof Produce p && p.content == i)) {
+                if (object instanceof Item i && !node.objectives.contains(o -> o instanceof Produce p && p.content == i)) {
                     node.objectives.add(new Produce(i));
                 }
 
@@ -573,7 +516,7 @@ public class IceContentParser {
                 } else {
                     if (researchName != null) {
                         //find parent node.
-                        TechNode parent = TechTree.all.find(t->t.content.name.equals(researchName) || t.content.name.equals(currentMod.name + "-" + researchName) || t.content.name.equals(SaveVersion.mapFallback(researchName)));
+                        TechNode parent = TechTree.all.find(t -> t.content.name.equals(researchName) || t.content.name.equals(currentMod.name + "-" + researchName) || t.content.name.equals(SaveVersion.mapFallback(researchName)));
 
                         if (parent == null) {
                             Log.warn("Content '" + researchName + "' isn't in the tech tree, but '" + unlock.name + "' requires it to be researched.");
@@ -593,16 +536,8 @@ public class IceContentParser {
         }
     }
 
-    /**
-     * Tries to resolve a class from the class type map.
-     */
-    public static <T> Class<T> resolve(String base) {
-        return resolve(base, null);
-    }
 
-    /**
-     * 尝试从类类型 map 解析类。
-     */
+    /** 尝试从类类型 map 解析类。 */
     public static <T> Class<T> resolve(String base, Class<T> def) {
         //未指定基类
         if ((base == null || base.isEmpty()) && def != null) return def;

@@ -63,11 +63,7 @@ object MenusDialog : Table() {
                         background.draw(x, y, width, height)
                     }
                 }
-                cont = value/* it1.table(back) { it2 ->
-                     it2.add("111111111111111111").row()
-                     cont = it2
-                 }.grow().margin(10f)*/
-
+                cont = value
                 it1.add(value).grow().margin(backMargin)
 
                 it1.table(back) { it2 ->

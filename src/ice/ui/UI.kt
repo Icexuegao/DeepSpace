@@ -12,10 +12,10 @@ import mindustry.gen.Icon
 import mindustry.type.Planet
 import mindustry.ui.Fonts
 import mindustry.ui.dialogs.PlanetDialog
-import mindustry.world.meta.BuildVisibility
 
 
 object UI {
+
     fun init() {
         Ice.ice.meta.displayName = "Deep Space"
         Ice.ice.meta.author = Ice.author.random()
@@ -26,11 +26,6 @@ object UI {
         sectorID()
         DeBugDialog.show()
         Vars.ui.menufrag.addButton("[#${Colors.rand}]DeepSpace[]", Icon.menu, MenusDialog::show)
-        if (SettingValue.getDebugMode()) {
-            Vars.content.blocks().forEach {
-                if (it.minfo.mod == Ice.ice) it.buildVisibility = BuildVisibility.shown
-            }
-        }
     }
 
     private fun sectorID() {
@@ -41,9 +36,7 @@ object UI {
                 if (SettingValue.getPlanetSectorId()) {
                     for (sec in planet.sectors) {
                         planets.drawPlane(sec) {
-                            Fonts.outline.draw(
-                                sec.id.toString(), 0f, 0f, Colors.b4, fontScl, true, 1
-                            )
+                            Fonts.outline.draw(sec.id.toString(), 0f, 0f, Colors.b4, fontScl, true, 1)
                         }
                     }
                 }

@@ -1,4 +1,5 @@
 attribute = "aa"
 type = "AttributeCrafter"
 [consumes]
-items = ["sand/1"]
+liquids = ["water/1"]
+items = ["copper/2"]

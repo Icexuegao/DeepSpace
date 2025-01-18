@@ -43,8 +43,8 @@ object AchievementDialog {
         医学博士("外星医生!!!", Colors.r1, true),
         血田("别担心,洗礼很快就会结束", Colors.r1, true),
         传教者("异端末路", Colors.y1, true),
-        空间风暴I("你感觉到一阵嗡嗡,声音越来越大,你的头开始一抽一跳的痛,有东西要来了", Colors.y1, true),
-        空间风暴II("现实正在破碎!", Colors.y1, true),
-        空间风暴III("时空让人感觉很沉重,仿佛这一切还没有结束", Colors.y1, true)
+        空间风暴I("未知之处涌现的风暴", Colors.y1, true),
+        空间风暴II("将秩序囚于混沌的牢笼", Colors.y1, true),
+        空间风暴III("长梯下破碎的现实与你", Colors.y1, true)
     }
 }

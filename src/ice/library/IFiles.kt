@@ -1,7 +1,9 @@
 package ice.library
 
+import arc.Core
 import arc.files.Fi
 import arc.graphics.Texture
+import arc.graphics.g2d.TextureAtlas.AtlasRegion
 import arc.graphics.g2d.TextureRegion
 import arc.util.Log
 import ice.Ice
@@ -47,7 +49,12 @@ object IFiles {
     }
 
     fun findPng(name: String): TextureRegion {
-        return TextureRegion(Texture(find("$name.png")))
+        val textureRegion = TextureRegion(Texture(find("$name.png")))
+        val are = AtlasRegion(textureRegion)
+        return are
+    }
+    fun load(name: String): TextureRegion {
+        return Core.atlas.find(name)
     }
 }
 

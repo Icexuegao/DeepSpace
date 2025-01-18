@@ -20,7 +20,6 @@ public class TextFx {
         UnitType type = e.data();
 
         color(type.engineColor == null ? e.color : type.engineColor);
-
         if (type.engineLayer > 0) Draw.z(type.engineLayer);
         else Draw.z((type.lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) - 0.001f);
         Draw.alpha(e.fin());

@@ -1,6 +1,6 @@
 package ice.world.consumers;
 
-import ice.world.blocks.factoryBlocks.multipleCrafter.MultipleCrafter;
+import ice.world.blocks.crafting.multipleCrafter.MultipleCrafter;
 import mindustry.gen.Building;
 import mindustry.world.Block;
 import mindustry.world.consumers.ConsumePower;

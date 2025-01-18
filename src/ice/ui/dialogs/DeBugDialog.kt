@@ -8,6 +8,7 @@ import arc.scene.ui.Image
 import arc.scene.ui.TextField
 import arc.scene.ui.layout.Table
 import arc.util.Log
+import ice.Ice
 import ice.library.tool.StringTool
 import ice.type.Incident
 import ice.ui.TableExtend
@@ -30,7 +31,7 @@ import mindustry.ui.Styles
 import mindustry.world.meta.BuildVisibility
 
 object DeBugDialog {
-    private val debug = Table()
+    private var debug = Table()
     private lateinit var cont: Table
     private var index = 0
     private val mar = 4f
@@ -43,7 +44,6 @@ object DeBugDialog {
     fun show() {
         debug.visible(SettingValue::getDebugMode)
         debug.setSize(530f, windowWidth)
-        debug
         Vars.ui.hudGroup.addChild(debug)
         buildPane(debug)
         buildWindow(debug)
@@ -82,11 +82,12 @@ object DeBugDialog {
             button("解锁科技", Icon.treeSmall, DeBugDialog::unlock)
             button("锁定科技", Icon.treeSmall, DeBugDialog::clearUnlock)
             button("物品", Icon.pasteSmall, DeBugDialog::items)
+            button("重置ui", Icon.homeSmall, DeBugDialog::home)
             button("传教", Icon.bookOpenSmall) {
                 Incident.announce("[red]<<传教>> 你的信仰疑似有点动摇[]", 9f)
             }
             button(("清除日志"), Icon.fileTextSmall, Vars.ui.consolefrag::clearMessages)
-        }.width(130f)
+        }.width(130f).height(211f)
         table.add(pane).expandY().top()
     }
 
@@ -183,6 +184,11 @@ object DeBugDialog {
 
     private fun allBlock() {
         clean()
+        if (SettingValue.getDebugMode()) {
+            Vars.content.blocks().forEach {
+                if (it.minfo.mod == Ice.ice) it.buildVisibility = BuildVisibility.shown
+            }
+        }
         cont.tableG {
             TableExtend.addLinet(it, "解禁方块", Color.white)
             it.tableG {
@@ -212,5 +218,14 @@ object DeBugDialog {
             }
         }
         index = 0
+    }
+
+    private fun home(){
+        Vars.ui.hudGroup.removeChild(debug)
+        debug=Table()
+        checklast=null
+        check=null
+        index=0
+        show()
     }
 }

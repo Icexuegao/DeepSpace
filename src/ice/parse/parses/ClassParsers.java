@@ -143,7 +143,7 @@ public class ClassParsers {
         put(DrawBlock.class, (type, data)->{
             if (data.isString()) {
                 //try to instantiate
-                return make(resolve(data.asString()));
+                return make(resolve(data.asString(),null));
             }
             //array is shorthand for DrawMulti
             if (data.isArray()) {
@@ -276,7 +276,7 @@ public class ClassParsers {
             return obj;
         });
         put(Ability.class, (type, data)->{
-            Class<? extends Ability> oc = resolve(data.getString("type", ""));
+            Class<? extends Ability> oc = resolve(data.getString("type", ""),null);
             data.remove("type");
             Ability obj = make(oc);
             readFields(obj, data);
