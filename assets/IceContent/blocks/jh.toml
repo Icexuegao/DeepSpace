@@ -1,5 +1,0 @@
-attribute = "aa"
-type = "AttributeCrafter"
-[consumes]
-liquids = ["water/1"]
-items = ["copper/2"]

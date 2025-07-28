@@ -95,7 +95,7 @@ class BHPathfind()  {
             Draw.color(Color.red)
             Draw.alpha(0.4f)
             if (drawto) {
-                path.each { p: Point2 ->
+                path.forEach { p: Point2 ->
                     Fill.crect(
                         p.x * Vars.tilesize - Vars.tilesize.toFloat() / 2,
                         p.y * Vars.tilesize - Vars.tilesize.toFloat() / 2,

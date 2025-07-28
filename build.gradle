@@ -1,13 +1,9 @@
-import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 
 buildscript {
     ext {
         proUser = System.getProperty("user.name")
         sdkRoot = System.getenv("ANDROID_HOME")
-        kotlinVersion = "1.9.23"
     }
     repositories {
         mavenLocal()
@@ -20,38 +16,46 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
 
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-    }
 }
 plugins {
     id("java")
-    id "org.jetbrains.kotlin.jvm" version "1.9.23"
+    id 'org.jetbrains.kotlin.jvm' version '2.2.0'
 }
 repositories {
     mavenCentral()
     mavenLocal()
-    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven{ url 'https://maven.aliyun.com/nexus/content/groups/public/'}
     maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
     maven { url 'https://repo.huaweicloud.com/repository/maven/' }
-    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url "https://maven.aliyun.com/repository/public" }
     maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
+    //implementation("com.github.Anuken.Arc:arc-core:v146")
+    // implementation files("lib/backend.jar")
+    // implementation "com.github.EB-wilson.UniverseCore:core:2.2.0"
+    //compileOnly files("lib/UniverseCore-v2.2.0.jar")
+   // compileOnly 'com.github.Anuken.Mindustry:core:v147.1'
+  //  compileOnly "com.github.Anuken.Arc:arc-core:v149"
+
+
+   // compileOnly files("lib/bmx.jar")
+  //  implementation files("lib/pinyin4j-2.5.0.jar")
     implementation 'org.tomlj:tomlj:1.1.1'
-    implementation "org.jbox2d:jbox2d-library:2.2.1.1"
-    compileOnly "com.github.Tinylake:MindustryX:v146.004"
-    compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+   // compileOnly "com.github.Tinylake:MindustryX:core:v2025.06.X10"
+    compileOnly files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar")
+    compileOnly "com.github.Anuken.Arc:flabel:v149"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    // compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 }
 
 sourceSets {
     main {
         java.srcDirs = ['src']
         //noinspection GrUnresolvedAccess
-        kotlin.srcDirs = ['src']
+//        kotlin.srcDirs = ['src']
         resources.srcDir('assets')
     }
 }
@@ -62,7 +66,7 @@ jar {
     manifest.attributes('Main-Class': 'ice.Ice')
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName = "${project.name}Desktop.jar"
-    from files("README.md", "LICENSE")
+    from files("README.md", "LICENSE","mod.json")
 
     from(sourceSets.main.resources.srcDirs)
     from {
@@ -84,19 +88,18 @@ tasks.register("myCopyJar", Copy) {
 tasks.register("text") {
 
 }
+tasks.register('runWithJavaExec', JavaExec) {
+    group = "kj"
+    classpath = sourceSets.main.runtimeClasspath
 
+    mainClass = "ice.MainKt"
+    // main("ice.Main")
+    args("我喜欢你", "你喜欢我")
+}
 
 tasks.withType(JavaCompile).configureEach {
-    targetCompatibility = 17//目标的兼容性
-    sourceCompatibility = JavaVersion.VERSION_17
+    //目标的兼容性
     options.encoding = "UTF-8"
-}
-tasks.withType(KotlinCompile).configureEach {
-    kotlinOptions.noJdk = false
-    kotlinOptions.jvmTarget = 17
-}
-tasks.withType(KotlinJvmCompile).configureEach {
-    jvmTargetValidationMode = JvmTargetValidationMode.ERROR
 }
 
 tasks.register('jarAndroid') {
@@ -112,7 +115,7 @@ tasks.register('jarAndroid') {
         //collect dependencies needed for desugaring
         def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
 
-        //dex and desugar files - this requires d8 in your PATH
+        //dex 和 desugar 文件 - 这需要 PATH 中的 d8
         "$sdkRoot/build-tools/35.0.0/d8.bat $dependencies --min-api 26 --output ${project.name}Android.jar ${project.name}Desktop.jar"
                 .execute(null, new File(buildLibDir)).waitForProcessOutput(System.out, System.err)
     }
@@ -134,9 +137,7 @@ tasks.register("myCopy", Copy) {
     into {
         "C:/Users/$proUser/AppData/Roaming/Mindustry/mods"
     }
-    doLast {
-        delete {
-            delete "C:/Users/$proUser/AppData/Roaming/Mindustry/mods/${project.name}.jar"
-        }
-    }
+}
+kotlin {
+    jvmToolchain(17)
 }
