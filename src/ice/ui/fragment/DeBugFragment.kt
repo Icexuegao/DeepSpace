@@ -12,16 +12,17 @@ import arc.scene.ui.Image
 import arc.scene.ui.TextField
 import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
-import arc.struct.Seq
 import ice.DFW
 import ice.Ice
+import ice.library.Incident
 import ice.library.pathfindAlgorithm.PFPathFind
 import ice.library.scene.listener.DragInputListener
-import ice.library.scene.texs.Colors
-import ice.library.scene.texs.Texs
-import ice.library.type.Incident
+import ice.library.scene.tex.Colors
+import ice.library.scene.tex.IStyles
 import ice.library.util.isNumericWithSign
 import ice.ui.*
+import ice.ui.dialog.AchievementDialog
+import ice.ui.dialog.MenusDialog
 import ice.vars.SettingValue
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
@@ -56,7 +57,7 @@ object DeBugFragment {
     private fun buildWindow(table: Table) {
         var windowVisibility = false
         var contvisibe = false
-        table.table(Texs.background41) { ta ->
+        table.table(IStyles.background41) { ta ->
             ta.setColor(Colors.b4)
             ta.icePane {
                 cont = it
@@ -83,12 +84,11 @@ object DeBugFragment {
     private fun buildPane(table: Table) {
         val pane = Table()
         pane.setPositions(500f, 100f).setSize(130f, 250f)
-        pane.add(Image(Tex.whiteui).addListeners(DragInputListener(table))).color(Colors.b4).height(40f).growX()
-            .row()
+        pane.add(Image(Tex.whiteui).addListeners(DragInputListener(table))).color(Colors.b4).height(40f).growX().row()
         pane.icePane {
             fun button(name: String, icon: Drawable, runnable: Runnable = Runnable {}) {
                 it.image(Tex.underlineWhite, Colors.b3).height(3f).growX().row()
-                it.imageButton(name, icon, Texs.txtCleari, 20f) {
+                it.imageButton(name, icon, IStyles.txtCleari, 20f) {
                     check = when (check) {
                         name -> null
                         null -> name
@@ -110,21 +110,7 @@ object DeBugFragment {
             button("剧情", Icon.bookOpenSmall) {
                 ScenarioFragment.flun()
             }
-            button("人称", Icon.bookOpenSmall) {
-                ConversationFragment.juqing = Seq<String>().apply {
-                    """
-        我喜欢你
-        你喜欢我
-        444444444444444444
-        55555555555555555555
-        66666666666666666666
-        我不喜欢你
-        你不喜欢我
-    """.trimIndent() .split("\n").forEach {
-                        add(it)
-                    }
-                }.iterator()
-            }
+
             button("血肉文本", Icon.fileTextSmall) {
                 FleshFragment.addText()
             }
@@ -134,19 +120,26 @@ object DeBugFragment {
                 Vars.state.rules.waves = false
                 Vars.state.gameOver = true
             }
-            button("df", Icon.up) {
-                VoiceoverFragment.flun()
+
+            button("menu", Icon.up) {
+                MenusDialog.show()
             }
-            button("df", Icon.units){
+
+            button("ac", Icon.up) {
+                val random = AchievementDialog.achievements.random()
+                random.unlock()
+                random.clearUnlock()
+            }
+            button("df", Icon.units) {
                 val dfw = DFW()
-                dfw.set(8*50f,8*50f)
+                dfw.set(8 * 50f, 8 * 50f)
                 dfw.add()
             }
 
 
-            button("df", Icon.units){
+            button("df", Icon.units) {
                 val pfPathFind = PFPathFind(Vars.world.tile(1, 1), Vars.world.tile(100, 100))
-                Events.run(mindustry.game.EventType.Trigger.draw){
+                Events.run(mindustry.game.EventType.Trigger.draw) {
                     pfPathFind.draw()
                 }
                 table.update {
@@ -155,22 +148,20 @@ object DeBugFragment {
                     }
                 }
             }
-            button("Df", Icon.bookOpenSmall){
-            }
         }.width(130f).height(211f)
         table.add(pane).expandY().top()
     }
 
     private fun addbutton(t: Table, content: UnlockableContent, run: Runnable) {
         index++
-        t.button(TextureRegionDrawable(content.uiIcon), Texs.button, 24f, run).size(40f).pad(2f)
+        t.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 24f, run).size(40f).pad(2f)
             .tooltip(content.localizedName)
         if (index % 8 == 0) t.row()
     }
 
     private fun gmode() {
         cont.iTableG {
-            addLinet(it, "游戏模式", Color.white)
+            it.addLine( "游戏模式", Color.white)
             it.table { ta ->
                 Gamemode.entries.forEach { m ->
                     ta.button(m.name, Styles.flatBordert) {
@@ -198,15 +189,14 @@ object DeBugFragment {
         var size = ""
         var add = true
         cont.iTableG {
-            addLinet(it, "物品", Color.white)
+            it.addLine( "物品", Color.white)
             it.iTableG { ita ->
                 Vars.content.items().forEach { item ->
                     addbutton(ita, item) {
                         if (add) {
                             Vars.player.core().items.add(item, if (size.isNumericWithSign()) size.toInt() else 1000)
                         } else {
-                            Vars.player.core().items.remove(item,
-                                if (size.isNumericWithSign()) size.toInt() else 1000)
+                            Vars.player.core().items.remove(item, if (size.isNumericWithSign()) size.toInt() else 1000)
                         }
                     }
                 }
@@ -253,7 +243,7 @@ object DeBugFragment {
                     }
                 }.size(160f, 45f).row()
             }.row()
-            addLinet(ta, "科技", Color.white)
+            ta.addLine( "科技", Color.white)
             ta.iTableG {
                 Vars.content.each { cotent ->
                     if (cotent is UnlockableContent) {
@@ -276,7 +266,7 @@ object DeBugFragment {
             if (it.minfo.mod == Ice.ice) it.buildVisibility = BuildVisibility.shown
         }
         cont.iTableG {
-            addLinet(it, "解禁方块", Color.white)
+            it.addLine("解禁方块", Color.white)
             it.iTableG {
                 Vars.content.blocks().forEach { block ->
                     if (block is UnlockableContent) {

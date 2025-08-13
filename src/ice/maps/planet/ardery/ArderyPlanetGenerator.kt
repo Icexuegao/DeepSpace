@@ -13,7 +13,7 @@ import arc.util.Structs
 import arc.util.Tmp
 import arc.util.noise.Ridged
 import arc.util.noise.Simplex
-import ice.content.IceBlocks
+import ice.content.IBlocks
 import mindustry.Vars
 import mindustry.ai.Astar
 import mindustry.ai.BaseRegistry.BasePart
@@ -54,13 +54,13 @@ class ArderyPlanetGenerator : PlanetGenerator() {
     var genLakes: Boolean = false
     var dec: ObjectMap<Block, Block> = ObjectMap.of(
         Blocks.sporeMoss, Blocks.sporeCluster,
-        IceBlocks.红土, Blocks.sporeCluster,
+        IBlocks.红土, Blocks.sporeCluster,
         Blocks.taintedWater, Blocks.water,
         Blocks.darksandTaintedWater, Blocks.darksandWater
     )
     var tars: ObjectMap<Block, Block> = ObjectMap.of(
         Blocks.sporeMoss, Blocks.shale,
-        IceBlocks.红土, Blocks.shale
+        IBlocks.红土, Blocks.shale
     )
     var water: Float = 2f / arr[0].size
     fun rawHeight(position: Vec3): Float {
@@ -458,7 +458,7 @@ class ArderyPlanetGenerator : PlanetGenerator() {
             //random moss
             if (floor === Blocks.sporeMoss) {
                 if (abs((0.5f - noise((x - 90).toFloat(), y.toFloat(), 4.0, 0.8, 65.0)).toDouble()) > 0.02) {
-                    floor = IceBlocks.红土
+                    floor = IBlocks.红土
                 }
             }
             //tar

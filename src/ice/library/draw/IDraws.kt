@@ -16,13 +16,11 @@ object IDraws {
     fun arc(x: Float, y: Float, radius: Float, scaleFactor: Float, innerAnge: Float, rotate: Float) {
         var innerAngel = innerAnge
         val sides = 40 + (radius * scaleFactor).toInt()
-
         val step = 360f / sides
         val sing = if (innerAngel > 0) 1 else -1
         innerAngel = min(abs(innerAngel), 360.0f)
 
         Lines.beginLine()
-
         var overed = 0f
         var ang = 0f
         while (ang <= innerAngel - step) {
@@ -43,7 +41,17 @@ object IDraws {
         }
         Lines.endLine()
     }
-    fun light(x: Float, y: Float, sides: Int, radius: Float, rotation: Float = 0f, center: Color, edge: Color,func: Prov<Float>) {
+
+    fun light(
+        x: Float,
+        y: Float,
+        sides: Int,
+        radius: Float,
+        rotation: Float = 0f,
+        center: Color,
+        edge: Color,
+        func: Prov<Float>
+    ) {
         var sides = sides
         sides = Mathf.ceil(sides / 2f) * 2
         val space = 360 / sides
@@ -58,19 +66,16 @@ object IDraws {
             }
             val edgef = run {
                 val get = func.get()
-
                 val a = abs(180 - space * i) / 180f
-                edge.a( Interp.pow3In.apply(a)*get) .toFloatBits()
-
+                edge.a(Interp.pow3In.apply(a) * get).toFloatBits()
             }
             Fill.quad(x, y, centerf, x + px, y + py, edgef, x + px2, y + py2, edgef, x + px2, y + py2, edgef)
             if (i == sides - 1) {
-                val px = Angles.trnsx( rotation, radius)
-                val py = Angles.trnsy( rotation, radius)
+                val px = Angles.trnsx(rotation, radius)
+                val py = Angles.trnsy(rotation, radius)
                 Fill.quad(x, y, centerf, x + px2, y + py2, edgef, x + px, y + py, edgef, x + px, y + py, edgef)
             }
             i += 1
-
         }
     }
 }

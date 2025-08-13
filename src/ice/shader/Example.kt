@@ -4,7 +4,7 @@ import arc.graphics.Mesh
 import arc.graphics.VertexAttribute
 import arc.graphics.g2d.Draw
 import arc.graphics.gl.Shader
-import ice.library.scene.texs.Texs
+import ice.library.scene.tex.IStyles
 
 class Example {
     val shader = Shader(
@@ -49,7 +49,7 @@ void main() {
 
     fun draw() {
         Draw.shader(shader)
-        Draw.rect(Texs.time,200f,200f)
+        Draw.rect(IStyles.time,200f,200f)
         Draw.reset()
      /*   mesh.setVertices(
             floatArrayOf(

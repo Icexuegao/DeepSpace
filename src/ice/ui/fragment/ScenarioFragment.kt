@@ -12,8 +12,8 @@ import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
 import arc.util.Align
 import arc.util.Log
-import ice.library.scene.texs.Characters
-import ice.library.scene.texs.Texs
+import ice.library.scene.tex.Characters
+import ice.library.scene.tex.IStyles
 import mindustry.Vars
 import mindustry.gen.Sounds
 
@@ -56,7 +56,7 @@ object ScenarioFragment {
         group.addChild(image)
 
         play = true
-        val table = Table(Texs.background23)
+        val table = Table(IStyles.background23)
         group.addChild(table)
         table.margin(10f).marginLeft(25f).add(next.first).width(if (Vars.mobile) 270f else 400f).left().labelAlign(Align.left)
             .wrap()

@@ -1,6 +1,8 @@
 package ice.ui.dialog
 
+import arc.Core
 import arc.flabel.FLabel
+import ice.library.scene.tex.IStyles
 import ice.music.IceMusics
 import ice.ui.*
 import ice.vars.SettingValue
@@ -11,28 +13,32 @@ object SettingDialog {
     fun show() {
         cont.pane(Styles.noBarPane) { it ->
             it.addLine("音乐")
-            addBar(it) { IceMusics.title.position / 168f }.padTop(10f).row()
-            addCheckBox(it, "主菜单音乐", SettingValue::menuMusic) { box ->
+            it.addProgressBar(IStyles.pa1) { IceMusics.title.position / 168f }.padTop(10f).row()
+            it.addCheckBox("主菜单音乐", SettingValue::menuMusic) { box ->
                 SettingValue.menuMusic = box.isChecked
             }.row()
-            addIceSlider(it, "主菜单音乐音量", 0f, 10f, 0.1f, SettingValue.menuMusicVolume) {
+            it.addIceSlider("主菜单音乐音量", 0f, 10f, 0.1f, SettingValue.menuMusicVolume) {
                 SettingValue.menuMusicVolume = it
             }.row()
 
             it.addLine("游戏")
-            addCheckBox(it, "显示星球区块id", SettingValue::planetSectorId) {
+            it.addCheckBox("显示星球区块id", SettingValue::planetSectorId) {
                 SettingValue.planetSectorId = it.isChecked
             }.row()
 
-            addCheckBox(it, "调试", SettingValue::debugMode) {
+            it.addCheckBox("调试", SettingValue::debugMode) {
                 SettingValue.debugMode = it.isChecked
             }.row()
-            addIceSlider(it, "视野最大缩放", 0f, 40f, 0.1f, SettingValue.maxZoom) {
+
+            it.addIceSlider("UI比例", 25f, 300f, 0.1f, Core.settings.getInt("uiscale", 100).toFloat()) {
+                Core.settings.put("uiscale", it.toInt())
+            }.row()
+            it.addIceSlider("视野最大缩放", 0f, 40f, 0.1f, SettingValue.maxZoom) {
                 SettingValue.maxZoom = it
-            }.tooltip("数值越大,放大能看到的越少").row()
-            addIceSlider(it, "视野最小缩放", 0.1f, 1.5f, 0.1f, SettingValue.minZoom) {
+            }.itooltip("数值越大,放大能看到的越少").row()
+            it.addIceSlider("视野最小缩放", 0.1f, 1.5f, 0.1f, SettingValue.minZoom) {
                 SettingValue.minZoom = it
-            }.tooltip("数值越小,缩小能看到的越多").row()
+            }.itooltip("数值越小,缩小能看到的越多").row()
             it.addLine("模式")
             val fLabel = FLabel(SettingValue.difficulty.bun).also { it.setColor(SettingValue.difficulty.color) }
             it.table {
@@ -40,7 +46,7 @@ object SettingDialog {
             }.growX().pad(5f).row()
             it.table { it2 ->
                 SettingValue.ModeDifficulty.entries.forEach { mod ->
-                    addCheckBox(it2, mod.na, mod.color, { SettingValue.difficulty == mod }) {
+                    it2.addCheckBox(mod.na, mod.color, { SettingValue.difficulty == mod }) {
                         SettingValue.difficulty = mod
                         fLabel.restartR(mod.bun).setColor(mod.color)
                     }

@@ -4,17 +4,18 @@ import arc.Core
 import arc.Events
 import arc.Graphics.Cursor.SystemCursor
 import arc.graphics.g2d.Draw
+import arc.util.OS
 import ice.Ice
 import ice.library.IFiles
 import ice.library.IFiles.newCursor
-import ice.library.scene.texs.Colors
+import ice.library.scene.tex.Colors
 import ice.library.util.accessField
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.dialog.MenusDialog
+import ice.ui.fragment.ConversationFragment
 import ice.ui.fragment.DeBugFragment
 import ice.ui.fragment.FleshFragment
 import ice.ui.fragment.ScenarioFragment
-import ice.ui.fragment.VoiceoverFragment
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.gen.Icon
@@ -25,7 +26,7 @@ object UI {
     val cgwidth = Core.graphics.width.toFloat()
     val cgheight = Core.graphics.height.toFloat()
     var MenuFragment.renderer: MenuRenderer by accessField("renderer")
-    private val menuRender = object : MenuRenderer() {
+    var menuRender = object : MenuRenderer() {
         val spacea = IFiles.findIcePng("spacea")
         override fun render() {
             Draw.color()
@@ -45,13 +46,12 @@ object UI {
         FleshFragment.build(Vars.ui.hudGroup)
         ScenarioFragment.build(Vars.ui.hudGroup)
         DeBugFragment.build(Vars.ui.hudGroup)
-      //  BossHealthFragment.build(Vars.ui.hudGroup)
-        VoiceoverFragment.build(Vars.ui.hudGroup)
-        //  ConversationFragment.build(Vars.ui.hudGroup)
-        Ice.ice.meta.author = "[#${Colors.b4}]alon[]"
+        //  BossHealthFragment.build(Vars.ui.hudGroup)
+        ConversationFragment.build(Vars.ui.hudGroup)
+        Ice.ice.meta.author = "[#${Colors.b4}]Alon[]"
         Ice.ice.meta.displayName = "[#${Colors.b4}]Deep Space[]"
 
-        if (!Vars.mobile) {
+        if (OS.isWindows) {
             loadSystemCursors()
         }
         Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]DeepSpace[]", Icon.menu, MenusDialog::show)

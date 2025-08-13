@@ -11,11 +11,10 @@ import ice.parse.ContentParser.locate
 import ice.parse.ContentParser.read
 import ice.parse.ContentParser.readFields
 import ice.parse.JTContents.currentMod
-import ice.parse.parses.ClassTypeParsers.TypeParser
-import ice.library.type.baseContent.item.IceItem
-import ice.library.type.baseContent.liquid.IceLiquid
-import ice.library.type.baseContent.status.IceStatusEffect
-import ice.library.type.baseContent.unit.type.IceUnitType
+import ice.library.baseContent.item.IceItem
+import ice.library.baseContent.liquid.IceLiquid
+import ice.library.baseContent.status.IceStatusEffect
+import ice.library.baseContent.unit.type.IceUnitType
 import mindustry.Vars
 import mindustry.ai.types.FlyingAI
 import mindustry.ctype.Content

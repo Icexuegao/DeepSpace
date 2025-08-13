@@ -11,9 +11,9 @@ import arc.struct.OrderedMap
 import arc.struct.Seq
 import arc.util.Scaling
 import ice.library.scene.element.IceDialog
-import ice.library.scene.texs.Colors
-import ice.library.scene.texs.Texs
-import ice.library.type.baseContent.BaseContentSeq
+import ice.library.scene.tex.Colors
+import ice.library.scene.tex.IStyles
+import ice.library.baseContent.BaseContentSeq
 import ice.ui.*
 import mindustry.ctype.UnlockableContent
 import mindustry.type.Item
@@ -30,7 +30,7 @@ object DataDialog {
     fun show() {
         cont.iTableGX { ta ->
             Button.entries.forEach {
-                val textButton = TextButton(it.name, Texs.button1)
+                val textButton = TextButton(it.name, IStyles.button1)
                 textButton.changed {
                     cContents = it
                 }
@@ -40,32 +40,32 @@ object DataDialog {
                 ta.add(textButton).pad(1f).grow()
             }
         }.height(60f).row()
-        cont.add(Image(Texs.whiteui)).color(Colors.b1).height(3f).growX().row()
+        cont.add(Image(IStyles.whiteui)).color(Colors.b1).height(3f).growX().row()
         cont.iTableG { ta ->
             ta.iTableGY {
                 it.iTableGX { search ->
-                    search.image(Texs.search).size(33f).padRight(8f)
+                    search.image(IStyles.search).size(33f).padRight(8f)
                     search.field("") { s ->
                         searchField = s
                         flun()
                     }.width(300f)
-                }.height(60f)
-                val button = Button(Texs.button).apply {
-                    add("?")
+                    val button = Button(IStyles.button).apply {
+                        add("?")
 
-                    changed {
-                        IceDialog("介绍").apply {
-                            cont.add("""
+                        changed {
+                            IceDialog("介绍").apply {
+                                cont.add($$"""
                                 默认搜索name和localizedName
                                 加[#]搜索简介
                                 加[$]搜索吐槽
-                                例如: #矿石 ${'$'}恶心
+                                例如: #矿石 $恶心
                             """.trimIndent()).color(Colors.b4)
-                            addCloseButton()
-                        }.show()
+                                addCloseButton()
+                            }.show()
+                        }
                     }
-                }
-                it.add(button).size(40f).padRight(8f).row()
+                    search.add(button).size(40f).pad(8f)
+                }.height(60f).row()
                 it.iPaneG { p ->
                     p.top()
                     var tmp = cContents
@@ -96,9 +96,9 @@ object DataDialog {
                             }
                             return@select true
                         }.forEach { content ->
-                            p.button(TextureRegionDrawable(content.uiIcon), Texs.button, 40f) {
+                            p.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
                                 cContent = content
-                            }.size(60f).pad(2f).margin(5f).tooltip(content.localizedName)
+                            }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
                         }
                     }
                     flun()
@@ -111,12 +111,12 @@ object DataDialog {
                 }
             }.width(400f)
 
-            ta.add(Image(Texs.whiteui)).color(Colors.b1).width(3f).growY()
+            ta.add(Image(IStyles.whiteui)).color(Colors.b1).width(3f).growY()
             ta.iPaneG { p ->
                 var tmp = cContent
                 val r = {
                     p.clear()
-                    val background31 = Texs.background31
+                    val background31 = IStyles.background31
                     p.iTableGX {
                         it.iTableGY(background31) { it1 ->
                             val color = unlockableContentColor(cContent)

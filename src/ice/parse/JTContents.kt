@@ -1,26 +1,17 @@
 package ice.parse
 
 import arc.files.Fi
-import arc.struct.Seq
-import arc.util.Log
-import ice.library.IFiles
-import ice.parse.ContentParser.finishParsing
-import ice.parse.ContentParser.markError
-import ice.parse.ContentParser.parse
 import mindustry.ctype.ContentType
-import mindustry.mod.Mods.LoadedMod
-import mindustry.type.ErrorContent
-import org.tomlj.Toml
-
+import mindustry.mod.Mods
 
 object JTContents {
     private class LoadRun(var type: ContentType, var file: Fi)
 
-    lateinit var currentMod: LoadedMod
+    lateinit var currentMod: Mods.LoadedMod
 
-    fun load(fileName: String, mod: LoadedMod) {
+    fun load(fileName: String, mod: Mods.LoadedMod) {
         currentMod = mod
-        val runs = Seq<LoadRun>()
+       /* val runs = Seq<LoadRun>()
         val contentRoot = IFiles.findDirectory(fileName) ?: return
         for (type in ContentType.all) {
             val folder = contentRoot.child("${type.name}s") //units,items....
@@ -45,5 +36,5 @@ object JTContents {
             }
         }
         finishParsing()
-    }
-}
+    }*/
+}}

@@ -22,11 +22,11 @@ import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Align
 import arc.util.pooling.Pools
-import ice.library.scene.texs.Colors
-import ice.library.scene.texs.Texs
-import ice.library.type.meta.stat.IceStats
+import ice.library.scene.tex.Colors
+import ice.library.scene.tex.IStyles
 import mindustry.gen.Sounds
 import mindustry.ui.Fonts
+import kotlin.math.roundToInt
 
 class IceDialog(
     title: String = ""
@@ -113,7 +113,6 @@ class IceDialog(
         titleTable.image(mindustry.gen.Tex.whiteui, Colors.b4).growX().height(3f).pad(4f)
 
         hidden { Sounds.back.play() }
-        shown {}
     }
 
     fun setStyle(style: DialogStyle) {
@@ -190,11 +189,12 @@ class IceDialog(
         return hit
     }
 
-    /** Centers the dialog in the scene.  */
+    /**使对话框在场景中居中。  */
     fun centerWindow() {
-        setPosition(Math.round(((Core.scene.width - Core.scene.marginLeft - Core.scene.marginRight) - getWidth()) / 2)
-            .toFloat(),
-            Math.round(((Core.scene.height - Core.scene.marginTop - Core.scene.marginBottom) - getHeight()) / 2)
+        setPosition(
+            (((Core.scene.width - Core.scene.marginLeft - Core.scene.marginRight) - getWidth()) / 2).roundToInt()
+                .toFloat(),
+            (((Core.scene.height - Core.scene.marginTop - Core.scene.marginBottom) - getHeight()) / 2).roundToInt()
                 .toFloat())
     }
 
@@ -213,7 +213,7 @@ class IceDialog(
             forEach { child: Element? ->
                 if (done[0]) return@forEach
                 if (child is ScrollPane) {
-                    Core.scene.setScrollFocus(child)
+                    Core.scene.scrollFocus = child
                     done[0] = true
                 }
             }
@@ -232,7 +232,8 @@ class IceDialog(
 
     fun addCloseButton(width: Float = 210f) {
         buttons.defaults().size(width, 64f)
-        buttons.button(IceStats.返回.localized(), Texs.rootButton) { this.hide() }.size(width, 64f)
+
+        buttons.button("返回", IStyles.rootCleanButton,::hide).size(width, 64f)
 
         addCloseListener()
     }
@@ -262,7 +263,7 @@ class IceDialog(
         resized(false, run)
     }
 
-    /** Adds a scene resize listener, optionally invoking it immediately.  */
+    /** 添加场景调整大小侦听器，可选择立即调用它。 */
     fun resized(invoke: Boolean, run: Runnable) {
         if (invoke) {
             run.run()
@@ -343,7 +344,7 @@ class IceDialog(
 
             if (previousScrollFocus != null && previousScrollFocus!!.scene == null) previousScrollFocus = null
             actor = stage.scrollFocus
-            if (actor == null || actor.isDescendantOf(this)) stage.setScrollFocus(previousScrollFocus)
+            if (actor == null || actor.isDescendantOf(this)) stage.scrollFocus = previousScrollFocus
         }
         if (action != null) {
             addCaptureListener(ignoreTouchDown)
@@ -366,7 +367,7 @@ class IceDialog(
 
     class DialogStyle : Style() {
         /** Optional.  */
-        var background: Drawable = Texs.background121
+        var background: Drawable = IStyles.background121
         var titleFont: Font = Fonts.def
 
         /** Optional.  */
@@ -383,7 +384,6 @@ class IceDialog(
         private var defaultHideAction = Prov<Action> { Actions.fadeOut(0.4f, Interp.fade) }
         private val tmpPosition = Vec2()
         private val tmpSize = Vec2()
-        private val MOVE = 1 shl 5
         fun setHideAction(prov: Prov<Action>) {
             defaultHideAction = prov
         }

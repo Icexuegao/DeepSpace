@@ -9,7 +9,7 @@ import arc.scene.actions.Actions
 import arc.scene.event.Touchable
 import arc.scene.ui.layout.WidgetGroup
 import arc.struct.Seq
-import ice.library.type.meta.IceEffects
+import ice.library.meta.IceEffects
 import ice.library.util.accessFloat
 import ice.ui.colorR
 import mindustry.Vars

@@ -1,7 +1,7 @@
 package ice.ui.dialog
 
 import arc.scene.ui.layout.Scl
-import ice.library.scene.texs.Colors
+import ice.library.scene.tex.Colors
 import ice.vars.SettingValue
 import mindustry.type.Planet
 import mindustry.ui.Fonts

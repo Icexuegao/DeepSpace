@@ -1,5 +1,6 @@
 package ice.music
 
+import arc.Core
 import arc.audio.Sound
 import ice.library.IFiles
 
@@ -10,6 +11,7 @@ object IceSounds {
     val laser2 = getSound("laser2")
     val forceHoldingLaser2 = getSound("forceHoldingLaser2")
     private fun getSound(name: String): Sound {
-        return Sound(IFiles.findSound("$name.ogg"))
+        val file = IFiles.findSound("$name.ogg")
+        return Core.audio.newSound(file)
     }
 }

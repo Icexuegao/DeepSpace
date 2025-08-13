@@ -1,6 +1,6 @@
 package ice.game
 
-import ice.library.scene.texs.Colors
+import ice.library.scene.tex.Colors
 import mindustry.game.Team
 
 object IceTeam {

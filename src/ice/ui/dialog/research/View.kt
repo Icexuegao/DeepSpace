@@ -7,7 +7,7 @@ import arc.scene.ui.layout.Scl
 import arc.struct.Seq
 import arc.util.Align
 import ice.ui.dialog.research.node.LinkNode
-import ice.library.scene.texs.Colors
+import ice.library.scene.tex.Colors
 
 class View : Group() {
     var panX: Float = 0f

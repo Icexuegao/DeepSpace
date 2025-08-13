@@ -2,7 +2,7 @@ package ice.ai
 
 import arc.math.Rand
 import arc.math.geom.Vec2
-import ice.library.type.meta.IceEffects.lancerLaserShoot1
+import ice.library.meta.IceEffects.lancerLaserShoot1
 import mindustry.ai.types.FlyingAI
 import mindustry.gen.Groups
 

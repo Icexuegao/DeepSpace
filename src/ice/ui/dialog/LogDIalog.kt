@@ -1,6 +1,6 @@
 package ice.ui.dialog
 
-import ice.library.scene.texs.Colors
+import ice.library.scene.tex.Colors
 
 object LogDIalog {
     val cont = MenusDialog.cont

@@ -88,7 +88,7 @@ public class Vec2Seq implements Iterable<Vec2>, Eachable<Vec2>{
 	}
 	
 	
-	//TODO should be faster.
+	//TODO 应该更快。
 	public void addAll(Vec2[] vec2s){
 		for(Vec2 vec2 : vec2s){
 			add(vec2);

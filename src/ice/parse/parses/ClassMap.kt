@@ -1,7 +1,7 @@
 package ice.parse.parses
 
 import arc.struct.ObjectMap
-import ice.library.type.baseContent.unit.type.IceUnitType
+import ice.library.baseContent.unit.type.IceUnitType
 import mindustry.mod.ClassMap
 
 object ClassMap {

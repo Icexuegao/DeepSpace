@@ -11,10 +11,10 @@ import arc.scene.ui.Image
 import arc.scene.ui.layout.Scl
 import arc.scene.ui.layout.Table
 import arc.util.Align
-import ice.content.IceItems
+import ice.content.IItems
 import ice.library.IFiles
-import ice.library.scene.texs.Colors
-import ice.library.scene.texs.Texs
+import ice.library.scene.tex.Colors
+import ice.library.scene.tex.IStyles
 import ice.ui.dialog.MenusDialog
 import ice.ui.dialog.research.node.LinkNode
 import ice.ui.dialog.research.node.MoveNode
@@ -66,18 +66,18 @@ object ResearchDialog {
     }
 
     init {
-        UnlockContentLinkNode(IceItems.铜锭, 0f, 0f).also {
-            UnlockContentLinkNode(IceItems.铅锭, 60f * 3, 0f).setParent(it).also {lead->
-                UnlockContentLinkNode(IceItems.石英, 60f * 5, 0f).setParent(lead).apply {
+        UnlockContentLinkNode(IItems.铜锭, 0f, 0f).also {
+            UnlockContentLinkNode(IItems.铅锭, 60f * 3, 0f).setParent(it).also { lead->
+                UnlockContentLinkNode(IItems.石英, 60f * 5, 0f).setParent(lead).apply {
                   object : LinkNode("1",60f * 7,0f,{
                         Button(Button.ButtonStyle().apply {
-                            up=Texs.background111
-                            over=Texs.background111
+                            up=IStyles.background111
+                            over=IStyles.background111
                             down=up
                         }).apply {
                             setSize(120f)
                             margin(10f)
-                            image(IceItems.血囊孢子.uiIcon).grow()
+                            image(IItems.血囊孢子.uiIcon).grow()
                         }
                     }){
                       override fun getOffset(): Float {
@@ -86,7 +86,7 @@ object ResearchDialog {
                   }.setParent(this)
                 }
             }
-            UnlockContentLinkNode(IceItems.锌锭, 60f * 3, 120f).setParent(it).apply {}
+            UnlockContentLinkNode(IItems.锌锭, 60f * 3, 120f).setParent(it).apply {}
         }
         Node(-150f, 0f) { Image(IFiles.findIcePng("精灵2")).apply { setSize(Node.nodeSize + 50f);setColor(Colors.b4) } }
         object : MoveNode(-150f, 0f,

@@ -2,9 +2,9 @@ package ice.library.scene.action
 
 import arc.math.Interp
 import arc.scene.actions.Actions
+import ice.library.meta.IceEffects
+import ice.library.scene.tex.Colors
 import ice.music.IceSounds
-import ice.library.type.meta.IceEffects
-import ice.library.scene.texs.Colors
 import mindustry.entities.Effect
 import mindustry.game.Team
 import mindustry.type.UnitType

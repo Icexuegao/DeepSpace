@@ -51,7 +51,7 @@ object IFiles {
             put(it.name(), it)
         }
     }
-    private val shaders=HashMap<String, Fi>().apply {
+    private val shaders = HashMap<String, Fi>().apply {
         rootDirectory["shaders"]?.list()?.forEach {
             put(it.name(), it)
         }
@@ -59,11 +59,9 @@ object IFiles {
 
     fun findSound(name: String) = sounds[name] ?: throw Exception("未找到文件:$name")
     fun findMusics(name: String) = musics[name] ?: throw Exception("未找到文件:$name")
-    fun findShader(name: String)=shaders[name] ?: throw Exception("未找到文件:$name")
-
-    fun findDirectory(name: String) = rootDirectory[name]
+    fun findShader(name: String) = shaders[name] ?: throw Exception("未找到文件:$name")
     fun findIcePng(name: String): AtlasRegion {
-        val file = spritesIce["$name.png"]?: throw Exception("未找到文件:$name")
+        val file = spritesIce["$name.png"] ?: throw Exception("未找到文件:$name")
         val texture = TextureRegion(Texture(file))
         val atlasRegion = AtlasRegion(texture)
         atlasRegion.offsetX = 0f
@@ -79,7 +77,7 @@ object IFiles {
     }
 
     fun findPng(name: String): AtlasRegion {
-        val file = sprites["$name.png"]?: throw Exception("未找到文件:$name")
+        val file = sprites["$name.png"] ?: throw Exception("未找到文件:$name")
         val texture = TextureRegion(Texture(file))
         val atlasRegion = AtlasRegion(texture)
         atlasRegion.offsetX = 0f
@@ -109,12 +107,14 @@ object IFiles {
         copy.leftWidth = 0f
         return copy
     }
+
     fun newCursor(filename: String): Graphics.Cursor {
         val p = findIcePng(filename).texture.textureData.pixmap
         val result = Core.graphics.newCursor(p, p.width / 2, p.height / 2)
         p.dispose()
         return result
     }
+
     private fun getScaledNinePatchDrawable(region: TextureRegion, ints: IntArray): ScaledNinePatchDrawable {
         return object : ScaledNinePatchDrawable(NinePatch(region, ints[0], ints[1], ints[2], ints[3])) {
             override fun getLeftWidth(): Float {

@@ -4,7 +4,7 @@ import arc.func.Floatp
 import arc.graphics.g2d.Draw
 import arc.math.Mathf
 import arc.scene.Element
-import ice.library.scene.tex.ProgressAttribute
+import ice.library.scene.layout.ProgressAttribute
 import kotlin.math.min
 
 class ProgressBar(var pa: ProgressAttribute, private var fraction: Floatp) : Element() {
