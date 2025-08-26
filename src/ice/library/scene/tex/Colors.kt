@@ -18,24 +18,22 @@ object Colors {
     val b2 = valueOf("b4cbd6")
     val b3 = valueOf("97abb7")
     val b5 = valueOf("ebf6ff")
-    val b4 = valueOf("d6f1ff")
-    val bd=valueOf("bad7e6")
-    val  df=valueOf("9fbdcc")
-
+    val b4 = valueOf("deedff")
+    val df = valueOf("9fbdcc")
     val b6 = valueOf("bfd7e3")
     val s1 = valueOf("#ed90df")
     val w1 = valueOf("#FFECF8FF")
     val w2 = valueOf("b0bac0")
     val 灰1 = valueOf("#4a4b53")
-    val 深2 = valueOf("#2f2d39")
 
     //植物叶子
-    val zhiwu=arrayOf("e1dded","c7c5d5","b4b3c7")
-    //砖
-    val zhuan=arrayOf("c5bdcc","ada7b4")
-    //柱子
-    val zhu=arrayOf("ada9bc","888497")
+    val zhiwu = arrayOf("e1dded", "c7c5d5", "b4b3c7")
 
+    //砖
+    val zhuan = arrayOf("c5bdcc", "ada7b4")
+
+    //柱子
+    val zhu = arrayOf("ada9bc", "888497")
     val rand: Color
         get() = cos[Rand().nextInt(cos.size)]
 

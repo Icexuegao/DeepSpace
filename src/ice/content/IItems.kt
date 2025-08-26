@@ -76,6 +76,6 @@ object IItems {
     val 石墨烯 = IceItem("graphene", "52578a")
     val 单晶硅 = IceItem("monocrystallineSilicon", "575757ff")
     val 电子元件 = IceItem("integratedCircuit", "53565c")
-    val 暮光合金= IceItem("duskIngot","d6f1ff")
+    val 暮光合金= IceItem("duskIngot","deedff")
 
 }

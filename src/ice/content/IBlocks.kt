@@ -8,16 +8,16 @@ import arc.util.Time
 import ice.Ice
 import ice.library.IFiles
 import ice.library.baseContent.BaseContentSeq
-import ice.library.baseContent.blocks.crafting.EffectGenericCrafter
+import ice.library.baseContent.blocks.crafting.GenericCrafter
 import ice.library.baseContent.blocks.crafting.multipleCrafter.Formula
 import ice.library.baseContent.blocks.crafting.multipleCrafter.MultipleCrafter
 import ice.library.baseContent.blocks.crafting.oreMultipleCrafter.OreFormula
 import ice.library.baseContent.blocks.crafting.oreMultipleCrafter.OreMultipleCrafter
 import ice.library.baseContent.blocks.distribution.*
-import ice.library.baseContent.blocks.distribution.digitalStorage.DigitalConduit
-import ice.library.baseContent.blocks.distribution.digitalStorage.DigitalInput
-import ice.library.baseContent.blocks.distribution.digitalStorage.DigitalOutput
-import ice.library.baseContent.blocks.distribution.digitalStorage.DigitalStorage
+import ice.library.baseContent.blocks.distribution.digitalStorage.HubConduit
+import ice.library.baseContent.blocks.distribution.digitalStorage.LogisticsHub
+import ice.library.baseContent.blocks.distribution.digitalStorage.LogisticsInput
+import ice.library.baseContent.blocks.distribution.digitalStorage.LogisticsOutput
 import ice.library.baseContent.blocks.distribution.droneNetwork.DroneDeliveryTerminal
 import ice.library.baseContent.blocks.distribution.droneNetwork.DroneReceivingRnd
 import ice.library.baseContent.blocks.distribution.itemNode.ItemNode
@@ -69,10 +69,12 @@ import mindustry.world.blocks.defense.Wall
 import mindustry.world.blocks.defense.turrets.ItemTurret
 import mindustry.world.blocks.defense.turrets.PowerTurret
 import mindustry.world.blocks.distribution.Conveyor
+import mindustry.world.blocks.distribution.Junction
 import mindustry.world.blocks.environment.*
+import mindustry.world.blocks.liquid.Conduit
+import mindustry.world.blocks.liquid.LiquidRouter
 import mindustry.world.blocks.power.Battery
 import mindustry.world.blocks.power.BeamNode
-import mindustry.world.blocks.production.GenericCrafter
 import mindustry.world.blocks.production.Pump
 import mindustry.world.blocks.storage.CoreBlock
 import mindustry.world.blocks.storage.Unloader
@@ -83,15 +85,15 @@ import mindustry.world.draw.*
 import mindustry.world.meta.Attribute
 import mindustry.world.meta.Env
 import kotlin.math.max
-import kotlin.random.Random
 
 object IBlocks {
     fun load() {
         Vars.content.blocks().forEach {
-            if (it.minfo.mod == Ice.ice) BaseContentSeq.blocks.add(it)
+            if (it.minfo.mod == Ice.mod) BaseContentSeq.blocks.add(it)
         }
     }
 
+    //region环境
     val 多叶草: Block = Prop("leafyGrass").apply {
         variants = 3
         customShadow = true
@@ -201,7 +203,8 @@ object IBlocks {
         }
 
         override fun renderUpdate(tile: UpdateRenderState) {
-            val nextInt = Random.nextInt(500)/* if (nextInt == 0) {
+            //val nextInt = Random.nextInt(500)
+            /* if (nextInt == 0) {
                  val random = IceEffects.rand.random(0, 3)
                  tile.tile.nearby(random)?.let {
                      if (it.floor() == tile.floor) return
@@ -340,52 +343,54 @@ object IBlocks {
     val 能量电池: Block = Battery("powerBattery").apply {
         size = 2
         baseExplosiveness = 1f
-        emptyLightColor=Colors.df
-        fullLightColor=Colors.b4
+        emptyLightColor = Colors.df
+        fullLightColor = Colors.b4
         consumePowerBuffered(4000f)
         requirements(Category.power, ItemStack.with(IItems.高碳钢, 5))
     }
 
-    /**防御*/
-    val 铬墙: Block = Wall("chromeWall1").apply {
+    //endregion
+    //region 防御
+    val 铬墙: Block = Wall("chromeWall").apply {
         health = 450
         armor
         size = 1
         requirements(Category.defense, ItemStack.with(IItems.铬锭, 6))
     }
-    val 大型铬墙: Block = Wall("chromeWall2").apply {
+    val 大型铬墙: Block = Wall("chromeWall-large").apply {
         size = 2
         health = 铬墙.health * 4
         requirements(Category.defense, ItemStack.with(IItems.铬锭, 6 * 4))
     }
-    val 巨型铬墙: Block = Wall("chromeWall3").apply {
-        size = 3
-        health = 铬墙.health * 9
-        requirements(Category.defense, ItemStack.with(IItems.铬锭, 6 * 9))
-    }
-    val 碳钢墙1: Block = Wall("CarbonSteelWall1").apply {
+    val 碳钢墙: Block = Wall("CarbonSteelWall").apply {
         size = 1
         armor = 5f
         health = 720
         chanceDeflect = 0.1f
         requirements(Category.defense, ItemStack.with(IItems.高碳钢, 3, IItems.低碳钢, 3))
     }
-    val 碳钢墙2: Block = Wall("CarbonSteelWall2").apply {
+    val 大型碳钢墙: Block = Wall("CarbonSteelWall-large").apply {
         size = 2
         armor = 5f
         chanceDeflect = 0.15f
-        health = 碳钢墙1.health * size * size
-        requirements(Category.defense,
-            ItemStack.with(IItems.高碳钢, 3 * size * size, IItems.低碳钢, 3 * size * size))
+        health = 碳钢墙.health * size * size
+        requirements(Category.defense, ItemStack.with(IItems.高碳钢, 3 * size * size, IItems.低碳钢, 3 * size * size))
     }
-    val 流金墙: Block= Wall("fluxGoldWall").apply {
-        size=1
-        armor=5f
+    val 流金墙: Block = Wall("fluxGoldWall").apply {
+        size = 1
+        armor = 5f
         health = 1000
-        requirements(Category.defense, ItemStack.with(IItems.金锭,10))
+        requirements(Category.defense, ItemStack.with(IItems.金锭, 10))
+    }
+    val 大型流金墙: Block = Wall("fluxGoldWall-large").apply {
+        size = 2
+        armor = 5f
+        health = 1000
+        requirements(Category.defense, ItemStack.with(IItems.金锭, 10))
     }
 
-    /**生产*/
+    //endregion
+    //region生产
     val 纤汲钻井: Block = IceDrill("deriveDrill").apply {
         tier = 3
         size = 2
@@ -405,7 +410,8 @@ object IBlocks {
         requirements(Category.production, ItemStack.with(IItems.硫钴矿, 4, IItems.低碳钢, 32))
     }
 
-    /**运输*/
+    ///*endregion生产*/
+    //region运输
     val 基础传送带: Block = Conveyor("baseConveyor").apply {
         size = 1
         speed = 0.2f
@@ -441,6 +447,11 @@ object IBlocks {
         instantTransfer = true
         requirements(Category.distribution, ItemStack.with(IItems.低碳钢, 5))
     }
+    val 基础交叉器: Block= Junction("baseJunction").apply {
+        size = 1
+        health = 100
+        requirements(Category.distribution, ItemStack.with(IItems.低碳钢, 5))
+    }
     val 转化分类器: Block = IceSorter("transformSorter").apply {
         size = 1
         health = 100
@@ -456,23 +467,44 @@ object IBlocks {
         health = 200
         requirements(Category.distribution, ItemStack.with(IItems.铜锭, 5))
     }
-    val 电子存储: Block = DigitalStorage("digitalStorage")
-    val 电子管道: Block = DigitalConduit("digitalConduit")
-    val 电子管道输入: Block = DigitalInput("digitalInput")
-    val 电子管道输出: Block = DigitalOutput("digitalOutput")
+    val 物流枢纽: Block = LogisticsHub("logisticsHub").apply {
+        requirements(Category.distribution, ItemStack.with(IItems.铜锭, 10))
+    }
+    val 枢纽管道: Block = HubConduit("hubConduit").apply {
+        requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
+    }
+    val 物流输入器: Block = LogisticsInput("logisticsInput").apply {
+        requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
+    }
+    val 物流输出器: Block = LogisticsOutput("logisticsOutput").apply {
+        requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
+    }
     val 无人机供货端: Block = DroneDeliveryTerminal("droneTeliveryTerminal").apply {}
     val 无人机需求端: Block = DroneReceivingRnd("droneReceivingRnd").apply {}
     val 随机源: Block = Randomer("randomSource")
 
-    /**液体*/
+    /*endregion运输*/
+    /*region 液体*/
     val 挖掘塔: Block = MinerTower("minerTower")
     val 泵腔: Block = pumpChamber("pumpChamber").apply {
         requirements(Category.liquid, ItemStack.with(IItems.肌腱, 40, IItems.碎骨, 10, IItems.无名肉块, 60))
     }
-    val 谐振泵: Block= Pump("resonancePump").apply {
-        size=2
-        squareSprite=false
-        requirements(Category.liquid,ItemStack.with(IItems.高碳钢, 40, IItems.锌锭, 10))
+    val 谐振导管: Block = Conduit("resonanceConduit").apply {
+        requirements(Category.liquid, ItemStack.with(IItems.高碳钢, 10, IItems.锌锭, 20))
+    }
+    val 谐振泵: Block = Pump("resonancePump").apply {
+        size = 2
+        squareSprite = false
+        requirements(Category.liquid, ItemStack.with(IItems.高碳钢, 40, IItems.锌锭, 10))
+    }
+    val 流体容器: Block = LiquidRouter("liquidContainer").apply {
+        requirements(Category.liquid, ItemStack.with(IItems.铜锭, 30))
+        size = 2
+        squareSprite = false
+        liquidPadding = 6f / 4f
+        solid = true
+        liquidCapacity = 1000f
+        health = 500
     }
     val 流体枢纽: Block = MultipleLiquidBlock("fluidJunction").apply {
         size = 3
@@ -485,46 +517,41 @@ object IBlocks {
         requirements(Category.liquid, ItemStack.with(Items.copper, 1))
     }
 
-    /**工厂*/
-    val 量子蚀刻厂: Block = object : EffectGenericCrafter("integratedFactory") {
-        init {
-            drawer = DrawMulti(DrawRegion("-bottom"), DrawRegion("-top"))
-            itemCapacity = 20
-            health = 200
-            outputItem = ItemStack(IItems.电子元件, 1)
-            consumeItems(*ItemStack.with(IItems.单晶硅, 1, IItems.石墨烯, 2, IItems.石英玻璃, 1))
-            craftTime = 60f
-            craftEffect = MultiEffect(IceEffects.lancerLaserShoot1, IceEffects.lancerLaserChargeBegin,
-                IceEffects.hitLaserBlast)
-            size = 3
-            requirements(Category.crafting, ItemStack.with(IItems.铜锭, 19))
-        }
+    //endregion
+    //region 工厂
+    val 量子蚀刻厂: Block = GenericCrafter("integratedFactory").apply {
+        drawers = IceDrawMulti(DrawRegion("-bottom"), DrawRegion("-top"))
+        itemCapacity = 20
+        health = 200
+        outputItems(IItems.电子元件, 1)
+        consumeItems(*ItemStack.with(IItems.单晶硅, 1, IItems.石墨烯, 2, IItems.石英玻璃, 1))
+        craftTime = 60f
+        craftEffect = MultiEffect(IceEffects.lancerLaserShoot1, IceEffects.lancerLaserChargeBegin,
+            IceEffects.hitLaserBlast)
+        size = 3
+        requirements(Category.crafting, ItemStack.with(IItems.铜锭, 19))
     }
-    val 单晶硅厂: Block = object : GenericCrafter("monocrystallineSiliconFactory") {
-        init {
-            requirements(Category.crafting, ItemStack.with(IItems.红冰, 12))
-            outputItem = ItemStack(IItems.单晶硅, 1)
-            craftTime = 60f
-            health = 360
-            size = 3
-            hasPower = true
-            drawer = DrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate", 9f, true), DrawDefault(),
-                DrawFlame(Color.valueOf("ff9c71")))
-            consumeItems(*ItemStack.with(Items.pyratite, 1, IItems.石英, 3))
-            consumePower(1.8f)
-        }
+    val 单晶硅厂: Block = GenericCrafter("monocrystallineSiliconFactory").apply {
+        requirements(Category.crafting, ItemStack.with(IItems.红冰, 12))
+        outputItems(IItems.单晶硅, 1)
+        craftTime = 60f
+        health = 360
+        size = 3
+        hasPower = true
+        drawers = IceDrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate", 9f, true), DrawDefault(),
+            DrawFlame(Color.valueOf("ff9c71")))
+        consumeItems(*ItemStack.with(Items.pyratite, 1, IItems.石英, 3))
+        consumePower(1.8f)
     }
-    val 铸铜厂: Block = object : GenericCrafter("copperFoundry") {
-        init {
-            size = 4
-            health = 200
-            craftTime = 90f
-            outputItem = ItemStack(IItems.黄铜锭, 3)
-            drawer = DrawMulti(DrawDefault(), DrawFlame())
-            consumeItems(*ItemStack.with(IItems.铜锭, 3, IItems.锌锭, 1))
-            requirements(Category.crafting, ItemStack.with(IItems.铜锭, 200, IItems.低碳钢, 150))
-            craftEffect = IceEffects.square(IItems.铜锭.color)
-        }
+    val 铸铜厂: Block = GenericCrafter("copperFoundry").apply {
+        size = 4
+        health = 200
+        craftTime = 90f
+        outputItems(IItems.黄铜锭, 3)
+        drawers = IceDrawMulti(DrawDefault(), DrawFlame())
+        consumeItems(*ItemStack.with(IItems.铜锭, 3, IItems.锌锭, 1))
+        requirements(Category.crafting, ItemStack.with(IItems.铜锭, 200, IItems.低碳钢, 150))
+        craftEffect = IceEffects.square(IItems.铜锭.color)
     }
     val 碳控熔炉: Block = MultipleCrafter("carbonSteelFactory").apply {
         size = 3
@@ -544,8 +571,7 @@ object IBlocks {
         formulas.addFormula(Formula().apply {
             craftTime = 60f
             craftEffect = ct
-            setInput(ConsumeItems(ItemStack.with(IItems.赤铁矿, 2, IItems.生煤, 1)),
-                ConsumePower(90 / 60f, 0f, false))
+            setInput(ConsumeItems(ItemStack.with(IItems.赤铁矿, 2, IItems.生煤, 1)), ConsumePower(90 / 60f, 0f, false))
             setOutput(ItemStack(IItems.高碳钢, 1))
         })
 
@@ -604,8 +630,17 @@ object IBlocks {
     val 蜂巢陶瓷合成巢 = GenericCrafter("ceramicKiln").apply {
         size = 4
     }
+    val 暮白高炉:Block=GenericCrafter("duskFactory").apply {
+        size=3
+        craftTime=120f
+        outputItems(IItems.暮光合金,3)
+        consumeItems(IItems.低碳钢,5,IItems.铬锭,1,IItems.钴锭,3,IItems.铪锭,1)
+        consumeLiquid(ILiquids.暮光液,0.3f)
+        requirements(Category.crafting,ItemStack.with(IItems.金锭,200,IItems.钴锭,70))
+    }
 
-    /**其他*/
+    //endregion
+    //region 其他
     val 真菌塔: Block = FungusCore("fungusTower").apply {
         size = 2
         category = Category.effect
@@ -781,4 +816,5 @@ object IBlocks {
         }
         range = shootType.speed * shootType.lifetime
     }
+    //endregion
 }

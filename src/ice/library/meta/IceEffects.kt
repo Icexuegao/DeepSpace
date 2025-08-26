@@ -166,7 +166,7 @@ object IceEffects {
         val data = e.data
         if (data is Unit) {
             val color = Colors.b4.cpy().a(e.fout())
-            IDraws.light(data.x, data.y, Lines.circleVertices(50f), 20f, e.rotation, Color.clear,
+            IDraws.light(data.x, data.y, Lines.circleVertices(70f), 20f, e.rotation, Color.clear,
                 color, e::fout)
         }
     }

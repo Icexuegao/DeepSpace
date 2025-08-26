@@ -8,12 +8,16 @@ import mindustry.Vars
 object ILiquids {
     fun load() {
         Vars.content.liquids().forEach {
-            if (it.minfo.mod== Ice.ice){
+            if (it.minfo.mod == Ice.mod) {
                 BaseContentSeq.liquids.add(it as IceLiquid)
             }
         }
     }
 
+    val 异溶质 = IceLiquid("strangeSolute", "9AA8E7").apply {
+        heatCapacity = 0.4f
+        boilPoint = 0.5f
+    }
     val 浓稠血浆 = IceLiquid("thickPlasma", "cc3737").apply {
         nutrientConcentration = 0.2f
     }
@@ -30,5 +34,8 @@ object ILiquids {
         explosiveness = 0.3f
         flammability = 1f
         gas = true
+    }
+    val 暮光液 = IceLiquid("duskLiquid", "deedff").apply {
+        temperature = 0.2f
     }
 }

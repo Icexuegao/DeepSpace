@@ -37,6 +37,7 @@ object IStyles {
     val background101: Drawable = IFiles.createNinePatch("background10-1")
     val background111:Drawable=IFiles.createNinePatch("background11-1")
     val background121:Drawable=IFiles.createNinePatch("background12-1")
+    val background122:Drawable=IFiles.createNinePatch("background12-2")
 
     //
     val xuerou: Drawable = IFiles.createNinePatch("科技树-血肉")

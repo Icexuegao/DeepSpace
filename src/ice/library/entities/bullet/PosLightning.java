@@ -36,16 +36,16 @@ import static arc.graphics.g2d.Lines.stroke;
 import static arc.math.Angles.randLenVectors;
 
 /**
- * Provide methods that can generate Position to Position Lightning.<p>
- * {@code Tmp} <b>var</b> is available.<p>
- * Completely independent class.<p>
+ * 提供可以生成位置到位置闪电的方法。<p>
+ * {@code Tmp} <b>var</b> 可用。<p>
+ * 完全独立的课程。<p>
  *
- * @implNote The method implements the generation of random lightning effect <b>from point to point</b> and complete certain action at <b>target point</b> through {@link Cons}.<p>
+ * @implNote 该方法实现<b>点到点的</b>随机闪电效果的生成，并通过{@link Cons}在<b>目标点</b>完成一定动作。<p>
  * @apiNote
- * <li> {@code hitPointMovement} {@link Cons} used to run specific action at the target point.
- * <li> {@code WIDTH}: {@value WIDTH} used to control the stroke of the lightning.
- * <li> {@code RANGE_RAND}: {@value RANGE_RAND} used to control the base xRand range of every part of the lightning.
- * <li> {@code ROT_DST}: {@value ROT_DST} used to control the length of every part of the lightning.<p>
+ * <li> {@code hitPointMovement} {@link Cons} 用于在目标点运行特定动作。
+ * <li> {@code WIDTH}：{@value WIDTH} 用于控制闪电的笔触。
+ * <li> {@code RANGE_RAND}： {@value RANGE_RAND} 用于控制闪电每个部分的基本 xRand 范围。
+ * <li> {@code ROT_DST}：{@value ROT_DST} 用于控制闪电每个部分的长度。<p>
  *
  * @see Position
  * @see Vec2

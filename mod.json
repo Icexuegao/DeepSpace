@@ -6,5 +6,5 @@
   "version": "0.12",
   "java": true,
   "main": "ice.Ice",
-  "minGameVersion": 150
+  "minGameVersion": 151
 }

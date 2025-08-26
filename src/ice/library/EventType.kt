@@ -6,12 +6,12 @@ import arc.math.Interp
 import arc.scene.actions.Actions
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
-import ice.library.scene.tex.Colors
-import ice.library.scene.tex.IStyles
-import ice.library.struct.ifTrue
 import ice.library.components.BuildInterface
 import ice.library.components.block.BlockDrawSelect
 import ice.library.components.block.BlockUpdate
+import ice.library.scene.tex.Colors
+import ice.library.scene.tex.IStyles
+import ice.library.struct.ifTrue
 import ice.ui.dialog.AchievementDialog
 import mindustry.Vars
 import mindustry.game.EventType
@@ -20,6 +20,7 @@ import mindustry.world.Tile
 
 object EventType {
     class AchievementUnlockEvent(var achievement: AchievementDialog.Achievement)
+     class LogisticsHubFire
     private val updates = Seq<Tile>(Tile::class.java)
     fun init() {
         Events.on(AchievementUnlockEvent::class.java){ event ->

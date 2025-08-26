@@ -1,13 +1,15 @@
 package ice.library.baseContent.blocks.distribution.digitalStorage
 
+import arc.Events
 import arc.func.Prov
 import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.library.EventType
+import ice.library.baseContent.blocks.abstractBlocks.IceBlock
 import ice.library.draw.drawer.DrawRegionColor
 import ice.library.draw.drawer.IceDrawMulti
-import ice.library.baseContent.blocks.abstractBlocks.IceBlock
 import ice.ui.ItemSelection
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
@@ -15,7 +17,7 @@ import mindustry.type.Item
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 
-class DigitalOutput(name: String) : IceBlock(name) {
+class LogisticsOutput(name: String) : IceBlock(name) {
 
     init {
         size = 1
@@ -51,8 +53,26 @@ class DigitalOutput(name: String) : IceBlock(name) {
 
     inner class DigitalUnloaderBuild : IceBuild() {
         var sortItem: Item? = null
+        var original: LogisticsHub.DigitalStorageBuild? = null
+        override fun updateProximity() {
+            super.updateProximity()
+            Events.fire(EventType.LogisticsHubFire())
+        }
+
+        override fun updateTile() {
+            original?.let { ori ->
+                proximity.forEach {
+                    if (sortItem != null && ori.items.get(sortItem) > 0 && it.acceptItem(this, sortItem)) {
+                        it.handleItem(this, sortItem)
+                        ori.items.remove(sortItem, 1)
+                    }
+                }
+            }
+
+        }
+
         override fun buildConfiguration(table: Table) {
-            ItemSelection.buildTable(this.block, table, Vars.content.items(), ::sortItem, ::configure)
+            ItemSelection.buildTable(block, table, Vars.content.items(), ::sortItem, ::configure, true)
         }
 
         override fun config(): Item? {

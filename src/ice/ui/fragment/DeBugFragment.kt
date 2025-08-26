@@ -1,6 +1,5 @@
 package ice.ui.fragment
 
-import arc.Events
 import arc.func.Boolp
 import arc.graphics.Color
 import arc.scene.Group
@@ -15,7 +14,6 @@ import arc.scene.ui.layout.WidgetGroup
 import ice.DFW
 import ice.Ice
 import ice.library.Incident
-import ice.library.pathfindAlgorithm.PFPathFind
 import ice.library.scene.listener.DragInputListener
 import ice.library.scene.tex.Colors
 import ice.library.scene.tex.IStyles
@@ -136,18 +134,6 @@ object DeBugFragment {
                 dfw.add()
             }
 
-
-            button("df", Icon.units) {
-                val pfPathFind = PFPathFind(Vars.world.tile(1, 1), Vars.world.tile(100, 100))
-                Events.run(mindustry.game.EventType.Trigger.draw) {
-                    pfPathFind.draw()
-                }
-                table.update {
-                    table.update {
-                        pfPathFind.update()
-                    }
-                }
-            }
         }.width(130f).height(211f)
         table.add(pane).expandY().top()
     }
@@ -263,7 +249,7 @@ object DeBugFragment {
 
     private fun allBlock() {
         Vars.content.blocks().forEach {
-            if (it.minfo.mod == Ice.ice) it.buildVisibility = BuildVisibility.shown
+            if (it.minfo.mod == Ice.mod) it.buildVisibility = BuildVisibility.shown
         }
         cont.iTableG {
             it.addLine("解禁方块", Color.white)

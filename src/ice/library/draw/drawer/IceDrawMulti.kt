@@ -9,7 +9,7 @@ import mindustry.world.Block
 import mindustry.world.draw.DrawBlock
 
 class IceDrawMulti(vararg var drawers: DrawBlock) : DrawBlock() {
-    override fun getRegionsToOutline(block: Block, out: Seq<TextureRegion?>) {
+    override fun getRegionsToOutline(block: Block, out: Seq<TextureRegion>) {
         for (draw in drawers) {
             draw.getRegionsToOutline(block, out)
         }

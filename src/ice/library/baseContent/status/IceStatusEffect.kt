@@ -1,6 +1,7 @@
 package ice.library.baseContent.status
 
 import ice.library.meta.stat.IceStats
+import mindustry.entities.units.StatusEntry
 import mindustry.gen.Unit
 import mindustry.type.StatusEffect
 
@@ -38,13 +39,11 @@ open class IceStatusEffect(name: String) : StatusEffect(name) {
         super.applied(unit, time, extend)
     }
 
-    override fun onRemoved(unit: Unit) {
-        super.onRemoved(unit)
-    }
 
-    override fun update(unit: Unit, time: Float) {
+
+    override fun update(unit: Unit, entry: StatusEntry) {
         /**时间结束恢复护甲 */
-        if (armorBreak != 0 && !armorRecovery && time <= 60) {
+        if (armorBreak != 0 && !armorRecovery && entry.time <= 60) {
             armorRecovery = true
             if (unit.type.armor >= armorBreak) {
                 unit.armor += armorBreak.toFloat()
@@ -52,7 +51,7 @@ open class IceStatusEffect(name: String) : StatusEffect(name) {
                 unit.armor += unit.type.armor
             }
         }
-        super.update(unit, time)
+        super.update(unit, entry)
     }
 
     override fun isHidden(): Boolean {

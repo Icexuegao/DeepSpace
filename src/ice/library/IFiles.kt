@@ -16,7 +16,7 @@ import ice.Ice
 object IFiles {
     private val filter = arrayOf("ice", "kotlin", "org", "META-INF")
     private val rootDirectory = HashMap<String, Fi>().apply {
-        Ice.ice.root.list().forEach {
+        Ice.mod.root.list().forEach {
             if (!filter.contains(it.name()) && it.isDirectory) {
                 put(it.name(), it)
             }
@@ -61,30 +61,23 @@ object IFiles {
     fun findMusics(name: String) = musics[name] ?: throw Exception("未找到文件:$name")
     fun findShader(name: String) = shaders[name] ?: throw Exception("未找到文件:$name")
     fun findIcePng(name: String): AtlasRegion {
-        val file = spritesIce["$name.png"] ?: throw Exception("未找到文件:$name")
-        val texture = TextureRegion(Texture(file))
-        val atlasRegion = AtlasRegion(texture)
-        atlasRegion.offsetX = 0f
-        atlasRegion.offsetY = 0f
-        atlasRegion.x = 0
-        atlasRegion.y = 0
-        atlasRegion.name = "${Ice.name}-$name"
-        atlasRegion.packedWidth = texture.width
-        atlasRegion.packedHeight = texture.height
-        atlasRegion.originalWidth = texture.width
-        atlasRegion.originalHeight = texture.height
-        return atlasRegion
+        val file = spritesIce["$name.png"] ?: throw Exception("未找到文件:$name.png")
+        return getAtlasRegion(file)
     }
 
     fun findPng(name: String): AtlasRegion {
         val file = sprites["$name.png"] ?: throw Exception("未找到文件:$name")
+        return getAtlasRegion(file)
+    }
+
+    private fun getAtlasRegion(file: Fi): AtlasRegion {
         val texture = TextureRegion(Texture(file))
         val atlasRegion = AtlasRegion(texture)
         atlasRegion.offsetX = 0f
         atlasRegion.offsetY = 0f
         atlasRegion.x = 0
         atlasRegion.y = 0
-        atlasRegion.name = "${Ice.name}-$name"
+        atlasRegion.name = "${Ice.name}-${file.name()}"
         atlasRegion.packedWidth = texture.width
         atlasRegion.packedHeight = texture.height
         atlasRegion.originalWidth = texture.width

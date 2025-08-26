@@ -48,8 +48,8 @@ object UI {
         DeBugFragment.build(Vars.ui.hudGroup)
         //  BossHealthFragment.build(Vars.ui.hudGroup)
         ConversationFragment.build(Vars.ui.hudGroup)
-        Ice.ice.meta.author = "[#${Colors.b4}]Alon[]"
-        Ice.ice.meta.displayName = "[#${Colors.b4}]Deep Space[]"
+        Ice.mod.meta.author = "[#${Colors.b4}]Alon[]"
+        Ice.mod.meta.displayName = "[#${Colors.b4}]Deep Space[]"
 
         if (OS.isWindows) {
             loadSystemCursors()

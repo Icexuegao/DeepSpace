@@ -10,7 +10,7 @@ import mindustry.content.Fx
 object IStatus {
     fun laod() {
         Vars.content.statusEffects().forEach {
-            if (it.minfo.mod == Ice.ice) {
+            if (it.minfo.mod == Ice.mod) {
                 BaseContentSeq.status.add(it as IceStatusEffect)
             }
         }

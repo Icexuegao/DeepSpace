@@ -18,13 +18,6 @@ import arc.util.Tmp
 import ice.Ice
 import ice.ai.CircleAi
 import ice.library.IFiles
-import ice.library.entities.IceRegister
-import ice.library.entities.ability.RotatorAbility
-import ice.library.entities.bullet.AngleBulletType
-import ice.library.entities.bullet.ChainBulletType
-import ice.library.entities.bullet.RandomDamageBulletType
-import ice.library.scene.tex.Colors
-import ice.library.struct.addP
 import ice.library.baseContent.BaseContentSeq
 import ice.library.baseContent.unit.IceUnitEngine
 import ice.library.baseContent.unit.ability.BarAbility
@@ -32,10 +25,18 @@ import ice.library.baseContent.unit.type.IceTankUnitType
 import ice.library.baseContent.unit.type.IceUnitType
 import ice.library.baseContent.unit.unitEntity.ClusterLobesUnit
 import ice.library.baseContent.unit.unitEntity.WitchUnit
+import ice.library.entities.IceRegister
+import ice.library.entities.ability.RotatorAbility
+import ice.library.entities.bullet.AngleBulletType
+import ice.library.entities.bullet.ChainBulletType
+import ice.library.entities.bullet.RandomDamageBulletType
 import ice.library.meta.IceEffects
+import ice.library.scene.tex.Colors
+import ice.library.struct.addP
 import ice.library.util.toStringi
 import ice.music.IceSounds
 import mindustry.Vars
+import mindustry.ai.types.MinerAI
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.content.UnitTypes
@@ -63,10 +64,18 @@ import kotlin.random.Random
 object IUnitTypes {
     fun load() {
         Vars.content.units().forEach {
-            if (it.minfo.mod == Ice.ice) BaseContentSeq.units.add(it)
+            if (it.minfo.mod == Ice.mod) BaseContentSeq.units.add(it)
         }
     }
 
+    val 收割 = object : IceUnitType("harvester") {}.apply {
+        aiController= Prov(::MinerAI)
+        flying=true
+        hitSize=10f
+        speed=2f
+        engineColor= Colors.b4
+        constructor = Prov(UnitEntityLegacyAlpha::create)
+    }
     val 路西法 = object : IceUnitType("lucifer") {
         override fun update(unit: Unit) {
             super.update(unit)
@@ -821,21 +830,18 @@ object IUnitTypes {
             //是的，这更新了 draw（） 中的状态......这不是问题，因为无论如何我都不想让它变得明显
             unit.shadowAlpha = if (unit.shadowAlpha < 0) dest else Mathf.approachDelta(unit.shadowAlpha, dest, 0.11f)
             Draw.color(Pal.shadow, Pal.shadow.a * unit.shadowAlpha)
-
-
             val rot = unit.rotation - 90
             val trnsx1 = Angles.trnsx(rot, value.x, value.y)
             val trnsy1 = Angles.trnsy(rot, value.x, value.y)
             val trnsx2 = Angles.trnsx(rot, -value.x, value.y)
             val trnsy2 = Angles.trnsy(rot, -value.x, value.y)
-
             val speed = Time.time * value.speed * 6
             val ux = unit.x + trnsx1
             val uy = unit.y + trnsy1
-            val nx = unit.x +trnsx2
+            val nx = unit.x + trnsx2
             val ny = unit.y + trnsy2
-            Draw.rect(name+"-"+"propeller", ux+ shadowTX * e, uy+ shadowTY * e, speed)
-            if (true) Draw.rect(name+"-"+"propeller", nx+ shadowTX * e, ny+ shadowTY * e, -speed)
+            Draw.rect("$name-propeller", ux + shadowTX * e, uy + shadowTY * e, speed)
+            if (true) Draw.rect("$name-propeller", nx + shadowTX * e, ny + shadowTY * e, -speed)
             Draw.rect(name, unit.x + shadowTX * e, unit.y + shadowTY * e, unit.rotation - 90)
             Draw.color()
         }
