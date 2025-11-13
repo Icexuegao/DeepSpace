@@ -45,7 +45,7 @@ class ProgressBar(var pa: ProgressAttribute, private var fraction: Floatp) : Ele
         Draw.alpha(color.a * parentAlpha)
         pa.bottomBar?.draw(x, y, width, height)
         Draw.color(pa.color, pa.color.a * parentAlpha)
-        pa.barTop.draw(x + pa.starX, y + pa.starY, min(width * value, width - (pa.starX * 2)), height - pa.drawHeight)
+        pa.barTop.draw(x + pa.starX, y + pa.starY, min(width * value, width - (pa.starX * 2)),  pa.drawHeight)
         Draw.color()
         Draw.alpha(color.a * parentAlpha)
         pa.barBackgroundDrawable.draw(x, y, width, height)

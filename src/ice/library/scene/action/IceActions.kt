@@ -3,8 +3,8 @@ package ice.library.scene.action
 import arc.math.Interp
 import arc.scene.actions.Actions
 import ice.library.meta.IceEffects
-import ice.library.scene.tex.Colors
-import ice.music.IceSounds
+import ice.library.scene.tex.IceColor
+import ice.music.ISounds
 import mindustry.entities.Effect
 import mindustry.game.Team
 import mindustry.type.UnitType
@@ -15,8 +15,8 @@ object IceActions {
         action.runnable = Runnable {
             val spawn = unit.spawn(team, x, y)
             spawn.rotation = rotate
-            IceEffects.jumpTrail.at(x, y, rotate, Colors.b4, spawn.type)
-            IceSounds.foldJump.at(spawn)
+            IceEffects.jumpTrail.at(x, y, rotate, IceColor.b4, spawn.type)
+            ISounds.foldJump.at(spawn)
             Effect.shake(spawn.hitSize / 3f, spawn.hitSize / 4f, spawn)
         }
         return action

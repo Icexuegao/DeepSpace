@@ -12,7 +12,7 @@ import mindustry.gen.Unit
 
 object IceRegister {
     private val ids = ObjectIntMap<Class<out Entityc>>()
-    val map: ObjectMap<String, Prov<out Entityc>> = ObjectMap()
+    private val map: ObjectMap<String, Prov<out Entityc>> = ObjectMap()
     private fun <T : Entityc> put(name: String, type: Class<T>, prov: Prov<out T>) {
         map.put(name, prov)
         ids.put(type, EntityMapping.register(name, prov))

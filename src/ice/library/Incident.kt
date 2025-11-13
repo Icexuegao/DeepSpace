@@ -107,19 +107,19 @@ object Incident {
 
         table.add(
             Stack(
-                drawIcon,
+                /*drawIcon,
                 drawn,
                 draws,
                 drawn1,
-                draws1,
+                draws1,*/
                 Shelter.ShelterUp(0f, shelter, graphicswidth, shelter, 3f, 3f),
-                fLabel,
+               // fLabel,
                 Shelter.ShelterDown(0f, shelter, graphicswidth, shelter, 3f, 3f)
             )
         )
         table.actions(
             Actions.delay(3 + 2f),
-            IceActions.spawnAction(IUnitTypes.传教者, tile.worldx(), tile.worldy(), 0f, Team.sharded),
+          /*  IceActions.spawnAction(IUnitTypes.传教者, tile.worldx(), tile.worldy(), 0f, Team.sharded),*/
             Actions.delay(0.5f),
             IceActions.spawnAction(IUnitTypes.仆从, tile.worldx(), tile.worldy() - 10 * 8, 0f, Team.sharded),
             Actions.delay(0.5f),

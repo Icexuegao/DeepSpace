@@ -10,7 +10,9 @@ import arc.scene.ui.CheckBox
 import arc.scene.ui.ImageButton.ImageButtonStyle
 import arc.scene.ui.Slider.SliderStyle
 import arc.scene.ui.TextButton.TextButtonStyle
+import arc.scene.ui.layout.Scl
 import ice.library.IFiles
+import ice.library.game.IceTeam
 import ice.library.scene.layout.ProgressAttribute
 import ice.library.struct.asDrawable
 import mindustry.gen.Tex
@@ -29,18 +31,19 @@ object IStyles {
     val background42: Drawable = IFiles.createNinePatch("background4-2")
     val background43: Drawable = IFiles.createNinePatch("background4-3")
     val background44: Drawable = IFiles.createNinePatch("background4-4")
+    val background45: Drawable = IFiles.createNinePatch("background4-5")
     val background61: Drawable = IFiles.createNinePatch("background6-1")
     val background62: Drawable = IFiles.createNinePatch("background6-2")
     val background71: Drawable = IFiles.createNinePatch("background7-1")
     val background81: Drawable = IFiles.createNinePatch("background8-1")
     val background91: Drawable = IFiles.createNinePatch("background9-1")
     val background101: Drawable = IFiles.createNinePatch("background10-1")
-    val background111:Drawable=IFiles.createNinePatch("background11-1")
-    val background121:Drawable=IFiles.createNinePatch("background12-1")
-    val background122:Drawable=IFiles.createNinePatch("background12-2")
-
+    val background111: Drawable = IFiles.createNinePatch("background11-1")
+    val background121: Drawable = IFiles.createNinePatch("background12-1")
+    val background122: Drawable = IFiles.createNinePatch("background12-2")
+    val background131: Drawable = IFiles.createNinePatch("background13-1")
     //
-    val xuerou: Drawable = IFiles.createNinePatch("科技树-血肉")
+    val tag: Drawable = IFiles.createNinePatch("tag")
     val achievementUnlock = IFiles.findIcePng("achievement-unlock")
     val achievementLock = IFiles.findIcePng("achievement-lock")
     val achievement = IFiles.findIcePng("achievement")
@@ -54,6 +57,24 @@ object IStyles {
         disabled = background43
         //imageDisabled= background10
     }
+    val button5 = object : ImageButtonStyle() {}.apply {
+        up = background44
+        over = background44
+        down = background44
+        checked = background44
+        disabled = background43
+        //imageDisabled= background10
+    }
+    val button6 = ImageButtonStyle().apply {
+        up = background45
+        over = background45
+        down = background45
+        checked = background45
+        disabled = background43
+        //imageDisabled= background10
+    }
+
+
     val button: ImageButtonStyle = object : ImageButtonStyle() {
     }.apply {
         up = background41
@@ -67,15 +88,15 @@ object IStyles {
         up = background41
         over = background41
         down = background42
-        imageUpColor = Colors.b4
-        imageDownColor = Colors.r1
-        imageOverColor = Colors.b4
+        imageUpColor = IceColor.b4
+        imageDownColor = IceColor.r1
+        imageOverColor = IceColor.b4
         //imageDisabled= background10
     }
-    val button4= ButtonStyle().apply {
-        up= background43
-        down= background43
-        over=background43
+    val button4 = ButtonStyle().apply {
+        up = background43
+        down = background43
+        over = background43
     }
     val button1 = object : TextButtonStyle() {}.apply {
         up = background61
@@ -84,7 +105,7 @@ object IStyles {
         checked = background62
         font = Fonts.def
         fontColor = Color.white
-        overFontColor = Colors.b4
+        overFontColor = IceColor.b4
         disabledFontColor = Color.gray
     }
     val frameButtonUp: Drawable = IFiles.createNinePatch("frameButtonUp")
@@ -94,6 +115,7 @@ object IStyles {
     val sliderKnob: Drawable = IFiles.findIcePng("sliderKnob").asDrawable()
     val black8: Drawable = (Tex.whiteui as TextureRegionDrawable).tint(0f, 0f, 0f, 0.8f)
     val barBackground: TextureRegion = IFiles.findIcePng("barBackground")
+    val barBottlom:Drawable= IFiles.createNinePatch("barBottom")
     val missionaryIcon: TextureRegion = IFiles.findIcePng("missionaryIcon")
     val missionaryIconTurNingRight1: TextureRegion = IFiles.findIcePng("missionaryIconTurNing1")
     val missionaryIconTurNingRight2: TextureRegion = IFiles.findIcePng("missionaryIconTurNing2")
@@ -107,9 +129,10 @@ object IStyles {
     val time: TextureRegion = IFiles.findIcePng("time").apply {
         texture.setFilter(Texture.TextureFilter.linear)
     }
+    val afehs = IFiles.findPng(IceTeam.afehs.name)
+    val playTeam=IFiles.findPng("afehs")
     val arrow: TextureRegion = IFiles.findIcePng("arrow")
-    val arrow1=IFiles.findIcePng("arrow1")
-
+    val arrow1 = IFiles.findIcePng("arrow1")
     val flower: TextureRegion = IFiles.findIcePng("flower").apply {
         texture.setFilter(Texture.TextureFilter.linear)
     }
@@ -161,7 +184,7 @@ object IStyles {
 
         font = Fonts.def
         fontColor = Color.white
-        overFontColor = Colors.b4
+        overFontColor = IceColor.b4
         disabledFontColor = Color.gray/*  imageDisabledColor = Color.lightGray
           imageUpColor = */
     }
@@ -182,19 +205,19 @@ object IStyles {
         down = frameButtonDown
         checked = frameButtonDown
         font = Fonts.def
-        fontColor = Colors.b4
+        fontColor = IceColor.b4
         disabledFontColor = Color.gray
     }
+
     val rootCleanButton = TextButtonStyle().apply {
         up = frameButtonUp
         over = up
         down = frameButtonDown
         checked = frameButtonUp
         font = Fonts.def
-        fontColor = Colors.b4
+        fontColor = IceColor.b4
         disabledFontColor = Color.gray
     }
-
     val checkBoxStyle = CheckBox.CheckBoxStyle().apply {
         val off = buttonDown.asDrawable()
         val on = buttonUp.asDrawable()
@@ -205,7 +228,7 @@ object IStyles {
         checkboxOver = off
         checkboxOffDisabled = off
         font = Fonts.def
-        fontColor = Colors.b1
+        fontColor = IceColor.b1
     }
     val defaultSlider = SliderStyle().apply {
         background = sliderFrame
@@ -213,15 +236,17 @@ object IStyles {
         knobOver = sliderKnob
         knobDown = sliderKnob
     }
-    var pa1 = ProgressAttribute(IStyles.barBackground, IStyles.barTop).apply {
-        color = Colors.b4
+
+    var pa1 = ProgressAttribute(barBackground, barTop).apply {
+        color = IceColor.b4
         starX = 5f
-        starY = 23f
-        drawHeight = IStyles.barBackground.height - 42f
+        starY = Scl.scl(24f)
+        drawHeight = Scl.scl(43f)
     }
     val scal = 0.7f
-    var pa2 = ProgressAttribute(IFiles.findIcePng("bossProgress-box"), IStyles.barTop, IFiles.findIcePng("bossProgress-right-cover"), scal).apply {
-        color = Colors.b4.cpy().a(1f)
+    var pa2 = ProgressAttribute(IFiles.findIcePng("bossProgress-box"), barTop,
+        IFiles.findIcePng("bossProgress-right-cover"), scal).apply {
+        color = IceColor.b4.cpy().a(1f)
         drawHeight = (barBackground.height - 80f) * scal
         starX = 24f * scal
         starY = 38f * scal

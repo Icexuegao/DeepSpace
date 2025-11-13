@@ -1,3 +1,5 @@
+import java.io.InputStreamReader
+
 buildscript {
     extra["proUser"] = System.getProperty("user.name")
     extra["sdkRoot"] = System.getenv("ANDROID_HOME")
@@ -38,17 +40,15 @@ dependencies {
     // implementation files("lib/backend.jar")
     // implementation "com.github.EB-wilson.UniverseCore:core:2.2.0"
     //compileOnly files("lib/UniverseCore-v2.2.0.jar")
-    //  compileOnly 'com.github.Anuken.Mindustry:core:v147.1'
     //  compileOnly "com.github.Anuken.Arc:arc-core:v149"
     //  compileOnly files("lib/bmx.jar")
     //  implementation files("lib/pinyin4j-2.5.0.jar")
     //  implementation 'org.tomlj:tomlj:1.1.1'
-    //  compileOnly "com.github.Tinylake:MindustryX:core:v2025.06.X10"
-   // compileOnly(files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar"))
-    compileOnly("com.github.Anuken.Mindustry:core:v150.1")
+    // compileOnly(files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar"))
+   // compileOnly("com.github.Anuken.Mindustry:core:v152.2")
     // compileOnly("com.github.Anuken.Arc:flabel:v149")
+    compileOnly("com.github.Tinylake:MindustryX:v2025.11.X22")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinCompatibility")
-    // compileOnly "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 }
 
 sourceSets {
@@ -86,14 +86,17 @@ tasks {
     }
 
     register<JavaExec>("runWithJavaExec") {
-        group = "kj"
+        group = "zi"
         classpath = sourceSets.main.get().runtimeClasspath
         mainClass.set("ice.MainKt")
         // main("ice.Main")
         args = listOf("我喜欢你", "你喜欢我")
     }
+    register("runPixMap") {
+        group = "kj"
+    }
 
-    register<Exec>("d8Compile") {
+    register("d8Compile") {
         dependsOn(jar)
         // 在配置阶段设置参数
         val sdkDir = File(sdkRoot)
@@ -102,22 +105,28 @@ tasks {
             f.isDirectory && File(f, "android.jar").exists()
         }?.maxByOrNull { it.name }
             ?: throw GradleException("No valid Android platform found")
-        val dependencies = configurations.compileClasspath.get() +
-                configurations.runtimeClasspath.get() +
-                listOf(File(platformRoot, "android.jar"))
-        val d8Path = File(sdkDir, "build-tools/36.0.0/d8.bat").absolutePath
+        val dependencies = (
+                configurations.compileClasspath.get() +
+                        configurations.runtimeClasspath.get() +
+                        setOf(File(platformRoot, "android.jar"))
+                ).joinToString(" ") { "--classpath $it" }
+        val string = "$sdkRoot/build-tools/36.0.0/d8.bat $dependencies --min-api 15 --output ${project.name}Android.jar ${project.name}Desktop.jar"
+        fun execute(string: String, path: File? = null, vararg args: Any?) {
+            val cmd = string.split(Regex("\\s+"))
+                .toMutableList()
+                .apply { addAll(args.map { it?.toString() ?: "null" }) }
+                .toTypedArray()
+            val process = ProcessBuilder(*cmd)
+                .directory(path ?: rootDir)
+                .redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                .redirectError(ProcessBuilder.Redirect.INHERIT)
+                .start()
 
-        commandLine(
-            listOf(d8Path) +
-                    dependencies.map { it.absolutePath } +
-                    listOf(
-                        "--min-api", "26",
-                        "--output", "$buildLibDir/${project.name}Android.jar",
-                        "$buildLibDir/${project.name}Desktop.jar"
-                    )
-        )
+            if (process.waitFor() != 0) throw Error(InputStreamReader(process.errorStream).readText())
 
-        workingDir = file(buildLibDir)
+        }
+
+        execute(string, File(buildLibDir))
     }
 
     register<Jar>("deploy") {
@@ -130,37 +139,14 @@ tasks {
         )
     }
 
+
+
     register<Copy>("myCopy") {
         dependsOn("deploy")
         from("$buildLibDir/${project.name}.jar") //源
         into("C:/Users/$proUser/AppData/Roaming/Mindustry/mods")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 
 buildscript {

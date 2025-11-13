@@ -10,24 +10,25 @@ import arc.scene.ui.layout.Table
 import arc.struct.OrderedMap
 import arc.struct.Seq
 import arc.util.Scaling
+import ice.library.content.BaseContentSeq
+import ice.library.meta.stat.IceStats
 import ice.library.scene.element.IceDialog
-import ice.library.scene.tex.Colors
 import ice.library.scene.tex.IStyles
-import ice.library.baseContent.BaseContentSeq
+import ice.library.scene.tex.IceColor
 import ice.ui.*
 import mindustry.ctype.UnlockableContent
+import mindustry.gen.Icon
 import mindustry.type.Item
 import mindustry.type.Liquid
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
 
-object DataDialog {
-    val cont = MenusDialog.cont
+object DataDialog : BaseDialog(IceStats.数据.localized(), Icon.book) {
     var cContents = Button.物品
     var cContent: UnlockableContent = Button.物品.content.first()
     var searchField = ""
     lateinit var flun: () -> Unit
-    fun show() {
+    override fun build() {
         cont.iTableGX { ta ->
             Button.entries.forEach {
                 val textButton = TextButton(it.name, IStyles.button1)
@@ -40,32 +41,29 @@ object DataDialog {
                 ta.add(textButton).pad(1f).grow()
             }
         }.height(60f).row()
-        cont.add(Image(IStyles.whiteui)).color(Colors.b1).height(3f).growX().row()
+        cont.add(Image(IStyles.whiteui)).color(IceColor.b1).height(3f).growX().row()
         cont.iTableG { ta ->
-            ta.iTableGY {
+            ta.table {
                 it.iTableGX { search ->
-                    search.image(IStyles.search).size(33f).padRight(8f)
-                    search.field("") { s ->
+                    search.image(IStyles.search).color(IceColor.b4).size(33f).padLeft(15f).padRight(8f)
+                    search.field(searchField) { s ->
                         searchField = s
                         flun()
-                    }.width(300f)
+                    }.growX()
                     val button = Button(IStyles.button).apply {
                         add("?")
-
                         changed {
                             IceDialog("介绍").apply {
-                                cont.add($$"""
-                                默认搜索name和localizedName
-                                加[#]搜索简介
-                                加[$]搜索吐槽
-                                例如: #矿石 $恶心
-                            """.trimIndent()).color(Colors.b4)
+                                cont.addCR("默认搜索name和localizedName")
+                                cont.addCR("加[#]搜索简介")
+                                cont.addCR("加[%]搜索吐槽")
+                                cont.addCR("例如: #矿 %饿")
                                 addCloseButton()
                             }.show()
                         }
                     }
                     search.add(button).size(40f).pad(8f)
-                }.height(60f).row()
+                }.minHeight(60f).row()
                 it.iPaneG { p ->
                     p.top()
                     var tmp = cContents
@@ -81,7 +79,7 @@ object DataDialog {
                                         return@select it.description.contains(substring)
                                     }
 
-                                    '$' -> {
+                                    '%' -> {
                                         it.details ?: return@select false
                                         return@select it.details.contains(substring)
 
@@ -109,27 +107,25 @@ object DataDialog {
                         }
                     }
                 }
-            }.width(400f)
-
-            ta.add(Image(IStyles.whiteui)).color(Colors.b1).width(3f).growY()
-            ta.iPaneG { p ->
+            }.minWidth(350f).growY()
+            ta.add(Image(IStyles.whiteui)).color(IceColor.b1).width(3f).growY()
+            ta.iTableG { p ->
                 var tmp = cContent
                 val r = {
                     p.clear()
                     val background31 = IStyles.background31
-                    p.iTableGX {
-                        it.iTableGY(background31) { it1 ->
+                    p.iTableG {
+                        it.iTableG(background31) { it1 ->
                             val color = unlockableContentColor(cContent)
                             it1.iTableG { it2 ->
-                                val d = Image(TextureRegionDrawable(cContent.uiIcon), Scaling.bounded)
-
-                                it2.add(d).expand()
-                                it2.add(cContent.localizedName).pad(2f).color(color).grow()
+                                it2.image(cContent.uiIcon).size(112f).scaling(Scaling.fit).row()
+                                it2.add(cContent.localizedName).fontScale(1.5f).pad(2f).color(color)
                             }.row()
 
                             it1.add(cContent.description).pad(2f).growX().color(color).height(150f).wrap().row()
-                            it1.add(cContent.details).pad(2f).growX().color(color).height(150f).wrap().row()
-                        }.margin(22f).width(300f)
+                            it1.add(cContent.details).pad(2f).growX().color(color.cpy().a(0.5f)).height(150f).wrap()
+                                .row()
+                        }.margin(22f).minWidth(200f)
                         it.iTableG(background31) { it2 ->
                             it2.icePane { it1 ->
                                 it1.add(cContent.name).color(Color.valueOf("b7e1fb")).padBottom(3f).row()
@@ -152,7 +148,7 @@ object DataDialog {
                                                 value.display(inset)
                                                 val element = inset.children[0]
                                                 if (element is Label) {
-                                                    element.color.set(Colors.b4)
+                                                    element.color.set(IceColor.b4)
                                                 }
                                                 inset.add().size(10f)
                                             }
@@ -161,10 +157,10 @@ object DataDialog {
                                     }
                                 }
                             }
-                        }.margin(22f)
-                    }.height(500f).row()
+                        }.margin(22f).minWidth(400f)
+                    }.minHeight(300f).row()
 
-                    p.iTableG(background31) {}.margin(22f)
+                    p.iTableG(background31) {}.margin(22f).minHeight(350f)
                 }
                 r()
                 p.update {
@@ -178,10 +174,11 @@ object DataDialog {
     }
 
     fun showBlock(block: UnlockableContent) {
-        MenusDialog.show()
+        if (!MenusDialog.isShown()) MenusDialog.show()
         cContent = block
-        MenusDialog.button = MenusDialog.MeunsButton.数据
-        show()
+        MenusDialog.button = this
+        hide()
+        build()
     }
 
     fun unlockableContentColor(content: UnlockableContent): Color {
@@ -189,7 +186,7 @@ object DataDialog {
             is Item -> content.color
             is Liquid -> content.color
             else -> {
-                Colors.b4
+                IceColor.b4
             }
         }
     }

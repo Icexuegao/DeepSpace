@@ -445,7 +445,7 @@ class IceScrollPane() : WidgetGroup() {
             }
         }
 
-        // The bounds of the scrollable area for the widget.
+        // 小组件的可滚动区域的边界。
         widgetAreaBounds[bgLeftWidth, bgBottomHeight, areaWidth] = areaHeight
         if (fadeScrollBars) {
             // Make sure widget is drawn under fading scrollbars.
@@ -580,11 +580,11 @@ class IceScrollPane() : WidgetGroup() {
             (widget as Cullable).setCullingArea(widgetCullingArea)
         }
 
-        // Draw the background ninepatch.
+        // 绘制背景九块。
         if (style.background != null) style.background.draw(0f, 0f, getWidth(), getHeight())
 
-        // Caculate the scissor bounds based on the batch transform, the available widget area and the camera transform. We need to
-        // project those to screen coordinates for OpenGL ES to consume.
+        // 根据批量变换、可用控件区域和摄像机变换计算剪刀边界。我们需要
+        // 将它们投影到屏幕坐标以供 OpenGL ES 使用。
         Core.scene.calculateScissors(widgetAreaBounds, scissorBounds)
         if (clip) {
             // 为 Widget 区域启用剪刀并绘制 Widget。
@@ -684,8 +684,8 @@ class IceScrollPane() : WidgetGroup() {
     }
 
     /**
-     * Sets the [Element] embedded in this scroll pane.
-     * @param widget May be null to remove any current actor.
+     * Sets the [Element] 嵌入到此滚动窗格中。
+     * @param widget 可以为空以删除任何当前Actor。
      */
     fun setWidget(widget: Element?) {
         require(widget !== this) { "widget cannot be the ScrollPane." }

@@ -13,22 +13,30 @@ import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
 import ice.DFW
 import ice.Ice
+import ice.content.IUnitTypes
 import ice.library.Incident
+import ice.library.meta.IceEffects
 import ice.library.scene.listener.DragInputListener
-import ice.library.scene.tex.Colors
 import ice.library.scene.tex.IStyles
+import ice.library.scene.tex.IceColor
+import ice.library.struct.log
 import ice.library.util.isNumericWithSign
+import ice.music.ISounds
 import ice.ui.*
 import ice.ui.dialog.AchievementDialog
 import ice.ui.dialog.MenusDialog
 import ice.vars.SettingValue
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
+import mindustry.entities.Effect
 import mindustry.game.Gamemode
 import mindustry.game.Rules
 import mindustry.game.Team
+import mindustry.gen.Groups
 import mindustry.gen.Icon
 import mindustry.gen.Tex
+import mindustry.gen.Unit
+import mindustry.type.UnitType
 import mindustry.ui.Styles
 import mindustry.world.meta.BuildVisibility
 
@@ -56,7 +64,7 @@ object DeBugFragment {
         var windowVisibility = false
         var contvisibe = false
         table.table(IStyles.background41) { ta ->
-            ta.setColor(Colors.b4)
+            ta.setColor(IceColor.b4)
             ta.icePane {
                 cont = it
             }.grow().visible {
@@ -82,10 +90,10 @@ object DeBugFragment {
     private fun buildPane(table: Table) {
         val pane = Table()
         pane.setPositions(500f, 100f).setSize(130f, 250f)
-        pane.add(Image(Tex.whiteui).addListeners(DragInputListener(table))).color(Colors.b4).height(40f).growX().row()
+        pane.add(Image(Tex.whiteui).addListeners(DragInputListener(table))).color(IceColor.b4).height(40f).growX().row()
         pane.icePane {
             fun button(name: String, icon: Drawable, runnable: Runnable = Runnable {}) {
-                it.image(Tex.underlineWhite, Colors.b3).height(3f).growX().row()
+                it.image(Tex.underlineWhite, IceColor.b3).height(3f).growX().row()
                 it.imageButton(name, icon, IStyles.txtCleari, 20f) {
                     check = when (check) {
                         name -> null
@@ -105,8 +113,16 @@ object DeBugFragment {
             button("传教", Icon.bookOpenSmall) {
                 Incident.announce("[red]<<传教>> 你的信仰疑似有点动摇[]", 9f)
             }
+            button("折跃", Icon.bookOpenSmall) {
+
+            }
             button("剧情", Icon.bookOpenSmall) {
-                ScenarioFragment.flun()
+                log {
+                    1
+                }
+            }
+            button("清除天气", Icon.bookOpenSmall) {
+                Groups.weather.clear()
             }
 
             button("血肉文本", Icon.fileTextSmall) {
@@ -126,16 +142,30 @@ object DeBugFragment {
             button("ac", Icon.up) {
                 val random = AchievementDialog.achievements.random()
                 random.unlock()
-                random.clearUnlock()
+                // random.clearUnlock()
             }
             button("df", Icon.units) {
                 val dfw = DFW()
                 dfw.set(8 * 50f, 8 * 50f)
                 dfw.add()
             }
-
+            button("kill", Icon.units) {
+                Groups.unit.find { it.type == IUnitTypes.青壤 }?.kill()
+            }
+            button("effect", Icon.effect) {
+                IceEffects.arc.at(Vars.player.x, Vars.player.y, 0f, IUnitTypes.焚棘)
+            }
         }.width(130f).height(211f)
         table.add(pane).expandY().top()
+    }
+
+    fun spawnAction(unit: UnitType, x: Float, y: Float, rotate: Float, team: Team): Unit {
+        val spawn = unit.spawn(team, x, y)
+        spawn.rotation = rotate
+        IceEffects.jumpTrail.at(x, y, rotate, IceColor.b4, spawn.type)
+        ISounds.foldJump.at(spawn)
+        Effect.shake(spawn.hitSize / 3f, spawn.hitSize / 4f, spawn)
+        return spawn
     }
 
     private fun addbutton(t: Table, content: UnlockableContent, run: Runnable) {
@@ -147,7 +177,7 @@ object DeBugFragment {
 
     private fun gmode() {
         cont.iTableG {
-            it.addLine( "游戏模式", Color.white)
+            it.addLine("游戏模式", Color.white)
             it.table { ta ->
                 Gamemode.entries.forEach { m ->
                     ta.button(m.name, Styles.flatBordert) {
@@ -175,7 +205,7 @@ object DeBugFragment {
         var size = ""
         var add = true
         cont.iTableG {
-            it.addLine( "物品", Color.white)
+            it.addLine("物品", Color.white)
             it.iTableG { ita ->
                 Vars.content.items().forEach { item ->
                     addbutton(ita, item) {
@@ -229,7 +259,7 @@ object DeBugFragment {
                     }
                 }.size(160f, 45f).row()
             }.row()
-            ta.addLine( "科技", Color.white)
+            ta.addLine("科技", Color.white)
             ta.iTableG {
                 Vars.content.each { cotent ->
                     if (cotent is UnlockableContent) {

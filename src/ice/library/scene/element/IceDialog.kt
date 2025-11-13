@@ -22,8 +22,8 @@ import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Align
 import arc.util.pooling.Pools
-import ice.library.scene.tex.Colors
 import ice.library.scene.tex.IStyles
+import ice.library.scene.tex.IceColor
 import mindustry.gen.Sounds
 import mindustry.ui.Fonts
 import kotlin.math.roundToInt
@@ -110,7 +110,7 @@ class IceDialog(
         setFillParent(true)
         this.title.setAlignment(Align.center)
         titleTable.row()
-        titleTable.image(mindustry.gen.Tex.whiteui, Colors.b4).growX().height(3f).pad(4f)
+        titleTable.image(mindustry.gen.Tex.whiteui, IceColor.b4).growX().height(3f).pad(4f)
 
         hidden { Sounds.back.play() }
     }
@@ -233,7 +233,7 @@ class IceDialog(
     fun addCloseButton(width: Float = 210f) {
         buttons.defaults().size(width, 64f)
 
-        buttons.button("返回", IStyles.rootCleanButton,::hide).size(width, 64f)
+        buttons.button("返回", IStyles.rootCleanButton, ::hide).size(width, 64f)
 
         addCloseListener()
     }
@@ -371,7 +371,7 @@ class IceDialog(
         var titleFont: Font = Fonts.def
 
         /** Optional.  */
-        var titleFontColor = Colors.b4
+        var titleFontColor = IceColor.b4
 
         /** Optional.  */
         var stageBackground: Drawable? = null

@@ -54,7 +54,7 @@ class LinkListener(val group: View) : InputListener() {
                 return
             }
             n1.child.addUnique(n2)
-            n2.parent = n1
+            //n2.parent = n1
             group.removeListener(this)
             return
         }

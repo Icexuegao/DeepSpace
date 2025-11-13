@@ -21,7 +21,7 @@ class RemoveInputListener(val group: View) : InputListener() {
             return@find false
         }?:return
 
-        find.parent?.child?.remove(find)
+     //   find.parent?.child?.remove(find)
         find.child.clear()
         group.links.remove(find)
 

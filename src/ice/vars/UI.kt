@@ -8,14 +8,11 @@ import arc.util.OS
 import ice.Ice
 import ice.library.IFiles
 import ice.library.IFiles.newCursor
-import ice.library.scene.tex.Colors
+import ice.library.scene.tex.IceColor
 import ice.library.util.accessField
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.dialog.MenusDialog
-import ice.ui.fragment.ConversationFragment
-import ice.ui.fragment.DeBugFragment
-import ice.ui.fragment.FleshFragment
-import ice.ui.fragment.ScenarioFragment
+import ice.ui.fragment.*
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.gen.Icon
@@ -25,6 +22,7 @@ import mindustry.ui.fragments.MenuFragment
 object UI {
     val cgwidth = Core.graphics.width.toFloat()
     val cgheight = Core.graphics.height.toFloat()
+    val sfxVolume = Core.settings.getInt("sfxvol") / 100f
     var MenuFragment.renderer: MenuRenderer by accessField("renderer")
     var menuRender = object : MenuRenderer() {
         val spacea = IFiles.findIcePng("spacea")
@@ -36,6 +34,7 @@ object UI {
     }
 
     fun init() {
+        Core.settings.put("campaignselect", true)
         Vars.ui.menufrag.renderer = menuRender
         Events.run(EventType.Trigger.update) {
             if (Vars.ui.planet.isShown) {
@@ -48,12 +47,14 @@ object UI {
         DeBugFragment.build(Vars.ui.hudGroup)
         //  BossHealthFragment.build(Vars.ui.hudGroup)
         ConversationFragment.build(Vars.ui.hudGroup)
-        Ice.mod.meta.author = "[#${Colors.b4}]Alon[]"
-        Ice.mod.meta.displayName = "[#${Colors.b4}]Deep Space[]"
+        ShowProgress.build(Vars.ui.hudGroup)
+        Ice.mod.meta.author = "[#${IceColor.b4}]Alon[]"
+        Ice.mod.meta.displayName = "[#${IceColor.b4}]Deep Space[]"
 
         if (OS.isWindows) {
             loadSystemCursors()
         }
+
         Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]DeepSpace[]", Icon.menu, MenusDialog::show)
         Core.atlas.regionMap.put("logo", IFiles.findIcePng("logo"))
     }

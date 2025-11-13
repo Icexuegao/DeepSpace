@@ -1,12 +1,13 @@
 package ice.ui.dialog.research.node
 
-import arc.func.Prov
 import arc.scene.Element
+import arc.scene.ui.layout.Scl
 import arc.struct.Seq
 
-open class LinkNode(val nameId: String, x: Float, y: Float, ep: Prov<Element>) : Node(x, y, ep) {
-    var parent: LinkNode? = null
+open class LinkNode(val name: String, x: Float, y: Float, element: Element) : Node(x, y, element) {
+    var parent = Seq<LinkNode>()
     var child = Seq<LinkNode>()
+    var nodeSize: Float = Scl.scl(60f)
 
     init {
         view.links.add(this)
@@ -22,14 +23,14 @@ open class LinkNode(val nameId: String, x: Float, y: Float, ep: Prov<Element>) :
 
     fun addChild(vararg node: LinkNode): LinkNode {
         node.forEach {
-            it.parent = this
+            it.parent.addUnique(this)
         }
         child.add(node)
         return this
     }
 
     fun setParent(node: LinkNode): LinkNode {
-        this.parent = node
+        parent.addUnique(node)
         node.addChild(this)
         return this
     }

@@ -7,6 +7,7 @@ import arc.math.Mathf
 import arc.scene.Action
 import arc.scene.Element
 import arc.scene.Group
+import arc.scene.Scene
 import arc.scene.actions.Actions
 import arc.scene.event.EventListener
 import arc.scene.style.Drawable
@@ -20,12 +21,13 @@ import arc.struct.Seq
 import ice.library.scene.element.IceScrollPane
 import ice.library.scene.element.ProgressBar
 import ice.library.scene.layout.ProgressAttribute
-import ice.library.scene.tex.Colors
 import ice.library.scene.tex.IStyles
 import ice.library.scene.tex.IStyles.background22
+import ice.library.scene.tex.IceColor
 import ice.library.scene.ui.layout.ITable
 import ice.library.struct.asDrawable
 import ice.library.struct.getT
+import ice.library.util.accessField
 import ice.library.util.toStringi
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
@@ -35,12 +37,19 @@ import mindustry.ui.Styles
 import mindustry.world.Block
 import java.util.*
 
+var Element.scenes: Scene by accessField("stage")
 fun Table.iTable(back: Drawable? = null, cons: Cons<ITable>): Cell<ITable> {
     return add(cons.getT(ITable(back)))
 }
 
 fun Table.iTableG(back: Drawable? = null, cons: Cons<ITable>): Cell<ITable> {
     return add(cons.getT(ITable(back))).grow()
+}
+
+fun Table.addCR(name: String, color: Color = IceColor.b4, r: Boolean = true): Cell<Label>{
+   val cell=add(name).color(IceColor.b4)
+    if (r) row()
+    return cell
 }
 
 fun Table.iTableGX(back: Drawable? = null, cons: Cons<ITable>): Cell<ITable> {
@@ -93,8 +102,8 @@ fun Table.imageButton(
     return add(button).marginLeft(6f)
 }
 
-fun Table.icePane(back: Drawable? = null, consumer: Cons<Table>): Cell<IceScrollPane> {
-    val table = Table()
+fun Table.icePane(back: Drawable? = null, consumer: Cons<ITable>): Cell<IceScrollPane> {
+    val table = ITable()
     if (back != null) table.background = back
     consumer.get(table)
     val pane = IceScrollPane(table)
@@ -119,13 +128,29 @@ fun Element.addListeners(listener: EventListener): Element {
 fun <T : Element> T.itooltip(string: String): T {
     addListener(Tooltip { tool ->
         tool.background(IStyles.background32).margin(20f)
-        tool.add(string, Colors.b4)
+        tool.add(string, IceColor.b4)
+    }.apply {
+        allowMobile = true
     })
+    return this
+}
+
+fun <T : Element> Cell<T>.tapped(run: (Element) -> Unit): Cell<T> {
+    get().tapped {
+        run(get())
+    }
     return this
 }
 
 fun <T : Element> Cell<T>.itooltip(string: String): Cell<T> {
     get().itooltip(string)
+    return this
+}
+
+fun <T : Element> T.updateE(cons: Cons<T>): T {
+    update {
+        cons.get(this)
+    }
     return this
 }
 
@@ -146,7 +171,7 @@ fun Table.addIceSlider(
     slider.changed {
         fLabel.restart("$name:${slider.value.toStringi(2)}")
     }
-    fLabel.setColor(Colors.b3)
+    fLabel.setColor(IceColor.b3)
     t2.add(fLabel)
     t2.marginLeft(30f).marginRight(30f)
     return add(Stack(t2, slider)).size(400f, 45f).expandX().left().pad(5f)
@@ -156,9 +181,9 @@ fun Table.addProgressBar(attribute: ProgressAttribute, fraction: Floatp): Cell<P
     return add(ProgressBar(attribute, fraction))
 }
 
-fun Table.addLine(name: String? = null, color: Color = Colors.b1) {
+fun Table.addLine(name: String? = null, color: Color = IceColor.b4) {
     table {
-        name?.let { n -> add(n).color(color).row() }
+        name?.let { n -> add(Label(n).apply { setFontScale(1.5f, 1.5f) }).color(color).row() }
         it.add(Image(IStyles.whiteui)).color(color).height(3f).growX().row()
     }.growX().row()
 }
@@ -233,7 +258,7 @@ object ItemSelection {
         rebuild()
         val main = Table(background22)
         main.table { search: Table ->
-            search.image(Icon.zoom).padLeft(4f)
+            search.image(Icon.zoom).padLeft(4f).color(IceColor.b4)
             this.search = search.field(null) { _: String -> rebuild() }.padBottom(4f).left().growX().get()
             this.search?.messageText = "@players.search"
         }.fillX().margin(13f).row()

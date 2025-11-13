@@ -5,16 +5,16 @@ import arc.func.Prov
 import arc.struct.ObjectMap
 import arc.util.Log
 import arc.util.serialization.JsonValue
+import ice.library.content.item.IceItem
+import ice.library.content.liquid.IceLiquid
+import ice.library.content.status.IceStatusEffect
+import ice.library.content.unit.type.IceUnitType
 import ice.parse.ContentParser
 import ice.parse.ContentParser.currentContent
 import ice.parse.ContentParser.locate
 import ice.parse.ContentParser.read
 import ice.parse.ContentParser.readFields
 import ice.parse.JTContents.currentMod
-import ice.library.baseContent.item.IceItem
-import ice.library.baseContent.liquid.IceLiquid
-import ice.library.baseContent.status.IceStatusEffect
-import ice.library.baseContent.unit.type.IceUnitType
 import mindustry.Vars
 import mindustry.ai.types.FlyingAI
 import mindustry.ctype.Content
@@ -182,7 +182,7 @@ object ClassTypeParsers {
         },
         ContentType.status,
         ContentParser.parser(ContentType.status) { name: String ->
-            IceStatusEffect(name)
+            IceStatusEffect(name){}
         },
         ContentType.weather,
         TypeParser { name: String, value: JsonValue ->

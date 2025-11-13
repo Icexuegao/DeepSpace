@@ -103,7 +103,7 @@ class DFW : Drawc, Hitboxc {
     }
 
     override fun hitbox(p0: Rect?) {
-        p0?.setCentered(x, y, hitSize, hitSize);
+        p0?.setCentered(x, y, hitSize, hitSize)
     }
 
     override fun hitboxTile(p0: Rect?) {
@@ -131,9 +131,6 @@ class DFW : Drawc, Hitboxc {
         this.id = id
     }
 
-    override fun read(p0: Reads?) {
-
-    }
 
     override fun remove() {
         if (!added) return
@@ -146,8 +143,7 @@ class DFW : Drawc, Hitboxc {
 
     val temp = Vec2()
     override fun update() {
-        Units.nearby(Rect(x - 8/2, y - 8f/2,  8f,  8f)) {
-
+        Units.nearby(Rect(x - 8 / 2, y - 8f / 2, 8f, 8f)) {
             vel.set(this).sub(it).scl(0.05f)
             log {
                 vel
@@ -173,8 +169,14 @@ class DFW : Drawc, Hitboxc {
         y += cy
     }
 
-    override fun write(p0: Writes?) {
+    override fun read(read: Reads) {
+        this.x = read.f()
+        this.y = read.f()
+    }
 
+    override fun write(write: Writes) {
+        write.f(this.x)
+        write.f(this.y)
     }
 
     override fun floorOn(): Floor? {

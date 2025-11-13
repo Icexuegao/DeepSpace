@@ -3,7 +3,7 @@ package ice.vars
 import arc.Core
 import arc.graphics.Color
 import ice.Ice
-import ice.library.scene.tex.Colors
+import ice.library.scene.tex.IceColor
 import ice.music.IceMusics
 import mindustry.Vars
 
@@ -25,7 +25,7 @@ object SettingValue {
         set(value) {
             field = value
             if (value) {
-                IceMusics.title.play()
+                IceMusics.title.pause(false)
             } else {
                 IceMusics.title.pause(true)
             }
@@ -34,14 +34,11 @@ object SettingValue {
         }
     var menuMusicVolume = 1f
         get() {
-            IceMusics.title.isLooping = true
             val float = Core.settings.getFloat("${Ice.name}-menuMusicVolume", 1f)
-            IceMusics.title.volume = float
             field = float
             return field
         }
         set(value) {
-            IceMusics.title.volume = value
             field = value
             Core.settings.put("${Ice.name}-menuMusicVolume", value)
         }
@@ -89,8 +86,8 @@ object SettingValue {
         }
 
     enum class ModeDifficulty(var na: String, var color: Color, var bun: String) {
-        Easy("神赐", Colors.y1, "圣水淅沥,与神同行,乐园就在此处..."),
-        General("洗礼", Colors.b4, "福祸未分,命途难测,神谕者缄口不言"),
-        Suffering("棘罪", Colors.r1, "圣光暗淡,神像蒙尘,亵渎者又将何去何从?")
+        Easy("神赐", IceColor.y1, "圣水淅沥,与神同行,乐园就在此处..."),
+        General("洗礼", IceColor.b4, "福祸未分,命途难测,神谕者缄口不言"),
+        Suffering("棘罪", IceColor.r1, "圣光暗淡,神像蒙尘,亵渎者又将何去何从?")
     }
 }

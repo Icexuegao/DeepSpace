@@ -14,7 +14,7 @@ import arc.struct.Seq
 import arc.util.Interval
 import ice.library.IFiles
 import ice.library.scene.action.IceActions
-import ice.library.scene.tex.Colors
+import ice.library.scene.tex.IceColor
 import ice.library.struct.asDrawable
 import ice.vars.UI
 import mindustry.Vars
@@ -107,10 +107,10 @@ object ConversationFragment {
             title?.let {
                 add(Label(it).apply {
                     setFontScale(1.5f)
-                }).color(Colors.b4).pad(10f).row()
+                }).color(IceColor.b4).pad(10f).row()
             }
-            add(fLabel).color(Colors.b4).row()
-            image(Tex.whiteui).color(Colors.b4).growX()
+            add(fLabel).color(IceColor.b4).row()
+            image(Tex.whiteui).color(IceColor.b4).growX()
             update {
                 pack()
                 setPosition(x - width / 2, y)

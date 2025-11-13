@@ -3,6 +3,7 @@ package ice.library
 import arc.Core
 import arc.Graphics
 import arc.files.Fi
+import arc.graphics.Pixmap
 import arc.graphics.Texture
 import arc.graphics.g2d.NinePatch
 import arc.graphics.g2d.PixmapRegion
@@ -14,10 +15,9 @@ import arc.util.Log
 import ice.Ice
 
 object IFiles {
-    private val filter = arrayOf("ice", "kotlin", "org", "META-INF")
     private val rootDirectory = HashMap<String, Fi>().apply {
         Ice.mod.root.list().forEach {
-            if (!filter.contains(it.name()) && it.isDirectory) {
+            if (it.isDirectory) {
                 put(it.name(), it)
             }
         }
@@ -34,7 +34,7 @@ object IFiles {
             }
         }
     }
-    private val sprites = HashMap<String, Fi>().apply {
+     val sprites = HashMap<String, Fi>().apply {
         rootDirectory["sprites"]?.findAll {
             it.extension().equals("png")
         }?.forEach {
@@ -69,8 +69,16 @@ object IFiles {
         val file = sprites["$name.png"] ?: throw Exception("未找到文件:$name")
         return getAtlasRegion(file)
     }
+    fun hasPng(name:String)=sprites.contains("$name.png")
+    fun hasIcePng(name:String)=spritesIce.contains("$name.png")
+    fun getPiX(name: String): Pixmap {
+       return Pixmap(sprites["$name.png"] ?: throw Exception("未找到文件:$name.png"))
+    }
 
-    private fun getAtlasRegion(file: Fi): AtlasRegion {
+    fun getNormName(name: String): String = "${Ice.name}-$name"
+    fun getRepName(name: String):String= name.replace("${Ice.name}-","")
+
+     fun getAtlasRegion(file: Fi): AtlasRegion {
         val texture = TextureRegion(Texture(file))
         val atlasRegion = AtlasRegion(texture)
         atlasRegion.offsetX = 0f
@@ -90,7 +98,8 @@ object IFiles {
         val texture = findIcePng("$name.9")
         val pixmapRegion = PixmapRegion(texture.texture.textureData.pixmap, 0, 0, texture.width, texture.height)
         val splits = getSplits(pixmapRegion)
-        texture.set(1, 1, texture.width - 2, texture.height - 2)
+       /* texture.set(1, 1, texture.width - 2, texture.height - 2)*/
+        texture.set(1, 2, texture.width - 2, texture.height -4)
         val copy = getScaledNinePatchDrawable(texture, splits!!)
         copy.minWidth = 0f
         copy.minHeight = 0f

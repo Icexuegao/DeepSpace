@@ -1,14 +1,19 @@
 package ice
 
+import java.io.File
+
 fun main() {
-    /* val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\distribution\\logisticsHub\\conduit")
-
-     file.listFiles()?.forEach {
-         val replace = it.name.replace("digitalConduit","hubConduit")
-
-               it.renameTo(File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\distribution\\logisticsHub\\conduit\\$replace"))
-     }*/
-    val d="dfw"
-
-    print(d.indexOf("f"))
+  //  repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\environment\\floor\\humanBones")
 }
+
+fun repName(path: String) {
+    val file = File(path)
+    var i=1
+    file.listFiles()?.forEach {
+
+        val replace = "humanBones$i.png"
+        it.renameTo(File("$path\\$replace"))
+        i++
+    }
+}
+

@@ -1,7 +1,7 @@
 #define HIGHP
 
-#define S1 vec4(207, 138.0, 143.0,100) / 255
-#define S2 vec3(207, 138.0, 143.0) /255
+#define S1 vec4(207.0, 138.0, 143.0,100.0) / 255.0
+#define S2 vec3(207.0, 138.0, 143.0) /255.0
 
 #define NSCALE 170.0 / 2.0
 #define DSCALE 160.0 / 2.0
@@ -31,7 +31,7 @@ void main(){
     c += (vec2(
         texture2D(u_noise, (coords) / NSCALE + vec2(btime) * vec2(-0.9, 0.8)).r,
         texture2D(u_noise, (coords) / NSCALE + vec2(btime * 1.1) * vec2(0.8, -1.0)).r
-    ) - vec2(0.5)) * 20.0 / u_resolution/2;
+    ) - vec2(0.5)) * 20.0 / u_resolution/2.0;
 
     vec4 color = texture2D(u_texture, c);
 

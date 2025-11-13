@@ -1,16 +1,18 @@
 package ice.ui.dialog
 
-import arc.Core
 import arc.flabel.FLabel
+import ice.library.meta.stat.IceStats
 import ice.library.scene.tex.IStyles
 import ice.music.IceMusics
 import ice.ui.*
 import ice.vars.SettingValue
+import mindustry.gen.Icon
 import mindustry.ui.Styles
+import mindustry.ui.dialogs.PlanetDialog
 
-object SettingDialog {
-    val cont = MenusDialog.cont
-    fun show() {
+object SettingDialog: BaseDialog(IceStats.设置.localized(), Icon.filters){
+
+    override fun build() {
         cont.pane(Styles.noBarPane) { it ->
             it.addLine("音乐")
             it.addProgressBar(IStyles.pa1) { IceMusics.title.position / 168f }.padTop(10f).row()
@@ -29,10 +31,10 @@ object SettingDialog {
             it.addCheckBox("调试", SettingValue::debugMode) {
                 SettingValue.debugMode = it.isChecked
             }.row()
-
-            it.addIceSlider("UI比例", 25f, 300f, 0.1f, Core.settings.getInt("uiscale", 100).toFloat()) {
-                Core.settings.put("uiscale", it.toInt())
+            it.addCheckBox("星球区块调试",  PlanetDialog::debugSelect){
+                PlanetDialog.debugSelect=it.isChecked
             }.row()
+
             it.addIceSlider("视野最大缩放", 0f, 40f, 0.1f, SettingValue.maxZoom) {
                 SettingValue.maxZoom = it
             }.itooltip("数值越大,放大能看到的越少").row()

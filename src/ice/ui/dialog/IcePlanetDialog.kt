@@ -1,7 +1,7 @@
 package ice.ui.dialog
 
 import arc.scene.ui.layout.Scl
-import ice.library.scene.tex.Colors
+import ice.library.scene.tex.IceColor
 import ice.vars.SettingValue
 import mindustry.type.Planet
 import mindustry.ui.Fonts
@@ -14,7 +14,7 @@ object IcePlanetDialog : PlanetDialog() {
         if (SettingValue.planetSectorId) {
             for (sec in planet.sectors) {
                 planets.drawPlane(sec) {
-                    Fonts.outline.draw(sec.id.toString(), 0f, 0f, Colors.b4, fontScl, true, 1)
+                    Fonts.outline.draw(sec.id.toString(), 0f, 0f, IceColor.b4, fontScl, true, 1)
                 }
             }
         }
