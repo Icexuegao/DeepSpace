@@ -32,9 +32,9 @@ object IFiles {
 
     fun init() {
         modFile.list().forEach {
-            rootDirectory.put(it.name(), it)
+            rootDirectory[it.name()] = it
         }
-        rootDirectory.forEach {entry ->
+        rootDirectory.forEach { entry ->
             when (entry.key) {
                 "sprites-ice" -> {
                     entry.value.findAll { f ->
@@ -48,6 +48,7 @@ object IFiles {
                         }
                     }
                 }
+
                 "sprites" -> {
                     entry.value.findAll { f ->
                         f.extension().equals("png")
@@ -55,21 +56,24 @@ object IFiles {
                         sprites.put(it.name(), it)
                     }
                 }
+
                 "music" -> {
                     entry.value.findAll { it.extension().equals("ogg") }?.forEach {
                         musics.put(it.name(), it)
                     }
                 }
+
                 "sounds" -> {
                     entry.value.findAll { it.extension().equals("ogg") }?.forEach {
                         sounds.put(it.name(), it)
                     }
                 }
+
                 "shaders" -> {
                     entry.value.walk {
-                        if(!shaders.contains(it.name())){
+                        if (!shaders.contains(it.name())) {
                             shaders.put(it.name(), it)
-                        }else{
+                        } else {
                             Log.warn("已收录shader文件:${shaders.get(it.name())?.path()},未收录:${it.path()}")
                         }
                     }
@@ -193,11 +197,11 @@ object IFiles {
     }
 
     private fun getSplitPoint(
-            raster: PixmapRegion,
-            startX: Int,
-            startY: Int,
-            startPoint: Boolean,
-            xAxis: Boolean,
+        raster: PixmapRegion,
+        startX: Int,
+        startY: Int,
+        startPoint: Boolean,
+        xAxis: Boolean,
     ): Int {
         var next = if (xAxis) startX else startY
         val end = if (xAxis) raster.width else raster.height
@@ -215,6 +219,5 @@ object IFiles {
 
         return 0
     }
-
 }
 
