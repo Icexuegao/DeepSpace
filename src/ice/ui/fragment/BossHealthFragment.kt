@@ -7,7 +7,7 @@ import arc.scene.event.Touchable
 import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
 import ice.library.scene.element.ProgressBar
-import ice.library.scene.tex.IStyles
+import ice.graphics.IStyles
 import ice.library.scene.ui.layout.CrosswiseCollapser
 
 object BossHealthFragment {

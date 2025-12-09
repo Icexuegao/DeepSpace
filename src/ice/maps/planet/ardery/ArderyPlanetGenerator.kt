@@ -16,10 +16,11 @@ import arc.util.Structs
 import arc.util.Tmp
 import arc.util.noise.Ridged
 import arc.util.noise.Simplex
-import ice.content.IBlocks
 import ice.content.IItems
 import ice.content.IPlanets
+import ice.content.block.Environment
 import ice.library.struct.log
+import ice.world.content.blocks.environment.IceOreBlock
 import mindustry.Vars
 import mindustry.ai.Astar
 import mindustry.ai.BaseRegistry.BasePart
@@ -38,7 +39,6 @@ import mindustry.world.Tile
 import mindustry.world.TileGen
 import mindustry.world.Tiles
 import mindustry.world.blocks.environment.SteamVent
-import mindustry.world.blocks.storage.CoreBlock.CoreBuild
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -84,8 +84,10 @@ class ArderyPlanetGenerator : PlanetGenerator() {
     }
 
     fun allowNumberedLaunch(s: Sector): Boolean {
-        return s.hasBase() && (s.info.bestCoreType.size >= 4 || s.isBeingPlayed && Vars.state.rules.defaultTeam.cores()
-            .contains { b: CoreBuild? -> b!!.block.size >= 4 })
+        return s.hasBase() &&true
+
+                (s.info.bestCoreType.size >= 4 || s.isBeingPlayed && Vars.state.rules.defaultTeam.cores()
+            .contains { b -> b.block.size >= 4 })
     }
 
     override fun allowLanding(sector: Sector): Boolean {
@@ -137,7 +139,7 @@ class ArderyPlanetGenerator : PlanetGenerator() {
         var captureDst = 999f
         var lightScl = 0f
         IPlanets.阿德里.sectors.forEach { sector ->
-            if (sector.hasEnemyBase() && !sector.isCaptured()) {
+            if (sector.hasEnemyBase() && !sector.isCaptured) {
                 dst = min(dst, position.dst(
                     sector.tile.v) - (if (sector.preset != null) sector.preset.difficulty / 10f * 0.03f - 0.03f else 0f))
             } else if (sector.hasBase()) {
@@ -313,9 +315,9 @@ class ArderyPlanetGenerator : PlanetGenerator() {
                                 if (Mathf.within(x.toFloat(), y.toFloat(),
                                         (rad - 1).toFloat()) && !other.floor().isLiquid
                                 ) {
-                                    val floor = other.floor()
+                                    other.floor()
                                     //TODO 不尊重受污染的地板
-                                    other.setFloor(IBlocks.血池)
+                                    other.setFloor(Environment.血池)
                                 }
                             }
                         }
@@ -435,8 +437,9 @@ class ArderyPlanetGenerator : PlanetGenerator() {
         }*/
 
         distort(10f, 6f)
-        val redB = arrayOf(IBlocks.血浅滩.asFloor(), IBlocks.血痂地, IBlocks.红土, IBlocks.殷血粗沙, IBlocks.肿瘤地,
-            IBlocks.红冰, IBlocks.软红冰, IBlocks.红霜, IBlocks.深血池, IBlocks.血池)
+        val redB = arrayOf(Environment.血浅滩.asFloor(), Environment.血痂地, Environment.红土, Environment.殷血粗沙,
+            Environment.肿瘤地,
+            Environment.红冰, Environment.软红冰, Environment.红霜, Environment.深血池, Environment.血池)
         //河流
         pass { x: Int, y: Int ->
             if (block.solid) return@pass
@@ -458,10 +461,10 @@ class ArderyPlanetGenerator : PlanetGenerator() {
                 //  忽略预先存在的液体
                 val block1 = when (floor) {
                     in redB -> {
-                        if (deep) IBlocks.深血池 else if (sd) IBlocks.血浅滩 else IBlocks.血池
+                        if (deep) Environment.深血池 else if (sd) Environment.血浅滩 else Environment.血池
                     }
 
-                    IBlocks.潮汐石 -> IBlocks.潮汐水石
+                    Environment.潮汐石 -> Environment.潮汐水石
                     else -> {
                         var b = Blocks.cryofluid
                         if (Vars.content.block(floor.name + "Water") != null) {
@@ -501,7 +504,7 @@ class ArderyPlanetGenerator : PlanetGenerator() {
                       }
                   }
 
-                  floor = if (floor === IBlocks.血浅滩) IBlocks.血池 else Blocks.water
+                  floor = if (floor === _root_ide_package_.ice.content.block.Environment.血浅滩) _root_ide_package_.ice.content.block.Environment.血池 else Blocks.water
               }
           }*/
         /* if (naval) {
@@ -536,7 +539,7 @@ class ArderyPlanetGenerator : PlanetGenerator() {
 
         inverseFloodFill(tiles.getn(spawn!!.x, spawn.y))
 
-        tech(IBlocks.钢铁地板2, IBlocks.钢铁地板1, IBlocks.跨界钢板墙)
+        tech(Environment.钢铁地板2, Environment.钢铁地板1, Environment.跨界钢板墙)
 
         pass { x, y ->
             //random 血痂地
@@ -636,74 +639,74 @@ class ArderyPlanetGenerator : PlanetGenerator() {
         //处理其他地形生成
         pass { x, y ->
             when (floor) {
-                IBlocks.潮汐石 -> {
+                Environment.潮汐石 -> {
                     if (!(abs(0.5f - noise((x - 90).toFloat(), y.toFloat(), 4.0, 0.8, 80.0)) > 0.035)) {
                         for (p in Geometry.d8) {
                             val other = tiles.get(x + p.x, y + p.y)
-                            if ((other?.floor() == IBlocks.潮汐石 || other?.floor() == IBlocks.潮汐水石)) {
-                                floor = IBlocks.潮汐水石
+                            if ((other?.floor() == Environment.潮汐石 || other?.floor() == Environment.潮汐水石)) {
+                                floor = Environment.潮汐水石
                             }
                         }
                     }
                     if (rand.chance(0.0005)) {
                         for (pos in SteamVent.offsets) {
                             val other = tiles[x + pos.x, y + pos.y]
-                            if (other == null || ((other.floor() != IBlocks.潮汐石) && (other.floor() != IBlocks.潮汐水石)) || other.block().solid) {
+                            if (other == null || ((other.floor() != Environment.潮汐石) && (other.floor() != Environment.潮汐水石)) || other.block().solid) {
                                 return@pass
                             }
                         }
-                        floor = IBlocks.潮汐喷口
+                        floor = Environment.潮汐喷口
                         for (pos in SteamVent.offsets) {
                             val other = tiles[pos.x + x + 1, pos.y + y + 1]
-                            other.setFloor(IBlocks.潮汐喷口)
+                            other.setFloor(Environment.潮汐喷口)
                         }
                     }
                 }
 
-                IBlocks.新月岩 -> {
+                Environment.新月岩 -> {
                     if (rand.chance(0.0005)) {
                         for (pos in SteamVent.offsets) {
                             val other = tiles[x + pos.x, y + pos.y]
-                            if (other == null || (other.floor() != IBlocks.新月岩) || other.block().solid) {
+                            if (other == null || (other.floor() != Environment.新月岩) || other.block().solid) {
                                 return@pass
                             }
                         }
-                        floor = IBlocks.新月喷口
+                        floor = Environment.新月喷口
                         for (pos in SteamVent.offsets) {
                             val other = tiles[pos.x + x + 1, pos.y + y + 1]
-                            other.setFloor(IBlocks.新月喷口)
+                            other.setFloor(Environment.新月喷口)
                         }
                     }
                 }
 
-                IBlocks.云英岩 -> {
-                    decoration(x, y, 0.013, IBlocks.云英石柱)
+                Environment.云英岩 -> {
+                    decoration(x, y, 0.013, Environment.云英石柱)
                 }
 
-                IBlocks.晶石地 -> {
-                    decoration(x, y, 0.001, IBlocks.燃素晶簇)
+                Environment.晶石地 -> {
+                    decoration(x, y, 0.001, Environment.燃素晶簇)
                     if (rand.chance(0.01)) {
                         Geometry.d8.forEach {
-                            if (tiles[x + it.x, y + it.y]?.block() == IBlocks.晶石墙 && block == Blocks.air) {
-                                block = IBlocks.燃素晶簇
+                            if (tiles[x + it.x, y + it.y]?.block() == Environment.晶石墙 && block == Blocks.air) {
+                                block = Environment.燃素晶簇
                             }
                         }
                     }
 
                 }
 
-                IBlocks.幽灵草 -> {
-                    decoration(x, y, 0.017, IBlocks.幽灵簇)
-                    decoration(x, y, 0.001, IBlocks.缠怨花)
+                Environment.幽灵草 -> {
+                    decoration(x, y, 0.017, Environment.幽灵簇)
+                    decoration(x, y, 0.001, Environment.缠怨花)
                     if (rand.chance(0.04)) {
                         Geometry.d8.forEach {
-                            if (tiles[x + it.x, y + it.y]?.block() == IBlocks.幽灵草墙 && block == Blocks.air) {
-                                block = IBlocks.幽冥蕨
+                            if (tiles[x + it.x, y + it.y]?.block() == Environment.幽灵草墙 && block == Blocks.air) {
+                                block = Environment.幽冥蕨
                                 Geometry.d8.forEach { it ->
                                     if (rand.chance(0.2)) {
                                         val tile = tiles[x + it.x + rand.random(-3, 3), y + it.y + rand.random(-3, 3)]
                                         if (tile?.block() === Blocks.air) {
-                                            tile.setBlock(IBlocks.幽冥蕨)
+                                            tile.setBlock(Environment.幽冥蕨)
                                         }
                                     }
                                 }
@@ -712,42 +715,42 @@ class ArderyPlanetGenerator : PlanetGenerator() {
                     }
                 }
 
-                IBlocks.肿瘤地 -> {
+                Environment.肿瘤地 -> {
                     if (rand.chance(0.05)) {
                         var spawn = true
                         Geometry.d8.forEach {
-                            if (tiles[x + it.x, y + it.y]?.floor() != IBlocks.肿瘤地) spawn = false
+                            if (tiles[x + it.x, y + it.y]?.floor() != Environment.肿瘤地) spawn = false
                         }
-                        if (spawn) floor = IBlocks.骸骨地
+                        if (spawn) floor = Environment.骸骨地
                     }
                     if (rand.chance(0.001) && block == Blocks.air) {
                         var spawn = true
                         Geometry.d8.forEach {
                             val floor1 = tiles[x + it.x, y + it.y]?.floor()
-                            if (floor1 != IBlocks.肿瘤地 && floor1 != IBlocks.骸骨地) spawn = false
+                            if (floor1 != Environment.肿瘤地 && floor1 != Environment.骸骨地) spawn = false
                             if (tiles[x + it.x, y + it.y]?.block() != Blocks.air) spawn = false
                         }
 
                         if (spawn) {
-                            block = IBlocks.肿瘤井
+                            block = Environment.肿瘤井
                             Geometry.d8.forEach {
-                                tiles[x + it.x, y + it.y]?.setBlock(IBlocks.肿瘤井)
+                                tiles[x + it.x, y + it.y]?.setBlock(Environment.肿瘤井)
                             }
                         }
 
                     }
                     if (rand.chance(0.002) && block == Blocks.air) {
-                        block = IBlocks.肉瘤菇
+                        block = Environment.肉瘤菇
                     }
-                    if (rand.chance(0.004) && block == IBlocks.肿瘤墙) {
-                        block = IBlocks.肉瘤菇
+                    if (rand.chance(0.004) && block == Environment.肿瘤墙) {
+                        block = Environment.肉瘤菇
                     }
                 }
 
-                IBlocks.凌冰 -> {
-                    decoration(x, y, 0.012, IBlocks.霜寒草)
+                Environment.凌冰 -> {
+                    decoration(x, y, 0.012, Environment.霜寒草)
                     if (rand.chance(0.002)) {
-                        block = IBlocks.凌冰尖刺
+                        block = Environment.凌冰尖刺
                         Geometry.d8.forEach {
                             if (rand.chance(0.2)) {
                                 tiles[x + it.x, y + it.y]?.setBlock(block)
@@ -757,42 +760,42 @@ class ArderyPlanetGenerator : PlanetGenerator() {
 
                 }
 
-                IBlocks.风蚀沙地 -> {
-                    decoration(x, y, 0.002, IBlocks.利芽)
+                Environment.风蚀沙地 -> {
+                    decoration(x, y, 0.002, Environment.利芽)
                     if (noise(x - 90f, y.toFloat(), 1.0, 0.68, 22.45) > 0.83) {
                         Geometry.d8.forEach {
                             val floor1 = tiles[x + it.x, y + it.y]?.floor()
-                            if (floor1 != ArrBlock.风蚀沙地 && floor1 != IBlocks.风蚀砂地) return@pass
+                            if (floor1 != ArrBlock.风蚀沙地 && floor1 != Environment.风蚀砂地) return@pass
                         }
-                        floor = IBlocks.风蚀砂地
+                        floor = Environment.风蚀砂地
                     }
                     if (rand.chance(0.0005)) {
                         for (pos in SteamVent.offsets) {
                             val other = tiles[x + pos.x, y + pos.y]
-                            if (other == null || ((other.floor() != IBlocks.风蚀沙地) && (other.floor() != IBlocks.风蚀砂地)) || other.block().solid) {
+                            if (other == null || ((other.floor() != Environment.风蚀沙地) && (other.floor() != Environment.风蚀砂地)) || other.block().solid) {
                                 return@pass
                             }
                         }
-                        floor = IBlocks.风蚀喷口
+                        floor = Environment.风蚀喷口
                         for (pos in SteamVent.offsets) {
                             val other = tiles[pos.x + x + 1, pos.y + y + 1]
-                            other.setFloor(IBlocks.风蚀喷口)
+                            other.setFloor(Environment.风蚀喷口)
                         }
                     }
 
                 }
 
-                IBlocks.红霜 -> {
+                Environment.红霜 -> {
                     if (noise(x - 90f, y.toFloat(), 1.0, 0.68, 22.45) > 0.83) {
                         Geometry.d8.forEach {
                             val floor1 = tiles[x + it.x, y + it.y]?.floor()
-                            if (floor1 != IBlocks.红霜 && floor1 != IBlocks.赤雪) return@pass
+                            if (floor1 != Environment.红霜 && floor1 != Environment.赤雪) return@pass
                         }
-                        floor = IBlocks.赤雪
+                        floor = Environment.赤雪
                     }
                 }
 
-                IBlocks.红土 -> {
+                Environment.红土 -> {
                     if (abs(0.5f - noise((x - 40).toFloat(), y.toFloat(), 2.0, 0.7, 80.0)) > 0.25f && abs(
                             0.5f - noise(x.toFloat(), (y + sector.id * 10).toFloat(), 1.0, 1.0,
                                 60.0)) > 0.41f && !(roomseq.contains { r: Room? ->
@@ -800,24 +803,24 @@ class ArderyPlanetGenerator : PlanetGenerator() {
                         })
                     ) {
                         ore = Blocks.air
-                        floor = IBlocks.灵液
+                        floor = Environment.灵液
                     }
                     if (rand.chance(0.0075)) {
-                        if (floor == IBlocks.红土 && rand.chance(0.05)) block = IBlocks.殷红树
-                        if (block == IBlocks.红土墙 && rand.chance(0.08)) block = IBlocks.殷红树
+                        if (floor == Environment.红土 && rand.chance(0.05)) block = Environment.殷红树
+                        if (block == Environment.红土墙 && rand.chance(0.08)) block = Environment.殷红树
                     }
                 }
 
-                IBlocks.红冰 -> {
+                Environment.红冰 -> {
                     if (noise(x - 90f, y.toFloat(), 1.0, 0.68, 22.45) > 0.83) {
                         Geometry.d8.forEach {
                             val floor1 = tiles[x + it.x, y + it.y]?.floor()
-                            if (floor1 != IBlocks.红冰 && floor1 != IBlocks.软红冰) return@pass
+                            if (floor1 != Environment.红冰 && floor1 != Environment.软红冰) return@pass
                         }
-                        floor = IBlocks.软红冰
+                        floor = Environment.软红冰
                     }
-                    if ((floor == IBlocks.红冰) && rand.chance(0.0005)) {
-                        block = IBlocks.殷红树
+                    if ((floor == Environment.红冰) && rand.chance(0.0005)) {
+                        block = Environment.殷红树
                     }
                 }
             }
@@ -885,14 +888,8 @@ class ArderyPlanetGenerator : PlanetGenerator() {
     }
 
     fun setOres() {
-        val ores = Seq.with<Block>(IItems.金矿.oreBlock, IItems.锆英石.oreBlock, IItems.石英.oreBlock,
-            IItems.赤铁矿.oreBlock, IItems.方铅矿.oreBlock, IItems.硫钴矿.oreBlock, IItems.黄铜矿.oreBlock,
-            IItems.闪锌矿.oreBlock,IItems.生煤.oreBlock,IItems.铬铁矿.oreBlock)
+        val ores = IceOreBlock.ores
         val poles = abs(sector.tile.v.y)
-        val nmag = 0.5f
-        val scl = 1f
-        val addscl = 1.3f
-
         val frequencies = FloatSeq()
         for (i in 0..<ores.size) {
             frequencies.add(rand.random(-0.1f, 0.01f) - i * 0.01f + poles * 0.04f)

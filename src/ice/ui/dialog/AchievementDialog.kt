@@ -10,17 +10,17 @@ import arc.struct.Seq
 import arc.util.Scaling
 import ice.Ice
 import ice.library.EventType
-import ice.library.meta.stat.IceStats
+import ice.world.meta.IceStats
 import ice.library.scene.element.BaseProgressBar
-import ice.library.scene.tex.IStyles
-import ice.library.scene.tex.IceColor
-import ice.ui.colorR
-import ice.ui.iPaneG
-import ice.ui.iTableG
-import ice.ui.iTableGX
+import ice.graphics.IStyles
+import ice.graphics.IceColor
+import ice.library.scene.ui.colorR
+import ice.library.scene.ui.iPaneG
+import ice.library.scene.ui.iTableG
+import ice.library.scene.ui.iTableGX
 import mindustry.gen.Icon
 
-object AchievementDialog: BaseDialog(IceStats.成就.localized(), Icon.star){
+object AchievementDialog: BaseMenusDialog(IceStats.成就.localized(), Icon.star){
     val achievements = Seq<Achievement>()
    override fun build() {
         cont.iTableG { t1 ->
@@ -41,7 +41,7 @@ object AchievementDialog: BaseDialog(IceStats.成就.localized(), Icon.star){
                     })
                         .color(IceColor.b4).expandX().right()
                 }.pad(5f).row()
-                table.iTableGX { it ->
+                table.iTableGX {
                     it.add(BaseProgressBar(IStyles.barBottlom, IStyles.barTop) { pross }.apply {
                         color.set(IceColor.b4)
                     }).grow()
@@ -64,6 +64,7 @@ object AchievementDialog: BaseDialog(IceStats.成就.localized(), Icon.star){
                         if (ach.unlocked()) {
                             b.button(Icon.trash, IStyles.button3) {
                                 ach.clearUnlock()
+                                hide()
                                 build()
                             }.size(40f).pad(12f).expandY().bottom()
 
@@ -111,6 +112,7 @@ object AchievementDialog: BaseDialog(IceStats.成就.localized(), Icon.star){
             if (!unlocked) {
                 unlocked = true
                 Core.settings.put("${Ice.name}-achievement-$name", true)
+                hide()
                 build()
                 Events.fire(EventType.AchievementUnlockEvent(this))
             }

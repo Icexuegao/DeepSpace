@@ -3,6 +3,7 @@ package ice.library
 import arc.Core
 import arc.Graphics
 import arc.files.Fi
+import arc.files.ZipFi
 import arc.graphics.Pixmap
 import arc.graphics.Texture
 import arc.graphics.g2d.NinePatch
@@ -13,48 +14,73 @@ import arc.scene.style.Drawable
 import arc.scene.style.ScaledNinePatchDrawable
 import arc.util.Log
 import ice.Ice
+import mindustry.Vars
 
 object IFiles {
-    private val rootDirectory = HashMap<String, Fi>().apply {
-        Ice.mod.root.list().forEach {
-            if (it.isDirectory) {
-                put(it.name(), it)
+    private val rootDirectory = HashMap<String, Fi>()
+    private val spritesIce = HashMap<String, Fi>()
+    private val sprites = HashMap<String, Fi>()
+    private val musics = HashMap<String, Fi>()
+    private val sounds = HashMap<String, Fi>()
+    private val shaders = HashMap<String, Fi>()
+    var modFile: Fi = run {
+        val list = Vars.modDirectory.list {
+            it.name.contains("DeepSpace")
+        }.first()
+        ZipFi(list)
+    }
+
+    fun init() {
+        modFile.list().forEach {
+            rootDirectory.put(it.name(), it)
+        }
+        rootDirectory.forEach {entry ->
+            when (entry.key) {
+                "sprites-ice" -> {
+                    entry.value.findAll { f ->
+                        f.extension().equals("png")
+                    }?.forEach {
+                        val key = it.name()
+                        if (spritesIce.contains(key)) {
+                            Log.warn("已收录pngice文件:${spritesIce.get(key)?.path()},未收录:${it.path()}")
+                        } else {
+                            spritesIce.put(key, it)
+                        }
+                    }
+                }
+                "sprites" -> {
+                    entry.value.findAll { f ->
+                        f.extension().equals("png")
+                    }?.forEach {
+                        sprites.put(it.name(), it)
+                    }
+                }
+                "music" -> {
+                    entry.value.findAll { it.extension().equals("ogg") }?.forEach {
+                        musics.put(it.name(), it)
+                    }
+                }
+                "sounds" -> {
+                    entry.value.findAll { it.extension().equals("ogg") }?.forEach {
+                        sounds.put(it.name(), it)
+                    }
+                }
+                "shaders" -> {
+                    entry.value.walk {
+                        if(!shaders.contains(it.name())){
+                            shaders.put(it.name(), it)
+                        }else{
+                            Log.warn("已收录shader文件:${shaders.get(it.name())?.path()},未收录:${it.path()}")
+                        }
+                    }
+                }
             }
         }
     }
-    private val spritesIce = HashMap<String, Fi>().apply {
-        rootDirectory["sprites-ice"]?.findAll {
-            it.extension().equals("png")
-        }?.forEach {
-            val key = it.name()
-            if (contains(key)) {
-                Log.warn("已收录pngice文件:${get(it.name())?.path()},未收录:${it.path()}")
-            } else {
-                put(key, it)
-            }
-        }
-    }
-     val sprites = HashMap<String, Fi>().apply {
-        rootDirectory["sprites"]?.findAll {
-            it.extension().equals("png")
-        }?.forEach {
-            put(it.name(), it)
-        }
-    }
-    private val musics = HashMap<String, Fi>().apply {
-        rootDirectory["music"]?.findAll { it.extension().equals("ogg") }?.forEach {
-            put(it.name(), it)
-        }
-    }
-    private val sounds = HashMap<String, Fi>().apply {
-        rootDirectory["sounds"]?.findAll { it.extension().equals("ogg") }?.forEach {
-            put(it.name(), it)
-        }
-    }
-    private val shaders = HashMap<String, Fi>().apply {
-        rootDirectory["shaders"]?.list()?.forEach {
-            put(it.name(), it)
-        }
+
+    fun getModName(): String {
+        val findMeta = Vars.mods.findMeta(modFile)
+        return findMeta.internalName
     }
 
     fun findSound(name: String) = sounds[name] ?: throw Exception("未找到文件:$name")
@@ -69,16 +95,17 @@ object IFiles {
         val file = sprites["$name.png"] ?: throw Exception("未找到文件:$name")
         return getAtlasRegion(file)
     }
-    fun hasPng(name:String)=sprites.contains("$name.png")
-    fun hasIcePng(name:String)=spritesIce.contains("$name.png")
+
+    fun hasPng(name: String) = sprites.contains("$name.png")
+    fun hasIcePng(name: String) = spritesIce.contains("$name.png")
     fun getPiX(name: String): Pixmap {
-       return Pixmap(sprites["$name.png"] ?: throw Exception("未找到文件:$name.png"))
+        return Pixmap(sprites["$name.png"] ?: throw Exception("未找到文件:$name.png"))
     }
 
     fun getNormName(name: String): String = "${Ice.name}-$name"
-    fun getRepName(name: String):String= name.replace("${Ice.name}-","")
+    fun getRepName(name: String): String = name.replace("${Ice.name}-", "")
 
-     fun getAtlasRegion(file: Fi): AtlasRegion {
+    fun getAtlasRegion(file: Fi): AtlasRegion {
         val texture = TextureRegion(Texture(file))
         val atlasRegion = AtlasRegion(texture)
         atlasRegion.offsetX = 0f
@@ -97,9 +124,8 @@ object IFiles {
     fun createNinePatch(name: String): Drawable {
         val texture = findIcePng("$name.9")
         val pixmapRegion = PixmapRegion(texture.texture.textureData.pixmap, 0, 0, texture.width, texture.height)
-        val splits = getSplits(pixmapRegion)
-       /* texture.set(1, 1, texture.width - 2, texture.height - 2)*/
-        texture.set(1, 2, texture.width - 2, texture.height -4)
+        val splits = getSplits(pixmapRegion)/* texture.set(1, 1, texture.width - 2, texture.height - 2)*/
+        texture.set(1, 2, texture.width - 2, texture.height - 4)
         val copy = getScaledNinePatchDrawable(texture, splits!!)
         copy.minWidth = 0f
         copy.minHeight = 0f
@@ -167,11 +193,11 @@ object IFiles {
     }
 
     private fun getSplitPoint(
-        raster: PixmapRegion,
-        startX: Int,
-        startY: Int,
-        startPoint: Boolean,
-        xAxis: Boolean,
+            raster: PixmapRegion,
+            startX: Int,
+            startY: Int,
+            startPoint: Boolean,
+            xAxis: Boolean,
     ): Int {
         var next = if (xAxis) startX else startY
         val end = if (xAxis) raster.width else raster.height

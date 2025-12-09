@@ -1,10 +1,10 @@
 package ice.ui.dialog
 
-import ice.library.meta.stat.IceStats
-import ice.library.scene.tex.IceColor
+import ice.world.meta.IceStats
+import ice.graphics.IceColor
 import mindustry.gen.Icon
 
-object LogDialog : BaseDialog(IceStats.日志.localized(), Icon.fileText) {
+object LogDialog : BaseMenusDialog(IceStats.日志.localized(), Icon.fileText) {
     override fun build() {
         cont.add("距今约二十年前,一场毁灭性灾难席卷而来").color(IceColor.b4).row()
         cont.add("北方极地突然涌现出诡异的红雾,并以不可阻挡之势向南蔓延.").color(IceColor.b4).row()

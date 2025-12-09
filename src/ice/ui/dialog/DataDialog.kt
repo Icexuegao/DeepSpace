@@ -10,12 +10,13 @@ import arc.scene.ui.layout.Table
 import arc.struct.OrderedMap
 import arc.struct.Seq
 import arc.util.Scaling
-import ice.library.content.BaseContentSeq
-import ice.library.meta.stat.IceStats
+import ice.Ice
+import ice.graphics.IStyles
+import ice.graphics.IceColor
 import ice.library.scene.element.IceDialog
-import ice.library.scene.tex.IStyles
-import ice.library.scene.tex.IceColor
-import ice.ui.*
+import ice.library.scene.ui.*
+import ice.world.content.BaseContentSeq
+import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
 import mindustry.gen.Icon
 import mindustry.type.Item
@@ -23,8 +24,8 @@ import mindustry.type.Liquid
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
 
-object DataDialog : BaseDialog(IceStats.数据.localized(), Icon.book) {
-    var cContents = Button.物品
+object DataDialog : BaseMenusDialog(IceStats.数据.localized(), Icon.book) {
+    private var cContents = Button.物品
     var cContent: UnlockableContent = Button.物品.content.first()
     var searchField = ""
     lateinit var flun: () -> Unit
@@ -54,10 +55,10 @@ object DataDialog : BaseDialog(IceStats.数据.localized(), Icon.book) {
                         add("?")
                         changed {
                             IceDialog("介绍").apply {
-                                cont.addCR("默认搜索name和localizedName")
-                                cont.addCR("加[#]搜索简介")
-                                cont.addCR("加[%]搜索吐槽")
-                                cont.addCR("例如: #矿 %饿")
+                                root.addCR("默认搜索name和localizedName")
+                                root.addCR("加[#]搜索简介")
+                                root.addCR("加[%]搜索吐槽")
+                                root.addCR("例如: #矿 %饿")
                                 addCloseButton()
                             }.show()
                         }
@@ -70,7 +71,7 @@ object DataDialog : BaseDialog(IceStats.数据.localized(), Icon.book) {
                     p.setRowsize(5)
                     flun = {
                         p.clear()
-                        cContents.content.select { it ->
+                        cContents.content.select {
                             if (searchField.isNotEmpty()) {
                                 val substring = searchField.substring(1)
                                 when (searchField[0]) {
@@ -82,16 +83,16 @@ object DataDialog : BaseDialog(IceStats.数据.localized(), Icon.book) {
                                     '%' -> {
                                         it.details ?: return@select false
                                         return@select it.details.contains(substring)
-
                                     }
 
                                     else -> {
                                         return@select (it.name.contains(searchField) || it.localizedName.contains(
-                                            searchField))
-
+                                            searchField
+                                        ))
                                     }
                                 }
                             }
+                            if (Ice.configIce.启用调试模式 && it.isHidden) return@select false
                             return@select true
                         }.forEach { content ->
                             p.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
@@ -123,16 +124,16 @@ object DataDialog : BaseDialog(IceStats.数据.localized(), Icon.book) {
                             }.row()
 
                             it1.add(cContent.description).pad(2f).growX().color(color).height(150f).wrap().row()
-                            it1.add(cContent.details).pad(2f).growX().color(color.cpy().a(0.5f)).height(150f).wrap()
-                                .row()
-                        }.margin(22f).minWidth(200f)
+                            it1.add(cContent.details).pad(2f).growX().color(color.cpy().a(0.5f)).height(150f).wrap().row()
+                        }.margin(22f).minWidth(150f)
                         it.iTableG(background31) { it2 ->
                             it2.icePane { it1 ->
                                 it1.add(cContent.name).color(Color.valueOf("b7e1fb")).padBottom(3f).row()
                                 val stats = cContent.stats
                                 cContent.checkStats()
-                                stats.toMap().keys().forEach { cat ->
-                                    val map: OrderedMap<Stat, Seq<StatValue>> = stats.toMap().get(cat)
+                                val toMap = stats.toMap()
+                                toMap.keys().forEach { cat ->
+                                    val map: OrderedMap<Stat, Seq<StatValue>> = toMap.get(cat)
                                     if (map.size == 0) return@forEach
                                     if (stats.useCategories) {
                                         it1.add(cat.localized()).color(Color.valueOf("b7e1fb")).padTop(5f).fillX()
@@ -191,12 +192,8 @@ object DataDialog : BaseDialog(IceStats.数据.localized(), Icon.book) {
         }
     }
 
-    enum class Button(val content: Seq<UnlockableContent>) {
-        物品(Seq<UnlockableContent>().addAll(BaseContentSeq.items)),
-        流体(Seq<UnlockableContent>().addAll(BaseContentSeq.liquids)),
-        建筑(Seq<UnlockableContent>().addAll(BaseContentSeq.blocks)),
-        状态(Seq<UnlockableContent>().addAll(BaseContentSeq.status)),
-        单位(Seq<UnlockableContent>().addAll(BaseContentSeq.units)),/* 天气(ContentType.weather),
+    private enum class Button(val content: Seq<UnlockableContent>) {
+        物品(Seq<UnlockableContent>().addAll(BaseContentSeq.items)), 流体(Seq<UnlockableContent>().addAll(BaseContentSeq.liquids)), 建筑(Seq<UnlockableContent>().addAll(BaseContentSeq.blocks)), 状态(Seq<UnlockableContent>().addAll(BaseContentSeq.status)), 单位(Seq<UnlockableContent>().addAll(BaseContentSeq.units)),/* 天气(ContentType.weather),
         战役(ContentType.sector),
         星球(ContentType.planet)*/
     }

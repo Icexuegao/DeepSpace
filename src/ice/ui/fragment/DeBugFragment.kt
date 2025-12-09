@@ -11,21 +11,20 @@ import arc.scene.ui.Image
 import arc.scene.ui.TextField
 import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
-import ice.DFW
 import ice.Ice
+import ice.audio.ISounds
 import ice.content.IUnitTypes
+import ice.graphics.IStyles
+import ice.graphics.IceColor
 import ice.library.Incident
-import ice.library.meta.IceEffects
+import ice.library.scene.element.IceDialog
 import ice.library.scene.listener.DragInputListener
-import ice.library.scene.tex.IStyles
-import ice.library.scene.tex.IceColor
+import ice.library.scene.ui.*
 import ice.library.struct.log
 import ice.library.util.isNumericWithSign
-import ice.music.ISounds
-import ice.ui.*
 import ice.ui.dialog.AchievementDialog
 import ice.ui.dialog.MenusDialog
-import ice.vars.SettingValue
+import ice.world.meta.IceEffects
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.entities.Effect
@@ -50,7 +49,11 @@ object DeBugFragment {
         name = "debug"
         setFillParent(true)
         touchable = Touchable.childrenOnly
-        visibility = Boolp { Vars.ui.hudfrag.shown && SettingValue.debugMode }
+        visibility = Boolp { Vars.ui.hudfrag.shown && Ice.configIce.启用调试模式 }
+    }
+    val deepSpace = IceDialog("DeepSpace").apply {
+        addCloseButton()
+        cont.button("主菜单", IStyles.rootCleanButton, MenusDialog::show).size(width, 64f)
     }
 
     fun build(parent: Group) {
@@ -114,7 +117,6 @@ object DeBugFragment {
                 Incident.announce("[red]<<传教>> 你的信仰疑似有点动摇[]", 9f)
             }
             button("折跃", Icon.bookOpenSmall) {
-
             }
             button("剧情", Icon.bookOpenSmall) {
                 log {
@@ -134,6 +136,14 @@ object DeBugFragment {
                 Vars.state.rules.waves = false
                 Vars.state.gameOver = true
             }
+            button("修复损坏", Icon.up) {
+                Vars.world.tiles.forEach {
+                    it.build?.let {
+                        it.team = Vars.player.team()
+                        it.enabled = true
+                    }
+                }
+            }
 
             button("menu", Icon.up) {
                 MenusDialog.show()
@@ -144,25 +154,23 @@ object DeBugFragment {
                 random.unlock()
                 // random.clearUnlock()
             }
-            button("df", Icon.units) {
-                val dfw = DFW()
-                dfw.set(8 * 50f, 8 * 50f)
-                dfw.add()
+            button("帝国折跃", Icon.units) {
+                /*  IceEffects.phaseJumpEmpire.at(Vars.player.x, Vars.player.y, 0f, Vars.content.unit("curse-of-flesh-无畏"))*/
             }
             button("kill", Icon.units) {
                 Groups.unit.find { it.type == IUnitTypes.青壤 }?.kill()
             }
             button("effect", Icon.effect) {
-                IceEffects.arc.at(Vars.player.x, Vars.player.y, 0f, IUnitTypes.焚棘)
+                IceEffects.arc.at(Vars.player.x, Vars.player.y, 0f, IUnitTypes.虚宿)
             }
         }.width(130f).height(211f)
         table.add(pane).expandY().top()
     }
 
-    fun spawnAction(unit: UnitType, x: Float, y: Float, rotate: Float, team: Team): Unit {
+    fun spawnAction(unit: UnitType, x: Float, y: Float, rotate: Float, color: Color, team: Team): Unit {
         val spawn = unit.spawn(team, x, y)
         spawn.rotation = rotate
-        IceEffects.jumpTrail.at(x, y, rotate, IceColor.b4, spawn.type)
+        IceEffects.jumpTrail.at(x, y, rotate, color, spawn.type)
         ISounds.foldJump.at(spawn)
         Effect.shake(spawn.hitSize / 3f, spawn.hitSize / 4f, spawn)
         return spawn
@@ -170,9 +178,15 @@ object DeBugFragment {
 
     private fun addbutton(t: Table, content: UnlockableContent, run: Runnable) {
         index++
-        t.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 24f, run).size(40f).pad(2f)
-            .tooltip(content.localizedName)
-        if (index % 8 == 0) t.row()
+
+        try {
+            val icon = TextureRegionDrawable(content.uiIcon)
+            t.button(icon, IStyles.button, 24f, run).size(40f).pad(2f)
+                .tooltip(content.localizedName)
+            if (index % 8 == 0) t.row()
+        } catch (e: Exception) {
+            throw Exception("添加按钮失败: $content", e)
+        }
     }
 
     private fun gmode() {

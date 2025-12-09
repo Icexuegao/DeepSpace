@@ -3,12 +3,11 @@ package ice.library.struct
 import arc.func.Cons
 import arc.func.Prov
 import arc.graphics.g2d.TextureRegion
-import arc.scene.actions.Actions.action
 import arc.scene.style.TextureRegionDrawable
 import arc.struct.Seq
 import arc.util.Log
 
-fun <T> Seq<T>.addP(prov: Prov<T>): Seq<T> = add(prov.get())
+
 fun <T> Seq<T>.isNotEmpty() = size != 0
 fun <T> Cons<T>.getT(t: T): T {
     get(t)
@@ -19,14 +18,22 @@ fun <K, V> HashMap<K, V>.addP(key: K, prov: Prov<V>) {
     put(key, prov.get())
 }
 
-inline fun <T> Iterable<T>.forEach(size:Int,action: (T) -> Unit): Unit {
-    var i=0
-    for (element in this){
-        if(i>=size)break
+/**
+ * 对集合中的前 [count] 个元素执行指定的操作
+ * @param count 要处理的元素数量，如果小于等于0则不处理任何元素
+ * @param action 要对每个元素执行的操作
+ */
+inline fun <T> Iterable<T>.forEach(count: Int, action: (T) -> Unit) {
+    if (count <= 0) return
+    var processed = 0
+    for (element in this) {
         action(element)
-        i++
+        if (++processed >= count) break
     }
 }
 
+
 fun <E> log(e: () -> E) = Log.info(e())
-fun TextureRegion.asDrawable() = TextureRegionDrawable(this)
+fun TextureRegion.asDrawable(): TextureRegionDrawable = TextureRegionDrawable(this)
+
+

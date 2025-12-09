@@ -200,7 +200,7 @@ class IceScrollPane() : WidgetGroup() {
         addListener(object : InputListener() {
             override fun exit(event: InputEvent?, x: Float, y: Float, pointer: Int, toActor: Element?) {
                 if (toActor != this@IceScrollPane) {
-                    scene?.setScrollFocus(null)
+                    scene?.scrollFocus = null
                 }
                 super.exit(event, x, y, pointer, toActor)
             }
@@ -298,7 +298,6 @@ class IceScrollPane() : WidgetGroup() {
             amountX -= velocityX * alpha * delta
             amountY -= velocityY * alpha * delta
             clamp()
-
             // Stop fling if hit overscroll distance.
             if (amountX == -overscrollDistance) velocityX = 0f
             if (amountX >= maxX + overscrollDistance) velocityX = 0f
@@ -414,19 +413,15 @@ class IceScrollPane() : WidgetGroup() {
         if (vScrollKnob != null) scrollbarWidth = vScrollKnob.minWidth
         if (style.vScroll != null) scrollbarWidth =
             max(scrollbarWidth.toDouble(), style.vScroll.minWidth.toDouble()).toFloat()
-
         // Get available space size by subtracting background's padded area.
         areaWidth = width - bgLeftWidth - bgRightWidth
         areaHeight = height - bgTopHeight - bgBottomHeight
         if (widget == null) return
-
         // Get widget's desired width.
         var widgetWidth: Float
         var widgetHeight: Float
         widgetWidth = widget!!.prefWidth
         widgetHeight = widget!!.prefHeight
-
-
         // Determine if horizontal/vertical scrollbars are needed.
         scrollX = forceScrollX || widgetWidth > areaWidth && !disableX
         scrollY = forceScrollY || widgetHeight > areaHeight && !disableY
@@ -444,7 +439,6 @@ class IceScrollPane() : WidgetGroup() {
                 }
             }
         }
-
         // 小组件的可滚动区域的边界。
         widgetAreaBounds[bgLeftWidth, bgBottomHeight, areaWidth] = areaHeight
         if (fadeScrollBars) {
@@ -465,7 +459,6 @@ class IceScrollPane() : WidgetGroup() {
                 if (scrollY && !vScrollOnRight) widgetAreaBounds.x += scrollbarWidth
             }
         }
-
         // If the widget is smaller than the available space, make it take up the available space.
         widgetWidth = if (disableX) areaWidth else max(areaWidth.toDouble(), widgetWidth.toDouble()).toFloat()
         widgetHeight = if (disableY) areaHeight else max(areaHeight.toDouble(), widgetHeight.toDouble()).toFloat()
@@ -480,7 +473,6 @@ class IceScrollPane() : WidgetGroup() {
         }
         scrollX(Mathf.clamp(amountX, 0f, maxX))
         //scrollY(Mathf.clamp(amountY, 0, maxY));
-
         // Set the bounds and scroll knob sizes if scrollbars are needed.
         if (scrollX) {
             if (hScrollKnob != null) {
@@ -544,14 +536,12 @@ class IceScrollPane() : WidgetGroup() {
     override fun draw() {
         if (widget == null) return
         validate()
-
         // Setup transform for this group.
         applyTransform(computeTransform())
         if (scrollX) hKnobBounds.x =
             hScrollBounds.x + ((hScrollBounds.width - hKnobBounds.width) * getVisualScrollPercentX())
         if (scrollY) vKnobBounds.y =
             vScrollBounds.y + ((vScrollBounds.height - vKnobBounds.height) * (1 - getVisualScrollPercentY()))
-
         // Calculate the widget's position depending on the scroll state and available widget area.
         var y = widgetAreaBounds.y
         y -= if (!scrollY) maxY else (maxY - visualAmountY)
@@ -579,10 +569,8 @@ class IceScrollPane() : WidgetGroup() {
             widgetCullingArea.height = widgetAreaBounds.height
             (widget as Cullable).setCullingArea(widgetCullingArea)
         }
-
         // 绘制背景九块。
         if (style.background != null) style.background.draw(0f, 0f, getWidth(), getHeight())
-
         // 根据批量变换、可用控件区域和摄像机变换计算剪刀边界。我们需要
         // 将它们投影到屏幕坐标以供 OpenGL ES 使用。
         Core.scene.calculateScissors(widgetAreaBounds, scissorBounds)
@@ -595,7 +583,6 @@ class IceScrollPane() : WidgetGroup() {
         } else {
             drawChildren()
         }
-
         // Render scrollbars and knobs on top.
         Draw.color(color.r, color.g, color.b, color.a * parentAlpha * Interp.fade.apply(fadeAlpha / fadeAlphaSeconds))
         if (scrollX && scrollY) {

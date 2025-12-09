@@ -6,7 +6,7 @@ import arc.scene.Group
 import arc.scene.ui.layout.Scl
 import arc.struct.Seq
 import arc.util.Align
-import ice.library.scene.tex.IceColor
+import ice.graphics.IceColor
 import ice.ui.dialog.research.node.LinkNode
 import mindustry.graphics.Pal
 
@@ -41,7 +41,7 @@ open class View : Group() {
         links.forEach {
             val element = it.element
             val parent1s = it.parent
-            val childs = it.child
+            it.child
 
             parent1s.forEach { parent1 ->
                 val color = if (parent1.unlocked() && it.unlocked()) {

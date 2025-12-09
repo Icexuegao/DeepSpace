@@ -5,10 +5,10 @@ import arc.func.Prov
 import arc.struct.ObjectMap
 import arc.util.Log
 import arc.util.serialization.JsonValue
-import ice.library.content.item.IceItem
-import ice.library.content.liquid.IceLiquid
-import ice.library.content.status.IceStatusEffect
-import ice.library.content.unit.type.IceUnitType
+import ice.world.content.item.IceItem
+import ice.world.content.liquid.IceLiquid
+import ice.world.content.status.StatusEffect
+import ice.world.content.unit.IceUnitType
 import ice.parse.ContentParser
 import ice.parse.ContentParser.currentContent
 import ice.parse.ContentParser.locate
@@ -182,7 +182,7 @@ object ClassTypeParsers {
         },
         ContentType.status,
         ContentParser.parser(ContentType.status) { name: String ->
-            IceStatusEffect(name){}
+            StatusEffect(name){}
         },
         ContentType.weather,
         TypeParser { name: String, value: JsonValue ->

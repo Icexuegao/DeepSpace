@@ -3,6 +3,7 @@ import java.io.InputStreamReader
 buildscript {
     extra["proUser"] = System.getProperty("user.name")
     extra["sdkRoot"] = System.getenv("ANDROID_HOME")
+
     repositories {
         mavenLocal()
         mavenCentral()
@@ -33,19 +34,29 @@ repositories {
     maven { url = uri("https://maven.aliyun.com/repository/public") }
     maven { url = uri("https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
     maven { url = uri("https://jitpack.io") }
+    maven { url = uri("https://www.jitpack.io") }
 }
-
+val uncVersion = "2.3.1"
 dependencies {
+    compileOnly(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
+
+    implementation("com.github.tommyettinger:RegExodus:0.1.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinCompatibility}")
+    implementation("com.github.EB-wilson.UniverseCore:markdown:$uncVersion")
+    implementation("com.github.EB-wilson.UniverseCore:scenes:$uncVersion")
     //implementation("com.github.Anuken.Arc:arc-core:v146")
-    // implementation files("lib/backend.jar")
-    // implementation "com.github.EB-wilson.UniverseCore:core:2.2.0"
+    //compileOnly files("lib\\UniverseCore-v2.2.0.jar")
+    //  implementation("com.github.EB-wilson.UniverseCore:markdown:${uncVersion}")
+//markdown工具支持
+    //  compileOnly("com.github.EB-wilson.UniverseCore:scenes:${uncVersion}")
+//ui相关工具类型
     //compileOnly files("lib/UniverseCore-v2.2.0.jar")
     //  compileOnly "com.github.Anuken.Arc:arc-core:v149"
     //  compileOnly files("lib/bmx.jar")
     //  implementation files("lib/pinyin4j-2.5.0.jar")
     //  implementation 'org.tomlj:tomlj:1.1.1'
     // compileOnly(files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar"))
-   // compileOnly("com.github.Anuken.Mindustry:core:v152.2")
+    // compileOnly("com.github.Anuken.Mindustry:core:v152.2")
     // compileOnly("com.github.Anuken.Arc:flabel:v149")
     compileOnly("com.github.Tinylake:MindustryX:v2025.11.X22")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinCompatibility")
@@ -80,21 +91,22 @@ tasks {
     }
 
     register<Copy>("myCopyJar") {
+        dependsOn("runWithJavaExec")
         dependsOn(jar)
         from("$buildLibDir/${project.name}Desktop.jar")
         into("C:/Users/$proUser/AppData/Roaming/Mindustry/mods")
     }
 
     register<JavaExec>("runWithJavaExec") {
-        group = "zi"
+        //  group = "zi"
         classpath = sourceSets.main.get().runtimeClasspath
         mainClass.set("ice.MainKt")
-        // main("ice.Main")
+        //  main("ice.Main")
         args = listOf("我喜欢你", "你喜欢我")
     }
-    register("runPixMap") {
-        group = "kj"
-    }
+    /*  register("runPixMap") {
+          group = "kj"
+      }*/
 
     register("d8Compile") {
         dependsOn(jar)
@@ -103,27 +115,22 @@ tasks {
         val platformDir = File(sdkDir, "platforms")
         val platformRoot = platformDir.listFiles { f ->
             f.isDirectory && File(f, "android.jar").exists()
-        }?.maxByOrNull { it.name }
-            ?: throw GradleException("No valid Android platform found")
-        val dependencies = (
-                configurations.compileClasspath.get() +
-                        configurations.runtimeClasspath.get() +
-                        setOf(File(platformRoot, "android.jar"))
-                ).joinToString(" ") { "--classpath $it" }
-        val string = "$sdkRoot/build-tools/36.0.0/d8.bat $dependencies --min-api 15 --output ${project.name}Android.jar ${project.name}Desktop.jar"
+        }?.maxByOrNull { it.name } ?: throw GradleException("No valid Android platform found")
+        val dependencies = (configurations.compileClasspath.get() + configurations.runtimeClasspath.get() + setOf(
+            File(platformRoot, "android.jar")
+        )).joinToString(" ") { "--classpath $it" }
+        val string =
+            "$sdkRoot/build-tools/36.0.0/d8.bat $dependencies --min-api 15 --output ${project.name}Android.jar ${project.name}Desktop.jar"
+
         fun execute(string: String, path: File? = null, vararg args: Any?) {
-            val cmd = string.split(Regex("\\s+"))
-                .toMutableList()
-                .apply { addAll(args.map { it?.toString() ?: "null" }) }
-                .toTypedArray()
-            val process = ProcessBuilder(*cmd)
-                .directory(path ?: rootDir)
-                .redirectOutput(ProcessBuilder.Redirect.INHERIT)
-                .redirectError(ProcessBuilder.Redirect.INHERIT)
-                .start()
+            val cmd =
+                string.split(Regex("\\s+")).toMutableList().apply { addAll(args.map { it?.toString() ?: "null" }) }
+                    .toTypedArray()
+            val process =
+                ProcessBuilder(*cmd).directory(path ?: rootDir).redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                    .redirectError(ProcessBuilder.Redirect.INHERIT).start()
 
             if (process.waitFor() != 0) throw Error(InputStreamReader(process.errorStream).readText())
-
         }
 
         execute(string, File(buildLibDir))
@@ -133,10 +140,7 @@ tasks {
         dependsOn("d8Compile")
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         archiveFileName.set("${project.name}.jar") //存档文件名
-        from(
-            zipTree("$buildLibDir/${project.name}Desktop.jar"),
-            zipTree("$buildLibDir/${project.name}Android.jar")
-        )
+        from(zipTree("$buildLibDir/${project.name}Desktop.jar"), zipTree("$buildLibDir/${project.name}Android.jar"))
     }
 
 
@@ -146,8 +150,7 @@ tasks {
         from("$buildLibDir/${project.name}.jar") //源
         into("C:/Users/$proUser/AppData/Roaming/Mindustry/mods")
     }
-}
-/*
+}/*
 
 buildscript {
     ext {

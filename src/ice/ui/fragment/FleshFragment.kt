@@ -9,9 +9,9 @@ import arc.scene.actions.Actions
 import arc.scene.event.Touchable
 import arc.scene.ui.layout.WidgetGroup
 import arc.struct.Seq
-import ice.library.meta.IceEffects
+import ice.world.meta.IceEffects
 import ice.library.util.accessFloat
-import ice.ui.colorR
+import ice.library.scene.ui.colorR
 import mindustry.Vars
 
 object FleshFragment {

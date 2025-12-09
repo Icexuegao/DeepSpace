@@ -11,7 +11,7 @@ import ice.content.IUnitTypes
 import ice.library.scene.action.IceActions
 import ice.library.scene.element.DrawIcon
 import ice.library.scene.element.Shelter
-import ice.library.scene.tex.IStyles
+import ice.graphics.IStyles
 import mindustry.Vars
 import mindustry.game.Team
 import mindustry.ui.Styles
@@ -40,7 +40,7 @@ object Incident {
                 return super.remove()
             }
         }
-        val fLabel = object : Label(text) {
+        object : Label(text) {
             init {
                 color.a(0f)
                 style = Styles.outlineLabel

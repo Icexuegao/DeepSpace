@@ -2,9 +2,9 @@ package ice.library.scene.action
 
 import arc.math.Interp
 import arc.scene.actions.Actions
-import ice.library.meta.IceEffects
-import ice.library.scene.tex.IceColor
-import ice.music.ISounds
+import ice.audio.ISounds
+import ice.graphics.IceColor
+import ice.world.meta.IceEffects
 import mindustry.entities.Effect
 import mindustry.game.Team
 import mindustry.type.UnitType
@@ -22,7 +22,7 @@ object IceActions {
         return action
     }
 
-    fun moveToAlphaAction(x: Float, y: Float, duration: Float, alpha: Float, interpolation: Interp): MoveToAlphaAction {
+    fun moveToAlphaAction(x: Float, y: Float, duration: Float, alpha: Float, interpolation: Interp= Interp.linear): MoveToAlphaAction {
         val action = Actions.action(MoveToAlphaAction::class.java) { MoveToAlphaAction() }
         action.setAlpha(alpha)
         action.duration = duration

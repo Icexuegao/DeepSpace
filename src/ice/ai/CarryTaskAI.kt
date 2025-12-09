@@ -1,6 +1,6 @@
 package ice.ai
 
-import ice.library.content.blocks.distribution.droneNetwork.DroneDeliveryTerminal.DroneDeliveryTerminalBuild
+import ice.world.content.blocks.distribution.droneNetwork.DroneDeliveryTerminal.DroneDeliveryTerminalBuild
 import mindustry.entities.units.AIController
 import mindustry.gen.Building
 import mindustry.gen.Call

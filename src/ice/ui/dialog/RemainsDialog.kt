@@ -9,35 +9,36 @@ import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Scaling
 import ice.Ice
-import ice.content.IBlocks
+import ice.audio.ISounds
 import ice.content.IItems
 import ice.content.IStatus
 import ice.content.IUnitTypes
+import ice.content.block.Crafting
+import ice.graphics.IStyles
+import ice.graphics.IceColor
 import ice.library.IFiles
-import ice.library.content.blocks.environment.IceOreBlock
-import ice.library.content.unit.ability.InterceptAbilty
-import ice.library.meta.stat.IceStats
-import ice.library.scene.tex.IStyles
-import ice.library.scene.tex.IceColor
+import ice.library.scene.element.typinglabel.TLabel
+import ice.library.scene.ui.iTable
+import ice.library.scene.ui.iTableG
+import ice.library.scene.ui.icePane
+import ice.library.scene.ui.itooltip
 import ice.library.struct.forEach
-import ice.music.ISounds
-import ice.ui.iTable
-import ice.ui.iTableG
-import ice.ui.icePane
-import ice.ui.itooltip
-import ice.vars.UI
+import ice.world.content.blocks.environment.IceOreBlock
+import ice.world.content.unit.ability.InterceptAbilty
+import ice.world.meta.IceStats
+import ice.ui.UI
 import mindustry.Vars
 import mindustry.gen.Icon
 import mindustry.world.consumers.ConsumeItems
 import mindustry.world.meta.Stats
 
-object RemainsDialog: BaseDialog(IceStats.遗物.localized(),Icon.logic){
+object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), Icon.logic) {
     val remainsSeq = Seq<Remains>()
     val enableSeq = Seq<Remains>()
     lateinit var tempRemain: Remains
-    var slotPos = 4
     lateinit var remainsTable: Table
     lateinit var enableTable: Table
+    var slotPos = 4
     fun load() {
         Remains("娜雅的手串") {
             setDescription("一串温润的玉石手串,在帝国任职期间由娜雅赠予")
@@ -92,6 +93,18 @@ object RemainsDialog: BaseDialog(IceStats.遗物.localized(),Icon.logic){
         Remains("纯净水晶坠饰") {
             setDescription("一块天然形成,毫无杂质的透明白水晶")
             effect = "玩家核心机[免疫所有状态]"
+            val lucifer = IUnitTypes.路西法
+
+            installFun {
+                lucifer.immunities.addAll(Vars.content.statusEffects())
+                lucifer.stats = Stats()
+                lucifer.checkStats()
+            }
+            uninstallFun {
+                lucifer.immunities.clear()
+                lucifer.stats = Stats()
+                lucifer.checkStats()
+            }
         }
         Remains("不朽者胚胎") {
             color = IceColor.r2
@@ -104,10 +117,10 @@ object RemainsDialog: BaseDialog(IceStats.遗物.localized(),Icon.logic){
                     it.setEnabled(false)
                 }
             }
-            val text = "一个被囚禁的血肉胚胎\n拥抱我,我将赐你永恒\n不必畏惧刀剑与瘟疫,不必屈服于时光与死亡\n用你的过去,换取未来\n用你的灵魂,换取存在\n直至你我合而为一"
+            val text = "一个被囚禁的血肉胚胎\n拥抱我,我将赐你永恒\n不必畏惧刀剑与瘟疫,不必屈服于时光与死亡\n用你的过去,换取未来\n用你的灵魂,换取存在\n直至你我合而为一"//
             setDescriptionTable {
                 for (string in text.split("\n")) {
-                    it.add(string).pad(5f).color(color).row()
+                    it.add(TLabel("{GARBLED}{SHAKE}$string")).pad(5f).color(color).row()
                 }
             }
             effect = "遗物槽位+[2]"
@@ -116,10 +129,9 @@ object RemainsDialog: BaseDialog(IceStats.遗物.localized(),Icon.logic){
             color = IceColor.r2
             setDescriptionTable {
                 it.add("一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合").pad(5f).color(color).row()
-                it.table { it ->
+                it.table {
                     it.add("影响单位: ").pad(5f).color(color)
-                    it.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit)
-                        .itooltip("${IUnitTypes.蚀虻.localizedName}")
+                    it.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")
                 }
             }
             val fg = 1.2f
@@ -166,7 +178,7 @@ object RemainsDialog: BaseDialog(IceStats.遗物.localized(),Icon.logic){
             setDescription("由奇异,沉重的玄武岩打磨而成")
             effect = "[碳控熔炉]所需燃料减少[1]"
             installFun {
-                IBlocks.碳控熔炉.formulas.formulas.forEach {
+                Crafting.碳控熔炉.formulas.formulas.forEach {
                     it.inputs?.forEach { cons ->
                         if (cons is ConsumeItems) {
                             cons.items.forEach { itemStack ->
@@ -177,11 +189,11 @@ object RemainsDialog: BaseDialog(IceStats.遗物.localized(),Icon.logic){
                         }
                     }
                 }
-                IBlocks.碳控熔炉.stats = Stats()
-                IBlocks.碳控熔炉.checkStats()
+                Crafting.碳控熔炉.stats = Stats()
+                Crafting.碳控熔炉.checkStats()
             }
             uninstallFun {
-                IBlocks.碳控熔炉.formulas.formulas.forEach {
+                Crafting.碳控熔炉.formulas.formulas.forEach {
                     it.inputs?.forEach { cons ->
                         if (cons is ConsumeItems) {
                             cons.items.forEach { itemStack ->
@@ -192,11 +204,11 @@ object RemainsDialog: BaseDialog(IceStats.遗物.localized(),Icon.logic){
                         }
                     }
                 }
-                IBlocks.碳控熔炉.stats = Stats()
-                IBlocks.碳控熔炉.checkStats()
+                Crafting.碳控熔炉.stats = Stats()
+                Crafting.碳控熔炉.checkStats()
             }
         }
-        Remains("谐振探针"){
+        Remains("谐振探针") {
             setDescription("一种用于探测矿物谐振频率的装置,可以显示隐藏矿层")
             effect = "矿物地板不再[隐藏]"
             installFun {
@@ -216,10 +228,26 @@ object RemainsDialog: BaseDialog(IceStats.遗物.localized(),Icon.logic){
                 Vars.renderer.blocks.floor.reload()
             }
         }
+        Remains("流光罗盘") {
+            setDescription("表面刻有古老的符文,会发出淡淡的光芒")
+            effect = "核心机增加[1]速度"
+
+            val lucifer = IUnitTypes.路西法
+            installFun {
+                lucifer.speed += 1f
+                lucifer.stats = Stats()
+                lucifer.checkStats()
+            }
+            uninstallFun {
+                lucifer.speed -= 1f
+                lucifer.stats = Stats()
+                lucifer.checkStats()
+            }
+        }
         tempRemain = if (enableSeq.isEmpty) remainsSeq.first() else enableSeq.first()
     }
 
-   override fun build() {
+    override fun build() {
         cont.iTable {
             var t = tempRemain
             fun flun() {
@@ -289,13 +317,12 @@ object RemainsDialog: BaseDialog(IceStats.遗物.localized(),Icon.logic){
         }
     }
 
-    class Remains(
-        val name: String, applys: Remains.() -> Unit = {}
-    ) {
+    class Remains(val name: String, applys: Remains.() -> Unit = {}) {
         var localizedName: String = ""
         var effect = ""
-        var icon = if (IFiles.hasIcePng(name)) TextureRegionDrawable(
-            IFiles.findIcePng(name)) else TextureRegionDrawable(IItems.红冰.uiIcon)
+        var icon = if (IFiles.hasIcePng(name)) TextureRegionDrawable(IFiles.findIcePng(name)) else TextureRegionDrawable(
+            IItems.红冰.uiIcon
+        )
         var color = IceColor.b4
         private var install = {}
         private var uninstall = {}

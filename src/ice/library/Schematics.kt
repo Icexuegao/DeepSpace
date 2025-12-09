@@ -3,7 +3,7 @@ package ice.library
 import arc.struct.Seq
 import arc.struct.StringMap
 import ice.Ice
-import ice.content.IBlocks
+import ice.content.block.Effect
 import mindustry.Vars
 import mindustry.game.Schematic
 import mindustry.game.Schematic.Stile
@@ -14,7 +14,7 @@ object Schematics {
     val allSch = Seq<Schematic>()
     var 虔信方垒 = createSchematic(3, 3) { tiles, strings ->
         strings.put("name", "虔信方垒")
-        tiles.add(Stile(IBlocks.虔信方垒, 1, 1, IBlocks.虔信方垒.lastConfig, 0))
+        tiles.add(Stile(Effect.虔信方垒, 1, 1, Effect.虔信方垒.lastConfig, 0))
     }
 
     fun loadSync() {
@@ -40,8 +40,7 @@ object Schematics {
         val cores = s.tiles.count { t: Stile? -> t!!.block is CoreBlock }
         val maxSize: Int = Vars.schematics.getMaxLaunchSize(core.block)
         //确保存在核心，并且原理图足够小。
-        if ((s.width > maxSize || s.height > maxSize || s.tiles.contains { t -> t.block.buildVisibility === BuildVisibility.sandboxOnly || !t.block.unlocked() } || cores > 1)
-        ) return
+        if ((s.width > maxSize || s.height > maxSize || s.tiles.contains { t -> t.block.buildVisibility === BuildVisibility.sandboxOnly || !t.block.unlocked() } || cores > 1)) return
         //放入缓存中
         Vars.schematics.loadouts.get(core.block as CoreBlock, ::Seq).add(s)
         //保存非自定义装载

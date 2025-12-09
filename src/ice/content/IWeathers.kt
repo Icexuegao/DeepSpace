@@ -1,16 +1,17 @@
 package ice.content
 
+import ice.library.world.ContentLoad
+import ice.graphics.IceColor
 import ice.library.IFiles
-import ice.library.content.blocks.abstractBlocks.IceBlock.Companion.desc
-import ice.library.scene.tex.IceColor
-import ice.ui.BaseBundle.Companion.bundle
+import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds
 import mindustry.type.weather.ParticleWeather
 import mindustry.type.weather.RainWeather
 import mindustry.world.meta.Attribute
 
-object IWeathers {
+object IWeathers: ContentLoad {
     var 凌雪 = ParticleWeather("tortureSnow").apply {
         randomParticleRotation = true
         particleRegion = IFiles.getNormName("tortureSnow")
@@ -40,6 +41,5 @@ object IWeathers {
         }
     }
 
-    fun load() = Unit
 
 }

@@ -10,13 +10,13 @@ import arc.scene.ui.Image
 import arc.scene.ui.Label
 import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
-import arc.struct.Seq
-import arc.util.Interval
+import ice.graphics.IceColor
 import ice.library.IFiles
 import ice.library.scene.action.IceActions
-import ice.library.scene.tex.IceColor
+import ice.library.scene.element.typinglabel.TLabel
 import ice.library.struct.asDrawable
-import ice.vars.UI
+import ice.library.struct.log
+import ice.ui.UI
 import mindustry.Vars
 import mindustry.gen.Tex
 
@@ -84,24 +84,11 @@ object ConversationFragment {
         delayStart: Float = 1f,
         delay: Float = 2f,
         delayEnd: Float = 1f,
-        speed: Float = 8f,
         x: Float = UI.cgwidth / 2,
         y: Float = UI.cgheight / 2,
         back: Drawable? = null
     ) {
-        val split = text.split("")
-        val iterator = Seq(split.toTypedArray()).iterator()
-        val interval = Interval(1)
-        val fLabel = Label("").apply {
-            update {
-                if (interval[speed]) {
-                    if (iterator.hasNext()) {
-                        getText().append(iterator.next())
-                        invalidateHierarchy()
-                    }
-                }
-            }
-        }
+        val fLabel = TLabel(text)
         val table = Table(back).apply {
             margin(20f)
             title?.let {
@@ -115,7 +102,10 @@ object ConversationFragment {
                 pack()
                 setPosition(x - width / 2, y)
             }
-            actions(Actions.alpha(0f), Actions.alpha(1f, delayStart), Actions.delay((split.size * speed) / 60),
+            log {
+                fLabel.getTotalDuration()
+            }
+            actions(Actions.alpha(0f), Actions.alpha(1f, delayStart), Actions.delay(fLabel.getTotalDuration()),
                 Actions.delay(delay), Actions.alpha(0f, delayEnd), Actions.remove())
         }
         group.addChild(table)

@@ -4,8 +4,8 @@ import arc.scene.ui.Image
 import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
-import ice.library.scene.tex.IStyles
-import ice.library.scene.tex.IceColor
+import ice.graphics.IStyles
+import ice.graphics.IceColor
 import ice.library.util.toStringi
 import mindustry.ui.Styles
 

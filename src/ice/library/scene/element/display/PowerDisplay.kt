@@ -4,7 +4,7 @@ import arc.scene.ui.Image
 import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
-import ice.library.scene.tex.IceColor
+import ice.graphics.IceColor
 import mindustry.core.UI
 import mindustry.gen.Icon
 import mindustry.ui.Styles

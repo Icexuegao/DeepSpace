@@ -1,12 +1,13 @@
 package ice.content
 
-import ice.library.content.blocks.abstractBlocks.IceBlock.Companion.desc
-import ice.library.content.item.IceItem
-import ice.library.content.item.OreItem
-import ice.ui.BaseBundle.Companion.bundle
+import ice.library.world.ContentLoad
+import ice.world.content.item.IceItem
+import ice.world.content.item.OreItem
+import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
+import ice.ui.bundle.BaseBundle.Companion.bundle
 
-@Suppress("unused") object IItems {
-    fun load() = Unit
+@Suppress("unused")
+object IItems: ContentLoad {
     val 脊髓末梢 = IceItem("spinalCordEnding", "bf3e47") {
         nutrientConcentration = 0.2f
         bundle {
@@ -39,7 +40,7 @@ import ice.ui.BaseBundle.Companion.bundle
         }
     }
     val 金珀沙 = IceItem("goldSand", "f8efad") {
-        hardness = 2
+        hardness = 1
         bundle {
             desc(zh_CN, "金珀沙",
                 "这种闪耀着金色光泽的沙粒含有微量琥珀结晶,在光照下会呈现半透明的琥珀色光晕,可进一步提取矿物质")
@@ -154,6 +155,16 @@ import ice.ui.BaseBundle.Companion.bundle
                 "这玩意儿比钻石难啃\n——采矿队长R-42的日志")
         }
     }
+    val 铱锇矿 = OreItem("iridiumosm", "656565", 4) {
+        bundle {
+            desc(zh_CN, "铱锇矿", "一种稀有金属矿,含有铱和锇,是提炼这两种金属的重要原料")
+        }
+    }
+    val 铈硅石 = OreItem("cerite", "BFC8E2", 2) {
+        bundle {
+            desc(zh_CN, "铈硅石", "稀土材料,含有铈,是提炼铈的重要原料")
+        }
+    }
     val 低碳钢 = IceItem("lowCarbonSteel", "d4d7e4") {
         bundle {
             desc(zh_CN, "低碳钢", "含碳量较低的钢材,具有优异的塑性和韧性,是建筑和机械制造的常用基础材料")
@@ -207,9 +218,57 @@ import ice.ui.BaseBundle.Companion.bundle
             desc(zh_CN, "铪锭", "稀有的高熔点金属,在能量传导和高温环境中表现出色,是高级能量设备的关键材料")
         }
     }
+    val 铈锭 = IceItem("ceriumIngot", "BFC8E2") {
+        explosiveness = 0.25f
+        flammability = 1.2f
+        radioactivity = 0.6f
+        cost = 1.2f
+        healthScaling = 0.6f
+        bundle {
+            desc(zh_CN, "铈锭", "经过初步加工的铈矿石,具有研磨抛光剂,特种玻璃及推进器零件等多种用途")
+        }
+    }
     val 钴钢 = IceItem("cobaltSteel", "c5d1e0") {
         bundle {
             desc(zh_CN, "钴钢", "钴合金钢,具有优异的耐高温和耐腐蚀性能,常用于制造高强度建筑和防护装备")
+        }
+    }
+    val 硫化合物= IceItem("sulfurCompound", "ffaa5f"){
+        flammability = 1.4f
+        explosiveness = 0.4f
+        buildable = false
+        bundle {
+            desc(zh_CN, "硫化合物")
+        }
+    }
+    val 爆炸化合物= IceItem("explosiveCompound", "ff795e") {
+        flammability = 0.4f
+        explosiveness = 1.2f
+        buildable = false
+        bundle {
+            desc(zh_CN, "爆炸化合物")
+        }
+    }
+    val 低温化合物 = IceItem("lowTemperatureCompound", "C0ECFF") {
+        charge = 0.1f
+        buildable = false
+        bundle {
+            desc(zh_CN, "低温化合物", "在极端低温中凝结而成的化合物,具有优异的导热性能,常用于制造高效率的冷却系统")
+        }
+    }
+    val 铈凝块 = IceItem("ceriumClot", "929DB5") {
+        buildable = false
+        explosiveness = 1.5f
+        flammability = 3.6f
+        bundle {
+            desc(zh_CN, "铈凝块", "对碰撞和温度极为敏感,同时极易自燃")
+        }
+    }
+    val 铱板 = IceItem("iridiumPlate", "656565") {
+        cost = 1.8f
+        healthScaling = 1f
+        bundle {
+            desc(zh_CN, "铱板", "已经完成了压铸工序的铱合金板,具有极强的抗冲击性能,是一种优秀的各向异性介质")
         }
     }
     val 燃能晶 = IceItem("burningCrystal", "737373") {
@@ -228,6 +287,13 @@ import ice.ui.BaseBundle.Companion.bundle
                 "凭借其超凡的抗冲击性和热稳定性,既能作为能量护盾发生器的核心基底材料,又能制成高速单位的防热瓦")
         }
     }
+    val 陶钢 = IceItem("potterySteel", "D6DEC6") {
+        cost = 1.8f
+        healthScaling = 0.8f
+        bundle {
+            desc(zh_CN, "陶钢", "这种复合材料能够快速且均匀地将电磁粒子辐射分散传导至装甲各处,从而大幅度降低高强度动能")
+        }
+    }
     val 石墨烯 = IceItem("graphene", "52578a") {
         bundle {
             desc(zh_CN, "石墨烯", "超薄的单层碳原子材料,具有出色的导电性和机械强度,是高级电子设备的核心材料")
@@ -238,14 +304,58 @@ import ice.ui.BaseBundle.Companion.bundle
             desc(zh_CN, "单晶硅", "高纯度的硅晶体,是制造高级电子设备和处理器的基础材料")
         }
     }
+    val 导能回路 = IceItem("conductingCircuit", "867F8C") {
+        bundle {
+            desc(zh_CN, "导能回路", "将高纯度单晶硅回路蚀刻进放射性能级降低的钍基座中,极大提升其导能性与稳固性")
+        }
+        charge = 0.8f
+        cost = 1.5f
+        healthScaling = 0.5f
+    }
     val 电子元件 = IceItem("integratedCircuit", "53565c") {
         bundle {
             desc(zh_CN, "电子元件", "精密的电子器件,是制造高级设备和处理器的基础材料")
         }
     }
+    val 生物钢 = IceItem("biologicalSteel", "D75B6E") {
+        bundle {
+            desc(zh_CN, "生物钢",
+                "被强行抑制了绝大部分活性的生物组织,此材料制造的装甲具有整体无缝,附着性强,耐酸碱,防辐射,防腐蚀,耐冲击等特点,只是....",
+                "你真的要使用他吗?")
+        }
+        frames = 3
+        transitionFrames = 13
+        frameTime = 5f
+        explosiveness = 0.75f
+        flammability = 0.5f
+        radioactivity = 0.1f
+        charge = 0.4f
+        cost = 2.4f
+        healthScaling = 2.4f
+    }
+    val 肃正协议 = IceItem("solemnProtocol", "FF5845") {
+        cost = 600f
+        bundle {
+            desc(zh_CN, "肃正协议", "装载该密匙激活协议以获取高级军械的控制及制造权")
+        }
+    }
     val 暮光合金 = IceItem("duskIngot", "deedff") {
         bundle {
             desc(zh_CN, "暮光合金", "在暮光时分呈现特殊光泽的合金材料,具有优异的能量传导特性,是高级能量设备的核心材料")
+        }
+    }
+    val 以太能 = IceItem("etherealEnergy", "E6C4EE") {
+        frames = 2
+        transitionFrames = 24
+        frameTime = 6f
+        radioactivity = 0.4f
+        charge = 1f
+        cost = 2.4f
+        healthScaling = 0.8f
+        bundle {
+            desc(zh_CN, "以太能",
+                "以太,一高能粒子,在以特定结构排列时注入相位能量,可在一定程度上影响时空结构,曾在研究初期引发了回溯时空/空间错位/乱序传送在内的一系列时空现象",
+                "在以太粒子以特定结构排列时注入相位能量,以太粒子会在法韦克内敛空间的能量辐射下,形成以伊塔宏粒子射线为场能的波态中子向心力场")
         }
     }
     val 玳渊矩阵 = IceItem("abyssMatrix", "d7bdff") {

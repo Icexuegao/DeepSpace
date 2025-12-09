@@ -1,0 +1,60 @@
+package ice.entities.bullet.base
+
+import arc.Core
+import arc.graphics.Color
+import arc.graphics.g2d.Draw
+import arc.graphics.g2d.TextureRegion
+import arc.math.Interp
+import arc.math.Mathf
+import arc.util.Tmp
+import mindustry.gen.Bullet
+import mindustry.graphics.Pal
+
+open class BasicBulletType(speed: Float = 3f, damage: Float = 20f, var sprite: String = "bullet") :
+    BulletType(speed, damage) {
+    var backColor: Color = Pal.bulletYellowBack
+    var frontColor: Color = Pal.bulletYellow
+    var mixColorFrom: Color = Color(1f, 1f, 1f, 0f)
+    var mixColorTo: Color = Color(1f, 1f, 1f, 0f)
+    var width: Float = 5f
+    var height: Float = 7f
+    var shrinkX: Float = 0f
+    var shrinkY: Float = 0.5f
+    var shrinkInterp: Interp = Interp.one
+    var spin: Float = 0f
+    var rotationOffset: Float = 0f
+
+    var backRegion: TextureRegion? = null
+    var frontRegion: TextureRegion? = null
+
+
+    override fun load() {
+        super.load()
+        frontRegion = Core.atlas.find(sprite)
+        backRegion = Core.atlas.find("$sprite-back")
+    }
+
+
+    override fun draw(b: Bullet) {
+        super.draw(b)
+        val shrink = shrinkInterp.apply(b.fout())
+        val height = this.height * ((1f - shrinkY) + shrinkY * shrink)
+        val width = this.width * ((1f - shrinkX) + shrinkX * shrink)
+        val offset =
+            -90 + (if (spin != 0f) Mathf.randomSeed(b.id.toLong(), 360f) + b.time * spin else 0f) + rotationOffset
+
+        val mix = Tmp.c1.set(mixColorFrom).lerp(mixColorTo, b.fin())
+
+        Draw.mixcol(mix, mix.a)
+
+        if (backRegion!!.found()) {
+            Draw.color(backColor)
+            Draw.rect(backRegion, b.x, b.y, width, height, b.rotation() + offset)
+        }
+
+        Draw.color(frontColor)
+        Draw.rect(frontRegion, b.x, b.y, width, height, b.rotation() + offset)
+
+        Draw.reset()
+    }
+}

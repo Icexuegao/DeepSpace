@@ -1,33 +1,27 @@
 package ice.ui.dialog
 
 import arc.graphics.g2d.Draw
-import arc.math.Interp
-import arc.scene.Scene
-import arc.scene.actions.Actions
-import arc.scene.ui.Dialog
 import arc.scene.ui.Image
 import arc.scene.ui.layout.Table
-import arc.util.Align
-import ice.library.meta.stat.IceStats
-import ice.library.scene.tex.IStyles
-import ice.library.scene.tex.IStyles.deepSpaceVer
-import ice.library.scene.tex.IceColor
+import ice.graphics.IStyles
+import ice.graphics.IStyles.deepSpaceVer
+import ice.graphics.IceColor
+import ice.library.scene.ui.Dialog
+import ice.library.scene.ui.esc
+import ice.library.scene.ui.iPaneG
 import ice.ui.dialog.research.ResearchDialog
-import ice.ui.iPaneG
+import ice.world.meta.IceStats
 import mindustry.gen.Icon
 
 object MenusDialog : Dialog() {
     const val backMargin = 10f
     val back = IStyles.background11
-    var button: BaseDialog? = null
+    var button: BaseMenusDialog? = null
     lateinit var conts: Table
 
     init {
         clearChildren()
-        margin(0f)
-        defaults().pad(0f)
         setFillParent(true)
-        //setOrigin(Align.center)
         table(back) { table ->
             table.table(back) {
                 it.add("May we love each other today").color(IceColor.b4).get().setFontScale(1.3f)
@@ -60,7 +54,7 @@ object MenusDialog : Dialog() {
                     }
                     it.iPaneG { pan ->
                         pan.top()
-                        BaseDialog.dalogs.forEach { mb ->
+                        BaseMenusDialog.dalogs.forEach { mb ->
                             pan.button({ b ->
                                 b.image(mb.icon).color(IceColor.b5).table.add(mb.name).color(IceColor.b5)
                             }, IStyles.rootButton) {
@@ -73,8 +67,7 @@ object MenusDialog : Dialog() {
                             }.pad(2f).growX().minHeight(100f).maxHeight(120f).row()
                         }
                         pan.button({ b ->
-                            b.image(Icon.exit).color(IceColor.b5).table.add(IceStats.关闭.localized())
-                                .color(IceColor.b5)
+                            b.image(Icon.exit).color(IceColor.b5).table.add(IceStats.关闭.localized()).color(IceColor.b5)
                         }, IStyles.rootCleanButton) {
                             hide()
                         }.pad(2f).growX().minHeight(100f).maxHeight(120f).row()
@@ -88,20 +81,8 @@ object MenusDialog : Dialog() {
                 }.margin(backMargin).width(200f).growY()
             }.grow()
         }.grow()
+        esc {
+            hide()
+        }
     }
-
-    override fun show(stage: Scene): MenusDialog {
-        show(stage, Actions.sequence(Actions.alpha(0f), Actions.fadeIn(0.4f, Interp.fade)))
-        centerWindow()
-        return this
-    }
-
-    override fun hide() {
-        if (!isShown) return
-        setOrigin(Align.center)
-        setClip(false)
-        isTransform = true
-        hide(Actions.fadeOut(0.4f, Interp.fade))
-    }
-
 }

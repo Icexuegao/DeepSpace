@@ -4,7 +4,7 @@ import arc.graphics.Mesh
 import arc.graphics.VertexAttribute
 import arc.graphics.g2d.Draw
 import arc.graphics.gl.Shader
-import ice.library.scene.tex.IStyles
+import ice.graphics.IStyles
 
 class Example {
     val shader = Shader(

@@ -1,6 +1,8 @@
 package ice.library.util
 
+import arc.graphics.Color
 import arc.math.Mathf
+import arc.util.Strings
 import ice.library.util.Strings.decimal
 import ice.library.util.Strings.fixDecimals
 import ice.library.util.Strings.regex
@@ -17,6 +19,8 @@ fun String.isNumericWithSign() = matches(regex)
 
 /**返回float保存x位数的字符串*/
 fun Float.toStringi(precision: Int) = "%.${precision}f".format(this)
+
+fun String.toColor(): Color = Color.valueOf(this)
 fun percent(cur: Float, max: Float, percent: Float = cur / max, showPercent: Boolean = percent < 0.95f): String {
     return buildString {
         append(format(cur))
@@ -49,18 +53,18 @@ fun format(number: Float): String {
 }
 
 private fun format0(number: Float): String {
-    if (fixDecimals) return arc.util.Strings.fixed(number, decimal)
+    if (fixDecimals) return Strings.fixed(number, decimal)
     return fixedPrecision(number)
 }
 
 fun fixedPrecision(v: Float): String {
     val exponent = Mathf.floor(Mathf.log(10f, abs(v))).coerceAtLeast(0)
     if (exponent >= decimal) return v.toInt().toString()
-    return arc.util.Strings.fixed(v, decimal - exponent)
+    return Strings.fixed(v, decimal - exponent)
 }
 
 fun scienceFormat(number: Float): String {
     val exponent = Mathf.floor(Mathf.log(10f, abs(number)))
     val mantissa = number / Mathf.pow(10f, exponent.toFloat())
-    return "${arc.util.Strings.fixed(mantissa, decimal)}[gray]E$exponent[]"
+    return "${Strings.fixed(mantissa, decimal)}[gray]E$exponent[]"
 }

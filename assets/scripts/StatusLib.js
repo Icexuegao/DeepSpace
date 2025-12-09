@@ -16,7 +16,7 @@
 function affinity(from, to, transitionHandler) {
     let spreadElements = new StatusEffect.TransitionHandler()
     {
-        handle: transitionHandler
+        transitionHandler
     }
     Reflect.invoke(StatusEffect, from, "affinity", [to, spreadElements], StatusEffect, StatusEffect.TransitionHandler);
 }
