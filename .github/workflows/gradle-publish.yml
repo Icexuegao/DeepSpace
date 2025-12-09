@@ -11,6 +11,7 @@ jobs:
       contents: read
       packages: write
 
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -23,7 +24,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: 9.0
+          gradle-version: 9.0.0
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
