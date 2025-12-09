@@ -10,8 +10,8 @@ import arc.struct.Seq
 import arc.util.Tmp
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.world.content.blocks.distribution.conveyor.PackStack
 import ice.ui.dialog.AchievementDialog
+import ice.world.content.blocks.distribution.conveyor.PackStack
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.gen.Groups
@@ -69,7 +69,7 @@ object EventType {
                     return@run
                 }
                 val mouseWorld = Core.input.mouseWorld()
-                val sub = Tmp.v1.set(mouseWorld).sub(it).scl(0.1f)
+                val sub = Tmp.v1.set(mouseWorld).sub(df).scl(0.1f)
                 if (!Vars.state.isPaused) it.move(sub)
             }
 
