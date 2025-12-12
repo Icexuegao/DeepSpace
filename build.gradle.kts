@@ -92,16 +92,6 @@ tasks {
             configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }
         )
 
-       *//* // 自动处理该构建的Java版本.
-        if (System.getProperty('java.version').startsWith('1.')) {
-            // Before Java 9, the runtime classes were packaged in a single jar file.
-            libraryjars "${System.getProperty('java.home')}/lib/rt.jar"
-        } else {
-            //从 Java 9 起，运行时类被封装在模块化的 jmod 文件中。
-            libraryjars "${System.getProperty('java.home')}/jmods/java.base.jmod", jarfilter: '!**.jar', filter: '!module-info.class'
-
-        }*//*
-        //libraryjars("${System.getProperty("java.home")}/jmods/java.base.jmod")
 
         // ProGuard配置文件
         configuration("proguard-rules.pro")
