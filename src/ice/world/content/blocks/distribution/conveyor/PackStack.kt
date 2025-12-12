@@ -17,6 +17,7 @@ import mindustry.Vars
 import mindustry.async.PhysicsProcess
 import mindustry.content.Blocks
 import mindustry.core.World
+import mindustry.entities.Effect
 import mindustry.entities.EntityCollisions
 import mindustry.entities.EntityGroup
 import mindustry.gen.*
@@ -98,9 +99,10 @@ class PackStack() : Drawc, Hitboxc, Velc, Physicsc {
         added = true
         updateLastPosition()
     }
-
+    var deadEffect: Effect?=null
     override fun remove() {
         if (!added) return
+        deadEffect?.at(this)
         Groups.all.remove(this)
         indexAll = -1
         Groups.draw.remove(this)

@@ -4,7 +4,7 @@ import java.io.File
 
 fun main() {
 
-    repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\environment\\floor\\bloodBlastocyst")
+    repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\distribution\\conveyor\\fleshArmorConveyor")
 
 }
 
@@ -25,7 +25,7 @@ fun repName(path: String) {
     val file = File(path)
 
     file.listFiles()?.forEach {
-        val replace1 = it.name.replace("bloodMorite", "bloodBlastocyst")
+        val replace1 = it.name.replace("血肉装甲传送带", "fleshArmorConveyor")
         it.renameTo(File("$path\\$replace1"))
     }
 }

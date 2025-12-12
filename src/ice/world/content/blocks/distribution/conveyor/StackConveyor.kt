@@ -20,9 +20,9 @@ import ice.graphics.IceColor
 import ice.library.IFiles
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
+import mindustry.content.Fx
 import mindustry.entities.Effect
 import mindustry.entities.TargetPriority
-import mindustry.entities.effect.WaveEffect
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
 import mindustry.gen.Sounds
@@ -61,16 +61,7 @@ open class StackConveyor(name: String) : IceBlock(name), Autotiler {
     var regions = Array(3) {
         IFiles.findPng("$name-$it")
     }
-    var loadEffect: Effect = WaveEffect().apply {
-        lifetime = 20f
-        sides = 3
-        sizeTo = 6f
-        sizeFrom = 0f
-        strokeTo = 0f
-        strokeFrom = 3f
-        colorFrom = IceColor.b4
-        colorTo = IceColor.b4
-    }
+    var loadEffect: Effect =Fx.conveyorPoof
     var unloadEffect = Effect(35.0f) { e: Effect.EffectContainer ->
         Draw.color(Pal.plasticBurn, IceColor.b4, e.fin())
         Angles.randLenVectors(e.id.toLong(), 4, 3.0f + e.fin() * 4.0f) { x: Float, y: Float ->

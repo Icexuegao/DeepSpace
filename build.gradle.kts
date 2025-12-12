@@ -14,6 +14,9 @@ buildscript {
         maven { url = uri("https://maven.aliyun.com/repository/public") }
         maven { url = uri("https://jitpack.io") }
     }
+    dependencies {
+     //   classpath("com.guardsquare:proguard-gradle:7.8.2")
+    }
 }
 val kotlinCompatibility = "2.2.0"
 val proUser: String by extra
@@ -44,6 +47,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinCompatibility}")
     implementation("com.github.EB-wilson.UniverseCore:markdown:$uncVersion")
     implementation("com.github.EB-wilson.UniverseCore:scenes:$uncVersion")
+  //  implementation("com.github.EB-wilson.UniverseCore:dynamilizer:${uncVersion}")
     //implementation("com.github.Anuken.Arc:arc-core:v146")
     //compileOnly files("lib\\UniverseCore-v2.2.0.jar")
     //  implementation("com.github.EB-wilson.UniverseCore:markdown:${uncVersion}")
@@ -73,7 +77,47 @@ sourceSets {
     }
 }
 
+
+
 tasks {
+   /* register<proguard.gradle.ProGuardTask>("proguard") {
+        // 输入JAR
+        injars("$buildLibDir/${project.name}Desktop.jar")
+
+        // 输出JAR
+        outjars("$buildLibDir/${project.name}DesktopProGuard.jar")
+
+        // 库JAR（不需要混淆的依赖）
+        libraryjars(
+            configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }
+        )
+
+       *//* // 自动处理该构建的Java版本.
+        if (System.getProperty('java.version').startsWith('1.')) {
+            // Before Java 9, the runtime classes were packaged in a single jar file.
+            libraryjars "${System.getProperty('java.home')}/lib/rt.jar"
+        } else {
+            //从 Java 9 起，运行时类被封装在模块化的 jmod 文件中。
+            libraryjars "${System.getProperty('java.home')}/jmods/java.base.jmod", jarfilter: '!**.jar', filter: '!module-info.class'
+
+        }*//*
+        //libraryjars("${System.getProperty("java.home")}/jmods/java.base.jmod")
+
+        // ProGuard配置文件
+        configuration("proguard-rules.pro")
+        // 添加详细输出选项
+        printmapping("build/mapping.txt")
+        printseeds("build/seeds.txt")
+        printusage("build/usage.txt")
+
+
+        dontoptimize()
+        dontshrink()
+        dontpreverify()
+        //dontobfuscate()
+    }*/
+
+
     withType<JavaCompile>().configureEach {
         sourceCompatibility = javaCompatibility
         targetCompatibility = javaCompatibility

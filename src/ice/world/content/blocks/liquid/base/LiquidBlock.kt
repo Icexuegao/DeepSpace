@@ -11,7 +11,6 @@ import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Env
 
 open class LiquidBlock(name: String) : IceBlock(name) {
-
     val liquidRegion: TextureRegion by lazy { Core.atlas.find("${this.name}-liquid") }
     val topRegion: TextureRegion by lazy { Core.atlas.find("${this.name}-top") }
     val bottomRegion: TextureRegion by lazy { Core.atlas.find("${this.name}-bottom") }
@@ -24,7 +23,7 @@ open class LiquidBlock(name: String) : IceBlock(name) {
         outputsLiquid = true
         envEnabled = envEnabled or (Env.space or Env.underwater)
         buildType = Prov(::LiquidBuild)
-        setDrawMulti(DrawBuild<LiquidBuild>{
+        setDrawMulti(DrawBuild<LiquidBuild> {
             val rotation = if (rotate) rotdeg() else 0f
             Draw.rect(bottomRegion, x, y, rotation)
 

@@ -3,11 +3,15 @@ package ice.content.block
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
-import ice.library.world.ContentLoad
 import ice.content.IItems
+import ice.graphics.IceColor
 import ice.library.EventType.lazyInit
+import ice.library.world.ContentLoad
+import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.*
+import ice.world.content.blocks.distribution.conveyor.Conveyor
 import ice.world.content.blocks.distribution.conveyor.PackStackConveyor
 import ice.world.content.blocks.distribution.conveyor.StackConveyor
 import ice.world.content.blocks.distribution.digitalStorage.HubConduit
@@ -17,23 +21,22 @@ import ice.world.content.blocks.distribution.digitalStorage.LogisticsOutput
 import ice.world.content.blocks.distribution.droneNetwork.DroneDeliveryTerminal
 import ice.world.content.blocks.distribution.droneNetwork.DroneReceivingRnd
 import ice.world.content.blocks.distribution.itemNode.TransferNode
-import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect
 import mindustry.entities.bullet.PointBulletType
 import mindustry.entities.effect.ParticleEffect
+import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.Block
 import mindustry.world.blocks.distribution.ArmoredConveyor
-import mindustry.world.blocks.distribution.Conveyor
 import mindustry.world.blocks.distribution.MassDriver
 import mindustry.world.blocks.storage.Unloader
+
 @Suppress("unused")
-object Distribution:ContentLoad {
+object Distribution : ContentLoad {
     val 基础传送带 = Conveyor("baseConveyor").apply {
         size = 1
         speed = 0.2f
@@ -65,6 +68,53 @@ object Distribution:ContentLoad {
         requirements(Category.distribution, IItems.高碳钢, 2, IItems.钴钢, 1, IItems.铬锭, 1)
         bundle {
             desc(zh_CN, "钴熠传送带")
+        }
+        loadEffect= WaveEffect().apply {
+            lifetime = 20f
+            sides = 3
+            sizeTo = 6f
+            sizeFrom = 0f
+            strokeTo = 0f
+            strokeFrom = 3f
+            colorFrom = IceColor.b4
+            colorTo = IceColor.b4
+        }
+    }
+    val 梯度传送带 = PackStackConveyor("gradedConveyor").apply {
+        speed = 60f / 600f
+        drawLastItems = false
+        differentItem = true
+        loadEffect = Effect(30.0f) { e ->
+            Draw.color(Color.valueOf("b8bde1"))
+            Lines.stroke(0.5f * e.fout())
+            val spread = 4f
+            Fx.rand.setSeed(e.id.toLong())
+            Draw.alpha(e.fout())
+            for (i in 0..7) {
+                val ang = e.rotation + Fx.rand.range(8f) + i
+                Fx.v.trns(ang, Fx.rand.random(e.fin() * 10f))
+                Lines.lineAngle(e.x + Fx.v.x + Fx.rand.range(spread), e.y + Fx.v.y + Fx.rand.range(spread), ang, e.fout() * Fx.rand.random(1f) + 1f)
+            }
+        }
+        requirements(Category.distribution, ItemStack.with(IItems.铪锭, 20))
+        bundle {
+            desc(zh_CN, "梯度传送带")
+        }
+    }
+    val 血肉装甲传送带 = Conveyor("fleshArmorConveyor").apply {
+        health = 600
+        armor = 8f
+        speed = 0.30f
+        healAmount=30f
+        displayedSpeed = 36f
+        placeableLiquid = true
+        requirements(Category.distribution, IItems.生物钢, 1, IItems.铱板, 2)
+        lazyInit {
+            bridgeReplacement = 装甲传送带桥
+            junctionReplacement = 交叉神经链路
+        }
+        bundle {
+            desc(zh_CN, "血肉装甲传送带","在传送带内部模拟血肉蠕动来快速输送物品")
         }
     }
     val 生物钢传送带 = StackConveyor("biologicalSteelConveyor").apply {
@@ -105,32 +155,6 @@ object Distribution:ContentLoad {
         requirements(Category.distribution, IItems.导能回路, 1, IItems.生物钢, 1)
         bundle {
             desc(zh_CN, "生物钢传送带", "打包物品进行运输,一次能携带100件物品,比塑钢传送带更快,可以用电力加速")
-        }
-    }
-    val 梯度传送带 = PackStackConveyor("gradedConveyor").apply {
-        speed = 60f / 600f
-        drawLastItems = false
-        differentItem = true
-        loadEffect = Effect(30.0f) { e ->
-            Draw.color(Color.valueOf("b8bde1"))
-            Lines.stroke(0.5f * e.fout())
-            val spread = 4f
-            Fx.rand.setSeed(e.id.toLong())
-            Draw.alpha(e.fout())
-            for (i in 0..7) {
-                val ang = e.rotation + Fx.rand.range(8f) + i
-                Fx.v.trns(ang, Fx.rand.random(e.fin() * 10f))
-                Lines.lineAngle(
-                    e.x + Fx.v.x + Fx.rand.range(spread),
-                    e.y + Fx.v.y + Fx.rand.range(spread),
-                    ang,
-                    e.fout() * Fx.rand.random(1f) + 1f
-                )
-            }
-        }
-        requirements(Category.distribution, ItemStack.with(IItems.铪锭, 20))
-        bundle {
-            desc(zh_CN, "梯度传送带")
         }
     }
     val 基础交叉器: Block = Junction("baseJunction").apply {
@@ -250,11 +274,7 @@ object Distribution:ContentLoad {
         receiveEffect = Fx.hitSquaresColor
         requirements(Category.distribution, IItems.钴锭, 335, IItems.铱板, 285, IItems.导能回路, 225, IItems.钴钢, 175)
         bundle {
-            desc(
-                zh_CN,
-                "重型质量驱动器",
-                "超远距离传输物品,收集一定物品后将其发射到另一个重型质量驱动器中,容量巨大但转速及发射速度缓慢"
-            )
+            desc(zh_CN, "重型质量驱动器", "超远距离传输物品,收集一定物品后将其发射到另一个重型质量驱动器中,容量巨大但转速及发射速度缓慢")
         }
     }
     val 传输节点: Block = TransferNode("transferNode").apply {
@@ -310,5 +330,4 @@ object Distribution:ContentLoad {
             desc(zh_CN, "随机源", "随机输出所有资源")
         }
     }
-
 }

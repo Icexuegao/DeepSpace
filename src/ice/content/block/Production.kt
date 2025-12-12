@@ -1,5 +1,6 @@
 package ice.content.block
 
+import ice.audio.ISounds
 import ice.content.IItems
 import ice.library.util.toColor
 import ice.library.world.ContentLoad
@@ -10,9 +11,11 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.production.IceDrill
 import mindustry.content.Fx
 import mindustry.content.Liquids
+import mindustry.entities.effect.ParticleEffect
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.Block
+import mindustry.world.blocks.production.BurstDrill
 
 @Suppress("unused")
 object Production : ContentLoad {
@@ -66,8 +69,34 @@ object Production : ContentLoad {
         warmupSpeed = 0.06f
         liquidBoostIntensity = 2f
         bundle {
-            desc(zh_CN, "热熔钻井")
+            desc(zh_CN, "热熔钻井", "通过多种合金制成的钻头融化地层以快速开采所有矿物")
         }
         requirements(Category.production, IItems.铱板, 125, IItems.导能回路, 85, IItems.陶钢, 55)
+    }
+    val 血肉钻井: Block = BurstDrill("fleshBloodDrill").apply {
+        size = 5
+        tier = 11
+        drillTime = 41.66f
+        itemCapacity = 600
+        liquidCapacity = 60f
+        consumePower(10f)
+        consumeLiquids(Liquids.water, 0.5f)
+        drillSound = ISounds.shotFiercely
+        placeableLiquid = true
+        drillEffect = ParticleEffect().apply {
+            particles = 6
+            lifetime = 90f
+            sizeFrom = 2f
+            sizeTo = 3f
+            length = 15f
+            baseLength = 30f
+            colorFrom = "D75B6E".toColor()
+            colorTo = "D75B6E00".toColor()
+            cone = 360f
+        }
+        requirements(Category.production, IItems.铱板, 450, IItems.导能回路, 225, IItems.钴锭, 32, IItems.生物钢, 75, IItems.肃正协议, 1)
+        bundle {
+            desc(zh_CN, "血肉钻井", "骨骼构成了最坚硬的钻头,肌肉形成了最强劲的转子,预热时间较长,需要持续供给血肉赘生物,可以安置在水上")
+        }
     }
 }

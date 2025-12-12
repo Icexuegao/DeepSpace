@@ -1,14 +1,15 @@
 package ice.content.block
 
 import arc.graphics.Color
-import ice.library.world.ContentLoad
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.IFiles
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
-import ice.world.draw.DrawMulti
+import ice.library.world.ContentLoad
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.world.draw.DrawAnyLiquidTile
+import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.gen.Sounds
@@ -23,8 +24,9 @@ import mindustry.world.consumers.ConsumeItemFlammable
 import mindustry.world.draw.*
 import mindustry.world.meta.Attribute
 import mindustry.world.meta.BlockGroup
+
 @Suppress("unused")
-object Power:ContentLoad {
+object Power : ContentLoad {
     val 能量节点: Block = BeamNode("powerNode").apply {
         laser = IFiles.findPng("powerNode-beam")
         laserEnd = IFiles.findPng("powerNode-beam-end")
@@ -64,6 +66,18 @@ object Power:ContentLoad {
         requirements(Category.power, IItems.低碳钢, 10, IItems.高碳钢, 20, IItems.黄铜锭, 30, IItems.铅锭, 50)
         bundle {
             desc(zh_CN, "能量电池")
+        }
+    }
+    val 大型能量电池: Block = Battery("largePowerBattery").apply {
+        size = 4
+        armor = 4f
+        absorbLasers = true
+        emptyLightColor = IceColor.df
+        fullLightColor = IceColor.b4
+        consumePowerBuffered(1000000f)
+        requirements(Category.power, IItems.铅锭, 150, IItems.铱板, 145, IItems.导能回路, 85, IItems.陶钢, 30)
+        bundle {
+            desc(zh_CN, "大型能量电池")
         }
     }
     val 燃烧发电机 = ConsumeGenerator("combustionGenerator").apply {
@@ -112,12 +126,7 @@ object Power:ContentLoad {
         requirements(Category.power, IItems.石英玻璃, 90, IItems.铱板, 105, IItems.单晶硅, 35)
         effectChance = 0.1f
         generateEffect = Fx.redgeneratespark
-        drawer = DrawMulti(
-            DrawRegion("-bottom"),
-            DrawLiquidTile(Liquids.slag),
-            DrawDefault(),
-            DrawGlowRegion()
-        )
+        drawer = DrawMulti(DrawRegion("-bottom"), DrawAnyLiquidTile(),DrawDefault(), DrawGlowRegion())
         bundle {
             desc(zh_CN, "地热发电机", "")
         }

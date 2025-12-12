@@ -9,6 +9,7 @@ import arc.util.Eachable
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.world.draw.DrawAnyLiquidTile
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
 import mindustry.world.blocks.production.Pump
@@ -16,7 +17,7 @@ import mindustry.world.draw.*
 
 class PumpChamber(name: String?) : Pump(name) {
     var arr: Array<TextureRegion?> = arrayOfNulls(4)
-    var drawers: DrawBlock = DrawMulti(DrawRegion("-bottom"), object : DrawLiquidTile() {
+    var drawers: DrawBlock = DrawMulti(DrawRegion("-bottom"), object : DrawAnyLiquidTile() {
         init {
             padBottom = 2f
             padTop = 2f

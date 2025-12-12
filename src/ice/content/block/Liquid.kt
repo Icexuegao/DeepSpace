@@ -10,10 +10,7 @@ import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.itemNode.TransferNode
-import ice.world.content.blocks.liquid.LiquidClassifier
-import ice.world.content.blocks.liquid.MultipleLiquidBlock
-import ice.world.content.blocks.liquid.PumpChamber
-import ice.world.content.blocks.liquid.SolidPump
+import ice.world.content.blocks.liquid.*
 import ice.world.content.blocks.liquid.base.LiquidRouter
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
@@ -23,8 +20,6 @@ import mindustry.entities.Effect
 import mindustry.graphics.Pal
 import mindustry.type.Category
 import mindustry.type.ItemStack
-import mindustry.world.Block
-import mindustry.world.blocks.liquid.Conduit
 import mindustry.world.blocks.liquid.LiquidJunction
 import mindustry.world.blocks.production.Pump
 import mindustry.world.draw.DrawBlurSpin
@@ -35,10 +30,9 @@ import mindustry.world.meta.Attribute
 
 @Suppress("unused")
 object Liquid : ContentLoad {
-    val 大型抽水机: Block = SolidPump("largeWaterPump").apply {
+    val 大型抽水机 = SolidPump("largeWaterPump").apply {
         size = 3
-        drawers = DrawMulti(
-            DrawDefault(), DrawLiquidRegion(), DrawRegionNull("-rotator",2f,true), DrawRegionNull("-top"))
+        drawers = DrawMulti(DrawDefault(), DrawLiquidRegion(), DrawRegionNull("-rotator", 2f, true), DrawRegionNull("-top"))
         attribute = Attribute.water
         baseEfficiency = 1f
         pumpAmount = 0.6f
@@ -47,15 +41,15 @@ object Liquid : ContentLoad {
         bundle {
             desc(zh_CN, "大型抽水机", "大型抽水机,可以抽取水源")
         }
-        requirements(Category.liquid, IItems.石英玻璃,75,IItems.高碳钢, 40, IItems.铬锭, 70, IItems.单晶硅,60)
+        requirements(Category.liquid, IItems.石英玻璃, 75, IItems.高碳钢, 40, IItems.铬锭, 70, IItems.单晶硅, 60)
     }
-    val 泵腔: Block = PumpChamber("pumpChamber").apply {
+    val 泵腔 = PumpChamber("pumpChamber").apply {
         requirements(Category.liquid, ItemStack.with(IItems.肌腱, 40, IItems.碎骨, 10, IItems.无名肉块, 60))
         bundle {
             desc(zh_CN, "泵腔")
         }
     }
-    val 动力泵: Block = Pump("kineticPump").apply {
+    val 动力泵 = Pump("kineticPump").apply {
         size = 1
         squareSprite = false
         requirements(Category.liquid, IItems.高碳钢, 40, IItems.锌锭, 10)
@@ -63,7 +57,7 @@ object Liquid : ContentLoad {
             desc(zh_CN, "动力泵")
         }
     }
-    val 谐振泵: Block = Pump("resonancePump").apply {
+    val 谐振泵 = Pump("resonancePump").apply {
         size = 2
         squareSprite = false
         requirements(Category.liquid, IItems.高碳钢, 40, IItems.锌锭, 10)
@@ -71,15 +65,13 @@ object Liquid : ContentLoad {
             desc(zh_CN, "谐振泵")
         }
     }
-    val 心肌泵: Block = Pump("myocardialPump").apply {
+    val 心肌泵 = Pump("myocardialPump").apply {
         size = 4
         squareSprite = false
         pumpAmount = 0.625f
         liquidCapacity = 240f
         consumePower(8f)
-        requirements(
-            Category.liquid, IItems.石英玻璃, 120, IItems.铱板, 120, IItems.导能回路, 85, IItems.陶钢, 45, IItems.生物钢, 15
-        )
+        requirements(Category.liquid, IItems.石英玻璃, 120, IItems.铱板, 120, IItems.导能回路, 85, IItems.陶钢, 45, IItems.生物钢, 15)
         bundle {
             desc(zh_CN, "心肌泵", "终极液泵,生物科技的高级产物")
         }
@@ -101,14 +93,13 @@ object Liquid : ContentLoad {
                 Fill.circle(e.x + x, e.y + y, e.fout() * 3f)
             }
         }
-        drawers = DrawMulti(
-            DrawRegion("-bottom"), DrawLiquidTile(result, 2f), DrawDefault(), DrawBlurSpin("-rotator", 2f).apply { blurThresh = 2f })
+        drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidTile(result, 2f), DrawDefault(), DrawBlurSpin("-rotator", 2f).apply { blurThresh = 2f })
         requirements(Category.liquid, IItems.高碳钢, 10, IItems.锌锭, 20)
         bundle {
             desc(zh_CN, "异质析取器", "从环境中提取${ILiquids.异溶质.localizedName}")
         }
     }
-    val 谐振导管: Block = Conduit("resonanceConduit").apply {
+    val 谐振导管 = Conduit("resonanceConduit").apply {
         requirements(Category.liquid, IItems.高碳钢, 10, IItems.锌锭, 2)
         bundle {
             desc(zh_CN, "谐振导管")
@@ -122,6 +113,19 @@ object Liquid : ContentLoad {
             desc(zh_CN, "流金导管")
         }
     }
+    val 动脉导管 = Conduit("arteryConduit").apply {
+        healAmount = 30f
+        health = 600
+        armor = 2f
+        leaks = false
+        liquidCapacity = 60f
+        liquidPressure = 1.1f
+        placeableLiquid = true
+        requirements(Category.liquid, IItems.石英玻璃, 1, IItems.铱板, 2, IItems.陶钢, 1, IItems.生物钢, 1)
+        bundle {
+            desc(zh_CN, "动脉导管")
+        }
+    }
     val 基础液体路由器 = LiquidRouter("baseLiquidRouter").apply {
         size = 1
         health = 100
@@ -130,7 +134,7 @@ object Liquid : ContentLoad {
             desc(zh_CN, "基础液体路由器", "接受一个方向的液体输入,并平均输出到其他3个方向,可以储存一定量的液体")
         }
     }
-    val 装甲液体路由器: Block = LiquidRouter("armoredLiquidRouter").apply {
+    val 装甲液体路由器 = LiquidRouter("armoredLiquidRouter").apply {
         armor = 4f
         liquidCapacity = 60f
         liquidPressure = 1.1f
@@ -161,6 +165,23 @@ object Liquid : ContentLoad {
             desc(zh_CN, "导管桥", "在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输液体")
         }
     }
+    val 装甲导管桥 = TransferNode("bridgeConduitArmored").apply {
+        directionAny = false
+        armor = 4f
+        range = 10
+        fadeIn = false
+        hasItems = false
+        bridgeWidth = 8f
+        hasPower = false
+        arrowSpacing = 6f
+        liquidCapacity = 24f
+        placeableLiquid = true
+        selectionColumns = 6
+        requirements(Category.liquid, IItems.石英玻璃, 8, IItems.陶钢, 3, IItems.铱板, 5)
+        bundle {
+            desc(zh_CN, "装甲导管桥")
+        }
+    }
     val 长距导管桥 = TransferNode("bridgeConduitLarge").apply {
         range = 10
         hasItems = false
@@ -169,12 +190,24 @@ object Liquid : ContentLoad {
         requirements(Category.liquid, IItems.石英玻璃, 20)
 
         bundle {
-            desc(
-                zh_CN, "长距导管桥", "消耗电力,在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输液体"
-            )
+            desc(zh_CN, "长距导管桥", "消耗电力,在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输液体")
         }
     }
-    val 流体容器: Block = LiquidRouter("liquidContainer").apply {
+    val 动脉导管桥 = TransferNode("bridgeConduitArtery").apply {
+        healAmount = 60f
+        hasItems = false
+        directionAny = false
+        armor = 4f
+        range = 37
+        liquidCapacity = 32f
+        placeableLiquid = true
+        consumePower(0.5f)
+        requirements(Category.liquid, IItems.石英玻璃, 20, IItems.导能回路, 10, IItems.生物钢, 5)
+        bundle {
+            desc(zh_CN, "动脉导管桥")
+        }
+    }
+    val 流体容器 = LiquidRouter("liquidContainer").apply {
         size = 2
         solid = true
         health = 500
@@ -211,18 +244,16 @@ object Liquid : ContentLoad {
             desc(zh_CN, "装甲储液罐", "双层复合装甲,内置的修复夹层可快速修复罐体,使其更安全地储存大量液体")
         }
     }
-    val 流体枢纽: Block = MultipleLiquidBlock("fluidJunction").apply {
+    val 流体枢纽 = MultipleLiquidBlock("fluidJunction").apply {
         size = 3
         liquidCapacity = 1000f
         health = size * size * 100
         requirements(Category.liquid, IItems.铜锭, 10)
         bundle {
-            desc(
-                zh_CN, "流体枢纽", "能将多种流体独立存储于同一单元,有效解决了复杂流水线中的空间占用问题,是高级化生产的必备设施"
-            )
+            desc(zh_CN, "流体枢纽", "能将多种流体独立存储于同一单元,有效解决了复杂流水线中的空间占用问题,是高级化生产的必备设施")
         }
     }
-    val 流体抽离器: Block = LiquidClassifier("liquidClassifier").apply {
+    val 流体抽离器 = LiquidClassifier("liquidClassifier").apply {
         size = 1
         liquidCapacity = 0f
         requirements(Category.liquid, Items.copper, 1)

@@ -16,6 +16,7 @@ class PackStackConveyor(name: String) : StackConveyor(name) {
             val nearby = if (nearby1 == null) false else nearby1.block() == Blocks.air || nearby1.block() == null
             if (front() == null && nearby && items.any()) {
                 val packStack = PackStack()
+                packStack.deadEffect=unloadEffect
                 packStack.items.set(items)
                 items.clear()
                 packStack.shepos = pos()

@@ -10,11 +10,14 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.graphics.IceColor
 import ice.library.world.ContentLoad
+import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.crafting.CeriumExtractor
 import ice.world.content.blocks.crafting.GenericCrafter
+import ice.world.content.blocks.crafting.Incinerator
 import ice.world.content.blocks.crafting.multipleCrafter.MultipleCrafter
 import ice.world.content.blocks.crafting.oreMultipleCrafter.OreFormula
 import ice.world.content.blocks.crafting.oreMultipleCrafter.OreMultipleCrafter
@@ -23,8 +26,6 @@ import ice.world.draw.DrawBuild
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
-import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -36,7 +37,6 @@ import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.type.LiquidStack
-import mindustry.world.blocks.production.Incinerator
 import mindustry.world.consumers.ConsumeItems
 import mindustry.world.consumers.ConsumeLiquids
 import mindustry.world.consumers.ConsumePower
@@ -44,6 +44,26 @@ import mindustry.world.draw.*
 
 @Suppress("unused")
 object Crafting : ContentLoad {
+    val 物品焚烧炉 = Incinerator("itemIncinerator").apply {
+        size = 1
+        hasLiquids = false
+        flameColor = IceColor.c5
+        consumePower(20 / 60f)
+        requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5)
+        bundle {
+            desc(zh_CN, "物品焚烧炉")
+        }
+    }
+    val 液体焚烧炉 = Incinerator("liquidIncinerator").apply {
+        size = 1
+        hasItems = false
+        flameColor = IceColor.b7
+        consumePower(20 / 60f)
+        requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5)
+        bundle {
+            desc(zh_CN, "液体焚烧炉")
+        }
+    }
     val 焚烧炉 = Incinerator("incinerator").apply {
         size = 1
         flameColor = IceColor.b4
