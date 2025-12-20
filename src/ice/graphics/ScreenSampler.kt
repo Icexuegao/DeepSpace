@@ -145,7 +145,6 @@ object ScreenSampler : Load {
     }
 
     /**将当前屏幕纹理转存到一个[帧缓冲区][FrameBuffer]，这将成为一份拷贝，可用于暂存屏幕内容
-     *
      * @param target 用于转存屏幕纹理的目标缓冲区
      * @param clear 在转存之前是否清空帧缓冲区
      */
@@ -158,8 +157,7 @@ object ScreenSampler : Load {
     private fun getToBufferES3(target: FrameBuffer, clear: Boolean) {
         checkNotNull(currBuffer) { "currently no buffer bound" }
 
-        if (clear) target.begin(Color.clear)
-        else target.begin()
+        if (clear) target.begin(Color.clear) else target.begin()
 
         Gl.bindFramebuffer(GL30.GL_READ_FRAMEBUFFER, currBuffer!!.framebufferHandle)
         Gl.bindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, target.framebufferHandle)
