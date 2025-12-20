@@ -1,6 +1,8 @@
 package ice.ui.dialog
 
+import arc.Core
 import arc.graphics.g2d.Draw
+import arc.scene.actions.Actions
 import arc.scene.ui.Image
 import arc.scene.ui.layout.Table
 import ice.graphics.IStyles
@@ -11,6 +13,7 @@ import ice.library.scene.ui.esc
 import ice.library.scene.ui.iPaneG
 import ice.ui.dialog.research.ResearchDialog
 import ice.world.meta.IceStats
+import mindustry.Vars
 import mindustry.gen.Icon
 
 object MenusDialog : Dialog() {
@@ -44,13 +47,13 @@ object MenusDialog : Dialog() {
                     it.margin(backMargin)
                     //排序
                     run {
-                        ResearchDialog
-                        DataDialog
-                        AchievementDialog
-                        RemainsDialog
-                        LogDialog
-                        SettingDialog
-                        ThankDialog
+                        ResearchDialog.setup()
+                        DataDialog.setup()
+                        AchievementDialog.setup()
+                        RemainsDialog.setup()
+                        LogDialog.setup()
+                        SettingDialog.setup()
+                        ThankDialog.setup()
                     }
                     it.iPaneG { pan ->
                         pan.top()
@@ -83,6 +86,11 @@ object MenusDialog : Dialog() {
         }.grow()
         esc {
             hide()
+            Core.app.post {
+                if (Vars.state.isGame && Vars.ui.paused.isShown) {
+                    Vars.ui.paused.hide(Actions.alpha(0f))
+                }
+            }
         }
     }
 }

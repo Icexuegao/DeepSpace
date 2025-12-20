@@ -10,7 +10,7 @@ import arc.scene.ui.layout.Table
 import arc.struct.OrderedMap
 import arc.struct.Seq
 import arc.util.Scaling
-import ice.Ice
+import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.element.IceDialog
@@ -92,7 +92,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), Icon.book) {
                                     }
                                 }
                             }
-                            if (Ice.configIce.启用调试模式 && it.isHidden) return@select false
+                            if (SettingValue.启用调试模式 && it.isHidden) return@select false
                             return@select true
                         }.forEach { content ->
                             p.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {

@@ -5,7 +5,7 @@ import arc.audio.Filters
 import arc.audio.Music
 import arc.math.Mathf
 import arc.util.Time
-import ice.Ice
+import ice.core.SettingValue
 import ice.ui.dialog.MenusDialog
 import mindustry.Vars
 import mindustry.audio.SoundControl
@@ -49,7 +49,7 @@ class SoundControl : SoundControl() {
             } else if (Vars.ui.editor.isShown) {
                 play(Musics.editor)
             } else if (MenusDialog.isShown()) {
-                if (Ice.configIce.启用主菜单音乐) {
+                if (SettingValue.启用主菜单音乐) {
                     play(IMusics.title)
                 }
             } else {
@@ -89,7 +89,7 @@ class SoundControl : SoundControl() {
         //更新当前曲目的音量
         if (current != null) {
             if (current == IMusics.title) {
-                current.setVolume(Ice.configIce.menuMusicVolume)
+                current.setVolume(SettingValue.menuMusicVolume)
             } else {
                 current.setVolume(fade * Core.settings.getInt("musicvol") / 100f)
             }
@@ -110,13 +110,13 @@ class SoundControl : SoundControl() {
         } else if (current === music) {
             //淡入淡出播放轨道
             val clamp = Mathf.clamp(fade + Time.delta / foutTime)
-            fade = clamp * if (current == IMusics.title) Ice.configIce.menuMusicVolume else 1f
+            fade = clamp * if (current == IMusics.title) SettingValue.menuMusicVolume else 1f
         } else {
             //淡出当前曲目
             val clamp = Mathf.clamp(fade - Time.delta / foutTime)
             fade = clamp// clamp*
             if (current == IMusics.title) {
-                current.volume = clamp * Ice.configIce.menuMusicVolume
+                current.volume = clamp * SettingValue.menuMusicVolume
             }
             if (fade <= 0.01f) {
                 //stop current track when it hits 0 volume

@@ -5,10 +5,10 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import arc.graphics.g2d.TextureRegion
+import ice.graphics.IceColor
 import ice.library.IFiles
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceStats
-import ice.graphics.IceColor
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Layer
@@ -44,11 +44,11 @@ open class IceBlock(name: String) : Block(name) {
 
     init {
         var variants = 0
-        while (IFiles.hasPng("$name${variants + 1}")) {
+        while (IFiles.sprites["$name${variants + 1}.png_"]!=null) {
             variants++
         }
         this.variants = variants
-        if (IFiles.hasPng("$name-shadow1")) customShadow = true
+        if (IFiles.sprites["$name-shadow1.png_"]!=null) customShadow = true
     }
 
     override fun setStats() {
@@ -87,7 +87,6 @@ open class IceBlock(name: String) : Block(name) {
         override fun handleDamage(amount: Float): Float {
             return maxOf(0f, amount * (1 - damageReduction.coerceIn(0f, 1f)))
         }
-
 
         override fun drawLight() {
             super.drawLight()

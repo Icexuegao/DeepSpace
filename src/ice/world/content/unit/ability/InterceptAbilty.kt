@@ -11,7 +11,7 @@ import mindustry.gen.Unit
 class InterceptAbilty(var damage: Float, var range: Float) : Ability() {
     data class UnitData(var unit: Unit, var range: Float)
 
-    lateinit var unitData: UnitData
+    var unitData: UnitData? = null
     override fun addStats(t: Table) {
         super.addStats(t)
         t.row()
@@ -32,14 +32,17 @@ class InterceptAbilty(var damage: Float, var range: Float) : Ability() {
 
     override fun update(unit: Unit) {
         super.update(unit)
-        unitData.unit = unit
-        val intersect = Groups.bullet.intersect(unit.x - range, unit.y - range, range * 2f, range * 2f)
-        intersect.forEach {
-            if (it.team == unit.team() || it.damage > damage) return
-            val angle = Angles.angle(unit.x, unit.y, it.x, it.y)
-            IceEffects.shieldWave.at(it.x, it.y, angle, unitData)
-            it.type.hit(it, it.x, it.y)
-            it.remove()
+        unitData?.let {ud->
+            ud.unit = unit
+            val intersect = Groups.bullet.intersect(unit.x - range, unit.y - range, range * 2f, range * 2f)
+            intersect.forEach {
+                if (it.team == unit.team() || it.damage > damage) return
+                val angle = Angles.angle(unit.x, unit.y, it.x, it.y)
+                IceEffects.shieldWave.at(it.x, it.y, angle, ud)
+                it.type.hit(it, it.x, it.y)
+                it.remove()
+            }
         }
+
     }
 }

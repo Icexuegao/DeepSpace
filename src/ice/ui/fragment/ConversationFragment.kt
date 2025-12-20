@@ -15,7 +15,6 @@ import ice.library.IFiles
 import ice.library.scene.action.IceActions
 import ice.library.scene.element.typinglabel.TLabel
 import ice.library.struct.asDrawable
-import ice.library.struct.log
 import ice.ui.UI
 import mindustry.Vars
 import mindustry.gen.Tex
@@ -31,36 +30,20 @@ object ConversationFragment {
         parent.addChild(group)
     }
 
-    fun blankScreenBottom(
-        delayStart: Float = 2f,
-        interpOut: Interp = Interp.pow2Out,
-        delay: Float = 4f,
-        delayEnd: Float = 2f,
-        interpIn: Interp = Interp.pow2In,
-        run: Runnable = Runnable {}
-    ) {
+    fun blankScreenBottom(delayStart: Float = 2f, interpOut: Interp = Interp.pow2Out, delay: Float = 4f, delayEnd: Float = 2f, interpIn: Interp = Interp.pow2In, run: Runnable = Runnable {}) {
         Image(voiceoverFragment).apply {
             setSize(UI.cgwidth, heightEdge)
             setPosition(0f, -heightEdge)
-            actions(Actions.alpha(0f), IceActions.moveToAlphaAction(0f, 0f, delayStart, 1f, interpOut),
-                Actions.run(run), Actions.delay(delay),
-                IceActions.moveToAlphaAction(0f, -heightEdge, delayEnd, 1f, interpIn), Actions.remove())
+            actions(Actions.alpha(0f), IceActions.moveToAlphaAction(0f, 0f, delayStart, 1f, interpOut), Actions.run(run), Actions.delay(delay), IceActions.moveToAlphaAction(0f, -heightEdge, delayEnd, 1f, interpIn), Actions.remove())
             group.addChild(this)
         }
     }
 
-    fun blankScreen(
-        delayStart: Float = 1f,
-        delay: Float = 4f,
-        delayEnd: Float = 2f,
-        interp: Interp = Interp.pow2Out,
-        run: Runnable = Runnable {}
-    ) {
+    fun blankScreen(delayStart: Float = 1f, delay: Float = 4f, delayEnd: Float = 2f, interp: Interp = Interp.pow2Out, run: Runnable = Runnable {}) {
         Image(voiceoverFragment).apply {
             setSize(UI.cgwidth, UI.cgheight)
             setPosition(0f, 0f)
-            actions(Actions.alpha(0f), Actions.alpha(1f, delayStart), Actions.run(run), Actions.delay(delay),
-                Actions.alpha(0f, delayEnd, interp), Actions.remove())
+            actions(Actions.alpha(0f), Actions.alpha(1f, delayStart), Actions.run(run), Actions.delay(delay), Actions.alpha(0f, delayEnd, interp), Actions.remove())
             group.addChild(this)
         }
     }
@@ -78,16 +61,7 @@ object ConversationFragment {
         }
     }
 
-    fun showText(
-        title: String? = null,
-        text: String,
-        delayStart: Float = 1f,
-        delay: Float = 2f,
-        delayEnd: Float = 1f,
-        x: Float = UI.cgwidth / 2,
-        y: Float = UI.cgheight / 2,
-        back: Drawable? = null
-    ) {
+    fun showText(title: String? = null, text: String, delayStart: Float = 1f, x: Float = UI.cgwidth / 2, y: Float = UI.cgheight / 2, back: Drawable? = null) {
         val fLabel = TLabel(text)
         val table = Table(back).apply {
             margin(20f)
@@ -101,12 +75,11 @@ object ConversationFragment {
             update {
                 pack()
                 setPosition(x - width / 2, y)
+                if (fLabel.hasEnded() && actions.isEmpty) {
+                    actions(Actions.alpha(0f, 2f), Actions.remove())
+                }
             }
-            log {
-                fLabel.getTotalDuration()
-            }
-            actions(Actions.alpha(0f), Actions.alpha(1f, delayStart), Actions.delay(fLabel.getTotalDuration()),
-                Actions.delay(delay), Actions.alpha(0f, delayEnd), Actions.remove())
+            actions(Actions.alpha(0f), Actions.alpha(1f, delayStart))
         }
         group.addChild(table)
     }

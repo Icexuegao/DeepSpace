@@ -6,7 +6,7 @@ import arc.graphics.g2d.Lines
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.EventType.lazyInit
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
@@ -36,7 +36,7 @@ import mindustry.world.blocks.distribution.MassDriver
 import mindustry.world.blocks.storage.Unloader
 
 @Suppress("unused")
-object Distribution : ContentLoad {
+object Distribution : Load {
     val 基础传送带 = Conveyor("baseConveyor").apply {
         size = 1
         speed = 0.2f
@@ -200,6 +200,7 @@ object Distribution : ContentLoad {
         }
     }
     val 装甲传送带桥: Block = TransferNode("armorBridge").apply {
+        directionAny=false
         health = 40
         armor = 4f
         range = 10
@@ -268,7 +269,7 @@ object Distribution : ContentLoad {
         itemCapacity = 2400
         minDistribute = 600
         bulletLifetime = 160f
-        shootSound = Sounds.artillery
+        shootSound = Sounds.shootCollaris
         shootEffect = Fx.shootBig2
         smokeEffect = Fx.shootSmokeTitan
         receiveEffect = Fx.hitSquaresColor

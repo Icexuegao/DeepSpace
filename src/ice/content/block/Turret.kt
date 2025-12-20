@@ -6,13 +6,13 @@ import arc.math.Interp
 import arc.math.Mathf
 import arc.util.Time
 import ice.audio.ISounds
-import ice.library.world.ContentLoad
 import ice.content.IItems
 import ice.entities.bullet.base.BasicBulletType
 import ice.graphics.IceColor
-import ice.world.meta.IceEffects
+import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.meta.IceEffects
 import mindustry.entities.Effect
 import mindustry.entities.Effect.EffectContainer
 import mindustry.entities.bullet.MissileBulletType
@@ -30,8 +30,9 @@ import mindustry.world.Block
 import mindustry.world.blocks.defense.turrets.ItemTurret
 import mindustry.world.blocks.defense.turrets.PowerTurret
 import mindustry.world.draw.DrawTurret
+
 @Suppress("unused")
-object Turret:ContentLoad {
+object Turret:Load {
     val 碎冰: Block = ItemTurret("trashIce").apply {
         bundle {
             desc(zh_CN, "碎冰")
@@ -148,7 +149,7 @@ object Turret:ContentLoad {
             shots = 2
             shotDelay = 15f
         }
-        shootSound = Sounds.missile
+        shootSound = Sounds.shootMissile
         shootY = 6f
         shootEffect = IceEffects.squareAngle(range = 30f, color1 = IceColor.b4, color2 = Color.white)
         shootType = MissileBulletType(6f, 30f).apply {

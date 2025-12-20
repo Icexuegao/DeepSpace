@@ -1,17 +1,19 @@
 package ice.world.content.blocks.distribution.digitalStorage
 
+import arc.Core
 import arc.Events
 import arc.func.Prov
 import arc.graphics.g2d.Draw
 import ice.library.EventType
-import ice.library.IFiles
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.game.Team
 import mindustry.gen.Building
 import mindustry.world.Tile
 
 class HubConduit(name: String) : IceBlock(name) {
-    val texture = Array(11) { IFiles.findPng("$name-$it") }
+    val texture = Array(11) {
+        Core.atlas.find("${this.name}-$it")
+        }
 
     init {
         size = 1

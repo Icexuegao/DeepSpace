@@ -68,7 +68,7 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
         priority = TargetPriority.transport
         conveyorPlacement = true
         underBullets = true
-        ambientSound = Sounds.conveyor
+        ambientSound = Sounds.loopConveyor
         ambientSoundVolume = 0.0022f
         unloadable = false
         noUpdateDisabled = false

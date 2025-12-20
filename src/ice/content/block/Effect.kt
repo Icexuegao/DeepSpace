@@ -1,6 +1,6 @@
 package ice.content.block
 
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.content.IItems
 import ice.content.IUnitTypes
 import ice.library.EventType.lazyInit
@@ -16,7 +16,7 @@ import mindustry.world.blocks.power.LightBlock
 import mindustry.world.blocks.storage.StorageBlock
 import mindustry.world.meta.Env
 @Suppress("unused")
-object Effect:ContentLoad {
+object Effect:Load {
     val 盒子 = StorageBlock("box").apply {
         size = 1
         health = 180

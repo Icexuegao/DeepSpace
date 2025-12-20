@@ -10,7 +10,7 @@ import arc.math.geom.Vec2
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.Ice
+import ice.core.SettingValue
 import ice.entities.IceRegister
 import ice.library.IFiles
 import mindustry.Vars
@@ -168,14 +168,14 @@ class PackStack() : Drawc, Hitboxc, Velc, Physicsc {
 
         Draw.z(Layer.block + 0.001f)
         Draw.color(Pal.shadow)
-        if (Ice.configIce.启用包裹物品时限)Draw.alpha(time / (60 * 10f))
+        if (SettingValue.启用包裹物品时限)Draw.alpha(time / (60 * 10f))
         Draw.rect(texShadow, x, y)
         Draw.color()
         Draw.alpha(time / (60 * 10f))
         Draw.scl()
         Draw.rect(tex, x, y)
         Draw.scl(0.5f)
-        if (Ice.configIce.启用包裹物品绘制 && items.any()) {
+        if (SettingValue.启用包裹物品绘制 && items.any()) {
             Draw.rect(items.first().uiIcon, x, y)
         }
         Draw.reset()
@@ -201,7 +201,7 @@ class PackStack() : Drawc, Hitboxc, Velc, Physicsc {
 
     override fun update() {
         if (!Vars.net.client()) {
-            if (Ice.configIce.启用包裹物品时限) {
+            if (SettingValue.启用包裹物品时限) {
                 time -= Time.delta
                 if (time <= 0f) remove()
             }else{

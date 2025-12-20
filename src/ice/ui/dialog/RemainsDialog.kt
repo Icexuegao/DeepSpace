@@ -23,23 +23,24 @@ import ice.library.scene.ui.iTableG
 import ice.library.scene.ui.icePane
 import ice.library.scene.ui.itooltip
 import ice.library.struct.forEach
+import ice.library.world.Load
+import ice.ui.UI
 import ice.world.content.blocks.environment.IceOreBlock
 import ice.world.content.unit.ability.InterceptAbilty
 import ice.world.meta.IceStats
-import ice.ui.UI
 import mindustry.Vars
 import mindustry.gen.Icon
 import mindustry.world.consumers.ConsumeItems
 import mindustry.world.meta.Stats
 
-object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), Icon.logic) {
+object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), Icon.logic), Load {
     val remainsSeq = Seq<Remains>()
     val enableSeq = Seq<Remains>()
     lateinit var tempRemain: Remains
     lateinit var remainsTable: Table
     lateinit var enableTable: Table
     var slotPos = 4
-    fun load() {
+    override fun init() {
         Remains("娜雅的手串") {
             setDescription("一串温润的玉石手串,在帝国任职期间由娜雅赠予")
             effect = "核心机增加拦截护盾"

@@ -12,16 +12,16 @@ import arc.graphics.gl.GLFrameBuffer
 import arc.graphics.gl.Shader
 import arc.util.serialization.Jval
 import ice.library.util.accessField
+import ice.library.world.Load
 import ice.shader.SglShaders
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.graphics.Layer
 import mindustry.graphics.Pixelator
 
-object ScreenSampler {
+object ScreenSampler : Load {
     private val <T : GLTexture> GLFrameBuffer<T>.lastBoundFramebuffer: GLFrameBuffer<T>? by accessField("lastBoundFramebuffer")
     private val Pixelator.buffer: FrameBuffer by accessField("buffer")
-
     private val pixelatorBuffer by lazy { Vars.renderer.pixelator.buffer }
 
     @JvmStatic
@@ -29,7 +29,6 @@ object ScreenSampler {
 
     @JvmStatic
     private var uiBuffer: FrameBuffer? = null
-
     private var currBuffer: FrameBuffer? = null
     private var activity = false
 
@@ -37,9 +36,8 @@ object ScreenSampler {
         Core.settings.remove("sampler.setup")
     }
 
-    fun setup() {
+    override fun init() {
         if (activity) throw RuntimeException("forbid setup sampler twice")
-
         var e = Jval.read(Core.settings.getString("sampler.setup", "{enabled: false}"))
 
         if (!e.getBool("enabled", false)) {
@@ -152,12 +150,12 @@ object ScreenSampler {
      * @param clear 在转存之前是否清空帧缓冲区
      */
     fun getToBuffer(target: FrameBuffer, clear: Boolean) {
-
-        if (Core.gl30 != null){
+        if (Core.gl30 != null) {
             getToBufferES3(target, clear)
         }
     }
-    private fun getToBufferES3(target: FrameBuffer, clear: Boolean){
+
+    private fun getToBufferES3(target: FrameBuffer, clear: Boolean) {
         checkNotNull(currBuffer) { "currently no buffer bound" }
 
         if (clear) target.begin(Color.clear)
@@ -170,5 +168,4 @@ object ScreenSampler {
         )
         target.end()
     }
-
 }

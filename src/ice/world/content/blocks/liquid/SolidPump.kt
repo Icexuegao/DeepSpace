@@ -3,8 +3,11 @@ package ice.world.content.blocks.liquid
 import arc.Core
 import arc.math.Mathf
 import arc.util.Time
-import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.library.scene.ui.iTable
+import ice.world.content.blocks.abstractBlocks.IceBlock
+import ice.world.draw.DrawLiquidRegion
+import ice.world.draw.DrawMulti
+import ice.world.draw.DrawRegionNull
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -15,6 +18,7 @@ import mindustry.type.Liquid
 import mindustry.ui.Bar
 import mindustry.world.Tile
 import mindustry.world.blocks.environment.Floor
+import mindustry.world.draw.DrawDefault
 import mindustry.world.meta.*
 import kotlin.math.max
 import kotlin.math.min
@@ -36,6 +40,7 @@ class SolidPump(name: String) : IceBlock(name) {
         hasLiquids = true
         outputsLiquid = true
         group = BlockGroup.liquids
+        drawers = DrawMulti(DrawDefault(), DrawLiquidRegion(), DrawRegionNull("-rotator", 2f, true), DrawRegionNull("-top"))
     }
 
     override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
@@ -61,22 +66,17 @@ class SolidPump(name: String) : IceBlock(name) {
         super.setStats()
         stats.add(Stat.output, result, 60f * pumpAmount, true)
         if (attribute != null) {
-            stats.add(if (baseEfficiency > 0.0001f) Stat.affinities else Stat.tiles,
-                blocks(attribute, floating, 1f, baseEfficiency <= 0.001f))
-
+            stats.add(if (baseEfficiency > 0.0001f) Stat.affinities else Stat.tiles, blocks(attribute, floating, 1f, baseEfficiency <= 0.001f))
         }
     }
 
-    fun blocks(
-        attr: Attribute?, floating: Boolean, scale: Float, startZero: Boolean, checkFloors: Boolean = true
-    ): StatValue {
+    fun blocks(attr: Attribute?, floating: Boolean, scale: Float, startZero: Boolean, checkFloors: Boolean = true): StatValue {
         return StatValue { table ->
             table.iTable { c ->
                 c.left()
                 c.setRowsize(5)
                 val blocks = Vars.content.blocks().select { block ->
-                    (!checkFloors || block is Floor) && block.attributes.get(
-                        attr) != 0f && !((block is Floor && block.isDeep) && !floating)
+                    (!checkFloors || block is Floor) && block.attributes.get(attr) != 0f && !((block is Floor && block.isDeep) && !floating)
                 }.with { s ->
                     s.sort {
                         it.attributes.get(attr)
@@ -96,8 +96,7 @@ class SolidPump(name: String) : IceBlock(name) {
 
     override fun canPlaceOn(tile: Tile, team: Team?, rotation: Int): Boolean {
         val sum = tile.getLinkedTilesAs(this, tempTiles).sumf { t: Tile ->
-            if (canPump(t)) baseEfficiency + (if (attribute != null) t.floor().attributes.get(
-                attribute) else 0f) else 0f
+            if (canPump(t)) baseEfficiency + (if (attribute != null) t.floor().attributes.get(attribute) else 0f) else 0f
         }
         return sum > 0.00001f
     }
@@ -177,5 +176,4 @@ class SolidPump(name: String) : IceBlock(name) {
             return pumpTime
         }
     }
-
 }

@@ -14,23 +14,28 @@ import arc.scene.style.Drawable
 import arc.scene.style.ScaledNinePatchDrawable
 import arc.util.Log
 import ice.Ice
+import ice.library.world.Load
 import mindustry.Vars
 
-object IFiles {
+object IFiles: Load {
     private val rootDirectory = HashMap<String, Fi>()
     private val spritesIce = HashMap<String, Fi>()
-    private val sprites = HashMap<String, Fi>()
+     val sprites = HashMap<String, Fi>()
     private val musics = HashMap<String, Fi>()
     private val sounds = HashMap<String, Fi>()
     private val shaders = HashMap<String, Fi>()
+    private var initializer=false
     var modFile: Fi = run {
         val list = Vars.modDirectory.list {
             it.name.contains("DeepSpace")
         }.first()
         ZipFi(list)
     }
+    var sp= HashMap<String,Pixmap >()
 
-    fun init() {
+    override fun setup() {
+        if (initializer)return
+        initializer=true
         modFile.list().forEach {
             rootDirectory[it.name()] = it
         }
@@ -44,41 +49,50 @@ object IFiles {
                         if (spritesIce.contains(key)) {
                             Log.warn("已收录pngice文件:${spritesIce.get(key)?.path()},未收录:${it.path()}")
                         } else {
-                            spritesIce.put(key, it)
+                            spritesIce[key] = it
                         }
                     }
                 }
 
-                "sprites" -> {
+                "sprites-out" -> {
                     entry.value.findAll { f ->
-                        f.extension().equals("png")
+                        f.extension().equals("png_")
                     }?.forEach {
-                        sprites.put(it.name(), it)
+                        sprites[it.name()] = it
                     }
                 }
 
                 "music" -> {
                     entry.value.findAll { it.extension().equals("ogg") }?.forEach {
-                        musics.put(it.name(), it)
+                        musics[it.name()] = it
                     }
                 }
 
                 "sounds" -> {
                     entry.value.findAll { it.extension().equals("ogg") }?.forEach {
-                        sounds.put(it.name(), it)
+                        sounds[it.name()] = it
                     }
                 }
 
                 "shaders" -> {
                     entry.value.walk {
                         if (!shaders.contains(it.name())) {
-                            shaders.put(it.name(), it)
+                            shaders[it.name()] = it
                         } else {
                             Log.warn("已收录shader文件:${shaders.get(it.name())?.path()},未收录:${it.path()}")
                         }
                     }
                 }
             }
+        }
+
+        IFiles.sprites.forEach { (name, sprite) ->
+            val dataWithoutHeader = sprite.readBytes()
+            val pngHeader = byteArrayOf(0x89.toByte(), 0x50.toByte(), 0x4E.toByte(), 0x47.toByte(),
+                0x0D.toByte(), 0x0A.toByte(), 0x1A.toByte(), 0x0A.toByte())
+            val completeData = pngHeader + dataWithoutHeader
+            val pixmap = Pixmap(completeData)
+            sp[sprite.extension()]=pixmap
         }
     }
 
@@ -96,6 +110,7 @@ object IFiles {
     }
 
     fun findPng(name: String): AtlasRegion {
+        return Core.atlas.find("ice-$name")
         val file = sprites["$name.png"] ?: throw Exception("未找到文件:$name")
         return getAtlasRegion(file)
     }
@@ -103,7 +118,7 @@ object IFiles {
     fun hasPng(name: String) = sprites.contains("$name.png")
     fun hasIcePng(name: String) = spritesIce.contains("$name.png")
     fun getPiX(name: String): Pixmap {
-        return Pixmap(sprites["$name.png"] ?: throw Exception("未找到文件:$name.png"))
+        return sp[name] ?: throw Exception("未找到文件:$name.png")
     }
 
     fun getNormName(name: String): String = "${Ice.name}-$name"

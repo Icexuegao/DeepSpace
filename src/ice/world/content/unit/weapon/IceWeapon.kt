@@ -14,7 +14,7 @@ import arc.struct.ObjectMap
 import arc.util.Strings
 import arc.util.Time
 import arc.util.Tmp
-import ice.Ice
+import ice.core.SettingValue
 import ice.graphics.IceColor
 import ice.world.content.unit.type.WeaponMount
 import ice.world.meta.IceStatValues
@@ -143,7 +143,7 @@ open class IceWeapon(name: String = "") : Weapon(name) {
 
         Draw.xscl = 1f
 
-        if (mount.shoot && Ice.configIce.启用调试模式) {
+        if (mount.shoot &&SettingValue.启用调试模式) {
             if (mount.aimX != 0f && mount.aimY != 0f && Mathf.len(mount.aimX - wx, mount.aimY - wy) <= 1200f) {
                 Draw.z(z + 1f)
                 Lines.stroke(1f)

@@ -7,6 +7,7 @@ import arc.graphics.g2d.Lines
 import arc.graphics.g2d.TextureRegion
 import arc.math.Angles
 import arc.math.Mathf
+import arc.math.geom.Geometry
 import arc.math.geom.Point2
 import arc.math.geom.Vec2
 import arc.struct.IntSeq
@@ -16,7 +17,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.IFiles.findPng
+import ice.graphics.TextureRegionDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
 import mindustry.core.Renderer
@@ -46,11 +47,11 @@ class TransferNode(name: String) : IceBlock(name) {
     val timerCheckMoved: Int = timers++
     var range = 10
     var transportTime = 2f
-    val endRegion: TextureRegion = findPng("$name-end")
-    var bridgeRegion: TextureRegion = findPng("$name-bridge")
-    var arrowRegion: TextureRegion = findPng("$name-arrow")
-    var topRegion: TextureRegion = findPng("$name-top")
-    var bottomRegion: TextureRegion = findPng("$name-bottom")
+    val endRegion: TextureRegion by TextureRegionDelegate("${this.name}-end")
+    var bridgeRegion: TextureRegion by TextureRegionDelegate("${this.name}-bridge")
+    var arrowRegion: TextureRegion by TextureRegionDelegate("${this.name}-arrow")
+    var topRegion: TextureRegion by TextureRegionDelegate("${this.name}-top")
+    var bottomRegion: TextureRegion by TextureRegionDelegate("${this.name}-bottom")
     var fadeIn = true
     var pulse = false
     var arrowSpacing = 4f
@@ -61,6 +62,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
     //for autolink
     var lastBuild: ItemNodeBuild? = null
+    var directionAny = true
 
     init {
         size = 1
@@ -107,11 +109,11 @@ class TransferNode(name: String) : IceBlock(name) {
             }
         }
         otherReq?.let {
-            drawBridge(plan, it.drawx(), it.drawy(), 180f)
+            drawBridge(plan, it.drawx(), it.drawy())
         }
     }
 
-    private fun drawBridge(req: BuildPlan, ox: Float, oy: Float, flip: Float) {
+    private fun drawBridge(req: BuildPlan, ox: Float, oy: Float) {
         if (Mathf.zero(Renderer.bridgeOpacity)) return
         Draw.alpha(Renderer.bridgeOpacity)
 
@@ -123,7 +125,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
         Draw.rect(
             arrowRegion, (req.drawx() + ox) / 2f, (req.drawy() + oy) / 2f,
-            Angles.angle(req.drawx(), req.drawy(), ox, oy) + flip
+            Angles.angle(req.drawx(), req.drawy(), ox, oy) + 180f
         )
 
         Draw.reset()
@@ -133,10 +135,17 @@ class TransferNode(name: String) : IceBlock(name) {
         super.drawPlace(x, y, rotation, valid)
         val link: Tile? = findLinklastBuild(x, y)
         val vvtf = Vars.tilesize.toFloat()
-        Drawf.dashRect(
-            blockColor, (x - range - 0.5f) * vvtf, (y - range - 0.5f) * vvtf, 2 * (range + 0.5f) * vvtf,
-            2 * (range + 0.5f) * vvtf
-        )
+        if (directionAny) {
+            Drawf.dashRect(
+                blockColor, (x - range - 0.5f) * vvtf, (y - range - 0.5f) * vvtf, 2 * (range + 0.5f) * vvtf,
+                2 * (range + 0.5f) * vvtf
+            )
+        } else {
+            Geometry.d4.forEach { pos ->
+                Drawf.dashLine(blockColor, (x + pos.x * 0.5f) * vvtf, (y + pos.y * 0.5f) * vvtf, (x + pos.x * range) * vvtf, (y + pos.y * range) * vvtf)
+            }
+        }
+
 
         link?.let {
             Draw.color(Pal.gray.write(Tmp.c3).a(blockColor.a))
@@ -156,16 +165,15 @@ class TransferNode(name: String) : IceBlock(name) {
         if (other == null) return false
         if (tile == null) return false
         if (!positionsValid(tile.x.toInt(), tile.y.toInt(), other.x.toInt(), other.y.toInt())) return false
-        (other.block() === tile.block() && tile.block() === this) || (tile.block() !is TransferNode && other.block() === this)
+        val block = (other.block() === tile.block() && tile.block() === this) || (tile.block() !is TransferNode && other.block() === this)
         val team = (other.team() == tile.team() || tile.block() != this)
         val build =
             (other.build is ItemNodeBuild) && (!checkDouble || (other.build as ItemNodeBuild).link != tile.pos())
 
 
-        return /*block &&*/ team && build
+        return block && team && build
     }
 
-    var directionAny = true
     private fun positionsValid(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
         return if (directionAny) {
             abs(y1 - y2) <= range && abs(x1 - x2) <= range
@@ -259,8 +267,8 @@ class TransferNode(name: String) : IceBlock(name) {
             val x: Float = Mathf.lerp(ox, tx, alpha)
             val y: Float = Mathf.lerp(oy, ty, alpha)
             val otherLink: Tile = if (linked) other else tile
-            val rel: Int =
-                (if (linked) tile else other).absoluteRelativeTo(otherLink.x.toInt(), otherLink.y.toInt()).toInt()
+            val tile1 = if (linked) tile else other
+            val rel: Float = Tmp.v5.set(tile1).sub(otherLink).angle()
             //draw "background"
             Draw.color(Pal.gray)
             Lines.stroke(2.5f)
@@ -275,7 +283,7 @@ class TransferNode(name: String) : IceBlock(name) {
             Lines.square(ox, oy, 2f, 45f)
             Draw.mixcol(Draw.getColor(), 1f)
             Draw.color()
-            Draw.rect(arrowRegion, x, y, (rel * 90).toFloat())
+            Draw.rect(arrowRegion, x, y,rel )
             Draw.mixcol()
         }
 
@@ -489,13 +497,12 @@ class TransferNode(name: String) : IceBlock(name) {
             link = read.i()
             warmup = read.f()
             val links: Byte = read.b()
-            for (i in 0 until links) {
+            repeat(links.toInt()) {
                 incoming.add(read.i())
             }
             moved = read.bool()
             wasMoved = moved
         }
-
     }
 }
 

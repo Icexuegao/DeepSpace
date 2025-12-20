@@ -63,7 +63,7 @@ class IceDrill(name: String) : IceBlock(name) {
         hasItems = true
         itemCapacity = 10
         squareSprite = false
-        ambientSound = Sounds.drill
+        ambientSound = Sounds.drillCharge
         ambientSoundVolume = 0.018f
         flags = EnumSet.of(BlockFlag.drill)
         buildType = Prov(::IceDrillBuild)

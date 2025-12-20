@@ -17,7 +17,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.IceColor
-import ice.library.IFiles
+import ice.graphics.TextureRegionDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
 import mindustry.content.Fx
@@ -53,15 +53,15 @@ open class StackConveyor(name: String) : IceBlock(name), Autotiler {
     var recharge = 2f
     var baseEfficiency = 0f
     var outputRouter = true
-    val edgeRegion: TextureRegion by lazy { Core.atlas.find("${this.name}-edge") }
-    val stackRegion: TextureRegion by lazy { Core.atlas.find("${this.name}-stack") }
-    val glowRegion: TextureRegion by lazy { Core.atlas.find("${this.name}-glow") }
+    var edgeRegion: TextureRegion by TextureRegionDelegate("${this.name}-edge")
+    var stackRegion: TextureRegion by TextureRegionDelegate("${this.name}-stack")
+    var glowRegion: TextureRegion by TextureRegionDelegate("${this.name}-glow")
     var glowAlpha: Float = 1f
     var glowColor: Color = Pal.redLight
     var regions = Array(3) {
-        IFiles.findPng("$name-$it")
+        Core.atlas.find("${this.name}-$it")
     }
-    var loadEffect: Effect =Fx.conveyorPoof
+    var loadEffect: Effect = Fx.conveyorPoof
     var unloadEffect = Effect(35.0f) { e: Effect.EffectContainer ->
         Draw.color(Pal.plasticBurn, IceColor.b4, e.fin())
         Angles.randLenVectors(e.id.toLong(), 4, 3.0f + e.fin() * 4.0f) { x: Float, y: Float ->
@@ -79,7 +79,7 @@ open class StackConveyor(name: String) : IceBlock(name), Autotiler {
         underBullets = true
         conveyorPlacement = true
         ambientSoundVolume = 0.004f
-        ambientSound = Sounds.conveyor
+        ambientSound = Sounds.loopConveyor
         group = BlockGroup.transportation
         priority = TargetPriority.transport
         buildType = Prov(::StackConveyorBuild)
@@ -186,7 +186,6 @@ open class StackConveyor(name: String) : IceBlock(name), Autotiler {
 
             Draw.z(Layer.block - 0.1f)
             val from = Vars.world.tile(link)
-
             //TODO 是不是某些配置下不画？
             if (glowRegion.found() && power != null && power.status > 0f) {
                 Draw.z(Layer.blockAdditive)
@@ -291,7 +290,8 @@ open class StackConveyor(name: String) : IceBlock(name), Autotiler {
         override fun canUnload(): Boolean {
             return state != stateLoad
         }
-        open fun stateUnload(){
+
+        open fun stateUnload() {
             while (lastItem != null && (if (!outputRouter) moveForward(lastItem) else dump(lastItem))) {
                 if (!outputRouter) {
                     items.remove(lastItem, 1)
@@ -304,6 +304,7 @@ open class StackConveyor(name: String) : IceBlock(name), Autotiler {
                 if (lastItem !== items.first()) break
             }
         }
+
         override fun updateTile() {
             val eff = if (enabled) (efficiency + baseEfficiency) else 0f
             //reel in crater

@@ -1,10 +1,10 @@
 package ice.content
 
 import ice.content.block.*
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 
-object IBlocks : ContentLoad {
-    init {
+object IBlocks : Load {
+    override fun load() {
         Environment.load()
         Defense.load()
         Production.load()

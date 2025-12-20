@@ -5,17 +5,14 @@ import arc.graphics.g2d.Fill
 import arc.math.Angles.randLenVectors
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import ice.world.content.blocks.liquid.*
 import ice.world.content.blocks.liquid.base.LiquidRouter
-import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
-import ice.world.draw.DrawRegionNull
-import mindustry.content.Items
 import mindustry.entities.Effect
 import mindustry.graphics.Pal
 import mindustry.type.Category
@@ -29,20 +26,7 @@ import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.Attribute
 
 @Suppress("unused")
-object Liquid : ContentLoad {
-    val 大型抽水机 = SolidPump("largeWaterPump").apply {
-        size = 3
-        drawers = DrawMulti(DrawDefault(), DrawLiquidRegion(), DrawRegionNull("-rotator", 2f, true), DrawRegionNull("-top"))
-        attribute = Attribute.water
-        baseEfficiency = 1f
-        pumpAmount = 0.6f
-        liquidCapacity = 120f
-        consumePower(6f)
-        bundle {
-            desc(zh_CN, "大型抽水机", "大型抽水机,可以抽取水源")
-        }
-        requirements(Category.liquid, IItems.石英玻璃, 75, IItems.高碳钢, 40, IItems.铬锭, 70, IItems.单晶硅, 60)
-    }
+object Liquid : Load {
     val 泵腔 = PumpChamber("pumpChamber").apply {
         requirements(Category.liquid, ItemStack.with(IItems.肌腱, 40, IItems.碎骨, 10, IItems.无名肉块, 60))
         bundle {
@@ -256,7 +240,7 @@ object Liquid : ContentLoad {
     val 流体抽离器 = LiquidClassifier("liquidClassifier").apply {
         size = 1
         liquidCapacity = 0f
-        requirements(Category.liquid, Items.copper, 1)
+        requirements(Category.liquid, IItems.石英玻璃, 20, IItems.铜锭,25)
 
         bundle {
             desc(zh_CN, "流体抽离器", "流体枢纽的流体卸载装置,将流体卸载于相邻的可输入建筑,本身并不存储流体")

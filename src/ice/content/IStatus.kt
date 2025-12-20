@@ -9,14 +9,14 @@ import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
-import ice.library.world.ContentLoad
 import ice.entities.effect.MultiEffect
+import ice.library.world.Load
+import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.status.PercentStatus
 import ice.world.content.status.StatusEffect
 import ice.world.meta.IceEffects
 import ice.world.meta.IceStats
-import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -33,7 +33,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("unused")
-object IStatus : ContentLoad {
+object IStatus : Load {
     val 封冻 = StatusEffect("freeze") {
         bundle {
             desc(zh_CN, "封冻", "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成毁灭性打击")
@@ -636,12 +636,12 @@ object IStatus : ContentLoad {
                     absorber?.damagePierce(damage)
                     other.unapply(this)
                     other.apply(this, reload + 30)
-                    Sounds.spark.at(unit)
+                    Sounds.shootBeamPlasma.at(unit)
                     Fx.chainLightning.at(unit.x, unit.y, 0f, color, other)
                     Fx.hitLaserBlast.at(other.x, other.y, unit.angleTo(other), color)
                 } else {
                     unit.apply(status, statusDuration)
-                    Sounds.pulseBlast.at(unit)
+                    Sounds.shootPulsar.at(unit)
                 }
                 unit.damagePierce(damage)
                 Fx.hitLaserBlast.at(unit.x, unit.y, 0f, color)

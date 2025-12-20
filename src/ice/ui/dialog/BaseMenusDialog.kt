@@ -5,8 +5,9 @@ import arc.scene.style.Drawable
 import arc.struct.Seq
 import ice.library.scene.ui.actionsR
 import ice.library.scene.ui.clearR
+import ice.library.world.Load
 
-abstract class BaseMenusDialog(val name: String, val icon: Drawable) {
+abstract class BaseMenusDialog(val name: String, val icon: Drawable): Load{
     companion object {
         val dalogs = Seq<BaseMenusDialog>()
     }

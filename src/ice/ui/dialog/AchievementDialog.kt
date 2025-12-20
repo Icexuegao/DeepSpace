@@ -9,15 +9,15 @@ import arc.scene.ui.Label
 import arc.struct.Seq
 import arc.util.Scaling
 import ice.Ice
-import ice.library.EventType
-import ice.world.meta.IceStats
-import ice.library.scene.element.BaseProgressBar
 import ice.graphics.IStyles
 import ice.graphics.IceColor
+import ice.library.EventType
+import ice.library.scene.element.BaseProgressBar
 import ice.library.scene.ui.colorR
 import ice.library.scene.ui.iPaneG
 import ice.library.scene.ui.iTableG
 import ice.library.scene.ui.iTableGX
+import ice.world.meta.IceStats
 import mindustry.gen.Icon
 
 object AchievementDialog: BaseMenusDialog(IceStats.成就.localized(), Icon.star){

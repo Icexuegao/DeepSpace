@@ -14,7 +14,7 @@ import arc.util.Strings
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.Ice
+import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.library.scene.element.display.ItemDisplay
 import ice.library.scene.element.display.LiquidDisplay
@@ -59,7 +59,7 @@ class MultipleCrafter(name: String) : IceBlock(name) {
         hasItems = true
         drawArrow = false
         configurable = true
-        ambientSound = Sounds.machine
+        ambientSound = Sounds.massdriver
         ambientSoundVolume = 0.03f
         flags = EnumSet.of(BlockFlag.factory)
         config(Int::class.javaObjectType
@@ -195,7 +195,7 @@ class MultipleCrafter(name: String) : IceBlock(name) {
         override fun draw() {
             super.draw()
 
-            if (Ice.configIce.启用多合成角标常显) {
+            if (SettingValue.启用多合成角标常显) {
                 drawcornerMark()
             }
         }
@@ -347,7 +347,7 @@ class MultipleCrafter(name: String) : IceBlock(name) {
                     }
                 }
             }
-            if (!Ice.configIce.启用多合成角标常显) {
+            if (!SettingValue.启用多合成角标常显) {
                 drawcornerMark()
             }
         }

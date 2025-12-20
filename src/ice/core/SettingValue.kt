@@ -7,43 +7,42 @@ import ice.Ice
 import ice.audio.IMusics
 import ice.entities.ModeDifficulty
 import ice.library.struct.log
+import ice.library.world.Load
 import ice.world.content.blocks.crafting.multipleCrafter.MultipleCrafter
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.ui.dialogs.PlanetDialog
 import kotlin.properties.Delegates
-import kotlin.reflect.KClass
-import kotlin.reflect.KMutableProperty
-import kotlin.reflect.KProperty
-import kotlin.reflect.KType
+import kotlin.reflect.*
 import kotlin.reflect.full.createType
 import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 
-class SettingValue {
-    companion object {
-        var configs = SettingValue::class.memberProperties.apply {
-            forEach {
-                it.isAccessible = true
-            }
+object SettingValue: Load {
+    private var configs = SettingValue::class.memberProperties.filter { prop ->
+        // 检查属性的可见性，只保留非私有属性
+        prop.visibility != KVisibility.PRIVATE
+    }.apply {
+        forEach {
+            it.isAccessible = true
         }
-        private var saveScheduled = false
-        private fun scheduleSave() {
-            if (!saveScheduled) {
-                saveScheduled = true
-                Core.app.post {
-                    Ice.configIce.save()
-                    saveScheduled = false
-                }
+    }
+    private var saveScheduled = false
+    private fun scheduleSave() {
+        if (!saveScheduled) {
+            saveScheduled = true
+            Core.app.post {
+                save()
+                saveScheduled = false
             }
         }
     }
 
-    var difficulty by observable(ModeDifficulty.General)
     var 启用主菜单音乐 by observable(true) { _, _, new ->
         if (!new) IMusics.title.stop()
     }
+    var difficulty by observable(ModeDifficulty.General)
     var menuMusicVolume by observable(1f)
     var 视野最大缩放限制 by observable(6f) { _, _, new ->
         Vars.renderer.maxZoom = new
@@ -81,7 +80,7 @@ class SettingValue {
         Core.settings.put("ice-SettingValue", "")
     }
 
-    fun init() {
+    override fun setup() {
         val get = Core.settings.getString("ice-SettingValue", write())
         val config: Jval = Jval.read(get)
         for (cfg in configs) {

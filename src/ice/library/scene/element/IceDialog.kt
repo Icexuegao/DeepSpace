@@ -57,7 +57,7 @@ class IceDialog(title: String = "") : Dialog() {
         setFillParent(true)
         this.title.setAlignment(Align.center)
 
-        hidden { Sounds.back.play() }
+        hidden { Sounds.uiBack.play() }
     }
 
     fun addCloseButton(width: Float = 210f) {

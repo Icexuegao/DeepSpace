@@ -1,6 +1,6 @@
 package ice.content.block
 
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.content.IItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.defense.Wall
@@ -13,7 +13,7 @@ import mindustry.world.blocks.defense.AutoDoor
 import mindustry.world.blocks.defense.ShieldWall
 
 @Suppress("unused")
-object Defense : ContentLoad {
+object Defense : Load {
     val 铬墙: Block = Wall("chromeWall").apply {
         health = 450
         size = 1

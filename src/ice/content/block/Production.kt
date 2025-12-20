@@ -3,11 +3,12 @@ package ice.content.block
 import ice.audio.ISounds
 import ice.content.IItems
 import ice.library.util.toColor
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.world.content.blocks.liquid.SolidPump
 import ice.world.content.blocks.production.IceDrill
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -18,7 +19,7 @@ import mindustry.world.Block
 import mindustry.world.blocks.production.BurstDrill
 
 @Suppress("unused")
-object Production : ContentLoad {
+object Production : Load {
     val 纤汲钻井: Block = IceDrill("deriveDrill").apply {
         tier = 2
         size = 2
@@ -98,5 +99,28 @@ object Production : ContentLoad {
         bundle {
             desc(zh_CN, "血肉钻井", "骨骼构成了最坚硬的钻头,肌肉形成了最强劲的转子,预热时间较长,需要持续供给血肉赘生物,可以安置在水上")
         }
+    }
+    val 抽水机= SolidPump("waterPump").apply {
+        size = 2
+        baseEfficiency = 1f
+        pumpAmount = 0.2f
+        liquidCapacity = 60f
+        consumePower(3f)
+        bundle {
+            desc(zh_CN, "抽水机", "抽水机,可以抽取水源")
+        }
+        requirements(Category.production, IItems.石英玻璃, 25, IItems.高碳钢, 20, IItems.单晶硅, 10)
+    }
+    val 大型抽水机 = SolidPump("largeWaterPump").apply {
+        rotate
+        size = 3
+        baseEfficiency = 1f
+        pumpAmount = 0.6f
+        liquidCapacity = 120f
+        consumePower(6f)
+        bundle {
+            desc(zh_CN, "大型抽水机", "大型抽水机,可以抽取水源")
+        }
+        requirements(Category.production, IItems.石英玻璃, 75, IItems.高碳钢, 40, IItems.铬锭, 70, IItems.单晶硅, 60)
     }
 }

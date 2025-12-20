@@ -8,9 +8,10 @@ import arc.scene.ui.layout.Table
 import arc.util.Strings
 import arc.util.Tmp
 import arc.util.pooling.Pools
-import ice.world.content.unit.entity.base.Entity
 import ice.entities.Damage.bulletDamageEvents
 import ice.entities.bullet.EmpBulletType
+import ice.library.world.Load
+import ice.world.content.unit.entity.base.Entity
 import ice.world.meta.IceStatValues.sep
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -27,11 +28,11 @@ import kotlin.math.max
 import kotlin.math.min
 
 open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entities.bullet.BulletType(speed, damage) {
-    companion object {
-        fun init() {
+    companion object : Load{
+
+        override fun setup() {
             Pools.get(Bullet::class.java, ::ZDBullet)
         }
-
         private class ZDBullet : Bullet() {
             override fun draw() {
                 Draw.z(this.type.layer)

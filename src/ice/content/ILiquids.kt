@@ -2,7 +2,7 @@ package ice.content
 
 import arc.graphics.Color
 import arc.struct.ObjectSet
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.entities.IcePuddle
 import ice.world.content.liquid.IceLiquid
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
@@ -12,7 +12,7 @@ import mindustry.content.Liquids
 import mindustry.content.StatusEffects
 import mindustry.type.CellLiquid
 
-object ILiquids: ContentLoad {
+object ILiquids: Load {
     val 腐殖浆体 = IceLiquid("humusSlurry", "a09bbd") {
         viscosity = 0.6f
         temperature = 0.3f

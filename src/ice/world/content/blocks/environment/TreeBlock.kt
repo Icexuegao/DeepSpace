@@ -35,6 +35,7 @@ class TreeBlock(name: String) : IceBlock(name) {
             0, max(0, variantShadowRegions.size - 1))]
 
         if (shad.found()) {
+            Draw.color(0f, 0f, 0f, 0.6f)
             Draw.z(Layer.power - 1)
             Draw.rect(shad, tile.worldx() + shadowOffset, tile.worldy() + shadowOffset, rot)
         }
@@ -42,6 +43,7 @@ class TreeBlock(name: String) : IceBlock(name) {
             max(0, variantRegions.size - 1))]
 
         Draw.z(Layer.power + 1)
+        Draw.color()
         Draw.rectv(reg, x, y, w, h, rot) { vec ->
             vec.add(Mathf.sin(vec.y * 3 + Time.time, scl, mag) + Mathf.sin(vec.x * 3 - Time.time, 70f, 0.8f),
                 Mathf.cos(vec.x * 3 + Time.time + 8, scl + 6f, mag * 1.1f) + Mathf.sin(vec.y * 3 - Time.time, 50f,

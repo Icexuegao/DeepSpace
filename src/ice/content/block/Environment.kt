@@ -7,19 +7,15 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.math.geom.Geometry
 import arc.struct.Seq
-import arc.util.Interval
-import arc.util.Time
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.graphics.IceColor
-import ice.library.IFiles
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.shader.IceShader
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.environment.*
 import ice.world.meta.Attributes
-import ice.world.meta.IceEffects
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -35,7 +31,7 @@ import mindustry.world.Tile
 import mindustry.world.meta.Attribute
 
 @Suppress("unused")
-object Environment : ContentLoad {
+object Environment : Load {
     val 多叶草 = Prop("leafyGrass").apply {
         bundle {
             desc(zh_CN, "多叶草")
@@ -529,35 +525,35 @@ object Environment : ContentLoad {
         }
     }
     val 血池 = object : Floor("thickBlood") {
-        var array = Seq<Dup>()
+     //   var array = Seq<Dup>()
         val foors = Seq<Tile>()
-        val texs = arrayOf(Array(13) {
+       /* val texs = arrayOf(Array(13) {
             IFiles.findPng("thickBloodHubble1-" + (it + 1))
         }, Array(13) {
             IFiles.findPng("thickBloodHubble2-" + (it + 1))
         }, Array(13) {
             IFiles.findPng("thickBloodHubble3-" + (it + 1))
-        })
+        })*/
 
         override fun init() {
             Events.on(EventType.ResetEvent::class.java) {
-                array.clear()
+            //    array.clear()
                 foors.clear()
             }
             Events.run(EventType.Trigger.draw) {
-                array.forEach {
-                    it.draw()
-                }
+             //  array.forEach {
+             //       it.draw()
+           //     }
             }
             Events.run(EventType.Trigger.update) {
-                array.forEach {
+               /* array.forEach {
                     it.update()
                 }
                 if (array.size <= foors.size / 5) {
                     foors.random()?.let {
-                        Dup(it)
+                     //   Dup(it)
                     }
-                }
+                }*/
             }
             super.init()
         }
@@ -567,7 +563,7 @@ object Environment : ContentLoad {
             super.drawBase(tile)
         }
 
-        inner class Dup(val tiles: Tile) {
+      /*  inner class Dup(val tiles: Tile) {
             init {
                 array.add(this)
             }
@@ -589,7 +585,7 @@ object Environment : ContentLoad {
             fun draw() {
                 Draw.rect(texs[indxtexs][indx], tiles.drawx() + offx, tiles.drawy() + offy)
             }
-        }
+        }*/
     }.apply {
         speedMultiplier = 0.5f
         status = IStatus.染血
@@ -789,6 +785,11 @@ object Environment : ContentLoad {
     val 血蚀囊胚=TallBlock("bloodBlastocyst").apply {
         bundle {
             desc(zh_CN, "血蚀囊胚")
+        }
+    }
+    val 缚肉树=TallBlock("bloodFleshTree").apply {
+        bundle {
+            desc(zh_CN, "缚肉树")
         }
     }
     val 摄魂墙 = Block("soulCapturing").apply {

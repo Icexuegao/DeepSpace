@@ -49,6 +49,7 @@ object ThankDialog : BaseMenusDialog(IceStats.鸣谢.localized(), Icon.bookOpen)
                 itable.iTable {
                     it.left()
                     it.setRowsize(2)
+                    it.layoutLabel("EBwilson").itooltip("以我现在的视角看还要继续的话unc得整个重构一遍")
                     it.layoutLabel("硫缺铅").itooltip(
                         "你的身体啊回到堕乐园啊,你的灵魂水啊回到爱之城\n你从爱的一部分,回到爱里,你温暖了乐园啊你继续爱着世界"
                     )

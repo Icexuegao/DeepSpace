@@ -92,7 +92,7 @@ open class MayflyWeapon(name: String) : IceWeapon(name) {
         shootWarmupSpeed = 0.03f
         linearWarmup = false
         minWarmup = 0.9f
-        shootSound = Sounds.lasershoot
+        shootSound = Sounds.shootLaser
         bullet = object : BulletType() {
             init {
                 damage = 320f

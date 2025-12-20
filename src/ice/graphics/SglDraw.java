@@ -15,7 +15,7 @@ import arc.math.geom.Vec3;
 import arc.util.Nullable;
 import arc.util.Time;
 import arc.util.Tmp;
-import ice.Ice;
+import ice.core.SettingValue;
 import ice.graphics.lightnings.generator.Floatc3;
 import mindustry.game.EventType;
 import mindustry.graphics.Drawf;
@@ -365,7 +365,7 @@ public class SglDraw {
    * @param distortion 扭曲绘制工具
    * @param draw 绘制任务*/
   public static <T> void drawDistortion(int taskID, T target, Distortion distortion, DrawAcceptor<T> draw){
-    if(!Ice.Companion.getConfigIce().get启用扭曲效果绘制()) return;
+    if(!SettingValue.INSTANCE.get启用扭曲效果绘制()) return;
 
     drawTask(taskID, target, distortion, e -> {
       e.resize();

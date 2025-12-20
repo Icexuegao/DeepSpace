@@ -3,11 +3,8 @@ package ice
 import java.io.File
 
 fun main() {
-
-    repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\distribution\\conveyor\\fleshArmorConveyor")
-
+   // repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\distribution\\conveyor\\fleshArmorConveyor")
 }
-
 
 fun repName1(path: String) {
     val file = File(path)

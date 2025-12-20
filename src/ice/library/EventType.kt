@@ -10,6 +10,8 @@ import arc.struct.Seq
 import arc.util.Tmp
 import ice.graphics.IStyles
 import ice.graphics.IceColor
+import ice.graphics.TextureRegionDelegate
+import ice.library.world.Load
 import ice.ui.dialog.AchievementDialog
 import ice.world.content.blocks.distribution.conveyor.PackStack
 import mindustry.Vars
@@ -18,7 +20,7 @@ import mindustry.gen.Groups
 import mindustry.gen.Iconc
 import mindustry.world.Tile
 
-object EventType {
+object EventType: Load {
     fun lazyInit(run: Runnable) {
         inits.add(run)
     }
@@ -28,7 +30,8 @@ object EventType {
 
     private val inits = Seq<Runnable>()
     private val updates = Seq<Tile>(Tile::class.java)
-    fun init() {
+    override fun setup() {
+        TextureRegionDelegate.setup()
         Events.on(EventType.ContentInitEvent::class.java) {
             inits.forEach { it.run() }
         }

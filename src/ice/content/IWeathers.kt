@@ -1,8 +1,8 @@
 package ice.content
 
-import ice.library.world.ContentLoad
 import ice.graphics.IceColor
 import ice.library.IFiles
+import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.content.StatusEffects
@@ -11,7 +11,7 @@ import mindustry.type.weather.ParticleWeather
 import mindustry.type.weather.RainWeather
 import mindustry.world.meta.Attribute
 
-object IWeathers: ContentLoad {
+object IWeathers: Load {
     var 凌雪 = ParticleWeather("tortureSnow").apply {
         randomParticleRotation = true
         particleRegion = IFiles.getNormName("tortureSnow")
@@ -19,7 +19,7 @@ object IWeathers: ContentLoad {
         sizeMin = 2.6f
         density = 1200f
         attrs.set(Attribute.light, -0.15f)
-        sound = Sounds.windhowl
+        sound = Sounds.wind
         soundVol = 0f
         soundVolOscMag = 1.5f
         soundVolOscScl = 1100f

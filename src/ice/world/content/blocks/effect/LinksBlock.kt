@@ -14,10 +14,9 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IItems
-import ice.library.IFiles.findPng
+import ice.library.scene.ui.itooltip
 import ice.world.content.blocks.abstractBlocks.RangeBlock
 import ice.world.meta.IceStats
-import ice.library.scene.ui.itooltip
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Drawf
@@ -32,7 +31,7 @@ import mindustry.world.meta.Env
 import kotlin.math.abs
 
 open class LinksBlock(name: String) : RangeBlock(name) {
-    var arrowRegion: TextureRegion = findPng("$name-arrow")
+    var arrowRegion: TextureRegion = Core.atlas.find("${this.name}-arrow")
     var buildSize = 10
     var allowLink = Seq<Block>()
 

@@ -1,15 +1,15 @@
 package ice.world.content.blocks.liquid
 
+import arc.Core
 import arc.func.Prov
 import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.IFiles
+import ice.library.scene.ui.ItemSelection
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
-import ice.library.scene.ui.ItemSelection
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.graphics.Drawf
@@ -18,7 +18,7 @@ import mindustry.world.blocks.liquid.LiquidBlock
 import mindustry.world.draw.DrawRegion
 
 open class LiquidClassifier(name: String) : IceBlock(name) {
-    val top2 = IFiles.findPng("$name-top2")
+    val top2 = Core.atlas.find("${this.name}-top2")
 
     init {
         update = true

@@ -14,13 +14,12 @@ import arc.scene.ui.layout.WidgetGroup
 import ice.Ice
 import ice.audio.ISounds
 import ice.content.IUnitTypes
+import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.Incident
-import ice.library.scene.element.IceDialog
 import ice.library.scene.listener.DragInputListener
 import ice.library.scene.ui.*
-import ice.library.struct.log
 import ice.library.util.isNumericWithSign
 import ice.ui.dialog.AchievementDialog
 import ice.ui.dialog.MenusDialog
@@ -49,11 +48,7 @@ object DeBugFragment {
         name = "debug"
         setFillParent(true)
         touchable = Touchable.childrenOnly
-        visibility = Boolp { Vars.ui.hudfrag.shown && Ice.configIce.启用调试模式 }
-    }
-    val deepSpace = IceDialog("DeepSpace").apply {
-        addCloseButton()
-        cont.button("主菜单", IStyles.rootCleanButton, MenusDialog::show).size(width, 64f)
+        visibility = Boolp { Vars.ui.hudfrag.shown && SettingValue.启用调试模式 }
     }
 
     fun build(parent: Group) {
@@ -66,7 +61,7 @@ object DeBugFragment {
     private fun buildWindow(table: Table) {
         var windowVisibility = false
         var contvisibe = false
-        table.table(IStyles.background41) { ta ->
+        table.table(IStyles.background41){ ta ->
             ta.setColor(IceColor.b4)
             ta.icePane {
                 cont = it
@@ -119,9 +114,7 @@ object DeBugFragment {
             button("折跃", Icon.bookOpenSmall) {
             }
             button("剧情", Icon.bookOpenSmall) {
-                log {
-                    1
-                }
+                ConversationFragment.showText("血肉肿瘤", "耳边萦绕着碎片的尖啸割裂了现实的帷幕")
             }
             button("清除天气", Icon.bookOpenSmall) {
                 Groups.weather.clear()

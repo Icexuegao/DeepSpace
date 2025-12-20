@@ -11,9 +11,9 @@ import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
 import ice.SglUnitSorts
+import ice.graphics.IceColor
 import ice.graphics.lightnings.LightningContainer
 import ice.graphics.lightnings.generator.VectorLightningGenerator
-import ice.graphics.IceColor
 import ice.world.content.unit.IceUnitType.Companion.rand
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -33,7 +33,7 @@ open class BlastLaser : EmpLightningBulletType() {
     var laserShake: Float = 5f
     var damageShake: Float = 12f
     var laserEffect: Effect = Fx.none
-    var laserSound: Sound = Sounds.laserbig
+    var laserSound: Sound = Sounds.shootLaser
     var blackZone: Boolean = true
 
     init {

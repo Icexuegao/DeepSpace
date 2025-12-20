@@ -3,10 +3,10 @@ package ice.content
 import arc.func.Cons
 import arc.func.Prov
 import arc.graphics.Color
-import ice.library.world.ContentLoad
 import ice.content.block.Effect
 import ice.game.IceTeam
 import ice.graphics.IceColor
+import ice.library.world.Load
 import ice.maps.planet.ardery.ArderyPlanetGenerator
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -18,7 +18,7 @@ import mindustry.graphics.g3d.SunMesh
 import mindustry.type.ItemStack
 import mindustry.type.Planet
 
-object IPlanets : ContentLoad {
+object IPlanets : Load {
     val 伊甸 = Planet("eden", null, 6f).apply {
         bloom = true
         accessible = false
@@ -63,7 +63,6 @@ object IPlanets : ContentLoad {
         atmosphereRadIn = 0.02f
         atmosphereRadOut = 0.3f
         allowLaunchLoadout = true
-        allowWaveSimulation = true
         allowSectorInvasion = true
         allowSelfSectorLaunch = true
         allowLegacyLaunchPads = true

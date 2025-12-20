@@ -27,7 +27,7 @@ open class Wall(name: String) : IceBlock(name) {
     var lightningDamage: Float = 20f
     var lightningLength: Int = 17
     var lightningColor: Color? = Pal.surge
-    var lightningSound: Sound = Sounds.spark
+    var lightningSound: Sound = Sounds.shootScathe
 
     /**子弹偏转几率。-1 禁用  */
     var chanceDeflect: Float = 0f

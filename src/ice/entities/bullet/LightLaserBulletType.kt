@@ -62,7 +62,7 @@ open class LightLaserBulletType : EmpLightningBulletType() {
     }
 
      override fun init(b: Bullet, c: LightningContainer) {
-        Sounds.spark.at(b.x, b.y, 1.2f)
+        Sounds.shootCollaris.at(b.x, b.y, 1.2f)
 
         c.lifeTime = lifetime
         c.time = lightningTime

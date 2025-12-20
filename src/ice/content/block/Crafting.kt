@@ -9,7 +9,7 @@ import ice.audio.ISounds
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.graphics.IceColor
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
@@ -43,7 +43,7 @@ import mindustry.world.consumers.ConsumePower
 import mindustry.world.draw.*
 
 @Suppress("unused")
-object Crafting : ContentLoad {
+object Crafting : Load {
     val 物品焚烧炉 = Incinerator("itemIncinerator").apply {
         size = 1
         hasLiquids = false
@@ -578,7 +578,7 @@ object Crafting : ContentLoad {
             flameRadiusMag = 3f
             flameRadiusInMag = 1.5f
         })
-        ambientSound = Sounds.extractLoop
+        ambientSound = Sounds.explosion
         ambientSoundVolume = 0.08f
         requirements(Category.crafting, IItems.铱板, 140, IItems.单晶硅, 50, IItems.铪锭, 30, IItems.铬锭, 100)
 
@@ -604,7 +604,7 @@ object Crafting : ContentLoad {
             spinSprite = true
             rotateSpeed = 15f
         }, DrawDefault())
-        ambientSound = Sounds.grinding
+        ambientSound = Sounds.loopGrind
         ambientSoundVolume = 0.025f
         requirements(Category.crafting, IItems.高碳钢, 100, IItems.铜锭, 50, IItems.铅锭, 30, IItems.低碳钢, 20)
         bundle {

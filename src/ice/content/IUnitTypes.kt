@@ -40,7 +40,7 @@ import ice.graphics.lightnings.generator.RandomGenerator
 import ice.library.util.MathTransform
 import ice.library.util.toColor
 import ice.library.util.toStringi
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.SglFx
@@ -93,7 +93,7 @@ import kotlin.math.min
 import kotlin.random.Random
 
 @Suppress("unused")
-object IUnitTypes: ContentLoad {
+object IUnitTypes: Load {
 
     val 收割 = IceUnitType("harvester") {
         speed = 2f
@@ -185,7 +185,7 @@ object IUnitTypes: ContentLoad {
             rotateSpeed = 3f
             bullet = LaserBulletType(100f).apply {
                 width = 10f
-                shootSound = Sounds.laser
+                shootSound = Sounds.shootLaser
                 shootEffect = IceEffects.squareAngle(color2 = Color.valueOf("ffa763"))
                 colors = arrayOf(Color.valueOf("ffa763"), Color.valueOf("ffa763"), Color.valueOf("fabd8e"))
             }
@@ -219,7 +219,7 @@ object IUnitTypes: ContentLoad {
             mirror = false
             rotate = true
             rotateSpeed = 3f
-            shootSound = Sounds.dullExplosion
+            shootSound = Sounds.explosionDull
             shootCone = 2f
             bullet = BombBulletType(50f, 8 * 5f).apply {
                 sprite = "missile-large"
@@ -328,7 +328,7 @@ object IUnitTypes: ContentLoad {
                 hitSize = 7f
                 lifetime = 18f
                 pierce = true
-                shootSound = Sounds.fire
+                shootSound = Sounds.loopFire
                 statusDuration = 60f * 10
                 shootEffect = IceEffects.changeFlame(lifetime * speed)
                 hitEffect = Fx.hitFlameSmall
@@ -442,7 +442,7 @@ object IUnitTypes: ContentLoad {
             y = 4f
             rotate = true
             reload = 60f
-            shootSound = Sounds.malignShoot
+            shootSound = Sounds.shootMalign
             bullet = BombBulletType(500f, 64f).apply {
                 width = 10f
                 height = 10f
@@ -552,7 +552,7 @@ object IUnitTypes: ContentLoad {
             bullet = object : BasicBulletType(8f, 40f) {
                 init {
                     smokeEffect = Fx.none
-                    shootSound = Sounds.malignShoot
+                    shootSound = Sounds.shootMalign
                     shootEffect = Fx.none
                     lifetime = 60 * 8f / speed + 60
                     trailLength = 24
@@ -840,7 +840,7 @@ object IUnitTypes: ContentLoad {
             reload = 30f
             recoils = 3
             rotateSpeed = 3f
-            shootSound = Sounds.shootBig
+            shootSound = Sounds.shootBeamPlasma
             bullet = TrailFadeBulletType(19f, 200f).apply {
                 lifetime = 15f
                 trailLength = 10
@@ -864,7 +864,7 @@ object IUnitTypes: ContentLoad {
                 frontColor = IceColor.b4
                 width = 9f
                 height = 9f
-                hitSound = Sounds.plasmaboom
+                hitSound = Sounds.shootBeamPlasma
                 hitShake = 5f
                 despawnShake = hitShake
                 pierceArmor = true
@@ -925,7 +925,7 @@ object IUnitTypes: ContentLoad {
             rotate = true
             layerOffset = -1f
             rotateSpeed = 4f
-            shootSound = Sounds.missile
+            shootSound = Sounds.shootMissile
             shoot = object : ShootHelix() {
                 var bl = true
                 override fun shoot(totalShots: Int, handler: BulletHandler, barrelIncrementer: Runnable?) {
@@ -1265,7 +1265,7 @@ object IUnitTypes: ContentLoad {
                 trailChance = 1f
                 trailRotation = true
 
-                hitSound = Sounds.spark
+                hitSound = Sounds.shootCorvus
 
                 hitEffect = Fx.circleColorSpark
                 hitColor = IceColor.matrixNet
@@ -1321,7 +1321,7 @@ object IUnitTypes: ContentLoad {
             recoil = 6f
             shake = 4f
             reload = 30f
-            shootSound = Sounds.spark
+            shootSound = Sounds.shootCorvus
             bullet = turretBullet
         }
         setWeapon("turret") {
@@ -1334,7 +1334,7 @@ object IUnitTypes: ContentLoad {
             recoil = 6f
             shake = 4f
             reload = 30f
-            shootSound = Sounds.spark
+            shootSound = Sounds.shootCorvus
             bullet = turretBullet
         }
         setWeapon("cannon") {
@@ -1345,7 +1345,7 @@ object IUnitTypes: ContentLoad {
             rotateSpeed = 3.5f
             recoilTime = 60f
             recoil = 6f
-            shootSound = Sounds.plasmaboom
+            shootSound = Sounds.shootBeamPlasma
             shake = 5f
             reload = 60f
             bullet = object : MultiTrailBulletType() {
@@ -1361,7 +1361,7 @@ object IUnitTypes: ContentLoad {
                     despawnEffect = SglFx.explodeImpWaveSmall
 
                     hitShake = 6f
-                    hitSound = Sounds.spark
+                    hitSound = Sounds.shootBeamPlasma
 
                     speed = 10f
                     lifetime = 60f
@@ -1413,7 +1413,7 @@ object IUnitTypes: ContentLoad {
                 mirror = false
                 recoil = 0f
                 targetSwitchInterval = 80f
-                shootSound = Sounds.laserblast
+                shootSound = Sounds.shootLaser
                 reload = 750f
                 cooldownTime = 30f
                 minWarmup = 0.95f
@@ -1901,8 +1901,8 @@ object IUnitTypes: ContentLoad {
             cooldownTime = 1080f
             shootStatus = IStatus.庇护
             shootStatusDuration = 180f
-            chargeSound = Sounds.lasercharge
-            shootSound = Sounds.laserblast
+            chargeSound = Sounds.shootLaser
+            shootSound = Sounds.shootLaser
             bullet = mindustry.entities.bullet.EmpBulletType().apply {
                 damage = 0f
                 lifetime = 30f
@@ -2038,7 +2038,7 @@ object IUnitTypes: ContentLoad {
             rotateSpeed = 3f
             shootCone = 15f
             cooldownTime = 60f
-            shootSound = Sounds.laser
+            shootSound = Sounds.shootLaser
             bullet = LaserBulletType(55f).apply {
                 lifetime = 15f
                 length = 320f
@@ -2070,7 +2070,7 @@ object IUnitTypes: ContentLoad {
             rotate = true
             rotateSpeed = 3f
             cooldownTime = 85f
-            shootSound = Sounds.cannon
+            shootSound = Sounds.shootScathe
             ejectEffect = Fx.casing4
             bullet = BasicBulletType().apply {
                 damage = 100f
@@ -2115,7 +2115,7 @@ object IUnitTypes: ContentLoad {
                     colorTo = Color.valueOf("F9C27A")
                 }
                 hitShake = 8f
-                hitSound = Sounds.plasmaboom
+                hitSound = Sounds.plantBreak
                 despawnEffect = Fx.none
                 hitEffect = MultiEffect().apply {
                     effects = arrayOf(ParticleEffect().apply {
@@ -2162,7 +2162,7 @@ object IUnitTypes: ContentLoad {
             color = Color.valueOf("FF5845")
             targetInterval = 1f
             targetSwitchInterval = 1f
-            shootSound = Sounds.lasershoot
+            shootSound = Sounds.shootLaser
             bullet = BulletType().apply {
                 damage = 125f
                 maxRange = 320f

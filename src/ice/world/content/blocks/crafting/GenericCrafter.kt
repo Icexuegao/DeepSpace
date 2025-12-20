@@ -12,10 +12,10 @@ import arc.util.Strings
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.graphics.IceColor
 import ice.world.content.blocks.IceBlockComponents.calwavetimeremain
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.meta.IceStats
-import ice.graphics.IceColor
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Effect
@@ -68,7 +68,7 @@ open class GenericCrafter(name: String) : IceBlock(name) {
         solid = true
         update = true
         hasItems = true
-        ambientSound = Sounds.machine
+        ambientSound = Sounds.loopMachine
         ambientSoundVolume = 0.03f
         flags = EnumSet.of(BlockFlag.factory)
         drawArrow = false

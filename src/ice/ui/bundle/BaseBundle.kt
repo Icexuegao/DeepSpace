@@ -2,12 +2,12 @@ package ice.ui.bundle
 
 import arc.Core
 import arc.struct.Seq
-import ice.library.world.ContentLoad
+import ice.library.world.Load
 import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
 
 open class BaseBundle(val name: String) {
-    companion object : ContentLoad {
+    companion object : Load {
         fun <T> T.bundle(bundle: Companion.() -> Unit) {
             bundle.invoke(Companion)
         }
