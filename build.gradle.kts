@@ -21,7 +21,7 @@ val proUser: String by extra
 val sdkRoot: String by extra
 plugins {
     java
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.10"
     id("com.gradleup.shadow") version "9.3.0"
     id("com.google.devtools.ksp") version "2.2.10-2.0.2"
     id("com.scalified.plugins.gradle.proguard") version "1.7.0"
