@@ -70,6 +70,7 @@ class TransferNode(name: String) : IceBlock(name) {
         update = true
         hasPower = true
         hasItems = true
+        allowDiagonal = true
         copyConfig = false
         envEnabled = Env.any
         unloadable = false
@@ -283,7 +284,7 @@ class TransferNode(name: String) : IceBlock(name) {
             Lines.square(ox, oy, 2f, 45f)
             Draw.mixcol(Draw.getColor(), 1f)
             Draw.color()
-            Draw.rect(arrowRegion, x, y,rel )
+            Draw.rect(arrowRegion, x, y, rel + 180f)
             Draw.mixcol()
         }
 
@@ -399,7 +400,7 @@ class TransferNode(name: String) : IceBlock(name) {
                 val warmup: Float = if (hasPower) this.warmup else 1f
 
                 Draw.alpha((if (fadeIn) max(warmup, 0.25f) else 1f) * Renderer.bridgeOpacity)
-                val angle: Float = Vec2(x, y).sub(other!!.drawx(), other.drawy()).angle()
+                val angle: Float = Vec2(x, y).sub(other!!.drawx(), other.drawy()).angle() + 180f
 
                 Draw.rect(endRegion, x, y, angle - 90)
                 Draw.rect(endRegion, other.drawx(), other.drawy(), angle - 270)

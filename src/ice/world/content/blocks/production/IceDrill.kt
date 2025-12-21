@@ -67,7 +67,7 @@ class IceDrill(name: String) : IceBlock(name) {
         ambientSoundVolume = 0.018f
         flags = EnumSet.of(BlockFlag.drill)
         buildType = Prov(::IceDrillBuild)
-        drawers = DrawMulti(DrawDefault(), DrawCracks(), DrawRim(), rotator, DrawRegionColor<IceDrillBuild>("-item") {
+        drawers = DrawMulti(DrawDefault(), DrawCracks(), DrawRim(), rotator,DrawRegion("-top"),DrawRegionColor<IceDrillBuild>("-item") {
             it.dominantColor()
         })
     }

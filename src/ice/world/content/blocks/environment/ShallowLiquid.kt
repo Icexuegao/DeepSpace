@@ -14,8 +14,9 @@ import mindustry.graphics.MultiPacker.PageType
 import mindustry.world.Block
 
 open class ShallowLiquid(name: String, val blockfoor: Block) : Floor(name) {
-    var overName="shallow-water"
-    var dps =0.3f
+    var overName = "shallow-water"
+    var dps = 0.3f
+
     init {
         cacheLayer = CacheLayer.water
         liquidDrop = Liquids.water
@@ -28,20 +29,19 @@ open class ShallowLiquid(name: String, val blockfoor: Block) : Floor(name) {
 
     override fun init() {
         super.init()
-        wall=blockfoor.asFloor().wall
+        wall = blockfoor.asFloor().wall
     }
 
     override fun createIcons(packer: MultiPacker) {
-       // super.createIcons(packer)
+        super.createIcons(packer)
         (1..variants).forEach {
-            val piX = IFiles.getPiX(IFiles.getRepName(blockfoor.name + it))
+            val piX = IFiles.getPiX(IFiles.getRepName(blockfoor.name) + it)
             val overlay = IFiles.getPiX(overName)
             piX.each { x, y ->
-                piX.setRaw(x, y,
-                    Pixmap.blend((overlay.getRaw(x, y) and -0x100) or ( dps* 255).toInt(), piX.getRaw(x, y)))
+                piX.setRaw(x, y, Pixmap.blend((overlay.getRaw(x, y) and -0x100) or (dps * 255).toInt(), piX.getRaw(x, y)))
             }
             val region1 = PixmapRegion(piX)
-            mapColor.set(region1.get(region1.width/2, region1.height/2))
+            mapColor.set(region1.get(region1.width / 2, region1.height / 2))
             Core.atlas.addRegion(name + it, TextureRegion(Texture(piX)))
             packer.add(PageType.environment, name + it, region1)
             piX.dispose()

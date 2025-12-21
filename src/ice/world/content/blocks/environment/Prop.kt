@@ -3,14 +3,14 @@ package ice.world.content.blocks.environment
 import arc.audio.Sound
 import arc.graphics.g2d.Draw
 import arc.math.Mathf
-import ice.world.content.blocks.abstractBlocks.IceBlock
+import ice.world.content.blocks.abstractBlocks.EnvironmentBlock
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 import mindustry.graphics.Layer
 import mindustry.world.Tile
 import kotlin.math.max
 
-open class Prop(name: String, breakSounds: Sound = Sounds.rockBreak) : IceBlock(name) {
+open class Prop(name: String, breakSounds: Sound = Sounds.rockBreak) : EnvironmentBlock(name) {
     var layer: Float = Layer.blockProp
 
     init {

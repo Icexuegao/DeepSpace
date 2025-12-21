@@ -1,6 +1,5 @@
 package ice.world.content.blocks.distribution.conveyor
 
-import arc.Core
 import arc.func.Boolf
 import arc.func.Prov
 import arc.graphics.g2d.Draw
@@ -16,9 +15,10 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.graphics.TextureRegionArrArrDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
+import ice.world.content.blocks.distribution.Junction
 import mindustry.Vars
-import mindustry.content.Blocks
 import mindustry.ctype.UnlockableContent
 import mindustry.entities.TargetPriority
 import mindustry.entities.units.BuildPlan
@@ -36,7 +36,6 @@ import mindustry.world.Tile
 import mindustry.world.blocks.Autotiler
 import mindustry.world.blocks.Autotiler.SliceMode
 import mindustry.world.blocks.distribution.*
-import mindustry.world.blocks.distribution.Conveyor
 import mindustry.world.blocks.distribution.StackConveyor
 import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Stat
@@ -51,8 +50,7 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
         private const val capacity = 3
     }
 
-  //  @Load(value = "@-#1-#2", lengths = [7, 4])
-    lateinit var regions: Array<Array<TextureRegion>>
+    var regions: Array<Array<TextureRegion>> by TextureRegionArrArrDelegate(this.name, 5, 4)
     var speed: Float = 0f
     var displayedSpeed: Float = 0f
     var pushUnits: Boolean = true
@@ -75,26 +73,14 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
         buildType = Prov(::ConveyorBuild)
     }
 
-    override fun load() {
-        super.load()
-        regions = Array(5) { s ->
-            Array(4) {
-                Core.atlas.find("$name-$s-$it")
-            }
-        }
+    override fun icons(): Array<TextureRegion> {
+        return arrayOf(regions[0][0])
     }
 
     override fun setStats() {
         super.setStats()
         //have to add a custom calculated speed, since the actual movement speed is apparently not linear
         stats.add(Stat.itemsMoved, displayedSpeed, StatUnit.itemsSecond)
-    }
-
-    override fun init() {
-        super.init()
-
-        if (junctionReplacement == null) junctionReplacement = Blocks.junction
-        if (bridgeReplacement == null || !(bridgeReplacement is ItemBridge || bridgeReplacement is DuctBridge)) bridgeReplacement = Blocks.itemBridge
     }
 
     override fun drawPlanRegion(plan: BuildPlan, list: Eachable<BuildPlan?>?) {
@@ -116,12 +102,8 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
     override fun handlePlacementLine(plans: Seq<BuildPlan?>) {
         if (bridgeReplacement == null) return
         val hasJuntionReplacement = junctionReplacement != null
-        if (bridgeReplacement is DuctBridge) Placement.calculateBridges(plans, bridgeReplacement as DirectionBridge?, hasJuntionReplacement, Boolf { b: Block? -> b is Duct || b is Conveyor })
-        if (bridgeReplacement is ItemBridge) Placement.calculateBridges(plans, bridgeReplacement as ItemBridge?, hasJuntionReplacement, Boolf { b: Block? -> b is Conveyor })
-    }
-
-    public override fun icons(): Array<TextureRegion> {
-        return arrayOf(regions[0][0])
+        if (bridgeReplacement is DuctBridge) Placement.calculateBridges(plans, bridgeReplacement as DirectionBridge?, hasJuntionReplacement) { b: Block? -> b is Duct || b is Conveyor }
+        if (bridgeReplacement is ItemBridge) Placement.calculateBridges(plans, bridgeReplacement as ItemBridge?, hasJuntionReplacement) { b: Block? -> b is Conveyor }
     }
 
     override fun isAccessible(): Boolean {
@@ -130,7 +112,7 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
 
     override fun getReplacement(req: BuildPlan, plans: Seq<BuildPlan?>): Block? {
         if (junctionReplacement == null) return this
-        val cont = Boolf { p: Point2? -> plans.contains(Boolf { o: BuildPlan? -> o!!.x == req.x + p!!.x && o.y == req.y + p.y && (req.block is Conveyor || req.block is Junction) }) }
+        val cont = Boolf { p: Point2? -> plans.contains { o: BuildPlan? -> o!!.x == req.x + p!!.x && o.y == req.y + p.y && (req.block is Conveyor || req.block is Junction) } }
         return if (cont.get(Geometry.d4(req.rotation)) &&
             cont.get(Geometry.d4(req.rotation - 2)) && req.tile() != null &&
             req.tile().block() is Conveyor && Mathf.mod(req.tile().build.rotation - req.rotation, 2) == 1
@@ -173,13 +155,13 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
                     val dir = rotation - i
                     val rot = (if (i == 0) rotation * 90 else (dir) * 90).toFloat()
 
-                    Draw.rect(sliced(regions[0]!![frame], if (i != 0) SliceMode.bottom else SliceMode.top), x + Geometry.d4x(dir) * Vars.tilesize * 0.75f, y + Geometry.d4y(dir) * Vars.tilesize * 0.75f, rot)
+                    Draw.rect(sliced(regions[0][frame], if (i != 0) SliceMode.bottom else SliceMode.top), x + Geometry.d4x(dir) * Vars.tilesize * 0.75f, y + Geometry.d4y(dir) * Vars.tilesize * 0.75f, rot)
                 }
             }
 
             Draw.z(Layer.block - 0.2f)
 
-            Draw.rect(regions[blendbits]!![frame], x, y, (Vars.tilesize * blendsclx).toFloat(), (Vars.tilesize * blendscly).toFloat(), (rotation * 90).toFloat())
+            Draw.rect(regions[blendbits][frame], x, y, (Vars.tilesize * blendsclx).toFloat(), (Vars.tilesize * blendscly).toFloat(), (rotation * 90).toFloat())
 
             Draw.z(Layer.block - 0.1f)
             val layer = Layer.block - 0.1f
@@ -300,10 +282,10 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
                 }
             }
 
-            if (minitem < itemSpace + (if (blendbits == 1) 0.3f else 0f)) {
-                clogHeat = Mathf.approachDelta(clogHeat, 1f, 1f / 60f)
+            clogHeat = if (minitem < itemSpace + (if (blendbits == 1) 0.3f else 0f)) {
+                Mathf.approachDelta(clogHeat, 1f, 1f / 60f)
             } else {
-                clogHeat = 0f
+                0f
             }
 
             noSleep()
@@ -321,7 +303,7 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
             noSleep()
             var removed = 0
 
-            for (j in 0..<amount) {
+            repeat(amount) {
                 for (i in 0..<len) {
                     if (ids[i] === item) {
                         remove(i)
@@ -360,8 +342,7 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
 
         override fun acceptItem(source: Building, item: Item?): Boolean {
             if (len >= capacity) return false
-            val facing = Edges.getFacingEdge(source.tile, tile)
-            if (facing == null) return false
+            val facing = Edges.getFacingEdge(source.tile, tile) ?: return false
             val direction = abs(facing.relativeTo(tile.x.toInt(), tile.y.toInt()) - rotation)
             return (((direction == 0) && minitem >= itemSpace) || ((direction % 2 == 1) && minitem > 0.7f)) && !(source.block.rotate && next === source)
         }

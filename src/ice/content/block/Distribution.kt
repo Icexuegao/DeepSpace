@@ -69,7 +69,7 @@ object Distribution : Load {
         bundle {
             desc(zh_CN, "钴熠传送带")
         }
-        loadEffect= WaveEffect().apply {
+        loadEffect = WaveEffect().apply {
             lifetime = 20f
             sides = 3
             sizeTo = 6f
@@ -105,7 +105,7 @@ object Distribution : Load {
         health = 600
         armor = 8f
         speed = 0.30f
-        healAmount=30f
+        healAmount = 30f
         displayedSpeed = 36f
         placeableLiquid = true
         requirements(Category.distribution, IItems.生物钢, 1, IItems.铱板, 2)
@@ -114,7 +114,7 @@ object Distribution : Load {
             junctionReplacement = 交叉神经链路
         }
         bundle {
-            desc(zh_CN, "血肉装甲传送带","在传送带内部模拟血肉蠕动来快速输送物品")
+            desc(zh_CN, "血肉装甲传送带", "在传送带内部模拟血肉蠕动来快速输送物品")
         }
     }
     val 生物钢传送带 = StackConveyor("biologicalSteelConveyor").apply {
@@ -200,7 +200,8 @@ object Distribution : Load {
         }
     }
     val 装甲传送带桥: Block = TransferNode("armorBridge").apply {
-        directionAny=false
+        allowDiagonal = false
+        directionAny = false
         health = 40
         armor = 4f
         range = 10
@@ -245,6 +246,7 @@ object Distribution : Load {
     val 增生传送带桥: Block = TransferNode("growthBridge").apply {
         directionAny = false
         hasLiquids = false
+        allowDiagonal = false
         healAmount = 60f
         armor = 4f
         range = 37

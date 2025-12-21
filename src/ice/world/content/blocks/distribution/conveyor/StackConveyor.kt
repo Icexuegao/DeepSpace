@@ -1,6 +1,5 @@
 package ice.world.content.blocks.distribution.conveyor
 
-import arc.Core
 import arc.func.Prov
 import arc.graphics.Blending
 import arc.graphics.Color
@@ -17,6 +16,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.IceColor
+import ice.graphics.TextureRegionArrDelegate
 import ice.graphics.TextureRegionDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
@@ -58,9 +58,7 @@ open class StackConveyor(name: String) : IceBlock(name), Autotiler {
     var glowRegion: TextureRegion by TextureRegionDelegate("${this.name}-glow")
     var glowAlpha: Float = 1f
     var glowColor: Color = Pal.redLight
-    var regions = Array(3) {
-        Core.atlas.find("${this.name}-$it")
-    }
+    var regions : Array<TextureRegion> by TextureRegionArrDelegate(this.name,3)
     var loadEffect: Effect = Fx.conveyorPoof
     var unloadEffect = Effect(35.0f) { e: Effect.EffectContainer ->
         Draw.color(Pal.plasticBurn, IceColor.b4, e.fin())

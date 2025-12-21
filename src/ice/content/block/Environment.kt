@@ -525,35 +525,35 @@ object Environment : Load {
         }
     }
     val 血池 = object : Floor("thickBlood") {
-     //   var array = Seq<Dup>()
+        //   var array = Seq<Dup>()
         val foors = Seq<Tile>()
-       /* val texs = arrayOf(Array(13) {
-            IFiles.findPng("thickBloodHubble1-" + (it + 1))
-        }, Array(13) {
-            IFiles.findPng("thickBloodHubble2-" + (it + 1))
-        }, Array(13) {
-            IFiles.findPng("thickBloodHubble3-" + (it + 1))
-        })*/
 
+        /* val texs = arrayOf(Array(13) {
+             IFiles.findPng("thickBloodHubble1-" + (it + 1))
+         }, Array(13) {
+             IFiles.findPng("thickBloodHubble2-" + (it + 1))
+         }, Array(13) {
+             IFiles.findPng("thickBloodHubble3-" + (it + 1))
+         })*/
         override fun init() {
             Events.on(EventType.ResetEvent::class.java) {
-            //    array.clear()
+                //    array.clear()
                 foors.clear()
             }
             Events.run(EventType.Trigger.draw) {
-             //  array.forEach {
-             //       it.draw()
-           //     }
+                //  array.forEach {
+                //       it.draw()
+                //     }
             }
             Events.run(EventType.Trigger.update) {
-               /* array.forEach {
-                    it.update()
-                }
-                if (array.size <= foors.size / 5) {
-                    foors.random()?.let {
-                     //   Dup(it)
-                    }
-                }*/
+                /* array.forEach {
+                     it.update()
+                 }
+                 if (array.size <= foors.size / 5) {
+                     foors.random()?.let {
+                      //   Dup(it)
+                     }
+                 }*/
             }
             super.init()
         }
@@ -562,30 +562,29 @@ object Environment : Load {
             foors.addUnique(tile)
             super.drawBase(tile)
         }
+        /*  inner class Dup(val tiles: Tile) {
+              init {
+                  array.add(this)
+              }
 
-      /*  inner class Dup(val tiles: Tile) {
-            init {
-                array.add(this)
-            }
+              var offxTime = IceEffects.rand.random(60f)
+              var indx = 0
+              var inty = Interval(1)
+              val offx = IceEffects.rand.random(-4f, 4f)
+              val offy = IceEffects.rand.random(-4f, 4f)
+              var i = 0f
+              val indxtexs = IceEffects.rand.random(0, texs.size - 1)
+              fun update() {
+                  i += Time.delta
+                  if (i > offxTime && inty[10f]) {
+                      if (indx + 1 != 13) indx++ else array.remove(this)
+                  }
+              }
 
-            var offxTime = IceEffects.rand.random(60f)
-            var indx = 0
-            var inty = Interval(1)
-            val offx = IceEffects.rand.random(-4f, 4f)
-            val offy = IceEffects.rand.random(-4f, 4f)
-            var i = 0f
-            val indxtexs = IceEffects.rand.random(0, texs.size - 1)
-            fun update() {
-                i += Time.delta
-                if (i > offxTime && inty[10f]) {
-                    if (indx + 1 != 13) indx++ else array.remove(this)
-                }
-            }
-
-            fun draw() {
-                Draw.rect(texs[indxtexs][indx], tiles.drawx() + offx, tiles.drawy() + offy)
-            }
-        }*/
+              fun draw() {
+                  Draw.rect(texs[indxtexs][indx], tiles.drawx() + offx, tiles.drawy() + offy)
+              }
+          }*/
     }.apply {
         speedMultiplier = 0.5f
         status = IStatus.染血
@@ -620,7 +619,7 @@ object Environment : Load {
             desc(zh_CN, "深血池")
         }
     }
-    val 浓稠深血池= Floor("denseDeepThickBlood").apply {
+    val 浓稠深血池 = Floor("denseDeepThickBlood").apply {
         speedMultiplier = 0.4f
         liquidDrop = ILiquids.浓稠血浆
         liquidMultiplier = 1.5f
@@ -782,12 +781,12 @@ object Environment : Load {
             desc(zh_CN, "肉瘤菇")
         }
     }
-    val 血蚀囊胚=TallBlock("bloodBlastocyst").apply {
+    val 血蚀囊胚 = TallBlock("bloodBlastocyst").apply {
         bundle {
             desc(zh_CN, "血蚀囊胚")
         }
     }
-    val 缚肉树=TallBlock("bloodFleshTree").apply {
+    val 缚肉树 = TallBlock("bloodFleshTree").apply {
         bundle {
             desc(zh_CN, "缚肉树")
         }

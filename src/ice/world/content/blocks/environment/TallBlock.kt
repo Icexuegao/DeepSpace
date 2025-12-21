@@ -2,12 +2,12 @@ package ice.world.content.blocks.environment
 
 import arc.graphics.g2d.Draw
 import arc.math.Mathf
-import ice.world.content.blocks.abstractBlocks.IceBlock
+import ice.world.content.blocks.abstractBlocks.EnvironmentBlock
 import mindustry.graphics.Layer
 import mindustry.world.Tile
 import kotlin.math.max
 
-open class TallBlock(name: String) : IceBlock(name) {
+open class TallBlock(name: String) : EnvironmentBlock(name) {
     var shadowOffset: Float = -3f
     var layer: Float = Layer.power + 1
     var shadowLayer: Float = Layer.power - 1

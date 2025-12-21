@@ -85,7 +85,7 @@ open class IceUnitType(name: String, applys: IceUnitType.() -> kotlin.Unit) : Un
     }
 
     override fun createIcons(packer: MultiPacker) {
-        return
+
         if (!Core.atlas.has("$name-full") && Core.atlas.has("$name-treads")) {
             val treadRegion = Pixmaps.outline(Core.atlas.getPixmap(treadRegion), outlineColor, outlineRadius)
             val region = Pixmaps.outline(Core.atlas.getPixmap(region), outlineColor, outlineRadius)

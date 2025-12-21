@@ -152,6 +152,7 @@ object Liquid : Load {
     val 装甲导管桥 = TransferNode("bridgeConduitArmored").apply {
         directionAny = false
         armor = 4f
+        allowDiagonal = false
         range = 10
         fadeIn = false
         hasItems = false
@@ -179,6 +180,7 @@ object Liquid : Load {
     }
     val 动脉导管桥 = TransferNode("bridgeConduitArtery").apply {
         healAmount = 60f
+        allowDiagonal = false
         hasItems = false
         directionAny = false
         armor = 4f

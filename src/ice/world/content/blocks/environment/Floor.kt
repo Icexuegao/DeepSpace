@@ -12,7 +12,8 @@ import mindustry.world.blocks.environment.Floor
 open class Floor(name: String) : Floor(name) {
     var BlockRenderer.updateFloors: Seq<UpdateRenderState> by accessField("updateFloors")
     var updateFloor = false
-    var setInit:Runnable = Runnable{}
+    var setInit: Runnable = Runnable {}
+
     init {
         hasColor = true
         var variants = 0
@@ -21,9 +22,12 @@ open class Floor(name: String) : Floor(name) {
         }
         this.variants = variants
     }
-    fun setInit(init:Runnable){
-        setInit=init
+
+    fun setInit(init: Runnable) {
+        setInit = init
     }
+
+
     override fun init() {
         super.init()
         setInit.run()
@@ -31,11 +35,10 @@ open class Floor(name: String) : Floor(name) {
             wall = it
         }
         Vars.content.block("${name}Stone")?.let {
-            decoration=it
+            decoration = it
         }
     }
 
     override fun updateRender(tile: Tile) = updateFloor
-    override fun icons() = if (variants == 0) arrayOf(Core.atlas.find(name)) else arrayOf(Core.atlas.find(name + "1"))
-
+    override fun icons() = if (variants == 0) arrayOf(Core.atlas.find(name)) else arrayOf(Core.atlas.find("${name}1"))
 }

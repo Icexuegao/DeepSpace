@@ -10,7 +10,7 @@ import arc.struct.Seq
 import arc.util.Tmp
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.graphics.TextureRegionDelegate
+import ice.graphics.TextureDelegate
 import ice.library.world.Load
 import ice.ui.dialog.AchievementDialog
 import ice.world.content.blocks.distribution.conveyor.PackStack
@@ -20,18 +20,14 @@ import mindustry.gen.Groups
 import mindustry.gen.Iconc
 import mindustry.world.Tile
 
-object EventType: Load {
-    fun lazyInit(run: Runnable) {
-        inits.add(run)
-    }
-
+object EventType : Load {
     class AchievementUnlockEvent(var achievement: AchievementDialog.Achievement)
     class LogisticsHubFire
 
     private val inits = Seq<Runnable>()
     private val updates = Seq<Tile>(Tile::class.java)
     override fun setup() {
-        TextureRegionDelegate.setup()
+        TextureDelegate.setup()
         Events.on(EventType.ContentInitEvent::class.java) {
             inits.forEach { it.run() }
         }
@@ -44,10 +40,9 @@ object EventType: Load {
             val container = Core.scene.table()
             container.top().add(table)
             container.setTranslation(0f, table.prefHeight)
-            container.actions(Actions.translateBy(0f, -table.prefHeight, 1f, Interp.fade), Actions.delay(2.5f),
-                Actions.run {
-                    container.actions(Actions.translateBy(0f, table.prefHeight, 1f, Interp.fade), Actions.remove())
-                })
+            container.actions(Actions.translateBy(0f, -table.prefHeight, 1f, Interp.fade), Actions.delay(2.5f), Actions.run {
+                container.actions(Actions.translateBy(0f, table.prefHeight, 1f, Interp.fade), Actions.remove())
+            })
         }
         Events.on(EventType.ResetEvent::class.java) {
             updates.clear()
@@ -55,7 +50,7 @@ object EventType: Load {
         var df: PackStack? = null
         Events.run(EventType.Trigger.update) {
             if (Core.input.isTouched) {
-                if(!Core.input.keyDown(KeyCode.mouseLeft))return@run
+                if (!Core.input.keyDown(KeyCode.mouseLeft)) return@run
                 val mouseWorld = Core.input.mouseWorld()
                 val find = Groups.draw.find { entityc ->
                     entityc.dst2(mouseWorld.x, mouseWorld.y) <= 5 * 5 && entityc is PackStack
@@ -75,7 +70,10 @@ object EventType: Load {
                 val sub = Tmp.v1.set(mouseWorld).sub(df).scl(0.1f)
                 if (!Vars.state.isPaused) it.move(sub)
             }
-
         }
+    }
+
+    fun lazyInit(run: Runnable) {
+        inits.add(run)
     }
 }

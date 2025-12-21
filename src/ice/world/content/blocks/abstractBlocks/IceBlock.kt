@@ -6,7 +6,6 @@ import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import arc.graphics.g2d.TextureRegion
 import ice.graphics.IceColor
-import ice.library.IFiles
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -41,15 +40,6 @@ open class IceBlock(name: String) : Block(name) {
     var blockColor = IceColor.b4
     var healAmount = 0f
     var damageReduction = 0f
-
-    init {
-        var variants = 0
-        while (IFiles.sprites["$name${variants + 1}.png_"]!=null) {
-            variants++
-        }
-        this.variants = variants
-        if (IFiles.sprites["$name-shadow1.png_"]!=null) customShadow = true
-    }
 
     override fun setStats() {
         super.setStats()

@@ -26,5 +26,4 @@ open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Uni
         stats.add(IceStats.硬度, "$hardness")
         stats.add(IceStats.是否用于建造, buildable)
     }
-
 }

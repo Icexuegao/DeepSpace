@@ -17,25 +17,20 @@ import ice.Ice
 import ice.library.world.Load
 import mindustry.Vars
 
-object IFiles: Load {
+object IFiles : Load {
+    const val displayName = "DeepSpace"
     private val rootDirectory = HashMap<String, Fi>()
     private val spritesIce = HashMap<String, Fi>()
-     val sprites = HashMap<String, Fi>()
+    private val sprites = HashMap<String, Fi>()
     private val musics = HashMap<String, Fi>()
     private val sounds = HashMap<String, Fi>()
     private val shaders = HashMap<String, Fi>()
-    private var initializer=false
-    var modFile: Fi = run {
-        val list = Vars.modDirectory.list {
-            it.name.contains("DeepSpace")
-        }.first()
-        ZipFi(list)
-    }
-    var sp= HashMap<String,Pixmap >()
+    private var initializer = false
+    private val modFile: Fi = ZipFi(Vars.modDirectory.list { it.name.contains(displayName) }.first())
 
     override fun setup() {
-        if (initializer)return
-        initializer=true
+        if (initializer) return
+        initializer = true
         modFile.list().forEach {
             rootDirectory[it.name()] = it
         }
@@ -45,24 +40,24 @@ object IFiles: Load {
                     entry.value.findAll { f ->
                         f.extension().equals("png")
                     }?.forEach {
-                        val key = it.name()
-                        if (spritesIce.contains(key)) {
-                            Log.warn("已收录pngice文件:${spritesIce.get(key)?.path()},未收录:${it.path()}")
+                        val nameWithoutExtension = it.nameWithoutExtension()
+                        if (spritesIce.contains(nameWithoutExtension)) {
+                            Log.warn("已收录pngice文件:${spritesIce.get(nameWithoutExtension)?.path()},未收录:${it.path()}")
                         } else {
-                            spritesIce[key] = it
+                            spritesIce[nameWithoutExtension] = it
                         }
                     }
                 }
 
-                "sprites-out" -> {
+                "sprites" -> {
                     entry.value.findAll { f ->
-                        f.extension().equals("png_")
+                        f.extension().equals("png")
                     }?.forEach {
-                        sprites[it.name()] = it
+                        sprites[it.nameWithoutExtension()] = it
                     }
                 }
 
-                "music" -> {
+                "musics" -> {
                     entry.value.findAll { it.extension().equals("ogg") }?.forEach {
                         musics[it.name()] = it
                     }
@@ -85,15 +80,6 @@ object IFiles: Load {
                 }
             }
         }
-
-        IFiles.sprites.forEach { (name, sprite) ->
-            val dataWithoutHeader = sprite.readBytes()
-            val pngHeader = byteArrayOf(0x89.toByte(), 0x50.toByte(), 0x4E.toByte(), 0x47.toByte(),
-                0x0D.toByte(), 0x0A.toByte(), 0x1A.toByte(), 0x0A.toByte())
-            val completeData = pngHeader + dataWithoutHeader
-            val pixmap = Pixmap(completeData)
-            sp[sprite.extension()]=pixmap
-        }
     }
 
     fun getModName(): String {
@@ -102,27 +88,23 @@ object IFiles: Load {
     }
 
     fun findSound(name: String) = sounds[name] ?: throw Exception("未找到文件:$name")
-    fun findMusics(name: String) = musics[name] ?: throw Exception("未找到文件:$name")
+    fun findMusic(name: String) = musics[name] ?: throw Exception("未找到文件:$name")
     fun findShader(name: String) = shaders[name] ?: throw Exception("未找到文件:$name")
     fun findIcePng(name: String): AtlasRegion {
-        val file = spritesIce["$name.png"] ?: throw Exception("未找到文件:$name.png")
+        val file = spritesIce[name] ?: throw Exception("未找到文件:$name.png")
         return getAtlasRegion(file)
     }
 
     fun findPng(name: String): AtlasRegion {
-        return Core.atlas.find("ice-$name")
-        val file = sprites["$name.png"] ?: throw Exception("未找到文件:$name")
-        return getAtlasRegion(file)
+        return Core.atlas.find("${getModName()}-$name")
     }
 
-    fun hasPng(name: String) = sprites.contains("$name.png")
-    fun hasIcePng(name: String) = spritesIce.contains("$name.png")
-    fun getPiX(name: String): Pixmap {
-        return sp[name] ?: throw Exception("未找到文件:$name.png")
-    }
+    fun hasPng(name: String) = sprites.contains(name)
+    fun hasIcePng(name: String) = spritesIce.contains(name)
+    fun getPiX(name: String) = Pixmap(sprites[name] ?: throw Exception("未找到文件:$name.png"))
 
-    fun getNormName(name: String): String = "${Ice.name}-$name"
-    fun getRepName(name: String): String = name.replace("${Ice.name}-", "")
+    fun getNormName(name: String): String = "${getModName()}-$name"
+    fun getRepName(name: String): String = name.replace("${getModName()}-", "")
 
     fun getAtlasRegion(file: Fi): AtlasRegion {
         val texture = TextureRegion(Texture(file))
