@@ -1,7 +1,7 @@
 package ice.content
 
 import ice.graphics.IceColor
-import ice.library.IFiles
+import ice.library.IFiles.appendModName
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -14,7 +14,7 @@ import mindustry.world.meta.Attribute
 object IWeathers: Load {
     var 凌雪 = ParticleWeather("tortureSnow").apply {
         randomParticleRotation = true
-        particleRegion = IFiles.getNormName("tortureSnow")
+        particleRegion ="tortureSnow".appendModName()
         sizeMax = 13f
         sizeMin = 2.6f
         density = 1200f

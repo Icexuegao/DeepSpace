@@ -12,6 +12,7 @@ import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
 import ice.graphics.IceColor
 import ice.library.IFiles
+import ice.library.IFiles.appendModName
 import ice.library.scene.action.IceActions
 import ice.library.scene.element.typinglabel.TLabel
 import ice.library.struct.asDrawable
@@ -21,7 +22,7 @@ import mindustry.gen.Tex
 
 object ConversationFragment {
     private var group: Group = WidgetGroup()
-    var voiceoverFragment = IFiles.findIcePng("voiceoverFragment").asDrawable()
+    var voiceoverFragment = IFiles.findPng("voiceoverFragment".appendModName()).asDrawable()
     val heightEdge = UI.cgheight / 4f
     fun build(parent: Group) {
         group.setFillParent(true)

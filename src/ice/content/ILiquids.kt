@@ -2,16 +2,17 @@ package ice.content
 
 import arc.graphics.Color
 import arc.struct.ObjectSet
-import ice.library.world.Load
 import ice.entities.IcePuddle
-import ice.world.content.liquid.IceLiquid
+import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.liquid.IceLiquid
 import mindustry.content.Fx.flakExplosionBig
 import mindustry.content.Liquids
 import mindustry.content.StatusEffects
 import mindustry.type.CellLiquid
 
+@Suppress("unused")
 object ILiquids: Load {
     val 腐殖浆体 = IceLiquid("humusSlurry", "a09bbd") {
         viscosity = 0.6f

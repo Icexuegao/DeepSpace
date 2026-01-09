@@ -5,13 +5,13 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.math.Angles
 import arc.util.Time
-import ice.library.IFiles
+import ice.library.IFiles.appendModName
 import ice.world.content.unit.entity.base.Entity
 
 class ArdenThorn : Entity() {
     companion object {
         val regions: TextureRegion by lazy {
-            Core.atlas.find(IFiles.getNormName("ardenThorn-propeller"))
+            Core.atlas.find("ardenThorn-propeller".appendModName())
         }
     }
 

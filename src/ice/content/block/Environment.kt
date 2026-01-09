@@ -1,29 +1,26 @@
 package ice.content.block
 
 import arc.Core
-import arc.Events
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.math.geom.Geometry
-import arc.struct.Seq
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.graphics.IceColor
+import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.shader.IceShader
+import ice.type.Dup
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.environment.*
 import ice.world.meta.Attributes
 import mindustry.Vars
 import mindustry.content.Fx
-import mindustry.content.Liquids
 import mindustry.entities.Effect
 import mindustry.entities.Units
-import mindustry.game.EventType
 import mindustry.gen.Sounds
-import mindustry.graphics.CacheLayer
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.world.Block
@@ -52,17 +49,17 @@ object Environment : Load {
             desc(zh_CN, "绿羽")
         }
     }
-    val 草嫣红 = Prop("flowers1").apply {
+    val 草嫣红 = Prop("springGrassRed").apply {
         bundle {
             desc(zh_CN, "草嫣红")
         }
     }
-    val 绯叶绮 = Prop("flowers2").apply {
+    val 绯叶绮 = Prop("scarletLeaf").apply {
         bundle {
             desc(zh_CN, "绯叶绮")
         }
     }
-    val 叶嫣粉 = Prop("flowers3").apply {
+    val 叶嫣粉 = Prop("leafBlush").apply {
         bundle {
             desc(zh_CN, "叶嫣粉")
         }
@@ -95,6 +92,7 @@ object Environment : Load {
         }
     }
     val 利芽 = TallBlock("edgeBud").apply {
+        shadowOffset = -1f
         bundle {
             desc(zh_CN, "利芽")
         }
@@ -274,16 +272,14 @@ object Environment : Load {
             desc(zh_CN, "流纹岩墙")
         }
     }
-    val 潮汐水石 = Floor("nightTideStoneWater").apply {
-        cacheLayer = CacheLayer.water
-        liquidDrop = Liquids.water
-        bundle {
-            desc(zh_CN, "潮汐水石")
-        }
-    }
     val 潮汐石 = Floor("nightTideStone").apply {
         bundle {
             desc(zh_CN, "潮汐石")
+        }
+    }
+    val 潮汐水石 = ShallowLiquid("nightTideStoneWater", 潮汐石).apply {
+        bundle {
+            desc(zh_CN, "潮汐水石")
         }
     }
     val 潮汐石墙 = StaticWall("nightTideStoneWall").apply {
@@ -517,7 +513,7 @@ object Environment : Load {
         supportsOverlay = true
         status = IStatus.染血
         statusDuration = 60 * 3f
-        setInit {
+        addContentInitEvent {
             wall = 肿瘤墙
         }
         bundle {
@@ -525,66 +521,12 @@ object Environment : Load {
         }
     }
     val 血池 = object : Floor("thickBlood") {
-        //   var array = Seq<Dup>()
-        val foors = Seq<Tile>()
-
-        /* val texs = arrayOf(Array(13) {
-             IFiles.findPng("thickBloodHubble1-" + (it + 1))
-         }, Array(13) {
-             IFiles.findPng("thickBloodHubble2-" + (it + 1))
-         }, Array(13) {
-             IFiles.findPng("thickBloodHubble3-" + (it + 1))
-         })*/
-        override fun init() {
-            Events.on(EventType.ResetEvent::class.java) {
-                //    array.clear()
-                foors.clear()
-            }
-            Events.run(EventType.Trigger.draw) {
-                //  array.forEach {
-                //       it.draw()
-                //     }
-            }
-            Events.run(EventType.Trigger.update) {
-                /* array.forEach {
-                     it.update()
-                 }
-                 if (array.size <= foors.size / 5) {
-                     foors.random()?.let {
-                      //   Dup(it)
-                     }
-                 }*/
-            }
-            super.init()
-        }
 
         override fun drawBase(tile: Tile) {
-            foors.addUnique(tile)
+            Dup.foors.addUnique(tile)
             super.drawBase(tile)
         }
-        /*  inner class Dup(val tiles: Tile) {
-              init {
-                  array.add(this)
-              }
 
-              var offxTime = IceEffects.rand.random(60f)
-              var indx = 0
-              var inty = Interval(1)
-              val offx = IceEffects.rand.random(-4f, 4f)
-              val offy = IceEffects.rand.random(-4f, 4f)
-              var i = 0f
-              val indxtexs = IceEffects.rand.random(0, texs.size - 1)
-              fun update() {
-                  i += Time.delta
-                  if (i > offxTime && inty[10f]) {
-                      if (indx + 1 != 13) indx++ else array.remove(this)
-                  }
-              }
-
-              fun draw() {
-                  Draw.rect(texs[indxtexs][indx], tiles.drawx() + offx, tiles.drawy() + offy)
-              }
-          }*/
     }.apply {
         speedMultiplier = 0.5f
         status = IStatus.染血
@@ -594,7 +536,7 @@ object Environment : Load {
         isLiquid = true
         cacheLayer = IceShader.thickBlood
         supportsOverlay = true
-        setInit {
+        addContentInitEvent {
             wall = 肿瘤墙
         }
         bundle {
@@ -612,7 +554,7 @@ object Environment : Load {
         drownTime = 200f
         cacheLayer = IceShader.thickBlood
         supportsOverlay = true
-        setInit {
+        addContentInitEvent {
             wall = 肿瘤墙
         }
         bundle {
@@ -629,7 +571,7 @@ object Environment : Load {
         statusDuration = 60 * 4f
         drownTime = 200f
         cacheLayer = IceShader.bloodShallow
-        setInit {
+        addContentInitEvent {
             wall = 肿瘤墙
         }
         bundle {
@@ -673,7 +615,7 @@ object Environment : Load {
         }
     }
     val 血痂地 = Floor("bloodScars").apply {
-        setInit {
+        addContentInitEvent {
             wall = 肿瘤墙
         }
         bundle {
@@ -706,25 +648,9 @@ object Environment : Load {
             desc(zh_CN, "肿瘤墙")
         }
     }
-    val 红冰 = object : Floor("redIce") {
-        init {
-            updateFloor = true
-            bundle {
-                desc(zh_CN, "红冰")
-            }
-        }
-
-        override fun renderUpdate(tile: UpdateRenderState) {
-            //val nextInt = Random.nextInt(500)
-            /* if (nextInt == 0) {
-                 val random = IceEffects.rand.random(0, 3)
-                 tile.tile.nearby(random)?.let {
-                     if (it.floor() == tile.floor) return
-                     it.setFloor(tile.floor)
-                     Vars.renderer.blocks.updateFloors.add(UpdateRenderState(it, it.floor()))
-                 }
-
-             }*/
+    val 红冰 = Floor("redIce").apply {
+        bundle {
+            desc(zh_CN, "红冰")
         }
     }
     val 红冰墙 = StaticWall("redIceWall").apply {
@@ -755,6 +681,7 @@ object Environment : Load {
     val 肿瘤喷口 = BloodNeoplasmaVent("bloodNeoplasmaVent").apply {
         parent = 肿瘤地.also { blendGroup = it }
         attributes.set(Attribute.steam, 1f)
+        effect = Fx.none
         bundle {
             desc(zh_CN, "肿瘤喷口")
         }

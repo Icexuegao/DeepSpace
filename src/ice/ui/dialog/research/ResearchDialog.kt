@@ -2,7 +2,6 @@ package ice.ui.dialog.research
 
 import arc.Events
 import arc.input.KeyCode
-import arc.math.Interp
 import arc.math.Mathf
 import arc.scene.actions.Actions
 import arc.scene.event.ElementGestureListener
@@ -19,11 +18,10 @@ import ice.content.block.*
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.ui.iTableG
-import ice.world.meta.IceStats
 import ice.ui.dialog.BaseMenusDialog
-import ice.ui.dialog.MenusDialog
 import ice.ui.dialog.research.node.Node
 import ice.ui.dialog.research.node.UCLinkNode
+import ice.world.meta.IceStats
 import mindustry.gen.Icon
 
 @Suppress("unused", "LocalVariableName")
@@ -66,65 +64,7 @@ object ResearchDialog : BaseMenusDialog(IceStats.科技.localized(), Icon.tree) 
             return super.mouseMoved(event, x, y)
         }
     }
-    val tagTable = Table().apply {
-        val ch = cont.height - Scl.scl(MenusDialog.backMargin) * 2
-        addChild(object : Table(IStyles.tag) {
-            var hove = false
-            var exited = false
 
-            init {
-                touchable = Touchable.enabled
-                setSize(124f, 64f)
-                x = -70f
-                val y1 = ch - height
-                y = y1
-                hovered {
-                    if (!hove) {
-                        actions.clear()
-                        hove = true
-                        exited = true
-                        addAction(Actions.moveTo(0f, y1, 1f, Interp.pow2))
-                    }
-                }
-                exited {
-                    if (exited) {
-                        actions.clear()
-                        exited = false
-                        hove = false
-                        addAction(Actions.moveTo(-70f, y1, 1f, Interp.pow2))
-                    }
-                }
-            }
-        })
-        addChild(object : Table(IStyles.tag) {
-            var hove = false
-            var exited = false
-
-            init {
-                touchable = Touchable.enabled
-                setSize(124f, 64f)
-                x = -70f
-                val y1 = ch - height * 2
-                y = y1
-                hovered {
-                    if (!hove) {
-                        actions.clear()
-                        hove = true
-                        exited = true
-                        addAction(Actions.moveTo(0f, y1, 0.5f, Interp.pow2))
-                    }
-                }
-                exited {
-                    if (exited) {
-                        actions.clear()
-                        exited = false
-                        hove = false
-                        addAction(Actions.moveTo(-70f, y1, 0.5f, Interp.pow2))
-                    }
-                }
-            }
-        })
-    }
     val minfo = Table().apply {
         top()
         Events.on(SelectANodeEvent::class.java) {
@@ -147,7 +87,7 @@ object ResearchDialog : BaseMenusDialog(IceStats.科技.localized(), Icon.tree) 
             t.clip = true
             val element = Stack(view.apply {
                 touchable = Touchable.childrenOnly
-            }, tagTable, minfo)
+            }, minfo)
             t.add(element).grow()
             t.addListener(zoomListener)
             t.touchable = Touchable.enabled

@@ -10,7 +10,7 @@ import mindustry.gen.Bullet
 import mindustry.graphics.Layer
 
 
-open class EmpLightningBulletType(time: Float=0f, damage: Float=1f) : EmpBulletType(0f, damage) {
+open class EmpLightningBulletType(time: Float=0f, damage: Float=1f) : SglEmpBulletType(0f, damage) {
 
     init {
         lifetime = time

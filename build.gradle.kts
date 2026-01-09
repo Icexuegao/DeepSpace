@@ -1,4 +1,7 @@
 
+import arc.files.Fi
+import arc.util.serialization.JsonReader
+import arc.util.serialization.JsonWriter
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 buildscript {
@@ -15,6 +18,9 @@ buildscript {
         maven { url = uri("https://maven.aliyun.com/repository/public") }
         maven { url = uri("https://jitpack.io") }
     }
+    dependencies {
+        classpath("com.github.Anuken.Mindustry:core:v154.2")
+    }
 }
 val kotlinCompatibility = "2.2.10"
 val proUser: String by extra
@@ -23,7 +29,6 @@ plugins {
     java
     kotlin("jvm") version "2.2.10"
     id("com.gradleup.shadow") version "9.3.0"
-    id("com.google.devtools.ksp") version "2.2.10-2.0.2"
     id("com.scalified.plugins.gradle.proguard") version "1.7.0"
 }
 
@@ -41,14 +46,9 @@ repositories {
 }
 val uncVersion = "2.3.1"
 dependencies {
-    implementation(project(":annotations"))
-    ksp(project(":annotations"))
-   // compileOnly(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
-
+    // compileOnly(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
     implementation("com.github.tommyettinger:RegExodus:0.1.10")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinCompatibility}")
-    implementation("com.github.EB-wilson.UniverseCore:markdown:$uncVersion")
-    implementation("com.github.EB-wilson.UniverseCore:scenes:$uncVersion")
     //  implementation("com.github.EB-wilson.UniverseCore:dynamilizer:${uncVersion}")
     //implementation("com.github.Anuken.Arc:arc-core:v146")
     //compileOnly files("lib\\UniverseCore-v2.2.0.jar")
@@ -98,6 +98,7 @@ tasks {
     withType<ShadowJar> {
         group = "alon"
         archiveFileName.set("${project.name}Desktop.jar")
+        dependsOn("updateVersion")
         from(files("README.md", "LICENSE", "mod.json"))
         manifest.attributes("Main-Class" to "ice.Ice")
     }
@@ -141,7 +142,14 @@ tasks {
         from("build/libs/${project.name}Desktop.jar")
         into("C:/Users/$proUser/AppData/Roaming/Mindustry/mods")
     }
-
+    register("updateVersion") {
+        group = "alon"
+        val file = Fi("mod.json")
+        val parse = JsonReader().parse(file)
+        val message = parse.get("version").asString().split("-")[1].toInt() +1
+        parse.get("version").set("Alpha-$message")
+        file.writeString(parse.prettyPrint(JsonWriter.OutputType.json, 0))
+    }
 
     register("d8Compile") {
         group = "alon"

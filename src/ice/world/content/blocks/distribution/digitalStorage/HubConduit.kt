@@ -1,9 +1,10 @@
 package ice.world.content.blocks.distribution.digitalStorage
 
-import arc.Core
 import arc.Events
 import arc.func.Prov
 import arc.graphics.g2d.Draw
+import arc.graphics.g2d.TextureRegion
+import ice.graphics.TextureRegionArrDelegate
 import ice.library.EventType
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.game.Team
@@ -11,9 +12,7 @@ import mindustry.gen.Building
 import mindustry.world.Tile
 
 class HubConduit(name: String) : IceBlock(name) {
-    val texture = Array(11) {
-        Core.atlas.find("${this.name}-$it")
-        }
+    val texture : Array<TextureRegion> by TextureRegionArrDelegate(this.name,11)
 
     init {
         size = 1
@@ -67,6 +66,10 @@ class HubConduit(name: String) : IceBlock(name) {
             return super.init(tile, team, shouldAdd, rotation)
         }
 
+        override fun updateProximity() {
+            super.updateProximity()
+            Events.fire(EventType.LogisticsHubFire())
+        }
         override fun draw() {
             Draw.rect(texture[indx], x, y)
         }

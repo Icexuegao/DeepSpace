@@ -4,25 +4,14 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.util.Tmp
-import ice.library.IFiles
 import ice.entities.bullet.base.BasicBulletType
+import ice.graphics.TextureRegionNoArrDelegate
+import ice.library.IFiles.appendModName
 import mindustry.gen.Bullet
 
 class MultiBasicBulletType(sprite: String) : BasicBulletType() {
-    var sprites: Array<TextureRegion> = run {
-        var variants = 0
-        while (IFiles.hasIcePng("$sprite${variants + 1}")) {
-            variants++
-        }
-        Array(variants) { i -> IFiles.findIcePng("$sprite${i + 1}") }
-    }
-    var spriteBacks: Array<TextureRegion> = run {
-        var variants = 0
-        while (IFiles.hasIcePng("$sprite${variants + 1}-back")) {
-            variants++
-        }
-        Array(variants) { i -> IFiles.findIcePng("$sprite${i + 1}-back") }
-    }
+    var sprites: Array<TextureRegion> by TextureRegionNoArrDelegate(sprite.appendModName())
+    var spriteBacks: Array<TextureRegion> by TextureRegionNoArrDelegate("$sprite-back".appendModName())
 
     override fun draw(b: Bullet) {
         drawTrail(b)

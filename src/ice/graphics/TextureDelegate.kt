@@ -1,20 +1,14 @@
 package ice.graphics
 
 import arc.Core
-import arc.Events
 import arc.graphics.g2d.TextureRegion
 import arc.struct.Seq
-import ice.library.world.Load
+import ice.library.IFiles
 import kotlin.reflect.KProperty
 
 open class TextureDelegate {
-    companion object : Load {
+    companion object {
         internal var delegate = Seq<() -> Unit>()
-        override fun setup() {
-            Events.on(mindustry.game.EventType.AtlasPackEvent::class.java) { _ ->
-                delegate.forEach { it.invoke() }
-            }
-        }
     }
 }
 
@@ -39,21 +33,54 @@ class TextureRegionDelegate(var initialValue: String, var def: String = "") : Te
     }
 }
 
-class TextureRegionArrDelegate(var initialValue: String, var size: Int) : TextureDelegate() {
+class TextureRegionArrDelegate(private var initialValue: String, private var size: Int) : TextureDelegate() {
     private var value: Array<TextureRegion>? = null
 
     init {
         delegate.add {
-            value = Array(size) {
-                Core.atlas.find("$initialValue-$it")
-            }
+            value = getArr()
+        }
+    }
+
+    fun getArr(): Array<TextureRegion> {
+        return Array(size) {
+            Core.atlas.find("$initialValue-$it")
         }
     }
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): Array<TextureRegion> {
-        value = value ?: Array(size) {
-            Core.atlas.find("$initialValue-$it")
+        value = value ?: getArr()
+        return value!!
+    }
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Array<TextureRegion>) {
+        this.value = value
+    }
+}
+
+class TextureRegionNoArrDelegate(private var initialValue: String) : TextureDelegate() {
+    private var value: Array<TextureRegion>? = null
+
+    init {
+        delegate.add {
+            value = getArr()
         }
+    }
+
+    fun getArr(): Array<TextureRegion> {
+        var variants = 0
+
+        while (IFiles.hasPng(initialValue + (variants + 1))) {
+            variants++
+        }
+
+        return Array(variants) {
+            IFiles.findPng(initialValue + (it + 1))
+        }
+    }
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Array<TextureRegion> {
+        value = value ?: getArr()
         return value!!
     }
 

@@ -6,7 +6,7 @@ import arc.graphics.Pixmap
 import arc.graphics.Texture
 import arc.graphics.g2d.PixmapRegion
 import arc.graphics.g2d.TextureRegion
-import ice.library.IFiles
+import ice.library.IFiles.appendModName
 import mindustry.content.Liquids
 import mindustry.graphics.CacheLayer
 import mindustry.graphics.MultiPacker
@@ -23,9 +23,6 @@ open class ShallowLiquid(name: String, val blockfoor: Block) : Floor(name) {
         isLiquid = true
     }
 
-    init {
-        variants = blockfoor.variants
-    }
 
     override fun init() {
         super.init()
@@ -33,10 +30,10 @@ open class ShallowLiquid(name: String, val blockfoor: Block) : Floor(name) {
     }
 
     override fun createIcons(packer: MultiPacker) {
-        super.createIcons(packer)
-        (1..variants).forEach {
-            val piX = IFiles.getPiX(IFiles.getRepName(blockfoor.name) + it)
-            val overlay = IFiles.getPiX(overName)
+     //   super.createIcons(packer)
+        (1..blockfoor.variants).forEach {
+            val piX = Core.atlas.getPixmap(blockfoor.name + it).crop()
+            val overlay = Core.atlas.getPixmap(overName.appendModName())
             piX.each { x, y ->
                 piX.setRaw(x, y, Pixmap.blend((overlay.getRaw(x, y) and -0x100) or (dps * 255).toInt(), piX.getRaw(x, y)))
             }

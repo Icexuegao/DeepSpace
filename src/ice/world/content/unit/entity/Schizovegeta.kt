@@ -8,7 +8,7 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.ILiquids
 import ice.content.IUnitTypes
-import ice.library.IFiles
+import ice.library.IFiles.appendModName
 import ice.world.content.unit.entity.base.FleshEntity
 import ice.world.meta.IceEffects
 import mindustry.Vars
@@ -20,12 +20,12 @@ class Schizovegeta : FleshEntity() {
     companion object {
         val bags: Array<TextureRegion> by lazy {
             Array(3) {
-                Core.atlas.find(IFiles.getNormName("schizovegeta-bag${it + 1}"))
+                Core.atlas.find(("schizovegeta-bag${it + 1}").appendModName())
             }
         }
         val scorchs: Array<TextureRegion> by lazy {
             Array(2) {
-                Core.atlas.find(IFiles.getNormName("schizovegeta-scorch-${it + 1}"))
+                Core.atlas.find(("schizovegeta-scorch-${it + 1}").appendModName())
             }
         }
     }

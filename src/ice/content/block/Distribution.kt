@@ -5,7 +5,7 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import ice.content.IItems
 import ice.graphics.IceColor
-import ice.library.EventType.lazyInit
+import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -30,7 +30,6 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.type.ItemStack
-import mindustry.world.Block
 import mindustry.world.blocks.distribution.ArmoredConveyor
 import mindustry.world.blocks.distribution.MassDriver
 import mindustry.world.blocks.storage.Unloader
@@ -42,7 +41,7 @@ object Distribution : Load {
         speed = 0.2f
         health = 30
         displayedSpeed = speed * 140f
-        lazyInit {
+        addContentInitEvent {
             junctionReplacement = 基础交叉器
         }
         requirements(Category.distribution, IItems.低碳钢, 1)
@@ -55,7 +54,7 @@ object Distribution : Load {
         speed = 0.21f
         health = 60
         displayedSpeed = speed * 140f
-        lazyInit {
+        addContentInitEvent {
             junctionReplacement = 基础交叉器
         }
         requirements(Category.distribution, IItems.钴锭, 1, IItems.铬锭, 1, IItems.复合陶瓷, 1)
@@ -109,7 +108,7 @@ object Distribution : Load {
         displayedSpeed = 36f
         placeableLiquid = true
         requirements(Category.distribution, IItems.生物钢, 1, IItems.铱板, 2)
-        lazyInit {
+        addContentInitEvent {
             bridgeReplacement = 装甲传送带桥
             junctionReplacement = 交叉神经链路
         }
@@ -157,7 +156,7 @@ object Distribution : Load {
             desc(zh_CN, "生物钢传送带", "打包物品进行运输,一次能携带100件物品,比塑钢传送带更快,可以用电力加速")
         }
     }
-    val 基础交叉器: Block = Junction("baseJunction").apply {
+    val 基础交叉器 = Junction("baseJunction").apply {
         size = 1
         health = 100
         requirements(Category.distribution, IItems.低碳钢, 5, IItems.高碳钢, 2)
@@ -165,7 +164,7 @@ object Distribution : Load {
             desc(zh_CN, "基础交叉器", "两条交叉传送带的桥梁")
         }
     }
-    val 交叉神经链路: Block = Junction("junctionNeuralChain").apply {
+    val 交叉神经链路 = Junction("junctionNeuralChain").apply {
         armor = 4f
         health = 250
         displayedSpeed = 30f
@@ -175,7 +174,7 @@ object Distribution : Load {
             desc(zh_CN, "交叉神经链路", "连接两条交叉的传送带,比交叉器更快")
         }
     }
-    val 基础路由器: Block = Router("baseRouter").apply {
+    val 基础路由器 = Router("baseRouter").apply {
         size = 1
         health = 70
         requirements(Category.distribution, IItems.低碳钢, 5)
@@ -183,7 +182,7 @@ object Distribution : Load {
             desc(zh_CN, "基础路由器", "将物品平均分配至其他三个方向")
         }
     }
-    val 转换分类器: Block = Sorter("transformSorter").apply {
+    val 转换分类器 = Sorter("transformSorter").apply {
         size = 1
         health = 100
         requirements(Category.distribution, IItems.高碳钢, 8, IItems.低碳钢, 6)
@@ -191,7 +190,7 @@ object Distribution : Load {
             desc(zh_CN, "转换分类器", "像分类器一样处理物品,可以通过配置调整分类状态")
         }
     }
-    val 转换溢流门: Block = TransformOverflowGate("transformOverflowGate").apply {
+    val 转换溢流门 = TransformOverflowGate("transformOverflowGate").apply {
         size = 1
         health = 200
         requirements(Category.distribution, IItems.高碳钢, 8, IItems.低碳钢, 6)
@@ -199,7 +198,7 @@ object Distribution : Load {
             desc(zh_CN, "转换溢流门", "像溢流门一样处理物品,可以通过配置调整溢流状态")
         }
     }
-    val 装甲传送带桥: Block = TransferNode("armorBridge").apply {
+    val 装甲传送带桥 = TransferNode("armorBridge").apply {
         allowDiagonal = false
         directionAny = false
         health = 40
@@ -234,7 +233,7 @@ object Distribution : Load {
             desc(zh_CN, "极速卸载器", "高速卸载物品")
         }
     }
-    val 量子卸载器: Block = Unloader("electronicUninstaller").apply {
+    val 量子卸载器 = Unloader("electronicUninstaller").apply {
         speed = 60f / 60f
         health = 200
         squareSprite = false
@@ -243,7 +242,7 @@ object Distribution : Load {
         }
         requirements(Category.distribution, IItems.电子元件, 25, IItems.钴锭, 25f, IItems.导能回路, 5)
     }
-    val 增生传送带桥: Block = TransferNode("growthBridge").apply {
+    val 增生传送带桥 = TransferNode("growthBridge").apply {
         directionAny = false
         hasLiquids = false
         allowDiagonal = false
@@ -258,7 +257,7 @@ object Distribution : Load {
             desc(zh_CN, "增生传送带桥", "先进的物品传输建筑,能超远距离快速传输物品")
         }
     }
-    val 重型质量驱动器: Block = MassDriver("heavyDutyMassDrives").apply {
+    val 重型质量驱动器 = MassDriver("heavyDutyMassDrives").apply {
         size = 5
         reload = 600f
         range = 1280f
@@ -280,7 +279,7 @@ object Distribution : Load {
             desc(zh_CN, "重型质量驱动器", "超远距离传输物品,收集一定物品后将其发射到另一个重型质量驱动器中,容量巨大但转速及发射速度缓慢")
         }
     }
-    val 传输节点: Block = TransferNode("transferNode").apply {
+    val 传输节点 = TransferNode("transferNode").apply {
         size = 1
         health = 200
         requirements(Category.distribution, ItemStack.with(IItems.铜锭, 5))
@@ -288,31 +287,31 @@ object Distribution : Load {
             desc(zh_CN, "传输节点")
         }
     }
-    val 物流枢纽: Block = LogisticsHub("logisticsHub").apply {
+    val 物流枢纽 = LogisticsHub("logisticsHub").apply {
         requirements(Category.distribution, ItemStack.with(IItems.铜锭, 10))
         bundle {
             desc(zh_CN, "物流枢纽")
         }
     }
-    val 枢纽管道: Block = HubConduit("hubConduit").apply {
+    val 枢纽管道 = HubConduit("hubConduit").apply {
         requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
         bundle {
             desc(zh_CN, "枢纽管道")
         }
     }
-    val 物流输入器: Block = LogisticsInput("logisticsInput").apply {
+    val 物流输入器 = LogisticsInput("logisticsInput").apply {
         requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
         bundle {
             desc(zh_CN, "物流输入器")
         }
     }
-    val 物流输出器: Block = LogisticsOutput("logisticsOutput").apply {
+    val 物流输出器 = LogisticsOutput("logisticsOutput").apply {
         requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
         bundle {
             desc(zh_CN, "物流输出器")
         }
     }
-    val 无人机供货端: Block = DroneDeliveryTerminal("droneTeliveryTerminal").apply {
+    val 无人机供货端 = DroneDeliveryTerminal("droneTeliveryTerminal").apply {
         squareSprite = false
         requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
 
@@ -320,14 +319,14 @@ object Distribution : Load {
             desc(zh_CN, "无人机供货端")
         }
     }
-    val 无人机需求端: Block = DroneReceivingRnd("droneReceivingRnd").apply {
+    val 无人机需求端 = DroneReceivingRnd("droneReceivingRnd").apply {
         requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
 
         bundle {
             desc(zh_CN, "无人机需求端")
         }
     }
-    val 随机源: Block = Randomer("randomSource").apply {
+    val 随机源 = Randomer("randomSource").apply {
         requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
         bundle {
             desc(zh_CN, "随机源", "随机输出所有资源")

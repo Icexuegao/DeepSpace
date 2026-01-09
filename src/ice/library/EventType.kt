@@ -2,6 +2,7 @@ package ice.library
 
 import arc.Core
 import arc.Events
+import arc.graphics.Texture
 import arc.input.KeyCode
 import arc.math.Interp
 import arc.scene.actions.Actions
@@ -18,18 +19,33 @@ import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.gen.Groups
 import mindustry.gen.Iconc
-import mindustry.world.Tile
 
 object EventType : Load {
     class AchievementUnlockEvent(var achievement: AchievementDialog.Achievement)
     class LogisticsHubFire
 
-    private val inits = Seq<Runnable>()
-    private val updates = Seq<Tile>(Tile::class.java)
+    private val contentInitEvent = Seq<() -> Unit>()
+    private val clientLoadEvent = Seq<() -> Unit>()
+    private val atlasPackEvent = Seq<() -> Unit>()
     override fun setup() {
-        TextureDelegate.setup()
+        //字体缩放模糊问题
+        addClientLoadEvent {
+            Core.atlas.textures.forEach {
+                val fid = Texture.TextureFilter.nearest
+                it.setFilter(fid, fid)
+            }
+        }
+        Events.on(EventType.AtlasPackEvent::class.java) { _ ->
+            TextureDelegate.delegate.forEach { it() }
+        }
+        Events.on(EventType.AtlasPackEvent::class.java) {
+            atlasPackEvent.forEach { it() }
+        }
         Events.on(EventType.ContentInitEvent::class.java) {
-            inits.forEach { it.run() }
+            contentInitEvent.forEach { it() }
+        }
+        Events.on(EventType.ClientLoadEvent::class.java) {
+            clientLoadEvent.forEach { it() }
         }
         Events.on(AchievementUnlockEvent::class.java) { event ->
             if (Vars.state.isMenu) return@on
@@ -43,9 +59,6 @@ object EventType : Load {
             container.actions(Actions.translateBy(0f, -table.prefHeight, 1f, Interp.fade), Actions.delay(2.5f), Actions.run {
                 container.actions(Actions.translateBy(0f, table.prefHeight, 1f, Interp.fade), Actions.remove())
             })
-        }
-        Events.on(EventType.ResetEvent::class.java) {
-            updates.clear()
         }
         var df: PackStack? = null
         Events.run(EventType.Trigger.update) {
@@ -63,7 +76,6 @@ object EventType : Load {
             }
             df?.let {
                 if (!it.added) {
-                    df = null
                     return@run
                 }
                 val mouseWorld = Core.input.mouseWorld()
@@ -73,7 +85,15 @@ object EventType : Load {
         }
     }
 
-    fun lazyInit(run: Runnable) {
-        inits.add(run)
+    fun addContentInitEvent(run: () -> Unit) {
+        contentInitEvent.add(run)
+    }
+
+    fun addClientLoadEvent(run: () -> Unit) {
+        clientLoadEvent.add(run)
+    }
+
+    fun addAtlasPackEvent(run: () -> Unit) {
+        atlasPackEvent.add(run)
     }
 }

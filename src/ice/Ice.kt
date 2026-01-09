@@ -18,7 +18,6 @@ import ice.library.universecore.UncCore
 import ice.shader.SglShaders
 import ice.ui.UI
 import ice.ui.bundle.BaseBundle
-import ice.ui.dialog.RemainsDialog
 import ice.vars.SglTechThree
 import ice.world.ICategory
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
@@ -31,6 +30,7 @@ open class Ice : Mod() {
     companion object {
         val mod: Mods.LoadedMod by lazy { Vars.mods.getMod(Ice::class.java) }
         val name = IFiles.getModName()
+        const val displayName = "DeepSpace"
     }
 
     init {
@@ -59,7 +59,7 @@ open class Ice : Mod() {
         }
         //  SglTechTreeDialog().show()
         UI.init()
-        RemainsDialog.init()
+        Remainss.init()
         Schematics.init()
         Vars.asyncCore.processes.add(ParcelProcess)
     }

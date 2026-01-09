@@ -69,6 +69,7 @@ object SettingValue: Load {
     var 启用扭曲效果绘制 by observable(true)
     var 启用包裹物品绘制 by observable(false)
     var 启用包裹物品时限 by observable(true)
+
     private fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T) -> Unit = { _, _, _ -> }) = Delegates.observable(initialValue) { property, old, new ->
         if (old != new) {
             onChange(property, old, new)

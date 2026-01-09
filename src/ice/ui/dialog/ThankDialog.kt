@@ -35,7 +35,6 @@ object ThankDialog : BaseMenusDialog(IceStats.鸣谢.localized(), Icon.bookOpen)
 
         cont.iPaneG { ta ->
             ta.table {
-                it.add("原作者: 雪糕(不再参与)", IceColor.b4).fontScale(1.2f).padRight(50f)
                 it.add("项目主管: Alon", IceColor.b4).fontScale(1.2f)
             }.padBottom(40f).row()
             ta.table {

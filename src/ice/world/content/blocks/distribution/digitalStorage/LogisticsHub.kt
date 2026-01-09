@@ -71,12 +71,16 @@ class LogisticsHub(name: String) : IceBlock(name) {
             super.afterReadAll()
             breadthFirstSearch(this)
         }
+
         init {
+            Events.on(mindustry.game.EventType.TileChangeEvent::class.java) {
+                breadthFirstSearch(this)
+            }
             Events.on(EventType.LogisticsHubFire::class.java) { event ->
                 breadthFirstSearch(this)
             }
             Events.on(BlockBuildBeginEvent::class.java) {
-                if (it.breaking){
+                if (it.breaking) {
                     breadthFirstSearch(this)
                 }
             }
@@ -95,7 +99,6 @@ class LogisticsHub(name: String) : IceBlock(name) {
                 processor.get(it::class.java)?.invoke(it, this)
             }
         }
-
 
         fun breadthFirstSearch(startBuilding: Building) {
             conduits.clear()
@@ -153,5 +156,4 @@ class LogisticsHub(name: String) : IceBlock(name) {
             // visitedBlocks.add(block);
         }
     }
-
 }

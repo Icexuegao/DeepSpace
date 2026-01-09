@@ -2,13 +2,13 @@ package ice.ui
 
 import arc.Core
 import arc.Graphics
-import arc.graphics.Texture
 import arc.graphics.g2d.Draw
 import arc.util.OS
 import ice.Ice
 import ice.core.SettingValue
 import ice.graphics.IceColor
 import ice.library.IFiles
+import ice.library.IFiles.appendModName
 import ice.library.universecore.ui.ToolBarFrag
 import ice.library.util.accessField
 import ice.library.world.Load
@@ -25,16 +25,6 @@ object UI : Load {
     val cgheight = Core.graphics.height.toFloat()
     val sfxVolume = Core.settings.getInt("sfxvol") / 100f
     var MenuFragment.renderer: MenuRenderer by accessField("renderer")
-    var menuRender = object : MenuRenderer() {
-        val spacea = IFiles.findIcePng("spacea")
-        override fun render() {
-            Draw.color()
-            Draw.rect(
-                spacea, cgwidth / 2, cgheight / 2,
-                cgwidth, cgheight
-            )
-        }
-    }
     var toolBarFrag = ToolBarFrag()
 
     override fun init() {
@@ -42,14 +32,18 @@ object UI : Load {
         toolBarFrag.addTool("deepSpaceMenu", { Icon.menu }, {
             MenusDialog.show()
         }) { false }
-        //字体缩放模糊问题
-        Core.atlas.textures.forEach {
-            val fid = Texture.TextureFilter.nearest
-            it.setFilter(fid, fid)
-        }
         //解决第一次选择星球报错问题
         Core.settings.put("campaignselect", true)
-        Vars.ui.menufrag.renderer = menuRender
+        Vars.ui.menufrag.renderer = object : MenuRenderer() {
+            val spacea = IFiles.findPng("spacea".appendModName())
+            override fun render() {
+                Draw.color()
+                Draw.rect(
+                    spacea, cgwidth / 2, cgheight / 2,
+                    cgwidth, cgheight
+                )
+            }
+        }
         Vars.ui.planet = IcePlanetDialog
         FleshFragment.build(Vars.ui.hudGroup)
         ScenarioFragment.build(Vars.ui.hudGroup)
@@ -66,7 +60,7 @@ object UI : Load {
         }
 
         Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]DeepSpace[]", Icon.menu, MenusDialog::show)
-        Core.atlas.regionMap.put("logo", IFiles.findIcePng("logo"))
+        Core.atlas.regionMap.put("logo", IFiles.findModPng("logo"))
     }
 
     fun loadSystemCursors() {

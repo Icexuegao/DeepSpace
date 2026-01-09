@@ -9,7 +9,7 @@ import arc.util.Strings
 import arc.util.Tmp
 import arc.util.pooling.Pools
 import ice.entities.Damage.bulletDamageEvents
-import ice.entities.bullet.EmpBulletType
+import ice.entities.bullet.SglEmpBulletType
 import ice.library.world.Load
 import ice.world.content.unit.entity.base.Entity
 import ice.world.meta.IceStatValues.sep
@@ -171,7 +171,7 @@ open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entitie
     fun setStats(table: Table) {
         table.left().defaults().padRight(3f).left()
         setDamageStats(table)
-        if (this is EmpBulletType) {
+        if (this is SglEmpBulletType) {
             val string =
                 if (empRange > 0) "[lightgray]~ [accent]" + empRange / Vars.tilesize + "[lightgray]" + StatUnit.blocks.localized() else ""
             sep(table, "[accent]$empDamage[lightgray] ${IceStats.电磁脉冲伤害.localized()}[]$string")

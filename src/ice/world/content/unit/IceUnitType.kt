@@ -8,6 +8,7 @@ import arc.graphics.Pixmaps
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
+import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.math.Rand
 import arc.math.Scaled
@@ -19,7 +20,9 @@ import ice.content.IItems
 import ice.content.IPlanets
 import ice.entities.IceRegister
 import ice.graphics.IceColor
+import ice.graphics.TextureRegionDelegate
 import ice.library.IFiles
+import ice.library.IFiles.appendModName
 import ice.world.content.unit.ability.UnitTypeFun
 import ice.world.content.unit.entity.base.Entity
 import ice.world.content.unit.weapon.IceWeapon
@@ -50,8 +53,8 @@ import kotlin.reflect.full.primaryConstructor
 
 open class IceUnitType(name: String, applys: IceUnitType.() -> kotlin.Unit) : UnitType(name), UnitTypeFun {
     companion object {
-        var imineLaserRegion = IFiles.findIcePng("minelaser")
-        var imineLaserEndRegion = IFiles.findIcePng("minelaser-end")
+        var imineLaserRegion: TextureRegion by TextureRegionDelegate("minelaser".appendModName())
+        var imineLaserEndRegion: TextureRegion by TextureRegionDelegate("minelaser-end".appendModName())
         val legOffsetIce = Vec2()
         val rand: Rand = Rand()
     }
@@ -118,8 +121,7 @@ open class IceUnitType(name: String, applys: IceUnitType.() -> kotlin.Unit) : Un
 
     override fun load() {
         super.load()
-        val name1 = IFiles.getRepName(name) + 1
-        if (IFiles.hasPng(name1)) region = IFiles.findPng(name1)
+        if (IFiles.hasPng(name+1)) region = IFiles.findPng(name+1)
         shadowRegion = region
     }
 

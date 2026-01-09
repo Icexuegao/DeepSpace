@@ -3,7 +3,7 @@ package ice.content.block
 import ice.library.world.Load
 import ice.content.IItems
 import ice.content.IUnitTypes
-import ice.library.EventType.lazyInit
+import ice.library.EventType.addContentInitEvent
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.*
 import ice.world.content.blocks.science.Laboratory
@@ -94,7 +94,7 @@ object Effect:Load {
         size = 2
         buildSize = 8
         range = 10 * 8f
-        lazyInit {
+        addContentInitEvent {
             allowLink.add(Production.纤汲钻井)
         }
         requirements(Category.effect, ItemStack.with(IItems.低碳钢, 30))

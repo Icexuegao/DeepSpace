@@ -45,7 +45,6 @@ import mindustry.world.Block
 import java.util.*
 
 var Element.scenes: Scene by accessField("stage")
-
 var Cell<Table>.padTop: Float by accessFloat("padTop")
 var Cell<Table>.padLeft: Float by accessFloat("padLeft")
 var Cell<Table>.padBottom: Float by accessFloat("padBottom")
@@ -167,6 +166,7 @@ fun <T : Element> T.updateE(cons: Cons<T>): T {
     }
     return this
 }
+
 
 fun Element.esc(r: Runnable): InputListener {
     val result = object : InputListener() {

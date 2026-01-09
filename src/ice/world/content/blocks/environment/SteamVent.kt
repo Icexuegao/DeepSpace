@@ -17,7 +17,26 @@ import mindustry.world.Tile
 import mindustry.world.meta.BlockFlag
 import kotlin.math.max
 
-class SteamVent(name: String) : Floor(name) {
+open class SteamVent(name: String) : Floor(name) {
+    companion object {
+        val offsets: Array<Point2> = arrayOf<Point2>(
+            Point2(0, 0),
+            Point2(1, 0),
+            Point2(1, 1),
+            Point2(0, 1),
+            Point2(-1, 1),
+            Point2(-1, 0),
+            Point2(-1, -1),
+            Point2(0, -1),
+            Point2(1, -1),
+        )
+
+        init {
+            for (p in offsets) {
+                p.sub(1, 1)
+            }
+        }
+    }
     var parent: Block? = Blocks.air
     var effect: Effect = Fx.ventSteam
     var effectColor: Color? = Pal.vent
@@ -72,23 +91,5 @@ class SteamVent(name: String) : Floor(name) {
         return true
     }
 
-    companion object {
-        val offsets: Array<Point2> = arrayOf<Point2>(
-            Point2(0, 0),
-            Point2(1, 0),
-            Point2(1, 1),
-            Point2(0, 1),
-            Point2(-1, 1),
-            Point2(-1, 0),
-            Point2(-1, -1),
-            Point2(0, -1),
-            Point2(1, -1),
-        )
 
-        init {
-            for (p in offsets) {
-                p.sub(1, 1)
-            }
-        }
-    }
 }

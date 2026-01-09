@@ -4,7 +4,6 @@ import arc.Core
 import arc.graphics.Blending
 import arc.graphics.Color
 import arc.math.Interp
-import ice.Ice
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
@@ -12,6 +11,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
+import ice.library.IFiles.appendModName
 import ice.library.util.toColor
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
@@ -359,10 +359,8 @@ object Power : Load {
                 fragVelocityMin = 1f
                 fragVelocityMax = 2f
 
-                fragBullet = BasicBulletType(sprite = "${Ice.name}-star").apply {
-                    damage = 225f
+                fragBullet = BasicBulletType( 8f,225f,"star".appendModName()).apply {
                     lifetime = 60f
-                    speed = 8f
                     height = 24f
                     width = 24f
                     spin = 2f
@@ -415,7 +413,7 @@ object Power : Load {
                         spin = 3f
                         interp = Interp.swing
                         lifetime = 80f
-                        region = "${Ice.name}-star"
+                        region = "star".appendModName()
                         lightColor = "FF5845".toColor()
                         colorFrom = "FF5845".toColor()
                         colorTo = "FF8663".toColor()

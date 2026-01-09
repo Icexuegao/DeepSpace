@@ -5,12 +5,12 @@ package ice.library.world
  * 该接口包含一个抽象方法 load(),实现该接口的类需要提供具体的加载逻辑,否则只对类进行初始化
  */
 interface Load {
-    /**模组类调用load()*/
-    fun load(){}
-
-    /**模组类调用init()*/
-    fun init(){}
-
     /**类初始化调用*/
     fun setup() {}
+
+    /**模组类调用init()*/
+    fun init() {}
+
+    /**模组类调用load()*/
+    fun load() {}
 }

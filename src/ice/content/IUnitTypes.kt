@@ -64,7 +64,9 @@ import mindustry.content.StatusEffects
 import mindustry.content.UnitTypes
 import mindustry.entities.*
 import mindustry.entities.Effect.EffectContainer
+import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.abilities.EnergyFieldAbility
+import mindustry.entities.abilities.ForceFieldAbility
 import mindustry.entities.abilities.ShieldRegenFieldAbility
 import mindustry.entities.bullet.ContinuousFlameBulletType
 import mindustry.entities.effect.ParticleEffect
@@ -72,6 +74,7 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.entities.effect.WrapEffect
 import mindustry.entities.part.*
 import mindustry.entities.pattern.ShootAlternate
+import mindustry.entities.pattern.ShootBarrel
 import mindustry.entities.pattern.ShootHelix
 import mindustry.entities.pattern.ShootPattern
 import mindustry.entities.units.WeaponMount
@@ -83,6 +86,7 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.graphics.Trail
 import mindustry.type.UnitType
+import mindustry.type.unit.MissileUnitType
 import mindustry.type.weapons.PointDefenseWeapon
 import mindustry.ui.Bar
 import mindustry.world.meta.BlockFlag
@@ -93,8 +97,7 @@ import kotlin.math.min
 import kotlin.random.Random
 
 @Suppress("unused")
-object IUnitTypes: Load {
-
+object IUnitTypes : Load {
     val 收割 = IceUnitType("harvester") {
         speed = 2f
         flying = true
@@ -194,7 +197,6 @@ object IUnitTypes: Load {
         bundle {
             desc(zh_CN, "碎甲")
         }
-
     }
     val 破军 = IceUnitType("breakArmy") {
         armor = 14f
@@ -890,8 +892,6 @@ object IUnitTypes: Load {
                 despawnEffect = hitEffect
             }
             shootY += 3f
-
-
         }
         setWeapon("weapon4") {
             x = 25.5f
@@ -934,7 +934,6 @@ object IUnitTypes: Load {
                         handler.shoot(0f, 0f, 0f, firstShotDelay + shotDelay * i) { b ->
                             b.moveRelative(0f, Mathf.sin(b.time + offset, scl, mag * if (bl) 1 else -1))
                         }
-
                     }
                 }
 
@@ -1251,7 +1250,7 @@ object IUnitTypes: Load {
             maxAlbedo = 0.8f
             shieldArmor = 10f
         })
-        val turretBullet = object : EmpBulletType() {
+        val turretBullet = object : SglEmpBulletType() {
             init {
                 damage = 420f
                 empDamage = 37f
@@ -1523,7 +1522,6 @@ object IUnitTypes: Load {
                             blackZone = false
 
                             laserEffect = SglFx.explodeImpWaveLaserBlase
-
                             val branch = RandomGenerator()
                             val g = RandomGenerator().apply {
                                 maxLength = 140f
@@ -1555,7 +1553,6 @@ object IUnitTypes: Load {
                             SglParticleModels.floatParticle.create(x, y, hitColor, dx, dy, Mathf.random(5.25f, 7f))
                         }
                     }
-
                 }
                 parts.addAll(CustomPart { x: Float, y: Float, r: Float, p: Float ->
                     Draw.color(IceColor.matrixNet)
@@ -1594,21 +1591,16 @@ object IUnitTypes: Load {
             override fun draw(unit: Unit, mount: WeaponMount) {
                 val x: Float = unit.x + Angles.trnsx(unit.rotation() - 90, mount.weapon.x, mount.weapon.y)
                 val y: Float = unit.y + Angles.trnsy(unit.rotation() - 90, mount.weapon.x, mount.weapon.y)
-
                 val angle = Mathf.angle(mount.aimX - x, mount.aimY - y)
                 val dst = Mathf.dst(mount.aimX - x, mount.aimY - y)
-
                 val angDiff = Angles.angleDist(angle, unit.rotation())
-
                 val lerp = Mathf.clamp((18 - abs(angDiff)) / 18f) * Mathf.clamp(mount.warmup - 0.05f)
                 val stLerp = lerp * (1f - Mathf.clamp((dst - 500f) / 100f))
-
                 val z = Draw.z()
                 Draw.z(Layer.effect)
                 Lines.stroke(4f * stLerp * Mathf.clamp(1 - mount.reload / mount.weapon.reload), unit.team.color)
                 Lines.line(x, y, mount.aimX, mount.aimY)
                 Lines.square(mount.aimX, mount.aimY, 18f, 45f)
-
                 val l = max(
                     Mathf.clamp(mount.warmup / mount.weapon.minWarmup) * Mathf.clamp(
                         1 - mount.reload / mount.weapon.reload
@@ -1637,7 +1629,6 @@ object IUnitTypes: Load {
 
                 super.draw(unit, mount)
             }
-
         })
         bundle {
             desc(zh_CN, "虚宿")
@@ -1680,8 +1671,8 @@ object IUnitTypes: Load {
             minWarmup = 0.99f
             shootWarmupSpeed = 0.06f
             shootSound = ISounds.moonhidelaunched
-            bullet = mindustry.entities.bullet.EmpBulletType().apply {
-                sprite = "curse-of-flesh-shining"
+            bullet = EmpsBulletType().apply {
+                sprite = "ice-shining"
                 damage = 125f
                 lifetime = 40f
                 speed = 12f
@@ -1785,8 +1776,8 @@ object IUnitTypes: Load {
                 fragBullets = 8
                 fragLifeMin = 0.5f
                 fragVelocityMin = 0.5f
-                fragBullet = BulletType().apply {
-                    sprite = "curse-of-flesh-star"
+                fragBullet = BasicBulletType().apply {
+                    sprite = "ice-star"
                     damage = 115f
                     lifetime = 40f
                     speed = 4f
@@ -1817,7 +1808,7 @@ object IUnitTypes: Load {
                         spin = 3f
                         interp = Interp.swing
                         lifetime = 100f
-                        region = "curse-of-flesh-star"
+                        region = "ice-star"
                         colorFrom = Color.valueOf("FF5845")
                         colorTo = Color.valueOf("FF8663")
                     }
@@ -1829,7 +1820,7 @@ object IUnitTypes: Load {
                         spin = 3f
                         interp = Interp.swing
                         lifetime = 100f
-                        region = "curse-of-flesh-star"
+                        region = "ice-star"
                         colorFrom = Color.valueOf("FF5845")
                         colorTo = Color.valueOf("FF8663")
                     }
@@ -1883,7 +1874,6 @@ object IUnitTypes: Load {
                         layerOffset = -0.0001f
                     })
             })
-
         }
         setWeapon("weapon2") {
             x = 0f
@@ -2023,7 +2013,6 @@ object IUnitTypes: Load {
                 color = "FFD37F".toColor()
                 colorTo = "F15454".toColor()
             })
-
         }
         setWeapon("weapon3") {
             x = 15.5f
@@ -2049,7 +2038,6 @@ object IUnitTypes: Load {
                 status = IStatus.熔融
                 statusDuration = 60f
             }
-
         }.copyAdd {
             x = 21.75f
             y = 40f
@@ -2152,7 +2140,6 @@ object IUnitTypes: Load {
                     })
                 }
             }
-
         }
         weapons.add(PointDefenseWeapon().apply {
             x = 0f
@@ -2169,7 +2156,6 @@ object IUnitTypes: Load {
                 shootEffect = Fx.sparkShoot
                 hitEffect = Fx.pointHit
             }
-
         })
         setWeapon {
             x = 0f
@@ -2207,7 +2193,6 @@ object IUnitTypes: Load {
                     colorTo = Color.valueOf("FF8663")
                 }
             }
-
         }
         fallSpeed = 0.0033333334f
         fallEffect = ParticleEffect().apply {
@@ -2254,6 +2239,773 @@ object IUnitTypes: Load {
             desc(zh_CN, "无畏", "无畏级战列巡航舰,帝国舰队的中坚力量\\n配备了两门火力凶猛的荷电粒子炮以及广域脉冲发生器,可以过载大范围内敌军的引擎和武器系统以及敌方工事的能源系统")
         }
     }
+    val 扑火 = IceUnitType("putotFire") {
+        circleTarget = true
+        faceTarget = false
+        targetAir = false
+        flying = true
+        health = 230f
+        hitSize = 9f
+        armor = 2f
+        range = 40f
+        accel = 0.08f
+        drag = 0.04f
+        speed = 3.6f
+        rotateSpeed = 6f
+        engineSize = 2f
+        engineOffset = 4.5f
+        trailLength = 4
+        engineLayer = 110f
+        abilities.add(ArmorPlateAbility().apply {
+            healthMultiplier = 0.1f
+        })
+
+        setWeapon {
+            reload = 65f
+            shootCone = 360f
+            shoot = ShootPattern().apply {
+                shots = 3
+                shotDelay = 5f
+            }
+            ignoreRotation = true
+            minShootVelocity = 0.04f
+            shootSound = Sounds.none
+            bullet = BombBulletType(35f, 30f).apply {
+                lifetime = 30f
+                width = 9f
+                height = 15f
+                status = StatusEffects.blasted
+                shootEffect = Fx.none
+                smokeEffect = Fx.none
+                hitEffect = Fx.flakExplosion
+                despawnEffect = Fx.flakExplosion
+            }
+        }
+        bundle {
+            desc(zh_CN, "扑火", "微型轰炸机,以极高的机动性持续骚扰敌军")
+        }
+    }
+    val 趋火 = IceUnitType("tuihuo") {
+        bundle {
+            desc(zh_CN, "趋火", "轻型轰炸机,配备五联装投弹器以快速杀伤敌军")
+        }
+        immunities.add(StatusEffects.wet)
+        abilities.add(ArmorPlateAbility().apply {
+            healthMultiplier = 0.2f
+        })
+        circleTarget = true
+        faceTarget = false
+        targetAir = false
+        flying = true
+        health = 675f
+        hitSize = 13f
+        armor = 5f
+        range = 40f
+        accel = 0.08f
+        drag = 0.016f
+        speed = 3f
+        rotateSpeed = 5f
+        engineSize = 2.5f
+        engineOffset = 7f
+        trailLength = 4
+        engineLayer = 110f
+        setWeapon {
+            reload = 55f
+            shootCone = 360f
+            shoot = ShootPattern().apply {
+                shots = 5
+                shotDelay = 5f
+            }
+            ignoreRotation = true
+            minShootVelocity = 0.04f
+            shootSound = Sounds.none
+            bullet = BombBulletType(35f, 30f).apply {
+                lifetime = 30f
+                width = 9f
+                height = 15f
+                status = StatusEffects.blasted
+                shootEffect = Fx.none
+                smokeEffect = Fx.none
+                hitEffect = Fx.flakExplosion
+                despawnEffect = Fx.flakExplosion
+            }
+        }
+    }
+    val 奔火 = IceUnitType("benFire") {
+        circleTarget = true
+        faceTarget = false
+        targetAir = false
+        flying = true
+        health = 1150f
+        hitSize = 21f
+        armor = 7f
+        range = 40f
+        accel = 0.07f
+        drag = 0.016f
+        speed = 2.4f
+        rotateSpeed = 4.5f
+        engineSize = 3f
+        engineOffset = 7.5f
+        trailLength = 4
+        engineLayer = 110f
+        bundle {
+            desc(zh_CN, "奔火", "中型轰炸机,以趋火为基础提升航弹装药量并加装护盾发生器以持续作战")
+        }
+        immunities.add(StatusEffects.wet)
+        abilities.add(ArmorPlateAbility().apply {
+            healthMultiplier = 0.25f
+        }, ShieldRegenFieldAbility(40f, 240f, 120f, 120f))
+        setWeapon {
+            reload = 70f
+            shootCone = 360f
+            shoot = ShootPattern().apply {
+                shots = 5
+                shotDelay = 10f
+            }
+            ignoreRotation = true
+            minShootVelocity = 0.04f
+            shootSound = Sounds.drillImpact
+            bullet = BombBulletType(60f, 40f).apply {
+                sprite = "large-bomb"
+                spin = 3f
+                width = 16f
+                height = 16f
+                shrinkX = 0.9f
+                shrinkY = 0.9f
+                speed = 0f
+                lifetime = 60f
+                absorbable = false
+                backColor = Color.valueOf("#FF5845")
+                frontColor = Color.valueOf("#FF8663")
+                hitSound = Sounds.explosionReactor
+                hitEffect = WrapEffect(Fx.dynamicSpikes, Color.valueOf("#FF8663")).apply {
+                    rotation = 48f
+                }
+                hitShake = 3f
+                despawnEffect = Fx.massiveExplosion
+            }
+        }
+    }
+    val 逐火 = IceUnitType("zhuFire") {
+        circleTarget = true
+        lowAltitude = true
+        flying = true
+        health = 9700f
+        hitSize = 42f
+        armor = 14f
+        range = 40f
+        accel = 0.06f
+        drag = 0.017f
+        speed = 2f
+        rotateSpeed = 3.6f
+        engineSize = 4f
+        engineOffset = 6f
+        immunities.addAll(StatusEffects.wet, StatusEffects.burning, StatusEffects.sporeSlowed)
+        engines.addAll(UnitType.UnitEngine().apply {
+            x = 9.75f
+            y = -7f
+            radius = 3f
+            rotation = -90f
+        }, UnitType.UnitEngine().apply {
+            x = -9.75f
+            y = -7f
+            radius = 3f
+            rotation = -90f
+        })
+        abilities.add(ArmorPlateAbility().apply {
+            healthMultiplier = 0.4f
+        }, ForceFieldAbility(80f, 2f, 1200f, 120f, 4, 0f))
+        bundle {
+            desc(zh_CN, "逐火", "中型攻击机,配备两门近防机炮,两门高爆机炮及两门离子激光,初级气动外壳足以应对一部分异常状态", "在战争烈度逐渐升级当下,[逐火]攻击机应运而生,更强的火力及装甲使其足以担任小队护航或集群突袭等多种用途")
+        }
+        setWeapon("weapon1") {
+            x = 21.25f
+            y = -3f
+            shake = 1f
+            recoil = 2f
+            shootY = 2f
+            reload = 35f
+            shoot = ShootPattern().apply {
+                shots = 3
+                shotDelay = 3f
+            }
+            rotate = true
+            rotateSpeed = 4f
+            shootSound = Sounds.shoot
+            bullet = BasicBulletType().apply {
+                damage = 55f
+                speed = 5f
+                lifetime = 48f
+                width = 6f
+                height = 9f
+                splashDamage = 65f
+                splashDamageRadius = 64f
+                shootEffect = Fx.shootBig
+                ammoMultiplier = 4f
+                status = StatusEffects.blasted
+                statusDuration = 60f
+                hitEffect = Fx.flakExplosion
+            }
+        }
+        setWeapon("weapon2") {
+            x = 11f
+            y = 2.75f
+            shake = 3f
+            recoil = 3f
+            shootY = 7f
+            reload = 180f
+            rotate = true
+            rotateSpeed = 2f
+            rotationLimit = 45f
+            shootSound = Sounds.shootLaser
+            bullet = LaserBulletType(135f).apply {
+                status = IStatus.熔融
+                length = 200f
+                lifetime = 15f
+                shootEffect = ParticleEffect().apply {
+                    line = true
+                    particles = 12
+                    lifetime = 20f
+                    length = 45f
+                    cone = 30f
+                    lenFrom = 6f
+                    lenTo = 6f
+                    strokeFrom = 3f
+                    strokeTo = 0f
+                    interp = Interp.fastSlow
+                    lightColor = Color.valueOf("#FF5845")
+                    colorFrom = Color.valueOf("#FF8663")
+                    colorTo = Color.valueOf("#FF5845")
+                }
+                colors = arrayOf(
+                    Color.valueOf("#D75B6E"),
+                    Color.valueOf("#E78F92"),
+                    Color.valueOf("#FFF0F0")
+                )
+                statusDuration = 180f
+                ammoMultiplier = 1f
+                hitEffect = ParticleEffect().apply {
+                    line = true
+                    particles = 10
+                    lifetime = 20f
+                    length = 75f
+                    cone = -360f
+                    lenFrom = 6f
+                    lenTo = 6f
+                    strokeFrom = 3f
+                    strokeTo = 0f
+                    lightColor = Color.valueOf("#FF5845")
+                    colorFrom = Color.valueOf("#FF8663")
+                    colorTo = Color.valueOf("#FF5845")
+                }
+            }
+        }
+        setWeapon("weapon3") {
+            x = 15.25f
+            y = 3.75f
+            shake = 2f
+            recoil = 3f
+            reload = 55f
+            shootY = 7.25f
+            shoot = ShootPattern().apply {
+                shots = 2
+                shotDelay = 3f
+            }
+            rotate = true
+            rotateSpeed = 2f
+            rotationLimit = 45f
+            shootSound = Sounds.shootPulsar
+            layerOffset = -0.001f
+            bullet = BasicBulletType().apply {
+                damage = 85f
+                speed = 5f
+                lifetime = 48f
+                width = 9f
+                height = 12f
+                splashDamage = 35f
+                splashDamageRadius = 32f
+                shootEffect = Fx.shootBig
+                ammoMultiplier = 4f
+                status = StatusEffects.blasted
+                statusDuration = 60f
+                hitEffect = Fx.flakExplosionBig
+            }
+        }
+    }
+    val 赴火 = IceUnitType("fuFire") {
+        bundle {
+            desc(zh_CN, "赴火", "大型多功能轰炸机,配备八联装投弹系统及两门高爆机炮,高级气动外壳保证了其飞行速度在大多数情况下不会降低")
+        }
+        circleTarget = true
+        flying = true
+        health = 27000f
+        hitSize = 48f
+        armor = 25f
+        range = 40f
+        drag = 0.02f
+        speed = 1.6f
+        rotateSpeed = 3f
+        engineSize = 5f
+        engineOffset = 12f
+        trailLength = 16
+        engineLayer = 110f
+        immunities.addAll(StatusEffects.wet,
+            StatusEffects.burning,
+            StatusEffects.freezing,
+            StatusEffects.sporeSlowed,
+            StatusEffects.tarred,
+            StatusEffects.muddy,
+            StatusEffects.electrified,
+            IStatus.辐射)
+        abilities.addAll(ArmorPlateAbility().apply {
+            healthMultiplier = 0.5f
+        })
+        engines.addAll(UnitType.UnitEngine().apply {
+            x = 9f
+            y = -10f
+            radius = 4f
+            rotation = -90f
+        }, UnitType.UnitEngine().apply {
+            x = -9f
+            y = -10f
+            radius = 4f
+            rotation = -90f
+        })
+        setWeapon("weapon1") {
+            x = 19.25f
+            y = 9.25f
+            recoil = 3f
+            shake = 2f
+            reload = 60f
+            shootY = 7.25f
+            shoot = ShootPattern().apply {
+                shots = 4
+                shotDelay = 3f
+            }
+            rotate = true
+            rotateSpeed = 2f
+            alternate = false
+            rotationLimit = 45f
+            shootSound = Sounds.shoot
+            layerOffset = -0.001f
+            bullet = BasicBulletType().apply {
+                damage = 135f
+                speed = 4f
+                lifetime = 48f
+                drag = -0.01f
+                width = 12f
+                height = 15f
+                splashDamage = 65f
+                splashDamageRadius = 64f
+                shootEffect = Fx.shootBig
+                ammoMultiplier = 4f
+                status = StatusEffects.blasted
+                statusDuration = 60f
+                hitEffect = Fx.flakExplosionBig
+            }
+        }
+        setWeapon {
+            x = 14f
+            y = 6f
+            shoot = ShootPattern().apply {
+                shots = 4
+                shotDelay = 30f
+            }
+            reload = 160f
+            alternate = false
+            shootCone = 360f
+            ignoreRotation = true
+            minShootVelocity = 0.04f
+            shootSound = Sounds.shoot
+            bullet = BombBulletType(90f, 60f).apply {
+                sprite = "large-bomb"
+                lifetime = 90f
+                speed = 0f
+                spin = 6f
+                width = 32f
+                height = 32f
+                shrinkX = 0.9f
+                shrinkY = 0.9f
+                absorbable = false
+                backColor = Color.valueOf("#FF5845")
+                frontColor = Color.valueOf("#FF8663")
+                despawnEffect = MultiEffect(
+                    WrapEffect(Fx.dynamicSpikes, Color.valueOf("FF5845"), 80f),
+                    ParticleEffect().apply {
+                        particles = 24
+                        sizeFrom = 9f
+                        sizeTo = 0f
+                        length = 80f
+                        baseLength = 8f
+                        lifetime = 30f
+                        colorFrom = Color.valueOf("FF5845")
+                        colorTo = Color.valueOf("FF8663")
+                        cone = 360f
+                    })
+
+                hitShake = 4f
+                hitSound = Sounds.explosionPlasmaSmall
+                hitEffect = Fx.massiveExplosion
+                lightning = 3
+                lightningLength = 15
+                lightningDamage = 75f
+                lightningColor = Color.valueOf("FF5845")
+                status = IStatus.熔融
+                statusDuration = 180f
+                fragBullets = 4
+                fragLifeMin = 0.7f
+                fragBullet = BombBulletType(60f, 40f).apply {
+                    sprite = "large-bomb"
+                    lifetime = 20f
+                    speed = 16f
+                    shrinkX = 0.9f
+                    shrinkY = 0.9f
+                    width = 8f
+                    height = 8f
+                    absorbable = false
+                    backColor = Color.valueOf("FF5845")
+                    frontColor = Color.valueOf("FF8663")
+                    hitSound = Sounds.explosionPlasmaSmall
+                    hitEffect = WrapEffect(Fx.dynamicSpikes, Color.valueOf("FF8663"), 48f)
+                    hitShake = 3f
+                    despawnEffect = Fx.massiveExplosion
+                }
+            }
+        }
+    }
+    val 星光 = MissileUnitType("starlight").apply {
+        bundle {
+            desc(zh_CN, "星光")
+        }
+        health = 130f
+        hitSize = 4f
+        speed = 7f
+        lifetime = 185f
+        rotateSpeed = 3.6f
+        engineColor = Color.valueOf("FEB380")
+        trailColor = Color.valueOf("FEB380")
+        engineLayer = 110f
+        engineSize = 2f
+        trailLength = 12
+        lowAltitude = false
+        missileAccelTime = 45f
+        weapons.add(IceWeapon().apply {
+            mirror = false
+            shootCone = 360f
+            shootOnDeath = true
+            shootSound = Sounds.none
+            bullet = ExplosionBulletType(24f, 72f).apply {
+                hitEffect = MultiEffect(
+                    WaveEffect().apply {
+                        lifetime = 15f
+                        sizeFrom = 0f
+                        sizeTo = 30f
+                        strokeFrom = 3f
+                        strokeTo = 0f
+                        colorFrom = Color.valueOf("FEB380")
+                        colorTo = Color.valueOf("FF8663")
+                    },
+                    ParticleEffect().apply {
+                        particles = 3
+                        lifetime = 20f
+                        line = true
+                        strokeFrom = 1.5f
+                        strokeTo = 1.5f
+                        lenFrom = 5f
+                        lenTo = 5f
+                        cone = 360f
+                        length = 50f
+                        interp = Interp.circleOut
+                        sizeInterp = Interp.pow5In
+                        colorFrom = Color.valueOf("FEB380")
+                        colorTo = Color.valueOf("FF8663")
+                    },
+                    ParticleEffect().apply {
+                        particles = 3
+                        lifetime = 25f
+                        line = true
+                        strokeFrom = 1.5f
+                        strokeTo = 1.5f
+                        lenFrom = 7f
+                        lenTo = 7f
+                        cone = 360f
+                        length = 30f
+                        interp = Interp.circleOut
+                        sizeInterp = Interp.pow5In
+                        colorFrom = Color.valueOf("FEB380")
+                        colorTo = Color.valueOf("FF8663")
+                    }
+                )
+            }
+        })
+        parts.add(FlarePart().apply {
+            color1 = Color.valueOf("FEB380")
+            stroke = 4.5f
+            radius = 0f
+            radiusTo = 30f
+            progress = DrawPart.PartProgress.life.curve(Interp.pow3Out)
+        })
+    }
+    val 化火 = IceUnitType("huaFire") {
+        bundle {
+            desc(zh_CN, "化火", "大型轰炸机,配备八联装投弹系统及两门高爆机炮,特种装甲外壳使其足以应对绝大部分负面状况")
+        }
+
+        circleTarget = true
+        faceTarget = false
+        flying = true
+        health = 112000f
+        hitSize = 58f
+        armor = 34f
+        range = 40f
+        accel = 0.08f
+        drag = 0.02f
+        speed = 1.2f
+        rotateSpeed = 1.8f
+        payloadCapacity = 2304f
+        engineSize = 6f
+        engineOffset = 13f
+        trailLength = 16
+        engineLayer = 110f
+
+        engines.add(UnitType.UnitEngine().apply {
+            x = 16f
+            y = -22f
+            radius = 5f
+            rotation = -45f
+        })
+        engines.add(UnitType.UnitEngine().apply {
+            x = -16f
+            y = -22f
+            radius = 5f
+            rotation = -135f
+        })
+        immunities.addAll(
+            StatusEffects.burning,
+            StatusEffects.melting,
+            StatusEffects.blasted,
+            StatusEffects.wet,
+            StatusEffects.freezing,
+            StatusEffects.sporeSlowed,
+            StatusEffects.slow,
+            StatusEffects.tarred,
+            StatusEffects.muddy,
+            StatusEffects.sapped,
+            StatusEffects.electrified,
+            StatusEffects.unmoving,
+            IStatus.熔融,
+            IStatus.辐射,
+            IStatus.衰变
+        )
+        abilities.add(ArmorPlateAbility().apply {
+            healthMultiplier = 0.8f
+        })
+        setWeapon {
+            x = 31f
+            y = -8f
+            shoot = ShootBarrel().apply {
+                shots = 3
+                shotDelay = 5f
+                barrels = floatArrayOf(0f, 0f, -20f, 0f, 0f, -30f, 0f, 0f, -40f)
+            }
+            shootY = 0f
+            reload = 90f
+            shootCone = 360f
+            shootSound = Sounds.shootMissile
+            bullet = BulletType().apply {
+                spawnUnit = 星光
+                speed = 0f
+                shootEffect = ParticleEffect().apply {
+                    lifetime = 35f
+                    particles = 10
+                    length = 40f
+                    cone = 20f
+                    sizeFrom = 4f
+                    sizeTo = 0f
+                    baseRotation = 180f
+                    interp = Interp.circleOut
+                    colorFrom = Color.valueOf("FF8663")
+                    colorTo = Color.valueOf("FF5845")
+                }
+            }
+        }
+        setWeapon {
+            x = 22f
+            y = 12f
+            shoot = ShootPattern().apply {
+                shots = 4
+                shotDelay = 30f
+            }
+            reload = 360f
+            alternate = false
+            shootCone = 360f
+            ignoreRotation = true
+            minShootVelocity = 0.04f
+            shootSound = Sounds.shootBeamPlasma
+            bullet = EmpBulletType().apply {
+                sprite = "large-bomb"
+                damage = 137f
+                lifetime = 90f
+                drag = 0.05f
+                speed = 1f
+                spin = 6f
+                width = 32f
+                height = 32f
+                shrinkX = 0.9f
+                shrinkY = 0.9f
+                collides = false
+                collidesAir = false
+                absorbable = false
+                collidesTiles = false
+                keepVelocity = false
+                backColor = Color.valueOf("FF5845")
+                frontColor = Color.valueOf("FF8663")
+                hitColor = Color.valueOf("FF5845")
+                despawnEffect = MultiEffect(
+                    WrapEffect(Fx.dynamicSpikes, Color.valueOf("FF5845"), 120f),
+                    ParticleEffect().apply {
+                        particles = 24
+                        sizeFrom = 9f
+                        sizeTo = 0f
+                        length = 80f
+                        baseLength = 8f
+                        lifetime = 30f
+                        colorFrom = Color.valueOf("FF5845")
+                        colorTo = Color.valueOf("FF8663")
+                        cone = 360f
+                    }
+                )
+                radius = 120f
+                unitDamageScl = 1.2f
+                powerDamageScl = 1.5f
+                hitPowerEffect = ParticleEffect().apply {
+                    particles = 7
+                    lifetime = 22f
+                    line = true
+                    lenFrom = 6f
+                    lenTo = 6f
+                    cone = 360f
+                    length = 80f
+                    colorFrom = Color.valueOf("FF8663")
+                    colorTo = Color.valueOf("FF5845")
+                }
+                status = IStatus.熔融
+                statusDuration = 180f
+                splashDamage = 915f
+                splashDamageRadius = 120f
+                scaledSplashDamage = true
+                lightning = 3
+                lightningLength = 11
+                lightningLengthRand = 5
+                lightningDamage = 75f
+                lightningColor = Color.valueOf("FF5845")
+                hitShake = 4f
+                hitSound = Sounds.shootBeamPlasma
+                hitEffect = Fx.massiveExplosion
+                fragBullets = 1
+                fragBullet = EmpBulletType().apply {
+                    sprite = "stardart"
+                    lifetime = 480f
+                    damage = 0f
+                    speed = 0f
+                    width = 8f
+                    height = 8f
+                    shrinkY = 0f
+                    collides = false
+                    collidesAir = false
+                    absorbable = false
+                    collidesTiles = false
+                    backColor = Color.valueOf("FF5845")
+                    frontColor = Color.valueOf("FF8663")
+                    hitColor = Color.valueOf("FF8663")
+                    despawnEffect = Fx.none
+                    status = IStatus.熔融
+                    statusDuration = 30f
+                    splashDamage = 537f
+                    splashDamageRadius = 80f
+                    scaledSplashDamage = true
+                    radius = 80f
+                    unitDamageScl = 1.2f
+                    powerDamageScl = 1.5f
+                    hitPowerEffect = ParticleEffect().apply {
+                        particles = 7
+                        lifetime = 22f
+                        line = true
+                        lenFrom = 6f
+                        lenTo = 6f
+                        cone = 360f
+                        length = 80f
+                        colorFrom = Color.valueOf("FF8663")
+                        colorTo = Color.valueOf("FF5845")
+                    }
+                    bulletInterval = 48f
+                    intervalBullet = SglEmpBulletType().apply {
+                        damage = 0f
+                        hittable = false
+                        collides = false
+                        collidesAir = false
+                        absorbable = false
+                        instantDisappear = true
+                        despawnShake = 1f
+                        hitColor = Color.valueOf("FF8663")
+                        status = IStatus.熔融
+                        statusDuration = 30f
+                        splashDamage = 73f
+                        splashDamageRadius = 48f
+                        scaledSplashDamage = true
+                        splashDamagePierce = true
+                        radius = 48f
+                        unitDamageScl = 1.2f
+                        powerDamageScl = 1.5f
+                        hitPowerEffect = ParticleEffect().apply {
+                            particles = 7
+                            lifetime = 22f
+                            line = true
+                            lenFrom = 6f
+                            lenTo = 6f
+                            cone = 360f
+                            length = 80f
+                            colorFrom = Color.valueOf("FF8663")
+                            colorTo = Color.valueOf("FF5845")
+                        }
+                        despawnEffect = Fx.none
+                        hitEffect = WaveEffect().apply {
+                            lifetime = 24f
+                            sizeFrom = 0f
+                            sizeTo = 48f
+                            strokeFrom = 4f
+                            strokeTo = 0f
+                            colorFrom = Color.valueOf("FF5845")
+                            colorTo = Color.valueOf("FF8663")
+                        }
+                    }
+                    fragBullets = 4
+                    fragBullet = BombBulletType(465f, 48f).apply {
+                        sprite = "large-bomb"
+                        lifetime = 20f
+                        speed = 16f
+                        shrinkX = 0.9f
+                        shrinkY = 0.9f
+                        drag = 0.2f
+                        width = 8f
+                        height = 8f
+                        collides = false
+                        collidesAir = false
+                        absorbable = false
+                        backColor = Color.valueOf("FF5845")
+                        frontColor = Color.valueOf("FF8663")
+                        incendAmount = 3
+                        status = IStatus.熔融
+                        statusDuration = 60f
+                        hitSound = Sounds.explosion
+                        hitEffect = WrapEffect(Fx.dynamicSpikes, Color.valueOf("FF8663"), 40f)
+                        hitShake = 3f
+                        despawnEffect = Fx.massiveExplosion
+                    }
+                }
+            }
+        }
+    }
 
     fun lightning(lifeTime: Float, time: Float, damage: Float, size: Float, color: Color?, generator: Func<Bullet?, LightningGenerator>): LightningBulletType {
         return object : LightningBulletType(0f, damage) {
@@ -2293,11 +3045,9 @@ object IUnitTypes: Load {
                     )
                     b.fdata = resultLength
                 }
-
                 val gen = generator.get(b)
                 gen.blockNow = Floatp2 { last: LightningVertex?, vertex: LightningVertex? ->
-                    val abs = Damage.findAbsorber(b.team, b.x + last!!.x, b.y + last.y, b.x + vertex!!.x, b.y + vertex.y)
-                    if (abs == null) return@Floatp2 -1f
+                    val abs = Damage.findAbsorber(b.team, b.x + last!!.x, b.y + last.y, b.x + vertex!!.x, b.y + vertex.y) ?: return@Floatp2 -1f
                     val ox = b.x + last.x
                     val oy = b.y + last.y
                     Mathf.len(abs.x - ox, abs.y - oy)

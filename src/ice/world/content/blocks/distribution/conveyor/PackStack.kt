@@ -60,8 +60,8 @@ class PackStack() : Drawc, Hitboxc, Velc, Physicsc {
     private var deltaY: Float = 0f
     var hitSize = 4f
     override fun clipSize(): Float = 200f
-    var tex = IFiles.findPng("gradedConveyor-stack")
-    var texShadow = IFiles.findPng("gradedConveyor-stack-shadow")
+    var tex = IFiles.findModPng("gradedConveyor-stack")
+    var texShadow = IFiles.findModPng("gradedConveyor-stack-shadow")
     var items = ItemModule()
 
     @Suppress("UNCHECKED_CAST")
