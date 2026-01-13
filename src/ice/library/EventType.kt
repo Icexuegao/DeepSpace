@@ -4,21 +4,15 @@ import arc.Core
 import arc.Events
 import arc.graphics.Texture
 import arc.input.KeyCode
-import arc.math.Interp
-import arc.scene.actions.Actions
-import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Tmp
-import ice.graphics.IStyles
-import ice.graphics.IceColor
 import ice.graphics.TextureDelegate
 import ice.library.world.Load
-import ice.ui.dialog.AchievementDialog
+import ice.ui.menusDialog.AchievementDialog
 import ice.world.content.blocks.distribution.conveyor.PackStack
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.gen.Groups
-import mindustry.gen.Iconc
 
 object EventType : Load {
     class AchievementUnlockEvent(var achievement: AchievementDialog.Achievement)
@@ -47,19 +41,7 @@ object EventType : Load {
         Events.on(EventType.ClientLoadEvent::class.java) {
             clientLoadEvent.forEach { it() }
         }
-        Events.on(AchievementUnlockEvent::class.java) { event ->
-            if (Vars.state.isMenu) return@on
-            val table = Table(IStyles.background101).margin(15f)
-            table.image(IStyles.achievementUnlock).size(50f)
-            table.add("成就: ${event.achievement.name} 已解锁 ${Iconc.lockOpen}", IceColor.b4)
-            table.pack()
-            val container = Core.scene.table()
-            container.top().add(table)
-            container.setTranslation(0f, table.prefHeight)
-            container.actions(Actions.translateBy(0f, -table.prefHeight, 1f, Interp.fade), Actions.delay(2.5f), Actions.run {
-                container.actions(Actions.translateBy(0f, table.prefHeight, 1f, Interp.fade), Actions.remove())
-            })
-        }
+
         var df: PackStack? = null
         Events.run(EventType.Trigger.update) {
             if (Core.input.isTouched) {

@@ -30,8 +30,6 @@ import ice.entities.bullet.base.BulletType
 import ice.entities.bullet.base.TrailMoveLightning
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.graphics.SglDraw
-import ice.graphics.SglDrawConst
 import ice.graphics.lightnings.LightningContainer
 import ice.graphics.lightnings.LightningVertex
 import ice.graphics.lightnings.generator.Floatp2
@@ -54,7 +52,6 @@ import ice.world.content.unit.weapon.MayflyWeapon
 import ice.world.draw.part.CustomPart
 import ice.world.meta.IceEffects
 import ice.world.meta.IceStats
-import ice.world.particles.SglParticleModels
 import mindustry.Vars
 import mindustry.ai.UnitCommand
 import mindustry.ai.types.MinerAI
@@ -91,6 +88,9 @@ import mindustry.type.weapons.PointDefenseWeapon
 import mindustry.ui.Bar
 import mindustry.world.meta.BlockFlag
 import mindustry.world.meta.Stat
+import singularity.graphic.SglDraw
+import singularity.graphic.SglDrawConst
+import singularity.world.particles.SglParticleModels
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min

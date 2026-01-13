@@ -84,6 +84,7 @@ proguard {
         autoRun.set(false)
     }
 }
+
 fun execute(string: String, path: File? = null, vararg args: Any?) {
     val cmd =
         string.split(Regex("\\s+")).toMutableList().apply { addAll(args.map { it?.toString() ?: "null" }) }

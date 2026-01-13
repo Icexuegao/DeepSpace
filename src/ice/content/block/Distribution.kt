@@ -11,6 +11,7 @@ import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.*
+import ice.world.content.blocks.distribution.conveyor.ArmoredConveyor
 import ice.world.content.blocks.distribution.conveyor.Conveyor
 import ice.world.content.blocks.distribution.conveyor.PackStackConveyor
 import ice.world.content.blocks.distribution.conveyor.StackConveyor
@@ -30,12 +31,12 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.type.ItemStack
-import mindustry.world.blocks.distribution.ArmoredConveyor
 import mindustry.world.blocks.distribution.MassDriver
 import mindustry.world.blocks.storage.Unloader
 
 @Suppress("unused")
 object Distribution : Load {
+    //传送带
     val 基础传送带 = Conveyor("baseConveyor").apply {
         size = 1
         speed = 0.2f
@@ -43,12 +44,31 @@ object Distribution : Load {
         displayedSpeed = speed * 140f
         addContentInitEvent {
             junctionReplacement = 基础交叉器
+            bridgeReplacement = 装甲传送带桥
         }
         requirements(Category.distribution, IItems.低碳钢, 1)
         bundle {
             desc(zh_CN, "基础传送带", "基础的运输设施,用于在建筑之间运输物品,造价低廉")
         }
     }
+    val 血肉装甲传送带 = Conveyor("fleshArmorConveyor").apply {
+        health = 600
+        armor = 8f
+        speed = 0.30f
+        healAmount = 30f
+        displayedSpeed = 36f
+        placeableLiquid = true
+        requirements(Category.distribution, IItems.生物钢, 1, IItems.铱板, 2)
+        addContentInitEvent {
+            bridgeReplacement = 增生传送带桥
+            junctionReplacement = 交叉神经链路
+        }
+        bundle {
+            desc(zh_CN, "血肉装甲传送带", "在传送带内部模拟血肉蠕动来快速输送物品")
+        }
+    }
+
+    //传送带 不接受侧面
     val 特种传送带 = ArmoredConveyor("specialConveyor").apply {
         size = 1
         speed = 0.21f
@@ -56,12 +76,15 @@ object Distribution : Load {
         displayedSpeed = speed * 140f
         addContentInitEvent {
             junctionReplacement = 基础交叉器
+            bridgeReplacement = 装甲传送带桥
         }
         requirements(Category.distribution, IItems.钴锭, 1, IItems.铬锭, 1, IItems.复合陶瓷, 1)
         bundle {
             desc(zh_CN, "特种传送带", "基础的运输设施,用于在建筑之间运输物品,不接收侧面输入")
         }
     }
+
+    //堆叠
     val 钴熠传送带 = StackConveyor("cobaltBrightConveyor").apply {
         speed = 50f / 600f
         requirements(Category.distribution, IItems.高碳钢, 2, IItems.钴钢, 1, IItems.铬锭, 1)
@@ -77,43 +100,6 @@ object Distribution : Load {
             strokeFrom = 3f
             colorFrom = IceColor.b4
             colorTo = IceColor.b4
-        }
-    }
-    val 梯度传送带 = PackStackConveyor("gradedConveyor").apply {
-        speed = 60f / 600f
-        drawLastItems = false
-        differentItem = true
-        loadEffect = Effect(30.0f) { e ->
-            Draw.color(Color.valueOf("b8bde1"))
-            Lines.stroke(0.5f * e.fout())
-            val spread = 4f
-            Fx.rand.setSeed(e.id.toLong())
-            Draw.alpha(e.fout())
-            for (i in 0..7) {
-                val ang = e.rotation + Fx.rand.range(8f) + i
-                Fx.v.trns(ang, Fx.rand.random(e.fin() * 10f))
-                Lines.lineAngle(e.x + Fx.v.x + Fx.rand.range(spread), e.y + Fx.v.y + Fx.rand.range(spread), ang, e.fout() * Fx.rand.random(1f) + 1f)
-            }
-        }
-        requirements(Category.distribution, ItemStack.with(IItems.铪锭, 20))
-        bundle {
-            desc(zh_CN, "梯度传送带")
-        }
-    }
-    val 血肉装甲传送带 = Conveyor("fleshArmorConveyor").apply {
-        health = 600
-        armor = 8f
-        speed = 0.30f
-        healAmount = 30f
-        displayedSpeed = 36f
-        placeableLiquid = true
-        requirements(Category.distribution, IItems.生物钢, 1, IItems.铱板, 2)
-        addContentInitEvent {
-            bridgeReplacement = 装甲传送带桥
-            junctionReplacement = 交叉神经链路
-        }
-        bundle {
-            desc(zh_CN, "血肉装甲传送带", "在传送带内部模拟血肉蠕动来快速输送物品")
         }
     }
     val 生物钢传送带 = StackConveyor("biologicalSteelConveyor").apply {
@@ -156,6 +142,29 @@ object Distribution : Load {
             desc(zh_CN, "生物钢传送带", "打包物品进行运输,一次能携带100件物品,比塑钢传送带更快,可以用电力加速")
         }
     }
+    val 梯度传送带 = PackStackConveyor("gradedConveyor").apply {
+        speed = 60f / 600f
+        drawLastItems = false
+        differentItem = true
+        loadEffect = Effect(30.0f) { e ->
+            Draw.color(Color.valueOf("b8bde1"))
+            Lines.stroke(0.5f * e.fout())
+            val spread = 4f
+            Fx.rand.setSeed(e.id.toLong())
+            Draw.alpha(e.fout())
+            for (i in 0..7) {
+                val ang = e.rotation + Fx.rand.range(8f) + i
+                Fx.v.trns(ang, Fx.rand.random(e.fin() * 10f))
+                Lines.lineAngle(e.x + Fx.v.x + Fx.rand.range(spread), e.y + Fx.v.y + Fx.rand.range(spread), ang, e.fout() * Fx.rand.random(1f) + 1f)
+            }
+        }
+        requirements(Category.distribution, ItemStack.with(IItems.铪锭, 20))
+        bundle {
+            desc(zh_CN, "梯度传送带")
+        }
+    }
+
+    //
     val 基础交叉器 = Junction("baseJunction").apply {
         size = 1
         health = 100
@@ -245,6 +254,7 @@ object Distribution : Load {
     val 增生传送带桥 = TransferNode("growthBridge").apply {
         directionAny = false
         hasLiquids = false
+        squareSprite=false
         allowDiagonal = false
         healAmount = 60f
         armor = 4f

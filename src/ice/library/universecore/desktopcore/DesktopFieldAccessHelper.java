@@ -2,7 +2,7 @@ package ice.library.universecore.desktopcore;
 
 import arc.struct.ObjectMap;
 import arc.struct.ObjectSet;
-import ice.library.universecore.util.FieldAccessHelper;
+import universecore.util.FieldAccessHelper;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

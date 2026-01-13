@@ -1,7 +1,7 @@
 package ice.library.universecore.androidcore;
 
 import arc.struct.ObjectMap;
-import ice.library.universecore.util.FieldAccessHelper;
+import universecore.util.FieldAccessHelper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

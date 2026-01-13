@@ -13,7 +13,6 @@ import arc.util.Tmp
 import ice.entities.bullet.LightLaserBulletType
 import ice.entities.bullet.base.BulletType
 import ice.graphics.IceColor
-import ice.graphics.SglDraw
 import ice.graphics.lightnings.LightningContainer
 import ice.world.SglFx
 import ice.world.content.unit.type.MayflyStatus
@@ -26,6 +25,7 @@ import mindustry.gen.*
 import mindustry.gen.Unit
 import mindustry.type.UnitType
 import mindustry.ui.Styles
+import singularity.graphic.SglDraw
 
 open class MayflyWeapon(name: String) : IceWeapon(name) {
     var delay: Float = 0f

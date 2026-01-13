@@ -18,10 +18,10 @@ import ice.graphics.IStyles.imageButtonClean
 import ice.graphics.IceColor
 import ice.library.scene.ui.*
 import ice.library.util.toStringi
-import ice.ui.dialog.DataDialog
-import ice.ui.dialog.MenusDialog
-import ice.ui.dialog.research.ResearchDialog.SelectANodeEvent
-import ice.ui.dialog.research.ResearchDialog.selectANode
+import ice.ui.menusDialog.DataDialog
+import ice.ui.MenusDialog
+import ice.ui.menusDialog.ResearchDialog.SelectANodeEvent
+import ice.ui.menusDialog.ResearchDialog.selectANode
 import mindustry.ctype.UnlockableContent
 import mindustry.gen.Building
 import mindustry.gen.Icon

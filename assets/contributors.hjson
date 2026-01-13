@@ -1,0 +1,21 @@
+{
+  "EB-wilson": {
+    contribute: "author",
+    name: "EBwilson"
+  },
+
+  "Carrot-09": {
+    contribute: "artist",
+    name: "Carrot"
+  },
+
+  "Ventivu": {
+    contribute: "program",
+    name: "Ventivu"
+  },
+
+  "woodjecket": {
+    contribute: "translate",
+    name: "Woodjecket\n[gray]to en_US"
+  }
+}

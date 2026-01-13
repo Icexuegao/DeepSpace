@@ -65,6 +65,7 @@ class TransferNode(name: String) : IceBlock(name) {
     var directionAny = true
 
     init {
+        squareSprite=false
         size = 1
         solid = true
         update = true
@@ -126,7 +127,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
         Draw.rect(
             arrowRegion, (req.drawx() + ox) / 2f, (req.drawy() + oy) / 2f,
-            Angles.angle(req.drawx(), req.drawy(), ox, oy) + 180f
+            Angles.angle(req.drawx(), req.drawy(), ox, oy)
         )
 
         Draw.reset()
@@ -175,7 +176,7 @@ class TransferNode(name: String) : IceBlock(name) {
         return block && team && build
     }
 
-    private fun positionsValid(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
+    public fun positionsValid(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
         return if (directionAny) {
             abs(y1 - y2) <= range && abs(x1 - x2) <= range
         } else {
@@ -402,8 +403,8 @@ class TransferNode(name: String) : IceBlock(name) {
                 Draw.alpha((if (fadeIn) max(warmup, 0.25f) else 1f) * Renderer.bridgeOpacity)
                 val angle: Float = Vec2(x, y).sub(other!!.drawx(), other.drawy()).angle() + 180f
 
-                Draw.rect(endRegion, x, y, angle - 90)
-                Draw.rect(endRegion, other.drawx(), other.drawy(), angle - 270)
+                Draw.rect(endRegion, x, y, angle + 90)
+                Draw.rect(endRegion, other.drawx(), other.drawy(), angle-90)
                 /* Draw.rect(endRegion, x, y, i * 90 + 90);
             Draw.rect(endRegion, other.drawx(), other.drawy(), i * 90 + 270);*/
                 Lines.stroke(bridgeWidth)

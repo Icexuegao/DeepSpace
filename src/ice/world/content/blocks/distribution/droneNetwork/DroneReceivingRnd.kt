@@ -6,10 +6,10 @@ import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IItems
-import ice.world.draw.DrawRegionColor
-import ice.world.draw.DrawMulti
-import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.library.scene.ui.ItemSelection
+import ice.world.content.blocks.abstractBlocks.IceBlock
+import ice.world.draw.DrawMulti
+import ice.world.draw.DrawRegionColor
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
@@ -28,6 +28,7 @@ class DroneReceivingRnd(name: String) : IceBlock(name) {
         saveConfig = true
         itemCapacity = 200
         configurable = true
+        clearOnDoubleTap=true
         buildType = Prov(::DroneReceivingRndBuild)
         requirements(Category.distribution, ItemStack.with(IItems.铬铁矿, 10))
         configClear { build: DroneReceivingRndBuild -> build.sortItem = null }

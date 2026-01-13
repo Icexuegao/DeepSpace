@@ -91,14 +91,14 @@ object ILiquids: Load {
             desc(zh_CN, "灵液", "一种酸性极强的溶液,可以用来处理金属")
         }
     }
-    val 氦气 = IceLiquid("helium", "f2ffbd") {
+   /* val 氦气 = IceLiquid("helium", "f2ffbd") {
         explosiveness = 0.3f
         flammability = 1f
         gas = true
         bundle {
             desc(zh_CN, "氦气", "一种惰性气体,虽然不可直接燃烧,但是处理后可形成高能燃料")
         }
-    }
+    }*/
     val 血肉赘生物= CellLiquid("bloodSlime").apply{
         incinerable = false
         cells = 8

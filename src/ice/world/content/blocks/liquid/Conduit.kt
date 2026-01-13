@@ -12,25 +12,21 @@ import arc.math.geom.Point2
 import arc.struct.Seq
 import arc.util.Eachable
 import arc.util.Tmp
+import ice.core.Placement
+import ice.world.content.blocks.distribution.itemNode.TransferNode
 import ice.world.content.blocks.liquid.base.LiquidBlock
 import mindustry.Vars
-import mindustry.content.Blocks
 import mindustry.entities.TargetPriority
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
-import mindustry.input.Placement
 import mindustry.type.Liquid
 import mindustry.world.Block
 import mindustry.world.Tile
 import mindustry.world.blocks.Autotiler
 import mindustry.world.blocks.Autotiler.SliceMode
 import mindustry.world.blocks.distribution.ChainedBuilding
-import mindustry.world.blocks.distribution.DirectionBridge
-import mindustry.world.blocks.distribution.ItemBridge
-import mindustry.world.blocks.liquid.Conduit
-import mindustry.world.blocks.liquid.LiquidJunction
 
 open class Conduit(name: String) : LiquidBlock(name), Autotiler {
     companion object {
@@ -62,9 +58,9 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
     /** If true, the liquid region is padded at corners, so it doesn't stick out.  */
     var padCorners: Boolean = true
     var leaks: Boolean = true
-    var junctionReplacement: Block? = null
-    var bridgeReplacement: Block? = null
-    var rotBridgeReplacement: Block? = null
+
+  lateinit  var junctionReplacement: LiquidJunction
+    lateinit  var bridgeReplacement:TransferNode
 
     init {
         rotate = true
@@ -125,11 +121,6 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
         }
     }
 
-    override fun init() {
-        super.init()
-        if (junctionReplacement == null) junctionReplacement = Blocks.liquidJunction
-        if (bridgeReplacement == null || bridgeReplacement !is ItemBridge) bridgeReplacement = Blocks.bridgeConduit
-    }
 
     override fun drawPlanRegion(plan: BuildPlan, list: Eachable<BuildPlan?>?) {
         val bits = getTiling(plan, list) ?: return
@@ -144,7 +135,6 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
     }
 
     override fun getReplacement(req: BuildPlan, plans: Seq<BuildPlan?>): Block? {
-        if (junctionReplacement == null) return this
         val cont = Boolf { p: Point2? -> plans.contains { o: BuildPlan? -> o!!.x == req.x + p!!.x && o.y == req.y + p.y && (req.block is Conduit || req.block is LiquidJunction) } }
         return if (cont.get(Geometry.d4(req.rotation)) &&
             cont.get(Geometry.d4(req.rotation - 2)) && req.tile() != null &&
@@ -156,14 +146,8 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
         return otherblock.hasLiquids && (otherblock.outputsLiquid || (lookingAt(tile, rotation, otherx, othery, otherblock))) && lookingAtEither(tile, rotation, otherx, othery, otherrot, otherblock)
     }
 
-    override fun handlePlacementLine(plans: Seq<BuildPlan?>) {
-        if (bridgeReplacement == null) return
-
-        if (rotBridgeReplacement is DirectionBridge) {
-            Placement.calculateBridges(plans, rotBridgeReplacement as DirectionBridge?, true) { b: Block? -> b is Conduit }
-        } else {
-            Placement.calculateBridges(plans, bridgeReplacement as ItemBridge, true) { b: Block? -> b is Conduit }
-        }
+    override fun handlePlacementLine(plans: Seq<BuildPlan>) {
+            Placement.calculateBridges(plans, bridgeReplacement, true) { b -> b is Conduit }
     }
 
     override fun icons(): Array<TextureRegion> {

@@ -26,7 +26,7 @@ public class SglShaders {
     // local space shaders
     public static WaveShader wave;
 
-    public static final Fi internalShaderDir = Ice.Companion.getMod().root.child("shaders").child("sgl").child("shaders");
+    public static final Fi internalShaderDir = Ice.Companion.getMod().root.child("shaders").child("sgl");
 
     public static class SglShader extends Shader{
         public SglShader(String vertexShader, String fragmentShader) {

@@ -9,8 +9,6 @@ import arc.graphics.gl.FrameBuffer
 import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
-import ice.graphics.SglDraw
-import ice.graphics.SglDraw.DrawAcceptor
 import ice.graphics.IceColor
 import ice.shader.SglShaders
 import ice.shader.SglShaders.MaskShader
@@ -19,6 +17,8 @@ import mindustry.gen.Bullet
 import mindustry.gen.Groups
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
+import singularity.graphic.SglDraw
+import singularity.graphic.SglDraw.DrawAcceptor
 import kotlin.math.max
 
 class MirrorArmorAbility : MirrorShieldBase() {

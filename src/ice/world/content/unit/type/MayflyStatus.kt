@@ -8,8 +8,6 @@ import arc.math.Mathf
 import arc.math.geom.Vec2
 import arc.util.Time
 import arc.util.Tmp
-import ice.graphics.MathRenderer
-import ice.graphics.SglDraw
 import ice.graphics.IceColor
 import ice.library.util.MathTransform
 import ice.world.SglFx
@@ -19,6 +17,8 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.graphics.Trail
 import mindustry.type.UnitType
+import singularity.graphic.MathRenderer
+import singularity.graphic.SglDraw
 import kotlin.math.min
 
 class MayflyStatus {

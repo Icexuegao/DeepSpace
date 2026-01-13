@@ -195,7 +195,7 @@ class MultipleCrafter(name: String) : IceBlock(name) {
         override fun draw() {
             super.draw()
 
-            if (SettingValue.启用多合成角标常显) {
+            if (SettingValue.启用多合成角标常显&& !Vars.state.isEditor) {
                 drawcornerMark()
             }
         }
@@ -347,7 +347,7 @@ class MultipleCrafter(name: String) : IceBlock(name) {
                     }
                 }
             }
-            if (!SettingValue.启用多合成角标常显) {
+            if (!SettingValue.启用多合成角标常显&& !Vars.state.isEditor) {
                 drawcornerMark()
             }
         }

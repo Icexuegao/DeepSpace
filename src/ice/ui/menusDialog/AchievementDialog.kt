@@ -1,0 +1,174 @@
+package ice.ui.menusDialog
+
+import arc.Core
+import arc.Events
+import arc.graphics.Color
+import arc.math.Mathf
+import arc.scene.style.TextureRegionDrawable
+import arc.scene.ui.Label
+import arc.scene.ui.layout.Table
+import arc.struct.Seq
+import arc.util.Scaling
+import ice.Ice
+import ice.graphics.IStyles
+import ice.graphics.IceColor
+import ice.library.EventType
+import ice.library.scene.element.BaseProgressBar
+import ice.library.scene.ui.colorR
+import ice.library.scene.ui.iPaneG
+import ice.library.scene.ui.iTableG
+import ice.library.scene.ui.iTableGX
+import ice.library.struct.asDrawable
+import ice.library.struct.log
+import ice.ui.MenusDialog
+import ice.ui.dialog.BaseMenusDialog
+import ice.world.meta.IceStats
+import mindustry.gen.Icon
+import singularity.Sgl
+import singularity.ui.fragments.notification.Notification
+import universecore.util.DataPackable
+
+object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.menusButton_host) {
+  val achievements = Seq<Achievement>()
+  override fun build(cont: Table) {
+    cont.iTableG { t1 ->
+      t1.table { t ->
+        val findPng = TextureRegionDrawable(IStyles.achievement)
+        t.image(findPng).scaling(Scaling.fit)
+      }.pad(20f).row()
+      t1.iTableGX(IStyles.background32) { table ->
+        val pross = (achievements.select { it.unlocked() }.size.toFloat() / achievements.size)
+        table.iTableGX { table1 ->
+          table1.add(
+            Label { "已获得${achievements.select { it.unlocked() }.size}项成就,共${achievements.size}项" })
+            .color(IceColor.b4).expandX().left()
+          table1.add(Label {
+            "(${
+              Mathf.round(pross * 100f)
+            }%)"
+          })
+            .color(IceColor.b4).expandX().right()
+        }.pad(5f).row()
+        table.iTableGX {
+          it.add(BaseProgressBar(IStyles.barBottlom, IStyles.barTop) { pross }.apply {
+            color.set(IceColor.b4)
+          }).grow()
+        }.minHeight(60f)
+      }.margin(21f).pad(20f).row()
+      t1.iPaneG { k ->
+        k.setRowsize(2)
+        k.top()
+        val buildAchievements: (Achievement) -> Unit = { ach ->
+          k.iTableGX(if (ach.unlocked()) IStyles.background101 else IStyles.background91) { b ->
+            b.image(if (ach.unlocked()) IStyles.achievementUnlock else IStyles.achievementLock).size(100f)
+              .pad(5f)
+            b.iTableG { b1 ->
+              b1.add(Label(ach.name).colorR(if (ach.unlocked()) IceColor.b4 else Color.gray)).padTop(10f)
+                .row()
+              b1.add(Label(ach.description).colorR(if (ach.unlocked()) IceColor.b4 else Color.gray))
+                .growX()
+                .expandY().wrap()
+            }
+            if (ach.unlocked()) {
+              b.button(Icon.trash, IStyles.button3) {
+                ach.clearUnlock()
+                hide()
+                build(MenusDialog.conts)
+              }.size(40f).pad(12f).expandY().bottom()
+            } else {
+              b.table().size(40f).pad(12f).expandY()
+            }
+          }.minSize(620f, 140f).pad(2f).margin(MenusDialog.backMargin + 2)
+        }
+        //优先展示已解锁
+        achievements.select { it.unlocked() }.forEach(buildAchievements)
+        achievements.select { !it.unlocked() }.forEach(buildAchievements)
+      }.grow()
+    }
+  }
+
+  init {
+    Achievement("孢子进化论", "升级一次孢子单位")
+    Achievement("世界树", "形成孢子网络")
+    Achievement("阴霾之下", "使用孢子建筑生产迷雾")
+    Achievement("生化危机", "一局内存在50个孢子单位")
+    Achievement("狂乱的鸡尾酒", "拥有所有状态效果")
+    Achievement("灾祸", "一直都无法避免,不是吗")
+    Achievement("外星医生", "杀死一只米戈")
+    Achievement("血田", "挺过一场血雨")
+    Achievement("异端末路", "建造传教者")
+    Achievement("阴霾之下", "用孢子建筑生产迷雾")
+    Achievement("生物引擎", "建筑泵腔")
+    Achievement("你看见我的腿了吗?", "生产带腿单位")
+    Achievement("世界树", "形成孢子网络")
+    Achievement("空间风暴I", "未知之处涌现的风暴")
+    Achievement("空间风暴II", "将秩序囚于混沌的牢笼")
+    Achievement("空间风暴III", "长梯下破碎的现实与你")
+  }
+
+  class Achievement(var name: String, var description: String) {
+    private var unlocked = false
+
+    init {
+      achievements.add(this)
+      unlocked = Core.settings.getBool("${Ice.name}-achievement-$name", false)
+    }
+
+    fun unlocked() = unlocked
+    fun unlock() {
+      if (!unlocked) {
+        unlocked = true
+        Core.settings.put("${Ice.name}-achievement-$name", true)
+        Events.fire(EventType.AchievementUnlockEvent(this))
+        Sgl.ui.notificationFrag.notify(AchievementNotification(name, description))
+        hide()
+        build(MenusDialog.conts)
+      }
+    }
+
+    fun clearUnlock() {
+      if (unlocked) {
+        unlocked = false
+        Core.settings.put("${Ice.name}-achievement-$name", false)
+        hide()
+        build(MenusDialog.conts)
+      }
+    }
+  }
+
+  class AchievementNotification(name: String, description: String) : Notification("成就解锁: $name", description) {
+    companion object{
+      const val typeID: Long = 12133159028768494L
+      fun assign() {
+        DataPackable.assignType(typeID) { args: Array<Any> ->
+          log {
+            args
+          }
+        }
+      }
+    }
+
+    override fun getIcon() = IStyles.afehs.asDrawable()
+
+    override fun activity() {
+      log { 2 }
+    }
+
+    override fun buildWindow(table: Table?) {
+    }
+
+    override fun getIconColor(): Color {
+      return IceColor.b4
+    }
+
+    override fun getTitleColor(): Color {
+      return IceColor.b4
+    }
+
+    override fun getInformationColor(): Color {
+      return IceColor.b4
+    }
+
+    override fun typeID() = typeID
+  }
+}

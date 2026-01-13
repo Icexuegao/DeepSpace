@@ -9,13 +9,13 @@ import arc.util.Time
 import ice.content.IItems
 import ice.graphics.IStyles
 import ice.graphics.IceColor
+import ice.ui.MenusDialog
+import ice.ui.dialog.research.node.UCLinkNode
+import ice.ui.menusDialog.ResearchDialog
+import ice.ui.menusDialog.ResearchDialog.selectANode
 import ice.world.content.blocks.IceBlockComponents.calwavetimeremain
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.draw.DrawMulti
-import ice.ui.dialog.MenusDialog
-import ice.ui.dialog.research.ResearchDialog
-import ice.ui.dialog.research.ResearchDialog.selectANode
-import ice.ui.dialog.research.node.UCLinkNode
 import mindustry.gen.Building
 import mindustry.gen.Icon
 import mindustry.gen.Iconc
@@ -82,9 +82,9 @@ class Laboratory(name: String) : IceBlock(name) {
             table.table {
                 it.button(Icon.bookOpen, IStyles.imageButtonClean, 40f) {
                     if (!MenusDialog.isShown()) MenusDialog.show()
-                    MenusDialog.button?.hide()
+                    MenusDialog.button.hide()
                     MenusDialog.button = ResearchDialog
-                    MenusDialog.button?.build()
+                    MenusDialog.button.build(MenusDialog.conts)
                 }.update {
                     table.pack()
                 }.row()

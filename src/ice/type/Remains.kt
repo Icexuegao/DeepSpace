@@ -10,7 +10,7 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.IFiles
 import ice.ui.UI
-import ice.ui.dialog.RemainsDialog
+import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
 
 open class Remains(val name: String) {

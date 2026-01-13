@@ -6,7 +6,7 @@ import arc.audio.Music
 import arc.math.Mathf
 import arc.util.Time
 import ice.core.SettingValue
-import ice.ui.dialog.MenusDialog
+import ice.ui.MenusDialog
 import mindustry.Vars
 import mindustry.audio.SoundControl
 import mindustry.gen.Musics

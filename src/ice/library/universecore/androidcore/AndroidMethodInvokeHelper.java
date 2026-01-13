@@ -2,7 +2,7 @@ package ice.library.universecore.androidcore;
 
 import arc.struct.ObjectMap;
 import ice.library.universecore.dynamilize.FunctionType;
-import ice.library.universecore.util.MethodInvokeHelper;
+import universecore.util.MethodInvokeHelper;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

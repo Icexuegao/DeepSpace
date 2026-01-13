@@ -19,8 +19,6 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pools
 import ice.graphics.IceColor
-import ice.graphics.SglDraw
-import ice.graphics.SglDraw.DrawAcceptor
 import ice.graphics.lightnings.LightningContainer
 import ice.graphics.lightnings.LightningContainer.PoolLightningContainer
 import ice.graphics.lightnings.LightningVertex
@@ -37,6 +35,7 @@ import mindustry.gen.Unit
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
+import singularity.graphic.SglDraw
 import kotlin.math.ceil
 import kotlin.math.min
 
@@ -1105,7 +1104,7 @@ object SglFx {
             val x = e.x
             val y = e.y
             val id = e.id
-            val draw = DrawAcceptor { n: Bloom? ->
+            val draw = SglDraw.DrawAcceptor { n: Bloom? ->
                 color(e.color)
                 SglDraw.drawLightEdge(x, y, l, w, l, w)
                 Lines.stroke(size * 0.08f * fout)

@@ -5,6 +5,7 @@ import arc.graphics.g2d.Fill
 import arc.math.Angles.randLenVectors
 import ice.content.IItems
 import ice.content.ILiquids
+import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -17,7 +18,6 @@ import mindustry.entities.Effect
 import mindustry.graphics.Pal
 import mindustry.type.Category
 import mindustry.type.ItemStack
-import mindustry.world.blocks.liquid.LiquidJunction
 import mindustry.world.blocks.production.Pump
 import mindustry.world.draw.DrawBlurSpin
 import mindustry.world.draw.DrawDefault
@@ -83,10 +83,16 @@ object Liquid : Load {
             desc(zh_CN, "异质析取器", "从环境中提取${ILiquids.异溶质.localizedName}")
         }
     }
+
+    //导管
     val 谐振导管 = Conduit("resonanceConduit").apply {
         requirements(Category.liquid, IItems.高碳钢, 10, IItems.锌锭, 2)
         bundle {
             desc(zh_CN, "谐振导管")
+        }
+        addContentInitEvent {
+            bridgeReplacement = 导管桥
+            junctionReplacement = 基础液体交叉器
         }
     }
     val 流金导管 = Conduit("fluxGoldConduit").apply {
@@ -95,6 +101,10 @@ object Liquid : Load {
         requirements(Category.liquid, IItems.金锭, 10, IItems.锌锭, 2)
         bundle {
             desc(zh_CN, "流金导管")
+        }
+        addContentInitEvent {
+            bridgeReplacement = 导管桥
+            junctionReplacement = 基础液体交叉器
         }
     }
     val 动脉导管 = Conduit("arteryConduit").apply {
@@ -109,36 +119,13 @@ object Liquid : Load {
         bundle {
             desc(zh_CN, "动脉导管")
         }
-    }
-    val 基础液体路由器 = LiquidRouter("baseLiquidRouter").apply {
-        size = 1
-        health = 100
-        requirements(Category.liquid, IItems.石英玻璃, 5)
-        bundle {
-            desc(zh_CN, "基础液体路由器", "接受一个方向的液体输入,并平均输出到其他3个方向,可以储存一定量的液体")
+        addContentInitEvent {
+            bridgeReplacement = 动脉导管桥
+            junctionReplacement = 基础液体交叉器
         }
     }
-    val 装甲液体路由器 = LiquidRouter("armoredLiquidRouter").apply {
-        armor = 4f
-        liquidCapacity = 60f
-        liquidPressure = 1.1f
-        solid = false
-        underBullets = true
-        placeableLiquid = true
-        requirements(Category.liquid, IItems.石英玻璃, 2, IItems.陶钢, 1, IItems.铱板, 3)
-        bundle {
-            desc(zh_CN, "装甲液体路由器", "向各个方向快速运输液体")
-        }
-    }
-    val 基础液体交叉器 = LiquidJunction("baseLiquidJunction").apply {
-        size = 1
-        health = 80
-        requirements(Category.liquid, IItems.石英玻璃, 5)
 
-        bundle {
-            desc(zh_CN, "基础液体交叉器")
-        }
-    }
+    //桥
     val 导管桥 = TransferNode("bridgeConduit").apply {
         range = 6
         hasItems = false
@@ -193,6 +180,35 @@ object Liquid : Load {
             desc(zh_CN, "动脉导管桥")
         }
     }
+    val 基础液体路由器 = LiquidRouter("baseLiquidRouter").apply {
+        size = 1
+        health = 100
+        requirements(Category.liquid, IItems.石英玻璃, 5)
+        bundle {
+            desc(zh_CN, "基础液体路由器", "接受一个方向的液体输入,并平均输出到其他3个方向,可以储存一定量的液体")
+        }
+    }
+    val 装甲液体路由器 = LiquidRouter("armoredLiquidRouter").apply {
+        armor = 4f
+        liquidCapacity = 60f
+        liquidPressure = 1.1f
+        solid = false
+        underBullets = true
+        placeableLiquid = true
+        requirements(Category.liquid, IItems.石英玻璃, 2, IItems.陶钢, 1, IItems.铱板, 3)
+        bundle {
+            desc(zh_CN, "装甲液体路由器", "向各个方向快速运输液体")
+        }
+    }
+    val 基础液体交叉器 = LiquidJunction("baseLiquidJunction").apply {
+        size = 1
+        health = 80
+        requirements(Category.liquid, IItems.石英玻璃, 5)
+
+        bundle {
+            desc(zh_CN, "基础液体交叉器")
+        }
+    }
     val 流体容器 = LiquidRouter("liquidContainer").apply {
         size = 2
         solid = true
@@ -242,7 +258,7 @@ object Liquid : Load {
     val 流体抽离器 = LiquidClassifier("liquidClassifier").apply {
         size = 1
         liquidCapacity = 0f
-        requirements(Category.liquid, IItems.石英玻璃, 20, IItems.铜锭,25)
+        requirements(Category.liquid, IItems.石英玻璃, 20, IItems.铜锭, 25)
 
         bundle {
             desc(zh_CN, "流体抽离器", "流体枢纽的流体卸载装置,将流体卸载于相邻的可输入建筑,本身并不存储流体")

@@ -15,12 +15,12 @@ import arc.math.geom.Vec2
 import arc.struct.Seq
 import arc.util.Nullable
 import arc.util.Time
-import ice.graphics.SglDraw
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.gen.Bullet
 import mindustry.gen.Groups
 import mindustry.gen.Unit
 import mindustry.type.UnitType
+import singularity.graphic.SglDraw
 import kotlin.math.max
 
 class MirrorFieldAbility : MirrorShieldBase() {

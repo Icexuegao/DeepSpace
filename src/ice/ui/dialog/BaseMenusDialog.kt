@@ -2,10 +2,12 @@ package ice.ui.dialog
 
 import arc.scene.actions.Actions
 import arc.scene.style.Drawable
+import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import ice.library.scene.ui.actionsR
 import ice.library.scene.ui.clearR
 import ice.library.world.Load
+import ice.ui.MenusDialog
 
 abstract class BaseMenusDialog(val name: String, val icon: Drawable): Load{
     companion object {
@@ -16,12 +18,11 @@ abstract class BaseMenusDialog(val name: String, val icon: Drawable): Load{
         dalogs.add(this)
     }
 
-    var cont = MenusDialog.conts
-    open fun build() {
+    open fun build(cont: Table) {
 
     }
 
     open fun hide() {
-        cont.clearR().actionsR(Actions.fadeOut(0f), Actions.fadeIn(0.5f))
+      MenusDialog.conts.clearR().actionsR(Actions.fadeOut(0f), Actions.fadeIn(0.5f))
     }
 }

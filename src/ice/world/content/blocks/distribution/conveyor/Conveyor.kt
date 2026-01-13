@@ -15,9 +15,11 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.core.Placement
 import ice.graphics.TextureRegionArrArrDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.content.blocks.distribution.Junction
+import ice.world.content.blocks.distribution.itemNode.TransferNode
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.entities.TargetPriority
@@ -27,7 +29,6 @@ import mindustry.gen.Sounds
 import mindustry.gen.Teamc
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
-import mindustry.input.Placement
 import mindustry.logic.LAccess
 import mindustry.type.Item
 import mindustry.world.Block
@@ -35,8 +36,7 @@ import mindustry.world.Edges
 import mindustry.world.Tile
 import mindustry.world.blocks.Autotiler
 import mindustry.world.blocks.Autotiler.SliceMode
-import mindustry.world.blocks.distribution.*
-import mindustry.world.blocks.distribution.StackConveyor
+import mindustry.world.blocks.distribution.ChainedBuilding
 import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
@@ -54,8 +54,8 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
     var speed: Float = 0f
     var displayedSpeed: Float = 0f
     var pushUnits: Boolean = true
-    var junctionReplacement: Block? = null
-    var bridgeReplacement: Block? = null
+    lateinit var junctionReplacement: Junction
+    lateinit var bridgeReplacement: TransferNode
 
     init {
         rotate = true
@@ -89,21 +89,20 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
         Draw.rect(region, plan.drawx(), plan.drawy(), region.width * bits[1] * region.scl(), region.height * bits[2] * region.scl(), (plan.rotation * 90).toFloat())
     }
 
-    override fun blends(tile: Tile?, rotation: Int, otherx: Int, othery: Int, otherrot: Int, otherblock: Block): Boolean {
+    override fun blends(tile: Tile, rotation: Int, otherx: Int, othery: Int, otherrot: Int, otherblock: Block): Boolean {
         return (otherblock.outputsItems() || (lookingAt(tile, rotation, otherx, othery, otherblock) && otherblock.hasItems))
                 && lookingAtEither(tile, rotation, otherx, othery, otherrot, otherblock)
     }
 
     //stack conveyors should be bridged over, not replaced
     override fun canReplace(other: Block?): Boolean {
-        return super.canReplace(other) && other !is StackConveyor
+        return super.canReplace(other) && other !is ice.world.content.blocks.distribution.conveyor.StackConveyor
     }
 
-    override fun handlePlacementLine(plans: Seq<BuildPlan?>) {
-        if (bridgeReplacement == null) return
-        val hasJuntionReplacement = junctionReplacement != null
-        if (bridgeReplacement is DuctBridge) Placement.calculateBridges(plans, bridgeReplacement as DirectionBridge?, hasJuntionReplacement) { b: Block? -> b is Duct || b is Conveyor }
-        if (bridgeReplacement is ItemBridge) Placement.calculateBridges(plans, bridgeReplacement as ItemBridge?, hasJuntionReplacement) { b: Block? -> b is Conveyor }
+    override fun handlePlacementLine(plans: Seq<BuildPlan>) {
+
+       Placement.calculateBridges(plans, bridgeReplacement , true) { b: Block -> b is Conveyor }
+        //  if (bridgeReplacement is ItemBridge) Placement.calculateBridges(plans, bridgeReplacement as ItemBridge?, hasJuntionReplacement) { b: Block? -> b is Conveyor }
     }
 
     override fun isAccessible(): Boolean {
@@ -111,7 +110,6 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
     }
 
     override fun getReplacement(req: BuildPlan, plans: Seq<BuildPlan?>): Block? {
-        if (junctionReplacement == null) return this
         val cont = Boolf { p: Point2? -> plans.contains { o: BuildPlan? -> o!!.x == req.x + p!!.x && o.y == req.y + p.y && (req.block is Conveyor || req.block is Junction) } }
         return if (cont.get(Geometry.d4(req.rotation)) &&
             cont.get(Geometry.d4(req.rotation - 2)) && req.tile() != null &&
@@ -190,7 +188,7 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
             super.drawCracks()
         }
 
-        override fun overwrote(builds: Seq<Building?>) {
+        override fun overwrote(builds: Seq<Building>) {
             val build = builds.first()
             if (build is ConveyorBuild) {
                 ids = build.ids.clone()

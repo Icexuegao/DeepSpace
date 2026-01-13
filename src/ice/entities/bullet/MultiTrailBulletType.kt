@@ -5,10 +5,10 @@ import arc.math.Rand
 import arc.util.Time
 import arc.util.Tmp
 import ice.entities.bullet.base.BulletType
-import ice.graphics.SglDraw
 import mindustry.content.Fx
 import mindustry.gen.Bullet
 import mindustry.graphics.Trail
+import singularity.graphic.SglDraw
 
 open class MultiTrailBulletType : BulletType() {
     var subTrails: Int = 2

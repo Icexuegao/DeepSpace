@@ -9,11 +9,6 @@ import arc.math.Mathf
 import arc.math.geom.Geometry
 import arc.math.geom.Rect
 import arc.util.Time
-import ice.library.world.particles.MultiParticleModel
-import ice.library.world.particles.Particle
-import ice.library.world.particles.Particle.Cloud
-import ice.library.world.particles.ParticleModel
-import ice.library.world.particles.models.*
 import ice.entities.bullet.HeatBulletType
 import mindustry.content.Fx
 import mindustry.entities.Units
@@ -22,6 +17,11 @@ import mindustry.gen.Bullet
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
+import universecore.world.particles.MultiParticleModel
+import universecore.world.particles.Particle
+import universecore.world.particles.Particle.Cloud
+import universecore.world.particles.ParticleModel
+import universecore.world.particles.models.*
 
 object SglParticleModels {
     val rect: Rect = Rect()
@@ -145,7 +145,7 @@ object SglParticleModels {
             }
         }
 
-        override fun isFaded(p: Particle, cloud: Cloud): Boolean {
+        override fun isFaded(p: Particle?, cloud: Cloud): Boolean {
             return cloud.size <= 0.03f
         }
 

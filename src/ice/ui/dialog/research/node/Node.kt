@@ -4,7 +4,7 @@ import arc.Events
 import arc.scene.Element
 import arc.scene.ui.layout.Scl
 import arc.scene.ui.layout.Table
-import ice.ui.dialog.research.ResearchDialog
+import ice.ui.menusDialog.ResearchDialog
 import mindustry.gen.Building
 import mindustry.type.Item
 

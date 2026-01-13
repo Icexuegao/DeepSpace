@@ -2,7 +2,7 @@ package ice.library.universecore.desktopcore;
 
 import arc.struct.ObjectMap;
 import ice.library.universecore.dynamilize.FunctionType;
-import ice.library.universecore.util.MethodInvokeHelper;
+import universecore.util.MethodInvokeHelper;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

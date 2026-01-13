@@ -9,8 +9,8 @@ import ice.library.scene.element.typinglabel.TLabel
 import ice.library.scene.ui.itooltip
 import ice.library.world.Load
 import ice.type.Remains
-import ice.ui.dialog.RemainsDialog
-import ice.ui.dialog.RemainsDialog.slotPos
+import ice.ui.menusDialog.RemainsDialog
+import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
 import ice.world.content.unit.ability.InterceptAbilty
 import mindustry.Vars
@@ -189,7 +189,7 @@ object Remainss : Load {
         }
     }
     val 谐振探针 = Remains("谐振探针").apply {
-        setDescription("一种用于探测矿物谐振频率的装置,可以显示隐藏矿层")
+        setDescription("一种用于探测矿物谐振频率的装置")
         effect = "矿物地板不再[隐藏]"
         install = {
             Vars.content.blocks().forEach {

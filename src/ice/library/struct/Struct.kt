@@ -6,7 +6,9 @@ import arc.graphics.g2d.TextureRegion
 import arc.scene.style.TextureRegionDrawable
 import arc.struct.Seq
 import arc.util.Log
+import universecore.util.colletion.CollectionObjectMap
 import kotlin.properties.Delegates
+import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 fun <T> Seq<T>.isNotEmpty() = size != 0
@@ -43,4 +45,13 @@ fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, n
 fun <E> log(e: () -> E) = Log.info(e())
 fun TextureRegion.asDrawable(): TextureRegionDrawable = TextureRegionDrawable(this)
 
+class AttachedProperty<in T : Any, V>(private val defaultValue: V) : ReadWriteProperty<T, V> {
+    private val valuesMap = CollectionObjectMap<T, V>()
+    override fun getValue(thisRef: T, property: KProperty<*>): V {
+        return valuesMap.getOrPut(thisRef) { defaultValue }
+    }
+    override fun setValue(thisRef: T, property: KProperty<*>, value: V){
+        valuesMap[thisRef] = value
+    }
 
+}
