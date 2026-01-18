@@ -15,84 +15,83 @@ import universecore.world.consumers.BaseConsumers
  * @author EBwilson
  */
 open class BaseProducers {
-    protected val prod: ObjectMap<ProduceType<*>, BaseProduce<*>> = ObjectMap<ProduceType<*>, BaseProduce<*>>()
+  protected val prod: ObjectMap<ProduceType<*>, BaseProduce<*>> = ObjectMap<ProduceType<*>, BaseProduce<*>>()
 
-    /**此生产项的颜色，这通常被用于确定绘制top等目的时快速选择颜色 */
-    var color: Color? = TRANS
+  /**此生产项的颜色，这通常被用于确定绘制top等目的时快速选择颜色 */
+  var color: Color? = TRANS
 
-    /**后初始化的变量，不要手动更改，该变量绑定到与此生产匹配的消耗项 */
-    var cons: BaseConsumers?=null
+  /**后初始化的变量，不要手动更改，该变量绑定到与此生产匹配的消耗项 */
+  var cons: BaseConsumers? = null
 
-    fun setColor(color: Color?): BaseProducers {
-        this.color = color
-        return this
+  fun setColor(color: Color?): BaseProducers {
+    this.color = color
+    return this
+  }
+
+  fun item(item: Item?, amount: Int): ProduceItems<*> {
+    return items(ItemStack(item, amount))
+  }
+
+  fun items(vararg items: ItemStack): ProduceItems<*> {
+    return add(ProduceItems(items))
+  }
+
+  fun liquid(liquid: Liquid?, amount: Float): ProduceLiquids<*> {
+    return liquids(LiquidStack(liquid, amount))
+  }
+
+  fun liquids(vararg liquids: LiquidStack): ProduceLiquids<*> {
+    return add(ProduceLiquids(liquids))
+  }
+
+  fun power(prod: Float): ProducePower<*> {
+    return add(ProducePower(prod))
+  }
+
+  @Suppress("UNCHECKED_CAST")
+  open fun <T : BaseProduce<out ProducerBuildComp>> add(produce: T): T {
+    val p = prod.get(produce.type())
+    if (p == null) {
+      prod.put(produce.type(), produce)
+      produce.parent = this
+      if (color === TRANS && produce.color() != null) {
+        color = produce.color()
+      }
+      return produce
+      // (c as BaseConsume<ConsumerBuildComp>).merge(consume as BaseConsume<ConsumerBuildComp>)
+    } else {
+      (p as BaseProduce<ProducerBuildComp>).merge(produce as BaseProduce<ProducerBuildComp>)
+    }
+    return p as T
+  }
+
+  fun <T : BaseProduce<out ProducerBuildComp>> get(type: ProduceType<T>): T? {
+    return prod.get(type) as T?
+  }
+
+  fun all(): Iterable<BaseProduce<*>> {
+    tmpProd.clear()
+
+    for (type in ProduceType.all()!!) {
+      val p = prod.get(type)
+      if (p != null) tmpProd.add(p)
     }
 
-    fun item(item: Item?, amount: Int): ProduceItems<*> {
-        return items(ItemStack(item, amount))
-    }
+    return tmpProd
+  }
 
-    fun items(vararg items: ItemStack): ProduceItems<*> {
-        return add(ProduceItems(items))
-    }
+  fun remove(type: ProduceType<*>?) {
+    prod.remove(type)
+  }
 
-    fun liquid(liquid: Liquid?, amount: Float): ProduceLiquids<*> {
-        return liquids(LiquidStack(liquid, amount))
+  fun display(stats: Stats) {
+    for (p in prod.values().toSeq().sort(Comparator { a: BaseProduce<*>, b: BaseProduce<*> -> a.type().id() - b.type().id() })) {
+      p.display(stats)
     }
+  }
 
-    fun liquids(vararg liquids: LiquidStack): ProduceLiquids<*> {
-        return add(ProduceLiquids(liquids))
-    }
-
-    fun power(prod: Float): ProducePower<*> {
-        return add(ProducePower(prod))
-    }
-    @Suppress("UNCHECKED_CAST")
-    open fun <T : BaseProduce<out ProducerBuildComp>> add(produce: T): T {
-        val p = prod.get(produce.type())
-        if (p == null) {
-            prod.put(produce.type(), produce)
-            produce.parent = this
-            if (color === TRANS && produce.color() != null) {
-                color = produce.color()
-            }
-            return produce
-            // (c as BaseConsume<ConsumerBuildComp>).merge(consume as BaseConsume<ConsumerBuildComp>)
-        } else{
-            (p as BaseProduce<ProducerBuildComp>).merge(produce as BaseProduce<ProducerBuildComp>)
-        }
-        return p as T
-    }
-
-    fun <T : BaseProduce<out ProducerBuildComp>> get(type: ProduceType<T>): T? {
-        return prod.get(type) as T?
-    }
-
-    fun all(): Iterable<BaseProduce<*>> {
-        tmpProd.clear()
-
-        for (type in ProduceType.all()!!) {
-            val p = prod.get(type)
-            if (p != null) tmpProd.add(p)
-        }
-
-        return tmpProd
-    }
-
-    fun remove(type: ProduceType<*>?) {
-        prod.remove(type)
-    }
-
-    fun display(stats: Stats) {
-        if (prod.size > 0) {
-            for (p in prod.values().toSeq().sort(Comparator { a: BaseProduce<*>?, b: BaseProduce<*>? -> a!!.type()!!.id() - b!!.type()!!.id() })) {
-                p.display(stats)
-            }
-        }
-    }
-
-    companion object {
-        val TRANS: Color = Color(0f, 0f, 0f, 0f)
-        protected val tmpProd: Seq<BaseProduce<*>> = Seq<BaseProduce<*>>()
-    }
+  companion object {
+    val TRANS: Color = Color(0f, 0f, 0f, 0f)
+    protected val tmpProd: Seq<BaseProduce<*>> = Seq<BaseProduce<*>>()
+  }
 }

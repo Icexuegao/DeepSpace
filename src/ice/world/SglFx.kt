@@ -24,7 +24,6 @@ import ice.graphics.lightnings.LightningContainer.PoolLightningContainer
 import ice.graphics.lightnings.LightningVertex
 import ice.graphics.lightnings.generator.RandomGenerator
 import ice.library.util.Functions
-import ice.world.content.unit.ability.MirrorFieldAbility
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -36,6 +35,7 @@ import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import singularity.graphic.SglDraw
+import singularity.world.unit.abilities.MirrorFieldAbility
 import kotlin.math.ceil
 import kotlin.math.min
 

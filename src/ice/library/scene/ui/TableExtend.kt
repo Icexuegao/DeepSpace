@@ -188,6 +188,21 @@ fun <T : Element> T.setPositions(x: Float, y: Float): T {
     return this
 }
 
+fun Element.tapXY(r:(x:Float,y: Float)-> Unit): InputListener {
+
+    val result: InputListener
+    addListener(object : InputListener() {
+      override fun touchDown(event: InputEvent, x: Float, y: Float, pointer: Int, button: KeyCode?): Boolean {
+        r(x,y)
+        event.stop()
+        return true
+      }
+    }.also { result = it })
+    return result
+}
+
+
+
 fun Table.addIceSlider(name: String, min: Float, max: Float, setpSize: Float, value: Float, valueFloatc: Floatc): Cell<Stack> {
     val slider = Slider(min, max, setpSize, false)
     slider.value = value

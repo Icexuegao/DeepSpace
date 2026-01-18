@@ -30,7 +30,7 @@ open class ClusterConduit(name: String?) : MultLiquidBlock(name) {
     val timerFlow: Int = timers++
     var botColor: Color = Color.valueOf("565656")
     var cornerRegion: TextureRegion? = null
-    var botRegions: Array<TextureRegion?> = arrayOfNulls<TextureRegion>(conduitAmount)
+    var botRegions: Array<TextureRegion?> = arrayOfNulls(conduitAmount)
     var capRegion: TextureRegion? = null
     var arrow: TextureRegion? = null
 
@@ -99,13 +99,12 @@ open class ClusterConduit(name: String?) : MultLiquidBlock(name) {
                 }
             }
         })
-
         return result[0]
     }
 
     override fun getReplacement(req: BuildPlan, requests: Seq<BuildPlan?>): Block? {
         if (junctionReplacement == null) return this
-        val cont = Boolf { p: Point2? -> requests.contains(Boolf { o: BuildPlan? -> o!!.x == req.x + p!!.x && o.y == req.y + p.y && o.rotation == req.rotation && (req.block is ClusterConduit || req.block is LiquidJunction) }) }
+        val cont = Boolf { p: Point2? -> requests.contains { o: BuildPlan? -> o!!.x == req.x + p!!.x && o.y == req.y + p.y && o.rotation == req.rotation && (req.block is ClusterConduit || req.block is LiquidJunction) } }
         return if (cont.get(Geometry.d4(req.rotation)) &&
             cont.get(Geometry.d4(req.rotation - 2)) && req.tile() != null &&
             req.tile().block() is ClusterConduit && Mathf.mod(req.build().rotation - req.rotation, 2) == 1
@@ -118,8 +117,8 @@ open class ClusterConduit(name: String?) : MultLiquidBlock(name) {
         Placement.calculateBridges(plans, bridgeReplacement as ItemBridge)
     }
 
-    override fun icons(): Array<TextureRegion?>? {
-        return arrayOf<TextureRegion?>(Core.atlas.find("conduit-bottom"), region)
+    override fun icons(): Array<TextureRegion?> {
+        return arrayOf(Core.atlas.find("conduit-bottom"), region)
     }
 
     open inner class ClusterConduitBuild : MultLiquidBuild() {
@@ -151,7 +150,7 @@ open class ClusterConduit(name: String?) : MultLiquidBlock(name) {
             }
         }
 
-        public override fun updateTile() {
+        override fun updateTile() {
             super.updateTile()
 
             if (anyLiquid() && timer(timerFlow, 1f)) {
@@ -167,7 +166,7 @@ open class ClusterConduit(name: String?) : MultLiquidBlock(name) {
             super.display(table)
         }
 
-        public override fun conduitAccept(source: MultLiquidBuild, index: Int, liquid: Liquid): Boolean {
+        override fun conduitAccept(source: MultLiquidBuild, index: Int, liquid: Liquid): Boolean {
             return super.conduitAccept(source, index, liquid) && (source.block is ClusterConduit || source.tile.absoluteRelativeTo(tile.x.toInt(), tile.y.toInt()).toInt() == rotation)
         }
 
@@ -205,7 +204,7 @@ open class ClusterConduit(name: String?) : MultLiquidBlock(name) {
             return super.moveLiquid(next, liquid)
         }
 
-        public override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+        override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
             return super.acceptLiquid(source, liquid) && (tile == null || source.tile.absoluteRelativeTo(tile.x.toInt(), tile.y.toInt()).toInt() == rotation)
         }
     }

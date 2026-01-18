@@ -43,6 +43,8 @@ object IStyles {
   val achievementUnlock = IFiles.findModPng("achievement-unlock")
   val achievementLock = IFiles.findModPng("achievement-lock")
   val achievement = IFiles.findModPng("achievement")
+
+  val remains = IFiles.findModPng("remains").asDrawable()
   val tanksui = IFiles.findModPng("thanks")
   val search = IFiles.findModPng("search")
   val button2 = object : ImageButtonStyle() {}.apply {
@@ -124,6 +126,7 @@ object IStyles {
   val afehs = IFiles.findModPng(IceTeam.教廷.name)
   val empire = IFiles.findModPng(IceTeam.帝国.name)
   val arrow = IFiles.findModPng("arrow")
+  val publicInfoIcon= IFiles.findModPng("upWel")
 
   val menusButton_host = IFiles.findModPng("menusButton_host").asDrawable()
   val menusButton_exit = IFiles.findModPng("menusButton_exit").asDrawable()

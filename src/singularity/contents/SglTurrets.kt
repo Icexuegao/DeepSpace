@@ -16,6 +16,8 @@ import arc.util.Strings
 import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pools
+import ice.content.ILiquids
+import ice.content.IItems
 import mindustry.Vars
 import mindustry.audio.SoundLoop
 import mindustry.content.Fx
@@ -53,10 +55,8 @@ import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.ui.UIUtils
 import singularity.util.MathTransform
-import singularity.util.func.Floatc3
 import singularity.world.SglFx
 import singularity.world.SglUnitSorts
-import singularity.world.blocks.SglBlock
 import singularity.world.blocks.SglBlock.SglBuilding
 import singularity.world.blocks.turrets.*
 import singularity.world.blocks.turrets.SglTurret.SglTurretBuild
@@ -409,7 +409,7 @@ class SglTurrets : ContentList {
       init {
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 35,
+            IItems.强化合金, 35,
             Items.surgeAlloy, 40,
             Items.plastanium, 45
           )
@@ -509,10 +509,10 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 120,
-            SglItems.aerogel, 100,
-            SglItems.aluminium, 60,
-            SglItems.crystal_FEX, 40,
+            IItems.强化合金, 120,
+            IItems.气凝胶, 100,
+            IItems.铝, 60,
+            IItems.FEX水晶, 40,
             Items.silicon, 75,
             Items.surgeAlloy, 45
           )
@@ -574,10 +574,10 @@ class SglTurrets : ContentList {
           t.add(OtherContents.crystallize.localizedName + "[lightgray] ~ [stat]0.25[lightgray] " + Core.bundle.get("unit.seconds"))
         })
         consume!!.time(60f)
-        consume!!.liquid(SglLiquids.FEX_liquid, 0.1f)
+        consume!!.liquid(ILiquids.FEX流体, 0.1f)
 
         newCoolant(1.5f, 20f)
-        consume!!.liquid(SglLiquids.phase_FEX_liquid, 0.1f)
+        consume!!.liquid(ILiquids.相位态FEX流体, 0.1f)
 
         draw = object : DrawSglTurret() {
         }
@@ -641,8 +641,8 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 100,
-            SglItems.aerogel, 120,
+            IItems.强化合金, 100,
+            IItems.气凝胶, 120,
             Items.titanium, 100,
             Items.graphite, 80,
             Items.lead, 85
@@ -723,10 +723,10 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 180,
-            SglItems.aerogel, 180,
-            SglItems.matrix_alloy, 120,
-            SglItems.uranium_238, 100,
+            IItems.强化合金, 180,
+            IItems.气凝胶, 180,
+            IItems.矩阵合金, 120,
+            IItems.铀238, 100,
             Items.surgeAlloy, 140,
             Items.graphite, 200
           )
@@ -948,7 +948,7 @@ class SglTurrets : ContentList {
         consume!!.items(
           *ItemStack.with(
             Items.graphite, 12,
-            SglItems.concentration_uranium_235, 1
+            IItems.浓缩铀235核燃料, 1
           )
         )
         consume!!.time(480f)
@@ -965,7 +965,7 @@ class SglTurrets : ContentList {
         consume!!.items(
           *ItemStack.with(
             Items.graphite, 12,
-            SglItems.concentration_plutonium_239, 1
+            IItems.浓缩钚239核燃料, 1
           )
         )
         consume!!.time(510f)
@@ -1099,13 +1099,13 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 180,
-            SglItems.aerogel, 150,
+            IItems.强化合金, 180,
+            IItems.气凝胶, 150,
             Items.surgeAlloy, 120,
-            SglItems.matrix_alloy, 100,
-            SglItems.crystal_FEX, 100,
-            SglItems.crystal_FEX_power, 80,
-            SglItems.iridium, 80
+            IItems.矩阵合金, 100,
+            IItems.FEX水晶, 100,
+            IItems.充能FEX水晶, 80,
+            IItems.铱, 80
           )
         )
         size = 5
@@ -1258,7 +1258,7 @@ class SglTurrets : ContentList {
             }
           }
         })
-        consume!!.item(SglItems.crystal_FEX_power, 2)
+        consume!!.item(IItems.充能FEX水晶, 2)
         consume!!.energy(2.2f)
         consume!!.time(180f)
         val generator = CircleGenerator().apply {
@@ -1280,7 +1280,6 @@ class SglTurrets : ContentList {
         }
         val timeId = timers++
         updating = Cons { e: SglBuilding ->
-          if (!Sgl.config.enableLightning) return@Cons
           e.CONTAINER?.update()
           val turret = e as SglTurretBuild
           if (turret.warmup > 0 && e.timer(timeId, 25 / turret.warmup)) {
@@ -1293,7 +1292,7 @@ class SglTurrets : ContentList {
         }
 
         newCoolant(1.45f, 20f)
-        consume!!.liquid(SglLiquids.phase_FEX_liquid, 0.25f)
+        consume!!.liquid(ILiquids.相位态FEX流体, 0.25f)
 
         draw = DrawMulti(
           DrawSglTurret(
@@ -1441,13 +1440,13 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 150,
-            SglItems.aluminium, 110,
-            SglItems.aerogel, 120,
-            SglItems.matrix_alloy, 160,
+            IItems.强化合金, 150,
+            IItems.铝, 110,
+            IItems.气凝胶, 120,
+            IItems.矩阵合金, 160,
             Items.thorium, 100,
             Items.silicon, 85,
-            SglItems.uranium_238, 85
+            IItems.铀238, 85
           )
         )
         size = 5
@@ -1546,7 +1545,7 @@ class SglTurrets : ContentList {
           t.add("@bullet.armorpierce")
         })
         consume!!.time(10f)
-        consume!!.item(SglItems.uranium_238, 1)
+        consume!!.item(IItems.铀238, 1)
 
         newAmmoCoating(Core.bundle.get("coating.crystal_fex"), SglDrawConst.fexCrystal, { b: BulletType? ->
           object : WarpedBulletType(b) {
@@ -1575,7 +1574,7 @@ class SglTurrets : ContentList {
           t.add(OtherContents.crystallize.localizedName + "[lightgray] ~ [stat]0.25[lightgray] " + Core.bundle.get("unit.seconds"))
         }, 2)
         consume!!.time(20f)
-        consume!!.item(SglItems.crystal_FEX, 1)
+        consume!!.item(IItems.FEX水晶, 1)
 
         draw = DrawSglTurret(
           object : RegionPart("_blade") {
@@ -1790,13 +1789,13 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 120,
-            SglItems.aluminium, 140,
+            IItems.强化合金, 120,
+            IItems.铝, 140,
             Items.phaseFabric, 80,
-            SglItems.matrix_alloy, 100,
-            SglItems.chlorella, 120,
-            SglItems.crystal_FEX_power, 85,
-            SglItems.iridium, 60
+            IItems.矩阵合金, 100,
+            IItems.绿藻素, 120,
+            _root_ide_package_.ice.content.IItems.充能FEX水晶, 85,
+            IItems.铱, 60
           )
         )
         size = 5
@@ -1997,11 +1996,11 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 100,
-            SglItems.aluminium, 140,
-            SglItems.crystal_FEX_power, 60,
-            SglItems.aerogel, 80,
-            SglItems.iridium, 30,
+            IItems.强化合金, 100,
+            IItems.铝, 140,
+            IItems.充能FEX水晶, 60,
+            IItems.气凝胶, 80,
+            IItems.铱, 30,
             Items.phaseFabric, 60
           )
         )
@@ -2240,12 +2239,12 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 160,
-            SglItems.aluminium, 110,
+            IItems.强化合金, 160,
+            IItems.铝, 110,
             Items.phaseFabric, 100,
-            SglItems.matrix_alloy, 120,
-            SglItems.crystal_FEX_power, 100,
-            SglItems.iridium, 100
+            IItems.矩阵合金, 120,
+            IItems.充能FEX水晶, 100,
+            IItems.铱, 100
           )
         )
         size = 5
@@ -2474,14 +2473,14 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 210,
-            SglItems.degenerate_neutron_polymer, 80,
+            IItems.强化合金, 210,
+            IItems.简并态中子聚合物, 80,
             Items.phaseFabric, 180,
-            SglItems.iridium, 100,
-            SglItems.aerogel, 200,
-            SglItems.aluminium, 220,
-            SglItems.matrix_alloy, 160,
-            SglItems.crystal_FEX_power, 180
+            IItems.铱, 100,
+            IItems.气凝胶, 200,
+            IItems.铝, 220,
+            IItems.矩阵合金, 160,
+            IItems.充能FEX水晶, 180
           )
         )
         size = 6
@@ -2632,7 +2631,7 @@ class SglTurrets : ContentList {
         consume!!.energy(1.1f)
         consume!!.liquids(
           *LiquidStack.with(
-            SglLiquids.phase_FEX_liquid, 0.2f,
+            ILiquids.相位态FEX流体, 0.2f,
             Liquids.cryofluid, 0.2f
           )
         )
@@ -2822,12 +2821,12 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 260,
-            SglItems.matrix_alloy, 120,
-            SglItems.aerogel, 200,
-            SglItems.uranium_238, 160,
-            SglItems.iridium, 80,
-            SglItems.crystal_FEX, 120
+            IItems.强化合金, 260,
+            IItems.矩阵合金, 120,
+            IItems.气凝胶, 200,
+            IItems.铀238, 160,
+            IItems.铱, 80,
+            IItems.FEX水晶, 120
           )
         )
         size = 5
@@ -2932,7 +2931,7 @@ class SglTurrets : ContentList {
         }) { t: Table?, b: BulletType? ->
           t!!.add(Core.bundle.format("infos.generateLightning", 60 / b!!.bulletInterval, 45))
         }
-        consume!!.item(SglItems.crystal_FEX, 1)
+        consume!!.item(IItems.FEX水晶, 1)
         consume!!.time(60f)
 
         newAmmo(object : MultiTrailBulletType() {
@@ -3154,7 +3153,7 @@ class SglTurrets : ContentList {
           table.row()
           table.add(Core.bundle.format("infos.generateLightning", 60 / b.bulletInterval, 60))
         }
-        consume!!.item(SglItems.crystal_FEX_power, 2)
+        consume!!.item(IItems.充能FEX水晶, 2)
         consume!!.time(120f)
 
         draw = DrawSglTurret(
@@ -3214,12 +3213,12 @@ class SglTurrets : ContentList {
 
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 150,
-            SglItems.aluminium, 180,
-            SglItems.crystal_FEX, 140,
-            SglItems.crystal_FEX_power, 120,
-            SglItems.aerogel, 180,
-            SglItems.iridium, 60,
+            IItems.强化合金, 150,
+            IItems.铝, 180,
+            IItems.FEX水晶, 140,
+            IItems.充能FEX水晶, 120,
+            IItems.气凝胶, 180,
+            IItems.铱, 60,
             Items.surgeAlloy, 120,
             Items.phaseFabric, 100
           )
@@ -3613,14 +3612,14 @@ class SglTurrets : ContentList {
       init {
         requirements(
           Category.turret, ItemStack.with(
-            SglItems.strengthening_alloy, 210,
-            SglItems.degenerate_neutron_polymer, 80,
+            IItems.强化合金, 210,
+            IItems.简并态中子聚合物, 80,
             Items.phaseFabric, 180,
-            SglItems.iridium, 120,
-            SglItems.aerogel, 240,
-            SglItems.matrix_alloy, 140,
-            SglItems.crystal_FEX_power, 150,
-            SglItems.crystal_FEX, 100
+            IItems.铱, 120,
+            IItems.气凝胶, 240,
+            IItems.矩阵合金, 140,
+            IItems.充能FEX水晶, 150,
+            IItems.FEX水晶, 100
           )
         )
         size = 6

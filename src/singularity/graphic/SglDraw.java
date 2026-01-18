@@ -128,10 +128,6 @@ public class SglDraw{
    * @param shader <strong>选择性的参数，若任务已初始化，这个参数无效</strong>，在这组任务绘制时使用的着色器
    * @param draw 添加到任务缓存的绘制任务，即此次绘制的操作*/
   public static <T, S extends Shader> void drawTask(int taskID, T target, S shader, DrawAcceptor<T> draw){
-    if(!Sgl.config.enableShaders){
-      draw.draw(target);
-      return;
-    }
 
     while (taskID >= taskBuffer.length){
       taskBuffer = Arrays.copyOf(taskBuffer, taskBuffer.length*2);
@@ -163,10 +159,7 @@ public class SglDraw{
   }
 
   public static <T, S extends Shader> void drawTask(int taskID, T target, Prov<FrameBuffer> bufferProv, S shader, DrawAcceptor<S> applyShader, DrawAcceptor<T> draw){
-    if(!Sgl.config.enableShaders){
-      draw.draw(target);
-      return;
-    }
+
 
     while (taskID >= taskBuffer.length){
       taskBuffer = Arrays.copyOf(taskBuffer, taskBuffer.length*2);
@@ -367,7 +360,6 @@ public class SglDraw{
    * @param distortion 扭曲绘制工具
    * @param draw 绘制任务*/
   public static <T> void drawDistortion(int taskID, T target, Distortion distortion, DrawAcceptor<T> draw){
-    if(!Sgl.config.enableDistortion) return;
 
     drawTask(taskID, target, distortion, e -> {
       e.resize();
@@ -382,7 +374,6 @@ public class SglDraw{
    * @param blur 模糊绘制对象
    * @param draw 绘制任务*/
   public static <T> void drawBlur(int taskID, T target, Blur blur, DrawAcceptor<T> draw){
-    if(!Sgl.config.enableShaders) return;
 
     drawTask(taskID, target, blur, e -> {
       e.resize(Core.graphics.getWidth(), Core.graphics.getHeight());

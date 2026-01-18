@@ -53,6 +53,10 @@ import kotlin.math.max
 open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
 
     companion object {
+      var ChainsContainer.TOTAL_ITEM_CAPACITY by AttachedProperty(0)
+      var ChainsContainer.TOTAL_LIQUID_CAPACITY by AttachedProperty(0f)
+      var ChainsContainer.valid1 by AttachedProperty(false)
+
         var Particle.OWNER: TokamakCoreBuild? by AttachedProperty(null)
         var Particle.inCorner: Vec2? by AttachedProperty(null)
         const val INV: Float = 0.01f
@@ -255,12 +259,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
     inner class TokamakCoreBuild : NormalCrafterBuild(), SpliceBuildComp {
         //   const val : String = "totalItemCapacity"
 //        const val : String = "totalLiquidCapacity"
-        var ChainsContainer.VALID by AttachedProperty(false)
-        var ChainsContainer.TOTAL_ITEM_CAPACITY by AttachedProperty(0)
-        var ChainsContainer.TOTAL_LIQUID_CAPACITY by AttachedProperty(0f)
-        var ChainsModule.VALID by AttachedProperty(false)
-        var ChainsModule.TOTAL_ITEM_CAPACITY by AttachedProperty(0)
-        var ChainsModule.TOTAL_LIQUID_CAPACITY by AttachedProperty(0f)
+
 
         override var loadingInvalidPos = IntSet()
         override var chains = ChainsModule(this)
@@ -284,8 +283,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
         }
 
         fun structValid(): Boolean {
-            chains.container.VALID = false
-            return chains.container.VALID
+            return chains.container.valid1
         }
 
         override fun canChain(other: ChainsBuildComp): Boolean {
@@ -309,7 +307,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
 
         override fun write(write: Writes) {
             super.write(write)
-            write(write)
+            writeChains(write)
         }
 
         override fun read(read: Reads, revision: Byte) {
@@ -319,7 +317,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
 
         override fun onProximityUpdate() {
             inLinked = null
-            outLinked = inLinked
+            outLinked = null
             for (build in chainBuilds()) {
                 if (build is TokamakOrbitBuild) {
                     if (relativeTo(build).toInt() == build.rotation) {
@@ -347,7 +345,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
         }
 
         override fun onChainsUpdated() {
-            chains
+          chains.container.valid1=false
 
             if (inLinked == null) return
 
@@ -408,37 +406,35 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
             }
 
             if (cornerCount == 4 && enclosed) {
-                chains.VALID = true
+              chains.container.valid1 = true
                 scale = w * h
                 val area = scale * INV
 
                 fuelConsMulti = Mathf.sqrt(area) * (outLinked!!.block as TokamakOrbit).flueMulti
                 energyOutMulti = area * (outLinked!!.block as TokamakOrbit).efficiencyPow
 
-                chains.TOTAL_ITEM_CAPACITY = itemCap
-                chains.TOTAL_LIQUID_CAPACITY = liqCap
+              chains.container.TOTAL_ITEM_CAPACITY = itemCap
+              chains.container.TOTAL_LIQUID_CAPACITY = liqCap
             } else {
-                chains.VALID = false
+              chains.container.valid1 = false
                 energyOutMulti = 0f
                 fuelConsMulti = energyOutMulti
                 scale = 0
 
-                chains.TOTAL_ITEM_CAPACITY = 0
-                chains.TOTAL_LIQUID_CAPACITY = 0f
+              chains.container.TOTAL_ITEM_CAPACITY = 0
+              chains.container.TOTAL_LIQUID_CAPACITY = 0f
             }
         }
 
         override fun getMaximumAccepted(item: Item?): Int {
             return if (structValid()) {
-                chains.container.TOTAL_ITEM_CAPACITY = 0
-                0
+                chains.container.TOTAL_ITEM_CAPACITY
             } else 0
         }
 
         override fun getMaximumAccepted(liquid: Liquid?): Float {
             return if (structValid()) {
-                chains.container.TOTAL_LIQUID_CAPACITY = 0f
-                0f
+                chains.container.TOTAL_LIQUID_CAPACITY
             } else 0f
         }
 

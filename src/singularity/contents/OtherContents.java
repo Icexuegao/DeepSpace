@@ -13,6 +13,7 @@ import arc.util.Time;
 import arc.util.Tmp;
 import arc.util.pooling.Pool;
 import arc.util.pooling.Pools;
+import ice.content.ILiquids;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.StatusEffects;
@@ -419,8 +420,8 @@ public class OtherContents implements ContentList{
             t.row();
             t.table(a -> {
               a.add(Core.bundle.get("infos.attach"));
-              a.image(SglLiquids.phase_FEX_liquid.uiIcon).size(25);
-              a.add(SglLiquids.phase_FEX_liquid.localizedName).color(Pal.accent);
+              a.image(ILiquids.INSTANCE.get相位态FEX流体().uiIcon).size(25);
+              a.add(ILiquids.INSTANCE.get相位态FEX流体().localizedName).color(Pal.accent);
             });
             t.row();
             t.add(Core.bundle.format("infos.shots", 3));
@@ -438,7 +439,7 @@ public class OtherContents implements ContentList{
 
         Tile t = unit.tileOn();
         Puddle p;
-        if(t != null && (p = Puddles.get(t)) != null && p.liquid == SglLiquids.phase_FEX_liquid && Mathf.chanceDelta(0.02f)){
+        if(t != null && (p = Puddles.get(t)) != null && p.liquid == ILiquids.INSTANCE.get相位态FEX流体() && Mathf.chanceDelta(0.02f)){
           for(int i = 0; i < 3; i++){
             float len = Mathf.random(1f, 7f);
             float a = Mathf.range(360f);

@@ -70,7 +70,7 @@ open class BaseConsumers(
     }
 
     fun addToFilter(type: ConsumeType<*>?, content: Content?) {
-        otherFilter.get(type, Prov { ObjectSet() })!!.add(content)
+        otherFilter.get(type) { ObjectSet() }!!.add(content)
     }
 
     fun addSelfAccess(type: ConsumeType<*>?, content: Content?) {

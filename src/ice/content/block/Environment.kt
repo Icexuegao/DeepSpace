@@ -12,7 +12,6 @@ import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.shader.IceShader
 import ice.type.Dup
-import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.environment.*
 import ice.world.meta.Attributes
@@ -30,49 +29,49 @@ import mindustry.world.meta.Attribute
 @Suppress("unused")
 object Environment : Load {
     val 多叶草 = Prop("leafyGrass").apply {
-        bundle {
-            desc(zh_CN, "多叶草")
-        }
+      bundle {
+        desc(zh_CN, "多叶草")
+      }
     }
     val 地笼草 = Prop("cageGrass").apply {
-        bundle {
-            desc(zh_CN, "地笼草")
-        }
+      bundle {
+        desc(zh_CN, "地笼草")
+      }
     }
     val 枯棕枝 = Prop("deadwoodGrass").apply {
-        bundle {
-            desc(zh_CN, "枯棕枝")
-        }
+      bundle {
+        desc(zh_CN, "枯棕枝")
+      }
     }
     val 绿羽 = Prop("featherGrass").apply {
-        bundle {
-            desc(zh_CN, "绿羽")
-        }
+      bundle {
+        desc(zh_CN, "绿羽")
+      }
     }
     val 草嫣红 = Prop("springGrassRed").apply {
-        bundle {
-            desc(zh_CN, "草嫣红")
-        }
+      bundle {
+        desc(zh_CN, "草嫣红")
+      }
     }
     val 绯叶绮 = Prop("scarletLeaf").apply {
-        bundle {
-            desc(zh_CN, "绯叶绮")
-        }
+      bundle {
+        desc(zh_CN, "绯叶绮")
+      }
     }
     val 叶嫣粉 = Prop("leafBlush").apply {
-        bundle {
-            desc(zh_CN, "叶嫣粉")
-        }
+      bundle {
+        desc(zh_CN, "叶嫣粉")
+      }
     }
     val 血孢子丛 = Prop("bloodNeoplasmSporophore", Sounds.plantBreak).apply {
-        bundle {
-            desc(zh_CN, "血孢子丛")
-        }
+      bundle {
+        desc(zh_CN, "血孢子丛")
+      }
     }
     val 血晶尖刺 = TallBlock("bloodCrystalSpikes").apply {
-        bundle {
-            desc(zh_CN, "血晶尖刺")
-        }
+      bundle {
+        desc(zh_CN, "血晶尖刺")
+      }
     }
     val 殷红树 = TreeBlock("bloodSporophoreTree").apply {
         attributes[Attributes.血囊孢子] = 1f
@@ -87,20 +86,20 @@ object Environment : Load {
                 it.apply(IStatus.寄生, 3 * 60f)
             }
         }
-        bundle {
-            desc(zh_CN, "殷红树")
-        }
+      bundle {
+        desc(zh_CN, "殷红树")
+      }
     }
     val 利芽 = TallBlock("edgeBud").apply {
         shadowOffset = -1f
-        bundle {
-            desc(zh_CN, "利芽")
-        }
+      bundle {
+        desc(zh_CN, "利芽")
+      }
     }
     val 红冰石 = Prop("redIceStone").apply {
-        bundle {
-            desc(zh_CN, "红冰石")
-        }
+      bundle {
+        desc(zh_CN, "红冰石")
+      }
     }
     val 灵液 = Floor("ichor").apply {
         liquidDrop = ILiquids.灵液
@@ -108,346 +107,346 @@ object Environment : Load {
         drownTime = 200f
         speedMultiplier = 0.4f
         isLiquid = true
-        bundle {
-            desc(zh_CN, "灵液")
-        }
+      bundle {
+        desc(zh_CN, "灵液")
+      }
     }
     val 软红冰 = Floor("softRedIce").apply {
         cacheLayer = IceShader.softRedIceCache
         speedMultiplier = 0.5f
-        bundle {
-            desc(zh_CN, "软红冰")
-        }
+      bundle {
+        desc(zh_CN, "软红冰")
+      }
     }
     val 绿羽地 = Floor("sod").apply {
-        bundle {
-            desc(zh_CN, "绿羽地")
-        }
+      bundle {
+        desc(zh_CN, "绿羽地")
+      }
     }
     val 绿羽墙 = StaticWall("sodWall").apply {
-        bundle {
-            desc(zh_CN, "绿羽墙")
-        }
+      bundle {
+        desc(zh_CN, "绿羽墙")
+      }
     }
     val 金珀沙 = Floor("goldPearlGrit").apply {
-        bundle {
-            desc(zh_CN, "金珀沙")
-        }
+      bundle {
+        desc(zh_CN, "金珀沙")
+      }
     }
     val 金珀沙水 = ShallowLiquid("goldPearlGritWater", 金珀沙).apply {
-        bundle {
-            desc(zh_CN, "金珀沙水")
-        }
+      bundle {
+        desc(zh_CN, "金珀沙水")
+      }
     }
     val 金珀沙墙 = StaticWall("goldPearlGritWall").apply {
-        bundle {
-            desc(zh_CN, "金珀沙墙")
-        }
+      bundle {
+        desc(zh_CN, "金珀沙墙")
+      }
     }
     val 皎月银沙石块 = Prop("silverSandStone").apply {
-        bundle {
-            desc(zh_CN, "皎月银沙石块")
-        }
+      bundle {
+        desc(zh_CN, "皎月银沙石块")
+      }
     }
     val 皎月银沙 = Floor("silverSand").apply {
-        bundle {
-            desc(zh_CN, "皎月银沙")
-        }
+      bundle {
+        desc(zh_CN, "皎月银沙")
+      }
     }
     val 皎月银沙水 = ShallowLiquid("silverSandWater", 皎月银沙).apply {
-        bundle {
-            desc(zh_CN, "皎月银沙水")
-        }
+      bundle {
+        desc(zh_CN, "皎月银沙水")
+      }
     }
     val 皎月银沙墙 = StaticWall("silverSandWall").apply {
-        bundle {
-            desc(zh_CN, "皎月银沙墙")
-        }
+      bundle {
+        desc(zh_CN, "皎月银沙墙")
+      }
     }
     val 风蚀沙柱 = TallBlock("windErodedSandPillar").apply {
-        bundle {
-            desc(zh_CN, "风蚀沙柱")
-        }
+      bundle {
+        desc(zh_CN, "风蚀沙柱")
+      }
     }
     val 风蚀砂地 = Floor("windErodedGrit").apply {
-        bundle {
-            desc(zh_CN, "风蚀砂地")
-        }
+      bundle {
+        desc(zh_CN, "风蚀砂地")
+      }
     }
     val 风蚀沙地 = Floor("windErodedSand").apply {
         decoration = 风蚀沙柱
-        bundle {
-            desc(zh_CN, "风蚀沙地")
-        }
+      bundle {
+        desc(zh_CN, "风蚀沙地")
+      }
     }
     val 风蚀沙水 = ShallowLiquid("windErodedSandWater", 风蚀沙地).apply {
-        bundle {
-            desc(zh_CN, "风蚀沙水")
-        }
+      bundle {
+        desc(zh_CN, "风蚀沙水")
+      }
     }
     val 风蚀沙深水 = ShallowDeepLiquid("windErodedSandDeepWater", 风蚀沙地).apply {
-        bundle {
-            desc(zh_CN, "风蚀沙深水")
-        }
+      bundle {
+        desc(zh_CN, "风蚀沙深水")
+      }
     }
     val 风蚀沙墙 = StaticWall("windErodedSandWall").apply {
-        bundle {
-            desc(zh_CN, "风蚀沙墙")
-        }
+      bundle {
+        desc(zh_CN, "风蚀沙墙")
+      }
     }
     val 风蚀喷口 = SteamVent("windErodedSand-vent").apply {
         parent = 风蚀沙地.also { blendGroup = it }
         attributes.set(Attribute.steam, 1f)
-        bundle {
-            desc(zh_CN, "风蚀喷口")
-        }
+      bundle {
+        desc(zh_CN, "风蚀喷口")
+      }
     }
     val 光辉板岩 = Floor("brillianceSlate").apply {
-        bundle {
-            desc(zh_CN, "光辉板岩")
-        }
+      bundle {
+        desc(zh_CN, "光辉板岩")
+      }
     }
     val 光辉板岩水 = ShallowLiquid("brillianceSlateWater", 光辉板岩).apply {
-        bundle {
-            desc(zh_CN, "光辉板岩水")
-        }
+      bundle {
+        desc(zh_CN, "光辉板岩水")
+      }
     }
     val 光辉板岩墙 = StaticWall("brillianceSlateWall").apply {
-        bundle {
-            desc(zh_CN, "光辉板岩墙")
-        }
+      bundle {
+        desc(zh_CN, "光辉板岩墙")
+      }
     }
     val 云英石柱 = Prop("greisenPillar").apply {
-        bundle {
-            desc(zh_CN, "云英石柱")
-        }
+      bundle {
+        desc(zh_CN, "云英石柱")
+      }
     }
     val 云英岩 = Floor("greisen").apply {
-        bundle {
-            desc(zh_CN, "云英岩")
-        }
+      bundle {
+        desc(zh_CN, "云英岩")
+      }
     }
     val 云英岩水 = ShallowLiquid("greisenWater", 云英岩).apply {
-        bundle {
-            desc(zh_CN, "云英岩水")
-        }
+      bundle {
+        desc(zh_CN, "云英岩水")
+      }
     }
     val 云英岩深水 = ShallowDeepLiquid("greisenDeepWater", 云英岩).apply {
-        bundle {
-            desc(zh_CN, "云英岩深水")
-        }
+      bundle {
+        desc(zh_CN, "云英岩深水")
+      }
     }
     val 云英岩墙 = StaticWall("greisenWall").apply {
-        bundle {
-            desc(zh_CN, "云英岩墙")
-        }
+      bundle {
+        desc(zh_CN, "云英岩墙")
+      }
     }
     val 红土石块 = Prop("redDirStone").apply {
-        bundle {
-            desc(zh_CN, "红土石块")
-        }
+      bundle {
+        desc(zh_CN, "红土石块")
+      }
     }
     val 红土 = Floor("redDir").apply {
-        bundle {
-            desc(zh_CN, "红土")
-        }
+      bundle {
+        desc(zh_CN, "红土")
+      }
     }
     val 红土墙 = StaticWall("redDirWall").apply {
-        bundle {
-            desc(zh_CN, "红土墙")
-        }
+      bundle {
+        desc(zh_CN, "红土墙")
+      }
     }
     val 流纹岩 = Floor("liparite").apply {
-        bundle {
-            desc(zh_CN, "流纹岩")
-        }
+      bundle {
+        desc(zh_CN, "流纹岩")
+      }
     }
     val 流纹岩水 = ShallowLiquid("lipariteWater", 流纹岩).apply {
-        bundle {
-            desc(zh_CN, "流纹岩水")
-        }
+      bundle {
+        desc(zh_CN, "流纹岩水")
+      }
     }
     val 流纹岩墙 = StaticWall("lipariteWall").apply {
-        bundle {
-            desc(zh_CN, "流纹岩墙")
-        }
+      bundle {
+        desc(zh_CN, "流纹岩墙")
+      }
     }
     val 潮汐石 = Floor("nightTideStone").apply {
-        bundle {
-            desc(zh_CN, "潮汐石")
-        }
+      bundle {
+        desc(zh_CN, "潮汐石")
+      }
     }
     val 潮汐水石 = ShallowLiquid("nightTideStoneWater", 潮汐石).apply {
-        bundle {
-            desc(zh_CN, "潮汐水石")
-        }
+      bundle {
+        desc(zh_CN, "潮汐水石")
+      }
     }
     val 潮汐石墙 = StaticWall("nightTideStoneWall").apply {
-        bundle {
-            desc(zh_CN, "潮汐石墙")
-        }
+      bundle {
+        desc(zh_CN, "潮汐石墙")
+      }
     }
     val 潮汐喷口 = SteamVent("nightTideStone-vent").apply {
         parent = 潮汐石.also { blendGroup = it }
         attributes.set(Attribute.steam, 1f)
-        bundle {
-            desc(zh_CN, "潮汐喷口")
-        }
+      bundle {
+        desc(zh_CN, "潮汐喷口")
+      }
     }
     val 侵蚀层地 = Floor("erosionalSlate").apply {
-        bundle {
-            desc(zh_CN, "侵蚀层地")
-        }
+      bundle {
+        desc(zh_CN, "侵蚀层地")
+      }
     }
     val 侵蚀层地水 = ShallowLiquid("erosionalSlateWater", 侵蚀层地).apply {
-        bundle {
-            desc(zh_CN, "侵蚀层地水")
-        }
+      bundle {
+        desc(zh_CN, "侵蚀层地水")
+      }
     }
     val 侵蚀层地墙 = StaticWall("erosionalSlateWall").apply {
-        bundle {
-            desc(zh_CN, "侵蚀层地墙")
-        }
+      bundle {
+        desc(zh_CN, "侵蚀层地墙")
+      }
     }
     val 燃素晶簇 = TallBlock("phlogistonCrystalCluster").apply {
-        bundle {
-            desc(zh_CN, "燃素晶簇")
-        }
+      bundle {
+        desc(zh_CN, "燃素晶簇")
+      }
     }
     val 晶石地 = Floor("crystalStone").apply {
-        bundle {
-            desc(zh_CN, "晶石地")
-        }
+      bundle {
+        desc(zh_CN, "晶石地")
+      }
     }
     val 晶石地水 = ShallowLiquid("crystalStoneWater", 晶石地).apply {
-        bundle {
-            desc(zh_CN, "晶石地水")
-        }
+      bundle {
+        desc(zh_CN, "晶石地水")
+      }
     }
     val 晶石墙 = StaticWall("crystalStoneWall").apply {
-        bundle {
-            desc(zh_CN, "晶石墙")
-        }
+      bundle {
+        desc(zh_CN, "晶石墙")
+      }
     }
     val 幽灵簇 = Seaweed("clusterGhosts").apply {
-        bundle {
-            desc(zh_CN, "幽灵簇")
-        }
+      bundle {
+        desc(zh_CN, "幽灵簇")
+      }
     }
     val 幽冥蕨 = TallBlock("ghostGrassFern").apply {
-        bundle {
-            desc(zh_CN, "幽冥蕨")
-        }
+      bundle {
+        desc(zh_CN, "幽冥蕨")
+      }
     }
     val 缠怨花 = TreeBlock("ghostGrassFlower").apply {
-        bundle {
-            desc(zh_CN, "缠怨花")
-        }
+      bundle {
+        desc(zh_CN, "缠怨花")
+      }
     }
     val 幽灵草 = Floor("ghostGrass").apply {
-        bundle {
-            desc(zh_CN, "幽灵草")
-        }
+      bundle {
+        desc(zh_CN, "幽灵草")
+      }
     }
     val 幽灵草水 = ShallowLiquid("ghostGrassWater", 幽灵草).apply {
-        bundle {
-            desc(zh_CN, "幽灵草水")
-        }
+      bundle {
+        desc(zh_CN, "幽灵草水")
+      }
     }
     val 幽灵草深水 = ShallowDeepLiquid("ghostGrassDeepWater", 幽灵草).apply {
-        bundle {
-            desc(zh_CN, "幽灵草深水")
-        }
+      bundle {
+        desc(zh_CN, "幽灵草深水")
+      }
     }
     val 幽灵草墙 = StaticWall("ghostGrassWall").apply {
-        bundle {
-            desc(zh_CN, "幽灵草墙")
-        }
+      bundle {
+        desc(zh_CN, "幽灵草墙")
+      }
     }
     val 灰烬地 = Floor("ash").apply {
-        bundle {
-            desc(zh_CN, "灰烬地")
-        }
+      bundle {
+        desc(zh_CN, "灰烬地")
+      }
     }
     val 灰烬地水 = ShallowLiquid("ashWater", 灰烬地).apply {
-        bundle {
-            desc(zh_CN, "灰烬地水")
-        }
+      bundle {
+        desc(zh_CN, "灰烬地水")
+      }
     }
     val 灰烬墙 = StaticWall("ashWall").apply {
-        bundle {
-            desc(zh_CN, "灰烬墙")
-        }
+      bundle {
+        desc(zh_CN, "灰烬墙")
+      }
     }
     val 钢铁地板1 = Floor("steelFloor1").apply {
-        bundle {
-            desc(zh_CN, "钢铁地板1")
-        }
+      bundle {
+        desc(zh_CN, "钢铁地板1")
+      }
     }
     val 钢铁墙1 = StaticWall("steelFloorWall1").apply {
-        bundle {
-            desc(zh_CN, "钢铁墙1")
-        }
+      bundle {
+        desc(zh_CN, "钢铁墙1")
+      }
     }
     val 钢铁地板2 = Floor("steelFloor2").apply {
-        bundle {
-            desc(zh_CN, "钢铁地板")
-        }
+      bundle {
+        desc(zh_CN, "钢铁地板")
+      }
     }
     val 钢铁墙2 = StaticWall("steelFloorWall2").apply {
-        bundle {
-            desc(zh_CN, "钢铁墙")
-        }
+      bundle {
+        desc(zh_CN, "钢铁墙")
+      }
     }
     val 精钢甲板 = Floor("steelFloor3").apply {
-        bundle {
-            desc(zh_CN, "精钢甲板")
-        }
+      bundle {
+        desc(zh_CN, "精钢甲板")
+      }
     }
     val 跨界钢板 = TiledFloor("bridgeSteel", 9).apply {
-        bundle {
-            desc(zh_CN, "跨界钢板")
-        }
+      bundle {
+        desc(zh_CN, "跨界钢板")
+      }
     }
     val 跨界钢板墙 = StaticWall("bridgeSteelWall").apply {
-        bundle {
-            desc(zh_CN, "跨界钢板墙")
-        }
+      bundle {
+        desc(zh_CN, "跨界钢板墙")
+      }
     }
     val 供能板 = Floor("powerBoard").apply {
-        bundle {
-            desc(zh_CN, "供能板")
-        }
+      bundle {
+        desc(zh_CN, "供能板")
+      }
     }
     val 供能墙 = StaticWall("powerWall").apply {
-        bundle {
-            desc(zh_CN, "供能墙")
-        }
+      bundle {
+        desc(zh_CN, "供能墙")
+      }
     }
     val 诅咒之地 = Floor("curseLand").apply {
-        bundle {
-            desc(zh_CN, "诅咒之地")
-        }
+      bundle {
+        desc(zh_CN, "诅咒之地")
+      }
     }
     val 诅咒之墙 = StaticWall("curseWall").apply {
-        bundle {
-            desc(zh_CN, "诅咒之墙")
-        }
+      bundle {
+        desc(zh_CN, "诅咒之墙")
+      }
     }
     val 新月岩 = Floor("crescent").apply {
-        bundle {
-            desc(zh_CN, "新月岩")
-        }
+      bundle {
+        desc(zh_CN, "新月岩")
+      }
     }
     val 新月岩水 = ShallowLiquid("crescentWater", 新月岩).apply {
-        bundle {
-            desc(zh_CN, "新月岩水")
-        }
+      bundle {
+        desc(zh_CN, "新月岩水")
+      }
     }
     val 新月岩墙 = StaticWall("crescentWall").apply {
-        bundle {
-            desc(zh_CN, "新月岩墙")
-        }
+      bundle {
+        desc(zh_CN, "新月岩墙")
+      }
     }
     val 新月喷口 = SteamVent("crescent-vent").apply {
         effectSpacing = 30f
@@ -463,44 +462,44 @@ object Environment : Load {
         }.layer(Layer.darkness - 1)
         parent = 新月岩.also { blendGroup = it }
         attributes.set(Attribute.steam, 1f)
-        bundle {
-            desc(zh_CN, "新月喷口")
-        }
+      bundle {
+        desc(zh_CN, "新月喷口")
+      }
     }
     val 凌冰尖刺 = TallBlock("tortureIceSpikes").apply {
-        bundle {
-            desc(zh_CN, "凌冰尖刺")
-        }
+      bundle {
+        desc(zh_CN, "凌冰尖刺")
+      }
     }
     val 凌冰石块 = Prop("tortureIceStone").apply {
-        bundle {
-            desc(zh_CN, "凌冰石块")
-        }
+      bundle {
+        desc(zh_CN, "凌冰石块")
+      }
     }
     val 霜寒草 = Prop("frostbiteGrass").apply {
-        bundle {
-            desc(zh_CN, "霜寒草")
-        }
+      bundle {
+        desc(zh_CN, "霜寒草")
+      }
     }
     val 凌冰 = Floor("tortureIce").apply {
-        bundle {
-            desc(zh_CN, "凌冰")
-        }
+      bundle {
+        desc(zh_CN, "凌冰")
+      }
     }
     val 凌冰水 = ShallowLiquid("tortureIceWater", 凌冰).apply {
-        bundle {
-            desc(zh_CN, "凌冰水")
-        }
+      bundle {
+        desc(zh_CN, "凌冰水")
+      }
     }
     val 凌冰深水 = ShallowDeepLiquid("tortureIceDeepWater", 凌冰).apply {
-        bundle {
-            desc(zh_CN, "凌冰深水")
-        }
+      bundle {
+        desc(zh_CN, "凌冰深水")
+      }
     }
     val 凌冰墙 = StaticWall("tortureIceWall").apply {
-        bundle {
-            desc(zh_CN, "凌冰墙")
-        }
+      bundle {
+        desc(zh_CN, "凌冰墙")
+      }
     }
     val 血浅滩 = Floor("bloodShoal").apply {
         albedo = 0.9f
@@ -516,9 +515,9 @@ object Environment : Load {
         addContentInitEvent {
             wall = 肿瘤墙
         }
-        bundle {
-            desc(zh_CN, "血浅滩")
-        }
+      bundle {
+        desc(zh_CN, "血浅滩")
+      }
     }
     val 血池 = object : Floor("thickBlood") {
 
@@ -539,9 +538,9 @@ object Environment : Load {
         addContentInitEvent {
             wall = 肿瘤墙
         }
-        bundle {
-            desc(zh_CN, "血池")
-        }
+      bundle {
+        desc(zh_CN, "血池")
+      }
     }
     val 深血池 = Floor("deepThickBlood").apply {
         speedMultiplier = 0.2f
@@ -557,9 +556,9 @@ object Environment : Load {
         addContentInitEvent {
             wall = 肿瘤墙
         }
-        bundle {
-            desc(zh_CN, "深血池")
-        }
+      bundle {
+        desc(zh_CN, "深血池")
+      }
     }
     val 浓稠深血池 = Floor("denseDeepThickBlood").apply {
         speedMultiplier = 0.4f
@@ -574,117 +573,117 @@ object Environment : Load {
         addContentInitEvent {
             wall = 肿瘤墙
         }
-        bundle {
-            desc(zh_CN, "浓稠深血池")
-        }
+      bundle {
+        desc(zh_CN, "浓稠深血池")
+      }
     }
     val 肿瘤地 = Floor("bloodNeoplasma").apply {
         decoration = 血孢子丛
-        bundle {
-            desc(zh_CN, "肿瘤地")
-        }
+      bundle {
+        desc(zh_CN, "肿瘤地")
+      }
     }
     val 碎骨地 = Floor("brokenBone").apply {
-        bundle {
-            desc(zh_CN, "碎骨地")
-        }
+      bundle {
+        desc(zh_CN, "碎骨地")
+      }
     }
     val 碎骨墙 = StaticWall("brokenBoneWall").apply {
-        bundle {
-            desc(zh_CN, "碎骨墙")
-        }
+      bundle {
+        desc(zh_CN, "碎骨墙")
+      }
     }
     val 血沙石块 = Prop("bloodSandStone").apply {
-        bundle {
-            desc(zh_CN, "血沙石块")
-        }
+      bundle {
+        desc(zh_CN, "血沙石块")
+      }
     }
     val 殷血粗沙 = Floor("bloodSand").apply {
-        bundle {
-            desc(zh_CN, "殷血粗沙")
-        }
+      bundle {
+        desc(zh_CN, "殷血粗沙")
+      }
     }
     val 殷血粗沙墙 = StaticWall("bloodSandWall").apply {
-        bundle {
-            desc(zh_CN, "殷血粗沙墙")
-        }
+      bundle {
+        desc(zh_CN, "殷血粗沙墙")
+      }
     }
     val 骸骨地 = Floor("humanBones").apply {
-        bundle {
-            desc(zh_CN, "骸骨地")
-        }
+      bundle {
+        desc(zh_CN, "骸骨地")
+      }
     }
     val 血痂地 = Floor("bloodScars").apply {
         addContentInitEvent {
             wall = 肿瘤墙
         }
-        bundle {
-            desc(zh_CN, "血痂地")
-        }
+      bundle {
+        desc(zh_CN, "血痂地")
+      }
     }
     val 血痂岩 = Floor("bloodScarsStone").apply {
-        bundle {
-            desc(zh_CN, "血痂岩")
-        }
+      bundle {
+        desc(zh_CN, "血痂岩")
+      }
     }
     val 血蚀岩石块 = Prop("bloodmoriteStone").apply {
-        bundle {
-            desc(zh_CN, "血蚀岩石块")
-        }
+      bundle {
+        desc(zh_CN, "血蚀岩石块")
+      }
     }
     val 血蚀岩 = Floor("bloodmorite").apply {
         decoration = 血蚀岩石块
-        bundle {
-            desc(zh_CN, "血蚀岩")
-        }
+      bundle {
+        desc(zh_CN, "血蚀岩")
+      }
     }
     val 血蚀墙 = StaticWall("bloodmoriteWall").apply {
-        bundle {
-            desc(zh_CN, "血蚀墙")
-        }
+      bundle {
+        desc(zh_CN, "血蚀墙")
+      }
     }
     val 肿瘤墙 = StaticWall("bloodNeoplasmaWall").apply {
-        bundle {
-            desc(zh_CN, "肿瘤墙")
-        }
+      bundle {
+        desc(zh_CN, "肿瘤墙")
+      }
     }
     val 红冰 = Floor("redIce").apply {
-        bundle {
-            desc(zh_CN, "红冰")
-        }
+      bundle {
+        desc(zh_CN, "红冰")
+      }
     }
     val 红冰墙 = StaticWall("redIceWall").apply {
-        bundle {
-            desc(zh_CN, "红冰墙")
-        }
+      bundle {
+        desc(zh_CN, "红冰墙")
+      }
     }
     val 赤雪 = Floor("bloodIceSnow").apply {
-        bundle {
-            desc(zh_CN, "赤雪")
-        }
+      bundle {
+        desc(zh_CN, "赤雪")
+      }
     }
     val 红霜石块 = Prop("bloodSnowStone").apply {
-        bundle {
-            desc(zh_CN, "红霜石块")
-        }
+      bundle {
+        desc(zh_CN, "红霜石块")
+      }
     }
     val 红霜 = Floor("bloodSnow").apply {
-        bundle {
-            desc(zh_CN, "红霜")
-        }
+      bundle {
+        desc(zh_CN, "红霜")
+      }
     }
     val 红霜墙 = StaticWall("bloodSnowWall").apply {
-        bundle {
-            desc(zh_CN, "红霜墙")
-        }
+      bundle {
+        desc(zh_CN, "红霜墙")
+      }
     }
     val 肿瘤喷口 = BloodNeoplasmaVent("bloodNeoplasmaVent").apply {
         parent = 肿瘤地.also { blendGroup = it }
         attributes.set(Attribute.steam, 1f)
         effect = Fx.none
-        bundle {
-            desc(zh_CN, "肿瘤喷口")
-        }
+      bundle {
+        desc(zh_CN, "肿瘤喷口")
+      }
     }
     val 肿瘤井 = object : Prop("bloodNeoplasmaWell") {
         override fun drawBase(tile: Tile) {
@@ -699,30 +698,30 @@ object Environment : Load {
         instantDeconstruct = true
         allowRectanglePlacement = true
         unitMoveBreakable = false
-        bundle {
-            desc(zh_CN, "肿瘤井")
-        }
+      bundle {
+        desc(zh_CN, "肿瘤井")
+      }
     }
     val 肉瘤菇 = TallBlock("bloodBall").apply {
-        bundle {
-            desc(zh_CN, "肉瘤菇")
-        }
+      bundle {
+        desc(zh_CN, "肉瘤菇")
+      }
     }
     val 血蚀囊胚 = TallBlock("bloodBlastocyst").apply {
-        bundle {
-            desc(zh_CN, "血蚀囊胚")
-        }
+      bundle {
+        desc(zh_CN, "血蚀囊胚")
+      }
     }
     val 缚肉树 = TallBlock("bloodFleshTree").apply {
-        bundle {
-            desc(zh_CN, "缚肉树")
-        }
+      bundle {
+        desc(zh_CN, "缚肉树")
+      }
     }
     val 摄魂墙 = Block("soulCapturing").apply {
         solid = true
         breakable = true
-        bundle {
-            desc(zh_CN, "摄魂墙")
-        }
+      bundle {
+        desc(zh_CN, "摄魂墙")
+      }
     }
 }

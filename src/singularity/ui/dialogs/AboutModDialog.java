@@ -17,6 +17,7 @@ import arc.util.Nullable;
 import arc.util.Time;
 import arc.util.io.Streams;
 import arc.util.serialization.Jval;
+import ice.Ice;
 import mindustry.gen.Icon;
 import mindustry.gen.Tex;
 import mindustry.graphics.Pal;
@@ -51,17 +52,17 @@ public class AboutModDialog extends BaseDialog {
         t.add(Core.bundle.get("infos.discord"));
       }, () -> Pal.lightOrange, () -> openUrl(Sgl.discord)),
 
-      /*new ButtonEntry(SglDrawConst.telegramIcon, t -> {
+      new ButtonEntry(SglDrawConst.telegramIcon, t -> {
         t.add(Core.bundle.get("misc.telegram")).color(Pal.accent);
         t.row();
         t.add(Core.bundle.get("infos.telegram"));
-      }, () -> Color.valueOf("7289da"), () -> openUrl(Sgl.telegramGroup)),*/
+      }, () -> Color.valueOf("7289da"), () -> {}/*openUrl(Sgl.telegramGroup)*/),
 
-     /* new ButtonEntry(SglDrawConst.qqIcon, t -> {
+      new ButtonEntry(SglDrawConst.qqIcon, t -> {
         t.add(Core.bundle.get("misc.qq")).color(Pal.accent);
         t.row();
         t.add(Core.bundle.get("infos.qq"));
-      }, () -> Pal.lightishGray, () -> openUrl(Sgl.qqGroup)),*/
+      }, () -> Pal.lightishGray, () -> openUrl(Ice.qqGrops)),
   };
 
   public AboutModDialog() {

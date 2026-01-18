@@ -6,31 +6,32 @@ import ice.world.meta.IceStats
 import mindustry.gen.Puddle
 import mindustry.type.Liquid
 
-open class IceLiquid(name: String, color: String, app: IceLiquid.() -> Unit = {}) : Liquid(name, Color.valueOf(color)) {
-    var updateFun: (Puddle) -> Unit = {}
-    var nutrientConcentration = 0f
+open class IceLiquid(name: String, color: Color , app: IceLiquid.() -> Unit = {}) : Liquid(name, color) {
 
-    init {
-        app(this)
-    }
+  constructor(name: String,color: String, app: IceLiquid.() -> Unit = {}) : this(name,Color.valueOf(color),app)
+  var updateFun: (Puddle) -> Unit = {}
+  var nutrientConcentration = 0f
 
-    override fun postInit() {
-        shownPlanets.add(IPlanets.阿德里)
-        super.postInit()
-    }
+  init {
+    app(this)
+  }
 
-    fun  setUpdate(updateFun: (Puddle) -> Unit) {
-        this.updateFun = updateFun
-    }
+  override fun postInit() {
+    shownPlanets.add(IPlanets.阿德里)
+    super.postInit()
+  }
 
-    override fun setStats() {
-        if (nutrientConcentration > 0f) stats.addPercent(IceStats.营养浓度, nutrientConcentration)
-        super.setStats()
-    }
+  fun setUpdate(updateFun: (Puddle) -> Unit) {
+    this.updateFun = updateFun
+  }
 
-    override fun update(puddle: Puddle) {
-        super.update(puddle)
-        updateFun(puddle)
-    }
+  override fun setStats() {
+    if (nutrientConcentration > 0f) stats.addPercent(IceStats.营养浓度, nutrientConcentration)
+    super.setStats()
+  }
 
+  override fun update(puddle: Puddle) {
+    super.update(puddle)
+    updateFun(puddle)
+  }
 }

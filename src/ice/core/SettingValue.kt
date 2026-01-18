@@ -60,9 +60,6 @@ object SettingValue: Load {
         Vars.content.blocks().select {
             it.minfo.mod == Ice.mod && it is MultipleCrafter
         }.forEach {
-            log {
-                it.localizedName + "$new"
-            }
             it.saveConfig = new
         }
     }

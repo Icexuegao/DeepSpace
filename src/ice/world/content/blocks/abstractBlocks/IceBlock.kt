@@ -61,6 +61,7 @@ open class IceBlock(name: String) : Block(name) {
     }
 
     open inner class IceBuild : Building() {
+
         override fun draw() {
             try {
                 drawers.draw(this)

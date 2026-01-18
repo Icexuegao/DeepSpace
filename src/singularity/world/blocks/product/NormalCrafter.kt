@@ -56,6 +56,7 @@ import universecore.world.producers.ProduceType
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
+@Suppress("UNCHECKED_CAST")
 /**常规的工厂类方块，具有强大的consume-produce制造系统的近乎全能的制造类方块 */
 open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
     companion object {
@@ -440,6 +441,9 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
         override fun shouldConsume(): Boolean {
             return super<FactoryBuildComp>.shouldConsume() && productValid()
         }
+
+      override fun warmup()=warmup
+      override fun totalProgress()=totalProgress
 
         override fun updateTile() {
             real = Mathf.lerpDelta(real, currBoost.get(this), 0.05f)

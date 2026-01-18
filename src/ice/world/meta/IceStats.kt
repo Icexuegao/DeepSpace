@@ -1,10 +1,16 @@
 package ice.world.meta
 
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import mindustry.world.meta.StatCat
+import universecore.world.meta.UncStatCat
 
 object IceStats {
   fun load() = Unit
+  val maxStructureSize= getStat("",UncStatCat.structure){
+    desc(zh_CN,"最大结构尺寸")
+  }
+
   val 电磁脉冲伤害 = IceStat("empDamage").apply {
     bundle {
       desc(zh_CN, "电磁脉冲伤害")
@@ -160,7 +166,7 @@ object IceStats {
       desc(zh_CN, "科技")
     }
   }
-  val 研究= IceStat("research").apply {
+  val 研究 = IceStat("research").apply {
     bundle {
       desc(zh_CN, "研究")
     }
@@ -253,6 +259,39 @@ object IceStats {
   val 捐赠 = IceStat("contribute").apply {
     bundle {
       desc(zh_CN, "捐赠")
+    }
+  }
+
+  val 支持详情 = getStat("support.info") {
+    desc(zh_CN, "首先,谢谢您愿意点开这个页面,若您喜欢这个mod,您的支持将是我们继续这个项目的莫大动力")
+  }
+  val 支持github = getStat("support.star") {
+    desc(zh_CN, "如果您想要支持这个mod,我们比较推荐您从下面的这个按钮跳转到这个项目的github页面,并为我们点亮一个star")
+  }
+  val 支持githubStar = getStat("support.githubStar") {
+    desc(zh_CN, "前往mod的github页面,并点亮一个star")
+  }
+  val 支持捐赠 = getStat("support.donate") {
+    desc(zh_CN, "如果您认为我们的作品值得您提供物质上的支持,您可以通过爱发电或者patreon来向我们提供赞助,我们无意要求您为我们的工作买单,但是如果您愿意为我们的所做给予肯定,我们亦会万分感激.")
+  }
+  val 爱发电 = getStat("afdian") {
+    desc(zh_CN, "爱发电")
+  }
+  val Patreon = getStat("patreon") {
+    desc(zh_CN, "Patreon")
+  }
+  val 支持爱发电 = getStat("support.afdian") {
+    desc(zh_CN, "来自中国的玩家可以选择通过爱发电赞助")
+  }
+  val 支持patreon = getStat("support.patreon") {
+    desc(zh_CN, "通过patreon赞助我们")
+  }
+
+  private fun getStat(name: String, cat: StatCat = StatCat.general, desc: IceStat.() -> Unit): IceStat {
+    return IceStat(name, cat).apply {
+      bundle {
+        desc()
+      }
     }
   }
 }

@@ -434,38 +434,15 @@ public class SglUI{
             f -> {
               if(f >= 0 && f < grapPreset.length){
                 Object[] a = grapPreset[(int) f];
-                Sgl.config.enableShaders = (Boolean) a[1];
-                Sgl.config.mathShapePrecision = ((Number) a[2]).intValue();
-                Sgl.config.enableDistortion = (Boolean) a[3];
-                Sgl.config.enableParticle = (Boolean) a[4];
-                Sgl.config.maxParticleCount = ((Number) a[5]).intValue();
-                Sgl.config.enableLightning = (Boolean) a[6];
               }
             },
             this::matchLevel,
             0, grapPreset.length, 1
         ){{
           str = () -> Core.bundle.get("settings.graph_" + matchLevel());
-        }},
+        }});
 
-        new ConfigCheck("enableShaders", b -> Sgl.config.enableShaders = b, () -> Sgl.config.enableShaders),
-        new ConfigSlider(
-            "mathShapePrecision",
-            f -> Mathf.round(f*1000f)/10f + "%",
-            f -> Sgl.config.mathShapePrecision = f,
-            () -> Sgl.config.mathShapePrecision,
-            0.1f, 1f, 0.001f
-        ),
-        new ConfigCheck("enableDistortion", b -> Sgl.config.enableDistortion = b, () -> Sgl.config.enableDistortion),
-        new ConfigCheck("enableParticle", b -> Sgl.config.enableParticle = b, () -> Sgl.config.enableParticle),
-        new ConfigSlider(
-            "maxParticleCount",
-            f -> Sgl.config.maxParticleCount = (int) f,
-            () -> Sgl.config.maxParticleCount,
-            0f, 4096, 8
-        ),
-        new ConfigCheck("enableLightning", b -> Sgl.config.enableLightning = b, () -> Sgl.config.enableLightning)
-    );
+
     config.addConfig("advance", SglDrawConst.configureIcon,
         new ConfigSepLine("interops", Core.bundle.get("infos.modInterop")),
         new ConfigCheck("enableModsInterops", b -> {

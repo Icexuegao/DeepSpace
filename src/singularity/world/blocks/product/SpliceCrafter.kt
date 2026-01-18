@@ -77,6 +77,9 @@ open class SpliceCrafter(name: String) : NormalCrafter(name), SpliceBlockComp {
     override fun chainable(other: ChainsBlockComp): Boolean {
         return this === other
     }
+  companion object{
+
+  }
 
     open inner class SpliceCrafterBuild : NormalCrafterBuild(), SpliceBuildComp {
         var highlight: Boolean = false

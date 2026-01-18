@@ -1,7 +1,7 @@
 package universecore.components.blockcomp
 
+import ice.world.meta.IceStats
 import mindustry.world.meta.Stats
-import universecore.world.meta.UncStat
 
 /**链式方块的方块信息组件，用于block，为[链式建筑][ChainsBuildComp]提供必要的描述属性
  *
@@ -25,6 +25,6 @@ interface ChainsBlockComp {
 
     /**设置方块的统计数据，通常你不需要操作这个行为 */ //  @Annotations.MethodEntry(entryMethod = "setStats", context = "stats -> stats")
     fun setChainsStats(stats: Stats) {
-        stats.add(UncStat.maxStructureSize, "@x@", maxChainsWidth,maxChainsHeight)
+        stats.add(IceStats.maxStructureSize, "${maxChainsWidth}x$maxChainsHeight")
     }
 }

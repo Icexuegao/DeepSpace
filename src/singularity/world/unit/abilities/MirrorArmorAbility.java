@@ -13,7 +13,6 @@ import mindustry.gen.Bullet;
 import mindustry.gen.Groups;
 import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
-import singularity.Sgl;
 import singularity.graphic.SglDraw;
 import singularity.graphic.SglDrawConst;
 import singularity.graphic.SglShaders;
@@ -50,8 +49,8 @@ public class MirrorArmorAbility extends MirrorShieldBase{
 
     float z = Draw.z();
 
-    if(Sgl.config.enableShaders && Core.settings.getBool("animatedshields")) {
-      Draw.z(Layer.shields - 2f);
+    if(true) {
+      Draw.z(Layer.shields - 5f);
       SglDraw.drawToBuffer(drawID, drawBuffer, unit, b -> {
         SglShaders.mirrorField.waveMix = Tmp.c1.set(SglDrawConst.matrixNet);
         SglShaders.mirrorField.stroke = 1.2f;

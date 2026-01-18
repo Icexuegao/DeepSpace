@@ -12,7 +12,7 @@ abstract class BaseProduce<T : ProducerBuildComp> {
     var blockWhenFull: Boolean = true
 
     /**产出资源类型 */
-    abstract fun type(): ProduceType<*>?
+    abstract fun type(): ProduceType<*>
 
     open fun color(): Color? {
         return null

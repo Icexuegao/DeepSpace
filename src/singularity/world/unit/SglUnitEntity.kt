@@ -2,15 +2,15 @@ package singularity.world.unit
 
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.entities.IceRegister
 import mindustry.gen.Hitboxc
-import mindustry.gen.Unit
 import mindustry.gen.UnitEntity
 import singularity.world.unit.abilities.ICollideBlockerAbility
 
 class SglUnitEntity : UnitEntity() {
-    var controlTime=0f
-    override fun classId(): Int {
-        return 51
+    override fun classId(): Int{
+      val id1 = IceRegister.getId(this::class.java)
+      return id1
     }
 
     override fun collides(other: Hitboxc?): Boolean {
@@ -24,14 +24,13 @@ class SglUnitEntity : UnitEntity() {
     override fun add() {
         super.add()
         if (type is SglUnitType<*>) {
-            val unit = this as Unit
-            (type as SglUnitType<*>).init(unit as SglUnitEntity)
+            (type as SglUnitType<SglUnitEntity>).init(this)
         } else throw RuntimeException("Unit type must be SglUnitType")
     }
 
     override fun read(read: Reads) {
         super.read(read)
-        if (type is SglUnitType<*>) (type as SglUnitType<*>).read(this, read, read.i())
+        if (type is SglUnitType<*>) (type as SglUnitType<SglUnitEntity>).read(this, read, read.i())
         else throw RuntimeException("Unit type must be SglUnitType")
     }
 
@@ -39,7 +38,7 @@ class SglUnitEntity : UnitEntity() {
         super.write(write)
         if (type is SglUnitType<*>) {
             write.i((type as SglUnitType<*>).version())
-            (type as SglUnitType<*>).write(this, write)
+            (type as SglUnitType<SglUnitEntity>).write(this, write)
         } else throw RuntimeException("Unit type must be SglUnitType")
     }
 }

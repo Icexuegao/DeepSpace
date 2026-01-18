@@ -4,6 +4,7 @@ import arc.scene.ui.Image
 import arc.scene.ui.Label
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
+import arc.util.Scaling
 import ice.content.Remainss
 import ice.graphics.IStyles
 import ice.graphics.IceColor
@@ -24,10 +25,11 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
     var slotPos: Int = 4
 
     override fun build(cont: Table) {
+      cont.add(Image(IStyles.remains, Scaling.fit)).row()
         cont.iTable {
             tiTleTable = it
             flunTiTleTable()
-        }.pad(50f).padTop(100f).minHeight(360f).row()
+        }.minHeight(360f).row()
 
         cont.iTable { ta ->
             ta.add(Label { "正在生效:[${enableSeq.size} / $slotPos]" }).color(IceColor.b4).pad(10f).row()

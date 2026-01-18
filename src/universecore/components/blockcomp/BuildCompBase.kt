@@ -25,7 +25,7 @@ interface BuildCompBase {
         } else throw Exception("返回的方块类型 不匹配")
     }
 
-    val block: Block?
+    val block: Block
         /**获取此建筑的[Block]，需要 */
         get() = getBlock(Block::class.java)
 

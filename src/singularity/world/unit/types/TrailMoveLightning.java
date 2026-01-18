@@ -14,6 +14,7 @@ public class TrailMoveLightning implements Pool.Poolable {
 
   {
     flushDelta(0);
+
   }
 
   private void flushDelta(int i) {

@@ -11,7 +11,6 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.entities.effect.MultiEffect
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.status.PercentStatus
 import ice.world.content.status.StatusEffect
@@ -36,9 +35,9 @@ import kotlin.math.min
 object IStatus : Load {
     val 封冻 = StatusEffect("freeze") {
         bundle {
-            desc(zh_CN, "封冻", "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成毁灭性打击")
+          desc(zh_CN, "封冻", "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成毁灭性打击")
         }
-        setUpdate { unit, e ->
+      setUpdate { unit, e ->
             val ice = 1f - (600 - e.time) / 600f * 0.4f
             if (unit.healthMultiplier > 0.4) unit.healthMultiplier *= ice
             if (unit.speedMultiplier > 0.4) unit.speedMultiplier *= ice
@@ -70,64 +69,64 @@ object IStatus : Load {
     }
     val 集群 = StatusEffect("assemble") {
         speedMultiplier = 1.5f
-        bundle {
-            desc(zh_CN, "集群", "激活协同协议,单位间建立纳米机器人共享网络,效应随范围内友方单位数量增强")
-        }
+      bundle {
+        desc(zh_CN, "集群", "激活协同协议,单位间建立纳米机器人共享网络,效应随范围内友方单位数量增强")
+      }
     }
     val 圣火 = StatusEffect("holyFlame") {
         damage = 70 / 60f
-        bundle {
-            desc(zh_CN, "圣火", "持续造成目标最大生命值百分比的火焰伤害")
-        }
+      bundle {
+        desc(zh_CN, "圣火", "持续造成目标最大生命值百分比的火焰伤害")
+      }
     }
     val 邪火 = StatusEffect("evilFlame") {
         damage = 75 / 60f
-        bundle {
-            desc(zh_CN, "邪火", "持续生命侵蚀,扣除单位生命上限")
-        }
+      bundle {
+        desc(zh_CN, "邪火", "持续生命侵蚀,扣除单位生命上限")
+      }
     }
     val 破甲I = StatusEffect("armorBreakI") {
         healthMultiplier = 0.8f
         speedMultiplier = 1.2f
         color = Color.valueOf("D1EFFF")
-        bundle {
-            desc(zh_CN, "破甲I", "目标单位护甲扣除,使其遭受的伤害显著提升")
-        }
+      bundle {
+        desc(zh_CN, "破甲I", "目标单位护甲扣除,使其遭受的伤害显著提升")
+      }
     }
     val 破甲II = StatusEffect("armorBreakII") {
         speedMultiplier = 1.1f
         armorBreak = 10f
-        bundle {
-            desc(zh_CN, "破甲II", "目标单位护甲扣除,使其遭受的伤害显著提升")
-        }
+      bundle {
+        desc(zh_CN, "破甲II", "目标单位护甲扣除,使其遭受的伤害显著提升")
+      }
     }
     val 破甲III = StatusEffect("armorBreakIII") {
         speedMultiplier = 1.1f
         armorBreak = 20f
-        bundle {
-            desc(zh_CN, "破甲III", "目标单位护甲扣除,使其遭受的伤害显著提升")
-        }
+      bundle {
+        desc(zh_CN, "破甲III", "目标单位护甲扣除,使其遭受的伤害显著提升")
+      }
     }
     val 破甲IV = StatusEffect("armorBreakIV") {
         speedMultiplier = 1.1f
         armorBreak = 30f
-        bundle {
-            desc(zh_CN, "破甲IV", "目标单位护甲扣除,使其遭受的伤害显著提升")
-        }
+      bundle {
+        desc(zh_CN, "破甲IV", "目标单位护甲扣除,使其遭受的伤害显著提升")
+      }
     }
     val 穿甲 = StatusEffect("armorPiercing") {
         speedMultiplier = 1.5f
         armorBreakPercent = 0.8f
-        bundle {
-            desc(zh_CN, "穿甲", "完全无视目标护甲,直接穿透对本体造成伤害")
-        }
+      bundle {
+        desc(zh_CN, "穿甲", "完全无视目标护甲,直接穿透对本体造成伤害")
+      }
     }
     val 电磁脉冲 = StatusEffect("electromagneticPulse") {
         speedMultiplier = 0.7f
         healthMultiplier = 0.9f
-        bundle {
-            desc(zh_CN, "电磁脉冲", "突发宽带电磁辐射的高强度脉冲,用于破坏敌人的电子设备")
-        }
+      bundle {
+        desc(zh_CN, "电磁脉冲", "突发宽带电磁辐射的高强度脉冲,用于破坏敌人的电子设备")
+      }
     }
     val 辐射 = StatusEffect("radiation") {
         reloadMultiplier = 0.9f
@@ -147,27 +146,27 @@ object IStatus : Load {
             colorFrom = Color.valueOf("F9A3C7")
             colorTo = Color.valueOf("A24FAA")
         }
-        bundle {
-            desc(zh_CN, "辐射", "经过一次能级降低的辐射,依旧能干扰精密电路并对其造成相当程度的损伤")
-        }
+      bundle {
+        desc(zh_CN, "辐射", "经过一次能级降低的辐射,依旧能干扰精密电路并对其造成相当程度的损伤")
+      }
     }
     val 染血 = StatusEffect("stainedBlood") {
         speedMultiplier = 0.8f
-        bundle {
-            desc(zh_CN, "染血", "染血")
-        }
+      bundle {
+        desc(zh_CN, "染血", "染血")
+      }
     }
     val 憎恨 = StatusEffect("hatred") {
-        bundle {
-            desc(zh_CN, "憎恨", "憎恨")
-        }
+      bundle {
+        desc(zh_CN, "憎恨", "憎恨")
+      }
     }
     val 流血 = StatusEffect("bleed") {
         color = Color.red
-        bundle {
-            desc(zh_CN, "流血", "流血")
-        }
-        setUpdate { u, s ->
+      bundle {
+        desc(zh_CN, "流血", "流血")
+      }
+      setUpdate { u, s ->
             u.health -= (u.speed() * u.hitSize() / 60)
             u.clampHealth()
         }
@@ -178,42 +177,42 @@ object IStatus : Load {
     val 回响 = StatusEffect("resound") {
         speedMultiplier = 0.5f
         effect = Fx.absorb
-        bundle {
-            desc(zh_CN, "回响", "回响")
-        }
+      bundle {
+        desc(zh_CN, "回响", "回响")
+      }
     }
     val 搏动 = StatusEffect("throb") {
         healthMultiplier = 1.7f
         speedMultiplier = 1.4f
         effect = Fx.absorb
-        bundle {
-            desc(zh_CN, "搏动", "搏动")
-        }
+      bundle {
+        desc(zh_CN, "搏动", "搏动")
+      }
     }
     val 寄生 = StatusEffect("parasitism") {
         healthMultiplier = 0.9f
         speedMultiplier = 0.9f
-        bundle {
-            desc(zh_CN, "寄生", "寄生状态会逐渐消耗单位生命值致其死亡,随后生成血肉单位")
-        }
+      bundle {
+        desc(zh_CN, "寄生", "寄生状态会逐渐消耗单位生命值致其死亡,随后生成血肉单位")
+      }
     }
     val 融合 = StatusEffect("merge") {
         healthMultiplier = 1.5f
-        bundle {
-            desc(zh_CN, "融合", "当血肉单位满足特定条件时,融合状态触发,逐渐靠近结合,属性整合提升")
-        }
+      bundle {
+        desc(zh_CN, "融合", "当血肉单位满足特定条件时,融合状态触发,逐渐靠近结合,属性整合提升")
+      }
     }
     val 维生I = StatusEffect("vitalFixI") {
         damage = -30f / 60
-        bundle {
-            desc(zh_CN, "维生I", "激活纳米机器人集群,将储存的硅矿微粒与裂解液转化为生物修复单元,持续重构受损机体")
-        }
+      bundle {
+        desc(zh_CN, "维生I", "激活纳米机器人集群,将储存的硅矿微粒与裂解液转化为生物修复单元,持续重构受损机体")
+      }
     }
     val 维生II = StatusEffect("vitalFixII") {
         damage = -60f / 60
-        bundle {
-            desc(zh_CN, "维生II", "激活纳米机器人集群,将储存的硅矿微粒与裂解液转化为生物修复单元,持续重构受损机体")
-        }
+      bundle {
+        desc(zh_CN, "维生II", "激活纳米机器人集群,将储存的硅矿微粒与裂解液转化为生物修复单元,持续重构受损机体")
+      }
     }
     val 脉冲 = StatusEffect("pulse") {
         setUpdate { unit, e ->
@@ -243,9 +242,9 @@ object IStatus : Load {
             lenTo = 16f
             colorTo = Color.valueOf("5A58C4")
         }
-        bundle {
-            desc(zh_CN, "脉冲", "脉冲", " E!M!P!")
-        }
+      bundle {
+        desc(zh_CN, "脉冲", "脉冲", " E!M!P!")
+      }
     }
     val 鼓舞 = StatusEffect("inspire") {
         setUpdate { unit, e ->
@@ -259,14 +258,14 @@ object IStatus : Load {
                 }
             }
         }
-        bundle {
-            desc(
-                zh_CN,
-                "鼓舞",
-                "为周围友军持续提供(具有鼓舞的单位)20%的属性倍率,且每秒回复相当于(具有鼓舞的单位)0.1%生命上限的生命值"
-            )
-        }
-        effectChance = 0.05f
+      bundle {
+        desc(
+          zh_CN,
+          "鼓舞",
+          "为周围友军持续提供(具有鼓舞的单位)20%的属性倍率,且每秒回复相当于(具有鼓舞的单位)0.1%生命上限的生命值"
+        )
+      }
+      effectChance = 0.05f
         reloadMultiplier = 1.2f
         healthMultiplier = 1.2f
         effect = ParticleEffect().apply {
@@ -344,14 +343,14 @@ object IStatus : Load {
     }
     val 过热 = StatusEffect("overheat") {
         bundle {
-            desc(
-                zh_CN,
-                "过热",
-                "过载动力炉并重导向其能量配给以进行主炮开火或特殊行动,期间过量的能量可能损坏管路",
-                "以此为信"
-            )
+          desc(
+            zh_CN,
+            "过热",
+            "过载动力炉并重导向其能量配给以进行主炮开火或特殊行动,期间过量的能量可能损坏管路",
+            "以此为信"
+          )
         }
-        disarm = true
+      disarm = true
         dragMultiplier = 1f
         speedMultiplier = 0f
         damage = 5f
@@ -369,9 +368,9 @@ object IStatus : Load {
     }
     val 屠戮 = StatusEffect("massacre") {
         bundle {
-            desc(zh_CN, "屠戮", "屠戮")
+          desc(zh_CN, "屠戮", "屠戮")
         }
-        damageMultiplier = 1.5f
+      damageMultiplier = 1.5f
         healthMultiplier = 0.8f
         speedMultiplier = 1.4f
         reloadMultiplier = 1.2f
@@ -391,9 +390,9 @@ object IStatus : Load {
     }
     val 损毁 = StatusEffect("destroyed") {
         bundle {
-            desc(zh_CN, "损毁", "损毁")
+          desc(zh_CN, "损毁", "损毁")
         }
-        healthMultiplier = 0.77f
+      healthMultiplier = 0.77f
         speedMultiplier = 0.85f
         reloadMultiplier = 0.95f
         effect = ParticleEffect().apply {
@@ -410,9 +409,9 @@ object IStatus : Load {
     }
     val 迅疗 = PercentStatus("rapidHealing", 0.8f, -6f) {
         bundle {
-            desc(zh_CN, "迅疗", "释放纳米机器人极速修复机体")
+          desc(zh_CN, "迅疗", "释放纳米机器人极速修复机体")
         }
-        healthMultiplier = 1.2f
+      healthMultiplier = 1.2f
         speedMultiplier = 1.05f
         color = Color.valueOf("73FFAE")
 
@@ -427,9 +426,9 @@ object IStatus : Load {
     }
     val 熔融 = PercentStatus("melt", 0.2f, 0.25f, 25f, true) {
         bundle {
-            desc(zh_CN, "熔融", "利用超高温的金属射流摧毁敌方单位的装甲及内部结构")
+          desc(zh_CN, "熔融", "利用超高温的金属射流摧毁敌方单位的装甲及内部结构")
         }
-        healthMultiplier = 0.8f
+      healthMultiplier = 0.8f
         speedMultiplier = 0.9f
         reloadMultiplier = 0.9f
         effect = Fx.melting
@@ -437,9 +436,9 @@ object IStatus : Load {
     }
     val 衰变 = StatusEffect("decay") {
         bundle {
-            desc(zh_CN, "衰变", "使原子迅速衰变,n被附着的单位会转变为放射源,持续辐射周围的一切事物")
+          desc(zh_CN, "衰变", "使原子迅速衰变,n被附着的单位会转变为放射源,持续辐射周围的一切事物")
         }
-        reloadMultiplier = 0.8f
+      reloadMultiplier = 0.8f
         healthMultiplier = 0.8f
         speedMultiplier = 0.8f
         damage = 1.25f
@@ -483,15 +482,15 @@ object IStatus : Load {
             colorTo = Color.valueOf("FF6666")
         }
         color = Color.valueOf("FF6666")
-        bundle {
-            desc(zh_CN, "蚀骨", "烈焰如附骨之疽,除之不尽")
-        }
+      bundle {
+        desc(zh_CN, "蚀骨", "烈焰如附骨之疽,除之不尽")
+      }
     }
     val 突袭 = StatusEffect("pounces") {
         bundle {
-            desc(zh_CN, "突袭")
+          desc(zh_CN, "突袭")
         }
-        damageMultiplier = 1.6f
+      damageMultiplier = 1.6f
         healthMultiplier = 1.8f
         speedMultiplier = 2f
         reloadMultiplier = 1.4f
@@ -531,9 +530,9 @@ object IStatus : Load {
     }
     val 秽蚀 = StatusEffect("filthyErosion") {
         bundle {
-            desc(zh_CN, "秽蚀", "打散目标的分子结构并干扰原子链,进而液化装甲与软组织", "污秽涌动,侵蚀不息")
+          desc(zh_CN, "秽蚀", "打散目标的分子结构并干扰原子链,进而液化装甲与软组织", "污秽涌动,侵蚀不息")
         }
-        damage = 5f
+      damage = 5f
         effectChance = 0.2f
         color = Color.valueOf("AA88B2")
         effect = WaveEffect().apply {
@@ -556,9 +555,9 @@ object IStatus : Load {
     }
     val 湍能 = PercentStatus("turbulentEnergy", 1f, 80f / 60f) {
         bundle {
-            desc(zh_CN, "湍能", "利用剧烈反应的能量破坏表层装甲稳定性,而后侵蚀内部结构")
+          desc(zh_CN, "湍能", "利用剧烈反应的能量破坏表层装甲稳定性,而后侵蚀内部结构")
         }
-        healthMultiplier = 0.9f
+      healthMultiplier = 0.9f
         color = Color.valueOf("A9D8FF")
         effect = WaveEffect().apply {
             lifetime = 20f
@@ -575,10 +574,10 @@ object IStatus : Load {
         healthMultiplier = 0.6f
         speedMultiplier = 0.7f
         reloadMultiplier = 0.7f
-        bundle {
-            desc(zh_CN, "日耀", "将太阳之力汇于指尖")
-        }
-        effect = ParticleEffect().apply {
+      bundle {
+        desc(zh_CN, "日耀", "将太阳之力汇于指尖")
+      }
+      effect = ParticleEffect().apply {
             particles = 3
             lifetime = 20f
             sizeFrom = 3f
@@ -598,10 +597,10 @@ object IStatus : Load {
         parentizeEffect = true
         effect = Fx.chainLightning
 
-        bundle {
-            desc(zh_CN, "电链", "闪电,会连击两次")
-        }
-        val range = 8 * 30f
+      bundle {
+        desc(zh_CN, "电链", "闪电,会连击两次")
+      }
+      val range = 8 * 30f
         val reload = 60f
         val damage = 150f
         val status = 湍能
@@ -658,17 +657,17 @@ object IStatus : Load {
         speedMultiplier = 0f
         dragMultiplier = 0f
         buildSpeedMultiplier = 0f
-        bundle {
-            desc(zh_CN, "坍缩")
-        }
+      bundle {
+        desc(zh_CN, "坍缩")
+      }
     }
     val 幻像 = StatusEffect("illusion") {
         bundle {
-            desc(
-                zh_CN, "幻像", "通过全相投影装置,将光线转化为可以承受一定程度打击的固体形态,创造出作战单位的三维复制体"
-            )
+          desc(
+            zh_CN, "幻像", "通过全相投影装置,将光线转化为可以承受一定程度打击的固体形态,创造出作战单位的三维复制体"
+          )
         }
-        damageMultiplier = 0f
+      damageMultiplier = 0f
         color = Color.valueOf("AFCCF4")
         permanent = true
         setUpdate { u, e ->
@@ -682,9 +681,9 @@ object IStatus : Load {
         speedMultiplier = 3f
         effect = Fx.overdriven
         color = Color.valueOf("D75B6E")
-        bundle {
-            desc(zh_CN, "狂乱", "混乱与疯狂")
-        }
+      bundle {
+        desc(zh_CN, "狂乱", "混乱与疯狂")
+      }
     }
     val 坚忍 = StatusEffect("stoical") {
         damageMultiplier = 1.15f
@@ -700,15 +699,15 @@ object IStatus : Load {
             colorFrom = Color.valueOf("E8895C")
             colorTo = Color.valueOf("FFA665")
         }
-        bundle {
-            desc(zh_CN, "坚忍")
-        }
+      bundle {
+        desc(zh_CN, "坚忍")
+      }
     }
     val 庇护 = StatusEffect("asylum") {
         bundle {
-            desc(zh_CN, "庇护", "为单位填充一层动能泡沫内衬,内衬在伸缩之间将大量分散装甲承受的猛烈冲击")
+          desc(zh_CN, "庇护", "为单位填充一层动能泡沫内衬,内衬在伸缩之间将大量分散装甲承受的猛烈冲击")
         }
-        reloadMultiplier = 1.1f
+      reloadMultiplier = 1.1f
         healthMultiplier = 3f
         speedMultiplier = 0.9f
         color = Color.valueOf("FFE18F")
@@ -743,9 +742,9 @@ object IStatus : Load {
     }
     val 复仇 = StatusEffect("revenge") {
         bundle {
-            desc(zh_CN, "复仇")
+          desc(zh_CN, "复仇")
         }
-        damageMultiplier = 1.8f
+      damageMultiplier = 1.8f
         healthMultiplier = 0.8f
         speedMultiplier = 1.1f
         reloadMultiplier = 1.5f
@@ -764,9 +763,9 @@ object IStatus : Load {
     }
     val 反扑 = StatusEffect("counter") {
         bundle {
-            desc(zh_CN, "反扑", "每损失1%生命值获得1.5%各项属性值")
+          desc(zh_CN, "反扑", "每损失1%生命值获得1.5%各项属性值")
         }
-        color = Color.valueOf("FB7A83")
+      color = Color.valueOf("FB7A83")
         effectChance = 0.01f
         setUpdate { unit, e ->
             val heal = 1f + 1.5f * (1 - unit.healthf())
@@ -778,9 +777,9 @@ object IStatus : Load {
     }
     val 作弊 = StatusEffect("cheat") {
         bundle {
-            desc(zh_CN, "作弊", "没关就是开了?")
+          desc(zh_CN, "作弊", "没关就是开了?")
         }
-        damageMultiplier = 99e9f
+      damageMultiplier = 99e9f
         healthMultiplier = 99e9f
         speedMultiplier = 99e9f
         reloadMultiplier = 99e9f
@@ -801,9 +800,9 @@ object IStatus : Load {
     }
     val 斩杀 = StatusEffect("kill") {
         bundle {
-            desc(zh_CN, "斩杀")
+          desc(zh_CN, "斩杀")
         }
-        setUpdate { unit, e ->
+      setUpdate { unit, e ->
             val x = unit.x
             val y = unit.y
             val size = unit.hitSize

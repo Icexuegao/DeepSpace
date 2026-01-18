@@ -1,7 +1,6 @@
 package singularity.world.consumers
 
 import arc.Core
-import arc.func.Cons
 import arc.math.Mathf
 import arc.scene.ui.Image
 import arc.scene.ui.layout.Table
@@ -18,7 +17,10 @@ import mindustry.graphics.Pal
 import mindustry.ui.Bar
 import mindustry.ui.Styles
 import mindustry.world.blocks.environment.Floor
-import mindustry.world.meta.*
+import mindustry.world.meta.Attribute
+import mindustry.world.meta.Stat
+import mindustry.world.meta.StatUnit
+import mindustry.world.meta.Stats
 import singularity.graphic.SglDrawConst
 import singularity.world.components.FloorCrafterBuildComp
 import universecore.components.blockcomp.ConsumerBuildComp
@@ -47,7 +49,7 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
 
     constructor(checkDeep: Boolean, checkLiquid: Boolean, attribute: Attribute?, scl: Float) {
         for (block in Vars.content.blocks()) {
-            if ((block !is Floor) || (checkDeep && block.isDeep()) || (checkLiquid && block.isLiquid) || block.attributes.get(attribute) <= 0) continue
+            if ((block !is Floor) || (checkDeep && block.isDeep) || (checkLiquid && block.isLiquid) || block.attributes.get(attribute) <= 0) continue
 
             floorEff.put(block, block.attributes.get(attribute) * scl)
         }
@@ -60,7 +62,7 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
                 val attribute = attributes[i] as Attribute?
                 val scl = attributes[i + 1] as Float
 
-                if ((block !is Floor) || (checkDeep && block.isDeep()) || (checkLiquid && block.isLiquid) || block.attributes.get(attribute) <= 0) {
+                if ((block !is Floor) || (checkDeep && block.isDeep) || (checkLiquid && block.isLiquid) || block.attributes.get(attribute) <= 0) {
                     i += 2
                     continue
                 }
@@ -71,7 +73,7 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
         }
     }
 
-    fun getEff(floorCount: ObjectIntMap<Floor?>): Float {
+    fun getEff(floorCount: ObjectIntMap<Floor>): Float {
         var res = baseEfficiency
 
         for (entry in floorCount) {
@@ -81,17 +83,17 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
         return res
     }
 
-    public override fun type(): ConsumeType<*>? {
+    override fun type(): ConsumeType<*> {
         return SglConsumeType.floor
     }
 
-    public override fun buildIcons(table: Table) {
+    override fun buildIcons(table: Table) {
         table.image(Icon.terrain)
     }
 
-    public override fun merge(baseConsume: BaseConsume<T>) {
-        if (baseConsume is SglConsumeFloor<*>) {
-            for (o in baseConsume.floorEff) {
+    override fun merge(other: BaseConsume<T>) {
+        if (other is SglConsumeFloor<*>) {
+            for (o in other.floorEff) {
                 if (o is ObjectFloatMap<*>) {
                     for (entry in (o as ObjectFloatMap<Floor?>)) {
                         floorEff.put(entry.key, floorEff.get(entry.key, 1f) * entry.value)
@@ -104,58 +106,58 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
         throw IllegalArgumentException("only merge consume with same type")
     }
 
-    public override fun consume(t: T) {
+    override fun consume(entity: T) {
         //no action
     }
 
-    public override fun update(t: T) {
+    override fun update(entity: T) {
         //no action
     }
 
-    public override fun display(stats: Stats) {
-        stats.add(Stat.tiles, StatValue { st: Table? ->
-            st!!.row().table(SglDrawConst.grayUIAlpha, Cons { t: Table? ->
-                t!!.clearChildren()
-                t.defaults().pad(5f).left()
-                var c = 0
-                for (entry in floorEff) {
-                    t.stack(
-                        Image(entry.key!!.uiIcon).setScaling(Scaling.fit),
-                        Table(Cons { table: Table? ->
-                            table!!.top().right().add((if (entry.value < 0) "[scarlet]" else if (baseEfficiency == 0f) "[accent]" else "[accent]+") + (entry.value * 100).toInt() + "%").style(Styles.outlineLabel)
-                            table.top().left().add("/" + StatUnit.blocks.localized()).color(Pal.gray)
-                        })
-                    ).fill().padRight(4f)
-                    t.add(entry.key!!.localizedName).left().padLeft(0f)
-                    c++
-
-                    if (c != 0 && c % 3 == 0) {
-                        t.row()
-                    }
+    override fun display(stats: Stats) {
+        stats.add(Stat.tiles) { st: Table? ->
+          st!!.row().table(SglDrawConst.grayUIAlpha) { t: Table? ->
+            t!!.clearChildren()
+            t.defaults().pad(5f).left()
+            var c = 0
+            for (entry in floorEff) {
+              t.stack(
+                Image(entry.key!!.uiIcon).setScaling(Scaling.fit),
+                Table { table: Table? ->
+                  table!!.top().right().add((if (entry.value < 0) "[scarlet]" else if (baseEfficiency == 0f) "[accent]" else "[accent]+") + (entry.value * 100).toInt() + "%").style(Styles.outlineLabel)
+                  table.top().left().add("/" + StatUnit.blocks.localized()).color(Pal.gray)
                 }
-            }).fill()
-        })
+              ).fill().padRight(4f)
+              t.add(entry.key!!.localizedName).left().padLeft(0f)
+              c++
+
+              if (c != 0 && c % 3 == 0) {
+                t.row()
+              }
+            }
+          }.fill()
+        }
     }
 
-    public override fun build(entity: T, table: Table) { /*none*/
+    override fun build(entity: T, table: Table) { /*none*/
     }
 
-    public override fun buildBars(t: T, bars: Table) {
+    override fun buildBars(entity: T, bars: Table) {
         bars.row()
         bars.add(
             Bar(
-                { Core.bundle.get("infos.floorEfficiency") + ": " + Strings.autoFixed(Mathf.round(efficiency(t) * 100).toFloat(), 0) + "%" },
+                { Core.bundle.get("infos.floorEfficiency") + ": " + Strings.autoFixed(Mathf.round(efficiency(entity) * 100).toFloat(), 0) + "%" },
                 { Pal.accent },
-                { Mathf.clamp(efficiency(t)) }
+                { Mathf.clamp(efficiency(entity)) }
             )).growX().height(18f).pad(4f)
         bars.row()
     }
 
-    public override fun efficiency(t: T): Float {
-        return getEff(t.floorCount())
+    override fun efficiency(entity: T): Float {
+        return getEff(entity.floorCount)
     }
 
-    public override fun filter(): Seq<Content?>? {
+    override fun filter(): Seq<Content?>? {
         return null
     }
 }

@@ -29,10 +29,10 @@ open class ClusterValve(name: String?) : ClusterConduit(name) {
         configurable = true
         outputsLiquid = true
 
-        config<Int?, ClusterValveBuild?>(Int::class.java, Cons2 { e: ClusterValveBuild?, i: Int? ->
-            e!!.currConfig = i!!
-        })
-        config(ByteArray::class.java) { e: ClusterValveBuild?, i: ByteArray? ->
+        config<Int?, ClusterValveBuild?>(Int::class.java) { e: ClusterValveBuild?, i: Int? ->
+          e!!.currConfig = i!!
+        }
+      config(ByteArray::class.java) { e: ClusterValveBuild?, i: ByteArray? ->
             when (i!![0].toInt()) {
                 0 -> e!!.input = !e.input
                 1 -> e!!.output = !e.output
@@ -40,34 +40,34 @@ open class ClusterValve(name: String?) : ClusterConduit(name) {
             }
         }
 
-        config<IntSeq?, ClusterValveBuild?>(IntSeq::class.java, Cons2 { e: ClusterValveBuild?, c: IntSeq? ->
-            if (c!!.get(0) == 0) {
-                e!!.configured[c.get(1)] = Vars.content.liquid(c.get(2))
-            } else if (c.get(0) == 1) {
-                e!!.liquidsBuffer = arrayOfNulls<ClusterLiquidModule>(c.get(4)) as Array<ClusterLiquidModule>
-                for (ind in e.liquidsBuffer.indices) {
-                    e.liquidsBuffer[ind] = ClusterLiquidModule()
-                }
-
-                e.input = c.get(1) == 1
-                e.output = c.get(2) == 1
-                e.blocking = c.get(3) == 1
-
-                e.configured = arrayOfNulls<Liquid>(c.get(4))
-                for (l in e.liquidsBuffer.indices) {
-                    e.configured[l] = Vars.content.liquid(c.get(l + 5))
-                }
+        config<IntSeq?, ClusterValveBuild?>(IntSeq::class.java) { e: ClusterValveBuild?, c: IntSeq? ->
+          if (c!!.get(0) == 0) {
+            e!!.configured[c.get(1)] = Vars.content.liquid(c.get(2))
+          } else if (c.get(0) == 1) {
+            e!!.liquidsBuffer = arrayOfNulls<ClusterLiquidModule>(c.get(4)) as Array<ClusterLiquidModule>
+            for (ind in e.liquidsBuffer.indices) {
+              e.liquidsBuffer[ind] = ClusterLiquidModule()
             }
-        })
+
+            e.input = c.get(1) == 1
+            e.output = c.get(2) == 1
+            e.blocking = c.get(3) == 1
+
+            e.configured = arrayOfNulls<Liquid>(c.get(4))
+            for (l in e.liquidsBuffer.indices) {
+              e.configured[l] = Vars.content.liquid(c.get(l + 5))
+            }
+          }
+        }
     }
 
-    public override fun drawPlanConfigTop(req: BuildPlan, list: Eachable<BuildPlan?>) {
+    override fun drawPlanConfigTop(req: BuildPlan, list: Eachable<BuildPlan?>) {
         Draw.rect(region, req.drawx(), req.drawy())
         Draw.rect(arrow, req.drawx(), req.drawy(), (req.rotation * 90).toFloat())
     }
 
-    public override fun icons(): Array<TextureRegion?>? {
-        return arrayOf<TextureRegion?>(
+    public override fun icons(): Array<TextureRegion?> {
+        return arrayOf(
             region,
             arrow
         )
@@ -83,23 +83,23 @@ open class ClusterValve(name: String?) : ClusterConduit(name) {
         var blocking: Boolean = false
         var currConfig: Int = 0
 
-        public override fun onReplaced(old: ReplaceBuildComp?) {
+        override fun onReplaced(old: ReplaceBuildComp?) {
             liquidsBuffer = old!!.getBuild<ClusterConduitBuild?>()!!.liquidsBuffer
             configured = arrayOfNulls<Liquid>(liquidsBuffer.size)
         }
 
         override fun buildConfiguration(table: Table) {
-            table.table(Cons { ta: Table? ->
-                ta!!.table(Styles.black6, Cons { conduits: Table? ->
-                    for (i in liquidsBuffer.indices) {
-                        val index = i
-                        conduits!!.button(
-                            Cons { t: Button? -> t!!.add(Core.bundle.get("misc.conduit") + "#" + index).left().grow() }, Styles.underlineb,
-                            Runnable { configure(index) }).update(Cons { b: Button? -> b!!.setChecked(index == currConfig) }).size(250f, 35f).pad(0f)
-                        conduits.row()
-                    }
-                })
-            }).top()
+            table.table { ta: Table? ->
+              ta!!.table(Styles.black6, Cons { conduits: Table? ->
+                for (i in liquidsBuffer.indices) {
+                  val index = i
+                  conduits!!.button(
+                    Cons { t: Button? -> t!!.add(Core.bundle.get("misc.conduit") + "#" + index).left().grow() }, Styles.underlineb,
+                    Runnable { configure(index) }).update(Cons { b: Button? -> b!!.setChecked(index == currConfig) }).size(250f, 35f).pad(0f)
+                  conduits.row()
+                }
+              })
+            }.top()
 
             table.table(Cons { tb: Table? ->
                 tb!!.clearChildren()

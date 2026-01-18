@@ -1,10 +1,7 @@
 package singularity.world.blocks.liquid
 
 import arc.Core
-import arc.func.Boolc
 import arc.func.Boolf
-import arc.func.Cons
-import arc.func.Cons2
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.scene.ui.Button
@@ -30,45 +27,45 @@ open class ConduitRiveting(name: String?) : ClusterConduit(name) {
         configurable = true
         outputsLiquid = true
 
-        config(IntSeq::class.java, Cons2 { e: ConduitRivetingBuild?, i: IntSeq? ->
-            e!!.liquidsBuffer = arrayOfNulls<ClusterLiquidModule>(i!!.get(0)) as Array<ClusterLiquidModule>
-            for (ind in e.liquidsBuffer.indices) {
-                e.liquidsBuffer[ind] = ClusterLiquidModule()
-            }
-            e.input = BooleanArray(i.get(0))
-            e.output = BooleanArray(i.get(0))
-            e.blocking = BooleanArray(i.get(0))
-            for (l in e.liquidsBuffer.indices) {
-                e.input[l] = i.get(l * 3 + 1) == 1
-                e.output[l] = i.get(l * 3 + 2) == 1
-                e.blocking[l] = i.get(l * 3 + 3) == 1
-            }
-        })
-        config<Int?, ConduitRivetingBuild?>(Int::class.java, Cons2 { e: ConduitRivetingBuild?, i: Int? ->
-            e!!.currConf = i!!
-        })
-        config<ByteArray?, ConduitRivetingBuild?>(ByteArray::class.java, Cons2 { e: ConduitRivetingBuild?, b: ByteArray? ->
-            when (b!![0].toInt()) {
-                0 -> e!!.input[e.currConf] = !e.input[e.currConf]
-                1 -> e!!.output[e.currConf] = !e.output[e.currConf]
-                2 -> e!!.blocking[e.currConf] = !e.blocking[e.currConf]
-            }
-        })
+        config(IntSeq::class.java) { e: ConduitRivetingBuild?, i: IntSeq? ->
+          e!!.liquidsBuffer = arrayOfNulls<ClusterLiquidModule>(i!!.get(0)) as Array<ClusterLiquidModule>
+          for (ind in e.liquidsBuffer.indices) {
+            e.liquidsBuffer[ind] = ClusterLiquidModule()
+          }
+          e.input = BooleanArray(i.get(0))
+          e.output = BooleanArray(i.get(0))
+          e.blocking = BooleanArray(i.get(0))
+          for (l in e.liquidsBuffer.indices) {
+            e.input[l] = i.get(l * 3 + 1) == 1
+            e.output[l] = i.get(l * 3 + 2) == 1
+            e.blocking[l] = i.get(l * 3 + 3) == 1
+          }
+        }
+      config(Int::class.java) { e: ConduitRivetingBuild?, i: Int? ->
+          e!!.currConf = i!!
+        }
+      config(ByteArray::class.java) { e: ConduitRivetingBuild?, b: ByteArray? ->
+          when (b!![0].toInt()) {
+            0 -> e!!.input[e.currConf] = !e.input[e.currConf]
+            1 -> e!!.output[e.currConf] = !e.output[e.currConf]
+            2 -> e!!.blocking[e.currConf] = !e.blocking[e.currConf]
+          }
+        }
 
-        configClear<ConduitRivetingBuild?>(Cons { e: ConduitRivetingBuild? ->
-            e!!.currConf = 0
-            e.input = BooleanArray(e.liquidsBuffer.size)
-            e.output = BooleanArray(e.liquidsBuffer.size)
-        })
+      configClear { e: ConduitRivetingBuild? ->
+        e!!.currConf = 0
+        e.input = BooleanArray(e.liquidsBuffer.size)
+        e.output = BooleanArray(e.liquidsBuffer.size)
+      }
     }
 
-    public override fun drawPlanConfigTop(req: BuildPlan, list: Eachable<BuildPlan?>) {
+    override fun drawPlanConfigTop(req: BuildPlan, list: Eachable<BuildPlan?>) {
         Draw.rect(region, req.drawx(), req.drawy())
         Draw.rect(arrow, req.drawx(), req.drawy(), (req.rotation * 90).toFloat())
     }
 
-    public override fun icons(): Array<TextureRegion?>? {
-        return arrayOf<TextureRegion?>(
+    override fun icons() : Array<TextureRegion?> {
+        return arrayOf(
             region,
             arrow
         )
@@ -80,39 +77,38 @@ open class ConduitRiveting(name: String?) : ClusterConduit(name) {
         var   blocking = BooleanArray(liquidsBuffer.size)
         var currConf: Int = 0
 
-        public override fun draw() {
+        override fun draw() {
             Draw.rect(region, x, y)
             Draw.rect(arrow, x, y, (rotation * 90).toFloat())
         }
 
-        public override fun onReplaced(old: ReplaceBuildComp?) {
+        override fun onReplaced(old: ReplaceBuildComp?) {
             liquidsBuffer = old!!.getBuild<ClusterConduitBuild?>()!!.liquidsBuffer
         }
 
         override fun buildConfiguration(table: Table) {
-            table.table(Styles.black6, Cons { t: Table? ->
-                for (i in liquidsBuffer.indices) {
-                    val index = i
-                    t!!.button(Cons { ta: Button? -> ta!!.add(Core.bundle.get("misc.conduit") + "#" + index).left().grow() }, Styles.underlineb, Runnable { configure(index) })
-                        .update(Cons { b: Button? -> b!!.setChecked(index == currConf) }).size(250f, 35f).pad(0f)
-                    t.row()
-                }
-            }).fill()
-            table.table(Styles.black6, Cons { t: Table? ->
-                t!!.defaults().left().top().height(45f).minWidth(170f).padRight(12f).left().growX()
-                t.check(Core.bundle.get("infos.inputMode"), Boolc { b: Boolean -> configure(byteArrayOf(0)) })
-                    .update(Cons { c: CheckBox? -> c!!.setChecked(input[currConf]) }).get().left()
+            table.table(Styles.black6) { t: Table? ->
+              for (i in liquidsBuffer.indices) {
+                t!!.button({ ta: Button? -> ta!!.add(Core.bundle.get("misc.conduit") + "#" + i).left().grow() }, Styles.underlineb, { configure(i) })
+                  .update { b: Button? -> b!!.setChecked(i == currConf) }.size(250f, 35f).pad(0f)
                 t.row()
-                t.check(Core.bundle.get("infos.outputMode"), Boolc { b: Boolean -> configure(byteArrayOf(1)) })
-                    .update(Cons { c: CheckBox? -> c!!.setChecked(output[currConf]) }).get().left()
-                t.row()
-                t.check(Core.bundle.get("infos.blocking"), Boolc { b: Boolean -> configure(byteArrayOf(2)) })
-                    .update(Cons { c: CheckBox? -> c!!.setChecked(blocking[currConf]) })
-                    .disabled(Boolf { c: CheckBox? -> input[currConf] || !output[currConf] }).get().left()
-            }).top().fill().padLeft(0f)
+              }
+            }.fill()
+            table.table(Styles.black6) { t: Table? ->
+              t!!.defaults().left().top().height(45f).minWidth(170f).padRight(12f).left().growX()
+              t.check(Core.bundle.get("infos.inputMode")) { b: Boolean -> configure(byteArrayOf(0)) }
+                .update { c: CheckBox? -> c!!.setChecked(input[currConf]) }.get().left()
+              t.row()
+              t.check(Core.bundle.get("infos.outputMode")) { b: Boolean -> configure(byteArrayOf(1)) }
+                .update { c: CheckBox? -> c!!.setChecked(output[currConf]) }.get().left()
+              t.row()
+              t.check(Core.bundle.get("infos.blocking")) { b: Boolean -> configure(byteArrayOf(2)) }
+                .update { c: CheckBox? -> c!!.setChecked(blocking[currConf]) }
+                .disabled { c: CheckBox? -> input[currConf] || !output[currConf] }.get().left()
+            }.top().fill().padLeft(0f)
         }
 
-        public override fun moveLiquidForward(leaks: Boolean, liquid: Liquid?): Float {
+        override fun moveLiquidForward(leaks: Boolean, liquid: Liquid?): Float {
             val next = tile.nearby(rotation)
             var flow = 0f
             for (i in liquidsBuffer.indices) {
@@ -121,8 +117,7 @@ open class ConduitRiveting(name: String?) : ClusterConduit(name) {
                 if (liquid != null && liquids.current !== liquid) continue
 
                 if (output[i]) {
-                    val i1 = i
-                    val other = getNext(groupName(i), Boolf { e: Building? ->
+                  val other = getNext(groupName(i), Boolf { e: Building? ->
                         if (!e!!.interactable(team)) return@Boolf false
                         val rot = relativeTo(e).toInt()
                         if (rot == (rotation + 1) % 4 || rot == (rotation + 3) % 4) {
@@ -130,8 +125,8 @@ open class ConduitRiveting(name: String?) : ClusterConduit(name) {
                                 if (e is ClusterConduitBuild) {
                                     if (e.tile.absoluteRelativeTo(tile.x.toInt(), tile.y.toInt()).toInt() == e.rotation) return@Boolf false
                                 }
-                                return@Boolf e.conduitAccept(this, i1, liquidsBuffer[i1].current())
-                            } else return@Boolf (e.block.hasLiquids && e.acceptLiquid(this, liquidsBuffer[i1].current()))
+                                return@Boolf e.conduitAccept(this, i, liquidsBuffer[i].current())
+                            } else return@Boolf (e.block.hasLiquids && e.acceptLiquid(this, liquidsBuffer[i].current()))
                         }
                         false
                     })
@@ -196,7 +191,7 @@ open class ConduitRiveting(name: String?) : ClusterConduit(name) {
             return source.interactable(team) && (liquids.currentAmount() < 0.01f || liquids.current() === liquid && liquids.currentAmount() < liquidCapacity)
         }
 
-        public override fun getModuleAccept(source: Building?, liquid: Liquid?): LiquidModule? {
+        override fun getModuleAccept(source: Building?, liquid: Liquid?): LiquidModule? {
             for (i in liquidsBuffer.indices) {
                 if (!input[i]) continue
                 val liquids: LiquidModule = liquidsBuffer[i]
@@ -205,7 +200,7 @@ open class ConduitRiveting(name: String?) : ClusterConduit(name) {
             return null
         }
 
-        public override fun write(write: Writes) {
+        override fun write(write: Writes) {
             super.write(write)
             write.i(input.size)
             for (i in input.indices) {
@@ -215,7 +210,7 @@ open class ConduitRiveting(name: String?) : ClusterConduit(name) {
             }
         }
 
-        public override fun read(read: Reads, revision: Byte) {
+        override fun read(read: Reads, revision: Byte) {
             super.read(read, revision)
             val len = read.i()
             input = BooleanArray(len)

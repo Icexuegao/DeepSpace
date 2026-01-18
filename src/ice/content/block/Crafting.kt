@@ -10,7 +10,6 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.graphics.IceColor
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
@@ -50,9 +49,9 @@ object Crafting : Load {
         flameColor = IceColor.c5
         consumePower(20 / 60f)
         requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5)
-        bundle {
-            desc(zh_CN, "物品焚烧炉")
-        }
+      bundle {
+        desc(zh_CN, "物品焚烧炉")
+      }
     }
     val 液体焚烧炉 = Incinerator("liquidIncinerator").apply {
         size = 1
@@ -60,18 +59,18 @@ object Crafting : Load {
         flameColor = IceColor.b7
         consumePower(20 / 60f)
         requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5)
-        bundle {
-            desc(zh_CN, "液体焚烧炉")
-        }
+      bundle {
+        desc(zh_CN, "液体焚烧炉")
+      }
     }
     val 焚烧炉 = Incinerator("incinerator").apply {
         size = 1
         flameColor = IceColor.b4
         consumePower(20 / 60f)
         requirements(Category.crafting, IItems.高碳钢, 20, IItems.铅锭, 5)
-        bundle {
-            desc(zh_CN, "焚烧炉")
-        }
+      bundle {
+        desc(zh_CN, "焚烧炉")
+      }
     }
     val 量子蚀刻厂 = GenericCrafter("integratedFactory").apply {
         drawers = DrawMulti(DrawRegion("-bottom"), DrawRegion("-top"))
@@ -84,9 +83,9 @@ object Crafting : Load {
             MultiEffect(IceEffects.lancerLaserShoot1, IceEffects.lancerLaserChargeBegin, IceEffects.hitLaserBlast)
         size = 3
         requirements(Category.crafting, ItemStack.with(IItems.铜锭, 19))
-        bundle {
-            desc(zh_CN, "量子蚀刻厂", "采用等离子蚀刻技术,在硅晶圆上雕刻出微米级电路,电子工业的基础设施")
-        }
+      bundle {
+        desc(zh_CN, "量子蚀刻厂", "采用等离子蚀刻技术,在硅晶圆上雕刻出微米级电路,电子工业的基础设施")
+      }
     }
     val 单晶硅厂 = GenericCrafter("monocrystallineSiliconFactory").apply {
         size = 4
@@ -110,9 +109,9 @@ object Crafting : Load {
             Draw.color()
         }, DrawDefault(), DrawFlame(color))
         requirements(Category.crafting, IItems.铬锭, 55, IItems.高碳钢, 200, IItems.铜锭, 150)
-        bundle {
-            desc(zh_CN, "单晶硅厂", "使用硫化物和石英矿石生产纯度更高的单晶硅")
-        }
+      bundle {
+        desc(zh_CN, "单晶硅厂", "使用硫化物和石英矿石生产纯度更高的单晶硅")
+      }
     }
     val 铸铜厂 = GenericCrafter("copperFoundry").apply {
         size = 4
@@ -123,19 +122,19 @@ object Crafting : Load {
         consumeItems(*ItemStack.with(IItems.铜锭, 3, IItems.锌锭, 1))
         requirements(Category.crafting, ItemStack.with(IItems.铜锭, 200, IItems.低碳钢, 150))
         craftEffect = IceEffects.square(IItems.铜锭.color)
-        bundle {
-            desc(zh_CN, "铸铜厂")
-        }
+      bundle {
+        desc(zh_CN, "铸铜厂")
+      }
     }
     val 碳控熔炉 = MultipleCrafter("carbonSteelFactory").apply {
         bundle {
-            desc(
-                zh_CN,
-                "碳控熔炉",
-                "通过精确控制碳元素配比,在同一生产线灵活产出高碳钢和低碳钢,稳定的温度控制确保钢材质量始终达标"
-            )
+          desc(
+            zh_CN,
+            "碳控熔炉",
+            "通过精确控制碳元素配比,在同一生产线灵活产出高碳钢和低碳钢,稳定的温度控制确保钢材质量始终达标"
+          )
         }
-        size = 3
+      size = 3
         itemCapacity = 50
         alwaysUnlocked = true
         val ct = RadialEffect().apply {
@@ -177,13 +176,13 @@ object Crafting : Load {
     }
     val 普适冶炼阵列 = MultipleCrafter("universalSmelterArray").apply {
         bundle {
-            desc(
-                zh_CN,
-                "普适冶炼阵列",
-                "核心级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铜,锌,铅等多种金属原料,为后续生产提供稳定的金属供应"
-            )
+          desc(
+            zh_CN,
+            "普适冶炼阵列",
+            "核心级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铜,锌,铅等多种金属原料,为后续生产提供稳定的金属供应"
+          )
         }
-        size = 3
+      size = 3
         itemCapacity = 30
         addFormula {
             craftTime = 45f
@@ -215,9 +214,9 @@ object Crafting : Load {
         craftTime = 45f
         outputItems(IItems.硫化合物, 3)
         requirements(Category.crafting, IItems.高碳钢, 150, IItems.铜锭, 30, IItems.铬锭, 30)
-        bundle {
-            desc(zh_CN, "硫化物混合器", "将煤,铅,沙混合生成硫化合物")
-        }
+      bundle {
+        desc(zh_CN, "硫化物混合器", "将煤,铅,沙混合生成硫化合物")
+      }
     }
     val 爆炸物混合器 = GenericCrafter("explosiveMixer").apply {
         size = 3
@@ -228,19 +227,19 @@ object Crafting : Load {
         craftEffect = IceEffects.square(IItems.爆炸化合物.color)
         outputItems(IItems.爆炸化合物, 3)
         requirements(Category.crafting, IItems.高碳钢, 80, IItems.铬锭, 50, IItems.单晶硅, 30)
-        bundle {
-            desc(zh_CN, "爆炸物混合器", "将硫化合物,燃素水晶混合生成爆炸物")
-        }
+      bundle {
+        desc(zh_CN, "爆炸物混合器", "将硫化合物,燃素水晶混合生成爆炸物")
+      }
     }
     val 特化冶炼阵列: MultipleCrafter = MultipleCrafter("specializedSmelterArray").apply {
         bundle {
-            desc(
-                zh_CN,
-                "特化冶炼阵列",
-                "进阶级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铬,金,钴等多种金属原料,为后续生产提供稳定的金属供应"
-            )
+          desc(
+            zh_CN,
+            "特化冶炼阵列",
+            "进阶级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铬,金,钴等多种金属原料,为后续生产提供稳定的金属供应"
+          )
         }
-        size = 3
+      size = 3
         itemCapacity = 35
         addFormula {
             craftTime = 60f
@@ -316,14 +315,14 @@ object Crafting : Load {
             spread = 2 * 8f - 6f
         }, DrawDefault())
         requirements(Category.crafting, IItems.铬锭, 50, IItems.铜锭, 20, IItems.锌锭, 30, IItems.黄铜锭, 10)
-        bundle {
-            desc(
-                zh_CN,
-                "蜂巢陶瓷合成巢",
-                "利用基因改造的硅基菌群分泌陶瓷基质,再经激光固化,生产过程中会发出蜂鸣般的共振声",
-                "资源蜜蜂?"
-            )
-        }
+      bundle {
+        desc(
+          zh_CN,
+          "蜂巢陶瓷合成巢",
+          "利用基因改造的硅基菌群分泌陶瓷基质,再经激光固化,生产过程中会发出蜂鸣般的共振声",
+          "资源蜜蜂?"
+        )
+      }
     }
     val 冲压锻炉 = GenericCrafter("pressingForge").apply {
         size = 5
@@ -349,9 +348,9 @@ object Crafting : Load {
             color = Color.valueOf("F0511D")
         })
         ambientSoundVolume = 0.07f
-        bundle {
-            desc(zh_CN, "冲压锻炉", "快速大批量地熔炼铱锇矿并将其锻压为铱板", "熔炼,锻压,一次成型,是锻炉中的豪杰")
-        }
+      bundle {
+        desc(zh_CN, "冲压锻炉", "快速大批量地熔炼铱锇矿并将其锻压为铱板", "熔炼,锻压,一次成型,是锻炉中的豪杰")
+      }
     }
     val 暮白高炉 = GenericCrafter("duskFactory").apply {
         size = 3
@@ -385,9 +384,9 @@ object Crafting : Load {
         consumeItems(IItems.低碳钢, 5, IItems.铬锭, 1, IItems.钴锭, 3, IItems.铪锭, 1)
         consumeLiquid(ILiquids.暮光液, 0.3f)
         requirements(Category.crafting, IItems.高碳钢, 200, IItems.铬锭, 50, IItems.钴锭, 30, IItems.铪锭, 10)
-        bundle {
-            desc(zh_CN, "暮白高炉", "将金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金")
-        }
+      bundle {
+        desc(zh_CN, "暮白高炉", "将金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金")
+      }
     }
     val 玳渊缚能厂 = GenericCrafter("tortoiseshellFactory").apply {
         size = 4
@@ -400,13 +399,13 @@ object Crafting : Load {
         outputItems(IItems.玳渊矩阵, 1)
         consumeItems(IItems.铪锭, 10, IItems.暮光合金, 3, IItems.铱板, 1)
         requirements(Category.crafting, IItems.铬锭, 300, IItems.铪锭, 200, IItems.黄铜锭, 170)
-        bundle {
-            desc(
-                zh_CN,
-                "玳渊缚能厂",
-                "枢机批准的能量设施,将狂暴的玳渊能量封印在稳定的矩阵结构中,每一块矩阵都蕴含着巨大的能量"
-            )
-        }
+      bundle {
+        desc(
+          zh_CN,
+          "玳渊缚能厂",
+          "枢机批准的能量设施,将狂暴的玳渊能量封印在稳定的矩阵结构中,每一块矩阵都蕴含着巨大的能量"
+        )
+      }
     }
     val 萃取固化器 = GenericCrafter("concentrateSolidifier").apply {
         size = 3
@@ -419,9 +418,9 @@ object Crafting : Load {
         outputItems(IItems.铪锭, 1)
         consumeItems(IItems.锆英石, 3)
         requirements(Category.crafting, IItems.高碳钢, 100, IItems.铬锭, 80, IItems.黄铜锭, 50, IItems.铜锭, 30)
-        bundle {
-            desc(zh_CN, "萃取固化器", "")
-        }
+      bundle {
+        desc(zh_CN, "萃取固化器", "")
+      }
     }
     val 电弧炉 = GenericCrafter("arcFurnace").apply {
         size = 3
@@ -432,9 +431,9 @@ object Crafting : Load {
         consumeItems(IItems.铅锭, 3, IItems.石英, 2, IItems.金珀沙, 2)
         setDrawMulti(DrawDefault(), DrawFlame())
         requirements(Category.crafting, IItems.高碳钢, 80, IItems.铅锭, 50, IItems.铜锭, 50, IItems.锌锭, 30)
-        bundle {
-            desc(zh_CN, "电弧炉")
-        }
+      bundle {
+        desc(zh_CN, "电弧炉")
+      }
     }
     val 铈提取器 = CeriumExtractor("ceriumExtractor").apply {
         size = 3
@@ -485,9 +484,9 @@ object Crafting : Load {
             rotateScl = 360f
             reverse = true
         })
-        bundle {
-            desc(zh_CN, "铈提取器", "在特制的高压反应釜内,通过液相沉淀的方式从钍中提取铈")
-        }
+      bundle {
+        desc(zh_CN, "铈提取器", "在特制的高压反应釜内,通过液相沉淀的方式从钍中提取铈")
+      }
     }
     val 增压铈萃取器 = CeriumExtractor("ceriumExtractorLarge").apply {
         size = 4
@@ -540,13 +539,13 @@ object Crafting : Load {
             rotateScl = 360f
             reverse = true
         })
-        bundle {
-            desc(
-                zh_CN,
-                "增压铈萃取器",
-                "在特制的超高压密封反应釜内,通过液相沉淀的方式萃取铈\n相较初代密封性更强,具有更高的压力,能够更迅速的萃取铈"
-            )
-        }
+      bundle {
+        desc(
+          zh_CN,
+          "增压铈萃取器",
+          "在特制的超高压密封反应釜内,通过液相沉淀的方式萃取铈\n相较初代密封性更强,具有更高的压力,能够更迅速的萃取铈"
+        )
+      }
     }
     val 导能回路装配器 = GenericCrafter("conductiveCircuitAssembler").apply {
         size = 5
@@ -582,14 +581,14 @@ object Crafting : Load {
         ambientSoundVolume = 0.08f
         requirements(Category.crafting, IItems.铱板, 140, IItems.单晶硅, 50, IItems.铪锭, 30, IItems.铬锭, 100)
 
-        bundle {
-            desc(
-                zh_CN,
-                "导能回路装配器",
-                "持续开启相位时间场,减缓局部时间以同时进行多种精密零件的制作",
-                "[#9B929D]为什么总有人管她叫灵魂熔炉[]"
-            )
-        }
+      bundle {
+        desc(
+          zh_CN,
+          "导能回路装配器",
+          "持续开启相位时间场,减缓局部时间以同时进行多种精密零件的制作",
+          "[#9B929D]为什么总有人管她叫灵魂熔炉[]"
+        )
+      }
     }
     val 高速粉碎机 = GenericCrafter("highSpeedCrusher").apply {
         size = 2
@@ -607,9 +606,9 @@ object Crafting : Load {
         ambientSound = Sounds.loopGrind
         ambientSoundVolume = 0.025f
         requirements(Category.crafting, IItems.高碳钢, 100, IItems.铜锭, 50, IItems.铅锭, 30, IItems.低碳钢, 20)
-        bundle {
-            desc(zh_CN, "高速粉碎机")
-        }
+      bundle {
+        desc(zh_CN, "高速粉碎机")
+      }
     }
     val 钴钢压缩机 = GenericCrafter("cobaltSteelCompressor").apply {
         size = 3
@@ -635,9 +634,9 @@ object Crafting : Load {
             glowScale = 5.652f
             color = Color.valueOf("F0511D")
         })
-        bundle {
-            desc(zh_CN, "钴钢压缩机")
-        }
+      bundle {
+        desc(zh_CN, "钴钢压缩机")
+      }
     }
     val 陶钢熔炼炉 = GenericCrafter("ceramicSteelFurnace").apply {
         size = 3
@@ -652,9 +651,9 @@ object Crafting : Load {
         setDrawMulti(DrawDefault(), DrawFlame())
         ambientSound = ISounds.beamLoop
         ambientSoundVolume = 0.02f
-        bundle {
-            desc(zh_CN, "陶钢熔炼炉", "使用多种原料熔炼一种前所未见的多功能装甲材料-陶钢")
-        }
+      bundle {
+        desc(zh_CN, "陶钢熔炼炉", "使用多种原料熔炼一种前所未见的多功能装甲材料-陶钢")
+      }
     }
     val 高能陶钢聚合炉 = GenericCrafter("highEnergyCeramicSteelFurnace").apply {
         size = 5
@@ -708,13 +707,13 @@ object Crafting : Load {
         })
         ambientSound = ISounds.beamLoop
         ambientSoundVolume = 0.03f
-        bundle {
-            desc(
-                zh_CN,
-                "高能陶钢聚合炉",
-                "依靠高能激光持续熔融原料以快速熔炼陶钢\n相比普通熔炼炉,熔炼效率及产物质量都有显著提升"
-            )
-        }
+      bundle {
+        desc(
+          zh_CN,
+          "高能陶钢聚合炉",
+          "依靠高能激光持续熔融原料以快速熔炼陶钢\n相比普通熔炼炉,熔炼效率及产物质量都有显著提升"
+        )
+      }
     }
     val 铈凝块混合器 = GenericCrafter("ceriumBlockMixer").apply {
         size = 2
@@ -728,8 +727,8 @@ object Crafting : Load {
         setDrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
             rotateSpeed = 3f
         }, DrawDefault(), DrawRegion("-top"))
-        bundle {
-            desc(zh_CN, "铈凝块混合器", "在特制的防静电车间内,研磨铈并与爆炸混合物混合后压制成型")
-        }
+      bundle {
+        desc(zh_CN, "铈凝块混合器", "在特制的防静电车间内,研磨铈并与爆炸混合物混合后压制成型")
+      }
     }
 }

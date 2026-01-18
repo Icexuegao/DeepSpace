@@ -24,7 +24,6 @@ import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
-import singularity.Sgl;
 import singularity.graphic.SglDraw;
 import singularity.graphic.SglDrawConst;
 import singularity.world.blocks.defence.GameOfLife;
@@ -861,7 +860,6 @@ public class SglFx{
 
     @Override
     public LightningContainer createLightning(float x, float y){
-      if(!Sgl.config.enableLightning) return null;
 
       if(!(data instanceof Float)) data = 90f;
       LightningContainer.PoolLightningContainer lightning = LightningContainer.PoolLightningContainer.create(lifetime, 1.4f, 2.5f);
@@ -910,7 +908,6 @@ public class SglFx{
     }
 
     public LightningContainer createLightning(float x, float y){
-      if(!Sgl.config.enableLightning) return null;
 
       LightningContainer.PoolLightningContainer lightning = LightningContainer.PoolLightningContainer.create(lifetime, 1.5f,2.6f);
 

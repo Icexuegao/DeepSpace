@@ -19,7 +19,6 @@ import mindustry.gen.Bullet;
 import mindustry.gen.Groups;
 import mindustry.gen.Unit;
 import mindustry.type.UnitType;
-import singularity.Sgl;
 import singularity.graphic.SglDraw;
 
 public class MirrorFieldAbility extends MirrorShieldBase{
@@ -123,7 +122,7 @@ public class MirrorFieldAbility extends MirrorShieldBase{
 
       Draw.color(unit.team.color, Color.white, Mathf.clamp(alpha));
 
-      if(Sgl.config.enableShaders && Core.settings.getBool("animatedshields")){
+      if(true){
         Draw.z(SglDraw.mirrorField + 0.001f * alpha);
         Fill.poly(drawX, drawY, sides, radius*scl, rotation + angle + moveOffsetRot);
       }else{

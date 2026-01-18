@@ -16,6 +16,7 @@ import arc.scene.ui.layout.Table;
 import arc.util.Time;
 import arc.util.Tmp;
 import arc.util.pooling.Pools;
+import ice.content.IItems;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.entities.Damage;
@@ -35,7 +36,7 @@ import mindustry.ui.Styles;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.meta.BlockFlag;
 import singularity.Sgl;
-import singularity.contents.SglItems;
+
 import singularity.contents.SglTurrets;
 import singularity.graphic.MathRenderer;
 import singularity.graphic.SglDraw;
@@ -49,6 +50,7 @@ import singularity.world.blocks.turrets.LightLaserBulletType;
 import singularity.world.blocks.turrets.MultiTrailBulletType;
 import singularity.world.draw.part.CustomPart;
 import singularity.world.unit.DataWeapon;
+import singularity.world.unit.SglUnitEntity;
 import singularity.world.unit.SglUnitType;
 import singularity.world.unit.SglWeapon;
 import singularity.world.unit.abilities.MirrorArmorAbility;
@@ -59,21 +61,21 @@ import universecore.world.lightnings.generator.VectorLightningGenerator;
 import static mindustry.Vars.headless;
 import static mindustry.Vars.world;
 
-public class EmptinessType extends SglUnitType<UnitEntity> {
+public class EmptinessType extends SglUnitType<SglUnitEntity> {
   private static final Rand rand = new Rand();
 
   public EmptinessType() {
-    super("emptinessunc");
+    super("emptinessunc",SglUnitEntity.class);
     requirements(
         Items.phaseFabric, 200,
         Items.surgeAlloy, 280,
-        SglItems.aerogel, 400,
-        SglItems.crystal_FEX_power, 300,
-        SglItems.strengthening_alloy, 560,
-        SglItems.iridium, 380,
-        SglItems.matrix_alloy, 420,
-        SglItems.degenerate_neutron_polymer, 420,
-        SglItems.anti_metter, 280
+            IItems.INSTANCE.get气凝胶(), 400,
+            IItems.INSTANCE.get充能FEX水晶(), 300,
+            IItems.INSTANCE.get强化合金(), 560,
+            IItems.INSTANCE.get铱(), 380,
+            IItems.INSTANCE.get矩阵合金(), 420,
+            IItems.INSTANCE.get简并态中子聚合物(), 420,
+            IItems.INSTANCE.get反物质(), 280
     );
 
     armor = 9;
@@ -182,7 +184,7 @@ public class EmptinessType extends SglUnitType<UnitEntity> {
         linearWarmup = false;
         minWarmup = 0.9f;
 
-        //shootSound = Sounds.lasershoot;
+        shootSound = Sounds.shootLaser;
 
         bullet = new BulletType() {
           {
@@ -251,9 +253,7 @@ public class EmptinessType extends SglUnitType<UnitEntity> {
             Fill.circle(b.x, b.y, 6 + 2*delay);
             SglDraw.drawDiamond(b.x, b.y, 24, 8*delay, b.rotation());
 
-            SglDraw.drawTransform(b.x, b.y, 4*delay, 0, b.rotation(), (x, y, r) -> {
-              SglDraw.gapTri(x, y, 12*delay, 16 + 16*delay, 14, r);
-            });
+            SglDraw.drawTransform(b.x, b.y, 4*delay, 0, b.rotation(), (x, y, r) -> SglDraw.gapTri(x, y, 12*delay, 16 + 16*delay, 14, r));
 
             Draw.color(Color.black);
             Fill.circle(b.x, b.y, 5*delay);
@@ -315,6 +315,7 @@ public class EmptinessType extends SglUnitType<UnitEntity> {
         t.row();
         t.add(coll).padLeft(16);
       }
+
 
       @Override
       public void init(Unit unit, DataWeaponMount mount) {

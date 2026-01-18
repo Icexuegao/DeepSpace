@@ -1,6 +1,5 @@
 package ice
 
-import arc.Core
 import ice.async.ParcelProcess
 import ice.audio.SoundControl
 import ice.content.*
@@ -12,7 +11,6 @@ import ice.game.IceTeam
 import ice.library.EventType
 import ice.library.IFiles
 import ice.library.Schematics
-import ice.shader.SglShaders
 import ice.ui.UI
 import ice.ui.bundle.BaseBundle
 import ice.vars.SglTechThree
@@ -32,6 +30,8 @@ open class Ice : Mod() {
     var displayName = IFiles.modWithClass.displayName
     var version = IFiles.modWithClass.version
     val singularity = Singularity()
+    const val githubProjectUrl = "https://github.com/Icexuegao/DeepSpace"
+    const val qqGrops="https://qm.qq.com/q/3CR3cn2Wc8"
   }
 
   init {
@@ -48,10 +48,6 @@ open class Ice : Mod() {
   override fun init() {
     UncCore.init()
     singularity.init()
-    if (!Core.app.isHeadless) {
-      //载入着色器
-      SglShaders.load()
-    }
     //  SglTechTreeDialog().show()
     UI.init()
     Remainss.init()

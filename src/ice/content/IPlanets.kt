@@ -8,7 +8,6 @@ import ice.game.IceTeam
 import ice.graphics.IceColor
 import ice.library.world.Load
 import ice.maps.planet.ardery.ArderyPlanetGenerator
-import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.game.Team
 import mindustry.graphics.g3d.HexMesh
@@ -29,9 +28,9 @@ object IPlanets : Load {
                 Color.valueOf("abe0fd"), Color.valueOf("abe0fd"), Color.valueOf("afd6ec"), Color.valueOf("afd6ec")
             )
         }
-        bundle {
-            desc(zh_CN, "伊甸")
-        }
+      bundle {
+        desc(zh_CN, "伊甸")
+      }
     }
     var 阿德里 = Planet("ardery", 伊甸, 1f, 4).apply {
         generator = ArderyPlanetGenerator()
@@ -78,9 +77,9 @@ object IPlanets : Load {
             r.showSpawns = false
             r.coreDestroyClear = true
         }
-        bundle {
-            desc(zh_CN, "阿德里")
-        }
+      bundle {
+        desc(zh_CN, "阿德里")
+      }
     }
 
 }

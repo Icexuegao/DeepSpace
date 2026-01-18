@@ -14,7 +14,6 @@ import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
 import ice.library.util.toColor
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
@@ -51,9 +50,9 @@ object Power : Load {
         fogRadius = 1
         buildCostMultiplier = 2.5f
         consumePowerBuffered(200f)
-        bundle {
-            desc(zh_CN, "能量节点")
-        }
+      bundle {
+        desc(zh_CN, "能量节点")
+      }
     }
     val 神经索节点 = PowerNode("neuralNode").apply {
         healAmount = 5f
@@ -61,15 +60,15 @@ object Power : Load {
         armor = 4f
         maxNodes = 12
         laserRange = 12f
-        hasPower = true
-        consumesPower = true
+      consumesPower = true
+      outputsPower = true
         consumePowerBuffered(16000f)
         laserColor1 = Color.valueOf("E78F92")
         laserColor2 = Color.valueOf("D75B6E")
         requirements(Category.power, IItems.铱板, 5, IItems.导能回路, 2, IItems.生物钢, 1)
-        bundle {
-            desc(zh_CN, "神经索节点", "向连接的建筑传输电力,生物和机械融合的第一步")
-        }
+      bundle {
+        desc(zh_CN, "神经索节点", "向连接的建筑传输电力,生物和机械融合的第一步")
+      }
     }
     val 神经束节点 = PowerNode("neuralBeamNode").apply {
         healAmount = 20f
@@ -77,15 +76,15 @@ object Power : Load {
         armor = 8f
         maxNodes = 24
         laserRange = 24f
-        hasPower = true
-        consumesPower = true
+      consumesPower = true
+      outputsPower = true
         consumePowerBuffered(80000f)
         laserColor1 = Color.valueOf("E78F92")
         laserColor2 = Color.valueOf("D75B6E")
         requirements(Category.power, IItems.铱板, 10, IItems.导能回路, 5, IItems.生物钢, 1)
-        bundle {
-            desc(zh_CN, "神经束节点", "具有更大范围的高级电力节点")
-        }
+      bundle {
+        desc(zh_CN, "神经束节点", "具有更大范围的高级电力节点")
+      }
     }
     val 远程能量节点 = PowerNode("remotePowerNode").apply {
         size = 3
@@ -93,13 +92,13 @@ object Power : Load {
         maxNodes = 4
         laserRange = 100f
         category = Category.power
-        hasPower = true
-        consumesPower = true
+      consumesPower = true
+      outputsPower = true
         consumePowerBuffered(50000f)
         requirements(Category.power, IItems.铅锭, 15, IItems.铱板, 15, IItems.导能回路, 10, IItems.暮光合金, 5)
-        bundle {
-            desc(zh_CN, "远程能量节点", "具有超大范围的高级电力节点")
-        }
+      bundle {
+        desc(zh_CN, "远程能量节点", "具有超大范围的高级电力节点")
+      }
     }
     val 小型能量电池: Block = Battery("smallPowerBattery").apply {
         size = 1
@@ -109,9 +108,9 @@ object Power : Load {
         fullLightColor = IceColor.b4
         consumePowerBuffered(3500f)
         requirements(Category.power, IItems.低碳钢, 5, IItems.高碳钢, 20, IItems.铅锭, 20)
-        bundle {
-            desc(zh_CN, "小型能量电池")
-        }
+      bundle {
+        desc(zh_CN, "小型能量电池")
+      }
     }
     val 能量电池: Block = Battery("powerBattery").apply {
         size = 2
@@ -121,9 +120,9 @@ object Power : Load {
         fullLightColor = IceColor.b4
         consumePowerBuffered(15000f)
         requirements(Category.power, IItems.低碳钢, 10, IItems.高碳钢, 20, IItems.黄铜锭, 30, IItems.铅锭, 50)
-        bundle {
-            desc(zh_CN, "能量电池")
-        }
+      bundle {
+        desc(zh_CN, "能量电池")
+      }
     }
     val 大型能量电池: Block = Battery("largePowerBattery").apply {
         size = 4
@@ -133,9 +132,9 @@ object Power : Load {
         fullLightColor = IceColor.b4
         consumePowerBuffered(1000000f)
         requirements(Category.power, IItems.铅锭, 150, IItems.铱板, 145, IItems.导能回路, 85, IItems.陶钢, 30)
-        bundle {
-            desc(zh_CN, "大型能量电池")
-        }
+      bundle {
+        desc(zh_CN, "大型能量电池")
+      }
     }
     val 燃烧发电机 = ConsumeGenerator("combustionGenerator").apply {
         powerProduction = 1f
@@ -146,9 +145,9 @@ object Power : Load {
         consume(ConsumeItemFlammable())
         drawer = DrawMulti(DrawDefault(), DrawWarmupRegion())
         requirements(Category.power, IItems.高碳钢, 20, IItems.锌锭, 20)
-        bundle {
-            desc(zh_CN, "燃烧发电机")
-        }
+      bundle {
+        desc(zh_CN, "燃烧发电机")
+      }
     }
     val 蒸汽冷凝机 = ThermalGenerator("steamCondenser").apply {
         size = 3
@@ -170,17 +169,17 @@ object Power : Load {
         })
         outputLiquid = LiquidStack(Liquids.water, 5f / 60f / 9f)
         liquidCapacity = 20f
-        bundle {
-            desc(zh_CN, "蒸汽冷凝机")
-        }
+      bundle {
+        desc(zh_CN, "蒸汽冷凝机")
+      }
     }
     val 太阳能板 = SolarGenerator("solarPanel").apply {
         size = 2
         powerProduction = 9f
-        bundle {
-            desc(zh_CN, "太阳能板")
-        }
-        requirements(Category.power, IItems.铈锭, 15, IItems.导能回路, 25, IItems.单晶硅, 30)
+      bundle {
+        desc(zh_CN, "太阳能板")
+      }
+      requirements(Category.power, IItems.铈锭, 15, IItems.导能回路, 25, IItems.单晶硅, 30)
     }
     val 地热发电机 = ThermalGenerator("geothermalGenerator").apply {
         size = 3
@@ -192,9 +191,9 @@ object Power : Load {
         effectChance = 0.1f
         generateEffect = Fx.redgeneratespark
         drawer = DrawMulti(DrawRegion("-bottom"), DrawAnyLiquidTile(), DrawDefault(), DrawGlowRegion())
-        bundle {
-            desc(zh_CN, "地热发电机", "")
-        }
+      bundle {
+        desc(zh_CN, "地热发电机", "")
+      }
     }
     val 热核裂变反应堆 = NuclearReactor("heatNuclearReactor").apply {
         fuelItem = IItems.钍锭
@@ -214,9 +213,9 @@ object Power : Load {
         requirements(Category.power, IItems.导能回路, 50, IItems.铬锭, 380, IItems.铱板, 325, IItems.石英玻璃, 75, IItems.铅锭, 300)
         ambientSound = Sounds.loopHum
         ambientSoundVolume = 0.2f
-        bundle {
-            desc(zh_CN, "热核裂变反应堆")
-        }
+      bundle {
+        desc(zh_CN, "热核裂变反应堆")
+      }
     }
     val 血肉反应堆 = ImpactReactor("bloodImpactReactor").apply {
         size = 5
@@ -250,9 +249,9 @@ object Power : Load {
         }, DrawGlowRegion(), DrawDefault(), DrawGlowRegion("-glow"))
         ambientSound = Sounds.loopPulse
         ambientSoundVolume = 0.08f
-        bundle {
-            desc(zh_CN, "血肉反应堆")
-        }
+      bundle {
+        desc(zh_CN, "血肉反应堆")
+      }
     }
     val 终归反应堆 = ImpactReactor("endImpactReactor").apply {
         size = 6
@@ -272,10 +271,10 @@ object Power : Load {
         explosionRadius = 84
         explosionDamage = 12000
         explodeSound = Sounds.shootCollaris
-        bundle {
-            desc(zh_CN, "终归反应堆")
-        }
-        destroyEffect = MultiEffect(ParticleEffect().apply {
+      bundle {
+        desc(zh_CN, "终归反应堆")
+      }
+      destroyEffect = MultiEffect(ParticleEffect().apply {
             particles = 1
             sizeFrom = 80f
             sizeTo = 9f

@@ -53,7 +53,7 @@ public class Contributors{
       this.name = name;
       this.contribute = contribute;
       
-      this.avatar = UrlDownloader.downloadImg(Sgl.githubUserAvatars + name, Core.atlas.find("nomap"));
+      this.avatar = UrlDownloader.downloadImg(Sgl.githubUserAvatars + name+".png", Core.atlas.find("nomap"));
     }
   }
 }

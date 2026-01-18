@@ -13,6 +13,7 @@ import universecore.world.blocks.modules.ChainsModule
  * @since 1.5
  * @author EBwilson
  */
+
 interface ChainsBuildComp : BuildCompBase, Posc, Iterable<ChainsBuildComp> {
     companion object {
         val tempSeq: Seq<ChainsBuildComp> = Seq<ChainsBuildComp>()
@@ -23,6 +24,7 @@ interface ChainsBuildComp : BuildCompBase, Posc, Iterable<ChainsBuildComp> {
 
     /**链式结构的容器，是连续结构保存和行为触发的核心 */ // @Annotations.BindField("chains")
     var chains:ChainsModule
+
 
     val chainsBlock: ChainsBlockComp
         get() = getBlock(ChainsBlockComp::class.java)

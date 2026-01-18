@@ -18,7 +18,6 @@ import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
 import ice.library.util.toColor
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Bundle.Companion.desc
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
@@ -55,9 +54,9 @@ object Turret : Load {
 
     val 碎冰 = ItemTurret("trashIce").apply {
         bundle {
-            desc(zh_CN, "碎冰")
+          desc(zh_CN, "碎冰")
         }
-        size = 1
+      size = 1
         health = 250
         recoil = 0.5f
         shootY = 3f
@@ -103,9 +102,9 @@ object Turret : Load {
     }
     val 神矢 = PowerTurret("divineArrow").apply {
         bundle {
-            desc(zh_CN, "神矢")
+          desc(zh_CN, "神矢")
         }
-        size = 2
+      size = 2
         health = 1000
         requirements(Category.turret, ItemStack.with(IItems.铬铁矿, 10, IItems.低碳钢, 20))
         reload = 30f
@@ -187,9 +186,9 @@ object Turret : Load {
     }
     val 绪终 = ItemTurret("thinkEnd").apply {
         bundle {
-            desc(zh_CN, "绪终")
+          desc(zh_CN, "绪终")
         }
-        size = 5
+      size = 5
         shoot.apply {
             firstShotDelay = 120f
             recoils = 1
@@ -236,9 +235,9 @@ object Turret : Load {
                 heatColor = Color.valueOf("c3baff").a(0.5f)
                 heatProgress = PartProgress.warmup
             })
-            bundle {
-                desc(zh_CN, "绪终")
-            }
+          bundle {
+            desc(zh_CN, "绪终")
+          }
         }
     }
     val 冲穿 = ItemTurret("breakThrough").apply {
@@ -267,10 +266,10 @@ object Turret : Load {
         consumePower(25f)
         consume(ConsumeCoolant(1.5f))
         coolantMultiplier = 0.333f
-        bundle {
-            desc(zh_CN, "冲穿", "以临界速度发射五道远程穿透磁轨炮摧毁敌人,比裂颅更强")
-        }
-        addAmmoType(IItems.钍锭) {
+      bundle {
+        desc(zh_CN, "冲穿", "以临界速度发射五道远程穿透磁轨炮摧毁敌人,比裂颅更强")
+      }
+      addAmmoType(IItems.钍锭) {
             RailBulletType().apply {
                 damage = 720f
                 knockback = 10f
@@ -511,9 +510,9 @@ object Turret : Load {
             })
         }
         requirements(Category.turret, IItems.铜锭, 120, IItems.铬锭, 140, IItems.钍锭, 60, IItems.单晶硅, 120)
-        bundle {
-            desc(zh_CN, "光谱", "中型能量炮塔,可以快速向敌人发射高热激光")
-        }
+      bundle {
+        desc(zh_CN, "光谱", "中型能量炮塔,可以快速向敌人发射高热激光")
+      }
     }
     val 撕裂 = PowerTurret("tear").apply {
         health = 19200
@@ -558,10 +557,10 @@ object Turret : Load {
                 heatColor = "F03B0E".toColor()
             })
         }
-        bundle {
-            desc(zh_CN, "撕裂", "一座强大的电磁轨道炮,超长轨道,超大力度,可以快速地进行精准射击")
-        }
-        requirements(Category.turret, IItems.铜锭, 9600, IItems.铬锭, 6400, IItems.铱板, 3600, IItems.导能回路, 2400, IItems.陶钢, 1920, IItems.生物钢, 1200)
+      bundle {
+        desc(zh_CN, "撕裂", "一座强大的电磁轨道炮,超长轨道,超大力度,可以快速地进行精准射击")
+      }
+      requirements(Category.turret, IItems.铜锭, 9600, IItems.铬锭, 6400, IItems.铱板, 3600, IItems.导能回路, 2400, IItems.陶钢, 1920, IItems.生物钢, 1200)
         shootType = BasicBulletType(16f,840f,"gauss-bullet").apply {
             lifetime = 48f
             shrinkY = 0f
@@ -746,10 +745,10 @@ object Turret : Load {
             })
         }
         requirements(Category.turret, IItems.铜锭, 1120, IItems.钴锭, 470, IItems.钍锭, 390, IItems.铬锭, 280, IItems.铱板, 225, IItems.爆炸化合物, 65)
-        bundle {
-            desc(zh_CN, "隧穿", "向指定方位发射三道强劲的定向爆破束,并在到达极限距离后原路返回")
-        }
-        shoot = ShootSpread().apply {
+      bundle {
+        desc(zh_CN, "隧穿", "向指定方位发射三道强劲的定向爆破束,并在到达极限距离后原路返回")
+      }
+      shoot = ShootSpread().apply {
             shots = 3
             spread = 15f
         }
@@ -1203,10 +1202,10 @@ object Turret : Load {
                 layer = 100f
             })
         }
-        bundle {
-            desc(zh_CN, "腥风", "改进型四联速射粒子炮,向敌人发射高热的粒子束\n为了更强的电热转换回路拆除了部分气冷系统,使用液体时冷却效果更佳")
-        }
-        shootType = BasicBulletType().apply {
+      bundle {
+        desc(zh_CN, "腥风", "改进型四联速射粒子炮,向敌人发射高热的粒子束\n为了更强的电热转换回路拆除了部分气冷系统,使用液体时冷却效果更佳")
+      }
+      shootType = BasicBulletType().apply {
             damage = 121f
             lifetime = 33.6f
             speed = 20f

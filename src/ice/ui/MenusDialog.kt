@@ -2,26 +2,29 @@ package ice.ui
 
 import arc.Core
 import arc.graphics.g2d.Draw
+import arc.input.KeyCode
+import arc.math.Interp
+import arc.scene.Scene
 import arc.scene.actions.Actions
+import arc.scene.ui.Dialog
 import arc.scene.ui.Image
 import arc.scene.ui.layout.Table
+import arc.util.Align
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.scene.ui.Dialog
-import ice.library.scene.ui.esc
 import ice.library.scene.ui.iPaneG
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*
 import ice.world.meta.IceStats
-import mindustry.Vars
 
 object MenusDialog : Dialog() {
   const val backMargin = 10f
   val back = IStyles.background11
-  var button: BaseMenusDialog= PublicInfoDialog
+  var button: BaseMenusDialog = PublicInfoDialog
   lateinit var conts: Table
 
   init {
+    //排序
     ResearchDialog.setup()
     DataDialog.setup()
     AchievementDialog.setup()
@@ -30,7 +33,7 @@ object MenusDialog : Dialog() {
     ConfigureDialog.setup()
     ModInfoDialog.setup()
     ContributeDialog.setup()
-    clearChildren()
+    reset()
     setFillParent(true)
     table(back) { table ->
       table.table(back) {
@@ -64,13 +67,13 @@ object MenusDialog : Dialog() {
                 mb.build(conts)
               }.update { b ->
                 b.isChecked = button == mb
-              }.pad(2f).growX().minHeight(100f).maxHeight(120f).row()
+              }.pad(2f).margin(20f).growX().row()
             }
             pan.button({ b ->
-              b.image(IStyles.menusButton_exit).color(IceColor.b5).table.add(IceStats.关闭.localized()).color(IceColor.b5)
+              b.image(IStyles.menusButton_exit).size(50f).color(IceColor.b5).table.add(IceStats.关闭.localized()).color(IceColor.b5)
             }, IStyles.rootCleanButton) {
               hide()
-            }.pad(2f).growX().minHeight(100f).maxHeight(120f).row()
+            }.pad(2f).margin(20f).growX().row()
           }
         }.width(200f).margin(10f).growY()
         it1.add(middle).grow().margin(backMargin)
@@ -79,14 +82,26 @@ object MenusDialog : Dialog() {
           it2.table { it.add(Image(IStyles.flower)).color(IceColor.b5).expand().bottom() }.grow()
         }.margin(backMargin).width(200f).growY()
       }.grow()
-    }.grow()
-    esc {
-      hide()
+    }.pad(0f).grow()
+    keyDown(KeyCode.escape){
       Core.app.post {
-        if (Vars.state.isGame && Vars.ui.paused.isShown) {
-          Vars.ui.paused.hide(Actions.alpha(0f))
-        }
+        hide()
       }
     }
+  }
+
+  override fun show(stage: Scene): Dialog {
+    show(stage, Actions.sequence(Actions.alpha(0f), Actions.fadeIn(0.4f, Interp.fade)))
+    centerWindow()
+    return this
+  }
+
+  override fun hide() {
+    if (!isShown) return
+    setOrigin(Align.center)
+    setClip(false)
+    isTransform = true
+
+    hide(Actions.fadeOut(0.4f, Interp.fade))
   }
 }

@@ -48,6 +48,9 @@ public class CollectionObjectMap<K, V> implements Map<K, V> {
       }
     }
   };
+  {
+
+  }
 
   private final Collection<V> values = new AbstractCollection<V>() {
     @Override

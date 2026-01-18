@@ -23,9 +23,27 @@ object IceRegister: Load {
         return map[name] as Prov<Unit>
     }
 
+
     fun getId(type: Class<out Entityc>): Int {
-        return ids[type, -1]
+
+      val i = ids[type, -1]
+      if (i == -1) {
+        throw Exception("Unit ${type.simpleName} 没有注册")
+      }
+      return i
     }
+
+
+
+  internal  fun < T : Unit> getPutUnits(clazz: Class<T>): Prov<T> {
+    put(clazz.simpleName, clazz) {
+      val declaredConstructor =clazz.getDeclaredConstructor()
+      declaredConstructor.isAccessible = true
+      declaredConstructor.newInstance()
+
+    }
+    return getUnit(clazz.simpleName) as Prov<T>
+  }
 
     internal inline fun <reified T : Entityc> getPutUnit(): Prov<Unit> {
         put(T::class.java.simpleName, T::class.java) {

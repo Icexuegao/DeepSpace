@@ -67,20 +67,6 @@ public class ModConfig {
   @Order(17f)
   public float backBlurLen;
 
-  //图形效果
-  @Order(19f)
-  public boolean enableShaders;
-  @Order(20f)
-  public float mathShapePrecision;
-  @Order(21f)
-  public boolean enableDistortion;
-  @Order(22f)
-  public boolean enableParticle;
-  @Order(23f)
-  public int maxParticleCount;
-  @Order(24f)
-  public boolean enableLightning;
-
   //Advanced/高级设置
   @Order(25f)
   public boolean enableModsInterops;

@@ -25,14 +25,7 @@ object IFiles : Load {
   override fun setup() {
     if (initializer) return
     initializer = true
-
-    log {
-      modWithClass.file.name()
-    }
     modWithClass.file.list().forEach {
-      log {
-        it.name()
-      }
       rootDirectory[it.name()] = it
     }
     rootDirectory.forEach { entry ->

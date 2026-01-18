@@ -280,6 +280,7 @@ public class MathRenderer{
   }
 
   public static void drawCurveCircle(float x, float y, float radius, int sinMulti, float scl, float rotate){
+  //  Draw.sort(false);//在启用排序功能时无法设置着色器。把着色器放在内部 和一位
     curveCircle.setScl(radius, radius);
     curveCircle.setArg(0, radius*radius);
     curveCircle.setArg(1, scl);

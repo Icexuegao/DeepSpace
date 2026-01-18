@@ -12,6 +12,7 @@ import arc.struct.ObjectSet
 import arc.struct.Seq
 import arc.util.Strings
 import arc.util.Tmp
+import ice.content.IItems
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -26,7 +27,6 @@ import mindustry.type.ItemStack
 import mindustry.type.LiquidStack
 import mindustry.ui.Bar
 import mindustry.world.meta.Stats
-import singularity.contents.SglItems
 import singularity.world.SglFx
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.meta.SglStat
@@ -64,11 +64,9 @@ open class NuclearReactor(name: String) : NormalCrafter(name) {
         newConsume()
         consume!!.time(time)
         consume!!.item(fuel, 1)
-
         newProduce()
         produce!!.energy(output)
-        if (prodWaste) produce!!.item(SglItems.nuclear_waste, 1)
-
+        if (prodWaste) produce!!.item(IItems.核废料, 1)
         fuels.add(consume)
     }
 
@@ -92,6 +90,8 @@ open class NuclearReactor(name: String) : NormalCrafter(name) {
         }?. consValidCondition { e:NuclearReactorBuild ->
             e.heat > 0
         } ?.optionalAlwaysValid = true
+
+      coolants.add(consume)
     }
 
     fun addTransfer(output: ItemStack) {
@@ -138,11 +138,11 @@ open class NuclearReactor(name: String) : NormalCrafter(name) {
         var smoothEfficiency: Float = 0f
 
         override fun consEfficiency(): Float {
-            return fuelItemsTotal() / itemCapacity * super.consEfficiency() * (1 - Mathf.clamp((items.get(SglItems.nuclear_waste) - itemCapacity / 3f) / (itemCapacity), 0f, 1f))
+            return fuelItemsTotal() / itemCapacity * super.consEfficiency() * (1 - Mathf.clamp((items.get(IItems.核废料) - itemCapacity / 3f) / (itemCapacity), 0f, 1f))
         }
 
         override fun shouldConsume(): Boolean {
-            return super.shouldConsume() && (items == null || items.get(SglItems.nuclear_waste) < itemCapacity)
+            return super.shouldConsume() && (items == null || items.get(IItems.核废料) < itemCapacity)
         }
 
         override fun updateTile() {
@@ -154,7 +154,7 @@ open class NuclearReactor(name: String) : NormalCrafter(name) {
                 onOverTemperature()
             }
 
-            dump(SglItems.nuclear_waste)
+            dump(IItems.核废料)
 
             if (heat > smokeThreshold) {
                 val smoke = 1.0f + (heat - smokeThreshold) / (maxHeat - smokeThreshold)

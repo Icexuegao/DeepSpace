@@ -2,6 +2,7 @@ package singularity.contents
 
 import arc.func.*
 import arc.struct.ObjectMap
+import ice.content.IItems
 import mindustry.content.Items
 import mindustry.gen.Building
 import mindustry.gen.Teamc
@@ -33,8 +34,8 @@ class DistributeBlocks : ContentList {
                 requirements(
                     Category.distribution, ItemStack.with(
                         Items.silicon, 8,
-                        SglItems.aerogel, 8,
-                        SglItems.aluminium, 10
+                        IItems.气凝胶, 8,
+                        IItems.铝, 10
                     )
                 )
 
@@ -49,9 +50,9 @@ class DistributeBlocks : ContentList {
                 requirements(
                     Category.distribution, ItemStack.with(
                         Items.phaseFabric, 6,
-                        SglItems.aerogel, 10,
-                        SglItems.strengthening_alloy, 8,
-                        SglItems.aluminium, 12
+                        IItems.气凝胶, 10,
+                        IItems.强化合金, 8,
+                        IItems.铝, 12
                     )
                 )
 
@@ -75,10 +76,10 @@ class DistributeBlocks : ContentList {
                 requirements(
                     Category.distribution, ItemStack.with(
                         Items.phaseFabric, 4,
-                        SglItems.iridium, 4,
-                        SglItems.crystal_FEX, 6,
-                        SglItems.aerogel, 12,
-                        SglItems.aluminium, 12
+                        IItems.铱, 4,
+                        IItems.FEX水晶, 6,
+                        IItems.气凝胶, 12,
+                        IItems.铝, 12
                     )
                 )
 
@@ -102,11 +103,11 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 200,
-                        SglItems.strengthening_alloy, 240,
-                        SglItems.crystal_FEX, 220,
-                        SglItems.aerogel, 200,
-                        SglItems.iridium, 90,
+                        IItems.矩阵合金, 200,
+                        IItems.强化合金, 240,
+                        IItems.FEX水晶, 220,
+                        IItems.气凝胶, 200,
+                        IItems.铱, 90,
                         Items.silicon, 260,
                         Items.graphite, 220,
                         Items.phaseFabric, 180
@@ -123,10 +124,10 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 20,
-                        SglItems.strengthening_alloy, 18,
-                        SglItems.crystal_FEX, 10,
-                        SglItems.aerogel, 16,
+                        IItems.矩阵合金, 20,
+                        IItems.强化合金, 18,
+                        IItems.FEX水晶, 10,
+                        IItems.气凝胶, 16,
                         Items.phaseFabric, 8
                     )
                 )
@@ -144,10 +145,10 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 40,
-                        SglItems.strengthening_alloy, 24,
-                        SglItems.crystal_FEX_power, 18,
-                        SglItems.iridium, 6,
+                        IItems.矩阵合金, 40,
+                        IItems.强化合金, 24,
+                        IItems.充能FEX水晶, 18,
+                        IItems.铱, 6,
                         Items.phaseFabric, 12
                     )
                 )
@@ -169,10 +170,10 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 120,
-                        SglItems.strengthening_alloy, 100,
-                        SglItems.crystal_FEX, 80,
-                        SglItems.iridium, 45,
+                        IItems.矩阵合金, 120,
+                        IItems.强化合金, 100,
+                        IItems.FEX水晶, 80,
+                    IItems.铱, 45,
                         Items.phaseFabric, 60,
                         Items.silicon, 80
                     )
@@ -189,9 +190,9 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 40,
-                        SglItems.strengthening_alloy, 25,
-                        SglItems.iridium, 12,
+                    IItems.矩阵合金, 40,
+                    IItems.强化合金, 25,
+                    IItems.铱, 12,
                         Items.phaseFabric, 20
                     )
                 )
@@ -204,9 +205,9 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 6,
-                        SglItems.strengthening_alloy, 10,
-                        SglItems.aerogel, 4
+                    IItems.矩阵合金, 6,
+                    IItems.强化合金, 10,
+                    IItems.气凝胶, 4
                     )
                 )
                 size = 1
@@ -217,11 +218,11 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 100,
-                        SglItems.crystal_FEX_power, 60,
-                        SglItems.strengthening_alloy, 60,
-                        SglItems.iridium, 40,
-                        SglItems.aerogel, 75
+                    IItems.矩阵合金, 100,
+                    IItems.充能FEX水晶, 60,
+                    IItems.强化合金, 60,
+                    IItems.铱, 40,
+                    IItems.气凝胶, 75
                     )
                 )
                 size = 4
@@ -232,10 +233,10 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 70,
-                        SglItems.crystal_FEX, 45,
-                        SglItems.crystal_FEX_power, 35,
-                        SglItems.iridium, 20,
+                    IItems.矩阵合金, 70,
+                    IItems.FEX水晶, 45,
+                    IItems.充能FEX水晶, 35,
+                    IItems.铱, 20,
                         Items.phaseFabric, 40
                     )
                 )
@@ -249,7 +250,7 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 45,
+                    IItems.矩阵合金, 45,
                         Items.copper, 40,
                         Items.silicon, 35,
                         Items.plastanium, 30,
@@ -267,10 +268,10 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 35,
-                        SglItems.strengthening_alloy, 30,
-                        SglItems.crystal_FEX, 20,
-                        SglItems.iridium, 10
+                    IItems.矩阵合金, 35,
+                    IItems.强化合金, 30,
+                    IItems.FEX水晶, 20,
+                    IItems.铱, 10
                     )
                 )
                 size = 2
@@ -281,9 +282,9 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 40,
-                        SglItems.strengthening_alloy, 40,
-                        SglItems.aerogel, 40
+                    IItems.矩阵合金, 40,
+                    IItems.强化合金, 40,
+                    IItems.气凝胶, 40
                     )
                 )
                 size = 2
@@ -312,10 +313,10 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 45,
-                        SglItems.crystal_FEX, 45,
-                        SglItems.strengthening_alloy, 50,
-                        SglItems.iridium, 35,
+                    IItems.矩阵合金, 45,
+                    IItems.FEX水晶, 45,
+                    IItems.强化合金, 50,
+                    IItems.铱, 35,
                         Items.phaseFabric, 40
                     )
                 )
@@ -330,10 +331,10 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 80,
-                        SglItems.crystal_FEX, 50,
-                        SglItems.strengthening_alloy, 80,
-                        SglItems.iridium, 45,
+                    IItems.矩阵合金, 80,
+                    IItems.FEX水晶, 50,
+                    IItems.强化合金, 80,
+                    IItems.铱, 45,
                         Items.phaseFabric, 80,
                         Items.graphite, 75
                     )
@@ -349,10 +350,10 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 60,
-                        SglItems.crystal_FEX, 45,
-                        SglItems.aerogel, 40,
-                        SglItems.iridium, 28,
+                    IItems.矩阵合金, 60,
+                    IItems.FEX水晶, 45,
+                    IItems.气凝胶, 40,
+                    IItems.铱, 28,
                         Items.phaseFabric, 45
                     )
                 )
@@ -369,10 +370,10 @@ class DistributeBlocks : ContentList {
             init {
                 requirements(
                     SglCategory.matrix, ItemStack.with(
-                        SglItems.matrix_alloy, 50,
-                        SglItems.aerogel, 75,
-                        SglItems.strengthening_alloy, 40,
-                        SglItems.aluminium, 60
+                    IItems.矩阵合金, 50,
+                    IItems.气凝胶, 75,
+                    IItems.强化合金, 40,
+                    IItems.铝, 60
                     )
                 )
 

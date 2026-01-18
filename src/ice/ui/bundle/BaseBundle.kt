@@ -7,46 +7,45 @@ import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
 
 open class BaseBundle(val name: String) {
-    companion object : Load {
-        fun <T> T.bundle(bundle: Companion.() -> Unit) {
-            bundle.invoke(Companion)
-        }
-
-        private val bundle = HashMap<String, BaseBundle>()
-        override fun load() {
-            IceStats.load()
-            bundle["${Core.settings.getString("locale", "zh_CN")}"]?.load()
-        }
-
-        val zh_CN = BaseBundle("zh_CN")
+  companion object : Load {
+    fun bundle(bundle: Companion.() -> Unit) {
+      bundle.invoke(Companion)
     }
 
-    private val runBun = Seq<Runnable>()
 
-    init {
-        bundle[name] = this
+    fun <T : UnlockableContent> T.desc(bundle: BaseBundle, name: String, desc: String = "", deta: String = "") {
+      bundle.runBun.add {
+        localizedName = name
+        description = desc
+        details = deta
+      }
     }
 
-    fun load() {
-        runBun.forEach { it.run() }
+    private val bundle = HashMap<String, BaseBundle>()
+    override fun load() {
+      IceStats.load()
+      bundle["${Core.settings.getString("locale", "zh_CN")}"]?.load()
     }
 
-    interface Bundle {
-        companion object {
-            fun <T : UnlockableContent> T.desc(bundle: BaseBundle, name: String, desc: String = "", deta: String = "") {
-                bundle.runBun.add {
-                    localizedName = name
-                    description = desc
-                    details = deta
-                }
-            }
-        }
+    val zh_CN = BaseBundle("zh_CN")
+  }
 
-        var localizedName: String
-        fun desc(bundle: BaseBundle, name: String) {
-            bundle.runBun.add {
-                localizedName = name
-            }
-        }
+  private val runBun = Seq<Runnable>()
+
+  init {
+    bundle[name] = this
+  }
+
+  fun load() {
+    runBun.forEach { it.run() }
+  }
+
+  interface Bundle {
+    var localizedName: String
+    fun desc(bundle: BaseBundle, name: String) {
+      bundle.runBun.add {
+        localizedName = name
+      }
     }
+  }
 }

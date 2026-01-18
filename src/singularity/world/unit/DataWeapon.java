@@ -69,8 +69,8 @@ public class DataWeapon extends SglWeapon{
 
   }
 
- // @Annotations.ImplEntries
-  public class DataWeaponMount extends WeaponMount /*implements ExtraVariableComp*/{
+
+  public class DataWeaponMount extends WeaponMount{
     public DataWeaponMount(){
       super(DataWeapon.this);
     }

@@ -18,48 +18,48 @@ import java.io.OutputStream;
 public class UrlDownloader {
   private static final OrderedMap<String, String> urlReplacers = new OrderedMap<>();
 
-  public static void setMirror(String source, String to){
+  public static void setMirror(String source, String to) {
     urlReplacers.put(source, to);
   }
 
-  public static void removeMirror(String source){
+  public static void removeMirror(String source) {
     urlReplacers.remove(source);
   }
 
-  public static void clearMirrors(){
+  public static void clearMirrors() {
     urlReplacers.clear();
   }
 
-  public static void retryDown(String url, ConsT<Http.HttpResponse, Exception> resultHandler, int maxRetry, Cons<Throwable> errHandler){
+  public static void retryDown(String url, ConsT<Http.HttpResponse, Exception> resultHandler, int maxRetry, Cons<Throwable> errHandler) {
     int[] counter = {0};
     Runnable[] get = new Runnable[1];
 
     for (ObjectMap.Entry<String, String> entry : urlReplacers) {
-      if (url.startsWith(entry.key)){
+      if (url.startsWith(entry.key)) {
         url = url.replaceFirst(entry.key, entry.value);
       }
     }
 
     String realUrl = url;
     get[0] = () -> Http.get(realUrl, resultHandler, e -> {
-      if(counter[0]++ <= maxRetry) get[0].run();
+      if (counter[0]++ <= maxRetry) get[0].run();
       else errHandler.get(e);
     });
     get[0].run();
   }
 
-  public static float[] downloadToStream(String url, OutputStream stream){
+  public static float[] downloadToStream(String url, OutputStream stream) {
     float[] progress = new float[1];
     retryDown(url, res -> {
-      try(stream){
+      try (stream) {
         InputStream in = res.getResultAsStream();
         long total = res.getContentLength();
 
         int curr = 0;
-        for (int b = in.read(); b != -1; b = in.read()){
+        for (int b = in.read(); b != -1; b = in.read()) {
           curr++;
           stream.write(b);
-          progress[0] = (float) curr/total;
+          progress[0] = (float) curr / total;
         }
       }
     }, 5, Log::err);
@@ -76,12 +76,12 @@ public class UrlDownloader {
     retryDown(url, res -> {
       Pixmap pix = new Pixmap(res.getResult());
       Core.app.post(() -> {
-        try{
+        try {
           Texture tex = new Texture(pix);
           tex.setFilter(Texture.TextureFilter.linear);
           result.set(tex);
           pix.dispose();
-        }catch(Exception e){
+        } catch (Exception e) {
           Log.err(e);
         }
       });
