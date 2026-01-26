@@ -3,6 +3,7 @@ package universecore
 import arc.Core
 import arc.Events
 import arc.scene.Group
+import arc.scene.ui.layout.Table
 import arc.util.Log
 import arc.util.OS
 import arc.util.Time
@@ -12,11 +13,12 @@ import ice.library.universecore.desktop9core.DesktopFieldAccessHelper9
 import ice.library.universecore.desktopcore.DesktopMethodInvokeHelper
 import ice.library.world.Load
 import mindustry.Vars
+import mindustry.game.EventType
 import mindustry.game.EventType.UnlockEvent
 import mindustry.game.EventType.WorldLoadEvent
 import mindustry.world.Block
+import singularity.Sgl
 import universecore.ui.fragments.SecondaryConfigureFragment
-import universecore.ui.styles.UncStyles
 import universecore.util.FieldAccessHelper
 import universecore.util.MethodInvokeHelper
 import universecore.util.handler.CategoryHandler
@@ -35,6 +37,7 @@ object UncCore : Load {
   lateinit var secConfig: SecondaryConfigureFragment
 
   override fun setup() {
+
     Log.info("[Universe Core] core loading")
 
     Time.run(0f) {
@@ -47,11 +50,20 @@ object UncCore : Load {
         Core.app.post { categories.handleBlockFrag() }
       }
     }
-
-    UncStyles.load()
   }
 
   override fun init() {
+    var toggler = FieldHandler.getValueDefault<Table>(Vars.ui.hudfrag.blockfrag, "toggler")
+
+    Events.run(EventType.Trigger.update) {
+      if (toggler.parent == null) {
+        toggler = FieldHandler.getValueDefault(Vars.ui.hudfrag.blockfrag, "toggler")
+        Core.app.post {
+          Sgl.ui.toolBar.build()
+        }
+      }
+    }
+
     if (!Vars.net.server()) {
       //  Vars.ui.database = UncDatabaseDialog.make();
       val overlay = FieldHandler.getValueDefault<Group>(Vars.control.input, "group")

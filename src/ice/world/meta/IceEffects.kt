@@ -19,7 +19,6 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.graphics.IceColor.s1
 import ice.graphics.IceDraw
-import ice.world.content.unit.ability.InterceptAbilty
 import ice.ui.fragment.DeBugFragment
 import mindustry.Vars
 import mindustry.content.Fx
@@ -214,15 +213,16 @@ object IceEffects {
         }
     }
 
-    val shieldWave = Effect(30f) { e: EffectContainer ->
-        val data = e.data
-        if (data is InterceptAbilty.UnitData) {
-            val color = IceColor.b4.cpy().a(e.fout())
-            IceDraw.light(data.unit.x, data.unit.y, Lines.circleVertices(70f), data.range, e.rotation,
-                          Color.clear,
-                          color, e::fout)
-        }
+  fun shieldWave(unit: Unit, color: Color =IceColor.b4, range: Float = 50f): Effect {
+    return Effect(30f) { e: EffectContainer ->
+      val color = color.cpy().a(e.fout())
+      IceDraw.light(
+        unit.x, unit.y, Lines.circleVertices(70f), range, e.rotation,
+        Color.clear,
+        color, e::fout
+      )
     }
+  }
 
     val arcend: IEffect = IEffect {
         set(120f) { e ->

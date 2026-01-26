@@ -50,12 +50,12 @@ class ReadLiquidsRequest(sender: DistElementBuildComp, private val destination: 
                     }, temp
                 )) {
                     if (tempLiquid!![id] < 0.001f || source!!.remainingCapacity() < 0.001f) continue@liquidFor
-                    var move = min(tempLiquid!![id], entry.entity.liquids.get(liquid))
+                    var move = min(tempLiquid!![id], entry.entity!!.liquids.get(liquid))
                     move = min(move, source!!.remainingCapacity())
 
                     move -= move % LiquidsBuffer.LiquidIntegerStack.packMulti
                     if (move > 0.001f) {
-                        entry.entity.liquids.remove(liquid, move)
+                        entry.entity!!.liquids.remove(liquid, move)
                         source!!.put(liquid, move)
                         source!!.dePutFlow(liquid, move)
                         tempLiquid!![id] -= move

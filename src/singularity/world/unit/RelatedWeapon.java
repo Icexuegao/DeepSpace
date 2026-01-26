@@ -10,6 +10,7 @@ import arc.scene.ui.layout.Table;
 import arc.util.Strings;
 import arc.util.Time;
 import arc.util.Tmp;
+import ice.world.IceBulletHandler;
 import mindustry.entities.Effect;
 import mindustry.entities.Mover;
 import mindustry.entities.bullet.BulletType;
@@ -103,14 +104,18 @@ public class RelatedWeapon extends DataWeapon {
       bullet.chargeEffect.at(shootX, shootY, rotation, bullet.keepVelocity || parentizeEffects ? unit : null);
     }
 
-    shoot.shoot(mount.totalShots, (xOffset, yOffset, angle, delay, mover) -> {
-      mount.totalShots++;
-      if(delay > 0f){
-        Time.run(delay, () -> bullet(unit, mount, xOffset, yOffset, angle, mover));
-      }else{
-        bullet(unit, mount, xOffset, yOffset, angle, mover);
+    var a=new IceBulletHandler(){
+      @Override
+      public void shoot(float xOffset, float yOffset, float angle, float delay, Mover mover) {
+        mount.totalShots++;
+        if(delay > 0f){
+          Time.run(delay, () -> bullet(unit, mount, xOffset, yOffset, angle, mover));
+        }else{
+          bullet(unit, mount, xOffset, yOffset, angle, mover);
+        }
       }
-    });
+    };
+    shoot.shoot(mount.totalShots,a);
 
     if(mount instanceof DataWeaponMount m){
       shoot(unit, m, shootX, shootY, rotation);

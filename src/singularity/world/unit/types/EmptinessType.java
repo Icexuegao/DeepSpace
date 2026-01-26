@@ -37,7 +37,7 @@ import mindustry.world.blocks.environment.Floor;
 import mindustry.world.meta.BlockFlag;
 import singularity.Sgl;
 
-import singularity.contents.SglTurrets;
+import ice.content.block.turret.TurretBullets;
 import singularity.graphic.MathRenderer;
 import singularity.graphic.SglDraw;
 import singularity.graphic.SglDrawConst;
@@ -72,7 +72,7 @@ public class EmptinessType extends SglUnitType<SglUnitEntity> {
             IItems.INSTANCE.get气凝胶(), 400,
             IItems.INSTANCE.get充能FEX水晶(), 300,
             IItems.INSTANCE.get强化合金(), 560,
-            IItems.INSTANCE.get铱(), 380,
+            IItems.INSTANCE.get铱锭(), 380,
             IItems.INSTANCE.get矩阵合金(), 420,
             IItems.INSTANCE.get简并态中子聚合物(), 420,
             IItems.INSTANCE.get反物质(), 280
@@ -880,7 +880,7 @@ public class EmptinessType extends SglUnitType<SglUnitEntity> {
                 lifetime = 245;
                 hitSize = 12;
 
-                intervalBullet = SglTurrets.spilloverEnergy.copy();
+                intervalBullet = TurretBullets.溢出能量.copy();
                 intervalBullet.damage = 160;
                 intervalBullet.splashDamage = 160;
                 intervalBullet.splashDamageRadius = 45;
@@ -948,7 +948,7 @@ public class EmptinessType extends SglUnitType<SglUnitEntity> {
                     }};
 
                     fragBullets = 8;
-                    fragBullet = SglTurrets.Companion.lightning(128, 32, 62, 5.2f, SglDrawConst.matrixNet, b -> {
+                    fragBullet = TurretBullets.lightning(128, 32, 62, 5.2f, SglDrawConst.matrixNet, b -> {
                       g.originAngle = b.rotation();
                       return g;
                     });

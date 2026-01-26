@@ -33,7 +33,7 @@ public class FakeBlock extends Block {
 
   @Override
   public void setStats() {
-    maskedBlock.setStats();
+    maskedBlock.checkStats();
     stats = maskedBlock.stats;
   }
 
@@ -57,7 +57,7 @@ public class FakeBlock extends Block {
 
     buildVisibility = BuildVisibility.shown;
     UncDatabaseDialog.hide(maskedBlock);
-    maskedBlock.category = null;
+   // maskedBlock.category = null;
   }
 
   @Override

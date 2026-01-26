@@ -1,8 +1,8 @@
 package ice.async
 
 import arc.struct.Seq
-import ice.world.content.blocks.distribution.conveyor.PackStack
 import ice.library.util.accessField
+import ice.world.content.blocks.distribution.conveyor.PackStack
 import mindustry.Vars
 import mindustry.async.AsyncProcess
 import mindustry.async.PhysicsProcess
@@ -60,4 +60,24 @@ object ParcelProcess: AsyncProcess {
             ref.body.local = local || entity.isLocal()
         }
     }
+
+  override fun reset() {
+  }
+
+  override fun init() {
+
+  }
+
+  override fun end() {
+
+  }
+
+  override fun process() {
+  }
+
+  override fun shouldProcess(): Boolean {
+    return true
+  }
+
+
 }

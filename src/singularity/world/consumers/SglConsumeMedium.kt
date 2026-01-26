@@ -83,12 +83,12 @@ class SglConsumeMedium<T>(var request: Float) : BaseConsume<T>() where T : Build
         table.add<ReqImage?>(
             ReqImage(
                 Singularity.getModAtlas("medium"),
-                Boolp { entity!!.mediumContains() > request * parent!!.delta(entity) * multiple(entity) + 0.0001f })
+                Boolp { entity!!.mediumContains > request * parent!!.delta(entity) * multiple(entity) + 0.0001f })
         ).padRight(8f)
     }
 
     public override fun efficiency(t: T): Float {
-        return Mathf.clamp(t!!.mediumContains() / (request * multiple(t)))
+        return Mathf.clamp(t!!.mediumContains / (request * multiple(t)))
     }
 
     public override fun filter(): Seq<Content?>? {

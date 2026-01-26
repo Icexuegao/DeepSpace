@@ -4,7 +4,7 @@ import arc.Core
 import arc.func.Cons
 import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.layout.Table
-import ice.Ice
+import ice.DeepSpace
 import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
@@ -14,6 +14,7 @@ import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
 
 open class Remains(val name: String) {
+  var level=0
     var localizedName: String = ""
     var effect = ""
     var icon = TextureRegionDrawable(IFiles.findModPng(name))
@@ -46,7 +47,7 @@ open class Remains(val name: String) {
             RemainsDialog.remainsSeq.addUnique(this)
             uninstall()
         }
-        Core.settings.put("${Ice.name}-remains-$name-enabled", enabled)
+        Core.settings.put("${DeepSpace.name}-remains-$name-enabled", enabled)
     }
 
     fun rebuildEnableRemains(table: Table) {

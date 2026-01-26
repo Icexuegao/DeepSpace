@@ -40,7 +40,7 @@ public abstract class DistBufferType<T extends BaseBuffer<?, ?, ?>>{
     @Override
     public Number containerUsed(Building build){
       if(build instanceof PayloadBuildComp b){
-        return b.payloadCapacity();
+        return b.getPayloadCapacity();
       }
       else{
         if(build.block.acceptsPayload){

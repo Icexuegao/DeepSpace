@@ -2,7 +2,6 @@ package singularity.type;
 
 import arc.struct.Seq;
 import mindustry.type.Planet;
-import singularity.Sgl;
 import singularity.game.planet.ChunkContextIncubator;
 import singularity.game.planet.PlanetContext;
 
@@ -19,13 +18,6 @@ public class SglPlanet extends Planet {
     super(name, parent, radius, sectorSize);
   }
 
-  @Override
-  public void init() {
-    super.init();
-
-    context = Sgl.logic.makePlanetContext(this);
-    context.addIncubator(incubators);
-  }
 
   public void addIncubators(ChunkContextIncubator... incubator) {
     this.incubators.addAll(incubator);

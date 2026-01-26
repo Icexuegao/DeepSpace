@@ -1,8 +1,6 @@
 package singularity.world.blocks.distribute
 
 import arc.Core
-import arc.func.Floatp
-import arc.func.Func
 import arc.func.Prov
 import arc.util.Strings
 import mindustry.core.UI
@@ -11,42 +9,34 @@ import singularity.graphic.SglDrawConst
 import singularity.world.blocks.distribute.DistEnergyEntry.DistEnergyEntryBuild
 
 open class DistEnergyManager(name: String) : DistNetBlock(name) {
-    init {
-        matrixEnergyCapacity = 2048f
-        isNetLinker = true
-    }
+  init {
+    this.matrixEnergyCapacity = 2048.0f
+    this.isNetLinker = true
+    buildType= Prov(::DistEnergyManagerBuild)
+  }
 
-    public override fun setBars() {
-        super.setBars()
-        addBar<DistEnergyManagerBuild?>("energyBuffered", Func { e: DistEnergyManagerBuild? ->
-            Bar(
-                Prov {
-                    Core.bundle.format(
-                        "bar.energyBuffered",
-                        if (e!!.matrixEnergyBuffered >= 1000) UI.formatAmount(e.matrixEnergyBuffered.toLong()) else Strings.autoFixed(e.matrixEnergyBuffered, 1),
-                        if (matrixEnergyCapacity >= 1000) UI.formatAmount(matrixEnergyCapacity.toLong()) else Strings.autoFixed(matrixEnergyCapacity, 1)
-                    )
-                },
-                Prov { SglDrawConst.matrixNet },
-                Floatp { e!!.matrixEnergyBuffered / matrixEnergyCapacity }
-            )
-        })
-    }
+  override fun setBars() {
+    super.setBars()
+    this.addBar("energyBuffered") { e: DistEnergyManagerBuild ->
 
-    inner class DistEnergyManagerBuild : DistNetBuild() {
-        override fun updateNetLinked() {
-            super.updateNetLinked()
-            for (building in proximity) {
-                if (building is DistEnergyEntryBuild) {
-                    netLinked.add(building)
-                }
-            }
+      Bar({ Core.bundle.format("bar.energyBuffered", *arrayOf<Any>(if (e.matrixEnergyBuffered >= 1000.0f) UI.formatAmount(e.matrixEnergyBuffered.toLong()) else Strings.autoFixed(e.matrixEnergyBuffered, 1), if (this.matrixEnergyCapacity >= 1000.0f) UI.formatAmount(this.matrixEnergyCapacity.toLong()) else Strings.autoFixed(this.matrixEnergyCapacity, 1))) }, { SglDrawConst.matrixNet }, { e.matrixEnergyBuffered / this.matrixEnergyCapacity }) }
+  }
+
+  inner class DistEnergyManagerBuild : DistNetBuild() {
+    override fun updateNetLinked() {
+      super.updateNetLinked()
+
+      for (building in this.proximity) {
+        if (building is DistEnergyEntryBuild) {
+          val entry = building
+          this.netLinked.add(entry)
         }
-
-        override fun onProximityUpdate() {
-            super.onProximityUpdate()
-
-            updateNetLinked()
-        }
+      }
     }
+
+    override fun onProximityUpdate() {
+      super.onProximityUpdate()
+      this.updateNetLinked()
+    }
+  }
 }

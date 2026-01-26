@@ -8,25 +8,25 @@ import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsumers
 
 open class AtomSchematicCrafter(name: String) : MediumCrafter(name) {
-    public override fun init() {
-        for (atomSchematic in SglContents.atomSchematics()) {
-            consumers.add(atomSchematic.request)
-            super.newProduce()
-            produce!!.item(atomSchematic.item, 1)
-        }
-
-        super.init()
+  override fun init() {
+    for (atomSchematic in SglContents.atomSchematics()) {
+      consumers.add(atomSchematic.request)
+      super.newProduce()
+      produce!!.item(atomSchematic.item, 1)
     }
 
-    public override fun newConsume(): BaseConsumers {
-         throw Exception()
-    }
+    super.init()
+  }
 
-    public override fun <T : ConsumerBuildComp> newOptionalConsume(validDef: Cons2<T, BaseConsumers>, displayDef: Cons2<Stats, BaseConsumers>): BaseConsumers {
-        throw Exception()
-    }
+  override fun newConsume(): BaseConsumers {
+    return super.newConsume()
+  }
 
-    public override fun newProduce(): Producers {
-        throw Exception()
-    }
+  override fun <T : ConsumerBuildComp> newOptionalConsume(validDef: Cons2<T, BaseConsumers>, displayDef: Cons2<Stats, BaseConsumers>): BaseConsumers? {
+    return null
+  }
+
+  override fun newProduce(): Producers {
+    return super.newProduce()
+  }
 }

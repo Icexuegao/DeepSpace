@@ -9,7 +9,6 @@ import mindustry.type.ItemStack
 import mindustry.world.Block
 import mindustry.world.Tile
 import singularity.world.blocks.liquid.ClusterConduit
-import singularity.world.blocks.liquid.ClusterConduit.ClusterConduitBuild
 import singularity.world.blocks.liquid.ClusterValve
 import singularity.world.blocks.liquid.ConduitRiveting
 import singularity.world.blocks.liquid.LiquidUnloader
@@ -24,27 +23,26 @@ class LiquidBlocks : ContentList {
         health = 360
       }
     }
-
     conduit_riveting = FakeBlock(object : ConduitRiveting("conduit_riveting") {
       init {
         requirements(Category.liquid, ItemStack.with(Items.plastanium, 18, IItems.气凝胶, 10, IItems.铝, 16))
         liquidCapacity = 10f
         health = 300
       }
-    }, Boolf3 { tile: Tile?, team: Team?, rotation: Int? ->
+    }) { tile: Tile?, team: Team?, rotation: Int? ->
       val build = tile!!.build
-      build is ClusterConduitBuild && build.rotation == rotation
-    })
-
+      build is ClusterConduit.ClusterConduitBuild && build.rotation == rotation
+    }
     filter_valve = FakeBlock(object : ClusterValve("filter_valve") {
       init {
         requirements(Category.liquid, ItemStack.with(Items.titanium, 10, IItems.气凝胶, 15, Items.graphite, 12))
         liquidCapacity = 10f
         health = 300
       }
-    }, Boolf3 { tile: Tile?, team: Team?, rotation: Int? -> val build = tile!!.build
-      build is ClusterConduitBuild && build.rotation == rotation })
-
+    }) { tile: Tile?, _: Team?, rotation: Int? ->
+      val build = tile!!.build
+      build is ClusterConduit.ClusterConduitBuild && build.rotation == rotation
+    }
     liquid_unloader = object : LiquidUnloader("liquid_unloader") {
       init {
         requirements(Category.liquid, ItemStack.with(Items.silicon, 20, IItems.铝, 25, Items.graphite, 15))
@@ -53,7 +51,7 @@ class LiquidBlocks : ContentList {
     }
   }
 
-  internal class FakeBlock(maskedBlock: Block, placeValid: Boolf3<Tile?, Team?, Int?>?) : universecore.world.blocks.FakeBlock(maskedBlock, placeValid) {
+  class FakeBlock(maskedBlock: Block, placeValid: Boolf3<Tile?, Team?, Int?>?) : universecore.world.blocks.FakeBlock(maskedBlock, placeValid) {
     init {
       maskedBlock.alwaysUnlocked = true
     }

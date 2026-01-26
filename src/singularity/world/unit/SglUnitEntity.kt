@@ -3,6 +3,7 @@ package singularity.world.unit
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.entities.IceRegister
+import mindustry.entities.units.UnitController
 import mindustry.gen.Hitboxc
 import mindustry.gen.UnitEntity
 import singularity.world.unit.abilities.ICollideBlockerAbility
@@ -41,4 +42,8 @@ class SglUnitEntity : UnitEntity() {
             (type as SglUnitType<SglUnitEntity>).write(this, write)
         } else throw RuntimeException("Unit type must be SglUnitType")
     }
+
+  override fun controller(): UnitController? {
+    return super.controller()
+  }
 }

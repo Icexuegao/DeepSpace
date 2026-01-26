@@ -3,10 +3,9 @@ package ice.core
 import arc.Core
 import arc.Events
 import arc.util.serialization.Jval
-import ice.Ice
+import ice.DeepSpace
 import ice.audio.IMusics
 import ice.entities.ModeDifficulty
-import ice.library.struct.log
 import ice.library.world.Load
 import ice.world.content.blocks.crafting.multipleCrafter.MultipleCrafter
 import mindustry.Vars
@@ -58,7 +57,7 @@ object SettingValue: Load {
     var 启用多合成角标常显 by observable(false)
     var 启用多合成配方缓存 by observable(true) { _, _, new ->
         Vars.content.blocks().select {
-            it.minfo.mod == Ice.mod && it is MultipleCrafter
+            it.minfo.mod == DeepSpace.mod && it is MultipleCrafter
         }.forEach {
             it.saveConfig = new
         }
@@ -93,7 +92,7 @@ object SettingValue: Load {
 
         Events.on(EventType.ClientLoadEvent::class.java) { _ ->
             Vars.content.blocks().select {
-                it.minfo.mod == Ice.mod && it is MultipleCrafter
+                it.minfo.mod == DeepSpace.mod && it is MultipleCrafter
             }.forEach {
                 it.saveConfig = 启用多合成配方缓存
             }

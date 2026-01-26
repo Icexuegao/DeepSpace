@@ -35,10 +35,10 @@ interface ConsumerBuildComp : BuildCompBase {
         return consumer.getOptionalEff(consumers)
     }
 
-    val consumerBlock: ConsumerBlockComp?
+    val consumerBlock: ConsumerBlockComp
         /**获得该块的ConsumerBlock */
         get() = getBlock(ConsumerBlockComp::class.java)
-    val consumerBuilding: ConsumerBuildComp?
+    val consumerBuilding: ConsumerBuildComp
         /**获得该块的NuclearEnergyBlock */
         get() = getBlock(ConsumerBuildComp::class.java)
 

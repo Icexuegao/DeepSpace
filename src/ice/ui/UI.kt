@@ -2,22 +2,18 @@ package ice.ui
 
 import arc.Core
 import arc.Graphics
-import arc.graphics.g2d.Draw
 import arc.util.OS
-import ice.Ice
+import ice.DeepSpace
 import ice.core.SettingValue
 import ice.graphics.IceColor
 import ice.library.IFiles
-import ice.library.IFiles.appendModName
 import ice.library.world.Load
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.*
 import mindustry.Vars
 import mindustry.gen.Icon
-import mindustry.graphics.MenuRenderer
 import singularity.Sgl
 import singularity.ui.fragments.ToolBarFrag
-import singularity.ui.fragments.override.SglMenuFrag
 
 object UI : Load {
   val cgwidth = Core.graphics.width.toFloat()
@@ -34,16 +30,6 @@ object UI : Load {
     }){false}
     //解决第一次选择星球报错问题
     Core.settings.put("campaignselect", true)
-    (Vars.ui.menufrag as SglMenuFrag).menuRenderer = object : MenuRenderer() {
-      val spacea = IFiles.findPng("spacea".appendModName())
-      override fun render() {
-        Draw.color()
-        Draw.rect(
-          spacea, cgwidth / 2, cgheight / 2,
-          cgwidth, cgheight
-        )
-      }
-    }
     Vars.ui.planet = IcePlanetDialog
     FleshFragment.build(Vars.ui.hudGroup)
     ScenarioFragment.build(Vars.ui.hudGroup)
@@ -52,8 +38,8 @@ object UI : Load {
     ConversationFragment.build(Vars.ui.hudGroup)
     if (SettingValue.启用调试模式) ShowProgress.build(Vars.ui.hudGroup)
     //  CharacterScenarioFragment.build(Vars.ui.hudGroup)
-    Ice.mod.meta.author = "[#${IceColor.b4}]Alon[]"
-    Ice.mod.meta.displayName = "[#${IceColor.b4}]Deep Space[]"
+    DeepSpace.mod.meta.author = "[#${IceColor.b4}]Alon[]"
+    DeepSpace.mod.meta.displayName = "[#${IceColor.b4}]Deep Space[]"
 
     if (OS.isWindows) {
       loadSystemCursors()

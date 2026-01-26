@@ -35,10 +35,21 @@ object Effect : Load {
       desc(zh_CN, "压缩存储器", "坚固耐用,新型空间压缩技术使其具有更大的空间")
     }
   }
+  val 仓库 = StorageBlock("warehouse").apply {
+    size = 3
+    health = 1280
+    itemCapacity = 5560
+    requirements(Category.effect, IItems.高碳钢, 330, IItems.低碳钢, 120, IItems.铜锭, 65)
+    bundle {
+      desc(zh_CN, "仓库", "存储各种类型的物品,可以用装卸器卸载物品")
+    }
+  }
+
   val 虔信方垒 = CoreBlock("pietasCornerCore").apply {
     size = 3
     health = 1000
-    unitType = IUnitTypes.路西法
+    squareSprite = false
+    unitType = IUnitTypes.加百列
     powerProduct = 30f / 60f
     isFirstTier = true
     itemCapacity = 4000
@@ -54,6 +65,7 @@ object Effect : Load {
     size = 4
     health = 5000
     unitType = IUnitTypes.路西法
+    squareSprite = false
     itemCapacity = 10000
     unitCapModifier = 10
     buildCostMultiplier = 2f
@@ -62,6 +74,17 @@ object Effect : Load {
       desc(zh_CN, "传颂核心")
     }
   }
+  val 血肉枢纽: Block = FleshAndBloodCoreBlock("fleshAndBloodhinge").apply {
+    health = -1
+    size = 4
+    itemCapacity = 6000
+    squareSprite = false
+    requirements(Category.effect, IItems.无名肉块, 2300, IItems.碎骨, 2000)
+    bundle {
+      desc(zh_CN, "血肉枢纽")
+    }
+  }
+
   val 真菌塔: Block = FungusCore("fungusTower").apply {
     size = 2
     category = Category.effect
@@ -95,23 +118,14 @@ object Effect : Load {
     buildSize = 8
     range = 10 * 8f
     addContentInitEvent {
-      allowLink.add(Production.纤汲钻井)
+      allowLink.add(ProductBlocks.纤汲钻井)
     }
     requirements(Category.effect, ItemStack.with(IItems.低碳钢, 30))
     bundle {
       desc(zh_CN, "传输矿仓")
     }
   }
-  val 血肉枢纽: Block = FleshAndBloodCoreBlock("fleshAndBloodhinge").apply {
-    health = -1
-    size = 4
-    itemCapacity = 6000
-    squareSprite = false
-    requirements(Category.effect, IItems.无名肉块, 2300, IItems.碎骨, 2000)
-    bundle {
-      desc(zh_CN, "血肉枢纽")
-    }
-  }
+
   val 基础实验室: Block = Laboratory("laboratory").apply {
     consumePower(100f / 60)
     bundle {
@@ -120,7 +134,7 @@ object Effect : Load {
     alwaysUnlocked = true
     requirements(Category.effect, IItems.高碳钢, 50, IItems.低碳钢, 50, IItems.铜锭, 50)
   }
-  val 照明器: Block = LightBlock("illuminator").apply {
+  val 小型照明器: Block = LightBlock("illuminatorSmall").apply {
     size = 1
     armor = 1f
     radius = 90f

@@ -1,56 +1,48 @@
-package singularity.world.components;
+package singularity.world.components
 
-import arc.Core;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.util.Strings;
-import mindustry.graphics.Pal;
-import mindustry.ui.Bar;
-import mindustry.world.Block;
-import singularity.Singularity;
+import arc.Core
+import arc.func.Floatp
+import arc.func.Func
+import arc.func.Prov
+import arc.graphics.g2d.Draw
+import arc.graphics.g2d.TextureRegion
+import arc.util.Strings
+import mindustry.gen.Building
+import mindustry.graphics.Pal
+import mindustry.ui.Bar
+import mindustry.world.Block
+import singularity.Singularity
 
-
-public interface MediumComp{
-  TextureRegion[] mediumRegiom = new TextureRegion[1];
+interface MediumComp {
+  companion object {
+    val mediumRegiom: Array<TextureRegion?> = arrayOfNulls(1)
+  }
 
   //@Annotations.BindField("mediumCapacity")
-  default float mediumCapacity(){
-    return 0;
-  }
+  var mediumCapacity: Float
 
-//  @Annotations.BindField("lossRate")
-  default float lossRate(){
-    return 0;
-  }
+  //  @Annotations.BindField("lossRate")
+  var lossRate: Float
 
-//  @Annotations.BindField("mediumMoveRate")
-  default float mediumMoveRate(){
-    return 0;
-  }
+  //  @Annotations.BindField("mediumMoveRate")
+  var mediumMoveRate: Float
 
- // @Annotations.BindField("outputMedium")
-  default boolean outputMedium(){
-    return false;
-  }
+  // @Annotations.BindField("outputMedium")
+  var outputMedium: Boolean
 
   //@Annotations.MethodEntry(entryMethod = "setBars")
-  default void setHeatBars(){
-    if(this instanceof Block b){
-      b.addBar("medium", entity -> {
-        MediumBuildComp ent = (MediumBuildComp) entity;
-        return new Bar(
-            () -> Core.bundle.get("misc.medium") + ":" + Strings.autoFixed(ent.mediumContains(), 2),
-            () -> Pal.reactorPurple,
-            () -> ent.mediumContains()/mediumCapacity()
-        ){
-          @Override
-          public void draw(){
-            super.draw();
-            if(mediumRegiom[0] == null) mediumRegiom[0] = Singularity.getModAtlas("medium");
-            Draw.rect(mediumRegiom[0], x + height, y + height/2, height, height);
+  fun setHeatBars() {
+    if (this is Block) {
+      this.addBar("medium", Func { entity: Building ->
+        val ent = entity as MediumBuildComp
+        object : Bar(Prov { Core.bundle.get("misc.medium") + ":" + Strings.autoFixed(ent.mediumContains, 2) }, Prov { Pal.reactorPurple }, Floatp { ent.mediumContains / mediumCapacity }) {
+          override fun draw() {
+            super.draw()
+            if (mediumRegiom[0] == null) mediumRegiom[0] = Singularity.getModAtlas("medium")
+            Draw.rect(mediumRegiom[0], x + height, y + height / 2, height, height)
           }
-        };
-      });
+        }
+      })
     }
   }
 }

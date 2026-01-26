@@ -148,7 +148,7 @@ public class DistFlowRateMonitor extends Monitor{
 
   @Override
   public void startMonit(DistributeNetwork distNetwork){
-    setBuffers(distNetwork.netStructValid()? distNetwork.getCore().buffers().values(): Empties.nilSeq());
+    setBuffers(distNetwork.netStructValid()? distNetwork.getCore().getBuffers().values(): Empties.nilSeq());
 
     for(BaseBuffer<?, ?, ?> buffer: targetBuffer){
       buffer.startCalculate(false);

@@ -35,7 +35,7 @@ class ReadItemsRequest(sender: DistElementBuildComp, private val destination: It
 
     public override fun init(target: DistributeNetwork) {
         super.init(target)
-        source = target.core!!.getBuffer(DistBufferType.itemBuffer)
+        source = target.core?.getBuffer(DistBufferType.itemBuffer)?:return
     }
 
     public override fun preHandleTask(): Boolean {
@@ -62,7 +62,7 @@ class ReadItemsRequest(sender: DistElementBuildComp, private val destination: It
                     if (source!!.remainingCapacity() <= 0) {
                         break@itemFor
                     }
-                    var move = min(entry.entity.items.get(item), tempItems!![id])
+                    var move = min(entry.entity!!.items.get(item), tempItems!![id])
                     move = min(move, source!!.remainingCapacity())
 
                     if (move > 0) {

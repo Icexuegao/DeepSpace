@@ -7,7 +7,6 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import mindustry.game.Team
 import mindustry.world.Tile
-import singularity.Sgl
 import singularity.game.planet.context.ResearchContext
 import singularity.world.blocks.SglBlock
 import singularity.world.blocks.research.InstituteRoom.InstituteRoomBuild
@@ -38,7 +37,7 @@ class Institute(name: String) : SglBlock(name), ChainsBlockComp {
 
     override fun canPlaceOn(tile: Tile?, team: Team?, rotation: Int): Boolean {
         return super.canPlaceOn(tile, team, rotation)
-                && !Sgl.logic.currentPlanet.currentContext(team, ResearchContext::class.java).processing
+                && !true
     }
 
     inner class InstituteBuild : SglBuilding(), ChainsBuildComp {
@@ -50,7 +49,6 @@ class Institute(name: String) : SglBlock(name), ChainsBlockComp {
         override fun created() {
             super.created()
 
-            context = Sgl.logic.currentPlanet.currentContext(team(), ResearchContext::class.java)
             context!!.processing = true
         }
 

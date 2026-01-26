@@ -3,146 +3,182 @@ package singularity.world.blocks.distribute
 import arc.func.Cons
 import arc.math.geom.Point2
 import arc.scene.ui.layout.Table
+import arc.struct.ObjectMap
+import arc.struct.OrderedSet
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.content.block.MatrixDistNet
+import mindustry.ctype.ContentType
 import mindustry.gen.Building
 import mindustry.world.Edges
-import mindustry.world.meta.StatValue
-import singularity.contents.DistributeBlocks
 import singularity.world.blocks.SglBlock
+import singularity.world.blocks.distribute.matrixGrid.RequestHandlers
 import singularity.world.components.distnet.DistMatrixUnitBuildComp
 import singularity.world.components.distnet.IOPointBlockComp
 import singularity.world.components.distnet.IOPointComp
+import singularity.world.distribution.GridChildType
 import singularity.world.meta.SglStat
 import universecore.util.DataPackable
 
 abstract class IOPoint(name: String) : SglBlock(name), IOPointBlockComp {
-    init {
-        update = true
-        buildCostMultiplier = 0f
+  override var supportContentType = OrderedSet<ContentType>()
+  override var configTypes = OrderedSet<GridChildType>()
+  override var requestFactories = ObjectMap<GridChildType, ObjectMap<ContentType, RequestHandlers.RequestHandler<*>>>()
 
-        schematicPriority = -10
+  init {
+    this.update = true
+    this.buildCostMultiplier = 0.0f
+    this.schematicPriority = -10
+  }
+
+  override fun init() {
+    super.init()
+    this.setupRequestFact()
+  }
+
+  override fun setStats() {
+    super.setStats()
+    this.stats.add(SglStat.componentBelongs) { t: Table? ->
+      t!!.defaults().left()
+      t.image(MatrixDistNet.网格控制器.fullIcon).size(35.0f).padRight(8.0f)
+      t.add(MatrixDistNet.网格控制器.localizedName)
+    }
+  }
+
+  override fun parseConfigObjects(e: SglBuilding?, obj: Any?) {
+    if (obj is TargetConfigure) {
+      if (e is IOPointBuild) {
+        val tile = e.nearby(-Point2.x(obj.offsetPos), -Point2.y(obj.offsetPos))
+        if (tile is DistMatrixUnitBuildComp) {
+          val mat = tile as DistMatrixUnitBuildComp
+          val offX = e.tileX() - tile.tileX()
+          val offY = e.tileY() - tile.tileY()
+          obj.offsetPos = Point2.pack(offX, offY)
+          e.parent(mat)
+          e.gridConfig(obj)
+          e.parent()!!.addIO(e)
+        } else {
+          e.parent(null)
+          e.gridConfig(null)
+        }
+      }
+    }
+  }
+
+  override fun pointConfig(config: Any?, transformer: Cons<Point2>): Any? {
+    if (config is ByteArray) {
+      val var5 = DataPackable.readObject<DataPackable?>(config, *arrayOfNulls<Any>(0))
+      if (var5 is TargetConfigure) {
+        var5.configHandle(transformer)
+        return var5.pack()
+      }
     }
 
-    public override fun init() {
-        super.init()
+    return config
+  }
 
-        setupRequestFact()
+  abstract fun setupRequestFact()
+
+  fun requestFactories(): ObjectMap<GridChildType, ObjectMap<ContentType, RequestHandlers.RequestHandler<*>>> {
+    return this.requestFactories
+  }
+
+  fun configTypes(): OrderedSet<GridChildType> {
+    return this.configTypes
+  }
+
+  fun supportContentType(): OrderedSet<ContentType> {
+    return this.supportContentType
+  }
+
+  abstract inner class IOPointBuild : SglBuilding(), IOPointComp {
+    override var parentMat: DistMatrixUnitBuildComp? = null
+    override var config: TargetConfigure? = null
+
+    override fun onProximityAdded() {
+      super.onProximityAdded()
+      if (this.config != null) {
+        val tile = this.nearby(-Point2.x(this.config!!.offsetPos), -Point2.y(this.config!!.offsetPos))
+        if (tile is DistMatrixUnitBuildComp) {
+          val mat = tile as DistMatrixUnitBuildComp
+          this.parentMat = mat
+          this.parentMat!!.addIO(this)
+        } else {
+          this.parentMat = null
+          this.config = null
+        }
+      }
     }
 
-    public override fun setStats() {
-        super.setStats()
-        stats.add(SglStat.componentBelongs, StatValue { t: Table? ->
-            t!!.defaults().left()
-            t.image(DistributeBlocks.matrix_controller!!.fullIcon).size(35f).padRight(8f)
-            t.add(DistributeBlocks.matrix_controller!!.localizedName)
-        })
+    override fun updateTile() {
+      if (this.parentMat != null && this.parentMat!!.building.isAdded) {
+        if (this.parentMat!!.gridValid()) {
+          this.resourcesDump()
+          this.resourcesSiphon()
+          this.transBack()
+        }
+      }
     }
 
-    public override fun parseConfigObjects(e: SglBuilding?, obj: Any?) {
-        if (obj is TargetConfigure && e is IOPointBuild) {
-            val tile = e.nearby(-Point2.x(obj.offsetPos), -Point2.y(obj.offsetPos))
-            if (tile !is DistMatrixUnitBuildComp) {
-                e.parent(null)
-                e.gridConfig(null)
-            } else {
-                //校准坐标...
-                val offX = e.tileX() - tile.tileX()
-                val offY = e.tileY() - tile.tileY()
+    override fun onRemoved() {
+      if (this.parentMat != null) {
+        this.parentMat!!.removeIO(this)
+      }
 
-                obj.offsetPos = Point2.pack(offX, offY)
-
-                e.parent(tile)
-                e.gridConfig(obj)
-                e.parent()!!.addIO(e)
-            }
-        }
+      super.onRemoved()
     }
 
-    override fun pointConfig(config: Any?, transformer: Cons<Point2?>): Any? {
-        if (config is ByteArray && DataPackable.readObject<DataPackable?>(config) is TargetConfigure) {
-            var cfg=DataPackable.readObject<DataPackable?>(config) as TargetConfigure
-            cfg.configHandle(transformer)
-            return cfg.pack()
-        }
-        return config
+    override fun config(): ByteArray? {
+      return if (this.config == null) NULL else this.config!!.pack()
     }
 
-    abstract fun setupRequestFact()
-
-    abstract inner class IOPointBuild : SglBuilding(), IOPointComp {
-        var parentMat: DistMatrixUnitBuildComp? = null
-        var config: TargetConfigure? = null
-
-        override fun onProximityAdded() {
-            super.onProximityAdded()
-            if (config != null) {
-                val tile = nearby(-Point2.x(config!!.offsetPos), -Point2.y(config!!.offsetPos))
-                if (tile !is DistMatrixUnitBuildComp) {
-                    parentMat = null
-                    config = null
-                } else {
-                    parentMat = tile
-                    parentMat!!.addIO(this)
-                }
-            }
-        }
-
-        override fun updateTile() {
-            if (parentMat == null || !parentMat!!.building.isAdded()) {
-                return
-            }
-            if (parentMat!!.gridValid()) {
-                resourcesDump()
-                resourcesSiphon()
-                transBack()
-            }
-        }
-
-        override fun onRemoved() {
-            if (parentMat != null) parentMat!!.removeIO(this)
-            super.onRemoved()
-        }
-
-        public override fun config(): ByteArray? {
-            return if (config == null) NULL else config!!.pack()
-        }
-
-        public override fun write(write: Writes) {
-            super.write(write)
-
-            if (config == null) {
-                write.i(-1)
-            } else {
-                write.i(1)
-                config!!.write(write)
-            }
-        }
-
-        public override fun read(read: Reads, revision: Byte) {
-            super.read(read, revision)
-
-            if (revision >= 3) {
-                if (read.i() > 0) {
-                    config = TargetConfigure()
-                    config!!.read(read)
-                }
-            }
-        }
-
-        fun getDirectBit(e: Building): Byte {
-            val dir = relativeTo(Edges.getFacingEdge(e, this))
-            return (if (dir.toInt() == 0) 1 else if (dir.toInt() == 1) 2 else if (dir.toInt() == 2) 4 else if (dir.toInt() == 3) 8 else 0).toByte()
-        }
-
-        protected abstract fun transBack()
-
-        protected abstract fun resourcesSiphon()
-
-        protected abstract fun resourcesDump()
+    override fun write(write: Writes) {
+      super.write(write)
+      if (this.config == null) {
+        write.i(-1)
+      } else {
+        write.i(1)
+        this.config!!.write(write)
+      }
     }
 
-    companion object {
-        val NULL: ByteArray = ByteArray(0)
+    override fun read(read: Reads, revision: Byte) {
+      super.read(read, revision)
+      if (revision >= 3 && read.i() > 0) {
+        this.config = TargetConfigure()
+        this.config!!.read(read)
+      }
     }
+
+    fun getDirectBit(e: Building): Byte {
+      val dir = this.relativeTo(Edges.getFacingEdge(e, this))
+      return (if (dir.toInt() == 0) 1 else (if (dir.toInt() == 1) 2 else (if (dir.toInt() == 2) 4 else (if (dir.toInt() == 3) 8 else 0)))).toByte()
+    }
+
+    protected abstract fun transBack()
+
+    protected abstract fun resourcesSiphon()
+
+    protected abstract fun resourcesDump()
+
+    fun parent(): DistMatrixUnitBuildComp? {
+      return this.parentMat
+    }
+
+    fun parent(valur: DistMatrixUnitBuildComp?) {
+      this.parentMat = valur
+    }
+
+    fun gridConfig(): TargetConfigure? {
+      return this.config
+    }
+
+    fun gridConfig(value: TargetConfigure?) {
+      this.config = value
+    }
+  }
+
+  companion object {
+    val NULL: ByteArray = ByteArray(0)
+  }
 }

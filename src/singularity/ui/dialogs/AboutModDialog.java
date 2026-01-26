@@ -17,7 +17,7 @@ import arc.util.Nullable;
 import arc.util.Time;
 import arc.util.io.Streams;
 import arc.util.serialization.Jval;
-import ice.Ice;
+import ice.DeepSpace;
 import mindustry.gen.Icon;
 import mindustry.gen.Tex;
 import mindustry.graphics.Pal;
@@ -62,7 +62,7 @@ public class AboutModDialog extends BaseDialog {
         t.add(Core.bundle.get("misc.qq")).color(Pal.accent);
         t.row();
         t.add(Core.bundle.get("infos.qq"));
-      }, () -> Pal.lightishGray, () -> openUrl(Ice.qqGrops)),
+      }, () -> Pal.lightishGray, () -> openUrl(DeepSpace.qqGropsUrl)),
   };
 
   public AboutModDialog() {

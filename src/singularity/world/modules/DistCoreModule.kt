@@ -27,7 +27,7 @@ class DistCoreModule(entity: DistElementBuildComp) : BlockModule() {
     }
 
     fun update() {
-        val network = core.distributor()!!.network
+        val network = core.distributor!!.network
 
         if (network.netValid()) {
             process += Time.delta * network.netEfficiency()
@@ -41,7 +41,7 @@ class DistCoreModule(entity: DistElementBuildComp) : BlockModule() {
             blocked.clear()
             var runCounter = calculatePower
             if (requestTasks.removeIf(
-                    Function { task: DistRequestBase? -> task!!.finished() || task.sender.distributor()!!.network !== network }
+                    Function { task: DistRequestBase? -> task!!.finished() || task.sender.distributor!!.network !== network }
                 )
             ) taskStack = requestTasks.toArray(EMP_TMP) as Array<DistRequestBase>
 
@@ -86,7 +86,7 @@ class DistCoreModule(entity: DistElementBuildComp) : BlockModule() {
                 }
             }
 
-            for (buffer in core.buffers()!!.values()) {
+            for (buffer in core.buffers!!.values()) {
                 buffer.bufferContAssign(network)
                 buffer.update()
             }

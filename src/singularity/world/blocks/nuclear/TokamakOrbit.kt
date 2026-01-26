@@ -49,7 +49,7 @@ open class TokamakOrbit(name: String) : SglBlock(name), SpliceBlockComp {
                     makeIcon = false
                 }
             },
-            object : DrawRegionDynamic<TokamakOrbitBuild?>("_bottom") {
+            object : DrawRegionDynamic<TokamakOrbitBuild>("_bottom") {
                 init {
                     alpha = Floatf { e: TokamakOrbitBuild? -> if (e!!.isCorner) 0f else 1f }
                     rotation = Floatf { e: TokamakOrbitBuild? -> e!!.rotation * 90f }

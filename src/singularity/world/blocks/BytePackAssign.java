@@ -14,7 +14,7 @@ public class BytePackAssign {
     try{
       DataPackable.assignType(TargetConfigure.typeID, param -> new TargetConfigure());
       DataPackable.assignType(MatrixGridCore.LinkPair.typeID, param -> Pools.obtain(MatrixGridCore.LinkPair.class, MatrixGridCore.LinkPair::new));
-      DataPackable.assignType(MatrixGridBlock.PosCfgPair.typeID, param -> Pools.obtain(MatrixGridBlock.PosCfgPair.class, MatrixGridBlock.PosCfgPair::new));
+      DataPackable.assignType(MatrixGridBlock.typeID, param -> Pools.obtain(MatrixGridBlock.PosCfgPair.class, MatrixGridBlock.PosCfgPair::new));
 
       AchievementDialog.AchievementNotification.Companion.assign();
       Notification.Note.assign();

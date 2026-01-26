@@ -58,7 +58,7 @@ abstract class MatrixMinerPlugin(name: String) : SglBlock(name) {
     }
 
     abstract inner class MatrixMinerPluginBuild : SglBuilding() {
-        var owner: MatrixMinerBuild? = null
+        open var owner: MatrixMinerBuild? = null
         var warmup: Float = 0f
 
 

@@ -35,7 +35,8 @@ object MenusDialog : Dialog() {
     ContributeDialog.setup()
     reset()
     setFillParent(true)
-    table(back) { table ->
+    defaults().reset()
+    table { table ->
       table.table(back) {
         it.add("May we love each other today").color(IceColor.b4).get().setFontScale(1.3f)
       }.margin(10f).height(60f).growX().row()
@@ -83,7 +84,8 @@ object MenusDialog : Dialog() {
         }.margin(backMargin).width(200f).growY()
       }.grow()
     }.pad(0f).grow()
-    keyDown(KeyCode.escape){
+    button.build(conts)
+    keyDown(KeyCode.escape) {
       Core.app.post {
         hide()
       }

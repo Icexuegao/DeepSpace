@@ -22,143 +22,212 @@ import universecore.world.blocks.modules.ChainsModule
 import java.util.*
 
 open class ComponentInterface(name: String) : DistNetBlock(name), SpliceBlockComp {
-    var interfaceLinker: TextureRegion? = null
-    var linker: TextureRegion? = null
-    override var maxChainsWidth: Int = 40
-    override var maxChainsHeight: Int = 40
-    override var interCorner = false
-    override var negativeSplice = false
+  override var negativeSplice: Boolean = false
+  override var interCorner: Boolean = false
+  var interfaceLinker: TextureRegion? = null
+  var linker: TextureRegion? = null
+  override var maxChainsWidth: Int = 40
+  override var maxChainsHeight: Int = 40
 
-    init {
-        isNetLinker = true
-        buildType = Prov(::ComponentInterfaceBuild)
+  init {
+    this.isNetLinker = true
+    buildType = Prov(::ComponentInterfaceBuild)
+  }
+
+  public override fun load() {
+    super.load()
+    this.interfaceLinker = Core.atlas.find(this.name + "_linker")
+    this.linker = Core.atlas.find(this.name + "_comp_linker")
+  }
+
+  override fun chainable(other: ChainsBlockComp): Boolean {
+    return other === this
+  }
+
+  fun interCorner(): Boolean {
+    return this.interCorner
+  }
+
+  fun negativeSplice(): Boolean {
+    return this.negativeSplice
+  }
+
+  fun maxWidth(): Int {
+    return this.maxChainsWidth
+  }
+
+  fun maxHeight(): Int {
+    return this.maxChainsHeight
+  }
+
+  override fun setStats() {
+    super.setStats()
+    this.setChainsStats(this.stats)
+  }
+
+  inner class ComponentInterfaceBuild : DistNetBuild(), SpliceBuildComp {
+    override var loadingInvalidPos: IntSet = IntSet()
+    override var splice: Int = 0
+    override var chains = ChainsModule(this)
+    var links: Seq<ComponentInterfaceBuild?> = Seq<ComponentInterfaceBuild?>()
+    var connects: Seq<DistElementBuildComp?> = Seq<DistElementBuildComp?>()
+    var interSplice: Byte = 0
+    var connectSplice: ByteArray = ByteArray(4)
+    var mark: Boolean = false
+
+    override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building {
+      super.init(tile, team, shouldAdd, rotation)
+      this.chains.newContainer()
+      return this
     }
 
-    override fun load() {
-        super.load()
-        interfaceLinker = Core.atlas.find(name + "_linker")
-        linker = Core.atlas.find(name + "_comp_linker")
+    override fun updateTile() {
+      super.updateTile()
+      if (this.mark) {
+        this.updateNetLinked()
+        (DistributeNetwork()).flow(this)
+        this.mark = false
+      }
     }
 
-    override fun chainable(other: ChainsBlockComp): Boolean {
-        return other === this
+    override fun updateNetLinked() {
+      super.updateNetLinked()
+      this.links.clear()
+      this.connects.clear()
+      Arrays.fill(this.connectSplice, 0.toByte())
+
+      for (building in this.proximity) {
+        if (building is ComponentInterfaceBuild) {
+          val inter = building
+          if (this.canChain(inter)) {
+            this.links.add(inter)
+            continue
+          }
+        }
+
+        if (building is DistNetBuild) {
+          val device = building
+          if (this.linkable(device) && device.linkable(this) && this.connectable(device)) {
+            this.connects.add(device)
+            val dir = this.relativeTo(device).toInt()
+            val arr = DirEdges.get(this@ComponentInterface.size, dir)
+
+            for (i in arr.indices) {
+              val t = this.tile.nearby(arr[i])
+              if (t != null && t.build === device) {
+                val var10000 = this.connectSplice
+                var10000[dir] = (var10000[dir].toInt() or (1 shl i).toByte().toInt()).toByte()
+              }
+            }
+          }
+        }
+      }
+
+      this.netLinked().addAll(this.links).addAll(this.connects)
     }
 
-    inner class ComponentInterfaceBuild : DistNetBuild(), SpliceBuildComp {
-        override var loadingInvalidPos= IntSet()
-        override  var chains= ChainsModule(this)
-        var links: Seq<ComponentInterfaceBuild?> = Seq<ComponentInterfaceBuild?>()
-        var connects: Seq<DistElementBuildComp?> = Seq<DistElementBuildComp?>()
-        var interSplice: Byte = 0
-        var connectSplice: ByteArray = ByteArray(4)
-        var mark: Boolean = false
-        override var splice = 0
-
-        override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building? {
-            super.init(tile, team, shouldAdd, rotation)
-            chains = ChainsModule(this)
-            chains.newContainer()
-            return this
-        }
-
-        override fun updateTile() {
-            super.updateTile()
-
-            if (mark) {
-                updateNetLinked()
-                DistributeNetwork().flow(this)
-                mark = false
-            }
-        }
-
-        override fun onProximityRemoved() {
-            super.onProximityRemoved()
-            onChainsRemoved()
-        }
-
-        override fun write(write: Writes) {
-            super.write(write)
-            writeChains(write)
-        }
-
-        override fun read(read: Reads, revision: Byte) {
-            super.read(read, revision)
-            readChains(read)
-        }
-        override fun updateNetLinked() {
-            super.updateNetLinked()
-
-            links.clear()
-            connects.clear()
-
-            Arrays.fill(connectSplice, 0.toByte())
-
-            for (building in proximity) {
-                if (building is ComponentInterfaceBuild && canChain(building)) {
-                    links.add(building)
-                } else if (building is DistNetBuild && linkable(building) && building.linkable(this) && connectable(building)) {
-                    connects.add(building)
-                    val dir = relativeTo(building).toInt()
-                    val arr = DirEdges.get(size, dir)
-
-                    for (i in arr.indices) {
-                        val t = tile.nearby(arr[i])
-                        if (t != null && t.build === building) connectSplice[dir] = (connectSplice[dir].toInt() or (1 shl i).toByte().toInt()).toByte()
-                    }
-                }
-            }
-
-            netLinked()!!.addAll(links).addAll(connects)
-        }
-
-        override fun onProximityAdded() {
-            super.onProximityAdded()
-
-            mark = true
-            onChainsAdded()
-        }
-
-        override fun onProximityUpdate() {
-            super.onProximityUpdate()
-
-            updateNetLinked()
-            mark = true
-            updateRegionBit()
-        }
-
-        override fun networkRemoved(remove: DistElementBuildComp) {
-            super.networkRemoved(remove)
-
-            connects.remove(remove)
-            if (remove is ComponentInterfaceBuild) links.remove(remove)
-
-            mark = true
-        }
-
-        override fun updateRegionBit() {
-            super.updateRegionBit()
-
-            interSplice = 0
-            for (i in 0..3) {
-                if ((splice and (1 shl i * 2)) !== 0) interSplice = (interSplice.toInt() or (1 shl i).toByte().toInt()).toByte()
-            }
-        }
-
-        fun connectable(other: DistNetBuild): Boolean {
-            val dir = other.relativeTo(this).toInt()
-            val t = other.tile
-            for (point2 in DirEdges.get(other.block.size, dir)) {
-                val ot = t.nearby(point2)
-                if (ot == null || ot.build !is ComponentInterfaceBuild) return false
-                var build = ot.build as ComponentInterfaceBuild
-                if (build !== this && build.distributor!!.network !== distributor!!.network) return false
-            }
-
-            return true
-        }
-
-        override fun canChain(other: ChainsBuildComp): Boolean {
-            return super.canChain(other) && (other.tileX() == tileX() || other.tileY() == tileY())
-        }
+    public override fun onProximityAdded() {
+      super.onProximityAdded()
+      this.mark = true
+      this.onChainsAdded()
     }
+
+    override fun onProximityUpdate() {
+      super.onProximityUpdate()
+      this.updateNetLinked()
+      this.mark = true
+      this.updateRegionBit()
+    }
+
+    override fun networkRemoved(remove: DistElementBuildComp) {
+      super.networkRemoved(remove)
+      this.connects.remove(remove)
+      if (remove is ComponentInterfaceBuild) {
+        val inter = remove
+        this.links.remove(inter)
+      }
+
+      this.mark = true
+    }
+
+    override fun updateRegionBit() {
+      super.updateRegionBit()
+      this.interSplice = 0
+
+      for (i in 0..3) {
+        if ((this.splice() and (1 shl i * 2)) != 0) {
+          this.interSplice = (this.interSplice.toInt() or (1 shl i)).toByte()
+        }
+      }
+    }
+
+    fun connectable(other: DistNetBuild): Boolean {
+      val dir = other.relativeTo(this).toInt()
+      val t = other.tile
+      val var4 = DirEdges.get(other.block.size, dir)
+      val var5 = var4.size
+      var var6 = 0
+
+      while (true) {
+        if (var6 >= var5) {
+          return true
+        }
+
+        val point2 = var4[var6]
+        val ot = t.nearby(point2)
+        if (ot == null) {
+          break
+        }
+
+        val var10 = ot.build
+        if (var10 !is ComponentInterfaceBuild) {
+          break
+        }
+
+        val inter = var10
+        if (inter !== this && inter.distributor.network != this.distributor.network) {
+          return false
+        }
+
+        ++var6
+      }
+
+      return false
+    }
+
+    override fun canChain(other: ChainsBuildComp): Boolean {
+      return super.canChain(other) && (other.tileX() == this.tileX() || other.tileY() == this.tileY())
+    }
+
+    fun splice(): Int {
+      return this.splice
+    }
+
+    fun splice(arr: Int) {
+      this.splice = arr
+    }
+
+    fun loadingInvalidPos(): IntSet {
+      return this.loadingInvalidPos
+    }
+
+    fun chains(): ChainsModule? {
+      return this.chains
+    }
+
+    public override fun onProximityRemoved() {
+      super.onProximityRemoved()
+      this.onChainsRemoved()
+    }
+
+    override fun write(write: Writes) {
+      super.write(write)
+      this.writeChains(write)
+    }
+
+    override fun read(read: Reads, revision: Byte) {
+      super.read(read, revision)
+      this.readChains(read)
+    }
+  }
 }

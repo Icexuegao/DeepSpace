@@ -1,50 +1,46 @@
-package singularity.world.components;
+package singularity.world.components
 
-import arc.util.Time;
-import universecore.components.blockcomp.BuildCompBase;
-import universecore.components.blockcomp.Takeable;
+import arc.util.Time
+import mindustry.gen.Building
+import universecore.components.blockcomp.BuildCompBase
+import universecore.components.blockcomp.Takeable
+import kotlin.math.max
+import kotlin.math.min
 
-public interface MediumBuildComp extends BuildCompBase, Takeable{
- // @Annotations.BindField("mediumContains")
-  default float mediumContains(){
-    return 0;
+interface MediumBuildComp : BuildCompBase, Takeable {
+  var mediumContains: Float
+
+  val mediumBlock: MediumComp
+    get() = getBlock(MediumComp::class.java)
+
+  fun acceptMedium(source: MediumBuildComp): Boolean {
+    return building.interactable(source.building.team) && mediumContains < this.mediumBlock.mediumCapacity
   }
 
-//  @Annotations.BindField("mediumContains")
-  default void mediumContains(float value){}
-
-  default MediumComp getMediumBlock(){
-    return getBlock(MediumComp.class);
+  fun remainingMediumCapacity(): Float {
+    return this.mediumBlock.mediumCapacity - mediumContains
   }
 
-  default boolean acceptMedium(MediumBuildComp source){
-    return getBuilding().interactable(source.getBuilding().team) && mediumContains() < getMediumBlock().mediumCapacity();
+  fun acceptMedium(source: MediumBuildComp, amount: Float): Float {
+    return if (acceptMedium(source)) min(remainingMediumCapacity(), amount) else 0f
   }
 
-  default float remainingMediumCapacity(){
-    return getMediumBlock().mediumCapacity() - mediumContains();
+  fun handleMedium(source: MediumBuildComp?, amount: Float) {
+    mediumContains = (mediumContains + max(amount - this.mediumBlock.lossRate * Time.delta, 0f))
   }
 
-  default float acceptMedium(MediumBuildComp source, float amount){
-    return acceptMedium(source)? Math.min(remainingMediumCapacity(), amount): 0;
+  fun removeMedium(amount: Float) {
+    mediumContains = (mediumContains - amount)
   }
 
-  default void handleMedium(MediumBuildComp source, float amount){
-    mediumContains(mediumContains() + Math.max(amount - getMediumBlock().lossRate()*Time.delta, 0));
-  }
+  fun dumpMedium() {
+    val next = getNext("medium") { e: Building? -> e is MediumBuildComp && (e as MediumBuildComp).acceptMedium(this, this.mediumBlock.mediumMoveRate) > 0 } as MediumBuildComp?
+    if (next == null) return
 
-  default void removeMedium(float amount){
-    mediumContains(mediumContains() - amount);
-  }
+    var move = min(mediumContains, this.mediumBlock.mediumMoveRate * building.delta())
+    move = min(move, next.remainingMediumCapacity())
 
-  default void dumpMedium(){
-    MediumBuildComp next = (MediumBuildComp) getNext("medium", e -> e instanceof MediumBuildComp && ((MediumBuildComp) e).acceptMedium(this, getMediumBlock().mediumMoveRate()) > 0);
-    if(next == null) return;
-
-    float move = Math.min(mediumContains(), getMediumBlock().mediumMoveRate()*getBuilding().delta());
-    move = Math.min(move, next.remainingMediumCapacity());
-
-    removeMedium(move);
-    next.handleMedium(this, move);
+    removeMedium(move)
+    next.handleMedium(this, move)
   }
 }

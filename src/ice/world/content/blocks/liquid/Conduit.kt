@@ -13,6 +13,8 @@ import arc.struct.Seq
 import arc.util.Eachable
 import arc.util.Tmp
 import ice.core.Placement
+import ice.world.content.blocks.distribution.conveyor.Autotiler
+import ice.world.content.blocks.distribution.conveyor.Autotiler.SliceMode
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import ice.world.content.blocks.liquid.base.LiquidBlock
 import mindustry.Vars
@@ -24,8 +26,6 @@ import mindustry.graphics.Layer
 import mindustry.type.Liquid
 import mindustry.world.Block
 import mindustry.world.Tile
-import mindustry.world.blocks.Autotiler
-import mindustry.world.blocks.Autotiler.SliceMode
 import mindustry.world.blocks.distribution.ChainedBuilding
 
 open class Conduit(name: String) : LiquidBlock(name), Autotiler {
@@ -122,7 +122,7 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
     }
 
 
-    override fun drawPlanRegion(plan: BuildPlan, list: Eachable<BuildPlan?>?) {
+    override fun drawPlanRegion(plan: BuildPlan, list: Eachable<BuildPlan>) {
         val bits = getTiling(plan, list) ?: return
 
         Draw.scl(bits[1].toFloat(), bits[2].toFloat())
@@ -142,7 +142,7 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
         ) junctionReplacement else this
     }
 
-    override fun blends(tile: Tile?, rotation: Int, otherx: Int, othery: Int, otherrot: Int, otherblock: Block): Boolean {
+    override fun blends(tile: Tile, rotation: Int, otherx: Int, othery: Int, otherrot: Int, otherblock: Block): Boolean {
         return otherblock.hasLiquids && (otherblock.outputsLiquid || (lookingAt(tile, rotation, otherx, othery, otherblock))) && lookingAtEither(tile, rotation, otherx, othery, otherrot, otherblock)
     }
 

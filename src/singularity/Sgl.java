@@ -16,7 +16,6 @@ import mindustry.game.Team;
 import singularity.core.ModConfig;
 import singularity.core.ModsInteropAPI;
 import singularity.core.UpdatePool;
-import singularity.game.SingularityGameLogic;
 import singularity.game.researchs.ResearchManager;
 import singularity.graphic.MathRenderer;
 import singularity.graphic.PostAtlasGenerator;
@@ -76,8 +75,6 @@ public class Sgl {
 
   public static final Team none = Team.get(255);
 
-  /** Singularity平行逻辑存储对象 */
-  public static SingularityGameLogic logic = new SingularityGameLogic();
   /** 模组配置存储器 */
   public static ModConfig config = new ModConfig();
   /** 持久保存的全局变量集 */
@@ -163,13 +160,11 @@ public class Sgl {
 
     matrixContainers.setDefaultSupports();
 
-    logic.init();
     interopAPI.init();
     empHealth.init();
     // researches.init();
 
     UpdatePool.receive("autosaveGlobal", globals::autosave);
-    UpdatePool.receive("sglLogicUpdate", logic::update);
 
     if (!Core.app.isHeadless()) {
       generatePostAtlas();

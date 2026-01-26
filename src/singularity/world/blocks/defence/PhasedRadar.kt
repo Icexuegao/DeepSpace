@@ -15,6 +15,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.content.IStatus
 import ice.library.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.game.Team
@@ -27,7 +28,6 @@ import mindustry.world.Block
 import mindustry.world.Tile
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
-import singularity.contents.OtherContents
 import singularity.graphic.SglDraw
 import singularity.world.blocks.SglBlock
 import singularity.world.meta.SglStat
@@ -79,8 +79,8 @@ open class PhasedRadar(name: String) : SglBlock(name), SpliceBlockComp {
       t!!.defaults().left().padLeft(5f)
       t.row()
       t.table { a: Table? ->
-        a!!.image(OtherContents.locking.uiIcon).size(25f)
-        a.add(OtherContents.locking.localizedName).color(Pal.accent)
+        a!!.image(IStatus.锁定.uiIcon).size(25f)
+        a.add(IStatus.锁定.localizedName).color(Pal.accent)
       }
       t.row()
       t.add(Core.bundle.get("infos.phaseRadarEff"))
@@ -103,7 +103,7 @@ open class PhasedRadar(name: String) : SglBlock(name), SpliceBlockComp {
     var centerPos: Vec2 = Vec2()
     var locking: ObjectSet<Unit> = ObjectSet<Unit>()
 
-    override fun create(block: Block?, team: Team?): Building {
+    override fun create(block: Block, team: Team): Building {
       super.create(block, team)
       timer = Interval(timers)
 
@@ -156,7 +156,7 @@ open class PhasedRadar(name: String) : SglBlock(name), SpliceBlockComp {
               locking.add(unit)
             } else if (unit.isFlying && !lenValid) {
               if (locking.remove(unit)) {
-                unit.unapply(OtherContents.locking)
+                unit.unapply(IStatus.锁定)
               }
             }
           }
@@ -168,7 +168,7 @@ open class PhasedRadar(name: String) : SglBlock(name), SpliceBlockComp {
             continue
           }
 
-          unit.apply(OtherContents.locking, 0.05f * Mathf.log(1.01f, (chains.container.all.size + 1).toFloat()))
+          unit.apply(IStatus.锁定, 0.05f * Mathf.log(1.01f, (chains.container.all.size + 1).toFloat()))
         }
       }
     }

@@ -9,52 +9,51 @@ import ice.graphics.lightnings.LightningContainer.PoolLightningContainer
 import ice.world.SglFx
 import mindustry.gen.Bullet
 
-open class LightningBulletType(time: Float=0f, damage: Float=1f) : BulletType(time, damage) {
+open class LightningBulletType(time: Float = 0f, damage: Float = 1f) : BulletType(time, damage) {
 
-    override fun init(bullet: Bullet) {
-        super.init(bullet)
-        val cont = Pools.obtain(PoolLightningContainer::class.java) { PoolLightningContainer() }
-        bullet.data = cont
+  override fun init(bullet: Bullet) {
+    super.init(bullet)
+    val cont = Pools.obtain(PoolLightningContainer::class.java) { PoolLightningContainer() }
+    bullet.data = cont
 
-        init(bullet, cont)
+    init(bullet, cont)
+  }
+
+  open fun init(b: Bullet, container: LightningContainer) {
+  }
+
+  override fun update(b: Bullet) {
+    super.update(b)
+    val data = b.data
+    if (data is LightningContainer) {
+      update(b, data)
     }
+  }
 
-    open fun init(b: Bullet, container: LightningContainer) {
-
+  override fun draw(b: Bullet) {
+    super.draw(b)
+    val data = b.data
+    if (data is LightningContainer) {
+      draw(b, data)
     }
+  }
 
-    override fun update(b: Bullet) {
-        super.update(b)
-        val data = b.data
-        if (data is LightningContainer) {
-            update(b, data)
-        }
+  fun draw(b: Bullet, c: LightningContainer) {
+    Draw.color(b.type.hitColor)
+    c.draw(b.x, b.y)
+  }
+
+  fun update(bullet: Bullet, container: LightningContainer) {
+    container.update()
+  }
+
+  override fun removed(b: Bullet) {
+    super.removed(b)
+
+    val data = b.data
+    if (data is LightningContainer) {
+      SglFx.lightningCont.at(b.x, b.y, 0f, b.type.hitColor, data)
+      Time.run(210f) { Pools.free(data) }
     }
-
-    override fun draw(b: Bullet) {
-        super.draw(b)
-        val data = b.data
-        if (data is LightningContainer) {
-            draw(b, data)
-        }
-    }
-
-    fun draw(b: Bullet, c: LightningContainer) {
-        Draw.color(b.type.hitColor)
-        c.draw(b.x, b.y)
-    }
-
-    fun update(bullet: Bullet?, container: LightningContainer) {
-        container.update()
-    }
-
-    override fun removed(b: Bullet) {
-        super.removed(b)
-
-        val data = b.data
-        if (data is LightningContainer) {
-            SglFx.lightningCont.at(b.x, b.y, 0f, b.type.hitColor, data)
-            Time.run(210f) { Pools.free(data) }
-        }
-    }
+  }
 }

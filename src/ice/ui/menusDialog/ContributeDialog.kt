@@ -7,7 +7,7 @@ import arc.scene.ui.Button
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
-import ice.Ice
+import ice.DeepSpace
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.ui.addLine
@@ -32,7 +32,7 @@ object ContributeDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.m
       p.row()
       p.add(IceStats.支持github.localized()).color(IceColor.b4).growX().wrap()
       p.row()
-      buildButton(p, Icon.github, Pal.accent, "GitHub", IceStats.支持githubStar.localized()) { Core.app.openURI(Ice.githubProjectUrl) }
+      buildButton(p, Icon.github, Pal.accent, "GitHub", IceStats.支持githubStar.localized()) { Core.app.openURI(DeepSpace.githubProjectUrl) }
       p.row()
       p.add(IceStats.支持捐赠.localized()).color(IceColor.b4).padTop(20f).growX().wrap()
       p.row()

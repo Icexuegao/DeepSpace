@@ -33,7 +33,6 @@ import mindustry.graphics.Pal
 import mindustry.type.Item
 import mindustry.world.Block
 import mindustry.world.Tile
-import mindustry.world.blocks.Autotiler
 import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit

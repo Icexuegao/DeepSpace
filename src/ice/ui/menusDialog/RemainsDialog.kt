@@ -8,6 +8,7 @@ import arc.util.Scaling
 import ice.content.Remainss
 import ice.graphics.IStyles
 import ice.graphics.IceColor
+import ice.library.scene.ui.iPaneG
 import ice.library.scene.ui.iTable
 import ice.library.scene.ui.iTableG
 import ice.library.scene.ui.icePane
@@ -16,69 +17,73 @@ import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
 
 object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menusButton_remains) {
-    val remainsSeq = Seq<Remains>()
-    val enableSeq = Seq<Remains>()
-    var tempRemain = Remainss.娜雅的手串
-    lateinit var tiTleTable: Table
-    lateinit var enableTable: Table
-    lateinit var remainsTable: Table
-    var slotPos: Int = 4
+  val remainsSeq = Seq<Remains>()
+  val enableSeq = Seq<Remains>()
+  var tempRemain = Remainss.娜雅的手串
+  lateinit var tiTleTable: Table
+  lateinit var enableTable: Table
+  lateinit var remainsTable: Table
+  var slotPos: Int = 4
 
-    override fun build(cont: Table) {
-      cont.add(Image(IStyles.remains, Scaling.fit)).row()
-        cont.iTable {
-            tiTleTable = it
-            flunTiTleTable()
-        }.minHeight(360f).row()
-
-        cont.iTable { ta ->
-            ta.add(Label { "正在生效:[${enableSeq.size} / $slotPos]" }).color(IceColor.b4).pad(10f).row()
-            ta.iTableG {
-                it.setRowsize(5)
-                enableTable = it
-                flunEnableSeq()
-            }
-        }.pad(30f).row()
-        cont.image(IStyles.whiteui).color(IceColor.b1).height(3f).growX().row()
-        cont.iTableG {
-            it.top()
-            it.add("已拥有:").color(IceColor.b4).pad(10f).row()
-            it.icePane { ip ->
-                ip.setRowsize(10)
-                remainsTable = ip
-                flunRemains()
-            }
-        }
-    }
-
-    fun flunRemains() {
+  override fun build(cont: Table) {
+    cont.iPaneG { cont1 ->
+      cont1.table {
+        it.add(Image(IStyles.remains, Scaling.fit))
+      }.row()
+      cont1.iTable {
+        tiTleTable = it
         flunTiTleTable()
-        flunRemainsSeq()
-        flunEnableSeq()
-    }
+      }.minHeight(360f).row()
 
-    fun flunTiTleTable() {
-        tiTleTable.clearChildren()
-        tiTleTable.image(tempRemain.icon).size(90f).pad(10f).row()
-        tiTleTable.add(tempRemain.name).pad(5f).color(tempRemain.color).row()
-        tiTleTable.add(tempRemain.customTable).row()
-        tiTleTable.add("效果: ${tempRemain.effect}").color(tempRemain.color)
+      cont1.iTable { ta ->
+        ta.add(Label { "正在生效:[${enableSeq.size} / $slotPos]" }).color(IceColor.b4).pad(10f).row()
+        ta.iTableG {
+          it.setRowsize(5)
+          enableTable = it
+          flunEnableSeq()
+        }
+      }.pad(30f).row()
+      cont1.image(IStyles.whiteui).color(IceColor.b1).height(3f).growX().row()
+      cont1.iTableG {
+        it.top()
+        it.add("已拥有:").color(IceColor.b4).pad(10f).row()
+        it.icePane { ip ->
+          ip.setRowsize(10)
+          remainsTable = ip
+          flunRemains()
+        }
+      }
     }
+  }
 
-    private fun flunRemainsSeq() {
-        remainsTable.clearChildren()
-        remainsSeq.forEach { item ->
-            item.rebuildRemains(remainsTable)
-        }
-    }
+  fun flunRemains() {
+    flunTiTleTable()
+    flunRemainsSeq()
+    flunEnableSeq()
+  }
 
-    private fun flunEnableSeq() {
-        enableTable.clearChildren()
-        enableSeq.forEach { item ->
-            item.rebuildEnableRemains(enableTable)
-        }
-        (1..(slotPos - enableSeq.size)).forEach { _ ->
-            enableTable.add(Image(IStyles.button.up)).size(60f).pad(10f)
-        }
+  fun flunTiTleTable() {
+    tiTleTable.clearChildren()
+    tiTleTable.image(tempRemain.icon).size(90f).pad(10f).row()
+    tiTleTable.add(tempRemain.name).pad(5f).color(tempRemain.color).row()
+    tiTleTable.add(tempRemain.customTable).row()
+    tiTleTable.add("效果: ${tempRemain.effect}").color(tempRemain.color)
+  }
+
+  private fun flunRemainsSeq() {
+    remainsTable.clearChildren()
+    remainsSeq.forEach { item ->
+      item.rebuildRemains(remainsTable)
     }
+  }
+
+  private fun flunEnableSeq() {
+    enableTable.clearChildren()
+    enableSeq.forEach { item ->
+      item.rebuildEnableRemains(enableTable)
+    }
+    (1..(slotPos - enableSeq.size)).forEach { _ ->
+      enableTable.add(Image(IStyles.button.up)).size(60f).pad(10f)
+    }
+  }
 }

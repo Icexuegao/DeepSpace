@@ -31,7 +31,7 @@ class PutItemsRequest(sender: DistElementBuildComp, protected val source: ItemsB
 
     public override fun init(target: DistributeNetwork) {
         super.init(target)
-        destination = target.core!!.getBuffer(DistBufferType.itemBuffer)
+        destination = target.core?.getBuffer(DistBufferType.itemBuffer)?:return
     }
 
     override fun preHandleTask(): Boolean {

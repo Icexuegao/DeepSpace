@@ -9,7 +9,7 @@ import arc.scene.ui.Label
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Scaling
-import ice.Ice
+import ice.DeepSpace
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.EventType
@@ -89,7 +89,6 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
 
   init {
     Achievement("孢子进化论", "升级一次孢子单位")
-    Achievement("世界树", "形成孢子网络")
     Achievement("阴霾之下", "使用孢子建筑生产迷雾")
     Achievement("生化危机", "一局内存在50个孢子单位")
     Achievement("狂乱的鸡尾酒", "拥有所有状态效果")
@@ -111,14 +110,14 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
 
     init {
       achievements.add(this)
-      unlocked = Core.settings.getBool("${Ice.name}-achievement-$name", false)
+      unlocked = Core.settings.getBool("${DeepSpace.name}-achievement-$name", false)
     }
 
     fun unlocked() = unlocked
     fun unlock() {
       if (!unlocked) {
         unlocked = true
-        Core.settings.put("${Ice.name}-achievement-$name", true)
+        Core.settings.put("${DeepSpace.name}-achievement-$name", true)
         Events.fire(EventType.AchievementUnlockEvent(this))
         Sgl.ui.notificationFrag.notify(AchievementNotification(name, description))
         hide()
@@ -129,7 +128,7 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
     fun clearUnlock() {
       if (unlocked) {
         unlocked = false
-        Core.settings.put("${Ice.name}-achievement-$name", false)
+        Core.settings.put("${DeepSpace.name}-achievement-$name", false)
         hide()
         build(MenusDialog.conts)
       }

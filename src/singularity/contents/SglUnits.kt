@@ -17,6 +17,7 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IItems
 import ice.content.ILiquids
+import ice.content.block.turret.TurretBullets
 import ice.library.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.content.Items
@@ -27,6 +28,7 @@ import mindustry.entities.units.UnitController
 import mindustry.game.EventType.ClientLoadEvent
 import mindustry.game.Team
 import mindustry.gen.Building
+import mindustry.gen.Bullet
 import mindustry.gen.Sounds
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
@@ -75,7 +77,7 @@ class SglUnits : ContentList {
     aurora = AuroraType()
     emptiness = EmptinessType()
 
-    unstable_energy_body = object : SglUnitType<SglUnitEntity>("unstable_energy_body",SglUnitEntity::class.java) {
+    unstable_energy_body = object : SglUnitType<SglUnitEntity>("unstable_energy_body", SglUnitEntity::class.java) {
       val FULL_SIZE_ENERGY: Float = 3680f
 
       var SglUnitEntity.lightnings: LightningContainer? by AttachedProperty(null)
@@ -109,6 +111,26 @@ class SglUnits : ContentList {
             override fun unit(): Unit? {
               // no ai
               return null
+            }
+
+            override fun hit(bullet: Bullet?) {
+            }
+
+            override fun isValidController(): Boolean {
+              return true
+            }
+
+            override fun isLogicControllable(): Boolean {
+              return false
+            }
+
+            override fun updateUnit() {
+            }
+
+            override fun removed(unit: Unit?) {
+            }
+
+            override fun afterRead(unit: Unit?) {
             }
           }
         }
@@ -209,7 +231,7 @@ class SglUnits : ContentList {
           unit.bullTime -= Time.delta
           val bullTime: Float = unit.bullTime
           if (bullTime <= 0) {
-            SglTurrets.spilloverEnergy!!.create(u, u.team, u.x, u.y, Mathf.random(0f, 360f), Mathf.random(0.5f, 1f))
+            TurretBullets.溢出能量!!.create(u, u.team, u.x, u.y, Mathf.random(0f, 360f), Mathf.random(0.5f, 1f))
             unit.health -= 180f
             unit.bullTime = max(controlTime / 10, 2f)
           }
@@ -297,7 +319,7 @@ class SglUnits : ContentList {
       init {
         requirements(
           Category.units, ItemStack.with(
-            Items.silicon, 180, Items.surgeAlloy, 160, Items.phaseFabric, 190, IItems.铝, 200, IItems.气凝胶, 120, IItems.强化合金, 215, IItems.矩阵合金, 180, IItems.FEX水晶, 140, IItems.铱, 100
+            Items.silicon, 180, Items.surgeAlloy, 160, Items.phaseFabric, 190, IItems.铝, 200, IItems.气凝胶, 120, IItems.强化合金, 215, IItems.矩阵合金, 180, IItems.FEX水晶, 140, IItems.铱锭, 100
           )
         )
         size = 7
@@ -377,7 +399,7 @@ class SglUnits : ContentList {
       init {
         requirements(
           Category.units, ItemStack.with(
-            Items.silicon, 240, Items.surgeAlloy, 240, Items.phaseFabric, 200, IItems.强化合金, 280, IItems.矩阵合金, 280, IItems.FEX水晶, 200, IItems.充能FEX水晶, 160, IItems.铱, 150, IItems.简并态中子聚合物, 100
+            Items.silicon, 240, Items.surgeAlloy, 240, Items.phaseFabric, 200, IItems.强化合金, 280, IItems.矩阵合金, 280, IItems.FEX水晶, 200, IItems.充能FEX水晶, 160, IItems.铱锭, 150, IItems.简并态中子聚合物, 100
           )
         )
         size = 9

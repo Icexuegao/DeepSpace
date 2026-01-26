@@ -2,19 +2,13 @@ package singularity.world.unit;
 
 import arc.math.Mathf;
 import arc.struct.ObjectMap;
-import arc.util.Log;
 import arc.util.Time;
-import arc.util.io.Reads;
-import arc.util.io.Writes;
 import arc.util.pooling.Pools;
 import arc.util.serialization.Jval;
 import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.ctype.ContentType;
-import mindustry.gen.Groups;
 import mindustry.gen.Unit;
-import mindustry.io.SaveFileReader;
-import mindustry.io.SaveVersion;
 import mindustry.mod.Mods;
 import mindustry.type.UnitType;
 import mindustry.world.meta.StatUnit;
@@ -22,10 +16,6 @@ import singularity.Sgl;
 import singularity.contents.OtherContents;
 import singularity.core.ModsInteropAPI;
 import singularity.world.meta.SglStat;
-
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
 
 public class EMPHealthManager {
   private final ObjectMap<Unit, EMPModel.EMPHealth> healthMap = new ObjectMap<>();
@@ -36,38 +26,38 @@ public class EMPHealthManager {
 
   private static final EMPModel.EMPHealth ZERO = new EMPModel.EMPHealth();
 
-  public void init(){
+  public void init() {
     /*添加mod交互API模型，用于其他mod定义单位的EMP生命模型
-    * 通常条目格式:
-    * ...
-    * "empHealthModels": {
-    *   “$unitTypeName”:{  //选中单位的内部名称，mod名称前缀可选，默认选择本mod中的content，一般不建议跨mod配置单位数据
-    *     "maxEmpHealth": #, //最大EMP生命值
-    *     "empArmor": #,  //EMP伤害减免百分比
-    *     "empRepair": #,  //EMP损伤自动恢复速度（/tick）
-    *     "empContinuousDamage": #  //电磁损毁状态下的持续生命扣除速度（/tick）
-    *   },
-    *   “$unitTypeName”:{
-    *     "maxEmpHealth": #,
-    *     "empArmor": #,
-    *     "empRepair": #,
-    *     "empContinuousDamage": #
-    *   },
-    *   ...
-    * }
-    * ...
-    *
-    * 若需要禁用某一单位的EMP损伤机制则作如下声明:
-    * ...
-    * "empHealthModels": {
-    *   "$unitTypeName": {
-    *     "disabled": true
-    *   },
-    *   ...
-    * }
-    * ...
-    * */
-    if (Sgl.config.interopAssignEmpModels){
+     * 通常条目格式:
+     * ...
+     * "empHealthModels": {
+     *   “$unitTypeName”:{  //选中单位的内部名称，mod名称前缀可选，默认选择本mod中的content，一般不建议跨mod配置单位数据
+     *     "maxEmpHealth": #, //最大EMP生命值
+     *     "empArmor": #,  //EMP伤害减免百分比
+     *     "empRepair": #,  //EMP损伤自动恢复速度（/tick）
+     *     "empContinuousDamage": #  //电磁损毁状态下的持续生命扣除速度（/tick）
+     *   },
+     *   “$unitTypeName”:{
+     *     "maxEmpHealth": #,
+     *     "empArmor": #,
+     *     "empRepair": #,
+     *     "empContinuousDamage": #
+     *   },
+     *   ...
+     * }
+     * ...
+     *
+     * 若需要禁用某一单位的EMP损伤机制则作如下声明:
+     * ...
+     * "empHealthModels": {
+     *   "$unitTypeName": {
+     *     "disabled": true
+     *   },
+     *   ...
+     * }
+     * ...
+     * */
+    if (Sgl.config.interopAssignEmpModels) {
       Sgl.interopAPI.addModel(new ModsInteropAPI.ConfigModel("empHealthModels") {
         @Override
         public void parse(Mods.LoadedMod mod, Jval declaring) {
@@ -80,14 +70,14 @@ public class EMPHealthManager {
             model.disabled = entry.value.getBool("disabled", false);
 
             if (!model.disabled) {
-              model.maxEmpHealth = entry.value.getFloat("maxEmpHealth", unit.health/Mathf.pow(unit.hitSize - unit.armor, 2)*200);
-              model.empArmor = entry.value.getFloat("empArmor", Mathf.clamp(unit.armor/100));
-              model.empRepair = entry.value.getFloat("empRepair", unit.hitSize/60);
-              model.empContinuousDamage = entry.value.getFloat("empContinuousDamage", unit.hitSize/30);
+              model.maxEmpHealth = entry.value.getFloat("maxEmpHealth", unit.health / Mathf.pow(unit.hitSize - unit.armor, 2) * 200);
+              model.empArmor = entry.value.getFloat("empArmor", Mathf.clamp(unit.armor / 100));
+              model.empRepair = entry.value.getFloat("empRepair", unit.hitSize / 60);
+              model.empContinuousDamage = entry.value.getFloat("empContinuousDamage", unit.hitSize / 30);
 
               unit.stats.add(SglStat.empHealth, model.maxEmpHealth);
-              unit.stats.add(SglStat.empArmor, model.empArmor*100, StatUnit.percent);
-              unit.stats.add(SglStat.empRepair, model.empRepair*60, StatUnit.perSecond);
+              unit.stats.add(SglStat.empArmor, model.empArmor * 100, StatUnit.percent);
+              unit.stats.add(SglStat.empRepair, model.empRepair * 60, StatUnit.perSecond);
             }
 
             unitDefaultHealthMap.put(unit, model);
@@ -97,7 +87,7 @@ public class EMPHealthManager {
         @Override
         public void disable(Mods.LoadedMod mod) {
           for (UnitType unit : Vars.content.units()) {
-            if (unit.minfo.mod == mod){
+            if (unit.minfo.mod == mod) {
               EMPModel model = new EMPModel();
               model.disabled = true;
 
@@ -125,7 +115,7 @@ public class EMPHealthManager {
             }))
     );*/
 
-    SaveVersion.addCustomChunk("empHealth", new SaveFileReader.CustomChunk() {
+   /* SaveVersion.addCustomChunk("empHealth", new SaveFileReader.CustomChunk() {
       @Override
       public void write(DataOutput stream) throws IOException {
         try(Writes write = new Writes(stream)){
@@ -176,20 +166,17 @@ public class EMPHealthManager {
           }
         }
       }
-    });
+    });*/
 
     for (UnitType unit : Vars.content.units()) {
       getModel(unit);
     }
   }
 
-  public byte version(){
-    return 0;
-  }
 
-  public void setEmpModel(UnitType type, float maxHealth, float armor, float repair, float empContDam){
+  public void setEmpModel(UnitType type, float maxHealth, float armor, float repair, float empContDam) {
     type.immunities.remove(OtherContents.emp_damaged);
-    unitDefaultHealthMap.put(type, new EMPModel(){{
+    unitDefaultHealthMap.put(type, new EMPModel() {{
       this.maxEmpHealth = maxHealth;
       this.empArmor = armor;
       this.empRepair = repair;
@@ -197,43 +184,43 @@ public class EMPHealthManager {
     }});
   }
 
-  public void setEmpDisabled(UnitType type){
-    unitDefaultHealthMap.put(type, new EMPModel(){{
+  public void setEmpDisabled(UnitType type) {
+    unitDefaultHealthMap.put(type, new EMPModel() {{
       disabled = true;
     }});
   }
 
-  public EMPModel getModel(UnitType type){
+  public EMPModel getModel(UnitType type) {
     return unitDefaultHealthMap.get(type, () -> {
       type.immunities.remove(OtherContents.emp_damaged);
 
       EMPModel res = new EMPModel();
-      res.maxEmpHealth = type.health/Mathf.pow(type.hitSize - type.armor, 2)*200;
-      res.empArmor = Mathf.clamp(type.armor/100, 0, 0.9f);
-      res.empRepair = type.hitSize/60;
-      res.empContinuousDamage = res.empRepair*2;
+      res.maxEmpHealth = type.health / Mathf.pow(type.hitSize - type.armor, 2) * 200;
+      res.empArmor = Mathf.clamp(type.armor / 100, 0, 0.9f);
+      res.empRepair = type.hitSize / 60;
+      res.empContinuousDamage = res.empRepair * 2;
 
       type.stats.add(SglStat.empHealth, res.maxEmpHealth);
-      type.stats.add(SglStat.empArmor, res.empArmor*100, StatUnit.percent);
-      type.stats.add(SglStat.empRepair, res.empRepair*60, StatUnit.perSecond);
+      type.stats.add(SglStat.empArmor, res.empArmor * 100, StatUnit.percent);
+      type.stats.add(SglStat.empRepair, res.empRepair * 60, StatUnit.perSecond);
       return res;
     });
   }
 
-  public EMPModel.EMPHealth getInst(Unit unit){
+  public EMPModel.EMPHealth getInst(Unit unit) {
     return getModel(unit.type).generate(unit);
   }
 
-  public EMPModel.EMPHealth zeroInst(Unit unit){
+  public EMPModel.EMPHealth zeroInst(Unit unit) {
     ZERO.model = getModel(unit.type);
     ZERO.unit = unit;
     ZERO.empHealth = 0;
-    
+
     return ZERO;
   }
 
-  public void update(Unit unit){
-    if (!unit.isAdded()){
+  public void update(Unit unit) {
+    if (!unit.isAdded()) {
       EMPModel.EMPHealth h = healthMap.remove(unit);
       if (h != null) Pools.free(h);
       return;
@@ -243,25 +230,24 @@ public class EMPHealthManager {
     EMPModel.EMPHealth h = get(unit);
     if (h.model.disabled) return;
 
-    if (!unit.hasEffect(OtherContents.emp_damaged)){
-      if (h.empHealth <= 0){
+    if (!unit.hasEffect(OtherContents.emp_damaged)) {
+      if (h.empHealth <= 0) {
         unit.shield = 0;
         Fx.unitShieldBreak.at(unit.x, unit.y, 0.0F, unit.team.color, unit);
 
         unit.apply(OtherContents.emp_damaged, 660);
-      }
-      else if (h.empHealth < h.model.maxEmpHealth) h.empHealth += h.model.empRepair*Time.delta;
+      } else if (h.empHealth < h.model.maxEmpHealth) h.empHealth += h.model.empRepair * Time.delta;
     }
   }
 
-  public EMPModel.EMPHealth get(Unit unit){
+  public EMPModel.EMPHealth get(Unit unit) {
     if (!unit.isAdded()) return zeroInst(unit);
     if (lastGetted != null && unit == lastGetter && lastGetted.bind) return lastGetted;
 
     return lastGetted = healthMap.get(lastGetter = unit, () -> getInst(unit));
   }
 
-  public boolean empDamaged(Unit unit){
+  public boolean empDamaged(Unit unit) {
     EMPModel.EMPHealth h = get(unit);
 
     if (h.model.disabled) return false;
@@ -269,32 +255,32 @@ public class EMPHealthManager {
     return h.empHealth < h.model.maxEmpHealth;
   }
 
-  public float getHealth(Unit unit){
+  public float getHealth(Unit unit) {
     if (get(unit).model.disabled) return 1;
     return get(unit).empHealth;
   }
 
-  public float healthPresent(Unit unit){
+  public float healthPresent(Unit unit) {
     EMPModel.EMPHealth h = get(unit);
 
     if (h.model.disabled) return 1;
 
-    return Mathf.clamp(h.empHealth/h.model.maxEmpHealth);
+    return Mathf.clamp(h.empHealth / h.model.maxEmpHealth);
   }
 
-  public float empDamage(Unit unit, float damage, boolean realDam){
+  public float empDamage(Unit unit, float damage, boolean realDam) {
     EMPModel.EMPHealth h = get(unit);
 
     if (h.model.disabled) return 0;
 
-    float real = Mathf.maxZero(realDam? damage: damage - damage*h.model.empArmor);
+    float real = Mathf.maxZero(realDam ? damage : damage - damage * h.model.empArmor);
     float orig = h.empHealth;
     h.empHealth = Mathf.maxZero(h.empHealth - real);
 
     return orig - h.empHealth;
   }
 
-  public void heal(Unit unit, float heal){
+  public void heal(Unit unit, float heal) {
     EMPModel.EMPHealth h = get(unit);
 
     if (h.model.disabled) return;

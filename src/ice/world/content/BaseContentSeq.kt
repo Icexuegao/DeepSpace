@@ -1,12 +1,12 @@
 package ice.world.content
 
 import arc.struct.Seq
-import ice.Ice
+import ice.DeepSpace
 import ice.world.content.item.IceItem
-import ice.world.content.status.StatusEffect
-import ice.world.content.unit.IceUnitType
 import mindustry.Vars
 import mindustry.type.Liquid
+import mindustry.type.StatusEffect
+import mindustry.type.UnitType
 import mindustry.world.Block
 
 object BaseContentSeq {
@@ -17,22 +17,22 @@ object BaseContentSeq {
     }
     val liquids = Seq<Liquid>().apply {
         Vars.content.liquids().forEach {
-            if (it.minfo.mod== Ice.mod)add(it)
+            if (it.minfo.mod== DeepSpace.mod)add(it)
         }
     }
     val status = Seq<StatusEffect>().apply {
         Vars.content.statusEffects().forEach {
-            if (it is StatusEffect) add(it)
+            if (it.minfo.mod ==DeepSpace.mod) add(it)
         }
     }
     val blocks = Seq<Block>().apply {
         Vars.content.blocks().forEach {
-            if (it.minfo.mod == Ice.mod) add(it)
+            if (it.minfo.mod == DeepSpace.mod) add(it)
         }
     }
-    val units = Seq<IceUnitType>().apply {
+    val units = Seq<UnitType>().apply {
         Vars.content.units().forEach {
-            if (it is IceUnitType) add(it)
+            if (it.minfo.mod == DeepSpace.mod ) add(it)
         }
     }
 }

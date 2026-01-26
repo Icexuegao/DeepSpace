@@ -31,7 +31,7 @@ public class DistNetMonitorDialog extends BaseDialog{
         t.add("").update(l -> {
           float totalUpload = 0, totalDownload = 0;
           if(n.netStructValid()){
-            for(BaseBuffer<?, ?, ?> buffer: n.getCore().buffers().values()){
+            for(BaseBuffer<?, ?, ?> buffer: n.getCore().getBuffers().values()){
               totalUpload += Math.max(buffer.putRate(), 0);
               totalDownload += Math.max(buffer.readRate(), 0);
             }
@@ -77,7 +77,7 @@ public class DistNetMonitorDialog extends BaseDialog{
         t.add("").update(l -> {
           int totalBuffered = 0, maxBuffered = 0;
           if(n.netStructValid())
-          for(BaseBuffer<?, ?, ?> value: n.getCore().buffers().values()){
+          for(BaseBuffer<?, ?, ?> value: n.getCore().getBuffers().values()){
             totalBuffered += value.usedCapacity().intValue();
             maxBuffered += value.capacity;
           }
@@ -98,7 +98,7 @@ public class DistNetMonitorDialog extends BaseDialog{
         t.add("").update(l -> {
           int activity = 0, blocked = 0, sleeping = 0;
           if(n.netStructValid()){
-            for(DistRequestBase task: n.getCore().distCore().getRequestTasks()){
+            for(DistRequestBase task: n.getCore().getDistCore().getRequestTasks()){
               if(task.isBlocked()) blocked++;
               else if(task.sleeping()) sleeping++;
               else activity++;

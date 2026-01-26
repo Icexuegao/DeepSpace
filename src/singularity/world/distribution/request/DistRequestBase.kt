@@ -133,7 +133,7 @@ abstract class DistRequestBase(val sender: DistElementBuildComp) {
 
     class RequestStatusException(info: String?) : RuntimeException(info)
 
-    interface RequestTask {
-        fun run(callTask: Boolp?): Boolean
+   fun interface RequestTask {
+        fun run(callTask: Boolp): Boolean
     }
 }

@@ -8,7 +8,6 @@ interface DistMatrixUnitComp {
     }
 
     //@Annotations.BindField("bufferCapacity")
-    fun bufferCapacity(): Int {
-        return slef<Any>().bufferCapacity
-    }
+  var bufferCapacity: Int
+
 }

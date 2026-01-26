@@ -7,8 +7,8 @@ import universecore.world.meta.UncStatCat
 
 object IceStats {
   fun load() = Unit
-  val maxStructureSize= getStat("",UncStatCat.structure){
-    desc(zh_CN,"最大结构尺寸")
+  val maxStructureSize = getStat("", UncStatCat.structure) {
+    desc(zh_CN, "最大结构尺寸")
   }
 
   val 电磁脉冲伤害 = IceStat("empDamage").apply {
@@ -285,6 +285,10 @@ object IceStats {
   }
   val 支持patreon = getStat("support.patreon") {
     desc(zh_CN, "通过patreon赞助我们")
+  }
+
+  val 可选输入 = getStat("optionalInputs", UncStatCat.other) {
+    desc(zh_CN, "可选输入")
   }
 
   private fun getStat(name: String, cat: StatCat = StatCat.general, desc: IceStat.() -> Unit): IceStat {

@@ -12,7 +12,7 @@ import arc.util.Strings
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.Ice
+import ice.DeepSpace
 import ice.graphics.IceColor
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.draw.DrawCracks
@@ -85,7 +85,7 @@ class IceDrill(name: String) : IceBlock(name) {
             Stat.drillTier, IceStatValues.drillables(
                 drillTime, hardnessDrillMultiplier, (size * size).toFloat(), drillMultipliers
             ) { b: Block ->
-                b.minfo.mod == Ice.mod && b is Floor && !b.wallOre && b.itemDrop != null && b.itemDrop.hardness <= tier && (!blockedItems.contains(
+                b.minfo.mod == DeepSpace.mod && b is Floor && !b.wallOre && b.itemDrop != null && b.itemDrop.hardness <= tier && (!blockedItems.contains(
                     b.itemDrop
                 ))
             })

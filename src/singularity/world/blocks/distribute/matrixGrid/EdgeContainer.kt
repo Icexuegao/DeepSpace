@@ -1,90 +1,89 @@
-package singularity.world.blocks.distribute.matrixGrid;
+package singularity.world.blocks.distribute.matrixGrid
 
-import arc.math.geom.Polygon;
-import arc.struct.ObjectSet;
-import arc.struct.Seq;
-import mindustry.world.Tile;
-import singularity.world.components.EdgeLinkerBuildComp;
-import universecore.util.Empties;
+import arc.math.geom.Polygon
+import arc.struct.ObjectSet
+import arc.struct.Seq
+import mindustry.world.Tile
+import singularity.world.components.EdgeLinkerBuildComp
+import universecore.util.Empties
 
-public class EdgeContainer{
-  private static final ObjectSet<EdgeLinkerBuildComp> flowed = new ObjectSet<>();
-  
-  public Seq<EdgeLinkerBuildComp> all = new Seq<>();
-  
-  private Polygon poly;
-  private boolean closure;
-  
-  public boolean inLerp(Tile tile){
-    return closure && poly != null && poly.contains(tile.drawx(), tile.drawy());
+class EdgeContainer {
+  var all: Seq<EdgeLinkerBuildComp> = Seq<EdgeLinkerBuildComp>()
+  var poly: Polygon? = null
+    private set
+  var isClosure: Boolean = false
+    private set
+
+  fun inLerp(tile: Tile): Boolean {
+    return this.isClosure && this.poly != null && this.poly!!.contains(tile.drawx(), tile.drawy())
   }
-  
-  public void add(EdgeLinkerBuildComp other){
-    all.add(other);
-    other.setEdges(this);
+
+  fun add(other: EdgeLinkerBuildComp) {
+    this.all.add(other)
+    other.edges = this
   }
-  
-  public void flow(EdgeLinkerBuildComp source){
-    flow(source, Empties.nilSeq());
-  }
-  
-  public void flow(EdgeLinkerBuildComp source, Seq<EdgeLinkerBuildComp> exclude){
-    flowed.clear();
-    EdgeLinkerBuildComp curr = source;
-    Seq<EdgeLinkerBuildComp> temp = new Seq<>();
-    while(curr != null && flowed.add(curr) && !exclude.contains(curr)){
-      temp.add(curr);
-      curr = curr.perEdge();
+
+  @JvmOverloads
+  fun flow(source: EdgeLinkerBuildComp?, exclude: Seq<EdgeLinkerBuildComp?> = Empties.nilSeq<EdgeLinkerBuildComp?>()) {
+    flowed.clear()
+    var curr = source
+
+    val temp: Seq<EdgeLinkerBuildComp?>?
+    temp = Seq<EdgeLinkerBuildComp?>()
+    while (curr != null && flowed.add(curr) && !exclude.contains(curr)) {
+      temp.add(curr)
+      curr = curr.perEdge
     }
-    for(int i = temp.size - 1; i >= 0; i--){
-      add(temp.get(i));
-    }
-    if(curr != null && !exclude.contains(curr)){
-      closure = true;
-      updatePoly();
 
-      for(EdgeLinkerBuildComp edge: all){
-        edge.edgeUpdated();
+    for (i in temp.size - 1 downTo 0) {
+      this.add(temp.get(i)!!)
+    }
+
+    if (curr != null && !exclude.contains(curr)) {
+      this.isClosure = true
+      this.updatePoly()
+
+      for (edge in this.all) {
+        edge.edgeUpdated()
       }
-      return;
-    }
-    
-    curr = source;
-    while(curr != null && flowed.add(curr) && !exclude.contains(curr)){
-      add(curr);
-      curr = curr.nextEdge();
-    }
-    poly = null;
-    closure = false;
+    } else {
+      var var7 = source
+      while (var7 != null && flowed.add(var7) && !exclude.contains(var7)) {
+        this.add(var7)
+        var7 = var7.nextEdge
+      }
 
-    for(EdgeLinkerBuildComp edge: all){
-      edge.edgeUpdated();
+      this.poly = null
+      this.isClosure = false
+
+      for (edge in this.all) {
+        edge.edgeUpdated()
+      }
     }
   }
-  
-  public boolean isClosure(){
-    return closure;
-  }
-  
-  public Polygon getPoly(){
-    return poly;
-  }
-  
-  private void updatePoly(){
-    float[] vertexArr = new float[all.size*2];
-    for(int i = 0; i < all.size; i++){
-      vertexArr[i*2] = all.get(i).getBuilding().x();
-      vertexArr[i*2 + 1] = all.get(i).getBuilding().y();
+
+  private fun updatePoly() {
+    val vertexArr = FloatArray(this.all.size * 2)
+
+    for (i in 0..<this.all.size) {
+      vertexArr[i * 2] = (this.all.get(i) as EdgeLinkerBuildComp).building.x()
+      vertexArr[i * 2 + 1] = (this.all.get(i) as EdgeLinkerBuildComp).building.y()
     }
-    poly = new Polygon(vertexArr);
+
+    this.poly = Polygon(vertexArr)
   }
-  
-  public void remove(EdgeLinkerBuildComp remove){
-    if(remove.nextEdge() != null){
-      new EdgeContainer().flow(remove.nextEdge(), Seq.with(remove));
+
+  fun remove(remove: EdgeLinkerBuildComp) {
+    if (remove.nextEdge != null) {
+      (EdgeContainer()).flow(remove.nextEdge, Seq.with<EdgeLinkerBuildComp?>(*arrayOf<EdgeLinkerBuildComp>(remove)))
     }
-    if(remove.perEdge() != null && remove.getEdges() == this){
-      new EdgeContainer().flow(remove.perEdge(), Seq.with(remove));
+
+    if (remove.perEdge != null && remove.edges == this) {
+      (EdgeContainer()).flow(remove.perEdge, Seq.with<EdgeLinkerBuildComp?>(*arrayOf<EdgeLinkerBuildComp>(remove)))
     }
+  }
+
+  companion object {
+    private val flowed: ObjectSet<EdgeLinkerBuildComp?> = ObjectSet<EdgeLinkerBuildComp?>()
   }
 }

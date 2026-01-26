@@ -48,11 +48,7 @@ import singularity.world.consumers.SglConsumers
 import singularity.world.meta.SglStat
 import singularity.world.meta.SglStatUnit
 import universecore.components.blockcomp.ConsumerBuildComp
-import universecore.world.consumers.BaseConsume
-import universecore.world.consumers.BaseConsumers
-import universecore.world.consumers.ConsumeItemBase
-import universecore.world.consumers.ConsumePower
-import universecore.world.consumers.ConsumeType
+import universecore.world.consumers.*
 import universecore.world.producers.BaseProducers
 import universecore.world.producers.ProducePayload
 import universecore.world.producers.ProduceType
@@ -246,7 +242,7 @@ class UnitFactoryCfgDialog : BaseDialog(Core.bundle.get("dialog.unitFactor.title
                                                                     Vars.ui.content.show(item)
                                                                 }).growX()
                                                                 button.button(Core.bundle.get("misc.add"), Icon.add, Styles.grayt, 32f, Runnable {
-                                                                    if (currConfig!!.taskCount() >= (currConfig!!.block as SglUnitFactory).maxTasks) {
+                                                                    if (currConfig!!.taskCount >= (currConfig!!.block as SglUnitFactory).maxTasks) {
                                                                         tip!!.clearActions()
                                                                         tip!!.actions(
                                                                             Actions.alpha(1f, 0.3f), Actions.delay(1.5f), Actions.alpha(0f, 0.8f)
@@ -584,7 +580,7 @@ class UnitFactoryCfgDialog : BaseDialog(Core.bundle.get("dialog.unitFactor.title
         status!!.top().defaults().left().growX().pad(4f).fillY()
         status!!.add("").update(Cons { l: Label? -> l!!.setText("> " + Core.bundle.format("dialog.unitFactor.status", factory.statusText())) })
         status!!.row()
-        status!!.add("").update(Cons { l: Label? -> l!!.setText(Core.bundle.format("dialog.unitFactor.taskRemaining", factory.taskCount(), (factory.block as SglUnitFactory).maxTasks)) })
+        status!!.add("").update(Cons { l: Label? -> l!!.setText(Core.bundle.format("dialog.unitFactor.taskRemaining", factory.taskCount, (factory.block as SglUnitFactory).maxTasks)) })
         status!!.row()
         status!!.add("").update(Cons { l: Label? ->
             var time = 0f

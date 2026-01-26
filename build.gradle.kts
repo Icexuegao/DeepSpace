@@ -1,3 +1,4 @@
+
 import arc.files.Fi
 import arc.util.serialization.JsonReader
 import arc.util.serialization.JsonWriter
@@ -18,7 +19,7 @@ buildscript {
     maven { url = uri("https://jitpack.io") }
   }
   dependencies {
-    classpath("com.github.Anuken.Mindustry:core:v154.2")
+    classpath("com.github.Anuken.Mindustry:core:v154.3")
   }
 }
 val kotlinCompatibility = "2.2.10"
@@ -35,11 +36,6 @@ plugins {
 repositories {
   mavenCentral()
   mavenLocal()
-  maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public/") }
-  maven { url = uri("https://maven.aliyun.com/nexus/content/repositories/jcenter") }
-  maven { url = uri("https://repo.huaweicloud.com/repository/maven/") }
-  maven { url = uri("https://maven.aliyun.com/repository/public") }
-  maven { url = uri("https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
   maven { url = uri("https://jitpack.io") }
   maven { url = uri("https://www.jitpack.io") }
 }
@@ -63,7 +59,7 @@ dependencies {
   // compileOnly(files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar"))
   // compileOnly("com.github.Anuken.Mindustry:core:v152.2")
   // compileOnly("com.github.Anuken.Arc:flabel:v149")
-  compileOnly("com.github.Anuken.Mindustry:core:v154.2")
+  compileOnly("com.github.Anuken.Mindustry:core:v154.3")
   implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinCompatibility")
 }
 
@@ -92,7 +88,6 @@ fun execute(string: String, path: File? = null, vararg args: Any?) {
 }
 
 tasks {
-
   withType<ShadowJar> {
     dependsOn("updateVersion")
     group = "alon"
@@ -120,6 +115,9 @@ tasks {
     // ProGuard 配置文件
     configuration("proguard-rules.pro")
     // 添加详细输出选项
+
+
+
     printmapping("build/mapping.txt")
     printseeds("build/seeds.txt")
     printusage("build/usage.txt")

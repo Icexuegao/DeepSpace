@@ -3,12 +3,12 @@ package singularity.world.blocks.turrets;
 import arc.graphics.g2d.Draw;
 import arc.util.Time;
 import arc.util.pooling.Pools;
-import mindustry.entities.bullet.BulletType;
+import ice.entities.bullet.base.BulletType;
 import mindustry.gen.Bullet;
 import singularity.world.SglFx;
 import universecore.world.lightnings.LightningContainer;
 
-public class LightningBulletType extends BulletType{
+public class LightningBulletType extends BulletType {
   public LightningBulletType(float time, float damage){
     super(time, damage);
   }

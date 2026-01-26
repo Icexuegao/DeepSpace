@@ -1,7 +1,5 @@
 package singularity.world.components.distnet
 
-import arc.func.Cons2
-import arc.func.Prov
 import arc.math.geom.Point2
 import arc.struct.ObjectMap
 import arc.struct.ObjectSet
@@ -24,152 +22,134 @@ import universecore.util.Empties
 import universecore.util.colletion.TreeSeq
 
 interface DistMatrixUnitBuildComp : DistElementBuildComp {
-    // @Annotations.BindField(value = "tempFactories", initialize = "new arc.struct.ObjectMap<>()")
-    fun tempFactories(): ObjectMap<GridChildType?, ObjectMap<ContentType?, RequestHandlers.RequestHandler<*>?>>? {
-        return null
+  // @Annotations.BindField(value = "tempFactories", initialize = "new arc.struct.ObjectMap<>()")
+  var tempFactories: ObjectMap<GridChildType, ObjectMap<ContentType, RequestHandlers.RequestHandler<*>>>
+
+  // @Annotations.BindField(value = "requests", initialize = "new arc.struct.OrderedSet<>()")
+  var requests: OrderedSet<DistRequestBase>
+
+  //  @Annotations.BindField(value = "matrixGrid", initialize = "new singularity.world.distribution.MatrixGrid(this)")
+  var matrixGrid: MatrixGrid
+
+  //  @Annotations.BindField(value = "configs", initialize = "new universecore.util.colletion.TreeSeq<>((a, b) -> b.priority - a.priority)")
+  var configs: TreeSeq<TargetConfigure>
+
+  // @Annotations.BindField(value = "buffers", initialize = "new arc.struct.OrderedMap<>()")
+
+  var buffers: OrderedMap<DistBufferType<*>, BaseBuffer<*, *, *>>
+
+  // @Annotations.BindField(value = "requestHandlerMap", initialize = "new arc.struct.ObjectMap()")
+  var requestHandlerMap: ObjectMap<DistRequestBase, RequestHandlers.RequestHandler<*>>
+
+  // @Annotations.BindField(value = "ioPoints", initialize = "new arc.struct.ObjectSet<>()")
+  var ioPoints: ObjectSet<IOPointComp>
+
+  // @Annotations.MethodEntry(entryMethod = "update")
+  fun updateGrid() {
+    if (gridValid()) matrixGrid.update()
+  }
+
+  fun <T : BaseBuffer<*, *, *>> getBuffer(buff: DistBufferType<T>): T {
+    return buffers.get(buff) as T
+  }
+
+  fun initBuffers() {
+    for (buffer in DistBufferType.all) {
+      buffers.put(buffer, buffer.get(this.matrixBlock!!.bufferCapacity))
+    }
+  }
+
+  fun gridValid(): Boolean {
+    return true
+  }
+
+  override var priority: Int
+    get() = matrixGrid.priority
+    set(value) {
+      matrixGrid.priority = value
+      distributor.network.priorityModified(this)
     }
 
-    // @Annotations.BindField(value = "requests", initialize = "new arc.struct.OrderedSet<>()")
-    fun requests(): OrderedSet<DistRequestBase> {
-       throw Exception("requests is null")
+  fun releaseRequest() {
+    for (request in requests) {
+      request.kill()
     }
+    requests.clear()
 
-    //  @Annotations.BindField(value = "matrixGrid", initialize = "new singularity.world.distribution.MatrixGrid(this)")
-    fun matrixGrid(): MatrixGrid? {
-        return null
-    }
+    resetFactories()
 
-    //  @Annotations.BindField(value = "configs", initialize = "new universecore.util.colletion.TreeSeq<>((a, b) -> b.priority - a.priority)")
-    fun configs(): TreeSeq<TargetConfigure>? {
-        return null
-    }
-
-    /** @Annotations.BindField(value = "buffers", initialize = "new arc.struct.OrderedMap<>()")
-     */
-    fun buffers(): OrderedMap<DistBufferType<*>, BaseBuffer<*, *, *>>? {
-        return null
-    }
-
-    // @Annotations.BindField(value = "requestHandlerMap", initialize = "new arc.struct.ObjectMap()")
-    fun requestHandlerMap(): ObjectMap<DistRequestBase?, RequestHandlers.RequestHandler<*>?>? {
-        return null
-    }
-
-    // @Annotations.BindField(value = "ioPoints", initialize = "new arc.struct.ObjectSet<>()")
-    fun ioPoints(): ObjectSet<IOPointComp?>? {
-        return null
-    }
-
-    // @Annotations.MethodEntry(entryMethod = "update")
-    fun updateGrid() {
-        if (gridValid()) matrixGrid()!!.update()
-    }
-
-    fun <T : BaseBuffer<*, *, *>> getBuffer(buff: DistBufferType<T>): T {
-        return buffers()!!.get(buff) as T
-    }
-
-    fun initBuffers() {
-        for (buffer in DistBufferType.all) {
-            buffers()!!.put(buffer, buffer.get(this.matrixBlock!!.bufferCapacity()))
+    for (config in configs) {
+      config.eachChildType { type: GridChildType, map: ObjectMap<ContentType, ObjectSet<UnlockableContent>> ->
+        for (contType in map!!.keys()) {
+          addConfig(type, contType, config)
         }
+      }
     }
 
-    fun gridValid(): Boolean {
-        return true
+    requestHandlerMap.clear()
+    for (entry in tempFactories) {
+      for (e in entry.value) {
+        val request = createRequest(entry.key, e.key) ?: continue
+        requests.add(request)
+        distributor.assign(request, false)
+
+        requestHandlerMap.put(request, e.value)
+      }
     }
 
-    override fun priority(): Int {
-        return matrixGrid()!!.priority
+    for (request in requests) {
+      request.init(distributor.network)
     }
+  }
 
-    override fun priority(priority: Int) {
-        matrixGrid()!!.priority = priority
-        distributor()!!.network.priorityModified(this)
+  fun configValid(entity: Building): Boolean {
+    if (entity is IOPointComp && (entity.config == null || entity.parentMat === this)) return true
+    return Sgl.matrixContainers.getContainer(entity.block) != null
+  }
+
+  fun resetFactories() {
+    for (fac in tempFactories) {
+      for (handler in fac.value.values()) {
+        handler!!.reset(this)
+      }
     }
+    tempFactories.clear()
+  }
 
-    fun releaseRequest() {
-        for (request in requests()!!) {
-            request.kill()
-        }
-        requests()!!.clear()
+  fun addConfig(type: GridChildType?, contType: ContentType?, cfg: TargetConfigure) {
+    val build = Vars.world.build(tile!!.x + Point2.x(cfg.offsetPos), tile!!.y + Point2.y(cfg.offsetPos))
+    val factory = if (build is IOPointComp) (build as IOPointComp).iOBlock!!.requestFactories.get(type, Empties.nilMapO())!!.get(contType) else null
 
-        resetFactories()
-
-        for (config in configs()!!) {
-            config.eachChildType(Cons2 { type: GridChildType?, map: ObjectMap<ContentType?, ObjectSet<UnlockableContent?>?>? ->
-                for (contType in map!!.keys()) {
-                    addConfig(type, contType, config)
-                }
-            })
-        }
-
-        requestHandlerMap()!!.clear()
-        for (entry in tempFactories()!!) {
-            for (e in entry.value) {
-                val request = createRequest(entry.key, e.key)
-                if (request == null) continue
-                requests()!!.add(request)
-                distributor()!!.assign(request, false)
-
-                requestHandlerMap()!!.put(request, e.value)
-            }
-        }
-
-        for (request in requests()!!) {
-            request.init(distributor()!!.network)
-        }
+    if (factory != null) {
+      val map = tempFactories.get(type) { ObjectMap() }
+      if (!map.containsKey(contType)) map.put(contType, factory)
+      factory.addParseConfig(cfg)
     }
+  }
 
-    fun configValid(entity: Building): Boolean {
-        if (entity is IOPointComp && (entity.gridConfig() == null || entity.parent() === this)) return true
-        return Sgl.matrixContainers.getContainer(entity.block) != null
-    }
+  fun createRequest(type: GridChildType?, contType: ContentType?): DistRequestBase? {
+    val factory = tempFactories.get(type, Empties.nilMapO()).get(contType) ?: return null
+    val result = factory.makeRequest(this)
+    factory.reset(this)
+    return result
+  }
 
-    fun resetFactories() {
-        for (fac in tempFactories()!!) {
-            for (handler in fac.value.values()) {
-                handler!!.reset(this)
-            }
-        }
-        tempFactories()!!.clear()
-    }
+  val matrixBlock: DistMatrixUnitComp
+    get() = getBlock(DistMatrixUnitComp::class.java)
 
-    fun addConfig(type: GridChildType?, contType: ContentType?, cfg: TargetConfigure) {
-        val build = Vars.world.build(tile!!.x + Point2.x(cfg.offsetPos), tile!!.y + Point2.y(cfg.offsetPos))
-        val factory = if (build is IOPointComp) (build as IOPointComp).iOBlock!!.requestFactories!!.get(type, Empties.nilMapO<ContentType?, RequestHandlers.RequestHandler<*>?>())!!.get(contType) else null
+  fun ioPointConfigBackEntry(ioPoint: IOPointComp)
 
-        if (factory != null) {
-            val map = tempFactories()!!.get(type, Prov { ObjectMap() })
-            if (!map.containsKey(contType)) map.put(contType, factory)
-            factory.addParseConfig(cfg)
-        }
-    }
+  fun tileValid(tile: Tile): Boolean
 
-    fun createRequest(type: GridChildType?, contType: ContentType?): DistRequestBase? {
-        val factory = tempFactories()!!.get(type, Empties.nilMapO<ContentType?, RequestHandlers.RequestHandler<*>?>()).get(contType)
-        if (factory == null) return null
-        val result = factory.makeRequest(this)
-        factory.reset(this)
-        return result
-    }
+  fun drawValidRange()
 
-    val matrixBlock: DistMatrixUnitComp?
-        get() = getBlock(DistMatrixUnitComp::class.java)
+  fun addIO(io: IOPointComp) {
+    ioPoints.add(io)
+    matrixGrid.addConfig(io.config!!)
+  }
 
-    fun ioPointConfigBackEntry(ioPoint: IOPointComp)
-
-    fun tileValid(tile: Tile?): Boolean
-
-    fun drawValidRange()
-
-    fun addIO(io: IOPointComp) {
-        ioPoints()!!.add(io)
-        matrixGrid()!!.addConfig(io.gridConfig())
-    }
-
-    fun removeIO(io: IOPointComp) {
-        ioPoints()!!.remove(io)
-        matrixGrid()!!.remove(io.building)
-    }
+  fun removeIO(io: IOPointComp) {
+    ioPoints.remove(io)
+    matrixGrid.remove(io.building)
+  }
 }

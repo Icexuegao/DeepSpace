@@ -11,6 +11,7 @@ import arc.scene.ui.Image
 import arc.scene.ui.TextField
 import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
+import ice.DeepSpace
 import ice.Ice
 import ice.audio.ISounds
 import ice.content.IUnitTypes
@@ -286,7 +287,7 @@ object DeBugFragment {
 
   private fun allBlock() {
     Vars.content.blocks().forEach {
-      if (it.minfo.mod == Ice.mod) it.buildVisibility = BuildVisibility.shown
+      if (it.minfo.mod == DeepSpace.mod) it.buildVisibility = BuildVisibility.shown
     }
     cont.iTableG {
       it.addLine("解禁方块", Color.white)

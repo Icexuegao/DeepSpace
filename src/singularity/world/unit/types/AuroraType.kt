@@ -19,7 +19,7 @@ import ice.content.IItems.气凝胶
 import ice.content.IItems.矩阵合金
 import ice.content.IItems.简并态中子聚合物
 import ice.content.IItems.铝
-import ice.content.IItems.铱
+import ice.content.IItems.铱锭
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -57,7 +57,7 @@ import kotlin.math.min
 class AuroraType : AirSeaAmphibiousUnit("aurora") {
   init {
     requirements(
-      Items.silicon, 360, Items.phaseFabric, 380, Items.surgeAlloy, 390, 铝, 400, 气凝胶, 430, FEX水晶, 280, 充能FEX水晶, 280, 强化合金, 340, 铱, 320, 矩阵合金, 380, 简并态中子聚合物, 200
+      Items.silicon, 360, Items.phaseFabric, 380, Items.surgeAlloy, 390, 铝, 400, 气凝胶, 430, FEX水晶, 280, 充能FEX水晶, 280, 强化合金, 340, 铱锭, 320, 矩阵合金, 380, 简并态中子聚合物, 200
     )
 
     armor = 10f

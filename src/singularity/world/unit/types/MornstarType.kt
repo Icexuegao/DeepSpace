@@ -24,7 +24,7 @@ import ice.content.IItems.强化合金
 import ice.content.IItems.气凝胶
 import ice.content.IItems.矩阵合金
 import ice.content.IItems.铝
-import ice.content.IItems.铱
+import ice.content.IItems.铱锭
 import ice.library.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.content.Fx
@@ -60,7 +60,7 @@ import universecore.world.lightnings.LightningContainer
 class MornstarType : AirSeaAmphibiousUnit("mornstar") {
   init {
     requirements(
-      Items.silicon, 420, Items.phaseFabric, 360, Items.surgeAlloy, 320, 铝, 380, 气凝胶, 320, 充能FEX水晶, 220, 强化合金, 280, 铱, 200, 矩阵合金, 220
+      Items.silicon, 420, Items.phaseFabric, 360, Items.surgeAlloy, 320, 铝, 380, 气凝胶, 320, 充能FEX水晶, 220, 强化合金, 280, 铱锭, 200, 矩阵合金, 220
     )
 
     armor = 19f

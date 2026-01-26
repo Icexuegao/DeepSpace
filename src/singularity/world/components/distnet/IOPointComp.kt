@@ -7,32 +7,22 @@ import singularity.world.distribution.GridChildType
 import universecore.components.blockcomp.BuildCompBase
 
 interface IOPointComp : BuildCompBase {
-    //  @Annotations.BindField("parentMat")
-    fun parent(): DistMatrixUnitBuildComp? {
-        return null
-    }
+  //  @Annotations.BindField("parentMat")
+  var parentMat: DistMatrixUnitBuildComp?
 
-    //@Annotations.BindField("parentMat")
-    fun parent(valur: DistMatrixUnitBuildComp?) {}
+  //  @Annotations.BindField("config")
+  var config: TargetConfigure?
 
-    //  @Annotations.BindField("config")
-    fun gridConfig(): TargetConfigure? {
-        return null
-    }
+  val iOBlock: IOPointBlockComp?
+    get() = getBlock(IOPointBlockComp::class.java)
 
-    // @Annotations.BindField("config")
-    fun gridConfig(value: TargetConfigure?) {}
+  fun configTypes(): Array<GridChildType?>? {
+    return this.iOBlock!!.configTypes.toSeq().toArray<GridChildType?>(GridChildType::class.java)
+  }
 
-    val iOBlock: IOPointBlockComp?
-        get() = getBlock(IOPointBlockComp::class.java)
+  fun configContentTypes(): Array<ContentType?>? {
+    return this.iOBlock!!.supportContentType.toSeq().toArray<ContentType?>(ContentType::class.java)
+  }
 
-    fun configTypes(): Array<GridChildType?>? {
-        return this.iOBlock!!.configTypes.toSeq().toArray<GridChildType?>(GridChildType::class.java)
-    }
-
-    fun configContentTypes(): Array<ContentType?>? {
-        return this.iOBlock!!.supportContentType.toSeq().toArray<ContentType?>(ContentType::class.java)
-    }
-
-    fun valid(unit: DistMatrixUnitBuildComp?, type: GridChildType?, content: Content?): Boolean
+  fun valid(unit: DistMatrixUnitBuildComp?, type: GridChildType?, content: Content?): Boolean
 }

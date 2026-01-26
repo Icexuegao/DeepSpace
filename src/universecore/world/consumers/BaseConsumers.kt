@@ -134,10 +134,10 @@ open class BaseConsumers(
         return add(ConsumePower(usage, capacity))
     }
 
-    fun <T> powerCond(usage: Float, capacity: Float, cons: Boolf<T?>): ConsumePower<T>? where T : Building, T : ConsumerBuildComp {
+    fun <T> powerCond(usage: Float, capacity: Float, cons: Boolf<T>): ConsumePower<T> where T : Building, T : ConsumerBuildComp {
         val consume = object : ConsumePower<T>(usage, capacity) {
             override fun requestedPower(entity: T): Float {
-                return if ((cons as Boolf<T>).get(entity)) super.requestedPower(entity) else 0f
+                return if (cons.get(entity)) super.requestedPower(entity) else 0f
             }
         }
         return add(consume)

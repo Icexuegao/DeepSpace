@@ -14,7 +14,7 @@ import static mindustry.Vars.renderer;
 
 public class SglShaders {
   // 3D stage
-  public static Shader planet, solar, standardBase, standard;
+  public static Shader solar;
 
   // scene space shaders
   public static Shader baseShader, simpleScreen;
@@ -49,7 +49,7 @@ public class SglShaders {
         throw new ArcRuntimeException("Shader contains explicit version requirement; this should be handled by the preprocessor. Code: \n```\n" + source + "\n```");
       }
 
-      //add GL_ES precision qualifiers
+      //添加GL_ES精度限定词
       if(fragment){
         source =
             "#ifdef GL_ES\n" +
@@ -84,7 +84,7 @@ public class SglShaders {
 
         return
             "#version " + version + "\n"
-            + "#extension GL_ARB_explicit_attrib_location : require\n"
+            + (Core.app.isDesktop() ? "#extension GL_ARB_explicit_attrib_location : require\n" : "")
             + (fragment ? "out" + (Core.app.isMobile() ? " lowp" : "") + " vec4 fragColor;\n" : "")
             + source
                 .replace("varying", fragment ? "in" : "out")
@@ -98,19 +98,10 @@ public class SglShaders {
   }
 
   public static void load() {
-    planet = new SglShader(
-        internalShaderDir.child("3d").child("planet.vert"),
-        internalShaderDir.child("3d").child("planet.frag")
-    );
     solar = new SglShader(
         internalShaderDir.child("3d").child("solar.vert"),
         internalShaderDir.child("3d").child("solar.frag")
     );
-    standardBase = new SglShader(
-        internalShaderDir.child("3d").child("standard_base.vert"),
-        internalShaderDir.child("3d").child("standard_base.frag")
-    );
-
     simpleScreen = new SglShader(Core.files.internal("shaders/screenspace.vert"), internalShaderDir.child("simple.frag"));
     baseShader = new SglShader(Core.files.internal("shaders/screenspace.vert"), internalShaderDir.child("dist_base.frag"));
     boundWater = new SglSurfaceShader("boundwater");

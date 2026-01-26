@@ -7,6 +7,7 @@ import arc.graphics.g2d.TextureRegion;
 import arc.scene.style.Drawable;
 import arc.struct.ObjectMap;
 import arc.util.Log;
+import ice.core.SettingValue;
 import mindustry.mod.Mod;
 import singularity.contents.*;
 import singularity.contents.override.OverrideTechThree;
@@ -21,30 +22,23 @@ import static mindustry.game.EventType.ClientLoadEvent;
 
 public class Singularity extends Mod {
   private static final ContentList[] modContents = new ContentList[]{new OtherContents(),//其他内容
-
-      new PowerBlocks(),//电力方块
-      new NuclearBlocks(),//核能方块
-      new CrafterBlocks(),//工厂方块
-      new LiquidBlocks(),//物流方块
-      new ProductBlocks(),//采集方块
-      new DistributeBlocks(),//物流运输方块
-      new SglTurrets(),//炮台
-      new SglUnits(),//单位相关内容（单位、工厂）
-      new SglPlanets(),//星球
-      new SglTechThree(),//科技树
+          new LiquidBlocks(),//物流方块
+          new SglUnits(),//单位相关内容（单位、工厂）
+          new SglPlanets(),//星球
+          new SglTechThree(),//科技树
   };
 
-  private static final OverrideContentList[] overrideContents = new OverrideContentList[]{ new OverrideTechThree(),};
+  private static final OverrideContentList[] overrideContents = new OverrideContentList[]{new OverrideTechThree(),};
 
   public Singularity() {
     Log.info("[Singularity] Singularity mod is loading,Thanks for your play");
     //加载模组配置数据
     Sgl.config.load();
 
-      Events.on(ClientLoadEvent.class, e -> {
-        Sgl.ui.mainMenu.show();
-       // new TestDialog().show();
-      });
+    Events.on(ClientLoadEvent.class, e -> {
+      if (SettingValue.INSTANCE.get启用调试模式()) Sgl.ui.mainMenu.show();
+      // new TestDialog().show();
+    });
 
   }
 

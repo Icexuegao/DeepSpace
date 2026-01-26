@@ -14,6 +14,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IItems
+import ice.graphics.TextureRegionDelegate
 import ice.library.scene.ui.itooltip
 import ice.world.content.blocks.abstractBlocks.RangeBlock
 import ice.world.meta.IceStats
@@ -31,7 +32,7 @@ import mindustry.world.meta.Env
 import kotlin.math.abs
 
 open class LinksBlock(name: String) : RangeBlock(name) {
-    var arrowRegion: TextureRegion = Core.atlas.find("${this.name}-arrow")
+    var arrowRegion: TextureRegion by TextureRegionDelegate("${this.name}-arrow")
     var buildSize = 10
     var allowLink = Seq<Block>()
 

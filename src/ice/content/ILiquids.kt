@@ -17,7 +17,6 @@ import mindustry.graphics.Pal
 import mindustry.type.CellLiquid
 import mindustry.type.Liquid
 import mindustry.world.Tile
-import singularity.contents.OtherContents
 import singularity.graphic.SglDraw
 import singularity.graphic.SglShaders
 import singularity.type.ReactLiquid
@@ -340,7 +339,7 @@ object ILiquids : Load {
       temperature = 0.35f
       viscosity = 0f
 
-      effect = OtherContents.crystallize
+      effect = IStatus.结晶化
     }
 
     val taskID: Int = SglDraw.nextTaskID()

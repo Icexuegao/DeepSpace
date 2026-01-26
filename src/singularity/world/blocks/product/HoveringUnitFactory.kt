@@ -67,7 +67,7 @@ open class HoveringUnitFactory(name: String) : SglUnitFactory(name) {
         buildType= Prov(::HoveringUnitFactoryBuild)
     }
 
-    public override fun load() {
+    override fun load() {
         super.load()
       //  hover = TextureRegion(Texture(Pixmaps.outline(Core.atlas.getPixmap(name + hoverTextureSuffix), Pal.darkOutline, 3)))
         hover= Core.atlas.white()
@@ -174,7 +174,7 @@ open class HoveringUnitFactory(name: String) : SglUnitFactory(name) {
         public override fun craftTrigger() {
             super.craftTrigger()
             Tmp.v1.set(3f, 0f).setAngle(Mathf.randomSeed(id.toLong(), 360f) - Time.time)
-            if (!payloads()!!.isEmpty()) getPayload().set(x + Tmp.v1.x, y + Tmp.v1.y, 90f)
+            if (!payloads.isEmpty) payload!!.set(x + Tmp.v1.x, y + Tmp.v1.y, 90f)
         }
 
         public override fun drawConstructingPayload() {
@@ -206,8 +206,8 @@ open class HoveringUnitFactory(name: String) : SglUnitFactory(name) {
         }
 
         override fun drawPayload() {
-            if (outputting() != null) {
-                val dst = dst(outputting())
+            if (outputting != null) {
+                val dst = dst(outputting)
                 val lerp = Mathf.clamp(dst / (size * Vars.tilesize))
                 val prog = dst / payloadReleasePos.len()
                 val tar = currentOutputTarget
@@ -216,22 +216,22 @@ open class HoveringUnitFactory(name: String) : SglUnitFactory(name) {
                 Draw.alpha(0.6f * lerp)
 
                 Lines.stroke(1.6f * lerp)
-                Lines.circle(outputting()!!.x(), outputting()!!.y(), outputting()!!.size())
+                Lines.circle(outputting!!.x(), outputting!!.y(), outputting!!.size())
 
                 Draw.draw(Draw.z(), Runnable {
                     MathRenderer.setDispersion((0.18f + Mathf.absin(Time.time / 3f, 6f, 0.4f)) * lerp * Mathf.clamp((1 - prog) / 0.5f))
                     MathRenderer.setThreshold(0.4f, 0.8f)
-                    MathRenderer.drawSin(x, y, 6f, outputting()!!.x(), outputting()!!.y(), 5f, 120f, -2.5f * Time.time)
-                    MathRenderer.drawSin(x, y, 6f, outputting()!!.x(), outputting()!!.y(), 5f, 150f, -3.2f * Time.time)
+                    MathRenderer.drawSin(x, y, 6f, outputting!!.x(), outputting!!.y(), 5f, 120f, -2.5f * Time.time)
+                    MathRenderer.drawSin(x, y, 6f, outputting!!.x(), outputting!!.y(), 5f, 150f, -3.2f * Time.time)
                 })
                 val z = Draw.z()
                 Draw.z(min(Layer.darkness, z - 1f))
-                val sh = if (outputting() is UnitPayload && (outputting() as UnitPayload) .unit.type.flying && tar == null) 1f else 1 - lastOutputProgress
-                val x = outputting()!!.x() + UnitType.shadowTX * sh
-                val y = outputting()!!.y() + UnitType.shadowTY * sh
+                val sh = if (outputting is UnitPayload && (outputting as UnitPayload) .unit.type.flying && tar == null) 1f else 1 - lastOutputProgress
+                val x = outputting!!.x() + UnitType.shadowTX * sh
+                val y = outputting!!.y() + UnitType.shadowTY * sh
 
                 Draw.color(Pal.shadow)
-                Draw.rect(outputting()!!.icon(), x, y, outputting()!!.rotation() - 90)
+                Draw.rect(outputting!!.icon(), x, y, outputting!!.rotation() - 90)
                 Draw.color()
                 Draw.z(z)
             }

@@ -1,9 +1,6 @@
 package ice.content
 
-import arc.func.Cons2
-import arc.func.Func
-import arc.func.Func2
-import arc.func.Prov
+import arc.func.*
 import arc.graphics.Blending
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
@@ -76,10 +73,8 @@ import mindustry.entities.units.WeaponMount
 import mindustry.game.Team
 import mindustry.gen.*
 import mindustry.gen.Unit
-import mindustry.graphics.Drawf
-import mindustry.graphics.Layer
-import mindustry.graphics.Pal
-import mindustry.graphics.Trail
+import mindustry.graphics.*
+import mindustry.graphics.MultiPacker.PageType
 import mindustry.type.UnitType
 import mindustry.type.unit.MissileUnitType
 import mindustry.type.weapons.PointDefenseWeapon
@@ -90,6 +85,16 @@ import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.particles.SglParticleModels
 import singularity.world.unit.abilities.MirrorArmorAbility
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Float
+import kotlin.Int
+import kotlin.Suppress
+import kotlin.also
+import kotlin.apply
+import kotlin.arrayOf
+import kotlin.collections.forEach
+import kotlin.floatArrayOf
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -267,19 +272,99 @@ object IUnitTypes : Load {
       }
     }
   }
-  val 路西法 = IceUnitType("lucifer") {
+  val 加百列 = object : IceUnitType("gabriel", {
     armor = 1f
     speed = 3.5f
     flying = true
     health = 150f
+    hitSize = 13f
+    mineTier = 2
+    mineSpeed = 2f
+    engineSize = 2.5f
+    rotateSpeed = 7f
+    itemCapacity = 30
+    engineOffset = 6f
+    circleTarget = true
+    engineColor = IceColor.b4
+    itemCapacity = 30
+    buildSpeed = 0.75f
+    buildRange = 8 * 40f
+    drag = 0.05f
+    accel = 0.11f
+    outlines = false
+    setWeapon("weapon") {
+      y += 0.8f
+      x = 4.3f
+      reload = 10f
+      layerOffset = -0.2f
+      rotateSpeed = 9f
+      shootSound=Sounds.shootAlpha
+      bullet = RandomDamageBulletType(8, 14, 3f).apply {
+        backColor = IceColor.b4
+        frontColor = IceColor.b4
+        lightColor = IceColor.b4
+        trailColor= IceColor.b4
+        trailWidth = 1.2f
+        trailLength = 4
+        shootY += 1
+        lifetime = 60f
+        homingPower = 0.05f
+        despawnEffect = Effect(14f, Cons { e: EffectContainer? ->
+          Draw.color(Color.white, IceColor.b4, e!!.fin())
+          e.scaled(7f, Cons { s: EffectContainer? ->
+            Lines.stroke(0.5f + s!!.fout())
+            Lines.circle(e.x, e.y, s.fin() * 5f)
+          })
+
+          Lines.stroke(0.5f + e.fout())
+
+          Angles.randLenVectors(e.id.toLong(), 5, e.fin() * 15f, Floatc2 { x: Float, y: Float ->
+            val ang = Mathf.angle(x, y)
+            Lines.lineAngle(e.x + x, e.y + y, ang, e.fout() * 3 + 1f)
+          })
+          Drawf.light(e.x, e.y, 20f, IceColor.b4, 0.6f * e.fout())
+        })
+        hitEffect = despawnEffect
+        homingRange = 50f
+        shootEffect = IceEffects.squareAngle(color1 = IceColor.b4, color2 = IceColor.b5)
+      }
+    }
+    bundle {
+      desc(zh_CN, "加百列")
+    }
+  }) {
+    override fun drawOutline(unit: Unit) {
+      Draw.z(Draw.z() - 1f)
+      Draw.color(outlineColor)
+      Draw.rect(name + "-outline", unit.x, unit.y, unit.rotation - 90)
+    }
+
+    override fun createIcons(packer: MultiPacker) {
+      super.createIcons(packer)
+      for (weapon in weapons) {
+        if (!weapon.name.isEmpty() && (minfo.mod == null || weapon.name.startsWith(minfo.mod.name)) && (weapon.top || !packer.isOutlined(weapon.name) || weapon.parts.contains(Boolf { p: DrawPart? -> p!!.under }))) {
+          makeOutline(PageType.main, packer, weapon.region, !weapon.top || weapon.parts.contains(Boolf { p: DrawPart? -> p!!.under }), outlineColor, outlineRadius)
+        }
+      }
+    }
+  }
+  val 路西法 = IceUnitType("lucifer") {
+    armor = 1f
+    accel = 0.2f
+    speed = 3.5f
+    flying = true
+    health = 150f
     hitSize = 16f
+    drag = 0.05f
+    accel = 0.11f
+    accel = 0.4f
+    faceTarget = false
+    lowAltitude = true
     mineTier = 3
     mineSpeed = 2f
     engineSize = 3f
-    faceTarget = false
-    lowAltitude = true
     rotateSpeed = 7f
-    itemCapacity = 5
+    itemCapacity = 40
     engineOffset = 8f
     circleTarget = true
     engineColor = IceColor.b4
@@ -292,7 +377,7 @@ object IUnitTypes : Load {
       reload = 15f
       rotateSpeed = 9f
       predictTarget = false
-      bullet = RandomDamageBulletType(8, 14, 3f).apply {
+      bullet = RandomDamageBulletType(14, 20, 3f).apply {
         backColor = IceColor.b4
         frontColor = IceColor.b4
         lightColor = IceColor.b4
@@ -303,11 +388,11 @@ object IUnitTypes : Load {
         shootEffect = IceEffects.squareAngle(color1 = IceColor.b4, color2 = IceColor.b5)
       }
     }
-    abilities
     bundle {
       desc(zh_CN, "路西法")
     }
   }
+
   val 仆从 = IceUnitType("footman") {
     speed = 3.2f
     flying = true
@@ -2260,47 +2345,43 @@ object IUnitTypes : Load {
       shootOnDeath = true
       shootSound = Sounds.none
       bullet = ExplosionBulletType(24f, 72f).apply {
-        hitEffect = MultiEffect(
-          WaveEffect().apply {
-            lifetime = 15f
-            sizeFrom = 0f
-            sizeTo = 30f
-            strokeFrom = 3f
-            strokeTo = 0f
-            colorFrom = Color.valueOf("FEB380")
-            colorTo = Color.valueOf("FF8663")
-          },
-          ParticleEffect().apply {
-            particles = 3
-            lifetime = 20f
-            line = true
-            strokeFrom = 1.5f
-            strokeTo = 1.5f
-            lenFrom = 5f
-            lenTo = 5f
-            cone = 360f
-            length = 50f
-            interp = Interp.circleOut
-            sizeInterp = Interp.pow5In
-            colorFrom = Color.valueOf("FEB380")
-            colorTo = Color.valueOf("FF8663")
-          },
-          ParticleEffect().apply {
-            particles = 3
-            lifetime = 25f
-            line = true
-            strokeFrom = 1.5f
-            strokeTo = 1.5f
-            lenFrom = 7f
-            lenTo = 7f
-            cone = 360f
-            length = 30f
-            interp = Interp.circleOut
-            sizeInterp = Interp.pow5In
-            colorFrom = Color.valueOf("FEB380")
-            colorTo = Color.valueOf("FF8663")
-          }
-        )
+        hitEffect = MultiEffect(WaveEffect().apply {
+          lifetime = 15f
+          sizeFrom = 0f
+          sizeTo = 30f
+          strokeFrom = 3f
+          strokeTo = 0f
+          colorFrom = Color.valueOf("FEB380")
+          colorTo = Color.valueOf("FF8663")
+        }, ParticleEffect().apply {
+          particles = 3
+          lifetime = 20f
+          line = true
+          strokeFrom = 1.5f
+          strokeTo = 1.5f
+          lenFrom = 5f
+          lenTo = 5f
+          cone = 360f
+          length = 50f
+          interp = Interp.circleOut
+          sizeInterp = Interp.pow5In
+          colorFrom = Color.valueOf("FEB380")
+          colorTo = Color.valueOf("FF8663")
+        }, ParticleEffect().apply {
+          particles = 3
+          lifetime = 25f
+          line = true
+          strokeFrom = 1.5f
+          strokeTo = 1.5f
+          lenFrom = 7f
+          lenTo = 7f
+          cone = 360f
+          length = 30f
+          interp = Interp.circleOut
+          sizeInterp = Interp.pow5In
+          colorFrom = Color.valueOf("FEB380")
+          colorTo = Color.valueOf("FF8663")
+        })
       }
     })
     parts.add(FlarePart().apply {
@@ -2550,9 +2631,7 @@ object IUnitTypes : Load {
           colorTo = Color.valueOf("#FF5845")
         }
         colors = arrayOf(
-          Color.valueOf("#D75B6E"),
-          Color.valueOf("#E78F92"),
-          Color.valueOf("#FFF0F0")
+          Color.valueOf("#D75B6E"), Color.valueOf("#E78F92"), Color.valueOf("#FFF0F0")
         )
         statusDuration = 180f
         ammoMultiplier = 1f
@@ -2622,14 +2701,7 @@ object IUnitTypes : Load {
     trailLength = 16
     engineLayer = 110f
     immunities.addAll(
-      StatusEffects.wet,
-      StatusEffects.burning,
-      StatusEffects.freezing,
-      StatusEffects.sporeSlowed,
-      StatusEffects.tarred,
-      StatusEffects.muddy,
-      StatusEffects.electrified,
-      IStatus.辐射
+      StatusEffects.wet, StatusEffects.burning, StatusEffects.freezing, StatusEffects.sporeSlowed, StatusEffects.tarred, StatusEffects.muddy, StatusEffects.electrified, IStatus.辐射
     )
     abilities.addAll(ArmorPlateAbility().apply {
       healthMultiplier = 0.5f
@@ -2704,8 +2776,7 @@ object IUnitTypes : Load {
         backColor = Color.valueOf("#FF5845")
         frontColor = Color.valueOf("#FF8663")
         despawnEffect = MultiEffect(
-          WrapEffect(Fx.dynamicSpikes, Color.valueOf("FF5845"), 80f),
-          ParticleEffect().apply {
+          WrapEffect(Fx.dynamicSpikes, Color.valueOf("FF5845"), 80f), ParticleEffect().apply {
             particles = 24
             sizeFrom = 9f
             sizeTo = 0f
@@ -2783,21 +2854,7 @@ object IUnitTypes : Load {
       rotation = -135f
     })
     immunities.addAll(
-      StatusEffects.burning,
-      StatusEffects.melting,
-      StatusEffects.blasted,
-      StatusEffects.wet,
-      StatusEffects.freezing,
-      StatusEffects.sporeSlowed,
-      StatusEffects.slow,
-      StatusEffects.tarred,
-      StatusEffects.muddy,
-      StatusEffects.sapped,
-      StatusEffects.electrified,
-      StatusEffects.unmoving,
-      IStatus.熔融,
-      IStatus.辐射,
-      IStatus.衰变
+      StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, StatusEffects.wet, StatusEffects.freezing, StatusEffects.sporeSlowed, StatusEffects.slow, StatusEffects.tarred, StatusEffects.muddy, StatusEffects.sapped, StatusEffects.electrified, StatusEffects.unmoving, IStatus.熔融, IStatus.辐射, IStatus.衰变
     )
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 0.8f
@@ -2864,8 +2921,7 @@ object IUnitTypes : Load {
         frontColor = Color.valueOf("FF8663")
         hitColor = Color.valueOf("FF5845")
         despawnEffect = MultiEffect(
-          WrapEffect(Fx.dynamicSpikes, Color.valueOf("FF5845"), 120f),
-          ParticleEffect().apply {
+          WrapEffect(Fx.dynamicSpikes, Color.valueOf("FF5845"), 120f), ParticleEffect().apply {
             particles = 24
             sizeFrom = 9f
             sizeTo = 0f
@@ -2875,8 +2931,7 @@ object IUnitTypes : Load {
             colorFrom = Color.valueOf("FF5845")
             colorTo = Color.valueOf("FF8663")
             cone = 360f
-          }
-        )
+          })
         radius = 120f
         unitDamageScl = 1.2f
         powerDamageScl = 1.5f
@@ -3057,5 +3112,9 @@ object IUnitTypes : Load {
         container.create(gen)
       }
     }
+  }
+
+  fun getCoreUnits(): Seq<IceUnitType> {
+    return Seq.with(加百列, 路西法)
   }
 }

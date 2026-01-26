@@ -10,7 +10,7 @@ import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Scaling
-import ice.Ice
+import ice.DeepSpace
 import ice.graphics.Characters
 import ice.graphics.IStyles
 import ice.graphics.IceColor
@@ -39,7 +39,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     }.height(200f).pad(10f).row()
 
     cont.iPaneG { ta ->
-      ta.add(Ice.displayName).fontScale(1.4f).color(IceColor.b4).row()
+      ta.add(DeepSpace.displayName).fontScale(1.4f).color(IceColor.b4).row()
       ta.table {
 
         val characters = Characters.alon
@@ -52,6 +52,8 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             tool.update {
               tool.pack()
             }
+          }.apply {
+            allowMobile = true
           })
           update {
             characters.upfate(this) { fLabel.actions.isEmpty }
@@ -66,7 +68,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
       }.row()
       ta.table {
         it.layoutLabel("作者: Alon").padRight(10f)
-        it.layoutLabel("版本: ${Ice.version}")
+        it.layoutLabel("版本: ${DeepSpace.version}")
       }.row()
 
       ta.addLine()
@@ -74,7 +76,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
         it.layoutLabel("亲爱贡献者:").fontScale(1.4f).row()
         it.layoutLabel("EBwilson - singularity").itooltip("以我现在的视角看还要继续的话unc得整个重构一遍").pad(5f).row()
         it.layoutLabel("帕奇维克 - 血肉诅咒").itooltip("广告招租位").pad(5f).row()
-        it.layoutLabel("ZL洋葱(不再参与) - 物品材质贴图包").itooltip("你知道吗,模组作者在QQ短视频上推过意义不明的奥特曼视频").pad(5f).row()
+        it.layoutLabel("ZL洋葱 - 物品材质贴图包").itooltip("你知道吗,模组作者在QQ短视频上推过意义不明的奥特曼视频").pad(5f).row()
         it.layoutLabel("Reflcaly_反射 - 人物立绘").itooltip("期待与你的再次见面!再见!").pad(5f).row()
       }.padBottom(20f).row()
       ta.addLine()
@@ -106,15 +108,15 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
       ta.addLine()
       ta.table {
         ContributeDialog.buildButton(it, Icon.githubSquare, IceColor.b4, "Github项目", "mod的开源地址") {
-          if (!Core.app.openURI(Ice.githubProjectUrl)) {
+          if (!Core.app.openURI(DeepSpace.githubProjectUrl)) {
             Vars.ui.showErrorMessage("@linkfail")
-            Core.app.clipboardText = Ice.githubProjectUrl
+            Core.app.clipboardText = DeepSpace.githubProjectUrl
           }
         }.growX()
         ContributeDialog.buildButton(it, SglDrawConst.qqIcon, Pal.lightishGray, Core.bundle.get("misc.qq"), Core.bundle.get("infos.qq")) {
-          if (!Core.app.openURI(Ice.qqGrops)) {
+          if (!Core.app.openURI(DeepSpace.qqGropsUrl)) {
             Vars.ui.showErrorMessage("@linkfail")
-            Core.app.clipboardText = Ice.qqGrops
+            Core.app.clipboardText = DeepSpace.qqGropsUrl
           }
         }.growX().row()
         ContributeDialog.buildButton(it, Icon.discord, Pal.lightOrange, "Discord论坛", "DeepSpace的discord聊天室") {

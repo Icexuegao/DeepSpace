@@ -8,9 +8,9 @@ import arc.graphics.g2d.NinePatch
 import arc.graphics.g2d.TextureAtlas.AtlasRegion
 import arc.scene.style.Drawable
 import arc.scene.style.ScaledNinePatchDrawable
+import arc.scene.style.TextureRegionDrawable
 import arc.util.Log
 import ice.Ice
-import ice.library.struct.log
 import ice.library.world.Load
 import universecore.util.mods.ModGetter
 import universecore.util.mods.ModInfo
@@ -47,7 +47,7 @@ object IFiles : Load {
             if (!shaders.contains(it.name())) {
               shaders[it.name()] = it
             } else {
-              Log.warn("已收录shader文件:${shaders.get(it.name())?.path()},未收录:${it.path()}")
+              Log.warn("已收录shader文件:${shaders[it.name()]?.path()},未收录:${it.path()}")
             }
           }
         }
@@ -70,32 +70,16 @@ object IFiles : Load {
   }
 
   fun createNinePatch(name: String): Drawable {
-    val region = findModPng(name)
-    val splits = region.splits
-    val copy: ScaledNinePatchDrawable = object : ScaledNinePatchDrawable(NinePatch(region, splits[0], splits[1], splits[2], splits[3])) {
-      override fun getLeftWidth(): Float {
-        return 0f
-      }
-
-      override fun getRightWidth(): Float {
-        return 0f
-      }
-
-      override fun getTopHeight(): Float {
-        return 0f
-      }
-
-      override fun getBottomHeight(): Float {
-        return 0f
-      }
+    val region: AtlasRegion? = Core.atlas.find("${modWithClass.name}-$name")
+    if (region!!.splits != null) {
+      val splits = region.splits
+      val patch = NinePatch(region, splits!![0], splits[1], splits[2], splits[3])
+      val pads = region.pads
+      if (pads != null) patch.setPadding(pads[0].toFloat(), pads[1].toFloat(), pads[2].toFloat(), pads[3].toFloat())
+      return ScaledNinePatchDrawable(patch, 1f)
+    } else {
+      return TextureRegionDrawable(region, 1f)
     }
-    copy.minWidth = 0f
-    copy.minHeight = 0f
-    copy.topHeight = 0f
-    copy.rightWidth = 0f
-    copy.bottomHeight = 0f
-    copy.leftWidth = 0f
-    return copy
   }
 
   fun newCursor(filename: String): Graphics.Cursor {

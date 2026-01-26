@@ -23,6 +23,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.world.IceBulletHandler
 import mindustry.Vars
 import mindustry.entities.Damage
 import mindustry.entities.Effect
@@ -100,7 +101,7 @@ open class GameOfLife(name: String) : SglBlock(name) {
     canOverdrive = false
 
     configurable = true
-    buildType= Prov(::GameOfLifeBuild)
+    buildType = Prov(::GameOfLifeBuild)
     config(Point2::class.java) { e: GameOfLifeBuild?, p: Point2? ->
       val cell = e!!.grid!!.get(p!!.x, p.y) ?: throw RuntimeException("position out of bound")
       if (cell.isLife) {
@@ -115,9 +116,11 @@ open class GameOfLife(name: String) : SglBlock(name) {
           e.editing = true
           e.grid!!.resetYears()
         }
+
         1 -> {
           e!!.activity = !e.activity
         }
+
         2 -> {
           for (cell in e!!.grid!!) {
             cell.kill()
@@ -137,9 +140,9 @@ open class GameOfLife(name: String) : SglBlock(name) {
     }
   }
 
-  override fun newConsume(): BaseConsumers? {
+  override fun newConsume(): BaseConsumers {
     val res = super.newConsume()
-    res!!.time(gridFlushInterval)
+    res.time(gridFlushInterval)
     return res
   }
 
@@ -202,7 +205,7 @@ open class GameOfLife(name: String) : SglBlock(name) {
         val details = Table()
         FactoryBlockComp.buildRecipe(details, cons, null)
 
-        t.table(SglDrawConst.grayUIAlpha) { ta-> ta!!.add(details).pad(4f) }
+        t.table(SglDrawConst.grayUIAlpha) { ta -> ta!!.add(details).pad(4f) }
         t.row()
       }
     }
@@ -213,7 +216,7 @@ open class GameOfLife(name: String) : SglBlock(name) {
     val s = Strings.autoFixed(gridSize * cellSize / Vars.tilesize, 1)
     stats.add(SglStat.gridSize, gridSize.toString() + "x" + gridSize + " - [gray]" + s + "x" + s + StatUnit.blocks.localized() + "[]")
     stats.add(SglStat.launchTime, launchCons.craftTime / 60f, StatUnit.seconds)
-    stats.add(SglStat.launchConsume) { t->
+    stats.add(SglStat.launchConsume) { t ->
       val stat = Stats()
       launchCons.showTime = false
       launchCons.display(stat)
@@ -278,7 +281,7 @@ open class GameOfLife(name: String) : SglBlock(name) {
     var editing: Boolean = false
     var invalid: Boolean = false
 
-    override fun create(block: Block?, team: Team?): Building {
+    override fun create(block: Block, team: Team): Building {
       super.create(block, team)
       grid = LifeGrid(gridSize)
       grid!!.maxYears = maxCellYears + (if (cellSenescence) 1 else 0)
@@ -657,9 +660,10 @@ open class GameOfLife(name: String) : SglBlock(name) {
     fun shootBullet(bullet: BulletType, pattern: ShootPattern): CellCaller {
       return object : CellCaller() {
         override fun call(build: GameOfLifeBuild, cell: Cell?, x: Float, y: Float) {
-          pattern.shoot(0) { offX: Float, offY: Float, rotation: Float, delay: Float, move: Mover? ->
+          val a = IceBulletHandler { offX: Float, offY: Float, rotation: Float, delay: Float, move: Mover? ->
             bullet.create(build, build.team, x + offX, y + offY, rotation, bullet.damage, 1f, 1f, null, move)
           }
+          pattern.shoot(0, a)
         }
 
         override fun setStats(stats: Stats) {

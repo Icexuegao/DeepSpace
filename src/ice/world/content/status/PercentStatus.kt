@@ -17,8 +17,8 @@ class PercentStatus(name: String,
                     var min: Float,
                     var transitionDamages: Float = 0f,
                     val obj: Boolean = false,
-                    appply: StatusEffect.() -> kotlin.Unit = {}
-) : StatusEffect(name, appply) {
+                    appply: IceStatusEffect.() -> kotlin.Unit = {}
+) : IceStatusEffect(name, appply) {
     companion object {
         var opposite = arrayOf(StatusEffects.wet, StatusEffects.freezing, IStatus.封冻)
         var affinity = arrayOf(StatusEffects.tarred, Fx.burning)

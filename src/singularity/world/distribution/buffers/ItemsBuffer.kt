@@ -79,9 +79,9 @@ class ItemsBuffer : BaseBuffer<ItemStack, Item, ItemsBuffer.ItemPacket>() {
             for (grid in network.grids) {
                 for (entry in grid!!.get<Building?>(
                     GridChildType.container,
-                    Boolf2 { e: Building?, c: TargetConfigure? -> e!!.acceptItem(handler, packet.get()) && c!!.get(GridChildType.container, packet.get()) })) {
+                    Boolf2 { e: Building?, c: TargetConfigure? -> e!!.acceptItem(handler, packet.get()) && c!!.get(GridChildType.container, packet.get()!!) })) {
                     if (packet.amount() <= 0) continue@itemRead
-                    val amount = min(packet.amount(), entry.entity.acceptStack(packet.get(), packet.amount(), handler))
+                    val amount = min(packet.amount(), entry.entity!!.acceptStack(packet.get(), packet.amount(), handler))
                     if (amount <= 0f) continue
 
                     packet.remove(amount)
@@ -110,14 +110,14 @@ class ItemsBuffer : BaseBuffer<ItemStack, Item, ItemsBuffer.ItemPacket>() {
                 c!!.get(GridChildType.container, ct)
                         && e!!.acceptItem(core, ct)
             })) {
-                var move = min(packet.amount(), entry.entity.acceptStack(packet.get(), packet.amount(), core))
+                var move = min(packet.amount(), entry.entity!!.acceptStack(packet.get(), packet.amount(), core))
                 move = min(move, counter)
                 if (move <= 0) continue
 
                 packet.remove(move)
                 packet.deRead(move)
                 counter -= move
-                entry.entity.handleStack(packet.get(), move, core)
+                entry.entity!!.handleStack(packet.get(), move, core)
                 if (deFlow) entry.entity.items.handleFlow(packet.get(), -move)
             }
         }

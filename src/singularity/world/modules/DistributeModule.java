@@ -42,7 +42,7 @@ public class DistributeModule extends BlockModule{
   
   public void assign(DistRequestBase request, DistributeNetwork initializer){
     if(network.netStructValid()){
-      DistCoreModule core = core().distCore();
+      DistCoreModule core = core().getDistCore();
       core.receive(request);
       if(initializer != null) request.init(initializer);
       lastAssign = request;

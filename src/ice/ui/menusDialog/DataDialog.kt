@@ -116,10 +116,10 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
           p.clear()
           val background31 = IStyles.background31
           p.iTableG {
-            it.iTableG(background31) {it1 ->
-              it1.icePane {it2->
+            it.iTableG(background31) { it1 ->
+              it1.icePane { it2 ->
                 val color = unlockableContentColor(cContent)
-                it2.iTableG { it3 ->
+                it2.iTableGX { it3 ->
                   it3.image(cContent.uiIcon).size(112f).scaling(Scaling.fit).row()
                   it3.add(cContent.localizedName).fontScale(1.5f).pad(2f).color(color)
                 }.row()
@@ -130,8 +130,8 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
             it.iTableG(background31) { it2 ->
               it2.icePane { it1 ->
                 it1.add(cContent.name).color(Color.valueOf("b7e1fb")).padBottom(3f).row()
-                val stats = cContent.stats
                 cContent.checkStats()
+                val stats = cContent.stats
                 val toMap = stats.toMap()
                 toMap.keys().forEach { cat ->
                   val map: OrderedMap<Stat, Seq<StatValue>> = toMap.get(cat)
@@ -159,10 +159,12 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
                   }
                 }
               }
-            }.margin(22f).minWidth(400f)
+            }.margin(22f)
           }.minHeight(300f).row()
 
-          p.iTableG(background31) {}.margin(22f).minHeight(350f)
+          p.iTableG(background31) {
+
+          }.margin(22f).minHeight(100f)
         }
         r()
         p.update {

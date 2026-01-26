@@ -1,187 +1,150 @@
-package singularity.world.components;
+package singularity.world.components
 
-import arc.graphics.g2d.Lines;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.math.geom.Geometry;
-import arc.struct.ObjectSet;
-import arc.util.Time;
-import arc.util.Tmp;
-import mindustry.Vars;
-import mindustry.gen.Building;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Pal;
-import mindustry.world.Block;
-import mindustry.world.Tile;
-import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatUnit;
-import mindustry.world.meta.Stats;
+import arc.graphics.g2d.Lines
+import arc.graphics.g2d.TextureRegion
+import arc.math.Mathf
+import arc.math.geom.Geometry
+import arc.struct.ObjectSet
+import arc.util.Time
+import arc.util.Tmp
+import mindustry.Vars
+import mindustry.graphics.Drawf
+import mindustry.graphics.Pal
+import mindustry.world.Block
+import mindustry.world.Tile
+import mindustry.world.meta.Stat
+import mindustry.world.meta.StatUnit
+import mindustry.world.meta.Stats
+import kotlin.math.abs
+import kotlin.math.min
 
-import static mindustry.Vars.tilesize;
-import static mindustry.Vars.world;
-
-public interface EdgeLinkerComp{
-  ObjectSet<EdgeLinkerBuildComp> tmpSeq = new ObjectSet<>();
-  
+interface EdgeLinkerComp {
   //@Annotations.BindField("linkLength")
-  default int linkLength(){
-    return 0;
-  }
+  var linkLength: Int
 
- // @Annotations.BindField("linkOffset")
-  default float linkOffset(){
-    return 0;
-  }
-  
- // @Annotations.BindField("linkRegion")
-  default TextureRegion linkRegion(){
-    return null;
-  }
+  // @Annotations.BindField("linkOffset")
+  var linkOffset: Float
 
-//  @Annotations.BindField("linkCapRegion")
-  default TextureRegion linkCapRegion(){
-    return null;
-  }
-  
-//  @Annotations.MethodEntry(entryMethod = "drawPlace", paramTypes = {"int -> x", "int -> y", "int -> rotation", "boolean -> valid"})
-  default void drawPlacing(int x, int y, int rotation, boolean valid){
-    Tmp.v1.set(1, 0);
-    for(int i = 0; i < 4; i++){
-      float dx = x*tilesize + getBlock().offset + Geometry.d4x(i)*getBlock().size*tilesize/2f;
-      float dy = y*tilesize + getBlock().offset + Geometry.d4y(i)*getBlock().size*tilesize/2f;
-      
+  // @Annotations.BindField("linkRegion")
+  var linkRegion: TextureRegion
+
+  //  @Annotations.BindField("linkCapRegion")
+  var linkCapRegion: TextureRegion
+
+  //  @Annotations.MethodEntry(entryMethod = "drawPlace", paramTypes = {"int -> x", "int -> y", "int -> rotation", "boolean -> valid"})
+  fun drawPlacing(x: Int, y: Int, rotation: Int, valid: Boolean) {
+    Tmp.v1.set(1f, 0f)
+    for (i in 0..3) {
+      val dx: Float = x * Vars.tilesize + this.block.offset + Geometry.d4x(i) * this.block.size * Vars.tilesize / 2f
+      val dy: Float = y * Vars.tilesize + this.block.offset + Geometry.d4y(i) * this.block.size * Vars.tilesize / 2f
+
       Drawf.dashLine(
-          Pal.accent,
-          dx,
-          dy,
-          dx + Geometry.d4x(i)*linkLength()*tilesize,
-          dy + Geometry.d4y(i)*linkLength()*tilesize
-      );
+        Pal.accent, dx, dy, dx + Geometry.d4x(i) * linkLength * Vars.tilesize, dy + Geometry.d4y(i) * linkLength * Vars.tilesize
+      )
 
-      for(int d = 1; d <= linkLength(); d++){
-        Tmp.v1.setLength(d);
-        Building t = world.build(x + (int) Tmp.v1.x, y + (int) Tmp.v1.y);
-        if(t instanceof EdgeLinkerBuildComp e && canLink(world.tile(x, y), this, t.tile, e.getEdgeBlock())){
-          Drawf.select(t.x, t.y, t.block.size * tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f), Pal.breakInvalid);
+      for (d in 1..linkLength) {
+        Tmp.v1.setLength(d.toFloat())
+        val t = Vars.world.build(x + Tmp.v1.x.toInt(), y + Tmp.v1.y.toInt())
+        if (t is EdgeLinkerBuildComp && canLink(Vars.world.tile(x, y), this, t.tile, t.edgeBlock!!)) {
+          Drawf.select(t.x, t.y, t.block.size * Vars.tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f), Pal.breakInvalid)
         }
       }
-      Tmp.v1.rotate90(1);
+      Tmp.v1.rotate90(1)
     }
   }
 
- // @Annotations.MethodEntry(entryMethod = "setStats", context = {"stats -> stats"})
-  default void setEdgeLinkerStats(Stats stats){
-    stats.add(Stat.linkRange, linkLength(), StatUnit.blocks);
+  // @Annotations.MethodEntry(entryMethod = "setStats", context = {"stats -> stats"})
+  fun setEdgeLinkerStats(stats: Stats) {
+    stats.add(Stat.linkRange, linkLength.toFloat(), StatUnit.blocks)
   }
-  
-  default void drawConfiguring(EdgeLinkerBuildComp origin){
-    Drawf.square(origin.getBuilding().x, origin.getBuilding().y, origin.getBlock().size*tilesize, Pal.accent);
-    if(origin.perEdge() != null){
+
+  fun drawConfiguring(origin: EdgeLinkerBuildComp) {
+    Drawf.square(origin.building.x, origin.building.y, (origin.block.size * Vars.tilesize).toFloat(), Pal.accent)
+    if (origin.perEdge != null) {
       Tmp.v2.set(
-          Tmp.v1.set(origin.getBuilding().x, origin.getBuilding().y)
-              .sub(origin.perEdge().getBuilding().x, origin.perEdge().getBuilding().y)
-              .setLength(origin.perEdge().getBlock().size*tilesize/2f))
-          .setLength(origin.getBlock().size*tilesize/2f);
-      
+        Tmp.v1.set(origin.building.x, origin.building.y).sub(origin.perEdge!!.building.x, origin.perEdge!!.building.y).setLength(origin.perEdge!!.block.size * Vars.tilesize / 2f)
+      ).setLength(origin.block.size * Vars.tilesize / 2f)
+
       Drawf.square(
-          origin.perEdge().getBuilding().x,
-          origin.perEdge().getBuilding().y,
-          origin.perEdge().getBlock().size*tilesize,
-          45,
-          Pal.place
-      );
+        origin.perEdge!!.building.x, origin.perEdge!!.building.y, (origin.perEdge!!.block.size * Vars.tilesize).toFloat(), 45f, Pal.place
+      )
       Drawf.dashLine(
-          Pal.accent,
-          origin.perEdge().getBuilding().x + Tmp.v1.x,
-          origin.perEdge().getBuilding().y + Tmp.v1.y,
-          origin.getBuilding().x - Tmp.v2.x,
-          origin.getBuilding().y - Tmp.v2.y
-      );
+        Pal.accent, origin.perEdge!!.building.x + Tmp.v1.x, origin.perEdge!!.building.y + Tmp.v1.y, origin.building.x - Tmp.v2.x, origin.building.y - Tmp.v2.y
+      )
     }
-    
-    if(origin.nextEdge() != null){
+
+    if (origin.nextEdge != null) {
       Tmp.v2.set(
-          Tmp.v1.set(origin.nextEdge().getBuilding().x, origin.nextEdge().getBuilding().y)
-              .sub(origin.getBuilding().x, origin.getBuilding().y)
-              .setLength(origin.getBlock().size*tilesize/2f))
-          .setLength(origin.nextEdge().getBlock().size*tilesize/2f);
-  
+        Tmp.v1.set(origin.nextEdge!!.building.x, origin.nextEdge!!.building.y).sub(origin.building.x, origin.building.y).setLength(origin.block.size * Vars.tilesize / 2f)
+      ).setLength(origin.nextEdge!!.block.size * Vars.tilesize / 2f)
+
       Drawf.square(
-          origin.nextEdge().getBuilding().x,
-          origin.nextEdge().getBuilding().y,
-          origin.nextEdge().getBlock().size*tilesize,
-          45,
-          Pal.accent
-      );
-      Lines.stroke(3, Pal.gray);
+        origin.nextEdge!!.building.x, origin.nextEdge!!.building.y, (origin.nextEdge!!.block.size * Vars.tilesize).toFloat(), 45f, Pal.accent
+      )
+      Lines.stroke(3f, Pal.gray)
       Lines.line(
-          origin.getBuilding().x + Tmp.v1.x,
-          origin.getBuilding().y + Tmp.v1.y,
-          origin.nextEdge().getBuilding().x - Tmp.v2.x,
-          origin.nextEdge().getBuilding().y - Tmp.v2.y
-      );
-      Lines.stroke(1, Pal.accent);
+        origin.building.x + Tmp.v1.x, origin.building.y + Tmp.v1.y, origin.nextEdge!!.building.x - Tmp.v2.x, origin.nextEdge!!.building.y - Tmp.v2.y
+      )
+      Lines.stroke(1f, Pal.accent)
       Lines.line(
-          origin.getBuilding().x + Tmp.v1.x,
-          origin.getBuilding().y + Tmp.v1.y,
-          origin.nextEdge().getBuilding().x - Tmp.v2.x,
-          origin.nextEdge().getBuilding().y - Tmp.v2.y
-      );
+        origin.building.x + Tmp.v1.x, origin.building.y + Tmp.v1.y, origin.nextEdge!!.building.x - Tmp.v2.x, origin.nextEdge!!.building.y - Tmp.v2.y
+      )
     }
-    
-    for(EdgeLinkerBuildComp other : getLinkable(origin)){
-      if(other == origin.nextEdge() || other == origin.perEdge()) continue;
-      Drawf.select(other.getBuilding().x, other.getBuilding().y,
-          other.getBlock().size * tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f), Pal.breakInvalid);
+
+    for (other in getLinkable(origin)) {
+      if (other === origin.nextEdge || other === origin.perEdge) continue
+      Drawf.select(
+        other.building.x, other.building.y, other.block.size * Vars.tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f), Pal.breakInvalid
+      )
     }
   }
-  
-  default ObjectSet<EdgeLinkerBuildComp> getLinkable(EdgeLinkerBuildComp origin){
-    tmpSeq.clear();
-    for(int i = 0; i < 4; i++){
-      int dx = Geometry.d4x(i);
-      int dy = Geometry.d4y(i);
-      for(int l = getBlock().size/2; l < linkLength() + getBlock().size/2; l++){
-        Tile tile = origin.tile().nearby(dx*l, dy*l);
-        if(tile == null) continue;
-        Building build = tile.build;
-        if(build instanceof EdgeLinkerBuildComp && canLink(origin, (EdgeLinkerBuildComp) build)) tmpSeq.add((EdgeLinkerBuildComp) build);
+
+  fun getLinkable(origin: EdgeLinkerBuildComp): ObjectSet<EdgeLinkerBuildComp> {
+    tmpSeq.clear()
+    for (i in 0..3) {
+      val dx = Geometry.d4x(i)
+      val dy = Geometry.d4y(i)
+      for (l in this.block.size / 2..<linkLength + this.block.size / 2) {
+        val tile = origin.tile()!!.nearby(dx * l, dy * l) ?: continue
+        val build = tile.build
+        if (build is EdgeLinkerBuildComp && canLink(origin, build as EdgeLinkerBuildComp)) tmpSeq.add(build as EdgeLinkerBuildComp)
       }
     }
-    
-    return tmpSeq;
+
+    return tmpSeq
   }
-  
-  default Block getBlock(){
-    return (Block) this;
-  }
-  
-  default void link(EdgeLinkerBuildComp entity, Integer pos){
-    Building build = Vars.world.build(pos);
-    
-    if(build instanceof EdgeLinkerBuildComp){
-      if(entity.nextEdge() == build){
-        entity.delink((EdgeLinkerBuildComp) build);
-      }
-      else entity.link((EdgeLinkerBuildComp) build);
+
+  val block: Block
+    get() = this as Block
+
+  fun link(entity: EdgeLinkerBuildComp, pos: Int) {
+    val build = Vars.world.build(pos)
+
+    if (build is EdgeLinkerBuildComp) {
+      if (entity.nextEdge === build) {
+        entity.delink(build as EdgeLinkerBuildComp)
+      } else entity.link(build as EdgeLinkerBuildComp)
     }
   }
 
-  default boolean canLink(EdgeLinkerBuildComp origin, EdgeLinkerBuildComp other){
-    return canLink(origin.tile(), origin.getEdgeBlock(), other.tile(), other.getEdgeBlock());
-  }
-  
-  default boolean canLink(Tile origin, EdgeLinkerComp originBlock, Tile other, EdgeLinkerComp otherBlock){
-    if(!originBlock.linkable(otherBlock) || !otherBlock.linkable(this)) return false;
-
-    int xDistance = Math.abs(origin.x - other.x),
-        yDistance = Math.abs(origin.y - other.y);
-
-    int linkLength = Math.min(originBlock.linkLength(), otherBlock.linkLength());
-    
-    return (yDistance < linkLength + getBlock().size/2f + getBlock().offset && origin.x == other.x && origin.y != other.y)
-        || (xDistance < linkLength + getBlock().size/2f + getBlock().offset && origin.x != other.x && origin.y == other.y);
+  fun canLink(origin: EdgeLinkerBuildComp, other: EdgeLinkerBuildComp): Boolean {
+    return canLink(origin.tile()!!, origin.edgeBlock!!, other.tile()!!, other.edgeBlock!!)
   }
 
-  boolean linkable(EdgeLinkerComp other);
+  fun canLink(origin: Tile, originBlock: EdgeLinkerComp, other: Tile, otherBlock: EdgeLinkerComp): Boolean {
+    if (!originBlock.linkable(otherBlock) || !otherBlock.linkable(this)) return false
+
+    val xDistance = abs(origin.x - other.x)
+    val yDistance = abs(origin.y - other.y)
+
+    val linkLength = min(originBlock.linkLength, otherBlock.linkLength)
+
+    return (yDistance < linkLength + this.block.size / 2f + this.block.offset && origin.x == other.x && origin.y != other.y) || (xDistance < linkLength + this.block.size / 2f + this.block.offset && origin.x != other.x && origin.y == other.y)
+  }
+
+  fun linkable(other: EdgeLinkerComp?): Boolean
+
+  companion object {
+    val tmpSeq: ObjectSet<EdgeLinkerBuildComp> = ObjectSet<EdgeLinkerBuildComp>()
+  }
 }

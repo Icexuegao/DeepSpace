@@ -76,20 +76,20 @@ class LiquidsBuffer : BaseBuffer<LiquidsBuffer.LiquidIntegerStack, Liquid, Liqui
         liquidRead@ for (packet in this) {
             for (grid in network.grids) {
                 val handler = network.core!!.building
-                for (entry in grid!!.get<Building?>(
+                for (entry in grid!!.get<Building>(
                     GridChildType.container,
                     Boolf2 { e: Building?, c: TargetConfigure? -> e!!.acceptLiquid(handler, packet.get()) && c!!.get(GridChildType.container, packet.get()) },
                     temp
                 )) {
                     if (packet.amount() <= 0.001f) continue@liquidRead
-                    var move = min(packet.amount(), entry.entity.block.liquidCapacity - entry.entity.liquids.get(packet.get()))
+                    var move = min(packet.amount(), entry.entity!!.block.liquidCapacity - entry.entity.liquids.get(packet.get()))
 
                     move -= move % LiquidIntegerStack.Companion.packMulti
                     if (move <= 0.001f) continue
 
                     packet.remove(move)
                     packet.deRead(move)
-                    entry.entity.handleLiquid(handler, packet.get(), move)
+                    entry.entity!!.handleLiquid(handler, packet.get(), move)
                 }
             }
         }
@@ -113,7 +113,7 @@ class LiquidsBuffer : BaseBuffer<LiquidsBuffer.LiquidIntegerStack, Liquid, Liqui
                 c!!.get(GridChildType.container, ct)
                         && e!!.acceptLiquid(core, ct)
             })) {
-                val accept = if (!entry.entity.acceptLiquid(core, ct)) 0f else entry.entity.block.liquidCapacity - entry.entity.liquids.get(ct)
+                val accept = if (!entry.entity!!.acceptLiquid(core, ct)) 0f else entry.entity!!.block.liquidCapacity - entry.entity.liquids.get(ct)
                 var move = min(packet.amount(), accept)
                 move = min(move, am)
 
@@ -123,7 +123,7 @@ class LiquidsBuffer : BaseBuffer<LiquidsBuffer.LiquidIntegerStack, Liquid, Liqui
                 packet.remove(move)
                 packet.deRead(move)
                 am -= move
-                entry.entity.handleLiquid(core, packet.get(), move)
+                entry.entity!!.handleLiquid(core, packet.get(), move)
                 if (deFlow) {
                     val cacheSums = FieldHandler.getValueDefault<FloatArray?>(LiquidModule::class.java, "cacheSums")
                     val flow = FieldHandler.getValueDefault<Array<WindowedMean?>?>(entry.entity.liquids, "flow")

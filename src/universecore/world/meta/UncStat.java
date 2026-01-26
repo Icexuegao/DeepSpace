@@ -6,7 +6,7 @@ import mindustry.world.meta.StatCat;
 import universecore.util.handler.FieldHandler;
 
 public class UncStat{
-  public static final Stat optionalInputs  = create("optionalInputs", UncStatCat.other),
+  public static final Stat
       inputs = create("inputs", StatCat.crafting),
       maxStructureSize = create("maxStructureSize", UncStatCat.structure);
 

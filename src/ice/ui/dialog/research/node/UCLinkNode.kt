@@ -11,15 +11,15 @@ import arc.scene.ui.ImageButton
 import arc.scene.ui.Label
 import arc.scene.ui.layout.Scl
 import arc.scene.ui.layout.Table
-import ice.Ice
+import ice.DeepSpace
 import ice.graphics.IStyles
 import ice.graphics.IStyles.background44
 import ice.graphics.IStyles.imageButtonClean
 import ice.graphics.IceColor
 import ice.library.scene.ui.*
 import ice.library.util.toStringi
-import ice.ui.menusDialog.DataDialog
 import ice.ui.MenusDialog
+import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.ResearchDialog.SelectANodeEvent
 import ice.ui.menusDialog.ResearchDialog.selectANode
 import mindustry.ctype.UnlockableContent
@@ -67,9 +67,9 @@ class UCLinkNode(val content: UnlockableContent, x: Float, y: Float
         for (i in requirements.indices) {
             finishedRequirements?.set(i, ItemStack(requirements[i].item,
                 if (Core.settings == null) 0 else Core.settings.getInt(
-                    "${Ice.name}-req-" + content.name + "-" + requirements[i].item.name)))
+                    "${DeepSpace.name}-req-" + content.name + "-" + requirements[i].item.name)))
         }
-        finishedtimeUnlock = Core.settings.getFloat("${Ice.name}-req-" + content.name + "-finishedtimeUnlock", 0f)
+        finishedtimeUnlock = Core.settings.getFloat("${DeepSpace.name}-req-" + content.name + "-finishedtimeUnlock", 0f)
     }
 
     override fun acceptItem(source: Building?, item: Item?): Boolean {
@@ -120,10 +120,10 @@ class UCLinkNode(val content: UnlockableContent, x: Float, y: Float
         //按物料类型保存已完成需求
         finishedRequirements?.let {
             for (stack in it) {
-                Core.settings.put("${Ice.name}-req-" + content.name + "-" + stack!!.item.name, stack.amount)
+                Core.settings.put("${DeepSpace.name}-req-" + content.name + "-" + stack!!.item.name, stack.amount)
             }
         }
-        Core.settings.put("${Ice.name}-req-" + content.name + "-finishedtimeUnlock", finishedtimeUnlock)
+        Core.settings.put("${DeepSpace.name}-req-" + content.name + "-finishedtimeUnlock", finishedtimeUnlock)
     }
 
     fun reset() {

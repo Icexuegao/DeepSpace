@@ -17,6 +17,7 @@ import arc.util.Eachable
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.game.Team
@@ -52,7 +53,6 @@ import singularity.world.draw.DrawAtlasGenerator
 import singularity.world.meta.SglStat
 import singularity.world.meta.SglStatUnit
 import singularity.world.modules.NuclearEnergyModule
-import singularity.world.modules.SglConsumeModule
 import singularity.world.modules.SglLiquidModule
 import singularity.world.particles.SglParticleModels
 import singularity.world.unit.SglUnitEntity
@@ -68,7 +68,6 @@ import universecore.world.consumers.ConsFilter
 import universecore.world.consumers.ConsumeType
 import universecore.world.lightnings.LightningContainer
 import universecore.world.lightnings.generator.VectorLightningGenerator
-import universecore.world.meta.UncStat
 import kotlin.math.min
 
 /**此mod的基础方块类型，对block添加了完善的consume系统，并拥有中子能的基础模块 */
@@ -128,8 +127,8 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     update = true
     consumesPower = false
     appliedConfig()
-    config(ByteArray::class.java, Cons2 { e: SglBuilding?, code: ByteArray? ->
-      if (code!!.isEmpty()) return@Cons2
+    config(ByteArray::class.java, Cons2 { e: SglBuilding, code: ByteArray ->
+      if (code.isEmpty()) return@Cons2
       parseConfigObjects(e, DataPackable.readObject(code, e))
     })
     buildType = Prov(::SglBuilding)
@@ -154,13 +153,13 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
 
   open fun parseConfigObjects(e: SglBuilding?, obj: Any?) {}
 
-  override fun newConsume(): BaseConsumers? {
+  override fun newConsume(): BaseConsumers {
     consume = SglConsumers(false)
-    this.consumers.add(consume)
-
-    return consume
+    consumers.add(consume)
+    return consume!!
   }
 
+  @Suppress("UNCHECKED_CAST")
   override fun <T : ConsumerBuildComp> newOptionalConsume(validDef: Cons2<T, BaseConsumers>, displayDef: Cons2<Stats, BaseConsumers>): BaseConsumers? {
     consume = object : SglConsumers(true) {
       init {
@@ -168,7 +167,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
         this.display = displayDef
       }
     }
-    this.optionalCons.add(consume)
+    optionalCons.add(consume)
     return consume!!
   }
 
@@ -238,7 +237,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     }
 
     if (!optionalCons.isEmpty) {
-      stats.add(UncStat.optionalInputs) { t: Table? ->
+      stats.add(IceStats.可选输入) { t: Table? ->
         t!!.left().row()
         for (con in optionalCons) {
           t.table(SglDrawConst.grayUIAlpha) { ta: Table? ->
@@ -303,7 +302,9 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     var recipeCurrent: Int = -1
     override var consumeCurrent
       get() = recipeCurrent
-      set(value) {}
+      set(value) {
+        recipeCurrent = value
+      }
     var lastRecipe: Int = 0
     var updateRecipe: Boolean = false
     var select: Int = 0
@@ -311,6 +312,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     var activateRecover: Float = 0f
     override fun energyLinked() = Seq<NuclearEnergyBuildComp>()
     override val resident: Float = this@SglBlock.resident
+
 
     fun superUpdate() {
       if ((Time.delta.let { this.timeScaleDuration -= it; this.timeScaleDuration }) <= 0.0f || !this.block.canOverdrive) {
@@ -384,15 +386,11 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     override fun maxEnergyPressure() = maxEnergyPressure
     override fun energy(): NuclearEnergyModule = energy
 
-    override fun create(block: Block?, team: Team?): Building? {
+    override fun create(block: Block, team: Team): Building {
       super.create(block, team)
-
       liquids = SglLiquidModule()
-
       if (consumers.size == 1) recipeCurrent = 0
-
-      consumer = SglConsumeModule(this)
-
+       consumer = BaseConsumeModule(this)
       if (hasEnergy) energy = NuclearEnergyModule(this)
       return this
     }
@@ -424,7 +422,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     }
 
     fun dumpLiquid() {
-      liquids.each { l: Liquid?, n: Float -> dumpLiquid(l) }
+      liquids.each { l: Liquid, _: Float -> dumpLiquid(l) }
     }
 
     override fun displayConsumption(table: Table) {
@@ -452,7 +450,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
       }
       rebuild.run()
 
-      if (consumer != null) table.update {
+      table.update {
         if (updateRecipe) {
           rebuild.run()
         }
@@ -552,7 +550,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
         bars.top().left().add(liquidsStr).left().padBottom(0f)
         bars.row()
         for (stack in displayLiquids) {
-          bars.add(Bar({ stack.liquid.localizedName }, { if (stack.liquid.barColor != null) stack.liquid.barColor else stack.liquid.color }, { min(liquids.get(stack.liquid) / block.liquidCapacity, 1f) })).growX()
+          bars.add(Bar({ stack.liquid.localizedName }, { stack.liquid.barColor ?: stack.liquid.color }, { min(liquids.get(stack.liquid) / block.liquidCapacity, 1f) })).growX()
           bars.row()
         }
       }
@@ -635,8 +633,8 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
       write.f(activation)
 
       write.i(recipeCurrent)
-      if (consumer != null) consumer.write(write)
-      if (energy != null) energy.write(write)
+      consumer.write(write)
+      energy.write(write)
     }
 
     override fun read(read: Reads, revision: Byte) {
@@ -645,8 +643,8 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
       if (revision >= 3) activation = read.f()
 
       recipeCurrent = read.i()
-      if (consumer != null) consumer.read(read, revision <= 2)
-      if (energy != null) energy.read(read, revision <= 2)
+      consumer.read(read, revision <= 2)
+      energy.read(read, revision <= 2)
     }
 
     override var heaps = ObjectMap<String, Takeable.Heaps<*>>()

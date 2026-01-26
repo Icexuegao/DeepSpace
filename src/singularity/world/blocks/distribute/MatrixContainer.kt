@@ -12,40 +12,55 @@ import singularity.world.distribution.DistSupportContainerTable
 import kotlin.math.min
 
 class MatrixContainer(name: String) : SglBlock(name) {
-    var isIntegrate: Boolean = true
+  var isIntegrate: Boolean = true
 
-    init {
-        update = false
-        destructible = true
-        unloadable = false
-        outputItems = false
+  init {
+    this.update = false
+    this.destructible = true
+    this.unloadable = false
+    this.outputItems = false
+    buildType = Prov(::MatrixContainerBuild)
+  }
+
+  public override fun init() {
+    super.init()
+    this.setDistSupport()
+  }
+
+  fun setDistSupport() {
+    val cont = Sgl.matrixContainers.getContainer(this, Prov { DistSupportContainerTable.Container(this, this.isIntegrate) })
+    if (this.hasItems) {
+      cont.setCapacity(DistBufferType.itemBuffer, this.itemCapacity.toFloat())
     }
 
-    public override fun init() {
-        super.init()
-        setDistSupport()
+    if (this.hasLiquids) {
+      cont.setCapacity(DistBufferType.liquidBuffer, this.liquidCapacity)
+    }
+  }
+
+  inner class MatrixContainerBuild : SglBuilding() {
+    public override fun acceptItem(source: Building, item: Item?): Boolean {
+      if (!this@MatrixContainer.isIntegrate) {
+        return super.acceptItem(source, item)
+      } else {
+        return this.interactable(source.team) && this.items.total() < this@MatrixContainer.itemCapacity
+      }
     }
 
-    fun setDistSupport() {
-        val cont = Sgl.matrixContainers.getContainer(this, Prov { DistSupportContainerTable.Container(this, isIntegrate) })
-        if (hasItems) cont.setCapacity(DistBufferType.itemBuffer, itemCapacity.toFloat())
-        if (hasLiquids) cont.setCapacity(DistBufferType.liquidBuffer, liquidCapacity)
+    override fun acceptStack(item: Item?, amount: Int, source: Teamc): Int {
+      if (!this@MatrixContainer.isIntegrate) {
+        return super.acceptStack(item, amount, source)
+      } else {
+        return if (this.interactable(source.team())) min(amount, this@MatrixContainer.itemCapacity - this.items.total()) else 0
+      }
     }
 
-    inner class MatrixContainerBuild : SglBuilding() {
-        public override fun acceptItem(source: Building, item: Item?): Boolean {
-            if (!isIntegrate) return super.acceptItem(source, item)
-            return interactable(source.team) && items.total() < itemCapacity
-        }
-
-        override fun acceptStack(item: Item?, amount: Int, source: Teamc): Int {
-            if (!isIntegrate) return super.acceptStack(item, amount, source)
-            return if (interactable(source.team())) min(amount, itemCapacity - items.total()) else 0
-        }
-
-        public override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
-            if (!isIntegrate) return super.acceptLiquid(source, liquid)
-            return interactable(source.team) && liquids()!!.total() < liquidCapacity
-        }
+    public override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+      if (!this@MatrixContainer.isIntegrate) {
+        return super.acceptLiquid(source, liquid)
+      } else {
+        return this.interactable(source.team) && this.liquids()!!.total() < this@MatrixContainer.liquidCapacity
+      }
     }
+  }
 }

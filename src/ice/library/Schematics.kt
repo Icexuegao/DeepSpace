@@ -2,7 +2,7 @@ package ice.library
 
 import arc.struct.Seq
 import arc.struct.StringMap
-import ice.Ice
+import ice.DeepSpace
 import ice.content.block.Effect
 import ice.library.world.Load
 import mindustry.Vars
@@ -20,7 +20,7 @@ object Schematics: Load{
 
    override fun init() {
         allSch.forEach { schematic ->
-            schematic.mod = Ice.mod
+            schematic.mod = DeepSpace.mod
             Vars.schematics.all().add(schematic)
             checkLoadout(schematic)
         }

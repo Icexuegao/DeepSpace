@@ -8,7 +8,7 @@ import mindustry.type.Liquid
 import mindustry.world.Block
 import mindustry.world.draw.DrawBlock
 
-class DrawLiquidRegion(drawLiquid: Liquid? = null) : DrawBlock() {
+open class DrawLiquidRegion(drawLiquid: Liquid? = null) : DrawBlock() {
     var drawLiquid: Liquid? = null
     var liquid: TextureRegion? = null
     var suffix: String = "-liquid"

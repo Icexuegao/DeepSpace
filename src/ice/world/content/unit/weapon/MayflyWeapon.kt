@@ -11,6 +11,7 @@ import arc.scene.ui.layout.Table
 import arc.util.Time
 import arc.util.Tmp
 import ice.entities.bullet.LightLaserBulletType
+import ice.entities.bullet.LightningBulletType
 import ice.entities.bullet.base.BulletType
 import ice.graphics.IceColor
 import ice.graphics.lightnings.LightningContainer
@@ -38,7 +39,7 @@ open class MayflyWeapon(name: String) : IceWeapon(name) {
             speed = 3f
             hitShake = 5f
             rangeOverride = 550f
-            fragBullet = mindustry.entities.bullet.LightningBulletType().apply {
+            fragBullet = LightningBulletType().apply {
                 lightningLength = 8
                 lightningLengthRand = 8
                 damage = 24f

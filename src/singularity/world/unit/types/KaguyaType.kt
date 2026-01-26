@@ -21,7 +21,7 @@ import ice.content.IItems.强化合金
 import ice.content.IItems.气凝胶
 import ice.content.IItems.矩阵合金
 import ice.content.IItems.铝
-import ice.content.IItems.铱
+import ice.content.IItems.铱锭
 import ice.library.struct.AttachedProperty
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -64,7 +64,7 @@ class KaguyaType : SglUnitType<SglUnitEntity>("kaguya",SglUnitEntity::class.java
 
   init {
     requirements(
-      Items.silicon, 460, Items.phaseFabric, 480, Items.surgeAlloy, 450, 铝, 520, 气凝胶, 480, 充能FEX水晶, 280, 强化合金, 340, 铱, 140, 矩阵合金, 220
+      Items.silicon, 460, Items.phaseFabric, 480, Items.surgeAlloy, 450, 铝, 520, 气凝胶, 480, 充能FEX水晶, 280, 强化合金, 340, 铱锭, 140, 矩阵合金, 220
     )
     armor = 20f
     speed = 1.1f

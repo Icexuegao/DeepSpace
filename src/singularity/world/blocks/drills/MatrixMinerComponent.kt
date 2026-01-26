@@ -4,6 +4,7 @@ import arc.Core
 import arc.func.Boolf
 import arc.func.Cons
 import arc.func.Floatf
+import arc.func.Prov
 import arc.scene.ui.layout.Table
 import arc.util.Strings
 import arc.util.io.Reads
@@ -31,7 +32,9 @@ open class MatrixMinerComponent(name: String) : MatrixMinerPlugin(name) {
             { liquid: Liquid? -> usageBase / (liquid!!.heatCapacity * 0.7f) }
         )
     }
-
+init {
+  buildType= Prov(::MatrixMinerComponentBuild)
+}
     fun newBoost(boostEff: Floatf<Liquid?>, filters: Boolf<Liquid?>?, usageBase: Float, usageMult: Floatf<Liquid?>) {
         newOptionalConsume({ e: MatrixMinerComponentBuild, c: BaseConsumers -> }, { s: Stats?, c: BaseConsumers? ->
             s!!.add(Stat.booster, StatValue { t: Table? ->

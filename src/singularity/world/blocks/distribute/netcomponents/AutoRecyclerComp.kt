@@ -10,6 +10,7 @@ import arc.scene.event.Touchable
 import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.Button
 import arc.scene.ui.CheckBox
+import arc.scene.ui.ImageButton
 import arc.scene.ui.Tooltip
 import arc.scene.ui.layout.Table
 import arc.struct.IntSeq
@@ -34,160 +35,171 @@ import singularity.world.distribution.GridChildType
 import universecore.util.Empties
 
 open class AutoRecyclerComp(name: String) : DistNetBlock(name) {
-    var usableRecycle: OrderedMap<DistBufferType<*>, Cons<Building>> = OrderedMap<DistBufferType<*>, Cons<Building>>()
+  var usableRecycle: OrderedMap<DistBufferType<*>, Cons<Building>> = OrderedMap<DistBufferType<*>, Cons<Building>>()
 
-    init {
-        configurable = true
+  init {
+    this.configurable = true
+    config<IntSeq?, AutoRecyclerCompBuild?>(IntSeq::class.java, Cons2 { b: AutoRecyclerCompBuild?, c: IntSeq? ->
+      val type: ContentType? = ContentType.entries[c!!.get(0)]
+      val content = Vars.content.getByID<UnlockableContent?>(type, c.get(1))
+      val set: ObjectSet<UnlockableContent?> = b!!.list.get(DistBufferType.typeOf(type), Prov { ObjectSet() })!!
+      if (!set.add(content)) set.remove(content)
+      b.flush = true
+    })
+    config(Int::class.javaObjectType, Cons2 { b: AutoRecyclerCompBuild?, i: Int? ->
+      if (i == -1) {
+        b!!.list.clear()
+      } else if (i == 1) {
+        b!!.isBlackList = !b.isBlackList
+      }
+      b!!.flush = true
+    })
+    buildType= Prov(::AutoRecyclerCompBuild)
+  }
 
-        config<IntSeq?, AutoRecyclerCompBuild?>(IntSeq::class.java, Cons2 { b: AutoRecyclerCompBuild?, c: IntSeq? ->
-            val type: ContentType? = ContentType.entries[c!!.get(0)]
-            val content = Vars.content.getByID<UnlockableContent?>(type, c.get(1))
-            val set = b!!.list.get(DistBufferType.typeOf(type), Prov { ObjectSet() })
-            if (!set.add(content)) set.remove(content)
-            b.flush = true
-        })
-        config<Int?, AutoRecyclerCompBuild?>(Int::class.java, Cons2 { b: AutoRecyclerCompBuild?, i: Int? ->
-            if (i == -1) {
-                b!!.list.clear()
-            } else if (i == 1) {
-                b!!.isBlackList = !b.isBlackList
+  fun <E : Building> setRecycle(type: DistBufferType<*>, recycle: Cons<E>) {
+    this.usableRecycle.put(type, recycle as Cons<Building>?)
+  }
+
+  open inner class AutoRecyclerCompBuild : DistNetBuild() {
+    var list: ObjectMap<DistBufferType<*>?, ObjectSet<UnlockableContent?>?> = ObjectMap<DistBufferType<*>?, ObjectSet<UnlockableContent?>?>()
+    var isBlackList: Boolean = true
+    var flush: Boolean = false
+    var rebuildItems: Runnable? = null
+    var currType: DistBufferType<*>? = null
+
+    fun updateConfig() {
+      if (this.distributor.network.netStructValid()) {
+        val config = TargetConfigure()
+        config.priority = -65536
+        val coreTile = this.distributor.network.core!!.tile
+        val dx = this.tile.x - coreTile!!.x
+        val dy = this.tile.y - coreTile.y
+        config.offsetPos = Point2.pack(dx, dy)
+        if (!this.isBlackList) {
+          for (type in this@AutoRecyclerComp.usableRecycle.orderedKeys()) {
+            for (content in Vars.content.getBy<Content?>(type.targetType())) {
+              if (content is UnlockableContent) {
+                val c = content
+                if (!(this.list.get(type, Empties.nilSetO<UnlockableContent?>()) as ObjectSet<*>).contains(c)) {
+                  config.set(GridChildType.container, c, byteArrayOf(-1))
+                }
+              }
             }
-            b!!.flush = true
-        })
+          }
+        } else {
+          val var5: ObjectMap.Values<*> = this.list.values().iterator()
+
+          while (var5.hasNext()) {
+            val counts: ObjectSet<UnlockableContent> = var5.next() as ObjectSet<UnlockableContent>
+            val var7 = counts.iterator()
+
+            while (var7.hasNext()) {
+              val content = var7.next() as UnlockableContent
+              config.set(GridChildType.container, content, byteArrayOf(-1))
+            }
+          }
+        }
+
+        this.distributor.network.core!!.matrixGrid.remove(this)
+        this.distributor.network.core!!.matrixGrid.addConfig(config)
+      }
     }
 
-    fun <E : Building?> setRecycle(type: DistBufferType<*>, recycle: Cons<E>) {
-        usableRecycle.put(type, recycle as Cons<Building>)
+    public override fun updateTile() {
+      super.updateTile()
+      if (this.flush) {
+        this.updateConfig()
+        this.flush = false
+      }
+
+      val var1: ObjectMap.Values<*> = this@AutoRecyclerComp.usableRecycle.values().iterator()
+
+      while (var1.hasNext()) {
+        val rec: Cons<Building?> = var1.next() as Cons<*> as Cons<Building?>
+        rec.get(this)
+      }
     }
 
-    open inner class AutoRecyclerCompBuild : DistNetBuild() {
-        var list: ObjectMap<DistBufferType<*>?, ObjectSet<UnlockableContent?>> = ObjectMap<DistBufferType<*>?, ObjectSet<UnlockableContent?>>()
-        var isBlackList: Boolean = true
-        var flush: Boolean = false
-
-        fun updateConfig() {
-            if (distributor!!.network.netStructValid()) {
-                val config = TargetConfigure()
-
-                config.priority = -65536
-                val coreTile = distributor!!.network.core!!.tile
-                val dx = tile.x - coreTile!!.x
-                val dy = tile.y - coreTile.y
-                config.offsetPos = Point2.pack(dx, dy)
-
-                if (!isBlackList) {
-                    for (type in usableRecycle.orderedKeys()) {
-                        for (content in Vars.content.getBy<Content?>(type.targetType())) {
-                            if (content is UnlockableContent && !list.get(type, Empties.nilSetO<UnlockableContent?>()).contains(content)) {
-                                config.set(GridChildType.container, content, byteArrayOf(-1))
-                            }
-                        }
-                    }
-                } else {
-                    for (counts in list.values()) {
-                        for (content in counts) {
-                            config.set(GridChildType.container, content, byteArrayOf(-1))
-                        }
-                    }
-                }
-
-                distributor!!.network.core!!.matrixGrid()!!.remove(this)
-                distributor!!.network.core!!.matrixGrid()!!.addConfig(config)
-            }
-        }
-
-        public override fun updateTile() {
-            super.updateTile()
-
-            if (flush) {
-                updateConfig()
-
-                flush = false
-            }
-
-            for (rec in usableRecycle.values()) {
-                rec.get(this)
-            }
-        }
-
-        override fun networkValided() {
-            flush = true
-        }
-
-        var rebuildItems: Runnable? = null
-        var currType: DistBufferType<*>? = null
-        override fun buildConfiguration(table: Table) {
-            table.table(Tex.pane, Cons { main: Table? ->
-                main!!.pane(Cons { items: Table? ->
-                    rebuildItems = Runnable {
-                        items!!.clearChildren()
-                        val itemSeq = Vars.content.getBy<UnlockableContent?>(currType!!.targetType())
-                        var counter = 0
-                        for (item in itemSeq) {
-                            if (item.unlockedNow()) {
-                                val button = items.button(
-                                    Tex.whiteui, Styles.selecti, 30f,
-                                    Runnable { configure(IntSeq.with(item.getContentType().ordinal, item.id.toInt())) }).size(40f).get()
-                                button.getStyle().imageUp = TextureRegionDrawable(item.uiIcon)
-                                button.update(Runnable { button.setChecked(list.get(currType, Empties.nilSetO<UnlockableContent?>()).contains(item)) })
-
-                                button.addListener(Tooltip(Cons { t: Table? -> t!!.table(Tex.paneLeft).get().add(item.localizedName) }))
-
-                                if (counter++ != 0 && counter % 5 == 0) items.row()
-                            }
-                        }
-                    }
-                    currType = usableRecycle.orderedKeys().get(0)
-                    rebuildItems!!.run()
-                }).size(225f, 160f)
-                main.image().color(Pal.gray).growY().width(4f).colspan(2).padLeft(3f).padRight(3f).margin(0f)
-                main.table(Cons { sideBar: Table? ->
-                    sideBar!!.pane(Cons { typesTable: Table? ->
-                        for (type in usableRecycle.orderedKeys()) {
-                            typesTable!!.button(Cons { t: Button? -> t!!.add(Core.bundle.get("content." + type.targetType().name + ".name")) }, Styles.underlineb, Runnable {
-                                currType = type
-                                rebuildItems!!.run()
-                            }).growX().height(35f).update(Cons { b: Button? -> b!!.setChecked(currType === type) })
-                                .touchable(Prov { if (currType === type) Touchable.disabled else Touchable.enabled })
-                            typesTable.row()
-                        }
-                    }).size(120f, 100f)
-                    sideBar.row()
-                    sideBar.check("", isBlackList, Boolc { b: Boolean -> configure(1) }).update(Cons { c: CheckBox? -> c!!.setText(Core.bundle.get(if (isBlackList) "misc.blackListMode" else "misc.whiteListMode")) }).size(120f, 40f)
-                    sideBar.row()
-                    sideBar.button(Core.bundle.get("misc.reset"), Icon.cancel, Styles.cleart, Runnable { configure(-1) }).size(120f, 40f)
-                }).fillX()
-            }).fill()
-        }
-
-        override fun write(write: Writes) {
-            super.write(write)
-            write.bool(isBlackList)
-
-            write.i(list.size)
-            for (entry in list) {
-                write.i(entry.key!!.id)
-                write.i(entry.value.size)
-                for (content in entry.value) {
-                    write.i(content!!.getContentType().ordinal)
-                    write.i(content.id.toInt())
-                }
-            }
-        }
-
-        override fun read(read: Reads, revision: Byte) {
-            super.read(read, revision)
-            isBlackList = read.bool()
-
-            list.clear()
-            val size = read.i()
-            for (i in 0..<size) {
-                val set = list.get(DistBufferType.all[read.i()], Prov { ObjectSet() })
-                val s = read.i()
-                for (l in 0..<s) {
-                    set.add(Vars.content.getByID<UnlockableContent?>(ContentType.all[read.i()], read.i()))
-                }
-            }
-        }
+    override fun networkValided() {
+      this.flush = true
     }
+
+    override fun buildConfiguration(table: Table) {
+      table.table(Tex.pane, Cons { main: Table? ->
+        main!!.pane(Cons { items: Table? ->
+          this.rebuildItems = Runnable {
+            items!!.clearChildren()
+            val itemSeq = Vars.content.getBy<UnlockableContent?>(this.currType!!.targetType())
+            var counter = 0
+            for (item in itemSeq) {
+              if (item.unlockedNow()) {
+                val button = items.button(Tex.whiteui, Styles.selecti, 30.0f, Runnable { this.configure(IntSeq.with(*intArrayOf(item.getContentType().ordinal, item.id.toInt()))) }).size(40.0f).get() as ImageButton
+                button.getStyle().imageUp = TextureRegionDrawable(item.uiIcon)
+                button.update(Runnable { button.setChecked((this.list.get(this.currType, Empties.nilSetO<UnlockableContent?>()) as ObjectSet<*>).contains(item)) })
+                button.addListener(Tooltip(Cons { t: Table? -> (t!!.table(Tex.paneLeft).get() as Table).add(item.localizedName) }))
+                if (counter++ != 0 && counter % 5 == 0) {
+                  items.row()
+                }
+              }
+            }
+          }
+          this.currType = this@AutoRecyclerComp.usableRecycle.orderedKeys().get(0) as DistBufferType<*>
+          this.rebuildItems!!.run()
+        }).size(225.0f, 160.0f)
+        main.image().color(Pal.gray).growY().width(4.0f).colspan(2).padLeft(3.0f).padRight(3.0f).margin(0.0f)
+        main.table(Cons { sideBar: Table? ->
+          sideBar!!.pane(Cons { typesTable: Table? ->
+            for (type in this@AutoRecyclerComp.usableRecycle.orderedKeys()) {
+              typesTable!!.button(Cons { t: Button? -> t!!.add(Core.bundle.get("content." + type.targetType().name + ".name")) }, Styles.underlineb, Runnable {
+                this.currType = type
+                this.rebuildItems!!.run()
+              }).growX().height(35.0f).update(Cons { b: Button? -> b!!.setChecked(this.currType === type) }).touchable(Prov { if (this.currType === type) Touchable.disabled else Touchable.enabled })
+              typesTable.row()
+            }
+          }).size(120.0f, 100.0f)
+          sideBar.row()
+          sideBar.check("", this.isBlackList, Boolc { b: Boolean -> this.configure(1) }).update(Cons { c: CheckBox? -> c!!.setText(Core.bundle.get(if (this.isBlackList) "misc.blackListMode" else "misc.whiteListMode")) }).size(120.0f, 40.0f)
+          sideBar.row()
+          sideBar.button(Core.bundle.get("misc.reset"), Icon.cancel, Styles.cleart, Runnable { this.configure(-1) }).size(120.0f, 40.0f)
+        }).fillX()
+      }).fill()
+    }
+
+    override fun write(write: Writes) {
+      super.write(write)
+      write.bool(this.isBlackList)
+      write.i(this.list.size)
+      val var2: ObjectMap.Entries<*, *> = this.list.iterator()
+
+      while (var2.hasNext()) {
+        val entry: ObjectMap.Entry<DistBufferType<*>?, ObjectSet<UnlockableContent?>?> = var2.next() as ObjectMap.Entry<DistBufferType<*>?, ObjectSet<UnlockableContent?>?>
+        write.i((entry.key as DistBufferType<*>).id)
+        write.i((entry.value as ObjectSet<*>).size)
+        val var4 = (entry.value as ObjectSet<*>).iterator()
+
+        while (var4.hasNext()) {
+          val content = var4.next() as UnlockableContent
+          write.i(content.getContentType().ordinal)
+          write.i(content.id.toInt())
+        }
+      }
+    }
+
+    override fun read(read: Reads, revision: Byte) {
+      super.read(read, revision)
+      this.isBlackList = read.bool()
+      this.list.clear()
+      val size = read.i()
+
+      for (i in 0..<size) {
+        val set: ObjectSet<UnlockableContent> = this.list.get(DistBufferType.all[read.i()], Prov { ObjectSet() }) as ObjectSet<UnlockableContent>
+        val s = read.i()
+
+        for (l in 0..<s) {
+          set.add(Vars.content.getByID<Content?>(ContentType.all[read.i()], read.i()) as UnlockableContent?)
+        }
+      }
+    }
+  }
 }

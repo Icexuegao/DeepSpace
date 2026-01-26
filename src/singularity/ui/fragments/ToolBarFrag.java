@@ -1,7 +1,6 @@
 package singularity.ui.fragments;
 
 import arc.Core;
-import arc.Events;
 import arc.func.Boolp;
 import arc.func.Prov;
 import arc.scene.style.Drawable;
@@ -10,7 +9,6 @@ import arc.scene.ui.Tooltip;
 import arc.scene.ui.layout.Table;
 import arc.struct.OrderedMap;
 import mindustry.Vars;
-import mindustry.game.EventType;
 import mindustry.gen.Tex;
 import mindustry.ui.Styles;
 import singularity.graphic.SglDrawConst;
@@ -21,15 +19,19 @@ public class ToolBarFrag {
 
   public Table toolsTable;
 
-  public void init(){
-    Events.on(EventType.WorldLoadEvent.class, e -> {
-      Core.app.post(() -> {
-        Table blockCatTable = FieldHandler.getValueDefault(Vars.ui.hudfrag.blockfrag, "blockCatTable");
-        blockCatTable.table(SglDrawConst.grayUIAlpha, tools -> {
-          tools.top().pane(Styles.noBarPane, this::buildTools).growY().width(50).left().get().setScrollingDisabledX(true);
-        }).width(50).growY();
-      });
+  public void build(){
+    Core.app.post(() -> {
+      Table blockCatTable = FieldHandler.getValueDefault(Vars.ui.hudfrag.blockfrag, "blockCatTable");
+      blockCatTable.table(SglDrawConst.grayUIAlpha, tools -> {
+        tools.top().pane(Styles.noBarPane, this::buildTools).growY().width(50).left().get().setScrollingDisabledX(true);
+      }).width(50).growY();
     });
+
+  }
+  public void init(){
+   /* Events.on(EventType.WorldLoadEvent.class, e -> {
+      build();
+    });*/
   }
 
   public void buildTools(Table tools){

@@ -308,19 +308,19 @@ open class NuclearNode(name: String) : NuclearBlock(name) {
       return true
     }
 
-    fun getNodeDumps(): Seq<NuclearEnergyBuildComp>{
-        val res = proximityNuclearBuilds().select { obj: NuclearEnergyBuildComp -> obj.consumeEnergy() }
-        for (i in 0..<linked.size) {
-          val pos = linked.get(i)
-          val b = Vars.world.build(pos)
+    fun getNodeDumps(): Seq<NuclearEnergyBuildComp> {
+      val res = proximityNuclearBuilds().select { obj: NuclearEnergyBuildComp -> obj.consumeEnergy() }
+      for (i in linked.size - 1 downTo 0) {
+        val pos = linked.get(i)
+        val b = Vars.world.build(pos)
 
-          if (b is NuclearEnergyBuildComp) {
-            res.add(b)
-          } else linked.removeIndex(i)
-        }
-
-        return res
+        if (b is NuclearEnergyBuildComp) {
+          res.add(b)
+        } else linked.removeIndex(i)
       }
+
+      return res
+    }
 
     override fun updateTile() {
       super.updateTile()

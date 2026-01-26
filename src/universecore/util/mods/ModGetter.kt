@@ -57,7 +57,7 @@ object ModGetter {
           result.add(ModInfo(ZipFi(file)))
         }
       } catch (ignored: IllegalModHandleException) {
-        throw Exception("ModGetter: json解析错误 $info",ignored)
+        throw Exception("ModGetter: json解析错误 $info", ignored)
       }
     }
 

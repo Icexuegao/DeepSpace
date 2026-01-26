@@ -14,32 +14,32 @@ import universecore.world.producers.ProduceType
  * @author EBwilson
  */
 open class BaseProductModule(val entity: ProducerBuildComp) : BlockModule() {
-    var consumer: BaseConsumeModule? = entity.consumer
+    var consumer: BaseConsumeModule = entity.consumer
     var current: BaseProducers?
     var valid: Boolean = false
 
     init {
-        current = if (entity.produceCurrent() != -1) entity.producerBlock!!.producers!!.get(entity.produceCurrent()) else null
+        current = if (entity.produceCurrent() != -1) entity.producerBlock.producers.get(entity.produceCurrent()) else null
     }
 
-    fun get(): Seq<BaseProducers>? {
+    fun get(): Seq<BaseProducers> {
         return entity.producerBlock.producers
     }
 
     fun trigger() {
         if (current != null) for (prod in current!!.all()) {
-            ( prod!! as BaseProduce<ProducerBuildComp>).produce(entity.getBuilding(ProducerBuildComp::class.java) )
+            ( prod as BaseProduce<ProducerBuildComp>).produce(entity.getBuilding(ProducerBuildComp::class.java) )
         }
     }
 
     val powerProduct: Float
         get() {
             if (current == null) return 0f
-            return current!!.get(ProduceType.power)!!.powerProduction * entity.consumer!!.powerOtherEff * (Mathf.num(entity.shouldConsume() && entity.consumeValid()) * (current!!.get(ProduceType.power) as BaseProduce<ProducerBuildComp>).multiple(entity))
+            return current!!.get(ProduceType.power)!!.powerProduction * entity.consumer.powerOtherEff * (Mathf.num(entity.shouldConsume() && entity.consumeValid()) * (current!!.get(ProduceType.power) as BaseProduce<ProducerBuildComp>).multiple(entity))
         }
 
     fun setCurrent() {
-        current = if (entity.consumeCurrent == -1) null else get()!!.get(entity.consumeCurrent)
+        current = if (entity.consumeCurrent == -1) null else get().get(entity.consumeCurrent)
     }
 
     open fun update() {
@@ -53,11 +53,11 @@ open class BaseProductModule(val entity: ProducerBuildComp) : BlockModule() {
             val preValid = valid()
             var anyValid = false
             for (prod in current!!.all()) {
-                val v = ( prod!! as BaseProduce<ProducerBuildComp>).valid(entity.getBuilding(ProducerBuildComp::class.java))
+                val v = ( prod as BaseProduce<ProducerBuildComp>).valid(entity.getBuilding(ProducerBuildComp::class.java))
                 anyValid = anyValid or v
                 valid = valid and (!prod.blockWhenFull || v)
                 if (doprod && preValid && v) {
-                    ( prod!! as BaseProduce<ProducerBuildComp>) .update(entity.getBuilding(ProducerBuildComp::class.java))
+                    prod.update(entity.getBuilding(ProducerBuildComp::class.java))
                 }
             }
             if (!anyValid) valid = false
@@ -69,7 +69,7 @@ open class BaseProductModule(val entity: ProducerBuildComp) : BlockModule() {
     fun doDump(entity: ProducerBuildComp) {
         if (current != null) {
             for (prod in current!!.all()) {
-                ( prod!! as BaseProduce<ProducerBuildComp>).dump(entity.getBuilding(ProducerBuildComp::class.java))
+                ( prod as BaseProduce<ProducerBuildComp>).dump(entity.getBuilding(ProducerBuildComp::class.java))
             }
         }
     }

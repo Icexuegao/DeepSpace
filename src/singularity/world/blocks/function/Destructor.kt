@@ -46,8 +46,8 @@ open class Destructor(name: String) : NormalCrafter(name) {
         })
     }
 
-    public override fun newConsume(): BaseConsumers? {
-        return null
+    public override fun newConsume(): BaseConsumers {
+        return BaseConsumers(false)
     }
 
     public override fun <T : ConsumerBuildComp> newOptionalConsume(validDef: Cons2<T, BaseConsumers>, displayDef: Cons2<Stats, BaseConsumers>): BaseConsumers? {

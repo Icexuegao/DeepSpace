@@ -222,7 +222,6 @@ public class SglUI{
     support = new SupportUsDialog();
     bufferStat = new DistNetMonitorDialog();
     document = new DocumentDialog();
-    techTreeDialog = new SglTechTreeDialog();
     unitFactoryCfg = new UnitFactoryCfgDialog();
 
     toolBar = new ToolBarFrag();

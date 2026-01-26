@@ -8,31 +8,23 @@ import singularity.world.meta.SglStatUnit
 
 interface DistElementBlockComp {
   //  @Annotations.BindField(value = "topologyUse", initialize = "1")
-    fun topologyUse(): Int {
-        return 0
-    }
+  var topologyUse: Int
 
   //  @Annotations.BindField("matrixEnergyUse")
-    fun matrixEnergyUse(): Float {
-        return 0f
-    }
+  var matrixEnergyUse: Float
 
-   // @Annotations.BindField("matrixEnergyCapacity")
-    fun matrixEnergyCapacity(): Float {
-        return 0f
-    }
+  // @Annotations.BindField("matrixEnergyCapacity")
+  var matrixEnergyCapacity: Float
 
   //  @get:Annotations.BindField("isNetLinker")
-    val isNetLinker: Boolean
-
+  val isNetLinker: Boolean
 
   //  @MethodEntry(entryMethod = "setStats", context = "stats -> stats")
-    fun setDistNetStats(stats: Stats) {
-        if (matrixEnergyUse() > 0) stats.add(
-            SglStat.matrixEnergyUse,
-            Strings.autoFixed(matrixEnergyUse() * 60, 2) + SglStatUnit.matrixEnergy.localized() + Core.bundle.get("misc.perSecond")
-        )
-        if (matrixEnergyCapacity() > 0) stats.add(SglStat.matrixEnergyCapacity, matrixEnergyCapacity(), SglStatUnit.matrixEnergy)
-        if (topologyUse() > 0) stats.add(SglStat.topologyUse, topologyUse().toFloat())
-    }
+  fun setDistNetStats(stats: Stats) {
+    if (matrixEnergyUse > 0) stats.add(
+      SglStat.matrixEnergyUse, Strings.autoFixed(matrixEnergyUse * 60, 2) + SglStatUnit.matrixEnergy.localized() + Core.bundle.get("misc.perSecond")
+    )
+    if (matrixEnergyCapacity > 0) stats.add(SglStat.matrixEnergyCapacity, matrixEnergyCapacity, SglStatUnit.matrixEnergy)
+    if (topologyUse > 0) stats.add(SglStat.topologyUse, topologyUse.toFloat())
+  }
 }
