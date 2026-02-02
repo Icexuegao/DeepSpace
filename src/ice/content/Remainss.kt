@@ -14,9 +14,10 @@ import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
 import ice.world.content.unit.ability.InterceptAbilty
 import mindustry.Vars
+import mindustry.type.ItemStack
 import mindustry.type.UnitType
-import mindustry.world.consumers.ConsumeItems
 import mindustry.world.meta.Stats
+import universecore.world.consumers.ConsumeType
 
 @Suppress("unused")
 object Remainss : Load {
@@ -170,33 +171,22 @@ object Remainss : Load {
   val 玄岩板 = Remains("玄岩板").apply {
     setDescription("由奇异,沉重的玄武岩打磨而成")
     effect = "[碳控熔炉]所需燃料减少[1]"
+    var itemStack = ItemStack()
+    CrafterBlocks.碳控熔炉.consumers.find {
+      it.get(ConsumeType.item)!!.consItems!!.find {
+        val bool: Boolean = it.item == IItems.生煤
+        if (bool) itemStack = it
+        bool
+      } != null
+    }
+
     install = {
-      CrafterBlocks.碳控熔炉.formulas.formulas.forEach {
-        it.inputs?.forEach { cons ->
-          if (cons is ConsumeItems) {
-            cons.items.forEach { itemStack ->
-              if (itemStack.item == IItems.生煤) {
-                itemStack.amount -= 1
-              }
-            }
-          }
-        }
-      }
+      itemStack.amount -= 1
       CrafterBlocks.碳控熔炉.stats = Stats()
       CrafterBlocks.碳控熔炉.checkStats()
     }
     uninstall = {
-      CrafterBlocks.碳控熔炉.formulas.formulas.forEach {
-        it.inputs?.forEach { cons ->
-          if (cons is ConsumeItems) {
-            cons.items.forEach { itemStack ->
-              if (itemStack.item == IItems.生煤) {
-                itemStack.amount += 1
-              }
-            }
-          }
-        }
-      }
+      itemStack.amount += 1
       CrafterBlocks.碳控熔炉.stats = Stats()
       CrafterBlocks.碳控熔炉.checkStats()
     }

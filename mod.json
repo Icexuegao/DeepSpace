@@ -1,10 +1,11 @@
 {
 "name": "ice",
 "displayName": "Deep Space",
-"description": "[#d6f1ff]模组为MDT引入四大势力,拓展全新科技树,单位,星球及地形机制[]",
+"description": "模组为MDT引入四大势力,拓展全新科技树,单位,星球及地形机制",
 "author": "Alon",
-"version": "Alpha-1387",
+"version": "Alpha-1876",
 "java": true,
 "main": "ice.Ice",
-"minGameVersion": 154.3
+"minGameVersion": 154.3,
+"recipeEntry": "singularity.Recipes"
 }

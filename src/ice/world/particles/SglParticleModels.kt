@@ -13,7 +13,6 @@ import ice.entities.bullet.HeatBulletType
 import mindustry.content.Fx
 import mindustry.entities.Units
 import mindustry.entities.bullet.BulletType
-import mindustry.gen.Bullet
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
@@ -44,8 +43,6 @@ object SglParticleModels {
             hitColor = Pal.lighterOrange
             despawnEffect = Fx.none
         }
-
-        override fun draw(b: Bullet?) {}
     }
 
     var floatParticle: ParticleModel = MultiParticleModel(

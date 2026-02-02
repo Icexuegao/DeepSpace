@@ -5,11 +5,13 @@ import arc.Graphics
 import arc.util.OS
 import ice.DeepSpace
 import ice.core.SettingValue
-import ice.graphics.IceColor
+import ice.library.DeBugFragment
 import ice.library.IFiles
 import ice.library.world.Load
 import ice.ui.dialog.IcePlanetDialog
-import ice.ui.fragment.*
+import ice.ui.fragment.ConversationFragment
+import ice.ui.fragment.FleshFragment
+import ice.ui.menusDialog.DataDialog
 import mindustry.Vars
 import mindustry.gen.Icon
 import singularity.Sgl
@@ -25,27 +27,31 @@ object UI : Load {
     toolBarFrag.addTool("deepSpaceMenu", { Icon.menu }, {
       MenusDialog.show()
     }) { false }
-    toolBarFrag.addTool("TexTNotification",{ Icon.add},{
-
-    }){false}
+    toolBarFrag.addTool("data", { Icon.book }, {
+      Vars.control.input.block?.let {
+        DataDialog.showUnlockableContent(it)
+      }?:run {
+        Vars.control.input.lastUnit?.let {
+          DataDialog.showUnlockableContent(it.type)
+        }
+      }
+    }) { false }
     //解决第一次选择星球报错问题
     Core.settings.put("campaignselect", true)
     Vars.ui.planet = IcePlanetDialog
     FleshFragment.build(Vars.ui.hudGroup)
-    ScenarioFragment.build(Vars.ui.hudGroup)
+    //  ScenarioFragment.build(Vars.ui.hudGroup)
     DeBugFragment.build(Vars.ui.hudGroup)
     //  BossHealthFragment.build(Vars.ui.hudGroup)
     ConversationFragment.build(Vars.ui.hudGroup)
-    if (SettingValue.启用调试模式) ShowProgress.build(Vars.ui.hudGroup)
+    //if (SettingValue.启用调试模式)// ShowProgress.build(Vars.ui.hudGroup)
     //  CharacterScenarioFragment.build(Vars.ui.hudGroup)
-    DeepSpace.mod.meta.author = "[#${IceColor.b4}]Alon[]"
-    DeepSpace.mod.meta.displayName = "[#${IceColor.b4}]Deep Space[]"
 
     if (OS.isWindows) {
       loadSystemCursors()
     }
 
-    Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]DeepSpace[]", Icon.menu, MenusDialog::show)
+    Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.displayName}[]", Icon.menu, MenusDialog::show)
     Core.atlas.regionMap.put("logo", IFiles.findModPng("logo"))
   }
 
@@ -59,6 +65,4 @@ object UI : Load {
     Vars.ui.repairCursor = IFiles.newCursor("repair")
     Core.graphics.restoreCursor()
   }
-
-
 }

@@ -34,11 +34,9 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
   }
 
   override fun build(cont: Table) {
-    cont.table {
-      it.image(IStyles.tanksui)
-    }.height(200f).pad(10f).row()
 
     cont.iPaneG { ta ->
+      ta.image(IStyles.tanksui).height(200f).pad(10f).row()
       ta.add(DeepSpace.displayName).fontScale(1.4f).color(IceColor.b4).row()
       ta.table {
 

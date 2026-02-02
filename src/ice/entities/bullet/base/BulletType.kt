@@ -1,160 +1,27 @@
 package ice.entities.bullet.base
 
 import arc.Core
-import arc.Events
-import arc.graphics.g2d.Draw
-import arc.math.Mathf
 import arc.scene.ui.layout.Collapser
 import arc.scene.ui.layout.Table
 import arc.util.Strings
-import arc.util.Tmp
-import arc.util.pooling.Pools
-import ice.content.IStatus
-import ice.entities.Damage.bulletDamageEvents
 import ice.entities.bullet.SglEmpBulletType
-import ice.library.world.Load
-import ice.world.content.unit.entity.base.Entity
 import ice.world.meta.IceStatValues.sep
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.StatusEffects
 import mindustry.entities.Damage
 import mindustry.entities.Fires
-import mindustry.game.EventType.UnitBulletDestroyEvent
-import mindustry.gen.*
-import mindustry.gen.Unit
-import mindustry.graphics.Drawf
+import mindustry.gen.Bullet
+import mindustry.gen.Icon
 import mindustry.ui.Styles
 import mindustry.world.meta.StatUnit
-import singularity.contents.OtherContents
-import kotlin.math.max
-import kotlin.math.min
 
 open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entities.bullet.BulletType(speed, damage) {
-  companion object : Load {
-
-    override fun setup() {
-      Pools.get(Bullet::class.java, ::IceBullet)
-    }
-
-    private class IceBullet : Bullet() {
-      var tmpRun = {}
-      override fun update() {
-        super.update()
-        tmpRun()
-
-        if (owner is Unit) {
-          val u = owner as Unit
-          if (u.hasEffect(IStatus.电子干扰)) {
-            val deflect = 16.4f * Mathf.clamp(u.getDuration(IStatus.电子干扰) / 120)
-            val rot = Mathf.random(-deflect, deflect)
-            rotation(rotation() + rot)
-            Tmp.v1.set(aimX - x, aimY - y).rotate(rot)
-            aimX = Tmp.v1.x
-            aimY = Tmp.v1.y
-          }
-
-          if (u.hasEffect(OtherContents.emp_damaged)) {
-            val rot = Mathf.random(-45, 45).toFloat()
-            rotation(rotation() + rot)
-            Tmp.v1.set(aimX - x, aimY - y).rotate(rot)
-            aimX = Tmp.v1.x
-            aimY = Tmp.v1.y
-          }
-        }
-      }
-
-      override fun draw() {
-        Draw.z(this.type.layer)
-        if (this.type.underwater) {
-          Drawf.underwater { type.draw(this) }
-        } else {
-          if (type is BulletType) {
-            (type as BulletType).drawCustom(this)
-          } else {
-            type.draw(this)
-          }
-        }
-
-        this.type.drawLight(this)
-        Draw.reset()
-      }
-
-      override fun collision(other: Hitboxc, x: Float, y: Float) {
-        if (type.sticky) {
-          if (stickyTarget == null) {
-            this.x = x + vel.x
-            this.y = y + vel.y
-            stickTo(other)
-          }
-        } else {
-          type.hit(this, x, y)
-          if (!type.pierce) {
-            hit = true
-            remove()
-          } else {
-            collided.add(other.id())
-          }
-          hitEntity(type, this, other, if (other is Healthc) other.health() else 0.0f)
-        }
-      }
-    }
-
-    fun hitEntity(type: mindustry.entities.bullet.BulletType, b: Bullet, entity: Hitboxc, health: Float) {
-      if (entity is Entity) {
-        entity.hitEntity(b, health)
-        return
-      }
-
-      val wasDead = entity is (Unit) && entity.dead
-      var health = health
-
-
-      if (entity is Healthc) {
-        var damage = b.damage
-        val shield = if (entity is Shieldc) max(entity.shield(), 0f) else 0f
-        // 如果设置了最大伤害比例限制
-        if (type.maxDamageFraction > 0) {
-          // 计算伤害上限（基于最大生命值和护盾值）
-          val cap = entity.maxHealth() * type.maxDamageFraction + shield
-          // 限制实际伤害不超过上限
-          damage = min(damage, cap)
-          //将生命值上限为 handlePierce 以正确处理它
-          health = min(health, cap)
-        } else {
-          health += shield
-        }
-        val owner = b.owner
-        if (type.lifesteal > 0f && owner is Healthc) {
-          val result = max(min(entity.health(), damage), 0f)
-          owner.heal(result * type.lifesteal)
-        }
-        if (type.pierceArmor) {
-          entity.damagePierce(damage)
-        } else {
-          entity.damage(damage)
-        }
-      }
-
-      if (entity is Unit) {
-        Tmp.v3.set(entity).sub(b).nor().scl(type.knockback * 80f)
-        if (type.impact) Tmp.v3.setAngle(b.rotation() + (if (type.knockback < 0) 180f else 0f))
-        entity.impulse(Tmp.v3)
-        entity.apply(type.status, type.statusDuration)
-        Events.fire(bulletDamageEvents.set(entity, b))
-      }
-
-      if (!wasDead && entity is Unit && entity.dead) {
-        Events.fire(UnitBulletDestroyEvent(entity, b))
-      }
-      type.handlePierce(b, health, entity.x(), entity.y())
-    }
-  }
-
   var drawOverride: Boolean = false
-  var drawRun: (Bullet) -> kotlin.Unit = {}
-  var updateRun: (Bullet) -> kotlin.Unit = {}
-  var removedRun: (Bullet) -> kotlin.Unit = {}
+  var drawRun: (Bullet) -> Unit = {}
+  var updateRun: (Bullet) -> Unit = {}
+  var removedRun: (Bullet) -> Unit = {}
+
   fun drawCustom(b: Bullet) {
     if (drawOverride) {
       drawRun(b)
@@ -174,16 +41,16 @@ open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entitie
     removedRun(b)
   }
 
-  fun setDraw(override: Boolean = false, run: (Bullet) -> kotlin.Unit) {
+  fun setDraw(override: Boolean = false, run: (Bullet) -> Unit) {
     drawOverride = override
     this.drawRun = run
   }
 
-  open fun setUpdate(run: (Bullet) -> kotlin.Unit) {
+  open fun setUpdate(run: (Bullet) -> Unit) {
     this.updateRun = run
   }
 
-  open fun setRemoved(run: (Bullet) -> kotlin.Unit) {
+  open fun setRemoved(run: (Bullet) -> Unit) {
     removedRun = run
   }
 

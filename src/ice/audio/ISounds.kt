@@ -18,7 +18,7 @@ object ISounds {
     val moonhidelaunched = getSound("moonhidelaunched")
     val remainInstall = getSound("remainInstall")
     val remainUninstall = getSound("remainUninstall")
-    val shotFiercely = getSound("shotFiercely")
+    val 激射 = getSound("shotFiercely")
     val 聚爆=getSound("聚爆")
     val 速射=getSound("速射")
 

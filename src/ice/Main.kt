@@ -3,7 +3,8 @@ package ice
 import java.io.File
 
 fun main() {
-   repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\distribution\\conveyor\\reinforcedConveyor")
+   //repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\distribution\\conveyor\\reinforcedConveyor")
+
 }
 
 

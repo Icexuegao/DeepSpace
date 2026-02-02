@@ -42,6 +42,7 @@ import kotlin.reflect.KProperty
 
 
 inline fun <reified T> T.jtype() = T::class.java
+val KClass<*>.j: Class<*> get() = java
 private fun checkFinal(field: Field) {
     if (Modifier.isFinal(field.modifiers)) throw IllegalArgumentException("Not support modify final field")
 }

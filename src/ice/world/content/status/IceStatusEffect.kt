@@ -43,6 +43,9 @@ open class IceStatusEffect(name: String, apply: IceStatusEffect.() -> kotlin.Uni
   fun affinitys(effect: StatusEffect, handler: TransitionHandler) {
     affinity(effect, handler)
   }
+  fun transs(effect: StatusEffect, handler: TransitionHandler) {
+    trans(effect, handler)
+  }
 
   fun opposites(vararg effect: StatusEffect) {
     opposite(*effect)

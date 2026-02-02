@@ -30,7 +30,6 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import mindustry.world.blocks.distribution.MassDriver
 import mindustry.world.blocks.storage.Unloader
 import mindustry.world.meta.Env
@@ -59,7 +58,7 @@ object Distribution : Load {
       junctionReplacement = 基础交叉器
       bridgeReplacement = 装甲传送带桥
     }
-    requirements(Category.distribution, IItems.高碳钢, 1, IItems.锌锭,1)
+    requirements(Category.distribution, IItems.高碳钢, 1, IItems.锌锭, 1)
     bundle {
       desc(zh_CN, "强化传送带", "基础的运输设施,用于在建筑之间运输物品,造价低廉")
     }
@@ -167,7 +166,7 @@ object Distribution : Load {
         Lines.lineAngle(e.x + Fx.v.x + Fx.rand.range(spread), e.y + Fx.v.y + Fx.rand.range(spread), ang, e.fout() * Fx.rand.random(1f) + 1f)
       }
     }
-    requirements(Category.distribution, ItemStack.with(IItems.铪锭, 20))
+    requirements(Category.distribution, IItems.铪锭, 20)
     bundle {
       desc(zh_CN, "梯度传送带")
     }
@@ -254,7 +253,7 @@ object Distribution : Load {
   val 传输节点 = TransferNode("transferNode").apply {
     size = 1
     health = 200
-    requirements(Category.distribution, ItemStack.with(IItems.铜锭, 5))
+    requirements(Category.distribution, IItems.铜锭, 5)
     bundle {
       desc(zh_CN, "传输节点")
     }
@@ -263,11 +262,7 @@ object Distribution : Load {
     bundle {
       desc(zh_CN, "运输节点", "一种更高级的传送带桥,可以对节点的任意侧面配置指定物品的输入与输出")
     }
-    requirements(
-      Category.distribution, ItemStack.with(
-        Items.silicon, 8, IItems.气凝胶, 8, IItems.铝, 10
-      )
-    )
+    requirements(Category.distribution, Items.silicon, 8, IItems.气凝胶, 8, IItems.铝, 10)
     range = 4
     arrowTimeScl = 6f
     transportTime = 3f
@@ -294,11 +289,8 @@ object Distribution : Load {
     bundle {
       desc(zh_CN, "铱制高效运输节点", "使用铱建造的高级运输节点,造价昂贵,但换来的收益除更长的连接距离和更快的运输速度外,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品")
     }
-    requirements(
-      Category.distribution, ItemStack.with(
-        Items.phaseFabric, 4, IItems.铱锭, 4, IItems.FEX水晶, 6, IItems.气凝胶, 12, IItems.铝, 12
-      )
-    )
+    requirements(Category.distribution, Items.phaseFabric, 4, IItems.铱锭, 4, IItems.FEX水晶, 6, IItems.气凝胶, 12, IItems.铝, 12)
+
 
     researchCostMultiplier = 2f
     itemCapacity = 20
@@ -346,6 +338,7 @@ object Distribution : Load {
     reload = 600f
     range = 1280f
     consumePower(23.75f)
+    squareSprite=false
     dumpTime = 1
     knockback = 4f
     translation = 2f
@@ -365,46 +358,44 @@ object Distribution : Load {
   }
 
   val 物流枢纽 = LogisticsHub("logisticsHub").apply {
-    requirements(Category.distribution, ItemStack.with(IItems.铜锭, 10))
+    requirements(Category.distribution, IItems.铜锭, 10)
     bundle {
       desc(zh_CN, "物流枢纽")
     }
   }
   val 枢纽管道 = HubConduit("hubConduit").apply {
-    requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
+    requirements(Category.distribution, IItems.铜锭, 1)
     bundle {
       desc(zh_CN, "枢纽管道")
     }
   }
   val 物流输入器 = LogisticsInput("logisticsInput").apply {
-    requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
+    requirements(Category.distribution, IItems.铜锭, 1)
     bundle {
       desc(zh_CN, "物流输入器")
     }
   }
   val 物流输出器 = LogisticsOutput("logisticsOutput").apply {
-    requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
+    requirements(Category.distribution, IItems.铜锭, 1)
     bundle {
       desc(zh_CN, "物流输出器")
     }
   }
   val 无人机供货端 = DroneDeliveryTerminal("droneTeliveryTerminal").apply {
     squareSprite = false
-    requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
-
+    requirements(Category.distribution, IItems.铜锭, 50, IItems.单晶硅, 80, IItems.钴钢, 40, IItems.铪锭, 30)
     bundle {
-      desc(zh_CN, "无人机供货端")
+      desc(zh_CN, "无人机供货端", "简约的无人运输模块,用于将物品从无人机需求端运输到无人机需求端")
     }
   }
   val 无人机需求端 = DroneReceivingRnd("droneReceivingRnd").apply {
-    requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
-
+    requirements(Category.distribution, IItems.铜锭, 20, IItems.单晶硅, 10)
     bundle {
-      desc(zh_CN, "无人机需求端")
+      desc(zh_CN, "无人机需求端","用于从供货端接受物品")
     }
   }
   val 随机源 = Randomer("randomSource").apply {
-    requirements(Category.distribution, ItemStack.with(IItems.铜锭, 1))
+    requirements(Category.distribution, IItems.铜锭, 1)
     bundle {
       desc(zh_CN, "随机源", "随机输出所有资源")
     }

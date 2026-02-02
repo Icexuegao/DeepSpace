@@ -38,6 +38,7 @@ import mindustry.world.meta.BlockGroup
 @Suppress("unused")
 object PowerBlocks : Load {
   val 能量节点 = BeamNode("powerNode").apply {
+    squareSprite=false
     laser = Core.atlas.find(this.name + "-beam")
     laserEnd = Core.atlas.find(this.name + "-beam-end")
     requirements(Category.power, IItems.高碳钢, 2, IItems.锌锭, 5, IItems.铜锭, 5)
@@ -55,6 +56,7 @@ object PowerBlocks : Load {
     }
   }
   val 神经索节点 = PowerNode("neuralNode").apply {
+    squareSprite=false
     healAmount = 5f
     size = 1
     armor = 4f
@@ -71,6 +73,7 @@ object PowerBlocks : Load {
     }
   }
   val 神经束节点 = PowerNode("neuralBeamNode").apply {
+    squareSprite=false
     healAmount = 20f
     size = 2
     armor = 8f
@@ -91,7 +94,7 @@ object PowerBlocks : Load {
     armor = 3f
     maxNodes = 4
     laserRange = 100f
-    category = Category.power
+    squareSprite=false
     consumesPower = true
     outputsPower = true
     consumePowerBuffered(50000f)
@@ -115,6 +118,7 @@ object PowerBlocks : Load {
   val 能量电池: Block = Battery("powerBattery").apply {
     size = 2
     health = 300
+    squareSprite=false
     baseExplosiveness = 1f
     emptyLightColor = IceColor.df
     fullLightColor = IceColor.b4
@@ -150,6 +154,7 @@ object PowerBlocks : Load {
     }
   }
   val 蒸汽冷凝机 = ThermalGenerator("steamCondenser").apply {
+    squareSprite=false
     size = 3
     fogRadius = 3
     hasLiquids = true

@@ -32,10 +32,6 @@ open class Ice : @RecipeEntryPoint(Recipes::class) Mod() {
   }
 
   init {
-    if (OS.isWindows && Runtime.version().feature() !in 10..18){
-      log { Runtime.version().feature() }
-      throw IllegalStateException("当前java版本不支持:${Runtime.version()} 请使用java 17")
-    }
     UncCore.setup()
     IFiles.setup()
     SettingValue.setup()

@@ -15,9 +15,7 @@ import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
 import arc.util.noise.Simplex
-import ice.content.IItems
 import ice.world.SglFx
-import ice.world.content.blocks.crafting.GenericCrafter
 import mindustry.Vars
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
@@ -26,9 +24,10 @@ import mindustry.world.Tile
 import singularity.graphic.Distortion
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
+import singularity.world.blocks.product.NormalCrafter
 import kotlin.math.abs
 
-open class Noise2dBlock(name: String) : GenericCrafter(name) {
+open class Noise2dBlock(name: String) : NormalCrafter(name) {
     init {
         buildType = Prov(::Noise2dBuild)
         size = 1
@@ -36,12 +35,9 @@ open class Noise2dBlock(name: String) : GenericCrafter(name) {
         health=10
         configurable = true
         buildType= Prov(::Noise2dBuild)
-        craftTime=180f
-        outputItems(IItems.钴锭,1)
-        consumeItems(IItems.红冰,2)
     }
 
-    inner class Noise2dBuild : GenericCrafterBuild() {
+    inner class Noise2dBuild : NormalCrafterBuild() {
         val tiles = Seq<Tile>()
         var scl: Float = 40f
         var threshold: Float = 0.5f
@@ -54,7 +50,7 @@ open class Noise2dBlock(name: String) : GenericCrafter(name) {
         val taskID: Int = SglDraw.nextTaskID()
         val timeId: Int = timers++
 
-        fun workEfficiency(): Float{
+        override fun workEfficiency(): Float{
             return  efficiency
         }
 

@@ -26,6 +26,7 @@ import kotlin.reflect.KProperty
  * @param defaultValue 属性的默认值，当首次访问属性时返回此值
  *
  * 注意事项：
+ * - 由于Pools的重置机制,可能对象不会被回收,从而导致WeakHashMap的值依旧保留
  * - 宿主对象T必须是非空类型(Any)
  * - 由于使用WeakHashMap，属性值会在宿主对象被回收后自动清除
  * - 不建议用于存储与宿主对象生命周期无关的重要数据

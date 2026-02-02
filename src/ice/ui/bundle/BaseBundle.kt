@@ -6,12 +6,11 @@ import ice.library.world.Load
 import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
 
-open class BaseBundle(val name: String) {
+ class BaseBundle(val name: String) {
   companion object : Load {
     fun bundle(bundle: Companion.() -> Unit) {
       bundle.invoke(Companion)
     }
-
 
     fun <T : UnlockableContent> T.desc(bundle: BaseBundle, name: String, desc: String = "", deta: String = "") {
       bundle.runBun.add {

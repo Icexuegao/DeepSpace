@@ -33,7 +33,7 @@ import singularity.world.draw.DrawEdgeLinkBits
 @Suppress("unused")
 object MatrixDistNet : Load {
 
-  var 矩阵中枢 = DistNetCore("matrix_core").apply {
+  var 矩阵中枢伺服器 = DistNetCore("matrix_core").apply {
     bundle{
       desc(zh_CN,"矩阵中枢伺服器","一个矩阵网络的核心设备,矩阵网络必须有且只有一个中枢伺服器,矩阵桥连接此方块时只能单向连接")
     }
@@ -41,13 +41,14 @@ object MatrixDistNet : Load {
       SglCategory.matrix, IItems.矩阵合金, 200, IItems.强化合金, 240, IItems.FEX水晶, 220, IItems.气凝胶, 200, IItems.铱锭, 90, Items.silicon, 260, Items.graphite, 220, Items.phaseFabric, 180
     )
     size = 6
+    squareSprite=false
     matrixEnergyUse = 1f
   }
   var 矩阵桥 = MatrixBridge("matrix_bridge").apply {
     requirements(
       SglCategory.matrix, IItems.矩阵合金, 20, IItems.强化合金, 18, IItems.FEX水晶, 10, IItems.气凝胶, 16, Items.phaseFabric, 8
-
     )
+    squareSprite=false
     size = 2
     newConsume()
     consume!!.powerCond(0.8f, 0f) { e: MatrixBridgeBuild? -> !e!!.distributor.network.netStructValid() }
@@ -64,7 +65,7 @@ object MatrixDistNet : Load {
     crossLinking = true
     size = 3
     maxLinks = 4
-
+    squareSprite=false
     linkRange = 45
 
     newConsume()
@@ -85,7 +86,7 @@ object MatrixDistNet : Load {
 
     linkOffset = 8f
     size = 4
-
+    squareSprite=false
     matrixEnergyUse = 1.2f
     bundle{
       desc(zh_CN,"网格控制器","矩阵网格的控制中枢,与矩阵网格框架建立矩阵网格,在网格中通过此设备配置网格内io点的的输入输出和存储设备,是一个重要的物流管理模型")
@@ -103,7 +104,7 @@ object MatrixDistNet : Load {
     linkOffset = 4.5f
     size = 2
   }
-  var io端点 = GenericIOPoint("io_point").apply {
+  var 通用IO端口 = GenericIOPoint("io_point").apply {
     bundle{
       desc(zh_CN,"通用IO端口","矩阵网格使用的IO设施,物品及液体的通用端口,通过网格控制器进行端口配置")
     }
@@ -113,6 +114,7 @@ object MatrixDistNet : Load {
       )
     )
     size = 1
+    squareSprite=false
   }
   var 能源管理器 = DistEnergyManager("matrix_energy_manager").apply {
     bundle{
@@ -124,9 +126,10 @@ object MatrixDistNet : Load {
       )
     )
     size = 4
+    squareSprite=false
   }
   var 能源能源簇 = DistEnergyBuffer("matrix_energy_buffer").apply {
-
+    squareSprite=false
     requirements(
       SglCategory.matrix, ItemStack.with(
         IItems.矩阵合金, 70, IItems.FEX水晶, 45, IItems.充能FEX水晶, 35, IItems.铱锭, 20, Items.phaseFabric, 40
@@ -139,7 +142,7 @@ object MatrixDistNet : Load {
     matrixEnergyCapacity = 16384f
   }
   var 能量接口 = DistPowerEntry("matrix_power_interface").apply {
-
+    squareSprite=false
     requirements(
       SglCategory.matrix, ItemStack.with(
         IItems.矩阵合金, 45, Items.copper, 40, Items.silicon, 35, Items.plastanium, 30, Items.graphite, 30
@@ -153,7 +156,7 @@ bundle {
     eneProd = 480f
   }
   var 中子接口 = DistNeutronEntry("matrix_neutron_interface").apply {
-
+    squareSprite=false
     requirements(
       SglCategory.matrix, ItemStack.with(
         IItems.矩阵合金, 35, IItems.强化合金, 30, IItems.FEX水晶, 20, IItems.铱锭, 10
@@ -170,6 +173,7 @@ bundle {
         IItems.矩阵合金, 40, IItems.强化合金, 40, IItems.气凝胶, 40
       )
     )
+    squareSprite=false
     size = 2
     topologyUse = 0
     matrixEnergyUse = 0.2f
@@ -192,7 +196,7 @@ bundle {
       )
     )
     size = 3
-
+    squareSprite=false
     computingPower = 8
     matrixEnergyUse = 0.6f
 
@@ -208,7 +212,7 @@ bundle {
       )
     )
     size = 4
-
+    squareSprite=false
     topologyCapaity = 16
     matrixEnergyUse = 0.8f
     bundle {
@@ -216,7 +220,7 @@ bundle {
     }
   }
   var 通用物质缓存器 = NetPluginComp("matrix_buffer").apply {
-
+    squareSprite=false
     requirements(
       SglCategory.matrix, ItemStack.with(
         IItems.矩阵合金, 60, IItems.FEX水晶, 45, IItems.气凝胶, 40, IItems.铱锭, 28, Items.phaseFabric, 45
@@ -238,7 +242,7 @@ bundle {
         IItems.矩阵合金, 50, IItems.气凝胶, 75, IItems.强化合金, 40, IItems.铝, 60
       )
     )
-
+    squareSprite=false
     hasLiquids = true
     hasItems = true
 bundle {

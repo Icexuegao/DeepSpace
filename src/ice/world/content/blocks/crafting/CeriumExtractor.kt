@@ -8,14 +8,15 @@ import arc.math.Mathf
 import ice.content.IStatus
 import mindustry.entities.Damage
 import mindustry.graphics.Layer
+import singularity.world.blocks.product.NormalCrafter
 import kotlin.math.min
 
-class CeriumExtractor(name: String) : GenericCrafter(name) {
+class CeriumExtractor(name: String) : NormalCrafter(name) {
     init {
         buildType = Prov(::CeriumExtractorBuild)
     }
 
-    inner class CeriumExtractorBuild : GenericCrafterBuild() {
+    inner class CeriumExtractorBuild : NormalCrafterBuild() {
         var size = 0f
         fun range(): Float {
             return block.size * 8 * 1.5f

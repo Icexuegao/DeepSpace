@@ -21,7 +21,6 @@ import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.liquid.SolidPump
-import ice.world.content.blocks.production.IceDrill
 import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.content.Fx
@@ -45,6 +44,7 @@ import singularity.util.MathTransform
 import singularity.world.SglFx
 import singularity.world.blocks.drills.*
 import singularity.world.blocks.drills.ExtendMiner.ExtendMinerBuild
+import singularity.world.blocks.drills.MatrixMinerComponent.MatrixMinerComponentBuild
 import singularity.world.blocks.drills.MatrixMinerSector.MatrixMinerSectorBuild
 import singularity.world.blocks.product.FloorCrafter
 import singularity.world.blocks.product.FloorCrafter.FloorCrafterBuild
@@ -58,44 +58,47 @@ import kotlin.math.pow
 
 @Suppress("unused")
 object ProductBlocks : Load {
-  val 纤汲钻井: Block = IceDrill("deriveDrill").apply {
-    tier = 2
+  val 纤汲钻井: Block = BaseDrill("deriveDrill").apply {
+    bitHardness = 3
     size = 2
     requirements(Category.production, IItems.高碳钢, 10, IItems.低碳钢, 5)
-    drillTime = 200f
+    drillTime = 400f
     bundle {
       desc(zh_CN, "纤汲钻井", "一种基础钻井,配备了最基础的钻芯,可用于开采基础资源")
     }
   }
-  val 蛮荒钻井: Block = IceDrill("uncivilizedDrill").apply {
-    tier = 4
+  val 蛮荒钻井: Block = BaseDrill("uncivilizedDrill").apply {
+    bitHardness = 4
     size = 3
-    drillTime = 150f
+    drillTime = 350f
     requirements(Category.production, IItems.铬锭, 20, IItems.钴锭, 12)
     bundle {
       desc(zh_CN, "蛮荒钻井", "一种次级钻井,在纤汲钻井的基础上进行了迭代,钻芯材料改进,可用于开采更高级资源")
     }
   }
-  val 曼哈德钻井: Block = IceDrill("manhardDrill").apply {
-    tier = 5
+  val 曼哈德钻井: Block = BaseDrill("manhardDrill").apply {
+    bitHardness = 5
     size = 3
-    drillTime = 100f
+    drillTime = 300f
+    squareSprite = false
     requirements(Category.production, ItemStack.with(IItems.硫钴矿, 4, IItems.低碳钢, 32))
     bundle {
       desc(zh_CN, "曼哈德钻井", "一种高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效资源开采")
     }
   }
-  val 热熔钻井: Block = IceDrill("hotMeltDrill").apply {
+  val 热熔钻井: Block = BaseDrill("hotMeltDrill").apply {
     size = 5
-    tier = 9
-    drillTime = 75f
+    bitHardness = 6
     itemCapacity = 60
     liquidCapacity = 60f
-    consumePower(4f)
-    consumeLiquids(Liquids.water, 0.3f).apply {
-      booster = true
-      optional = true
+    drillTime = 200f
+    newConsume().apply {
+      power(4f)
     }
+    newBooster(2f).apply {
+      liquid(Liquids.water, 0.3f)
+    }
+
     drillEffect = Fx.mine
     updateEffect = mindustry.entities.effect.WaveEffect().apply {
       lifetime = 60f
@@ -106,7 +109,6 @@ object ProductBlocks : Load {
     }
     rotator.rotateSpeed = 6f
     warmupSpeed = 0.06f
-    liquidBoostIntensity = 2f
     bundle {
       desc(zh_CN, "热熔钻井", "通过多种合金制成的钻头融化地层以快速开采所有矿物")
     }
@@ -120,7 +122,7 @@ object ProductBlocks : Load {
     liquidCapacity = 60f
     consumePower(10f)
     consumeLiquids(Liquids.water, 0.5f)
-    drillSound = ISounds.shotFiercely
+    drillSound = ISounds.激射
     placeableLiquid = true
     drillEffect = ParticleEffect().apply {
       particles = 6
@@ -298,7 +300,7 @@ object ProductBlocks : Load {
       Category.production, IItems.简并态中子聚合物, 50, IItems.强化合金, 120, IItems.气凝胶, 90, IItems.充能FEX水晶, 75, IItems.铱锭, 40, Items.phaseFabric, 60
     )
     size = 4
-
+    squareSprite = false
     energyCapacity = 1024f
     basicPotentialEnergy = 1024f
 
@@ -341,7 +343,7 @@ object ProductBlocks : Load {
     )
   }
   var 引力延展室 = ExtendMiner("force_field_extender").apply {
-
+    squareSprite = false
     bundle {
       desc(zh_CN, "引力延展室", "用于延伸潮汐钻头的设备,贴近潮汐钻头,并与其他延展室彼此正对连接可扩大钻头覆盖的范围")
     }
@@ -379,223 +381,200 @@ object ProductBlocks : Load {
     })
   }
 
-  var 矩阵矿床 = object : MatrixMiner("matrix_miner") {
-    init {
-      bundle {
-        desc(zh_CN, "矩阵矿床", "矩阵矿床的控制中心,四面可安装矿床的工作组件以进行开采工作")
-      }
-      requirements(
-        Category.production, ItemStack.with(
-          IItems.矩阵合金, 130, IItems.充能FEX水晶, 80, IItems.强化合金, 90, IItems.气凝胶, 90, Items.phaseFabric, 65, Items.graphite, 90, IItems.铱锭, 45
-        )
-      )
-      size = 5
-      matrixEnergyUse = 0.6f
-
-      baseRange = 32
+  var 矩阵矿床 = MatrixMiner("matrix_miner").apply {
+    bundle {
+      desc(zh_CN, "矩阵矿床", "矩阵矿床的控制中心,四面可安装矿床的工作组件以进行开采工作")
     }
+    requirements(Category.production, IItems.矩阵合金, 130, IItems.充能FEX水晶, 80, IItems.强化合金, 90, IItems.气凝胶, 90, Items.phaseFabric, 65, Items.graphite, 90, IItems.铱锭, 45)
+    size = 5
+    matrixEnergyUse = 0.6f
+    squareSprite = false
+    baseRange = 32
   }
-  var 采掘扇区 = object : MatrixMinerSector("matrix_miner_node") {
-    init {
-
-      bundle {
-        desc(zh_CN, "采掘扇区", "矩阵矿床的采掘工作组件,提供一个基础开采角度区间")
-      }
-      requirements(
-        Category.production, ItemStack.with(
-          IItems.矩阵合金, 30, IItems.充能FEX水晶, 25, IItems.强化合金, 16, IItems.气凝胶, 20
-        )
-      )
-      size = 3
-      drillSize = 3
-
-      clipSize = (64 * Vars.tilesize).toFloat()
-
-      energyMulti = 2f
+  var 采掘扇区 = MatrixMinerSector("matrix_miner_node").apply {
+    bundle {
+      desc(zh_CN, "采掘扇区", "矩阵矿床的采掘工作组件,提供一个基础开采角度区间")
     }
-  }
-  var 谐振增压组件 = object : MatrixMinerComponent("matrix_miner_extend") {
-    init {
-      bundle {
-        desc(zh_CN, "谐振增压组件", "矩阵矿床的增幅组件,使矩阵矿床的采集范围增大,可以大幅提高钻头的采掘效率")
-      }
-      requirements(
-        Category.production, ItemStack.with(
-          IItems.矩阵合金, 40, IItems.充能FEX水晶, 40, IItems.强化合金, 60, IItems.铱锭, 12, IItems.简并态中子聚合物, 20
-        )
+    requirements(
+      Category.production, ItemStack.with(
+        IItems.矩阵合金, 30, IItems.充能FEX水晶, 25, IItems.强化合金, 16, IItems.气凝胶, 20
       )
-      size = 3
+    )
+    size = 3
+    drillSize = 3
+    squareSprite = false
+    clipSize = (64 * Vars.tilesize).toFloat()
+    energyMulti = 2f
+  }
+  var 谐振增压组件 = MatrixMinerComponent("matrix_miner_extend").apply {
+    bundle {
+      desc(zh_CN, "谐振增压组件", "矩阵矿床的增幅组件,使矩阵矿床的采集范围增大,可以大幅提高钻头的采掘效率")
+    }
+    requirements(Category.production, IItems.矩阵合金, 40, IItems.充能FEX水晶, 40, IItems.强化合金, 60, IItems.铱锭, 12, IItems.简并态中子聚合物, 20)
+    size = 3
+    squareSprite = false
+    drillSize = 5
+    energyMulti = 4f
+    clipSize = (64 * Vars.tilesize).toFloat()
+    draw = DrawMulti(
+      DrawDefault(), object : DrawBlock() {
+        override fun draw(build: Building) {
+          if (build is MatrixMinerComponentBuild) {
+            Draw.z(Layer.effect)
+            Draw.color(SglDrawConst.matrixNet)
+            Fill.circle(build.x, build.y, 2 * build.warmup)
+            Draw.color(Pal.reactorPurple)
+            Lines.stroke(2f * build.warmup)
+            SglDraw.drawCornerTri(
+              build.x, build.y, 20 * build.warmup, 4 * build.warmup, -Time.time * 1.5f, true
+            )
+            if (build.owner != null) {
+              for (plugin in build.owner!!.plugins) {
+                if (plugin is MatrixMinerSectorBuild) {
+                  Lines.stroke(2f * build.warmup * plugin.warmup)
+                  SglDraw.drawCornerTri(
+                    plugin.drillPos!!.x, plugin.drillPos!!.y, 36 * build.warmup * plugin.warmup, 8 * build.warmup * plugin.warmup, -Time.time * 1.5f, true
+                  )
+                }
+              }
+            }
+          }
+        }
+      })
+  }
+  var 量子隧穿仪 = MatrixMinerComponent("matrix_miner_pierce").apply {
 
-      drillSize = 5
-      energyMulti = 4f
+    bundle {
+      desc(zh_CN, "量子隧穿仪", "矩阵矿床的增幅组件,安装此组件后,矩阵矿床将能够透过建筑挖掘被建筑覆盖的矿石")
+    }
+    requirements(
+      Category.production, ItemStack.with(
+        IItems.矩阵合金, 40, IItems.充能FEX水晶, 40, IItems.FEX水晶, 50, IItems.强化合金, 30, IItems.铱锭, 20, Items.phaseFabric, 40
+      )
+    )
+    size = 3
+    squareSprite = false
+    pierceBuild = true
+    energyMulti = 4f
 
-      clipSize = (64 * Vars.tilesize).toFloat()
+    clipSize = (64 * Vars.tilesize).toFloat()
 
-      draw = DrawMulti(
-        DrawDefault(), object : DrawBlock() {
-          override fun draw(build: Building?) {
+    draw = DrawMulti(
+      DrawDefault(), object : DrawBlock() {
+        val param: FloatArray = FloatArray(9)
+        val index = arrayOf<String?>("t1", "t2", "t3", "t4")
+        val index2 = arrayOf<String?>("t11", "t12", "t13", "t14")
+        val indexSelf = arrayOf<String?>("ts1", "ts2", "ts3")
 
-            if (build is MatrixMinerComponentBuild) {
-              Draw.z(Layer.effect)
-              Draw.color(SglDrawConst.matrixNet)
-              Fill.circle(build.x, build.y, 2 * build.warmup)
+        override fun draw(build: Building) {
 
+          if (build is MatrixMinerComponentBuild) {
+            rand.setSeed(build.id.toLong())
+
+            Draw.z(Layer.effect)
+            Draw.color(SglDrawConst.matrixNet)
+            Fill.circle(build.x, build.y, 2 * build.warmup)
+            Draw.color(Pal.reactorPurple)
+
+            for (i in 0..2) {
+              for (d in 0..2) {
+                param[d * 3] = rand.random(2f, 4f) / (d + 1) * (if (i % 2 == 0) 1 else -1)
+                param[d * 3 + 1] = rand.random(0f, 360f)
+                param[d * 3 + 2] = rand.random(8f, 20f) / ((d + 1) * (d + 1))
+              }
+              val v = Tmp.v1.set(MathTransform.fourierSeries(Time.time, *param)).scl(build.warmup)
               Draw.color(Pal.reactorPurple)
-              Lines.stroke(2f * build.warmup)
-              SglDraw.drawCornerTri(
-                build.x, build.y, 20 * build.warmup, 4 * build.warmup, -Time.time * 1.5f, true
-              )
+              Fill.circle(build.x + v.x, build.y + v.y, build.warmup)
 
-              if (build.owner != null) {
-                for (plugin in build.owner!!.plugins) {
-                  if (plugin is MatrixMinerSectorBuild) {
-                    Lines.stroke(2f * build.warmup * plugin.warmup)
-                    SglDraw.drawCornerTri(
-                      plugin.drillPos!!.x, plugin.drillPos!!.y, 36 * build.warmup * plugin.warmup, 8 * build.warmup * plugin.warmup, -Time.time * 1.5f, true
-                    )
+              //   var trail: Trail? = build.getVar(indexSelf[i])
+              //    if (trail == null) build.setVar(indexSelf[i], Trail(60).also { trail = it })
+
+              //   trail!!.update(build.x + v.x, build.y + v.y)
+
+              //  trail.draw(Pal.reactorPurple, build.warmup)
+            }
+
+            if (build.owner != null) {
+              for ((ind, plugin) in build.owner!!.plugins.withIndex()) {
+                if (plugin is MatrixMinerSectorBuild) {
+                  val bool = rand.random(1) > 0.5f
+                  for (d in 0..2) {
+                    param[d * 3] = rand.random(0.5f, 3f) / (d + 1) * (if (bool != (d % 2 == 0)) 1 else -1)
+                    param[d * 3 + 1] = rand.random(0f, 360f)
+                    param[d * 3 + 2] = rand.random(16f, 40f) / ((d + 1) * (d + 1))
                   }
-                }
-              }
-            }
-          }
-        })
-    }
-  }
-  var 量子隧穿仪 = object : MatrixMinerComponent("matrix_miner_pierce") {
-    init {
-      bundle {
-        desc(zh_CN, "量子隧穿仪", "矩阵矿床的增幅组件,安装此组件后,矩阵矿床将能够透过建筑挖掘被建筑覆盖的矿石")
-      }
-      requirements(
-        Category.production, ItemStack.with(
-          IItems.矩阵合金, 40, IItems.充能FEX水晶, 40, IItems.FEX水晶, 50, IItems.强化合金, 30, IItems.铱锭, 20, Items.phaseFabric, 40
-        )
-      )
-      size = 3
+                  val v = Tmp.v1.set(MathTransform.fourierSeries(Time.time, *param))
 
-      pierceBuild = true
-      energyMulti = 4f
-
-      clipSize = (64 * Vars.tilesize).toFloat()
-
-      draw = DrawMulti(
-        DrawDefault(), object : DrawBlock() {
-          val param: FloatArray = FloatArray(9)
-          val index = arrayOf<String?>("t1", "t2", "t3", "t4")
-          val index2 = arrayOf<String?>("t11", "t12", "t13", "t14")
-          val indexSelf = arrayOf<String?>("ts1", "ts2", "ts3")
-
-          override fun draw(build: Building) {
-
-            if (build is MatrixMinerComponentBuild) {
-              rand.setSeed(build.id.toLong())
-
-              Draw.z(Layer.effect)
-              Draw.color(SglDrawConst.matrixNet)
-              Fill.circle(build.x, build.y, 2 * build.warmup)
-              Draw.color(Pal.reactorPurple)
-
-              for (i in 0..2) {
-                for (d in 0..2) {
-                  param[d * 3] = rand.random(2f, 4f) / (d + 1) * (if (i % 2 == 0) 1 else -1)
-                  param[d * 3 + 1] = rand.random(0f, 360f)
-                  param[d * 3 + 2] = rand.random(8f, 20f) / ((d + 1) * (d + 1))
-                }
-                val v = Tmp.v1.set(MathTransform.fourierSeries(Time.time, *param)).scl(build.warmup)
-                Draw.color(Pal.reactorPurple)
-                Fill.circle(build.x + v.x, build.y + v.y, build.warmup)
-
-                //   var trail: Trail? = build.getVar(indexSelf[i])
-                //    if (trail == null) build.setVar(indexSelf[i], Trail(60).also { trail = it })
-
-                //   trail!!.update(build.x + v.x, build.y + v.y)
-
-                //  trail.draw(Pal.reactorPurple, build.warmup)
-              }
-
-              if (build.owner != null) {
-                for ((ind, plugin) in build.owner!!.plugins.withIndex()) {
-                  if (plugin is MatrixMinerSectorBuild) {
-                    val bool = rand.random(1) > 0.5f
-                    for (d in 0..2) {
-                      param[d * 3] = rand.random(0.5f, 3f) / (d + 1) * (if (bool != (d % 2 == 0)) 1 else -1)
-                      param[d * 3 + 1] = rand.random(0f, 360f)
-                      param[d * 3 + 2] = rand.random(16f, 40f) / ((d + 1) * (d + 1))
-                    }
-                    val v = Tmp.v1.set(MathTransform.fourierSeries(Time.time, *param))
-
-                    for (d in 0..2) {
-                      param[d * 3] = rand.random(0.5f, 3f) / (d + 1) * (if (bool != (d % 2 == 0)) -1 else 1)
-                      param[d * 3 + 1] = rand.random(0f, 360f)
-                      param[d * 3 + 2] = rand.random(12f, 30f) / ((d + 1) * (d + 1))
-                    }
-                    val v2 = Tmp.v2.set(MathTransform.fourierSeries(Time.time, *param))
-                    Draw.color(Pal.reactorPurple)
-                    Fill.circle(plugin.drillPos!!.x + v.x, plugin.drillPos!!.y + v.y, 1.5f * build.warmup * plugin.warmup)
-                    Fill.circle(plugin.drillPos!!.x + v2.x, plugin.drillPos!!.y + v2.y, build.warmup * plugin.warmup)
-
-                    //   var trail: Trail? = build.getVar(index[ind])
-                    //     if (trail == null) build.setVar(index[ind], Trail(72).also { trail = it })
-                    //     var trail2: Trail? = build.getVar(index2[ind])
-                    //     if (trail2 == null) build.setVar(index2[ind], Trail(72).also { trail2 = it })
-
-                    //   trail!!.draw(Pal.reactorPurple, 1.5f * build.warmup * plugin.warmup)
-                    //    trail.update(plugin.drillPos.x + v.x, plugin.drillPos.y + v.y)
-
-                    //    trail2!!.draw(Pal.reactorPurple, build.warmup * plugin.warmup)
-                    //    trail2.update(plugin.drillPos.x + v2.x, plugin.drillPos.y + v2.y)
+                  for (d in 0..2) {
+                    param[d * 3] = rand.random(0.5f, 3f) / (d + 1) * (if (bool != (d % 2 == 0)) -1 else 1)
+                    param[d * 3 + 1] = rand.random(0f, 360f)
+                    param[d * 3 + 2] = rand.random(12f, 30f) / ((d + 1) * (d + 1))
                   }
+                  val v2 = Tmp.v2.set(MathTransform.fourierSeries(Time.time, *param))
+                  Draw.color(Pal.reactorPurple)
+                  Fill.circle(plugin.drillPos!!.x + v.x, plugin.drillPos!!.y + v.y, 1.5f * build.warmup * plugin.warmup)
+                  Fill.circle(plugin.drillPos!!.x + v2.x, plugin.drillPos!!.y + v2.y, build.warmup * plugin.warmup)
+
+                  //   var trail: Trail? = build.getVar(index[ind])
+                  //     if (trail == null) build.setVar(index[ind], Trail(72).also { trail = it })
+                  //     var trail2: Trail? = build.getVar(index2[ind])
+                  //     if (trail2 == null) build.setVar(index2[ind], Trail(72).also { trail2 = it })
+
+                  //   trail!!.draw(Pal.reactorPurple, 1.5f * build.warmup * plugin.warmup)
+                  //    trail.update(plugin.drillPos.x + v.x, plugin.drillPos.y + v.y)
+
+                  //    trail2!!.draw(Pal.reactorPurple, build.warmup * plugin.warmup)
+                  //    trail2.update(plugin.drillPos.x + v2.x, plugin.drillPos.y + v2.y)
                 }
               }
             }
           }
-        })
-    }
+        }
+      })
   }
-  var 矩阵增幅器 = object : MatrixMinerComponent("matrix_miner_overdrive") {
-    init {
-      bundle {
-        desc(zh_CN, "矩阵增幅器", "矩阵矿床的增幅组件,提高矩阵矿床的最大范围,并消耗液体增加矩阵矿床的工作效率")
-      }
-      requirements(
-        Category.production, ItemStack.with(
-          IItems.矩阵合金, 40, IItems.充能FEX水晶, 50, IItems.强化合金, 40, IItems.气凝胶, 40, IItems.铱锭, 15, Items.phaseFabric, 60
-        )
+  var 矩阵增幅器 = MatrixMinerComponent("matrix_miner_overdrive").apply {
+
+    bundle {
+      desc(zh_CN, "矩阵增幅器", "矩阵矿床的增幅组件,提高矩阵矿床的最大范围,并消耗液体增加矩阵矿床的工作效率")
+    }
+    requirements(
+      Category.production, ItemStack.with(
+        IItems.矩阵合金, 40, IItems.充能FEX水晶, 50, IItems.强化合金, 40, IItems.气凝胶, 40, IItems.铱锭, 15, Items.phaseFabric, 60
       )
-      size = 3
-      range = 16
-      drillMoveMulti = 2f
-      energyMulti = 2f
+    )
+    size = 3
+    range = 16
+    drillMoveMulti = 2f
+    energyMulti = 2f
+    squareSprite = false
+    clipSize = (10 * Vars.tilesize).toFloat()
 
-      clipSize = (10 * Vars.tilesize).toFloat()
+    liquidCapacity = 40f
 
-      liquidCapacity = 40f
+    newConsume()
+    consume!!.time(180f)
+    consume!!.item(Items.phaseFabric, 1)
 
-      newConsume()
-      consume!!.time(180f)
-      consume!!.item(Items.phaseFabric, 1)
+    newBoost(1f, 0.6f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.3f)
 
-      newBoost(1f, 0.6f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.3f)
+    draw = DrawMulti(
+      DrawDefault(), object : DrawBlock() {
+        override fun draw(build: Building?) {
 
-      draw = DrawMulti(
-        DrawDefault(), object : DrawBlock() {
-          override fun draw(build: Building?) {
+          if (build is MatrixMinerComponentBuild) {
+            Draw.z(Layer.effect)
+            Draw.color(SglDrawConst.matrixNet)
+            Fill.circle(build.x, build.y, 2 * build.warmup)
 
-            if (build is MatrixMinerComponentBuild) {
-              Draw.z(Layer.effect)
-              Draw.color(SglDrawConst.matrixNet)
-              Fill.circle(build.x, build.y, 2 * build.warmup)
+            Lines.stroke(1.4f * build.warmup, Pal.reactorPurple)
+            SglDraw.dashCircle(build.x, build.y, 10f, 5, 180f, Time.time)
 
-              Lines.stroke(1.4f * build.warmup, Pal.reactorPurple)
-              SglDraw.dashCircle(build.x, build.y, 10f, 5, 180f, Time.time)
-
-              if (build.owner != null) {
-                Lines.stroke(1.6f * build.warmup, Pal.reactorPurple)
-                SglDraw.dashCircle(build.owner!!.x, build.owner!!.y, 18f, 6, 180f, -Time.time)
-              }
+            if (build.owner != null) {
+              Lines.stroke(1.6f * build.warmup, Pal.reactorPurple)
+              SglDraw.dashCircle(build.owner!!.x, build.owner!!.y, 18f, 6, 180f, -Time.time)
             }
           }
-        })
-    }
+        }
+      })
   }
 }

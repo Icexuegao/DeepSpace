@@ -29,7 +29,6 @@ import mindustry.graphics.Pal
 import mindustry.type.Item
 import mindustry.world.blocks.defense.turrets.ItemTurret
 import singularity.Sgl
-import singularity.contents.OtherContents
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
@@ -62,7 +61,7 @@ object TurretBullets {
       }
 
       if (entity is Unit) {
-        entity.apply(OtherContents.frost, entity.getDuration(OtherContents.frost) + 6)
+        entity.apply(IStatus.霜冻, entity.getDuration(IStatus.霜冻) + 6)
       }
     }
 
@@ -109,7 +108,7 @@ object TurretBullets {
       }
 
       Units.nearbyEnemies(b.team, b.x, b.y, radius, Cons { unit: Unit? ->
-        unit!!.apply(OtherContents.frost, unit.getDuration(OtherContents.frost) + 2f * Time.delta)
+        unit!!.apply(IStatus.霜冻, unit.getDuration(IStatus.霜冻) + 2f * Time.delta)
       })
     }
 

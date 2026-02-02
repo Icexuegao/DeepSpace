@@ -8,13 +8,13 @@ object IBlocks : Load {
     Environment.load()
     Defense.load()
     ProductBlocks.load()
-    NuclearBlock.load()
+    NuclearBlocks.load()
     Distribution.load()
     MatrixDistNet.load()
     PowerBlocks.load()
     LiquidBlocks.load()
     CrafterBlocks.load()
-    Effect.load()
+    EffectBlocks.load()
     Turret.load()
   }
 }

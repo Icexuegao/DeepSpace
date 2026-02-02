@@ -28,13 +28,12 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.crafting.CeriumExtractor
-import ice.world.content.blocks.crafting.GenericCrafter
 import ice.world.content.blocks.crafting.Incinerator
 import ice.world.content.blocks.crafting.multipleCrafter.MultipleCrafter
 import ice.world.content.blocks.crafting.oreMultipleCrafter.OreFormula
 import ice.world.content.blocks.crafting.oreMultipleCrafter.OreMultipleCrafter
+import ice.world.draw.*
 import ice.world.draw.DrawArcSmelt
-import ice.world.draw.DrawBuild
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
@@ -128,60 +127,8 @@ object CrafterBlocks : Load {
       desc(zh_CN, "焚烧炉")
     }
   }
-  val 量子蚀刻厂 = GenericCrafter("integratedFactory").apply {
-    drawers = DrawMulti(DrawRegion("-bottom"), DrawRegion("-top"))
-    itemCapacity = 20
-    health = 200
-    outputItems(IItems.电子元件, 1)
-    consumeItems(*ItemStack.with(IItems.单晶硅, 1, IItems.石墨烯, 2, IItems.石英玻璃, 1))
-    craftTime = 60f
-    craftEffect = MultiEffect(IceEffects.lancerLaserShoot1, IceEffects.lancerLaserChargeBegin, IceEffects.hitLaserBlast)
-    size = 3
-    requirements(Category.crafting, ItemStack.with(IItems.铜锭, 19))
-    bundle {
-      desc(zh_CN, "量子蚀刻厂", "采用等离子蚀刻技术,在硅晶圆上雕刻出微米级电路,电子工业的基础设施")
-    }
-  }
-  val 单晶硅厂 = GenericCrafter("monocrystallineSiliconFactory").apply {
-    size = 4
-    health = 460
-    hasPower = true
-    craftTime = 60f
-    craftEffect = IceEffects.square(IItems.单晶硅.color)
-    consumePower(1.8f)
-    outputItems(IItems.单晶硅, 1)
-    consumeItems(IItems.硫化合物, 1, IItems.石英, 3)
-    val color = Color.valueOf("ffef99")
-    setDrawMulti(DrawRegion("-bottom"), DrawBuild<GenericCrafter.GenericCrafterBuild> {
-      Draw.color(color)
-      Draw.alpha(warmup)
-      Lines.lineAngleCenter(
-        x + Mathf.sin(totalProgress(), 6f, Vars.tilesize / 3f * size), y, 90f, size * Vars.tilesize / 2f
-      )
-      Lines.lineAngleCenter(
-        x, y + Mathf.sin(totalProgress(), 3f, Vars.tilesize / 3f * size), 0f, size * Vars.tilesize / 2f
-      )
-      Draw.color()
-    }, DrawDefault(), DrawFlame(color))
-    requirements(Category.crafting, IItems.铬锭, 55, IItems.高碳钢, 200, IItems.铜锭, 150)
-    bundle {
-      desc(zh_CN, "单晶硅厂", "使用硫化物和石英矿石生产纯度更高的单晶硅")
-    }
-  }
-  val 铸铜厂 = GenericCrafter("copperFoundry").apply {
-    size = 4
-    health = 200
-    craftTime = 90f
-    outputItems(IItems.黄铜锭, 3)
-    setDrawMulti(DrawDefault(), DrawFlame())
-    consumeItems(*ItemStack.with(IItems.铜锭, 3, IItems.锌锭, 1))
-    requirements(Category.crafting, ItemStack.with(IItems.铜锭, 200, IItems.低碳钢, 150))
-    craftEffect = IceEffects.square(IItems.铜锭.color)
-    bundle {
-      desc(zh_CN, "铸铜厂")
-    }
-  }
-  val 碳控熔炉 = MultipleCrafter("carbonSteelFactory").apply {
+
+  val 碳控熔炉 = NormalCrafter("carbonSteelFactory").apply {
     bundle {
       desc(
         zh_CN, "碳控熔炉", "通过精确控制碳元素配比,在同一生产线灵活产出高碳钢和低碳钢,稳定的温度控制确保钢材质量始终达标"
@@ -190,25 +137,31 @@ object CrafterBlocks : Load {
     size = 3
     itemCapacity = 50
     alwaysUnlocked = true
-    val ct = RadialEffect().apply {
+    craftEffect = RadialEffect().apply {
       effect = Fx.surgeCruciSmoke
       rotationSpacing = 0f
       lengthOffset = 0f
       amount = 4
     }
-    addFormula {
-      craftTime = 45f
-      craftEffect = ct
-      setInput(ConsumeItems(ItemStack.with(IItems.赤铁矿, 2)), ConsumePower(60 / 60f, 0f, false))
-      setOutput(ItemStack(IItems.低碳钢, 1))
+    newConsume().apply {
+      time(45f)
+      item(IItems.赤铁矿, 2)
+      power(60 / 60f)
     }
-    addFormula {
-      craftTime = 60f
-      craftEffect = ct
-      setInput(ConsumeItems(ItemStack.with(IItems.赤铁矿, 2, IItems.生煤, 3)), ConsumePower(90 / 60f, 0f, false))
-      setOutput(ItemStack(IItems.高碳钢, 1))
+    newProduce().apply {
+      items(IItems.低碳钢, 1)
     }
-    setDrawMulti(DrawRegion("-bottom"), DrawArcSmelt().apply {
+    newConsume().apply {
+      time(60f)
+      items(IItems.赤铁矿, 2, IItems.生煤, 3)
+      power(90 / 60f)
+    }
+    newProduce().apply {
+      items(IItems.高碳钢, 1)
+    }
+
+
+    draw = DrawMulti(DrawRegion("-bottom"), DrawArcSmelt().apply {
       x += 8
       startAngle = 135f
       endAngle = 225f
@@ -227,7 +180,7 @@ object CrafterBlocks : Load {
     }, DrawDefault())
     requirements(Category.crafting, IItems.铜锭, 10, IItems.低碳钢, 50)
   }
-  val 普适冶炼阵列 = MultipleCrafter("universalSmelterArray").apply {
+  val 普适冶炼阵列 = NormalCrafter("universalSmelterArray").apply {
     bundle {
       desc(
         zh_CN, "普适冶炼阵列", "核心级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铜,锌,铅等多种金属原料,为后续生产提供稳定的金属供应"
@@ -235,54 +188,58 @@ object CrafterBlocks : Load {
     }
     size = 3
     itemCapacity = 30
-    addFormula {
-      craftTime = 45f
-      craftEffect = IceEffects.square(IceColor.b4)
-      setInput(ConsumeItems(ItemStack.with(IItems.黄铜矿, 2)), ConsumePower(60 / 60f, 0f, false))
-      setOutput(ItemStack(IItems.铜锭, 1))
+    craftEffect = IceEffects.square(IceColor.b4)
+    newConsume().apply {
+      time(80f)
+      item(IItems.黄铜矿, 3)
+      power(60 / 60f)
     }
-    addFormula {
-      craftTime = 50f
-      craftEffect = IceEffects.square(IceColor.b4)
-      setInput(ConsumeItems(ItemStack.with(IItems.方铅矿, 2)), ConsumePower(60 / 60f, 0f, false))
-      setOutput(ItemStack(IItems.铅锭, 1))
+    newProduce().apply {
+      items(IItems.铜锭, 1, IItems.低碳钢, 1)
     }
-    addFormula {
-      craftTime = 60f
-      craftEffect = IceEffects.square(IceColor.b4)
-      setInput(ConsumeItems(ItemStack.with(IItems.闪锌矿, 2)), ConsumePower(60 / 60f, 0f, false))
-      setOutput(ItemStack(IItems.锌锭, 1))
+
+    newConsume().apply {
+      time(180f)
+      item(IItems.方铅矿, 5)
+      power(90 / 60f)
     }
-    setDrawMulti(DrawDefault(), DrawFlame(IceColor.b4))
+    newProduce().apply {
+      items(IItems.铅锭, 4)
+    }
+
+    newConsume().apply {
+      time(120f)
+      item(IItems.闪锌矿, 3)
+      power(180 / 60f)
+    }
+    newProduce().apply {
+      items(IItems.锌锭, 2)
+    }
+
+    draw = DrawMulti(DrawDefault(), DrawFlame(IceColor.b4))
     requirements(Category.crafting, IItems.高碳钢, 150, IItems.低碳钢, 70)
   }
-  val 硫化物混合器 = GenericCrafter("sulfideMixer").apply {
-    size = 3
-    itemCapacity = 36
-    consumePower(1f)
-    consumeItems(IItems.生煤, 4, IItems.铅锭, 6, IItems.金珀沙, 6)
-    craftEffect = IceEffects.square(IItems.硫化合物.color)
-    craftTime = 45f
-    outputItems(IItems.硫化合物, 3)
-    requirements(Category.crafting, IItems.高碳钢, 150, IItems.铜锭, 30, IItems.铬锭, 30)
+
+  val 铸铜厂 = NormalCrafter("copperFoundry").apply {
+    size = 4
+    health = 200
+    newConsume().apply {
+      time(90f)
+      items(IItems.铜锭, 3, IItems.锌锭, 1)
+      power(60 / 60f)
+    }
+    newProduce().apply {
+      items(IItems.黄铜锭, 3)
+    }
+
+    draw = DrawMulti(DrawDefault(), DrawFlame())
+    requirements(Category.crafting, ItemStack.with(IItems.铜锭, 200, IItems.低碳钢, 150))
+    craftEffect = IceEffects.square(IItems.铜锭.color)
     bundle {
-      desc(zh_CN, "硫化物混合器", "将煤,铅,沙混合生成硫化合物")
+      desc(zh_CN, "铸铜厂")
     }
   }
-  val 爆炸物混合器 = GenericCrafter("explosiveMixer").apply {
-    size = 3
-    itemCapacity = 36
-    consumePower(2f)
-    consumeItems(IItems.硫化合物, 3, IItems.燃素水晶, 1)
-    craftTime = 45f
-    craftEffect = IceEffects.square(IItems.爆炸化合物.color)
-    outputItems(IItems.爆炸化合物, 3)
-    requirements(Category.crafting, IItems.高碳钢, 80, IItems.铬锭, 50, IItems.单晶硅, 30)
-    bundle {
-      desc(zh_CN, "爆炸物混合器", "将硫化合物,燃素水晶混合生成爆炸物")
-    }
-  }
-  val 特化冶炼阵列: MultipleCrafter = MultipleCrafter("specializedSmelterArray").apply {
+  val 特化冶炼阵列 = NormalCrafter("specializedSmelterArray").apply {
     bundle {
       desc(
         zh_CN, "特化冶炼阵列", "进阶级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铬,金,钴等多种金属原料,为后续生产提供稳定的金属供应"
@@ -290,27 +247,120 @@ object CrafterBlocks : Load {
     }
     size = 3
     itemCapacity = 35
-    addFormula {
-      craftTime = 60f
-      craftEffect = IceEffects.square(IceColor.b4)
-      setInput(ConsumeItems(ItemStack.with(IItems.铬铁矿, 2)), ConsumePower(60 / 60f, 0f, false))
-      setOutput(ItemStack(IItems.铬锭, 1))
+    craftEffect = IceEffects.square(IceColor.b4)
+    newConsume().apply {
+      time(240f)
+      item(IItems.铬铁矿, 5)
+      power(180f / 60f)
     }
-    addFormula {
-      craftTime = 50f
-      craftEffect = IceEffects.square(IceColor.b4)
-      setInput(ConsumeItems(ItemStack.with(IItems.硫钴矿, 2)), ConsumePower(60 / 60f, 0f, false))
-      setOutput(ItemStack(IItems.钴锭, 1))
+    newProduce().apply {
+      items(IItems.铬锭, 3, IItems.低碳钢, 1)
     }
-    addFormula {
-      craftTime = 60f
-      craftEffect = IceEffects.square(IceColor.b4)
-      setInput(ConsumeItems(ItemStack.with(IItems.金矿, 3)), ConsumePower(60 / 60f, 0f, false))
-      setOutput(ItemStack(IItems.金锭, 1))
+    newConsume().apply {
+      time(150f)
+      item(IItems.硫钴矿, 3)
+      power(90 / 60f)
     }
-    setDrawMulti(DrawDefault(), DrawFlame())
+    newProduce().apply {
+      items(IItems.钴锭, 1)
+    }
+    newConsume().apply {
+      time(60f)
+      item(IItems.金矿, 5)
+      power(80 / 60f)
+    }
+    newProduce().apply {
+      items(IItems.金锭, 1)
+    }
+
+    draw = DrawMulti(DrawDefault(), DrawFlame())
     requirements(Category.crafting, IItems.高碳钢, 150, IItems.铅锭, 40, IItems.铜锭, 30, IItems.锌锭, 30)
   }
+  val 量子蚀刻厂 = NormalCrafter("integratedFactory").apply {
+    size = 3
+    health = 200
+    itemCapacity = 20
+    newConsume().apply {
+      time(160f)
+      items(IItems.单晶硅, 1, IItems.石墨烯, 2, IItems.石英玻璃, 1)
+      power(220 / 60f)
+    }
+    newProduce().apply {
+      items(IItems.电子元件, 1)
+    }
+    craftEffect = MultiEffect(IceEffects.lancerLaserShoot1, IceEffects.lancerLaserChargeBegin, IceEffects.hitLaserBlast)
+    draw = DrawMulti(DrawRegion("-bottom"), DrawRegion("-top"))
+    requirements(Category.crafting, ItemStack.with(IItems.铜锭, 19))
+    bundle {
+      desc(zh_CN, "量子蚀刻厂", "采用等离子蚀刻技术,在硅晶圆上雕刻出微米级电路,电子工业的基础设施")
+    }
+  }
+  val 单晶硅厂 = NormalCrafter("monocrystallineSiliconFactory").apply {
+    size = 4
+    health = 460
+    hasPower = true
+    craftEffect = IceEffects.square(IItems.单晶硅.color)
+    newConsume().apply {
+      time(60f)
+      items(IItems.硫化合物, 1, IItems.石英, 3)
+      power(1.8f)
+    }
+    newProduce().apply {
+      items(IItems.单晶硅, 1)
+    }
+
+    val color = Color.valueOf("ffef99")
+    draw = DrawMulti(DrawRegion("-bottom"), DrawBuild<NormalCrafterBuild> {
+      Draw.color(color)
+      Draw.alpha(warmup)
+      Lines.lineAngleCenter(
+        x + Mathf.sin(totalProgress(), 6f, Vars.tilesize / 3f * size), y, 90f, size * Vars.tilesize / 2f
+      )
+      Lines.lineAngleCenter(
+        x, y + Mathf.sin(totalProgress(), 3f, Vars.tilesize / 3f * size), 0f, size * Vars.tilesize / 2f
+      )
+      Draw.color()
+    }, DrawDefault(), DrawFlame(color))
+    requirements(Category.crafting, IItems.铬锭, 55, IItems.高碳钢, 200, IItems.铜锭, 150)
+    bundle {
+      desc(zh_CN, "单晶硅厂", "使用硫化物和石英矿石生产纯度更高的单晶硅")
+    }
+  }
+  val 硫化物混合器 = NormalCrafter("sulfideMixer").apply {
+    size = 3
+    itemCapacity = 36
+    craftEffect = IceEffects.square(IItems.硫化合物.color)
+    newConsume().apply {
+      time(45f)
+      items(IItems.生煤, 4, IItems.铅锭, 6, IItems.金珀沙, 6)
+      power(1f)
+    }
+    newProduce().apply {
+      items(IItems.硫化合物, 3)
+    }
+    requirements(Category.crafting, IItems.高碳钢, 150, IItems.铜锭, 30, IItems.铬锭, 30)
+    bundle {
+      desc(zh_CN, "硫化物混合器", "将煤,铅,沙混合生成硫化合物")
+    }
+  }
+  val 爆炸物混合器 = NormalCrafter("explosiveMixer").apply {
+    size = 3
+    itemCapacity = 36
+    newConsume().apply {
+      time(45f)
+      items(IItems.硫化合物, 3, IItems.燃素水晶, 1)
+      power(2f)
+    }
+    newProduce().apply {
+      items(IItems.爆炸化合物, 3)
+    }
+    craftEffect = IceEffects.square(IItems.爆炸化合物.color)
+    requirements(Category.crafting, IItems.高碳钢, 80, IItems.铬锭, 50, IItems.单晶硅, 30)
+    bundle {
+      desc(zh_CN, "爆炸物混合器", "将硫化合物,燃素水晶混合生成爆炸物")
+    }
+  }
+
   val 矿石粉碎机 = object : OreMultipleCrafter("mineralCrusher") {
     init {
       squareSprite = false
@@ -333,25 +383,30 @@ object CrafterBlocks : Load {
         addInput(IItems.方铅矿, 1)
         addInput(ConsumeLiquids(LiquidStack.with(Liquids.water, 15f)))
         addOutput(IItems.铅锭, 1, 5)
-        addOutput(Items.copper, 2, 60)
+        addOutput(IItems.铜锭, 2, 60)
         addOutput(Items.beryllium, 3, 7)
       }, OreFormula().apply {
         crftTime = 30f
         addInput(IItems.黄铜矿, 1, IItems.生煤, 1)
         addOutput(IItems.铅锭, 1, 50)
-        addOutput(Items.graphite, 1, 50)
+        addOutput(IItems.钴锭, 1, 50)
       })
     }
   }
-  val 蜂巢陶瓷合成巢 = GenericCrafter("ceramicKiln").apply {
+  val 蜂巢陶瓷合成巢 = NormalCrafter("ceramicKiln").apply {
     size = 4
     health = 300
-    craftTime = 120f
     squareSprite = false
-    outputItems(IItems.复合陶瓷, 3)
-    consumeItems(IItems.金珀沙, 10)
-    consumeLiquids(ILiquids.异溶质, 32f / 60f)
-    setDrawMulti(DrawRegion("-bottom"), DrawCultivator().apply {
+    newConsume().apply {
+      time(120f)
+      items(IItems.金珀沙, 10)
+      liquid(ILiquids.异溶质, 32f / 60f)
+      power(1f)
+    }
+    newProduce().apply {
+      items(IItems.复合陶瓷, 3)
+    }
+    draw = DrawMulti(DrawRegion("-bottom"), DrawCultivator().apply {
       plantColor = ILiquids.异溶质.color
       plantColorLight = Color.valueOf("abbaff")
       spread = 2 * 8f - 6f
@@ -363,21 +418,25 @@ object CrafterBlocks : Load {
       )
     }
   }
-  val 冲压锻炉 = GenericCrafter("pressingForge").apply {
+  val 冲压锻炉 = NormalCrafter("pressingForge").apply {
     size = 5
     armor = 4f
     itemCapacity = 60
     liquidCapacity = 60f
-    consumePower(27.5f)
-    consumeItems(IItems.铱锇矿, 45)
-    consumeLiquid(Liquids.water, 1f)
-    craftTime = 45f
+    newConsume().apply {
+      time(45f)
+      items(IItems.铱锇矿, 45)
+      liquid(Liquids.water, 1f)
+      power(27.5f)
+    }
+    newProduce().apply {
+      items(IItems.铱板, 15)
+      liquid(ILiquids.废水, 1f)
+    }
     updateEffect = Fx.fuelburn
     craftEffect = Fx.pulverizeMedium
-    outputItems(IItems.铱板, 15)
-    outputLiquids(ILiquids.废水, 1f)
     requirements(Category.crafting, IItems.高碳钢, 450, IItems.锌锭, 180, IItems.钴锭, 135)
-    setDrawMulti(DrawRegion("-bottom"), DrawPistons().apply {
+    draw = DrawMulti(DrawRegion("-bottom"), DrawPistons().apply {
       sinMag = -2.6f
       sinScl = 3.5325f
       lenOffset = 0f
@@ -391,11 +450,19 @@ object CrafterBlocks : Load {
       desc(zh_CN, "冲压锻炉", "快速大批量地熔炼铱锇矿并将其锻压为铱板")
     }
   }
-  val 暮白高炉 = GenericCrafter("duskFactory").apply {
+  val 暮白高炉 = NormalCrafter("duskFactory").apply {
     size = 3
-    craftTime = 120f
     itemCapacity = 20
-    setDrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawArcSmelt().apply {
+    craftEffect = IceEffects.square(IceColor.b4, length = 6f)
+    newConsume().apply {
+      time(120f)
+      items(IItems.低碳钢, 5, IItems.铬锭, 1, IItems.钴锭, 3, IItems.铪锭, 1)
+      liquid(ILiquids.暮光液, 0.3f)
+    }
+    newProduce().apply {
+      items(IItems.暮光合金, 3)
+    }
+    draw = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawArcSmelt().apply {
       y = 2f
       flameColor = IceColor.b4
       startAngle = 60f
@@ -418,25 +485,25 @@ object CrafterBlocks : Load {
     }, DrawDefault(), DrawFlame().apply {
       flameColor = IceColor.b4
     })
-    craftEffect = IceEffects.square(IceColor.b4, length = 6f)
-    outputItems(IItems.暮光合金, 3)
-    consumeItems(IItems.低碳钢, 5, IItems.铬锭, 1, IItems.钴锭, 3, IItems.铪锭, 1)
-    consumeLiquid(ILiquids.暮光液, 0.3f)
     requirements(Category.crafting, IItems.高碳钢, 200, IItems.铬锭, 50, IItems.钴锭, 30, IItems.铪锭, 10)
     bundle {
       desc(zh_CN, "暮白高炉", "将金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金")
     }
   }
-  val 玳渊缚能厂 = GenericCrafter("tortoiseshellFactory").apply {
+  val 玳渊缚能厂 = NormalCrafter("tortoiseshellFactory").apply {
     size = 4
     health = 700
-    craftTime = 120f
     itemCapacity = 20
-    setDrawMulti(DrawDefault(), DrawFlame().apply {
+    newConsume().apply {
+      time(120f)
+      items(IItems.铪锭, 10, IItems.暮光合金, 3, IItems.铱锭, 1)
+    }
+    newProduce().apply {
+      items(IItems.玳渊矩阵, 1)
+    }
+    draw = DrawMulti(DrawDefault(), DrawFlame().apply {
       flameColor = Color.valueOf("c4aee4")
     })
-    outputItems(IItems.玳渊矩阵, 1)
-    consumeItems(IItems.铪锭, 10, IItems.暮光合金, 3, IItems.铱板, 1)
     requirements(Category.crafting, IItems.铬锭, 300, IItems.铪锭, 200, IItems.黄铜锭, 170)
     bundle {
       desc(
@@ -444,29 +511,36 @@ object CrafterBlocks : Load {
       )
     }
   }
-  val 萃取固化器 = GenericCrafter("concentrateSolidifier").apply {
+  val 萃取固化器 = NormalCrafter("concentrateSolidifier").apply {
     size = 3
     health = 400
-    craftTime = 90f
     itemCapacity = 20
+    newConsume().apply {
+      time(90f)
+      items(IItems.锆英石, 3)
+      power(230f / 60f)
+    }
+    newProduce().apply {
+      items(IItems.铪锭, 1)
+    }
     craftEffect = IceEffects.square(IItems.铪锭.color, length = 8f)
-    setDrawMulti(DrawDefault())
-    consumePower(230f / 60f)
-    outputItems(IItems.铪锭, 1)
-    consumeItems(IItems.锆英石, 3)
+    draw = (DrawDefault())
     requirements(Category.crafting, IItems.高碳钢, 100, IItems.铬锭, 80, IItems.黄铜锭, 50, IItems.铜锭, 30)
     bundle {
       desc(zh_CN, "萃取固化器", "")
     }
   }
-  val 电弧炉 = GenericCrafter("arcFurnace").apply {
+  val 电弧炉 = NormalCrafter("arcFurnace").apply {
     size = 3
     itemCapacity = 36
-    consumePower(2.75f)
-    craftTime = 4f * 60f
-    outputItems(IItems.石英玻璃, 4)
-    consumeItems(IItems.铅锭, 3, IItems.石英, 2, IItems.金珀沙, 2)
-    setDrawMulti(DrawDefault(), DrawFlame())
+    newConsume().apply {
+      time(4f * 60f)
+      items(IItems.铅锭, 3, IItems.石英, 2, IItems.金珀沙, 2)
+      power(2.75f)
+    }
+    newProduce().apply {
+      items(IItems.石英玻璃, 4)
+    }
     requirements(Category.crafting, IItems.高碳钢, 80, IItems.铅锭, 50, IItems.铜锭, 50, IItems.锌锭, 30)
     bundle {
       desc(zh_CN, "电弧炉")
@@ -476,16 +550,20 @@ object CrafterBlocks : Load {
     size = 3
     itemCapacity = 36
     liquidCapacity = 36f
-    consumePower(7.6f)
-    consumeItems(IItems.铈硅石, 5)
-    consumeLiquids(ILiquids.异溶质, 15f / 60f)
-    craftTime = 80f
-    outputItems(IItems.铈锭, 2)
-    outputLiquids(ILiquids.废水, 0.2f)
+    newConsume().apply {
+      time(80f)
+      items(IItems.铈硅石, 5)
+      liquid(ILiquids.异溶质, 15f / 60f)
+      power(7.6f)
+    }
+    newProduce().apply {
+      items(IItems.铈锭, 2)
+      liquid(ILiquids.废水, 0.2f)
+    }
     requirements(
       Category.crafting, IItems.铱板, 55, IItems.高碳钢, 230, IItems.石英玻璃, 30, IItems.铬锭, 80, IItems.单晶硅, 80
     )
-    setDrawMulti(DrawRegion("-bottom"), DrawLiquidTile(Liquids.water), DrawCultivator().apply {
+    draw = DrawMulti(DrawRegion("-bottom"), DrawLiquidTile(Liquids.water), DrawCultivator().apply {
       plantColor = Color.valueOf("A24FAA")
       plantColorLight = Color.valueOf("F9A3C7")
       bottomColor = Color.valueOf("474747")
@@ -519,16 +597,20 @@ object CrafterBlocks : Load {
     size = 4
     itemCapacity = 48
     liquidCapacity = 48f
-    consumePower(13.85f)
-    consumeItems(IItems.铈硅石, 7)
-    consumeLiquids(ILiquids.异溶质, 36f / 60f)
-    craftTime = 35f
-    outputItems(IItems.铈锭, 3)
-    outputLiquids(ILiquids.废水, 30f / 60f)
+    newConsume().apply {
+      time(35f)
+      items(IItems.铈硅石, 7)
+      liquid(ILiquids.异溶质, 36f / 60f)
+      power(13.85f)
+    }
+    newProduce().apply {
+      items(IItems.铈锭, 3)
+      liquid(ILiquids.废水, 30f / 60f)
+    }
     requirements(
-      Category.crafting, IItems.铬锭, 185, IItems.铱板, 100, IItems.石英玻璃, 45, IItems.铱板, 120, IItems.导能回路, 80, IItems.铈锭, 55
+      Category.crafting, IItems.铬锭, 185, IItems.石英玻璃, 45, IItems.铱板, 120, IItems.导能回路, 80, IItems.铈锭, 55
     )
-    setDrawMulti(DrawRegion("-bottom"), DrawLiquidTile(Liquids.water), DrawCultivator().apply {
+    draw = DrawMulti(DrawRegion("-bottom"), DrawLiquidTile(Liquids.water), DrawCultivator().apply {
       plantColor = Color.valueOf("A24FAA")
       plantColorLight = Color.valueOf("F9A3C7")
       bottomColor = Color.valueOf("474747")
@@ -560,16 +642,20 @@ object CrafterBlocks : Load {
       )
     }
   }
-  val 导能回路装配器 = GenericCrafter("conductiveCircuitAssembler").apply {
+  val 导能回路装配器 = NormalCrafter("conductiveCircuitAssembler").apply {
     size = 5
     armor = 4f
     itemCapacity = 60
     canOverdrive = false
-    consumePower(15.25f)
-    consumeItems(IItems.单晶硅, 9, IItems.铪锭, 3)
-    outputItems(IItems.导能回路, 6)
+    newConsume().apply {
+      time(120f)
+      items(IItems.单晶硅, 9, IItems.铪锭, 3)
+      power(15.25f)
+    }
+    newProduce().apply {
+      items(IItems.导能回路, 6)
+    }
     updateEffect = Fx.mineBig
-    craftTime = 120f
     craftEffect = WaveEffect().apply {
       lifetime = 180f
       sizeTo = 40f
@@ -578,7 +664,7 @@ object CrafterBlocks : Load {
       colorFrom = Color.valueOf("B7B9C2")
       colorTo = Color.valueOf("B7B9C280")
     }
-    setDrawMulti(DrawDefault(), DrawFlame().apply {
+    draw = DrawMulti(DrawDefault(), DrawFlame().apply {
       flameColor = Color.valueOf("B7B9C2")
       lightRadius = 60f
       lightAlpha = 0.6f
@@ -600,41 +686,53 @@ object CrafterBlocks : Load {
       )
     }
   }
-  val 高速粉碎机 = GenericCrafter("highSpeedCrusher").apply {
+  val 高速粉碎机 = NormalCrafter("highSpeedCrusher").apply {
+
     size = 2
     itemCapacity = 24
+    squareSprite = false
     craftEffect = Fx.pulverize
     updateEffect = Fx.pulverizeSmall
-    consumePower(1f)
-    craftTime = 10f
-    consumeItems(IItems.黄玉髓, 2)
-    outputItems(IItems.金珀沙, 4)
-    setDrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
+    ambientSound = Sounds.loopGrind
+    ambientSoundVolume = 0.025f
+    newConsume().apply {
+      time(10f)
+      power(1f)
+      items(IItems.黄玉髓, 2)
+    }
+    newProduce().apply {
+      items(IItems.金珀沙, 4)
+    }
+
+    draw = DrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
       spinSprite = true
       rotateSpeed = 15f
     }, DrawDefault())
-    ambientSound = Sounds.loopGrind
-    ambientSoundVolume = 0.025f
+
     requirements(Category.crafting, IItems.高碳钢, 100, IItems.铜锭, 50, IItems.铅锭, 30, IItems.低碳钢, 20)
     bundle {
       desc(zh_CN, "高速粉碎机")
     }
   }
-  val 钴钢压缩机 = GenericCrafter("cobaltSteelCompressor").apply {
+  val 钴钢压缩机 = NormalCrafter("cobaltSteelCompressor").apply {
     size = 3
     hasLiquids = true
     squareSprite = false
     itemCapacity = 36
     liquidCapacity = 36f
-    consumePower(7.5f)
-    craftTime = 36f
+    newConsume().apply {
+      time(36f)
+      items(IItems.钴锭, 4, IItems.铬锭, 2)
+      liquid(ILiquids.异溶质, 20f / 60f)
+      power(7.5f)
+    }
+    newProduce().apply {
+      items(IItems.钴钢, 3)
+    }
     craftEffect = IceEffects.square(IItems.钴钢.color)
     updateEffect = Fx.plasticburn
-    consumeLiquids(ILiquids.异溶质, 20f / 60f)
-    outputItems(IItems.钴钢, 3)
-    consumeItems(IItems.钴锭, 4, IItems.铬锭, 2)
     requirements(Category.crafting, IItems.高碳钢, 150, IItems.铬锭, 100, IItems.锌锭, 50)
-    setDrawMulti(DrawRegion("-bottom"), DrawPistons().apply {
+    draw = DrawMulti(DrawRegion("-bottom"), DrawPistons().apply {
       sinMag = 2.75f
       sinScl = 3f
       sides = 8
@@ -648,33 +746,42 @@ object CrafterBlocks : Load {
       desc(zh_CN, "钴钢压缩机")
     }
   }
-  val 陶钢熔炼炉 = GenericCrafter("ceramicSteelFurnace").apply {
+  val 陶钢熔炼炉 = NormalCrafter("ceramicSteelFurnace").apply {
     size = 3
     itemCapacity = 36
-    consumePower(7.75f)
-    consumeItems(IItems.石英玻璃, 1, IItems.钴钢, 1, IItems.铈锭, 1)
-    outputItems(IItems.陶钢, 1)
-    craftTime = 60f
+    newConsume().apply {
+      time(60f)
+      power(7.75f)
+      items(IItems.石英玻璃, 1, IItems.钴钢, 1, IItems.铈锭, 1)
+
+    }
+    newProduce().apply {
+      items(IItems.陶钢, 1)
+    }
     canOverdrive = false
     updateEffect = Fx.melting
     requirements(Category.crafting, IItems.铬锭, 130, IItems.钴钢, 45, IItems.铱板, 55, IItems.导能回路, 45)
-    setDrawMulti(DrawDefault(), DrawFlame())
+    draw=DrawMulti(DrawDefault(), DrawFlame())
     ambientSound = ISounds.beamLoop
     ambientSoundVolume = 0.02f
     bundle {
       desc(zh_CN, "陶钢熔炼炉", "使用多种原料熔炼一种前所未见的多功能装甲材料-陶钢")
     }
   }
-  val 高能陶钢聚合炉 = GenericCrafter("highEnergyCeramicSteelFurnace").apply {
+  val 高能陶钢聚合炉 = NormalCrafter("highEnergyCeramicSteelFurnace").apply {
     size = 5
     dumpTime = 2
     itemCapacity = 120
     liquidCapacity = 60f
-    consumePower(23.8f)
-    consumeItems(IItems.钴钢, 12, IItems.铈锭, 12, IItems.石英玻璃, 12)
-    consumeLiquids(ILiquids.异溶质, 30 / 60f)
-    outputItems(IItems.陶钢, 12)
-    craftTime = 240f
+    newConsume().apply {
+      power(23.8f)
+      time(240f)
+      items(IItems.钴钢, 12, IItems.铈锭, 12, IItems.石英玻璃, 12)
+      liquid(ILiquids.异溶质, 30f / 60f)
+    }
+    newProduce().apply {
+      item(IItems.陶钢, 12)
+    }
     canOverdrive = false
     updateEffect = Fx.redgeneratespark
     craftEffect = MultiEffect(RadialEffect().apply {
@@ -691,7 +798,7 @@ object CrafterBlocks : Load {
       amount = 4
     })
     requirements(Category.crafting, IItems.钴钢, 230, IItems.铱板, 115, IItems.导能回路, 85, IItems.陶钢, 45)
-    setDrawMulti(DrawRegion("-bottom"), DrawCircles().apply {
+    draw = DrawMulti(DrawRegion("-bottom"), DrawCircles().apply {
       color = Color.valueOf("FEB380")
       amount = 3
       sides = 16
@@ -723,16 +830,20 @@ object CrafterBlocks : Load {
       )
     }
   }
-  val 铈凝块混合器 = GenericCrafter("ceriumBlockMixer").apply {
+  val 铈凝块混合器 = NormalCrafter("ceriumBlockMixer").apply {
     size = 2
     itemCapacity = 36
     craftEffect = IceEffects.square(IItems.铈凝块.color)
-    consumePower(2f)
-    consumeItems(IItems.爆炸化合物, 3, IItems.铈锭, 2)
-    craftTime = 90f
-    outputItems(IItems.铈凝块, 2)
+    newConsume().apply {
+      power(2f)
+      time(90f)
+      items(IItems.爆炸化合物, 3, IItems.铈锭, 2)
+    }
+    newProduce().apply {
+      item(IItems.铈凝块, 2)
+    }
     requirements(Category.crafting, IItems.铬锭, 80, IItems.铪锭, 60, IItems.铈锭, 50, IItems.单晶硅, 35)
-    setDrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
+    draw = DrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
       rotateSpeed = 3f
     }, DrawDefault(), DrawRegion("-top"))
     bundle {
@@ -746,7 +857,7 @@ object CrafterBlocks : Load {
       desc(zh_CN, "裂变编织器", "使用相控阵辐照压印技术,在有辐射源的情况下将铀的同位素压印为相位物")
     }
     requirements(
-      Category.crafting, IItems.FEX水晶, 50, Items.phaseFabric, 60, IItems.强化合金, 50, Items.plastanium, 45, IItems.单晶硅, 70
+      Category.crafting, IItems.FEX水晶, 50, IItems.絮凝剂, 60, IItems.强化合金, 50, IItems.钴钢, 45, IItems.单晶硅, 70
     )
     size = 4
     oneOfOptionCons = true
@@ -814,7 +925,7 @@ object CrafterBlocks : Load {
       }
       requirements(
         Category.production, ItemStack.with(
-          Items.copper, 10, IItems.石英玻璃, 12, Items.graphite, 8
+          IItems.铜锭, 10, IItems.石英玻璃, 12, IItems.钴锭, 8
         )
       )
       hasLiquids = true
@@ -922,7 +1033,7 @@ object CrafterBlocks : Load {
       }
       requirements(
         Category.production, ItemStack.with(
-          Items.plastanium, 85, IItems.铬锭, 90, IItems.气凝胶, 80, Items.copper, 90
+          IItems.钴钢, 85, IItems.铬锭, 90, IItems.气凝胶, 80, IItems.铜锭, 90
         )
       )
       size = 3
@@ -973,12 +1084,12 @@ object CrafterBlocks : Load {
       desc(zh_CN, "电解机", "内置了几组电极以进行一系列电化学反应,将材料电解为一些有用的东西")
     }
     requirements(
-      Category.crafting, IItems.铬锭, 80, Items.copper, 100, IItems.铅锭, 80, IItems.单晶硅, 50, IItems.石英玻璃, 60, Items.plastanium, 35
+      Category.crafting, IItems.铬锭, 80, IItems.铜锭, 100, IItems.铅锭, 80, IItems.单晶硅, 50, IItems.石英玻璃, 60, IItems.钴钢, 35
     )
     size = 3
     itemCapacity = 25
     liquidCapacity = 40f
-
+    squareSprite = false
     newConsume().apply {
       liquid(Liquids.water, 0.6f)
       power(6f)
@@ -1013,7 +1124,7 @@ object CrafterBlocks : Load {
     newProduce()
     produce!!.items(
       *ItemStack.with(
-        IItems.铝, 4, IItems.铅锭, 3, IItems.铬锭, 1, Items.thorium, 2
+        IItems.铝, 4, IItems.铅锭, 3, IItems.铬锭, 1, IItems.钍锭, 2
       )
     )
 
@@ -1069,11 +1180,11 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.铬锭, 60, IItems.铅锭, 90, Items.graphite, 100, IItems.石英玻璃, 80, IItems.单晶硅, 70
+        IItems.铬锭, 60, IItems.铅锭, 90, IItems.钴锭, 100, IItems.石英玻璃, 80, IItems.单晶硅, 70
       )
     )
     size = 3
-
+    squareSprite = false
     itemCapacity = 20
     liquidCapacity = 40f
 
@@ -1125,10 +1236,10 @@ object CrafterBlocks : Load {
       desc(zh_CN, "反应仓", "一个精准控制进料的化学反应容器,是普遍使用的化工设备")
     }
     requirements(
-      Category.crafting, IItems.铬锭, 100, IItems.石英玻璃, 100, IItems.铅锭, 80, Items.graphite, 85, IItems.单晶硅, 80, Items.plastanium, 7
+      Category.crafting, IItems.铬锭, 100, IItems.石英玻璃, 100, IItems.铅锭, 80, IItems.钴锭, 85, IItems.单晶硅, 80, IItems.钴钢, 7
     )
     size = 3
-
+    squareSprite = false
     itemCapacity = 35
     liquidCapacity = 45f
 
@@ -1188,7 +1299,7 @@ object CrafterBlocks : Load {
 
     newConsume()
     consume!!.time(30f)
-    consume!!.item(Items.coal, 1)
+    consume!!.item(IItems.生煤, 1)
     consume!!.liquids(
       *LiquidStack.with(
         ILiquids.酸液, 0.2f, ILiquids.孢子云, 0.3f
@@ -1239,7 +1350,7 @@ object CrafterBlocks : Load {
           }
         }
       }
-    }, object : DrawDyColorCultivator<NormalCrafterBuild?>() {
+    }, object : DrawDyColorCultivator<NormalCrafterBuild>() {
       init {
         spread = 4f
         plantColor = Func { e: NormalCrafterBuild? -> SglDrawConst.transColor }
@@ -1251,11 +1362,11 @@ object CrafterBlocks : Load {
   }
   var 燃烧室 = NormalCrafter("combustion_chamber").apply {
     bundle {
-      desc(zh_CN, "反应仓", "一个精准控制进料的化学反应容器,是普遍使用的化工设备","密闭耐高温的舱室,用于执行化学燃烧过程,为最大化利用燃烧释放的能量,燃烧会将在活塞室内进行以推动线圈产生电力")
+      desc(zh_CN, "燃烧室", "密闭耐高温的舱室,用于执行化学燃烧过程,为最大化利用燃烧释放的能量,燃烧会将在活塞室内进行以推动线圈产生电力")
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.铬锭, 90, Items.graphite, 80, IItems.石英玻璃, 80, IItems.单晶硅, 75
+        IItems.铬锭, 90, IItems.钴锭, 80, IItems.石英玻璃, 80, IItems.单晶硅, 75
       )
     )
     size = 3
@@ -1289,13 +1400,11 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.铬锭, 90, IItems.单晶硅, 80, Items.plastanium, 60, IItems.石英玻璃, 75, Items.graphite, 80
+        IItems.铬锭, 90, IItems.单晶硅, 80, IItems.钴钢, 60, IItems.石英玻璃, 75, IItems.钴锭, 80
       )
     )
     size = 3
-
-
-
+    squareSprite = false
     liquidCapacity = 45f
     itemCapacity = 30
 
@@ -1306,7 +1415,7 @@ object CrafterBlocks : Load {
         ILiquids.氯化硅溶胶, 0.2f, Liquids.hydrogen, 0.4f
       )
     )
-    consume!!.item(Items.sand, 5)
+    consume!!.item(IItems.金珀沙, 5)
     consume!!.power(2f)
     newProduce()
     produce!!.item(
@@ -1347,7 +1456,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.铬锭, 65, IItems.单晶硅, 70, Items.copper, 60, Items.graphite, 60, Items.plastanium, 70
+        IItems.铬锭, 65, IItems.单晶硅, 70, IItems.铜锭, 60, IItems.钴锭, 60, IItems.钴钢, 70
       )
     )
     size = 3
@@ -1359,7 +1468,7 @@ object CrafterBlocks : Load {
     consume!!.time(90f)
     consume!!.items(
       *ItemStack.with(
-        IItems.铬锭, 3, Items.thorium, 2, IItems.焦炭, 1
+        IItems.铬锭, 3, IItems.钍锭, 2, IItems.焦炭, 1
       )
     )
     consume!!.liquid(ILiquids.氯化硅溶胶, 0.2f)
@@ -1385,10 +1494,10 @@ object CrafterBlocks : Load {
       override fun draw(build: Building) {
         val base = (Time.time / 70)
         Draw.color(flameColor, 0.5f)
-        DrawBlock.rand.setSeed(build.id.toLong())
+        rand.setSeed(build.id.toLong())
         for (i in 0..34) {
-          val fin = (DrawBlock.rand.random(1f) + base) % 1f
-          val angle = DrawBlock.rand.random(360f) + (Time.time / 1.5f) % 360f
+          val fin = (rand.random(1f) + base) % 1f
+          val angle = rand.random(360f) + (Time.time / 1.5f) % 360f
           val len = 10 * Mathf.pow(fin, 1.5f)
           Draw.alpha(0.5f * build.warmup() * (1f - Mathf.curve(fin, 1f - 0.4f)))
           Fill.circle(
@@ -1417,7 +1526,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.铬锭, 70, Items.graphite, 75, Items.copper, 90, IItems.石英玻璃, 90, Items.plastanium, 50
+        IItems.铬锭, 70, IItems.钴锭, 75, IItems.铜锭, 90, IItems.石英玻璃, 90, IItems.钴钢, 50
       )
     )
     size = 3
@@ -1429,7 +1538,7 @@ object CrafterBlocks : Load {
     newConsume()
     consume!!.time(90f)
     consume!!.power(2f)
-    consume!!.item(Items.coal, 3)
+    consume!!.item(IItems.生煤, 3)
     newProduce()
     produce!!.items(
       *ItemStack.with(
@@ -1453,7 +1562,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.FEX水晶, 45, IItems.强化合金, 70, IItems.单晶硅, 90, Items.phaseFabric, 65, IItems.石英玻璃, 120
+        IItems.FEX水晶, 45, IItems.强化合金, 70, IItems.单晶硅, 90, IItems.絮凝剂, 65, IItems.石英玻璃, 120
       )
     )
     size = 3
@@ -1468,7 +1577,7 @@ object CrafterBlocks : Load {
     newProduce().color = IItems.核废料.color
     produce!!.items(
       *ItemStack.with(
-        IItems.铱金混合物, 2, IItems.铅锭, 5, Items.thorium, 3
+        IItems.铱金混合物, 2, IItems.铅锭, 5, IItems.钍锭, 3
       )
     ).random()
 
@@ -1480,7 +1589,7 @@ object CrafterBlocks : Load {
     newProduce().color = Items.scrap.color
     produce!!.items(
       *ItemStack.with(
-        Items.thorium, 3, IItems.铬锭, 4, IItems.铅锭, 5, Items.copper, 3
+        IItems.钍锭, 3, IItems.铬锭, 4, IItems.铅锭, 5, IItems.铜锭, 3
       )
     ).random()
 
@@ -1491,7 +1600,7 @@ object CrafterBlocks : Load {
     newProduce().color = IItems.黑晶石.color
     produce!!.items(
       *ItemStack.with(
-        IItems.铬锭, 2, Items.thorium, 1, IItems.铅锭, 3, IItems.铝, 4
+        IItems.铬锭, 2, IItems.钍锭, 1, IItems.铅锭, 3, IItems.铝, 4
       )
     ).random()
 
@@ -1501,8 +1610,10 @@ object CrafterBlocks : Load {
       override fun draw(build: Building) {
         val e = build as NormalCrafterBuild
         if (e.producer!!.current == null) return
+
         val region = Vars.renderer.fluidFrames[0][Liquids.water.animationFrame]
         val toDraw = Tmp.tr1
+
         val bounds = size / 2f * Vars.tilesize - 3
         val color = e.producer!!.current!!.color
 
@@ -1531,12 +1642,11 @@ object CrafterBlocks : Load {
               oy = -squishY / 2f
             }
 
-            Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, e.warmup, color)
+            Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, e.warmup(), color)
           }
         }
-        Draw.rect()
       }
-    }, DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild?>("_laser") {
+    }, DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild>("_laser") {
       init {
         rotation = Floatf { e: NormalCrafterBuild? -> e!!.totalProgress * 1.5f }
         alpha = Floatf { obj: NormalCrafterBuild? -> obj!!.workEfficiency() }
@@ -1560,13 +1670,13 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        Items.copper, 30, IItems.单晶硅, 24, IItems.石英玻璃, 30, Items.graphite, 20
+        IItems.铜锭, 30, IItems.单晶硅, 24, IItems.石英玻璃, 30, IItems.钴锭, 20
       )
     )
     size = 2
     hasLiquids = true
     liquidCapacity = 30f
-
+    squareSprite = false
     updateEffect = Fx.steam
     updateEffectChance = 0.035f
 
@@ -1588,17 +1698,17 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.铝, 50, Items.graphite, 60, IItems.单晶硅, 45, IItems.铬锭, 45, IItems.气凝胶, 50
+        IItems.铝, 50, IItems.钴锭, 60, IItems.单晶硅, 45, IItems.铬锭, 45, IItems.气凝胶, 50
       )
     )
     size = 3
     hasLiquids = true
     liquidCapacity = 30f
-
+    squareSprite = false
     newConsume()
     consume!!.time(60f)
     consume!!.liquid(Liquids.water, 2f)
-    consume!!.item(Items.graphite, 1)
+    consume!!.item(IItems.钴锭, 1)
     consume!!.power(1f)
     newProduce()
     produce!!.liquid(ILiquids.纯净水, 2f)
@@ -1651,7 +1761,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.铬锭, 60, Items.graphite, 40, IItems.铅锭, 45, IItems.石英玻璃, 60
+        IItems.铬锭, 60, IItems.钴锭, 40, IItems.铅锭, 45, IItems.石英玻璃, 60
       )
     )
     size = 2
@@ -1669,7 +1779,7 @@ object CrafterBlocks : Load {
     produce!!.liquid(ILiquids.FEX流体, 0.2f)
     produce!!.items(
       *ItemStack.with(
-        Items.sand, 5, IItems.黑晶石, 3, IItems.铀原矿, 2
+        IItems.金珀沙, 5, IItems.黑晶石, 3, IItems.铀原矿, 2
       )
     ).random()
 
@@ -1709,7 +1819,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.强化合金, 35, IItems.单晶硅, 45, Items.copper, 40, IItems.石英玻璃, 50
+        IItems.强化合金, 35, IItems.单晶硅, 45, IItems.铜锭, 40, IItems.石英玻璃, 50
       )
     )
     size = 2
@@ -1724,7 +1834,7 @@ object CrafterBlocks : Load {
     produce!!.item(IItems.FEX水晶, 2)
 
     draw = DrawMulti(
-      object : DrawCultivator() {
+      DrawDefaultBottom(), object : DrawCultivator() {
         init {
           plantColor = Color.valueOf("#C73A3A")
           plantColorLight = Color.valueOf("#E57D7D")
@@ -1742,7 +1852,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.强化合金, 40, Items.plastanium, 90, Items.phaseFabric, 85, IItems.单晶硅, 80
+        IItems.强化合金, 40, IItems.钴钢, 90, IItems.絮凝剂, 85, IItems.单晶硅, 80
       )
     )
     size = 2
@@ -1772,7 +1882,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.强化合金, 45, Items.phaseFabric, 40, IItems.单晶硅, 45, Items.graphite, 30
+        IItems.强化合金, 45, IItems.絮凝剂, 40, IItems.单晶硅, 45, IItems.钴锭, 30
       )
     )
     size = 2
@@ -1811,7 +1921,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.强化合金, 80, IItems.气凝胶, 80, Items.phaseFabric, 60, IItems.单晶硅, 60, Items.graphite, 45
+        IItems.强化合金, 80, IItems.气凝胶, 80, IItems.絮凝剂, 60, IItems.单晶硅, 60, IItems.钴锭, 45
       )
     )
     size = 3
@@ -1875,7 +1985,7 @@ object CrafterBlocks : Load {
       desc(zh_CN, "热能离心机", "以极高的温度将物质熔化成液态,以差速离心分离其中不同质量的物质")
     }
     requirements(
-      Category.crafting, IItems.强化合金, 100, IItems.气凝胶, 80, Items.copper, 120, IItems.单晶硅, 70, Items.plastanium, 75
+      Category.crafting, IItems.强化合金, 100, IItems.气凝胶, 80, IItems.铜锭, 120, IItems.单晶硅, 70, IItems.钴钢, 75
     )
     size = 3
     itemCapacity = 28
@@ -1900,7 +2010,7 @@ object CrafterBlocks : Load {
     consume!!.time(120f)
     consume!!.item(IItems.黑晶石, 5)
     consume!!.power(2.8f)
-    setByProduct(0.3f, Items.thorium)
+    setByProduct(0.3f, IItems.钍锭)
     newProduce().color = IItems.黑晶石.color
     produce!!.items(
       *ItemStack.with(
@@ -1912,7 +2022,7 @@ object CrafterBlocks : Load {
     updateEffect = Fx.plasticburn
 
     draw = DrawMulti(DrawBottom(), object : DrawBlock() {
-      override fun draw(build: Building?) {
+      override fun draw(build: Building) {
         val e = build as NormalCrafterBuild
         if (e.producer!!.current == null) return
 
@@ -1950,21 +2060,7 @@ object CrafterBlocks : Load {
           }
         }
       }
-    }, object : DrawRegion("_rim") {
-      init {
-        rotateSpeed = 0.8f
-        spinSprite = true
-      }
-    }, DrawDefault(), object : DrawRegion("_rotator") {
-      init {
-        rotateSpeed = 1.8f
-        spinSprite = true
-      }
-    }, object : DrawRegion("_toprotator") {
-      init {
-        rotateSpeed = -1.2f
-      }
-    }, object : DrawRegionDynamic<NormalCrafterBuild?>("_top") {
+    }, DrawRegion("_rim", 0.8f, true), DrawDefault(), DrawRegion("_rotator", 1.8f, true), DrawRegion("_toprotator", -1.2f, true), object : DrawRegionDynamic<NormalCrafterBuild?>("_top") {
       init {
         rotation = Floatf { e: NormalCrafterBuild? -> -e!!.totalProgress() * 1.2f }
         color = Func { e: NormalCrafterBuild? -> if (e!!.producer!!.current != null) e.producer!!.current!!.color else SglDrawConst.transColor }
@@ -1982,7 +2078,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.强化合金, 80, IItems.充能FEX水晶, 60, IItems.FEX水晶, 75, Items.phaseFabric, 80
+        IItems.强化合金, 80, IItems.充能FEX水晶, 60, IItems.FEX水晶, 75, IItems.絮凝剂, 80
       )
     )
     size = 3
@@ -2061,11 +2157,7 @@ object CrafterBlocks : Load {
     bundle {
       desc(zh_CN, "FEX充能座", "对FEX结晶释放高能中子脉冲,合适的脉冲频率会令能量在晶格之内不断积累,叠加,使FEX晶体结构变得不稳定,并带来一些特别的效果")
     }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.强化合金, 70, IItems.FEX水晶, 60, IItems.石英玻璃, 65, Items.phaseFabric, 70, Items.plastanium, 85
-      )
-    )
+    requirements(Category.crafting, IItems.强化合金, 70, IItems.FEX水晶, 60, IItems.石英玻璃, 65, IItems.絮凝剂, 70, IItems.钴钢, 85)
     size = 3
 
     itemCapacity = 15
@@ -2117,7 +2209,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.强化合金, 80, IItems.充能FEX水晶, 75, IItems.石英玻璃, 80, Items.phaseFabric, 90, Items.surgeAlloy, 120
+        IItems.强化合金, 80, IItems.充能FEX水晶, 75, IItems.石英玻璃, 80, IItems.絮凝剂, 90, Items.surgeAlloy, 120
       )
     )
     size = 4
@@ -2185,14 +2277,14 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.强化合金, 120, IItems.FEX水晶, 80, IItems.充能FEX水晶, 100, IItems.铱锭, 60, IItems.气凝胶, 120, Items.phaseFabric, 90
+        IItems.强化合金, 120, IItems.FEX水晶, 80, IItems.充能FEX水晶, 100, IItems.铱锭, 60, IItems.气凝胶, 120, IItems.絮凝剂, 90
       )
     )
     size = 4
     itemCapacity = 20
     energyCapacity = 1024f
     basicPotentialEnergy = 256f
-
+    squareSprite = false
     warmupSpeed = 0.005f
 
     newConsume()
@@ -2224,7 +2316,7 @@ object CrafterBlocks : Load {
     newProduce()
     produce!!.items(
       *ItemStack.with(
-        IItems.铱金混合物, 1, IItems.强化合金, 1, Items.thorium, 1
+        IItems.铱金混合物, 1, IItems.强化合金, 1, IItems.钍锭, 1
       )
     )
 
@@ -2270,7 +2362,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.强化合金, 180, IItems.矩阵合金, 900, IItems.充能FEX水晶, 100, IItems.FEX水晶, 120, IItems.铱锭, 80, IItems.气凝胶, 100, Items.surgeAlloy, 80, Items.phaseFabric, 90
+        IItems.强化合金, 180, IItems.矩阵合金, 900, IItems.充能FEX水晶, 100, IItems.FEX水晶, 120, IItems.铱锭, 80, IItems.气凝胶, 100, Items.surgeAlloy, 80
       )
     )
     size = 5
@@ -2375,7 +2467,7 @@ object CrafterBlocks : Load {
   var 物质逆化器 = object : MediumCrafter("substance_inverter") {
     init {
       bundle {
-        desc(zh_CN,"物质逆化器","将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到引力容器中")
+        desc(zh_CN, "物质逆化器", "将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到引力容器中")
       }
       requirements(Category.crafting, ItemStack.with())
       size = 5
@@ -2510,7 +2602,7 @@ object CrafterBlocks : Load {
   var 析构器 = object : Destructor("destructor") {
     init {
       bundle {
-        desc(zh_CN,"析构器","加速碰撞破坏物质的原子核结构,以分析物质的微观构成形态并建立原子空间构成的蓝图")
+        desc(zh_CN, "析构器", "加速碰撞破坏物质的原子核结构,以分析物质的微观构成形态并建立原子空间构成的蓝图")
       }
       requirements(Category.effect, ItemStack.with())
       size = 5
@@ -2532,7 +2624,7 @@ object CrafterBlocks : Load {
   var 强子重构仪 = object : AtomSchematicCrafter("hadron_reconstructor") {
     init {
       bundle {
-        desc(zh_CN,"强子重构仪","微缩的定向大量强子对撞机,使得创造物质从理论成为现实")
+        desc(zh_CN, "强子重构仪", "微缩的定向大量强子对撞机,使得创造物质从理论成为现实")
       }
       requirements(
         Category.crafting, ItemStack.with(

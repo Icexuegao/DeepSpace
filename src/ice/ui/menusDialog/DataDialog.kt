@@ -71,28 +71,29 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
           p.setRowsize(5)
           flun = {
             p.clear()
-            cContents.content.select {
+            cContents.content.select {content ->
               if (searchField.isNotEmpty()) {
                 val substring = searchField.substring(1)
                 when (searchField[0]) {
                   '#' -> {
-                    it.description ?: return@select false
-                    return@select it.description.contains(substring)
+                    content.description ?: return@select false
+                    return@select content.description.contains(substring)
                   }
 
                   '%' -> {
-                    it.details ?: return@select false
-                    return@select it.details.contains(substring)
+                    content.details ?: return@select false
+                    return@select content.details.contains(substring)
                   }
 
                   else -> {
-                    return@select (it.name.contains(searchField) || it.localizedName.contains(
+                    return@select (it.name.contains(searchField) || content.localizedName.contains(
                       searchField
                     ))
                   }
                 }
               }
-              if (SettingValue.启用调试模式 && it.isHidden) return@select false
+              if (SettingValue.启用调试模式) return@select true
+              if ( content.isHidden)return@select false
               return@select true
             }.forEach { content ->
               p.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
@@ -177,8 +178,8 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
     }
   }
 
-  fun showBlock(block: UnlockableContent) {
-    if (!MenusDialog.isShown()) MenusDialog.show()
+  fun showUnlockableContent(block: UnlockableContent) {
+    if (!MenusDialog.isShown) MenusDialog.show()
     cContent = block
     MenusDialog.button = this
     hide()

@@ -7,7 +7,7 @@ import universecore.world.meta.UncStatCat
 
 object IceStats {
   fun load() = Unit
-  val maxStructureSize = getStat("", UncStatCat.structure) {
+  val 最大结构尺寸 = getStat("maxStructureSize", IceStatCats.结构) {
     desc(zh_CN, "最大结构尺寸")
   }
 

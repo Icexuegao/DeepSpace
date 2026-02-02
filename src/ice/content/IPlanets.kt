@@ -3,7 +3,7 @@ package ice.content
 import arc.func.Cons
 import arc.func.Prov
 import arc.graphics.Color
-import ice.content.block.Effect
+import ice.content.block.EffectBlocks
 import ice.game.IceTeam
 import ice.graphics.IceColor
 import ice.library.world.Load
@@ -51,7 +51,7 @@ object IPlanets : Load {
         iconColor = IceColor.r2
         sectorSeed = 1
         allowWaves = true
-        defaultCore = Effect.虔信方垒
+        defaultCore = EffectBlocks.虔信方垒
         startSector = 9
         //不能很好地与配置配合使用
         prebuildBase = false

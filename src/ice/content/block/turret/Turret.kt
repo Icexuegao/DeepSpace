@@ -76,7 +76,6 @@ import mindustry.world.draw.DrawTurret
 import mindustry.world.meta.StatUnit
 import singularity.Sgl
 import singularity.Singularity
-import singularity.contents.OtherContents
 import singularity.graphic.MathRenderer
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
@@ -112,6 +111,7 @@ object Turret : Load {
     reload = 45f
     range = 160f
     shootCone = 30f
+    squareSprite=false
     shoot = ShootSummon().apply {
       x = 0f
       y = 0f
@@ -131,7 +131,7 @@ object Turret : Load {
       height = 9f
       lifetime = 30f
       ammoMultiplier = 2f
-      despawnEffect = IceEffects.baseHitEffect
+      despawnEffect = IceEffects.基础子弹击中特效
       hitEffect = despawnEffect
       trailColor = IceColor.b4
       backColor = IceColor.b4
@@ -158,6 +158,7 @@ object Turret : Load {
     requirements(Category.turret, ItemStack.with(IItems.铬铁矿, 10, IItems.低碳钢, 20))
     reload = 30f
     recoils = 2
+    squareSprite=false
     drawer = DrawTurret().apply {
       for (i in 0..1) {
         parts.add(object : RegionPart("-" + (if (i == 0) "l" else "r")) {
@@ -503,6 +504,7 @@ object Turret : Load {
     cooldownTime = 210f
     minWarmup = 0.9f
     shootWarmupSpeed = 0.08f
+    squareSprite=false
     shoot = ShootSpread().apply {
       shots = 3
       shotDelay = 15f
@@ -564,6 +566,7 @@ object Turret : Load {
     }
   }
   val 撕裂 = PowerTurret("tear").apply {
+    squareSprite=false
     health = 19200
     size = 8
     range = 768f
@@ -720,6 +723,7 @@ object Turret : Load {
     }
   }
   val 隧穿 = ItemTurret("tunnelOpening").apply {
+    squareSprite=false
     health = 3450
     size = 5
     recoil = 3f
@@ -1181,6 +1185,7 @@ object Turret : Load {
     }
   }
   val 腥风 = PowerTurret("bloodyWind").apply {
+    squareSprite=false
     health = 6400
     size = 6
     armor = 8f
@@ -2864,7 +2869,7 @@ object Turret : Load {
         override fun hitEntity(b: Bullet?, entity: Hitboxc?, health: Float) {
           super.hitEntity(b, entity, health)
           if (entity is Statusc) {
-            entity.apply(OtherContents.frost, entity.getDuration(OtherContents.frost) + 10f)
+            entity.apply(IStatus.霜冻, entity.getDuration(IStatus.霜冻) + 10f)
           }
         }
       }, object : BulletType() {
@@ -2911,7 +2916,7 @@ object Turret : Load {
         override fun hitEntity(b: Bullet?, entity: Hitboxc?, health: Float) {
           super.hitEntity(b, entity, health)
           if (entity is Statusc) {
-            entity.apply(OtherContents.frost, entity.getDuration(OtherContents.frost) + 12f)
+            entity.apply(IStatus.霜冻, entity.getDuration(IStatus.霜冻) + 12f)
           }
         }
       })
@@ -3105,7 +3110,7 @@ object Turret : Load {
         }
 
         if (entity is Unit) {
-          entity.apply(OtherContents.frost, entity.getDuration(OtherContents.frost) + 10)
+          entity.apply(IStatus.霜冻, entity.getDuration(IStatus.霜冻) + 10)
         }
       }
     })
@@ -3319,12 +3324,12 @@ object Turret : Load {
             fragVelocityMax = 0f
           }
 
-          override fun draw(b: Bullet?) {
+          override fun draw(b: Bullet) {
             super.draw(b)
             Draw.color(SglDrawConst.winter)
 
-            SglDraw.drawBloomUponFlyUnit<Bullet?>(b) { e: Bullet? ->
-              val rot = e!!.fin(Interp.pow2Out) * 3600
+            SglDraw.drawBloomUponFlyUnit(b) { e: Bullet ->
+              val rot = e.fin(Interp.pow2Out) * 3600
               SglDraw.drawCrystal(
                 e.x, e.y, 30f, 14f, 8f, 0f, 0f, 0.8f, Layer.effect, Layer.bullet, rot, e.rotation(), SglDrawConst.frost, SglDrawConst.winter
               )

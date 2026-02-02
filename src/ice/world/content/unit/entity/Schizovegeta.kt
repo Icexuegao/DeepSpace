@@ -24,7 +24,7 @@ class Schizovegeta : FleshEntity() {
             }
         }
         val scorchs: Array<TextureRegion> by lazy {
-            Array(2) {
+            Array(9) {
                 Core.atlas.find(("schizovegeta-scorch-${it + 1}").appendModName())
             }
         }

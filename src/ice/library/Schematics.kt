@@ -3,7 +3,7 @@ package ice.library
 import arc.struct.Seq
 import arc.struct.StringMap
 import ice.DeepSpace
-import ice.content.block.Effect
+import ice.content.block.EffectBlocks
 import ice.library.world.Load
 import mindustry.Vars
 import mindustry.game.Schematic
@@ -15,7 +15,7 @@ object Schematics: Load{
     val allSch = Seq<Schematic>()
     var 虔信方垒 = createSchematic(3, 3) { tiles, strings ->
         strings.put("name", "虔信方垒")
-        tiles.add(Stile(Effect.虔信方垒, 1, 1, Effect.虔信方垒.lastConfig, 0))
+        tiles.add(Stile(EffectBlocks.虔信方垒, 1, 1, EffectBlocks.虔信方垒.lastConfig, 0))
     }
 
    override fun init() {

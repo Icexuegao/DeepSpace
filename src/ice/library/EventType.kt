@@ -48,7 +48,7 @@ object EventType : Load {
         if (!Core.input.keyDown(KeyCode.mouseLeft)) return@run
         val mouseWorld = Core.input.mouseWorld()
         val find = Groups.draw.find { entityc ->
-          entityc.dst2(mouseWorld.x, mouseWorld.y) <= 5 * 5 && entityc is PackStack
+          entityc is PackStack && entityc.dst2(mouseWorld.x, mouseWorld.y) <= 5 * 5
         } as? PackStack
         if (df == null) {
           df = find

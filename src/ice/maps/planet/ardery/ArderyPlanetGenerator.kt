@@ -961,8 +961,11 @@ class ArderyPlanetGenerator : PlanetGenerator() {
   }
 
   fun addStarItems() {
-    val items = Vars.player.core()?.items ?: return
-    items.add(ItemStack.with(IItems.高碳钢, 200, IItems.低碳钢, 200, IItems.铜锭, 150, IItems.锌锭, 150).toList())
+    if (Vars.player.core()?.items ==null){
+      Core.app.post {addStarItems()}
+      return
+    }
+    Vars.player.core()?.items!!.add(ItemStack.with(IItems.高碳钢, 200, IItems.低碳钢, 200, IItems.铜锭, 150, IItems.锌锭, 150).toList())
   }
 
   fun setOres() {

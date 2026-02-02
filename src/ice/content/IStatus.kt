@@ -5,13 +5,17 @@ import arc.Events
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
+import arc.graphics.g2d.Lines
 import arc.math.Angles
 import arc.math.Interp.*
 import arc.math.Mathf
+import arc.math.Rand
 import arc.struct.ObjectMap
 import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
+import arc.util.pooling.Pool
+import arc.util.pooling.Pools
 import ice.content.ILiquids.相位态FEX流体
 import ice.content.block.turret.TurretBullets.破碎FEX结晶
 import ice.entities.effect.MultiEffect
@@ -25,10 +29,13 @@ import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.Damage
+import mindustry.entities.Effect
 import mindustry.entities.Puddles
 import mindustry.entities.Units
+import mindustry.entities.abilities.Ability
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
+import mindustry.entities.units.StatusEntry
 import mindustry.game.EventType
 import mindustry.game.Team
 import mindustry.gen.Sounds
@@ -39,6 +46,10 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
+import singularity.Sgl
+import singularity.graphic.SglDraw
+import singularity.graphic.SglDraw.DrawAcceptor
+import singularity.graphic.SglDrawConst
 import singularity.ui.UIUtils
 import singularity.world.SglFx
 import singularity.world.meta.SglStat
@@ -48,6 +59,7 @@ import kotlin.math.min
 @Suppress("unused")
 object IStatus : Load {
   val lastHealth = ObjectMap<Unit, Float>()
+  val rand: Rand = Rand()
 
   val 封冻 = IceStatusEffect("freeze") {
     bundle {
@@ -489,7 +501,7 @@ object IStatus : Load {
       colorTo = Color.valueOf("F15454")
     }
 
-    effect = ParticleEffect().apply {
+    var effect = ParticleEffect().apply {
       particles = 1
       lifetime = 85f
       line = true
@@ -508,7 +520,7 @@ object IStatus : Load {
     setUpdate { unit, e ->
       if (Mathf.chanceDelta(effectChance.toDouble())) {
         Tmp.v1.rnd(Mathf.range(unit.type.hitSize / 2))
-        this.effect.at(unit.x + Tmp.v1.x, unit.y + Tmp.v1.y, unit.rotation + 180, this.color)
+        effect.at(unit.x + Tmp.v1.x, unit.y + Tmp.v1.y, unit.rotation + 180f, this.color)
       }
     }
   }
@@ -911,7 +923,6 @@ object IStatus : Load {
       unit.reloadMultiplier *= (0.75f + 0.25f * (1 - scl))
     }
   }
-
   var 锁定 = IceStatusEffect("locking") {
     bundle {
       desc(zh_CN, "锁定", "单位受到的攻击有概率造成更高的伤害,这取决于锁定的强度")
@@ -954,6 +965,221 @@ object IStatus : Load {
         }
         lastHealth.put(unit, unit.health)
       }
+    }
+  }
+  var 熔毁 = object : IceStatusEffect("meltdown", {
+    bundle {
+      desc(zh_CN, "熔毁")
+    }
+    damage = 2.2f
+    effect = Fx.melting
+    init {
+      opposites(StatusEffects.freezing, StatusEffects.wet)
+      affinitys(StatusEffects.tarred, TransitionHandler { unit: Unit?, result: StatusEntry?, time: Float ->
+        unit!!.damagePierce(8f)
+        Fx.burning.at(unit.x + Mathf.range(unit.bounds() / 2f), unit.y + Mathf.range(unit.bounds() / 2f))
+        result!!.set(this, 180 + result.time)
+      })
+
+      affinitys(霜冻, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
+        e.damage(t)
+        s.time -= t
+      })
+
+      transs(凛冻, TransitionHandler { e: Unit?, s: StatusEntry?, t: Float ->
+        s!!.time -= t
+        e!!.apply(StatusEffects.blasted)
+        e.damage(max(e.getDuration(凛冻), t) / 2f)
+      })
+      stats.add(SglStat.exShieldDamage, Core.bundle.get("infos.meltdownDamage"))
+    }
+    setUpdate { unit, entry ->
+      if (unit.shield > 0) {
+        unit.shieldAlpha = 1f
+        unit.shield -= Time.delta * entry.time / 6
+      }
+    }
+  }) {
+    override fun draw(unit: Unit, time: Float) {
+      super.draw(unit, time)
+
+      SglDraw.drawBloomUponFlyUnit<Unit?>(unit, DrawAcceptor { u: Unit ->
+        val rate = Mathf.clamp(90 / (time / 30))
+        Lines.stroke(2.2f * rate, Pal.lighterOrange)
+        Draw.alpha(rate * 0.7f)
+        Lines.circle(u.x, u.y, u.hitSize / 2 + rate * u.hitSize / 2)
+        rand.setSeed(unit.id.toLong())
+        for (i in 0..7) {
+          SglDraw.drawTransform(u.x, u.y, u.hitSize / 2 + rate * u.hitSize / 2, 0f, Time.time + rand.random(360f)) { x: Float, y: Float, r: Float ->
+            val len = rand.random(u.hitSize / 4, u.hitSize / 1.5f)
+            SglDraw.drawDiamond(x, y, len, len * 0.135f, r)
+          }
+        }
+        Draw.reset()
+      })
+    }
+  }
+  var 电磁损毁 = IceStatusEffect("emp_damaged") {
+    bundle {
+      desc(zh_CN, "电磁损毁", "单位的系统中枢及各周边电子设备严重损毁,火控核心几乎失效,所有功能设备完全失效,近乎废铁")
+    }
+    color = Pal.accent
+    speedMultiplier = 0.5f
+    buildSpeedMultiplier = 0.1f
+    reloadMultiplier = 0.6f
+    damageMultiplier = 0.7f
+    init {
+      stats.add(SglStat.effect) { t ->
+        t.defaults().left().padLeft(5f)
+        t.row()
+        t.add(Core.bundle.format("data.bulletDeflectAngle", "45" + StatUnit.degrees.localized())).color(Color.lightGray)
+        t.row()
+        t.add(Core.bundle.get("infos.banedAbilities")).color(Color.lightGray)
+        t.row()
+        t.add(Core.bundle.get("infos.empDamagedInfo"))
+      }
+    }
+    setUpdate { unit, entry ->
+      if (Sgl.empHealth.empDamaged(unit)) {
+        if (unit.getDuration(this) <= 60) {
+          unit.apply(this, 60f)
+        } else {
+          unit.speedMultiplier = 0.01f
+          unit.reloadMultiplier = 0f
+          unit.buildSpeedMultiplier = 0f
+        }
+
+        unit.shield = 0f
+        unit.damageContinuousPierce((1 - Sgl.empHealth.healthPresent(unit)) * Sgl.empHealth.get(unit).model.empContinuousDamage)
+
+        for (i in unit.abilities.indices) {
+          if (unit.abilities[i] !is BanedAbility) {
+            val baned = Pools.obtain(BanedAbility::class.java, ::BanedAbility)
+            baned.index = i
+            baned.masked = unit.abilities[i]
+            unit.abilities[i] = baned
+          }
+        }
+      } else {
+        unit.unapply(this)
+      }
+    }
+
+  }
+
+  var 霜冻: IceStatusEffect = object : IceStatusEffect("frost", {
+    bundle {
+      desc(zh_CN, "冻结", "在极低的温度下,单位的系统将很难正常工作,在寒气完全渗透到单位的核心后,它将被冻成一个巨大的冰块")
+    }
+    color = SglDrawConst.frost
+    speedMultiplier = 0.5f
+    reloadMultiplier = 0.8f
+    effect = Fx.freezing
+
+    init {
+      opposites(StatusEffects.burning, StatusEffects.melting)
+      affinitys(熔毁, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
+        e.damage(s.time)
+        s.time -= t
+      })
+      stats.add(SglStat.effect) { t ->
+        t.add(Core.bundle.get("infos.frostInfo"))
+        t.image(凛冻.uiIcon).size(25f)
+        t.add(凛冻.localizedName).color(Pal.accent)
+      }
+    }
+    setUpdate { unit, entry ->
+      if (entry.time >= 30 * unit.hitSize + unit.maxHealth / unit.hitSize) {
+        if (unit.getDuration(凛冻) <= 0) {
+          unit.unapply(this)
+          unit.apply(凛冻, max(entry.time / 2, 180f))
+        }
+      }
+    }
+  }) {
+    override fun draw(unit: Unit, time: Float) {
+      super.draw(unit)
+      if (unit.hasEffect(凛冻)) return
+      val rate = time / (30 * unit.hitSize + unit.maxHealth / unit.hitSize)
+      rand.setSeed(unit.id.toLong())
+      val ro = rand.random(360).toFloat()
+      Draw.color(SglDrawConst.frost)
+      Draw.alpha(0.85f * rate)
+      Draw.z(Layer.flyingUnit)
+      SglDraw.drawDiamond(unit.x, unit.y, unit.hitSize * 2.35f * rate, unit.hitSize * 2 * rate, ro, 0.2f * rate)
+    }
+  }
+  var 凛冻: IceStatusEffect = object : IceStatusEffect("frost_freeze", {
+    bundle {
+      desc(zh_CN, "凛冻", "单位被寒气被彻底冰封,无法行动,如果寒气继续加深,在冰块碎裂时,它会彻底碎成一堆粉末")
+    }
+    speedMultiplier = 0f
+    reloadMultiplier = 0f
+    dragMultiplier = 10f
+    effect = SglFx.particleSpread
+
+    init {
+      opposites(StatusEffects.burning, StatusEffects.melting)
+      stats.add(SglStat.effect) { t ->
+        t.image(霜冻.uiIcon).size(25f)
+        t.add(霜冻.localizedName).color(Pal.accent)
+        t.add(Core.bundle.get("infos.frostFreezeInfo"))
+      }
+    }
+  }) {
+
+    override fun update(unit: Unit, entry: StatusEntry) {
+      super.update(unit, entry)
+      if (unit.getDuration(霜冻) >= 60 * unit.hitSize + 3 * unit.maxHealth / unit.hitSize) {
+        Fx.pointShockwave.at(unit.x, unit.y)
+        SglFx.freezingBreakDown.at(unit.x, unit.y, 0f, unit)
+        unit.kill()
+        unit.unapply(this)
+        Effect.shake(8f, 8f, unit)
+      }
+    }
+
+    override fun draw(unit: Unit) {
+      super.draw(unit)
+      rand.setSeed(unit.id.toLong())
+      val ro = rand.random(360).toFloat()
+
+      val time = unit.getDuration(霜冻)
+      val rate = time / (60 * unit.hitSize + 3 * unit.maxHealth / unit.hitSize)
+      Draw.color(SglDrawConst.frost, SglDrawConst.winter, rate)
+      Draw.alpha(0.85f)
+      Draw.z(Layer.flyingUnit)
+      SglDraw.drawDiamond(unit.x, unit.y, unit.hitSize * 2.35f, unit.hitSize * 2, ro, 0.3f)
+
+      Draw.alpha(0.7f)
+      val n = (unit.hitSize / 8 + rand.random(2, 5)).toInt()
+      for (i in 0..<n) {
+        val v = rand.random(0.75f)
+        val re = 1 - Mathf.clamp((1 - rate - v) / (1 - v))
+
+        val off = rand.random(unit.hitSize * 0.5f, unit.hitSize)
+        val len = rand.random(unit.hitSize) * re
+        val wid = rand.random(unit.hitSize * 0.4f, unit.hitSize * 0.8f) * re
+        val rot = rand.random(360).toFloat()
+
+        SglDraw.drawDiamond(unit.x + Angles.trnsx(rot, off), unit.y + Angles.trnsy(rot, off), len, wid, rot, 0.2f)
+      }
+    }
+  }
+
+  class BanedAbility : Ability(), Pool.Poolable {
+    var masked: Ability? = null
+    var index: Int = -1
+    override fun update(unit: Unit) {
+      if (!unit.hasEffect(电磁损毁)) {
+        unit.abilities[index] = masked
+        Pools.free(this)
+      }
+    }
+
+    override fun reset() {
+      masked = null
+      index = -1
     }
   }
 }

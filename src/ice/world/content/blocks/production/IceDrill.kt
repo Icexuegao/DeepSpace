@@ -15,10 +15,6 @@ import arc.util.io.Writes
 import ice.DeepSpace
 import ice.graphics.IceColor
 import ice.world.content.blocks.abstractBlocks.IceBlock
-import ice.world.draw.DrawCracks
-import ice.world.draw.DrawMulti
-import ice.world.draw.DrawRegionColor
-import ice.world.draw.DrawRim
 import ice.world.meta.IceStatValues
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -35,8 +31,6 @@ import mindustry.world.Tile
 import mindustry.world.blocks.environment.Floor
 import mindustry.world.consumers.Consume
 import mindustry.world.consumers.ConsumeLiquidBase
-import mindustry.world.draw.DrawDefault
-import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.BlockFlag
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
@@ -54,7 +48,10 @@ class IceDrill(name: String) : IceBlock(name) {
     var blockedItems = Seq<Item>()
     var liquidBoostIntensity = 1.6f
     var warmupSpeed: Float = 0.015f
-    var rotator = DrawRegion("-rotator", 3f, true)
+
+
+   var returnItem: Item? = null
+   var returnCount: Int = 0
 
     init {
         size = 2
@@ -67,9 +64,7 @@ class IceDrill(name: String) : IceBlock(name) {
         ambientSoundVolume = 0.018f
         flags = EnumSet.of(BlockFlag.drill)
         buildType = Prov(::IceDrillBuild)
-        drawers = DrawMulti(DrawDefault(), DrawCracks(), DrawRim(), rotator,DrawRegion("-top"),DrawRegionColor<IceDrillBuild>("-item") {
-            it.dominantColor()
-        })
+
     }
 
     override fun init() {

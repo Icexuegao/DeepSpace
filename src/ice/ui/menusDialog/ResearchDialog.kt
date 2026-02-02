@@ -96,7 +96,7 @@ object ResearchDialog : BaseMenusDialog(IceStats.研究.localized(), IStyles.men
     }
 
     init {
-        val 虔信方垒 = UCLinkNode(Effect.虔信方垒, 0f, 0f)
+        val 虔信方垒 = UCLinkNode(EffectBlocks.虔信方垒, 0f, 0f)
         val 能量节点 = UCLinkNode(PowerBlocks.能量节点, 虔信方垒.x + 6 * 60, 虔信方垒.y).setParent(虔信方垒)
         val 燃烧发电机 = UCLinkNode(PowerBlocks.燃烧发电机, 能量节点.x, 能量节点.y + 2 * 60).setParent(能量节点)
         val 小型能量电池 = UCLinkNode(PowerBlocks.小型能量电池, 能量节点.x + 2 * 60, 能量节点.y).setParent(能量节点)

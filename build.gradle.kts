@@ -41,7 +41,13 @@ repositories {
 }
 val uncVersion = "2.3.1"
 dependencies {
-  // compileOnly(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
+  compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
+  implementation("org.commonmark:commonmark:0.20.0")
+  implementation("org.commonmark:commonmark-ext-gfm-tables:0.20.0")
+  implementation("org.commonmark:commonmark-ext-gfm-strikethrough:0.20.0")
+  implementation("org.commonmark:commonmark-ext-ins:0.20.0")
+  compileOnly(fileTree(mapOf("dir" to "lib", "include" to listOf("*.zip"))))
+  compileOnly(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
   implementation("com.github.tommyettinger:RegExodus:0.1.10")
   implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinCompatibility}")
   //  implementation("com.github.EB-wilson.UniverseCore:dynamilizer:${uncVersion}")
@@ -88,6 +94,13 @@ fun execute(string: String, path: File? = null, vararg args: Any?) {
 }
 
 tasks {
+  withType<JavaCompile>().configureEach {
+    sourceCompatibility = 17.toString()
+    targetCompatibility = 17.toString()
+    options.encoding = "UTF-8"
+   // options.compilerArgs.addAll(arrayOf("--add-exports", "java.base/jdk.internal.misc=ALL-UNNAMED"))
+  }
+
   withType<ShadowJar> {
     dependsOn("updateVersion")
     group = "alon"
@@ -116,20 +129,10 @@ tasks {
     configuration("proguard-rules.pro")
     // 添加详细输出选项
 
-
-
     printmapping("build/mapping.txt")
     printseeds("build/seeds.txt")
     printusage("build/usage.txt")
   }
-
-
-  withType<JavaCompile>().configureEach {
-    sourceCompatibility = 17.toString()
-    targetCompatibility = 17.toString()
-    options.encoding = "UTF-8"
-  }
-
 
   register<Copy>("myCopyJar") {
     group = "alon"

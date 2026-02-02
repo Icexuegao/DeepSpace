@@ -1,6 +1,9 @@
 package ice.content
 
-import arc.func.*
+import arc.func.Cons2
+import arc.func.Func
+import arc.func.Func2
+import arc.func.Prov
 import arc.graphics.Blending
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
@@ -12,6 +15,7 @@ import arc.math.Mathf
 import arc.math.Rand
 import arc.math.geom.Rect
 import arc.scene.style.TextureRegionDrawable
+import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
@@ -20,7 +24,6 @@ import ice.ai.AIController
 import ice.ai.CarryTaskAI
 import ice.audio.ISounds
 import ice.entities.IcePuddle
-import ice.entities.IceRegister
 import ice.entities.bullet.*
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
@@ -32,14 +35,18 @@ import ice.graphics.lightnings.LightningVertex
 import ice.graphics.lightnings.generator.Floatp2
 import ice.graphics.lightnings.generator.LightningGenerator
 import ice.graphics.lightnings.generator.RandomGenerator
+import ice.library.IFiles.appendModName
 import ice.library.util.MathTransform
+import ice.library.util.j
 import ice.library.util.toColor
 import ice.library.util.toStringi
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.SglFx
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.BarAbility
+import ice.world.content.unit.ability.*
+import ice.world.content.unit.ability.RepairFieldAbility
+import ice.world.content.unit.ability.UnitSpawnAbility
 import ice.world.content.unit.entity.*
 import ice.world.content.unit.entity.base.Entity
 import ice.world.content.unit.weapon.IceWeapon
@@ -50,17 +57,13 @@ import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.ai.UnitCommand
 import mindustry.ai.types.MinerAI
-import mindustry.content.Fx
-import mindustry.content.Items
-import mindustry.content.StatusEffects
-import mindustry.content.UnitTypes
+import mindustry.content.*
 import mindustry.entities.*
 import mindustry.entities.Effect.EffectContainer
-import mindustry.entities.abilities.ArmorPlateAbility
-import mindustry.entities.abilities.EnergyFieldAbility
-import mindustry.entities.abilities.ForceFieldAbility
-import mindustry.entities.abilities.ShieldRegenFieldAbility
+import mindustry.entities.abilities.*
 import mindustry.entities.bullet.ContinuousFlameBulletType
+import mindustry.entities.bullet.PointBulletType
+import mindustry.entities.effect.ExplosionEffect
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.entities.effect.WrapEffect
@@ -76,25 +79,18 @@ import mindustry.gen.Unit
 import mindustry.graphics.*
 import mindustry.graphics.MultiPacker.PageType
 import mindustry.type.UnitType
+import mindustry.type.Weapon
 import mindustry.type.unit.MissileUnitType
 import mindustry.type.weapons.PointDefenseWeapon
+import mindustry.type.weapons.RepairBeamWeapon
 import mindustry.ui.Bar
+import mindustry.world.blocks.defense.turrets.PowerTurret
 import mindustry.world.meta.BlockFlag
 import mindustry.world.meta.Stat
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.particles.SglParticleModels
 import singularity.world.unit.abilities.MirrorArmorAbility
-import kotlin.Any
-import kotlin.Boolean
-import kotlin.Float
-import kotlin.Int
-import kotlin.Suppress
-import kotlin.also
-import kotlin.apply
-import kotlin.arrayOf
-import kotlin.collections.forEach
-import kotlin.floatArrayOf
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -166,7 +162,6 @@ object IUnitTypes : Load {
         shootEffect = IceEffects.baseShootEffect(Pal.accent)
       }
     }
-    frontalInjuryFree(0.2f)
     bundle {
       desc(zh_CN, "突刺")
     }
@@ -197,7 +192,6 @@ object IUnitTypes : Load {
         colors = arrayOf(Color.valueOf("ffa763"), Color.valueOf("ffa763"), Color.valueOf("fabd8e"))
       }
     }
-    frontalInjuryFree(0.3f)
     bundle {
       desc(zh_CN, "碎甲")
     }
@@ -213,7 +207,6 @@ object IUnitTypes : Load {
     omniMovement = false
     rotateMoveFirst = true
     treadRects = arrayOf(Rect(16f - (128 / 2), 11f - (149 / 2), 33f, 127f))
-    frontalInjuryFree(0.35f)
     bundle {
       desc(zh_CN, "破军")
     }
@@ -272,14 +265,332 @@ object IUnitTypes : Load {
       }
     }
   }
-  val 加百列 = object : IceUnitType("gabriel", {
+  var 攻城 = IceUnitType("siege") {
+    bundle {
+      desc(zh_CN, "攻城", " 配备180毫米口径冲击炮,在防御/攻坚战中皆有不俗表现\n冲击炮开火时产生的强大气浪足以吹飞小口径炮弹\n但因其剧烈的后坐力,需要展开脚架完全架起后才能开火", "炮平四海!!!")
+    }
+    health = 8400f
+    armor = 12f
+    hitSize = 27f
+    speed = 0.8f
+    range = 80f
+    aimDst = 216f
+    rotateSpeed = 2.4f
+    hovering = true
+    targetAir = false
+    faceTarget = false
+    singleTarget = true
+    treadFrames = 18
+    treadPullOffset = 1
+    crushDamage = 5f
+    outlineColor = Color.valueOf("1F1F1F")
+    treadRects = arrayOf(Rect(-52f, -77f, 25f, 154f))
+    targetFlags = arrayOf(BlockFlag.turret, BlockFlag.reactor)
+    parts.add(RegionPart().apply {
+      suffix = "-tread-top"
+      mirror = true
+      moveY = 3f
+      moveRot = -10f
+    })
+    parts.add(RegionPart().apply {
+      suffix = "-tread-bottom"
+      mirror = true
+      moveY = -3f
+      moveRot = 10f
+    })
+    parts.add(RegionPart().apply {
+      suffix = "-foot"
+      mirror = true
+      under = true
+      moveX = 9.5f
+      layerOffset = -0.01f
+    })
+    setWeapon {
+      x = 0f
+      shake = 0f
+      reload = 30f
+      shootCone = 1f
+      mirror = false
+      rotate = true
+      display = false
+      useAmmo = false
+      rotateSpeed = 20f
+      targetInterval = 10f
+      shootSound = Sounds.none
+      shootStatus = StatusEffects.unmoving
+      shootStatusDuration = 60f
+      bullet = BulletType().apply {
+        damage = 0f
+        lifetime = 90f
+        speed = 8f
+        collidesAir = false
+        instantDisappear = true
+        shootEffect = Fx.none
+        smokeEffect = Fx.none
+        despawnEffect = Fx.none
+        hitEffect = Fx.none
+      }
+    }
+    setWeapon("weapon") {
+      x = 0f
+      recoil = 1f
+      shake = 3f
+      shootY = 8f
+      reload = 180f
+      shootCone = 1f
+      mirror = false
+      rotate = true
+      rotateSpeed = 3f
+      layerOffset = 0.01f
+      targetInterval = 10f
+      minWarmup = 0.99f
+      cooldownTime = 210f
+      shootStatus = StatusEffects.shielded
+      shootStatusDuration = 60f
+      shootWarmupSpeed = 0.04f
+      shootSound = Sounds.shootMeltdown
+      bullet = PointBulletType().apply {
+        damage = 0f
+        lifetime = 18f
+        speed = 40f
+        status = IStatus.熔融
+        statusDuration = 120f
+        collidesAir = false
+        hitColor = Color.valueOf("D86E56")
+        splashDamage = 380f
+        splashDamageRadius = 60f
+        scaledSplashDamage = true
+        buildingDamageMultiplier = 2.25f
+        shootEffect = ParticleEffect().apply {
+          particles = 12
+          lifetime = 36f
+          sizeFrom = 4f
+          cone = 30f
+          length = 60f
+          interp = Interp.pow2Out
+          sizeInterp = Interp.pow2In
+          lightColor = Color.valueOf("FF8663")
+          colorFrom = Color.valueOf("FF8663")
+          colorTo = Color.valueOf("FEB380")
+        }
+        trailEffect = Fx.none
+        smokeEffect = Fx.shootSmokeTitan
+        hitShake = 8f
+        hitSound = Sounds.explosion
+        hitEffect = MultiEffect(
+          WrapEffect(Fx.dynamicSpikes, Color.valueOf("D86E56"), 80f), Fx.scatheExplosion, ParticleEffect().apply {
+            particles = 7
+            lifetime = 85f
+            sizeFrom = 4f
+            sizeTo = 0f
+            cone = 360f
+            length = 33f
+            baseLength = 49f
+            interp = Interp.pow10Out
+            sizeInterp = Interp.pow10In
+            colorFrom = Color.valueOf("727272")
+            colorTo = Color.valueOf("727272")
+          })
+      }
+      parts.add(RegionPart().apply {
+        suffix = "-barrel"
+        mirror = true
+        under = true
+        moveY = 7.25f
+        moves.add(DrawPart.PartMove().apply {
+          progress = DrawPart.PartProgress.recoil
+          y = -4f
+        })
+        children.add(RegionPart().apply {
+          suffix = "-top"
+          mirror = true
+          under = true
+          x = 0.25f
+          layerOffset = -0.0001f
+        })
+      })
+    }
+
+  }
+  val 重压 = IceUnitType("heavyPress") {
+    bundle {
+      desc(zh_CN, "重压", "装甲厚重的慢速单位,结构简单,生产工艺成熟\n依靠坚固的装甲承受打击并以履带持续碾压建筑造成伤害")
+    }
+    squareShape = true
+    omniMovement = false
+
+    health = 11400f
+    armor = 37f
+    hitSize = 24f
+    speed = 0.6f
+    range = 1f
+    rotateSpeed = 1.2f
+    outlineColor = Color.valueOf("1F1F1F")
+    hovering = true
+    targetAir = false
+    faceTarget = false
+    rotateMoveFirst = false
+    targetPriority = 4f
+    treadFrames = 18
+    crushDamage = 20f
+    treadPullOffset = 4
+    targetFlags = arrayOf(BlockFlag.turret)
+    treadRects = arrayOf(Rect(-55f, -61f, 27f, 130f))
+    setWeapon {
+      x = 0f
+      shake = 0f
+      reload = 30f
+      mirror = false
+      display = false
+      useAmmo = false
+      shootCone = 360f
+      shootSound = Sounds.none
+      shootStatus = IStatus.突袭
+      shootStatusDuration = 60f
+      bullet = BulletType().apply {
+        damage = 0f
+        lifetime = 30f
+        speed = 8f
+        collidesAir = false
+        instantDisappear = true
+        shootEffect = Fx.none
+        smokeEffect = Fx.none
+        despawnEffect = Fx.none
+        hitEffect = Fx.none
+      }
+    }
+    abilities.add(ShieldArcAbility().apply {
+      region = "heavyPress-shield".appendModName()
+      whenShooting = false
+      y = -6f
+      max = 3600f
+      regen = 3f
+      cooldown = 600f
+      radius = 30f
+      angle = 80f
+      width = 5f
+    })
+    abilities.add(ArmorPlateAbility().apply {
+      healthMultiplier = 1f
+    })
+
+  }
+  val 毒刺 = IceUnitType("poisonBarb") {
+    bundle {
+      desc(zh_CN, "毒刺", "生物科技的终端产物,在一定情况下可以无限制的自我增殖")
+    }
+    lowAltitude = true
+    flying = true
+    health = 1270f
+    hitSize = 16f
+    armor = 4f
+    speed = 4f
+    drag = 0.04f
+    accel = 0.08f
+    rotateSpeed = 7.5f
+    engineOffset = 11f
+    engineSize = 2.5f
+    trailLength = 8
+    outlineColor = "1F1F1F".toColor()
+    targetFlags = arrayOf(BlockFlag.reactor, BlockFlag.generator, BlockFlag.factory)
+    abilities.add(UnitSpawnAbility(this, 1800f).apply {
+      color = Pal.remove
+      alpha = 0.4f
+    })
+    setWeapon("weapon") {
+      x = 0f
+      shootY = 8f
+      reload = 180f
+      mirror = false
+      shootCone = 5f
+      cooldownTime = 120f
+      shootSound = Sounds.shootRetusa
+      bullet = RailBulletType().apply {
+        damage = 325f
+        length = 160f
+        recoil = 1f
+        pointEffectSpace = 36f
+        pointEffect = Fx.railTrail
+        shootEffect = Fx.railShoot
+        hitEffect = Fx.railHit
+        pierceDamageFactor = 0f
+        buildingDamageMultiplier = 0.2f
+      }
+    }
+  }
+  var 爆蚊 = IceUnitType("explosiveMosquito") {
+    bundle {
+      desc(zh_CN, "爆蚊", "飞行自爆兵种,能从意想不到的方位发起进攻")
+    }
+    lowAltitude = true
+    flying = true
+    health = 270f
+    hitSize = 11f
+    armor = 1f
+    speed = 2.4f
+    accel = 0.08f
+    drag = 0.04f
+    engineSize = 3f
+    trailLength = 3
+    engineOffset = 7f
+    immunities.addAll(StatusEffects.burning, StatusEffects.wet, StatusEffects.sporeSlowed)
+    deathExplosionEffect = Fx.none
+    targetFlags = arrayOf(
+      BlockFlag.reactor, BlockFlag.generator, BlockFlag.turret
+    )
+    abilities.add(MoveEffectAbility().apply {
+      y = -10f
+      interval = 4f
+      teamColor = true
+      effect = Fx.missileTrailShort
+    })
+    setWeapon {
+      x = 0f
+      reload = 600f
+      mirror = false
+      shootCone = 360f
+      shootOnDeath = true
+      shootSound = Sounds.explosion
+      bullet = BulletType().apply {
+        collides = false
+        hittable = false
+        killShooter = true
+        instantDisappear = true
+        shootEffect = Fx.none
+        despawnEffect = ExplosionEffect().apply {
+          sparkColor = Color.valueOf("F6E096")
+          lifetime = 30f
+          smokes = 30
+          smokeSize = 13f
+          smokeSizeBase = 0.6f
+          smokeRad = 32f
+          waveLife = 30f
+          waveStroke = 2f
+          waveRad = 73f
+          waveRadBase = 2f
+          sparkRad = 64f
+          sparkLen = 13f
+          sparkStroke = 4f
+          sparks = 40
+        }
+        status = IStatus.蚀骨
+        statusDuration = 240f
+        splashDamage = 210f
+        splashDamageRadius = 80f
+        hitEffect = Fx.pulverize
+        despawnSound = Sounds.explosion
+      }
+    }
+
+  }
+  val 加百列 = object : IceUnitType("gabriel", Entity::class.java, {
     armor = 1f
     speed = 3.5f
     flying = true
     health = 150f
     hitSize = 13f
     mineTier = 2
-    mineSpeed = 2f
+    mineSpeed = 4f
     engineSize = 2.5f
     rotateSpeed = 7f
     itemCapacity = 30
@@ -298,32 +609,18 @@ object IUnitTypes : Load {
       reload = 10f
       layerOffset = -0.2f
       rotateSpeed = 9f
-      shootSound=Sounds.shootAlpha
+      shootSound = Sounds.shootAlpha
       bullet = RandomDamageBulletType(8, 14, 3f).apply {
         backColor = IceColor.b4
         frontColor = IceColor.b4
         lightColor = IceColor.b4
-        trailColor= IceColor.b4
+        trailColor = IceColor.b4
         trailWidth = 1.2f
         trailLength = 4
         shootY += 1
         lifetime = 60f
         homingPower = 0.05f
-        despawnEffect = Effect(14f, Cons { e: EffectContainer? ->
-          Draw.color(Color.white, IceColor.b4, e!!.fin())
-          e.scaled(7f, Cons { s: EffectContainer? ->
-            Lines.stroke(0.5f + s!!.fout())
-            Lines.circle(e.x, e.y, s.fin() * 5f)
-          })
-
-          Lines.stroke(0.5f + e.fout())
-
-          Angles.randLenVectors(e.id.toLong(), 5, e.fin() * 15f, Floatc2 { x: Float, y: Float ->
-            val ang = Mathf.angle(x, y)
-            Lines.lineAngle(e.x + x, e.y + y, ang, e.fout() * 3 + 1f)
-          })
-          Drawf.light(e.x, e.y, 20f, IceColor.b4, 0.6f * e.fout())
-        })
+        despawnEffect = IceEffects.基础子弹击中特效
         hitEffect = despawnEffect
         homingRange = 50f
         shootEffect = IceEffects.squareAngle(color1 = IceColor.b4, color2 = IceColor.b5)
@@ -336,32 +633,30 @@ object IUnitTypes : Load {
     override fun drawOutline(unit: Unit) {
       Draw.z(Draw.z() - 1f)
       Draw.color(outlineColor)
-      Draw.rect(name + "-outline", unit.x, unit.y, unit.rotation - 90)
+      Draw.rect("$name-outline", unit.x, unit.y, unit.rotation - 90)
     }
 
     override fun createIcons(packer: MultiPacker) {
       super.createIcons(packer)
       for (weapon in weapons) {
-        if (!weapon.name.isEmpty() && (minfo.mod == null || weapon.name.startsWith(minfo.mod.name)) && (weapon.top || !packer.isOutlined(weapon.name) || weapon.parts.contains(Boolf { p: DrawPart? -> p!!.under }))) {
-          makeOutline(PageType.main, packer, weapon.region, !weapon.top || weapon.parts.contains(Boolf { p: DrawPart? -> p!!.under }), outlineColor, outlineRadius)
+        if (!weapon.name.isEmpty() && (minfo.mod == null || weapon.name.startsWith(minfo.mod.name)) && (weapon.top || !packer.isOutlined(weapon.name) || weapon.parts.contains { p: DrawPart? -> p!!.under })) {
+          makeOutline(PageType.main, packer, weapon.region, !weapon.top || weapon.parts.contains { p: DrawPart? -> p!!.under }, outlineColor, outlineRadius)
         }
       }
     }
   }
-  val 路西法 = IceUnitType("lucifer") {
+  val 路西法 = object : IceUnitType("lucifer", Entity::class.java, {
     armor = 1f
     accel = 0.2f
+    health = 200f
     speed = 3.5f
     flying = true
-    health = 150f
     hitSize = 16f
     drag = 0.05f
     accel = 0.11f
     accel = 0.4f
-    faceTarget = false
-    lowAltitude = true
     mineTier = 3
-    mineSpeed = 2f
+    mineSpeed = 5f
     engineSize = 3f
     rotateSpeed = 7f
     itemCapacity = 40
@@ -371,13 +666,42 @@ object IUnitTypes : Load {
     itemCapacity = 30
     buildSpeed = 0.75f
     buildRange = 8 * 40f
-    setWeapon("weapon") {
-      mirror = true
-      rotate = true
+    outlines = false
+    setWeapon("weapon1") {
+      x = 5f
+      y = 4f
+      layerOffset = -0.2f
       reload = 15f
-      rotateSpeed = 9f
-      predictTarget = false
-      bullet = RandomDamageBulletType(14, 20, 3f).apply {
+      shootSound = Sounds.shootAlpha
+      bullet = RandomDamageBulletType(14, 20, 4f).apply {
+        width = 4f
+        height = 12f
+        backColor = IceColor.b4
+        frontColor = IceColor.b4
+        lightColor = IceColor.b4
+        trailColor = IceColor.b4
+        trailWidth = 1.2f
+        trailLength = 4
+        shootY += 1
+        lifetime = 60f
+        homingPower = 0.05f
+        homingRange = 50f
+        homingPower = 0.05f
+        despawnEffect = IceEffects.基础子弹击中特效
+        hitEffect = despawnEffect
+        homingRange = 50f
+        shootEffect = IceEffects.squareAngle(color1 = IceColor.b4, color2 = IceColor.b5)
+      }
+    }
+    setWeapon("weapon2") {
+      x = 7.5f
+      y = 0f
+      layerOffset = -0.2f
+      reload = 30f
+      shootSound = Sounds.shootAlpha
+      bullet = RandomDamageBulletType(1, 30, 6f).apply {
+        width = 4f
+        height = 12f
         backColor = IceColor.b4
         frontColor = IceColor.b4
         lightColor = IceColor.b4
@@ -385,11 +709,28 @@ object IUnitTypes : Load {
         lifetime = 60f
         homingPower = 0.05f
         homingRange = 50f
+        despawnEffect = IceEffects.基础子弹击中特效
+        hitEffect = despawnEffect
         shootEffect = IceEffects.squareAngle(color1 = IceColor.b4, color2 = IceColor.b5)
       }
     }
     bundle {
       desc(zh_CN, "路西法")
+    }
+  }) {
+    override fun drawOutline(unit: Unit) {
+      Draw.z(Draw.z() - 1f)
+      Draw.color(outlineColor)
+      Draw.rect("$name-outline", unit.x, unit.y, unit.rotation - 90)
+    }
+
+    override fun createIcons(packer: MultiPacker) {
+      super.createIcons(packer)
+      for (weapon in weapons) {
+        if (!weapon.name.isEmpty() && (minfo.mod == null || weapon.name.startsWith(minfo.mod.name)) && (weapon.top || !packer.isOutlined(weapon.name) || weapon.parts.contains { p: DrawPart? -> p!!.under })) {
+          makeOutline(PageType.main, packer, weapon.region, !weapon.top || weapon.parts.contains { p: DrawPart? -> p!!.under }, outlineColor, outlineRadius)
+        }
+      }
     }
   }
 
@@ -621,7 +962,7 @@ object IUnitTypes : Load {
       )
     }
   }
-  val 裂片集群 = IceUnitType("clusterLobes") {
+  val 裂片集群 = IceUnitType("clusterLobes", ClusterLobesUnit::class.j) {
     setWeapon {
       shoot.apply {
         shots = 4
@@ -730,7 +1071,7 @@ object IUnitTypes : Load {
     })
     rotateSpeed = 2f
     drag = 0.05f
-    constructor = IceRegister.getPutUnit<ClusterLobesUnit>()
+    //constructor = IceRegister.getPutUnit<>()
     flying = true
     hidden = false
     faceTarget = false
@@ -989,7 +1330,7 @@ object IUnitTypes : Load {
       desc(zh_CN, "断业", "断业是神殿[净罪计划]的产物,其装甲内层熔铸了经神祝圣的暮光合金,主炮能对建筑与重甲单位造成毁灭性伤害,能撕裂红雾中的畸变体集群", "帝国腐朽的装甲部队节节败退,唯有枢机的神术能短暂驱散腐化,帝国残部讥讽其为伪神的铁棺材,但无人能否认——当它的履带碾过焦土时,连红雾都会为之退散")
     }
   }
-  val 焚棘 = IceUnitType("ardenThorn") {
+  val 焚棘 = IceUnitType("ardenThorn", ArdenThorn::class.j) {
     speed = 1.3f
     accel = 0.5f
     drag = 0.05f
@@ -999,7 +1340,6 @@ object IUnitTypes : Load {
     drawCell = false
     faceTarget = false
     rotateSpeed = 1.9f
-    constructor = IceRegister.getPutUnit<ArdenThorn>()
     setWeapon("weapon1") {
       x = 11f
       y = 27f
@@ -1065,7 +1405,7 @@ object IUnitTypes : Load {
           Draw.blend()
           Draw.z(Layer.effect)
           Drawf.light(e.x, e.y, rad * e.fout(Interp.circleOut) * 4f, e.color, 0.7f)
-        }, IceEffects.baseHitEffect)
+        }, IceEffects.基础子弹击中特效)
         despawnEffect = hitEffect
         shootEffect = IceEffects.squareAngle(color1 = IceColor.b5, color2 = IceColor.b4)
       }
@@ -1098,7 +1438,7 @@ object IUnitTypes : Load {
           Drawf.tri(e.x, e.y, w, 8 * e.fout(), e.rotation - 15f)
           Drawf.tri(e.x, e.y, w, 8 * e.fout(), e.rotation - 30f)
         }
-        hitEffect = IceEffects.baseHitEffect
+        hitEffect = IceEffects.基础子弹击中特效
         despawnEffect = hitEffect
       }
     }
@@ -1108,7 +1448,7 @@ object IUnitTypes : Load {
       )
     }
   }
-  val 青壤 = IceUnitType("schizovegeta") {
+  val 青壤 = IceUnitType("schizovegeta", Schizovegeta::class.j) {
     speed = 0.3f
     health = 200f
     hitSize = 12f
@@ -1139,14 +1479,13 @@ object IUnitTypes : Load {
     legMoveSpace = 1f
 
     deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
-    constructor = IceRegister.getPutUnit<Schizovegeta>()
     bundle {
       desc(
         zh_CN, "青壤", "由血肉喷口缓慢孕育的活体培养囊,本身不具备攻击性,只会笨拙地蠕行移动.当其外膜在环境中自然破裂或被外力摧毁时,会释放出数颗至数十颗不等的肿瘤"
       )
     }
   }
-  val 丰穰之瘤 = IceUnitType("richTumor") {
+  val 丰穰之瘤 = IceUnitType("richTumor", RichTumor::class.j) {
     speed = 0f
     accel = -3f
     range = 0f
@@ -1163,14 +1502,13 @@ object IUnitTypes : Load {
     playerControllable = false
     deathSound = Sounds.plantBreak
     deathExplosionEffect = IceEffects.bloodNeoplasma
-    constructor = IceRegister.getPutUnit<RichTumor>()
     bundle {
       desc(
         zh_CN, "丰穰之瘤", "无法移动的特殊组织体,不会被任何单位视为目标.落地后进入短暂的潜伏期,随后开始将下方地表同化为活性肿瘤地,为血肉网络提供持续的生长基础"
       )
     }
   }
-  val 蚀虻 = IceUnitType("corrodfly-head") {
+  val 蚀虻 = IceUnitType("corrodfly-head", CorrodflyHead::class.j) {
     rotateMoveFirst = true
     allowedInPayloads = false
     legStraightness = 0.3f
@@ -1198,12 +1536,11 @@ object IUnitTypes : Load {
     outlineRadius = 3
     outlineColor = IceColor.r2
     deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
-    constructor = IceRegister.getPutUnit<CorrodflyHead>()
     bundle {
       desc(zh_CN, "蚀虻")
     }
   }
-  val 蚀虻Middle = IceUnitType("corrodfly-middle") {
+  val 蚀虻Middle = IceUnitType("corrodfly-middle", CorrodflyMiddle::class.j) {
     hitSize = 5f
     drawCell = false
     outlineRadius = 3
@@ -1215,9 +1552,8 @@ object IUnitTypes : Load {
     deathSound = ISounds.chizovegeta
     aiController = Prov(::AIController)
     deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
-    constructor = IceRegister.getPutUnit<CorrodflyMiddle>()
   }
-  val 蚀虻End = IceUnitType("corrodfly-end") {
+  val 蚀虻End = IceUnitType("corrodfly-end", CorrodflyEnd::class.j) {
     legStraightness = 0.3f
     stepShake = 0f
     legCount = 2
@@ -1235,14 +1571,12 @@ object IUnitTypes : Load {
     legForwardScl = 1.1f
     rippleScale = 0.2f
     legMoveSpace = 1f
-
     hitSize = 8f
     outlineRadius = 3
     outlineColor = IceColor.r2
     drawCell = false
     createScorch = false
     hidden = true
-    constructor = IceRegister.getPutUnit<CorrodflyEnd>()
     faceTarget = false
     playerControllable = false
     deathSound = ISounds.chizovegeta
@@ -1261,6 +1595,8 @@ object IUnitTypes : Load {
       shoot.shotDelay = 15f
       shootSound = ISounds.flblSquirt
       bullet = MultiBasicBulletType("flesh").apply {
+        speed = 3f
+
         width = 7f
         height = width
         shrinkInterp = Interp.one
@@ -1304,8 +1640,47 @@ object IUnitTypes : Load {
       }
     }
   }
+  val 糜蝇 = IceUnitType("flies", Flies::class.j) {
+    bundle {
+      desc(zh_CN, "糜蝇", "小型飞行生物单位,体型轻盈,机动性高\n虽然单体战斗力薄弱,但往往以群体形式出现,形成令人困扰的蜂群\n其死亡时会释放出具有腐蚀性的体液")
+    }
+    speed += 1f
+    health = 300f
+    flying = true
+    drawCell = false
+    engineSize = 0f
+    outlineColor = IceColor.r2
+    accel = 0.08f
+    drag = 0.04f
+    hitSize = 10f
+    createWreck = false
+    deathSound = Sounds.plantBreak
+    createScorch = false
+    range = 1f
+    deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
+    setWeapon {
+      bullet.apply {
+        rangeOverride = 25f
+        killShooter = true
+        splashDamage = 80f
+        splashDamageRadius = 5 * 8f
+        instantDisappear = true
+        hittable = false
+        collidesAir = true
+        despawnEffect = WaveEffect().apply {
+          colorFrom = IceColor.r2
+          colorTo = IceColor.r1
+          sizeFrom = hitSize
+          lifetime = 25f
+          sizeTo = hitSize * 2f
+        }
+        hitEffect = despawnEffect
+        shootEffect = Fx.none
+      }
+      shootCone = 360f
+    }
+  }
   val 虚宿 = IceUnitType("emptiness") {
-    constructor = IceRegister.getPutUnit<Entity>()
     armor = 9f
     speed = 0.8f
     accel = 0.065f
@@ -2320,7 +2695,7 @@ object IUnitTypes : Load {
       })
     }
     bundle {
-      desc(zh_CN, "无畏", "无畏级战列巡航舰,帝国舰队的中坚力量\\n配备了两门火力凶猛的荷电粒子炮以及广域脉冲发生器,可以过载大范围内敌军的引擎和武器系统以及敌方工事的能源系统")
+      desc(zh_CN, "无畏", "无畏级战列巡航舰,帝国舰队的中坚力量\n配备了两门火力凶猛的荷电粒子炮以及广域脉冲发生器,可以过载大范围内敌军的引擎和武器系统以及敌方工事的能源系统")
     }
   }
   val 星光 = MissileUnitType("starlight").apply {
@@ -2392,6 +2767,7 @@ object IUnitTypes : Load {
       progress = DrawPart.PartProgress.life.curve(Interp.pow3Out)
     })
   }
+
   val 扑火 = IceUnitType("putotFire") {
     circleTarget = true
     faceTarget = false
@@ -2818,7 +3194,6 @@ object IUnitTypes : Load {
       }
     }
   }
-
   val 化火 = IceUnitType("huaFire") {
     bundle {
       desc(zh_CN, "化火", "大型轰炸机,配备八联装投弹系统及两门高爆机炮,特种装甲外壳使其足以应对绝大部分负面状况")
@@ -2902,7 +3277,7 @@ object IUnitTypes : Load {
       minShootVelocity = 0.04f
       shootSound = Sounds.shootBeamPlasma
       bullet = EmpBulletType().apply {
-        sprite = "large-bomb"
+        sprite = "large-bomb".appendModName()
         damage = 137f
         lifetime = 90f
         drag = 0.05f
@@ -2961,7 +3336,7 @@ object IUnitTypes : Load {
         hitEffect = Fx.massiveExplosion
         fragBullets = 1
         fragBullet = EmpBulletType().apply {
-          sprite = "stardart"
+          sprite = "stardart".appendModName()
           lifetime = 480f
           damage = 0f
           speed = 0f
@@ -3062,6 +3437,666 @@ object IUnitTypes : Load {
         }
       }
     }
+  }
+
+  val 陨石 = IceUnitType("meteorite") {
+    bundle {
+      desc(zh_CN, "陨石", "多功能异构飞行器,具有强大的纳米修复系统,集群作战时尤为强大")
+    }
+    flying = true
+    lowAltitude = true
+    health = 3450f
+    armor = 13f
+    hitSize = 18f
+    speed = 2.4f
+    accel = 0.08f
+    drag = 0.04f
+    rotateSpeed = 4.8f
+    engineSize = 3f
+    engineOffset = 12f
+    healColor = "FFA665".toColor()
+    outlineColor = "1F1F1F".toColor()
+    setWeapon("weapon") {
+      x = -6f
+      y = 5.5f
+      recoil = 1f
+      shake = 0.5f
+      reload = 35f
+      mirror = false
+      shootCone = 5f
+      inaccuracy = 1f
+      rotationLimit = 25f
+      cooldownTime = 65f
+      ejectEffect = Fx.casing1
+      shoot.apply {
+        shots = 4
+        shotDelay = 4f
+        layerOffset = -0.001f
+        shootSound = Sounds.shoot
+        bullet = BasicBulletType(7f, 37f).apply {
+          width = 8f
+          height = 12f
+          lifetime = 27f
+          hitColor = Pal.bulletYellowBack
+          hitEffect = Fx.hitSquaresColor
+          shootEffect = Fx.shootSmokeSquare
+        }
+      }
+    }
+    setWeaponT<RepairBeamWeapon>("陨石修复") {
+      x = 0.5f
+      y = -2f
+      shootY = 0f
+      mirror = false
+      laserColor = "FFA665".toColor()
+      repairSpeed = 5f
+      bullet = object : BulletType() {
+        init {
+          maxRange = 120f
+        }
+      }
+    }
+    setWeaponT<PointDefenseWeapon>("陨石点防") {
+      x = 0.5f
+      y = -2f
+      shootY = 0f
+      color = "FFA665".toColor()
+      reload = 9f
+      targetInterval = reload
+      targetSwitchInterval = reload
+      bullet = BulletType().apply {
+        damage = 67f
+        maxRange = 216f
+        shootEffect = Fx.sparkShoot
+        hitEffect = Fx.pointHit
+      }
+    }
+    abilities.add(EnergyFieldAbility(155f, 85f, 160f).apply {
+      x = 0.5f
+      y = -2f
+      healPercent = 2f
+      effectRadius = 2f
+      maxTargets = 20
+      statusDuration = 180f
+      color = Color.valueOf("FFA665")
+      status = StatusEffects.melting
+    })
+  }
+  val 陨铁 = IceUnitType("meteoricIron") {
+    bundle {
+      desc(zh_CN, "陨铁", "多功能异构飞行器,具有强大的纳米修复系统,集群作战时尤为强大\n具有一门略小于船体主结构的光束炮")
+    }
+    flying = true
+    lowAltitude = true
+    health = 10700f
+    armor = 21f
+    hitSize = 23f
+    speed = 1.9f
+    accel = 0.04f
+    drag = 0.016f
+    rotateSpeed = 3.1f
+    engineSize = 5f
+    engineOffset = 14f
+    healColor = Color.valueOf("FFA665")
+    outlineColor = Color.valueOf("1F1F1F")
+    setWeapon("陨铁激光") {
+      x = 8f
+      y = 4f
+      recoil = 0f
+      shake = 3f
+      reload = 85f
+      mirror = false
+      shootCone = 5f
+      cooldownTime = 115f
+      shoot.apply {
+        shots = 2
+        shotDelay = 10f
+      }
+      shootSound = Sounds.shootLaser
+      bullet = LaserBulletType(334f).apply {
+        width = 25f
+        length = 230f
+        sideAngle = 20f
+        sideWidth = 1.5f
+        sideLength = 80f
+        colors = arrayOf("EC7458AA".toColor(), "FF9C5A".toColor(), Color.white)
+        shootEffect = Fx.shockwave
+      }
+    }
+    setWeaponT<RepairBeamWeapon>("陨铁修复") {
+      x = -3.75f
+      y = -6.75f
+      shootY = 0f
+      mirror = false
+      laserColor = Color.valueOf("FFA665")
+      repairSpeed = 8f
+      bullet = BulletType().apply {
+        maxRange = 160f
+      }
+    }
+    setWeaponT<PointDefenseWeapon>("陨铁点防") {
+      x = -3.75f
+      y = -6.75f
+      shootY = 0f
+      color = Color.valueOf("FFA665")
+      reload = 7f
+      targetInterval = reload
+      targetSwitchInterval = reload
+      bullet = BulletType().apply {
+        damage = 85f
+        maxRange = 216f
+        shootEffect = Fx.sparkShoot
+        hitEffect = Fx.pointHit
+      }
+    }
+    setWeapon("machineGun") {
+      x = -2.25f
+      y = 1.5f
+      recoil = 1f
+      shake = 1f
+      reload = 43f
+      rotate = true
+      mirror = false
+      shootCone = 5f
+      inaccuracy = 1f
+      rotateSpeed = 6f
+      cooldownTime = 65f
+      ejectEffect = Fx.casing2
+      shoot.apply {
+        shots = 2
+        shotDelay = 4f
+      }
+      shootSound = Sounds.shoot
+      bullet = BasicBulletType(7f, 37f).apply {
+        width = 8f
+        height = 12f
+        lifetime = 39f
+        hitColor = Pal.bulletYellowBack
+        splashDamage = 25f
+        splashDamageRadius = 16f
+        status = IStatus.损毁
+        statusDuration = 60f
+        hitEffect = Fx.flakExplosion
+        shootEffect = Fx.shootSmokeSquare
+        despawnEffect = Fx.hitSquaresColor
+      }
+    }
+    abilities.add(EnergyFieldAbility(225f, 85f, 200f).apply {
+      x = -3.75f
+      y = -6.75f
+      healPercent = 2f
+      effectRadius = 2f
+
+      maxTargets = 20
+      statusDuration = 180f
+      color = "FFA665".toColor()
+      status = StatusEffects.melting
+    })
+  }
+  val 陨星 = IceUnitType("meteoricStar") {
+    bundle {
+      desc(zh_CN, "陨星", "多功能异构飞行器,具有强大的纳米修复系统,集群作战时尤为强大\n具有侧向弧形盾,可以抵挡两侧袭来的子弹")
+    }
+    flying = true
+    lowAltitude = true
+    health = 25300f
+    armor = 29f
+    hitSize = 44f
+    speed = 1.3f
+    accel = 0.04f
+    drag = 0.04f
+    rotateSpeed = 2.3f
+    engineSize = 0f
+    engineOffset = 24f
+    healColor = Color.valueOf("FFA665")
+    outlineColor = Color.valueOf("1F1F1F")
+    engines = Seq.with(UnitType.UnitEngine(3f, -22f, 6f, -90f))
+
+    var b1 = ((Blocks.afflict as PowerTurret).shootType as mindustry.entities.bullet.BasicBulletType).apply {
+      recoil = 1f
+      val toColor: Color = "FFA665".toColor()
+      hitColor = toColor
+      backColor = toColor
+      trailColor = toColor
+      fragBullet.apply {
+        (hitEffect as WaveEffect).apply {
+          colorFrom = toColor
+        }
+        (despawnEffect as WaveEffect).apply {
+          colorTo = toColor
+        }
+        hitColor = toColor
+        backColor = toColor
+        trailColor = toColor
+      }
+      intervalBullet = fragBullet
+    }
+
+    fun strafe(wx: Float, wy: Float): IceWeapon {
+      return IceWeapon("$name-machineGun").apply {
+        x = wx
+        y = wy
+        recoil = 1f
+        shake = 1f
+        reload = 43f
+        rotate = true
+        mirror = false
+        shootCone = 5f
+        inaccuracy = 1f
+        rotateSpeed = 6f
+        cooldownTime = 65f
+        ejectEffect = Fx.casing2
+        shoot.apply {
+          shots = 2
+          shotDelay = 4f
+        }
+        shootSound = Sounds.shoot
+        this.bullet = BasicBulletType(7f, 73f).apply {
+          width = 8f
+          height = 12f
+          lifetime = 39f
+          hitColor = Color.valueOf("FFA665")
+          splashDamage = 25f
+          splashDamageRadius = 16f
+          status = IStatus.损毁
+          statusDuration = 60f
+          hitEffect = Fx.flakExplosion
+          shootEffect = Fx.shootSmokeSquare
+          despawnEffect = Fx.hitSquaresColor
+        }
+
+      }
+    }
+    weapons.add(strafe(-11.25f, 20.75f))
+    weapons.add(strafe(-15f, 12.25f))
+    weapons.add(strafe(14.75f, 3.5f))
+    setWeapon("secondaryCannon") {
+      x = -12.75f
+      y = -17.25f
+      recoil = 2f
+      shake = 3f
+      reload = 35f
+      mirror = false
+      shootCone = 5f
+      cooldownTime = 65f
+      ejectEffect = Fx.casing1
+      shoot.apply {
+        shots = 4
+        shotDelay = 4f
+      }
+      shootSound = Sounds.shoot
+      bullet = BasicBulletType(9f, 73f).apply {
+        width = 8f
+        height = 12f
+        lifetime = 41f
+        hitColor = Color.valueOf("FFA665")
+        splashDamage = 47f
+        splashDamageRadius = 32f
+        status = IStatus.破甲II
+        statusDuration = 75f
+        hitEffect = Fx.flakExplosion
+        shootEffect = Fx.shootSmokeSquare
+        despawnEffect = Fx.hitSquaresColor
+      }
+    }
+    setWeapon("陨星主炮") {
+      x = 3.25f
+      y = 5f
+      recoil = 0f
+      shake = 3f
+      reload = 165f
+      mirror = false
+      shootCone = 20f
+      cooldownTime = 185f
+      ejectEffect = Fx.casing4
+      shootSound = Sounds.shootCorvus
+      bullet = b1
+    }
+    setWeaponT<RepairBeamWeapon>("陨铁修复") {
+      x = 3f
+      y = -7.75f
+      shootY = 0f
+      mirror = false
+      laserColor = Color.valueOf("FFA665")
+      repairSpeed = 11f
+      bullet = BulletType().apply {
+        maxRange = 200f
+      }
+    }
+    setWeaponT<PointDefenseWeapon>("陨铁点防") {
+      x = 3f
+      y = -7.75f
+      shootY = 0f
+      color = Color.valueOf("FFA665")
+      reload = 5f
+      targetInterval = reload
+      targetSwitchInterval = reload
+      bullet = BulletType().apply {
+        damage = 131f
+        maxRange = 256f
+        shootEffect = Fx.sparkShoot
+        hitEffect = Fx.pointHit
+      }
+    }
+    abilities.add(EnergyFieldAbility(255f, 85f, 240f).apply {
+      x = 3f
+      y = -7.75f
+      healPercent = 2f
+      effectRadius = 3f
+      maxTargets = 20
+      statusDuration = 180f
+      color = Color.valueOf("FFA665")
+      status = IStatus.熔融
+    })
+    abilities.add(ShieldArcAbility().apply {
+      x = 33f
+      regen = 5f
+      max = 3000f
+      cooldown = 60f * 8
+      angleOffset = 90f
+      angle = 75f
+      radius = 63f
+      width = 5f
+      whenShooting = false
+    }, ShieldArcAbility().apply {
+      x = -6f
+      y = -6f
+      regen = 5f
+      max = 3000f
+      cooldown = 60f * 8
+      angleOffset = -90f
+      angle = 96f
+      radius = 36f
+      width = 5f
+      whenShooting = false
+    })
+  }
+
+  val 冥刻 = IceUnitType("darkCarving") {
+    bundle {
+      desc(zh_CN, "冥刻", "坚固的远程炮舰,可以对敌人进行远距离定点打击\n对抗单位时效果更佳")
+    }
+    accel = 0.04f
+    drag = 0.04f
+    flying = true
+    health = 7300f
+    armor = 12f
+    hitSize = 30f
+    speed = 1.2f
+    rotateSpeed = 2.4f
+    engineOffset = 13f
+    engineSize = 4f
+    lowAltitude = true
+    ammoCapacity = 10
+    outlineColor = "1F1F1F".toColor()
+    engines.add(UnitType.UnitEngine(7.5f, -11f, 2f, -45f), UnitType.UnitEngine(-7.5f, -11f, 2f, -135f))
+    abilities.add(StatusFieldAbility(IStatus.坚忍, 240f, 600f, 160f))
+    parts.add(RegionPart().apply {
+      suffix = "-glow"
+      outline = false
+      color = Color.valueOf("E6C4EE")
+      blending = Blending.additive
+    })
+    parts.add(ShapePart().apply {
+      progress = DrawPart.PartProgress.smoothReload
+      y = 6f
+      hollow = true
+      circle = true
+      stroke = 1.2f
+      strokeTo = 0f
+      radius = 7.5f
+      color = Color.valueOf("E6C4EE")
+      colorTo = Color.valueOf("AA88B2")
+      layer = 110f
+    })
+    parts.add(ShapePart().apply {
+      progress = DrawPart.PartProgress.smoothReload
+      y = 6f
+      sides = 4
+      hollow = true
+      stroke = 0.9f
+      strokeTo = 0f
+      radius = 3.6f
+      rotateSpeed = -0.5f
+      color = Color.valueOf("E6C4EE")
+      colorTo = Color.valueOf("AA88B2")
+      layer = 110f
+    })
+    parts.add(ShapePart().apply {
+      progress = DrawPart.PartProgress.smoothReload
+      y = 6f
+      sides = 4
+      hollow = true
+      stroke = 0.9f
+      strokeTo = 0f
+      radius = 6.3f
+      rotateSpeed = -0.5f
+      color = Color.valueOf("E6C4EE")
+      colorTo = Color.valueOf("AA88B2")
+      layer = 110f
+    })
+    setWeapon("weapon") {
+      x = 0f
+      recoil = 0f
+      shake = 1f
+      shootY = 6f
+      reload = 180f
+      shootCone = 5f
+      mirror = false
+      heatColor = "E6C4EE".toColor()
+      cooldownTime = 210f
+      shootSound = ISounds.激射
+      bullet = PointBulletType().apply {
+        damage = 0f
+        lifetime = 7.2f
+        speed = 40f
+        status = IStatus.秽蚀
+        absorbable = false
+        statusDuration = 300f
+        splashDamage = 466f
+        splashDamageRadius = 20f
+        buildingDamageMultiplier = 0.4f
+        smokeEffect = Fx.none
+        hitSound = Sounds.explosion
+        trailSpacing = 4f
+        shootEffect = MultiEffect(ParticleEffect().apply {
+          particles = 6
+          lifetime = 30f
+          line = true
+          cone = 36f
+          length = 15f
+          baseLength = 3f
+          colorFrom = Color.valueOf("E6C4EE")
+          colorTo = Color.valueOf("AA88B2")
+        }, WaveEffect().apply {
+          lifetime = 15f
+          sizeTo = 15f
+          strokeFrom = 1f
+          lightColor = Color.valueOf("E6C4EE")
+          colorFrom = Color.valueOf("E6C4EE")
+          colorTo = Color.valueOf("AA88B2")
+        })
+        despawnEffect = ParticleEffect().apply {
+          line = true
+          particles = 5
+          lifetime = 30f
+          lenFrom = 9f
+          lenTo = 0f
+          cone = 360f
+          length = 32f
+          baseLength = 3f
+          colorFrom = Color.valueOf("E6C4EE")
+          colorTo = Color.valueOf("AA88B2")
+        }
+        trailEffect = MultiEffect(ParticleEffect().apply {
+          particles = 1
+          lifetime = 30f
+          line = true
+          strokeFrom = 2.4f
+          strokeTo = 0f
+          lenFrom = 4.2f
+          lenTo = 4.2f
+          cone = 0f
+          length = 1f
+          baseLength = 1f
+          colorFrom = Color.valueOf("E6C4EE")
+          colorTo = Color.valueOf("AA88B2")
+        }, ParticleEffect().apply {
+          particles = 2
+          lifetime = 25f
+          sizeFrom = 1.2f
+          length = 10f
+          baseLength = 4.8f
+          colorFrom = Color.valueOf("E6C4EE")
+          colorTo = Color.valueOf("AA88B2")
+          cone = 360f
+        })
+        hitEffect = MultiEffect(ParticleEffect().apply {
+          particles = 8
+          lifetime = 35f
+          sizeFrom = 4f
+          sizeTo = 0f
+          cone = 360f
+          length = 18f
+          colorFrom = Color.valueOf("E6C4EE")
+          colorTo = Color.valueOf("AA88B2")
+        }, ParticleEffect().apply {
+          particles = 8
+          lifetime = 25f
+          sizeFrom = 2f
+          sizeTo = 0f
+          cone = 360f
+          length = 35f
+          interp = Interp.pow5Out
+          colorFrom = Color.valueOf("E6C4EE")
+          colorTo = Color.valueOf("AA88B2")
+        }, WaveEffect().apply {
+          lifetime = 15f
+          sizeFrom = 1f
+          sizeTo = 30f
+          strokeFrom = 3f
+          strokeTo = 0f
+          colorFrom = Color.valueOf("E6C4EE")
+          colorTo = Color.valueOf("AA88B2")
+        })
+      }
+    }
+  }
+
+  val 甘霖 = IceUnitType("ganlin") {
+    bundle {
+      desc(zh_CN, "甘霖","以生物钢作为主要材料,辅以陶钢作为电磁屏蔽层,一般装备甚至无法留下划痕,同时在澎湃的能量输出下,其回复速度令人惊异,\n控制中枢与动力炉紧密相连,在内部结构大规模受损导致动力炉失稳融毁后会一同损毁\n因此,即使工程部门收集到了如此多残骸也难以了解其中枢构造")
+    }
+    health = 68700f
+    hitSize = 48f
+    armor = 77f
+    speed = 1.08f
+    rotateSpeed = 1.2f
+    legCount = 6
+    legLength = 36f
+    stepShake = 0.2f
+    legGroupSize = 3
+    legMoveSpace = 1f
+    legExtension = -3f
+    legBaseOffset = 16f
+    legMaxLength = 1.1f
+    legMinLength = 0.2f
+    legLengthScl = 0.95f
+    legForwardScl = 0.9f
+    legSplashRange = 16f
+    legSplashDamage = 150f
+    hovering = true
+    lockLegBase = true
+    allowLegStep = true
+    outlineColor = Color.valueOf("1F1F1F")
+    legContinuousMove = true
+    abilities.add(RegenAbility().apply {
+      percentAmount = 1f / 100f
+    })
+    abilities.add(DeathGiftAbility(160f, IStatus.复仇, 900f, 0.1f, 1000f))
+    abilities.add(DeathGiftAbility(320f, IStatus.屠戮, 900f, 0.1f, 1000f))
+    abilities.add(ShieldAbility(240f, 2400f))
+    abilities.add(RepairFieldAbility(200f, 500f, 0.02f).apply {
+      y = -1f
+      range = 240f
+      orbRadius = 12f
+      orbMidScl = 0.4f
+      orbSinScl = 8f
+      orbSinMag = 1f
+      particles = 24
+      particleSize = 4f
+      particleLen = 32f
+      rotateScl = 3f
+      particleLife = 360f
+      particleInterp = Interp(Interp.swing::apply)
+    })
+    weapons.add(RepairBeamWeapon("甘霖修复".appendModName()).apply {
+      x = 0f
+      y = -1f
+      shootY = 0f
+      mirror = false
+      laserColor = Color.valueOf("FF5845")
+      repairSpeed = 17f
+      bullet = BulletType(0f, 0f).apply {
+        maxRange = 240f
+      }
+    })
+   var b= object : BasicBulletType() {
+      init {
+        speed = 8f
+        damage = 213f
+        lifetime = 45f
+        shrinkY = 0f
+        ammoMultiplier = 1f
+        status = IStatus.损毁
+        statusDuration = 180f
+        pierce = true
+        pierceBuilding = true
+        pierceDamageFactor = 0.6f
+        width = 13f
+        height = 14f
+        drag = -0.01f
+        hitColor = Pal.bulletYellowBack
+        hitEffect = Fx.hitSquaresColor
+        shootEffect = Fx.shootSmokeSquare
+
+      }
+      override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
+        var size = if (entity is Unit) entity.hitSize else (entity as Building).block.size * 8f
+        val unit = b.owner as Unit
+        var scale = unit.hitSize / if (size > 1) unit.hitSize / size else 1f
+        b.damage = damage * scale
+        super.hitEntity(b, entity, health)
+      }
+    }
+    weapons.add(object : Weapon("ganlin-weapon".appendModName()) {
+      override fun addStats(u: UnitType, t: Table) {
+        super.addStats(u, t)
+        t.row();
+        t.add("[lightgray]对[stat]中小型[lightgray]单位/方块进行[red]压制").row()
+      }
+    }.apply {
+      bullet=b
+      x = 18.75f
+      y = 15f
+      recoil = 2f
+      shake = 3f
+      shootY = 8f
+      reload = 25f
+      rotate = true
+      shootCone = 5f
+      rotateSpeed = 3f
+      rotationLimit = 25f
+      layerOffset = -0.001f
+      shootStatus = IStatus.鼓舞
+      shootStatusDuration = 120f
+      shoot = ShootPattern().apply {
+        shots = 3
+        shotDelay = 4f
+      }
+      shootSound = Sounds.shootCollaris
+
+    })
   }
 
   fun lightning(lifeTime: Float, time: Float, damage: Float, size: Float, color: Color?, generator: Func<Bullet?, LightningGenerator>): LightningBulletType {

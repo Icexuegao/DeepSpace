@@ -277,7 +277,7 @@ class UCLinkNode(val content: UnlockableContent, x: Float, y: Float
             }
             ta.add(button)
             ta.button(Icon.book, imageButtonClean, 40f) {
-                DataDialog.showBlock(content)
+                DataDialog.showUnlockableContent(content)
                 ta.scenes = MenusDialog.scene
             }
             requirements.let { itemsStacks ->
