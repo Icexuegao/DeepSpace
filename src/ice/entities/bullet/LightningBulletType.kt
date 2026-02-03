@@ -6,8 +6,8 @@ import arc.util.pooling.Pools
 import ice.entities.bullet.base.BulletType
 import ice.graphics.lightnings.LightningContainer
 import ice.graphics.lightnings.LightningContainer.PoolLightningContainer
-import ice.world.SglFx
 import mindustry.gen.Bullet
+import singularity.world.SglFx
 
 open class LightningBulletType(time: Float = 0f, damage: Float = 1f) : BulletType(time, damage) {
 

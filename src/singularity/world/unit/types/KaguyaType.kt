@@ -16,15 +16,9 @@ import arc.scene.ui.layout.Table
 import arc.util.Interval
 import arc.util.Time
 import arc.util.Tmp
-import ice.content.IItems.充能FEX水晶
-import ice.content.IItems.强化合金
-import ice.content.IItems.气凝胶
-import ice.content.IItems.矩阵合金
-import ice.content.IItems.铝
-import ice.content.IItems.铱锭
 import ice.library.struct.AttachedProperty
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.entities.Units
 import mindustry.entities.bullet.BulletType
 import mindustry.entities.bullet.LaserBulletType
@@ -57,15 +51,15 @@ import singularity.world.unit.SglWeapon
 import singularity.world.unit.abilities.MirrorFieldAbility
 import kotlin.math.max
 
-class KaguyaType : SglUnitType<SglUnitEntity>("kaguya",SglUnitEntity::class.java) {
+class KaguyaType : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
   companion object {
     private val rand = Rand()
   }
 
   init {
-    requirements(
-      Items.silicon, 460, Items.phaseFabric, 480, Items.surgeAlloy, 450, 铝, 520, 气凝胶, 480, 充能FEX水晶, 280, 强化合金, 340, 铱锭, 140, 矩阵合金, 220
-    )
+    bundle{
+      desc(zh_CN,"辉夜","搭载光束引擎的巨型攻击舰,具有强大的火力和相当灵活的机动性,其武装足以将绝大多数防线夷为平地")
+    }
     armor = 20f
     speed = 1.1f
     accel = 0.06f
@@ -354,7 +348,7 @@ class KaguyaType : SglUnitType<SglUnitEntity>("kaguya",SglUnitEntity::class.java
               MathRenderer.setThreshold(0.4f, 0.6f)
 
               rand.setSeed(b.id.toLong())
-              repeat(( 0..2).count()) {
+              repeat((0..2).count()) {
                 MathRenderer.drawSin(
                   b.x, b.y, b.aimX, b.aimY, rand.random(4f, 6f) * b.fslope(), rand.random(360f, 720f), rand.random(360f) - Time.time * rand.random(4f, 7f)
                 )

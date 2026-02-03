@@ -3,12 +3,11 @@ package ice.entities.bullet
 import arc.graphics.g2d.Draw
 import arc.util.Time
 import arc.util.pooling.Pools
-import ice.world.SglFx
 import ice.graphics.lightnings.LightningContainer
 import ice.graphics.lightnings.LightningContainer.PoolLightningContainer
 import mindustry.gen.Bullet
 import mindustry.graphics.Layer
-
+import singularity.world.SglFx
 
 open class EmpLightningBulletType(time: Float=0f, damage: Float=1f) : SglEmpBulletType(0f, damage) {
 

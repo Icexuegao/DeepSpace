@@ -19,16 +19,10 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pool.Poolable
 import arc.util.pooling.Pools
-import ice.content.IItems.充能FEX水晶
-import ice.content.IItems.强化合金
-import ice.content.IItems.气凝胶
-import ice.content.IItems.矩阵合金
-import ice.content.IItems.铝
-import ice.content.IItems.铱锭
 import ice.library.struct.AttachedProperty
+import ice.ui.bundle.BaseBundle
 import mindustry.Vars
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.entities.Damage
 import mindustry.entities.Effect
 import mindustry.entities.Units
@@ -59,9 +53,9 @@ import universecore.world.lightnings.LightningContainer
 
 class MornstarType : AirSeaAmphibiousUnit("mornstar") {
   init {
-    requirements(
-      Items.silicon, 420, Items.phaseFabric, 360, Items.surgeAlloy, 320, 铝, 380, 气凝胶, 320, 充能FEX水晶, 220, 强化合金, 280, 铱锭, 200, 矩阵合金, 220
-    )
+    BaseBundle.bundle {
+      desc(zh_CN,"晨星","搭载光束引擎的巨型护卫舰,装载光棱蜉蚴模块,能够引导光束能量体发动猛烈的攻击,同时它搭载的重型电磁脉冲主炮也能对敌人造成致命的打击")
+    }
 
     armor = 19f
     speed = 0.84f

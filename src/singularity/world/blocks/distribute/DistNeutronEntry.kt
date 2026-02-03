@@ -20,7 +20,7 @@ open class DistNeutronEntry(name: String) : DistEnergyEntry(name) {
     public override fun updateTile() {
       super.updateTile()
       if (this.distributor.network.netStructValid()) {
-        val energyInput = min(this@DistNeutronEntry.maxEnergyInput, this.energy.getEnergy())
+        val energyInput = min(this@DistNeutronEntry.maxEnergyInput, this.energy.energy)
         this.energyProduct = energyInput * 1.25f
         this.handleEnergy(-energyInput * Time.delta)
       }

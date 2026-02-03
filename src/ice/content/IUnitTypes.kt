@@ -42,7 +42,6 @@ import ice.library.util.toColor
 import ice.library.util.toStringi
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.SglFx
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.*
 import ice.world.content.unit.ability.RepairFieldAbility
@@ -89,6 +88,7 @@ import mindustry.world.meta.BlockFlag
 import mindustry.world.meta.Stat
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
+import singularity.world.SglFx
 import singularity.world.particles.SglParticleModels
 import singularity.world.unit.abilities.MirrorArmorAbility
 import kotlin.math.abs
@@ -1681,6 +1681,9 @@ object IUnitTypes : Load {
     }
   }
   val 虚宿 = IceUnitType("emptiness") {
+    bundle {
+      desc(zh_CN, "虚宿", "巨型光棱战列舰,光束反应堆的最终产物,火力至上原则的最终答案,拥有强大的能量护盾")
+    }
     armor = 9f
     speed = 0.8f
     accel = 0.065f

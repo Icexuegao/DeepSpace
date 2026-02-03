@@ -13,7 +13,6 @@ import singularity.contents.*;
 import singularity.contents.override.OverrideTechThree;
 import singularity.type.SglCategory;
 import singularity.type.SglContentType;
-import singularity.world.meta.SglAttribute;
 import universecore.util.OverrideContentList;
 
 import java.util.Locale;
@@ -53,7 +52,6 @@ public class Singularity extends Mod {
   @Override
   public void loadContent() {
     //加载属性类型
-    SglAttribute.load();
     //加载方块类型
     SglCategory.load();
     //载入所有新内容类型

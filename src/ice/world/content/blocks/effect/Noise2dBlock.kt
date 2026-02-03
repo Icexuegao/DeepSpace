@@ -15,7 +15,6 @@ import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
 import arc.util.noise.Simplex
-import ice.world.SglFx
 import mindustry.Vars
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
@@ -24,6 +23,7 @@ import mindustry.world.Tile
 import singularity.graphic.Distortion
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
+import singularity.world.SglFx
 import singularity.world.blocks.product.NormalCrafter
 import kotlin.math.abs
 

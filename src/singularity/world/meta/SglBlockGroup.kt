@@ -1,10 +1,10 @@
-package singularity.world.meta;
+package singularity.world.meta
 
-import mindustry.world.meta.BlockGroup;
-import universecore.util.handler.EnumHandler;
+import mindustry.world.meta.BlockGroup
+import universecore.util.handler.EnumHandler
 
-public class SglBlockGroup{
-  private static final EnumHandler<BlockGroup> handler = new EnumHandler<>(BlockGroup.class);
-  
-  public static BlockGroup nuclear = handler.addEnumItemTail("nuclear", true);
+object SglBlockGroup {
+  private val handler = EnumHandler(BlockGroup::class.java)
+
+  var nuclear: BlockGroup = handler.addEnumItemTail("nuclear", true)
 }

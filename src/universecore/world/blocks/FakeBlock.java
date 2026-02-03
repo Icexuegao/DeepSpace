@@ -10,7 +10,6 @@ import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.meta.BuildVisibility;
 import universecore.components.blockcomp.ReplaceBuildComp;
-import universecore.override.dialogs.UncDatabaseDialog;
 import universecore.util.handler.FieldHandler;
 import universecore.util.handler.MethodHandler;
 
@@ -56,7 +55,6 @@ public class FakeBlock extends Block {
     category = maskedBlock.category;
 
     buildVisibility = BuildVisibility.shown;
-    UncDatabaseDialog.hide(maskedBlock);
    // maskedBlock.category = null;
   }
 

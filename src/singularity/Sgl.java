@@ -95,7 +95,7 @@ public class Sgl {
 
   public static void init() {
     //注册所有打包数据类型id
-    BytePackAssign.assignAll();
+    BytePackAssign.INSTANCE.assignAll();
 
     globals = new Settings() {
       {

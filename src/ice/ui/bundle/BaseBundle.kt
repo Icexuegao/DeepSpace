@@ -6,7 +6,7 @@ import ice.library.world.Load
 import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
 
- class BaseBundle(val name: String) {
+class BaseBundle(val name: String) {
   companion object : Load {
     fun bundle(bundle: Companion.() -> Unit) {
       bundle.invoke(Companion)

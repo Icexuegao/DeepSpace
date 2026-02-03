@@ -3,7 +3,7 @@
 "displayName": "Deep Space",
 "description": "模组为MDT引入四大势力,拓展全新科技树,单位,星球及地形机制",
 "author": "Alon",
-"version": "Alpha-1876",
+"version": "Alpha-1891",
 "java": true,
 "main": "ice.Ice",
 "minGameVersion": 154.3,

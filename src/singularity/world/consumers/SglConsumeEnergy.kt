@@ -65,9 +65,9 @@ class SglConsumeEnergy<T>(var usage: Float) : BaseConsume<T>() where T : Buildin
     public override fun efficiency(entity: T): Float {
         if (entity!!.energy() == null) return 0f
         if (buffer) {
-            return (if (entity.energy()!!.getEnergy() >= usage * 60 * multiple(entity)) 1 else 0).toFloat()
+            return (if (entity.energy()!!.energy >= usage * 60 * multiple(entity)) 1 else 0).toFloat()
         }
-        return Mathf.clamp(entity.energy()!!.getEnergy() / (usage * 12.5f * multiple(entity)))
+        return Mathf.clamp(entity.energy()!!.energy / (usage * 12.5f * multiple(entity)))
     }
 
     public override fun filter(): Seq<Content?>? {

@@ -21,6 +21,7 @@ import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.liquid.SolidPump
+import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.content.Fx
@@ -53,7 +54,6 @@ import singularity.world.consumers.SglConsumeFloor
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawDirSpliceBlock
 import singularity.world.draw.DrawExpandPlasma
-import singularity.world.meta.SglAttribute
 import kotlin.math.pow
 
 @Suppress("unused")
@@ -199,7 +199,7 @@ object ProductBlocks : Load {
     produce!!.item(IItems.岩层沥青, 2)
 
     newBooster(1f)
-    consume!!.add(SglConsumeFloor(SglAttribute.bitumen, 1.12f))
+    consume!!.add(SglConsumeFloor(IAttribute.bitumen, 1.12f))
 
     draw = DrawMulti(
       DrawBottom(), object : DrawLiquidRegion(Liquids.water) {

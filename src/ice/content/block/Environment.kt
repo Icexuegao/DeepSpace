@@ -14,7 +14,7 @@ import ice.shader.IceShader
 import ice.type.Dup
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.environment.*
-import ice.world.meta.Attributes
+import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Effect
@@ -74,7 +74,7 @@ object Environment : Load {
       }
     }
     val 殷红树 = TreeBlock("bloodSporophoreTree").apply {
-        attributes[Attributes.血囊孢子] = 1f
+        attributes[IAttribute.血囊孢子] = 1f
         var range = 40f
         setUpdate { tile ->
             val mouseWorld = Core.input.mouseWorld()

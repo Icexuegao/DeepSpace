@@ -1,6 +1,5 @@
 package ice
 
-import arc.util.OS
 import ice.async.ParcelProcess
 import ice.audio.SoundControl
 import ice.content.*
@@ -12,12 +11,12 @@ import ice.game.IceTeam
 import ice.library.EventType
 import ice.library.IFiles
 import ice.library.Schematics
-import ice.library.struct.log
 import ice.ui.Documents
 import ice.ui.UI
 import ice.ui.bundle.BaseBundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.Noise2dBlock
+import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.mod.Mod
 import singularity.Recipes
@@ -32,6 +31,7 @@ open class Ice : @RecipeEntryPoint(Recipes::class) Mod() {
   }
 
   init {
+    IAttribute.load()
     UncCore.setup()
     IFiles.setup()
     SettingValue.setup()

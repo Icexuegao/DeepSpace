@@ -19,6 +19,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.block.turret.TurretBullets
 import ice.library.struct.AttachedProperty
+import ice.ui.bundle.BaseBundle
 import mindustry.Vars
 import mindustry.content.Items
 import mindustry.content.Liquids
@@ -50,10 +51,8 @@ import singularity.world.blocks.product.HoveringUnitFactory
 import singularity.world.blocks.product.SglUnitFactory
 import singularity.world.consumers.SglConsumers
 import singularity.world.particles.SglParticleModels
-import singularity.world.unit.AirSeaAmphibiousUnit.AirSeaUnit
 import singularity.world.unit.SglUnitEntity
 import singularity.world.unit.SglUnitType
-import singularity.world.unit.UnitEntityType
 import singularity.world.unit.UnitTypeRegister
 import singularity.world.unit.types.AuroraType
 import singularity.world.unit.types.EmptinessType
@@ -86,6 +85,9 @@ class SglUnits : ContentList {
       var SglUnitEntity.bullTime by AttachedProperty(0f)
 
       init {
+        BaseBundle.bundle {
+          desc(zh_CN,"不稳定能量体")
+        }
         Events.on(ClientLoadEvent::class.java) { e: ClientLoadEvent? ->
           immunities.addAll(Vars.content.statusEffects())
           Sgl.empHealth.setEmpDisabled(this)
@@ -231,7 +233,7 @@ class SglUnits : ContentList {
           unit.bullTime -= Time.delta
           val bullTime: Float = unit.bullTime
           if (bullTime <= 0) {
-            TurretBullets.溢出能量!!.create(u, u.team, u.x, u.y, Mathf.random(0f, 360f), Mathf.random(0.5f, 1f))
+            TurretBullets.溢出能量.create(u, u.team, u.x, u.y, Mathf.random(0f, 360f), Mathf.random(0.5f, 1f))
             unit.health -= 180f
             unit.bullTime = max(controlTime / 10, 2f)
           }
@@ -410,7 +412,7 @@ class SglUnits : ContentList {
         payloadSpeed = 1.2f
 
         consCustom = Cons2 { u: UnitType?, c: SglConsumers? ->
-          c!!.power(Mathf.round(u!!.health / u.hitSize) * 0.02f)!!.showIcon = true
+          c!!.power(Mathf.round(u!!.health / u.hitSize) * 0.02f).showIcon = true
           if (u.hitSize >= 38) c.energy(u.hitSize / 24)
         }
 
@@ -454,9 +456,8 @@ class SglUnits : ContentList {
               Lines.square(b.x, b.y, (size * Vars.tilesize).toFloat(), Time.time * 1.25f)
               SglDraw.drawCornerTri(b.x, b.y, 58f, 14f, Time.time * 3.5f, true)
               var p: ProducePayload<*>? = null
-              val item = p!!.payloads[0].item
-              if (b.producer!!.current != null && (b.producer!!.current!!.get<ProducePayload<*>>(ProduceType.payload).also { p = it }) != null && item is UnitType) {
-                SglDraw.arc(b.x, b.y, item.hitSize + 8, 360 * b.progress(), -Time.time * 0.8f)
+              if (b.producer!!.current != null && (b.producer!!.current!!.get(ProduceType.payload).also { p = it }) != null && p!!.payloads[0].item is UnitType) {
+                SglDraw.arc(b.x, b.y, (p.payloads[0].item as UnitType).hitSize + 8, 360 * b.progress(), -Time.time * 0.8f)
               }
 
               Draw.color(Pal.reactorPurple)
@@ -491,11 +492,6 @@ class SglUnits : ContentList {
 
   companion object {
     var SglUnitEntity.controlTime by AttachedProperty(0f)
-    const val EPHEMERAS: String = "ephemeras"
-    const val TIMER: String = "timer"
-    const val STATUS: String = "status"
-    const val PHASE: String = "phase"
-    const val SHOOTERS: String = "shooters"
 
     /**棱镜 */
     var prism: UnitType? = null
@@ -504,22 +500,17 @@ class SglUnits : ContentList {
     var manifold: UnitType? = null
 
     /**辉夜 */
-    @UnitEntityType(SglUnitEntity::class)
     var kaguya: UnitType? = null
 
     /**虚宿 */
-    @UnitEntityType(SglUnitEntity::class)
     var emptiness: UnitType? = null
 
     /**晨星 */
-    @UnitEntityType(AirSeaUnit::class)
     var mornstar: UnitType? = null
 
     /**极光 */
-    @UnitEntityType(AirSeaUnit::class)
     var aurora: UnitType? = null
 
-    @UnitEntityType(SglUnitEntity::class)
     var unstable_energy_body: UnitType? = null
 
     /**机械构造坞 */

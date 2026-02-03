@@ -12,17 +12,9 @@ import arc.math.Rand
 import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pools
-import ice.content.IItems.FEX水晶
-import ice.content.IItems.充能FEX水晶
-import ice.content.IItems.强化合金
-import ice.content.IItems.气凝胶
-import ice.content.IItems.矩阵合金
-import ice.content.IItems.简并态中子聚合物
-import ice.content.IItems.铝
-import ice.content.IItems.铱锭
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.Vars
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.entities.Damage
 import mindustry.entities.Mover
 import mindustry.entities.Units
@@ -56,9 +48,9 @@ import kotlin.math.min
 
 class AuroraType : AirSeaAmphibiousUnit("aurora") {
   init {
-    requirements(
-      Items.silicon, 360, Items.phaseFabric, 380, Items.surgeAlloy, 390, 铝, 400, 气凝胶, 430, FEX水晶, 280, 充能FEX水晶, 280, 强化合金, 340, 铱锭, 320, 矩阵合金, 380, 简并态中子聚合物, 200
-    )
+    bundle{
+      desc(zh_CN,"极光","搭载光束引擎的战列旗舰,将引擎功率最大程度内化,其装载的两门'光锥'主炮能够贯穿任何强互作用材料之外的装甲,给敌人以毁灭性的打击")
+    }
 
     armor = 10f
     speed = 0.65f
@@ -228,6 +220,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
                 super.init(b)
                 b?.trail(Trail(trailLength))
               }
+
               override fun draw(b: Bullet) {
                 super.draw(b)
                 Draw.color(hitColor)
@@ -252,7 +245,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
 
           override fun init(b: Bullet) {
             super.init(b)
-            val l = Pools.obtain(TrailMoveLightning::class.java) {TrailMoveLightning()}
+            val l = Pools.obtain(TrailMoveLightning::class.java) { TrailMoveLightning() }
             l.range = 8f
             l.maxOff = 7.5f
             l.chance = 0.4f

@@ -313,7 +313,6 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     override fun energyLinked() = Seq<NuclearEnergyBuildComp>()
     override val resident: Float = this@SglBlock.resident
 
-
     fun superUpdate() {
       if ((Time.delta.let { this.timeScaleDuration -= it; this.timeScaleDuration }) <= 0.0f || !this.block.canOverdrive) {
         this.timeScale = 1.0f
@@ -390,7 +389,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
       super.create(block, team)
       liquids = SglLiquidModule()
       if (consumers.size == 1) recipeCurrent = 0
-       consumer = BaseConsumeModule(this)
+      consumer = BaseConsumeModule(this)
       if (hasEnergy) energy = NuclearEnergyModule(this)
       return this
     }

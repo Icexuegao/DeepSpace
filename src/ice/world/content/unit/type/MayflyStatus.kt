@@ -10,7 +10,6 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.graphics.IceColor
 import ice.library.util.MathTransform
-import ice.world.SglFx
 import mindustry.Vars
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
@@ -19,6 +18,7 @@ import mindustry.graphics.Trail
 import mindustry.type.UnitType
 import singularity.graphic.MathRenderer
 import singularity.graphic.SglDraw
+import singularity.world.SglFx
 import kotlin.math.min
 
 class MayflyStatus {
