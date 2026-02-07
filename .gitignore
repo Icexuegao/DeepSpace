@@ -1,0 +1,11 @@
+/杂项
+.gitignore
+.idea
+.gradle
+.lib
+/assets/sprites-out/
+/lib/
+/annotations/build/
+/build
+/src/singularity/
+/src/universecore/
