@@ -1,11 +1,19 @@
 /杂项
 .gitignore
 .idea
+
+
+# Gradle 相关
 .gradle
+.gradle/
+build/
+annotations/build/
+
+# 库文件
 .lib
-/assets/sprites-out/
 /lib/
-/annotations/build/
-/build
+
+
 /src/singularity/
 /src/universecore/
+
