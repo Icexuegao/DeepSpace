@@ -1,8 +1,8 @@
 package singularity.world.blocks.product
 
+import arc.func.Boolf
 import arc.func.Cons
 import arc.func.Intf
-import arc.func.Prov
 import arc.graphics.g2d.Draw
 import arc.util.Structs
 import arc.util.io.Reads
@@ -17,8 +17,10 @@ import mindustry.type.PayloadSeq
 import mindustry.world.blocks.payloads.Payload
 import mindustry.world.meta.BlockGroup
 import singularity.world.components.PayloadBuildComp
+import singularity.world.components.PayloadBuildComp.Companion.temp
 import singularity.world.draw.DrawPayloadFactory
 import singularity.world.modules.PayloadModule
+import universecore.world.consumers.ConsumeItemBase
 import universecore.world.consumers.ConsumeType
 import universecore.world.producers.ProducePayload
 import universecore.world.producers.ProduceType
@@ -31,9 +33,9 @@ open class PayloadCrafter(name: String) : NormalCrafter(name) {
   var payloadRotateSpeed: Float = 5.0f
 
   init {
-    this.draw = object : DrawPayloadFactory<PayloadCrafterBuild?>() {
+    this.draw = object : DrawPayloadFactory<PayloadCrafterBuild>() {
       init {
-        this.spliceBits = Intf { obj: PayloadCrafterBuild -> obj.blendBit }
+        this.spliceBits = Intf{it.blendBit}
         this.drawPayload = Cons { e: PayloadCrafterBuild? ->
           e!!.drawConstructingPayload()
           e.drawPayload()
@@ -45,11 +47,10 @@ open class PayloadCrafter(name: String) : NormalCrafter(name) {
     this.rotate = true
     this.group = BlockGroup.payloads
     this.envEnabled = this.envEnabled or 6
-    buildType = Prov(::PayloadCrafterBuild)
   }
 
   open inner class PayloadCrafterBuild : NormalCrafterBuild(), PayloadBuildComp {
-    override var payloads: PayloadModule = PayloadModule()
+    override var payloads = PayloadModule()
     override var carried: Boolean = false
     override var outputLocking: Boolean = false
     override var stackAlpha: Float = 0f
@@ -59,72 +60,125 @@ open class PayloadCrafter(name: String) : NormalCrafter(name) {
       get() = this@PayloadCrafter.payloadCapacity
       set(value) {}
     override var payloadSpeed: Float
-      get() =  this@PayloadCrafter.payloadSpeed
+      get() = this@PayloadCrafter.payloadSpeed
       set(value) {}
     override var payloadRotateSpeed: Float
-      get() =  this@PayloadCrafter.payloadRotateSpeed
+      get() = this@PayloadCrafter.payloadRotateSpeed
       set(value) {}
     override var inputting: Payload? = null
 
-    override fun acceptUnitPayload(unit: Unit?): Boolean {
-      return this.inputting == null && !this.consumer.hasConsume() || this@PayloadCrafter.consFilter.filter(this, ConsumeType.payload, unit!!.type, true)
+    override fun acceptUnitPayload(unit: Unit): Boolean {
+      return this.inputting() == null && !this.consumer.hasConsume() || this@PayloadCrafter.consFilter.filter(this, ConsumeType.Companion.payload, unit.type, true)
     }
 
     override fun canControlSelect(unit: Unit): Boolean {
-      return this@PayloadCrafter.acceptsPayload && !unit.spawnedByCore && unit.type.allowedInPayloads && this.payloads.isEmpty && this.acceptUnitPayload(unit) && unit.tileOn() != null && unit.tileOn().build === this
+      return this@PayloadCrafter.acceptsPayload && !unit.spawnedByCore && unit.type.allowedInPayloads && this.payloads()!!.isEmpty() && this.acceptUnitPayload(unit) && unit.tileOn() != null && unit.tileOn().build === this
     }
 
-    override fun onControlSelect(player: Unit?) {
-      this.handleUnitPayload(player) { p: Payload? -> this.payloads.add(p) }
+    public override fun onControlSelect(player: Unit?) {
+      this.handleUnitPayload(player, Cons { p: Payload? -> this.payloads()!!.add(p) })
     }
 
-    override fun shouldConsume(): Boolean {
-      return if (!super.shouldConsume()) {
-        false
+    public override fun shouldConsume(): Boolean {
+      if (!super.shouldConsume()) {
+        return false
       } else {
-        this.outputting == null || abs(this.outputting!!.x() - this.x) >= (this@PayloadCrafter.size * 8).toFloat() / 2.0f + 1.0f || abs(this.outputting!!.y() - this.y) >= (this@PayloadCrafter.size * 8).toFloat() / 2.0f + 1.0f
+        return this.outputting() == null || abs(this.outputting()!!.x() - this.x) >= (this@PayloadCrafter.size * 8).toFloat() / 2.0f + 1.0f || abs(this.outputting()!!.y() - this.y) >= (this@PayloadCrafter.size * 8).toFloat() / 2.0f + 1.0f
       }
     }
-
 
     override fun acceptPayload(source: Building?, payload: Payload): Boolean {
-      return (source === this || this@PayloadCrafter.acceptsPayload && this.inputting == null && (!this.consumer.hasConsume() || this@PayloadCrafter.consFilter.filter(this, ConsumeType.payload, payload.content(), true))) && this.payloads.total() < payloadCapacity
+      return (source === this || this@PayloadCrafter.acceptsPayload && this.inputting() == null && (!this.consumer.hasConsume() || this@PayloadCrafter.consFilter.filter(this, ConsumeType.payload, payload.content(), true))) && this.payloads()!!.total() < this.payloadCapacity()
     }
 
-    override fun sense(sensor: LAccess?): Double {
-      return if (sensor == LAccess.payloadCount) this.payloads.total().toDouble() else super.sense(sensor)
+    public override fun sense(sensor: LAccess?): Double {
+      return if (sensor == LAccess.payloadCount) this.payloads()!!.total().toDouble() else super.sense(sensor)
     }
 
-    override fun craftTrigger() {
+    public override fun craftTrigger() {
       super.craftTrigger()
-      if (!this.payloads.isEmpty) {
-        this.payload!!.set(this.x, this.y, this.rotdeg())
+      if (!this.payloads()!!.isEmpty()) {
+        this.getPayload()!!.set(this.x, this.y, this.rotdeg())
       }
     }
 
-    override fun getPayloads(): PayloadSeq? {
-      PayloadBuildComp.temp.clear()
-      for (payload in payloads.iterate()) {
-        PayloadBuildComp.temp.add(payload.content())
-      }
-      return PayloadBuildComp.temp
-    }
-
-    override fun getPayload(): Payload? {
-      return payloads.take()
-    }
-
-
-    open fun drawConstructingPayload() {
-      val p: ProducePayload<*>? = this.producer?.current?.get(ProduceType.payload)
-      if (p != null && producer!!.current != null) {
-        Draw.draw(35.0f) { Drawf.construct(this, p.payloads[0].item, this.rotdeg() - 90.0f, this.progress(), this.workEfficiency(), this.totalProgress()) }
+   open fun drawConstructingPayload() {
+      var p: ProducePayload<*>?=null
+      if (this.producer!!.current != null && (this.producer!!.current!!.get(ProduceType.payload).also { p = it }) != null) {
+        Draw.draw(35.0f){
+          Drawf.construct(this, p!!.payloads[0].item, this.rotdeg() - 90.0f, this.progress(), this.workEfficiency(), this.totalProgress()) }
       }
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    public override fun acceptItem(source: Building, item: Item?): Boolean {
       val stack: ItemStack?
-      return source.interactable(this.team) && this@PayloadCrafter.hasItems && (source === this || !this.consumer.hasConsume() && !this.consumer.hasOptional() || this@PayloadCrafter.consFilter.filter(this, ConsumeType.item, item, this.acceptAll(ConsumeType.item))) && this.items.get(item).toFloat() < (if (Structs.find((this.consumer.current!!.get(ConsumeType.item))!!.consItems) { e: ItemStack? -> e!!.item === item }.let { stack=it } !=null) stack!!.amount.toFloat() * this@PayloadCrafter.itemCapacityMulti else 0.0f)
+      return source.interactable(this.team) && this@PayloadCrafter.hasItems && (source === this || !this.consumer.hasConsume() && !this.consumer.hasOptional() || this@PayloadCrafter.consFilter.filter(this, ConsumeType.item, item, this.acceptAll(ConsumeType.item))) && this.items.get(item).toFloat() < (if (((Structs.find<ItemStack>((this.consumer.current!!.get<ConsumeItemBase<*>>(ConsumeType.item) as ConsumeItemBase<*>).consItems, Boolf { e: ItemStack? -> e!!.item === item }) as ItemStack).also {
+          stack = it
+        }) != null) stack!!.amount.toFloat() * this@PayloadCrafter.itemCapacityMulti else 0.0f)
+    }
+
+    fun payloadCapacity(): Int {
+      return this@PayloadCrafter.payloadCapacity
+    }
+
+    fun payloadSpeed(): Float {
+      return this@PayloadCrafter.payloadSpeed
+    }
+
+    fun payloadRotateSpeed(): Float {
+      return this@PayloadCrafter.payloadRotateSpeed
+    }
+
+    fun inputting(): Payload? {
+      return this.inputting
+    }
+
+    fun inputting(payload: Payload?) {
+      this.inputting = payload
+    }
+
+    fun outputting(): Payload? {
+      return this.outputting
+    }
+
+    fun outputting(payload: Payload?) {
+      this.outputting = payload
+    }
+
+    fun blendBit(): Int {
+      return this.blendBit
+    }
+
+    fun blendBit(bit: Int) {
+      this.blendBit = bit
+    }
+
+    fun stackAlpha(): Float {
+      return this.stackAlpha
+    }
+
+    fun stackAlpha(alpha: Float) {
+      this.stackAlpha = alpha
+    }
+
+    fun outputLocking(): Boolean {
+      return this.outputLocking
+    }
+
+    fun outputLocking(locking: Boolean) {
+      this.outputLocking = locking
+    }
+
+    fun carried(): Boolean {
+      return this.carried
+    }
+
+    fun carried(carried: Boolean) {
+      this.carried = carried
+    }
+
+    fun payloads(): PayloadModule? {
+      return this.payloads
     }
 
     override fun onRemoved() {
@@ -147,11 +201,23 @@ open class PayloadCrafter(name: String) : NormalCrafter(name) {
       this.drawTeamTopEntry()
     }
 
-    override fun takePayload(): Payload? {
-      return payloads.take()
+    override fun getPayloads(): PayloadSeq {
+      temp.clear()
+      for (payload in payloads.iterate()) {
+        temp.add(payload.content())
+      }
+      return temp
     }
 
-    override fun updateTile() {
+    override fun takePayload(): Payload? {
+      return super<PayloadBuildComp>.takePayload()
+    }
+
+    override fun getPayload(): Payload? {
+      return payloads()?.get()
+    }
+
+    public override fun updateTile() {
       super.updateTile()
       this.updatePayloads()
     }
@@ -161,12 +227,12 @@ open class PayloadCrafter(name: String) : NormalCrafter(name) {
       super<PayloadBuildComp>.handlePayload(source, payload)
     }
 
-    override fun write(write: Writes) {
+    public override fun write(write: Writes) {
       super.write(write)
       this.writePayloads(write)
     }
 
-    override fun read(read: Reads, revision: Byte) {
+    public override fun read(read: Reads, revision: Byte) {
       super.read(read, revision)
       this.readPayloads(read, revision)
     }

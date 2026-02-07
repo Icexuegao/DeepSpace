@@ -45,9 +45,7 @@ public class InsExtension implements Parser.ParserExtension, MDLayoutRenderer.Dr
     @Override
     public void render(Node node) {
       context.lastText = null;
-
       visitChildren(node);
-
       TextMirror orig = context.lastText;
       while (orig != null){
         context.draw(DrawLine.get(

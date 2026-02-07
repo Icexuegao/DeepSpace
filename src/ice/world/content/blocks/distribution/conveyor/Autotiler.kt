@@ -58,7 +58,7 @@ interface Autotiler {
     region.set(input)
     val width = region.width
     region.setWidth(width / 2)
-    region.setX(region.getX() + width)
+    region.x = region.x + width
     return region
   }
 

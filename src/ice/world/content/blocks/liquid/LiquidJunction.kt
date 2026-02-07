@@ -8,40 +8,39 @@ import mindustry.gen.Building
 import mindustry.type.Liquid
 import mindustry.world.meta.Stat
 
-//TODO should leak!
 class LiquidJunction(name: String) : LiquidBlock(name) {
-    init {
-        floating = true
-        buildType = Prov(::LiquidJunctionBuild)
+  init {
+    floating = true
+    buildType = Prov(::LiquidJunctionBuild)
+  }
+
+  override fun setStats() {
+    super.setStats()
+    stats.remove(Stat.liquidCapacity)
+  }
+
+  override fun setBars() {
+    super.setBars()
+    removeBar("liquid")
+  }
+
+  override fun icons(): Array<TextureRegion> {
+    return arrayOf(region)
+  }
+
+  inner class LiquidJunctionBuild : LiquidBuild() {
+    override fun draw() {
+      Draw.rect(region, x, y)
     }
 
-    override fun setStats() {
-        super.setStats()
-        stats.remove(Stat.liquidCapacity)
+    override fun getLiquidDestination(source: Building, liquid: Liquid?): Building? {
+      if (!enabled) return this
+      val dir = (source.relativeTo(tile.x.toInt(), tile.y.toInt()) + 4) % 4
+      val next = nearby(dir)
+      if (next == null || (!next.acceptLiquid(this, liquid) && next.block !is LiquidJunction)) {
+        return this
+      }
+      return next.getLiquidDestination(this, liquid)
     }
-
-    override fun setBars() {
-        super.setBars()
-        removeBar("liquid")
-    }
-
-    override fun icons(): Array<TextureRegion> {
-        return arrayOf(region)
-    }
-
-    inner class LiquidJunctionBuild : LiquidBuild() {
-        override fun draw() {
-            Draw.rect(region, x, y)
-        }
-
-        override fun getLiquidDestination(source: Building, liquid: Liquid?): Building? {
-            if (!enabled) return this
-            val dir = (source.relativeTo(tile.x.toInt(), tile.y.toInt()) + 4) % 4
-            val next = nearby(dir)
-            if (next == null || (!next.acceptLiquid(this, liquid) && next.block !is LiquidJunction)) {
-                return this
-            }
-            return next.getLiquidDestination(this, liquid)
-        }
-    }
+  }
 }

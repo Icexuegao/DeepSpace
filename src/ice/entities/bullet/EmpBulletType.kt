@@ -48,7 +48,7 @@ class EmpBulletType : BasicBulletType() {
             other = absorber
           }
 
-          if (other.power != null && other.power.graph.getLastPowerProduced() > 0f) {
+          if (other.power != null && other.power.graph.lastPowerProduced > 0f) {
             other.applySlowdown(powerSclDecrease, timeDuration)
             other.damage(damage * powerDamageScl)
             hitPowerEffect.at(other.x, other.y, b.angleTo(other), hitColor)

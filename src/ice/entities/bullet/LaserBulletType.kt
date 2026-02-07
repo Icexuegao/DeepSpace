@@ -18,7 +18,7 @@ import mindustry.graphics.Drawf
 import mindustry.graphics.Pal
 import kotlin.math.max
 
-open class LaserBulletType(damage: Float): BasicBulletType(0f,damage) {
+open class LaserBulletType(damage: Float): BasicBulletType(damage, 0f) {
     var colors = arrayOf(Pal.lancerLaser.cpy().mul(1f, 1f, 1f, 0.4f), Pal.lancerLaser, Color.white)
     var laserEffect: Effect = Fx.lancerLaserShootSmoke
     var length: Float = 160f

@@ -5,7 +5,7 @@ import singularity.world.components.MediumBuildComp
 import singularity.world.components.MediumComp
 import singularity.world.consumers.SglConsumeType
 import singularity.world.products.ProduceMedium
-import singularity.world.products.SglProduceType
+import universecore.world.producers.ProduceType
 
 open class MediumCrafter(name: String) : NormalCrafter(name), MediumComp {
   override var mediumCapacity: Float = 16f
@@ -22,7 +22,7 @@ open class MediumCrafter(name: String) : NormalCrafter(name), MediumComp {
     super.init()
     var m: ProduceMedium<*>?
     for (producer in producers) {
-      outputMedium = outputMedium or ((producer.get(SglProduceType.medium).also { m = it }) != null && (m!!.product.also { mediumMoveRate = it }) > 0)
+      outputMedium = outputMedium or ((producer.get(ProduceType.medium).also { m = it }) != null && (m!!.product.also { mediumMoveRate = it }) > 0)
     }
   }
 

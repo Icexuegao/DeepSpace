@@ -17,21 +17,21 @@ import singularity.Singularity;
 import singularity.graphic.SglDrawConst;
 import universecore.ui.elements.ZoomableTable;
 
-public class ContributorsDialog extends BaseDialog{
+public class ContributorsDialog extends BaseDialog {
   protected ZoomableTable table = new ZoomableTable();
-  
-  public ContributorsDialog(){
+
+  public ContributorsDialog() {
     super("");
     margin(0f).marginBottom(8);
-    
+
     titleTable.clearChildren();
-    
+
     cont.add(table).size(Core.scene.getWidth(), Core.scene.getHeight());
   }
-  
-  public void build(){
+
+  public void build() {
     addCloseButton();
-    
+
     touchable = Touchable.enabled;
 
     table.table(SglDrawConst.grayUIAlpha, table -> {
@@ -46,7 +46,7 @@ public class ContributorsDialog extends BaseDialog{
       table.row();
       table.table(cons -> {
         cons.defaults().pad(8).padLeft(8).padRight(8);
-        for(Contribute contribute: Contribute.values()){
+        for (Contribute contribute : Contribute.values()) {
           if (contribute == Contribute.author) continue;
 
           cons.table(Tex.buttonTrans, t -> {
@@ -56,7 +56,7 @@ public class ContributorsDialog extends BaseDialog{
             t.add(contribute.localize()).padTop(6);
             t.row();
             Seq<Contributors.Contributor> seq = Sgl.contributors.get(contribute);
-            if(seq != null) for(Contributors.Contributor contributor: seq){
+            if (seq != null) for (Contributors.Contributor contributor : seq) {
               t.add(new ContributorTable(contributor)).fillY();
               t.row();
             }
@@ -67,11 +67,11 @@ public class ContributorsDialog extends BaseDialog{
       table.left().add(Core.bundle.get("dialog.contributors.thanks")).fill().left();
     }).margin(8);
   }
-  
-  protected static class ContributorTable extends Table{
+
+  protected static class ContributorTable extends Table {
     static float tapTime;
 
-    public ContributorTable(Contributors.Contributor contributor){
+    public ContributorTable(Contributors.Contributor contributor) {
       image(contributor.avatar).size(180).get().addListener(new Tooltip(t -> t.table(Tex.paneLeft).get().add(Core.bundle.get("infos.clickToPage") + "\nhttps://github.com/" + contributor.name)));
       row();
       add(contributor.displayName).color(Pal.accent).fill();

@@ -9,27 +9,14 @@ import ice.world.meta.IceStatValues.sep
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.StatusEffects
-import mindustry.entities.Damage
-import mindustry.entities.Fires
 import mindustry.gen.Bullet
 import mindustry.gen.Icon
 import mindustry.ui.Styles
 import mindustry.world.meta.StatUnit
 
 open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entities.bullet.BulletType(speed, damage) {
-  var drawOverride: Boolean = false
-  var drawRun: (Bullet) -> Unit = {}
   var updateRun: (Bullet) -> Unit = {}
   var removedRun: (Bullet) -> Unit = {}
-
-  fun drawCustom(b: Bullet) {
-    if (drawOverride) {
-      drawRun(b)
-    } else {
-      draw(b)
-      drawRun(b)
-    }
-  }
 
   override fun update(b: Bullet) {
     super.update(b)
@@ -41,10 +28,6 @@ open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entitie
     removedRun(b)
   }
 
-  fun setDraw(override: Boolean = false, run: (Bullet) -> Unit) {
-    drawOverride = override
-    this.drawRun = run
-  }
 
   open fun setUpdate(run: (Bullet) -> Unit) {
     this.updateRun = run
@@ -190,30 +173,5 @@ open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entitie
       table.add(coll).padLeft(16f)
     }
     table.row()
-  }
-
-  override fun createSplashDamage(b: Bullet, x: Float, y: Float) {
-
-    if (splashDamageRadius > 0) {
-      ice.entities.Damage.damage(
-        b.team, x, y, splashDamageRadius, splashDamage * b.damageMultiplier(), splashDamagePierce, collidesAir, collidesGround, scaledSplashDamage, b
-      )
-
-      if (status !== StatusEffects.none) {
-        Damage.status(b.team, x, y, splashDamageRadius, status, statusDuration, collidesAir, collidesGround)
-      }
-
-      if (heals()) {
-        Vars.indexer.eachBlock(b.team, x, y, splashDamageRadius, { obj -> obj.damaged() }, { other ->
-          healEffect.at(other.x, other.y, 0f, healColor, other.block)
-          other.heal(healPercent / 100f * other.maxHealth() + healAmount)
-        })
-      }
-      if (makeFire) {
-        Vars.indexer.eachBlock(null, x, y, splashDamageRadius, { other -> other.team !== b.team }, { other ->
-          Fires.create(other.tile)
-        })
-      }
-    }
   }
 }

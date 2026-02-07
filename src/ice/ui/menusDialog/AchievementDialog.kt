@@ -29,6 +29,7 @@ import universecore.util.DataPackable
 
 object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.menusButton_host) {
   val achievements = Seq<Achievement>()
+
   init {
     Achievement("孢子进化论", "升级一次孢子单位")
     Achievement("阴霾之下", "使用孢子建筑生产迷雾")
@@ -45,60 +46,62 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
     Achievement("空间风暴I", "未知之处涌现的风暴")
     Achievement("空间风暴II", "将秩序囚于混沌的牢笼")
     Achievement("空间风暴III", "长梯下破碎的现实与你")
-  }
-  override fun build(cont: Table) {
-    cont.iPaneG { k ->
-        k.table { t ->
-          t.image( TextureRegionDrawable(IStyles.achievement,0.5f)).scaling(Scaling.fit)
-        }.pad(20f).row()
-
-        k.iTableGX(IStyles.background32) { table ->
-          val pross = (achievements.select { it.unlocked() }.size.toFloat() / achievements.size)
-          table.iTableGX { table1 ->
-            table1.add(Label { "已获得${achievements.select { it.unlocked() }.size}项成就,共${achievements.size}项" }).color(IceColor.b4).expandX().left()
-            table1.add(Label { "(${Mathf.round(pross * 100f)}%)" }).color(IceColor.b4).expandX().right()
-          }.pad(5f).row()
-          table.iTableGX {
-            it.add(BaseProgressBar(IStyles.barBottlom, IStyles.barTop) { pross }.apply {
-              color.set(IceColor.b4)
-            }).grow()
-          }.minHeight(60f)
-        }.margin(21f).pad(20f).row()
-
-        k.iTableG {
-          it.setRowsize(2)
-          it.top()
-          val buildAchievements: (Achievement) -> Unit = { ach ->
-            it.iTableGX(if (ach.unlocked()) IStyles.background101 else IStyles.background91) { b ->
-              b.image(if (ach.unlocked()) IStyles.achievementUnlock else IStyles.achievementLock).size(100f)
-                .pad(5f)
-              b.iTableG { b1 ->
-                b1.add(Label(ach.name).colorR(if (ach.unlocked()) IceColor.b4 else Color.gray)).padTop(10f)
-                  .row()
-                b1.add(Label(ach.description).colorR(if (ach.unlocked()) IceColor.b4 else Color.gray))
-                  .growX()
-                  .expandY().wrap()
-              }
-              if (ach.unlocked()) {
-                b.button(Icon.trash, IStyles.button3) {
-                  ach.clearUnlock()
-                  hide()
-                  build(cont)
-                }.size(40f).pad(12f).expandY().bottom()
-              } else {
-                b.table().size(40f).pad(12f).expandY()
-              }
-            }.minSize(620f, 140f).pad(2f).margin(MenusDialog.backMargin + 2)
-          }
-          //优先展示已解锁
-          achievements.select { it1 -> it1.unlocked() }.forEach(buildAchievements)
-          achievements.select { it1 -> !it1.unlocked() }.forEach(buildAchievements)
-        }
-
+    Events.on(EventType.AchievementUnlockEvent::class.java) { e ->
+      Sgl.ui.notificationFrag.notify(AchievementNotification(e.achievement.name, e.achievement.description))
     }
   }
 
+  override fun build(cont: Table) {
+    cont.iPaneG { k ->
+      k.table { t ->
+        t.image(TextureRegionDrawable(IStyles.achievement, 0.5f)).scaling(Scaling.fit)
+      }.pad(20f).row()
 
+      k.iTableGX(IStyles.background32) { table ->
+        val pross = (achievements.select { it.unlocked() }.size.toFloat() / achievements.size)
+        table.iTableGX { table1 ->
+          table1.add(Label { "已获得${achievements.select { it.unlocked() }.size}项成就,共${achievements.size}项" }).color(IceColor.b4).expandX().left()
+          table1.add(Label { "(${Mathf.round(pross * 100f)}%)" }).color(IceColor.b4).expandX().right()
+        }.pad(5f).row()
+        table.iTableGX {
+          it.add(BaseProgressBar(IStyles.barBottlom, IStyles.barTop) { pross }.apply {
+            color.set(IceColor.b4)
+          }).grow()
+        }.minHeight(60f)
+      }.margin(21f).pad(20f).row()
+
+      k.iTableG {
+        it.setRowsize(2)
+        it.top()
+        val buildAchievements: (Achievement) -> Unit = { ach ->
+          it.iTableGX(if (ach.unlocked()) IStyles.background101 else IStyles.background91) { b ->
+            b.image(if (ach.unlocked()) IStyles.achievementUnlock else IStyles.achievementLock).size(100f)
+              .pad(5f)
+            b.iTableG { b1 ->
+              b1.add(Label(ach.name).colorR(if (ach.unlocked()) IceColor.b4 else Color.gray)).padTop(10f)
+                .row()
+              b1.add(Label(ach.description).colorR(if (ach.unlocked()) IceColor.b4 else Color.gray))
+                .growX()
+                .expandY().wrap()
+            }
+            if (ach.unlocked()) {
+              b.button(Icon.trash, IStyles.button3) {
+                ach.clearUnlock()
+                hide()
+                build(cont)
+              }.size(40f).pad(12f).expandY().bottom()
+            } else {
+              b.table().size(40f).pad(12f).expandY()
+            }
+          }.minSize(620f, 140f).pad(2f).margin(MenusDialog.backMargin + 2)
+        }
+        //优先展示已解锁
+        achievements.select { it1 -> it1.unlocked() }.forEach(buildAchievements)
+        achievements.select { it1 -> !it1.unlocked() }.forEach(buildAchievements)
+      }
+
+    }
+  }
 
   class Achievement(var name: String, var description: String) {
     private var unlocked = false
@@ -114,7 +117,6 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
         unlocked = true
         Core.settings.put("${DeepSpace.name}-achievement-$name", true)
         Events.fire(EventType.AchievementUnlockEvent(this))
-        Sgl.ui.notificationFrag.notify(AchievementNotification(name, description))
         hide()
         build(MenusDialog.conts)
       }
@@ -131,7 +133,7 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
   }
 
   class AchievementNotification(name: String, description: String) : Notification("成就解锁: $name", description) {
-    companion object{
+    companion object {
       const val typeID: Long = 12133159028768494L
       fun assign() {
         DataPackable.assignType(typeID) { args: Array<Any> ->
@@ -142,7 +144,6 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
     override fun getIcon() = IStyles.afehs.asDrawable()
 
     override fun activity() {
-
     }
 
     override fun buildWindow(table: Table?) {

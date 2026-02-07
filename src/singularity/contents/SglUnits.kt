@@ -53,11 +53,6 @@ import singularity.world.consumers.SglConsumers
 import singularity.world.particles.SglParticleModels
 import singularity.world.unit.SglUnitEntity
 import singularity.world.unit.SglUnitType
-import singularity.world.unit.UnitTypeRegister
-import singularity.world.unit.types.AuroraType
-import singularity.world.unit.types.EmptinessType
-import singularity.world.unit.types.KaguyaType
-import singularity.world.unit.types.MornstarType
 import universecore.world.lightnings.LightningContainer
 import universecore.world.lightnings.generator.CircleGenerator
 import universecore.world.lightnings.generator.ShrinkGenerator
@@ -68,13 +63,27 @@ import kotlin.math.min
 
 class SglUnits : ContentList {
 
-  override fun load() {
-    UnitTypeRegister.registerAll()
+  companion object {
+    var SglUnitEntity.controlTime by AttachedProperty(0f)
 
-    mornstar = MornstarType()
-    kaguya = KaguyaType()
-    aurora = AuroraType()
-    emptiness = EmptinessType()
+    /**棱镜 */
+    var prism: UnitType? = null
+
+    /**流形 */
+    var manifold: UnitType? = null
+
+    /**虚宿 */
+    var emptiness: UnitType? = null
+
+    var unstable_energy_body: UnitType? = null
+
+    /**机械构造坞 */
+    var cstr_1: Block? = null
+    var cstr_2: Block? = null
+    var cstr_3: Block? = null
+  }
+  override fun load() {
+
 
     unstable_energy_body = object : SglUnitType<SglUnitEntity>("unstable_energy_body", SglUnitEntity::class.java) {
       val FULL_SIZE_ENERGY: Float = 3680f
@@ -86,7 +95,7 @@ class SglUnits : ContentList {
 
       init {
         BaseBundle.bundle {
-          desc(zh_CN,"不稳定能量体")
+          desc(zh_CN, "不稳定能量体")
         }
         Events.on(ClientLoadEvent::class.java) { e: ClientLoadEvent? ->
           immunities.addAll(Vars.content.statusEffects())
@@ -291,6 +300,9 @@ class SglUnits : ContentList {
 
     cstr_1 = object : SglUnitFactory("cstr_1") {
       init {
+        BaseBundle.bundle {
+          desc(zh_CN,"起源构造器","高度集成的机械建造工厂,可以直接进行中小型单位的建造任务","比起繁杂冗长的重构工作,我们将所有工作都集成在了你看到的这坐机器当中,这可以节省出大量的空间与成本,为对抗敌人创造更多的优势")
+        }
         requirements(
           Category.units, ItemStack.with(
             Items.silicon, 120, Items.graphite, 160, Items.thorium, 90, IItems.铝, 120, IItems.强化合金, 135
@@ -328,7 +340,7 @@ class SglUnits : ContentList {
         liquidCapacity = 280f
         energyCapacity = 1024f
         basicPotentialEnergy = 1024f
-        squareSprite=false
+        squareSprite = false
         payloadSpeed = 1f
 
         consCustom = Cons2 { u: UnitType?, c: SglConsumers? ->
@@ -408,7 +420,7 @@ class SglUnits : ContentList {
         liquidCapacity = 420f
         energyCapacity = 4096f
         basicPotentialEnergy = 4096f
-        squareSprite=false
+        squareSprite = false
         payloadSpeed = 1.2f
 
         consCustom = Cons2 { u: UnitType?, c: SglConsumers? ->
@@ -490,32 +502,4 @@ class SglUnits : ContentList {
     }
   }
 
-  companion object {
-    var SglUnitEntity.controlTime by AttachedProperty(0f)
-
-    /**棱镜 */
-    var prism: UnitType? = null
-
-    /**流形 */
-    var manifold: UnitType? = null
-
-    /**辉夜 */
-    var kaguya: UnitType? = null
-
-    /**虚宿 */
-    var emptiness: UnitType? = null
-
-    /**晨星 */
-    var mornstar: UnitType? = null
-
-    /**极光 */
-    var aurora: UnitType? = null
-
-    var unstable_energy_body: UnitType? = null
-
-    /**机械构造坞 */
-    var cstr_1: Block? = null
-    var cstr_2: Block? = null
-    var cstr_3: Block? = null
-  }
 }

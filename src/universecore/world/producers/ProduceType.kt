@@ -1,32 +1,35 @@
 package universecore.world.producers
 
 import arc.struct.Seq
+import singularity.world.products.ProduceEnergy
+import singularity.world.products.ProduceMedium
 
 open class ProduceType<T : BaseProduce<*>>(val type: Class<T>) {
-    private val id: Int = allType.size
+  companion object {
+    private val allType = Seq<ProduceType<*>>()
 
-    fun id(): Int {
-        return id
+    fun all(): Array<ProduceType<*>?>? {
+      return allType.toArray<ProduceType<*>?>(ProduceType::class.java)
     }
 
-    init {
-        allType.add(this)
+    fun <Type : BaseProduce<*>> add(type: Class<Type>): ProduceType<out Type> {
+      return ProduceType(type)
     }
 
-    companion object {
-        private val allType = Seq<ProduceType<*>?>()
+    val power = add(ProducePower::class.java) as ProduceType<ProducePower<*>>
+    val item = add(ProduceItems::class.java) as ProduceType<ProduceItems<*>>
+    val liquid = add(ProduceLiquids::class.java) as ProduceType<ProduceLiquids<*>>
+    val payload = add(ProducePayload::class.java) as ProduceType<ProducePayload<*>>
+    val energy = add(ProduceEnergy::class.java) as ProduceType<ProduceEnergy<*>>
+    val medium = add(ProduceMedium::class.java) as ProduceType<ProduceMedium<*>>
 
-        fun all(): Array<ProduceType<*>?>? {
-            return allType.toArray<ProduceType<*>?>(ProduceType::class.java)
-        }
+    val add: ProduceType<out ProduceItems<*>> = add(ProduceItems::class.java)
+    val mediusm = add
+  }
 
-        fun <Type : BaseProduce<*>> add(type: Class<Type>): ProduceType<out Type> {
-            return ProduceType<Type>(type)
-        }
+  val id: Int = allType.size
 
-        val power: ProduceType<ProducePower<*>> = Companion.add(ProducePower::class.java) as ProduceType<ProducePower<*>>
-        val item: ProduceType<ProduceItems<*>> = Companion.add(ProduceItems::class.java) as ProduceType<ProduceItems<*>>
-        val liquid: ProduceType<ProduceLiquids<*>> = Companion.add(ProduceLiquids::class.java) as ProduceType<ProduceLiquids<*>>
-        val payload: ProduceType<ProducePayload<*>> = Companion.add(ProducePayload::class.java) as ProduceType<ProducePayload<*>>
-    }
+  init {
+    allType.add(this)
+  }
 }

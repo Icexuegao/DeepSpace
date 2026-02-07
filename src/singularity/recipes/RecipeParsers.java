@@ -10,7 +10,6 @@ import mindustry.world.Block;
 import org.jetbrains.annotations.NotNull;
 import singularity.world.blocks.product.NormalCrafter;
 import singularity.world.consumers.SglConsumeFloor;
-import singularity.world.products.SglProduceType;
 import tmi.recipe.*;
 import universecore.components.blockcomp.ConsumerBuildComp;
 import universecore.world.consumers.BaseConsume;
@@ -50,7 +49,7 @@ public class RecipeParsers {
         boolean isGenerator = false;
 
         for (BaseProduce<?> produce : crafter.all()) {
-          if (produce.type() == ProduceType.Companion.getPower() || produce.type() == SglProduceType.Companion.getEnergy()) {
+          if (produce.type() == ProduceType.Companion.getPower() || produce.type() == ProduceType.Companion.getEnergy()) {
             isGenerator = true;
             break;
           }

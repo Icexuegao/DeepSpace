@@ -97,7 +97,7 @@ open class BaseDrill(name: String) : SglBlock(name) {
   fun newBooster(increase: Float): BaseConsumers {
     return newOptionalConsume({ entity: ConsumerBuildComp, cons: BaseConsumers ->
       (entity as BaseDrillBuild).efficiencyIncrease = increase
-      entity.boostTime = cons!!.craftTime
+      entity.boostTime = cons.craftTime
     }, { stats: Stats?, _: BaseConsumers? ->
       stats!!.add(Stat.boostEffect, increase, StatUnit.timesSpeed)
     })

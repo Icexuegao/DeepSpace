@@ -100,8 +100,8 @@ object IItems : Load {
       desc(zh_CN, "石英", "高硬度晶体,主要成分为SiO2,对于极端酸性环境有优异的耐受性")
     }
   }
-  val 生煤 = OreItem("rawCoal", "151515", 2) {
-    flammability = 0.6f
+  val 生煤 = OreItem("rawCoal", "#7D7D7D", 2) {
+    flammability = 0.7f
     bundle {
       desc(zh_CN, "生煤", "未经精炼的原煤,含有较多杂质,但仍是重要的燃料来源,需要进一步加工以提高纯度")
     }

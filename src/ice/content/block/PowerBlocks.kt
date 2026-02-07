@@ -197,7 +197,7 @@ object PowerBlocks : Load {
     generateEffect = Fx.redgeneratespark
     drawer = DrawMulti(DrawRegion("-bottom"), DrawAnyLiquidTile(), DrawDefault(), DrawGlowRegion())
     bundle {
-      desc(zh_CN, "地热发电机", "")
+      desc(zh_CN, "地热发电机")
     }
   }
   val 热核裂变反应堆 = NuclearReactor("heatNuclearReactor").apply {
@@ -363,7 +363,7 @@ object PowerBlocks : Load {
         fragVelocityMin = 1f
         fragVelocityMax = 2f
 
-        fragBullet = BasicBulletType(8f, 225f, "star".appendModName()).apply {
+        fragBullet = BasicBulletType(225f, 8f, "star".appendModName()).apply {
           lifetime = 60f
           height = 24f
           width = 24f

@@ -24,12 +24,9 @@ import ice.graphics.IceColor
 import ice.library.struct.AttachedProperty
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.crafting.CeriumExtractor
 import ice.world.content.blocks.crafting.Incinerator
-import ice.world.content.blocks.crafting.multipleCrafter.MultipleCrafter
 import ice.world.content.blocks.crafting.oreMultipleCrafter.OreFormula
 import ice.world.content.blocks.crafting.oreMultipleCrafter.OreMultipleCrafter
 import ice.world.draw.*
@@ -59,9 +56,7 @@ import mindustry.type.LiquidStack
 import mindustry.ui.Bar
 import mindustry.world.Block
 import mindustry.world.blocks.liquid.LiquidBlock
-import mindustry.world.consumers.ConsumeItems
 import mindustry.world.consumers.ConsumeLiquids
-import mindustry.world.consumers.ConsumePower
 import mindustry.world.draw.*
 import mindustry.world.meta.Attribute
 import mindustry.world.meta.BlockStatus
@@ -527,7 +522,7 @@ object CrafterBlocks : Load {
     draw = (DrawDefault())
     requirements(Category.crafting, IItems.高碳钢, 100, IItems.铬锭, 80, IItems.黄铜锭, 50, IItems.铜锭, 30)
     bundle {
-      desc(zh_CN, "萃取固化器", "")
+      desc(zh_CN, "萃取固化器")
     }
   }
   val 电弧炉 = NormalCrafter("arcFurnace").apply {
@@ -881,7 +876,7 @@ object CrafterBlocks : Load {
         e.statusi = 2
       }, { s: Stats?, c: BaseConsumers? ->
         s!!.add(SglStat.effect) { t: Table? -> t!!.add(Core.bundle.get("misc.doConsValid")) }
-      })?.overdriveValid(false)
+      }).overdriveValid(false)
       consume!!.item(item!!, 1)
       consume!!.time(180f)
       consume!!.power(0.4f)
@@ -1002,16 +997,16 @@ object CrafterBlocks : Load {
 
       buildType = Prov {
         object : SpliceCrafterBuild() {
-          var efficiency: Float = 0f
+          var efficiencys: Float = 0f
 
           override fun efficiency(): Float {
-            return super.efficiency() * efficiency
+            return super.efficiency() * efficiencys
           }
 
           override fun updateTile() {
             super.updateTile()
 
-            efficiency = if (enabled) Mathf.maxZero(
+            efficiencys = if (enabled) Mathf.maxZero(
               Attribute.light.env() + (if (Vars.state.rules.lighting) 1f - Vars.state.rules.ambientLight.a else 1f)
             ) else 0f
           }

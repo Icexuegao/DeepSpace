@@ -1,12 +1,12 @@
 package ice.content.block
 
-import ice.content.block.turret.Turret
+import ice.content.block.TurretBlocks
 import ice.library.world.Load
 
 object IBlocks : Load {
   override fun load() {
-    Environment.load()
-    Defense.load()
+    EnvironmentBlocks.load()
+    DefenseBlocks.load()
     ProductBlocks.load()
     NuclearBlocks.load()
     Distribution.load()
@@ -15,6 +15,6 @@ object IBlocks : Load {
     LiquidBlocks.load()
     CrafterBlocks.load()
     EffectBlocks.load()
-    Turret.load()
+    TurretBlocks.load()
   }
 }

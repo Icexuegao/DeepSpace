@@ -58,9 +58,7 @@ class GarbledEffect(label: TLabel, params: Array<String?>) : Effect(label) {
         // Get or create state for this glyph
         val state = glyphStates.getOrPut(localIndex) {
             GlyphState(
-                isGarbled = false,
-                currentChar = glyph.id.toChar(),
-                lastChangeTime = 0f
+              currentChar = glyph.id.toChar()
             )
         }
 

@@ -265,7 +265,7 @@ open class SglUnitFactory(name: String) : PayloadCrafter(name), DistElementBlock
           }
 
           this.newProduce()
-          this.produce!!.add(ProducePayload(PayloadStack.with(unit, 1)) { b: SglUnitFactoryBuild, c: Any -> b.payloads.total() <= 0 })
+          this.produce!!.add(ProducePayload(PayloadStack.with(unit, 1)) { b: SglUnitFactoryBuild, c: Any -> b.payloads.total() <= 0  })
           if (this.byProduct != null) {
             this.byProduct!!.get(unit, this.produce)
           }
@@ -273,7 +273,6 @@ open class SglUnitFactory(name: String) : PayloadCrafter(name), DistElementBlock
       }
     }
   }
-
 
   enum class ConfigCmd {
     CLEAR_TASK,

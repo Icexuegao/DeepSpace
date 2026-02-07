@@ -22,7 +22,7 @@ import kotlin.math.min
 
 class ProduceMedium<T>(var product: Float) : BaseProduce<T>() where T : Building?, T : ProducerBuildComp, T : MediumBuildComp {
   override fun type(): ProduceType<*> {
-    return SglProduceType.medium
+    return ProduceType.medium
   }
 
   override fun hasIcons(): Boolean {
@@ -44,18 +44,18 @@ class ProduceMedium<T>(var product: Float) : BaseProduce<T>() where T : Building
   override fun produce(entity: T) {}
 
   override fun update(entity: T) {
-    entity.mediumContains=(entity.mediumContains + min(entity.remainingMediumCapacity(), product * parent!!.cons!!.delta(entity) * multiple(entity)))
+    entity.mediumContains = (entity.mediumContains + min(entity.remainingMediumCapacity(), product * parent!!.cons!!.delta(entity) * multiple(entity)))
   }
 
   override fun display(stats: Stats) {
-    stats.add(SglStat.special) { table: Table? ->
-      table!!.row()
-      table.table { t: Table? ->
-        t!!.defaults().left().fill().padLeft(6f)
+    stats.add(SglStat.special) { table ->
+      table.row()
+      table.table { t ->
+        t.defaults().left().fill().padLeft(6f)
         t.add(Core.bundle.get("misc.output") + ":").left()
         val display = product * 60
-        t.table { icon: Table? ->
-          icon!!.add(object : Stack() {
+        t.table { icon ->
+          icon.add(object : Stack() {
             init {
               add(Image(Singularity.getModAtlas("medium")))
 

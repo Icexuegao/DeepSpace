@@ -88,7 +88,7 @@ open class BaseProducers {
   }
 
   fun display(stats: Stats) {
-    for (p in prod.values().toSeq().sort(Comparator { a: BaseProduce<*>, b: BaseProduce<*> -> a.type().id() - b.type().id() })) {
+    for (p in prod.values().toSeq().sort(Comparator { a: BaseProduce<*>, b: BaseProduce<*> -> a.type().id - b.type().id })) {
       p.display(stats)
     }
   }

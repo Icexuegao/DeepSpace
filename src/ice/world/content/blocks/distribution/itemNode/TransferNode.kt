@@ -176,7 +176,7 @@ class TransferNode(name: String) : IceBlock(name) {
         return block && team && build
     }
 
-    public fun positionsValid(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
+    fun positionsValid(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
         return if (directionAny) {
             abs(y1 - y2) <= range && abs(x1 - x2) <= range
         } else {

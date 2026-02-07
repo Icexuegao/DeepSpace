@@ -57,8 +57,8 @@ class KaguyaType : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.jav
   }
 
   init {
-    bundle{
-      desc(zh_CN,"辉夜","搭载光束引擎的巨型攻击舰,具有强大的火力和相当灵活的机动性,其武装足以将绝大多数防线夷为平地")
+    bundle {
+      desc(zh_CN, "辉夜", "搭载光束引擎的巨型攻击舰,具有强大的火力和相当灵活的机动性,其武装足以将绝大多数防线夷为平地")
     }
     armor = 20f
     speed = 1.1f

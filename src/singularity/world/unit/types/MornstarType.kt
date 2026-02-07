@@ -54,7 +54,7 @@ import universecore.world.lightnings.LightningContainer
 class MornstarType : AirSeaAmphibiousUnit("mornstar") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN,"晨星","搭载光束引擎的巨型护卫舰,装载光棱蜉蚴模块,能够引导光束能量体发动猛烈的攻击,同时它搭载的重型电磁脉冲主炮也能对敌人造成致命的打击")
+      desc(zh_CN, "晨星", "搭载光束引擎的巨型护卫舰,装载光棱蜉蚴模块,能够引导光束能量体发动猛烈的攻击,同时它搭载的重型电磁脉冲主炮也能对敌人造成致命的打击")
     }
 
     armor = 19f

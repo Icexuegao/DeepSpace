@@ -13,7 +13,7 @@ import universecore.world.producers.ProduceType
 
 class ProduceEnergy<T>(var product: Float) : BaseProduce<T>() where T : Building, T : NuclearEnergyBuildComp, T : ProducerBuildComp {
   override fun type(): ProduceType<ProduceEnergy<*>> {
-    return SglProduceType.energy
+    return ProduceType.energy
   }
 
   override fun buildIcons(table: Table) {

@@ -1,21 +1,21 @@
 package ice.maps.planet.ardery
 
 import arc.struct.Seq
-import ice.content.block.Environment
+import ice.content.block.EnvironmentBlocks
 import mindustry.world.Block
 
 internal object ArrBlock {
-    val 肿瘤地 = Environment.肿瘤地// 苔藓
-    val 血痂地 = Environment.血痂地//孢子苔藓
-    val 红土 = Environment.红土//shale
-    val 风蚀沙地 = Environment.风蚀沙地
+    val 肿瘤地 = EnvironmentBlocks.肿瘤地// 苔藓
+    val 血痂地 = EnvironmentBlocks.血痂地//孢子苔藓
+    val 红土 = EnvironmentBlocks.红土//shale
+    val 风蚀沙地 = EnvironmentBlocks.风蚀沙地
     var arr = getArrBlock()
     fun getArrBlock(): Array<Array<Block>> {
         val bs = Seq<Array<Block>>()
         fun adof(vararg block: Block) {
             bs.add(arrayOf(*block))
         }
-        Environment.apply {
+        EnvironmentBlocks.apply {
             adof(潮汐石, 风蚀沙地, 流纹岩, 幽灵草, 云英岩, 晶石地, 光辉板岩, 皎月银沙, 金珀沙, 侵蚀层地, 灰烬地, 凌冰)
             adof(潮汐石, 风蚀沙地, 流纹岩, 幽灵草, 云英岩, 晶石地, 光辉板岩, 皎月银沙, 金珀沙, 侵蚀层地, 灰烬地, 凌冰)
             adof(潮汐石, 风蚀沙地, 流纹岩, 幽灵草, 云英岩, 晶石地, 光辉板岩, 皎月银沙, 金珀沙, 侵蚀层地, 灰烬地, 凌冰)

@@ -44,7 +44,6 @@ import singularity.graphic.SglDrawConst
 import singularity.world.blocks.SglBlock
 import singularity.world.meta.SglStat
 import singularity.world.products.Producers
-import singularity.world.products.SglProduceType
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.components.blockcomp.FactoryBlockComp
 import universecore.components.blockcomp.FactoryBuildComp
@@ -252,7 +251,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       hasLiquids = hasLiquids or outputsLiquid
       outputsPower = outputsPower or (prod.get(ProduceType.power) != null && prod.get(ProduceType.power)!!.powerProduction != 0f)
       hasPower = hasPower or outputsPower
-      outputEnergy = outputEnergy or (prod.get(SglProduceType.energy) != null)
+      outputEnergy = outputEnergy or (prod.get(ProduceType.energy) != null)
       hasEnergy = hasEnergy or outputEnergy
     }
 

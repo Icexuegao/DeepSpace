@@ -36,13 +36,14 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
   override fun build(cont: Table) {
 
     cont.iPaneG { ta ->
+      ta.top()
       ta.image(IStyles.tanksui).height(200f).pad(10f).row()
       ta.add(DeepSpace.displayName).fontScale(1.4f).color(IceColor.b4).row()
       ta.table {
 
         val characters = Characters.alon
         val fLabel = FLabel(hint.random()).also { label -> label.setColor(IceColor.b4) }
-        val image = Image(characters.gal.asDrawable(),Scaling.fit)
+        val image = Image(characters.gal.asDrawable(), Scaling.fit)
         image.apply {
           addListener(Tooltip { tool ->
             tool.background(IStyles.background32).margin(20f)

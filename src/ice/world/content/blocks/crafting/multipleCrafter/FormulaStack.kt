@@ -4,7 +4,7 @@ import arc.struct.Seq
 import mindustry.gen.Building
 import mindustry.world.Block
 
-class FormulaStack() {
+class FormulaStack {
     companion object {
         fun with(vararg formulas: Formula): FormulaStack {
             return FormulaStack().addFormulas(*formulas)

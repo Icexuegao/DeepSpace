@@ -14,7 +14,7 @@ import mindustry.world.meta.StatUnit
 
 class RandomDamageBulletType(
     var min: Int, var max: Int, speed: Float
-) : BasicBulletType(speed) {
+) : BasicBulletType(speed = speed) {
 
     override fun init() {
         super.init()

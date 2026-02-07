@@ -2,7 +2,6 @@ package ice.content
 
 import arc.func.Cons2
 import arc.func.Func
-import arc.func.Func2
 import arc.func.Prov
 import arc.graphics.Blending
 import arc.graphics.Color
@@ -14,29 +13,25 @@ import arc.math.Interp
 import arc.math.Mathf
 import arc.math.Rand
 import arc.math.geom.Rect
-import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
-import arc.util.Time
 import arc.util.Tmp
-import arc.util.pooling.Pools
 import ice.ai.AIController
 import ice.ai.CarryTaskAI
 import ice.audio.ISounds
+import ice.content.unit.Emptiness
+import ice.content.unit.Scream
 import ice.entities.IcePuddle
 import ice.entities.bullet.*
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
-import ice.entities.bullet.base.TrailMoveLightning
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.graphics.lightnings.LightningContainer
 import ice.graphics.lightnings.LightningVertex
 import ice.graphics.lightnings.generator.Floatp2
 import ice.graphics.lightnings.generator.LightningGenerator
-import ice.graphics.lightnings.generator.RandomGenerator
 import ice.library.IFiles.appendModName
-import ice.library.util.MathTransform
 import ice.library.util.j
 import ice.library.util.toColor
 import ice.library.util.toStringi
@@ -49,16 +44,20 @@ import ice.world.content.unit.ability.UnitSpawnAbility
 import ice.world.content.unit.entity.*
 import ice.world.content.unit.entity.base.Entity
 import ice.world.content.unit.weapon.IceWeapon
-import ice.world.content.unit.weapon.MayflyWeapon
-import ice.world.draw.part.CustomPart
 import ice.world.meta.IceEffects
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.ai.UnitCommand
 import mindustry.ai.types.MinerAI
-import mindustry.content.*
-import mindustry.entities.*
+import mindustry.content.Blocks
+import mindustry.content.Fx
+import mindustry.content.StatusEffects
+import mindustry.content.UnitTypes
+import mindustry.entities.Damage
+import mindustry.entities.Effect
 import mindustry.entities.Effect.EffectContainer
+import mindustry.entities.Mover
+import mindustry.entities.Puddles
 import mindustry.entities.abilities.*
 import mindustry.entities.bullet.ContinuousFlameBulletType
 import mindustry.entities.bullet.PointBulletType
@@ -71,12 +70,14 @@ import mindustry.entities.pattern.ShootAlternate
 import mindustry.entities.pattern.ShootBarrel
 import mindustry.entities.pattern.ShootHelix
 import mindustry.entities.pattern.ShootPattern
-import mindustry.entities.units.WeaponMount
 import mindustry.game.Team
 import mindustry.gen.*
 import mindustry.gen.Unit
-import mindustry.graphics.*
+import mindustry.graphics.Drawf
+import mindustry.graphics.Layer
+import mindustry.graphics.MultiPacker
 import mindustry.graphics.MultiPacker.PageType
+import mindustry.graphics.Pal
 import mindustry.type.UnitType
 import mindustry.type.Weapon
 import mindustry.type.unit.MissileUnitType
@@ -86,13 +87,10 @@ import mindustry.ui.Bar
 import mindustry.world.blocks.defense.turrets.PowerTurret
 import mindustry.world.meta.BlockFlag
 import mindustry.world.meta.Stat
-import singularity.graphic.SglDraw
-import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
-import singularity.world.particles.SglParticleModels
-import singularity.world.unit.abilities.MirrorArmorAbility
-import kotlin.math.abs
-import kotlin.math.max
+import singularity.world.unit.types.AuroraType
+import singularity.world.unit.types.KaguyaType
+import singularity.world.unit.types.MornstarType
 import kotlin.math.min
 import kotlin.random.Random
 
@@ -151,7 +149,7 @@ object IUnitTypes : Load {
       mirror = false
       rotate = true
       rotateSpeed = 3f
-      bullet = BasicBulletType(4f, 80f).apply {
+      bullet = BasicBulletType(80f, 4f).apply {
         height = 8f
         width = 4f
         drag = 0f
@@ -475,6 +473,7 @@ object IUnitTypes : Load {
     })
 
   }
+  val 悲鸣 = Scream()
   val 毒刺 = IceUnitType("poisonBarb") {
     bundle {
       desc(zh_CN, "毒刺", "生物科技的终端产物,在一定情况下可以无限制的自我增殖")
@@ -801,7 +800,7 @@ object IUnitTypes : Load {
         shots = 3
         shotDelay = 10f
       }
-      bullet = BasicBulletType(7f, 250f, "large-orb").apply {
+      bullet = BasicBulletType(250f, 7f, "large-orb").apply {
         width = 17f
         height = 21f
         hitSize = 8f
@@ -870,7 +869,20 @@ object IUnitTypes : Load {
       rotate = true
       reload = 60f
       shootSound = Sounds.shootMalign
-      bullet = BombBulletType(500f, 64f).apply {
+      bullet = object : BombBulletType(500f, 64f) {
+        var i = 0f
+        override fun update(b: Bullet) {
+          super.update(b)
+          i += b.time()
+        }
+
+        override fun draw(b: Bullet) {
+          super.draw(b)
+          Draw.color(Pal.accent)
+          Lines.stroke(1 - Interp.pow3Out.apply(b.fin()) * 3)
+          Lines.poly(b.x, b.y, 3, Interp.pow3Out.apply(1 - b.fin()) * 24, i)
+        }
+      }.apply {
         width = 10f
         height = 10f
         speed = 12f
@@ -894,7 +906,7 @@ object IUnitTypes : Load {
         })
         intervalSpread = 300f
         bulletInterval = 10f
-        intervalBullet = BasicBulletType(2f, 30f, "mine-bullet").apply {
+        intervalBullet = BasicBulletType(30f, 2f, "mine-bullet").apply {
           pierce = true
           pierceBuilding = true
           status = IStatus.破甲II
@@ -905,15 +917,6 @@ object IUnitTypes : Load {
             sides = 3
             colorFrom = Pal.accent
           }
-        }
-        var i = 0f
-        setUpdate {
-          i += it.time()
-        }
-        setDraw {
-          Draw.color(Pal.accent)
-          Lines.stroke(1 - Interp.pow3Out.apply(it.fin()) * 3)
-          Lines.poly(it.x, it.y, 3, Interp.pow3Out.apply(1 - it.fin()) * 24, i)
         }
       }
     }
@@ -927,7 +930,7 @@ object IUnitTypes : Load {
       shoot.apply {
         shotDelay = 15f
       }
-      bullet = BasicBulletType(8f, 23f).apply {
+      bullet = BasicBulletType(23f, 8f).apply {
         trailChance = 0.25f
         trailLength = 12
         trailWidth = 3.2f
@@ -976,7 +979,7 @@ object IUnitTypes : Load {
       rotateSpeed = 0f
       reload = 60 * 3f
       inaccuracy = 60f
-      bullet = object : BasicBulletType(8f, 40f) {
+      bullet = object : BasicBulletType(40f, 8f) {
         init {
           smokeEffect = Fx.none
           shootSound = Sounds.shootMalign
@@ -1680,422 +1683,12 @@ object IUnitTypes : Load {
       shootCone = 360f
     }
   }
-  val 虚宿 = IceUnitType("emptiness") {
-    bundle {
-      desc(zh_CN, "虚宿", "巨型光棱战列舰,光束反应堆的最终产物,火力至上原则的最终答案,拥有强大的能量护盾")
-    }
-    armor = 9f
-    speed = 0.8f
-    accel = 0.065f
-    drag = 0.05f
-    rotateSpeed = 0.8f
-    faceTarget = true
-    health = 102500f
-    lowAltitude = true
-    flying = true
-    hitSize = 85f
-    targetFlags = BlockFlag.allLogic
-    drawShields = false
-    requirements(Items.phaseFabric, 200, Items.surgeAlloy, 280)
-    engineSize = 0f
-    setEnginesMirror(object : UnitType.UnitEngine(-15f, -60f, 8f, -90f) {
-      override fun draw(unit: Unit) = kotlin.Unit
-    }, object : UnitType.UnitEngine(-40f, -50f, 8f, -90f) {
-      override fun draw(unit: Unit) = kotlin.Unit
-    })
-    abilities.addAll(MirrorArmorAbility().apply {
-      strength = 240f
-      maxShield = 8200f
-      recoverSpeed = 3f
-      cooldown = 5500f
-      minAlbedo = 0.5f
-      maxAlbedo = 0.8f
-      shieldArmor = 10f
-    })
-    val turretBullet = object : SglEmpBulletType() {
-      init {
-        damage = 420f
-        empDamage = 37f
-        pierceCap = 4
-        pierceBuilding = true
-        laserAbsorb = true
-        speed = 16f
-        lifetime = 35f
-        hitSize = 6f
-        trailEffect = MultiEffect(SglFx.trailLineLong, Fx.colorSparkBig)
-        trailChance = 1f
-        trailRotation = true
 
-        hitSound = Sounds.shootCorvus
+  val 晨星 = MornstarType()
+  val 辉夜 = KaguyaType()
+  val 极光 = AuroraType()
+  val 虚宿 = Emptiness()
 
-        hitEffect = Fx.circleColorSpark
-        hitColor = IceColor.matrixNet
-
-        shootEffect = Fx.circleColorSpark
-
-        despawnHit = true
-
-        trailLength = 38
-        trailWidth = 4f
-        trailColor = IceColor.matrixNet
-      }
-
-      override fun init(b: Bullet) {
-        super.init(b)
-        val l = Pools.obtain(TrailMoveLightning::class.java) { TrailMoveLightning() }
-        l.chance = 0.5f
-        l.maxOff = 6f
-        l.range = 12f
-        b.data = l
-      }
-
-      override fun updateTrail(b: Bullet) {
-        if (!Vars.headless && trailLength > 0) {
-          if (b.trail == null) {
-            b.trail = Trail(trailLength)
-          }
-          b.trail.length = trailLength
-
-          if (b.data !is TrailMoveLightning) return
-          var data = b.data as TrailMoveLightning
-          data.update()
-          SglDraw.drawTransform(
-            b.x, b.y, 0f, data.off, b.rotation()
-          ) { x: Float, y: Float, r: Float -> b.trail.update(x, y) }
-        }
-      }
-
-      override fun removed(b: Bullet) {
-        super.removed(b)
-        if (b.data is TrailMoveLightning) {
-          Pools.free(b.data)
-        }
-      }
-    }
-    setWeapon("turret") {
-      x = 17f
-      y = 26.5f
-      rotate = true
-      shootCone = 6f
-      rotateSpeed = 5f
-      recoilTime = 45f
-      recoil = 6f
-      shake = 4f
-      reload = 30f
-      shootSound = Sounds.shootCorvus
-      bullet = turretBullet
-    }
-    setWeapon("turret") {
-      x = 22f
-      y = -1f
-      rotate = true
-      shootCone = 6f
-      rotateSpeed = 5f
-      recoilTime = 45f
-      recoil = 6f
-      shake = 4f
-      reload = 30f
-      shootSound = Sounds.shootCorvus
-      bullet = turretBullet
-    }
-    setWeapon("cannon") {
-      x = 27f
-      y = -35f
-      rotate = true
-      shootCone = 6f
-      rotateSpeed = 3.5f
-      recoilTime = 60f
-      recoil = 6f
-      shootSound = Sounds.shootBeamPlasma
-      shake = 5f
-      reload = 60f
-      bullet = object : MultiTrailBulletType() {
-        init {
-          damage = 60f
-          splashDamage = 560f
-          splashDamageRadius = 18f
-
-          pierceCap = 5
-          pierceBuilding = true
-
-          hitEffect = mindustry.entities.effect.MultiEffect(SglFx.diamondSparkLarge, SglFx.spreadSparkLarge)
-          despawnEffect = SglFx.explodeImpWaveSmall
-
-          hitShake = 6f
-          hitSound = Sounds.shootBeamPlasma
-
-          speed = 10f
-          lifetime = 60f
-          trailEffect = mindustry.entities.effect.MultiEffect(
-            Fx.colorSparkBig, SglFx.movingCrystalFrag, SglFx.polyParticle
-          )
-          trailChance = 0.3f
-          trailColor = IceColor.matrixNet
-          trailRotation = true
-
-          shootEffect = SglFx.shootRail
-          smokeEffect = Fx.shootSmokeSmite
-          hitColor = IceColor.matrixNet
-
-          trailLength = 34
-          trailWidth = 4f
-          hitSize = 6f
-        }
-
-        override fun draw(b: Bullet) {
-          super.draw(b)
-
-          Draw.color(hitColor)
-          SglDraw.gapTri(b.x, b.y, 12f, 28f, -10f, b.rotation())
-        }
-      }
-    }
-    setWeaponT<MayflyWeapon>("mayfly") {
-      x = 58.5f
-      y = -13.75f
-      baseRotation = -45f
-    }
-    setWeaponT<MayflyWeapon>("mayfly") {
-      x = 57.5f
-      y = -37.75f
-      baseRotation = -90f
-      delay = 20f
-    }
-    setWeaponT<MayflyWeapon>("mayfly") {
-      x = 52.5f
-      y = -65.75f
-      baseRotation = -135f
-      delay = 40f
-    }
-    weapons.add(object : IceWeapon("ice-lightedge") {
-      init {
-        x = 0f
-        y = -28f
-        mirror = false
-        recoil = 0f
-        targetSwitchInterval = 80f
-        shootSound = Sounds.shootLaser
-        reload = 750f
-        cooldownTime = 30f
-        minWarmup = 0.95f
-        linearWarmup = false
-        shootWarmupSpeed = 0.014f
-
-
-        bullet = object : BlastLaser() {
-          init {
-            damage = 260f
-            damageInterval = 5f
-            blastDelay = 38f
-            rangeOverride = 600f
-            splashDamage = 3280f
-            splashDamageRadius = 120f
-            empDamage = 530f
-            empRange = 120f
-            lifetime = 245f
-            hitSize = 12f
-            val spilloverEnergy: BulletType = object : BulletType() {
-              init {
-                collides = false
-                absorbable = false
-                splashDamage = 120f
-                splashDamageRadius = 40f
-                speed = 4.4f
-                lifetime = 64f
-                hitShake = 4f
-                hitSize = 3f
-                despawnHit = true
-                hitEffect = mindustry.entities.effect.MultiEffect(SglFx.explodeImpWaveSmall, SglFx.diamondSpark)
-                hitColor = IceColor.matrixNet
-
-                trailColor = IceColor.matrixNet
-                trailEffect = SglFx.movingCrystalFrag
-                trailRotation = true
-                trailInterval = 4f
-
-                fragBullet = object : LightningBulletType() {
-                  init {
-                    lightningLength = 14
-                    lightningLengthRand = 4
-                    damage = 24f
-                  }
-                }
-                fragBullets = 1
-              }
-
-              override fun update(b: Bullet) {
-                super.update(b)
-
-                b.vel.lerp(0f, 0f, 0.012f)
-
-                if (b.timer(4, 3f)) {
-                  Angles.randLenVectors(System.nanoTime(), 2, 2.2f) { x: Float, y: Float ->
-                    SglParticleModels.floatParticle.create(
-                      b.x, b.y, IceColor.matrixNet, x, y, 2.2f
-                    ).strength = 0.3f
-                  }
-                }
-              }
-
-              override fun draw(b: Bullet) {
-                Draw.color(hitColor)
-                val fout = b.fout(Interp.pow3Out)
-                Fill.circle(b.x, b.y, 5f * fout)
-                Draw.color(Color.black)
-                Fill.circle(b.x, b.y, 2.6f * fout)
-              }
-            }
-
-            intervalBullet = spilloverEnergy.copy()
-            intervalBullet.damage = 160f
-            intervalBullet.splashDamage = 160f
-            intervalBullet.splashDamageRadius = 45f
-            intervalBullets = 2
-            intervalDelay = 3f
-            intervalRandomSpread = 360f
-
-            laserEffect = mindustry.entities.effect.MultiEffect(
-              SglFx.laserBlastWeaveLarge, SglFx.circleSparkLarge, SglFx.impactBubbleBig
-            )
-            shootEffect = mindustry.entities.effect.MultiEffect(
-              SglFx.shootCrossLightLarge, SglFx.explodeImpWaveBig, SglFx.impactWaveBig, SglFx.impactBubble
-            )
-            hitEffect = mindustry.entities.effect.MultiEffect(Fx.colorSparkBig, SglFx.diamondSparkLarge)
-
-            hitColor = IceColor.matrixNet
-
-            fragBullets = 3
-            fragSpread = 120f
-            fragRandomSpread = 72f
-            fragBullet = BlastLaser().apply {
-              damage = 120f
-              damageInterval = 5f
-
-              rangeOverride = 360f
-              splashDamage = 1400f
-              splashDamageRadius = 60f
-              empDamage = 220f
-              empRange = 60f
-              lifetime = 186f
-              hitSize = 9f
-
-              hitEffect = MultiEffect(Fx.circleColorSpark, SglFx.diamondSparkLarge)
-
-              blackZone = false
-
-              laserEffect = SglFx.explodeImpWaveLaserBlase
-              val branch = RandomGenerator()
-              val g = RandomGenerator().apply {
-                maxLength = 140f
-                maxDeflect = 55f
-                branchChance = 0.2f
-                minBranchStrength = 0.8f
-                maxBranchStrength = 1f
-                branchMaker = Func2 { vert: LightningVertex?, strength: Float? ->
-                  branch.maxLength = 60 * strength!!
-                  branch.originAngle = vert!!.angle + Mathf.random(-90, 90)
-                  branch
-                }
-              }
-              fragBullets = 8
-              fragBullet = lightning(128f, 32f, 62f, 5.2f, IceColor.matrixNet) { b: Bullet? ->
-                g.originAngle = b!!.rotation()
-                g
-              }
-              fragBullet.rangeOverride = 120f
-            }
-          }
-
-          override fun createSplashDamage(b: Bullet, x: Float, y: Float) {
-            super.createSplashDamage(b, x, y)
-
-            Angles.randLenVectors(
-              System.nanoTime(), Mathf.random(15, 22), 4f, 6.5f
-            ) { dx: Float, dy: Float ->
-              SglParticleModels.floatParticle.create(x, y, hitColor, dx, dy, Mathf.random(5.25f, 7f))
-            }
-          }
-        }
-        parts.addAll(CustomPart { x: Float, y: Float, r: Float, p: Float ->
-          Draw.color(IceColor.matrixNet)
-          val dx = Angles.trnsx(r, 1f, 0f)
-          val dy = Angles.trnsy(r, 1f, 0f)
-
-          for (i in 0..3) {
-            val len = 20 + i * 25 - (i % 2) * 6
-            val rx = x + dx * len
-            val ry = y + dy * len
-
-            SglDraw.gapTri(
-              rx, ry, Mathf.absin(Time.time / 4 - i * Mathf.pi, 1f, (10 - 2 * i) * p), (10 + (6 + (i % 2) * 6) * p) - i, (if (i % 2 == 0) -1 else 1) * (5 + 4 * p - i), r
-            )
-          }
-          SglDraw.drawDiamond(x, y, 44 + 20 * p, 8 + 4 * p, Time.time)
-          SglDraw.drawDiamond(x, y, 38 + 14 * p, 6 + 4 * p, -Time.time * 1.2f)
-          SglDraw.drawDiamond(x, y, 32 + 8 * p, 4 + 3 * p, Time.time * 1.3f)
-          Fill.circle(x, y, 12f)
-          Draw.color(Color.white)
-          Fill.circle(x, y, 9f)
-          Draw.color(Color.black)
-          Fill.circle(x, y, 7.5f)
-        }.apply {
-          layer = Layer.effect
-          progress = DrawPart.PartProgress.warmup
-        })
-      }
-
-      override fun findTarget(unit: Unit, x: Float, y: Float, range: Float, air: Boolean, ground: Boolean): Teamc? {
-        return Units.bestTarget(unit.team, x, y, range, { u: Unit -> unit.checkTarget(air, ground) }, { t: Teamc? -> ground }, { u: Unit, x: Float, y: Float ->
-          1f
-        })
-      }
-
-      override fun draw(unit: Unit, mount: WeaponMount) {
-        val x: Float = unit.x + Angles.trnsx(unit.rotation() - 90, mount.weapon.x, mount.weapon.y)
-        val y: Float = unit.y + Angles.trnsy(unit.rotation() - 90, mount.weapon.x, mount.weapon.y)
-        val angle = Mathf.angle(mount.aimX - x, mount.aimY - y)
-        val dst = Mathf.dst(mount.aimX - x, mount.aimY - y)
-        val angDiff = Angles.angleDist(angle, unit.rotation())
-        val lerp = Mathf.clamp((18 - abs(angDiff)) / 18f) * Mathf.clamp(mount.warmup - 0.05f)
-        val stLerp = lerp * (1f - Mathf.clamp((dst - 500f) / 100f))
-        val z = Draw.z()
-        Draw.z(Layer.effect)
-        Lines.stroke(4f * stLerp * Mathf.clamp(1 - mount.reload / mount.weapon.reload), unit.team.color)
-        Lines.line(x, y, mount.aimX, mount.aimY)
-        Lines.square(mount.aimX, mount.aimY, 18f, 45f)
-        val l = max(
-          Mathf.clamp(mount.warmup / mount.weapon.minWarmup) * Mathf.clamp(
-            1 - mount.reload / mount.weapon.reload
-          ), mount.heat
-        )
-        Lines.stroke(4f * l * stLerp)
-        SglDraw.arc(mount.aimX, mount.aimY, 62f, 360 * l, -Time.time * 1.2f)
-
-        Lines.stroke(4f * Mathf.clamp(mount.warmup / mount.weapon.minWarmup), IceColor.matrixNet)
-        SglDraw.drawCornerTri(
-          mount.aimX, mount.aimY, 46f, 8f, MathTransform.gradientRotateDeg(Time.time * 0.85f, 38f, 1 / 3f, 3), true
-        )
-
-        Draw.z(Draw.z() + 0.01f)
-        for (i in 0..2) {
-          SglDraw.drawTransform(
-            mount.aimX, mount.aimY, 54f, 0f, -1.4f * Time.time + i * 120
-          ) { rx: Float, ry: Float, r: Float ->
-            Draw.rect(
-              (SglDrawConst.matrixArrow as TextureRegionDrawable).getRegion(), rx, ry, 12 * stLerp, 12 * stLerp, r + 90
-            )
-          }
-        }
-
-        Draw.z(z)
-
-        super.draw(unit, mount)
-      }
-    })
-    bundle {
-      desc(zh_CN, "虚宿")
-    }
-  }
   val 无畏 = IceUnitType("fearless") {
     abilities.add(EnergyFieldAbility(0f, 60f, 0f).apply {
       y = -31.75f
@@ -2132,9 +1725,9 @@ object IUnitTypes : Load {
       layerOffset = 0.01f
       minWarmup = 0.99f
       shootWarmupSpeed = 0.06f
-      shootSound = ISounds.moonhidelaunched
+      shootSound = ISounds.月隐发射
       bullet = EmpsBulletType().apply {
-        sprite = "ice-shining"
+        sprite = "shining"
         damage = 125f
         lifetime = 40f
         speed = 12f
@@ -2239,7 +1832,7 @@ object IUnitTypes : Load {
         fragLifeMin = 0.5f
         fragVelocityMin = 0.5f
         fragBullet = BasicBulletType().apply {
-          sprite = "ice-star"
+          sprite = "star"
           damage = 115f
           lifetime = 40f
           speed = 4f
@@ -2603,7 +2196,9 @@ object IUnitTypes : Load {
         }
       }
     }
+
     weapons.add(PointDefenseWeapon().apply {
+
       x = 0f
       y = -31.75f
       recoil = 0f
@@ -3280,7 +2875,7 @@ object IUnitTypes : Load {
       minShootVelocity = 0.04f
       shootSound = Sounds.shootBeamPlasma
       bullet = EmpBulletType().apply {
-        sprite = "large-bomb".appendModName()
+        sprite = "large-bomb"
         damage = 137f
         lifetime = 90f
         drag = 0.05f
@@ -3339,7 +2934,7 @@ object IUnitTypes : Load {
         hitEffect = Fx.massiveExplosion
         fragBullets = 1
         fragBullet = EmpBulletType().apply {
-          sprite = "stardart".appendModName()
+          sprite = "stardart"
           lifetime = 480f
           damage = 0f
           speed = 0f
@@ -3476,7 +3071,7 @@ object IUnitTypes : Load {
         shotDelay = 4f
         layerOffset = -0.001f
         shootSound = Sounds.shoot
-        bullet = BasicBulletType(7f, 37f).apply {
+        bullet = BasicBulletType(37f, 7f).apply {
           width = 8f
           height = 12f
           lifetime = 27f
@@ -3610,7 +3205,7 @@ object IUnitTypes : Load {
         shotDelay = 4f
       }
       shootSound = Sounds.shoot
-      bullet = BasicBulletType(7f, 37f).apply {
+      bullet = BasicBulletType(37f, 7f).apply {
         width = 8f
         height = 12f
         lifetime = 39f
@@ -3694,7 +3289,7 @@ object IUnitTypes : Load {
           shotDelay = 4f
         }
         shootSound = Sounds.shoot
-        this.bullet = BasicBulletType(7f, 73f).apply {
+        this.bullet = BasicBulletType(73f, 7f).apply {
           width = 8f
           height = 12f
           lifetime = 39f
@@ -3728,7 +3323,7 @@ object IUnitTypes : Load {
         shotDelay = 4f
       }
       shootSound = Sounds.shoot
-      bullet = BasicBulletType(9f, 73f).apply {
+      bullet = BasicBulletType(73f, 9f).apply {
         width = 8f
         height = 12f
         lifetime = 41f
@@ -3988,7 +3583,7 @@ object IUnitTypes : Load {
 
   val 甘霖 = IceUnitType("ganlin") {
     bundle {
-      desc(zh_CN, "甘霖","以生物钢作为主要材料,辅以陶钢作为电磁屏蔽层,一般装备甚至无法留下划痕,同时在澎湃的能量输出下,其回复速度令人惊异,\n控制中枢与动力炉紧密相连,在内部结构大规模受损导致动力炉失稳融毁后会一同损毁\n因此,即使工程部门收集到了如此多残骸也难以了解其中枢构造")
+      desc(zh_CN, "甘霖", "以生物钢作为主要材料,辅以陶钢作为电磁屏蔽层,一般装备甚至无法留下划痕,同时在澎湃的能量输出下,其回复速度令人惊异,\n控制中枢与动力炉紧密相连,在内部结构大规模受损导致动力炉失稳融毁后会一同损毁\n因此,即使工程部门收集到了如此多残骸也难以了解其中枢构造")
     }
     health = 68700f
     hitSize = 48f
@@ -4044,7 +3639,7 @@ object IUnitTypes : Load {
         maxRange = 240f
       }
     })
-   var b= object : BasicBulletType() {
+    var b = object : BasicBulletType() {
       init {
         speed = 8f
         damage = 213f
@@ -4062,8 +3657,8 @@ object IUnitTypes : Load {
         hitColor = Pal.bulletYellowBack
         hitEffect = Fx.hitSquaresColor
         shootEffect = Fx.shootSmokeSquare
-
       }
+
       override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
         var size = if (entity is Unit) entity.hitSize else (entity as Building).block.size * 8f
         val unit = b.owner as Unit
@@ -4075,11 +3670,11 @@ object IUnitTypes : Load {
     weapons.add(object : Weapon("ganlin-weapon".appendModName()) {
       override fun addStats(u: UnitType, t: Table) {
         super.addStats(u, t)
-        t.row();
+        t.row()
         t.add("[lightgray]对[stat]中小型[lightgray]单位/方块进行[red]压制").row()
       }
     }.apply {
-      bullet=b
+      bullet = b
       x = 18.75f
       y = 15f
       recoil = 2f
@@ -4103,7 +3698,7 @@ object IUnitTypes : Load {
   }
 
   fun lightning(lifeTime: Float, time: Float, damage: Float, size: Float, color: Color?, generator: Func<Bullet?, LightningGenerator>): LightningBulletType {
-    return object : LightningBulletType(0f, damage) {
+    return object : LightningBulletType(damage = damage) {
       init {
         lifetime = lifeTime
         collides = false

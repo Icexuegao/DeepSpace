@@ -10,7 +10,7 @@ import arc.struct.Seq
 import arc.util.Align
 import arc.util.pooling.Pools
 import ice.library.scene.element.typinglabel.Parser.parseTokens
-import java.lang.reflect.Field
+import ice.library.util.accessField
 import java.util.*
 import kotlin.math.max
 
@@ -117,14 +117,14 @@ class TLabel(text:CharSequence) : Label(text) {
      */
     internal fun setText(newText: CharSequence, modifyOriginalText: Boolean, restart: Boolean) {
         super.setText(newText)
-        if (modifyOriginalText && originalText != null){
+        if (modifyOriginalText){
             saveOriginalText()
         }
         if (restart) {
             this.restart()
         }
         if (hasEnded()) {
-            this.skipToTheEnd(true, ignoreEffects = false)
+            this.skipToTheEnd()
         }
     }
 
@@ -606,23 +606,13 @@ class TLabel(text:CharSequence) : Label(text) {
      * Reallocate glyph clones according to the updated [GlyphLayout]. This should only be called when the text or
      * the layout changes.
      */
+    val GlyphLayout.colorStack: Seq<Color> by accessField("colorStack")
     private fun layoutCache() {
         val cache = fontCache
         val layout = super.getGlyphLayout()
         val runs = layout.runs
-        var colorStack: Field?
-        try {
-            colorStack = GlyphLayout::class.java.getDeclaredField("colorStack")
-        } catch (e: NoSuchFieldException) {
-            throw RuntimeException(e)
-        }
-        colorStack.setAccessible(true)
-        var colors: Seq<Color>
-        try {
-            colors = colorStack.get(layout) as Seq<Color>
-        } catch (e: IllegalAccessException) {
-            throw RuntimeException(e)
-        }
+
+        val colors=layout.colorStack
 
         // Reset layout line breaks
         layoutLineBreaks.clear()

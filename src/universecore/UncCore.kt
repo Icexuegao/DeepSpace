@@ -37,7 +37,6 @@ object UncCore : Load {
   lateinit var secConfig: SecondaryConfigureFragment
 
   override fun setup() {
-
     Log.info("[Universe Core] core loading")
 
     Time.run(0f) {
@@ -65,7 +64,6 @@ object UncCore : Load {
     }
 
     if (!Vars.net.server()) {
-      //  Vars.ui.database = UncDatabaseDialog.make();
       val overlay = FieldHandler.getValueDefault<Group>(Vars.control.input, "group")
       FieldHandler.decache(Vars.control.input.javaClass)
       secConfig = SecondaryConfigureFragment()

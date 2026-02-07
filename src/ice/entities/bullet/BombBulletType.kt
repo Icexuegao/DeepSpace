@@ -3,17 +3,18 @@ package ice.entities.bullet
 import ice.entities.bullet.base.BasicBulletType
 import mindustry.gen.Sounds
 
-open class BombBulletType(damage: Float, radius: Float) :
-    BasicBulletType(0.7f) {
-    init {
-        this.damage=0f
-        splashDamageRadius = radius
-        splashDamage = damage
-        collidesTiles = false
-        collides = false
-        lifetime = 30f
-        keepVelocity = false
-        collidesAir = false
-        hitSound = Sounds.explosion
-    }
+open class BombBulletType(damage: Float = 1f, radius: Float = 1f, sprite: String = "shell") : BasicBulletType(0f, 0.7f, sprite) {
+  constructor() : this(1f, 1f)
+  init {
+    splashDamageRadius = radius
+    splashDamage = damage
+    collidesTiles = false
+    collides = false
+    shrinkY = 0.7f
+    lifetime = 30f
+    drag = 0.05f
+    keepVelocity = false
+    collidesAir = false
+    hitSound = Sounds.explosion
+  }
 }

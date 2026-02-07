@@ -19,7 +19,6 @@ import singularity.world.consumers.SglConsumeType
 import singularity.world.consumers.SglConsumeType.Companion.floor
 import singularity.world.meta.SglStatUnit
 import singularity.world.products.ProduceEnergy
-import singularity.world.products.SglProduceType
 import tmi.RecipeEntry
 import tmi.TooManyItems
 import tmi.recipe.Recipe
@@ -103,7 +102,7 @@ class Recipes : RecipeEntry {
 
     //neutron energy
     RecipeParsers.registerConsumeParser(SglConsumeType.energy) { b: Block?, r: Recipe?, c: SglConsumeEnergy<*>?, h: Cons<RecipeItemStack?>? -> h!!.get(r!!.addMaterialPersec(EnergyMarker.INSTANCE, c!!.usage).setFormat { f: Float -> (if (f * 60.0f > 1000.0f) UI.formatAmount((f * 60.0f).toLong()) else Strings.autoFixed(f * 60.0f, 2)) + SglStatUnit.neutronFluxSecond.localized() }) }
-    RecipeParsers.registerProduceParser(SglProduceType.energy) { b: Block?, r: Recipe?, p: ProduceEnergy<*>?, h: Cons<RecipeItemStack?>? -> h!!.get(r!!.addProductionPersec(EnergyMarker.INSTANCE, p!!.product).setFormat { f: Float -> (if (f * 60.0f > 1000.0f) UI.formatAmount((f * 60.0f).toLong()) else Strings.autoFixed(f * 60.0f, 2)) + SglStatUnit.neutronFluxSecond.localized() }) }
+    RecipeParsers.registerProduceParser(ProduceType.energy) { b: Block?, r: Recipe?, p: ProduceEnergy<*>, h: Cons<RecipeItemStack?>? -> h!!.get(r!!.addProductionPersec(EnergyMarker.INSTANCE, p!!.product).setFormat { f: Float -> (if (f * 60.0f > 1000.0f) UI.formatAmount((f * 60.0f).toLong()) else Strings.autoFixed(f * 60.0f, 2)) + SglStatUnit.neutronFluxSecond.localized() }) }
 
     //payloads
     RecipeParsers.registerConsumeParser(ConsumeType.payload) { b: Block?, r: Recipe?, c: ConsumePayload<*>?, h: Cons<RecipeItemStack?>? ->

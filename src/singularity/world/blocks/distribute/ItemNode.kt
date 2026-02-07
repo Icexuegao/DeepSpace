@@ -117,9 +117,9 @@ open class ItemNode(name: String) : SglBlock(name) {
     otherReq = null
     list.each(Cons { other: BuildPlan? ->
       if (other!!.block === this && plan !== other) {
-        val `patt3946$temp` = plan.config
-        if (`patt3946$temp` is Point2) {
-          val p = `patt3946$temp`
+        val any = plan.config
+        if (any is Point2) {
+          val p = any
           if (p.equals(other.x - plan.x, other.y - plan.y)) {
             otherReq = other
           }

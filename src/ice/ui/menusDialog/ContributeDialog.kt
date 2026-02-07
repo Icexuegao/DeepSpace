@@ -51,7 +51,7 @@ object ContributeDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.m
         img.image().height(6f).width(30f).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f))
       }.growY().fillX().padLeft(-12f)
 
-      b.table(Tex.buttonEdge3) { i -> i.image(icon).size(55f) }.size(64f)
+      b.table(Tex.buttonEdge3) { i -> i.image(icon).size(32f) }.size(64f)
       b.table { t ->
         t.defaults().left().growX()
         t.add(name).color(Pal.accent)

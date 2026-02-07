@@ -12,8 +12,8 @@ import arc.scene.ui.layout.Scl
 import arc.util.Align
 import arc.util.pooling.Pools
 import ice.graphics.IceColor
-import ice.library.scene.element.IceDialog
 import ice.library.scene.element.typinglabel.TLabel
+import ice.library.scene.ui.getIceBaseDialog
 import ice.library.struct.addP
 import ice.ui.fragment.FleshFragment
 import ice.world.content.blocks.abstractBlocks.IceBlock
@@ -41,7 +41,7 @@ class LostBox(name: String) : IceBlock(name) {
 
     val width = layout.width
 
-    font.setColor(color)
+    font.color = color
     val dx = x * Vars.tilesize + offset
     var dy = y * Vars.tilesize + offset + size * Vars.tilesize / 2f + 3
     font.draw(text, dx, dy + layout.height + 1, Align.center)
@@ -52,7 +52,7 @@ class LostBox(name: String) : IceBlock(name) {
     Lines.line(dx - layout.width / 2f - 2f, dy, dx + layout.width / 2f + 1.5f, dy)
 
     font.setUseIntegerPositions(ints)
-    font.setColor(Color.white)
+    font.color = Color.white
     font.getData().setScale(1f)
     Draw.reset()
     Pools.free(layout)
@@ -92,10 +92,10 @@ class LostBox(name: String) : IceBlock(name) {
       val tile = "祭祀残篇"
       val string = lostBoxStringMap[tile]
 
-      IceDialog("遗弃匣").apply {
-        root.add(tile).padBottom(10f).color(IceColor.r1).row()
+      getIceBaseDialog("遗弃匣").apply {
+        cont.add(tile).padBottom(10f).color(IceColor.r1).row()
         string?.split("\n")?.forEach { s ->
-          root.add(FLabel(s.filterNot { it.isWhitespace() }).also {
+          cont.add(FLabel(s.filterNot { it.isWhitespace() }).also {
             it.defaultToken = "{dfd}"
           }).color(IceColor.r1).row()
         }

@@ -21,8 +21,7 @@ import universecore.world.lightnings.generator.LightningGenerator;
  *
  * @since 1.5
  * @author EBwilson
- * @deprecated 移动到图形模块中*/
-@Deprecated
+ */
 public class Lightning implements Pool.Poolable{
   private static final Vec2 last = new Vec2(), self = new Vec2(), next = new Vec2();
 
@@ -47,11 +46,7 @@ public class Lightning implements Pool.Poolable{
   /**闪电的每一段的触发器，在任意一段闪电的部分生成完成时会各自调用一次，传入当前顶点和前一个顶点*/
   public Cons2<LightningVertex, LightningVertex> trigger;
 
-  /**闪电的蔓延速度，若不设置将使用{@link Lightning#time}确定闪电完全出现的时间
-   * @deprecated  规范化，此API将不再有效*/
-  @Deprecated
-  public float speed;
-  /**闪电由产生到完全显现的时间，在{@link Lightning#speed}未设置的情况下有效*/
+  /**闪电由产生到完全显现的时间，*/
   public float time;
   public float counter, lengthMargin;
 
@@ -64,10 +59,6 @@ public class Lightning implements Pool.Poolable{
   boolean enclosed;
 
   public static Lightning create(LightningGenerator generator, float width, float lifeTime, Interp lerp, float time, Cons2<LightningVertex, LightningVertex> trigger){
-    return create(generator, width, lifeTime, lerp, time, 0, trigger);
-  }
-
-  public static Lightning create(LightningGenerator generator, float width, float lifeTime, Interp lerp, float time, float speed, Cons2<LightningVertex, LightningVertex> trigger){
     return create(generator, width, lifeTime, lifeTime, lerp, time, true, false, trigger);
   }
 

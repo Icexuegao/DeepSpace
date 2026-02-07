@@ -1,7 +1,7 @@
 package singularity.world.blocks.turrets;
 
+import ice.entities.bullet.base.BulletType;
 import mindustry.entities.Units;
-import mindustry.entities.bullet.BulletType;
 import mindustry.gen.Bullet;
 import mindustry.gen.Hitboxc;
 import mindustry.gen.Unit;
@@ -11,10 +11,10 @@ public class EmpBulletType extends BulletType {
   public float empDamage;
   public float empRange;
 
-  public EmpBulletType(){
+  public EmpBulletType() {
   }
 
-  public EmpBulletType(float speed, float damage){
+  public EmpBulletType(float speed, float damage) {
     this.speed = speed;
     this.damage = damage;
   }

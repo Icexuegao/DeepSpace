@@ -5,7 +5,7 @@ import arc.graphics.g2d.Fill
 import arc.util.Time
 import arc.util.Timer
 import ice.content.IUnitTypes
-import ice.content.block.Environment
+import ice.content.block.EnvironmentBlocks
 import ice.graphics.IceColor
 import mindustry.Vars
 import mindustry.content.Blocks
@@ -16,7 +16,7 @@ import mindustry.graphics.Layer
 
 class BloodNeoplasmaVent(name: String) : SteamVent(name) {
     init {
-        parent = Environment.肿瘤地
+        parent = EnvironmentBlocks.肿瘤地
         effect = Effect(140f) { e ->
             Draw.color(e.color, IceColor.r1, e.fin())
             Draw.alpha(e.fslope() * 0.78f)

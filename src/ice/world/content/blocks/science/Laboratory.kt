@@ -81,7 +81,7 @@ class Laboratory(name: String) : IceBlock(name) {
             }
             table.table {
                 it.button(Icon.bookOpen, IStyles.imageButtonClean, 40f) {
-                    if (!MenusDialog.isShown()) MenusDialog.show()
+                    if (!MenusDialog.isShown) MenusDialog.show()
                     MenusDialog.button.hide()
                     MenusDialog.button = ResearchDialog
                     MenusDialog.button.build(MenusDialog.conts)

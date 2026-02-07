@@ -42,7 +42,7 @@ class GradientEffect(label: TLabel, params: Array<String?>) : Effect(label) {
         // Calculate progress
         val distanceMod = (1f / distance) * (1f - DEFAULT_DISTANCE)
         val frequencyMod = (1f / frequency) * DEFAULT_FREQUENCY
-        val progress = calculateProgress(frequencyMod, distanceMod * localIndex, true)
+        val progress = calculateProgress(frequencyMod, distanceMod * localIndex)
 
         // Calculate color
         if (glyph.color == null) glyph.color = Color(Color.white)

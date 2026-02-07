@@ -1,6 +1,5 @@
 package universecore.util.handler;
 
-
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -69,6 +68,7 @@ public class EnumHandler<T extends Enum<?>>{
      * @param addition 创建的实例的名称
      * @param ordinal 插入的位置对应的序数
      * @param param 附加的构造器参数列表*/
+    //ps:实际因为报错问题 并没有把后方的实例向后移动 所以只能尾插 从中间插会导致两个枚举用同一个枚举位
     public T addEnumItem(String addition, int ordinal, Object... param){
         T newEnum = newEnumInstance(addition, ordinal, param);
         rearrange(newEnum, ordinal);
@@ -103,6 +103,7 @@ public class EnumHandler<T extends Enum<?>>{
             values.add(ordinal, instance);
 
             fieldHandler.setValue(null, valuesField.getName(), values.toArray((T[]) Array.newInstance(clazz, 0)));
+
         }
         catch (SecurityException | IllegalArgumentException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
             throw new RuntimeException(e);

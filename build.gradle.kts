@@ -1,4 +1,3 @@
-
 import arc.files.Fi
 import arc.util.serialization.JsonReader
 import arc.util.serialization.JsonWriter
@@ -98,7 +97,7 @@ tasks {
     sourceCompatibility = 17.toString()
     targetCompatibility = 17.toString()
     options.encoding = "UTF-8"
-   // options.compilerArgs.addAll(arrayOf("--add-exports", "java.base/jdk.internal.misc=ALL-UNNAMED"))
+    // options.compilerArgs.addAll(arrayOf("--add-exports", "java.base/jdk.internal.misc=ALL-UNNAMED"))
   }
 
   withType<ShadowJar> {
@@ -149,7 +148,7 @@ tasks {
     file.writeString(parse.prettyPrint(JsonWriter.OutputType.json, 0))
   }
 
-  register("d8Compile") {
+  register<JavaExec>("d8Compile") {
     group = "alon"
     dependsOn(shadowJar)
     val sdkDir = File(sdkRoot)
@@ -157,11 +156,24 @@ tasks {
     val platformRoot = platformDir.listFiles { f ->
       f.isDirectory && File(f, "android.jar").exists()
     }?.maxByOrNull { it.name } ?: throw GradleException("找不到有效的安卓平台")
-    val dependencies = (configurations.compileClasspath.get() + configurations.runtimeClasspath.get() + setOf(
-      File(platformRoot, "android.jar")
-    )).joinToString(" ") { "--classpath $it" }
-    val string = "$sdkRoot/build-tools/36.0.0/d8.bat $dependencies --min-api 26 --output ${project.name}Android.jar ${project.name}Desktop.jar"
-    execute(string, File("$rootDir/build/libs"))
+    classpath(files("$sdkRoot/build-tools/36.0.0/lib/d8.jar"))
+    mainClass.set("com.android.tools.r8.D8")
+    val classpathFiles = (configurations.compileClasspath.get().files + configurations.runtimeClasspath.get().files + File(platformRoot, "android.jar"))
+    val argsList = mutableListOf<String>()
+    classpathFiles.forEach { file ->
+      argsList.add("--classpath")
+      argsList.add(file.absolutePath)
+    }
+
+    argsList.add("--min-api")
+    argsList.add("26")
+    argsList.add("--output")
+    argsList.add("${project.rootDir}/build/libs/${project.name}Android.jar")
+    argsList.add("${project.rootDir}/build/libs/${project.name}Desktop.jar")
+
+    args = argsList
+
+    workingDir = File(project.rootDir, "build/libs")
   }
 
   register<Jar>("deploy") {
@@ -171,6 +183,23 @@ tasks {
     archiveFileName.set("${project.name}.jar") //存档文件名
     from(zipTree("build/libs/${project.name}Desktop.jar"), zipTree("build/libs/${project.name}Android.jar"))
   }
+  register("removeVer") {
+    Fi("build/libs/version").deleteDirectory()
+  }
+  register<Jar>("deployVersion") {
+    group = "alon"
+    dependsOn("removeVer")
+    dependsOn("deploy")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    val file = Fi("mod.json")
+    val parse = JsonReader().parse(file)
+    val message = parse.get("version")
+    archiveFileName.set("${project.name}-${message.asString()}.jar") //存档文件名
+    val file1: File = file("build/libs/version")
+    destinationDirectory.set(file1)
+    from(zipTree("build/libs/${project.name}.jar"))
+  }
+
 
   register<Copy>("myCopy") {
     group = "alon"

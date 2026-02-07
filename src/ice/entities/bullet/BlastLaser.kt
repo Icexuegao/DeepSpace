@@ -10,7 +10,6 @@ import arc.math.Interp
 import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
-import ice.SglUnitSorts
 import ice.graphics.IceColor
 import ice.graphics.lightnings.LightningContainer
 import ice.graphics.lightnings.generator.VectorLightningGenerator
@@ -22,6 +21,7 @@ import mindustry.entities.UnitSorts
 import mindustry.gen.Bullet
 import mindustry.gen.Sounds
 import mindustry.gen.Unit
+import singularity.world.SglUnitSorts
 
 open class BlastLaser : EmpLightningBulletType() {
     companion object {

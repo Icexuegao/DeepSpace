@@ -127,7 +127,7 @@ interface PayloadBuildComp : BuildCompBase {
 
   // @get:MethodEntry(entryMethod = "getPayload", override = true)
   /*  val payload: Payload?
-        get() =*/
+        get() = payloads().get()*/
 
   // @MethodEntry(entryMethod = "acceptPayload", paramTypes = ["mindustry.gen.Building -> source", "mindustry.world.blocks.payloads.Payload -> payload"], override = true)
   /*  fun acceptPayload(source: Building?, payload: Payload?): Boolean {
@@ -141,7 +141,7 @@ interface PayloadBuildComp : BuildCompBase {
     if (outputLocking) stackAlpha = (0f)
   }
 
-  fun acceptUnitPayload(unit: Unit?): Boolean {
+  fun acceptUnitPayload(unit: Unit): Boolean {
     return inputting == null
   }
 

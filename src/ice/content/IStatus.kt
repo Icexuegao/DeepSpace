@@ -60,11 +60,11 @@ import kotlin.math.min
 object IStatus : Load {
   val lastHealth = ObjectMap<Unit, Float>()
   val rand: Rand = Rand()
-
   val 封冻 = IceStatusEffect("freeze") {
     bundle {
       desc(zh_CN, "封冻", "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成毁灭性打击")
     }
+
     setUpdate { unit, e ->
       val ice = 1f - (600 - e.time) / 600f * 0.4f
       if (unit.healthMultiplier > 0.4) unit.healthMultiplier *= ice
@@ -74,7 +74,7 @@ object IStatus : Load {
     transitionDamage = 36f
     init {
       opposites(StatusEffects.burning, StatusEffects.melting)
-      affinitys(StatusEffects.blasted) { unit, result, time ->
+      affinity(StatusEffects.blasted) { unit, result, time ->
         unit.damagePierce(this.transitionDamage)
         if (unit.team == Vars.state.rules.waveTeam) {
           Events.fire(EventType.Trigger.blastFreeze)
@@ -274,7 +274,7 @@ object IStatus : Load {
       desc(zh_CN, "脉冲", "脉冲", " E!M!P!")
     }
   }
-  val 鼓舞 = IceStatusEffect("inspire") {
+  val 鼓舞 = IceStatusEffect("inspires") {
     setUpdate { unit, e ->
       Units.nearby(unit.team, unit.x, unit.y, unit.type.hitSize * 4) { u ->
         if (u.team == unit.team && u != unit && !u.statusBits().get(this.id.toInt())) {
@@ -605,7 +605,7 @@ object IStatus : Load {
     var timer = 0f
     val all = Seq<Unit>()
     init {
-      affinitys(status) { unit, result, time ->
+      affinity(status) { unit, result, time ->
         unit.damagePierce(unit.type.health / 100 * 2)
         Fx.dynamicSpikes.wrap(Color.valueOf("C0ECFF"), unit.hitSize / 2).at(unit.x + Mathf.range(unit.bounds() / 2), unit.y + Mathf.range(unit.bounds() / 2))
         result.set(this, min(time + result.time, 60f))
@@ -863,7 +863,7 @@ object IStatus : Load {
         }
       }
 
-      val health = lastHealth[unit]
+      val health = lastHealth[unit]?:0f
       if (health != unit.health) {
         if (health - 10 > unit.health) {
           val damageBase = health - unit.health
@@ -975,13 +975,13 @@ object IStatus : Load {
     effect = Fx.melting
     init {
       opposites(StatusEffects.freezing, StatusEffects.wet)
-      affinitys(StatusEffects.tarred, TransitionHandler { unit: Unit?, result: StatusEntry?, time: Float ->
+      affinity(StatusEffects.tarred, TransitionHandler { unit: Unit?, result: StatusEntry?, time: Float ->
         unit!!.damagePierce(8f)
         Fx.burning.at(unit.x + Mathf.range(unit.bounds() / 2f), unit.y + Mathf.range(unit.bounds() / 2f))
         result!!.set(this, 180 + result.time)
       })
 
-      affinitys(霜冻, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
+      affinity(冻结, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
         e.damage(t)
         s.time -= t
       })
@@ -1067,7 +1067,7 @@ object IStatus : Load {
 
   }
 
-  var 霜冻: IceStatusEffect = object : IceStatusEffect("frost", {
+  var 冻结: IceStatusEffect = object : IceStatusEffect("frost", {
     bundle {
       desc(zh_CN, "冻结", "在极低的温度下,单位的系统将很难正常工作,在寒气完全渗透到单位的核心后,它将被冻成一个巨大的冰块")
     }
@@ -1078,7 +1078,7 @@ object IStatus : Load {
 
     init {
       opposites(StatusEffects.burning, StatusEffects.melting)
-      affinitys(熔毁, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
+      affinity(熔毁, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
         e.damage(s.time)
         s.time -= t
       })
@@ -1121,8 +1121,8 @@ object IStatus : Load {
     init {
       opposites(StatusEffects.burning, StatusEffects.melting)
       stats.add(SglStat.effect) { t ->
-        t.image(霜冻.uiIcon).size(25f)
-        t.add(霜冻.localizedName).color(Pal.accent)
+        t.image(冻结.uiIcon).size(25f)
+        t.add(冻结.localizedName).color(Pal.accent)
         t.add(Core.bundle.get("infos.frostFreezeInfo"))
       }
     }
@@ -1130,7 +1130,7 @@ object IStatus : Load {
 
     override fun update(unit: Unit, entry: StatusEntry) {
       super.update(unit, entry)
-      if (unit.getDuration(霜冻) >= 60 * unit.hitSize + 3 * unit.maxHealth / unit.hitSize) {
+      if (unit.getDuration(冻结) >= 60 * unit.hitSize + 3 * unit.maxHealth / unit.hitSize) {
         Fx.pointShockwave.at(unit.x, unit.y)
         SglFx.freezingBreakDown.at(unit.x, unit.y, 0f, unit)
         unit.kill()
@@ -1144,7 +1144,7 @@ object IStatus : Load {
       rand.setSeed(unit.id.toLong())
       val ro = rand.random(360).toFloat()
 
-      val time = unit.getDuration(霜冻)
+      val time = unit.getDuration(冻结)
       val rate = time / (60 * unit.hitSize + 3 * unit.maxHealth / unit.hitSize)
       Draw.color(SglDrawConst.frost, SglDrawConst.winter, rate)
       Draw.alpha(0.85f)

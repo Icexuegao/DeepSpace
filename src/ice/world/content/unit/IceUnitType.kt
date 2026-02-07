@@ -50,7 +50,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.Unit as KUnit
 
-open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, applys: IceUnitType.() -> KUnit) : UnitType(name) {
+open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, applys: IceUnitType.() -> KUnit ={}) : UnitType(name) {
   private var requirements: Array<ItemStack> = arrayOf(ItemStack(IItems.低碳钢, 100))
 
   init {

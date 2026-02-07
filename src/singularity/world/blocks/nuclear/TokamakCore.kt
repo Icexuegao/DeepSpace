@@ -130,6 +130,15 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
           p.x = v.x
           p.y = v.y
           val tile = Vars.world.tileWorld(p.x, p.y)
+
+          // 添加空值检查
+          if (tile == null || tile.build == null) {
+            freeVec(v)
+            p.inCorner = null
+            p.speed.setZero()
+            return
+          }
+
           when (tile.build) {
             is TokamakOrbitBuild -> {
               p.speed.setAngle((tile.build.rotation * 90).toFloat())

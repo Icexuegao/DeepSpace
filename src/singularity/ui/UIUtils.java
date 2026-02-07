@@ -70,9 +70,7 @@ public class UIUtils {
             SglDraw.dashCircle(x + width/2f, y + height/2f, width/2f - Scl.scl(5f),
                 8, 180, Time.time);
           }
-        }, img -> {
-          img.image(project.icon == null? project.contents.first().uiIcon: project.icon).size(80f);
-        }).margin(30f)
+        }, img -> img.image(project.icon == null? project.contents.first().uiIcon: project.icon).size(80f)).margin(30f)
     ).pad(40f).padTop(30f).padBottom(30f);
     table.row();
     table.stack(
@@ -93,17 +91,13 @@ public class UIUtils {
     table.table(conts -> {
       int n = 0;
       for (UnlockableContent content : project.contents) {
-        conts.button(b -> b.image(content.uiIcon).grow().scaling(Scaling.fit).pad(4f), Styles.cleart, () -> {
-          Vars.ui.content.show(content);
-        }).size(42f).padLeft(4f);
+        conts.button(b -> b.image(content.uiIcon).grow().scaling(Scaling.fit).pad(4f), Styles.cleart, () -> Vars.ui.content.show(content)).size(42f).padLeft(4f);
 
         if (++n%6 == 0) conts.row();
       }
     }).pad(20).padBottom(10);
     table.row();
-    table.table(Tex.buttonTrans, slogan -> {
-      slogan.add(project.slogan).pad(4f).grow().wrapLabel(true).color(Color.lightGray).fontScale(0.8f).labelAlign(Align.center);
-    }).width(300f).minHeight(80f).fillY().pad(10).padBottom(30).padTop(0);
+    table.table(Tex.buttonTrans, slogan -> slogan.add(project.slogan).pad(4f).grow().wrapLabel(true).color(Color.lightGray).fontScale(0.8f).labelAlign(Align.center)).width(300f).minHeight(80f).fillY().pad(10).padBottom(30).padTop(0);
   }
 
   public static void buildResearchInspired(Table table, Inspire inspire, ResearchProject project) {
@@ -112,45 +106,39 @@ public class UIUtils {
     table.add(inspire.description).pad(10f).padTop(30f).growX().labelAlign(Align.center).wrapLabel(true);
     table.row();
     table.table(Tex.buttonSideRightOver, card -> {
-      card.update(() -> {
-        prog[0] = Mathf.approachDelta(prog[0], project.inspire.provProgress, 0.005f);
-      });
-      card.table(SglDrawConst.grayUIAlpha, img -> {
-        img.stack(
-            new BloomGroup(){{
-              setFillParent(true);
-              bloomIntensity = 1.8f;
-              addChild(new Element(){
-                { setFillParent(true); }
+      card.update(() -> prog[0] = Mathf.approachDelta(prog[0], project.inspire.provProgress, 0.005f));
+      card.table(SglDrawConst.grayUIAlpha, img -> img.stack(
+          new BloomGroup(){{
+            setFillParent(true);
+            bloomIntensity = 1.8f;
+            addChild(new Element(){
+              { setFillParent(true); }
 
-                @Override
-                public void draw() {
-                  super.draw();
-                  Draw.color(SglDrawConst.matrixNet, Draw.getColor().a);
-                  Fill.circle(getX(Align.center), getY(Align.center), getWidth()/2);
-                }
-              });
-            }},
-            new Table(new BaseDrawable(){
               @Override
-              public void draw(float x, float y, float width, float height) {
-                float parentAlpha = Draw.getColor().a;
-                Draw.color(Pal.darkestGray, parentAlpha);
-                Fill.circle(x + width/2f, y + height/2f, width/2f - Scl.scl(4f));
-
-                SglDraw.drawCircleProgress(
-                    x + width/2, y + height/2, width/2f,
-                    Scl.scl(6f), Scl.scl(3f),
-                    project.progress() + prog[0],
-                    project.inspire.provProgress - prog[0],
-                    SglDrawConst.matrixNet, SglDrawConst.matrixNet
-                );
+              public void draw() {
+                super.draw();
+                Draw.color(SglDrawConst.matrixNet, Draw.getColor().a);
+                Fill.circle(getX(Align.center), getY(Align.center), getWidth()/2);
               }
-            }, i -> {
-              i.image(project.icon != null ? project.icon : project.contents.first().uiIcon).size(32).scaling(Scaling.fit);
-            })
-        ).grow().pad(4f);
-      }).width(64f).growY();
+            });
+          }},
+          new Table(new BaseDrawable(){
+            @Override
+            public void draw(float x, float y, float width, float height) {
+              float parentAlpha = Draw.getColor().a;
+              Draw.color(Pal.darkestGray, parentAlpha);
+              Fill.circle(x + width/2f, y + height/2f, width/2f - Scl.scl(4f));
+
+              SglDraw.drawCircleProgress(
+                  x + width/2, y + height/2, width/2f,
+                  Scl.scl(6f), Scl.scl(3f),
+                  project.progress() + prog[0],
+                  project.inspire.provProgress - prog[0],
+                  SglDrawConst.matrixNet, SglDrawConst.matrixNet
+              );
+            }
+          }, i -> i.image(project.icon != null ? project.icon : project.contents.first().uiIcon).size(32).scaling(Scaling.fit))
+      ).grow().pad(4f)).width(64f).growY();
       card.table(new BaseDrawable(){
         @Override
         public void draw(float x, float y, float width, float height) {

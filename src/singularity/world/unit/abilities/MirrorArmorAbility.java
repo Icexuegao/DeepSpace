@@ -49,7 +49,6 @@ public class MirrorArmorAbility extends MirrorShieldBase{
 
     float z = Draw.z();
 
-    if(true) {
       Draw.z(Layer.shields - 5f);
       SglDraw.drawToBuffer(drawID, drawBuffer, unit, b -> {
         SglShaders.mirrorField.waveMix = Tmp.c1.set(SglDrawConst.matrixNet);
@@ -89,15 +88,7 @@ public class MirrorArmorAbility extends MirrorShieldBase{
       //  pingpongBuffer.end();
       //  pingpongBuffer.blit(Draw.getShader());
       //}), u -> {});
-    }
-    else{
-      Draw.z(SglDraw.mirrorField + 1);
-      Draw.mixcol(Tmp.c1.set(unit.team.color).lerp(Color.white, alpha), 1f);
-      Draw.alpha(0.3f*Math.max(alpha, Mathf.absin(6, 0.6f)));
-      Draw.scl(1.1f);
-      Draw.rect(unit.type.shadowRegion, unit.x, unit.y, unit.rotation - 90);
-      Draw.reset();
-    }
+
 
     Draw.z(z);
     Draw.reset();

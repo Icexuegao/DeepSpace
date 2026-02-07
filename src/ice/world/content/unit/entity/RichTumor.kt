@@ -3,7 +3,7 @@ package ice.world.content.unit.entity
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.content.block.Environment
+import ice.content.block.EnvironmentBlocks
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars
 import mindustry.content.Fx
@@ -18,7 +18,7 @@ class RichTumor : Entity() {
         super.update()
         timer += Time.delta
         if (timer > time) {
-            Vars.world.tileWorld(x, y)?.setFloor(Environment.肿瘤地)
+            Vars.world.tileWorld(x, y)?.setFloor(EnvironmentBlocks.肿瘤地)
             kill()
         }
     }

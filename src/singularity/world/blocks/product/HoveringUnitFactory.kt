@@ -289,11 +289,11 @@ open class HoveringUnitFactory(name: String) : SglUnitFactory(name) {
             }
 
             override fun getX(): Float {
-                return x + Angles.trnsx(Mathf.randomSeed(id.toLong(), 360f) - Time.time, 3f, 0f)
+                return this@HoveringUnitFactoryBuild.x + Angles.trnsx(Mathf.randomSeed(id.toLong(), 360f) - Time.time, 3f, 0f)
             }
 
             override fun getY(): Float {
-                return y + Angles.trnsy(Mathf.randomSeed(id.toLong(), 360f) - Time.time, 3f, 0f)
+                return this@HoveringUnitFactoryBuild.y + Angles.trnsy(Mathf.randomSeed(id.toLong(), 360f) - Time.time, 3f, 0f)
             }
         }
         inner class HoveringStat {

@@ -76,11 +76,7 @@ object NuclearBlocks : Load {
     bundle {
       desc(zh_CN, "相位能量塔", "大型中子能运输传输设备,可以承载更高的能量负载和更多的链接数量")
     }
-    requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.强化合金, 24, IItems.FEX水晶, 16, IItems.絮凝剂, 15
-      )
-    )
+    requirements(SglCategory.nuclear, IItems.强化合金, 24, IItems.FEX水晶, 16, IItems.絮凝剂, 15)
     size = 3
     squareSprite = false
     maxLinks = 18
@@ -92,11 +88,7 @@ object NuclearBlocks : Load {
     bundle {
       desc(zh_CN, "中子缓冲器", "小型能量缓冲设施,用于稳定能量水平和能量升降压,可进行低能区调压")
     }
-    requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.强化合金, 40, IItems.FEX水晶, 50, IItems.气凝胶, 40, IItems.单晶硅, 60
-      )
-    )
+    requirements(SglCategory.nuclear, IItems.强化合金, 40, IItems.FEX水晶, 50, IItems.气凝胶, 40, IItems.单晶硅, 60)
     squareSprite = false
     size = 2
     energyCapacity = 1024f
@@ -109,9 +101,7 @@ object NuclearBlocks : Load {
     }
     squareSprite = false
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.强化合金, 60, IItems.FEX水晶, 75, IItems.气凝胶, 50, IItems.单晶硅, 75, IItems.絮凝剂, 80
-      )
+      SglCategory.nuclear, IItems.强化合金, 60, IItems.FEX水晶, 75, IItems.气凝胶, 50, IItems.单晶硅, 75, IItems.絮凝剂, 80
     )
     size = 3
     energyCapacity = 4096f
@@ -124,9 +114,8 @@ object NuclearBlocks : Load {
     }
     squareSprite = false
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.强化合金, 90, IItems.FEX水晶, 120, IItems.充能FEX水晶, 80, IItems.铱锭, 50, IItems.单晶硅, 125, IItems.絮凝剂, 90, Items.surgeAlloy, 80
-      )
+      SglCategory.nuclear, IItems.强化合金, 90, IItems.FEX水晶, 120, IItems.充能FEX水晶, 80, IItems.铱锭, 50, IItems.单晶硅, 125, IItems.絮凝剂, 90, IItems.暮光合金, 80
+
     )
     size = 4
     energyCapacity = 16384f
@@ -139,9 +128,8 @@ object NuclearBlocks : Load {
     }
     squareSprite = false
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.强化合金, 120, IItems.FEX水晶, 140, IItems.充能FEX水晶, 100, IItems.铱锭, 75, IItems.矩阵合金, 80, IItems.絮凝剂, 100, Items.surgeAlloy, 80
-      )
+      SglCategory.nuclear, IItems.强化合金, 120, IItems.FEX水晶, 140, IItems.充能FEX水晶, 100, IItems.铱锭, 75, IItems.矩阵合金, 80, IItems.絮凝剂, 100, IItems.暮光合金, 80
+
     )
     size = 5
     energyCapacity = 65536f
@@ -154,9 +142,8 @@ object NuclearBlocks : Load {
     }
     squareSprite = false
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.FEX水晶, 160, IItems.气凝胶, 80, IItems.矩阵合金, 80, IItems.强化合金, 100, IItems.单晶硅, 60, IItems.絮凝剂, 55
-      )
+      SglCategory.nuclear, IItems.FEX水晶, 160, IItems.气凝胶, 80, IItems.矩阵合金, 80, IItems.强化合金, 100, IItems.单晶硅, 60, IItems.絮凝剂, 55
+
     )
     size = 3
     energyCapacity = (2 shl 16).toFloat()
@@ -177,9 +164,8 @@ object NuclearBlocks : Load {
       desc(zh_CN, "环形电磁储能簇", "约束式主动中子能存储设备,可以存储极大量的能量,但是需要消耗电力,若电力供应不足会发生泄漏")
     }
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.FEX水晶, 200, IItems.充能FEX水晶, 100, IItems.矩阵合金, 120, IItems.强化合金, 120, IItems.气凝胶, 100, Items.surgeAlloy, 80, IItems.单晶硅, 120
-      )
+      SglCategory.nuclear, IItems.FEX水晶, 200, IItems.充能FEX水晶, 100, IItems.矩阵合金, 120, IItems.强化合金, 120, IItems.气凝胶, 100, IItems.暮光合金, 80, IItems.单晶硅, 120
+
     )
     size = 5
     energyCapacity = (2 shl 19).toFloat()
@@ -277,9 +263,7 @@ object NuclearBlocks : Load {
       desc(zh_CN, "衰变仓", "放射性物质进行衰变产生少量的核能量,可能存在副产物")
     }
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.强化合金, 60, IItems.FEX水晶, 40, IItems.单晶硅, 50, IItems.铅锭, 80, Items.metaglass, 40
-      )
+      SglCategory.nuclear, IItems.强化合金, 60, IItems.FEX水晶, 40, IItems.单晶硅, 50, IItems.铅锭, 80, IItems.石英玻璃, 40
     )
     size = 2
     autoSelect = true
@@ -355,9 +339,7 @@ object NuclearBlocks : Load {
       desc(zh_CN, "中子能发电机", "利用经典的中子分解技术,使用核能量生产大量电力")
     }
     requirements(
-      Category.power, ItemStack.with(
-        IItems.强化合金, 100, IItems.充能FEX水晶, 80, IItems.铀238, 75, IItems.絮凝剂, 70, IItems.气凝胶, 90
-      )
+      Category.power, IItems.强化合金, 100, IItems.充能FEX水晶, 80, IItems.铀238, 75, IItems.絮凝剂, 70, IItems.气凝胶, 90
     )
     size = 3
 
@@ -385,9 +367,8 @@ object NuclearBlocks : Load {
       desc(zh_CN, "核子冲击反应堆", "先进的核内爆式冲击反应堆,利用力场约束使核爆炸以最高的效率推动压电转子发电")
     }
     requirements(
-      Category.power, ItemStack.with(
-        IItems.强化合金, 260, IItems.气凝胶, 240, IItems.铀238, 300, Items.plastanium, 220, IItems.单晶硅, 280, IItems.絮凝剂, 160, Items.surgeAlloy, 200
-      )
+      Category.power, IItems.强化合金, 260, IItems.气凝胶, 240, IItems.铀238, 300, IItems.钴钢, 220, IItems.单晶硅, 280, IItems.絮凝剂, 160, IItems.暮光合金, 200
+
     )
     size = 5
     itemCapacity = 30
@@ -510,22 +491,16 @@ object NuclearBlocks : Load {
       desc(zh_CN, "晶格反应堆", "特制的缓速反应堆,不使用压缩燃料,直接对燃料晶格结构排列化进行可控裂变,产能较低,但利用率极高\n需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发小范围[accent]爆炸[]")
     }
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.强化合金, 120, IItems.FEX水晶, 90, IItems.充能FEX水晶, 70, IItems.铀238, 100, IItems.絮凝剂, 60, Items.surgeAlloy, 80
-      )
+      SglCategory.nuclear, IItems.强化合金, 120, IItems.FEX水晶, 90, IItems.充能FEX水晶, 70, IItems.铀238, 100, IItems.絮凝剂, 60, IItems.暮光合金, 80
     )
     size = 3
     itemCapacity = 25
     liquidCapacity = 20f
     energyCapacity = 1024f
-
     hasLiquids = true
-
     explosionDamageBase = 260
     explosionRadius = 12
-
     productHeat = 0.1f
-
     newReact(IItems.铀235, 1200f, 6f, false)
     newReact(IItems.钚239, 1020f, 7f, false)
     newReact(Items.thorium, 900f, 4.5f, false)
@@ -559,9 +534,8 @@ object NuclearBlocks : Load {
       desc(zh_CN, "超核临界反应堆", "先进的特大型反应堆,内部力场进一步压缩燃料使反应更加剧烈,具有极高的产能效率,且不会产生核废料\n需要特殊的冷却手段控制堆温,反应堆温度超过限制温度时会造成堆芯熔毁,引发大范围毁灭性[red]核爆[]")
     }
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.强化合金, 400, IItems.FEX水晶, 260, IItems.充能FEX水晶, 280, IItems.简并态中子聚合物, 100, IItems.铀238, 320, Items.surgeAlloy, 375, IItems.絮凝剂, 240
-      )
+      SglCategory.nuclear, IItems.强化合金, 400, IItems.FEX水晶, 260, IItems.充能FEX水晶, 280, IItems.简并态中子聚合物, 100, IItems.铀238, 320, IItems.暮光合金, 375, IItems.絮凝剂, 240
+
     )
     size = 6
     hasLiquids = true
@@ -659,7 +633,7 @@ object NuclearBlocks : Load {
     bundle {
       desc(zh_CN, "托卡马克点火装置", "托卡马克核聚变装置的核心组件,是添加材料与输出能量的端口,在一个核聚变装置中必须有且只有一个此设备。将此设备使用聚变约束导轨链接成一个闭环(这个闭环有且只能有4个拐角)构成完整的托卡马克聚变反应堆,而此反应堆的功率取决于整个结构的规模大小")
     }
-    requirements(SglCategory.nuclear, IItems.絮凝剂, 160, IItems.单晶硅, 200, Items.surgeAlloy, 160, IItems.絮凝剂, 220, IItems.强化合金, 180, IItems.气凝胶, 240, IItems.FEX水晶, 160, IItems.充能FEX水晶, 120, IItems.铱锭, 100)
+    requirements(SglCategory.nuclear, IItems.絮凝剂, 160, IItems.单晶硅, 200, IItems.暮光合金, 160, IItems.絮凝剂, 220, IItems.强化合金, 180, IItems.气凝胶, 240, IItems.FEX水晶, 160, IItems.充能FEX水晶, 120, IItems.铱锭, 100)
     size = 5
 
     itemCapacity = 60
@@ -701,9 +675,8 @@ object NuclearBlocks : Load {
       desc(zh_CN, "超导电磁约束导轨", "通过电磁场约束等离子体流的聚变约束导轨,需要消耗大量电力驱动")
     }
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.絮凝剂, 60, Items.surgeAlloy, 80, IItems.单晶硅, 100, IItems.强化合金, 120, IItems.FEX水晶, 80, IItems.气凝胶, 100, IItems.铱锭, 60
-      )
+      SglCategory.nuclear, IItems.絮凝剂, 60, IItems.暮光合金, 80, IItems.单晶硅, 100, IItems.强化合金, 120, IItems.FEX水晶, 80, IItems.气凝胶, 100, IItems.铱锭, 60
+
     )
     quickRotate = false
     size = 3
@@ -725,9 +698,8 @@ object NuclearBlocks : Load {
     }
     quickRotate = false
     requirements(
-      SglCategory.nuclear, ItemStack.with(
-        IItems.絮凝剂, 100, Items.surgeAlloy, 120, IItems.简并态中子聚合物, 60, IItems.强化合金, 140, IItems.FEX水晶, 100, IItems.充能FEX水晶, 80, IItems.气凝胶, 160, IItems.铱锭, 120
-      )
+      SglCategory.nuclear, IItems.絮凝剂, 100, IItems.暮光合金, 120, IItems.简并态中子聚合物, 60, IItems.强化合金, 140, IItems.FEX水晶, 100, IItems.充能FEX水晶, 80, IItems.气凝胶, 160, IItems.铱锭, 120
+
     )
     size = 5
     squareSprite = false

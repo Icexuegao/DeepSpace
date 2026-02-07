@@ -13,6 +13,7 @@ import universecore.util.handler.FieldHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**contentType处理对象，用于创建新的内容类型，以及处理类型的显示排序
  *
@@ -105,7 +106,7 @@ public class UncContentType{
       list.add(t.value);
     }
 
-    list.sort((a, b) -> a.ordinal() - b.ordinal());
+    list.sort(Comparator.comparingInt(Enum::ordinal));
 
     displayContentList = list.toArray(ContentType.class);
   }

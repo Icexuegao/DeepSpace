@@ -61,7 +61,7 @@ object TurretBullets {
       }
 
       if (entity is Unit) {
-        entity.apply(IStatus.霜冻, entity.getDuration(IStatus.霜冻) + 6)
+        entity.apply(IStatus.冻结, entity.getDuration(IStatus.冻结) + 6)
       }
     }
 
@@ -108,7 +108,7 @@ object TurretBullets {
       }
 
       Units.nearbyEnemies(b.team, b.x, b.y, radius, Cons { unit: Unit? ->
-        unit!!.apply(IStatus.霜冻, unit.getDuration(IStatus.霜冻) + 2f * Time.delta)
+        unit!!.apply(IStatus.冻结, unit.getDuration(IStatus.冻结) + 2f * Time.delta)
       })
     }
 
@@ -207,7 +207,8 @@ object TurretBullets {
       if (b.timer(4, 3f)) {
         Angles.randLenVectors(
           System.nanoTime(), 2, 2.2f
-        ) { x: Float, y: Float -> SglParticleModels.floatParticle.create(b.x, b.y, SglDrawConst.matrixNet, x, y, 2.2f).strength = 0.3f }
+        ) { x: Float, y: Float ->
+          SglParticleModels.floatParticle.create(b.x, b.y, SglDrawConst.matrixNet, x, y, 2.2f).strength = 0.3f }
       }
     }
 
