@@ -386,16 +386,16 @@ object NuclearBlocks : Load {
     craftedSoundVolume = 1f
     val model: ParticleModel = MultiParticleModel(
       SizeVelRelatedParticle(), TargetMoveParticle().apply {
-      dest = Func { p: Particle -> p.dest }
-      deflection = Floatf { p: Particle -> p.eff }
-    }, RandDeflectParticle().apply {
-      deflectAngle = 0f
-      strength = 0.125f
-    }, TrailFadeParticle().apply {
-      trailFade = 0.04f
-      fadeColor = Pal.lightishGray
-      colorLerpSpeed = 0.03f
-    }, ShapeParticle(), DrawDefaultTrailParticle()
+        dest = Func { p: Particle -> p.dest }
+        deflection = Floatf { p: Particle -> p.eff }
+      }, RandDeflectParticle().apply {
+        deflectAngle = 0f
+        strength = 0.125f
+      }, TrailFadeParticle().apply {
+        trailFade = 0.04f
+        fadeColor = Pal.lightishGray
+        colorLerpSpeed = 0.03f
+      }, ShapeParticle(), DrawDefaultTrailParticle()
     )
 
     craftTrigger = Cons { e: NormalCrafterBuild ->

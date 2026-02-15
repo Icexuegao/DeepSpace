@@ -56,6 +56,10 @@ object IUnitTypes : Load {
   val 惊雷 = Thunder()
   val 雷劫 = ThunderTribulation()
 
+  val 见证 = Witness()
+  val 履行 = Execution()
+  val 苦修= Meditation()
+
   val 收割 = Harvester()
   val 幻影 = Phantom()
   val 弧光 = ArcLight()

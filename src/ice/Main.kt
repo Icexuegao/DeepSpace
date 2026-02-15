@@ -3,7 +3,7 @@ package ice
 import java.io.File
 
 fun main() {
-   repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\ice\\2dwd")
+  // repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\ice\\2dwd")
  // val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\environment\\ore")
  // req(file)
 }

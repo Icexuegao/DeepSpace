@@ -38,7 +38,7 @@ object IItems : Load {
   }
   val 骨钢 = IceItem("item_fleshSteel", "bf3e47") {
     bundle {
-      desc(zh_CN, "骨钢", "一种由血肉与骸骨熔铸的合金,用于建造自愈型建筑") //TODO:解决"合金"二字的问题
+      desc(zh_CN, "骨钢", "一种由血肉与骸骨熔铸的合金,用于建造自愈型建筑")
     }
   }
 
@@ -266,7 +266,7 @@ object IItems : Load {
     cost = 2.5f
     bundle {
       desc(zh_CN, "铱锭", "一种强度极高的稀有金属材料,其复合物具备核能的半导体特性(类似硅在电子工业中的半导体特性),是精密核电路制造的核心材料")
-    }//"强度很高的天然金属,它的FEX复合物可认为就是核能的半导体,就如同硅一样,铱就是精密核电路的核心材料"
+    }
   }
   val 钴钢 = IceItem("item_cobaltSteel", "c5d1e0") {
     bundle {
@@ -289,8 +289,8 @@ object IItems : Load {
     explosiveness = 0.4f
     buildable = false
     bundle {
-      desc(zh_CN, "硫化合物", "这样由硫素与金属化合而成的晶体常态下相对平和,但其受热分解后伴随发生着地急剧化学反应,足以融毁多数\n能够迸发出大量热能的可控燃素显然重要,因而硫化物得以被视作为一种重要材料,为工业或武器的方方面面所利用")
-    }//TODO:alon钦定,不知道是否要更改
+      desc(zh_CN, "硫化合物", "硫素与金属化合而成的晶体常态下相对平和,但其受热分解后伴随发生着地急剧化学反应,足以融毁多数\n能够迸发出大量热能的可控燃素显然重要,因而硫化物得以被视作为一种重要材料,为工业或武器的方方面面所利用")
+    }
   }
   val 爆炸化合物 = IceItem("item_explosiveCompound", "ff795e") {
     flammability = 0.4f
@@ -403,7 +403,7 @@ object IItems : Load {
     healthScaling = 0.8f
     bundle {
       desc(zh_CN, "以太能", "一种存储在容器种的高能粒子能量,在特定结构排列下注入相位能量后可影响时空结构.研究初期曾引发时空回溯,空间错位及乱序传送等现象", "在以太粒子以特定结构排列时注入相位能量,以太粒子会在法韦克内敛空间的能量辐射下,形成以伊塔宏粒子射线为场能的波态中子向心力场")
-    }//TODO:此段的deta并未修改
+    }
   }
   val 玳渊矩阵 = IceItem("item_abyssMatrix", "d7bdff") {
     bundle {
@@ -411,7 +411,6 @@ object IItems : Load {
     }
   }
 
-  //TODO:以下是FEX内容段,并未得知是否保留
   val FEX水晶 = IceItem("item_crystal_FEX", "#D2393E") {
     hardness = 3
     explosiveness = 0f

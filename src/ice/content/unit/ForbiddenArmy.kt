@@ -79,16 +79,13 @@ class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
     setWeapon("weapon1") {
       x = 31.25f
       y = 2f
-      shoot = ShootMulti(
-        ShootPattern().apply {
-          shots = 2
-          shotDelay = 10f
-        },
-        ShootSpread().apply {
-          shots = 7
-          spread = 2f
-        }
-      )
+      shoot = ShootMulti(ShootPattern().apply {
+        shots = 2
+        shotDelay = 10f
+      }, ShootSpread().apply {
+        shots = 7
+        spread = 2f
+      })
       shake = 8f
       recoil = 5f
       shootY = 27f
@@ -110,38 +107,34 @@ class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
         statusDuration = 60f
         splashDamage = 373f
         splashDamageRadius = 40f
-        shootEffect = MultiEffect(
-          ParticleEffect().apply {
-            lifetime = 30f
-            particles = 3
-            sizeFrom = 6f
-            sizeTo = 0f
-            cone = 20f
-            length = 85f
-            colorFrom = Color.valueOf("FF5845")
-            colorTo = Color.valueOf("FF8663")
-          },
-          ParticleEffect().apply {
-            particles = 2
-            lifetime = 40f
-            line = true
-            lenFrom = 17f
-            lenTo = 3f
-            cone = 20f
-            length = 105f
-            colorFrom = Color.valueOf("FF5845")
-            colorTo = Color.valueOf("FF8663")
-          },
-          WaveEffect().apply {
-            lifetime = 10f
-            sizeFrom = 0f
-            sizeTo = 40f
-            strokeFrom = 4f
-            strokeTo = 0f
-            colorFrom = Color.valueOf("FF5845")
-            colorTo = Color.valueOf("FF8663")
-          }
-        )
+        shootEffect = MultiEffect(ParticleEffect().apply {
+          lifetime = 30f
+          particles = 3
+          sizeFrom = 6f
+          sizeTo = 0f
+          cone = 20f
+          length = 85f
+          colorFrom = Color.valueOf("FF5845")
+          colorTo = Color.valueOf("FF8663")
+        }, ParticleEffect().apply {
+          particles = 2
+          lifetime = 40f
+          line = true
+          lenFrom = 17f
+          lenTo = 3f
+          cone = 20f
+          length = 105f
+          colorFrom = Color.valueOf("FF5845")
+          colorTo = Color.valueOf("FF8663")
+        }, WaveEffect().apply {
+          lifetime = 10f
+          sizeFrom = 0f
+          sizeTo = 40f
+          strokeFrom = 4f
+          strokeTo = 0f
+          colorFrom = Color.valueOf("FF5845")
+          colorTo = Color.valueOf("FF8663")
+        })
         frontColor = Color.valueOf("FF8663")
         backColor = Color.valueOf("FF5845")
         trailColor = Color.valueOf("FF8663")
@@ -194,37 +187,34 @@ class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
           splashDamageRadius = 20f
           hitEffect = MultiEffect(
             ParticleEffect().apply {
-              particles = 3
-              lifetime = 36f
-              sizeFrom = 5f
-              sizeTo = 0f
-              cone = 360f
-              length = 40f
-              interp = Interp.circleOut
-              colorFrom = Color.valueOf("FF5845")
-              colorTo = Color.valueOf("FF8663")
-            },
-            ParticleEffect().apply {
-              particles = 7
-              lifetime = 20f
-              line = true
-              lenFrom = 13f
-              lenTo = 3f
-              cone = 360f
-              length = 75f
-              colorFrom = Color.valueOf("FF5845")
-              colorTo = Color.valueOf("FF8663")
-            },
-            WaveEffect().apply {
-              lifetime = 30f
-              sizeFrom = 0f
-              sizeTo = 40f
-              strokeFrom = 4f
-              strokeTo = 0f
-              colorFrom = Color.valueOf("FF5845")
-              colorTo = Color.valueOf("FF8663")
-            },
-            Fx.hitSquaresColor
+            particles = 3
+            lifetime = 36f
+            sizeFrom = 5f
+            sizeTo = 0f
+            cone = 360f
+            length = 40f
+            interp = Interp.circleOut
+            colorFrom = Color.valueOf("FF5845")
+            colorTo = Color.valueOf("FF8663")
+          }, ParticleEffect().apply {
+            particles = 7
+            lifetime = 20f
+            line = true
+            lenFrom = 13f
+            lenTo = 3f
+            cone = 360f
+            length = 75f
+            colorFrom = Color.valueOf("FF5845")
+            colorTo = Color.valueOf("FF8663")
+          }, WaveEffect().apply {
+            lifetime = 30f
+            sizeFrom = 0f
+            sizeTo = 40f
+            strokeFrom = 4f
+            strokeTo = 0f
+            colorFrom = Color.valueOf("FF5845")
+            colorTo = Color.valueOf("FF8663")
+          }, Fx.hitSquaresColor
           )
           despawnEffect = Fx.none
         }
@@ -236,6 +226,5 @@ class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
         blending = Blending.additive
       })
     }
-
   }
 }
