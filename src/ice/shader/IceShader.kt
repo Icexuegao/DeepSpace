@@ -5,11 +5,11 @@ import mindustry.graphics.CacheLayer
 import mindustry.graphics.Shaders
 
 object IceShader {
-    var ichor: CacheLayer = getCacheLayers("ichor")
-    val softRedIceCache: CacheLayer = getCacheLayers("softRedIce")
-    val bloodShallow: CacheLayer = getCacheLayers("bloodShallow")
-    val thickBlood: CacheLayer = getCacheLayers("thickBlood")
-    fun getCacheLayers(name: String): CacheLayer {
+    var ichor: CacheLayer.ShaderLayer = getCacheLayers("ichor")
+    val softRedIceCache: CacheLayer.ShaderLayer =  getCacheLayers("softRedIce")
+    val bloodShallow: CacheLayer.ShaderLayer = getCacheLayers("bloodShallow")
+    val thickBlood: CacheLayer.ShaderLayer = getCacheLayers("thickBlood")
+    fun getCacheLayers(name: String): CacheLayer.ShaderLayer {
         val surfaceShader = Shaders.SurfaceShader(Shaders.getShaderFi("screenspace.vert").readString(), findFi("$name.frag").readString())
         val shaderLayer = CacheLayer.ShaderLayer(surfaceShader)
         CacheLayer.add(shaderLayer)

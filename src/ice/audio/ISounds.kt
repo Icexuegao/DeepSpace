@@ -23,6 +23,7 @@ object ISounds {
   val 棱镜 = getSound("棱镜")
   val 月隐发射 = getSound("moonhidelaunched")
   val 月隐蓄力 = getSound("月隐蓄力")
+  val 灼烧=getSound("灼烧")
 
   private fun getSound(name: String): Sound {
     val file = IFiles.findSound("$name.ogg")

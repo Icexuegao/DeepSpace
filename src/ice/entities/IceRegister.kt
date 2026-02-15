@@ -30,7 +30,7 @@ object IceRegister : Load {
    */
   fun getId(type: Class<out Entityc>): Int {
     val id = ids[type, -1]
-    return if (id == -1) throw Exception("Unit ${type.simpleName} 没有注册") else id
+    return if (id == -1) throw Exception("Unit ${type.canonicalName } 没有注册") else id
   }
 
   /**获取并注册指定Unit类的提供者,会自动注册[EntityMapping]
@@ -38,14 +38,14 @@ object IceRegister : Load {
    * @return 返回一个[Prov]类型的提供者,用于创建指定类的实例
    */
   fun getPutUnits(clazz: Class<*>): Prov<Unit> {
-    put(clazz.simpleName, clazz as Class<Unit>) {
+    put(clazz.canonicalName , clazz as Class<Unit>) {
       TmpClassConstruntor.get(clazz) { clazz.getDeclaredConstructor() }.also { it.isAccessible = true }.newInstance()
     }
-    return getUnit(clazz.simpleName) as Prov<Unit>
+    return getUnit(clazz.canonicalName ) as Prov<Unit>
   }
 
   override fun setup() {
-    put(PackStack::class.java.simpleName, PackStack::class.java) {
+    put(PackStack::class.java.canonicalName , PackStack::class.java) {
       return@put PackStack::class.java.getDeclaredConstructor().newInstance()
     }
   }

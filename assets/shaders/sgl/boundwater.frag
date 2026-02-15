@@ -10,7 +10,7 @@ varying vec2 v_texCoords;
 
 const float mscl = 40.0;
 const float mth = 7.0;
-
+const float threshold = 0.01;
 void main(){
     vec2 c = v_texCoords;
     vec2 v = vec2(1.0/u_resolution.x, 1.0/u_resolution.y);
@@ -19,16 +19,25 @@ void main(){
     float stime = u_time / 5.0;
 
     vec4 tc = texture2D(u_texture, c, 0.0).rgba;
-    vec4 color = texture2D(u_texture, c + vec2(sin(stime/3.0 + coords.y/0.75) * v.x, 0.0)).rgba * vec4(0.9, 0.9, 1, 1);
-    float tester = mod(
+    if (tc.a <= threshold){
+        gl_FragColor = tc;
+    }
+    else {
+        vec2 coo = c + vec2(sin(stime/3.0 + coords.y/0.75) * v.x, 0.0);
+        vec4 color = texture2D(u_texture, coo, 0.0).rgba * vec4(0.9, 0.9, 1, 1);
+        if (color.a <= threshold || texture2D(u_texture, coo + v * vec2(2.0, 0.0), 0.0).a <= threshold || texture2D(u_texture, coo + v * vec2(-2.0, 0.0), 0.0).a <= threshold){
+            color = tc  * vec4(0.9, 0.9, 1, 1);
+        }
+        float tester = mod(
         (coords.x + coords.y * 1.1 + sin(stime / 8.0 + coords.x / 5.0 - coords.y / 100.0) * 2.0) +
-            sin(stime / 20.0 + coords.y / 3.0) * 1.0 +
-            sin(stime / 10.0 - coords.y / 2.0) * 2.0 +
-            sin(stime / 7.0 + coords.y / 1.0) * 0.5 +
-            sin(coords.x / 3.0 + coords.y / 2.0) +
-            sin(stime / 20.0 + coords.x / 4.0) * 1.0, mscl
-    );
+        sin(stime / 20.0 + coords.y / 3.0) * 1.0 +
+        sin(stime / 10.0 - coords.y / 2.0) * 2.0 +
+        sin(stime / 7.0 + coords.y / 1.0) * 0.5 +
+        sin(coords.x / 3.0 + coords.y / 2.0) +
+        sin(stime / 20.0 + coords.x / 4.0) * 1.0, mscl
+        );
 
-    tc = mix(tc, color * 1.2, step(mth, tester));
-    gl_FragColor = tc;
+        tc = mix(tc, color * 1.2, step(mth, tester));
+        gl_FragColor = tc;
+    }
 }

@@ -32,16 +32,14 @@ open class Randomer(name: String) : EnergySource(name) {
 
     override fun updateTile() {
       super.updateTile()
-      for (l in Vars.content.liquids()) {
+      for (liquid in Vars.content.liquids()) {
         proximity.forEach {
-          if (it.acceptLiquid(this, l)) {
-            it.handleLiquid(this, l,it.block.liquidCapacity-it.liquids.get(l))
+          if (it.acceptLiquid(this, liquid)) {
+            it.handleLiquid(this, liquid,it.block.liquidCapacity-it.liquids.get(liquid))
           }
         }
       }
-      for (item in Vars.content.items()) {
-        offload(item)
-      }
+      Vars.content.items().forEach(::offload)
     }
 
     override fun handleItem(source: Building?, item: Item?) {

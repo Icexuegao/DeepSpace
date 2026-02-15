@@ -74,7 +74,7 @@ object IStatus : Load {
     transitionDamage = 36f
     init {
       opposites(StatusEffects.burning, StatusEffects.melting)
-      affinity(StatusEffects.blasted) { unit, result, time ->
+      affinitys(StatusEffects.blasted) { unit, result, time ->
         unit.damagePierce(this.transitionDamage)
         if (unit.team == Vars.state.rules.waveTeam) {
           Events.fire(EventType.Trigger.blastFreeze)
@@ -110,7 +110,7 @@ object IStatus : Load {
   val 邪火 = IceStatusEffect("evilFlame") {
     damage = 75 / 60f
     bundle {
-      desc(zh_CN, "邪火", "持续生命侵蚀,扣除单位生命上限")
+      desc(zh_CN, "邪火", "持续侵蚀生命,扣除单位生命上限")
     }
   }
   val 破甲I = IceStatusEffect("armorBreakI") {
@@ -118,28 +118,28 @@ object IStatus : Load {
     speedMultiplier = 1.2f
     color = Color.valueOf("D1EFFF")
     bundle {
-      desc(zh_CN, "破甲I", "目标单位护甲扣除,使其遭受的伤害显著提升")
+      desc(zh_CN, "破甲I", "扣除目标单位护甲,使其遭受的伤害显著提升")
     }
   }
   val 破甲II = IceStatusEffect("armorBreakII") {
     speedMultiplier = 1.1f
     armorBreak = 10f
     bundle {
-      desc(zh_CN, "破甲II", "目标单位护甲扣除,使其遭受的伤害显著提升")
+      desc(zh_CN, "破甲II", "扣除目标单位护甲,使其遭受的伤害显著提升")
     }
   }
   val 破甲III = IceStatusEffect("armorBreakIII") {
     speedMultiplier = 1.1f
     armorBreak = 20f
     bundle {
-      desc(zh_CN, "破甲III", "目标单位护甲扣除,使其遭受的伤害显著提升")
+      desc(zh_CN, "破甲III", "扣除目标单位护甲,使其遭受的伤害显著提升")
     }
   }
   val 破甲IV = IceStatusEffect("armorBreakIV") {
     speedMultiplier = 1.1f
     armorBreak = 30f
     bundle {
-      desc(zh_CN, "破甲IV", "目标单位护甲扣除,使其遭受的伤害显著提升")
+      desc(zh_CN, "破甲IV", "扣除目标单位护甲,使其遭受的伤害显著提升")
     }
   }
   val 穿甲 = IceStatusEffect("armorPiercing") {
@@ -206,7 +206,7 @@ object IStatus : Load {
     speedMultiplier = 0.5f
     effect = Fx.absorb
     bundle {
-      desc(zh_CN, "回响", "回响")
+      desc(zh_CN, "回响", "")
     }
   }
   val 搏动 = IceStatusEffect("throb") {
@@ -214,20 +214,20 @@ object IStatus : Load {
     speedMultiplier = 1.4f
     effect = Fx.absorb
     bundle {
-      desc(zh_CN, "搏动", "搏动")
+      desc(zh_CN, "搏动", "畸变在血管中蔓延,欢愉在骨髓中滋长,血肉在律动中苏醒")
     }
   }
   val 寄生 = IceStatusEffect("parasitism") {
     healthMultiplier = 0.9f
     speedMultiplier = 0.9f
     bundle {
-      desc(zh_CN, "寄生", "寄生状态会逐渐消耗单位生命值致其死亡,随后生成血肉单位")
+      desc(zh_CN, "寄生", "异种的胚胎在脏器间扎根,血肉在无声中溃烂,骨骼在无序里软化,直到我们新增一员")
     }
   }
   val 融合 = IceStatusEffect("merge") {
     healthMultiplier = 1.5f
     bundle {
-      desc(zh_CN, "融合", "当血肉单位满足特定条件时,融合状态触发,逐渐靠近结合,属性整合提升")
+      desc(zh_CN, "融合", "生物的界限在混沌中消融,纠缠,渗透,重组,褪去残存的躯壳,将我们的力量合为一体")
     }
   }
   val 维生I = IceStatusEffect("vitalFixI") {
@@ -863,7 +863,7 @@ object IStatus : Load {
         }
       }
 
-      val health = lastHealth[unit]?:0f
+      val health = lastHealth[unit] ?: 0f
       if (health != unit.health) {
         if (health - 10 > unit.health) {
           val damageBase = health - unit.health
@@ -975,13 +975,13 @@ object IStatus : Load {
     effect = Fx.melting
     init {
       opposites(StatusEffects.freezing, StatusEffects.wet)
-      affinity(StatusEffects.tarred, TransitionHandler { unit: Unit?, result: StatusEntry?, time: Float ->
+      affinitys(StatusEffects.tarred, TransitionHandler { unit: Unit?, result: StatusEntry?, time: Float ->
         unit!!.damagePierce(8f)
         Fx.burning.at(unit.x + Mathf.range(unit.bounds() / 2f), unit.y + Mathf.range(unit.bounds() / 2f))
         result!!.set(this, 180 + result.time)
       })
 
-      affinity(冻结, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
+      affinitys(冻结, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
         e.damage(t)
         s.time -= t
       })
@@ -1078,7 +1078,7 @@ object IStatus : Load {
 
     init {
       opposites(StatusEffects.burning, StatusEffects.melting)
-      affinity(熔毁, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
+      affinitys(熔毁, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
         e.damage(s.time)
         s.time -= t
       })

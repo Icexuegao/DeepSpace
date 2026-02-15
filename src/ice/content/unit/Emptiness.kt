@@ -1,5 +1,7 @@
 package ice.content.unit
 
+import arc.func.Floatc2
+import arc.func.Func
 import arc.func.Func2
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
@@ -10,19 +12,12 @@ import arc.math.Mathf
 import arc.scene.style.TextureRegionDrawable
 import arc.util.Time
 import arc.util.pooling.Pools
-import ice.content.IUnitTypes.lightning
 import ice.content.block.turret.TurretBullets
 import ice.entities.bullet.BlastLaser
-import ice.entities.bullet.MultiTrailBulletType
-import ice.entities.bullet.SglEmpBulletType
-import ice.entities.bullet.base.TrailMoveLightning
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.graphics.lightnings.LightningVertex
-import ice.graphics.lightnings.generator.RandomGenerator
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.weapon.IceWeapon
 import ice.world.content.unit.weapon.MayflyWeapon
 import ice.world.draw.part.CustomPart
 import mindustry.Vars
@@ -37,13 +32,19 @@ import mindustry.gen.Teamc
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
 import mindustry.graphics.Trail
+import mindustry.type.Weapon
 import mindustry.world.meta.BlockFlag
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.util.MathTransform
 import singularity.world.SglFx
+import singularity.world.blocks.turrets.EmpBulletType
+import singularity.world.blocks.turrets.MultiTrailBulletType
 import singularity.world.particles.SglParticleModels
 import singularity.world.unit.abilities.MirrorArmorAbility
+import singularity.world.unit.types.TrailMoveLightning
+import universecore.graphics.lightnings.LightningVertex
+import universecore.graphics.lightnings.generator.RandomGenerator
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -80,7 +81,7 @@ class Emptiness : IceUnitType("emptiness") {
       maxAlbedo = 0.8f
       shieldArmor = 10f
     })
-    val turretBullet = object : SglEmpBulletType() {
+    val turretBullet = object : EmpBulletType() {
       init {
         damage = 420f
         empDamage = 37f
@@ -235,7 +236,7 @@ class Emptiness : IceUnitType("emptiness") {
       baseRotation = -135f
       delay = 40f
     }
-    weapons.add(object : IceWeapon("ice-lightedge") {
+    weapons.add(object : Weapon("ice-lightedge") {
       init {
         x = 0f
         y = -28f
@@ -252,8 +253,9 @@ class Emptiness : IceUnitType("emptiness") {
 
         bullet = object : BlastLaser() {
           init {
-            damage = 260f
+            damage = 160f
             damageInterval = 5f
+
             blastDelay = 38f
             rangeOverride = 600f
             splashDamage = 3280f
@@ -277,49 +279,64 @@ class Emptiness : IceUnitType("emptiness") {
             shootEffect = mindustry.entities.effect.MultiEffect(
               SglFx.shootCrossLightLarge, SglFx.explodeImpWaveBig, SglFx.impactWaveBig, SglFx.impactBubble
             )
-            hitEffect = mindustry.entities.effect.MultiEffect(Fx.colorSparkBig, SglFx.diamondSparkLarge)
+            hitEffect = mindustry.entities.effect.MultiEffect(
+              Fx.colorSparkBig, SglFx.diamondSparkLarge
+            )
 
-            hitColor = IceColor.matrixNet
+            hitColor = SglDrawConst.matrixNet
 
             fragBullets = 3
             fragSpread = 120f
             fragRandomSpread = 72f
-            fragBullet = BlastLaser().apply {
-              damage = 120f
-              damageInterval = 5f
+            fragBullet = object : BlastLaser() {
+              init {
+                damage = 120f
+                damageInterval = 5f
 
-              rangeOverride = 360f
-              splashDamage = 1400f
-              splashDamageRadius = 60f
-              empDamage = 220f
-              empRange = 60f
-              lifetime = 186f
-              hitSize = 9f
+                rangeOverride = 360f
+                splashDamage = 1400f
+                splashDamageRadius = 60f
+                empDamage = 220f
+                empRange = 60f
+                lifetime = 186f
+                hitSize = 9f
 
-              hitEffect = MultiEffect(Fx.circleColorSpark, SglFx.diamondSparkLarge)
+                hitEffect = mindustry.entities.effect.MultiEffect(
+                  Fx.circleColorSpark, SglFx.diamondSparkLarge
+                )
 
-              blackZone = false
+                blackZone = false
 
-              laserEffect = SglFx.explodeImpWaveLaserBlase
-              val branch = RandomGenerator()
-              val g = RandomGenerator().apply {
-                maxLength = 140f
-                maxDeflect = 55f
-                branchChance = 0.2f
-                minBranchStrength = 0.8f
-                maxBranchStrength = 1f
-                branchMaker = Func2 { vert: LightningVertex?, strength: Float? ->
-                  branch.maxLength = 60 * strength!!
-                  branch.originAngle = vert!!.angle + Mathf.random(-90, 90)
-                  branch
+                laserEffect = SglFx.explodeImpWaveLaserBlase
+
+                val branch = RandomGenerator()
+                val g: RandomGenerator = object : RandomGenerator() {
+                  override fun remove() {
+
+                  }
+
+                  init {
+                    maxLength = 140f
+                    maxDeflect = 55f
+
+                    branchChance = 0.2f
+                    minBranchStrength = 0.8f
+                    maxBranchStrength = 1f
+                    branchMaker = Func2 { vert: LightningVertex?, strength: Float? ->
+                      branch.maxLength = 60 * strength!!
+                      branch.originAngle = vert!!.angle + Mathf.random(-90, 90)
+                      branch
+                    }
+                  }
                 }
+
+                fragBullets = 8
+                fragBullet = TurretBullets.lightning(128f, 32f, 62f, 5.2f, SglDrawConst.matrixNet) { b: Bullet? ->
+                  g.originAngle = b!!.rotation()
+                  g
+                }
+                fragBullet.rangeOverride = 120f
               }
-              fragBullets = 8
-              fragBullet = lightning(128f, 32f, 62f, 5.2f, IceColor.matrixNet) { b: Bullet? ->
-                g.originAngle = b!!.rotation()
-                g
-              }
-              fragBullet.rangeOverride = 120f
             }
           }
 

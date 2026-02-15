@@ -41,9 +41,9 @@ import singularity.world.SglFx
 import singularity.world.blocks.turrets.EmpBulletType
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
-import universecore.world.lightnings.LightningContainer
-import universecore.world.lightnings.LightningVertex
-import universecore.world.lightnings.generator.RandomGenerator
+import universecore.graphics.lightnings.LightningContainer
+import universecore.graphics.lightnings.LightningVertex
+import universecore.graphics.lightnings.generator.RandomGenerator
 import kotlin.math.min
 
 class Haze : SglTurret("haze") {

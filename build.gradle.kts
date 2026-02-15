@@ -64,7 +64,7 @@ dependencies {
   // compileOnly(files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar"))
   // compileOnly("com.github.Anuken.Mindustry:core:v152.2")
   // compileOnly("com.github.Anuken.Arc:flabel:v149")
-  compileOnly("com.github.Anuken.Mindustry:core:v154.3")
+  compileOnly("com.github.Anuken.Mindustry:core:v155.2")
   implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinCompatibility")
 }
 
@@ -97,7 +97,12 @@ tasks {
     sourceCompatibility = 17.toString()
     targetCompatibility = 17.toString()
     options.encoding = "UTF-8"
-    // options.compilerArgs.addAll(arrayOf("--add-exports", "java.base/jdk.internal.misc=ALL-UNNAMED"))
+    options.compilerArgs.addAll(arrayOf( "--add-exports", "java.base/jdk.internal.misc=ALL-UNNAMED",
+      "--add-exports", "java.base/jdk.internal.module=ALL-UNNAMED",
+      "--add-exports", "java.base/jdk.internal.reflect=ALL-UNNAMED",
+      "--add-exports", "java.base/sun.nio.ch=ALL-UNNAMED")
+
+    )
   }
 
   withType<ShadowJar> {
@@ -194,7 +199,10 @@ tasks {
     val file = Fi("mod.json")
     val parse = JsonReader().parse(file)
     val message = parse.get("version")
-    archiveFileName.set("${project.name}-${message.asString()}.jar") //存档文件名
+    val split: List<String> = message.asString().split("-")
+    val toInt= split[1].toInt()+1
+
+    archiveFileName.set("${project.name}-${split[0]}-${toInt}.jar") //存档文件名
     val file1: File = file("build/libs/version")
     destinationDirectory.set(file1)
     from(zipTree("build/libs/${project.name}.jar"))

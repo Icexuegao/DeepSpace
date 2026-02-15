@@ -1,42 +1,25 @@
 package ice.entities.bullet.base
 
 import arc.Core
+import arc.math.Mathf
+import arc.math.geom.Vec2
 import arc.scene.ui.layout.Collapser
 import arc.scene.ui.layout.Table
 import arc.util.Strings
-import ice.entities.bullet.SglEmpBulletType
+import arc.util.Time
 import ice.world.meta.IceStatValues.sep
-import ice.world.meta.IceStats
 import mindustry.Vars
+import mindustry.content.Fx
 import mindustry.content.StatusEffects
+import mindustry.entities.Damage
+import mindustry.entities.Effect
+import mindustry.entities.Lightning
 import mindustry.gen.Bullet
 import mindustry.gen.Icon
 import mindustry.ui.Styles
 import mindustry.world.meta.StatUnit
 
 open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entities.bullet.BulletType(speed, damage) {
-  var updateRun: (Bullet) -> Unit = {}
-  var removedRun: (Bullet) -> Unit = {}
-
-  override fun update(b: Bullet) {
-    super.update(b)
-    updateRun(b)
-  }
-
-  override fun removed(b: Bullet) {
-    super.removed(b)
-    removedRun(b)
-  }
-
-
-  open fun setUpdate(run: (Bullet) -> Unit) {
-    this.updateRun = run
-  }
-
-  open fun setRemoved(run: (Bullet) -> Unit) {
-    removedRun = run
-  }
-
   open fun setDamageStats(bt: Table) {
     if (damage > 0 && (collides || splashDamage <= 0)) {
       if (continuousDamage() > 0) {
@@ -50,10 +33,6 @@ open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entitie
   fun setStats(table: Table) {
     table.left().defaults().padRight(3f).left()
     setDamageStats(table)
-    if (this is SglEmpBulletType) {
-      val string = if (empRange > 0) "[lightgray]~ [accent]" + empRange / Vars.tilesize + "[lightgray]" + StatUnit.blocks.localized() else ""
-      sep(table, "[accent]$empDamage[lightgray] ${IceStats.电磁脉冲伤害.localized()}[]$string")
-    }
 
     /*  if (this is HeatBulletType) {
           table.row()
@@ -173,5 +152,56 @@ open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entitie
       table.add(coll).padLeft(16f)
     }
     table.row()
+  }
+
+  override fun hit(b: Bullet?, x: Float, y: Float, createFrags: Boolean) {
+    hitEffect.at(x, y, b!!.rotation(), hitColor)
+    hitSound.at(x, y, hitSoundPitch, hitSoundVolume)
+
+    Effect.shake(hitShake, hitShake, b)
+
+    if (fragOnHit) {
+      if (delayFrags && fragBullet != null && fragBullet.delayFrags) {
+        Time.run(0f, Runnable { createFrags(b, x, y) })
+      } else {
+        createFrags(b, x, y)
+      }
+    }
+    createPuddles(b, x, y)
+    createIncend(b, x, y)
+    createUnits(b, x, y)
+
+    if (suppressionRange > 0) {
+      //bullets are pooled, require separate Vec2 instance
+      Damage.applySuppression(b.team, b.x, b.y, suppressionRange, suppressionDuration, 0f, suppressionEffectChance, Vec2(b.x, b.y), suppressColor)
+    }
+
+    createSplashDamage(b, x, y)
+
+    for (i in 0..<lightning) {
+      Lightning.create(b, lightningColor, if (lightningDamage < 0) damage else lightningDamage, b.x, b.y, b.rotation() + Mathf.range(lightningCone / 2) + lightningAngle, lightningLength + Mathf.random(lightningLengthRand))
+    }
+  }
+  override fun removed(b: Bullet) {
+    if (trailLength > 0 && b.trail != null && b.trail.size() > 0) {
+      Fx.trailFade.at(b.x, b.y, trailWidth, trailColor, b.trail.copy())
+    }
+  }
+
+  override fun despawned(b: Bullet) {
+    if (despawnHit) {
+      hit(b)
+    } else {
+      createUnits(b, b.x, b.y)
+    }
+
+    if (!fragOnHit) {
+      createFrags(b, b.x, b.y)
+    }
+
+    despawnEffect.at(b.x, b.y, b.rotation(), hitColor)
+    despawnSound.at(b)
+
+    Effect.shake(despawnShake, despawnShake, b)
   }
 }

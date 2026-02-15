@@ -3,10 +3,16 @@ package ice.world.meta
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import mindustry.world.meta.StatCat
+import singularity.world.meta.SglStatCat
 import universecore.world.meta.UncStatCat
 
 object IceStats {
   fun load() = Unit
+  val  最大能量势= IceStat("maxEnergyPotential", SglStatCat.neutron).apply {
+    bundle {
+      desc(zh_CN, "最大能量势")
+    }
+  }
   val 最大结构尺寸 = getStat("maxStructureSize", IceStatCats.结构) {
     desc(zh_CN, "最大结构尺寸")
   }

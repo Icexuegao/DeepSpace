@@ -82,6 +82,7 @@ object IFiles : Load {
     }
   }
 
+
   fun newCursor(filename: String): Graphics.Cursor {
     val fi = modWithClass.file.child("sprites").child("cursors").child("$filename.png")
     val p = Pixmap(fi)

@@ -24,7 +24,6 @@ import ice.graphics.TextureRegionDelegate
 import ice.library.IFiles
 import ice.library.IFiles.appendModName
 import ice.world.content.unit.entity.base.Entity
-import ice.world.content.unit.weapon.IceWeapon
 import mindustry.Vars
 import mindustry.ai.ControlPathfinder
 import mindustry.ai.Pathfinder
@@ -334,8 +333,8 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     sample = constructor.get()
   }
 
-  open fun setWeapon(weaponName: String = "", configurator: IceWeapon.() -> KUnit): IceWeapon {
-    return IceWeapon(
+  open fun setWeapon(weaponName: String = "", configurator: Weapon.() -> KUnit): Weapon {
+    return Weapon(
       if (weaponName.isEmpty()) "" else {
         "$name-$weaponName"
       }
@@ -348,7 +347,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     return instance.apply(configurator).also { weapons.add(it) }
   }
 
-  open fun IceWeapon.copyAdd(configurator: Weapon.() -> KUnit) {
+  open fun Weapon.copyAdd(configurator: Weapon.() -> KUnit) {
     val copy = copy()
     configurator(copy)
     weapons.add(copy)

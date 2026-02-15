@@ -36,7 +36,7 @@ class Spring: SglTurret("spring") {
     }
     requirements(
       Category.turret, ItemStack.with(
-        IItems.强化合金, 120, IItems.铝, 140, Items.phaseFabric, 80, IItems.矩阵合金, 100, IItems.绿藻素, 120, IItems.充能FEX水晶, 85, IItems.铱锭, 60
+        IItems.强化合金, 120, IItems.铝锭, 140, Items.phaseFabric, 80, IItems.矩阵合金, 100, IItems.绿藻素, 120, IItems.充能FEX水晶, 85, IItems.铱锭, 60
       )
     )
     size = 5

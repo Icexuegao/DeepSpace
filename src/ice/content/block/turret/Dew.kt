@@ -41,7 +41,7 @@ class Dew: ProjectileTurret("dew") {
     }
     requirements(
       Category.turret, ItemStack.with(
-        IItems.强化合金, 150, IItems.铝, 110, IItems.气凝胶, 120, IItems.矩阵合金, 160, Items.thorium, 100, Items.silicon, 85, IItems.铀238, 85
+        IItems.强化合金, 150, IItems.铝锭, 110, IItems.气凝胶, 120, IItems.矩阵合金, 160, Items.thorium, 100, Items.silicon, 85, IItems.铀238, 85
       )
     )
     size = 5

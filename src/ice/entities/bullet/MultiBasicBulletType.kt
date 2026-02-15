@@ -9,7 +9,7 @@ import ice.graphics.TextureRegionNoArrDelegate
 import ice.library.IFiles.appendModName
 import mindustry.gen.Bullet
 
-class MultiBasicBulletType(sprite: String) : BasicBulletType() {
+open class MultiBasicBulletType(sprite: String) : BasicBulletType() {
   var sprites: Array<TextureRegion> by TextureRegionNoArrDelegate(sprite.appendModName())
   var spriteBacks: Array<TextureRegion> by TextureRegionNoArrDelegate("$sprite-back".appendModName())
 

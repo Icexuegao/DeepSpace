@@ -34,7 +34,7 @@ class Frost: LaserTurret("frost") {
     }
     requirements(
       Category.turret, ItemStack.with(
-        IItems.强化合金, 160, IItems.铝, 110, Items.phaseFabric, 100, IItems.矩阵合金, 120, IItems.充能FEX水晶, 100, IItems.铱锭, 100
+        IItems.强化合金, 160, IItems.铝锭, 110, Items.phaseFabric, 100, IItems.矩阵合金, 120, IItems.充能FEX水晶, 100, IItems.铱锭, 100
       )
     )
     size = 5

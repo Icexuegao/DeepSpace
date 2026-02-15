@@ -24,7 +24,6 @@ object MenusDialog : Dialog() {
   lateinit var conts: Table
 
   init {
-    //排序
     ResearchDialog.setup()
     DataDialog.setup()
     AchievementDialog.setup()
@@ -32,7 +31,10 @@ object MenusDialog : Dialog() {
     PublicInfoDialog.setup()
     ConfigureDialog.setup()
     ModInfoDialog.setup()
-    ContributeDialog.setup()
+    SponsoredDialog.setup()
+  }
+
+  init {
     reset()
     setFillParent(true)
     defaults().reset()

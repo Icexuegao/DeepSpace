@@ -156,6 +156,7 @@ object Remainss : Load {
   val 心跳鼓 = Remains("心跳鼓").apply {
     color = IceColor.r2
     setDescription("带有奇异弹性的心肌隔膜,沉稳的节拍能让你的心跳同步")
+
     effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
     install = {
       IStatus.回响.speedMultiplier += 0.2f
@@ -170,7 +171,7 @@ object Remainss : Load {
   }
   val 玄岩板 = Remains("玄岩板").apply {
     setDescription("由奇异,沉重的玄武岩打磨而成")
-    effect = "[碳控熔炉]所需燃料减少[1]"
+    effect = "[${CrafterBlocks.碳控熔炉.localizedName}]所需燃料减少[1]"
     var itemStack = ItemStack()
     CrafterBlocks.碳控熔炉.consumers.find {
       it.get(ConsumeType.item)!!.consItems!!.find {

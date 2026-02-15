@@ -239,7 +239,7 @@ bundle {
 
     requirements(
       SglCategory.matrix, ItemStack.with(
-        IItems.矩阵合金, 50, IItems.气凝胶, 75, IItems.强化合金, 40, IItems.铝, 60
+        IItems.矩阵合金, 50, IItems.气凝胶, 75, IItems.强化合金, 40, IItems.铝锭, 60
       )
     )
     squareSprite=false

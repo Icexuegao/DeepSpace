@@ -33,14 +33,15 @@ import mindustry.world.meta.StatUnit
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
+import singularity.world.blocks.turrets.LightningBulletType
 import singularity.world.blocks.turrets.MultiTrailBulletType
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
-import universecore.world.lightnings.LightningContainer
-import universecore.world.lightnings.generator.VectorLightningGenerator
+import universecore.graphics.lightnings.LightningContainer
+import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
-class Mirage: SglTurret("mirage") {
-  init{
+class Mirage : SglTurret("mirage") {
+  init {
     bundle {
       desc(zh_CN, "虚妄", "高能FEX结晶弹射器,将大块结晶态FEX发射向目标,不同的结晶状态会产生截然不同的效果,在互相作用下可以造成相当大的杀伤效果")
     }
@@ -110,7 +111,7 @@ class Mirage: SglTurret("mirage") {
         trailRotation = true
 
         hitColor = SglDrawConst.fexCrystal
-        val gen: VectorLightningGenerator = VectorLightningGenerator().apply {
+        val gen = VectorLightningGenerator().apply {
           branchChance = 0.18f
           minBranchStrength = 0.8f
           maxBranchStrength = 1f
@@ -126,10 +127,11 @@ class Mirage: SglTurret("mirage") {
         }
 
         intervalBullet = lightning(30f, 45f, 4f, SglDrawConst.fexCrystal, true) { b: Bullet? ->
-          val e = Units.bestEnemy(b!!.team, b.x, b.y, 80f, { u: Unit -> true }, UnitSorts.farthest)
+          val e = Units.bestEnemy(b!!.team, b.x, b.y, 80f, { _: Unit -> true }, UnitSorts.farthest)
           if (e == null) {
             gen.vector.rnd(Mathf.random(40f, 80f))
           } else gen.vector.set(e.x - b.x, e.y - b.y).add(Mathf.random(-3f, 3f), Mathf.random(-3f, 3f))
+
           gen
         }
         bulletInterval = 1f
@@ -146,7 +148,7 @@ class Mirage: SglTurret("mirage") {
         )
       }
     }) { t, b: mindustry.entities.bullet.BulletType? ->
-      t!!.add(Core.bundle.format("infos.generateLightning", 60 / b!!.bulletInterval, 45))
+      t.add("[accent]释放闪电${60 / b!!.bulletInterval}/秒[lightgray] ~[accent]${45}[lightgray]伤害[]")
     }
     consume!!.item(IItems.FEX水晶, 1)
     consume!!.time(60f)
@@ -175,7 +177,7 @@ class Mirage: SglTurret("mirage") {
         )
 
         fragBullets = 1
-        fragBullet = object : singularity.world.blocks.turrets.LightningBulletType() {
+        fragBullet = object : LightningBulletType() {
           init {
             damage = 42f
             lifetime = 105f
@@ -201,33 +203,32 @@ class Mirage: SglTurret("mirage") {
             minInterval = 6f
             maxInterval = 16f
           }
-          val s: singularity.world.blocks.turrets.LightningBulletType = this
 
           override fun continuousDamage(): Float {
             return damage * 20
           }
 
-          override fun init(b: Bullet?, cont: LightningContainer) {
-            super.init(b, cont)
-            cont.lifeTime = 16f
-            cont.minWidth = 2.5f
-            cont.maxWidth = 4.5f
-            cont.lerp = Interp.pow2Out
-            cont.time = 0f
+          override fun init(b: Bullet, container: LightningContainer) {
+            super.init(b, container)
+            container.lifeTime = 16f
+            container.minWidth = 2.5f
+            container.maxWidth = 4.5f
+            container.lerp = Interp.pow2Out
+            container.time = 0f
           }
 
-          override fun update(b: Bullet, container: LightningContainer) {
-            super.update(b, container)
+          override fun update(bullet: Bullet, container: LightningContainer) {
+            super.update(bullet, container)
 
-            b.vel.x = Mathf.lerpDelta(b.vel.x, 0f, 0.05f)
-            b.vel.y = Mathf.lerpDelta(b.vel.y, 0f, 0.05f)
+            bullet.vel.x = Mathf.lerpDelta(bullet.vel.x, 0f, 0.05f)
+            bullet.vel.y = Mathf.lerpDelta(bullet.vel.y, 0f, 0.05f)
 
-            if (b.timer(4, 3f)) {
+            if (bullet.timer(4, 3f)) {
               var tar: Hitboxc? = null
               var dst = 0f
-              for (unit in Groups.unit.intersect(b.x - 180, b.y - 180, 360f, 360f)) {
-                if (unit.team === b.team || !unit.hasEffect(IStatus.结晶化)) continue
-                val d = unit.dst(b)
+              for (unit in Groups.unit.intersect(bullet.x - 180, bullet.y - 180, 360f, 360f)) {
+                if (unit.team === bullet.team || !unit.hasEffect(IStatus.结晶化)) continue
+                val d = unit.dst(bullet)
                 if (d > 180) continue
 
                 if (tar == null || d > dst) {
@@ -238,13 +239,14 @@ class Mirage: SglTurret("mirage") {
 
               if (tar == null) {
                 dst = 0f
-                for (bullet in Groups.bullet.intersect(b.x - 180, b.y - 180, 360f, 360f)) {
-                  if (bullet.team !== b.team || bullet.type !== s) continue
-                  val d = bullet.dst(b)
+                for (b1 in Groups.bullet.intersect(bullet.x - 180, bullet.y - 180, 360f, 360f)) {
+
+                  if (b1.team !== bullet.team || b1.type !== this) continue
+                  val d = b1.dst(bullet)
                   if (d > 180) continue
 
                   if (tar == null || d > dst) {
-                    tar = bullet
+                    tar = b1
                     dst = d
                   }
                 }
@@ -252,11 +254,11 @@ class Mirage: SglTurret("mirage") {
 
               if (tar == null) return
 
-              gen.vector.set(tar.x() - b.x, tar.y() - b.y)
+              gen.vector.set(tar.x() - bullet.x, tar.y() - bullet.y)
 
               container.create(gen)
 
-              Damage.collideLine(b, b.team, b.x, b.y, gen.vector.angle(), gen.vector.len(), false, false)
+              Damage.collideLine(bullet, bullet.team, bullet.x, bullet.y, gen.vector.angle(), gen.vector.len(), false, false)
             }
           }
 
@@ -299,7 +301,7 @@ class Mirage: SglTurret("mirage") {
           }
         }
         intervalBullet = lightning(30f, 60f, 4f, SglDrawConst.fexCrystal, true) { b: Bullet? ->
-          val e = Units.bestEnemy(b!!.team, b.x, b.y, 80f, Boolf { u: Unit? -> true }, UnitSorts.farthest)
+          val e = Units.bestEnemy(b!!.team, b.x, b.y, 80f, Boolf { _: Unit? -> true }, UnitSorts.farthest)
           if (e == null) {
             gen.vector.rnd(Mathf.random(40f, 80f))
           } else gen.vector.set(e.x - b.x, e.y - b.y).add(Mathf.random(-3f, 3f), Mathf.random(-3f, 3f))

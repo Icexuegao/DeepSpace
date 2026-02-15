@@ -28,9 +28,9 @@ class PointBulletType : BulletType() {
     val py = b.y + b.lifetime * b.vel.y
     val rot = b.rotation()
 
-    Geometry.iterateLine(0f, b.x, b.y, px, py, trailSpacing, Floatc2 { x: Float, y: Float ->
+    Geometry.iterateLine(0f, b.x, b.y, px, py, trailSpacing) { x: Float, y: Float ->
       trailEffect.at(x, y, rot)
-    })
+    }
 
     b.time = b.lifetime
     b.set(px, py)

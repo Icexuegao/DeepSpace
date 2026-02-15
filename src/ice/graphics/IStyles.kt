@@ -44,6 +44,8 @@ object IStyles {
   val achievementLock = IFiles.findModPng("achievement-lock")
   val achievement = IFiles.findModPng("achievement")
 
+  val paneLeft=IFiles.createNinePatch("pane-left")
+
   val remains = IFiles.findModPng("remains").asDrawable()
   val tanksui = IFiles.findModPng("thanks")
   val search = IFiles.findModPng("search")

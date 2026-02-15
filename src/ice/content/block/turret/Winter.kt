@@ -16,15 +16,11 @@ import ice.content.block.turret.TurretBullets.freezingField
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids
 import mindustry.entities.effect.WaveEffect
-import mindustry.entities.part.DrawPart.PartMove
-import mindustry.entities.part.DrawPart.PartProgress
 import mindustry.entities.part.RegionPart
 import mindustry.gen.Bullet
 import mindustry.gen.Sounds
@@ -49,7 +45,7 @@ class Winter : SglTurret("winter"){
     }
     requirements(
       Category.turret, ItemStack.with(
-        IItems.强化合金, 210, IItems.简并态中子聚合物, 80, Items.phaseFabric, 180, IItems.铱锭, 100, IItems.气凝胶, 200, IItems.铝, 220, IItems.矩阵合金, 160, IItems.充能FEX水晶, 180
+        IItems.强化合金, 210, IItems.简并态中子聚合物, 80, Items.phaseFabric, 180, IItems.铱锭, 100, IItems.气凝胶, 200, IItems.铝锭, 220, IItems.矩阵合金, 160, IItems.充能FEX水晶, 180
       )
     )
     size = 6

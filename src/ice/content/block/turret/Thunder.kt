@@ -37,11 +37,11 @@ import singularity.graphic.SglDraw
 import singularity.world.SglFx
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
-import universecore.world.lightnings.LightningContainer
-import universecore.world.lightnings.LightningVertex
-import universecore.world.lightnings.generator.CircleGenerator
-import universecore.world.lightnings.generator.RandomGenerator
-import universecore.world.lightnings.generator.VectorLightningGenerator
+import universecore.graphics.lightnings.LightningContainer
+import universecore.graphics.lightnings.LightningVertex
+import universecore.graphics.lightnings.generator.CircleGenerator
+import universecore.graphics.lightnings.generator.RandomGenerator
+import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
 class Thunder : SglTurret("thunder") {
   init {
@@ -192,7 +192,7 @@ class Thunder : SglTurret("thunder") {
 
       override fun createSplashDamage(b: Bullet, x: Float, y: Float) {}
 
-      override fun despawned(b: Bullet?) {}
+      override fun despawned(b: Bullet) {}
 
       override fun removed(b: Bullet) {
         super.removed(b)

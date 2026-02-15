@@ -43,7 +43,7 @@ class Soflame : SglTurret("soflame") {
     }
     requirements(
       Category.turret, ItemStack.with(
-        IItems.强化合金, 150, IItems.铝, 180, IItems.FEX水晶, 140, IItems.充能FEX水晶, 120, IItems.气凝胶, 180, IItems.铱锭, 60, Items.surgeAlloy, 120, Items.phaseFabric, 100
+        IItems.强化合金, 150, IItems.铝锭, 180, IItems.FEX水晶, 140, IItems.充能FEX水晶, 120, IItems.气凝胶, 180, IItems.铱锭, 60, Items.surgeAlloy, 120, Items.phaseFabric, 100
       )
     )
     size = 5

@@ -39,7 +39,7 @@ class Fubuki: LaserTurret("fubuki") {
     }
     requirements(
       Category.turret, ItemStack.with(
-        IItems.强化合金, 100, IItems.铝, 140, IItems.充能FEX水晶, 60, IItems.气凝胶, 80, IItems.铱锭, 30, Items.phaseFabric, 60
+        IItems.强化合金, 100, IItems.铝锭, 140, IItems.充能FEX水晶, 60, IItems.气凝胶, 80, IItems.铱锭, 30, Items.phaseFabric, 60
       )
     )
     size = 4

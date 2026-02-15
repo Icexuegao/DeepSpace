@@ -82,12 +82,12 @@ import singularity.world.draw.DrawRegionDynamic
 import singularity.world.meta.SglStat
 import singularity.world.particles.SglParticleModels
 import universecore.components.blockcomp.FactoryBuildComp
+import universecore.graphics.lightnings.LightningContainer
+import universecore.graphics.lightnings.generator.CircleGenerator
+import universecore.graphics.lightnings.generator.LightningGenerator
+import universecore.graphics.lightnings.generator.VectorLightningGenerator
 import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.ConsumeType
-import universecore.world.lightnings.LightningContainer
-import universecore.world.lightnings.generator.CircleGenerator
-import universecore.world.lightnings.generator.LightningGenerator
-import universecore.world.lightnings.generator.VectorLightningGenerator
 import universecore.world.producers.ProduceType
 import kotlin.math.max
 
@@ -945,38 +945,42 @@ object CrafterBlocks : Load {
 
       }
 
-      draw = DrawMulti(DrawBottom(), object : DrawBlock() {
-        val rand: Rand = Rand()
-        val drawID: Int = SglDraw.nextTaskID()
+      draw = DrawMulti(
+        DrawBottom(),
+        object : DrawBlock() {
+          val rand: Rand = Rand()
+          val drawID: Int = SglDraw.nextTaskID()
 
-        override fun draw(build: Building) {
-          Draw.z(Draw.z() + 0.001f)
-          val cap = build.block.liquidCapacity
-          val drawCell = Cons { b: Building? ->
+          override fun draw(build: Building) {
+            Draw.z(Draw.z() + 0.001f)
+            val cap = build.block.liquidCapacity
+            val drawCell = Cons { b: Building? ->
 
-            val alp = max(b!!.warmup(), 0.7f * b.liquids.get(ILiquids.藻泥) / cap)
-            if (alp <= 0.01f) return@Cons
+              val alp = max(b!!.warmup(), 0.7f * b.liquids.get(ILiquids.藻泥) / cap)
+              if (alp <= 0.01f) return@Cons
 
-            rand.setSeed(b.id.toLong())
-            val am = (1 + rand.random(3) * b.warmup()).toInt()
-            val move = 0.2f * Mathf.sinDeg(Time.time + rand.random(360f)) * b.warmup()
-            Draw.color(ILiquids.藻泥.color)
-            Draw.alpha(alp)
-            Angles.randLenVectors(b.id.toLong(), am, 3.5f) { dx: Float, dy: Float ->
-              Fill.circle(
-                b.x + dx + move, b.y + dy + move, (rand.random(0.2f, 0.8f) + Mathf.absin(5f, 0.1f)) * max(b.warmup(), b.liquids.get(ILiquids.藻泥) / cap)
-              )
+              rand.setSeed(b.id.toLong())
+              val am = (1 + rand.random(3) * b.warmup()).toInt()
+              val move = 0.2f * Mathf.sinDeg(Time.time + rand.random(360f)) * b.warmup()
+              Draw.color(ILiquids.藻泥.color)
+              Draw.alpha(alp)
+              Angles.randLenVectors(b.id.toLong(), am, 3.5f) { dx: Float, dy: Float ->
+                Fill.circle(
+                  b.x + dx + move, b.y + dy + move, (rand.random(0.2f, 0.8f) + Mathf.absin(5f, 0.1f)) * max(b.warmup(), b.liquids.get(ILiquids.藻泥) / cap)
+                )
+              }
+              Draw.reset()
             }
-            Draw.reset()
-          }
 
-          SglDraw.drawTask(drawID, build, SglShaders.boundWater) { e: Building ->
-            drawCell.get(e)
-            Draw.alpha(0.75f * (e.liquids.get(Liquids.water) / cap))
-            Draw.rect(Blocks.water.region, e.x, e.y)
+            SglDraw.drawTask(drawID, build, SglShaders.boundWater) { e: Building ->
+              drawCell.get(e)
+              Draw.alpha(0.75f * (e.liquids.get(Liquids.water) / cap))
+               Draw.rect(Blocks.water.region, e.x, e.y)
+              Draw.flush()
+            }
           }
-        }
-      }, object : DrawAntiSpliceBlock<SpliceCrafterBuild>() {
+        },
+         object : DrawAntiSpliceBlock<SpliceCrafterBuild>() {
         init {
           planSplicer = Boolf2 { plan: BuildPlan, other: BuildPlan ->
             if (plan.block is SpliceCrafter && other.block is SpliceCrafter) {
@@ -993,7 +997,8 @@ object CrafterBlocks : Load {
         init {
           alpha = Floatf { e: SpliceCrafterBuild -> if (e.highlight) 1f else 0f }
         }
-      })
+      }
+      )
 
       buildType = Prov {
         object : SpliceCrafterBuild() {
@@ -1119,7 +1124,7 @@ object CrafterBlocks : Load {
     newProduce()
     produce!!.items(
       *ItemStack.with(
-        IItems.铝, 4, IItems.铅锭, 3, IItems.铬锭, 1, IItems.钍锭, 2
+        IItems.铝锭, 4, IItems.铅锭, 3, IItems.铬锭, 1, IItems.钍锭, 2
       )
     )
 
@@ -1286,7 +1291,7 @@ object CrafterBlocks : Load {
 
     newConsume()
     consume!!.time(60f)
-    consume!!.item(IItems.铝, 1)
+    consume!!.item(IItems.铝锭, 1)
     consume!!.liquid(ILiquids.碱液, 0.2f)
     consume!!.power(1f)
     newProduce()
@@ -1595,7 +1600,7 @@ object CrafterBlocks : Load {
     newProduce().color = IItems.黑晶石.color
     produce!!.items(
       *ItemStack.with(
-        IItems.铬锭, 2, IItems.钍锭, 1, IItems.铅锭, 3, IItems.铝, 4
+        IItems.铬锭, 2, IItems.钍锭, 1, IItems.铅锭, 3, IItems.铝锭, 4
       )
     ).random()
 
@@ -1693,7 +1698,7 @@ object CrafterBlocks : Load {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.铝, 50, IItems.钴锭, 60, IItems.单晶硅, 45, IItems.铬锭, 45, IItems.气凝胶, 50
+        IItems.铝锭, 50, IItems.钴锭, 60, IItems.单晶硅, 45, IItems.铬锭, 45, IItems.气凝胶, 50
       )
     )
     size = 3
@@ -2009,7 +2014,7 @@ object CrafterBlocks : Load {
     newProduce().color = IItems.黑晶石.color
     produce!!.items(
       *ItemStack.with(
-        IItems.铝, 3, IItems.铅锭, 2
+        IItems.铝锭, 3, IItems.铅锭, 2
       )
     )
 

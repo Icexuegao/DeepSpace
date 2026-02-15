@@ -3,6 +3,7 @@ package ice.content.block.turret
 import arc.func.Cons
 import arc.func.Cons2
 import arc.func.Func
+import arc.func.Func2
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
@@ -33,11 +34,11 @@ import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
 import singularity.world.particles.SglParticleModels
+import universecore.graphics.lightnings.LightningContainer
+import universecore.graphics.lightnings.LightningVertex
+import universecore.graphics.lightnings.generator.LightningGenerator
+import universecore.graphics.lightnings.generator.RandomGenerator
 import universecore.util.funcs.Floatp2
-import universecore.world.lightnings.LightningContainer
-import universecore.world.lightnings.LightningVertex
-import universecore.world.lightnings.generator.LightningGenerator
-import universecore.world.lightnings.generator.RandomGenerator
 import kotlin.math.min
 
 object TurretBullets {
@@ -221,13 +222,12 @@ object TurretBullets {
     }
   }
   val branch = RandomGenerator()
-  fun lightning(lifeTime: Float, damage: Float, size: Float, color: Color?, gradient: Boolean, generator: Func<Bullet?, LightningGenerator>): BulletType {
+  fun lightning(lifeTime: Float, damage: Float, size: Float, color: Color?, gradient: Boolean, generator: Func<Bullet, LightningGenerator>): singularity.world.blocks.turrets. LightningBulletType {
     return lightning(lifeTime, if (gradient) lifeTime / 2 else 0f, damage, size, color, generator)
   }
 
-  @JvmStatic
-  fun lightning(lifeTime: Float, time: Float, damage: Float, size: Float, color: Color?, generator: Func<Bullet?, LightningGenerator>): BulletType {
-    return object : singularity.world.blocks.turrets.LightningBulletType(0f, damage) {
+  fun lightning(lifeTime: Float, time: Float, damage: Float, size: Float, color: Color?, generator: Func<Bullet, LightningGenerator>): singularity.world.blocks.turrets. LightningBulletType {
+    return object : singularity.world.blocks.turrets. LightningBulletType(0f,damage) {
       init {
         lifetime = lifeTime
         collides = false
@@ -247,14 +247,14 @@ object TurretBullets {
         drawSize = 120f
       }
 
-      override fun init(b: Bullet, container: LightningContainer) {
-        container.time = time
-        container.lifeTime = lifeTime
-        container.maxWidth = size
-        container.minWidth = size * 0.85f
-        container.lerp = Interp.linear
+      override fun init(b: Bullet, cont: LightningContainer) {
+        cont.time = time
+        cont.lifeTime = lifeTime
+        cont.maxWidth = size
+        cont.minWidth = size * 0.85f
+        cont.lerp = Interp.linear
 
-        container.trigger = Cons2 { last: LightningVertex?, vert: LightningVertex? ->
+        cont.trigger = Cons2 { last: LightningVertex?, vert: LightningVertex? ->
           if (!b.isAdded) return@Cons2
           Tmp.v1.set(vert!!.x - last!!.x, vert.y - last.y)
           val resultLength = Damage.findPierceLength(b, pierceCap, Tmp.v1.len())
@@ -262,19 +262,19 @@ object TurretBullets {
           Damage.collideLine(b, b.team, b.x + last.x, b.y + last.y, Tmp.v1.angle(), resultLength, false, false, pierceCap)
           b.fdata = resultLength
         }
-        val gen: LightningGenerator = generator.get(b)
-        gen.blockNow = Floatp2 { last, vertex ->
-          val abs = Damage.findAbsorber(b.team, b.x + last.x, b.y + last.y, b.x + vertex.x, b.y + vertex.y) ?: return@Floatp2 -1f
+        val gen = generator.get(b)
+        gen.blockNow = Func2 { last: LightningVertex, vertex: LightningVertex ->
+          val abs = Damage.findAbsorber(b.team, b.x + last.x, b.y + last.y, b.x + vertex.x, b.y + vertex.y) ?: return@Func2 -1f
           val ox: Float = b.x + last.x
           val oy: Float = b.y + last.y
           Mathf.len(abs.x - ox, abs.y - oy)
         }
-        container.create(gen)
+        cont.create(gen)
       }
     }
   }
 
-  fun graphiteCloud(lifeTime: Float, size: Float, air: Boolean, ground: Boolean, empDamage: Float): mindustry.entities.bullet.BulletType {
+  fun graphiteCloud(lifeTime: Float, size: Float, air: Boolean, ground: Boolean, empDamage: Float): BulletType {
     return object : BulletType(0f, 0f) {
       init {
         lifetime = lifeTime

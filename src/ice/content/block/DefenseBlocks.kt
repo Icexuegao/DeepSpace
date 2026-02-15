@@ -46,9 +46,9 @@ import singularity.world.blocks.defence.PhasedRadar
 import singularity.world.blocks.defence.SglWall
 import singularity.world.draw.DrawDirSpliceBlock
 import singularity.world.meta.SglStat
+import universecore.graphics.lightnings.LightningContainer
+import universecore.graphics.lightnings.generator.VectorLightningGenerator
 import universecore.world.consumers.BaseConsumers
-import universecore.world.lightnings.LightningContainer
-import universecore.world.lightnings.generator.VectorLightningGenerator
 
 @Suppress("unused")
 object DefenseBlocks : Load {

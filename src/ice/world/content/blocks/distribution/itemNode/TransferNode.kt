@@ -135,7 +135,15 @@ class TransferNode(name: String) : IceBlock(name) {
 
     override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
         super.drawPlace(x, y, rotation, valid)
-        val link: Tile? = findLinklastBuild(x, y)
+        val link = findLinklastBuild(x, y)?:return
+
+      var b=false
+      Geometry.d4.forEach {
+        if (link.x+it.x==x && link.y+it.y==y) {b=true}
+      }
+      if (b)return
+
+
         val vvtf = Vars.tilesize.toFloat()
         if (directionAny) {
             Drawf.dashRect(
@@ -149,17 +157,17 @@ class TransferNode(name: String) : IceBlock(name) {
         }
 
 
-        link?.let {
-            Draw.color(Pal.gray.write(Tmp.c3).a(blockColor.a))
-            Lines.stroke(3f)
-            Lines.line(it.drawx(), it.drawy(), x * vvtf, y * vvtf)
-            Draw.color(blockColor)
-            Lines.stroke(1f)
-            Lines.line(it.drawx(), it.drawy(), x * vvtf, y * vvtf)
+      link.let {
+        Draw.color(Pal.gray.write(Tmp.c3).a(blockColor.a))
+        Lines.stroke(3f)
+        Lines.line(it.drawx(), it.drawy(), x * vvtf, y * vvtf)
+        Draw.color(blockColor)
+        Lines.stroke(1f)
+        Lines.line(it.drawx(), it.drawy(), x * vvtf, y * vvtf)
 
-            Drawf.square(x * vvtf, y * vvtf, size.toFloat(), 45f, blockColor)
-            Drawf.square(it.drawx(), it.drawy(), size.toFloat(), 45f, blockColor)
-        }
+        Drawf.square(x * vvtf, y * vvtf, size.toFloat(), 45f, blockColor)
+        Drawf.square(it.drawx(), it.drawy(), size.toFloat(), 45f, blockColor)
+      }
         Draw.reset()
     }
 
@@ -239,7 +247,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
         override fun playerPlaced(config: Any?) {
             val linkTile: Tile? = findLinklastBuild(tile.x.toInt(), tile.y.toInt())
-            if (linkValid(tile, linkTile) && this.link != linkTile!!.pos() /*&& !proximity.contains(linkTile.build)*/) {
+            if (linkValid(tile, linkTile) && this.link != linkTile!!.pos() && !proximity.contains(linkTile.build)) {
                 linkTile.build.configure(tile.pos())
             }
 

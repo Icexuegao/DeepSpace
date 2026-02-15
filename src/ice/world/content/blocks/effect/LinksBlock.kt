@@ -50,7 +50,7 @@ open class LinksBlock(name: String) : RangeBlock(name) {
 
     override fun setStats() {
         super.setStats()
-        stats.add(IceStats.范围, "[${range / 8}] T")
+        stats.add(IceStats.范围, range)
         stats.add(IceStats.最大连接, "$buildSize")
         if (!allowLink.isEmpty) stats.add(IceStats.可连接建筑) { ta ->
             allowLink.forEach { b ->

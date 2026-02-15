@@ -154,7 +154,7 @@ fun Element.addListeners(listener: EventListener): Element {
 
 fun <T : Element> T.itooltip(string: String): T {
   addListener(Tooltip { tool ->
-    tool.background(IStyles.background32).margin(20f)
+    tool.background(IStyles.paneLeft).margin(20f)
     tool.add(string, IceColor.b4)
   }.apply {
     allowMobile = true

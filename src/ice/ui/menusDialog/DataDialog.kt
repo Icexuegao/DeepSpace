@@ -33,21 +33,16 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
   init {
     ContentDialogBase<Item>("物品").apply {
       contents.addAll(BaseContentSeq.items)
-      contentsHash.addAll(contents)
       color = { it.color }
     }
     ContentDialogBase<Liquid>("液体").apply {
       contents.addAll(BaseContentSeq.liquids)
-      contentsHash.addAll(contents)
       color = { it.color }
     }
     object : ContentDialogBase<Block>("建筑") {
       override fun showList(table: ITable) {
         val values = Category.entries.toTypedArray()
         val tables = Array(values.size) { ITable().apply { setRowsize(5) } }
-        var seq= Seq<String>().apply {
-          Category.all.forEach{add(it.name)}
-        }
 
         contents.select { content ->
           searchSelect(content)
@@ -56,7 +51,8 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
             val child = tables[category.ordinal]
             if (content.category.name == category.name) {
               child.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
-                currentContent = content
+                currentContent = tmpHash.indexOf(content)
+                flunInfo()
               }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
             }
           }
@@ -74,25 +70,28 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
       }
     }.apply {
       contents.addAll(BaseContentSeq.blocks)
-      contentsHash.addAll(contents)
     }
     ContentDialogBase<StatusEffect>("状态").apply {
       contents.addAll(BaseContentSeq.status)
-      contentsHash.addAll(contents)
     }
     ContentDialogBase<UnitType>("单位").apply {
       contents.addAll(BaseContentSeq.units)
-      contentsHash.addAll(contents)
     }
   }
 
   private var contentDialogs: ContentDialogBase<*> = ContentDialogBase.contentDialog.first()
-  var currentContent: UnlockableContent = contentDialogs.contents.first()
 
-  lateinit var flun: () -> Unit
+  private val gen = Table()
+  private val list = ITable()
+  private val info = ITable()
+  private var field: TextField? = null
 
   override fun build(cont: Table) {
-    cont.iTableGX { ta ->
+    cont.add(gen).grow()
+  }
+
+  init {
+    gen.iTableGX { ta ->
       ContentDialogBase.contentDialog.forEach {
         val textButton = TextButton(it.name, IStyles.button1)
         textButton.changed {
@@ -105,21 +104,21 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
         ta.add(textButton).pad(1f).grow()
       }
     }.height(60f).row()
-    cont.add(Image(IStyles.whiteui)).color(IceColor.b1).height(3f).growX().row()
-    cont.iTableG { ta ->
+    gen.add(Image(IStyles.whiteui)).color(IceColor.b1).height(3f).growX().row()
+    gen.iTableG { ta ->
       ta.table {
-        var field: TextField? = null
+
         it.iTableGX { search ->
           search.image(IStyles.search).apply {
             get().tapped {
               contentDialogs.searchField = ""
               field!!.text = ""
-              flun()
+              flunList()
             }
           }.color(IceColor.b4).size(33f).padLeft(15f).padRight(8f)
           field = search.field(contentDialogs.searchField) { s ->
             contentDialogs.searchField = s
-            flun()
+            flunList()
           }.growX().get()
           val button = arc.scene.ui.Button(IStyles.button).apply {
             add("?")
@@ -134,69 +133,67 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
         }.minHeight(60f).row()
         it.iPaneG { p ->
           p.top()
-          var tmp = contentDialogs
-          flun = {
-            p.clear()
-            field!!.text = contentDialogs.searchField
-            contentDialogs.showList(p)
-          }
-          flun()
-          p.update {
-            if (tmp != contentDialogs) {
-              tmp = contentDialogs
-              flun()
-            }
-          }
+          p.add(list)
+          flunList()
         }
       }.minWidth(350f).growY()
       ta.add(Image(IStyles.whiteui)).color(IceColor.b1).width(3f).growY()
       ta.iTableG { p ->
-        var tmp = currentContent
-        val r = {
-          p.clear()
-          p.iTableG {
-            it.iTableG(IStyles.background31) { it1 ->
-              it1.icePane { it2 ->
-                contentDialogs.showInfo(it2)
-              }.grow()
-            }.margin(22f)
-            it.iTableG(IStyles.background31) { it2 ->
-              it2.icePane { it1 ->
-                contentDialogs.showProperties(it1)
-              }
-            }.margin(22f)
-          }.minHeight(300f).row()
-          p.iTableG(IStyles.background31) {
-            contentDialogs.showOther(it)
-          }.margin(22f).minHeight(100f)
-        }
-        r()
-        p.update {
-          if (tmp != currentContent) {
-            tmp = currentContent
-            r()
-          }
-        }
+        p.add(info).grow()
+        flunInfo()
       }
     }
   }
 
+  fun flunAll() {
+    contentDialogs.changed()
+    flunList()
+    flunInfo()
+  }
+
+  fun flunList() {
+    list.clear()
+    field!!.text = contentDialogs.searchField
+    contentDialogs.showList(list)
+  }
+
+  fun flunInfo() {
+    info.clear()
+    info.iTableG {
+      it.iTableG(IStyles.background31) { it1 ->
+        it1.icePane { it2 ->
+          contentDialogs.showInfo(it2)
+        }.minWidth(200f).growX()
+      }.margin(22f)
+      it.iTableG(IStyles.background31) { it2 ->
+        it2.icePane { it1 ->
+          contentDialogs.showProperties(it1)
+        }
+      }.margin(22f)
+    }.minHeight(300f).row()
+    info.iTableG(IStyles.background31) {
+      contentDialogs.showOther(it)
+    }.margin(22f).minHeight(100f)
+  }
+
   fun showUnlockableContent(block: UnlockableContent) {
-    var c: ContentDialogBase<*>? = null
+    var ha: ContentDialogBase<*>? = null
 
     ContentDialogBase.contentDialog.forEach {
-      if (it.contentsHash.contains(block)) c = it
+      if (it.tmpHash.contains(block)) ha = it
     }
-    if (c != null) {
-      contentDialogs = c
+    if (ha != null) {
+      contentDialogs = ha
+      contentDialogs.currentContent = ha.tmpHash.indexOf(block)
     } else return
 
     if (!MenusDialog.isShown) MenusDialog.show()
 
-    currentContent = block
+
     MenusDialog.button = this
     hide()
     build(MenusDialog.conts)
+    flunAll()
   }
 
   private open class ContentDialogBase<T : UnlockableContent>(val name: String) {
@@ -206,17 +203,24 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
 
     var searchField = ""
     var contents = Seq<T>()
-    var contentsHash = LinkedHashSet<T>()
+    val tmpHash by lazy {
+      LinkedHashSet<T>().apply {
+        addAll(contents)
+      }
+    }
     var color: (T) -> Color = {
       IceColor.b4
     }
+    var currentContent = 0
 
     init {
       contentDialog.add(this)
     }
 
     open fun showInfo(table: Table) {
-      val color = color(currentContent as T)
+      val currentContent = tmpHash.filterIndexed { index, _ -> index == currentContent }.first()
+
+      val color = color(currentContent)
       table.iTableGX { it3 ->
         it3.image(currentContent.uiIcon).size(112f).scaling(Scaling.fit).row()
         it3.add(currentContent.localizedName).fontScale(1.5f).pad(2f).color(color)
@@ -226,6 +230,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
     }
 
     open fun showProperties(table: Table) {
+      val currentContent = tmpHash.filterIndexed { index, _ -> index == currentContent }.first()
       table.add(currentContent.name).color(Color.valueOf("b7e1fb")).padBottom(3f).row()
       currentContent.checkStats()
       val stats = currentContent.stats
@@ -261,7 +266,9 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
     }
 
     open fun searchSelect(content: T): Boolean {
+      if (content.isHidden && !SettingValue.启用调试模式) return false
       if (searchField.isNotEmpty()) {
+
         val substring = searchField.substring(1)
         when (searchField[0]) {
           '#' -> {
@@ -291,12 +298,15 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
         searchSelect(content)
       }.forEach { content ->
         table.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
-          currentContent = content
+          currentContent = tmpHash.indexOf(content)
+          flunInfo()
         }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
       }
     }
 
     fun changed() {
+      flunList()
+      flunInfo()
     }
   }
 }

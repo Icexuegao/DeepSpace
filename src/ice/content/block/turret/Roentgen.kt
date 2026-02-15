@@ -28,7 +28,7 @@ class Roentgen : ProjectileTurret("roentgen") {
     }
     requirements(
       Category.turret, ItemStack.with(
-        IItems.强化合金, 120, IItems.气凝胶, 100, IItems.铝, 60, IItems.FEX水晶, 40, Items.silicon, 75, Items.surgeAlloy, 45
+        IItems.强化合金, 120, IItems.气凝胶, 100, IItems.铝锭, 60, IItems.FEX水晶, 40, Items.silicon, 75, Items.surgeAlloy, 45
       )
     )
     size = 4

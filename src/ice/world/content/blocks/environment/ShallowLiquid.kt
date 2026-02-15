@@ -3,9 +3,7 @@ package ice.world.content.blocks.environment
 import arc.Core
 import arc.graphics.Color
 import arc.graphics.Pixmap
-import arc.graphics.Texture
 import arc.graphics.g2d.PixmapRegion
-import arc.graphics.g2d.TextureRegion
 import ice.library.IFiles.appendModName
 import mindustry.content.Liquids
 import mindustry.graphics.CacheLayer
@@ -39,7 +37,7 @@ open class ShallowLiquid(name: String, val blockfoor: Block) : Floor(name) {
             }
             val region1 = PixmapRegion(piX)
             mapColor.set(region1.get(region1.width / 2, region1.height / 2))
-            Core.atlas.addRegion(name + it, TextureRegion(Texture(piX)))
+          //  Core.atlas.addRegion(name + it, TextureRegion(Texture(piX)))
             packer.add(PageType.environment, name + it, region1)
             piX.dispose()
         }

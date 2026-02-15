@@ -21,7 +21,7 @@ class PercentStatus(name: String,
 ) : IceStatusEffect(name, appply) {
     companion object {
         var opposite = arrayOf(StatusEffects.wet, StatusEffects.freezing, IStatus.封冻)
-        var affinitys = arrayOf(StatusEffects.tarred, Fx.burning)
+        var affinitys1 = arrayOf(StatusEffects.tarred, Fx.burning)
     }
 
     init {
@@ -30,8 +30,8 @@ class PercentStatus(name: String,
                 opposite.forEach {
                     opposite(it)
                 }
-                val effect1 = affinitys[0] as mindustry.type.StatusEffect
-                val effect2 = affinitys[1] as Effect
+                val effect1 = affinitys1[0] as mindustry.type.StatusEffect
+                val effect2 = affinitys1[1] as Effect
                 affinity(effect1) { unit, result, time ->
                     unit.damagePierce(this.transitionDamages)
                     effect2.at(unit.x + Mathf.range(unit.bounds() / 2), unit.y + Mathf.range(unit.bounds() / 2))

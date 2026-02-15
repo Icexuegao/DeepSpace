@@ -9,7 +9,9 @@ import arc.math.geom.Vec2
 import arc.util.Time
 import arc.util.Tmp
 import ice.graphics.IceColor
+import ice.world.content.unit.weapon.MayflyWeapon.Companion.phase
 import mindustry.Vars
+import mindustry.entities.units.WeaponMount
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
@@ -19,6 +21,7 @@ import singularity.graphic.MathRenderer
 import singularity.graphic.SglDraw
 import singularity.util.MathTransform
 import singularity.world.SglFx
+import singularity.world.unit.DataWeapon
 import kotlin.math.min
 
 class MayflyStatus {
@@ -49,7 +52,7 @@ class MayflyStatus {
         }
     }
 
-    fun update(unit: Unit, mount: WeaponMount) {
+    fun update(unit: Unit, mount: DataWeapon.DataWeaponMount) {
         val movX = Angles.trnsx(mount.rotation, 0f, 14f) * mount.warmup
         val movY = Angles.trnsy(mount.rotation, 0f, 14f) * mount.warmup
 
