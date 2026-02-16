@@ -64,17 +64,16 @@ object IStatus : Load {
     bundle {
       desc(zh_CN, "封冻", "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成毁灭性打击")
     }
-
     setUpdate { unit, e ->
-      val ice = 1f - (600 - e.time) / 600f * 0.4f
+      val ice = (600 / e.time) - 1f
       if (unit.healthMultiplier > 0.4) unit.healthMultiplier *= ice
       if (unit.speedMultiplier > 0.4) unit.speedMultiplier *= ice
       if (unit.reloadMultiplier > 0.4) unit.reloadMultiplier *= ice
     }
     transitionDamage = 36f
     init {
-      opposites(StatusEffects.burning, StatusEffects.melting)
-      affinitys(StatusEffects.blasted) { unit, result, time ->
+      opposite(StatusEffects.burning, StatusEffects.melting)
+      affinity(StatusEffects.blasted) { unit, result, time ->
         unit.damagePierce(this.transitionDamage)
         if (unit.team == Vars.state.rules.waveTeam) {
           Events.fire(EventType.Trigger.blastFreeze)
@@ -206,7 +205,7 @@ object IStatus : Load {
     speedMultiplier = 0.5f
     effect = Fx.absorb
     bundle {
-      desc(zh_CN, "回响", "")
+      desc(zh_CN, "回响")
     }
   }
   val 搏动 = IceStatusEffect("throb") {
@@ -824,7 +823,7 @@ object IStatus : Load {
       colorTo = Color.valueOf("F15454")
     }
   }
-  var 结晶化 = IceStatusEffect("crystallize") {
+  val 结晶化 = IceStatusEffect("crystallize") {
     bundle {
       desc(zh_CN, "结晶化", "FEX物质在单位表面富集结晶产生不稳定的晶体壳,使单位会与活性的FEX结晶相互作用,同时在受到攻击时会造成额外的衍生伤害")
     }
@@ -876,7 +875,7 @@ object IStatus : Load {
     }
 
   }
-  var 暮春 = IceStatusEffect("wild_growth") {
+  val 暮春 = IceStatusEffect("wild_growth") {
     bundle {
       desc(zh_CN, "暮春", "受力场控制的纳米机器人会干扰单位的行动,破坏其设施")
     }
@@ -886,7 +885,7 @@ object IStatus : Load {
     damageMultiplier = 0.6f
     damage = 1.5f
   }
-  var 临春 = IceStatusEffect("spring_coming") {
+  val 临春 = IceStatusEffect("spring_coming") {
     bundle {
       desc(zh_CN, "临春", "纳米机器人矩阵会在力场的引导下为单位提供增益")
     }
@@ -896,7 +895,7 @@ object IStatus : Load {
     damageMultiplier = 1.1f
     damage = -1f
   }
-  var 电子干扰 = IceStatusEffect("electric_disturb") {
+  val 电子干扰 = IceStatusEffect("electric_disturb") {
     bundle {
       desc(zh_CN, "电子干扰", "电子设备受到外部干扰,火控系统将无法正常工作")
     }
@@ -923,7 +922,7 @@ object IStatus : Load {
       unit.reloadMultiplier *= (0.75f + 0.25f * (1 - scl))
     }
   }
-  var 锁定 = IceStatusEffect("locking") {
+  val 锁定 = IceStatusEffect("locking") {
     bundle {
       desc(zh_CN, "锁定", "单位受到的攻击有概率造成更高的伤害,这取决于锁定的强度")
     }
@@ -967,21 +966,21 @@ object IStatus : Load {
       }
     }
   }
-  var 熔毁 = object : IceStatusEffect("meltdown", {
+  val 熔毁 = object : IceStatusEffect("meltdown", {
     bundle {
       desc(zh_CN, "熔毁")
     }
     damage = 2.2f
     effect = Fx.melting
     init {
-      opposites(StatusEffects.freezing, StatusEffects.wet)
-      affinitys(StatusEffects.tarred, TransitionHandler { unit: Unit?, result: StatusEntry?, time: Float ->
+      opposite(StatusEffects.freezing, StatusEffects.wet)
+      affinity(StatusEffects.tarred, TransitionHandler { unit: Unit?, result: StatusEntry?, time: Float ->
         unit!!.damagePierce(8f)
         Fx.burning.at(unit.x + Mathf.range(unit.bounds() / 2f), unit.y + Mathf.range(unit.bounds() / 2f))
         result!!.set(this, 180 + result.time)
       })
 
-      affinitys(冻结, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
+      affinity(冻结, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
         e.damage(t)
         s.time -= t
       })
@@ -1019,7 +1018,7 @@ object IStatus : Load {
       })
     }
   }
-  var 电磁损毁 = IceStatusEffect("emp_damaged") {
+  val 电磁损毁 = IceStatusEffect("emp_damaged") {
     bundle {
       desc(zh_CN, "电磁损毁", "单位的系统中枢及各周边电子设备严重损毁,火控核心几乎失效,所有功能设备完全失效,近乎废铁")
     }
@@ -1067,7 +1066,7 @@ object IStatus : Load {
 
   }
 
-  var 冻结: IceStatusEffect = object : IceStatusEffect("frost", {
+  val 冻结: IceStatusEffect = object : IceStatusEffect("frost", {
     bundle {
       desc(zh_CN, "冻结", "在极低的温度下,单位的系统将很难正常工作,在寒气完全渗透到单位的核心后,它将被冻成一个巨大的冰块")
     }
@@ -1077,8 +1076,8 @@ object IStatus : Load {
     effect = Fx.freezing
 
     init {
-      opposites(StatusEffects.burning, StatusEffects.melting)
-      affinitys(熔毁, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
+      opposite(StatusEffects.burning, StatusEffects.melting)
+      affinity(熔毁, TransitionHandler { e: Unit, s: StatusEntry, t: Float ->
         e.damage(s.time)
         s.time -= t
       })
@@ -1109,7 +1108,7 @@ object IStatus : Load {
       SglDraw.drawDiamond(unit.x, unit.y, unit.hitSize * 2.35f * rate, unit.hitSize * 2 * rate, ro, 0.2f * rate)
     }
   }
-  var 凛冻: IceStatusEffect = object : IceStatusEffect("frost_freeze", {
+  val 凛冻: IceStatusEffect = object : IceStatusEffect("frost_freeze", {
     bundle {
       desc(zh_CN, "凛冻", "单位被寒气被彻底冰封,无法行动,如果寒气继续加深,在冰块碎裂时,它会彻底碎成一堆粉末")
     }
@@ -1119,7 +1118,7 @@ object IStatus : Load {
     effect = SglFx.particleSpread
 
     init {
-      opposites(StatusEffects.burning, StatusEffects.melting)
+      opposite(StatusEffects.burning, StatusEffects.melting)
       stats.add(SglStat.effect) { t ->
         t.image(冻结.uiIcon).size(25f)
         t.add(冻结.localizedName).color(Pal.accent)

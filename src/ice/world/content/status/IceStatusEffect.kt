@@ -14,11 +14,7 @@ open class IceStatusEffect(name: String, apply: IceStatusEffect.() -> kUnit = {}
   var armorRecovery: Boolean = false
   private var update = Cons2<Unit, StatusEntry> { _, _ -> }
   private var drawFun: (Unit) -> kUnit = {}
-  val affinitys: StatusEffect.(effect: StatusEffect, handler: TransitionHandler) -> kUnit = accessMethod2("affinity")
 
-  fun opposites(vararg effect: StatusEffect) {
-    opposite(*effect)
-  }
 
   init {
     apply(this)
