@@ -56,7 +56,7 @@ class Missionary : IceUnitType("missionary") {
         shots = 3
         shotDelay = 10f
       }
-      bullet = BasicBulletType(250f, 7f, "large-orb").apply {
+      bullet = BasicBulletType(7f, 250f, "large-orb").apply {
         width = 17f
         height = 21f
         hitSize = 8f
@@ -162,7 +162,7 @@ class Missionary : IceUnitType("missionary") {
         })
         intervalSpread = 300f
         bulletInterval = 10f
-        intervalBullet = BasicBulletType(30f, 2f, "mine-bullet").apply {
+        intervalBullet = BasicBulletType(2f, 30f, "mine-bullet").apply {
           pierce = true
           pierceBuilding = true
           status = IStatus.破甲II
@@ -186,7 +186,7 @@ class Missionary : IceUnitType("missionary") {
       shoot.apply {
         shotDelay = 15f
       }
-      bullet = BasicBulletType(23f, 8f).apply {
+      bullet = BasicBulletType(8f, 23f).apply {
         trailChance = 0.25f
         trailLength = 12
         trailWidth = 3.2f

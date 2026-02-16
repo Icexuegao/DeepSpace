@@ -36,7 +36,7 @@ class Witness : IceUnitType("unit_witness", UnitWaterMove::class.java) {
       inaccuracy = 2f
       ejectEffect = Fx.casing1
       shootSound = Sounds.shootPulsar
-      bullet = BasicBulletType(11f, 9f).apply {
+      bullet = BasicBulletType(9f, 11f).apply {
         lifetime = 20f
         width = 5f
         height = 8f

@@ -14,7 +14,6 @@ import mindustry.entities.abilities.EnergyFieldAbility
 import mindustry.entities.abilities.ShieldArcAbility
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
-import mindustry.type.UnitType
 import mindustry.type.Weapon
 import mindustry.type.weapons.PointDefenseWeapon
 import mindustry.type.weapons.RepairBeamWeapon
@@ -79,7 +78,7 @@ class MeteoricStar : IceUnitType("meteoricStar") {
           shotDelay = 4f
         }
         shootSound = Sounds.shoot
-        this.bullet = BasicBulletType(73f, 7f).apply {
+        this.bullet = BasicBulletType(7f, 73f).apply {
           width = 8f
           height = 12f
           lifetime = 39f
@@ -113,7 +112,7 @@ class MeteoricStar : IceUnitType("meteoricStar") {
         shotDelay = 4f
       }
       shootSound = Sounds.shoot
-      bullet = BasicBulletType(73f, 9f).apply {
+      bullet = BasicBulletType(9f, 73f).apply {
         width = 8f
         height = 12f
         lifetime = 41f

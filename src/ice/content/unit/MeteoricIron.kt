@@ -102,7 +102,7 @@ class MeteoricIron : IceUnitType("meteoricIron") {
         shotDelay = 4f
       }
       shootSound = Sounds.shoot
-      bullet = BasicBulletType(37f, 7f).apply {
+      bullet = BasicBulletType(7f, 37f).apply {
         width = 8f
         height = 12f
         lifetime = 39f

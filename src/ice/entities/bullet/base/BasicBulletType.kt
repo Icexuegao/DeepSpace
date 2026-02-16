@@ -11,7 +11,7 @@ import ice.library.IFiles
 import mindustry.gen.Bullet
 import mindustry.graphics.Pal
 
-open class BasicBulletType(damage: Float = 1f, speed: Float = 1f, var sprite: String = "bullet") : BulletType(speed, damage) {
+open class BasicBulletType(speed: Float = 1f, damage: Float = 1f, var sprite: String = "bullet") : BulletType(speed, damage) {
   var backColor: Color = Pal.bulletYellowBack
   var frontColor: Color = Pal.bulletYellow
   var mixColorFrom: Color = Color(1f, 1f, 1f, 0f)

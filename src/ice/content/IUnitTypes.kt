@@ -33,8 +33,15 @@ import singularity.world.unit.types.MornstarType
 
 @Suppress("unused")
 object IUnitTypes : Load {
+  val 飞蠓 = FlyingMidges()
+  val 疟蚊 = Mosquito()
+  val 血俎 = BloodAltar()
+  val 工蜂 = WorkerBee()
+
   val 星光 = Starlight()
   val 火花 = Spark()
+  val 战斧 = WarAxe()
+  val 火狱 = HellFire()
 
   val 坚盾 = StrongShield()
   val 围护 = Enclosure()
@@ -59,6 +66,7 @@ object IUnitTypes : Load {
   val 见证 = Witness()
   val 履行 = Execution()
   val 苦修= Meditation()
+  val 沧溟 = Abyss()
 
   val 收割 = Harvester()
   val 幻影 = Phantom()

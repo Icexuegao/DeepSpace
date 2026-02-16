@@ -379,7 +379,7 @@ class BlackThorns : IceUnitType("unit_blackThorns") {
       shootY = 0f
       reload = 360f
       shootSound = ISounds.激射
-      bullet = BasicBulletType(425f, 5f, "arrows").apply {
+      bullet = BasicBulletType(5f, 425f, "arrows").apply {
         lifetime = 160f
         drag = -0.001f
         shrinkY = 0f
@@ -464,7 +464,7 @@ class BlackThorns : IceUnitType("unit_blackThorns") {
         fragBullets = 8
         fragLifeMin = 0.5f
         fragVelocityMin = 0.5f
-        fragBullet = BasicBulletType(115f, 4f, "star").apply {
+        fragBullet = BasicBulletType(4f, 115f, "star").apply {
           lifetime = 40f
           spin = 8f
           shrinkX = 0f

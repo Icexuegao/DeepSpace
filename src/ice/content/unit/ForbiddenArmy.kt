@@ -95,7 +95,7 @@ class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
       cooldownTime = 150f
       layerOffset = -0.001f
       shootSound = ISounds.聚爆
-      bullet = BasicBulletType(467f, 24f).apply {
+      bullet = BasicBulletType(24f, 467f).apply {
         lifetime = 36f
         drag = 0.06f
         height = 12f
@@ -172,7 +172,7 @@ class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
         }
         despawnEffect = Fx.none
         fragBullets = 1
-        fragBullet = BasicBulletType(45f, 0f).apply {
+        fragBullet = BasicBulletType(0f, 45f).apply {
           sprite = "large-bomb"
           lifetime = 120f
           height = 14f

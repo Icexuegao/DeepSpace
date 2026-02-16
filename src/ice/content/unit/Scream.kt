@@ -97,7 +97,7 @@ class Scream : IceUnitType("scream") {
       shootStatusDuration = 120f
       shootSound = Sounds.shootCorvus
       ejectEffect = Fx.casing4
-      bullet = BasicBulletType(310f, 20f).apply {
+      bullet = BasicBulletType(20f, 310f).apply {
         lifetime = 19f
         shrinkY = 0f
         width = 16f
@@ -206,7 +206,7 @@ class Scream : IceUnitType("scream") {
       shootStatusDuration = 120f
       shootSound = Sounds.shootCorvus
       ejectEffect = Fx.casing4
-      bullet = BasicBulletType(310f, 20f).apply {
+      bullet = BasicBulletType(20f, 310f).apply {
         lifetime = 19f
         shrinkY = 0f
         width = 16f
@@ -308,7 +308,7 @@ class Scream : IceUnitType("scream") {
       cooldownTime = 170f
       ejectEffect = Fx.casing4
       shootSound = Sounds.shootConquer
-      bullet = BasicBulletType(1530f, 20f).apply {
+      bullet = BasicBulletType(20f, 1530f).apply {
         lifetime = 28.8f
         shrinkY = 0f
         width = 16f
@@ -466,7 +466,7 @@ class Scream : IceUnitType("scream") {
         color = Color.valueOf("FF0000")
         blending = Blending.additive
       })
-      bullet = BasicBulletType(7490f, 20f).apply {
+      bullet = BasicBulletType(20f, 7490f).apply {
         lifetime = 33.6f
         shrinkY = 0f
         width = 32f

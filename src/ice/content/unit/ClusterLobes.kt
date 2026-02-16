@@ -59,7 +59,7 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
       rotateSpeed = 0f
       reload = 60 * 3f
       inaccuracy = 60f
-      bullet = object : BasicBulletType(40f, 8f) {
+      bullet = object : BasicBulletType(8f, 40f) {
         init {
           smokeEffect = Fx.none
           shootSound = Sounds.shootMalign

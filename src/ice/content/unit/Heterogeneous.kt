@@ -63,7 +63,7 @@ class Heterogeneous : IceUnitType("unit_heterogeneous") {
       rotationLimit = 90f
       cooldownTime = 500f
       shootSound = Sounds.shootBeamPlasma
-      bullet = BasicBulletType(0f, 6f).apply {
+      bullet = BasicBulletType(6f, 0f).apply {
         sprite = "circle-bullet"
         lifetime = 96f
         height = 32f

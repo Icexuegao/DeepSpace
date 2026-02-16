@@ -77,7 +77,7 @@ class DeathOath : IceUnitType("unit_deathOath", MechUnit::class.java) {
       cooldownTime = 150f
       ejectEffect = Fx.casing3
       shootSound = Sounds.shootSpectre
-      bullet = BasicBulletType(585f, 12f).apply {
+      bullet = BasicBulletType(12f, 585f).apply {
         lifetime = 33f
         width = 16f
         height = 25f
