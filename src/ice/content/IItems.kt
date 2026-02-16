@@ -38,7 +38,7 @@ object IItems : Load {
   }
   val 骨钢 = IceItem("item_fleshSteel", "bf3e47") {
     bundle {
-      desc(zh_CN, "骨钢", "一种由血肉与骸骨熔铸的合金,用于建造自愈型建筑")
+      desc(zh_CN, "骨钢", "由血肉与骸骨组成的复合生物材料,用于建造自愈型建筑")
     }
   }
 
@@ -418,7 +418,7 @@ object IItems : Load {
     radioactivity = 0.4f
     cost = 1.25f
     bundle {
-      desc(zh_CN, "FEX晶体", "晶体化的高纯度FEX,中子导率和核性能都有明显提高,核工业不可或缺的重要材料")
+      desc(zh_CN, "导能晶体", "晶体化的高纯度材料,中子导率与核性能均有显著提升,是核工业中不可或缺的核心材料")
     }
   }
   val 充能FEX水晶 = object : IceItem("item_crystal_FEX_power", "#E34248") {
@@ -430,7 +430,7 @@ object IItems : Load {
       cost = 1.35f
       frameTime = 9f
       bundle {
-        desc(zh_CN, "活性FEX结晶", "经大量能量激发的FEX结晶,性质极其不稳定,危险且难以储存,但在需要释放中子能的地方不可或缺", "严禁用任何致密介质接触激发态的FEX结晶这是《中子工业操作管理条例》中加粗且划着红色下划线的条目,类似这样的条目都往往是来自一个个血淋淋的教训")
+        desc(zh_CN, "活化导能结晶", "经大量能量激发的高纯度结晶材料,性质极其不稳定,危险且难以储存,但在需要释放中子能的地方不可或缺", "严禁用任何致密介质接触激发态的导能结晶.在《中子工业操作管理条例》中,此类条目均以醒目字体特别标注.每一行警示背后,都是无法挽回的事故与代价")
       }
     }
 
@@ -527,7 +527,7 @@ object IItems : Load {
     flammability = 1.8f
     radioactivity = 0f
     bundle {
-      desc(zh_CN, "相位封装氢单元", "一种由相位材料包裹的氢中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氢的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氢原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
+      desc(zh_CN, "相位封装氢单元", "由相位材料包裹的氢中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氢的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氢原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
     }
   }
   val 相位封装氦单元 = IceItem("item_encapsulated_helium_cell", "#F9FFDE") {
@@ -536,7 +536,7 @@ object IItems : Load {
     flammability = 0f
     radioactivity = 0f
     bundle {
-      desc(zh_CN, "相位封装氦单元", "一种由相位材料包裹的氦中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氦的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氦原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
+      desc(zh_CN, "相位封装氦单元", "由相位材料包裹的氦中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氦的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氦原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
     }
   }
   val 浓缩铀235核燃料 = IceItem("item_concentration_uranium_235", "#95B564") {
@@ -590,7 +590,7 @@ object IItems : Load {
     flammability = 1.2f
     radioactivity = 0f
     bundle {
-      desc(zh_CN, "绿藻块", "一种经分离杂质后整合而成的绿藻细胞集团,可用于提取更有价值的绿藻素")
+      desc(zh_CN, "绿藻块", "经分离杂质后整合而成的绿藻细胞集团,可用于提取更有价值的绿藻素")
     }
   }
   val 绿藻素 = IceItem("item_chlorella", "#7BD261") {
@@ -599,7 +599,7 @@ object IItems : Load {
     flammability = 1.6f
     radioactivity = 0f
     bundle {
-      desc(zh_CN, "绿藻素", "一种从绿藻细胞中分离出的生物活性成分,是绿藻进行光合作用的核心物质.用于将光合作用机制应用于工业生产")
+      desc(zh_CN, "绿藻素", "从绿藻细胞中分离出的生物活性成分,是绿藻进行光合作用的核心物质.用于将光合作用机制应用于工业生产")
     }
   }
   val 碱石 = IceItem("item_alkali_stone", "#B0BAC0") {
@@ -627,7 +627,7 @@ object IItems : Load {
     flammability = 0f
     radioactivity = 0.25f
     bundle {
-      desc(zh_CN, "核废料", "一种核反应后残留的放射性物质,仍具有较强的辐射性.虽已无太大核能利用价值,但仍能作为提炼铱元素的非常规来源")
+      desc(zh_CN, "核废料", "核反应后残留的放射性物质,仍具有较强的辐射性.虽已无太大核能利用价值,但仍能作为提炼铱元素的非常规来源")
     }
   }
   val 岩层沥青 = IceItem("item_rock_bitumen", "#808A73") {
@@ -636,8 +636,8 @@ object IItems : Load {
     flammability = 0f
     radioactivity = 0f
     bundle {
-      desc(zh_CN, "岩层沥青", "一种从地壳深层钻取的沥青状物质,质地粘稠,内含有多种重矿物成分", "矿石碎屑在某些条件下会自发的富集并成块,大部分都会形成矿层,但许多未成型的矿屑被粘度很高的胶体裹挟时会在深层底层中形成沥青状的矿石胶结物,成分复杂")
-    }//"从地壳深层钻取的由FEX胶结的沥青状物质,含有不少较重的矿物"
+      desc(zh_CN, "岩层沥青", "从地壳深层钻取的沥青状物质,质地粘稠,内含有多种重矿物成分", "矿石碎屑在某些条件下会自发的富集并成块,大部分都会形成矿层,但许多未成型的矿屑被粘度很高的胶体裹挟时会在深层底层中形成沥青状的矿石胶结物,成分复杂")
+    }
   }
   val 铀原料 = IceItem("item_uranium_rawmaterial", "#B5D980") {
     hardness = 0
@@ -645,7 +645,7 @@ object IItems : Load {
     flammability = 0f
     radioactivity = 0.1f
     bundle {
-      desc(zh_CN, "铀原料", "一种铀矿石的化学冶炼中间物,经过增热离心可以制造燃料级的铀235和高纯度的铀238")
+      desc(zh_CN, "铀原料", "铀矿石的化学冶炼中间物,经过增热离心可以制造燃料级的铀235和高纯度的铀238")
     }
   }
   val 铱金混合物 = IceItem("item_iridium_mixed_rawmaterial", "#AECBCB") {
