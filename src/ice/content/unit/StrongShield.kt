@@ -61,7 +61,7 @@ class StrongShield : IceUnitType("unit_strongShield", MechUnit::class.java) {
       reload = 25f
       ejectEffect = Fx.casing1
       shootSound = Sounds.shoot
-      bullet = BasicBulletType(19f, 6f).apply {
+      bullet = BasicBulletType(6f, 19f).apply {
         lifetime = 32f
       }
     }

@@ -25,7 +25,7 @@ class BarbProtrusion : IceUnitType("barbProtrusion") {
       mirror = false
       rotate = true
       rotateSpeed = 3f
-      bullet = BasicBulletType(80f, 4f).apply {
+      bullet = BasicBulletType(4f, 80f).apply {
         height = 8f
         width = 4f
         drag = 0f

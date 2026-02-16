@@ -45,7 +45,7 @@ class TrashIce:ItemTurret("trashIce") {
       Drawf.tri(e.x, e.y, w, 15.0f * e.fout(), e.rotation)
       Drawf.tri(e.x, e.y, w, 3.0f * e.fout(), e.rotation + 180.0f)
     }
-    ammo(IItems.硫钴矿, BasicBulletType(9f, 5f).apply {
+    ammo(IItems.硫钴矿, BasicBulletType(5f, 9f).apply {
       width = 2f
       height = 9f
       lifetime = 30f

@@ -12,7 +12,7 @@ import ice.library.struct.Vec2Seq
 import mindustry.gen.Bullet
 
 @Suppress("UNCHECKED_CAST")
-open class TrailFadeBulletType(speed: Float, damage: Float) : BasicBulletType(damage, speed) {
+open class TrailFadeBulletType(speed: Float, damage: Float) : BasicBulletType(speed, damage) {
     companion object {
         private val v1: Vec2 = Vec2()
         protected val v2: Vec2 = Vec2()

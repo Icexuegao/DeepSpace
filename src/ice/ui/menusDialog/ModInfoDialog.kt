@@ -62,16 +62,17 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
   private var downloadProgress: Float = 0f
 
   init {
-    ContributorTable("EBwilson", "2534946881", Work.program).itooltip("以我现在的视角看还要继续的话unc得整个重构一遍")
-    ContributorTable("硫缺铅", "1164806786", Work.translate).itooltip("理解宇宙有助于身体健康")
-    ContributorTable("帕奇维克", "154864663", Work.artist).itooltip("广告招租位")
-    ContributorTable("ZL洋葱", "813466636", Work.artist).itooltip("你知道吗,模组作者在QQ短视频上推过意义不明的奥特曼视频")
-    ContributorTable("Reflcaly_反射", "2354671478", Work.artist).itooltip("期待与你的再次见面!再见!")
-    ContributorTable("NeilGreenFly", "1471761931", Work.program).itooltip("我想想")
-    ContributorTable("Carrot", "1456616666", Work.artist)
-    ContributorTable("Ventivu", "3123632012", Work.program)
+    ContributorTable("EBwilson", "2534946881", Work.program_icon_work).itooltip("以我现在的视角看还要继续的话unc得整个重构一遍")
+    ContributorTable("硫缺铅", "1164806786", Work.translate_icon_work).itooltip("理解宇宙有助于身体健康")
+    ContributorTable("帕奇维克", "154864663", Work.artist_icon_work).itooltip("广告招租位")
+    ContributorTable("前之骈", "2519583310", Work.copywriting_icon_work).itooltip("请务必关注neurosama喵,谢谢喵!")
+    ContributorTable("ZL洋葱", "813466636", Work.artist_icon_work).itooltip("你知道吗,模组作者在QQ短视频上推过意义不明的奥特曼视频")
+    ContributorTable("NeilGreenFly", "1471761931", Work.program_icon_work).itooltip("我想想")
+    ContributorTable("Reflcaly_反射", "2354671478", Work.artist_icon_work).itooltip("期待与你的再次见面!再见!")
+    ContributorTable("Carrot", "1456616666", Work.artist_icon_work)
+    ContributorTable("Ventivu", "3123632012", Work.program_icon_work)
 
-    AssistedTable("前之骈", "2519583310").itooltip("请务必关注neurosama喵,谢谢喵!")
+
     AssistedTable("Novarc", "2124363741").itooltip("等终末地出了我再继续写mod")
     AssistedTable("Eipusino", "1428509711").itooltip("颉姐你带我走吧")
     AssistedTable("sowiearch", "68237730").itooltip("我喜欢你 莲莲我喜欢你")
@@ -438,10 +439,11 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
   }
 
   private enum class Work(val des: String) {
-    artist("贴图/美术"),
-    translate("翻译"),
-    sounds("音乐/音效"),
-    program("程序/调试");
+    artist_icon_work("贴图/美术"),
+    translate_icon_work("翻译"),
+    sounds_icon_work("音乐/音效"),
+    copywriting_icon_work("文案"),
+    program_icon_work("程序/调试");
 
     fun icon(): Drawable = Singularity.getModDrawable(name)
   }

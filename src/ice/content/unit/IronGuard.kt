@@ -5,7 +5,6 @@ import arc.math.Interp
 import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
-import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle
 import ice.world.content.unit.IceUnitType
@@ -74,7 +73,7 @@ class IronGuard : IceUnitType("unit_ironGuard", MechUnit::class.java) {
       rotate = true
       rotateSpeed = 6f
       ejectEffect = Fx.casing1
-      bullet = BasicBulletType(19f, 6f).apply {
+      bullet = BasicBulletType(6f, 19f).apply {
         lifetime = 32f
       }
     }
@@ -97,7 +96,7 @@ class IronGuard : IceUnitType("unit_ironGuard", MechUnit::class.java) {
       shootSound = Sounds.shootAtrax
       shootStatus = IStatus.屠戮
       shootStatusDuration = 30f
-      bullet = BasicBulletType(85f, 9f).apply {
+      bullet = BasicBulletType(9f, 85f).apply {
         lifetime = 29f
         width = 11f
         height = 20f

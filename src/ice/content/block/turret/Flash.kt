@@ -36,7 +36,7 @@ class Flash:SglTurret("flash") {
 
     shootSound = Sounds.shootSmite
     //copy from smite
-    newAmmo(object : BasicBulletType(72f, 6f) {
+    newAmmo(object : BasicBulletType(6f, 72f) {
       init {
         sprite = "large-orb"
         width = 17f

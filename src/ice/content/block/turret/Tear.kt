@@ -72,7 +72,7 @@ class Tear :PowerTurret("tear"){
       desc(zh_CN, "撕裂", "一座强大的电磁轨道炮,超长轨道,超大力度,可以快速地进行精准射击")
     }
     requirements(Category.turret, IItems.铜锭, 9600, IItems.铬锭, 6400, IItems.铱板, 3600, IItems.导能回路, 2400, IItems.陶钢, 1920, IItems.生物钢, 1200)
-    shootType = BasicBulletType(840f, 16f, "gauss-bullet").apply {
+    shootType = BasicBulletType(16f, 840f, "gauss-bullet").apply {
       lifetime = 48f
       shrinkY = 0f
       height = 32f

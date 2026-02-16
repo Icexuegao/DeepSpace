@@ -121,7 +121,7 @@ class Omega : IceUnitType("unit_omega") {
       shootY = 0f
       inaccuracy = 15f
       shootSound = Sounds.shootMalign
-      bullet = BasicBulletType(85f, 8f, "arrows").apply {
+      bullet = BasicBulletType(8f, 85f, "arrows").apply {
         lifetime = 50f
         drag = -0.01f
         shrinkY = 0f
@@ -206,7 +206,7 @@ class Omega : IceUnitType("unit_omega") {
         })
         fragBullets = 4
         fragLifeMin = 0.5f
-        fragBullet = BasicBulletType(45f, 4f, "star").apply {
+        fragBullet = BasicBulletType(4f, 45f, "star").apply {
           lifetime = 40f
           spin = 8f
           shrinkX = 0f

@@ -363,7 +363,7 @@ object PowerBlocks : Load {
         fragVelocityMin = 1f
         fragVelocityMax = 2f
 
-        fragBullet = BasicBulletType(225f, 8f, "star".appendModName()).apply {
+        fragBullet = BasicBulletType(8f, 225f, "star".appendModName()).apply {
           lifetime = 60f
           height = 24f
           width = 24f

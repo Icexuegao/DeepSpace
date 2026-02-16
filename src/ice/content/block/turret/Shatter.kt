@@ -43,7 +43,7 @@ class Shatter : ItemTurret("turret_shatter") {
     consume(ConsumeCoolant(0.3f))
 
     ammo(
-      IItems.铬锭, BasicBulletType(9f, 6f).apply {
+      IItems.铬锭, BasicBulletType(6f, 9f).apply {
         lifetime = 50f
         width = 6f
         height = 8f
@@ -55,7 +55,7 @@ class Shatter : ItemTurret("turret_shatter") {
         shootEffect = Fx.shootSmall
         hitEffect = Fx.flakExplosion
         fragBullets = 4
-        fragBullet = BasicBulletType(4f, 3f).apply {
+        fragBullet = BasicBulletType(3f, 4f).apply {
           width = 3f
           height = 4f
           shrinkY = 0f
@@ -66,7 +66,7 @@ class Shatter : ItemTurret("turret_shatter") {
         }
       },
 
-      IItems.钍锭, BasicBulletType(11f, 5f).apply {
+      IItems.钍锭, BasicBulletType(5f, 11f).apply {
         lifetime = 58f
         width = 6f
         height = 8f
@@ -79,7 +79,7 @@ class Shatter : ItemTurret("turret_shatter") {
         shootEffect = Fx.shootSmall
         hitEffect = Fx.flakExplosion
         fragBullets = 2
-        fragBullet = BasicBulletType(5f, 3f).apply {
+        fragBullet = BasicBulletType(3f, 5f).apply {
           width = 3f
           height = 4f
           shrinkY = 0f
@@ -92,7 +92,7 @@ class Shatter : ItemTurret("turret_shatter") {
         }
       },
 
-      IItems.单晶硅, BasicBulletType(7f, 4.5f).apply {
+      IItems.单晶硅, BasicBulletType(4.5f, 7f).apply {
         lifetime = 66f
         width = 6f
         height = 8f
@@ -106,7 +106,7 @@ class Shatter : ItemTurret("turret_shatter") {
         hitEffect = Fx.flakExplosion
       },
 
-      IItems.铱板, BasicBulletType(8f, 4f).apply {
+      IItems.铱板, BasicBulletType(4f, 8f).apply {
         lifetime = 74f
         width = 6f
         height = 8f
@@ -120,7 +120,7 @@ class Shatter : ItemTurret("turret_shatter") {
         shootEffect = Fx.shootSmall
         hitEffect = Fx.flakExplosion
         fragBullets = 4
-        fragBullet = BasicBulletType(0f, 3f).apply {
+        fragBullet = BasicBulletType(3f, 0f).apply {
           width = 3f
           height = 4f
           shrinkY = 0f
@@ -135,7 +135,7 @@ class Shatter : ItemTurret("turret_shatter") {
         }
       },
 
-      IItems.低温化合物, BasicBulletType(6f, 4f).apply {
+      IItems.低温化合物, BasicBulletType(4f, 6f).apply {
         lifetime = 74f
         width = 6f
         height = 8f
@@ -173,7 +173,7 @@ class Shatter : ItemTurret("turret_shatter") {
         }
       },
 
-      IItems.铈凝块, BasicBulletType(5f, 4.3f).apply {
+      IItems.铈凝块, BasicBulletType(4.3f, 5f).apply {
         lifetime = 70f
         width = 6f
         height = 8f
@@ -186,7 +186,7 @@ class Shatter : ItemTurret("turret_shatter") {
         shootEffect = Fx.shootSmall
         hitEffect = Fx.flakExplosion
         fragBullets = 3
-        fragBullet = BasicBulletType(2f, 3f).apply {
+        fragBullet = BasicBulletType(3f, 2f).apply {
           width = 3f
           height = 4f
           shrinkY = 0f

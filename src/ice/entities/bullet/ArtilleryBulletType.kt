@@ -6,7 +6,7 @@ import mindustry.content.Fx
 import mindustry.gen.Bullet
 import mindustry.gen.Sounds
 
-class ArtilleryBulletType(speed: Float = 1f, damage: Float = 1f, bulletSprite: String = "shell") : BasicBulletType(speed, damage, bulletSprite) {
+class ArtilleryBulletType(speed: Float = 1f, damage: Float = 1f, bulletSprite: String = "shell") : BasicBulletType( speed,damage, bulletSprite) {
   var trailMult: Float = 1f
   var trailSize: Float = 4f
 

@@ -49,7 +49,7 @@ class Meteorite:IceUnitType("meteorite") {
         shotDelay = 4f
         layerOffset = -0.001f
         shootSound = Sounds.shoot
-        bullet = BasicBulletType(37f, 7f).apply {
+        bullet = BasicBulletType(7f, 37f).apply {
           width = 8f
           height = 12f
           lifetime = 27f

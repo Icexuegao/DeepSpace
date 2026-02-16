@@ -29,7 +29,7 @@ class Curtain : SglTurret("curtain") {
     range = 144f
     targetGround = false
 
-    newAmmo(object : BasicBulletType(30f, 1.6f, "missile") {
+    newAmmo(object : BasicBulletType(1.6f, 30f, "missile") {
       init {
         frontColor = Items.graphite.color.cpy().lerp(Color.white, 0.7f)
         backColor = Items.graphite.color
