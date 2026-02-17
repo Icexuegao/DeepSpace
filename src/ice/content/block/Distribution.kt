@@ -22,7 +22,6 @@ import ice.world.content.blocks.distribution.droneNetwork.DroneDeliveryTerminal
 import ice.world.content.blocks.distribution.droneNetwork.DroneReceivingRnd
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect
 import mindustry.entities.bullet.PointBulletType
@@ -253,7 +252,7 @@ object Distribution : Load {
   val 传输节点 = TransferNode("transferNode").apply {
     size = 1
     health = 200
-    requirements(Category.distribution, IItems.铜锭, 5)
+    requirements(Category.distribution, IItems.铜锭, 8, IItems.铬锭, 8, IItems.石英玻璃, 10)
     bundle {
       desc(zh_CN, "传输节点")
     }
@@ -338,7 +337,7 @@ object Distribution : Load {
     reload = 600f
     range = 1280f
     consumePower(23.75f)
-    squareSprite=false
+    squareSprite = false
     dumpTime = 1
     knockback = 4f
     translation = 2f
@@ -391,7 +390,7 @@ object Distribution : Load {
   val 无人机需求端 = DroneReceivingRnd("droneReceivingRnd").apply {
     requirements(Category.distribution, IItems.铜锭, 20, IItems.单晶硅, 10)
     bundle {
-      desc(zh_CN, "无人机需求端","用于从供货端接受物品")
+      desc(zh_CN, "无人机需求端", "用于从供货端接受物品")
     }
   }
   val 随机源 = Randomer("randomSource").apply {

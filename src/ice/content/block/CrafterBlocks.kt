@@ -16,10 +16,10 @@ import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.layout.Table
 import arc.util.Time
 import arc.util.Tmp
-import arc.util.noise.Noise
 import ice.audio.ISounds
 import ice.content.IItems
 import ice.content.ILiquids
+import ice.content.block.crafter.*
 import ice.graphics.IceColor
 import ice.library.struct.AttachedProperty
 import ice.library.world.Load
@@ -39,7 +39,6 @@ import mindustry.content.Blocks
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids
-import mindustry.entities.Effect
 import mindustry.entities.effect.MultiEffect
 import mindustry.entities.effect.RadialEffect
 import mindustry.entities.effect.WaveEffect
@@ -69,9 +68,11 @@ import singularity.graphic.SglShaders
 import singularity.util.MathTransform
 import singularity.world.SglFx
 import singularity.world.blocks.SglBlock
-import singularity.world.blocks.function.Destructor
-import singularity.world.blocks.product.*
+import singularity.world.blocks.product.FloorCrafter
+import singularity.world.blocks.product.MediumCrafter
+import singularity.world.blocks.product.NormalCrafter
 import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
+import singularity.world.blocks.product.SpliceCrafter
 import singularity.world.blocks.product.SpliceCrafter.SpliceCrafterBuild
 import singularity.world.consumers.SglConsumeFloor
 import singularity.world.consumers.SglConsumers
@@ -80,15 +81,9 @@ import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawDyColorCultivator
 import singularity.world.draw.DrawRegionDynamic
 import singularity.world.meta.SglStat
-import singularity.world.particles.SglParticleModels
 import universecore.components.blockcomp.FactoryBuildComp
-import universecore.graphics.lightnings.LightningContainer
-import universecore.graphics.lightnings.generator.CircleGenerator
-import universecore.graphics.lightnings.generator.LightningGenerator
-import universecore.graphics.lightnings.generator.VectorLightningGenerator
 import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.ConsumeType
-import universecore.world.producers.ProduceType
 import kotlin.math.max
 
 @Suppress("unused")
@@ -123,97 +118,8 @@ object CrafterBlocks : Load {
     }
   }
 
-  val 碳控熔炉 = NormalCrafter("carbonSteelFactory").apply {
-    bundle {
-      desc(
-        zh_CN, "碳控熔炉", "通过精确控制碳元素配比,在同一生产线灵活产出高碳钢和低碳钢,稳定的温度控制确保钢材质量始终达标"
-      )
-    }
-    size = 3
-    itemCapacity = 50
-    alwaysUnlocked = true
-    craftEffect = RadialEffect().apply {
-      effect = Fx.surgeCruciSmoke
-      rotationSpacing = 0f
-      lengthOffset = 0f
-      amount = 4
-    }
-    newConsume().apply {
-      time(45f)
-      item(IItems.赤铁矿, 2)
-      power(60 / 60f)
-    }
-    newProduce().apply {
-      items(IItems.低碳钢, 1)
-    }
-    newConsume().apply {
-      time(60f)
-      items(IItems.赤铁矿, 2, IItems.生煤, 3)
-      power(90 / 60f)
-    }
-    newProduce().apply {
-      items(IItems.高碳钢, 1)
-    }
-
-
-    draw = DrawMulti(DrawRegion("-bottom"), DrawArcSmelt().apply {
-      x += 8
-      startAngle = 135f
-      endAngle = 225f
-    }, DrawArcSmelt().apply {
-      x -= 8
-      startAngle = -45f
-      endAngle = 45f
-    }, DrawArcSmelt().apply {
-      y += 8
-      startAngle = 180 + 45f
-      endAngle = 360 - 45f
-    }, DrawArcSmelt().apply {
-      y -= 8
-      startAngle = 0f + 45
-      endAngle = 180f - 45f
-    }, DrawDefault())
-    requirements(Category.crafting, IItems.铜锭, 10, IItems.低碳钢, 50)
-  }
-  val 普适冶炼阵列 = NormalCrafter("universalSmelterArray").apply {
-    bundle {
-      desc(
-        zh_CN, "普适冶炼阵列", "核心级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铜,锌,铅等多种金属原料,为后续生产提供稳定的金属供应"
-      )
-    }
-    size = 3
-    itemCapacity = 30
-    craftEffect = IceEffects.square(IceColor.b4)
-    newConsume().apply {
-      time(80f)
-      item(IItems.黄铜矿, 3)
-      power(60 / 60f)
-    }
-    newProduce().apply {
-      items(IItems.铜锭, 1, IItems.低碳钢, 1)
-    }
-
-    newConsume().apply {
-      time(180f)
-      item(IItems.方铅矿, 5)
-      power(90 / 60f)
-    }
-    newProduce().apply {
-      items(IItems.铅锭, 4)
-    }
-
-    newConsume().apply {
-      time(120f)
-      item(IItems.闪锌矿, 3)
-      power(180 / 60f)
-    }
-    newProduce().apply {
-      items(IItems.锌锭, 2)
-    }
-
-    draw = DrawMulti(DrawDefault(), DrawFlame(IceColor.b4))
-    requirements(Category.crafting, IItems.高碳钢, 150, IItems.低碳钢, 70)
-  }
+  val 碳控熔炉 = CarbonSteelFactory()
+  val 普适冶炼阵列 = UniversalSmelterArray()
 
   val 铸铜厂 = NormalCrafter("copperFoundry").apply {
     size = 4
@@ -271,56 +177,6 @@ object CrafterBlocks : Load {
     draw = DrawMulti(DrawDefault(), DrawFlame())
     requirements(Category.crafting, IItems.高碳钢, 150, IItems.铅锭, 40, IItems.铜锭, 30, IItems.锌锭, 30)
   }
-  val 量子蚀刻厂 = NormalCrafter("integratedFactory").apply {
-    size = 3
-    health = 200
-    itemCapacity = 20
-    newConsume().apply {
-      time(160f)
-      items(IItems.单晶硅, 1, IItems.石墨烯, 2, IItems.石英玻璃, 1)
-      power(220 / 60f)
-    }
-    newProduce().apply {
-      items(IItems.电子元件, 1)
-    }
-    craftEffect = MultiEffect(IceEffects.lancerLaserShoot1, IceEffects.lancerLaserChargeBegin, IceEffects.hitLaserBlast)
-    draw = DrawMulti(DrawRegion("-bottom"), DrawRegion("-top"))
-    requirements(Category.crafting, ItemStack.with(IItems.铜锭, 19))
-    bundle {
-      desc(zh_CN, "量子蚀刻厂", "采用等离子蚀刻技术,在硅晶圆上雕刻出微米级电路,电子工业的基础设施")
-    }
-  }
-  val 单晶硅厂 = NormalCrafter("monocrystallineSiliconFactory").apply {
-    size = 4
-    health = 460
-    hasPower = true
-    craftEffect = IceEffects.square(IItems.单晶硅.color)
-    newConsume().apply {
-      time(60f)
-      items(IItems.硫化合物, 1, IItems.石英, 3)
-      power(1.8f)
-    }
-    newProduce().apply {
-      items(IItems.单晶硅, 1)
-    }
-
-    val color = Color.valueOf("ffef99")
-    draw = DrawMulti(DrawRegion("-bottom"), DrawBuild<NormalCrafterBuild> {
-      Draw.color(color)
-      Draw.alpha(warmup)
-      Lines.lineAngleCenter(
-        x + Mathf.sin(totalProgress(), 6f, Vars.tilesize / 3f * size), y, 90f, size * Vars.tilesize / 2f
-      )
-      Lines.lineAngleCenter(
-        x, y + Mathf.sin(totalProgress(), 3f, Vars.tilesize / 3f * size), 0f, size * Vars.tilesize / 2f
-      )
-      Draw.color()
-    }, DrawDefault(), DrawFlame(color))
-    requirements(Category.crafting, IItems.铬锭, 55, IItems.高碳钢, 200, IItems.铜锭, 150)
-    bundle {
-      desc(zh_CN, "单晶硅厂", "使用硫化物和石英矿石生产纯度更高的单晶硅")
-    }
-  }
   val 硫化物混合器 = NormalCrafter("sulfideMixer").apply {
     size = 3
     itemCapacity = 36
@@ -355,6 +211,39 @@ object CrafterBlocks : Load {
       desc(zh_CN, "爆炸物混合器", "将硫化合物,燃素水晶混合生成爆炸物")
     }
   }
+
+  val 单晶硅厂 = NormalCrafter("monocrystallineSiliconFactory").apply {
+    size = 4
+    health = 460
+    hasPower = true
+    craftEffect = IceEffects.square(IItems.单晶硅.color)
+    newConsume().apply {
+      time(60f)
+      items(IItems.硫化合物, 1, IItems.石英, 3)
+      power(1.8f)
+    }
+    newProduce().apply {
+      items(IItems.单晶硅, 1)
+    }
+
+    val color = Color.valueOf("ffef99")
+    draw = DrawMulti(DrawRegion("-bottom"), DrawBuild<NormalCrafterBuild> {
+      Draw.color(color)
+      Draw.alpha(warmup)
+      Lines.lineAngleCenter(
+        x + Mathf.sin(totalProgress(), 6f, Vars.tilesize / 3f * size), y, 90f, size * Vars.tilesize / 2f
+      )
+      Lines.lineAngleCenter(
+        x, y + Mathf.sin(totalProgress(), 3f, Vars.tilesize / 3f * size), 0f, size * Vars.tilesize / 2f
+      )
+      Draw.color()
+    }, DrawDefault(), DrawFlame(color))
+    requirements(Category.crafting, IItems.铬锭, 55, IItems.高碳钢, 200, IItems.铜锭, 150)
+    bundle {
+      desc(zh_CN, "单晶硅厂", "使用硫化物和石英矿石生产纯度更高的单晶硅")
+    }
+  }
+  val 等离子蚀刻厂 = IntegratedFactory()
 
   val 矿石粉碎机 = object : OreMultipleCrafter("mineralCrusher") {
     init {
@@ -756,7 +645,7 @@ object CrafterBlocks : Load {
     canOverdrive = false
     updateEffect = Fx.melting
     requirements(Category.crafting, IItems.铬锭, 130, IItems.钴钢, 45, IItems.铱板, 55, IItems.导能回路, 45)
-    draw=DrawMulti(DrawDefault(), DrawFlame())
+    draw = DrawMulti(DrawDefault(), DrawFlame())
     ambientSound = ISounds.beamLoop
     ambientSoundVolume = 0.02f
     bundle {
@@ -945,42 +834,39 @@ object CrafterBlocks : Load {
 
       }
 
-      draw = DrawMulti(
-        DrawBottom(),
-        object : DrawBlock() {
-          val rand: Rand = Rand()
-          val drawID: Int = SglDraw.nextTaskID()
+      draw = DrawMulti(DrawBottom(), object : DrawBlock() {
+        val rand: Rand = Rand()
+        val drawID: Int = SglDraw.nextTaskID()
 
-          override fun draw(build: Building) {
-            Draw.z(Draw.z() + 0.001f)
-            val cap = build.block.liquidCapacity
-            val drawCell = Cons { b: Building? ->
+        override fun draw(build: Building) {
+          Draw.z(Draw.z() + 0.001f)
+          val cap = build.block.liquidCapacity
+          val drawCell = Cons { b: Building? ->
 
-              val alp = max(b!!.warmup(), 0.7f * b.liquids.get(ILiquids.藻泥) / cap)
-              if (alp <= 0.01f) return@Cons
+            val alp = max(b!!.warmup(), 0.7f * b.liquids.get(ILiquids.藻泥) / cap)
+            if (alp <= 0.01f) return@Cons
 
-              rand.setSeed(b.id.toLong())
-              val am = (1 + rand.random(3) * b.warmup()).toInt()
-              val move = 0.2f * Mathf.sinDeg(Time.time + rand.random(360f)) * b.warmup()
-              Draw.color(ILiquids.藻泥.color)
-              Draw.alpha(alp)
-              Angles.randLenVectors(b.id.toLong(), am, 3.5f) { dx: Float, dy: Float ->
-                Fill.circle(
-                  b.x + dx + move, b.y + dy + move, (rand.random(0.2f, 0.8f) + Mathf.absin(5f, 0.1f)) * max(b.warmup(), b.liquids.get(ILiquids.藻泥) / cap)
-                )
-              }
-              Draw.reset()
+            rand.setSeed(b.id.toLong())
+            val am = (1 + rand.random(3) * b.warmup()).toInt()
+            val move = 0.2f * Mathf.sinDeg(Time.time + rand.random(360f)) * b.warmup()
+            Draw.color(ILiquids.藻泥.color)
+            Draw.alpha(alp)
+            Angles.randLenVectors(b.id.toLong(), am, 3.5f) { dx: Float, dy: Float ->
+              Fill.circle(
+                b.x + dx + move, b.y + dy + move, (rand.random(0.2f, 0.8f) + Mathf.absin(5f, 0.1f)) * max(b.warmup(), b.liquids.get(ILiquids.藻泥) / cap)
+              )
             }
-
-            SglDraw.drawTask(drawID, build, SglShaders.boundWater) { e: Building ->
-              drawCell.get(e)
-              Draw.alpha(0.75f * (e.liquids.get(Liquids.water) / cap))
-               Draw.rect(Blocks.water.region, e.x, e.y)
-              Draw.flush()
-            }
+            Draw.reset()
           }
-        },
-         object : DrawAntiSpliceBlock<SpliceCrafterBuild>() {
+
+          SglDraw.drawTask(drawID, build, SglShaders.boundWater) { e: Building ->
+            drawCell.get(e)
+            Draw.alpha(0.75f * (e.liquids.get(Liquids.water) / cap))
+            Draw.rect(Blocks.water.region, e.x, e.y)
+            Draw.flush()
+          }
+        }
+      }, object : DrawAntiSpliceBlock<SpliceCrafterBuild>() {
         init {
           planSplicer = Boolf2 { plan: BuildPlan, other: BuildPlan ->
             if (plan.block is SpliceCrafter && other.block is SpliceCrafter) {
@@ -997,8 +883,7 @@ object CrafterBlocks : Load {
         init {
           alpha = Floatf { e: SpliceCrafterBuild -> if (e.highlight) 1f else 0f }
         }
-      }
-      )
+      })
 
       buildType = Prov {
         object : SpliceCrafterBuild() {
@@ -1231,467 +1116,13 @@ object CrafterBlocks : Load {
       }, DrawDefault()
     )
   }
-  var 反应仓 = NormalCrafter("reacting_pool").apply {
-    bundle {
-      desc(zh_CN, "反应仓", "一个精准控制进料的化学反应容器,是普遍使用的化工设备")
-    }
-    requirements(
-      Category.crafting, IItems.铬锭, 100, IItems.石英玻璃, 100, IItems.铅锭, 80, IItems.钴锭, 85, IItems.单晶硅, 80, IItems.钴钢, 7
-    )
-    size = 3
-    squareSprite = false
-    itemCapacity = 35
-    liquidCapacity = 45f
-
-    newConsume()
-    consume!!.time(60f)
-    consume!!.item(IItems.黑晶石, 3)
-    consume!!.liquid(ILiquids.酸液, 0.2f)
-    consume!!.power(0.8f)
-    newProduce()
-    produce!!.liquid(ILiquids.复合矿物溶液, 0.4f)
-
-    newConsume()
-    consume!!.time(60f)
-    consume!!.liquid(ILiquids.酸液, 0.2f)
-    consume!!.item(IItems.铀原矿, 1)
-    consume!!.power(0.8f)
-    newProduce()
-    produce!!.liquid(ILiquids.铀盐溶液, 0.2f)
-
-    newConsume()
-    consume!!.liquids(
-      *LiquidStack.with(
-        ILiquids.纯净水, 0.4f, ILiquids.二氧化硫, 0.4f, ILiquids.氯气, 0.2f
-      )
-    )
-    consume!!.power(0.6f)
-    newProduce()
-    produce!!.liquid(ILiquids.酸液, 0.6f)
-
-    newConsume()
-    consume!!.time(120f)
-    consume!!.items(
-      *ItemStack.with(
-        IItems.单晶硅, 2, IItems.絮凝剂, 1
-      )
-    )
-    consume!!.liquids(
-      *LiquidStack.with(
-        ILiquids.纯净水, 0.4f, ILiquids.氯气, 0.2f
-      )
-    )
-    consume!!.power(1.5f)
-    newProduce()
-    produce!!.liquids(
-      *LiquidStack.with(
-        ILiquids.氯化硅溶胶, 0.4f, ILiquids.酸液, 0.2f
-      )
-    )
-
-    newConsume()
-    consume!!.time(60f)
-    consume!!.item(IItems.铝锭, 1)
-    consume!!.liquid(ILiquids.碱液, 0.2f)
-    consume!!.power(1f)
-    newProduce()
-    produce!!.item(IItems.絮凝剂, 2)
-
-    newConsume()
-    consume!!.time(30f)
-    consume!!.item(IItems.生煤, 1)
-    consume!!.liquids(
-      *LiquidStack.with(
-        ILiquids.酸液, 0.2f, ILiquids.孢子云, 0.3f
-      )
-    )
-    consume!!.power(1f)
-    newProduce()
-    produce!!.item(Items.blastCompound, 1)
-
-    draw = DrawMulti(
-      DrawBottom(), object : DrawBlock() {
-      override fun draw(build: Building?) {
-        val e = build as NormalCrafterBuild
-        if (e.consumer.current == null || e.producer!!.current == null) return
-        val l = e.consumer.current!!.get(ConsumeType.liquid)!!.consLiquids!![0].liquid
-        val region = Vars.renderer.fluidFrames[if (l.gas) 1 else 0][l.animationFrame]
-        val toDraw = Tmp.tr1
-        val bounds = size / 2f * Vars.tilesize - 3
-        val color = Tmp.c1.set(l.color).a(1f).lerp(e.producer!!.current!!.color, e.warmup())
-
-        for (sx in 0..<size) {
-          for (sy in 0..<size) {
-            val relx = sx - (size - 1) / 2f
-            val rely = sy - (size - 1) / 2f
-
-            toDraw.set(region)
-            //truncate region if at border
-            val rightBorder = relx * Vars.tilesize + 3
-            val topBorder = rely * Vars.tilesize + 3
-            val squishX = rightBorder + Vars.tilesize / 2f - bounds
-            val squishY = topBorder + Vars.tilesize / 2f - bounds
-            var ox = 0f
-            var oy = 0f
-
-            if (squishX >= 8 || squishY >= 8) continue
-            //cut out the parts that don't fit inside the padding
-            if (squishX > 0) {
-              toDraw.setWidth(toDraw.width - squishX * 4f)
-              ox = -squishX / 2f
-            }
-
-            if (squishY > 0) {
-              toDraw.setY(toDraw.y + squishY * 4f)
-              oy = -squishY / 2f
-            }
-
-            Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, max(e.warmup(), e.liquids.get(l) / liquidCapacity), color)
-          }
-        }
-      }
-    }, object : DrawDyColorCultivator<NormalCrafterBuild>() {
-      init {
-        spread = 4f
-        plantColor = Func { e: NormalCrafterBuild? -> SglDrawConst.transColor }
-        bottomColor = Func { e: NormalCrafterBuild? -> SglDrawConst.transColor }
-        plantColorLight = Func { e: NormalCrafterBuild? -> Color.white }
-      }
-    }, DrawDefault()
-    )
-  }
-  var 燃烧室 = NormalCrafter("combustion_chamber").apply {
-    bundle {
-      desc(zh_CN, "燃烧室", "密闭耐高温的舱室,用于执行化学燃烧过程,为最大化利用燃烧释放的能量,燃烧会将在活塞室内进行以推动线圈产生电力")
-    }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.铬锭, 90, IItems.钴锭, 80, IItems.石英玻璃, 80, IItems.单晶硅, 75
-      )
-    )
-    size = 3
-    liquidCapacity = 40f
-    itemCapacity = 25
-
-
-    newConsume()
-    consume!!.liquid(Liquids.hydrogen, 0.8f)
-    newProduce()
-    produce!!.liquid(ILiquids.纯净水, 0.4f)
-    produce!!.power(5f)
-
-    newConsume()
-    consume!!.time(120f)
-    consume!!.item(Items.pyratite, 1)
-    newProduce()
-    produce!!.liquid(ILiquids.二氧化硫, 0.4f)
-    produce!!.power(4.5f)
-
-    newBooster(2.65f)
-    consume!!.liquid(Liquids.ozone, 0.4f)
-
-    draw = DrawMulti(
-      DrawBottom(), DrawCrucibleFlame(), DrawDefault()
-    )
-  }
-  var 真空坩埚 = NormalCrafter("vacuum_crucible").apply {
-    bundle {
-      desc(zh_CN, "真空坩埚", "在低压高温环境下进行特殊工序时使用的设备")
-    }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.铬锭, 90, IItems.单晶硅, 80, IItems.钴钢, 60, IItems.石英玻璃, 75, IItems.钴锭, 80
-      )
-    )
-    size = 3
-    squareSprite = false
-    liquidCapacity = 45f
-    itemCapacity = 30
-
-    newConsume()
-    consume!!.time(60f)
-    consume!!.liquids(
-      *LiquidStack.with(
-        ILiquids.氯化硅溶胶, 0.2f, Liquids.hydrogen, 0.4f
-      )
-    )
-    consume!!.item(IItems.金珀沙, 5)
-    consume!!.power(2f)
-    newProduce()
-    produce!!.item(
-      IItems.单晶硅, 8
-    )
-
-    newConsume()
-    consume!!.time(120f)
-    consume!!.liquid(ILiquids.氯化硅溶胶, 0.4f)
-    consume!!.item(IItems.石英玻璃, 10)
-    consume!!.power(1.8f)
-    newProduce()
-    produce!!.item(IItems.气凝胶, 5)
-
-    newConsume()
-    consume!!.time(120f)
-    consume!!.item(IItems.绿藻块, 1)
-    consume!!.liquid(ILiquids.酸液, 0.2f)
-    consume!!.power(1.6f)
-    newProduce()
-    produce!!.item(IItems.絮凝剂, 1)
-
-    newConsume()
-    consume!!.time(120f)
-    consume!!.item(Items.sporePod, 1)
-    consume!!.liquid(ILiquids.碱液, 0.2f)
-    consume!!.power(1.6f)
-    newProduce()
-    produce!!.item(IItems.絮凝剂, 1)
-
-    draw = DrawMulti(
-      DrawBottom(), DrawCrucibleFlame(), DrawDefault()
-    )
-  }
-  var 热能冶炼炉 = NormalCrafter("thermal_smelter").apply {
-    bundle {
-      desc(zh_CN, "热能冶炼炉", "用于冶炼金属的设备,可以制造气流进行金属化合物的高温煅烧")
-    }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.铬锭, 65, IItems.单晶硅, 70, IItems.铜锭, 60, IItems.钴锭, 60, IItems.钴钢, 70
-      )
-    )
-    size = 3
-
-    itemCapacity = 20
-
-
-    newConsume()
-    consume!!.time(90f)
-    consume!!.items(
-      *ItemStack.with(
-        IItems.铬锭, 3, IItems.钍锭, 2, IItems.焦炭, 1
-      )
-    )
-    consume!!.liquid(ILiquids.氯化硅溶胶, 0.2f)
-    consume!!.power(2.6f)
-    newProduce()
-    produce!!.item(IItems.强化合金, 4)
-
-    newConsume()
-    consume!!.time(120f)
-    consume!!.items(
-      *ItemStack.with(
-        IItems.氯铱酸盐, 1, IItems.焦炭, 2
-      )
-    )
-    consume!!.liquid(Liquids.hydrogen, 0.4f)
-    consume!!.power(3f)
-    newProduce()
-    produce!!.item(IItems.铱锭, 2)
-
-    draw = DrawMulti(DrawBottom(), object : DrawBlock() {
-      val flameColor: Color = Color.valueOf("f58349")
-
-      override fun draw(build: Building) {
-        val base = (Time.time / 70)
-        Draw.color(flameColor, 0.5f)
-        rand.setSeed(build.id.toLong())
-        for (i in 0..34) {
-          val fin = (rand.random(1f) + base) % 1f
-          val angle = rand.random(360f) + (Time.time / 1.5f) % 360f
-          val len = 10 * Mathf.pow(fin, 1.5f)
-          Draw.alpha(0.5f * build.warmup() * (1f - Mathf.curve(fin, 1f - 0.4f)))
-          Fill.circle(
-            build.x + Angles.trnsx(angle, len), build.y + Angles.trnsy(angle, len), 3 * fin * build.warmup()
-          )
-        }
-
-        Draw.blend()
-        Draw.reset()
-      }
-    }, DrawDefault(), object : DrawFlame() {
-      init {
-        flameRadius = 2f
-        flameRadiusScl = 4f
-      }
-
-      override fun load(block: Block) {
-        top = Core.atlas.find(block.name + "_top")
-        block.clipSize = max(block.clipSize, (lightRadius + lightSinMag) * 2f * block.size)
-      }
-    })
-  }
-  var 干馏塔 = NormalCrafter("retort_column").apply {
-    bundle {
-      desc(zh_CN, "干馏塔", "通过隔绝空气的高温分离煤炭中的物质,以制造焦炭")
-    }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.铬锭, 70, IItems.钴锭, 75, IItems.铜锭, 90, IItems.石英玻璃, 90, IItems.钴钢, 50
-      )
-    )
-    size = 3
-    itemCapacity = 12
-    liquidCapacity = 20f
-
-
-
-    newConsume()
-    consume!!.time(90f)
-    consume!!.power(2f)
-    consume!!.item(IItems.生煤, 3)
-    newProduce()
-    produce!!.items(
-      *ItemStack.with(
-        Items.pyratite, 1, IItems.焦炭, 1
-      )
-    )
-
-    craftEffect = Fx.smeltsmoke
-
-    draw = DrawMulti(
-      DrawDefault(), object : DrawFlame() {
-        override fun load(block: Block) {
-          top = Core.atlas.find(block.name + "_top")
-          block.clipSize = max(block.clipSize, (lightRadius + lightSinMag) * 2f * block.size)
-        }
-      })
-  }
-  var 激光解离机 = NormalCrafter("laser_resolver").apply {
-    bundle {
-      desc(zh_CN, "激光解离机", "使用不同频段的激光来定向分离物质以得到更加有用的东西")
-    }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.FEX水晶, 45, IItems.强化合金, 70, IItems.单晶硅, 90, IItems.絮凝剂, 65, IItems.石英玻璃, 120
-      )
-    )
-    size = 3
-    itemCapacity = 20
-    warmupSpeed = 0.01f
-
-
-    newConsume()
-    consume!!.time(60f)
-    consume!!.power(3.2f)
-    consume!!.item(IItems.核废料, 1)
-    newProduce().color = IItems.核废料.color
-    produce!!.items(
-      *ItemStack.with(
-        IItems.铱金混合物, 2, IItems.铅锭, 5, IItems.钍锭, 3
-      )
-    ).random()
-
-    newConsume()
-    consume!!.time(30f)
-    consume!!.item(Items.scrap, 2)
-    consume!!.liquid(Liquids.slag, 0.1f)
-    consume!!.power(3.5f)
-    newProduce().color = Items.scrap.color
-    produce!!.items(
-      *ItemStack.with(
-        IItems.钍锭, 3, IItems.铬锭, 4, IItems.铅锭, 5, IItems.铜锭, 3
-      )
-    ).random()
-
-    newConsume()
-    consume!!.time(60f)
-    consume!!.item(IItems.黑晶石, 1)
-    consume!!.power(2.8f)
-    newProduce().color = IItems.黑晶石.color
-    produce!!.items(
-      *ItemStack.with(
-        IItems.铬锭, 2, IItems.钍锭, 1, IItems.铅锭, 3, IItems.铝锭, 4
-      )
-    ).random()
-
-
-    draw = DrawMulti(
-      DrawBottom(), object : DrawBlock() {
-      override fun draw(build: Building) {
-        val e = build as NormalCrafterBuild
-        if (e.producer!!.current == null) return
-
-        val region = Vars.renderer.fluidFrames[0][Liquids.water.animationFrame]
-        val toDraw = Tmp.tr1
-
-        val bounds = size / 2f * Vars.tilesize - 3
-        val color = e.producer!!.current!!.color
-
-        for (sx in 0..<size) {
-          for (sy in 0..<size) {
-            val relx = sx - (size - 1) / 2f
-            val rely = sy - (size - 1) / 2f
-
-            toDraw.set(region)
-            val rightBorder = relx * Vars.tilesize + 3
-            val topBorder = rely * Vars.tilesize + 3
-            val squishX = rightBorder + Vars.tilesize / 2f - bounds
-            val squishY = topBorder + Vars.tilesize / 2f - bounds
-            var ox = 0f
-            var oy = 0f
-
-            if (squishX >= 8 || squishY >= 8) continue
-
-            if (squishX > 0) {
-              toDraw.setWidth(toDraw.width - squishX * 4f)
-              ox = -squishX / 2f
-            }
-
-            if (squishY > 0) {
-              toDraw.setY(toDraw.y + squishY * 4f)
-              oy = -squishY / 2f
-            }
-
-            Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, e.warmup(), color)
-          }
-        }
-      }
-    }, DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild>("_laser") {
-      init {
-        rotation = Floatf { e: NormalCrafterBuild? -> e!!.totalProgress * 1.5f }
-        alpha = Floatf { obj: NormalCrafterBuild? -> obj!!.workEfficiency() }
-      }
-
-      override fun draw(build: Building?) {
-        SglDraw.drawBloomUnderBlock(build) { build: Building -> super.draw(build) }
-        Draw.z(Layer.block + 5)
-      }
-    }, object : DrawRegion("_rotator") {
-      init {
-        rotateSpeed = 1.5f
-        spinSprite = true
-      }
-    }, DrawRegion("_top")
-    )
-  }
-  var 蒸馏净化器 = NormalCrafter("distill_purifier").apply {
-    bundle {
-      desc(zh_CN, "蒸馏净化器", "用原始的蒸馏方式分离水中的杂质")
-    }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.铜锭, 30, IItems.单晶硅, 24, IItems.石英玻璃, 30, IItems.钴锭, 20
-      )
-    )
-    size = 2
-    hasLiquids = true
-    liquidCapacity = 30f
-    squareSprite = false
-    updateEffect = Fx.steam
-    updateEffectChance = 0.035f
-
-    newConsume()
-    consume!!.time(120f)
-    consume!!.liquid(Liquids.water, 0.5f)
-    consume!!.power(1f)
-    newProduce()
-    produce!!.liquid(ILiquids.纯净水, 0.4f)
-    produce!!.item(IItems.碱石, 1)
-
-    draw = DrawMulti(
-      DrawBottom(), DrawLiquidTile(Liquids.water, 3f), DrawDefault()
-    )
-  }
+  var 反应仓 = ReactingPool()
+  var 燃烧室 = CombustionChamber()
+  var 真空坩埚 = VacuumVrucible()
+  var 热能冶炼炉 = ThermalSmelter()
+  var 干馏塔 = RetortColumn()
+  var 激光解离机 = LaserResolver()
+  var 蒸馏净化器 = DistillPurifier()
   var 渗透净化器 = NormalCrafter("osmotic_purifier").apply {
     bundle {
       desc(zh_CN, "渗透净化器", "使用物质吸附及反渗透过滤技术制造的高效净化装置,能更有效的分离水中的杂质")
@@ -2208,8 +1639,7 @@ object CrafterBlocks : Load {
       desc(zh_CN, "矩阵切割器", "以纳米尺度的高能激光将金属切割为纳米颗粒,并在上方雕刻微电路,以生产矩阵合金")
     }
     requirements(
-      Category.crafting,
-        IItems.强化合金, 80, IItems.充能FEX水晶, 75, IItems.石英玻璃, 80, IItems.絮凝剂, 90, IItems.暮光合金, 120
+      Category.crafting, IItems.强化合金, 80, IItems.充能FEX水晶, 75, IItems.石英玻璃, 80, IItems.絮凝剂, 90, IItems.暮光合金, 120
     )
     size = 4
 
@@ -2360,8 +1790,7 @@ object CrafterBlocks : Load {
       desc(zh_CN, "聚合引力发生器", "在真空仓内利用大量的能量制造一个引力漏斗,将物质紧密的挤压在一起至中子简并态,用负引力场外壳包裹为一份简并态中子聚合物")
     }
     requirements(
-      Category.crafting,
-        IItems.强化合金, 180, IItems.矩阵合金, 900, IItems.充能FEX水晶, 100, IItems.FEX水晶, 120, IItems.铱锭, 80, IItems.气凝胶, 100, IItems.暮光合金, 80
+      Category.crafting, IItems.强化合金, 180, IItems.矩阵合金, 900, IItems.充能FEX水晶, 100, IItems.FEX水晶, 120, IItems.铱锭, 80, IItems.气凝胶, 100, IItems.暮光合金, 80
     )
     size = 5
     itemCapacity = 20
@@ -2462,196 +1891,7 @@ object CrafterBlocks : Load {
       produce!!.medium(0.6f)
     }
   }
-  var 物质逆化器 = object : MediumCrafter("substance_inverter") {
-    init {
-      bundle {
-        desc(zh_CN, "物质逆化器", "将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到引力容器中")
-      }
-      requirements(Category.crafting, ItemStack.with())
-      size = 5
-
-      placeablePlayer = false
-
-      itemCapacity = 20
-      energyCapacity = 1024f
-
-      newConsume()
-      consume!!.item(IItems.简并态中子聚合物, 1)
-      consume!!.energy(5f)
-      consume!!.medium(2.25f)
-      consume!!.time(120f)
-      newProduce()
-      produce!!.item(IItems.反物质, 1)
-
-      craftEffect = SglFx.explodeImpWaveBig
-      craftEffectColor = Pal.reactorPurple
-
-      craftedSound = Sounds.explosion
-      craftedSoundVolume = 1f
-
-      clipSize = 150f
-      val generator: LightningGenerator = CircleGenerator().apply {
-
-        radius = 13.5f
-        minInterval = 1.5f
-        maxInterval = 3f
-        maxSpread = 2.25f
-
-      }
-      initialed = Cons { e: SglBuilding ->
-        e.lightningDrawer = object : LightningContainer() {
-          init {
-            minWidth = 0.8f
-            maxWidth = minWidth
-            lifeTime = 24f
-          }
-        }
-        e.lightnings = object : LightningContainer() {
-          init {
-            lerp = Interp.pow2Out
-          }
-        }
-        e.lightningGenerator = VectorLightningGenerator().apply {
-          maxSpread = 8f
-          minInterval = 5f
-          maxInterval = 12f
-        }
-      }
-
-      crafting = Cons { e: NormalCrafterBuild? ->
-
-        if (SglDraw.clipDrawable(e!!.x, e.y, clipSize) && Mathf.chanceDelta((e.workEfficiency() * 0.1f).toDouble())) e.lightningDrawer!!.create(generator)
-        if (Mathf.chanceDelta((e.workEfficiency() * 0.04f).toDouble())) SglFx.randomLightning.at(e.x, e.y, 0f, Pal.reactorPurple)
-      }
-
-      craftTrigger = Cons { e: NormalCrafterBuild? ->
-        if (!SglDraw.clipDrawable(e!!.x, e.y, clipSize)) return@Cons
-        val a = Mathf.random(1, 3)
-
-        for (i in 0..<a) {
-          val gen: VectorLightningGenerator = e.lightningGenerator!!
-          gen.vector.rnd(Mathf.random(65, 100).toFloat())
-          val amount = Mathf.random(3, 5)
-          for (i1 in 0..<amount) {
-            e.lightnings!!.create(gen)
-          }
-
-          if (Mathf.chance(0.25)) {
-            SglFx.explodeImpWave.at(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple)
-            Angles.randLenVectors(
-              System.nanoTime(), Mathf.random(4, 7), 2f, 3.5f
-            ) { x: Float, y: Float -> SglParticleModels.floatParticle.create(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple, x, y, Mathf.random(3.25f, 4f)) }
-          } else {
-            SglFx.spreadLightning.at(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple)
-          }
-        }
-
-        Effect.shake(5.5f, 20f, e.x, e.y)
-      }
-
-      draw = DrawMulti(DrawBottom(), object : DrawBlock() {
-        override fun draw(build: Building?) {
-
-          val e = build as NormalCrafterBuild
-
-          SglDraw.drawBloomUnderBlock(e) { b: NormalCrafterBuild ->
-            val c: LightningContainer = b.lightningDrawer!!
-            if (!Vars.state.isPaused) c.update()
-
-            Draw.color(Pal.reactorPurple)
-            Draw.alpha(e.workEfficiency())
-            c.draw(b.x, b.y)
-          }
-          Draw.z(35f)
-          Draw.color()
-        }
-      }, DrawDefault(), object : DrawBlock() {
-        override fun draw(build: Building?) {
-
-          val e = build as NormalCrafterBuild
-          Draw.z(Layer.effect)
-          Draw.color(Pal.reactorPurple)
-          val c: LightningContainer = e.lightnings!!
-          if (!Vars.state.isPaused) c.update()
-          c.draw(e.x, e.y)
-          val lerp = Noise.noise(Time.time, 0f, 3.5f, 1f)
-          val offsetH = 6 * lerp
-          val offsetW = 14 * lerp
-
-          SglDraw.drawLightEdge(
-            e.x, e.y, (35 + offsetH) * e.workEfficiency(), 2.25f * e.workEfficiency(), (145 + offsetW) * e.workEfficiency(), 4 * e.workEfficiency()
-          )
-
-          Draw.z(Layer.bullet - 10)
-          Draw.alpha(0.2f * e.workEfficiency() + lerp * 0.25f)
-          SglDraw.gradientCircle(e.x, e.y, 72 * e.workEfficiency(), 6 + 5 * e.workEfficiency() + 2.3f * lerp, SglDrawConst.transColor)
-          Draw.alpha(0.3f * e.workEfficiency() + lerp * 0.25f)
-          SglDraw.gradientCircle(e.x, e.y, 41 * e.workEfficiency(), -6 * e.workEfficiency() - 2f * lerp, SglDrawConst.transColor)
-          Draw.alpha(0.55f * e.workEfficiency() + lerp * 0.25f)
-          SglDraw.gradientCircle(e.x, e.y, 18 * e.workEfficiency(), -3 * e.workEfficiency() - lerp, SglDrawConst.transColor)
-          Draw.alpha(1f)
-          SglDraw.drawLightEdge(
-            e.x, e.y, (60 + offsetH) * e.workEfficiency(), 2.25f * e.workEfficiency(), 0f, 0.55f, (180 + offsetW) * e.workEfficiency(), 4 * e.workEfficiency(), 0f, 0.55f
-          )
-        }
-      })
-    }
-  }
-  var 析构器 = object : Destructor("destructor") {
-    init {
-      bundle {
-        desc(zh_CN, "析构器", "加速碰撞破坏物质的原子核结构,以分析物质的微观构成形态并建立原子空间构成的蓝图")
-      }
-      requirements(Category.effect, ItemStack.with())
-      size = 5
-
-      placeablePlayer = false
-      recipeIndfo = Core.bundle.get("infos.destructItems")
-
-      draw = DrawMulti(
-        DrawBottom(), object : DrawPlasma() {
-          init {
-            suffix = "_plasma_"
-            plasma1 = SglDrawConst.matrixNet
-            plasma2 = SglDrawConst.matrixNetDark
-          }
-        }, DrawDefault()
-      )
-    }
-  }
-  var 强子重构仪 = object : AtomSchematicCrafter("hadron_reconstructor") {
-    init {
-      bundle {
-        desc(zh_CN, "强子重构仪", "微缩的定向大量强子对撞机,使得创造物质从理论成为现实")
-      }
-      requirements(
-        Category.crafting, ItemStack.with(
-          IItems.简并态中子聚合物, 80, IItems.铱锭, 120, IItems.充能FEX水晶, 120, IItems.矩阵合金, 90, IItems.气凝胶, 120, Items.surgeAlloy, 90
-        )
-      )
-      size = 4
-      itemCapacity = 24
-
-      placeablePlayer = false
-
-      craftEffect = SglFx.hadronReconstruct
-
-      draw = DrawMulti(
-        DrawBottom(), object : DrawPlasma() {
-        init {
-          suffix = "_plasma_"
-          plasma1 = Pal.reactorPurple
-          plasma2 = Pal.reactorPurple2
-        }
-      }, object : DrawBlock() {
-        override fun draw(build: Building?) {
-          val e = build as NormalCrafterBuild
-          Draw.alpha(e.progress())
-          if (e.producer!!.current != null) Draw.rect(e.producer!!.current!!.get(ProduceType.item)!!.items[0].item.uiIcon, e.x, e.y, 4f, 4f)
-          Draw.color()
-        }
-      }, DrawDefault()
-      )
-    }
-  }
+  var 物质逆化器 = SubstanceInverter()
+  var 析构器 = Destructors()
+  var 强子重构仪 = HadronReconstructor()
 }
