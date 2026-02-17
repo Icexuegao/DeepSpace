@@ -164,7 +164,7 @@ fun <T : Element> T.itooltip(string: String): T {
 
 fun <T : Element> T.itooltip(table: (Table)-> Unit): T {
   addListener(Tooltip { tool ->
-    tool.background(IStyles.background32).margin(20f)
+    tool.background(IStyles.paneLeft).margin(20f)
     table.invoke(tool)
   }.apply {
     allowMobile = true
