@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.mech
 
 import arc.graphics.Color
 import arc.math.Interp
