@@ -1,4 +1,4 @@
-
+package ice.content.unit.flying.fire
 
 import arc.graphics.Color
 import ice.content.IStatus
