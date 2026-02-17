@@ -11,6 +11,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.entities.Mover
@@ -42,9 +43,9 @@ class Soflame : SglTurret("soflame") {
       desc(zh_CN, "阳炎", "将能量聚集到“太阳分子”上,直到能量足够高时发射出去,极热的物质云会留下灼热的轨迹,并在碰撞时爆炸,将目标化为灰烬")
     }
     requirements(
-      Category.turret, ItemStack.with(
-        IItems.强化合金, 150, IItems.铝锭, 180, IItems.FEX水晶, 140, IItems.充能FEX水晶, 120, IItems.气凝胶, 180, IItems.铱锭, 60, Items.surgeAlloy, 120, Items.phaseFabric, 100
-      )
+      Category.turret,
+        IItems.强化合金, 150, IItems.铝锭, 180, IItems.FEX水晶, 140, IItems.充能FEX水晶,
+      120, IItems.气凝胶, 180, IItems.铱锭, 60, IItems.暮光合金, 120,  IItems.絮凝剂, 100
     )
     size = 5
     recoil = 4f

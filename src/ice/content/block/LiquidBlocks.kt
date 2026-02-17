@@ -128,7 +128,7 @@ object LiquidBlocks : Load {
     hasItems = false
     hasPower = false
     liquidCapacity = 10f
-    requirements(Category.liquid, IItems.石英玻璃, 10)
+    requirements(Category.liquid, IItems.锌锭,5, IItems.石英玻璃, 10)
     bundle {
       desc(zh_CN, "导管桥", "在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输液体")
     }
@@ -156,7 +156,7 @@ object LiquidBlocks : Load {
     hasItems = false
     liquidCapacity = 10f
     consumePower(30f / 60f)
-    requirements(Category.liquid, IItems.石英玻璃, 20)
+    requirements(Category.liquid, IItems.铜锭,8,IItems.锌锭,10, IItems.石英玻璃, 20)
 
     bundle {
       desc(zh_CN, "长距导管桥", "消耗电力,在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输液体")

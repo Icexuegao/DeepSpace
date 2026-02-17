@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.flying.rain
 
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType

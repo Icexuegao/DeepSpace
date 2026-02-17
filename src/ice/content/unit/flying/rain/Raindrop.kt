@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.flying.rain
 
 import arc.graphics.Color
 import ice.ui.bundle.BaseBundle
@@ -8,7 +8,7 @@ import mindustry.gen.Sounds
 
 class Raindrop : IceUnitType("unit_raindrop") {
   init {
-    BaseBundle.bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "雨滴", "小型突击舰,配备的闪电发生器可以快速杀伤敌军", "从小小的雨滴开始")
     }
     circleTarget = true

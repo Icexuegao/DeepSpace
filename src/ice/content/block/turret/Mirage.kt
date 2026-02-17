@@ -18,6 +18,7 @@ import ice.content.block.turret.TurretBullets.lightning
 import ice.content.block.turret.TurretBullets.破碎FEX结晶
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -46,9 +47,10 @@ class Mirage : SglTurret("mirage") {
       desc(zh_CN, "虚妄", "高能FEX结晶弹射器,将大块结晶态FEX发射向目标,不同的结晶状态会产生截然不同的效果,在互相作用下可以造成相当大的杀伤效果")
     }
     requirements(
-      Category.turret, ItemStack.with(
-        IItems.强化合金, 260, IItems.矩阵合金, 120, IItems.气凝胶, 200, IItems.铀238, 160, IItems.铱锭, 80, IItems.FEX水晶, 120
-      )
+      Category.turret,
+        IItems.强化合金, 260, IItems.矩阵合金, 120, IItems.气凝胶, 200,
+
+      IItems.铀238, 160, IItems.铱锭, 80, IItems.FEX水晶, 120
     )
     size = 5
 

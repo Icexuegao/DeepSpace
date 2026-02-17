@@ -1,10 +1,8 @@
-package ice.content.unit
+package ice.content.unit.flying.rain
 
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
 import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.gen.Sounds

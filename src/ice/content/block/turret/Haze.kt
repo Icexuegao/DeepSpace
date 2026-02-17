@@ -20,6 +20,7 @@ import ice.content.block.turret.TurretBullets.rand
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.audio.SoundLoop
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -52,9 +53,9 @@ class Haze : SglTurret("haze") {
       desc(zh_CN, "阴霾", "大型石墨导弹发射器,发射一枚电磁脉冲核弹,包裹的巨量石墨会产生一片巨大的石墨云传导电磁脉冲,造成严重的电子损伤")
     }
     requirements(
-      Category.turret, ItemStack.with(
-        IItems.强化合金, 180, IItems.气凝胶, 180, IItems.矩阵合金, 120, IItems.铀238, 100, Items.surgeAlloy, 140, Items.graphite, 200
-      )
+      Category.turret, IItems.强化合金, 180, IItems.气凝胶, 180,
+
+      IItems.矩阵合金, 120, IItems.铀238, 100, IItems.暮光合金, 140, IItems.锌锭, 200
     )
     size = 5
 

@@ -22,7 +22,6 @@ import ice.world.content.blocks.distribution.droneNetwork.DroneDeliveryTerminal
 import ice.world.content.blocks.distribution.droneNetwork.DroneReceivingRnd
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect
 import mindustry.entities.bullet.PointBulletType
@@ -253,7 +252,7 @@ object Distribution : Load {
   val 传输节点 = TransferNode("transferNode").apply {
     size = 1
     health = 200
-    requirements(Category.distribution, IItems.铜锭, 5)
+    requirements(Category.distribution, IItems.铜锭, 8, IItems.铬锭, 8, IItems.石英玻璃, 10)
     bundle {
       desc(zh_CN, "传输节点")
     }
@@ -262,7 +261,7 @@ object Distribution : Load {
     bundle {
       desc(zh_CN, "运输节点", "一种更高级的传送带桥,可以对节点的任意侧面配置指定物品的输入与输出")
     }
-    requirements(Category.distribution, Items.silicon, 8, IItems.气凝胶, 8, IItems.铝锭, 10)
+    requirements(Category.distribution, IItems.电子元件, 8, IItems.气凝胶, 8, IItems.铝锭, 10)
     range = 4
     arrowTimeScl = 6f
     transportTime = 3f
@@ -271,7 +270,7 @@ object Distribution : Load {
     bundle {
       desc(zh_CN, "相位运输节点", "使用相位物制造的运输节点,具有更快的运输速度和更远的连接距离")
     }
-    requirements(Category.distribution, Items.phaseFabric, 6, IItems.气凝胶, 10, IItems.强化合金, 8, IItems.铝锭, 12)
+    requirements(Category.distribution, IItems.絮凝剂, 6, IItems.气凝胶, 10, IItems.强化合金, 8, IItems.铝锭, 12)
     researchCostMultiplier = 1.5f
     itemCapacity = 15
     maxItemCapacity = 60
@@ -289,7 +288,7 @@ object Distribution : Load {
     bundle {
       desc(zh_CN, "铱制高效运输节点", "使用铱建造的高级运输节点,造价昂贵,但换来的收益除更长的连接距离和更快的运输速度外,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品")
     }
-    requirements(Category.distribution, Items.phaseFabric, 4, IItems.铱锭, 4, IItems.FEX水晶, 6, IItems.气凝胶, 12, IItems.铝锭, 12)
+    requirements(Category.distribution, IItems.絮凝剂, 4, IItems.铱锭, 4, IItems.FEX水晶, 6, IItems.气凝胶, 12, IItems.铝锭, 12)
 
 
     researchCostMultiplier = 2f
@@ -338,7 +337,7 @@ object Distribution : Load {
     reload = 600f
     range = 1280f
     consumePower(23.75f)
-    squareSprite=false
+    squareSprite = false
     dumpTime = 1
     knockback = 4f
     translation = 2f
@@ -391,7 +390,7 @@ object Distribution : Load {
   val 无人机需求端 = DroneReceivingRnd("droneReceivingRnd").apply {
     requirements(Category.distribution, IItems.铜锭, 20, IItems.单晶硅, 10)
     bundle {
-      desc(zh_CN, "无人机需求端","用于从供货端接受物品")
+      desc(zh_CN, "无人机需求端", "用于从供货端接受物品")
     }
   }
   val 随机源 = Randomer("randomSource").apply {

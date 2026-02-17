@@ -168,7 +168,7 @@ object ProductBlocks : Load {
     bundle {
       desc(zh_CN, "岩层钻井机", "钻探深层的地壳,将深埋在地壳深处的较高质量的矿物送至地表")
     }
-    requirements(Category.production, ItemStack.with(Items.titanium, 45, Items.lead, 30, Items.copper, 30))
+    requirements(Category.production, IItems.铬锭, 45, IItems.铅锭, 30, IItems.铜锭, 30)
     size = 2
     liquidCapacity = 24f
     oneOfOptionCons = true
@@ -219,9 +219,7 @@ object ProductBlocks : Load {
       desc(zh_CN, "岩石粉碎机", "将岩石粉碎成细小的颗粒,对于没有沙子的地方来说十分有用,同时某些岩石含盐量高,因此还可以从中得到一些有用的副产物", "事实上这台机器的效率并不算高,或者说它浪费掉的材料太多了,为了产出能够供应工业使用的富硅沙砾,几乎每生产一吨石英沙就要消耗掉几十吨原石,更别提硅纯度更低的一些岩石了")
     }
     requirements(
-      Category.production, ItemStack.with(
-        IItems.强化合金, 40, IItems.气凝胶, 55, Items.silicon, 60, Items.titanium, 50, Items.graphite, 60
-      )
+      Category.production, IItems.强化合金, 40, IItems.气凝胶, 55, IItems.单晶硅, 60, IItems.铬锭, 50, IItems.黄铜锭, 60
     )
     size = 3
 
@@ -297,7 +295,9 @@ object ProductBlocks : Load {
       desc(zh_CN, "潮汐钻头", "使用最前沿力场控制技术制造的高级钻头,以粒子束冲击破坏挖掘物的物质结构后通过控制引力场震荡完成矿石解体和采集的过程")
     }
     requirements(
-      Category.production, IItems.简并态中子聚合物, 50, IItems.强化合金, 120, IItems.气凝胶, 90, IItems.充能FEX水晶, 75, IItems.铱锭, 40, Items.phaseFabric, 60
+      Category.production, IItems.简并态中子聚合物, 50, IItems.强化合金, 120,
+
+      IItems.气凝胶, 90, IItems.充能FEX水晶, 75, IItems.铱锭, 40, IItems.絮凝剂, 60
     )
     size = 4
     squareSprite = false
@@ -385,7 +385,7 @@ object ProductBlocks : Load {
     bundle {
       desc(zh_CN, "矩阵矿床", "矩阵矿床的控制中心,四面可安装矿床的工作组件以进行开采工作")
     }
-    requirements(Category.production, IItems.矩阵合金, 130, IItems.充能FEX水晶, 80, IItems.强化合金, 90, IItems.气凝胶, 90, Items.phaseFabric, 65, Items.graphite, 90, IItems.铱锭, 45)
+    requirements(Category.production, IItems.矩阵合金, 130, IItems.充能FEX水晶, 80, IItems.强化合金, 90, IItems.气凝胶, 90, IItems.絮凝剂, 65, IItems.锌锭, 90, IItems.铱锭, 45)
     size = 5
     matrixEnergyUse = 0.6f
     squareSprite = false
@@ -448,9 +448,7 @@ object ProductBlocks : Load {
       desc(zh_CN, "量子隧穿仪", "矩阵矿床的增幅组件,安装此组件后,矩阵矿床将能够透过建筑挖掘被建筑覆盖的矿石")
     }
     requirements(
-      Category.production, ItemStack.with(
-        IItems.矩阵合金, 40, IItems.充能FEX水晶, 40, IItems.FEX水晶, 50, IItems.强化合金, 30, IItems.铱锭, 20, Items.phaseFabric, 40
-      )
+      Category.production, IItems.矩阵合金, 40, IItems.充能FEX水晶, 40, IItems.FEX水晶, 50, IItems.强化合金, 30, IItems.铱锭, 20, IItems.絮凝剂, 40
     )
     size = 3
     squareSprite = false
@@ -538,9 +536,7 @@ object ProductBlocks : Load {
       desc(zh_CN, "矩阵增幅器", "矩阵矿床的增幅组件,提高矩阵矿床的最大范围,并消耗液体增加矩阵矿床的工作效率")
     }
     requirements(
-      Category.production, ItemStack.with(
-        IItems.矩阵合金, 40, IItems.充能FEX水晶, 50, IItems.强化合金, 40, IItems.气凝胶, 40, IItems.铱锭, 15, Items.phaseFabric, 60
-      )
+      Category.production, IItems.矩阵合金, 40, IItems.充能FEX水晶, 50, IItems.强化合金, 40, IItems.气凝胶, 40, IItems.铱锭, 15, IItems.絮凝剂, 60
     )
     size = 3
     range = 16

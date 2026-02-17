@@ -9,6 +9,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.entities.Damage
@@ -35,9 +36,10 @@ class Spring: SglTurret("spring") {
       desc(zh_CN, "春分", "这座炮塔能够引导能量够修复我方单位和建筑,同时它会侵入敌方的机械结构中,阻止其行动", "成熟的能量引导技术赋予了这座巨物十分突出的能力")
     }
     requirements(
-      Category.turret, ItemStack.with(
-        IItems.强化合金, 120, IItems.铝锭, 140, Items.phaseFabric, 80, IItems.矩阵合金, 100, IItems.绿藻素, 120, IItems.充能FEX水晶, 85, IItems.铱锭, 60
-      )
+      Category.turret,
+      IItems.强化合金, 120, IItems.铝锭, 140, IItems.絮凝剂, 80,
+
+      IItems.矩阵合金, 100, IItems.绿藻素, 120, IItems.充能FEX水晶, 85, IItems.铱锭, 60
     )
     size = 5
     scaledHealth = 450f

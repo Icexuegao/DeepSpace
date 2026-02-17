@@ -8,6 +8,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.crushedIce
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Items
 import mindustry.content.Liquids
 import mindustry.entities.bullet.ContinuousLaserBulletType
@@ -26,16 +27,16 @@ import singularity.world.blocks.turrets.LaserTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 
-class Frost: LaserTurret("frost") {
+class Frost : LaserTurret("frost") {
   init {
 
     bundle {
       desc(zh_CN, "霜降", "从激光冷却发展而来的巨型冷冻光束炮,用巨大的冰冻光束给敌人沉痛而寒冷的重击")
     }
     requirements(
-      Category.turret, ItemStack.with(
-        IItems.强化合金, 160, IItems.铝锭, 110, Items.phaseFabric, 100, IItems.矩阵合金, 120, IItems.充能FEX水晶, 100, IItems.铱锭, 100
-      )
+      Category.turret, IItems.强化合金, 160, IItems.铝锭, 110, IItems.絮凝剂, 100,
+
+      IItems.矩阵合金, 120, IItems.充能FEX水晶, 100, IItems.铱锭, 100
     )
     size = 5
     scaledHealth = 420f

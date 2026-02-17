@@ -8,6 +8,7 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.entities.part.HaloPart
@@ -40,9 +41,10 @@ class Dew: ProjectileTurret("dew") {
       desc(zh_CN, "白露", "连续高速发射一连串穿甲弹,向敌人倾泻如同暴雨般的火力")
     }
     requirements(
-      Category.turret, ItemStack.with(
-        IItems.强化合金, 150, IItems.铝锭, 110, IItems.气凝胶, 120, IItems.矩阵合金, 160, Items.thorium, 100, Items.silicon, 85, IItems.铀238, 85
-      )
+      Category.turret,
+        IItems.强化合金, 150, IItems.铝锭, 110, IItems.气凝胶, 120,
+
+      IItems.矩阵合金, 160, IItems.钍锭, 100, IItems.电子元件, 85, IItems.铀238, 85
     )
     size = 5
     scaledHealth = 360f

@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.flying.rain
 
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
@@ -14,7 +14,7 @@ import mindustry.gen.Sounds
 
 class Storm : IceUnitType("unit_storm") {
   init {
-    BaseBundle.bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "暴雨", "轻型驱逐舰,配备了双联球状闪电发生器,杀伤力更强")
     }
     lowAltitude = true

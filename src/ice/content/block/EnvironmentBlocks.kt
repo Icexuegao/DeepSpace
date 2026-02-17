@@ -5,6 +5,7 @@ import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.math.geom.Geometry
+import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.graphics.IceColor
@@ -132,11 +133,13 @@ object EnvironmentBlocks : Load {
       bundle {
         desc(zh_CN, "金珀沙")
       }
+      itemDrop= IItems.金珀沙
     }
     val 金珀沙水 = ShallowLiquid("goldPearlGritWater", 金珀沙).apply {
       bundle {
         desc(zh_CN, "金珀沙水")
       }
+      itemDrop= IItems.金珀沙
     }
     val 金珀沙墙 = StaticWall("goldPearlGritWall").apply {
       bundle {
