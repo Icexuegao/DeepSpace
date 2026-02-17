@@ -33,7 +33,7 @@ open class Ice : @RecipeEntryPoint(Recipes::class) Mod() {
 
   init {
     IAttribute.load()
-    
+    UncCore.setup()
     IFiles.setup()
     SettingValue.setup()
     IceRegister.setup()
