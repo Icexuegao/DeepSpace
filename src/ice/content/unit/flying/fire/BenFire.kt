@@ -12,8 +12,12 @@ import mindustry.entities.effect.WrapEffect
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 
+
 class BenFire : IceUnitType("benFire") {
   init {
+    bundle {
+      desc(zh_CN, "奔火", "中型空中突击单位.投掷高爆航弹攻击敌人,并加装护盾辅助发生器以维持友军护盾持续作战.开火时减少所受伤害")
+    }
     circleTarget = true
     faceTarget = false
     targetAir = false
@@ -30,9 +34,6 @@ class BenFire : IceUnitType("benFire") {
     engineOffset = 7.5f
     trailLength = 4
     engineLayer = 110f
-    BaseBundle.Companion.bundle {
-      desc(zh_CN, "奔火", "中型轰炸机,以趋火为基础提升航弹装药量并加装护盾发生器以持续作战")
-    }
     immunities.add(StatusEffects.wet)
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 0.25f

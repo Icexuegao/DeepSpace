@@ -22,8 +22,8 @@ import mindustry.type.ammo.ItemAmmoType
 
 class DeathOath : IceUnitType("unit_deathOath", MechUnit::class.java) {
   init {
-    BaseBundle.Companion.bundle {
-      desc(zh_CN, "死誓", "发射穿透能量弹攻击远距离敌人,对近距离敌人则发射高热激光")
+    BaseBundle.bundle {
+      desc(zh_CN, "死誓", "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,缓慢恢复生命值,开火时减少所受伤害")
     }
     health = 29000f
     armor = 25f

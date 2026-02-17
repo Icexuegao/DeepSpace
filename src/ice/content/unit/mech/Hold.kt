@@ -12,8 +12,8 @@ import mindustry.gen.Sounds
 
 class Hold : IceUnitType("unit_hold", MechUnit::class.java) {
   init {
-    BaseBundle.Companion.bundle {
-      desc(zh_CN, "固守", "连续发射穿透性激光束以攻击敌人")
+    BaseBundle.bundle {
+      desc(zh_CN, "固守", "中型地面突击单位.连续发射穿透性激光束攻击敌人,并以自身为中心投射一片立场墙.会缓慢恢复生命值,开火时减少所受伤害")
     }
     health = 1270f
     hitSize = 14f

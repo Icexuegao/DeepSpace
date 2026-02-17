@@ -17,6 +17,9 @@ import mindustry.gen.Sounds
 
 class ZhuFire : IceUnitType("zhuFire") {
   init {
+    bundle {
+      desc(zh_CN, "逐火", "中型空中突击单位.交替发射机炮与离子激光攻击敌人,会以自身为中心投射一片立场墙.初级气动外壳足以应对一部分异常状态,开火时减少所受伤害", "在战争烈度逐渐升级当下,[逐火]攻击机应运而生,更强的火力及装甲使其足以担任小队护航或集群突袭等多种用途")
+    }
     circleTarget = true
     lowAltitude = true
     flying = true
@@ -45,9 +48,6 @@ class ZhuFire : IceUnitType("zhuFire") {
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 0.4f
     }, ForceFieldAbility(80f, 2f, 1200f, 120f, 4, 0f))
-    bundle {
-      desc(zh_CN, "逐火", "中型攻击机,配备两门近防机炮,两门高爆机炮及两门离子激光,初级气动外壳足以应对一部分异常状态", "在战争烈度逐渐升级当下,[逐火]攻击机应运而生,更强的火力及装甲使其足以担任小队护航或集群突袭等多种用途")
-    }
     setWeapon("weapon1") {
       x = 21.25f
       y = -3f

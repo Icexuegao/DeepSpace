@@ -2,7 +2,7 @@ package ice.content.unit.mech
 
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.ArmorPlateAbility
 import mindustry.content.Fx
@@ -16,8 +16,8 @@ import mindustry.gen.Sounds
 class StrongShield : IceUnitType("unit_strongShield", MechUnit::class.java) {
 
   init {
-    BaseBundle.Companion.bundle {
-      desc(zh_CN, "坚盾", "发射标准子弹攻击敌人")
+    bundle {
+      desc(zh_CN, "坚盾", "轻型地面突击单位.发射标准子弹攻击敌人,会超频在附近的友军.会缓慢恢复生命值,并在开火时减少所受伤害")
     }
     health = 240f
     armor = 2f

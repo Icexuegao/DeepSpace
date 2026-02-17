@@ -1,7 +1,7 @@
 package ice.content.unit.flying.fire
 
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -11,6 +11,9 @@ import mindustry.gen.Sounds
 
 class PutotFire : IceUnitType("putotFire") {
   init {
+    bundle {
+      desc(zh_CN, "扑火", "轻型空中突击单位.以极高的机动性持续骚扰敌军,开火时减少所受伤害")
+    }
     circleTarget = true
     faceTarget = false
     targetAir = false
@@ -51,9 +54,6 @@ class PutotFire : IceUnitType("putotFire") {
         hitEffect = Fx.flakExplosion
         despawnEffect = Fx.flakExplosion
       }
-    }
-    BaseBundle.Companion.bundle {
-      desc(zh_CN, "扑火", "微型轰炸机,以极高的机动性持续骚扰敌军")
     }
   }
 }

@@ -29,7 +29,7 @@ class FlyingMidges : IceUnitType("unit_flyingMidges", TimedKillUnit::class.java)
     itemCapacity = 0
 
     BaseBundle.bundle {
-      desc(zh_CN, "飞蠓", "小巧致命的游击单位,集群作战时尤为强大")
+      desc(zh_CN, "飞蠓", "轻型空中突击单位.体型轻盈,行动敏捷,以其机动性在进攻中占据主导地位,集群作战中有显著优势")
     }
     targetFlags = arrayOf(
       BlockFlag.reactor,

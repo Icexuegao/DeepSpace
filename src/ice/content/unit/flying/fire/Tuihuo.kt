@@ -1,7 +1,7 @@
 package ice.content.unit.flying.fire
 
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -11,8 +11,8 @@ import mindustry.gen.Sounds
 
 class Tuihuo : IceUnitType("tuihuo") {
   init {
-    BaseBundle.Companion.bundle {
-      desc(zh_CN, "趋火", "轻型轰炸机,配备五联装投弹器以快速杀伤敌军")
+    bundle {
+      desc(zh_CN, "趋火", "轻型空中突击单位.快速投掷航弹杀伤敌军,开火时减少所受伤害")
     }
     immunities.add(StatusEffects.wet)
     abilities.add(ArmorPlateAbility().apply {
