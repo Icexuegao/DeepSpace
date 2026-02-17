@@ -2,7 +2,7 @@ package ice.content.unit.flying.fire
 
 import arc.graphics.Color
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -11,7 +11,6 @@ import mindustry.entities.abilities.ShieldRegenFieldAbility
 import mindustry.entities.effect.WrapEffect
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
-
 
 class BenFire : IceUnitType("benFire") {
   init {

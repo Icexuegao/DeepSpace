@@ -14,7 +14,7 @@ import mindustry.gen.Sounds
 
 class Storm : IceUnitType("unit_storm") {
   init {
-    BaseBundle.Companion.bundle {
+    BaseBundle.bundle {
       desc(zh_CN, "暴雨", "轻型驱逐舰,配备了双联球状闪电发生器,杀伤力更强")
     }
     lowAltitude = true

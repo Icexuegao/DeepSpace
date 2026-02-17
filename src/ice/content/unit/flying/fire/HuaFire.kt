@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.flying.fire
 
 import arc.graphics.Color
 import arc.math.Interp
@@ -18,7 +18,6 @@ import mindustry.entities.effect.WrapEffect
 import mindustry.entities.pattern.ShootBarrel
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
-import mindustry.type.UnitType
 import singularity.world.blocks.turrets.EmpBulletType
 
 class HuaFire : IceUnitType("huaFire") {

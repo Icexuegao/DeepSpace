@@ -35,7 +35,7 @@ open class Remains(val name: String) {
   }
 
   fun setDescription(desc: String) {
-    customTable.add(desc).wrap().pad(5f).color(color).row()
+    customTable.add(desc).grow().wrap().pad(5f).color(color).row()
   }
 
   fun setEnabled(enabled: Boolean) {
@@ -75,7 +75,7 @@ open class Remains(val name: String) {
       }
     }.disabled {
       disabled()
-    }.size(60f).pad(10f).get().hovered {
+    }.size(60f).pad(10f).itooltip(name).get().hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this
         RemainsDialog.flunRemains()

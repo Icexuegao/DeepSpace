@@ -85,9 +85,9 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
 
     tiTleTable.addLine().pad(3f)
     tiTleTable.table {
-      /*  tiTleTable.add(tempRemain.customTable).row()*/
       it.add("效果: ${tempRemain.effect}").pad(5f).fontScale(1.3f).wrap().color(tempRemain.color).grow()
     }.marginLeft(9f).grow().row()
+    tiTleTable.add(tempRemain.customTable).grow().row()
   }
 
   private fun flunRemainsSeq() {
