@@ -12,6 +12,7 @@ import mindustry.entities.effect.WrapEffect
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 
+
 class BenFire : IceUnitType("benFire") {
   init {
     bundle {
