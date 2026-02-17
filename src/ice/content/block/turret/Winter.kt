@@ -16,6 +16,7 @@ import ice.content.block.turret.TurretBullets.freezingField
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -44,9 +45,11 @@ class Winter : SglTurret("winter"){
       desc(zh_CN, "冬至", "它用力场,将周围的物质分子的移动牢牢的限制,在极寒领域展开的瞬间,有如时间也被冻结一般,一切都停了下来,并破碎成无数微小的碎片")
     }
     requirements(
-      Category.turret, ItemStack.with(
-        IItems.强化合金, 210, IItems.简并态中子聚合物, 80, Items.phaseFabric, 180, IItems.铱锭, 100, IItems.气凝胶, 200, IItems.铝锭, 220, IItems.矩阵合金, 160, IItems.充能FEX水晶, 180
-      )
+      Category.turret,
+        IItems.强化合金, 210, IItems.简并态中子聚合物, 80,  IItems.絮凝剂, 180,
+
+      IItems.铱锭, 100, IItems.气凝胶, 200, IItems.铝锭, 220, IItems.矩阵合金, 160, IItems.充能FEX水晶, 180
+
     )
     size = 6
     scaledHealth = 410f

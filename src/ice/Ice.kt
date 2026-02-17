@@ -18,6 +18,7 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.Noise2dBlock
 import ice.world.meta.IAttribute
 import mindustry.Vars
+import mindustry.ctype.UnlockableContent
 import mindustry.mod.Mod
 import singularity.Recipes
 import singularity.Singularity
@@ -51,6 +52,10 @@ open class Ice : @RecipeEntryPoint(Recipes::class) Mod() {
     Schematics.init()
     Vars.asyncCore.processes.add(ParcelProcess)
     Documents.init()
+
+    Vars.content.each {
+      if (it.minfo.mod== DeepSpace.mod && it is UnlockableContent)it.unlock()
+    }
   }
 
   override fun loadContent() {

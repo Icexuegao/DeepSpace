@@ -2208,9 +2208,8 @@ object CrafterBlocks : Load {
       desc(zh_CN, "矩阵切割器", "以纳米尺度的高能激光将金属切割为纳米颗粒,并在上方雕刻微电路,以生产矩阵合金")
     }
     requirements(
-      Category.crafting, ItemStack.with(
-        IItems.强化合金, 80, IItems.充能FEX水晶, 75, IItems.石英玻璃, 80, IItems.絮凝剂, 90, Items.surgeAlloy, 120
-      )
+      Category.crafting,
+        IItems.强化合金, 80, IItems.充能FEX水晶, 75, IItems.石英玻璃, 80, IItems.絮凝剂, 90, IItems.暮光合金, 120
     )
     size = 4
 
@@ -2361,9 +2360,8 @@ object CrafterBlocks : Load {
       desc(zh_CN, "聚合引力发生器", "在真空仓内利用大量的能量制造一个引力漏斗,将物质紧密的挤压在一起至中子简并态,用负引力场外壳包裹为一份简并态中子聚合物")
     }
     requirements(
-      Category.crafting, ItemStack.with(
-        IItems.强化合金, 180, IItems.矩阵合金, 900, IItems.充能FEX水晶, 100, IItems.FEX水晶, 120, IItems.铱锭, 80, IItems.气凝胶, 100, Items.surgeAlloy, 80
-      )
+      Category.crafting,
+        IItems.强化合金, 180, IItems.矩阵合金, 900, IItems.充能FEX水晶, 100, IItems.FEX水晶, 120, IItems.铱锭, 80, IItems.气凝胶, 100, IItems.暮光合金, 80
     )
     size = 5
     itemCapacity = 20

@@ -13,6 +13,7 @@ import ice.content.block.turret.TurretBullets.crushedIce
 import ice.content.block.turret.TurretBullets.rand
 import ice.entities.bullet.base.BulletType
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids
@@ -38,9 +39,9 @@ class Fubuki: LaserTurret("fubuki") {
       desc(zh_CN, "吹雪", "向前喷发凛冽的冰霜风暴,凛冽的风雪足以将敌人冻结成冰雕")
     }
     requirements(
-      Category.turret, ItemStack.with(
-        IItems.强化合金, 100, IItems.铝锭, 140, IItems.充能FEX水晶, 60, IItems.气凝胶, 80, IItems.铱锭, 30, Items.phaseFabric, 60
-      )
+      Category.turret,
+        IItems.强化合金, 100, IItems.铝锭, 140, IItems.充能FEX水晶, 60, IItems.气凝胶, 80,
+        IItems.铱锭, 30,  IItems.絮凝剂, 60
     )
     size = 4
     scaledHealth = 400f

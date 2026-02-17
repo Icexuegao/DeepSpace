@@ -319,7 +319,7 @@ object DefenseBlocks : Load {
         "生命游戏这一概念原本是由数学家康威设计的一个计算机程序,早期,人们仅仅研究与探索了生命游戏在计算机程序程序级别的规律,其与自然科学的重叠几乎完全被忽视了,直到二十一世纪60年代,科学家发现在真空仓内的粒子涨落规律与生命游戏在形式上高度重合,生命游戏规则成为了一项科学规律\n在这一规则下进行受控的反物质湮灭可以得到最接近理论数据的能量利用效率,因此这一规则广泛被应用于能源与武装,不过,像混沌矩阵这样彻底的巨型网格本身还是一个过于大胆的尝试,所幸在巨大的学术压力下中止数次数次后该项目还是收获了非常突出的成果"
       )
     }
-    requirements(Category.defense, ItemStack.with())
+    requirements(Category.defense, IItems.钴钢,300, IItems.电子元件,100, IItems.简并态中子聚合物,100, IItems.絮凝剂,80, IItems.暮光合金,60, IItems.充能FEX水晶,60)
     size = 8
     health = 5200
     hasItems = true
