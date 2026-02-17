@@ -1,4 +1,4 @@
-package ice.content.unit
+
 
 import arc.graphics.Color
 import ice.content.IStatus
