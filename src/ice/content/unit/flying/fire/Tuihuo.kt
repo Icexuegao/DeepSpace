@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.flying.fire
 
 import ice.entities.bullet.BombBulletType
 import ice.ui.bundle.BaseBundle.Companion.bundle
