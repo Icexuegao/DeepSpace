@@ -9,6 +9,7 @@ import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.IFiles
+import ice.library.scene.ui.itooltip
 import ice.ui.UI
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
@@ -34,7 +35,7 @@ open class Remains(val name: String) {
   }
 
   fun setDescription(desc: String) {
-    customTable.add(desc).pad(5f).color(color).row()
+    customTable.add(desc).wrap().pad(5f).color(color).row()
   }
 
   fun setEnabled(enabled: Boolean) {
@@ -57,7 +58,7 @@ open class Remains(val name: String) {
       RemainsDialog.flunRemains()
     }.disabled {
       disabled()
-    }.size(60f).pad(10f).get().hovered {
+    }.size(60f).pad(10f).itooltip(name).get().hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this
         RemainsDialog.flunRemains()

@@ -74,7 +74,33 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
     ContentDialogBase<StatusEffect>("状态").apply {
       contents.addAll(BaseContentSeq.status)
     }
-    ContentDialogBase<UnitType>("单位").apply {
+    object : ContentDialogBase<UnitType>("单位") {
+      override fun showList(table: ITable) {
+        val types = arrayOf("ground", "air", "naval")
+        val tables = Array(types.size) { ITable().apply { setRowsize(5) } }
+
+        contents.select { content ->
+          searchSelect(content)
+        }.forEach { content ->
+          fun dfw(table: Table) {
+            table.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
+              currentContent = tmpHash.indexOf(content)
+              flunInfo()
+            }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
+          }
+          if (content.flying) dfw(tables[1]) else if (content.naval) dfw(tables[2]) else dfw(tables[0])
+        }
+
+        types.forEach { name ->
+          val child = tables[types.indexOf(name)]
+          if (child.children.size == 0) return@forEach
+          table.iTableG { it1 ->
+            it1.addLine(name).padBottom(5f)
+            it1.add(child).grow().row()
+          }.row()
+        }
+      }
+    }.apply {
       contents.addAll(BaseContentSeq.units)
     }
   }
@@ -230,7 +256,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
     }
 
     open fun showProperties(table: Table) {
-      val currentContent = tmpHash.filterIndexed { index, _ -> index == currentContent }.first()
+      val currentContent = tmpHash.filterIndexed { index, c-> searchSelect(c) }.first()
       table.add(currentContent.name).color(Color.valueOf("b7e1fb")).padBottom(3f).row()
       currentContent.checkStats()
       val stats = currentContent.stats

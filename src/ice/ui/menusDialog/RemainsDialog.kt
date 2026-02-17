@@ -8,7 +8,8 @@ import arc.util.Scaling
 import ice.content.Remainss
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.scene.ui.iPaneG
+import ice.library.IFiles
+import ice.library.scene.ui.addLine
 import ice.library.scene.ui.iTable
 import ice.library.scene.ui.iTableG
 import ice.library.scene.ui.icePane
@@ -23,37 +24,45 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
   lateinit var tiTleTable: Table
   lateinit var enableTable: Table
   lateinit var remainsTable: Table
-  var slotPos: Int = 4
+  var slotPos: Int = 8
 
   override fun build(cont: Table) {
-    cont.iPaneG { cont1 ->
-      cont1.table {
-        it.add(Image(IStyles.remains, Scaling.fit))
-      }.row()
-      cont1.iTable {
-        tiTleTable = it
-        flunTiTleTable()
-      }.minHeight(360f).row()
+    cont.table {
+      it.add(Image(IStyles.remains, Scaling.fit))
+    }.row()
+    cont.iTableG { cont1 ->
 
       cont1.iTable { ta ->
-        ta.add(Label { "正在生效:[${enableSeq.size} / $slotPos]" }).color(IceColor.b4).pad(10f).row()
-        ta.iTableG {
-          it.setRowsize(5)
-          enableTable = it
-          flunEnableSeq()
+        ta.table { gh ->
+          gh.table(IFiles.createNinePatch("adwdddqddw")) {
+            it.add(Label {
+              "正在生效: ${enableSeq.size} / $slotPos"
+            }).color(IceColor.b4)
+          }.margin(5f).marginLeft(20f).marginRight(20f).pad(10f).row()
+          gh.iTable {
+            it.setRowsize(4)
+            enableTable = it
+          }
+        }.row()
+        ta.iTable { gh ->
+          gh.image(IStyles.whiteui).color(IceColor.b1).height(3f).growX().row()
+          gh.iTable {
+            it.top()
+            it.add("已拥有:").color(IceColor.b4).pad(10f).row()
+            it.icePane { ip ->
+              ip.setRowsize(7)
+              remainsTable = ip
+            }
+          }
         }
-      }.pad(30f).row()
-      cont1.image(IStyles.whiteui).color(IceColor.b1).height(3f).growX().row()
-      cont1.iTableG {
-        it.top()
-        it.add("已拥有:").color(IceColor.b4).pad(10f).row()
-        it.icePane { ip ->
-          ip.setRowsize(10)
-          remainsTable = ip
-          flunRemains()
-        }
-      }
-    }
+      }.expand().top()
+
+      cont1.iTable { tiTle ->
+        tiTleTable = tiTle
+      }.minWidth(400f).expandX().top()
+
+    }.padTop(30f)
+    flunRemains()
   }
 
   fun flunRemains() {
@@ -64,10 +73,21 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
 
   fun flunTiTleTable() {
     tiTleTable.clearChildren()
-    tiTleTable.image(tempRemain.icon).size(90f).pad(10f).row()
-    tiTleTable.add(tempRemain.name).pad(5f).color(tempRemain.color).row()
-    tiTleTable.add(tempRemain.customTable).row()
-    tiTleTable.add("效果: ${tempRemain.effect}").color(tempRemain.color)
+    tiTleTable.image(tempRemain.icon).size(120f).pad(30f).padTop(0f).row()
+
+    tiTleTable.table {
+
+      it.table(IFiles.createNinePatch("Uwdwdqddw")) { it1 ->
+        it1.add("遗物").color(IceColor.b4).expandX().left().padLeft(4f)
+      }.width(100f).height(30f).color(IceColor.b6).expandX().left().row()
+      it.add(tempRemain.name).fontScale(1.5f).pad(5f).padLeft(0f).color(tempRemain.color).expandX().left().row()
+    }.grow().row()
+
+    tiTleTable.addLine().pad(3f)
+    tiTleTable.table {
+      /*  tiTleTable.add(tempRemain.customTable).row()*/
+      it.add("效果: ${tempRemain.effect}").pad(5f).fontScale(1.3f).wrap().color(tempRemain.color).grow()
+    }.marginLeft(9f).grow().row()
   }
 
   private fun flunRemainsSeq() {
