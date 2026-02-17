@@ -21,7 +21,7 @@ import mindustry.type.ammo.ItemAmmoType
 class IronGuard : IceUnitType("unit_ironGuard", MechUnit::class.java) {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "铁卫", "快速交替发射炮弹攻击敌人")
+      desc(zh_CN, "铁卫", "中型地面突击单位.快速交替发射炮弹攻击敌人,缓慢恢复生命值,开火时减少所受伤害")
     }
     health = 11000f
     armor = 11f

@@ -12,7 +12,7 @@ import mindustry.gen.Sounds
 class Tuihuo : IceUnitType("tuihuo") {
   init {
     bundle {
-      desc(zh_CN, "趋火", "轻型轰炸机,配备五联装投弹器以快速杀伤敌军")
+      desc(zh_CN, "趋火", "轻型空中突击单位.快速投掷航弹杀伤敌军,开火时减少所受伤害")
     }
     immunities.add(StatusEffects.wet)
     abilities.add(ArmorPlateAbility().apply {

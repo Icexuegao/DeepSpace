@@ -17,7 +17,7 @@ class StrongShield : IceUnitType("unit_strongShield", MechUnit::class.java) {
 
   init {
     bundle {
-      desc(zh_CN, "坚盾", "发射标准子弹攻击敌人")
+      desc(zh_CN, "坚盾", "轻型地面突击单位.发射标准子弹攻击敌人,会超频在附近的友军.会缓慢恢复生命值,并在开火时减少所受伤害")
     }
     health = 240f
     armor = 2f

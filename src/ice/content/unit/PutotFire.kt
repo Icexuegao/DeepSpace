@@ -11,6 +11,9 @@ import mindustry.gen.Sounds
 
 class PutotFire : IceUnitType("putotFire") {
   init {
+    bundle {
+      desc(zh_CN, "扑火", "轻型空中突击单位.以极高的机动性持续骚扰敌军,开火时减少所受伤害")
+    }
     circleTarget = true
     faceTarget = false
     targetAir = false
@@ -51,9 +54,6 @@ class PutotFire : IceUnitType("putotFire") {
         hitEffect = Fx.flakExplosion
         despawnEffect = Fx.flakExplosion
       }
-    }
-    bundle {
-      desc(zh_CN, "扑火", "微型轰炸机,以极高的机动性持续骚扰敌军")
     }
   }
 }

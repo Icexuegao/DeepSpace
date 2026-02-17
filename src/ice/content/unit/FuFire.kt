@@ -18,7 +18,7 @@ import mindustry.gen.Sounds
 class FuFire : IceUnitType("fuFire") {
   init {
     bundle {
-      desc(zh_CN, "赴火", "大型多功能轰炸机,配备八联装投弹系统及两门高爆机炮,高级气动外壳保证了其飞行速度在大多数情况下不会降低")
+      desc(zh_CN, "赴火", "重型空中突击单位.投掷高爆航弹并辅以机炮攻击敌人,高级气动外壳保证飞行速度在大多数情况下不会降低,开火时减少所受伤害")
     }
     circleTarget = true
     flying = true

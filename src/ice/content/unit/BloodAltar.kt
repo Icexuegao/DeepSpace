@@ -32,7 +32,7 @@ class BloodAltar : IceUnitType("unit_bloodAltar", TimedKillUnit::class.java) {
     playerControllable = false
     itemCapacity = 0
     BaseBundle.bundle {
-      desc(zh_CN, "血俎", "由疟蚊进化而成,拥有坚韧的几丁质甲壳和吸血利齿")
+      desc(zh_CN, "血俎", "中型空中突击单位.由疟蚊改进而成,体表覆盖坚韧的几丁质甲壳.阵亡后会分裂出飞蠓并洒下一滩血肉赘生物")
     }
     health = 3240f
     armor = 3f

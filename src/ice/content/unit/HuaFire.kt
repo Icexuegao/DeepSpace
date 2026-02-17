@@ -24,7 +24,7 @@ import singularity.world.blocks.turrets.EmpBulletType
 class HuaFire : IceUnitType("huaFire") {
   init {
     bundle {
-      desc(zh_CN, "化火", "大型轰炸机,配备八联装投弹系统及两门高爆机炮,特种装甲外壳使其足以应对绝大部分负面状况")
+      desc(zh_CN, "化火", "重型空中突击单位.投掷高爆航弹并辅以机炮攻击敌人,特种装甲外壳使其足以应对绝大部分负面状况.开火时减少所受伤害")
     }
 
     circleTarget = true
