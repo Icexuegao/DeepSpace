@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.mech
 
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
@@ -12,7 +12,7 @@ import mindustry.gen.Sounds
 
 class Hold : IceUnitType("unit_hold", MechUnit::class.java) {
   init {
-    BaseBundle.bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "固守", "连续发射穿透性激光束以攻击敌人")
     }
     health = 1270f

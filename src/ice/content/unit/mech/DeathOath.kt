@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.mech
 
 import arc.graphics.Blending
 import arc.graphics.Color
@@ -22,7 +22,7 @@ import mindustry.type.ammo.ItemAmmoType
 
 class DeathOath : IceUnitType("unit_deathOath", MechUnit::class.java) {
   init {
-    BaseBundle.bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "死誓", "发射穿透能量弹攻击远距离敌人,对近距离敌人则发射高热激光")
     }
     health = 29000f

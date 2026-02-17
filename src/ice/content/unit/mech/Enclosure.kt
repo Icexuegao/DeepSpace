@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.mech
 
 import arc.graphics.Color
 import ice.ui.bundle.BaseBundle
@@ -11,9 +11,9 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.MechUnit
 import mindustry.gen.Sounds
 
-class Enclosure:IceUnitType("unit_enclosure", MechUnit::class.java) {
+class Enclosure: IceUnitType("unit_enclosure", MechUnit::class.java) {
   init {
-    BaseBundle.bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN,"围护","快速发射散射激光打击敌人,对近距离目标尤为有效")
     }
     health = 640f

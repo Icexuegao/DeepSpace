@@ -1,7 +1,7 @@
-package ice.content.unit
+package ice.content.unit.flying.fire
 
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.BaseBundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -52,7 +52,7 @@ class PutotFire : IceUnitType("putotFire") {
         despawnEffect = Fx.flakExplosion
       }
     }
-    bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "扑火", "微型轰炸机,以极高的机动性持续骚扰敌军")
     }
   }

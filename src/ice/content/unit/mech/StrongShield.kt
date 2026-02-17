@@ -1,8 +1,8 @@
-package ice.content.unit
+package ice.content.unit.mech
 
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.BaseBundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.ArmorPlateAbility
 import mindustry.content.Fx
@@ -16,7 +16,7 @@ import mindustry.gen.Sounds
 class StrongShield : IceUnitType("unit_strongShield", MechUnit::class.java) {
 
   init {
-    bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "坚盾", "发射标准子弹攻击敌人")
     }
     health = 240f

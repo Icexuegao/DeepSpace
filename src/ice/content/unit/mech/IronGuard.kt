@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.mech
 
 import arc.graphics.Color
 import arc.math.Interp
@@ -20,7 +20,7 @@ import mindustry.type.ammo.ItemAmmoType
 
 class IronGuard : IceUnitType("unit_ironGuard", MechUnit::class.java) {
   init {
-    BaseBundle.bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "铁卫", "快速交替发射炮弹攻击敌人")
     }
     health = 11000f

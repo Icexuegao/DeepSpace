@@ -1,13 +1,14 @@
-package ice.content.unit
+package ice.content.unit.flying.fire
 
 import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IStatus
-import ice.content.IUnitTypes.星光
+import ice.content.IUnitTypes
 import ice.entities.bullet.BombBulletType
+import ice.entities.bullet.EmpBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.BaseBundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -18,12 +19,10 @@ import mindustry.entities.effect.WrapEffect
 import mindustry.entities.pattern.ShootBarrel
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
-import mindustry.type.UnitType
-import singularity.world.blocks.turrets.EmpBulletType
 
 class HuaFire : IceUnitType("huaFire") {
   init {
-    bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "化火", "大型轰炸机,配备八联装投弹系统及两门高爆机炮,特种装甲外壳使其足以应对绝大部分负面状况")
     }
 
@@ -75,7 +74,7 @@ class HuaFire : IceUnitType("huaFire") {
       shootCone = 360f
       shootSound = Sounds.shootMissile
       bullet = BulletType().apply {
-        spawnUnit = 星光
+        spawnUnit = IUnitTypes.星光
         speed = 0f
         shootEffect = ParticleEffect().apply {
           lifetime = 35f
@@ -104,7 +103,7 @@ class HuaFire : IceUnitType("huaFire") {
       ignoreRotation = true
       minShootVelocity = 0.04f
       shootSound = Sounds.shootBeamPlasma
-      bullet = ice.entities.bullet.EmpBulletType().apply {
+      bullet = EmpBulletType().apply {
         sprite = "large-bomb"
         damage = 137f
         lifetime = 90f
@@ -163,7 +162,7 @@ class HuaFire : IceUnitType("huaFire") {
         hitSound = Sounds.shootBeamPlasma
         hitEffect = Fx.massiveExplosion
         fragBullets = 1
-        fragBullet = EmpBulletType().apply {
+        fragBullet = singularity.world.blocks.turrets.EmpBulletType().apply {
           sprite = "stardart"
           lifetime = 480f
           damage = 0f
@@ -199,7 +198,7 @@ class HuaFire : IceUnitType("huaFire") {
             colorTo = Color.valueOf("FF5845")
           }
           bulletInterval = 48f
-          intervalBullet = EmpBulletType().apply {
+          intervalBullet = singularity.world.blocks.turrets.EmpBulletType().apply {
             damage = 0f
             hittable = false
             collides = false

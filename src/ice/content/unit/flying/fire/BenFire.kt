@@ -1,8 +1,8 @@
-package ice.content.unit
+package ice.content.unit.flying.fire
 
 import arc.graphics.Color
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.BaseBundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -30,7 +30,7 @@ class BenFire : IceUnitType("benFire") {
     engineOffset = 7.5f
     trailLength = 4
     engineLayer = 110f
-    bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "奔火", "中型轰炸机,以趋火为基础提升航弹装药量并加装护盾发生器以持续作战")
     }
     immunities.add(StatusEffects.wet)
