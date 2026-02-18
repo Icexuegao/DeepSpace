@@ -25,7 +25,7 @@ import mindustry.gen.Sounds
 class ThunderTribulation : IceUnitType("unit_thunderTribulation") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "雷劫", "大型的巡航舰,移动缓慢,配备等离子速射炮,可以从其核心发射毁灭性的电磁炮弹,同时产生闪电场")
+      desc(zh_CN, "雷劫", "重型空中突击单位.发射高能激光和双联球状闪电并辅等离子速射炮攻击敌人,正面投射弧形护盾抵御攻击.在场时抑制敌方建筑修复能力,同时以闪电场电击附近敌军并治疗友军")
     }
 
 
