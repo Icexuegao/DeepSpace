@@ -16,7 +16,7 @@ import mindustry.gen.Sounds
 class Thunder : IceUnitType("unit_thunder") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "惊雷", "重型巡航舰,发射缓慢移动的球状闪电,同时使用闪电场电击附近敌人")
+      desc(zh_CN, "惊雷", "重型空中突击单位.发射缓慢移动的球状闪电攻击敌人,同时以闪电场电击附近敌军并治疗友军")
     }
     lowAltitude = true
     flying = true

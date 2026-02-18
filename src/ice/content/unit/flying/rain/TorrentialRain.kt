@@ -10,7 +10,7 @@ import mindustry.gen.Sounds
 class TorrentialRain : IceUnitType("unit_torrentialRain") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "骤雨", "轻型护卫舰,配备的激光聚焦器可以快速杀伤敌军")
+      desc(zh_CN, "骤雨", "轻型空中突击单位.发射聚焦激光攻击敌人")
     }
     lowAltitude = true
     flying = true

@@ -8,8 +8,8 @@ import mindustry.gen.Sounds
 
 class Raindrop : IceUnitType("unit_raindrop") {
   init {
-    BaseBundle.Companion.bundle {
-      desc(zh_CN, "雨滴", "小型突击舰,配备的闪电发生器可以快速杀伤敌军", "从小小的雨滴开始")
+    BaseBundle.bundle {
+      desc(zh_CN, "雨滴", "轻型空中突击单位.发射速射电弧攻击敌人", "从小小的雨滴开始")
     }
     circleTarget = true
     lowAltitude = true
