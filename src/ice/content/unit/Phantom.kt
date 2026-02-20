@@ -12,7 +12,7 @@ import mindustry.gen.Sounds
 class Phantom : IceUnitType("unit_phantom") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "幻影", "一种小型武装矿机,拥有不俗的挖掘速度及物品容量")
+      desc(zh_CN, "幻影", "轻型空中工程单位.具备不俗的挖掘速度与物品容量,可在采集途中应对零星威胁")
     }
     flying = true
     commands.add(UnitCommand.mineCommand)
