@@ -19,7 +19,7 @@ import mindustry.gen.Sounds
 class ArcLight : IceUnitType("unit_arcLight") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "弧光", "自动修复损坏的建筑和附近的友方单位\n发射激光与湍能弹攻击附近的敌人")
+      desc(zh_CN, "弧光", "中型空中支援单位.发射激光与湍能弹攻击附近敌人,会自动修复受损建筑,并对附近的友军提供迅疗效果")
     }
 
     defaultCommand = UnitCommand.repairCommand

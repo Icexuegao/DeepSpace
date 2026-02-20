@@ -19,7 +19,7 @@ class Harvester : IceUnitType("harvester") {
     defaultCommand = UnitCommand.mineCommand
     aiController = Prov(::MinerAI)
     bundle {
-      desc(zh_CN, "收割", "全新设计的采矿单位,搭载了高效的激光共振钻头")
+      desc(zh_CN, "收割", "轻型空中工程单位.搭载高效激光共振钻头,专精于资源采集作业")
     }
   }
 }

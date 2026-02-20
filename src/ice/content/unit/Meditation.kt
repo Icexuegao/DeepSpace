@@ -14,7 +14,7 @@ import mindustry.gen.UnitWaterMove
 class Meditation : IceUnitType("unit_meditation", UnitWaterMove::class.java) {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "苦修", "发射炮弹与一连串导弹攻击附近敌人,同时配有护盾发生器")
+      desc(zh_CN, "苦修", "中型海栖突击单位.发射炮弹与导弹攻击敌人,并加装护盾辅助发生器以维持友军护盾持续作战")
     }
     health = 1365f
     hitSize = 25f

@@ -12,7 +12,7 @@ class Witness : IceUnitType("unit_witness", UnitWaterMove::class.java) {
 
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "见证", "发射小口径机炮和中程制导鱼雷攻击敌人\n机动性能优秀,能够高效清理落单的敌方舰只")
+      desc(zh_CN, "见证", "轻型海栖突击单位.发射机炮与小型鱼雷攻击敌人,机动性能优异,擅长清理落单的敌方舰只")
     }
     health = 300f
     hitSize = 11f
