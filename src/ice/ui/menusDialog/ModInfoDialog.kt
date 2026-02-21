@@ -69,8 +69,8 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     ContributorTable("ZL洋葱", "813466636", Work.artist_icon_work).itooltip("你知道吗,模组作者在QQ短视频上推过意义不明的奥特曼视频")
     ContributorTable("NeilGreenFly", "1471761931", Work.program_icon_work).itooltip("我想想")
     ContributorTable("Reflcaly_反射", "2354671478", Work.artist_icon_work).itooltip("期待与你的再次见面!再见!")
-    ContributorTable("Carrot", "1456616666", Work.artist_icon_work)
-    ContributorTable("Ventivu", "3123632012", Work.program_icon_work)
+    ContributorTable("Carrot", "1456616666", Work.artist_icon_work).itooltip("哇还有奇点")
+    ContributorTable("Ventivu", "3123632012", Work.program_icon_work).itooltip("咨询一下,有获取sgl模组的授权吗")
 
 
     AssistedTable("Novarc", "2124363741").itooltip("等终末地出了我再继续写mod")

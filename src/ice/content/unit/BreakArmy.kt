@@ -40,8 +40,7 @@ class BreakArmy : IceUnitType("breakArmy") {
       rotateSpeed = 3f
       shootSound = Sounds.explosionDull
       shootCone = 2f
-      bullet = BombBulletType(50f, 8 * 5f).apply {
-        sprite = "missile-large"
+      bullet = BombBulletType(50f, 8 * 5f,"missile-large").apply {
         makeFire = true
         collidesTiles = true
         collides = true

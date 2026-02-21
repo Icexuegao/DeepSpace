@@ -4,6 +4,7 @@ import arc.func.Prov
 import ice.graphics.IceColor
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.unit.IceUnitType
+import mindustry.Vars
 import mindustry.ai.UnitCommand
 import mindustry.ai.types.MinerAI
 
@@ -18,6 +19,7 @@ class Harvester : IceUnitType("harvester") {
     engineColor = IceColor.b4
     defaultCommand = UnitCommand.mineCommand
     aiController = Prov(::MinerAI)
+    mineItems.add(Vars.content.items())
     bundle {
       desc(zh_CN, "收割", "轻型空中工程单位.搭载高效激光共振钻头,专精于资源采集作业")
     }

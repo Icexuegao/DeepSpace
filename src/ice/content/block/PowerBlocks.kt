@@ -1,9 +1,16 @@
 package ice.content.block
 
 import arc.Core
+import arc.func.Cons
+import arc.func.Floatf
+import arc.func.Func
 import arc.graphics.Blending
 import arc.graphics.Color
+import arc.math.Angles
 import arc.math.Interp
+import arc.math.Mathf
+import arc.math.geom.Vec2
+import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
@@ -20,20 +27,37 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.power.PowerNode
 import ice.world.draw.DrawAnyLiquidTile
-import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids
+import mindustry.entities.Effect
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
+import mindustry.graphics.Pal
 import mindustry.type.Category
 import mindustry.type.LiquidStack
 import mindustry.world.Block
 import mindustry.world.blocks.power.*
 import mindustry.world.consumers.ConsumeItemFlammable
 import mindustry.world.draw.*
+import mindustry.world.draw.DrawMulti
 import mindustry.world.meta.Attribute
 import mindustry.world.meta.BlockGroup
+import singularity.world.SglFx
+import singularity.world.blocks.product.NormalCrafter
+import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
+import singularity.world.draw.DrawBottom
+import singularity.world.draw.DrawExpandPlasma
+import singularity.world.particles.SglParticleModels
+import universecore.world.particles.MultiParticleModel
+import universecore.world.particles.Particle
+import universecore.world.particles.ParticleModel
+import universecore.world.particles.models.DrawDefaultTrailParticle
+import universecore.world.particles.models.RandDeflectParticle
+import universecore.world.particles.models.ShapeParticle
+import universecore.world.particles.models.SizeVelRelatedParticle
+import universecore.world.particles.models.TargetMoveParticle
+import universecore.world.particles.models.TrailFadeParticle
 
 @Suppress("unused")
 object PowerBlocks : Load {
@@ -583,5 +607,115 @@ object PowerBlocks : Load {
     }, DrawGlowRegion("-glow"))
     ambientSound = Sounds.loopPulse
     ambientSoundVolume = 0.12f
+  }
+  val 中子能发电机 = NormalCrafter("neutron_generator").apply {
+    bundle {
+      desc(zh_CN, "中子能发电机", "利用经典的中子分解技术,使用核能量生产大量电力")
+    }
+    requirements(
+      Category.power, IItems.强化合金, 100, IItems.充能FEX水晶, 80, IItems.铀238, 75, IItems.絮凝剂, 70, IItems.气凝胶, 90
+    )
+    size = 3
+
+    energyCapacity = 1024f
+    basicPotentialEnergy = 256f
+    warmupSpeed = 0.0075f
+
+    newConsume()
+    consume!!.energy(4f)
+    newProduce()
+    produce!!.power(50f)
+
+    draw = DrawMulti(
+      DrawBottom(), DrawDefault(), object : DrawPlasma() {
+        init {
+          suffix = "_plasma_"
+          plasma1 = Pal.reactorPurple
+          plasma2 = Pal.reactorPurple2
+        }
+      }, DrawRegion("_top")
+    )
+  }
+  val 核子冲击反应堆 = NormalCrafter("nuclear_impact_reactor").apply {
+    bundle {
+      desc(zh_CN, "核子冲击反应堆", "先进的核内爆式冲击反应堆,利用力场约束使核爆炸以最高的效率推动压电转子发电")
+    }
+    requirements(
+      Category.power, IItems.强化合金, 260, IItems.气凝胶, 240, IItems.铀238, 300, IItems.钴钢, 220, IItems.单晶硅, 280, IItems.絮凝剂, 160, IItems.暮光合金, 200
+
+    )
+    size = 5
+    itemCapacity = 30
+    liquidCapacity = 35f
+
+    craftEffect = SglFx.explodeImpWaveBig
+    craftEffectColor = Pal.reactorPurple
+
+    updateEffect = SglFx.impWave
+    effectRange = 2f
+    updateEffectChance = 0.025f
+    ambientSound = Sounds.loopMachineSpin
+    ambientSoundVolume = 0.55f
+    craftedSound = Sounds.explosionPlasmaSmall
+    craftedSoundVolume = 1f
+    val model: ParticleModel = MultiParticleModel(
+      SizeVelRelatedParticle(), TargetMoveParticle().apply {
+        dest = Func { p: Particle -> p.dest }
+        deflection = Floatf { p: Particle -> p.eff }
+      }, RandDeflectParticle().apply {
+        deflectAngle = 0f
+        strength = 0.125f
+      }, TrailFadeParticle().apply {
+        trailFade = 0.04f
+        fadeColor = Pal.lightishGray
+        colorLerpSpeed = 0.03f
+      }, ShapeParticle(), DrawDefaultTrailParticle()
+    )
+
+    craftTrigger = Cons { e: NormalCrafterBuild ->
+      for (particle in Particle.get { p -> p.x < e.x + 20 && p.x > e.x - 20 && p.y < e.y + 20 && p.y > e.y - 20 }) {
+        particle!!.remove()
+      }
+      Effect.shake(4f, 18f, e.x, e.y)
+      Angles.randLenVectors(System.nanoTime(), Mathf.random(5, 9), 4.75f, 6.25f) { x: Float, y: Float ->
+        Tmp.v1.set(x, y).setLength(4f)
+        val p: Particle = model.create(e.x + Tmp.v1.x, e.y + Tmp.v1.y, Pal.reactorPurple, x, y, Mathf.random(5f, 7f))
+        p.dest = Vec2(e.x, e.y)
+        p.eff = e.workEfficiency() * 0.15f
+      }
+    }
+    crafting = Cons { e: NormalCrafterBuild? ->
+      if (Mathf.chanceDelta(0.02)) Angles.randLenVectors(
+        System.nanoTime(), 1, 2f, 3.5f
+      ) { x: Float, y: Float ->
+        SglParticleModels.floatParticle.create(e!!.x, e.y, Pal.reactorPurple, x, y, Mathf.random(3.25f, 4f))
+      }
+    }
+
+    warmupSpeed = 0.0008f
+
+    newConsume().consValidCondition { e: NormalCrafterBuild? -> e!!.power.status >= 0.99f }
+    consume!!.item(IItems.浓缩铀235核燃料, 1)
+    consume!!.power(80f)
+    consume!!.liquid(Liquids.cryofluid, 0.6f)
+    consume!!.time(180f)
+    newProduce()
+    produce!!.power(400f)
+
+    newConsume().consValidCondition { e: NormalCrafterBuild? -> e!!.power.status >= 0.99f }
+    consume!!.item(IItems.浓缩钚239核燃料, 1)
+    consume!!.power(80f)
+    consume!!.liquid(Liquids.cryofluid, 0.6f)
+    consume!!.time(150f)
+    newProduce()
+    produce!!.power(425f)
+
+    draw = DrawMulti(
+      DrawBottom(), object : DrawExpandPlasma() {
+        init {
+          plasmas = 2
+        }
+      }, DrawDefault()
+    )
   }
 }

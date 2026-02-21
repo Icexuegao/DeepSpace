@@ -8,14 +8,12 @@ import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.content.StatusEffects
 import mindustry.entities.bullet.LightningBulletType
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.graphics.Pal
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import mindustry.type.Liquid
 import singularity.world.blocks.turrets.SglTurret
 
@@ -24,15 +22,13 @@ class Flash : SglTurret("flash") {
     BaseBundle.bundle {
       desc(zh_CN, "闪光", "发射带电巨浪子弹贯穿敌人,释放的大量闪电能够对集群造成十分可观的打击")
     }
-    requirements(Category.turret,IItems.强化合金, 35, IItems.暮光合金, 40, IItems.钴锭, 45)
-    size = 2
 
+    size = 2
+    range = 240f
     itemCapacity = 20
     liquidCapacity = 30f
-    range = 240f
-
     shootSound = Sounds.shootSmite
-    //copy from smite
+    requirements(Category.turret, IItems.强化合金, 35, IItems.暮光合金, 40, IItems.钴锭, 45)
     newAmmo(object : BasicBulletType(6f, 72f) {
       init {
         sprite = "large-orb"
@@ -106,8 +102,9 @@ class Flash : SglTurret("flash") {
         bulletInterval = 3f
       }
     }).setReloadAmount(3)
+
     consume?.apply {
-      item(Items.surgeAlloy, 1)
+      item(IItems.金锭, 1)
       power(2.4f)
       time(45f)
     }

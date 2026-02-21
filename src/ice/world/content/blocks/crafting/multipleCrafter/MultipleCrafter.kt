@@ -25,7 +25,7 @@ import ice.library.scene.ui.iTableG
 import ice.library.scene.ui.iTableGY
 import ice.library.util.percent
 import ice.world.content.blocks.abstractBlocks.IceBlock
-import ice.world.meta.IceStatValues.formulas
+import ice.world.meta.IStatValues.formulas
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.gen.Building
@@ -148,7 +148,7 @@ class MultipleCrafter(name: String) : IceBlock(name) {
 
 
         addBar("productionProgress") { build: MultipleCrafterBuilding ->
-            Bar({ IceStats.生产进度.localizedName }, { Pal.ammo }) { build.progress }
+            Bar({ IceStats.生产进度.localized() }, { Pal.ammo }) { build.progress }
         }
     }
 

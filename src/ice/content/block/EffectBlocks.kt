@@ -2,6 +2,7 @@ package ice.content.block
 
 import ice.content.IItems
 import ice.content.IUnitTypes
+import ice.content.block.effect.ProspectingRadar
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -84,15 +85,16 @@ object EffectBlocks : Load {
       desc(zh_CN, "血肉枢纽")
     }
   }
-
   val 真菌塔: Block = FungusCore("fungusTower").apply {
     size = 2
-    squareSprite=false
+    squareSprite = false
     category = Category.effect
     bundle {
       desc(zh_CN, "真菌塔")
     }
   }
+
+  val 勘探雷达 = ProspectingRadar()
   val 定向超速器: Block = OrientationProjector("orientationProjector").apply {
     size = 2
     buildSize = 5
@@ -105,7 +107,7 @@ object EffectBlocks : Load {
     bundle {
       desc(zh_CN, "遗弃资源箱")
     }
-    squareSprite=false
+    squareSprite = false
   }
   val 遗弃匣: Block = LostBox("lostBox").apply {
     size = 2
@@ -133,7 +135,7 @@ object EffectBlocks : Load {
     bundle {
       desc(zh_CN, "基础实验室")
     }
-    itemCapacity=100
+    itemCapacity = 100
     alwaysUnlocked = true
     requirements(Category.effect, IItems.高碳钢, 50, IItems.低碳钢, 50, IItems.铜锭, 50)
   }
@@ -153,7 +155,7 @@ object EffectBlocks : Load {
     armor = 4f
     radius = 270f
     brightness = 1.6f
-    squareSprite=false
+    squareSprite = false
     consumePower(0.5f)
     requirements(Category.effect, IItems.铜锭, 30f, IItems.高碳钢, 20f, IItems.黄铜锭, 10f)
     bundle {

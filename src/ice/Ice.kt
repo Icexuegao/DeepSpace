@@ -1,5 +1,6 @@
 package ice
 
+import arc.math.geom.Vec2
 import ice.async.ParcelProcess
 import ice.audio.SoundControl
 import ice.content.*
@@ -20,13 +21,11 @@ import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.mod.Mod
-import singularity.Recipes
 import singularity.Singularity
 import singularity.type.SglCategory
-import tmi.RecipeEntryPoint
 import universecore.UncCore
 
-open class Ice : @RecipeEntryPoint(Recipes::class) Mod() {
+open class Ice : Mod() {
   companion object {
     val singularity = Singularity()
   }

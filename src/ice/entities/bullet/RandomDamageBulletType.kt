@@ -26,7 +26,7 @@ class RandomDamageBulletType(
             if (continuousDamage() > 0) {
                 bt.add(Core.bundle.format("bullet.damage", continuousDamage()) + StatUnit.perSecond.localized())
             } else {
-                bt.add("[stat]$min ~ $max[lightgray] ${IceStats.伤害.localizedName}")
+                bt.add("[stat]$min ~ $max[lightgray] ${IceStats.伤害.localized()}")
             }
         }
     }

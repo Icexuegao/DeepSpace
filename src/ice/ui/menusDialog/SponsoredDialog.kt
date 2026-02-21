@@ -30,7 +30,7 @@ import singularity.ui.SglStyles
 
 object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.menusButton_contribute) {
   init {
-    SponsoredTable("小笨喵∽", "3881959748", 20f).itooltip("希望大家多赞助赞助作者")
+    SponsoredTable("小笨喵∽", "3881959748", 30f).itooltip("希望大家多赞助赞助作者")
     SponsoredTable("minphea∽", "3757625379", 30f).itooltip("加入对立神教吧!")
     SponsoredTable("一无柠檬汁", "3591484752", 2f).itooltip("灌注alon喵")
   }

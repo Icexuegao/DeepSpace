@@ -8,7 +8,7 @@ import universecore.world.meta.UncStatCat
 
 object IceStats {
   fun load() = Unit
-  val  最大能量势= IceStat("maxEnergyPotential", SglStatCat.neutron).apply {
+  val 最大能量势 = IceStat("maxEnergyPotential", SglStatCat.neutron).apply {
     bundle {
       desc(zh_CN, "最大能量势")
     }

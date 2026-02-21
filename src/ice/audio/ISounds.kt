@@ -5,6 +5,7 @@ import arc.audio.Sound
 import ice.library.IFiles
 
 object ISounds {
+  val radar= getSound("radar")
   val beamLoop = getSound("beamLoop")
   val chizovegeta = getSound("chizovegeta")
   val flblSquirt = getSound("flblSquirt")

@@ -15,7 +15,7 @@ import arc.util.io.Writes
 import ice.DeepSpace
 import ice.graphics.IceColor
 import ice.world.content.blocks.abstractBlocks.IceBlock
-import ice.world.meta.IceStatValues
+import ice.world.meta.IStatValues
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.Fx
@@ -74,10 +74,10 @@ class IceDrill(name: String) : IceBlock(name) {
 
     override fun setStats() {
         super.setStats()
-        stats.add(IceStats.钻探等级, IceStatValues.funString { "$tier" })
+        stats.add(IceStats.钻探等级, IStatValues.funString { "$tier" })
         stats.add(Stat.drillSpeed, 60f / drillTime * size * size, StatUnit.itemsSecond)
         stats.add(
-            Stat.drillTier, IceStatValues.drillables(
+            Stat.drillTier, IStatValues.drillables(
                 drillTime, hardnessDrillMultiplier, (size * size).toFloat(), drillMultipliers
             ) { b: Block ->
                 b.minfo.mod == DeepSpace.mod && b is Floor && !b.wallOre && b.itemDrop != null && b.itemDrop.hardness <= tier && (!blockedItems.contains(

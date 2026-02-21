@@ -2,12 +2,14 @@ package ice.ui.bundle
 
 import arc.Core
 import arc.struct.Seq
+import ice.library.struct.AttachedProperty
 import ice.library.world.Load
 import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
 
 class BaseBundle(val name: String) {
   companion object : Load {
+
     fun bundle(bundle: Companion.() -> Unit) {
       bundle.invoke(Companion)
     }
@@ -40,7 +42,9 @@ class BaseBundle(val name: String) {
   }
 
   interface Bundle {
-    var localizedName: String
+    companion object{
+      var Bundle.localizedName: String by AttachedProperty("")
+    }
     fun desc(bundle: BaseBundle, name: String) {
       bundle.runBun.add {
         localizedName = name

@@ -64,14 +64,14 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
         super.setBars()
         addBar("units") { build: DroneDeliveryTerminalBuild ->
             Bar(
-                { "${IceStats.单位数量.localizedName} :${build.units.size}/$unitSize" },
+                { "${IceStats.单位数量.localized()} :${build.units.size}/$unitSize" },
                 { Pal.power },
                 { build.units.size / unitSize.toFloat() }
             )
         }
         addBar("productionProgress") { build: DroneDeliveryTerminalBuild ->
             Bar(
-                IceStats.生产进度::localizedName,
+                IceStats.生产进度::localized,
                 Pal::power,
                 build::buildProgress
             )

@@ -62,7 +62,7 @@ open class LinksBlock(name: String) : RangeBlock(name) {
     override fun setBars() {
         super.setBars()
         addBar("links") { b: LinksBlockBuildEnd ->
-            Bar({ Core.bundle.formatString(IceStats.连接.localizedName, b.builds.size, buildSize) }, { blockColor }) {
+            Bar({ Core.bundle.formatString(IceStats.连接.localized(), b.builds.size, buildSize) }, { blockColor }) {
                 b.builds.size.toFloat() / buildSize
             }
         }

@@ -111,7 +111,7 @@ object Remainss : Load {
     val text = "一个被囚禁的血肉胚胎\n拥抱我,我将赐你永恒\n不必畏惧刀剑与瘟疫,不必屈服于时光与死亡\n用你的过去,换取未来\n用你的灵魂,换取存在\n直至你我合而为一"//
     setDescriptionTable {
       for (string in text.split("\n")) {
-        it.add(TLabel("{GARBLED}{SHAKE}$string")).wrap().pad(5f).color(color).row()
+        it.add(TLabel("{GARBLED}{SHAKE}$string")).grow().wrap().pad(5f).color(color).row()
       }
     }
     effect = "遗物槽位+[$pos]"
@@ -122,7 +122,7 @@ object Remainss : Load {
   val 脊骨寄生虫 = Remains("脊骨寄生虫").apply {
     color = IceColor.r2
     setDescriptionTable {
-      it.add("一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合").wrap().pad(5f).color(color).row()
+      it.add("一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合").grow().wrap().pad(5f).color(color).row()
       it.table { table ->
         table.add("影响单位: ").pad(5f).color(color)
         table.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")

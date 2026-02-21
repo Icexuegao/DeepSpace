@@ -51,7 +51,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
             val child = tables[category.ordinal]
             if (content.category.name == category.name) {
               child.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
-                currentContent = tmpHash.indexOf(content)
+                currentContentIndex = tmpHash.indexOf(content)
                 flunInfo()
               }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
             }
@@ -75,6 +75,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
       contents.addAll(BaseContentSeq.status)
     }
     object : ContentDialogBase<UnitType>("单位") {
+
       override fun showList(table: ITable) {
         val types = arrayOf("ground", "air", "naval")
         val tables = Array(types.size) { ITable().apply { setRowsize(5) } }
@@ -84,8 +85,8 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
         }.forEach { content ->
           fun dfw(table: Table) {
             table.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
-              currentContent = tmpHash.indexOf(content)
-              flunInfo()
+              currentContentIndex = tmpHash.indexOf(content)
+              flunAll()
             }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
           }
           if (content.flying) dfw(tables[1]) else if (content.naval) dfw(tables[2]) else dfw(tables[0])
@@ -210,7 +211,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
     }
     if (ha != null) {
       contentDialogs = ha
-      contentDialogs.currentContent = ha.tmpHash.indexOf(block)
+      contentDialogs.currentContentIndex = ha.tmpHash.indexOf(block)
     } else return
 
     if (!MenusDialog.isShown) MenusDialog.show()
@@ -237,15 +238,23 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
     var color: (T) -> Color = {
       IceColor.b4
     }
-    var currentContent = 0
+    var currentContentIndex = 0
 
     init {
       contentDialog.add(this)
     }
 
-    open fun showInfo(table: Table) {
-      val currentContent = tmpHash.filterIndexed { index, _ -> index == currentContent }.first()
+    fun getCurrentContent(): T {
+      val currentContent = tmpHash.filterIndexed { index, _ -> index == currentContentIndex }.first()
+      if (currentContent.isHidden) {
+        currentContentIndex++
+        return getCurrentContent()
+      }
+      return currentContent
+    }
 
+    open fun showInfo(table: Table) {
+      val currentContent=getCurrentContent()
       val color = color(currentContent)
       table.iTableGX { it3 ->
         it3.image(currentContent.uiIcon).size(112f).scaling(Scaling.fit).row()
@@ -256,7 +265,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
     }
 
     open fun showProperties(table: Table) {
-      val currentContent = tmpHash.filterIndexed { index, c-> searchSelect(c) }.first()
+      val currentContent = tmpHash.filterIndexed { index, c -> index == currentContentIndex }.first()
       table.add(currentContent.name).color(Color.valueOf("b7e1fb")).padBottom(3f).row()
       currentContent.checkStats()
       val stats = currentContent.stats
@@ -324,7 +333,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
         searchSelect(content)
       }.forEach { content ->
         table.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
-          currentContent = tmpHash.indexOf(content)
+          currentContentIndex = tmpHash.indexOf(content)
           flunInfo()
         }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
       }

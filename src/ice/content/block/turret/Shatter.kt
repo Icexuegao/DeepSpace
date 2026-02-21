@@ -6,6 +6,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
+import ice.library.IFiles.appendModName
 import ice.ui.bundle.BaseBundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
@@ -148,7 +149,7 @@ class Shatter : ItemTurret("turret_shatter") {
         splashDamage = 3f
         splashDamageRadius = 6f
         hitEffect = ParticleEffect().apply {
-          region = "curse-of-flesh-crystal"
+          region = "crystal".appendModName()
           particles = 3
           lifetime = 36f
           length = 60f

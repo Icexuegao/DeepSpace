@@ -2,17 +2,23 @@ package ice.world.meta
 
 import arc.Core
 import arc.func.Boolf
+import arc.func.Boolp
+import arc.func.Cons
 import arc.graphics.Color
+import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.scene.Element
 import arc.scene.event.HandCursorListener
+import arc.scene.ui.Image
 import arc.scene.ui.Label
-import arc.scene.ui.Tooltip
+import arc.scene.ui.Tooltip.Tooltips
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Collapser
+import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectFloatMap
 import arc.struct.ObjectMap
+import arc.util.Nullable
 import arc.util.Scaling
 import arc.util.Strings
 import ice.graphics.IStyles
@@ -20,11 +26,13 @@ import ice.world.content.blocks.crafting.multipleCrafter.Formula
 import ice.world.content.blocks.crafting.multipleCrafter.FormulaStack
 import mindustry.Vars
 import mindustry.content.StatusEffects
+import mindustry.core.UI
 import mindustry.ctype.UnlockableContent
 import mindustry.entities.bullet.BulletType
 import mindustry.gen.Icon
 import mindustry.graphics.Pal
 import mindustry.type.Item
+import mindustry.type.ItemStack
 import mindustry.type.UnitType
 import mindustry.ui.Styles
 import mindustry.world.Block
@@ -35,7 +43,7 @@ import mindustry.world.meta.StatValues
 import mindustry.world.meta.Stats
 import kotlin.math.max
 
-object IceStatValues {
+object IStatValues {
     fun funString(str: () -> String): StatValue {
         return StatValue {
             it.add(Label { str() })
@@ -351,20 +359,55 @@ object IceStatValues {
         return (if (amout > 0) "[stat]+" else "[negstat]") + Strings.autoFixed(amout, 1)
     }
 
-    fun <T : Element> withTooltip(element: T, content: UnlockableContent?, tooltip: Boolean = false): T {
-        if (content != null) {
-            if (!Vars.mobile) {
-                if (tooltip) {
-                    element.addListener(Tooltip.Tooltips.getInstance().create(content.localizedName, Vars.mobile))
-                }
-                element.addListener(HandCursorListener({ !content.isHidden }, true))
-            }
-            element.clicked {
-                if (!content.isHidden) {
-                    Vars.ui.content.show(content)
-                }
-            }
+  fun <T : Element?> withTooltip(element: T?, content: UnlockableContent?, tooltip: Boolean): T? {
+    if (content != null) {
+      if (!Vars.mobile) {
+        if (tooltip) {
+          element!!.addListener(Tooltips.getInstance().create(content.localizedName, Vars.mobile))
         }
-        return element
+        element!!.addListener(HandCursorListener(Boolp { !content.isHidden() }, true))
+      }
+      element!!.clicked {
+        if (!content.isHidden) {
+        //  Vars.ui.content.show(content)
+        }
+      }
     }
+    return element
+  }
+
+  fun <T : Element?> withTooltip(element: T?, content: UnlockableContent?): T? {
+    return withTooltip<T?>(element, content, false)
+  }
+
+  /** Displays an item with a specified amount.  */
+  private fun stack(region: TextureRegion?, amount: Int, @Nullable content: UnlockableContent?, tooltip: Boolean): Stack {
+    val stack = Stack()
+
+    stack.add(Table(Cons { o: Table? ->
+      o!!.left()
+      o.add<Image?>(Image(region)).size(32f).scaling(Scaling.fit)
+    }))
+
+    if (amount != 0) {
+      stack.add(Table(Cons { t: Table? ->
+        t!!.left().bottom()
+        t.add(if (amount >= 1000) UI.formatAmount(amount.toLong()) else amount.toString() + "").name("stack amount").style(Styles.outlineLabel)
+        t.pack()
+      }))
+    }
+
+    withTooltip<Stack?>(stack, content, tooltip)
+
+    return stack
+  }
+
+  /** Displays an item with a specified amount.  */
+  private fun stack(region: TextureRegion?, amount: Int, @Nullable content: UnlockableContent?): Stack {
+    return stack(region, amount, content, true)
+  }
+
+  fun stack(stack: ItemStack): Stack {
+    return stack(stack.item.uiIcon, stack.amount, stack.item)
+  }
 }

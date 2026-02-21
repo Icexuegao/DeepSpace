@@ -814,6 +814,7 @@ object CrafterBlocks : Load {
       )
       hasLiquids = true
       negativeSplice = true
+      allowRectanglePlacement = true
 
       newConsume()
       consume!!.liquid(Liquids.water, 0.02f)
@@ -1123,160 +1124,9 @@ object CrafterBlocks : Load {
   var 干馏塔 = RetortColumn()
   var 激光解离机 = LaserResolver()
   var 蒸馏净化器 = DistillPurifier()
-  var 渗透净化器 = NormalCrafter("osmotic_purifier").apply {
-    bundle {
-      desc(zh_CN, "渗透净化器", "使用物质吸附及反渗透过滤技术制造的高效净化装置,能更有效的分离水中的杂质")
-    }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.铝锭, 50, IItems.钴锭, 60, IItems.单晶硅, 45, IItems.铬锭, 45, IItems.气凝胶, 50
-      )
-    )
-    size = 3
-    hasLiquids = true
-    liquidCapacity = 30f
-    squareSprite = false
-    newConsume()
-    consume!!.time(60f)
-    consume!!.liquid(Liquids.water, 2f)
-    consume!!.item(IItems.钴锭, 1)
-    consume!!.power(1f)
-    newProduce()
-    produce!!.liquid(ILiquids.纯净水, 2f)
-    produce!!.item(IItems.碱石, 2)
-
-    draw = DrawMulti(
-      DrawBottom(), DrawLiquidTile(Liquids.water, 3f), object : DrawBlock() {
-        override fun draw(build: Building?) {
-          val e = build as NormalCrafterBuild
-          val region = Vars.renderer.fluidFrames[0][Liquids.water.animationFrame]
-          val toDraw = Tmp.tr1
-          val bounds = size / 2f * Vars.tilesize - 8
-          val color = ILiquids.纯净水.color
-
-          for (sx in 0..<size) {
-            for (sy in 0..<size) {
-              val relx = sx - (size - 1) / 2f
-              val rely = sy - (size - 1) / 2f
-
-              toDraw.set(region)
-              val rightBorder = relx * Vars.tilesize + 8
-              val topBorder = rely * Vars.tilesize + 8
-              val squishX = rightBorder + Vars.tilesize / 2f - bounds
-              val squishY = topBorder + Vars.tilesize / 2f - bounds
-              var ox = 0f
-              var oy = 0f
-
-              if (squishX >= 8 || squishY >= 8) continue
-
-              if (squishX > 0) {
-                toDraw.setWidth(toDraw.width - squishX * 4f)
-                ox = -squishX / 2f
-              }
-
-              if (squishY > 0) {
-                toDraw.setY(toDraw.y + squishY * 4f)
-                oy = -squishY / 2f
-              }
-
-              Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, e.warmup(), color)
-            }
-          }
-        }
-      }, DrawDefault()
-    )
-  }
-  var 洗矿机 = NormalCrafter("ore_washer").apply {
-    bundle {
-      desc(zh_CN, "洗矿机", "用高速的水流冲刷沥青粗矿以除去轻杂质,以及洗脱附着在岩石间的FEX物质")
-    }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.铬锭, 60, IItems.钴锭, 40, IItems.铅锭, 45, IItems.石英玻璃, 60
-      )
-    )
-    size = 2
-    hasLiquids = true
-    itemCapacity = 20
-    liquidCapacity = 24f
-
-
-    newConsume()
-    consume!!.time(120f)
-    consume!!.liquid(Liquids.water, 0.2f)
-    consume!!.item(IItems.岩层沥青, 1)
-    consume!!.power(1.8f)
-    newProduce()
-    produce!!.liquid(ILiquids.FEX流体, 0.2f)
-    produce!!.items(
-      *ItemStack.with(
-        IItems.金珀沙, 5, IItems.黑晶石, 3, IItems.铀原矿, 2
-      )
-    ).random()
-
-    craftEffect = Fx.pulverizeMedium
-
-    draw = DrawMulti(DrawDefault(), object : DrawLiquidRegion(Liquids.water) {
-      init {
-        suffix = "_liquid"
-      }
-    }, object : DrawRegion("_rotator") {
-      init {
-        rotateSpeed = 4.5f
-        spinSprite = true
-      }
-    }, DrawRegion("_top"), object : DrawRegionDynamic<NormalCrafterBuild?>("_point") {
-      init {
-        color = Func { e: NormalCrafterBuild? ->
-          val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as SglConsumers).first()
-          if (cons is universecore.world.consumers.ConsumeItems<*>) {
-            val item = cons.consItems!![0].item
-            return@Func item.color
-          } else return@Func Color.white
-        }
-        alpha = Floatf { e: NormalCrafterBuild? ->
-          val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as SglConsumers).first()
-          if (cons is universecore.world.consumers.ConsumeItems<*>) {
-            val item = cons.consItems!![0].item
-            return@Floatf e.items.get(item).toFloat() / e.block.itemCapacity
-          } else return@Floatf 0f
-        }
-      }
-    })
-  }
-  var 结晶器 = NormalCrafter("crystallizer").apply {
-    bundle {
-      desc(zh_CN, "结晶器", "最早的FEX结晶技术,依赖电磁场波动,使FEX在载体金属上逐步形成结晶")
-    }
-    requirements(
-      Category.crafting, ItemStack.with(
-        IItems.强化合金, 35, IItems.单晶硅, 45, IItems.铜锭, 40, IItems.石英玻璃, 50
-      )
-    )
-    size = 2
-    liquidCapacity = 16f
-
-    newConsume()
-    consume!!.time(240f)
-    consume!!.item(IItems.强化合金, 1)
-    consume!!.liquid(ILiquids.FEX流体, 0.2f)
-    consume!!.power(2.8f)
-    newProduce()
-    produce!!.item(IItems.FEX水晶, 2)
-
-    draw = DrawMulti(
-      DrawDefaultBottom(), object : DrawCultivator() {
-        init {
-          plantColor = Color.valueOf("#C73A3A")
-          plantColorLight = Color.valueOf("#E57D7D")
-        }
-
-        override fun load(block: Block) {
-          middle = Core.atlas.find(block.name + "_middle")
-        }
-      }, DrawDefault()
-    )
-  }
+  var 渗透净化器 = OsmoticPurifier()
+  var 洗矿机 = OreWasher()
+  var 结晶器 = Crystallizer()
   var FEX相位混合器 = NormalCrafter("FEX_phase_mixer").apply {
     bundle {
       desc(zh_CN, "FEX相位混合器", "重建FEX的液态物质结构,使其中的能量活性化")

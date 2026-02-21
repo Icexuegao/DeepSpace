@@ -7,7 +7,7 @@ import arc.scene.ui.layout.Collapser
 import arc.scene.ui.layout.Table
 import arc.util.Strings
 import arc.util.Time
-import ice.world.meta.IceStatValues.sep
+import ice.world.meta.IStatValues.sep
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
