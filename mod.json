@@ -3,7 +3,7 @@
 "displayName": "DeepSpace",
 "description": "半成品模组,目的是为mdt添加更多的内容",
 "author": "Alon",
-"version": "Alpha-3067",
+"version": "Alpha-3069",
 "java": true,
 "main": "ice.Ice",
 "minGameVersion": 155

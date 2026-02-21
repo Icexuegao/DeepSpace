@@ -11,7 +11,7 @@ import mindustry.graphics.Layer
 import singularity.world.blocks.product.NormalCrafter
 import kotlin.math.min
 
-class CeriumExtractor(name: String) : NormalCrafter(name) {
+open class CeriumExtractor(name: String) : NormalCrafter(name) {
     init {
         buildType = Prov(::CeriumExtractorBuild)
     }
