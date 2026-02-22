@@ -57,12 +57,10 @@ object IUnitTypes : Load {
   val 火苗 = FlameMissile()
   val 重创 = HeavyDamageMissile()
 
-  val 飞蠓 = FlyingMidges()
-  val 疟蚊 = Mosquito()
-  val 血俎 = BloodAltar()
   val 工蜂 = WorkerBee()
   val 绒刺 = Barb()
   val 和弦 = Chord()
+  val 收割 = Harvester()
 
   val 坚盾 = StrongShield()
   val 围护 = Enclosure()
@@ -71,12 +69,20 @@ object IUnitTypes : Load {
   val 死誓 = DeathOath()
   val 禁军 = ForbiddenArmy()
 
+  val 飞蠓 = FlyingMidges()
+  val 疟蚊 = Mosquito()
+  val 血俎 = BloodAltar()
+
   val 扑火 = PutotFire()
   val 趋火 = Tuihuo()
   val 奔火 = BenFire()
   val 逐火 = ZhuFire()
   val 赴火 = FuFire()
   val 化火 = HuaFire()
+
+  val 陨石 = Meteorite()
+  val 陨铁 = MeteoricIron()
+  val 陨星 = MeteoricStar()
 
   val 雨滴 = Raindrop()
   val 骤雨 = TorrentialRain()
@@ -97,16 +103,15 @@ object IUnitTypes : Load {
   val 悲鸣 = Scream()
   val 断业 = BreakUp()
 
-  val 收割 = Harvester()
+
   val 幻影 = Phantom()
   val 弧光 = ArcLight()
   val 蜂后 = QueenBee()
   val 剑戟 = SwordSpear()
   val 否决 = Veto()
+  val 风暴 = StormBolt()
 
   val 黑棘 = BlackThorns()
-
-
 
   val 毒刺 = PoisonBarb()
   val 爆蚊 = ExplosiveMosquito()
@@ -274,11 +279,6 @@ object IUnitTypes : Load {
   val 虚宿 = Emptiness()
 
   val 无畏 = Fearless()
-
-  val 陨石 = Meteorite()
-  val 陨铁 = MeteoricIron()
-  val 陨星 = MeteoricStar()
-
   val 冥刻 = DarkCarving()
 
 
