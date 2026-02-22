@@ -29,22 +29,6 @@ class CarbonSteelFactory : NormalCrafter("carbonSteelFactory") {
       lengthOffset = 0f
       amount = 4
     }
-    newConsume().apply {
-      time(45f)
-      item(IItems.赤铁矿, 2)
-      power(60 / 60f)
-    }
-    newProduce().apply {
-      items(IItems.低碳钢, 1)
-    }
-    newConsume().apply {
-      time(60f)
-      items(IItems.赤铁矿, 2, IItems.生煤, 3)
-      power(90 / 60f)
-    }
-    newProduce().apply {
-      items(IItems.高碳钢, 1)
-    }
     draw = DrawMulti(DrawRegion("-bottom"), DrawArcSmelt().apply {
       x += 8
       startAngle = 135f
@@ -62,5 +46,22 @@ class CarbonSteelFactory : NormalCrafter("carbonSteelFactory") {
       startAngle = 0f + 45
       endAngle = 180f - 45f
     }, DrawDefault())
+
+    newConsume().apply {
+      time(45f)
+      item(IItems.赤铁矿, 2)
+      power(60 / 60f)
+    }
+    newProduce().apply {
+      items(IItems.低碳钢, 1)
+    }
+    newConsume().apply {
+      time(60f)
+      items(IItems.赤铁矿, 2, IItems.生煤, 3)
+      power(90 / 60f)
+    }
+    newProduce().apply {
+      items(IItems.高碳钢, 1)
+    }
   }
 }

@@ -11,6 +11,7 @@ import arc.struct.Seq
 import ice.ai.AIController
 import ice.audio.ISounds
 import ice.content.unit.*
+import ice.content.unit.flying.Veto
 import ice.content.unit.flying.fire.BenFire
 import ice.content.unit.flying.fire.FuFire
 import ice.content.unit.flying.fire.HuaFire
@@ -49,15 +50,19 @@ import singularity.world.unit.types.MornstarType
 
 @Suppress("unused")
 object IUnitTypes : Load {
-  val 飞蠓 = FlyingMidges()
-  val 疟蚊 = Mosquito()
-  val 血俎 = BloodAltar()
-  val 工蜂 = WorkerBee()
-
   val 星光 = Starlight()
   val 火花 = Spark()
   val 战斧 = WarAxe()
   val 火狱 = HellFire()
+  val 火苗 = FlameMissile()
+  val 重创 = HeavyDamageMissile()
+
+  val 飞蠓 = FlyingMidges()
+  val 疟蚊 = Mosquito()
+  val 血俎 = BloodAltar()
+  val 工蜂 = WorkerBee()
+  val 绒刺 = Barb()
+  val 和弦 = Chord()
 
   val 坚盾 = StrongShield()
   val 围护 = Enclosure()
@@ -84,21 +89,25 @@ object IUnitTypes : Load {
   val 苦修= Meditation()
   val 沧溟 = Abyss()
 
-  val 收割 = Harvester()
-  val 幻影 = Phantom()
-  val 弧光 = ArcLight()
-  val 蜂后 = QueenBee()
-  val 剑戟 = SwordSpear()
-
-  val 黑棘 = BlackThorns()
-
-  val 和弦 = Chord()
   val 突刺 = BarbProtrusion()
   val 碎甲 = Shatter()
   val 破军 = BreakArmy()
   val 攻城 = Siege()
   val 重压 = HeavyPress()
   val 悲鸣 = Scream()
+  val 断业 = BreakUp()
+
+  val 收割 = Harvester()
+  val 幻影 = Phantom()
+  val 弧光 = ArcLight()
+  val 蜂后 = QueenBee()
+  val 剑戟 = SwordSpear()
+  val 否决 = Veto()
+
+  val 黑棘 = BlackThorns()
+
+
+
   val 毒刺 = PoisonBarb()
   val 爆蚊 = ExplosiveMosquito()
   val 加百列 = Gabriel()
@@ -107,6 +116,7 @@ object IUnitTypes : Load {
   val 泽塔 = Zeta()
   val 伊普西龙 = Ipsiglon()
   val 炸蛛 = SpiderBomb()
+  val 罗织 = Weaver()
 
   val 异种 = Heterogeneous()
   val 冥 = Pluto()
@@ -115,7 +125,7 @@ object IUnitTypes : Load {
   val 仆从 = Footman()
   val 传教者 = Missionary()
   val 裂片集群 = ClusterLobes()
-  val 断业 = BreakUp()
+
   val 焚棘 = ArdenThorn()
   val 青壤 = Schizovegeta()
   val 丰穰之瘤 = RichTumor()

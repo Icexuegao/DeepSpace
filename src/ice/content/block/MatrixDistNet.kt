@@ -128,7 +128,7 @@ object MatrixDistNet : Load {
     size = 4
     squareSprite=false
   }
-  var 能源能源簇 = DistEnergyBuffer("matrix_energy_buffer").apply {
+  var 能源簇 = DistEnergyBuffer("matrix_energy_buffer").apply {
     squareSprite=false
     requirements(
       SglCategory.matrix, ItemStack.with(
@@ -137,7 +137,7 @@ object MatrixDistNet : Load {
     )
     size = 3
     bundle {
-      desc(zh_CN,"能源能源簇","网络缓存能源能的设备,可以存储一定量的矩阵能源以避免停电等情况造成的致命问题")
+      desc(zh_CN,"能源簇","网络缓存能源能的设备,可以存储一定量的矩阵能源以避免停电等情况造成的致命问题")
     }
     matrixEnergyCapacity = 16384f
   }

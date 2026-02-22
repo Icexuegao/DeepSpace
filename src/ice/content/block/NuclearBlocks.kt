@@ -12,7 +12,6 @@ import arc.math.Angles
 import arc.math.Interp
 import arc.math.Mathf
 import arc.math.Rand
-import arc.math.geom.Vec2
 import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
@@ -24,13 +23,11 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids
-import mindustry.entities.Effect
 import mindustry.game.Team
 import mindustry.gen.Building
 import mindustry.gen.Sounds
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
-import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.blocks.liquid.LiquidBlock
 import mindustry.world.draw.*
@@ -48,17 +45,12 @@ import singularity.world.blocks.product.NormalCrafter
 import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
 import singularity.world.consumers.SglConsumers
 import singularity.world.draw.DrawBottom
-import singularity.world.draw.DrawExpandPlasma
 import singularity.world.draw.DrawReactorHeat
 import singularity.world.draw.DrawRegionDynamic
 import singularity.world.meta.SglStat
 import singularity.world.particles.SglParticleModels
 import universecore.world.consumers.ConsumeItems
 import universecore.world.consumers.ConsumeLiquids
-import universecore.world.particles.MultiParticleModel
-import universecore.world.particles.Particle
-import universecore.world.particles.ParticleModel
-import universecore.world.particles.models.*
 import kotlin.math.max
 
 @Suppress("unused")
@@ -524,7 +516,7 @@ object NuclearBlocks : Load {
     bundle {
       desc(zh_CN, "托卡马克点火装置", "托卡马克核聚变装置的核心组件,是添加材料与输出能量的端口,在一个核聚变装置中必须有且只有一个此设备。将此设备使用聚变约束导轨链接成一个闭环(这个闭环有且只能有4个拐角)构成完整的托卡马克聚变反应堆,而此反应堆的功率取决于整个结构的规模大小")
     }
-    requirements(SglCategory.nuclear, IItems.絮凝剂, 160, IItems.单晶硅, 200, IItems.暮光合金, 160, IItems.絮凝剂, 220, IItems.强化合金, 180, IItems.气凝胶, 240, IItems.FEX水晶, 160, IItems.充能FEX水晶, 120, IItems.铱锭, 100)
+    requirements(SglCategory.nuclear, IItems.单晶硅, 200, IItems.暮光合金, 160, IItems.絮凝剂, 220, IItems.强化合金, 180, IItems.气凝胶, 240, IItems.FEX水晶, 160, IItems.充能FEX水晶, 120, IItems.铱锭, 100)
     size = 5
 
     itemCapacity = 60

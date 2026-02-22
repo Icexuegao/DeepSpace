@@ -1,6 +1,5 @@
 package ice
 
-import arc.math.geom.Vec2
 import ice.async.ParcelProcess
 import ice.audio.SoundControl
 import ice.content.*
