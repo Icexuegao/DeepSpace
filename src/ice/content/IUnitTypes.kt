@@ -115,10 +115,13 @@ object IUnitTypes : Load {
   val 欧米茄 = Omega()
   val 泽塔 = Zeta()
   val 伊普西龙 = Ipsiglon()
+
   val 炸蛛 = SpiderBomb()
   val 罗织 = Weaver()
-
+  val 构陷 = Constrict()
+  val 甘霖 = Ganlin()
   val 异种 = Heterogeneous()
+
   val 冥 = Pluto()
   val 玄 = Hyun()
 
@@ -278,7 +281,7 @@ object IUnitTypes : Load {
 
   val 冥刻 = DarkCarving()
 
-  val 甘霖 = Ganlin()
+
 
   fun getCoreUnits(): Seq<IceUnitType> {
     return Seq.with(加百列, 路西法)
