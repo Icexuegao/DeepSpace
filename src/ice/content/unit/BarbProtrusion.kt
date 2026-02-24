@@ -9,6 +9,9 @@ import mindustry.graphics.Pal
 
 class BarbProtrusion : IceUnitType("barbProtrusion") {
   init {
+    bundle {
+      desc(zh_CN, "突刺","轻型地面突击单位.发射炮弹攻击敌人")
+    }
     armor = 8f
     speed = 0.7f
     health = 700f
@@ -35,9 +38,6 @@ class BarbProtrusion : IceUnitType("barbProtrusion") {
         lifetime = 40f
         shootEffect = IceEffects.baseShootEffect(Pal.accent)
       }
-    }
-    bundle {
-      desc(zh_CN, "突刺")
     }
   }
 }

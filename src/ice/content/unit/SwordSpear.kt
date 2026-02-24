@@ -24,7 +24,7 @@ import mindustry.type.weapons.PointDefenseWeapon
 class SwordSpear : IceUnitType("unit_swordSpear") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "剑戟", "灵活的中型激光炮艇,可以在远处发射激光攻击敌人")
+      desc(zh_CN, "剑戟", "中型空中突击单位.在远处发射激光攻击敌人,尾迹灼烧途经的敌军.配备小型裂解炮抵御敌人的攻击,并对附近的友军提供屠戮效果,开火时减少所受伤害")
     }
     lowAltitude = true
     flying = true

@@ -24,7 +24,7 @@ class Chord : IceUnitType("chord") {
     playerControllable = false
     controller = Func { CarryTaskAI() }
     bundle {
-      desc(zh_CN, "和弦")
+      desc(zh_CN, "和弦","轻型空中工程单位.配备大容量货舱与稳定悬挂系统,专精于物资运输任务.常三机编队协同作业")
     }
   }
 }

@@ -17,7 +17,7 @@ import mindustry.type.weapons.RepairBeamWeapon
 class Meteorite:IceUnitType("meteorite") {
   init{
     bundle {
-      desc(zh_CN, "陨石", "多功能异构飞行器,具有强大的纳米修复系统,集群作战时尤为强大")
+      desc(zh_CN, "陨石", "轻型空中突击单位.以机炮持续扫射攻击敌人,以闪电场电击附近敌军并治疗友军.配备裂解炮抵御敌人的攻击")
     }
     flying = true
     lowAltitude = true

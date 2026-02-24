@@ -44,7 +44,7 @@ class Veto : IceUnitType("units_veto") {
 
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "否决", "广告招租")
+      desc(zh_CN, "否决", "重型空中突击单位.舰首舰尾发射导弹,四门近程激光与两门远程磁轨炮交替射击,中央主炮投送高爆弹.加装护盾辅助发生器以维持友军护盾持续作战","否决,人类?")
     }
     flying = true
     lowAltitude = true

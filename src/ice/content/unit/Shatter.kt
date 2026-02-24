@@ -10,6 +10,9 @@ import mindustry.gen.Sounds
 
 class Shatter : IceUnitType("shatter") {
   init {
+    bundle {
+      desc(zh_CN, "碎甲","轻型地面突击单位.发射高热激光攻击敌人")
+    }
     armor = 10f
     speed = 0.8f
     health = 1200f
@@ -34,9 +37,6 @@ class Shatter : IceUnitType("shatter") {
         shootEffect = IceEffects.squareAngle(color2 = Color.valueOf("ffa763"))
         colors = arrayOf(Color.valueOf("ffa763"), Color.valueOf("ffa763"), Color.valueOf("fabd8e"))
       }
-    }
-    bundle {
-      desc(zh_CN, "碎甲")
     }
   }
 }

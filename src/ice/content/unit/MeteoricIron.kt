@@ -19,7 +19,7 @@ import mindustry.type.weapons.RepairBeamWeapon
 class MeteoricIron : IceUnitType("meteoricIron") {
   init {
     bundle {
-      desc(zh_CN, "陨铁", "多功能异构飞行器,具有强大的纳米修复系统,集群作战时尤为强大\n具有一门略小于船体主结构的光束炮")
+      desc(zh_CN, "陨铁", "中型空中突击单位.发射高热激光并辅以机炮攻击敌人,以闪电场电击附近敌军并治疗友军.配备裂解炮抵御敌人的攻击")
     }
     flying = true
     lowAltitude = true

@@ -26,7 +26,7 @@ import mindustry.gen.Sounds
 class BlackThorns : IceUnitType("unit_blackThorns") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "黑棘", "可以向敌人发射火苗导弹和远距离穿透激光,对于近距离的敌人则快速发射穿透激光")
+      desc(zh_CN, "黑棘", "重型空中突击单位.向远处敌人发射导弹与穿透激光,对近距离目标则切换为穿透激光与空爆火箭快速打击")
     }
 
     lowAltitude = true
