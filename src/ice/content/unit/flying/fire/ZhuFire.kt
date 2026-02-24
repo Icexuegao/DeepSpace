@@ -1,11 +1,11 @@
-package ice.content.unit
+package ice.content.unit.flying.fire
 
 import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.BaseBundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -15,9 +15,9 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 
-class ZhuFire : IceUnitType("zhuFire") {
+class ZhuFire : IceUnitType("unit_zhuFire") {
   init {
-    bundle {
+    BaseBundle.bundle {
       desc(zh_CN, "逐火", "中型空中突击单位.交替发射机炮与离子激光攻击敌人,以自身为中心投射一片立场护盾.初级气动外壳足以应对一部分异常状态,开火时减少所受伤害", "在战争烈度逐渐升级当下,[逐火]攻击机应运而生,更强的火力及装甲使其足以担任小队护航或集群突袭等多种用途")
     }
     circleTarget = true
