@@ -41,9 +41,6 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       it.addBox("启用多合成角标常显", SettingValue::启用多合成角标常显) { box, _ ->
         SettingValue.启用多合成角标常显 = box.isChecked
       }.row()
-      it.addBox("启用多合成配方缓存", SettingValue::启用多合成配方缓存) { box, _ ->
-        SettingValue.启用多合成配方缓存 = box.isChecked
-      }.row()
       it.addBox("启用包裹物品绘制", SettingValue::启用包裹物品绘制) { box, _ ->
         SettingValue.启用包裹物品绘制 = box.isChecked
       }.row()

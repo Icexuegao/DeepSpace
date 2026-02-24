@@ -1,13 +1,10 @@
 package ice.content
 
-import arc.Core
 import arc.util.Scaling
-import ice.DeepSpace
 import ice.content.block.CrafterBlocks
 import ice.graphics.IceColor
 import ice.library.scene.element.typinglabel.TLabel
 import ice.library.scene.ui.itooltip
-import ice.library.world.Load
 import ice.type.Remains
 import ice.ui.menusDialog.RemainsDialog
 import ice.ui.menusDialog.RemainsDialog.slotPos
@@ -20,7 +17,7 @@ import mindustry.world.meta.Stats
 import universecore.world.consumers.ConsumeType
 
 @Suppress("unused")
-object Remainss : Load {
+object Remainss {
   val 娜雅的手串 = Remains("娜雅的手串").apply {
     setDescription("一串温润的玉石手串,在帝国任职期间由娜雅赠予")
     effect = "核心机增加拦截护盾"
@@ -225,15 +222,6 @@ object Remainss : Load {
       lucifer.speed -= 1f
       lucifer.stats = Stats()
       lucifer.checkStats()
-    }
-  }
-
-  override fun init() {
-    RemainsDialog.remainsSeq.sort { it.level.toFloat() }.reversed().forEach {
-      val enabled = Core.settings.getBool("${DeepSpace.name}-remains-${it.name}-enabled", false)
-      if (enabled) {
-        it.setEnabled(true)
-      }
     }
   }
 }

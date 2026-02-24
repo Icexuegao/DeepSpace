@@ -2,6 +2,8 @@ import arc.files.Fi
 import arc.util.serialization.JsonReader
 import arc.util.serialization.JsonWriter
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 buildscript {
   extra["proUser"] = System.getProperty("user.name")
@@ -40,7 +42,7 @@ repositories {
 }
 val uncVersion = "2.3.1"
 dependencies {
-  compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
+  //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")
   implementation("org.commonmark:commonmark-ext-gfm-tables:0.20.0")
   implementation("org.commonmark:commonmark-ext-gfm-strikethrough:0.20.0")
@@ -150,6 +152,10 @@ tasks {
     val parse = JsonReader().parse(file)
     val message = parse.get("version").asString().split("-")[1].toInt() + 1
     parse.get("version").set("Alpha-$message")
+    val currentDate = LocalDate.now()
+    val formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日")
+    val formattedDate = currentDate.format(formatter)
+    parse.get("updateDate").set(formattedDate)
     file.writeString(parse.prettyPrint(JsonWriter.OutputType.json, 0))
   }
 

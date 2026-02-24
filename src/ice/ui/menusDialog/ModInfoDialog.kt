@@ -162,7 +162,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             }.width(230f)
             t.row()
             t.add(Core.bundle.get("infos.releaseDate")).color(Pal.accent)
-            t.add(Core.bundle.get("mod.updateDate"))
+            t.add(DeepSpace.updateDate)
             t.button("", Icon.upload, Styles.nonet, 28f) {
               checkOrDoUpdate()
             }.update { b: TextButton? ->
@@ -173,15 +173,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             }.width(230f)
           }.fillY().padTop(40f).margin(4f).padBottom(20f).minWidth(700f)
         }.row()
-        //：
-        //[       ]  Modname
-        //[icon]  Author
-        //[       ]
-        //
-        //[       ]  Modname
-        //[icon]  Author
-        //[       ]
-        //
+
         t3.table { t3 ->
           t3.defaults().pad(3f)
 

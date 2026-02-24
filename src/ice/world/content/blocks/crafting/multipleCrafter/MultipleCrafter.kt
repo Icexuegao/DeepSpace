@@ -53,6 +53,7 @@ class MultipleCrafter(name: String) : IceBlock(name) {
     var ignoreLiquidFullness = false
 
     init {
+      saveConfig=true
         solid = true
         update = true
         conductivePower = true

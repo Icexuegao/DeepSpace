@@ -12,22 +12,9 @@ import ice.ai.AIController
 import ice.audio.ISounds
 import ice.content.unit.*
 import ice.content.unit.flying.Veto
-import ice.content.unit.flying.fire.BenFire
-import ice.content.unit.flying.fire.FuFire
-import ice.content.unit.flying.fire.HuaFire
-import ice.content.unit.flying.rain.Raindrop
-import ice.content.unit.flying.rain.Storm
-import ice.content.unit.flying.rain.Thunder
-import ice.content.unit.flying.rain.ThunderTribulation
-import ice.content.unit.flying.rain.TorrentialRain
-import ice.content.unit.flying.fire.PutotFire
-import ice.content.unit.flying.fire.Tuihuo
-import ice.content.unit.mech.DeathOath
-import ice.content.unit.mech.Enclosure
-import ice.content.unit.mech.ForbiddenArmy
-import ice.content.unit.mech.Hold
-import ice.content.unit.mech.IronGuard
-import ice.content.unit.mech.StrongShield
+import ice.content.unit.flying.fire.*
+import ice.content.unit.flying.rain.*
+import ice.content.unit.mech.*
 import ice.entities.IcePuddle
 import ice.entities.bullet.MultiBasicBulletType
 import ice.entities.effect.MultiEffect
@@ -92,7 +79,7 @@ object IUnitTypes : Load {
 
   val 见证 = Witness()
   val 履行 = Execution()
-  val 苦修= Meditation()
+  val 苦修 = Meditation()
   val 沧溟 = Abyss()
 
   val 突刺 = BarbProtrusion()
@@ -102,7 +89,6 @@ object IUnitTypes : Load {
   val 重压 = HeavyPress()
   val 悲鸣 = Scream()
   val 断业 = BreakUp()
-
 
   val 幻影 = Phantom()
   val 弧光 = ArcLight()
@@ -280,8 +266,6 @@ object IUnitTypes : Load {
 
   val 无畏 = Fearless()
   val 冥刻 = DarkCarving()
-
-
 
   fun getCoreUnits(): Seq<IceUnitType> {
     return Seq.with(加百列, 路西法)

@@ -40,11 +40,16 @@ object IStyles {
   val background121 = IFiles.createNinePatch("background12-1")
   val background122 = IFiles.createNinePatch("background12-2")
   val background131 = IFiles.createNinePatch("background13-1")
+
   val achievementUnlock = IFiles.findModPng("achievement-unlock")
   val achievementLock = IFiles.findModPng("achievement-lock")
   val achievement = IFiles.findModPng("achievement")
 
+  val achievementGodQuality = IFiles.findModPng("achievement-godQuality")
+  val achievementHourglass = IFiles.findModPng("achievement-hourglass")
+
   val paneLeft=IFiles.createNinePatch("pane-left")
+  val paneBottom=IFiles.createNinePatch("pane-bottom")
 
   val remains = IFiles.findModPng("remains").asDrawable()
   val tanksui = IFiles.findModPng("thanks")

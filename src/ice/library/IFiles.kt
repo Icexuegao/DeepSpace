@@ -11,6 +11,7 @@ import arc.scene.style.ScaledNinePatchDrawable
 import arc.scene.style.TextureRegionDrawable
 import arc.util.Log
 import ice.Ice
+import ice.library.struct.log
 import ice.library.world.Load
 import universecore.util.mods.ModGetter
 import universecore.util.mods.ModInfo

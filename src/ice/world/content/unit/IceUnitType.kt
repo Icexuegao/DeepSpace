@@ -34,6 +34,7 @@ import mindustry.content.StatusEffects
 import mindustry.core.Renderer
 import mindustry.entities.Effect
 import mindustry.entities.Effect.EffectContainer
+import mindustry.entities.abilities.Ability
 import mindustry.entities.part.DrawPart
 import mindustry.gen.*
 import mindustry.gen.Unit
@@ -45,11 +46,20 @@ import mindustry.type.ItemStack
 import mindustry.type.UnitType
 import mindustry.type.Weapon
 import mindustry.world.meta.Env
+import mindustry.world.meta.Stat
+import mindustry.world.meta.StatValue
+import mindustry.world.meta.StatValues
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.Unit as KUnit
 
 open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, applys: IceUnitType.() -> KUnit ={}) : UnitType(name) {
+  companion object {
+    var imineLaserRegion: TextureRegion by TextureRegionDelegate("minelaser".appendModName())
+    var imineLaserEndRegion: TextureRegion by TextureRegionDelegate("minelaser-end".appendModName())
+    val legOffsetIce = Vec2()
+    val rand: Rand = Rand()
+  }
   private var requirements: Array<ItemStack> = arrayOf(ItemStack(IItems.低碳钢, 100))
 
   init {
@@ -61,13 +71,26 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     requirements = ItemStack.with(*req)
   }
 
-  companion object {
-    var imineLaserRegion: TextureRegion by TextureRegionDelegate("minelaser".appendModName())
-    var imineLaserEndRegion: TextureRegion by TextureRegionDelegate("minelaser-end".appendModName())
-    val legOffsetIce = Vec2()
-    val rand: Rand = Rand()
+  override fun setStats() {
+    super.setStats()
+    fun abilities(abilities: Seq<Ability>): StatValue {
+      return StatValue { table->
+        table.row()
+        table.table { t ->
+          for (ability in abilities) {
+            if (ability.display) {
+              ability.display(t)
+              t.row()
+            }
+          }
+        }
+      }
+    }
+    stats.remove(Stat.abilities)
+    if (abilities.any()) {
+      stats.add(Stat.abilities, abilities(abilities))
+    }
   }
-
   override fun getRequirements(prevReturn: Array<UnitType?>?, timeReturn: FloatArray?): Array<ItemStack>? {
     if (totalRequirements != null) return totalRequirements
 

@@ -1,10 +1,12 @@
 package ice.ui.menusDialog
 
+import arc.Core
 import arc.scene.ui.Image
 import arc.scene.ui.Label
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Scaling
+import ice.DeepSpace
 import ice.content.Remainss
 import ice.graphics.IStyles
 import ice.graphics.IceColor
@@ -18,6 +20,7 @@ import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
 
 object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menusButton_remains) {
+
   val remainsSeq = Seq<Remains>()
   val enableSeq = Seq<Remains>()
   var tempRemain = Remainss.娜雅的手串
@@ -25,6 +28,14 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
   lateinit var enableTable: Table
   lateinit var remainsTable: Table
   var slotPos: Int = 8
+  override fun init() {
+    remainsSeq.sort { it.level.toFloat() }.reversed().forEach {
+      val enabled = Core.settings.getBool("${DeepSpace.name}-remains-${it.name}-enabled", false)
+      if (enabled) {
+        it.setEnabled(true)
+      }
+    }
+  }
 
   override fun build(cont: Table) {
     cont.table {

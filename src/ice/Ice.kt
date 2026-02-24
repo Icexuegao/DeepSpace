@@ -12,14 +12,18 @@ import ice.library.EventType
 import ice.library.IFiles
 import ice.library.Schematics
 import ice.ui.Documents
+import ice.ui.MenusDialog
 import ice.ui.UI
 import ice.ui.bundle.BaseBundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.Noise2dBlock
 import ice.world.meta.IAttribute
 import mindustry.Vars
+import mindustry.content.Blocks
 import mindustry.ctype.UnlockableContent
 import mindustry.mod.Mod
+import mindustry.world.blocks.defense.turrets.BaseTurret
+import mindustry.world.consumers.ConsumeCoolant
 import singularity.Singularity
 import singularity.type.SglCategory
 import universecore.UncCore
@@ -30,9 +34,9 @@ open class Ice : Mod() {
   }
 
   init {
+    IFiles.setup()
     IAttribute.load()
     UncCore.setup()
-    IFiles.setup()
     SettingValue.setup()
     IceRegister.setup()
     IceBullet.setup()
@@ -46,10 +50,10 @@ open class Ice : Mod() {
     singularity.init()
     //  SglTechTreeDialog().show()
     UI.init()
-    Remainss.init()
     Schematics.init()
     Vars.asyncCore.processes.add(ParcelProcess)
     Documents.init()
+    MenusDialog.init()
 
     Vars.content.each {
       if (it.minfo.mod== DeepSpace.mod && it is UnlockableContent)it.unlock()
@@ -70,6 +74,8 @@ open class Ice : Mod() {
     IWeathers.load()
     IPlanets.load()
     //  SglTechThree.load()
+
     BaseBundle.load()
+
   }
 }

@@ -87,7 +87,7 @@ open class LiquidClassifier(name: String) : IceBlock(name) {
       }
 
       proximity.select { it !is MultipleLiquidBlock.MultipleBlockBuild }.forEach {
-        if (sortLiquid != null) transferLiquid(it, 10f, sortLiquid)
+        if (sortLiquid != null &&it.liquids!=null) transferLiquid(it, 10f, sortLiquid)
       }
     }
 

@@ -13,28 +13,30 @@ import arc.util.Align
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.ui.iPaneG
+import ice.library.world.Load
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*
 import ice.world.meta.IceStats
 
-object MenusDialog : Dialog() {
+object MenusDialog : Dialog(), Load {
   const val backMargin = 10f
   val back = IStyles.background11
   var button: BaseMenusDialog = PublicInfoDialog
   lateinit var conts: Table
 
-  init {
-    ResearchDialog.setup()
-    DataDialog.setup()
-    AchievementDialog.setup()
-    RemainsDialog.setup()
-    PublicInfoDialog.setup()
-    ConfigureDialog.setup()
-    ModInfoDialog.setup()
-    SponsoredDialog.setup()
+  override fun init() {
+    BaseMenusDialog.dalogs.add(PublicInfoDialog)
+    BaseMenusDialog.dalogs.add(ResearchDialog)
+    BaseMenusDialog.dalogs.add(DataDialog)
+    BaseMenusDialog.dalogs.add(AchievementDialog)
+    RemainsDialog.init()
+    BaseMenusDialog.dalogs.add(RemainsDialog)
+    BaseMenusDialog.dalogs.add(ConfigureDialog)
+    BaseMenusDialog.dalogs.add(ModInfoDialog)
+    BaseMenusDialog.dalogs.add(SponsoredDialog)
   }
 
-  init {
+  fun build() {
     reset()
     setFillParent(true)
     defaults().reset()
@@ -95,6 +97,7 @@ object MenusDialog : Dialog() {
   }
 
   override fun show(stage: Scene): Dialog {
+    build()
     show(stage, Actions.sequence(Actions.alpha(0f), Actions.fadeIn(0.4f, Interp.fade)))
     centerWindow()
     return this
@@ -103,7 +106,7 @@ object MenusDialog : Dialog() {
   override fun hide() {
     if (!isShown) return
     setOrigin(Align.center)
-    setClip(false)
+    clip = false
     isTransform = true
 
     hide(Actions.fadeOut(0.4f, Interp.fade))

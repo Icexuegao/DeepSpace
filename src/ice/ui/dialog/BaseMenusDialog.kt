@@ -14,13 +14,7 @@ abstract class BaseMenusDialog(val name: String, val icon: Drawable): Load{
         val dalogs = Seq<BaseMenusDialog>()
     }
 
-    init {
-        dalogs.add(this)
-    }
-
-    open fun build(cont: Table) {
-
-    }
+    abstract fun build(cont: Table)
 
     open fun hide() {
       MenusDialog.conts.clearR().actionsR(Actions.fadeOut(0f), Actions.fadeIn(0.5f))
