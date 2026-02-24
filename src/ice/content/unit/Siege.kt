@@ -21,7 +21,7 @@ import mindustry.world.meta.BlockFlag
 class Siege : IceUnitType("siege") {
   init {
     bundle {
-      desc(zh_CN, "攻城", " 配备180毫米口径冲击炮,在防御/攻坚战中皆有不俗表现\n冲击炮开火时产生的强大气浪足以吹飞小口径炮弹\n但因其剧烈的后坐力,需要展开脚架完全架起后才能开火", "炮平四海!!!")
+      desc(zh_CN, "攻城", "中型地面突击单位.使用冲击炮越过防御工事轰击敌方建筑.开火时无法移动", "炮平四海!!!")
     }
     health = 8400f
     armor = 12f

@@ -29,7 +29,7 @@ import mindustry.graphics.Pal
 class Scream : IceUnitType("scream") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "悲鸣", "超重型坦克,将只用于大型舰只及阵地防御的轨道炮作为主炮\n配备四门速射粒子炮及两门弧光冲击炮,正面火力极为凶猛\n新型装甲镀层使其足以抵御大口径炮弹并适应复杂的战场环境\n状态场使其能够更好地协同周围友军突破敌军阵线", "钢铁的履带滚滚向前")
+      desc(zh_CN, "悲鸣", "重型地面突击单位.对远距离敌人发射集束弹轰击,对近距离敌人则切换为速射粒子炮与弧光冲击炮.对附近的友军提供庇护和突袭效果.配备单位构筑器,会随时间向战场投放\"重压\"","战场沉默的天灾,\n可怜蝼蚁的悲鸣.")
     }
     squareShape = true
     omniMovement = false

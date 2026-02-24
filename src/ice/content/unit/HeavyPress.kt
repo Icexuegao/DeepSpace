@@ -16,7 +16,7 @@ import mindustry.world.meta.BlockFlag
 class HeavyPress : IceUnitType("heavyPress") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "重压", "装甲厚重的慢速单位,结构简单,生产工艺成熟\n依靠坚固的装甲承受打击并以履带持续碾压建筑造成伤害")
+      desc(zh_CN, "重压", "中型地面突击单位.持续以履带碾压对敌方建筑.正面投射弧形护盾抵御攻击,碾压时减少所受伤害","钢铁的履带滚滚向前")
     }
     squareShape = true
     omniMovement = false

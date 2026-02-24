@@ -17,6 +17,9 @@ import mindustry.graphics.Pal
 
 class BreakArmy : IceUnitType("breakArmy") {
   init {
+    bundle {
+      desc(zh_CN, "破军","中型地面突击单位.发射高爆炮弹攻击敌人")
+    }
     armor = 14f
     speed = 0.7f
     health = 1200f
@@ -27,9 +30,6 @@ class BreakArmy : IceUnitType("breakArmy") {
     omniMovement = false
     rotateMoveFirst = true
     treadRects = arrayOf(Rect(16f - (128 / 2), 11f - (149 / 2), 33f, 127f))
-    bundle {
-      desc(zh_CN, "破军")
-    }
     setWeapon("weapon") {
       x = 0f
       shootY += 8f

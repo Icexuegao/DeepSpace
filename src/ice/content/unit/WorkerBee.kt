@@ -9,7 +9,7 @@ import mindustry.gen.BuildingTetherPayloadUnit
 class WorkerBee : IceUnitType("unit_workerBee", BuildingTetherPayloadUnit::class.java) {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "工蜂", "小巧灵活的辅助单位,勤勤恳恳地为巢群培育巨兽")
+      desc(zh_CN, "工蜂", "轻型空中工程单位.配备精密的模块化建造系统,负责大型单位的建造与装配任务")
     }
     defaultCommand = UnitCommand.assistCommand
 
