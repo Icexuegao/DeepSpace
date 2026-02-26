@@ -35,7 +35,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
       contents.addAll(BaseContentSeq.items)
       color = { it.color }
     }
-    ContentDialogBase<Liquid>("液体").apply {
+    ContentDialogBase<Liquid>("流体").apply {
       contents.addAll(BaseContentSeq.liquids)
       color = { it.color }
     }
@@ -246,7 +246,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
 
     fun getCurrentContent(): T {
       val currentContent = tmpHash.filterIndexed { index, _ -> index == currentContentIndex }.first()
-      if (currentContent.isHidden) {
+      if (currentContent.isHidden&& !SettingValue.启用调试模式) {
         currentContentIndex++
         return getCurrentContent()
       }

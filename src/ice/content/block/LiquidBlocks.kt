@@ -23,6 +23,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawLiquidTile
 import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.Attribute
+import singularity.world.blocks.liquid.LiquidUnloader
 
 @Suppress("unused")
 object LiquidBlocks : Load {
@@ -128,7 +129,7 @@ object LiquidBlocks : Load {
     hasItems = false
     hasPower = false
     liquidCapacity = 10f
-    requirements(Category.liquid, IItems.锌锭,5, IItems.石英玻璃, 10)
+    requirements(Category.liquid, IItems.锌锭, 5, IItems.石英玻璃, 10)
     bundle {
       desc(zh_CN, "导管桥", "在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输液体")
     }
@@ -156,7 +157,7 @@ object LiquidBlocks : Load {
     hasItems = false
     liquidCapacity = 10f
     consumePower(30f / 60f)
-    requirements(Category.liquid, IItems.铜锭,8,IItems.锌锭,10, IItems.石英玻璃, 20)
+    requirements(Category.liquid, IItems.铜锭, 8, IItems.锌锭, 10, IItems.石英玻璃, 20)
 
     bundle {
       desc(zh_CN, "长距导管桥", "消耗电力,在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输液体")
@@ -180,7 +181,7 @@ object LiquidBlocks : Load {
   val 基础液体路由器 = LiquidRouter("baseLiquidRouter").apply {
     size = 1
     health = 100
-    requirements(Category.liquid, IItems.石英玻璃, 5)
+    requirements(Category.liquid, IItems.铜锭, 4, IItems.石英玻璃, 2)
     bundle {
       desc(zh_CN, "基础液体路由器", "接受一个方向的液体输入,并平均输出到其他3个方向,可以储存一定量的液体")
     }
@@ -200,7 +201,7 @@ object LiquidBlocks : Load {
   val 基础液体交叉器 = LiquidJunction("baseLiquidJunction").apply {
     size = 1
     health = 80
-    requirements(Category.liquid, IItems.石英玻璃, 5)
+    requirements(Category.liquid, IItems.黄铜锭, 5, IItems.石英玻璃, 5)
 
     bundle {
       desc(zh_CN, "基础液体交叉器")
@@ -213,7 +214,7 @@ object LiquidBlocks : Load {
     squareSprite = false
     liquidPadding = 6f / 4f
     liquidCapacity = 800f
-    requirements(Category.liquid, IItems.铜锭, 30)
+    requirements(Category.liquid, IItems.铜锭, 20, IItems.石英玻璃, 15)
     bundle {
       desc(zh_CN, "流体容器")
     }
@@ -225,7 +226,7 @@ object LiquidBlocks : Load {
     squareSprite = false
     liquidPadding = 6f / 4f
     liquidCapacity = 2000f
-    requirements(Category.liquid, IItems.铜锭, 30)
+    requirements(Category.liquid, IItems.铜锭, 50, IItems.石英玻璃, 30)
     bundle {
       desc(zh_CN, "流体仓库")
     }
@@ -238,7 +239,7 @@ object LiquidBlocks : Load {
     liquidPadding = 4f
     liquidCapacity = 6400f
     placeableLiquid = true
-    requirements(Category.liquid, IItems.铱板, 85, IItems.石英玻璃, 35, IItems.陶钢, 55)
+    requirements(Category.liquid, IItems.铱板, 85, IItems.陶钢, 55, IItems.石英玻璃, 35)
     bundle {
       desc(zh_CN, "装甲储液罐", "双层复合装甲,内置的修复夹层可快速修复罐体,使其更安全地储存大量液体")
     }
@@ -247,7 +248,7 @@ object LiquidBlocks : Load {
     size = 3
     liquidCapacity = 1000f
     health = size * size * 100
-    requirements(Category.liquid, IItems.铜锭, 10)
+    requirements(Category.liquid, IItems.铜锭, 50, IItems.铬锭, 30, IItems.单晶硅, 20, IItems.石英玻璃, 50)
     bundle {
       desc(zh_CN, "流体枢纽", "能将多种流体独立存储于同一单元,有效解决了复杂流水线中的空间占用问题,是高级化生产的必备设施")
     }
@@ -255,10 +256,17 @@ object LiquidBlocks : Load {
   val 流体抽离器 = LiquidClassifier("liquidClassifier").apply {
     size = 1
     liquidCapacity = 0f
-    requirements(Category.liquid, IItems.石英玻璃, 20, IItems.铜锭, 25)
+    requirements(Category.liquid, IItems.铜锭, 20, IItems.黄铜锭, 10, IItems.铬锭, 10, IItems.石英玻璃, 10)
 
     bundle {
       desc(zh_CN, "流体抽离器", "流体枢纽的流体卸载装置,将流体卸载于相邻的可输入建筑,本身并不存储流体")
     }
+  }
+  val 流体装卸器 = LiquidUnloader("liquid_unloader").apply {
+    bundle {
+      desc(zh_CN, "流体装卸器", "从方块中卸载流体，就像装卸器提取物品一样")
+    }
+    requirements(Category.liquid, IItems.单晶硅, 20, IItems.铝锭, 25, IItems.铬锭, 15)
+    size = 1
   }
 }

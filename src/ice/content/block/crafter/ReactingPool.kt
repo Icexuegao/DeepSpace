@@ -30,7 +30,7 @@ class ReactingPool : NormalCrafter("reacting_pool") {
       desc(zh_CN, "反应仓", "一个精准控制进料的化学反应容器,是普遍使用的化工设备")
     }
     requirements(
-      Category.crafting, IItems.铬锭, 100, IItems.石英玻璃, 100, IItems.铅锭, 80, IItems.钴锭, 85, IItems.单晶硅, 80, IItems.钴钢, 7
+      Category.crafting, IItems.铬锭, 100, IItems.石英玻璃, 100, IItems.铅锭, 80, IItems.钴锭, 85, IItems.单晶硅, 80, IItems.钴钢, 70
     )
     size = 3
     squareSprite = false
@@ -91,67 +91,72 @@ class ReactingPool : NormalCrafter("reacting_pool") {
     newProduce()
     produce!!.item(IItems.絮凝剂, 2)
 
-    newConsume()
-    consume!!.time(30f)
-    consume!!.item(IItems.生煤, 1)
-    consume!!.liquids(
-      *LiquidStack.with(
-        ILiquids.酸液, 0.2f, ILiquids.孢子云, 0.3f
-      )
-    )
-    consume!!.power(1f)
-    newProduce()
-    produce!!.item(Items.blastCompound, 1)
+    newConsume().apply {
+      time(30f)
+      item(IItems.生煤, 1)
+      liquids(ILiquids.酸液, 0.2f, ILiquids.孢子云, 0.3f)
+      power(1f)
+    }
+    newProduce().item(Items.blastCompound, 1)
+
+    newConsume().apply {
+      time(60f)
+      items(IItems.生煤, 2, IItems.单晶硅,1)
+      liquids(ILiquids.氢气, 0.2f)
+      power(1f)
+    }
+    newProduce().item(IItems.石墨烯, 1)
+
 
     draw = DrawMulti(
       DrawBottom(), object : DrawBlock() {
-        override fun draw(build: Building?) {
-          val e = build as NormalCrafterBuild
-          if (e.consumer.current == null || e.producer!!.current == null) return
-          val l = e.consumer.current!!.get(ConsumeType.liquid)!!.consLiquids!![0].liquid
-          val region = Vars.renderer.fluidFrames[if (l.gas) 1 else 0][l.animationFrame]
-          val toDraw = Tmp.tr1
-          val bounds = size / 2f * Vars.tilesize - 3
-          val color = Tmp.c1.set(l.color).a(1f).lerp(e.producer!!.current!!.color, e.warmup())
+      override fun draw(build: Building?) {
+        val e = build as NormalCrafterBuild
+        if (e.consumer.current == null || e.producer!!.current == null) return
+        val l = e.consumer.current!!.get(ConsumeType.liquid)!!.consLiquids!![0].liquid
+        val region = Vars.renderer.fluidFrames[if (l.gas) 1 else 0][l.animationFrame]
+        val toDraw = Tmp.tr1
+        val bounds = size / 2f * Vars.tilesize - 3
+        val color = Tmp.c1.set(l.color).a(1f).lerp(e.producer!!.current!!.color, e.warmup())
 
-          for (sx in 0..<size) {
-            for (sy in 0..<size) {
-              val relx = sx - (size - 1) / 2f
-              val rely = sy - (size - 1) / 2f
+        for (sx in 0..<size) {
+          for (sy in 0..<size) {
+            val relx = sx - (size - 1) / 2f
+            val rely = sy - (size - 1) / 2f
 
-              toDraw.set(region)
-              //truncate region if at border
-              val rightBorder = relx * Vars.tilesize + 3
-              val topBorder = rely * Vars.tilesize + 3
-              val squishX = rightBorder + Vars.tilesize / 2f - bounds
-              val squishY = topBorder + Vars.tilesize / 2f - bounds
-              var ox = 0f
-              var oy = 0f
+            toDraw.set(region)
+            //truncate region if at border
+            val rightBorder = relx * Vars.tilesize + 3
+            val topBorder = rely * Vars.tilesize + 3
+            val squishX = rightBorder + Vars.tilesize / 2f - bounds
+            val squishY = topBorder + Vars.tilesize / 2f - bounds
+            var ox = 0f
+            var oy = 0f
 
-              if (squishX >= 8 || squishY >= 8) continue
-              //cut out the parts that don't fit inside the padding
-              if (squishX > 0) {
-                toDraw.setWidth(toDraw.width - squishX * 4f)
-                ox = -squishX / 2f
-              }
-
-              if (squishY > 0) {
-                toDraw.setY(toDraw.y + squishY * 4f)
-                oy = -squishY / 2f
-              }
-
-              Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, max(e.warmup(), e.liquids.get(l) / liquidCapacity), color)
+            if (squishX >= 8 || squishY >= 8) continue
+            //cut out the parts that don't fit inside the padding
+            if (squishX > 0) {
+              toDraw.setWidth(toDraw.width - squishX * 4f)
+              ox = -squishX / 2f
             }
+
+            if (squishY > 0) {
+              toDraw.setY(toDraw.y + squishY * 4f)
+              oy = -squishY / 2f
+            }
+
+            Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, max(e.warmup(), e.liquids.get(l) / liquidCapacity), color)
           }
         }
-      }, object : DrawDyColorCultivator<NormalCrafterBuild>() {
-        init {
-          spread = 4f
-          plantColor = Func { e: NormalCrafterBuild? -> SglDrawConst.transColor }
-          bottomColor = Func { e: NormalCrafterBuild? -> SglDrawConst.transColor }
-          plantColorLight = Func { e: NormalCrafterBuild? -> Color.white }
-        }
-      }, DrawDefault()
+      }
+    }, object : DrawDyColorCultivator<NormalCrafterBuild>() {
+      init {
+        spread = 4f
+        plantColor = Func { e: NormalCrafterBuild? -> SglDrawConst.transColor }
+        bottomColor = Func { e: NormalCrafterBuild? -> SglDrawConst.transColor }
+        plantColorLight = Func { e: NormalCrafterBuild? -> Color.white }
+      }
+    }, DrawDefault()
     )
   }
 }

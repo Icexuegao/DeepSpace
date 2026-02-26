@@ -15,6 +15,10 @@ import ice.content.unit.flying.Veto
 import ice.content.unit.flying.fire.*
 import ice.content.unit.flying.rain.*
 import ice.content.unit.mech.*
+import ice.content.unit.naval.Abyss
+import ice.content.unit.naval.Execution
+import ice.content.unit.naval.Meditation
+import ice.content.unit.naval.Witness
 import ice.entities.IcePuddle
 import ice.entities.bullet.MultiBasicBulletType
 import ice.entities.effect.MultiEffect

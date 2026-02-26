@@ -11,31 +11,11 @@ import mindustry.type.Category
 
 @Suppress("unused")
 object CrafterBlocks : Load {
-  val 物品焚烧炉 = Incinerator("itemIncinerator").apply {
-    size = 1
-    hasLiquids = false
-    flameColor = IceColor.c5
-    consumePower(20 / 60f)
-    requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5)
-    bundle {
-      desc(zh_CN, "物品焚烧炉")
-    }
-  }
-  val 液体焚烧炉 = Incinerator("liquidIncinerator").apply {
-    size = 1
-    hasItems = false
-    flameColor = IceColor.b7
-    consumePower(20 / 60f)
-    requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5)
-    bundle {
-      desc(zh_CN, "液体焚烧炉")
-    }
-  }
   val 焚烧炉 = Incinerator("incinerator").apply {
     size = 1
     flameColor = IceColor.b4
     consumePower(20 / 60f)
-    requirements(Category.crafting, IItems.高碳钢, 20, IItems.铅锭, 5)
+    requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5, IItems.铅锭, 5)
     bundle {
       desc(zh_CN, "焚烧炉")
     }

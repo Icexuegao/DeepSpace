@@ -1,6 +1,5 @@
 package ice.world.content.blocks.liquid
 
-import arc.func.Func
 import arc.func.Prov
 import arc.graphics.g2d.TextureRegion
 import arc.scene.ui.layout.Table
@@ -14,7 +13,6 @@ import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
-import mindustry.gen.Building
 import mindustry.graphics.Drawf
 import mindustry.type.Liquid
 import mindustry.world.blocks.liquid.LiquidBlock
@@ -27,13 +25,12 @@ open class LiquidClassifier(name: String) : IceBlock(name) {
   init {
     update = true
     saveConfig = true
-    hasLiquids = true
+    hasLiquids = false
     configurable = true
     destructible = true
     underBullets = true
     outputsLiquid = true
     clearOnDoubleTap = true
-    liquidCapacity = 30f
     buildType = Prov(::LiquidClassifierBuild)
     drawers = DrawMulti(DrawRegion("-bottom"), DrawBuild<LiquidClassifierBuild> {
       if (sortLiquid != null) {
@@ -53,20 +50,6 @@ open class LiquidClassifier(name: String) : IceBlock(name) {
     }
   }
 
-  companion object {
-    fun Building.transferLiquid(next: Building, amount: Float, liquid: Liquid) {
-      next.liquids ?: return
-      val flow = min(liquids.get(liquid), min(next.block.liquidCapacity - next.liquids[liquid], amount))
-      if (next.acceptLiquid(this, liquid)) {
-        next.handleLiquid(this, liquid, flow)
-        liquids.remove(liquid, flow)
-      }
-    }
-  }
-
-  override fun <T : Building?> addLiquidBar(current: Func<T?, Liquid?>?) {
-  }
-
   inner class LiquidClassifierBuild : IceBuild() {
 
     var sortLiquid: Liquid? = null
@@ -81,13 +64,17 @@ open class LiquidClassifier(name: String) : IceBlock(name) {
     }
 
     override fun updateTile() {
-      proximity.select { it is MultipleLiquidBlock.MultipleBlockBuild }.forEach { mub ->
-        val multipleBlockBuild = mub as MultipleLiquidBlock.MultipleBlockBuild
-        if (sortLiquid != null) multipleBlockBuild.transferLiquid(this, 10f, sortLiquid)
-      }
-
-      proximity.select { it !is MultipleLiquidBlock.MultipleBlockBuild }.forEach {
-        if (sortLiquid != null &&it.liquids!=null) transferLiquid(it, 10f, sortLiquid)
+      sortLiquid ?: return
+      proximity.forEach {
+        if (it is MultipleLiquidBlock.MultipleBlockBuild) {
+          proximity.forEach { building ->
+            if (building.acceptLiquid(this, sortLiquid)) {
+              val amount: Float = min(it.liquids.get(sortLiquid), building.block.liquidCapacity - building.liquids.get(sortLiquid))
+              building.handleLiquid(this, sortLiquid, amount)
+              it.liquids.remove(sortLiquid, amount)
+            }
+          }
+        }
       }
     }
 

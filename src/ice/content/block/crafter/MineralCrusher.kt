@@ -1,22 +1,25 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.world.content.blocks.crafting.oreMultipleCrafter.OreFormula
-import ice.world.content.blocks.crafting.oreMultipleCrafter.OreMultipleCrafter
+import ice.ui.bundle.BaseBundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
-import mindustry.content.Items
-import mindustry.content.Liquids
-import mindustry.type.LiquidStack
-import mindustry.world.consumers.ConsumeLiquids
+import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
+import singularity.world.blocks.product.NormalCrafter
 
-class MineralCrusher : OreMultipleCrafter("mineralCrusher") {
+class MineralCrusher : NormalCrafter("mineralCrusher") {
   init {
+    BaseBundle.bundle {
+      desc(zh_CN,"矿石粉碎机","将融合矿物质粉碎为小块,然后筛选分类")
+    }
+    health=240
+    size=4
     squareSprite = false
     hasLiquids = true
-    drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawDefault(), DrawRegion("-runner", 6f, true).apply {
+    draw = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawDefault(), DrawRegion("-runner", 6f, true).apply {
       x = 8.3f
       y = 8.3f
     }, DrawRegion("-runner", 6f, true).apply {
@@ -29,18 +32,24 @@ class MineralCrusher : OreMultipleCrafter("mineralCrusher") {
       x = -8.3f
       y = 8.3f
     })
-    oreFormula.add(OreFormula().apply {
-      crftTime = 60f
-      addInput(IItems.方铅矿, 1)
-      addInput(ConsumeLiquids(LiquidStack.with(Liquids.water, 15f)))
-      addOutput(IItems.铅锭, 1, 5)
-      addOutput(IItems.铜锭, 2, 60)
-      addOutput(Items.beryllium, 3, 7)
-    }, OreFormula().apply {
-      crftTime = 30f
-      addInput(IItems.黄铜矿, 1, IItems.生煤, 1)
-      addOutput(IItems.铅锭, 1, 50)
-      addOutput(IItems.钴锭, 1, 50)
-    })
+    newConsume().apply {
+      items(IItems.黑晶石, 1)
+      power(2f)
+      time(30f)
+    }
+    newProduce().apply {
+      items(IItems.铬铁矿,4, IItems.方铅矿,2, IItems.铝土矿,3).random()
+    }
+
+    newConsume().apply {
+      items(IItems.黄玉髓, 1)
+      power(2f)
+      time(30f)
+    }
+    newProduce().apply {
+      items(IItems.黄铜矿,3, IItems.方铅矿,2, IItems.闪锌矿,2).random()
+    }
+
+    requirements(Category.crafting, IItems.高碳钢, 50, IItems.黄铜锭, 20, IItems.铬锭, 60, IItems.单晶硅, 20)
   }
 }

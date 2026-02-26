@@ -20,7 +20,7 @@ class CarbonSteelFactory : NormalCrafter("carbonSteelFactory") {
       )
     }
     size = 3
-    itemCapacity = 50
+    itemCapacity = 20
     alwaysUnlocked = true
     requirements(Category.crafting, IItems.铜锭, 10, IItems.低碳钢, 50)
     craftEffect = RadialEffect().apply {

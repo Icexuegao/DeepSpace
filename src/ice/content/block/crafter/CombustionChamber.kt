@@ -29,7 +29,7 @@ class CombustionChamber : NormalCrafter("combustion_chamber") {
 
 
     newConsume()
-    consume!!.liquid(Liquids.hydrogen, 0.8f)
+    consume!!.liquid(ILiquids.氢气, 0.8f)
     newProduce()
     produce!!.liquid(ILiquids.纯净水, 0.4f)
     produce!!.power(5f)

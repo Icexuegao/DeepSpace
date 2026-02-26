@@ -33,7 +33,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
     consume!!.time(60f)
     consume!!.liquids(
       *LiquidStack.with(
-        ILiquids.氯化硅溶胶, 0.2f, Liquids.hydrogen, 0.4f
+        ILiquids.氯化硅溶胶, 0.2f, ILiquids.氢气, 0.4f
       )
     )
     consume!!.item(IItems.金珀沙, 5)

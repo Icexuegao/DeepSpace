@@ -1,4 +1,4 @@
-package ice.content.unit
+package ice.content.unit.naval
 
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
@@ -87,7 +87,7 @@ class Abyss : IceUnitType("unit_abyss", UnitWaterMove::class.java) {
   }
 
   init {
-    BaseBundle.bundle {
+    BaseBundle.Companion.bundle {
       desc(zh_CN, "沧溟", "重型海栖突击单位.发射炮弹和大型鱼雷并辅以机炮攻击敌人,加装护盾辅助发生器维持友军护盾,同时为附近友军提供反扑效果,对舰攻击能力极强")
     }
     health = 8800f
@@ -139,7 +139,8 @@ class Abyss : IceUnitType("unit_abyss", UnitWaterMove::class.java) {
       gun(-6.75f, 16.25f, -20f), gun(13.5f, 7.75f, 20f), torpedo
     )
 
-    abilities.add(ShieldRegenFieldAbility(80f, 800f, 240f, 200f), StatusFieldAbility(IStatus.反扑, 360f, 360f, 160f)
+    abilities.add(
+      ShieldRegenFieldAbility(80f, 800f, 240f, 200f), StatusFieldAbility(IStatus.反扑, 360f, 360f, 160f)
     )
   }
 

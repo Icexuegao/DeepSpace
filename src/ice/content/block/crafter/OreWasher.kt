@@ -45,9 +45,7 @@ class OreWasher:NormalCrafter("ore_washer"){
   newProduce()
   produce!!.liquid(ILiquids.FEX流体, 0.2f)
   produce!!.items(
-    *ItemStack.with(
-      IItems.金珀沙, 5, IItems.黑晶石, 3, IItems.铀原矿, 2
-    )
+      IItems.黄玉髓, 5, IItems.黑晶石, 3, IItems.铀原矿, 2
   ).random()
 
   craftEffect = Fx.pulverizeMedium

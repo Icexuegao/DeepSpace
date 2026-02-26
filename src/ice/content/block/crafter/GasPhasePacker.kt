@@ -50,7 +50,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
       Items.phaseFabric, 2, IItems.气凝胶, 2
     )
   )
-  consume!!.liquid(Liquids.hydrogen, 0.4f)
+  consume!!.liquid(ILiquids.氢气, 0.4f)
   newProduce()
   produce!!.item(IItems.相位封装氢单元, 1)
 

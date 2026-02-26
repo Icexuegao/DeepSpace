@@ -138,7 +138,7 @@ object ILiquids : Load {
   var 纯净水 = object : Liquid("liquid_purified_water", Color.valueOf("#C3DFFF").a(0.8f)) {
     init {
       bundle {
-        desc(zh_CN, "纯净水", "分离掉其中的杂质的水,在各类严格的流程中是必要的","为避免引入杂质,作为溶剂的水必须经过净化去除其中可能影响产品质量的其他物质")
+        desc(zh_CN, "纯净水", "分离掉其中的杂质的水,在各类严格的流程中是必要的", "为避免引入杂质,作为溶剂的水必须经过净化去除其中可能影响产品质量的其他物质")
       }
       heatCapacity = 0.45f
       temperature = 0.4f
@@ -292,6 +292,13 @@ object ILiquids : Load {
       desc(zh_CN, "沼气", "一种天然气体,主要成分是甲烷,可替代部分工厂的燃料需求")
     }
   }
+  val 氢气 = IceLiquid("liquid_hydrogen", Color.valueOf("#9eabf7")) {
+    bundle {
+      desc(zh_CN, "氢气")
+    }
+    gas = true
+    flammability = 1f
+  }
   var 氦气 = IceLiquid("liquid_helium", Color.valueOf("#D6FFFC")) {
     bundle {
       desc(zh_CN, "氦气", "较为常见的0族惰性气体,常用作工业保护气或通过中子流轰击生产核聚变燃料", "一般来说氦气在行星岩层中的分布会比较丰富,由于原子质量过轻,在有大气的行星地表很难大量存在")
@@ -381,5 +388,4 @@ object ILiquids : Load {
       }, { puddle: Puddle? -> super.drawPuddle(puddle) })
     }
   }
-
 }

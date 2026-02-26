@@ -42,11 +42,7 @@ class Electrolytor:NormalCrafter("electrolytor"){
     power(6f)
   }
   newProduce().apply {
-    liquids(
-      *LiquidStack.with(
-        Liquids.ozone, 0.6f, Liquids.hydrogen, 0.8f
-      )
-    )
+    liquids(Liquids.ozone, 0.6f, ILiquids.氢气, 0.8f)
   }
 
   newConsume()
@@ -55,7 +51,7 @@ class Electrolytor:NormalCrafter("electrolytor"){
   newProduce()
   produce!!.liquids(
     *LiquidStack.with(
-      Liquids.ozone, 0.6f, Liquids.hydrogen, 0.8f
+      Liquids.ozone, 0.6f, ILiquids.氢气, 0.8f
     )
   )
 

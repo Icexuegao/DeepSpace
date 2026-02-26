@@ -57,7 +57,7 @@ class ThermalSmelter : NormalCrafter("thermal_smelter") {
         IItems.氯铱酸盐, 1, IItems.焦炭, 2
       )
     )
-    consume!!.liquid(Liquids.hydrogen, 0.4f)
+    consume!!.liquid(ILiquids.氢气, 0.4f)
     consume!!.power(3f)
     newProduce()
     produce!!.item(IItems.铱锭, 2)

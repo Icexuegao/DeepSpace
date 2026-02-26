@@ -7,6 +7,8 @@ import ice.DeepSpace
 import ice.core.SettingValue
 import ice.library.DeBugFragment
 import ice.library.IFiles
+import ice.library.struct.asDrawable
+import ice.library.struct.log
 import ice.library.world.Load
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.ConversationFragment
@@ -24,18 +26,35 @@ object UI : Load {
   var toolBarFrag: ToolBarFrag = Sgl.ui.toolBar
 
   override fun init() {
-    toolBarFrag.addTool("deepSpaceMenu", { Icon.menu }, {
+    toolBarFrag.addTool("deepSpaceMenu",{"模组菜单"}, { Icon.menu }, {
       MenusDialog.show()
     }) { false }
-    toolBarFrag.addTool("data", { Icon.book }, {
+    toolBarFrag.addTool("data",{"打开当前内容数据"}, { Icon.book }, {
       Vars.control.input.block?.let {
         DataDialog.showUnlockableContent(it)
-      }?:run {
+      } ?: run {
         Vars.control.input.lastUnit?.let {
           DataDialog.showUnlockableContent(it.type)
         }
       }
     }) { false }
+
+    Sgl.ui.toolBar.addTool("debugMonitor",{"调试监视器"}, { Icon.wrench }, {
+      Sgl.ui.debugInfos.hidden = !Sgl.ui.debugInfos.hidden
+    }, { !Sgl.ui.debugInfos.hidden })
+    //上一次保存的调试配置 调试常开真的很sb
+    if (!SettingValue.启用调试模式) toolBarFrag.hideTool("debugMonitor")
+    SettingValue.addDeBugRun {
+      log { it
+      }
+      if (it) toolBarFrag.showTool("debugMonitor") else {
+        log {
+          Sgl.ui.debugInfos.hidden
+        }
+        toolBarFrag.hideTool("debugMonitor")
+        Sgl.ui.debugInfos.hidden = true
+      }
+    }
     //解决第一次选择星球报错问题
     Core.settings.put("campaignselect", true)
     Vars.ui.planet = IcePlanetDialog

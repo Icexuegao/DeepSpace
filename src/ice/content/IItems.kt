@@ -4,6 +4,7 @@ import arc.Core
 import arc.graphics.g2d.TextureRegion
 import arc.util.Time
 import ice.library.world.Load
+import ice.ui.bundle.BaseBundle
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.item.IceItem
 import ice.world.content.item.OreItem
@@ -172,6 +173,11 @@ object IItems : Load {
   val 铈硅石 = OreItem("item_cerite", "BFC8E2", 2) {
     bundle {
       desc(zh_CN, "铈硅石", "一种稀土矿石,常呈黄褐色至红褐色.含有较高比例的铈元素,是提炼铈的主要原料之一")
+    }
+  }
+  val 铝土矿 = IceItem("item_alumina", "c0c0c0") {
+    bundle {
+      desc(zh_CN,"铝土矿")
     }
   }
   val 铀原矿 = OreItem("item_uranium_rawore", "#95B564", 4) {

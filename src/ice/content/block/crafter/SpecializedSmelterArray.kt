@@ -48,5 +48,13 @@ class SpecializedSmelterArray : NormalCrafter("specializedSmelterArray") {
     newProduce().apply {
       items(IItems.金锭, 1)
     }
+    newConsume().apply {
+      time(30f)
+      items(IItems.铝土矿, 3, IItems.生煤,1)
+      power(80 / 60f)
+    }
+    newProduce().apply {
+      items(IItems.铝锭, 1)
+    }
   }
 }

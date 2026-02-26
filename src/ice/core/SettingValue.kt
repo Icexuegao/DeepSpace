@@ -1,6 +1,7 @@
 package ice.core
 
 import arc.Core
+import arc.struct.Seq
 import arc.util.serialization.Jval
 import ice.audio.IMusics
 import ice.entities.ModeDifficulty
@@ -35,6 +36,11 @@ object SettingValue : Load {
     }
   }
 
+  private val deBugRunSeq = Seq<(Boolean) -> Unit>()
+  fun addDeBugRun(block: (Boolean) -> Unit) {
+    deBugRunSeq.add(block)
+  }
+
   var 启用主菜单音乐 by observable(true) { _, _, new ->
     if (!new) IMusics.title.stop()
   }
@@ -47,7 +53,9 @@ object SettingValue : Load {
     Vars.renderer.minZoom = new
   }
   var 启用星球区块ID by observable(false)
-  var 启用调试模式 by observable(false)
+  var 启用调试模式 by observable(false){_, _, new ->
+    deBugRunSeq.forEach { it.invoke(new) }
+  }
   var 星球区块调试 by observable(false) { _, _, new ->
     PlanetDialog.debugSelect = new
   }
@@ -60,11 +68,8 @@ object SettingValue : Load {
   var 神质 by observable(0)
 
   private fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T) -> Unit = { _, _, _ -> }) = Delegates.observable(initialValue) { property, old, new ->
-    if (old != new) {
-      log { property.name }
       onChange(property, old, new)
       scheduleSave()
-    }
   }
 
   override fun setup() {

@@ -31,6 +31,7 @@ import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.world.blocks.distribution.MassDriver
 import mindustry.world.blocks.storage.Unloader
+import mindustry.world.meta.BuildVisibility
 import mindustry.world.meta.Env
 import singularity.world.blocks.distribute.ItemNode
 
@@ -394,9 +395,9 @@ object Distribution : Load {
     }
   }
   val 随机源 = Randomer("randomSource").apply {
-    requirements(Category.distribution, IItems.铜锭, 1)
     bundle {
       desc(zh_CN, "随机源", "随机输出所有资源")
     }
+    buildVisibility = BuildVisibility.sandboxOnly
   }
 }
