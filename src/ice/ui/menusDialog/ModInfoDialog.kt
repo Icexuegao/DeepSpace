@@ -1,7 +1,6 @@
 package ice.ui.menusDialog
 
 import arc.Core
-import arc.flabel.FLabel
 import arc.func.ConsT
 import arc.func.Floatc
 import arc.graphics.Color
@@ -15,22 +14,22 @@ import arc.scene.style.Drawable
 import arc.scene.ui.Image
 import arc.scene.ui.Label
 import arc.scene.ui.TextButton
-import arc.scene.ui.Tooltip
 import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
-import arc.util.*
+import arc.util.Http
+import arc.util.Interval
+import arc.util.Log
+import arc.util.Time
 import arc.util.io.Streams
 import arc.util.serialization.Jval
 import ice.DeepSpace
 import ice.core.SettingValue
-import ice.graphics.Characters
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.graphics.RandSetTextrue
 import ice.library.IFiles
 import ice.library.scene.ui.*
-import ice.library.struct.asDrawable
 import ice.library.struct.log
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceEffects

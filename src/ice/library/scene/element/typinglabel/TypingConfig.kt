@@ -110,6 +110,6 @@ object TypingConfig {
         registerEffect("GRADIENT", "ENDGRADIENT", GradientEffect::class.java)
         registerEffect("FADE", "ENDFADE", FadeEffect::class.java)
         registerEffect("BLINK", "ENDBLINK", BlinkEffect::class.java)
-        registerEffect("GARBLED", "ENDGARBLED", GarbledEffect::class.java)
+       // registerEffect("GARBLED", "ENDGARBLED", GarbledEffect::class.java)
     }
 }

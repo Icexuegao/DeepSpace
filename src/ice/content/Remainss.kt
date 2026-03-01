@@ -108,7 +108,7 @@ object Remainss {
     val text = "一个被囚禁的血肉胚胎\n拥抱我,我将赐你永恒\n不必畏惧刀剑与瘟疫,不必屈服于时光与死亡\n用你的过去,换取未来\n用你的灵魂,换取存在\n直至你我合而为一"//
     setDescriptionTable {
       for (string in text.split("\n")) {
-        it.add(TLabel("{GARBLED}{SHAKE}$string")).grow().wrap().pad(5f).color(color).row()
+        it.add(TLabel(string)).grow().wrap().pad(5f).color(color).row()
       }
     }
     effect = "遗物槽位+[$pos]"
@@ -171,9 +171,9 @@ object Remainss {
     effect = "[${CrafterBlocks.碳控熔炉.localizedName}]所需燃料减少[1]"
     var itemStack = ItemStack()
     CrafterBlocks.碳控熔炉.consumers.find {
-      it.get(ConsumeType.item)!!.consItems!!.find {
-        val bool: Boolean = it.item == IItems.生煤
-        if (bool) itemStack = it
+      it.get(ConsumeType.item)!!.consItems!!.find { stack ->
+        val bool: Boolean = stack.item == IItems.生煤
+        if (bool) itemStack = stack
         bool
       } != null
     }

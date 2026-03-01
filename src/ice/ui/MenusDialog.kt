@@ -31,9 +31,9 @@ object MenusDialog : Dialog(), Load {
     BaseMenusDialog.dalogs.add(AchievementDialog)
     RemainsDialog.init()
     BaseMenusDialog.dalogs.add(RemainsDialog)
-    BaseMenusDialog.dalogs.add(ConfigureDialog)
     BaseMenusDialog.dalogs.add(ModInfoDialog)
     BaseMenusDialog.dalogs.add(SponsoredDialog)
+    BaseMenusDialog.dalogs.add(ConfigureDialog)
   }
 
   fun build() {
