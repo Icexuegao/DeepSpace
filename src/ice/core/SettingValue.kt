@@ -64,6 +64,7 @@ object SettingValue : Load {
   var 启用扭曲效果绘制 by observable(true)
   var 启用包裹物品绘制 by observable(false)
   var 启用包裹物品时限 by observable(true)
+  var 启用QQ头像获取 by observable(true)
 
   var 神质 by observable(0)
 

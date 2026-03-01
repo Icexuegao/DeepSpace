@@ -11,7 +11,6 @@ import arc.scene.Element
 import arc.scene.event.HandCursorListener
 import arc.scene.ui.Image
 import arc.scene.ui.Label
-import arc.scene.ui.Tooltip.Tooltips
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Collapser
 import arc.scene.ui.layout.Stack
@@ -22,6 +21,7 @@ import arc.util.Nullable
 import arc.util.Scaling
 import arc.util.Strings
 import ice.graphics.IStyles
+import ice.library.scene.ui.itooltip
 import ice.world.content.blocks.crafting.multipleCrafter.Formula
 import ice.world.content.blocks.crafting.multipleCrafter.FormulaStack
 import mindustry.Vars
@@ -33,6 +33,7 @@ import mindustry.gen.Icon
 import mindustry.graphics.Pal
 import mindustry.type.Item
 import mindustry.type.ItemStack
+import mindustry.type.Liquid
 import mindustry.type.UnitType
 import mindustry.ui.Styles
 import mindustry.world.Block
@@ -363,14 +364,9 @@ object IStatValues {
     if (content != null) {
       if (!Vars.mobile) {
         if (tooltip) {
-          element!!.addListener(Tooltips.getInstance().create(content.localizedName, Vars.mobile))
+          element!!.itooltip(content.localizedName)
         }
         element!!.addListener(HandCursorListener(Boolp { !content.isHidden() }, true))
-      }
-      element!!.clicked {
-        if (!content.isHidden) {
-        //  Vars.ui.content.show(content)
-        }
       }
     }
     return element
@@ -409,5 +405,38 @@ object IStatValues {
 
   fun stack(stack: ItemStack): Stack {
     return stack(stack.item.uiIcon, stack.amount, stack.item)
+  }
+  fun stack(item: UnlockableContent, amount: Int, tooltip: Boolean): Stack {
+    return stack(item.uiIcon, amount, item, tooltip)
+  }
+  fun displayItem(item: Item, amount: Int, showName: Boolean): Table {
+    val t = Table()
+    t.add(stack(item, amount, !showName))
+    if (showName) t.add(item.localizedName).padLeft((if (4 + amount > 99) 4 else 0).toFloat())
+    return t
+  }
+
+  fun displayLiquid(liquid: Liquid, amount: Float, perSecond: Boolean): Table {
+    val t = Table()
+
+    t.add(object : Stack() {
+      init {
+        add(Image(liquid.uiIcon).setScaling(Scaling.fit))
+
+        if (amount != 0f) {
+          val t = Table().left().bottom()
+          t.add(Strings.autoFixed(amount, 3)).style(Styles.outlineLabel)
+          add(t)
+        }
+      }
+    }).size(Vars.iconMed).padRight((3 + (if (amount != 0f) (Strings.autoFixed(amount, 3).length - 1) * 10 else 0)).toFloat()).with(Cons { s: Stack? -> StatValues.withTooltip(s, liquid, false) })
+
+    if (perSecond && amount != 0f) {
+      t.add(StatUnit.perSecond.localized()).padLeft(2f).padRight(5f).color(Color.lightGray).style(Styles.outlineLabel)
+    }
+
+    t.itooltip("${liquid.localizedName}")
+
+    return t
   }
 }

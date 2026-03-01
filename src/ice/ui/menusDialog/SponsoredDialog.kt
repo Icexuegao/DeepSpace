@@ -1,24 +1,24 @@
 package ice.ui.menusDialog
 
 import arc.Core
+import arc.flabel.FLabel
 import arc.graphics.Color
 import arc.scene.style.Drawable
 import arc.scene.ui.Button
 import arc.scene.ui.Image
+import arc.scene.ui.Tooltip
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Scaling
 import ice.DeepSpace
+import ice.graphics.Characters
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.IFiles
-import ice.library.scene.ui.addCR
-import ice.library.scene.ui.addLine
-import ice.library.scene.ui.iPaneG
-import ice.library.scene.ui.iTable
-import ice.library.scene.ui.itooltip
+import ice.library.scene.ui.*
+import ice.library.struct.asDrawable
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.ModInfoDialog.getQQImage
 import ice.world.meta.IceStats
@@ -29,7 +29,17 @@ import singularity.graphic.SglDrawConst
 import singularity.ui.SglStyles
 
 object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.menusButton_contribute) {
-  init{
+  private val hint = Seq<String>().apply {
+    add("你就快要成功了是吗?")
+    add("干嘛这么看着我?")
+    add("你又是为何来到这里?")
+    add("情况还真是急转直下啊")
+    add("你戳够了没?!")
+    add("你知道alon和Alon的区别吗")
+  }
+
+  init {
+    SponsoredTable("一得阁拉米∽", "762214119", 50f).itooltip("感谢Alon以及团队成员在DeepSpace模组上的辛勤付出")
     SponsoredTable("小笨喵∽", "3881959748", 30f).itooltip("希望大家多赞助赞助作者")
     SponsoredTable("minphea∽", "3757625379", 30f).itooltip("加入对立神教吧!")
     SponsoredTable("一无柠檬汁", "3591484752", 2f).itooltip("灌注alon喵")
@@ -42,7 +52,35 @@ object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.me
       p.row()
       p.addLine()
       p.row()
-      p.image(SglDrawConst.sgl2).scaling(Scaling.fit).size(365f)
+      p.table {
+        it.image(SglDrawConst.sgl2).size(365f).scaling(Scaling.fit)
+
+        val characters = Characters.alon
+        val fLabel = FLabel(hint.random()).also { label -> label.setColor(IceColor.b4) }
+        val image = Image(characters.gal.asDrawable(), Scaling.fit)
+        image.apply {
+          addListener(Tooltip { tool ->
+            tool.background(IStyles.paneLeft).margin(20f)
+            tool.add(fLabel)
+            tool.update {
+              tool.pack()
+            }
+          }.apply {
+            allowMobile = true
+          })
+          update {
+            characters.upfate(this) { fLabel.actions.isEmpty }
+          }
+          tapped {
+            fLabel.restart(hint.random())
+          }
+          val scl = 2f
+          setSize(52f * scl, 72f * scl)
+        }
+
+        it.addChild(image)
+
+      }.expandX().fillX().row()
       p.row()
       p.add(IceStats.支持github.localized()).color(IceColor.b4).growX().wrap()
       p.row()

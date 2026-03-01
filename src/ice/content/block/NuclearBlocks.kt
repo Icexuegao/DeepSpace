@@ -43,14 +43,14 @@ import singularity.world.blocks.nuclear.*
 import singularity.world.blocks.nuclear.EnergyContainer.EnergyContainerBuild
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
-import singularity.world.consumers.SglConsumers
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawReactorHeat
 import singularity.world.draw.DrawRegionDynamic
 import singularity.world.meta.SglStat
 import singularity.world.particles.SglParticleModels
-import universecore.world.consumers.ConsumeItems
-import universecore.world.consumers.ConsumeLiquids
+import universecore.world.consumers.BaseConsumers
+import universecore.world.consumers.cons.ConsumeItems
+import universecore.world.consumers.cons.ConsumeLiquids
 import kotlin.math.max
 
 @Suppress("unused")
@@ -290,7 +290,7 @@ object NuclearBlocks : Load {
       DrawBottom(), DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild?>("_top") {
         init {
           color = Func { e: NormalCrafterBuild? ->
-            val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as SglConsumers).first()
+            val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as BaseConsumers).first()
             when (cons) {
               is ConsumeLiquids<*> -> {
                 var liquid = cons.consLiquids!![0].liquid
@@ -307,7 +307,7 @@ object NuclearBlocks : Load {
             }
           }
           alpha = Floatf { e: NormalCrafterBuild? ->
-            val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as SglConsumers).first()
+            val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as BaseConsumers).first()
             when (cons) {
               is ConsumeLiquids<*> -> {
                 var liquid = cons.consLiquids!![0].liquid

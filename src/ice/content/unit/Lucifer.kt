@@ -36,8 +36,8 @@ class Lucifer : IceUnitType("lucifer") {
     buildRange = 8 * 40f
     outlines = false
     setWeapon("weapon1") {
-      x = 5f
-      y = 4f
+      x = 3f
+      y = 5f
       layerOffset = -0.2f
       reload = 15f
       shootSound = Sounds.shootAlpha
@@ -60,8 +60,8 @@ class Lucifer : IceUnitType("lucifer") {
       }
     }
     setWeapon("weapon2") {
-      x = 7.5f
-      y = 0f
+      x = 7f
+      y = 2f
       layerOffset = -0.2f
       reload = 30f
       shootSound = Sounds.shootAlpha

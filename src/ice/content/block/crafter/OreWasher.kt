@@ -17,9 +17,9 @@ import mindustry.type.ItemStack
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
-import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
-import singularity.world.consumers.SglConsumers
 import singularity.world.draw.DrawRegionDynamic
+import universecore.world.consumers.BaseConsumers
+import universecore.world.consumers.cons.ConsumeItems
 
 class OreWasher:NormalCrafter("ore_washer"){
   init {
@@ -62,15 +62,15 @@ class OreWasher:NormalCrafter("ore_washer"){
   }, DrawRegion("_top"), object : DrawRegionDynamic<NormalCrafterBuild?>("_point") {
     init {
       color = Func { e: NormalCrafterBuild? ->
-        val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as SglConsumers).first()
-        if (cons is universecore.world.consumers.ConsumeItems<*>) {
+        val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as BaseConsumers).first()
+        if (cons is ConsumeItems<*>) {
           val item = cons.consItems!![0].item
           return@Func item.color
         } else return@Func Color.white
       }
       alpha = Floatf { e: NormalCrafterBuild? ->
-        val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as SglConsumers).first()
-        if (cons is universecore.world.consumers.ConsumeItems<*>) {
+        val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as BaseConsumers).first()
+        if (cons is ConsumeItems<*>) {
           val item = cons.consItems!![0].item
           return@Floatf e.items.get(item).toFloat() / e.block.itemCapacity
         } else return@Floatf 0f

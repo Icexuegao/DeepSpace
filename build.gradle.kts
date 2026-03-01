@@ -33,7 +33,6 @@ plugins {
   id("com.scalified.plugins.gradle.proguard") version "1.7.0"
 }
 
-
 repositories {
   mavenCentral()
   mavenLocal()

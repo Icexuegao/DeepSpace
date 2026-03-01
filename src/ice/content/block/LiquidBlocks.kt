@@ -1,10 +1,6 @@
 package ice.content.block
 
-import arc.graphics.g2d.Draw
-import arc.graphics.g2d.Fill
-import arc.math.Angles.randLenVectors
 import ice.content.IItems
-import ice.content.ILiquids
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -12,17 +8,9 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import ice.world.content.blocks.liquid.*
 import ice.world.content.blocks.liquid.base.LiquidRouter
-import ice.world.draw.DrawMulti
-import mindustry.entities.Effect
-import mindustry.graphics.Pal
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.blocks.production.Pump
-import mindustry.world.draw.DrawBlurSpin
-import mindustry.world.draw.DrawDefault
-import mindustry.world.draw.DrawLiquidTile
-import mindustry.world.draw.DrawRegion
-import mindustry.world.meta.Attribute
 import singularity.world.blocks.liquid.LiquidUnloader
 
 @Suppress("unused")
@@ -58,29 +46,6 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.石英玻璃, 120, IItems.铱板, 120, IItems.导能回路, 85, IItems.陶钢, 45, IItems.生物钢, 15)
     bundle {
       desc(zh_CN, "心肌泵", "终极液泵,生物科技的高级产物")
-    }
-  }
-  val 异质析取器 = SolidPump("solutePump").apply {
-    size = 3
-    pumpAmount = 0.2f
-    squareSprite = false
-    liquidCapacity = 40f
-    result = ILiquids.异溶质
-    attribute = Attribute.water
-    consumePower(2f)
-    updateEffect = Effect(50f) { e ->
-      Draw.color(Pal.lancerLaser)
-      randLenVectors(
-        e.id.toLong(), 4, 1 + 20f * e.fout(),
-      ) { x: Float, y: Float ->
-        Draw.color(result.color)
-        Fill.circle(e.x + x, e.y + y, e.fout() * 3f)
-      }
-    }
-    drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidTile(result, 2f), DrawDefault(), DrawBlurSpin("-rotator", 2f).apply { blurThresh = 2f })
-    requirements(Category.liquid, IItems.高碳钢, 10, IItems.锌锭, 20)
-    bundle {
-      desc(zh_CN, "异质析取器", "从环境中提取${ILiquids.异溶质.localizedName}")
     }
   }
 

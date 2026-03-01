@@ -50,6 +50,9 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       it.addBox("启用扭曲效果绘制", SettingValue::启用扭曲效果绘制) { box, _ ->
         SettingValue.启用扭曲效果绘制 = box.isChecked
       }.row()
+      it.addBox("启用QQ头像获取", SettingValue::启用QQ头像获取) { box, _ ->
+        SettingValue.启用QQ头像获取 = box.isChecked
+      }.row()
       it.addIceSlider("视野最大缩放限制", 0f, 40f, 0.1f, SettingValue.视野最大缩放限制) {
         SettingValue.视野最大缩放限制 = it
       }.row()

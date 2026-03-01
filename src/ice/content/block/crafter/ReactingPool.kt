@@ -93,8 +93,8 @@ class ReactingPool : NormalCrafter("reacting_pool") {
 
     newConsume().apply {
       time(30f)
-      item(IItems.生煤, 1)
-      liquids(ILiquids.酸液, 0.2f, ILiquids.孢子云, 0.3f)
+      items(IItems.生煤, 1, IItems.燃素水晶,1)
+      liquids(ILiquids.酸液, 0.2f)
       power(1f)
     }
     newProduce().item(Items.blastCompound, 1)

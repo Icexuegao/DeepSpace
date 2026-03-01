@@ -297,6 +297,13 @@ object IceStats {
     desc(zh_CN, "可选输入")
   }
 
+  val 物品 = getStat("item") {
+    desc(zh_CN, "物品")
+  }
+  val 流体 = getStat("liquid") {
+    desc(zh_CN, "流体")
+  }
+
   private fun getStat(name: String, cat: StatCat = StatCat.general, desc: IceStat.() -> Unit): IceStat {
     return IceStat(name, cat).apply {
       bundle {

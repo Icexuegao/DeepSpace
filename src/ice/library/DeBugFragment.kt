@@ -146,12 +146,14 @@ object DeBugFragment {
       }.row()
       table.field("x"){ it1 ->
         it1.toFloatOrNull().let { it2 ->
-          weapon.x=-it2!!
+          it2?:return@let
+          weapon.x=-it2
         }
       }.growX().row()
       table.field("y"){ it1 ->
         it1.toFloatOrNull().let { it1 ->
-          weapon.y=it1!!
+          it1?:return@let
+          weapon.y=it1
         }
       }.growX().row()
       table.setSize(400f,400f)

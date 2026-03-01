@@ -84,14 +84,6 @@ class Electrolytor:NormalCrafter("electrolytor"){
   )
 
   newConsume()
-  consume!!.item(Items.sporePod, 1)
-  consume!!.liquid(Liquids.water, 0.2f)
-  consume!!.power(2.8f)
-  consume!!.time(60f)
-  newProduce()
-  produce!!.liquid(ILiquids.孢子云, 0.4f)
-
-  newConsume()
   consume!!.item(IItems.绿藻块, 1)
   consume!!.liquid(Liquids.water, 0.2f)
   consume!!.time(120f)

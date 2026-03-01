@@ -19,7 +19,7 @@ class CeriumExtractorLarge : CeriumExtractor("ceriumExtractorLarge") {
     newConsume().apply {
       time(35f)
       items(IItems.铈硅石, 7)
-      liquid(ILiquids.异溶质, 36f / 60f)
+      liquid(Liquids.water, 36f / 60f)
       power(13.85f)
     }
     newProduce().apply {

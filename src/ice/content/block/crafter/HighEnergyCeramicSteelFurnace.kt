@@ -9,6 +9,7 @@ import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
+import mindustry.content.Liquids
 import mindustry.entities.effect.MultiEffect
 import mindustry.entities.effect.RadialEffect
 import mindustry.type.Category
@@ -25,7 +26,7 @@ class HighEnergyCeramicSteelFurnace : NormalCrafter("highEnergyCeramicSteelFurna
       power(23.8f)
       time(240f)
       items(IItems.钴钢, 12, IItems.铈锭, 12, IItems.石英玻璃, 12)
-      liquid(ILiquids.异溶质, 30f / 60f)
+      liquid(Liquids.water, 30f / 60f)
     }
     newProduce().apply {
       item(IItems.陶钢, 12)

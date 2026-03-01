@@ -23,6 +23,7 @@ import arc.util.*
 import arc.util.io.Streams
 import arc.util.serialization.Jval
 import ice.DeepSpace
+import ice.core.SettingValue
 import ice.graphics.Characters
 import ice.graphics.IStyles
 import ice.graphics.IceColor
@@ -45,14 +46,7 @@ import universecore.util.UrlDownloader
 import java.util.regex.Pattern
 
 object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menusButton_infos) {
-  private val hint = Seq<String>().apply {
-    add("你就快要成功了是吗?")
-    add("干嘛这么看着我?")
-    add("你又是为何来到这里?")
-    add("情况还真是急转直下啊")
-    add("你戳够了没?!")
-    add("你知道alon和Alon的区别吗")
-  }
+
 
   private val UNC_RELEASE_FILE: Pattern = Pattern.compile("^${DeepSpace.displayName}.+\\.(jar|zip)$")
 
@@ -100,30 +94,6 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
 
       ta.table(SglDrawConst.grayUIAlpha) { t3 ->
         t3.table { t2 ->
-          t2.table { images ->
-            val characters = Characters.alon
-            val fLabel = FLabel(hint.random()).also { label -> label.setColor(IceColor.b4) }
-            val image = Image(characters.gal.asDrawable(), Scaling.fit)
-            image.apply {
-              addListener(Tooltip { tool ->
-                tool.background(IStyles.paneLeft).margin(20f)
-                tool.add(fLabel)
-                tool.update {
-                  tool.pack()
-                }
-              }.apply {
-                allowMobile = true
-              })
-              update {
-                characters.upfate(this) { fLabel.actions.isEmpty }
-              }
-              tapped {
-                fLabel.restart(hint.random())
-              }
-            }
-            val scl = 2f
-            images.add(image).size(52f * scl, 72f * scl).row()
-          }.pad(10f)
           t2.table { t ->
             t.defaults().left().pad(5f).growX().height(40f)
             t.add(DeepSpace.displayName).color(Pal.accent)
@@ -401,6 +371,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
   }
 
   fun getQQImage(number: String): TextureRegion {
+    if (!SettingValue.启用QQ头像获取)return Core.atlas.find("nomap")
     return UrlDownloader.downloadImg("https://q.qlogo.cn/headimg_dl?dst_uin=$number&spec=640&img_type=jpg", Core.atlas.find("nomap"))
   }
 

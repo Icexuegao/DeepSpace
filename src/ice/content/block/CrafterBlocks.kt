@@ -49,7 +49,7 @@ object CrafterBlocks : Load {
 
   val 裂变编织器 = FissionWeaver()
   val 绿藻池 = CulturingBarn()
-  val 育菌箱 = Incubator()
+  val 沼气池 = Incubator()
   val 电解机 = Electrolytor()
   val 渗透分离槽 = OsmoticSeparationTank()
   val 反应仓 = ReactingPool()

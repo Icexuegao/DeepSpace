@@ -8,4 +8,5 @@ import mindustry.world.meta.StatCat
 
 class IceStat(name: String, category: StatCat = StatCat.general) : Stat(name, category), BaseBundle.Bundle {
   override fun localized() = localizedName
+  override fun toString() = localizedName
 }

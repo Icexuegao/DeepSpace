@@ -38,7 +38,6 @@ import mindustry.type.Liquid
 import mindustry.world.Block
 import mindustry.world.blocks.production.BurstDrill
 import mindustry.world.draw.*
-import mindustry.world.meta.Attribute
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.util.MathTransform
@@ -50,10 +49,10 @@ import singularity.world.blocks.drills.MatrixMinerSector.MatrixMinerSectorBuild
 import singularity.world.blocks.product.FloorCrafter
 import singularity.world.blocks.product.FloorCrafter.FloorCrafterBuild
 import singularity.world.blocks.product.NormalCrafter
-import singularity.world.consumers.SglConsumeFloor
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawDirSpliceBlock
 import singularity.world.draw.DrawExpandPlasma
+import universecore.world.consumers.cons.SglConsumeFloor
 import kotlin.math.pow
 
 @Suppress("unused")
@@ -68,20 +67,20 @@ object ProductBlocks : Load {
     }
   }
   val 蛮荒钻井: Block = BaseDrill("uncivilizedDrill").apply {
-    bitHardness = 4
-    size = 3
-    drillTime = 350f
-    requirements(Category.production, IItems.铬锭, 20, IItems.钴锭, 12)
     bundle {
       desc(zh_CN, "蛮荒钻井", "一种次级钻井,在纤汲钻井的基础上进行了迭代,钻芯材料改进,可用于开采更高级资源")
     }
+    bitHardness = 4
+    size = 3
+    drillTime = 350f
+    requirements(Category.production, IItems.钴锭, 35, IItems.铬锭, 45, IItems.低碳钢, 50, IItems.高碳钢, 40, IItems.黄铜锭, 10)
   }
   val 曼哈德钻井: Block = BaseDrill("manhardDrill").apply {
     bitHardness = 5
     size = 3
-    drillTime = 300f
+    drillTime = 250f
     squareSprite = false
-    requirements(Category.production, ItemStack.with(IItems.硫钴矿, 4, IItems.低碳钢, 32))
+    requirements(Category.production, IItems.强化合金,60,IItems.钴钢,110,IItems.铪锭,80,IItems.单晶硅,36,IItems.电子元件,80,IItems.暮光合金,50)
     bundle {
       desc(zh_CN, "曼哈德钻井", "一种高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效资源开采")
     }
@@ -203,15 +202,15 @@ object ProductBlocks : Load {
 
     draw = DrawMulti(
       DrawBottom(), object : DrawLiquidRegion(Liquids.water) {
-      init {
-        suffix = "_liquid"
-      }
-    }, object : DrawRegion("_rotator") {
-      init {
-        rotateSpeed = 1.5f
-        spinSprite = true
-      }
-    }, DrawDefault(), DrawRegion("_top")
+        init {
+          suffix = "_liquid"
+        }
+      }, object : DrawRegion("_rotator") {
+        init {
+          rotateSpeed = 1.5f
+          spinSprite = true
+        }
+      }, DrawDefault(), DrawRegion("_top")
     )
   }
   var 岩石粉碎机 = FloorCrafter("rock_crusher").apply {
@@ -255,39 +254,39 @@ object ProductBlocks : Load {
     consume!!.optionalAlwaysValid = false
     produce!!.item(IItems.碱石, 1)
 
-    newOptionalProduct()
+    /*newOptionalProduct()
     consume!!.add(SglConsumeFloor<FloorCrafterBuild>(Attribute.spores, 1f)).baseEfficiency = 0f
     consume!!.optionalAlwaysValid = false
-    produce!!.liquid(ILiquids.孢子云, 0.2f)
+    produce!!.liquid(ILiquids.孢子云, 0.2f)*/
 
     newBooster(1.8f)
     consume!!.liquid(Liquids.water, 0.12f)
 
     draw = DrawMulti(
       DrawBottom(), DrawDefault(), object : DrawBlock() {
-      var rim: TextureRegion? = null
-      val heatColor: Color = Color.valueOf("ff5512")
+        var rim: TextureRegion? = null
+        val heatColor: Color = Color.valueOf("ff5512")
 
-      override fun draw(build: Building?) {
-        val e = build as NormalCrafter.NormalCrafterBuild
+        override fun draw(build: Building?) {
+          val e = build as NormalCrafter.NormalCrafterBuild
 
-        Draw.color(heatColor)
-        Draw.alpha(e.workEfficiency() * 0.6f * (1f - 0.3f + Mathf.absin(Time.time, 3f, 0.3f)))
-        Draw.blend(Blending.additive)
-        Draw.rect(rim, e.x, e.y)
-        Draw.blend()
-        Draw.color()
-      }
+          Draw.color(heatColor)
+          Draw.alpha(e.workEfficiency() * 0.6f * (1f - 0.3f + Mathf.absin(Time.time, 3f, 0.3f)))
+          Draw.blend(Blending.additive)
+          Draw.rect(rim, e.x, e.y)
+          Draw.blend()
+          Draw.color()
+        }
 
-      override fun load(block: Block) {
-        rim = Core.atlas.find(block.name + "_rim")
-      }
-    }, object : DrawRegion("_rotator") {
-      init {
-        rotateSpeed = 2.8f
-        spinSprite = true
-      }
-    }, DrawRegion("_top")
+        override fun load(block: Block) {
+          rim = Core.atlas.find(block.name + "_rim")
+        }
+      }, object : DrawRegion("_rotator") {
+        init {
+          rotateSpeed = 2.8f
+          spinSprite = true
+        }
+      }, DrawRegion("_top")
     )
   }
   var 潮汐钻头 = ExtendableDrill("tidal_drill").apply {
@@ -320,26 +319,26 @@ object ProductBlocks : Load {
 
     draw = DrawMulti(
       DrawBottom(), object : DrawExpandPlasma() {
-      init {
-        plasmas = 2
-        plasma1 = Pal.reactorPurple
-        plasma2 = Pal.reactorPurple2
-      }
-    }, DrawDefault(), object : DrawBlock() {
-      override fun draw(build: Building) {
-        val e = build as ExtendableDrill.ExtendableDrillBuild
-        val z = Draw.z()
-        Draw.z(Layer.bullet)
-        Draw.color(Pal.reactorPurple)
-        val lerp = (-2.2 * e.warmup.toDouble().pow(2.0) + 3.2 * e.warmup).toFloat()
-        Fill.circle(e.x, e.y, 3 * e.warmup)
-        SglDraw.drawLightEdge(
-          e.x, e.y, 26 * lerp, 2.5f * lerp, e.rotatorAngle, 1f, 16 * lerp, 2f * lerp, -e.rotatorAngle, 1f
-        )
-        Draw.z(z)
-        Draw.color()
-      }
-    }, DrawRegion("_top")
+        init {
+          plasmas = 2
+          plasma1 = Pal.reactorPurple
+          plasma2 = Pal.reactorPurple2
+        }
+      }, DrawDefault(), object : DrawBlock() {
+        override fun draw(build: Building) {
+          val e = build as ExtendableDrill.ExtendableDrillBuild
+          val z = Draw.z()
+          Draw.z(Layer.bullet)
+          Draw.color(Pal.reactorPurple)
+          val lerp = (-2.2 * e.warmup.toDouble().pow(2.0) + 3.2 * e.warmup).toFloat()
+          Fill.circle(e.x, e.y, 3 * e.warmup)
+          SglDraw.drawLightEdge(
+            e.x, e.y, 26 * lerp, 2.5f * lerp, e.rotatorAngle, 1f, 16 * lerp, 2f * lerp, -e.rotatorAngle, 1f
+          )
+          Draw.z(z)
+          Draw.color()
+        }
+      }, DrawRegion("_top")
     )
   }
   var 引力延展室 = ExtendMiner("force_field_extender").apply {

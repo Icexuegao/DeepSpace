@@ -9,6 +9,7 @@ import singularity.world.blocks.product.NormalCrafter
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.LightningVertex
 import universecore.graphics.lightnings.generator.RandomGenerator
+import universecore.world.consumers.cons.ConsumeLiquidCond
 import kotlin.random.Random
 
 open class Noise2dBlock(name: String) : NormalCrafter(name) {
@@ -19,6 +20,10 @@ open class Noise2dBlock(name: String) : NormalCrafter(name) {
     health = 10
     configurable = true
     buildType = Prov(::Noise2dBuild)
+    newConsume().add(ConsumeLiquidCond<Noise2dBuild>().apply {
+      minFlammability = 0.1f
+      maxFlammability = 1f
+    })
   }
 
   inner class Noise2dBuild : NormalCrafterBuild() {
@@ -46,12 +51,12 @@ open class Noise2dBlock(name: String) : NormalCrafter(name) {
     override fun update() {
       super.update()
       if (timer.get(0, 111f)) {
-       // con.create(lig)
-        TurretBullets.lightning(120f,60f,10f,20f, IceColor.b4){bullet ->
+        // con.create(lig)
+        TurretBullets.lightning(120f, 60f, 10f, 20f, IceColor.b4) { bullet ->
           lig
         }.apply {
-          speed=0f
-        }.create(this,x, y, Random.nextInt(0,360).toFloat()).apply {
+          speed = 0f
+        }.create(this, x, y, Random.nextInt(0, 360).toFloat()).apply {
 
         }
       }

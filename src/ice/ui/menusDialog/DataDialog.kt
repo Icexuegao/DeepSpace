@@ -35,9 +35,36 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
       contents.addAll(BaseContentSeq.items)
       color = { it.color }
     }
-    ContentDialogBase<Liquid>("流体").apply {
+    object :ContentDialogBase<Liquid>("流体"){
+      override fun showList(table: ITable) {
+        val types = arrayOf("liquid", "gas")
+        val tables = Array(types.size) { ITable().apply { setRowsize(5) } }
+
+        contents.select { content ->
+          searchSelect(content)
+        }.forEach { content ->
+          fun dfw(table: Table) {
+            table.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
+              currentContentIndex = tmpHash.indexOf(content)
+              flunAll()
+            }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
+          }
+          if (content.gas)dfw(tables[1]) else dfw(tables[0])
+        }
+
+        types.forEach { name ->
+          val child = tables[types.indexOf(name)]
+          if (child.children.size == 0) return@forEach
+          table.iTableG { it1 ->
+            it1.addLine(name).padBottom(5f)
+            it1.add(child).grow().row()
+          }.row()
+        }
+      }
+    }.apply {
       contents.addAll(BaseContentSeq.liquids)
       color = { it.color }
+
     }
     object : ContentDialogBase<Block>("建筑") {
       override fun showList(table: ITable) {

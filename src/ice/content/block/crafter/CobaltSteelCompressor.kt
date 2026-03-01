@@ -2,7 +2,6 @@ package ice.content.block.crafter
 
 import arc.graphics.Color
 import ice.content.IItems
-import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawLiquidRegion
@@ -41,7 +40,7 @@ class CobaltSteelCompressor : NormalCrafter("cobaltSteelCompressor") {
     newConsume().apply {
       time(36f)
       items(IItems.钴锭, 4, IItems.铬锭, 2)
-      liquid(ILiquids.异溶质, 20f / 60f)
+      liquid(Liquids.water, 20f / 60f)
       power(7.5f)
     }
     newProduce().apply {

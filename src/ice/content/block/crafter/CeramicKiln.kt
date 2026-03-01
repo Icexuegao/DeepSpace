@@ -2,10 +2,10 @@ package ice.content.block.crafter
 
 import arc.graphics.Color
 import ice.content.IItems
-import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
+import mindustry.content.Liquids
 import mindustry.type.Category
 import mindustry.world.draw.DrawCultivator
 import mindustry.world.draw.DrawDefault
@@ -23,7 +23,7 @@ class CeramicKiln : NormalCrafter("ceramicKiln") {
     health = 300
     squareSprite = false
     draw = DrawMulti(DrawRegion("-bottom"), DrawCultivator().apply {
-      plantColor = ILiquids.异溶质.color
+      plantColor = Liquids.water.color
       plantColorLight = Color.valueOf("abbaff")
       spread = 2 * 8f - 6f
     }, DrawDefault())
@@ -32,7 +32,7 @@ class CeramicKiln : NormalCrafter("ceramicKiln") {
     newConsume().apply {
       time(120f)
       items(IItems.金珀沙, 10)
-      liquid(ILiquids.异溶质, 32f / 60f)
+      liquid(Liquids.water, 32f / 60f)
       power(1f)
     }
     newProduce().apply {

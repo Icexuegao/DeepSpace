@@ -19,16 +19,14 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.Noise2dBlock
 import ice.world.meta.IAttribute
 import mindustry.Vars
-import mindustry.content.Blocks
 import mindustry.ctype.UnlockableContent
 import mindustry.mod.Mod
-import mindustry.world.blocks.defense.turrets.BaseTurret
-import mindustry.world.consumers.ConsumeCoolant
 import singularity.Singularity
 import singularity.type.SglCategory
 import universecore.UncCore
 
 open class Ice : Mod() {
+
   companion object {
     val singularity = Singularity()
   }
@@ -56,7 +54,7 @@ open class Ice : Mod() {
     MenusDialog.init()
 
     Vars.content.each {
-      if (it.minfo.mod== DeepSpace.mod && it is UnlockableContent)it.unlock()
+      if (it.minfo.mod == DeepSpace.mod && it is UnlockableContent) it.unlock()
     }
   }
 
@@ -76,6 +74,5 @@ open class Ice : Mod() {
     //  SglTechThree.load()
 
     BaseBundle.load()
-
   }
 }
