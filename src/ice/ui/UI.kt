@@ -47,13 +47,8 @@ object UI : Load {
     //上一次保存的调试配置 调试常开真的很sb
     if (!SettingValue.启用调试模式) toolBarFrag.hideTool("debugMonitor")
     SettingValue.addDeBugRun {
-      log {
-        it
-      }
+
       if (it) toolBarFrag.showTool("debugMonitor") else {
-        log {
-          Sgl.ui.debugInfos.hidden
-        }
         toolBarFrag.hideTool("debugMonitor")
         Sgl.ui.debugInfos.hidden = true
       }

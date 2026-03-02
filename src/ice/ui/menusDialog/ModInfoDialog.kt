@@ -299,7 +299,6 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
         if (isNewVersion(response.getString("tag_name"))) {
           newVersion = response.getString("tag_name")
           for (asset in response.get("assets").asArray()) {
-            log { asset.getString("name") }
             if (asset.has("name") && UNC_RELEASE_FILE.matcher(asset.getString("name")).matches()) {
               updateUrl = asset.getString("browser_download_url")
             }

@@ -226,7 +226,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       for (cons in res.all()) {
         mul *= (cons as BaseConsume<ConsumerBuildComp>).efficiency(e)
       }
-      boost * mul * Mathf.clamp(e.consumer.consEfficiency) * e.consumer.getOptionalEff(res)
+      boost * mul * Mathf.clamp(e.consumer.consEfficiency) //* e.consumer.getOptionalEff(res)
     }
 
     consume!!.customDisplayOnly = true
@@ -454,7 +454,6 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
 
     override fun update() {
       super.update()
-      updateConsumer()
 
       updateProducer()
 

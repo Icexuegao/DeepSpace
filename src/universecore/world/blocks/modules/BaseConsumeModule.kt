@@ -117,7 +117,6 @@ open class BaseConsumeModule(val entity: ConsumerBuildComp) : BlockModule() {
 
     updateOptional()
   }
-
   fun updateOptional() {
     if (optional.isNotEmpty()) {
       var cons: BaseConsumers

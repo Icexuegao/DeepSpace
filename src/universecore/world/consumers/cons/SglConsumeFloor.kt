@@ -33,7 +33,7 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
   val floorEff: ObjectFloatMap<Floor> = ObjectFloatMap<Floor>()
   var baseEfficiency: Float = 1f
 
-  constructor(vararg floors: Any?) {
+  constructor(vararg floors: Any) {
     var i = 0
     // 正确的写法
     while (i < floors.size) {
@@ -46,9 +46,9 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
     }
   }
 
-  constructor(attribute: Attribute?, scl: Float) : this(true, true, attribute, scl)
+  constructor(attribute: Attribute, scl: Float) : this(true, true, attribute, scl)
 
-  constructor(checkDeep: Boolean, checkLiquid: Boolean, attribute: Attribute?, scl: Float) {
+  constructor(checkDeep: Boolean, checkLiquid: Boolean, attribute: Attribute, scl: Float) {
     for (block in Vars.content.blocks()) {
       if ((block !is Floor) || (checkDeep && block.isDeep) || (checkLiquid && block.isLiquid) || block.attributes.get(attribute) <= 0) continue
 
@@ -77,14 +77,12 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
   fun getEff(floorCount: ObjectIntMap<Floor>): Float {
     var res = baseEfficiency
     for (entry in floorCount) {
-      res += floorEff.get(entry.key, 0f) * entry.value*0.5f
+      res += floorEff.get(entry.key, 0f) * entry.value
     }
     return res
   }
 
-  override fun type(): ConsumeType<*> {
-    return ConsumeType.floor
-  }
+  override fun type() = ConsumeType.floor
 
   override fun buildIcons(table: Table) {
     table.image(Icon.terrain)
@@ -109,14 +107,14 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
   }
 
   override fun display(stats: Stats) {
-    stats.add(Stat.tiles) { st: Table? ->
-      st!!.row().table(SglDrawConst.grayUIAlpha) { t: Table? ->
+    stats.add(Stat.tiles) {st: Table? ->
+      st!!.row().table(SglDrawConst.grayUIAlpha) {t: Table? ->
         t!!.clearChildren()
         t.defaults().pad(5f).left()
         var c = 0
         for (entry in floorEff) {
           t.stack(
-            Image(entry.key!!.uiIcon).setScaling(Scaling.fit), Table { table: Table? ->
+            Image(entry.key!!.uiIcon).setScaling(Scaling.fit), Table {table: Table? ->
               table!!.top().right().add((if (entry.value < 0) "[scarlet]" else if (baseEfficiency == 0f) "[accent]" else "[accent]+") + (entry.value * 100).toStringi(1) + "%").style(Styles.outlineLabel)
               table.top().left().add("/" + StatUnit.blocks.localized()).color(Pal.gray)
             }).fill().padRight(4f)
@@ -142,7 +140,6 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
       }, {
         Pal.accent
       }, {
-        log { efficiency(entity) }
         Mathf.clamp(efficiency(entity))
       })
     ).growX().height(18f).pad(4f)
@@ -150,7 +147,6 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
   }
 
   override fun efficiency(entity: T): Float {
-    //很奇怪 效率计算返回都是正确的 但是结果效率增加了2倍 所以我不得不*0.5
     return getEff(entity.floorCount)
   }
 
