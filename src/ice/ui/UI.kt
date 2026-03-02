@@ -28,10 +28,10 @@ object UI : Load {
   var toolBarFrag: ToolBarFrag = ToolBarFrag()
 
   override fun init() {
-    toolBarFrag.addTool("deepSpaceMenu", { "模组菜单" }, { Icon.menu }, {
+    toolBarFrag.addTool("deepSpaceMenu", {"模组菜单"}, {Icon.menu}, {
       MenusDialog.show()
-    }) { false }
-    toolBarFrag.addTool("data", { "打开当前内容数据" }, { Icon.book }, {
+    }) {false}
+    toolBarFrag.addTool("data", {"打开当前内容数据"}, {Icon.book}, {
       Vars.control.input.block?.let {
         DataDialog.showUnlockableContent(it)
       } ?: run {
@@ -39,11 +39,11 @@ object UI : Load {
           DataDialog.showUnlockableContent(it.type)
         }
       }
-    }) { false }
+    }) {false}
 
-    toolBarFrag.addTool("debugMonitor", { "调试监视器" }, { Icon.wrench }, {
+    toolBarFrag.addTool("debugMonitor", {"调试监视器"}, {Icon.wrench}, {
       Sgl.ui.debugInfos.hidden = !Sgl.ui.debugInfos.hidden
-    }, { !Sgl.ui.debugInfos.hidden })
+    }, {!Sgl.ui.debugInfos.hidden})
     //上一次保存的调试配置 调试常开真的很sb
     if (!SettingValue.启用调试模式) toolBarFrag.hideTool("debugMonitor")
     SettingValue.addDeBugRun {
@@ -73,12 +73,13 @@ object UI : Load {
       loadSystemCursors()
     }
 
-    Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.displayName}[]", Icon.menu){
+    Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.displayName}[]", Icon.menu) {
       MenusDialog.show()
       showSoundCloseV(ISounds.进入模组界面)
     }
   }
-  fun showSoundCloseV(sound: Sound){
+
+  fun showSoundCloseV(sound: Sound) {
     //非常愚蠢
     sound.play()
     Sounds.uiButton.stop()
