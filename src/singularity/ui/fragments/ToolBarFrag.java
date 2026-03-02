@@ -20,15 +20,14 @@ public class ToolBarFrag {
 
   public Table toolsTable;
 
-  public void build(){
+  public void build() {
     Core.app.post(() -> {
       Table blockCatTable = FieldHandler.getValueDefault(Vars.ui.hudfrag.blockfrag, "blockCatTable");
       blockCatTable.table(SglDrawConst.grayUIAlpha, tools -> tools.top().pane(Styles.noBarPane, this::buildTools).growY().width(50).left().get().setScrollingDisabledX(true)).width(50).growY();
     });
-
   }
 
-  public void buildTools(Table tools){
+  public void buildTools(Table tools) {
     toolsTable = tools;
     tools.clearChildren();
     tools.top().defaults().top().size(50).pad(0);
@@ -41,53 +40,55 @@ public class ToolBarFrag {
         b.resizeImage(36);
         b.setChecked(entry.checked.get());
       }).get();
-      if (entry.hoverTip != null){
+      if (entry.hoverTip != null) {
         button.addListener(new Tooltip(t -> t.background(IStyles.INSTANCE.getPaneLeft()).add(entry.hoverTip.get()).update(l -> {
           l.setText(entry.hoverTip.get());
           l.pack();
-        })){{allowMobile = true;}});
+        })) {{
+          allowMobile = true;
+        }});
       }
       tools.row();
     }
   }
 
-  public void addTool(String name, Prov<Drawable> icon, Runnable listener, Boolp checked){
+  public void addTool(String name, Prov<Drawable> icon, Runnable listener, Boolp checked) {
     tools.put(name, new ToolEntry(icon, listener, checked));
     if (toolsTable != null) buildTools(toolsTable);
   }
 
-  public void addTool(String name, Prov<String> tip, Prov<Drawable> icon, Runnable listener, Boolp checked){
+  public void addTool(String name, Prov<String> tip, Prov<Drawable> icon, Runnable listener, Boolp checked) {
     tools.put(name, new ToolEntry(icon, listener, checked, tip));
     if (toolsTable != null) buildTools(toolsTable);
   }
 
-  public void removeTool(String name){
+  public void removeTool(String name) {
     tools.remove(name);
     if (toolsTable != null) buildTools(toolsTable);
   }
 
-  public void hideTool(String name){
+  public void hideTool(String name) {
     setShown(name, false);
   }
 
-  public void showTool(String name){
+  public void showTool(String name) {
     setShown(name, true);
   }
 
-  public void setShown(String name, boolean shown){
+  public void setShown(String name, boolean shown) {
     ToolEntry entry = tools.get(name);
-    if (entry != null){
+    if (entry != null) {
       entry.shown = shown;
     }
 
     if (toolsTable != null) buildTools(toolsTable);
   }
 
-  public void clearTools(){
+  public void clearTools() {
     tools.clear();
   }
 
-  public static class ToolEntry{
+  public static class ToolEntry {
     boolean shown = true;
 
     Prov<Drawable> icon;
@@ -96,13 +97,13 @@ public class ToolBarFrag {
 
     Prov<String> hoverTip;
 
-    public ToolEntry(Prov<Drawable> icon, Runnable listener, Boolp checked){
+    public ToolEntry(Prov<Drawable> icon, Runnable listener, Boolp checked) {
       this.icon = icon;
       this.listener = listener;
       this.checked = checked;
     }
 
-    public ToolEntry(Prov<Drawable> icon, Runnable listener, Boolp checked, Prov<String> hoverTip){
+    public ToolEntry(Prov<Drawable> icon, Runnable listener, Boolp checked, Prov<String> hoverTip) {
       this.icon = icon;
       this.listener = listener;
       this.checked = checked;

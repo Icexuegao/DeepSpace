@@ -1,7 +1,6 @@
 package ice
 
 import ice.async.ParcelProcess
-import ice.audio.SoundControl
 import ice.content.*
 import ice.content.block.IBlocks
 import ice.core.SettingValue
@@ -46,7 +45,6 @@ open class Ice : Mod() {
   }
 
   override fun init() {
-    Vars.control.sound = SoundControl()
     UncCore.init()
     singularity.init()
     //  SglTechTreeDialog().show()

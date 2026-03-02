@@ -31,7 +31,7 @@ object IFiles : Load {
     }
     rootDirectory.forEach { entry ->
       when (entry.key) {
-        "musics" -> {
+        "music" -> {
           entry.value.walk {
             if (it.extension().equals("ogg")) musics[it.name()] = it
           }

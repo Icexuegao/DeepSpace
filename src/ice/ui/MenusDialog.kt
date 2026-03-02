@@ -18,7 +18,6 @@ import ice.library.world.Load
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*
 import ice.world.meta.IceStats
-import mindustry.gen.Sounds
 
 object MenusDialog : Dialog(), Load {
   const val backMargin = 10f

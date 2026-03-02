@@ -7,7 +7,6 @@ import arc.util.OS
 import ice.DeepSpace
 import ice.audio.ISounds
 import ice.core.SettingValue
-import ice.graphics.IStyles
 import ice.library.DeBugFragment
 import ice.library.IFiles
 import ice.library.struct.log
@@ -26,7 +25,7 @@ object UI : Load {
   val cgwidth = Core.graphics.width.toFloat()
   val cgheight = Core.graphics.height.toFloat()
   val sfxVolume: Float get() = Core.settings.getInt("sfxvol") / 100f
-  var toolBarFrag: ToolBarFrag = Sgl.ui.toolBar
+  var toolBarFrag: ToolBarFrag = ToolBarFrag()
 
   override fun init() {
     toolBarFrag.addTool("deepSpaceMenu", { "模组菜单" }, { Icon.menu }, {
@@ -42,7 +41,7 @@ object UI : Load {
       }
     }) { false }
 
-    Sgl.ui.toolBar.addTool("debugMonitor", { "调试监视器" }, { Icon.wrench }, {
+    toolBarFrag.addTool("debugMonitor", { "调试监视器" }, { Icon.wrench }, {
       Sgl.ui.debugInfos.hidden = !Sgl.ui.debugInfos.hidden
     }, { !Sgl.ui.debugInfos.hidden })
     //上一次保存的调试配置 调试常开真的很sb
