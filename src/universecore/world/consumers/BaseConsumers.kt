@@ -85,7 +85,7 @@ open class BaseConsumers(
     selfAccess.get(type) { ObjectSet() }!!.add(content)
   }
 
-  open fun time(time: Float): BaseConsumers? {
+  open fun time(time: Float): BaseConsumers {
     this.craftTime = time
     showTime = time > 0
     return this

@@ -36,6 +36,7 @@ object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.me
     add("情况还真是急转直下啊")
     add("你戳够了没?!")
     add("你知道alon和Alon的区别吗")
+    add("有点受宠若惊了")
   }
 
   init {

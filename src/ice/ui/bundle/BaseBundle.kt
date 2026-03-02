@@ -9,7 +9,6 @@ import mindustry.ctype.UnlockableContent
 
 class BaseBundle(val name: String) {
   companion object : Load {
-
     fun bundle(bundle: Companion.() -> Unit) {
       bundle.invoke(Companion)
     }
@@ -42,9 +41,10 @@ class BaseBundle(val name: String) {
   }
 
   interface Bundle {
-    companion object{
+    companion object {
       var Bundle.localizedName: String by AttachedProperty("")
     }
+
     fun desc(bundle: BaseBundle, name: String) {
       bundle.runBun.add {
         localizedName = name

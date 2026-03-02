@@ -21,10 +21,13 @@ import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.mod.Mod
+import singularity.Recipes
 import singularity.Singularity
 import singularity.type.SglCategory
+import tmi.RecipeEntryPoint
 import universecore.UncCore
 
+@RecipeEntryPoint(Recipes::class)
 open class Ice : Mod() {
 
   companion object {

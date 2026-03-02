@@ -21,7 +21,7 @@ class Spark : MissileUnitType("unit_spark") {
     hitSize = 11f
     armor = 1f
     speed = 9.6f
-    lifetime = 150f
+    lifetime = 120f
     maxRange = 10f
     rotateSpeed = 1.2f
     missileAccelTime = 60f

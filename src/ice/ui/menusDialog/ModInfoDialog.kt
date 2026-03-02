@@ -64,6 +64,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     ContributorTable("Reflcaly_反射", "2354671478", Work.artist_icon_work).itooltip("期待与你的再次见面!再见!")
     ContributorTable("Carrot", "1456616666", Work.artist_icon_work).itooltip("哇还有奇点")
     ContributorTable("Ventivu", "3123632012", Work.program_icon_work).itooltip("咨询一下,有获取sgl模组的授权吗")
+    ContributorTable("zero", "3129162464", Work.sounds_icon_work).itooltip("请务必关注neurosama喵,谢谢喵!").itooltip("我喜欢你")
 
 
     AssistedTable("Novarc", "2124363741").itooltip("等终末地出了我再继续写mod")

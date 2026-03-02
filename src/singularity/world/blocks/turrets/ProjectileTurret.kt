@@ -54,7 +54,7 @@ open class ProjectileTurret(name: String) : SglTurret(name) {
         showTime = false
       }
 
-      override fun time(time: Float): BaseConsumers? {
+      override fun time(time: Float): BaseConsumers {
         showTime = false
         craftTime = time
         return this
@@ -71,7 +71,7 @@ open class ProjectileTurret(name: String) : SglTurret(name) {
           display.get(ta)
         }
       }
-      s.add(SglStat.coatingTime, c!!.craftTime / 60, StatUnit.seconds)
+      s.add(SglStat.coatingTime, c.craftTime / 60, StatUnit.seconds)
     }
     optionalCons.add(consume)
     val cons: BaseConsumers? = consume

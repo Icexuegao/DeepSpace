@@ -32,17 +32,15 @@ object IFiles : Load {
     rootDirectory.forEach { entry ->
       when (entry.key) {
         "musics" -> {
-          entry.value.findAll { it.extension().equals("ogg") }?.forEach {
-            musics[it.name()] = it
+          entry.value.walk {
+            if (it.extension().equals("ogg")) musics[it.name()] = it
           }
         }
-
         "sounds" -> {
-          entry.value.findAll { it.extension().equals("ogg") }?.forEach {
-            sounds[it.name()] = it
+          entry.value.walk {
+            if (it.extension().equals("ogg")) sounds[it.name()] = it
           }
         }
-
         "shaders" -> {
           entry.value.walk {
             if (!shaders.contains(it.name())) {
@@ -82,7 +80,6 @@ object IFiles : Load {
       return TextureRegionDrawable(region, 1f)
     }
   }
-
 
   fun newCursor(filename: String): Graphics.Cursor {
     val fi = modWithClass.file.child("sprites").child("cursors").child("$filename.png")

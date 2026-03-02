@@ -48,19 +48,19 @@ object IStyles {
   val achievementGodQuality = IFiles.findModPng("achievement-godQuality")
   val achievementHourglass = IFiles.findModPng("achievement-hourglass")
 
-  val paneLeft=IFiles.createNinePatch("pane-left")
-  val paneBottom=IFiles.createNinePatch("pane-bottom")
+  val paneLeft = IFiles.createNinePatch("pane-left")
+  val paneBottom = IFiles.createNinePatch("backBottom")
 
   val remains = IFiles.findModPng("remains").asDrawable()
   val tanksui = IFiles.findModPng("thanks")
   val search = IFiles.findModPng("search")
+
   val button2 = object : ImageButtonStyle() {}.apply {
     up = background41
     over = background41
     down = background42
     checked = background44
     disabled = background43
-    //imageDisabled= background10
   }
   val button5 = object : ImageButtonStyle() {}.apply {
     up = background44
@@ -68,7 +68,6 @@ object IStyles {
     down = background44
     checked = background44
     disabled = background43
-    //imageDisabled= background10
   }
   val button6 = ImageButtonStyle().apply {
     up = background45
@@ -76,14 +75,12 @@ object IStyles {
     down = background45
     checked = background45
     disabled = background43
-    //imageDisabled= background10
   }
   val button: ImageButtonStyle = object : ImageButtonStyle() {}.apply {
     up = background41
     over = background41
     down = background42
     disabled = background43
-    //imageDisabled= background10
   }
   val button3: ImageButtonStyle = object : ImageButtonStyle() {}.apply {
     up = background41
@@ -92,7 +89,6 @@ object IStyles {
     imageUpColor = IceColor.b4
     imageDownColor = IceColor.r1
     imageOverColor = IceColor.b4
-    //imageDisabled= background10
   }
   val button4 = ButtonStyle().apply {
     up = background43
@@ -117,6 +113,7 @@ object IStyles {
   val black8 = (Tex.whiteui as TextureRegionDrawable).tint(0f, 0f, 0f, 0.8f)
   val barBackground = IFiles.findModPng("barBackground")
   val barBottlom: Drawable = IFiles.createNinePatch("barBottom")
+
   val missionaryIcon = IFiles.findModPng("missionaryIcon")
   val missionaryIconTurNingRight1 = IFiles.findModPng("missionaryIconTurNing1")
   val missionaryIconTurNingRight2 = IFiles.findModPng("missionaryIconTurNing2")
@@ -126,26 +123,24 @@ object IStyles {
   val missionaryIconTurNingLeft2 = IFiles.findModPng("missionaryIconTurNing2").apply {
     flip(true, false)
   }
+
   val whiteui = IFiles.findModPng("whiteui")
-  val time = IFiles.findModPng("time").apply {
-    texture.setFilter(Texture.TextureFilter.linear)
-  }
+
   val afehs = IFiles.findModPng(IceTeam.教廷.name)
   val empire = IFiles.findModPng(IceTeam.帝国.name)
-  val arrow = IFiles.findModPng("arrow")
-  val publicInfoIcon= IFiles.findModPng("upWel")
+
+  val publicInfoIcon = IFiles.findModPng("upWel")
 
   val menusButton_host = IFiles.findModPng("menusButton_host").asDrawable()
   val menusButton_exit = IFiles.findModPng("menusButton_exit").asDrawable()
-  val menusButton_remains= IFiles.findModPng("menusButton_remains").asDrawable()
+  val menusButton_remains = IFiles.findModPng("menusButton_remains").asDrawable()
   val menusButton_contribute = IFiles.findModPng("menusButton_contribute").asDrawable()
-  val menusButton_infos= IFiles.findModPng("menusButton_infos").asDrawable()
-  val menusButton_configure= IFiles.findModPng("menusButton_configure").asDrawable()
-  val menusButton_publicInfo= IFiles.findModPng("menusButton_publicInfo").asDrawable()
-  val menusButton_tech_point= IFiles.findModPng("menusButton_tech_point").asDrawable()
-  val menusButton_database= IFiles.findModPng("menusButton_database").asDrawable()
+  val menusButton_infos = IFiles.findModPng("menusButton_infos").asDrawable()
+  val menusButton_configure = IFiles.findModPng("menusButton_configure").asDrawable()
+  val menusButton_publicInfo = IFiles.findModPng("menusButton_publicInfo").asDrawable()
+  val menusButton_tech_point = IFiles.findModPng("menusButton_tech_point").asDrawable()
+  val menusButton_database = IFiles.findModPng("menusButton_database").asDrawable()
 
-  val arrow1 = IFiles.findModPng("arrow1")
   val flower = IFiles.findModPng("flower").apply {
     texture.setFilter(Texture.TextureFilter.linear)
   }

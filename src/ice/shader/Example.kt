@@ -49,7 +49,7 @@ void main() {
 
     fun draw() {
         Draw.shader(shader)
-        Draw.rect(IStyles.time,200f,200f)
+        //Draw.rect(IStyles.time,200f,200f)
         Draw.reset()
      /*   mesh.setVertices(
             floatArrayOf(

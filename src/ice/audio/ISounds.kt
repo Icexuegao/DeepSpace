@@ -26,8 +26,18 @@ object ISounds {
   val 月隐蓄力 = getSound("月隐蓄力")
   val 灼烧=getSound("灼烧")
 
+  val 进入模组界面=getUISound("进入模组界面")
+  val 模组界面左侧按钮反馈=getUISound("模组界面左侧按钮反馈")
+  val 数据板块顶部选择按钮反馈 = getUISound("数据板块顶部选择按钮反馈")
+  val 数据板块内个体反馈 = getUISound("数据板块内个体反馈")
+  val 科技树内个体已激活 = getUISound("科技树内个体已激活")
+  val 进入数据界面 = getUISound("进入数据界面")
   private fun getSound(name: String): Sound {
     val file = IFiles.findSound("$name.ogg")
+    return Core.audio.newSound(file)
+  }
+  private fun getUISound(name: String): Sound {
+    val file = IFiles.findSound("ui-$name.ogg")
     return Core.audio.newSound(file)
   }
 }

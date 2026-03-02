@@ -40,14 +40,9 @@ import singularity.graphic.SglDrawConst
 import singularity.ui.UIUtils
 import singularity.world.blocks.SglBlock
 import singularity.world.draw.DrawSglTurret
-import universecore.world.consumers.*
-import universecore.world.consumers.cons.ConsumeItemBase
-import universecore.world.consumers.cons.ConsumeItems
-import universecore.world.consumers.cons.ConsumeLiquidBase
-import universecore.world.consumers.cons.ConsumeLiquidCond
-import universecore.world.consumers.cons.ConsumeLiquids
-import universecore.world.consumers.cons.ConsumePayload
-import universecore.world.consumers.cons.ConsumePower
+import universecore.world.consumers.BaseConsumers
+import universecore.world.consumers.ConsumeType
+import universecore.world.consumers.cons.*
 import kotlin.math.max
 
 @Suppress("UNCHECKED_CAST")
@@ -409,6 +404,7 @@ open class SglTurret(name: String) : SglBlock(name) {
     var queuedBullets: Int = 0
     var logicControlTime: Float = 0f
     var currCoolant: BaseConsumers? = null
+
     override fun shouldAutoTarget(): Boolean {
       return true
     }
@@ -449,6 +445,7 @@ open class SglTurret(name: String) : SglBlock(name) {
       unit.rotation(rotationu)
       unit.team(team)
       recoilOffset.trns(rotationu, -Mathf.pow(curRecoil, recoilPow) * recoil)
+
 
       updateTarget()
 
@@ -586,6 +583,7 @@ open class SglTurret(name: String) : SglBlock(name) {
       }
 
       curRecoil = 1f
+
       heat = 1f
     }
 

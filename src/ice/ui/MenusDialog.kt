@@ -10,6 +10,7 @@ import arc.scene.ui.Dialog
 import arc.scene.ui.Image
 import arc.scene.ui.layout.Table
 import arc.util.Align
+import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.ui.iPaneG
@@ -17,6 +18,7 @@ import ice.library.world.Load
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*
 import ice.world.meta.IceStats
+import mindustry.gen.Sounds
 
 object MenusDialog : Dialog(), Load {
   const val backMargin = 10f
@@ -24,7 +26,7 @@ object MenusDialog : Dialog(), Load {
   var button: BaseMenusDialog = PublicInfoDialog
   lateinit var conts: Table
 
-  override fun init() {
+  init {
     BaseMenusDialog.dalogs.add(PublicInfoDialog)
     BaseMenusDialog.dalogs.add(ResearchDialog)
     BaseMenusDialog.dalogs.add(DataDialog)
@@ -36,7 +38,7 @@ object MenusDialog : Dialog(), Load {
     BaseMenusDialog.dalogs.add(ConfigureDialog)
   }
 
-  fun build() {
+  init {
     reset()
     setFillParent(true)
     defaults().reset()
@@ -65,11 +67,17 @@ object MenusDialog : Dialog(), Load {
             BaseMenusDialog.dalogs.forEach { mb ->
               pan.button({ b ->
                 b.image(mb.icon).size(50f).color(IceColor.b5).table.add(mb.name).color(IceColor.b5)
+                b.changed {
+                  if (button != mb) {
+                    button.hide()
+                    button = mb
+                    mb.build(conts)
+                  }
+                  UI.showSoundCloseV(ISounds.模组界面左侧按钮反馈)
+
+                }
               }, IStyles.rootButton) {
-                if (button == mb) return@button
-                button.hide()
-                button = mb
-                mb.build(conts)
+
               }.update { b ->
                 b.isChecked = button == mb
               }.pad(2f).margin(20f).growX().row()
@@ -78,6 +86,7 @@ object MenusDialog : Dialog(), Load {
               b.image(IStyles.menusButton_exit).size(50f).color(IceColor.b5).table.add(IceStats.关闭.localized()).color(IceColor.b5)
             }, IStyles.rootCleanButton) {
               hide()
+              UI.showSoundCloseV(ISounds.模组界面左侧按钮反馈)
             }.pad(2f).margin(20f).growX().row()
           }
         }.width(200f).margin(10f).growY()
@@ -97,7 +106,7 @@ object MenusDialog : Dialog(), Load {
   }
 
   override fun show(stage: Scene): Dialog {
-    build()
+    //build()
     show(stage, Actions.sequence(Actions.alpha(0f), Actions.fadeIn(0.4f, Interp.fade)))
     centerWindow()
     return this
