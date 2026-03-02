@@ -246,7 +246,9 @@ fun Table.addProgressBar(attribute: ProgressAttribute, fraction: Floatp): Cell<P
 
 fun Table.addLine(name: String? = null, color: Color = IceColor.b4): Cell<Table> {
   val growX = table {
-    name?.let { n -> it.add(Label(n).apply { setFontScale(1.5f, 1.5f) }).color(color).row() }
+    name?.let { n -> it.add(Label(n).apply {
+      setFontScale(1.5f, 1.5f)
+    }).color(color).row() }
     it.add(Image(IStyles.whiteui)).color(color).height(3f).growX().row()
   }.growX()
   growX.row()

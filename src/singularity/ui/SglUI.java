@@ -64,9 +64,7 @@ public class SglUI {
 
   public UnitFactoryCfgDialog unitFactoryCfg;
   public SglTechTreeDialog techTreeDialog;
-  public InstituteConfigDialog instituteCfg;
 
-  ;
   public DebugInfos debugInfos;
   public NotificationFrag notificationFrag;
 
