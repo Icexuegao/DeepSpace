@@ -12,12 +12,14 @@ import arc.scene.ui.layout.Table
 import arc.struct.OrderedMap
 import arc.struct.Seq
 import arc.util.Scaling
+import ice.audio.ISounds
 import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.ui.*
 import ice.library.scene.ui.layout.ITable
 import ice.ui.MenusDialog
+import ice.ui.UI
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.content.BaseContentSeq
 import ice.world.content.blocks.abstractBlocks.EnvironmentBlock
@@ -47,6 +49,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
             table.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
               currentContentIndex = tmpHash.indexOf(content)
               flunAll()
+              UI.showSoundCloseV(ISounds.数据板块内个体反馈)
             }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
           }
           if (content.gas)dfw(tables[1]) else dfw(tables[0])
@@ -80,6 +83,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
               child.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
                 currentContentIndex = tmpHash.indexOf(content)
                 flunInfo()
+                UI.showSoundCloseV(ISounds.数据板块内个体反馈)
               }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
             }
           }
@@ -114,6 +118,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
             table.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
               currentContentIndex = tmpHash.indexOf(content)
               flunAll()
+              UI.showSoundCloseV(ISounds.数据板块内个体反馈)
             }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
           }
           if (content.flying) dfw(tables[1]) else if (content.naval) dfw(tables[2]) else dfw(tables[0])
@@ -151,6 +156,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
         textButton.changed {
           contentDialogs = it
           it.changed()
+          UI.showSoundCloseV(ISounds.数据板块顶部选择按钮反馈)
         }
         textButton.update {
           textButton.isChecked = contentDialogs == it
@@ -362,6 +368,7 @@ object DataDialog : BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBu
         table.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
           currentContentIndex = tmpHash.indexOf(content)
           flunInfo()
+          UI.showSoundCloseV(ISounds.数据板块内个体反馈)
         }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
       }
     }

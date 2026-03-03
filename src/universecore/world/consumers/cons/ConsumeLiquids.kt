@@ -4,7 +4,10 @@ import arc.math.Mathf
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
 import arc.struct.Seq
+import arc.util.Time
+import ice.library.struct.log
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import ice.world.meta.IStatValues
 import ice.world.meta.IceStats
 import mindustry.ctype.Content
 import mindustry.gen.Building
@@ -45,10 +48,10 @@ class ConsumeLiquids<T>(liquids: Array<out LiquidStack>) : ConsumeLiquidBase<T>(
       }
 
       for (stack in other.consLiquids!!) {
-        TMP.get(stack.liquid) { LiquidStack(stack.liquid, 0f) }!!.amount += stack.amount
+        TMP.get(stack.liquid) {LiquidStack(stack.liquid, 0f)}!!.amount += stack.amount
       }
 
-      consLiquids = TMP.values().toSeq().sort(Comparator { a: LiquidStack?, b: LiquidStack? -> a!!.liquid.id - b!!.liquid.id }).toArray(LiquidStack::class.java)
+      consLiquids = TMP.values().toSeq().sort(Comparator {a: LiquidStack?, b: LiquidStack? -> a!!.liquid.id - b!!.liquid.id}).toArray(LiquidStack::class.java)
       return
     }
     throw IllegalArgumentException("only merge consume with same type")
@@ -66,14 +69,18 @@ class ConsumeLiquids<T>(liquids: Array<out LiquidStack>) : ConsumeLiquidBase<T>(
     }
   }
 
+
+
+
+
   override fun display(stats: Stats) {
-    stats.add(Stat.input) { table: Table? ->
-      table!!.row()
-      table.table { t: Table? ->
-        t!!.defaults().left().fill().padLeft(6f)
+    stats.add(Stat.input) {table: Table ->
+      table.row()
+      table.table {t: Table ->
+        t.defaults().left().fill().padLeft(6f)
         t.add("${IceStats.流体.localizedName}:")
         for (stack in consLiquids!!) {
-          t.add(StatValues.displayLiquid(stack.liquid, stack.amount * 60, true))
+          t.add(IStatValues.displayLiquid(stack.liquid, stack.amount * 60, true))
         }
       }.left().padLeft(5f)
     }
@@ -84,8 +91,7 @@ class ConsumeLiquids<T>(liquids: Array<out LiquidStack>) : ConsumeLiquidBase<T>(
       table.add(
         ReqImage(
           stack.liquid.uiIcon
-        ) { entity.liquids != null && entity.liquids.get(stack.liquid) > 0 }
-      ).padRight(8f)
+        ) {entity.liquids != null && entity.liquids.get(stack.liquid) > 0}).padRight(8f)
     }
     table.row()
   }
@@ -110,6 +116,6 @@ class ConsumeLiquids<T>(liquids: Array<out LiquidStack>) : ConsumeLiquidBase<T>(
   }
 
   override fun filter(): Seq<Content>? {
-    return Seq.with(*consLiquids!!).map { s: LiquidStack -> s.liquid }
+    return Seq.with(*consLiquids!!).map {s: LiquidStack -> s.liquid}
   }
 }

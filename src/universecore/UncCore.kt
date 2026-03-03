@@ -8,6 +8,7 @@ import arc.util.Log
 import arc.util.OS
 import arc.util.Time
 import ice.library.world.Load
+import ice.ui.UI
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.game.EventType.UnlockEvent
@@ -63,7 +64,7 @@ object UncCore : Load {
       if (toggler.parent == null) {
         toggler = FieldHandler.getValueDefault(Vars.ui.hudfrag.blockfrag, "toggler")
         Core.app.post {
-          Sgl.ui.toolBar.build()
+         UI.toolBarFrag.build()
         }
       }
     }

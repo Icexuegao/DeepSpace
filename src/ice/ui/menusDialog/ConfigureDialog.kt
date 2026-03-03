@@ -23,14 +23,13 @@ import ice.ui.dialog.BaseMenusDialog
 import ice.ui.dialog.research.node.UCLinkNode
 import ice.world.meta.IceStats
 import mindustry.Vars
-import mindustry.ui.Styles
 
 object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.menusButton_configure) {
   override fun build(cont: Table) {
-    cont.iPaneG { it ->
+    cont.iPaneG {it ->
       it.addLine("音乐")
-      it.addProgressBar(IStyles.pa1) { IMusics.title.position / 168f }.padTop(10f).row()
-      it.addBox("启用主菜单音乐", SettingValue::启用主菜单音乐) { box, _ ->
+      it.addProgressBar(IStyles.pa1) {IMusics.title.position / 168f}.padTop(10f).row()
+      it.addBox("启用主菜单音乐", SettingValue::启用主菜单音乐) {box, _ ->
         SettingValue.启用主菜单音乐 = box.isChecked
       }.row()
       it.addIceSlider("主菜单音乐音量", 0f, 10f, 0.1f, SettingValue.menuMusicVolume) {
@@ -38,19 +37,19 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       }.row()
 
       it.addLine("游戏")
-      it.addBox("启用多合成角标常显", SettingValue::启用多合成角标常显) { box, _ ->
+      it.addBox("启用多合成角标常显", SettingValue::启用多合成角标常显) {box, _ ->
         SettingValue.启用多合成角标常显 = box.isChecked
       }.row()
-      it.addBox("启用包裹物品绘制", SettingValue::启用包裹物品绘制) { box, _ ->
+      it.addBox("启用包裹物品绘制", SettingValue::启用包裹物品绘制) {box, _ ->
         SettingValue.启用包裹物品绘制 = box.isChecked
       }.row()
-      it.addBox("启用包裹物品时限", SettingValue::启用包裹物品时限) { box, _ ->
+      it.addBox("启用包裹物品时限", SettingValue::启用包裹物品时限) {box, _ ->
         SettingValue.启用包裹物品时限 = box.isChecked
       }.row()
-      it.addBox("启用扭曲效果绘制", SettingValue::启用扭曲效果绘制) { box, _ ->
+      it.addBox("启用扭曲效果绘制", SettingValue::启用扭曲效果绘制) {box, _ ->
         SettingValue.启用扭曲效果绘制 = box.isChecked
       }.row()
-      it.addBox("启用QQ头像获取", SettingValue::启用QQ头像获取) { box, _ ->
+      it.addBox("启用QQ头像获取", SettingValue::启用QQ头像获取) {box, _ ->
         SettingValue.启用QQ头像获取 = box.isChecked
       }.row()
       it.addIceSlider("视野最大缩放限制", 0f, 40f, 0.1f, SettingValue.视野最大缩放限制) {
@@ -66,13 +65,12 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       it.table {
         it.add(fLabel)
       }.growX().pad(5f).row()
-      it.table { it2 ->
-        ModeDifficulty.entries.forEach { mod ->
+      it.table {it2 ->
+        ModeDifficulty.entries.forEach {mod ->
           it2.addBox(
-            mod.na, { SettingValue.difficulty == mod }, if (SettingValue.difficulty == mod) mod.color else IceColor.b4
-          ) { _, la ->
+            mod.na, {SettingValue.difficulty == mod}, if (SettingValue.difficulty == mod) mod.color else IceColor.b4
+          ) {_, la ->
             SettingValue.difficulty = mod
-            //  fLabel.restartR(mod.bun).setColor(mod.color)
             fLabel.restart(mod.bun)
             fLabel.setColor(mod.color)
             la.update {
@@ -82,20 +80,20 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         }
       }.growX().row()
       it.addLine("调试")
-      it.addBox("恢复默认配置", { true }, clean = true) { _, _ ->
+      it.addBox("恢复默认配置", {true}, clean = true) {_, _ ->
         SettingValue.clear()
         Vars.ui.showInfoOnHidden("游戏将退出以重新加载配置") {
           Core.app.exit()
         }
       }.row()
-      it.addBox("启用星球区块ID", SettingValue::启用星球区块ID) { box, _ ->
+      it.addBox("启用星球区块ID", SettingValue::启用星球区块ID) {box, _ ->
         SettingValue.启用星球区块ID = box.isChecked
       }.row()
 
-      it.addBox("启用调试模式", SettingValue::启用调试模式) { box, _ ->
+      it.addBox("启用调试模式", SettingValue::启用调试模式) {box, _ ->
         SettingValue.启用调试模式 = box.isChecked
       }.row()
-      it.addBox("删除科技树所有缓存物品", { true }, clean = true) { _, _ ->
+      it.addBox("删除科技树所有缓存物品", {true}, clean = true) {_, _ ->
         ResearchDialog.view.links.forEach {
           if (it is UCLinkNode) {
             it.reset()
@@ -103,7 +101,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
           }
         }
       }.row()
-      it.addBox("星球区块调试", SettingValue::星球区块调试) { box, _ ->
+      it.addBox("星球区块调试", SettingValue::星球区块调试) {box, _ ->
         SettingValue.星球区块调试 = box.isChecked
       }.row()
     }
@@ -127,7 +125,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
 
     return add(Table().apply {
       add(button).padRight(4f)
-      add(label.also { it.setColor(color) })
+      add(label.also {it.setColor(color)})
     }).margin(10f).top().left().pad(5f)
   }
 }

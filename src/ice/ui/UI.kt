@@ -2,12 +2,13 @@ package ice.ui
 
 import arc.Core
 import arc.Graphics
+import arc.audio.Sound
 import arc.util.OS
 import ice.DeepSpace
+import ice.audio.ISounds
 import ice.core.SettingValue
 import ice.library.DeBugFragment
 import ice.library.IFiles
-import ice.library.struct.asDrawable
 import ice.library.struct.log
 import ice.library.world.Load
 import ice.ui.dialog.IcePlanetDialog
@@ -16,20 +17,21 @@ import ice.ui.fragment.FleshFragment
 import ice.ui.menusDialog.DataDialog
 import mindustry.Vars
 import mindustry.gen.Icon
+import mindustry.gen.Sounds
 import singularity.Sgl
 import singularity.ui.fragments.ToolBarFrag
 
 object UI : Load {
   val cgwidth = Core.graphics.width.toFloat()
   val cgheight = Core.graphics.height.toFloat()
-  val sfxVolume = Core.settings.getInt("sfxvol") / 100f
-  var toolBarFrag: ToolBarFrag = Sgl.ui.toolBar
+  val sfxVolume: Float get() = Core.settings.getInt("sfxvol") / 100f
+  var toolBarFrag: ToolBarFrag = ToolBarFrag()
 
   override fun init() {
-    toolBarFrag.addTool("deepSpaceMenu",{"模组菜单"}, { Icon.menu }, {
+    toolBarFrag.addTool("deepSpaceMenu", {"模组菜单"}, {Icon.menu}, {
       MenusDialog.show()
-    }) { false }
-    toolBarFrag.addTool("data",{"打开当前内容数据"}, { Icon.book }, {
+    }) {false}
+    toolBarFrag.addTool("data", {"打开当前内容数据"}, {Icon.book}, {
       Vars.control.input.block?.let {
         DataDialog.showUnlockableContent(it)
       } ?: run {
@@ -37,20 +39,16 @@ object UI : Load {
           DataDialog.showUnlockableContent(it.type)
         }
       }
-    }) { false }
+    }) {false}
 
-    Sgl.ui.toolBar.addTool("debugMonitor",{"调试监视器"}, { Icon.wrench }, {
+    toolBarFrag.addTool("debugMonitor", {"调试监视器"}, {Icon.wrench}, {
       Sgl.ui.debugInfos.hidden = !Sgl.ui.debugInfos.hidden
-    }, { !Sgl.ui.debugInfos.hidden })
+    }, {!Sgl.ui.debugInfos.hidden})
     //上一次保存的调试配置 调试常开真的很sb
     if (!SettingValue.启用调试模式) toolBarFrag.hideTool("debugMonitor")
     SettingValue.addDeBugRun {
-      log { it
-      }
+
       if (it) toolBarFrag.showTool("debugMonitor") else {
-        log {
-          Sgl.ui.debugInfos.hidden
-        }
         toolBarFrag.hideTool("debugMonitor")
         Sgl.ui.debugInfos.hidden = true
       }
@@ -70,8 +68,16 @@ object UI : Load {
       loadSystemCursors()
     }
 
-    Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.displayName}[]", Icon.menu, MenusDialog::show)
-    Core.atlas.regionMap.put("logo", IFiles.findModPng("logo"))
+    Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.displayName}[]", Icon.menu) {
+      MenusDialog.show()
+      showSoundCloseV(ISounds.进入模组界面)
+    }
+  }
+
+  fun showSoundCloseV(sound: Sound) {
+    //非常愚蠢
+    sound.play()
+    Sounds.uiButton.stop()
   }
 
   fun loadSystemCursors() {

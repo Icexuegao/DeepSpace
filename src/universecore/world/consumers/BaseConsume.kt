@@ -3,7 +3,9 @@ package universecore.world.consumers
 import arc.func.Floatf
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
+import ice.library.struct.log
 import mindustry.ctype.Content
+import mindustry.gen.Building
 import mindustry.world.meta.Stats
 import universecore.components.blockcomp.ConsumerBuildComp
 
@@ -35,7 +37,7 @@ abstract class BaseConsume<T> where T : ConsumerBuildComp {
     return (if (consMultiplier == null) 1f else consMultiplier!!.get(entity)) * entity.consMultiplier()
   }
 
-  fun <N : ConsumerBuildComp?> setMultiple(multiple: Floatf<N>): BaseConsume<T> {
+  fun <E> setMultiple(multiple: Floatf<E>): BaseConsume<T> {
     consMultiplier = multiple as Floatf<T>
     return this
   }

@@ -31,7 +31,7 @@ class HuaFire : IceUnitType("huaFire") {
     flying = true
     health = 112000f
     hitSize = 58f
-    armor = 34f
+    armor = 26f
     range = 40f
     accel = 0.08f
     drag = 0.02f

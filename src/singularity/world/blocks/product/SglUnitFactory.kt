@@ -56,10 +56,10 @@ import singularity.world.distribution.request.DistRequestBase
 import singularity.world.meta.SglStat
 import singularity.world.modules.DistributeModule
 import singularity.world.modules.PayloadModule
-import singularity.world.products.Producers
 import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.cons.ConsumeItemBase
 import universecore.world.consumers.ConsumeType
+import universecore.world.producers.BaseProducers
 import universecore.world.producers.ProducePayload
 import universecore.world.producers.ProduceType
 import java.io.BufferedReader
@@ -101,7 +101,7 @@ open class SglUnitFactory(name: String) : PayloadCrafter(name), DistElementBlock
   var machineLevel: Int = 0
   var matrixDistributeOnly: Boolean = false
   var consCustom: Cons2<UnitType?, BaseConsumers?>? = null
-  var byProduct: Cons2<UnitType?, Producers?>? = null
+  var byProduct: Cons2<UnitType?, BaseProducers?>? = null
 
   init {
     this.autoSelect = false

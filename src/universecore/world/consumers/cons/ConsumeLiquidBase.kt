@@ -21,7 +21,9 @@ abstract class ConsumeLiquidBase<T> : BaseConsume<T>() where T : Building, T : C
       var count = 0
       for (stack in liquids) {
         count++
-        if (count > 0 && or) table.add("/").set(Cell.defaults()).fillX()
+        if (count > 0 && or){
+          table.add("/").set(Cell.defaults()).fillX()
+        }
         if (limit in 0..count) {
           table.add("...")
           break

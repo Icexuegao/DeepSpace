@@ -36,13 +36,13 @@ class CombustionChamber : NormalCrafter("combustion_chamber") {
 
     newConsume()
     consume!!.time(120f)
-    consume!!.item(Items.pyratite, 1)
+    consume!!.item(IItems.硫化合物, 1)
     newProduce()
     produce!!.liquid(ILiquids.二氧化硫, 0.4f)
     produce!!.power(4.5f)
 
     newBooster(2.65f)
-    consume!!.liquid(Liquids.ozone, 0.4f)
+    consume!!.liquid(ILiquids.氧气, 0.4f)
 
     draw = DrawMulti(
       DrawBottom(), DrawCrucibleFlame(), DrawDefault()

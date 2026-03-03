@@ -64,9 +64,7 @@ public class SglUI {
 
   public UnitFactoryCfgDialog unitFactoryCfg;
   public SglTechTreeDialog techTreeDialog;
-  public InstituteConfigDialog instituteCfg;
 
-  public ToolBarFrag toolBar;
   public DebugInfos debugInfos;
   public NotificationFrag notificationFrag;
 
@@ -220,7 +218,6 @@ public class SglUI {
     document = new DocumentDialog();
     unitFactoryCfg = new UnitFactoryCfgDialog();
 
-    toolBar = new ToolBarFrag();
     debugInfos = new DebugInfos();
     notificationFrag = new NotificationFrag();
 

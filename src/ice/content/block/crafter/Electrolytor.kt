@@ -5,11 +5,8 @@ import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
-import mindustry.content.Items
 import mindustry.content.Liquids
 import mindustry.gen.Building
 import mindustry.type.Category
@@ -20,7 +17,6 @@ import mindustry.world.draw.DrawBlock
 import mindustry.world.draw.DrawDefault
 import singularity.graphic.SglDrawConst
 import singularity.world.blocks.product.NormalCrafter
-import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawDyColorCultivator
 import universecore.world.consumers.ConsumeType
@@ -42,7 +38,7 @@ class Electrolytor:NormalCrafter("electrolytor"){
     power(6f)
   }
   newProduce().apply {
-    liquids(Liquids.ozone, 0.6f, ILiquids.氢气, 0.8f)
+    liquids(ILiquids.氧气, 0.6f, ILiquids.氢气, 0.8f)
   }
 
   newConsume()
@@ -50,8 +46,7 @@ class Electrolytor:NormalCrafter("electrolytor"){
   consume!!.power(5.8f)
   newProduce()
   produce!!.liquids(
-    *LiquidStack.with(
-      Liquids.ozone, 0.6f, ILiquids.氢气, 0.8f
+    *LiquidStack.with(ILiquids.氧气, 0.6f, ILiquids.氢气, 0.8f
     )
   )
 

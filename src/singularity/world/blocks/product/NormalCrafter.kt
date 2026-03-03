@@ -12,19 +12,18 @@ import arc.math.Mathf
 import arc.math.Rand
 import arc.scene.event.Touchable
 import arc.scene.ui.Button
-import arc.scene.ui.Image
 import arc.scene.ui.Tooltip
 import arc.scene.ui.layout.Table
 import arc.struct.EnumSet
 import arc.struct.ObjectFloatMap
 import arc.struct.OrderedMap
 import arc.struct.Seq
-import arc.util.Scaling
 import arc.util.Strings
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.core.SettingValue
 import ice.graphics.IStyles
+import ice.library.scene.element.display.TimeDisplay
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Effect
@@ -44,7 +43,6 @@ import mindustry.world.meta.*
 import singularity.graphic.SglDrawConst
 import singularity.world.blocks.SglBlock
 import singularity.world.meta.SglStat
-import singularity.world.products.Producers
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.components.blockcomp.FactoryBlockComp
 import universecore.components.blockcomp.FactoryBuildComp
@@ -61,7 +59,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
 @Suppress("UNCHECKED_CAST")
-/**常规的工厂类方块，具有强大的consume-produce制造系统的近乎全能的制造类方块 */
+/**常规的工厂类方块,具有强大的consume-produce制造系统的近乎全能的制造类方块*/
 open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
   companion object {
     private fun buildRecipeSimple(cons: BaseConsumers, prod: BaseProducers, ta: Table) {
@@ -107,7 +105,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
   var shouldConfig: Boolean = false
 
   /**同样的，这也是一个指针，指向当前编辑的produce */
-  var produce: Producers? = null
+  var produce: BaseProducers? = null
   var craftTrigger: Cons<out NormalCrafterBuild?>? = null
   var crafting: Cons<out NormalCrafterBuild?>? = null
   override var warmupSpeed = 0.02f
@@ -127,15 +125,15 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
     buildType = Prov(::NormalCrafterBuild)
   }
 
-  override fun newProduce(): Producers {
-    produce = Producers()
+  override fun newProduce(): BaseProducers {
+    produce = BaseProducers()
     producers.add(produce)
     return produce!!
   }
 
   fun newOptionalProduct() {
-    produce = Producers()
-    val prod: Producers = produce!!
+    produce = BaseProducers()
+    val prod: BaseProducers = produce!!
     newOptionalConsume({ e: NormalCrafterBuild, c: BaseConsumers ->
       for (baseProduce in prod.all()) {
         val baseProduce1 = baseProduce as BaseProduce<ProducerBuildComp>
@@ -199,7 +197,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
     }
   }
 
-  fun newBooster(boost: Float): BaseConsumers? {
+  fun newBooster(boost: Float): BaseConsumers {
     val ada: Array<Floatf<NormalCrafterBuild>> = arrayOfNulls<Floatf<*>>(1) as Array<Floatf<NormalCrafterBuild>>
     val res = newOptionalConsume({ e: NormalCrafterBuild, c: BaseConsumers ->
       e.currBoost = ada[0]
@@ -224,10 +222,10 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
 
     ada[0] = Floatf { e: NormalCrafterBuild ->
       var mul = 1f
-      for (cons in res!!.all()) {
+      for (cons in res.all()) {
         mul *= (cons as BaseConsume<ConsumerBuildComp>).efficiency(e)
       }
-      boost * mul * Mathf.clamp(e.consumer.consEfficiency) * e.consumer.getOptionalEff(res)
+      boost * mul * Mathf.clamp(e.consumer.consEfficiency) //* e.consumer.getOptionalEff(res)
     }
 
     consume!!.customDisplayOnly = true
@@ -293,14 +291,15 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
         val simple = Table { ta ->
           ta!!.left().defaults().left()
           if (cons.showTime) {
-            ta.stack(Table { o ->
+            ta.add(TimeDisplay(cons.craftTime))
+            /*ta.stack(Table { o ->
               o!!.left()
               o.add(Image(SglDrawConst.time)).size(32f).scaling(Scaling.fit)
             }, Table { o: Table? ->
               o!!.left().bottom()
               o.add(Strings.autoFixed(cons.craftTime / 60, 1) + StatUnit.seconds.localized()).style(Styles.outlineLabel)
               o.pack()
-            })
+            })*/
             ta.add(" > ")
           }
           buildRecipeSimple(cons, prod, ta)
@@ -454,7 +453,6 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
 
     override fun update() {
       super.update()
-      updateConsumer()
 
       updateProducer()
 

@@ -320,6 +320,7 @@ object EnvironmentBlocks : Load {
       bundle {
         desc(zh_CN, "晶石地")
       }
+      attributes.set(IAttribute.bitumen, 0.1f)
     }
     val 晶石地水 = ShallowLiquid("crystalStoneWater", 晶石地).apply {
       bundle {

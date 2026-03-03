@@ -1,7 +1,6 @@
 package ice
 
 import ice.async.ParcelProcess
-import ice.audio.SoundControl
 import ice.content.*
 import ice.content.block.IBlocks
 import ice.core.SettingValue
@@ -21,10 +20,13 @@ import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.mod.Mod
+import singularity.Recipes
 import singularity.Singularity
 import singularity.type.SglCategory
+import tmi.RecipeEntryPoint
 import universecore.UncCore
 
+@RecipeEntryPoint(Recipes::class)
 open class Ice : Mod() {
 
   companion object {
@@ -43,7 +45,6 @@ open class Ice : Mod() {
   }
 
   override fun init() {
-    Vars.control.sound = SoundControl()
     UncCore.init()
     singularity.init()
     //  SglTechTreeDialog().show()

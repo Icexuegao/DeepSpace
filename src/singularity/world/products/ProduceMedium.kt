@@ -22,25 +22,19 @@ import universecore.world.producers.ProduceType
 import kotlin.math.min
 
 class ProduceMedium<T>(var product: Float) : BaseProduce<T>() where T : Building?, T : ProducerBuildComp, T : MediumBuildComp {
-  override fun type(): ProduceType<*> {
-    return ProduceType.medium
-  }
-
-  override fun hasIcons(): Boolean {
-    return true
-  }
-
+  override fun type() = ProduceType.medium
+  override fun hasIcons() = true
   override fun buildIcons(table: Table) {
     val region = Singularity.getModAtlas("medium")
     val stack = Stack()
-    stack.add(Table { o ->
+    stack.add(Table {o ->
       o.left()
       o.add(Image(region)).size(32f).scaling(Scaling.fit)
     })
-    val product=product * 60
+    val product = product * 60
 
     if (product > 0) {
-      stack.add(Table { t ->
+      stack.add(Table {t ->
         t.left().bottom()
         t.add(if (product >= 1000) UI.formatAmount(product.toLong()) else product.toString() + "").style(Styles.outlineLabel)
         t.pack()
@@ -65,13 +59,13 @@ class ProduceMedium<T>(var product: Float) : BaseProduce<T>() where T : Building
   }
 
   override fun display(stats: Stats) {
-    stats.add(SglStat.special) { table ->
+    stats.add(SglStat.special) {table ->
       table.row()
-      table.table { t ->
+      table.table {t ->
         t.defaults().left().fill().padLeft(6f)
         t.add(Core.bundle.get("misc.output") + ":").left()
         val display = product * 60
-        t.table { icon ->
+        t.table {icon ->
           icon.add(object : Stack() {
             init {
               add(Image(Singularity.getModAtlas("medium")))

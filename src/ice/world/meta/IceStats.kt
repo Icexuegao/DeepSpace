@@ -1,14 +1,13 @@
 package ice.world.meta
 
+import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import mindustry.world.meta.StatCat
-import singularity.world.meta.SglStatCat
 import universecore.world.meta.UncStatCat
 
-object IceStats {
-  fun load() = Unit
-  val 最大能量势 = IceStat("maxEnergyPotential", SglStatCat.neutron).apply {
+object IceStats: Load {
+  val 最大能量势 = IceStat("maxEnergyPotential", IceStatCats.neutron).apply {
     bundle {
       desc(zh_CN, "最大能量势")
     }

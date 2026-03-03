@@ -31,9 +31,7 @@ open class BaseConsumers(
   /**是否为可选消耗项 */
   val optional: Boolean
 ) {
-  companion object {
     protected val tmpCons: Seq<BaseConsume<*>> = Seq<BaseConsume<*>>()
-  }
 
   protected val cons: ObjectMap<ConsumeType<*>, BaseConsume<*>> = ObjectMap<ConsumeType<*>, BaseConsume<*>>()
 
@@ -85,7 +83,7 @@ open class BaseConsumers(
     selfAccess.get(type) { ObjectSet() }!!.add(content)
   }
 
-  open fun time(time: Float): BaseConsumers? {
+  open fun time(time: Float): BaseConsumers {
     this.craftTime = time
     showTime = time > 0
     return this

@@ -9,12 +9,12 @@ import arc.struct.Seq;
 import mindustry.world.Block;
 import org.jetbrains.annotations.NotNull;
 import singularity.world.blocks.product.NormalCrafter;
-import universecore.world.consumers.cons.SglConsumeFloor;
 import tmi.recipe.*;
 import universecore.components.blockcomp.ConsumerBuildComp;
 import universecore.world.consumers.BaseConsume;
 import universecore.world.consumers.BaseConsumers;
 import universecore.world.consumers.ConsumeType;
+import universecore.world.consumers.cons.SglConsumeFloor;
 import universecore.world.producers.BaseProduce;
 import universecore.world.producers.BaseProducers;
 import universecore.world.producers.ProduceType;
@@ -63,12 +63,12 @@ public class NormalCrafterParser extends RecipeParser<NormalCrafter> {
           if (consume instanceof SglConsumeFloor<?> cf) {
             recipe.setEff(new Recipe.EffFunc() {
               @Override
-              public float calculateMultiple(@NotNull Recipe recipe, @NotNull EnvParameter envParameter) {
+              public float calculateMultiple(@NotNull Recipe recipe, @NotNull InputTable envParameter) {
                 return 0;
               }
 
               @Override
-              public float calculateEff(@NotNull Recipe recipe, @NotNull EnvParameter envParameter, float v) {
+              public float calculateEff(@NotNull Recipe recipe, @NotNull InputTable envParameter, float v) {
                 return cf.getBaseEfficiency();
               }
             });

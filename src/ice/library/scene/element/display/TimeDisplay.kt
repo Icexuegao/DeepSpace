@@ -1,28 +1,22 @@
 package ice.library.scene.element.display
 
 import arc.scene.ui.Image
-import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
-import ice.graphics.IStyles
-import ice.graphics.IceColor
-import ice.library.util.toStringi
+import arc.util.Strings
 import mindustry.ui.Styles
+import mindustry.world.meta.StatUnit
+import singularity.graphic.SglDrawConst
 
 class TimeDisplay(amount: Float) : Table() {
-    init {
-        add(Stack().apply {
-            add(Table { o: Table ->
-                o.left()
-                o.add(Image(IStyles.time).apply { setColor(IceColor.b4) }).size(32f).scaling(Scaling.fit)
-            })
-            add(Table { t: Table ->
-                t.left().bottom()
-                val f = amount / 60f
-                val text = f.toStringi(1)
-                t.add(text).style(Styles.outlineLabel)
-                t.pack()
-            })
-        })
-    }
+  init {
+    stack(Table { o ->
+      o.left()
+      o.add(Image(SglDrawConst.time)).size(32f).scaling(Scaling.fit)
+    }, Table { o ->
+      o.left().bottom()
+      o.add(Strings.autoFixed(amount / 60, 1) + StatUnit.seconds.localized()).style(Styles.outlineLabel)
+      o.pack()
+    })
+  }
 }

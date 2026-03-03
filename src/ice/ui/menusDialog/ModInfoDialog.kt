@@ -64,6 +64,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     ContributorTable("Reflcaly_反射", "2354671478", Work.artist_icon_work).itooltip("期待与你的再次见面!再见!")
     ContributorTable("Carrot", "1456616666", Work.artist_icon_work).itooltip("哇还有奇点")
     ContributorTable("Ventivu", "3123632012", Work.program_icon_work).itooltip("咨询一下,有获取sgl模组的授权吗")
+    ContributorTable("zero", "3129162464", Work.sounds_icon_work).itooltip("我喜欢你")
 
 
     AssistedTable("Novarc", "2124363741").itooltip("等终末地出了我再继续写mod")
@@ -298,7 +299,6 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
         if (isNewVersion(response.getString("tag_name"))) {
           newVersion = response.getString("tag_name")
           for (asset in response.get("assets").asArray()) {
-            log { asset.getString("name") }
             if (asset.has("name") && UNC_RELEASE_FILE.matcher(asset.getString("name")).matches()) {
               updateUrl = asset.getString("browser_download_url")
             }
@@ -380,7 +380,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     }
 
     init {
-      add(Stack(Image(getQQImage(number)), Image(IFiles.findModPng("wdwd")))).size(180f).get()
+      add(Stack(Image(getQQImage(number)), Image(IStyles.contributorBack))).size(180f).get()
       row()
       add(name).color(Pal.accent).fill()
       contributors.add(this)
@@ -393,7 +393,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     }
 
     init {
-      add(Stack(Image(getQQImage(number)), Image(IFiles.findModPng("wdwd")))).size(180f).get()
+      add(Stack(Image(getQQImage(number)), Image(IStyles.contributorBack))).size(180f).get()
       row()
       addCR(name).fill()
       assisteds.add(this)
@@ -402,9 +402,9 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
 
   private enum class Work(val des: String) {
     artist_icon_work("贴图/美术"),
-    translate_icon_work("翻译"),
+    translate_icon_work("翻译/本地化"),
     sounds_icon_work("音乐/音效"),
-    copywriting_icon_work("文案"),
+    copywriting_icon_work("文案/策划"),
     program_icon_work("程序/调试");
 
     fun icon(): Drawable = Singularity.getModDrawable(name)

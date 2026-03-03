@@ -15,6 +15,7 @@ import arc.util.Tmp
 import ice.audio.ISounds
 import ice.content.IItems
 import ice.content.ILiquids
+import ice.content.block.crafter.Incubator
 import ice.library.util.toColor
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -73,7 +74,7 @@ object ProductBlocks : Load {
     bitHardness = 4
     size = 3
     drillTime = 350f
-    requirements(Category.production, IItems.钴锭, 35, IItems.铬锭, 45, IItems.低碳钢, 50, IItems.高碳钢, 40, IItems.黄铜锭, 10)
+    requirements(Category.production, IItems.铬锭, 45, IItems.低碳钢, 50, IItems.高碳钢, 40, IItems.黄铜锭, 10)
   }
   val 曼哈德钻井: Block = BaseDrill("manhardDrill").apply {
     bitHardness = 5
@@ -163,6 +164,7 @@ object ProductBlocks : Load {
     requirements(Category.production, IItems.石英玻璃, 75, IItems.高碳钢, 40, IItems.铬锭, 70, IItems.单晶硅, 60)
   }
 
+  val 沼气池 = Incubator()
   var 岩层钻井机 = FloorCrafter("rock_drill").apply {
     bundle {
       desc(zh_CN, "岩层钻井机", "钻探深层的地壳,将深埋在地壳深处的较高质量的矿物送至地表")
