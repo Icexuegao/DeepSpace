@@ -1,24 +1,21 @@
 package ice.world.content.blocks.distribution.digitalStorage
 
-import arc.Events
 import arc.func.Prov
 import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.EventType
 import ice.library.scene.ui.ItemSelection
-import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.draw.DrawMulti
 import ice.world.draw.DrawRegionColor
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.type.Item
-import mindustry.world.Tile
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 
-class LogisticsOutput(name: String) : IceBlock(name) {
+class LogisticsOutput(name: String) : LogisticsBlock(name) {
+    override val blockType = Type.OUTPUT
 
     init {
         size = 1
@@ -43,40 +40,31 @@ class LogisticsOutput(name: String) : IceBlock(name) {
             it.sortItem?.color
         }, DrawDefault())
     }
-    override fun blockChanged(tile: Tile) {
-        Events.fire(EventType.LogisticsHubFire())
-    }
-    override fun outputsItems(): Boolean {
-        return true
-    }
+
+    override fun outputsItems() = true
 
     override fun drawPlanConfig(plan: BuildPlan, list: Eachable<BuildPlan?>?) {
         drawPlanConfigCenter(plan, plan.config, "$name-center")
     }
 
-    inner class DigitalUnloaderBuild : IceBuild() {
+    inner class DigitalUnloaderBuild : LogisticsBuild() {
         var sortItem: Item? = null
-        var original: LogisticsHub.DigitalStorageBuild? = null
 
         override fun updateTile() {
-            original?.let { ori ->
-                proximity.forEach {
-                    if (sortItem != null && ori.items.get(sortItem) > 0 && it.acceptItem(this, sortItem)) {
-                        it.handleItem(this, sortItem)
-                        ori.items.remove(sortItem, 1)
-                    }
+            val original = LogisticsGraph.getHub(this) ?: return
+            proximity.forEach {
+                if (sortItem != null && original.items.get(sortItem) > 0 && it.acceptItem(this, sortItem)) {
+                    it.handleItem(this, sortItem)
+                    original.items.remove(sortItem, 1)
                 }
             }
-
         }
 
         override fun buildConfiguration(table: Table) {
             ItemSelection.buildTable(block, table, Vars.content.items(), ::sortItem, ::configure, true)
         }
 
-        override fun config(): Item? {
-            return sortItem
-        }
+        override fun config() = sortItem
 
         override fun read(read: Reads, revision: Byte) {
             super.read(read, revision)
