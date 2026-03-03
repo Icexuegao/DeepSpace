@@ -131,6 +131,8 @@ object IStyles {
 
   val publicInfoIcon = IFiles.findModPng("upWel")
 
+  val contributorBack =IFiles.findModPng("contributor-back")
+
   val menusButton_host = IFiles.findModPng("menusButton_host").asDrawable()
   val menusButton_exit = IFiles.findModPng("menusButton_exit").asDrawable()
   val menusButton_remains = IFiles.findModPng("menusButton_remains").asDrawable()

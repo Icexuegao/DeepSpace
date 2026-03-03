@@ -74,7 +74,7 @@ object ProductBlocks : Load {
     bitHardness = 4
     size = 3
     drillTime = 350f
-    requirements(Category.production, IItems.钴锭, 35, IItems.铬锭, 45, IItems.低碳钢, 50, IItems.高碳钢, 40, IItems.黄铜锭, 10)
+    requirements(Category.production, IItems.铬锭, 45, IItems.低碳钢, 50, IItems.高碳钢, 40, IItems.黄铜锭, 10)
   }
   val 曼哈德钻井: Block = BaseDrill("manhardDrill").apply {
     bitHardness = 5

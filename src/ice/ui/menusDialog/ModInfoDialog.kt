@@ -380,7 +380,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     }
 
     init {
-      add(Stack(Image(getQQImage(number)), Image(IFiles.findModPng("wdwd")))).size(180f).get()
+      add(Stack(Image(getQQImage(number)), Image(IStyles.contributorBack))).size(180f).get()
       row()
       add(name).color(Pal.accent).fill()
       contributors.add(this)
@@ -393,7 +393,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     }
 
     init {
-      add(Stack(Image(getQQImage(number)), Image(IFiles.findModPng("wdwd")))).size(180f).get()
+      add(Stack(Image(getQQImage(number)), Image(IStyles.contributorBack))).size(180f).get()
       row()
       addCR(name).fill()
       assisteds.add(this)
@@ -402,9 +402,9 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
 
   private enum class Work(val des: String) {
     artist_icon_work("贴图/美术"),
-    translate_icon_work("翻译"),
+    translate_icon_work("翻译/本地化"),
     sounds_icon_work("音乐/音效"),
-    copywriting_icon_work("文案"),
+    copywriting_icon_work("文案/策划"),
     program_icon_work("程序/调试");
 
     fun icon(): Drawable = Singularity.getModDrawable(name)

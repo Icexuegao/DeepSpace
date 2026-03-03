@@ -105,11 +105,14 @@ object IUnitTypes : Load {
 
   val 毒刺 = PoisonBarb()
   val 爆蚊 = ExplosiveMosquito()
+
   val 加百列 = Gabriel()
   val 路西法 = Lucifer()
-  val 欧米茄 = Omega()
-  val 泽塔 = Zeta()
+
   val 伊普西龙 = Ipsiglon()
+  val 泽塔 = Zeta()
+  val 欧米茄 = Omega()
+
 
   val 炸蛛 = SpiderBomb()
   val 罗织 = Weaver()

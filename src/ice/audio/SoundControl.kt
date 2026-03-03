@@ -68,7 +68,7 @@ class SoundControl : SoundControl() {
     Core.audio.setPaused(Core.audio.soundBus.id, Vars.state.isPaused)
 
     if (MenusDialog.isShown) {
-      play(IMusics.title)
+     if (SettingValue.启用主菜单音乐) play(IMusics.title)
     } else if (Vars.state.isMenu) {
       silenced = false
       if (Vars.ui.planet.isShown) {
