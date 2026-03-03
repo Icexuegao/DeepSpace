@@ -9,7 +9,6 @@ import arc.struct.ObjectIntMap
 import arc.struct.Seq
 import arc.util.Scaling
 import arc.util.Strings
-import ice.library.struct.log
 import ice.library.util.toStringi
 import mindustry.Vars
 import mindustry.ctype.Content

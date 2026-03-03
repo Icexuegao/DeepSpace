@@ -49,7 +49,7 @@ class CulturingBarn : SpliceCrafter("culturing_barn") {
       liquid(Liquids.water, 0.02f)
     }
     newProduce().apply {
-      liquids(Liquids.ozone, 0.01f, ILiquids.藻泥, 0.006f)
+      liquids(ILiquids.氧气, 0.01f, ILiquids.藻泥, 0.006f)
     }
 
     structUpdated = Cons { e: SpliceCrafterBuild ->

@@ -4,7 +4,6 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.draw.DrawMulti
-import mindustry.content.Liquids
 import mindustry.gen.Building
 import mindustry.type.Category
 import mindustry.type.ItemStack
@@ -35,7 +34,7 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
     consume!!.time(60f)
     consume!!.liquids(
       *LiquidStack.with(
-        ILiquids.碱液, 0.2f, ILiquids.铀盐溶液, 0.2f, Liquids.ozone, 0.2f
+        ILiquids.碱液, 0.2f, ILiquids.铀盐溶液, 0.2f, ILiquids.氧气, 0.2f
       )
     )
     consume!!.item(IItems.絮凝剂, 1)
@@ -47,7 +46,7 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
     consume!!.time(120f)
     consume!!.liquids(
       *LiquidStack.with(
-        ILiquids.酸液, 0.2f, Liquids.ozone, 0.4f
+        ILiquids.酸液, 0.2f, ILiquids.氧气, 0.4f
       )
     )
     consume!!.item(IItems.铱金混合物, 1)

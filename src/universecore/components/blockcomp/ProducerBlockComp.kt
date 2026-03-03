@@ -1,7 +1,6 @@
 package universecore.components.blockcomp
 
 import arc.struct.Seq
-import singularity.world.products.Producers
 import universecore.world.producers.BaseProducers
 
 /**生产者方块的组件，令方块具有记录输出资源配方的功能
@@ -15,8 +14,8 @@ interface ProducerBlockComp : ConsumerBlockComp {
   var producers: Seq<BaseProducers>
 
   /**创建一张新的生产清单加入容器，并返回它 */
-  fun newProduce(): Producers {
-    val produce = Producers()
+  fun newProduce(): BaseProducers {
+    val produce = BaseProducers()
     producers.add(produce)
     return produce
   }

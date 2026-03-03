@@ -8,6 +8,8 @@ import mindustry.type.ItemStack
 import mindustry.type.Liquid
 import mindustry.type.LiquidStack
 import mindustry.world.meta.Stats
+import singularity.world.products.ProduceEnergy
+import singularity.world.products.ProduceMedium
 import universecore.components.blockcomp.ProducerBuildComp
 import universecore.world.consumers.BaseConsumers
 
@@ -54,6 +56,13 @@ open class BaseProducers {
 
   fun power(prod: Float): ProducePower<*> {
     return add(ProducePower(prod))
+  }
+  fun energy(prod: Float): ProduceEnergy<*> {
+    return add(ProduceEnergy(prod))
+  }
+
+  fun medium(prod: Float): ProduceMedium<*> {
+    return add(ProduceMedium(prod))
   }
 
   @Suppress("UNCHECKED_CAST")

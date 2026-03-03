@@ -306,6 +306,16 @@ object ILiquids : Load {
     }
   }
 
+  val 氧气 = IceLiquid("liquid_oxygen", Color.valueOf("#d7d9e2")) {
+    bundle {
+      desc(zh_CN, "氧气", "最常用的气体,在工业生产中都作为氧化剂")
+    }
+    gas = true
+    explosiveness = 0f
+    flammability = 0f
+    temperature = 0.5f
+    viscosity = 0f
+  }
   var 二氧化碳 = IceLiquid("liquid_carbon_dioxide", Color.white) {
     bundle {
       desc(zh_CN, "二氧化碳", "大气中普遍存在的温室气体,在工业生产中,二氧化碳常被用作制冷剂,惰性保护气体")
@@ -338,6 +348,7 @@ object ILiquids : Load {
       desc(zh_CN, "沼气", "一种天然气体,主要成分是甲烷,可替代部分工厂的燃料需求")
     }
   }
+
   val 氢气 = IceLiquid("liquid_hydrogen", Color.valueOf("#9eabf7")) {
     bundle {
       desc(zh_CN, "氢气")

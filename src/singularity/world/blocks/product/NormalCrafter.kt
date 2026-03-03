@@ -43,7 +43,6 @@ import mindustry.world.meta.*
 import singularity.graphic.SglDrawConst
 import singularity.world.blocks.SglBlock
 import singularity.world.meta.SglStat
-import singularity.world.products.Producers
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.components.blockcomp.FactoryBlockComp
 import universecore.components.blockcomp.FactoryBuildComp
@@ -106,7 +105,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
   var shouldConfig: Boolean = false
 
   /**同样的，这也是一个指针，指向当前编辑的produce */
-  var produce: Producers? = null
+  var produce: BaseProducers? = null
   var craftTrigger: Cons<out NormalCrafterBuild?>? = null
   var crafting: Cons<out NormalCrafterBuild?>? = null
   override var warmupSpeed = 0.02f
@@ -126,15 +125,15 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
     buildType = Prov(::NormalCrafterBuild)
   }
 
-  override fun newProduce(): Producers {
-    produce = Producers()
+  override fun newProduce(): BaseProducers {
+    produce = BaseProducers()
     producers.add(produce)
     return produce!!
   }
 
   fun newOptionalProduct() {
-    produce = Producers()
-    val prod: Producers = produce!!
+    produce = BaseProducers()
+    val prod: BaseProducers = produce!!
     newOptionalConsume({ e: NormalCrafterBuild, c: BaseConsumers ->
       for (baseProduce in prod.all()) {
         val baseProduce1 = baseProduce as BaseProduce<ProducerBuildComp>
