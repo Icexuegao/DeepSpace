@@ -25,7 +25,7 @@ import mindustry.type.weapons.RepairBeamWeapon
 class Ganlin : IceUnitType("ganlin") {
   init {
     bundle {
-      desc(zh_CN, "甘霖", "以生物钢作为主要材料,辅以陶钢作为电磁屏蔽层,一般装备甚至无法留下划痕,同时在澎湃的能量输出下,其回复速度令人惊异,\n控制中枢与动力炉紧密相连,在内部结构大规模受损导致动力炉失稳融毁后会一同损毁\n因此,即使工程部门收集到了如此多残骸也难以了解其中枢构造")
+      desc(zh_CN, "甘霖", "重型地面支援单位.交替发射机炮攻击敌人,同时对友军发射治疗光线.在场时会治疗附近的友军,缓慢恢复生命值")
     }
     health = 68700f
     hitSize = 48f

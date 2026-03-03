@@ -14,6 +14,9 @@ import mindustry.graphics.MultiPacker.PageType
 
 class Lucifer : IceUnitType("lucifer") {
   init {
+    bundle {
+      desc(zh_CN, "路西法"," ")
+    }
     armor = 1f
     accel = 0.2f
     health = 200f
@@ -79,9 +82,6 @@ class Lucifer : IceUnitType("lucifer") {
         hitEffect = despawnEffect
         shootEffect = IceEffects.squareAngle(color1 = IceColor.b4, color2 = IceColor.b5)
       }
-    }
-    bundle {
-      desc(zh_CN, "路西法")
     }
   }
 

@@ -13,7 +13,7 @@ import mindustry.world.meta.BlockFlag
 class PoisonBarb : IceUnitType("poisonBarb") {
   init {
     bundle {
-      desc(zh_CN, "毒刺", "生物科技的终端产物,在一定情况下可以无限制的自我增殖")
+      desc(zh_CN, "毒刺", "轻型空中突击单位.发射穿透性激光攻击敌人,每隔一段时间会克隆自身","帝国科技的终极产物,几乎可以无限制地自我增殖")
     }
     lowAltitude = true
     flying = true

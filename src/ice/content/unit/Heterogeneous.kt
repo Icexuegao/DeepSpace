@@ -17,7 +17,7 @@ import mindustry.gen.Sounds
 class Heterogeneous : IceUnitType("unit_heterogeneous") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "异种", "重型全地形多足机甲,配备了快速发射的汲取光束\n对远距离敌人发射不稳定的聚变能量弹,造成巨大的范围伤害并使范围内的原子发生衰变")
+      desc(zh_CN, "异种", "重型地面突击单位.对远距离敌人发射不稳定的聚变能量弹,对近距离敌人则发射密集弱化激光")
     }
     health = 127000f
     armor = 31f
