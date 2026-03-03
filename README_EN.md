@@ -1,7 +1,7 @@
 [简体中文](README.md)|English 
 
 <div align="center">
-    <img src="./assets/sprites/ice/ui/logo.png" alt="logo" width="750"/>
+    <img src="./assets/sprites/ice/ui/icon/logo.png" alt="logo" width="750"/>
 </div>
 
 ---
