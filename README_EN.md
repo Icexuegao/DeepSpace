@@ -1,17 +1,13 @@
 [简体中文](README.md)|English 
 
-<style>
-    .lt {
-        margin: 0 auto;
-        border: 1px grey solid;
-    }
-</style>
-
-<table class="lt">
+<div align="center">
     <img src="./assets/sprites/ice/ui/logo.png" alt="logo" width="750"/>
-</table>
+</div>
 
-# ___DeepSpace___ <img src="./assets/icon.png" alt = "icon" width = "100"/>
+---
+# ___DeepSpace___
+<img src="./assets/icon.png" alt = "icon" width = "200"/>
+
 A ___multi-faceted content___ Mindustry __Kotlin/Java__ mod.
 
 ## Our concept
@@ -19,20 +15,20 @@ A ___multi-faceted content___ Mindustry __Kotlin/Java__ mod.
 
 ## Highlights
 ### Remains
-<table class="lt">
-    <img src="./screenshot/shot1.png" alt="remains" width="750"/>
-</table>
+<img src="./screenshot/shot1.png" alt="logo" width="750"/>
+
+---
 
 ### Planets
-<table class="lt">
-    <img src="./screenshot/shot2.png" alt="planets" width="750"/>
-</table>
+<img src="./screenshot/shot2.png" alt="logo" width="750"/>
+
+---
 
 ### Character dialogue
 ~~OMG galgame~~
-<table class="lt">
-    <img src="./screenshot/shot3.png" alt="gal" width="500"/>
-</table>
+<img src="./screenshot/shot3.png" alt="logo" width="750"/>
+
+---
 
 ## Have any additional suggestions or questions?
 - __My QQ__: 2315079583
