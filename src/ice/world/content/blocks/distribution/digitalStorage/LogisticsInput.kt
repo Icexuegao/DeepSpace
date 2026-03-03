@@ -1,14 +1,12 @@
 package ice.world.content.blocks.distribution.digitalStorage
 
-import arc.Events
 import arc.func.Prov
-import ice.library.EventType
-import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.gen.Building
 import mindustry.type.Item
-import mindustry.world.Tile
 
-class LogisticsInput(name: String) : IceBlock(name) {
+class LogisticsInput(name: String) : LogisticsBlock(name) {
+    override val blockType = Type.INPUT
+
     init {
         size = 1
         solid = true
@@ -21,13 +19,11 @@ class LogisticsInput(name: String) : IceBlock(name) {
         buildType = Prov(::DigitalInputBuild)
     }
 
-    override fun blockChanged(tile: Tile) {
-        Events.fire(EventType.LogisticsHubFire())
-    }
-
-    inner class DigitalInputBuild : IceBuild() {
+    inner class DigitalInputBuild : LogisticsBuild() {
         var original: LogisticsHub.DigitalStorageBuild? = null
+
         override fun acceptItem(source: Building, item: Item): Boolean {
+            original = LogisticsGraph.getHub(this)
             return original?.acceptItem(source, item) ?: false
         }
 
