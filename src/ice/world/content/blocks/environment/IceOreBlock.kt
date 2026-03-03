@@ -1,35 +1,44 @@
 package ice.world.content.blocks.environment
 
+import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.math.Mathf
 import arc.struct.Seq
+import ice.core.SettingValue
 import ice.library.EventType
 import ice.world.content.blocks.abstractBlocks.Variants
+import mindustry.Vars
 import mindustry.type.Item
 import mindustry.world.Tile
 import mindustry.world.blocks.environment.OreBlock
 import kotlin.math.max
 
 class IceOreBlock(name: String, ore: Item) : OreBlock("${name}Ore", ore) {
-    companion object{
-        var ores= Seq<IceOreBlock>()
+  companion object {
+    var ores = Seq<IceOreBlock>()
+  }
+
+  var display = false
+
+  init {
+    ores.add(this)
+    useColor = false
+    EventType.addAtlasPackEvent {
+      Variants.setBlockVariants(this)
     }
-    var display=false
-    init {
-        ores.add(this)
-        useColor = true
-        mapColor = itemDrop.color
-        EventType.addAtlasPackEvent {
-            Variants.setBlockVariants(this)
-        }
+    SettingValue.addDeBugRun {
+      if (Vars.state.isGame){
+        Vars.renderer.blocks.floor.reload()
+      }
     }
-    override fun drawBase(tile: Tile) {
-        if (Mathf.randomSeed(tile.pos().toLong(),1,20)==1||display){
-            Draw.rect(
-                variantRegions[Mathf.randomSeed(
-                    tile.pos().toLong(), 0, max(0, (variantRegions.size - 1))
-                )], tile.worldx(), tile.worldy()
-            )
-        }
+  }
+  override fun drawBase(tile: Tile) {
+    if (SettingValue.启用调试模式 || display || Vars.state.isEditor || Vars.ui.editor.isShown || Mathf.randomSeed(tile.pos().toLong(), 1, 20) == 1) {
+      Draw.rect(
+        variantRegions[Mathf.randomSeed(
+          tile.pos().toLong(), 0, max(0, (variantRegions.size - 1))
+        )], tile.worldx(), tile.worldy()
+      )
     }
+  }
 }

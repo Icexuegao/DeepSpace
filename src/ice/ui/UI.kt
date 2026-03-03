@@ -77,6 +77,7 @@ object UI : Load {
   fun showSoundCloseV(sound: Sound) {
     //非常愚蠢
     sound.play()
+    Core.audio.play(sound,1f,1f,1f,true)
     Sounds.uiButton.stop()
   }
 

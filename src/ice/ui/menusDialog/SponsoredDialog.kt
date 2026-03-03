@@ -152,7 +152,7 @@ object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.me
     }
 
     init {
-      add(Stack(Image(getQQImage(number)), Image(IFiles.findModPng("wdwd")))).size(180f).get()
+      add(Stack(Image(getQQImage(number)), Image(IStyles.contributorBack))).size(180f).get()
       row()
 
       add(name).color(IceColor.y2).row()

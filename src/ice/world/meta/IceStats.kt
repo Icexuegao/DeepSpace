@@ -6,7 +6,7 @@ import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import mindustry.world.meta.StatCat
 import universecore.world.meta.UncStatCat
 
-object IceStats: Load {
+object IceStats : Load {
   val 最大能量势 = IceStat("maxEnergyPotential", IceStatCats.neutron).apply {
     bundle {
       desc(zh_CN, "最大能量势")
@@ -267,6 +267,22 @@ object IceStats: Load {
     }
   }
 
+  val 作者 = IceStat("author").apply {
+    bundle {
+      desc(zh_CN, "作者")
+    }
+  }
+  val 亲爱的贡献者 = IceStat("contributors").apply {
+    bundle {
+      desc(zh_CN, "亲爱的贡献者")
+    }
+  }
+  val 版本 = IceStat("version").apply {
+    bundle {
+      desc(zh_CN, "版本")
+    }
+  }
+
   val 支持详情 = getStat("support.info") {
     desc(zh_CN, "首先,谢谢您愿意点开这个页面,若您喜欢这个mod,您的支持将是我们继续这个项目的莫大动力")
   }
@@ -303,7 +319,7 @@ object IceStats: Load {
     desc(zh_CN, "流体")
   }
 
-  private fun getStat(name: String, cat: StatCat = StatCat.general, desc: IceStat.() -> Unit): IceStat {
+  private fun getStat(name: String, cat: StatCat = StatCat.general, desc: IceStat.()->Unit): IceStat {
     return IceStat(name, cat).apply {
       bundle {
         desc()

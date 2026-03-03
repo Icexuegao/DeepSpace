@@ -124,7 +124,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
     }
 
     return add(Table().apply {
-      add(button).padRight(4f)
+      add(button).padRight(8f)
       add(label.also {it.setColor(color)})
     }).margin(10f).top().left().pad(5f)
   }
