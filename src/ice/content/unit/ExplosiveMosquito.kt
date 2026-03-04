@@ -15,7 +15,7 @@ import mindustry.world.meta.BlockFlag
 class ExplosiveMosquito : IceUnitType("explosiveMosquito") {
   init {
     bundle {
-      desc(zh_CN, "爆蚊", "飞行自爆兵种,能从意想不到的方位发起进攻")
+      desc(zh_CN, "爆蚊", "轻型空中突击单位.向敌人发起自杀式攻击","因其酷似蚊虫的行为方式而得名.")
     }
     lowAltitude = true
     flying = true

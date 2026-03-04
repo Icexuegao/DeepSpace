@@ -22,7 +22,7 @@ import mindustry.gen.Sounds
 class StormBolt : IceUnitType("unit_storBolt") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "风暴", "坚固的超远程炮舰\n可以对敌人进行超视距定点打击,对于近距离的敌人则发射高热激光")
+      desc(zh_CN, "风暴", "重型空中突击单位.对远距离敌人发射能量弹,对近距离的敌人则发射高热激光.加装护盾辅助发生器以维持友军护盾持续作战,开火时减少所受伤害.攻击时无法移动","风雨欲来...")
     }
     flying = true
     health = 75000f

@@ -36,7 +36,7 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
 
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "炸蛛", "搭载了矢量推进器的多足自爆机甲\n能从意想不到的方位发起进攻,并产生足以撼动永固工事的剧烈爆炸")
+      desc(zh_CN, "炸蛛", "中型地面突击单位.向敌人发起剧烈自杀式攻击.配备推进器以快速接近敌人.阵亡后会分裂出爆蚊")
     }
 
     health = 7680f
