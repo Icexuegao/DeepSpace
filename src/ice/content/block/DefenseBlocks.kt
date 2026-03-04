@@ -55,7 +55,7 @@ object DefenseBlocks : Load {
   val 碳钢墙 = Wall("carbonSteelWall").apply {
     size = 1
     armor = 5f
-    health = 320
+    health = 430
     chanceDeflect = 0.1f
     requirements(Category.defense, IItems.高碳钢, 3, IItems.低碳钢, 3)
     bundle {

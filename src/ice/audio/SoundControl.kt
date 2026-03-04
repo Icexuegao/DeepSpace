@@ -7,10 +7,12 @@ import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Time
 import ice.core.SettingValue
+import ice.library.struct.log
 import ice.ui.MenusDialog
 import mindustry.Vars
 import mindustry.audio.SoundControl
 import mindustry.gen.Musics
+import kotlin.math.log10
 
 class SoundControl : SoundControl() {
   val iceAmbientMusic = Seq<Music>()
@@ -19,17 +21,32 @@ class SoundControl : SoundControl() {
 
   init {
     iceAmbientMusic.addAll(Musics.game1, Musics.game3, Musics.game6, Musics.game8, Musics.game9, Musics.fine)
-    iceDarkMusic.addAll(IMusics.Core_Overload_Rite)// Seq.with(Musics.game2, Musics.game5, Musics.game7, Musics.game4)
-    iceBossMusic.addAll(Musics.boss1, Musics.boss2, Musics.game2, Musics.game5)
+    iceDarkMusic.addAll(IMusics.核心过载仪式)// Seq.with(Musics.game2, Musics.game5, Musics.game7, Musics.game4)
+    iceBossMusic.addAll(IMusics.异端核心)
+  }
+
+  override fun isDark(): Boolean {
+    if (Vars.player.team().data().hasCore() && Vars.player.team().data().core().healthf() < 0.85f) {
+      //core damaged -> dark
+      return true
+    }
+
+    //it may be dark based on wave
+    if (Mathf.chance(((log10(((Vars.state.wave - 17f) / 19f).toDouble()) + 1).toFloat() / 4f).toDouble())) {
+      return true
+    }
+
+    //dark based on enemies
+    return Mathf.chance((Vars.state.enemies / 70f + 0.1f).toDouble())
   }
 
   override fun playRandom() {
     if (Vars.state.boss() != null) {
-      playOnce(iceBossMusic.random(lastRandomPlayed))
+      playOnce(iceBossMusic.random())
     } else if (isDark()) {
-      playOnce(iceDarkMusic.random(lastRandomPlayed))
+      playOnce(iceDarkMusic.random())
     } else {
-      playOnce(iceAmbientMusic.random(lastRandomPlayed))
+      playOnce(iceAmbientMusic.random())
     }
   }
 
@@ -68,7 +85,7 @@ class SoundControl : SoundControl() {
     Core.audio.setPaused(Core.audio.soundBus.id, Vars.state.isPaused)
 
     if (MenusDialog.isShown) {
-     if (SettingValue.启用主菜单音乐) play(IMusics.title)
+      if (SettingValue.启用主菜单音乐) play(IMusics.title)
     } else if (Vars.state.isMenu) {
       silenced = false
       if (Vars.ui.planet.isShown) {
@@ -82,7 +99,7 @@ class SoundControl : SoundControl() {
       silenced = false
       play(Musics.editor)
     } else {
-      //this just fades out the last track to make way for ingame music
+      //这只是将最后一首曲目淡出，为游戏内音乐腾出空间
       silence()
 
       if (Core.settings.getBool("alwaysmusic")) {
@@ -126,7 +143,7 @@ class SoundControl : SoundControl() {
       //开始在新曲目中演奏
       current = music
       current.isLooping = true
-      current.setVolume(0f.also { fade = it })
+      current.setVolume(0f.also {fade = it})
       current.play()
       silenced = false
     } else if (current === music) {

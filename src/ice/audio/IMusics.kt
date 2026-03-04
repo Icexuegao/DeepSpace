@@ -1,14 +1,12 @@
 package ice.audio
 
-import arc.Core
 import arc.audio.Music
 import ice.library.IFiles
-import mindustry.Vars
-import mindustry.gen.Musics
 
 object IMusics {
   val title = Music(IFiles.findMusic("title.ogg"))
-  val Core_Overload_Rite =Music(IFiles.findMusic("Core_Overload_Rite.ogg"))
+  val 核心过载仪式 =Music(IFiles.findMusic("Core_Overload_Ritual.ogg"))
+  val 异端核心 =Music(IFiles.findMusic("Heretic_Core.ogg"))
 }
 
 

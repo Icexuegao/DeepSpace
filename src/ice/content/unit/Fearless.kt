@@ -32,16 +32,10 @@ class Fearless : IceUnitType("fearless") {
     BaseBundle.bundle {
       desc(zh_CN, "无畏", "无畏级战列巡航舰,帝国舰队的中坚力量\n配备了两门火力凶猛的荷电粒子炮以及广域脉冲发生器,可以过载大范围内敌军的引擎和武器系统以及敌方工事的能源系统")
     }
-    abilities.add(EnergyFieldAbility(0f, 60f, 0f).apply {
-      y = -31.75f
-      display = false
-      maxTargets = 0
-      healPercent = 0f
-      color = Color.valueOf("FF5845")
-    }, ShieldRegenFieldAbility(400f, 12000f, 60f, 240f))
+
     flying = true
     health = 64000f
-    armor = 139f
+    armor = 78f
     hitSize = 92f
     range = 480f
     speed = 1f
@@ -51,6 +45,14 @@ class Fearless : IceUnitType("fearless") {
     faceTarget = false
     lowAltitude = true
     outlineColor = Color.valueOf("1F1F1F")
+
+    abilities.add(EnergyFieldAbility(0f, 60f, 0f).apply {
+      y = -31.75f
+      display = false
+      maxTargets = 0
+      healPercent = 0f
+      color = Color.valueOf("FF5845")
+    }, ShieldRegenFieldAbility(400f, 12000f, 60f, 240f))
     setWeapon("weapon1") {
       x = 20.75f
       y = -3.25f

@@ -1,5 +1,6 @@
 package ice.content.unit.flying.fire
 
+import ice.content.IItems
 import ice.entities.bullet.BombBulletType
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.unit.IceUnitType
@@ -14,6 +15,7 @@ class Tuihuo : IceUnitType("tuihuo") {
     bundle {
       desc(zh_CN, "趋火", "轻型空中突击单位.快速投掷航弹杀伤敌军,开火时减少所受伤害")
     }
+    requirements(IItems.低碳钢,35, IItems.高碳钢,15, IItems.单晶硅,10, IItems.铬锭,10)
     immunities.add(StatusEffects.wet)
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 0.2f

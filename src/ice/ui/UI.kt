@@ -9,7 +9,6 @@ import ice.audio.ISounds
 import ice.core.SettingValue
 import ice.library.DeBugFragment
 import ice.library.IFiles
-import ice.library.struct.log
 import ice.library.world.Load
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.ConversationFragment
@@ -17,7 +16,6 @@ import ice.ui.fragment.FleshFragment
 import ice.ui.menusDialog.DataDialog
 import mindustry.Vars
 import mindustry.gen.Icon
-import mindustry.gen.Sounds
 import singularity.Sgl
 import singularity.ui.fragments.ToolBarFrag
 
@@ -70,15 +68,14 @@ object UI : Load {
 
     Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.displayName}[]", Icon.menu) {
       MenusDialog.show()
-      showSoundCloseV(ISounds.进入模组界面)
+      showUISoundCloseV(ISounds.进入模组界面)
     }
   }
 
-  fun showSoundCloseV(sound: Sound) {
-    //非常愚蠢
+  fun showUISoundCloseV(sound: Sound) {
+    sound.setBus(Vars.control.sound.uiBus)
     sound.play()
-    Core.audio.play(sound,1f,1f,1f,true)
-    Sounds.uiButton.stop()
+    //Sounds.uiButton.stop()
   }
 
   fun loadSystemCursors() {

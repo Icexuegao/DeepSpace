@@ -11,16 +11,7 @@ import mindustry.type.Category
 
 @Suppress("unused")
 object CrafterBlocks : Load {
-  val 焚烧炉 = Incinerator("incinerator").apply {
-    size = 1
-    flameColor = IceColor.b4
-    consumePower(20 / 60f)
-    requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5, IItems.铅锭, 5)
-    bundle {
-      desc(zh_CN, "焚烧炉")
-    }
-  }
-
+  val 焚烧炉 = Incinerator()
   val 碳控熔炉 = CarbonSteelFactory()
   val 普适冶炼阵列 = UniversalSmelterArray()
 

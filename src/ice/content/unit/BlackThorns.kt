@@ -31,7 +31,7 @@ class BlackThorns : IceUnitType("unit_blackThorns") {
 
     lowAltitude = true
     flying = true
-    health = 174000f
+    health = 110050f
     armor = 15f
     hitSize = 86f
     speed = 0.667f
@@ -379,7 +379,7 @@ class BlackThorns : IceUnitType("unit_blackThorns") {
       shootY = 0f
       reload = 360f
       shootSound = ISounds.激射
-      bullet = BasicBulletType(5f, 425f, "arrows").apply {
+      bullet = BasicBulletType(5f, 310f, "arrows").apply {
         lifetime = 160f
         drag = -0.001f
         shrinkY = 0f
