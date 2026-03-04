@@ -16,13 +16,13 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.entities.bullet.base.BulletType
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.UnitTypes
 import mindustry.core.World
 import mindustry.entities.*
 import mindustry.entities.Units.Sortf
-import mindustry.entities.bullet.BulletType
 import mindustry.entities.pattern.ShootPattern
 import mindustry.game.Team
 import mindustry.gen.*

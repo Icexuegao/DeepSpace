@@ -1,4 +1,4 @@
-package ice.world.content.blocks.crafting
+package ice.content.block.crafter
 
 import arc.func.Prov
 import arc.graphics.Color
@@ -12,7 +12,7 @@ import arc.util.io.Writes
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.graphics.IceColor
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.BaseBundle
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.content.Fx
 import mindustry.entities.Effect
@@ -29,13 +29,17 @@ open class Incinerator : IceBlock("incinerator") {
   var flameColor: Color = Color.valueOf("ffad9d")
 
   init {
-    bundle {
-      desc(zh_CN, "焚烧炉")
+    BaseBundle.bundle {
+      desc(zh_CN, "焚烧炉", "焚烧液体和物品,可通过配置面板进行可选配置")
     }
     size = 1
     flameColor = IceColor.b4
     consumePower(20 / 60f)
     requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5, IItems.铅锭, 5)
+    config(IncineratorConfig::class.java) {build: IncineratorBuild, config: IncineratorConfig ->
+      build.incinerationLiquid = config.incinerationLiquid
+      build.incinerationItem = config.incinerationItem
+    }
   }
 
   init {
@@ -49,11 +53,15 @@ open class Incinerator : IceBlock("incinerator") {
     buildType = Prov(::IncineratorBuild)
   }
 
+  data class IncineratorConfig(val incinerationLiquid: Boolean, val incinerationItem: Boolean)
   inner class IncineratorBuild : IceBuild() {
     var heat: Float = 0f
-
     var incinerationLiquid = false
     var incinerationItem = false
+
+    override fun config(): Any {
+      return IncineratorConfig(incinerationLiquid, incinerationItem)
+    }
 
     override fun buildConfiguration(table: Table) {
       table.button({

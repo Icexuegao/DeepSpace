@@ -18,6 +18,7 @@ import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.library.util.toStringi
+import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
@@ -70,7 +71,7 @@ import universecore.world.consumers.ConsumeType
 import kotlin.math.min
 
 /**此mod的基础方块类型，对block添加了完善的consume系统，并拥有中子能的基础模块 */
-open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGenerator {
+open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlasGenerator {
   var autoSelect: Boolean = false
   var canSelect: Boolean = true
   var outputItems: Boolean = false
@@ -267,7 +268,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     draw.getRegionsToOutline(this, out)
   }
 
-  public override fun icons(): Array<TextureRegion?>? {
+  public override fun icons(): Array<TextureRegion> {
     return draw.finalIcons(this)
   }
 
@@ -288,7 +289,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     private val fieldHandler = FieldHandler(PlacementFragment::class.java)
   }
 
-  open inner class SglBuilding : Building(), ConsumerBuildComp, NuclearEnergyBuildComp {
+  open inner class SglBuilding : IceBuild(), ConsumerBuildComp, NuclearEnergyBuildComp {
     var lightningDrawer: LightningContainer? = null
     var lightnings: LightningContainer? = null
     var lightningGenerator: VectorLightningGenerator? = null
@@ -413,7 +414,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
     }
 
     override fun shouldConsume(): Boolean {
-      return super<Building>.shouldConsume() && super<ConsumerBuildComp>.shouldConsume()
+      return super<IceBuild>.shouldConsume() && super<ConsumerBuildComp>.shouldConsume()
     }
 
     //  @Override
@@ -456,7 +457,11 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
         }
       }
     }
-
+    override fun draw() {
+      draw.draw(this)
+     if (Vars.renderer.drawStatus)drawStatus()
+      drawActivation()
+    }
     override fun drawStatus() {
       if (this.block.enableDrawStatus && consumers.size > 0) {
         val multiplier = if (block.size > 1) 1.0f else 0.64f
@@ -614,11 +619,7 @@ open class SglBlock(name: String) : Block(name), ConsumerBlockComp, PostAtlasGen
       return block.liquidCapacity
     }
 
-    override fun draw() {
-      draw.draw(this)
-      drawStatus()
-      drawActivation()
-    }
+
 
     override fun drawLight() {
       draw.drawLight(this)

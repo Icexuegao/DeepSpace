@@ -73,7 +73,7 @@ object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.me
             characters.upfate(this) { fLabel.actions.isEmpty }
           }
           tapped {
-            fLabel.restart(hint.random())
+            fLabel.restart(hint.random(fLabel.text.toString()))
           }
           val scl = 2f
           setSize(52f * scl, 72f * scl)
