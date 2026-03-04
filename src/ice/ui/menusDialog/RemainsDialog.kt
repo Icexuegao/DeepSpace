@@ -54,7 +54,7 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
             it.setRowsize(4)
             enableTable = it
           }
-        }.row()
+        }.growX().row()
         ta.iTable { gh ->
           gh.image(IStyles.whiteui).color(IceColor.b1).height(3f).growX().row()
           gh.iTable {
@@ -65,7 +65,7 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
               remainsTable = ip
             }
           }
-        }
+        }.growX()
       }.expand().top()
 
       cont1.iTable { tiTle ->

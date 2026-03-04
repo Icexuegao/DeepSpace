@@ -40,6 +40,9 @@ open class Randomer(name: String) : EnergySource(name) {
     }
     val itemsArray = ObjectMap<Item, Boolean>()
     val liquidsArray = ObjectMap<Liquid, Boolean>()
+    override fun draw() {
+      draw.draw(this)
+    }
     override fun buildConfiguration(table: Table) {
       val nearby: Building = nearby(rotation) ?: return
 

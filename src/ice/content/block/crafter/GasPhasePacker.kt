@@ -8,12 +8,8 @@ import arc.math.Mathf
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
-import mindustry.content.Items
-import mindustry.content.Liquids
 import mindustry.gen.Building
 import mindustry.type.Category
 import mindustry.type.ItemStack
@@ -29,11 +25,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
   bundle {
     desc(zh_CN, "气体相位封装机", "用于将一份流体用相位物封装成中子靶丸,以进一步转变为核聚变所使用的燃料")
   }
-  requirements(
-    Category.crafting, ItemStack.with(
-      IItems.强化合金, 80, IItems.气凝胶, 80, IItems.絮凝剂, 60, IItems.单晶硅, 60, IItems.钴锭, 45
-    )
-  )
+  requirements(Category.crafting, IItems.强化合金, 80, IItems.气凝胶, 80, IItems.絮凝剂, 60, IItems.单晶硅, 60, IItems.钴锭, 45)
   size = 3
 
   hasLiquids = true
@@ -45,11 +37,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
   newConsume()
   consume!!.time(240f)
   consume!!.power(1.4f)
-  consume!!.items(
-    *ItemStack.with(
-      Items.phaseFabric, 2, IItems.气凝胶, 2
-    )
-  )
+  consume!!.items(IItems.絮凝剂, 2, IItems.气凝胶, 2)
   consume!!.liquid(ILiquids.氢气, 0.4f)
   newProduce()
   produce!!.item(IItems.相位封装氢单元, 1)
@@ -57,11 +45,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
   newConsume()
   consume!!.time(240f)
   consume!!.power(1.4f)
-  consume!!.items(
-    *ItemStack.with(
-      Items.phaseFabric, 2, IItems.气凝胶, 2
-    )
-  )
+  consume!!.items(IItems.絮凝剂, 2, IItems.气凝胶, 2)
   consume!!.liquid(ILiquids.氦气, 0.4f)
   newProduce()
   produce!!.item(IItems.相位封装氦单元, 1)

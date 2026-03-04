@@ -4,7 +4,6 @@ import arc.Core
 import arc.graphics.g2d.TextureRegion
 import arc.util.Time
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.item.IceItem
 import ice.world.content.item.OreItem
@@ -293,7 +292,6 @@ object IItems : Load {
   val 硫化合物 = IceItem("item_sulfurCompound", "ffaa5f") {
     flammability = 1.4f
     explosiveness = 0.4f
-    buildable = false
     bundle {
       desc(zh_CN, "硫化合物", "硫素与金属化合而成的晶体常态下相对平和,但其受热分解后伴随发生着地急剧化学反应,足以融毁多数\n能够迸发出大量热能的可控燃素显然重要,因而硫化物得以被视作为一种重要材料,为工业或武器的方方面面所利用")
     }
@@ -301,20 +299,17 @@ object IItems : Load {
   val 爆炸化合物 = IceItem("item_explosiveCompound", "ff795e") {
     flammability = 0.4f
     explosiveness = 1.2f
-    buildable = false
     bundle {
       desc(zh_CN, "爆炸化合物", "一种极端不稳定的化合物,为满足冲击武器需求而诞生的高能材料,爆炸威力极强,应避免长途运输与存储")
     }
   }
   val 低温化合物 = IceItem("item_lowTemperatureCompound", "C0ECFF") {
     charge = 0.1f
-    buildable = false
     bundle {
       desc(zh_CN, "低温化合物", "一种在极端低温环境中凝结而成的化合物,具备优异的导热性能,常用于制造高效率的冷却系统")
     }
   }
   val 铈凝块 = IceItem("item_ceriumClot", "929DB5") {
-    buildable = false
     explosiveness = 1.5f
     flammability = 3.6f
     bundle {
@@ -367,228 +362,6 @@ object IItems : Load {
     charge = 0.8f
     cost = 1.5f
     healthScaling = 0.5f
-  }
-  val 电子元件 = IceItem("item_integratedCircuit", "53565c") {
-    bundle {
-      desc(zh_CN, "电子元件", "精密的电子器件,是制造高级设备和处理器的基础材料")
-    }
-  }
-  val 肃正协议 = IceItem("item_solemnProtocol", "FF5845") {
-    cost = 600f
-    bundle {
-      desc(zh_CN, "肃正协议", "装载特定密匙的激活协议,授权后即可解锁高级军械的控制权限与制造权限")
-    }
-  }
-  val 生物钢 = IceItem("item_biologicalSteel", "D75B6E") {
-    bundle {
-      desc(zh_CN, "生物钢", "一种被强行抑制了绝大部分活性的生物材料.此材料制造的装甲具有整体无缝,附着性强,耐酸碱,防辐射,防腐蚀,耐冲击等的优异特性,只是....", "你真的要使用他吗?")
-    }
-    frames = 3
-    transitionFrames = 13
-    frameTime = 5f
-    explosiveness = 0.75f
-    flammability = 0.5f
-    radioactivity = 0.1f
-    charge = 0.4f
-    cost = 2.4f
-    healthScaling = 2.4f
-  }
-
-  val 暮光合金 = IceItem("item_duskIngot", "deedff") {
-    bundle {
-      desc(zh_CN, "暮光合金", "一种在暮光时分呈现特殊光泽的合金,具有优异的能量传导特性,是高级能量设备的核心材料")
-    }
-  }
-  val 以太能 = IceItem("item_etherealEnergy", "E6C4EE") {
-    frames = 2
-    transitionFrames = 24
-    frameTime = 6f
-    radioactivity = 0.4f
-    charge = 1f
-    cost = 2.4f
-    healthScaling = 0.8f
-    bundle {
-      desc(zh_CN, "以太能", "存储在容器种的高能粒子能量,在特定结构排列下注入相位能量后可影响时空结构.研究初期曾引发时空回溯,空间错位及乱序传送等现象", "在以太粒子以特定结构排列时注入相位能量,以太粒子会在法韦克内敛空间的能量辐射下,形成以伊塔宏粒子射线为场能的波态中子向心力场")
-    }
-  }
-  val 玳渊矩阵 = IceItem("item_abyssMatrix", "d7bdff") {
-    bundle {
-      desc(zh_CN, "玳渊矩阵", "具有独特的能量传导和存储特性,是高级炮塔弹药的核心材料")
-    }
-  }
-
-  val FEX水晶 = IceItem("item_crystal_FEX", "#D2393E") {
-    hardness = 3
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0.4f
-    cost = 1.25f
-    bundle {
-      desc(zh_CN, "导能晶体", "一种高纯度低能阻晶体,中子导率与核性能均有显著提升,是核工业中不可或缺的核心材料")
-    }
-  }
-  val 充能FEX水晶 = object : IceItem("item_crystal_FEX_power", "#E34248") {
-    init {
-      hardness = 3
-      explosiveness = 3.6f
-      flammability = 0f
-      radioactivity = 3f
-      cost = 1.35f
-      frameTime = 9f
-      bundle {
-        desc(zh_CN, "活化导能结晶", "一种经大量能量激发的高纯度低能阻晶体,性质极其不稳定,危险且难以储存,但在需要释放中子能的地方不可或缺", "严禁用任何致密介质接触激发态的导能结晶.在《中子工业操作管理条例》中,此类条目均以醒目字体特别标注.每一行警示背后,都是无法挽回的事故与代价")
-      }
-    }
-
-    override fun loadIcon() {
-      super.loadIcon()
-      val regions = arrayOfNulls<TextureRegion>(18)
-
-      for (i in 0..9) {
-        regions[i] = Core.atlas.find(name + "_" + i)
-        if (i != 0 && i != 9) regions[regions.size - i] = regions[i]
-      }
-
-      fullIcon = TextureRegion(fullIcon)
-      uiIcon = TextureRegion(uiIcon)
-
-      UpdatePool.receive("dynamicIcon-$name") {
-        val frame = (Time.globalTime / frameTime).toInt() % regions.size
-        fullIcon.set(regions[frame])
-        uiIcon.set(regions[frame])
-      }
-    }
-  }
-  val 矩阵合金 = IceItem("item_matrix_alloy", "#929090") {
-    hardness = 4
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
-    cost = 1.4f
-    bundle {
-      desc(zh_CN, "矩阵合金", "一种由大量纳米机器人聚合而成的可编程合金,机械强度较低,但能够自由变换形态甚至物态,具备极高的适应性与灵活性")
-    }
-  }
-  val 强化合金 = IceItem("item_strengthening_alloy", "#B1B1B0") {
-    hardness = 5
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
-    cost = 1.25f
-    bundle {
-      desc(zh_CN, "强化合金", "一种各项性能均衡优异的合金,具备极高的结构强度与抗性,广泛应用于各类领域")
-    }
-  }
-  val 气凝胶 = IceItem("item_aerogel", "#D5EBEE") {
-    hardness = 3
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
-    cost = 1.1f
-    bundle {
-      desc(zh_CN, "气凝胶", "硅基结构的超轻材料.内部由大量细微蜂窝状孔洞填充,具备强度高,密度极小,绝缘绝热等优异特性,广泛应用于各领域")
-    }
-  }
-  val 简并态中子聚合物 = IceItem("item_degenerate_neutron_polymer", "#FF7FE0") {
-    hardness = 10
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
-    cost = 3f
-    bundle {
-      desc(zh_CN, "简并态中子聚合物", "由中子简并态构成的超高密度聚合物,硬度难以测量,韧性与塑性趋近于零.除作为极端环境下的结构材料外,亦是引力场技术的理想场源")
-    }
-  }
-  val 铀238 = IceItem("item_uranium_238", "#7CA73D") {
-    hardness = 2
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0.4f
-    cost = 1.5f
-    bundle {
-      desc(zh_CN, "铀-238", "俗称贫铀的放射性同位素,硬度较高且结构致密.可用作中子反射板及动能穿甲弹头,亦可吸收中子后衰变为更有用的钚-239", "无论在哪一个星球上,自然状态下的铀238总是占据铀的绝大部分的丰富度,所幸它可以转变为更有用的东西,如果全部都用来造穿甲弹和防弹装甲之类的话,保有量可能可以用到下个地质纪...")
-    }
-  }
-  val 铀235 = IceItem("item_uranium_235", "#B5D980") {
-    hardness = 2
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 1.6f
-    bundle {
-      desc(zh_CN, "铀-235", "一种主要的裂变核燃料,同时也是天然的中子放射源")
-    }
-  }
-  val 钚239 = IceItem("item_plutonium_239", "#D1D19F") {
-    hardness = 2
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 1.6f
-    bundle {
-      desc(zh_CN, "钚-239", "由铀-238吸收中子后衰变而成的强放射性同位素,与铀-235同为常用的裂变核燃料", "尽管铀238可以转换为钚239,但也许你需要一个不小规模的反应堆阵列才能实现量产钚239了")
-    }
-  }
-  val 相位封装氢单元 = IceItem("item_encapsulated_hydrogen_cell", "#9EFFC6") {
-    hardness = 2
-    explosiveness = 2.4f
-    flammability = 1.8f
-    radioactivity = 0f
-    bundle {
-      desc(zh_CN, "相位封装氢单元", "由相位材料包裹的氢中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氢的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氢原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
-    }
-  }
-  val 相位封装氦单元 = IceItem("item_encapsulated_helium_cell", "#F9FFDE") {
-    hardness = 2
-    explosiveness = 0.3f
-    flammability = 0f
-    radioactivity = 0f
-    bundle {
-      desc(zh_CN, "相位封装氦单元", "由相位材料包裹的氦中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氦的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氦原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
-    }
-  }
-  val 浓缩铀235核燃料 = IceItem("item_concentration_uranium_235", "#95B564") {
-    hardness = 4
-    explosiveness = 12f
-    flammability = 0f
-    radioactivity = 2.4f
-    bundle {
-      desc(zh_CN, "封装铀-235", "一种经高度浓缩并超低温封装的铀核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
-    }
-  }
-  val 浓缩钚239核燃料 = IceItem("item_concentration_plutonium_239", "#B0B074") {
-    hardness = 4
-    explosiveness = 12f
-    flammability = 0f
-    radioactivity = 2.4f
-    bundle {
-      desc(zh_CN, "封装钚-239", "一种经高度浓缩并超低温封装的钚核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
-    }
-  }
-  val 氢聚变燃料 = IceItem("item_hydrogen_fusion_fuel", "#83D6A0") {
-    hardness = 2
-    explosiveness = 2.4f
-    flammability = 1.8f
-    radioactivity = 0f
-    bundle {
-      desc(zh_CN, "氢聚变燃料", "一种核燃料,压缩氢原子同位素,原子性质易于发生聚变,属轻核聚变燃料")
-    }
-  }
-  val 氦聚变燃料 = IceItem("item_helium_fusion_fuel", "#D0D6B7") {
-    hardness = 2
-    explosiveness = 0.3f
-    flammability = 0f
-    radioactivity = 0f
-    bundle {
-      desc(zh_CN, "氦聚变燃料", "一种核燃料,压缩氦原子同位素,原子性质易于发生聚变,属轻核聚变燃料")
-    }
-  }
-  val 反物质 = IceItem("item_anti_metter", "734CD2") {
-    hardness = 12
-    explosiveness = 64f
-    flammability = 0f
-    radioactivity = 0f
-    bundle {
-      desc(zh_CN, "反物质", "由引力场约束隔绝的反物质,与正物质接触即发生完全湮灭并将质量转化为纯能量,危险性极高,广泛用于强攻击性武器", "通常每一个反物质储存单元都会具有一个独立的能源模块来维持约束力场,在远航星舰队伴随燃料仓库放出的耀眼的焰火消失后,停电被成为了携带反物质的情况下最危险的事")
-    }
   }
   val 绿藻块 = IceItem("item_chlorella_block", "#6CB855") {
     hardness = 1
@@ -672,4 +445,229 @@ object IItems : Load {
       desc(zh_CN, "氯铱酸盐", "一种高纯度含铱化合物,经过煅烧脱氯后可以得到产品铱", "几乎所有行星上都有铱,但它们几乎都下沉到了行星的核部,只有少量与铂族金属聚合伴生为矿物构成,可利用量极少")
     }
   }
+
+  val 强化合金 = IceItem("item_strengthening_alloy", "#B1B1B0") {
+    hardness = 5
+    explosiveness = 0f
+    flammability = 0f
+    radioactivity = 0f
+    cost = 1.25f
+    bundle {
+      desc(zh_CN, "强化合金", "一种各项性能均衡优异的合金,具备极高的结构强度与抗性,广泛应用于各类领域")
+    }
+  }
+  val 电子元件 = IceItem("item_integratedCircuit", "53565c") {
+    bundle {
+      desc(zh_CN, "电子元件", "精密的电子器件,是制造高级设备和处理器的基础材料")
+    }
+  }
+  val 气凝胶 = IceItem("item_aerogel", "#D5EBEE") {
+    hardness = 3
+    explosiveness = 0f
+    flammability = 0f
+    radioactivity = 0f
+    cost = 1.1f
+    bundle {
+      desc(zh_CN, "气凝胶", "硅基结构的超轻材料.内部由大量细微蜂窝状孔洞填充,具备强度高,密度极小,绝缘绝热等优异特性,广泛应用于各领域")
+    }
+  }
+
+  val 铀238 = IceItem("item_uranium_238", "#7CA73D") {
+    hardness = 2
+    explosiveness = 0f
+    flammability = 0f
+    radioactivity = 0.4f
+    cost = 1.5f
+    bundle {
+      desc(zh_CN, "铀-238", "俗称贫铀的放射性同位素,硬度较高且结构致密.可用作中子反射板及动能穿甲弹头,亦可吸收中子后衰变为更有用的钚-239", "无论在哪一个星球上,自然状态下的铀238总是占据铀的绝大部分的丰富度,所幸它可以转变为更有用的东西,如果全部都用来造穿甲弹和防弹装甲之类的话,保有量可能可以用到下个地质纪...")
+    }
+  }
+  val 铀235 = IceItem("item_uranium_235", "#B5D980") {
+    hardness = 2
+    explosiveness = 0f
+    flammability = 0f
+    radioactivity = 1.6f
+    bundle {
+      desc(zh_CN, "铀-235", "一种主要的裂变核燃料,同时也是天然的中子放射源")
+    }
+  }
+  val 钚239 = IceItem("item_plutonium_239", "#D1D19F") {
+    hardness = 2
+    explosiveness = 0f
+    flammability = 0f
+    radioactivity = 1.6f
+    bundle {
+      desc(zh_CN, "钚-239", "由铀-238吸收中子后衰变而成的强放射性同位素,与铀-235同为常用的裂变核燃料", "尽管铀238可以转换为钚239,但也许你需要一个不小规模的反应堆阵列才能实现量产钚239了")
+    }
+  }
+  val 相位封装氢单元 = IceItem("item_encapsulated_hydrogen_cell", "#9EFFC6") {
+    hardness = 2
+    explosiveness = 2.4f
+    flammability = 1.8f
+    radioactivity = 0f
+    bundle {
+      desc(zh_CN, "相位封装氢单元", "由相位材料包裹的氢中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氢的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氢原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
+    }
+  }
+  val 相位封装氦单元 = IceItem("item_encapsulated_helium_cell", "#F9FFDE") {
+    hardness = 2
+    explosiveness = 0.3f
+    flammability = 0f
+    radioactivity = 0f
+    bundle {
+      desc(zh_CN, "相位封装氦单元", "由相位材料包裹的氦中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氦的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氦原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
+    }
+  }
+  val 浓缩铀235核燃料 = IceItem("item_concentration_uranium_235", "#95B564") {
+    hardness = 4
+    explosiveness = 12f
+    flammability = 0f
+    radioactivity = 2.4f
+    bundle {
+      desc(zh_CN, "封装铀-235", "一种经高度浓缩并超低温封装的铀核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
+    }
+  }
+  val 浓缩钚239核燃料 = IceItem("item_concentration_plutonium_239", "#B0B074") {
+    hardness = 4
+    explosiveness = 12f
+    flammability = 0f
+    radioactivity = 2.4f
+    bundle {
+      desc(zh_CN, "封装钚-239", "一种经高度浓缩并超低温封装的钚核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
+    }
+  }
+  val 氢聚变燃料 = IceItem("item_hydrogen_fusion_fuel", "#83D6A0") {
+    hardness = 2
+    explosiveness = 2.4f
+    flammability = 1.8f
+    radioactivity = 0f
+    bundle {
+      desc(zh_CN, "氢聚变燃料", "一种核燃料,压缩氢原子同位素,原子性质易于发生聚变,属轻核聚变燃料")
+    }
+  }
+  val 氦聚变燃料 = IceItem("item_helium_fusion_fuel", "#D0D6B7") {
+    hardness = 2
+    explosiveness = 0.3f
+    flammability = 0f
+    radioactivity = 0f
+    bundle {
+      desc(zh_CN, "氦聚变燃料", "一种核燃料,压缩氦原子同位素,原子性质易于发生聚变,属轻核聚变燃料")
+    }
+  }
+
+  val 矩阵合金 = IceItem("item_matrix_alloy", "#929090") {
+    hardness = 4
+    explosiveness = 0f
+    flammability = 0f
+    radioactivity = 0f
+    cost = 1.4f
+    bundle {
+      desc(zh_CN, "矩阵合金", "一种由大量纳米机器人聚合而成的可编程合金,机械强度较低,但能够自由变换形态甚至物态,具备极高的适应性与灵活性")
+    }
+  }
+  val 生物钢 = IceItem("item_biologicalSteel", "D75B6E") {
+    bundle {
+      desc(zh_CN, "生物钢", "一种被强行抑制了绝大部分活性的生物材料.此材料制造的装甲具有整体无缝,附着性强,耐酸碱,防辐射,防腐蚀,耐冲击等的优异特性,只是....", "你真的要使用他吗?")
+    }
+    frames = 3
+    transitionFrames = 13
+    frameTime = 5f
+    explosiveness = 0.75f
+    flammability = 0.5f
+    radioactivity = 0.1f
+    charge = 0.4f
+    cost = 2.4f
+    healthScaling = 2.4f
+  }
+  val 肃正协议 = IceItem("item_solemnProtocol", "FF5845") {
+    cost = 600f
+    bundle {
+      desc(zh_CN, "肃正协议", "装载特定密匙的激活协议,授权后即可解锁高级军械的控制权限与制造权限")
+    }
+  }
+  val FEX水晶 = IceItem("item_crystal_FEX", "#D2393E") {
+    hardness = 3
+    explosiveness = 0f
+    flammability = 0f
+    radioactivity = 0.4f
+    cost = 1.25f
+    bundle {
+      desc(zh_CN, "导能晶体", "一种高纯度低能阻晶体,中子导率与核性能均有显著提升,是核工业中不可或缺的核心材料")
+    }
+  }
+  val 充能FEX水晶 = object : IceItem("item_crystal_FEX_power", "#E34248") {
+    init {
+      hardness = 3
+      explosiveness = 3.6f
+      flammability = 0f
+      radioactivity = 3f
+      cost = 1.35f
+      frameTime = 9f
+      bundle {
+        desc(zh_CN, "活化导能结晶", "一种经大量能量激发的高纯度低能阻晶体,性质极其不稳定,危险且难以储存,但在需要释放中子能的地方不可或缺", "严禁用任何致密介质接触激发态的导能结晶.在《中子工业操作管理条例》中,此类条目均以醒目字体特别标注.每一行警示背后,都是无法挽回的事故与代价")
+      }
+    }
+
+    override fun loadIcon() {
+      super.loadIcon()
+      val regions = arrayOfNulls<TextureRegion>(18)
+
+      for (i in 0..9) {
+        regions[i] = Core.atlas.find(name + "_" + i)
+        if (i != 0 && i != 9) regions[regions.size - i] = regions[i]
+      }
+
+      fullIcon = TextureRegion(fullIcon)
+      uiIcon = TextureRegion(uiIcon)
+
+      UpdatePool.receive("dynamicIcon-$name") {
+        val frame = (Time.globalTime / frameTime).toInt() % regions.size
+        fullIcon.set(regions[frame])
+        uiIcon.set(regions[frame])
+      }
+    }
+  }
+
+  val 简并态中子聚合物 = IceItem("item_degenerate_neutron_polymer", "#FF7FE0") {
+    hardness = 10
+    explosiveness = 0f
+    flammability = 0f
+    radioactivity = 0f
+    cost = 3f
+    bundle {
+      desc(zh_CN, "简并态中子聚合物", "由中子简并态构成的超高密度聚合物,硬度难以测量,韧性与塑性趋近于零.除作为极端环境下的结构材料外,亦是引力场技术的理想场源")
+    }
+  }
+  val 暮光合金 = IceItem("item_duskIngot", "deedff") {
+    bundle {
+      desc(zh_CN, "暮光合金", "一种在暮光时分呈现特殊光泽的合金,具有优异的能量传导特性,是高级能量设备的核心材料")
+    }
+  }
+  val 以太能 = IceItem("item_etherealEnergy", "E6C4EE") {
+    frames = 2
+    transitionFrames = 24
+    frameTime = 6f
+    radioactivity = 0.4f
+    charge = 1f
+    cost = 2.4f
+    healthScaling = 0.8f
+    bundle {
+      desc(zh_CN, "以太能", "存储在容器种的高能粒子能量,在特定结构排列下注入相位能量后可影响时空结构.研究初期曾引发时空回溯,空间错位及乱序传送等现象", "在以太粒子以特定结构排列时注入相位能量,以太粒子会在法韦克内敛空间的能量辐射下,形成以伊塔宏粒子射线为场能的波态中子向心力场")
+    }
+  }
+  val 玳渊矩阵 = IceItem("item_abyssMatrix", "d7bdff") {
+    bundle {
+      desc(zh_CN, "玳渊矩阵", "具有独特的能量传导和存储特性,是高级炮塔弹药的核心材料")
+    }
+  }
+  val 反物质 = IceItem("item_anti_metter", "734CD2") {
+    hardness = 12
+    explosiveness = 64f
+    flammability = 0f
+    radioactivity = 0f
+    bundle {
+      desc(zh_CN, "反物质", "由引力场约束隔绝的反物质,与正物质接触即发生完全湮灭并将质量转化为纯能量,危险性极高,广泛用于强攻击性武器", "通常每一个反物质储存单元都会具有一个独立的能源模块来维持约束力场,在远航星舰队伴随燃料仓库放出的耀眼的焰火消失后,停电被成为了携带反物质的情况下最危险的事")
+    }
+  }
+
 }
