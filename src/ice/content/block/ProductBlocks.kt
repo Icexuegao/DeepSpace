@@ -202,7 +202,7 @@ object ProductBlocks : Load {
     produce!!.item(IItems.岩层沥青, 2)
 
     newBooster(1f)
-    consume!!.add(SglConsumeFloor(IAttribute.bitumen, 1.12f))
+    consume!!.add(SglConsumeFloor(IAttribute.沥青, 1.12f))
 
     draw = DrawMulti(
       DrawBottom(), object : DrawLiquidRegion(Liquids.water) {

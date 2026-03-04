@@ -144,7 +144,7 @@ open class ConsumeLiquidCond<T> : ConsumeLiquidBase<T>() where T : Building, T :
 
           if (count != 0 && count % 4 == 0) index++
 
-          tables[index].add(IStatValues.displayLiquid(stack.liquid, stack.amount * 60, true)).row()
+          tables[index].add(IStatValues.displayLiquid(stack.liquid, stack.amount * 60, true,false)).row()
         }
         tables.forEach(t::add)
 

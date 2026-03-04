@@ -4,8 +4,6 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.draw.DrawMulti
-import mindustry.content.Items
-import mindustry.content.Liquids
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.type.LiquidStack
@@ -59,13 +57,6 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
     newProduce()
     produce!!.item(IItems.絮凝剂, 1)
 
-    newConsume()
-    consume!!.time(120f)
-    consume!!.item(Items.sporePod, 1)
-    consume!!.liquid(ILiquids.碱液, 0.2f)
-    consume!!.power(1.6f)
-    newProduce()
-    produce!!.item(IItems.絮凝剂, 1)
 
     draw = DrawMulti(
       DrawBottom(), DrawCrucibleFlame(), DrawDefault()

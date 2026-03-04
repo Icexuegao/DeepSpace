@@ -16,6 +16,7 @@ object CrafterBlocks : Load {
   val 单晶硅厂 = MonocrystallineSiliconFactory()
   val 等离子蚀刻厂 = IntegratedFactory()
 
+  val 低温混合器 = LowTemperatureMixer()
   val 矿石粉碎机 = MineralCrusher()
   val 蜂巢陶瓷合成巢 = CeramicKiln()
   val 冲压锻炉 = PressingForge()
