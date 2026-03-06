@@ -46,6 +46,9 @@ import kotlin.random.Random
 
 class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
   init {
+    bundle {
+      desc(zh_CN, "裂片集群","超重型空中毁灭单位.","阴影宣告到来,\n灰白落定尘埃.")
+    }
     setWeapon {
       shoot.apply {
         shots = 4
@@ -180,9 +183,6 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
       haloRadius = 16f
       haloRotateSpeed = -1f
     })
-    bundle {
-      desc(zh_CN, "裂片集群")
-    }
   }
 
   class ClusterLobesUnit : Entity() {

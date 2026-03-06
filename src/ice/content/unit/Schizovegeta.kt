@@ -25,7 +25,7 @@ class Schizovegeta : IceUnitType("schizovegeta", SchizovegetaUnit::class.java) {
   init {
     bundle {
       desc(
-        zh_CN, "青壤", "由血肉喷口缓慢孕育的活体培养囊,本身不具备攻击性,只会笨拙地蠕行移动.当其外膜在环境中自然破裂或被外力摧毁时,会释放出数颗至数十颗不等的肿瘤"
+        zh_CN, "青壤", "小型陆行污染生物.无法攻击,只能笨拙地蠕行移动.死亡后会释放出数颗丰瘤."
       )
     }
     speed = 0.3f

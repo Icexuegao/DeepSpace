@@ -158,7 +158,7 @@ object IUnitTypes : Load {
     outlineColor = IceColor.r2
     deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
     bundle {
-      desc(zh_CN, "蚀虻")
+      desc(zh_CN, "蚀虻","小型陆行污染生物.拥有多段体节,尾部体节带有喷口,会喷射腐蚀胶体")
     }
   }
   val 蚀虻Middle = IceUnitType("corrodfly-middle", CorrodflyMiddle::class.java) {

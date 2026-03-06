@@ -32,7 +32,7 @@ class RichTumor : IceUnitType("richTumor", RichTumorUnit::class.java) {
     deathExplosionEffect = IceEffects.bloodNeoplasma
     bundle {
       desc(
-        zh_CN, "丰穰之瘤", "无法移动的特殊组织体,不会被任何单位视为目标.落地后进入短暂的潜伏期,随后开始将下方地表同化为活性肿瘤地,为血肉网络提供持续的生长基础"
+        zh_CN, "丰瘤", "小型陆行污染生物.无法移动与攻击,不会被任何单位视为目标.落地后进入短暂的潜伏期,随后将下方地表同化为活性肿瘤地"
       )
     }
   }
