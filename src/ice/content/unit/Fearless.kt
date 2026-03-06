@@ -30,7 +30,7 @@ import mindustry.type.weapons.PointDefenseWeapon
 class Fearless : IceUnitType("fearless") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "无畏", "无畏级战列巡航舰,帝国舰队的中坚力量\n配备了两门火力凶猛的荷电粒子炮以及广域脉冲发生器,可以过载大范围内敌军的引擎和武器系统以及敌方工事的能源系统")
+      desc(zh_CN, "无畏", "重型空中突击单位.发射荷电粒子高爆弹并辅以激光攻击敌人.装载脉冲发生器用以过载敌军引擎和武器系统.加装护盾辅助发生器以维持友军护盾持续作战,配备裂解炮抵御敌人的攻击","帝国舰队的中坚力量.")
     }
     abilities.add(EnergyFieldAbility(0f, 60f, 0f).apply {
       y = -31.75f

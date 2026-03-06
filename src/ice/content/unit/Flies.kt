@@ -18,7 +18,7 @@ import mindustry.gen.Sounds
 class Flies : IceUnitType("flies", FliesUnit::class.java) {
   init {
     bundle {
-      desc(zh_CN, "糜蝇", "小型飞行生物单位,体型轻盈,机动性高\n虽然单体战斗力薄弱,但往往以群体形式出现,形成令人困扰的蜂群\n其死亡时会释放出具有腐蚀性的体液")
+      desc(zh_CN, "糜蝇", "小型飞行污染生物.常成群结队出现,并对任何被视作威胁的个体发动自杀式袭击")
     }
     speed += 1f
     health = 300f
