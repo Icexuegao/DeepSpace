@@ -29,12 +29,12 @@ import mindustry.graphics.Pal
 class Scream : IceUnitType("scream") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "悲鸣", "重型地面突击单位.对远距离敌人发射集束弹轰击,对近距离敌人则切换为速射粒子炮与弧光冲击炮.对附近的友军提供庇护和突袭效果.配备单位构筑器,会随时间向战场投放\"重压\"","战场沉默的天灾,\n可怜蝼蚁的悲鸣.")
+      desc(zh_CN, "悲鸣", "重型地面突击单位.对远距离敌人发射集束弹轰击,对近距离敌人则切换为速射粒子炮与弧光冲击炮.对附近的友军提供庇护和突袭效果.配备单位构筑器,会随时间向战场投放\"重压\"", "战场沉默的天灾,\n可怜蝼蚁的悲鸣.")
     }
     squareShape = true
     omniMovement = false
-    health = 499520f
-    armor = 241f
+    health = 131050f
+    armor = 150f
     hitSize = 96f
     speed = 0.48f
     accel = 0.1f
@@ -70,7 +70,7 @@ class Scream : IceUnitType("scream") {
       onShoot = true
       activeEffect = Fx.none
     }, UnitSpawnAbility(重压, 1200f).apply {
-      color= Pal.remove
+      color = Pal.remove
       alpha = 0.4f
       spawnY = -41f
       display = false
@@ -112,7 +112,7 @@ class Scream : IceUnitType("scream") {
         reflectable = false
         status = IStatus.熔融
         statusDuration = 60f
-        splashDamage = 610f
+        splashDamage = 233f
         splashDamageRadius = 40f
         buildingDamageMultiplier = 1.5f
         shootEffect = ParticleEffect().apply {
@@ -143,37 +143,37 @@ class Scream : IceUnitType("scream") {
         despawnEffect = Fx.none
         hitEffect = MultiEffect(
           ParticleEffect().apply {
-          region = "blank"
-          particles = 3
-          lifetime = 33f
-          sizeFrom = 5f
-          sizeTo = 0f
-          cone = 360f
-          offset = 45f
-          length = 55f
-          baseLength = 33f
-          interp = Interp.pow5Out
-          sizeInterp = Interp.pow10In
-          colorFrom = Color.valueOf("FFD37F")
-          colorTo = Color.valueOf("F9C27A")
-        }, ParticleEffect().apply {
-          particles = 9
-          lifetime = 33f
-          line = true
-          strokeFrom = 2f
-          lenFrom = 11f
-          lenTo = 0f
-          cone = 360f
-          length = 80f
-          colorFrom = Color.valueOf("FFD37F")
-          colorTo = Color.valueOf("F9C27A")
-        }, WaveEffect().apply {
-          lifetime = 15f
-          sizeTo = 80f
-          strokeFrom = 4f
-          colorFrom = Color.valueOf("F9C27A")
-          colorTo = Color.valueOf("FFD37F")
-        }, Fx.hitSquaresColor
+            region = "blank"
+            particles = 3
+            lifetime = 33f
+            sizeFrom = 5f
+            sizeTo = 0f
+            cone = 360f
+            offset = 45f
+            length = 55f
+            baseLength = 33f
+            interp = Interp.pow5Out
+            sizeInterp = Interp.pow10In
+            colorFrom = Color.valueOf("FFD37F")
+            colorTo = Color.valueOf("F9C27A")
+          }, ParticleEffect().apply {
+            particles = 9
+            lifetime = 33f
+            line = true
+            strokeFrom = 2f
+            lenFrom = 11f
+            lenTo = 0f
+            cone = 360f
+            length = 80f
+            colorFrom = Color.valueOf("FFD37F")
+            colorTo = Color.valueOf("F9C27A")
+          }, WaveEffect().apply {
+            lifetime = 15f
+            sizeTo = 80f
+            strokeFrom = 4f
+            colorFrom = Color.valueOf("F9C27A")
+            colorTo = Color.valueOf("FFD37F")
+          }, Fx.hitSquaresColor
         )
       }
       parts.add(RegionPart().apply {
@@ -221,7 +221,7 @@ class Scream : IceUnitType("scream") {
         reflectable = false
         status = IStatus.湍能
         statusDuration = 60f
-        splashDamage = 610f
+        splashDamage = 233f
         splashDamageRadius = 40f
         buildingDamageMultiplier = 1.5f
         shootEffect = ParticleEffect().apply {
@@ -252,37 +252,37 @@ class Scream : IceUnitType("scream") {
         despawnEffect = Fx.none
         hitEffect = MultiEffect(
           ParticleEffect().apply {
-          region = "blank"
-          particles = 3
-          lifetime = 33f
-          sizeFrom = 5f
-          sizeTo = 0f
-          cone = 360f
-          offset = 45f
-          length = 55f
-          baseLength = 33f
-          interp = Interp.pow5Out
-          sizeInterp = Interp.pow10In
-          colorFrom = Color.valueOf("FFD37F")
-          colorTo = Color.valueOf("F9C27A")
-        }, ParticleEffect().apply {
-          particles = 9
-          lifetime = 33f
-          line = true
-          strokeFrom = 2f
-          lenFrom = 11f
-          lenTo = 0f
-          cone = 360f
-          length = 80f
-          colorFrom = Color.valueOf("FFD37F")
-          colorTo = Color.valueOf("F9C27A")
-        }, WaveEffect().apply {
-          lifetime = 15f
-          sizeTo = 80f
-          strokeFrom = 4f
-          colorFrom = Color.valueOf("F9C27A")
-          colorTo = Color.valueOf("FFD37F")
-        }, Fx.hitSquaresColor
+            region = "blank"
+            particles = 3
+            lifetime = 33f
+            sizeFrom = 5f
+            sizeTo = 0f
+            cone = 360f
+            offset = 45f
+            length = 55f
+            baseLength = 33f
+            interp = Interp.pow5Out
+            sizeInterp = Interp.pow10In
+            colorFrom = Color.valueOf("FFD37F")
+            colorTo = Color.valueOf("F9C27A")
+          }, ParticleEffect().apply {
+            particles = 9
+            lifetime = 33f
+            line = true
+            strokeFrom = 2f
+            lenFrom = 11f
+            lenTo = 0f
+            cone = 360f
+            length = 80f
+            colorFrom = Color.valueOf("FFD37F")
+            colorTo = Color.valueOf("F9C27A")
+          }, WaveEffect().apply {
+            lifetime = 15f
+            sizeTo = 80f
+            strokeFrom = 4f
+            colorFrom = Color.valueOf("F9C27A")
+            colorTo = Color.valueOf("FFD37F")
+          }, Fx.hitSquaresColor
         )
       }
       parts.add(RegionPart().apply {
@@ -440,7 +440,7 @@ class Scream : IceUnitType("scream") {
       recoil = 8f
       shake = 20f
       shootY = 73f
-      reload = 480f
+      reload =(1f/0.07f)*60f
       shootCone = 1f
       mirror = false
       rotate = true
@@ -466,7 +466,7 @@ class Scream : IceUnitType("scream") {
         color = Color.valueOf("FF0000")
         blending = Blending.additive
       })
-      bullet = BasicBulletType(20f, 7490f).apply {
+      bullet = BasicBulletType(20f, 1357f).apply {
         lifetime = 33.6f
         shrinkY = 0f
         width = 32f
@@ -478,7 +478,7 @@ class Scream : IceUnitType("scream") {
         reflectable = false
         status = IStatus.电磁脉冲
         statusDuration = 240f
-        splashDamage = 5370f
+        splashDamage = 2170f
         splashDamageRadius = 210f
         buildingDamageMultiplier = 2.5f
         trailChance = 1f

@@ -52,7 +52,7 @@ class CulturingBarn : SpliceCrafter("culturing_barn") {
       liquids(ILiquids.氧气, 0.01f, ILiquids.藻泥, 0.006f)
     }
 
-    structUpdated = Cons { e: SpliceCrafterBuild ->
+    structUpdated = Cons {e: SpliceCrafterBuild ->
       val right = e.nearby(0)
       val top = e.nearby(1)
       val left = e.nearby(2)
@@ -67,7 +67,7 @@ class CulturingBarn : SpliceCrafter("culturing_barn") {
       override fun draw(build: Building) {
         Draw.z(Draw.z() + 0.001f)
         val cap = build.block.liquidCapacity
-        val drawCell = Cons { b: Building? ->
+        val drawCell = Cons {b: Building? ->
 
           val alp = max(b!!.warmup(), 0.7f * b.liquids.get(ILiquids.藻泥) / cap)
           if (alp <= 0.01f) return@Cons
@@ -77,7 +77,7 @@ class CulturingBarn : SpliceCrafter("culturing_barn") {
           val move = 0.2f * Mathf.sinDeg(Time.time + rand.random(360f)) * b.warmup()
           Draw.color(ILiquids.藻泥.color)
           Draw.alpha(alp)
-          Angles.randLenVectors(b.id.toLong(), am, 3.5f) { dx: Float, dy: Float ->
+          Angles.randLenVectors(b.id.toLong(), am, 3.5f) {dx: Float, dy: Float ->
             Fill.circle(
               b.x + dx + move, b.y + dy + move, (rand.random(0.2f, 0.8f) + Mathf.absin(5f, 0.1f)) * max(b.warmup(), b.liquids.get(ILiquids.藻泥) / cap)
             )
@@ -85,7 +85,7 @@ class CulturingBarn : SpliceCrafter("culturing_barn") {
           Draw.reset()
         }
 
-        SglDraw.drawTask(drawID, build, SglShaders.boundWater) { e: Building ->
+        SglDraw.drawTask(drawID, build, SglShaders.boundWater) {e: Building ->
           drawCell.get(e)
           Draw.alpha(0.75f * (e.liquids.get(Liquids.water) / cap))
           Draw.rect(Blocks.water.region, e.x, e.y)
@@ -94,7 +94,7 @@ class CulturingBarn : SpliceCrafter("culturing_barn") {
       }
     }, object : DrawAntiSpliceBlock<SpliceCrafterBuild>() {
       init {
-        planSplicer = Boolf2 { plan: BuildPlan, other: BuildPlan ->
+        planSplicer = Boolf2 {plan: BuildPlan, other: BuildPlan ->
           if (plan.block is SpliceCrafter && other.block is SpliceCrafter) {
             val block = plan.block as SpliceCrafter
             val otherBlock = other.block as SpliceCrafter
@@ -102,20 +102,20 @@ class CulturingBarn : SpliceCrafter("culturing_barn") {
           } else return@Boolf2 false
 
         }
-        splicer = Intf { it.splice }
+        splicer = Intf {it.splice}
         layerRec = false
       }
     }, object : DrawRegionDynamic<SpliceCrafterBuild>("_highlight") {
       init {
-        alpha = Floatf { e: SpliceCrafterBuild -> if (e.highlight) 1f else 0f }
+        alpha = Floatf {e: SpliceCrafterBuild -> if (e.highlight) 1f else 0f}
       }
     })
   }
 
   override fun setBars() {
     super.setBars()
-    addBar("efficiency") { entity: SglBuilding? ->
-      Bar({ Core.bundle.format("bar.efficiency", (entity!!.efficiency() * 100).toInt()) }, { Pal.lightOrange }, { entity!!.efficiency() })
+    addBar("efficiency") {entity: SglBuilding? ->
+      Bar({Core.bundle.format("bar.efficiency", (entity!!.efficiency() * 100).toInt())}, {Pal.lightOrange}, {entity!!.efficiency()})
     }
   }
 

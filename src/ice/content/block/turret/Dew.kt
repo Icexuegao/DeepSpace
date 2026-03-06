@@ -101,8 +101,10 @@ class Dew: ProjectileTurret("dew") {
           Drawf.tri(b.x, b.y, 6f * b.fin(), 20f * b.fin(), b.rotation() + 156f * i)
         }
       }
-    })
-    consume!!.item(Items.thorium, 1)
+    }).apply {
+
+    }
+    consume!!.item(IItems.钍锭, 1)
     consume!!.time(10f)
 
     newAmmoCoating(Core.bundle.get("coating.depletedUranium"), Pal.accent, { b: mindustry.entities.bullet.BulletType ->

@@ -18,6 +18,8 @@ class ExplosiveMosquito : IceUnitType("explosiveMosquito") {
       desc(zh_CN, "爆蚊", "轻型空中突击单位.向敌人发起自杀式攻击","因其酷似蚊虫的行为方式而得名.")
     }
     lowAltitude = true
+    createWreck=false
+    createScorch = false
     flying = true
     health = 270f
     hitSize = 11f

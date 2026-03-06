@@ -18,7 +18,7 @@ import universecore.world.consumers.ConsumeType
 class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
   init {
     bundle {
-      desc(zh_CN, "渗透分离槽", "内置加压可控粒径反渗透过滤器,用于进行一些需要分离颗粒的反应工")
+      desc(zh_CN, "渗透分离槽", "内置加压可控粒径反渗透过滤器,用于进行一些需要分离颗粒的反应工艺")
     }
     requirements(
       Category.crafting, ItemStack.with(
@@ -32,11 +32,7 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
 
     newConsume()
     consume!!.time(60f)
-    consume!!.liquids(
-      *LiquidStack.with(
-        ILiquids.碱液, 0.2f, ILiquids.铀盐溶液, 0.2f, ILiquids.氧气, 0.2f
-      )
-    )
+    consume!!.liquids(ILiquids.碱液, 0.2f, ILiquids.铀盐溶液, 0.2f, ILiquids.氧气, 0.2f)
     consume!!.item(IItems.絮凝剂, 1)
     consume!!.power(1.2f)
     newProduce()
@@ -61,6 +57,28 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
     newProduce()
     produce!!.item(IItems.绿藻块, 1)
     produce!!.liquid(ILiquids.纯净水, 0.2f)
+
+    newConsume().apply {
+      time(30f)
+      power(1f)
+      item(IItems.低温化合物,1)
+      liquid(ILiquids.氢气,6f/60f)
+    }
+
+    newProduce().apply {
+      liquid(ILiquids.急冻液, 20f/60f)
+    }
+
+
+    newConsume().apply {
+      time(60f)
+      power(1.2f)
+      item(IItems.低温化合物,1)
+      liquid(ILiquids.碱液,32f/60f)
+    }
+    newProduce().apply {
+      liquid(ILiquids.暮光液, 32f/60f)
+    }
 
     draw = DrawMulti(
       DrawBottom(), object : DrawBlock() {

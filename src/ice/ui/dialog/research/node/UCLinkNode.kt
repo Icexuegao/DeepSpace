@@ -59,7 +59,7 @@ class UCLinkNode(
       margin(10f)
       add(Image(content.uiIcon)).grow()
       changed {
-        UI.showSoundCloseV(ISounds.科技树内个体已激活)
+        UI.showUISoundCloseV(ISounds.科技树内个体已激活)
       }
     }
   }
@@ -289,7 +289,7 @@ class UCLinkNode(
       }
       ta.add(button)
       ta.button(Icon.book, imageButtonClean, 40f) {
-        UI.showSoundCloseV(ISounds.进入数据界面)
+        UI.showUISoundCloseV(ISounds.进入数据界面)
         DataDialog.showUnlockableContent(content)
         //ta.scenes = MenusDialog.scene
       }

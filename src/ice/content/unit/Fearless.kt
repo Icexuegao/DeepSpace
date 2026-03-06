@@ -32,16 +32,10 @@ class Fearless : IceUnitType("fearless") {
     BaseBundle.bundle {
       desc(zh_CN, "无畏", "重型空中突击单位.发射荷电粒子高爆弹并辅以激光攻击敌人.装载脉冲发生器用以过载敌军引擎和武器系统.加装护盾辅助发生器以维持友军护盾持续作战,配备裂解炮抵御敌人的攻击","帝国舰队的中坚力量.")
     }
-    abilities.add(EnergyFieldAbility(0f, 60f, 0f).apply {
-      y = -31.75f
-      display = false
-      maxTargets = 0
-      healPercent = 0f
-      color = Color.valueOf("FF5845")
-    }, ShieldRegenFieldAbility(400f, 12000f, 60f, 240f))
+
     flying = true
     health = 64000f
-    armor = 139f
+    armor = 78f
     hitSize = 92f
     range = 480f
     speed = 1f
@@ -51,6 +45,14 @@ class Fearless : IceUnitType("fearless") {
     faceTarget = false
     lowAltitude = true
     outlineColor = Color.valueOf("1F1F1F")
+
+    abilities.add(EnergyFieldAbility(0f, 60f, 0f).apply {
+      y = -31.75f
+      display = false
+      maxTargets = 0
+      healPercent = 0f
+      color = Color.valueOf("FF5845")
+    }, ShieldRegenFieldAbility(400f, 12000f, 60f, 240f))
     setWeapon("weapon1") {
       x = 20.75f
       y = -3.25f

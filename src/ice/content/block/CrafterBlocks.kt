@@ -1,26 +1,11 @@
 package ice.content.block
 
-import ice.content.IItems
 import ice.content.block.crafter.*
-import ice.graphics.IceColor
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
-import ice.world.content.blocks.crafting.Incinerator
-import mindustry.type.Category
 
 @Suppress("unused")
 object CrafterBlocks : Load {
-  val 焚烧炉 = Incinerator("incinerator").apply {
-    size = 1
-    flameColor = IceColor.b4
-    consumePower(20 / 60f)
-    requirements(Category.crafting, IItems.高碳钢, 20, IItems.铜锭, 5, IItems.铅锭, 5)
-    bundle {
-      desc(zh_CN, "焚烧炉")
-    }
-  }
-
+  val 焚烧炉 = Incinerator()
   val 碳控熔炉 = CarbonSteelFactory()
   val 普适冶炼阵列 = UniversalSmelterArray()
 
@@ -31,6 +16,7 @@ object CrafterBlocks : Load {
   val 单晶硅厂 = MonocrystallineSiliconFactory()
   val 等离子蚀刻厂 = IntegratedFactory()
 
+  val 低温混合器 = LowTemperatureMixer()
   val 矿石粉碎机 = MineralCrusher()
   val 蜂巢陶瓷合成巢 = CeramicKiln()
   val 冲压锻炉 = PressingForge()
@@ -48,7 +34,7 @@ object CrafterBlocks : Load {
   val 铈凝块混合器 = CeriumBlockMixer()
 
   val 裂变编织器 = FissionWeaver()
-  val 绿藻池 = CulturingBarn()
+  val 密匙编译器 = KeyCompiler()
 
   val 电解机 = Electrolytor()
   val 渗透分离槽 = OsmoticSeparationTank()

@@ -382,7 +382,7 @@ object IStatValues {
     return t
   }
 
-  fun displayLiquid(liquid: Liquid, amount: Float, perSecond: Boolean): Table {
+  fun displayLiquid(liquid: Liquid, amount: Float, perSecond: Boolean,showName: Boolean): Table {
     val t = Table()
 
     t.add(object : Stack() {
@@ -395,11 +395,12 @@ object IStatValues {
           add(t)
         }
       }
-    }).size(Vars.iconMed).padRight((3 + (if (amount != 0f) (Strings.autoFixed(amount, 3).length - 1) * 10 else 0)).toFloat()).with { s: Stack? -> StatValues.withTooltip(s, liquid, false) }
+    }).size(Vars.iconMed)
 
     if (perSecond && amount != 0f) {
       t.add(StatUnit.perSecond.localized()).padLeft(2f).padRight(5f).color(Color.lightGray).style(Styles.outlineLabel)
     }
+    if (showName)t.add(liquid.localizedName)
 
     t.itooltip("${liquid.localizedName}")
 

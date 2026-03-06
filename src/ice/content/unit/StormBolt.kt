@@ -25,8 +25,8 @@ class StormBolt : IceUnitType("unit_storBolt") {
       desc(zh_CN, "风暴", "重型空中突击单位.对远距离敌人发射能量弹,对近距离的敌人则发射高热激光.加装护盾辅助发生器以维持友军护盾持续作战,开火时减少所受伤害.攻击时无法移动","风雨欲来...")
     }
     flying = true
-    health = 87000f
-    armor = 134f
+    health = 75000f
+    armor = 8f
     hitSize = 89f
     speed = 0.4f
     range = 960f
@@ -67,7 +67,7 @@ class StormBolt : IceUnitType("unit_storBolt") {
       chargeSound = Sounds.chargeLancer
       shootSound = Sounds.shootBreach
       bullet = BasicBulletType(8f, 2400f, "circle-bullet").apply {
-        lifetime = 120f
+        lifetime = (78f/(speed*8))*60f
         height = 32f
         width = 32f
         shrinkY = 0f
@@ -78,7 +78,7 @@ class StormBolt : IceUnitType("unit_storBolt") {
         statusDuration = 600f
         homingRange = 320f
         homingPower = 0.01f
-        splashDamage = 8400f
+        splashDamage = 1050f
         splashDamageRadius = 120f
         scaledSplashDamage = true
         frontColor = "FF8663".toColor()
@@ -336,7 +336,7 @@ class StormBolt : IceUnitType("unit_storBolt") {
       cooldownTime = 210f
       chargeSound = ISounds.月隐蓄力  // 修正：使用原始JSON中的声音名称
       shootSound = ISounds.月隐发射   // 修正：使用原始JSON中的声音名称
-      bullet = LaserBulletType(425f).apply {
+      bullet = LaserBulletType(235f).apply {
         lifetime = 15f
         length = 360f
         width = 32f

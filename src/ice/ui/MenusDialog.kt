@@ -72,7 +72,7 @@ object MenusDialog : Dialog(), Load {
                     button = mb
                     mb.build(conts)
                   }
-                  UI.showSoundCloseV(ISounds.模组界面左侧按钮反馈)
+                  UI.showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
 
                 }
               }, IStyles.rootButton) {
@@ -85,7 +85,7 @@ object MenusDialog : Dialog(), Load {
               b.image(IStyles.menusButton_exit).size(50f).color(IceColor.b5).table.add(IceStats.关闭.localized()).color(IceColor.b5)
             }, IStyles.rootCleanButton) {
               hide()
-              UI.showSoundCloseV(ISounds.模组界面左侧按钮反馈)
+              UI.showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
             }.pad(2f).margin(20f).growX().row()
           }
         }.width(200f).margin(10f).growY()

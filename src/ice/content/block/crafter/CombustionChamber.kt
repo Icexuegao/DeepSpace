@@ -29,7 +29,7 @@ class CombustionChamber : NormalCrafter("combustion_chamber") {
 
 
     newConsume()
-    consume!!.liquid(ILiquids.氢气, 0.8f)
+    consume!!.liquids(ILiquids.氢气, 0.8f, ILiquids.氧气,36f/60f)
     newProduce()
     produce!!.liquid(ILiquids.纯净水, 0.4f)
     produce!!.power(5f)
@@ -41,8 +41,8 @@ class CombustionChamber : NormalCrafter("combustion_chamber") {
     produce!!.liquid(ILiquids.二氧化硫, 0.4f)
     produce!!.power(4.5f)
 
-    newBooster(2.65f)
-    consume!!.liquid(ILiquids.氧气, 0.4f)
+    newBooster(1.65f)
+    consume!!.liquid(ILiquids.沼气, 0.2f)
 
     draw = DrawMulti(
       DrawBottom(), DrawCrucibleFlame(), DrawDefault()

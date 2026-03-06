@@ -218,7 +218,7 @@ open class SglTurret(name: String) : SglBlock(name) {
     return newAmmo(ammoType, false, value)
   }
 
-  fun newAmmo(ammoType: BulletType, override: Boolean = false, value: Cons2<Table, BulletType> = Cons2 { _, _ -> }): AmmoDataEntry {
+  fun newAmmo(ammoType: BulletType, override: Boolean = false, value: Cons2<Table, BulletType> = Cons2 {_, _ -> }): AmmoDataEntry {
     consume = object : BaseConsumers(false) {
       init {
         showTime = false

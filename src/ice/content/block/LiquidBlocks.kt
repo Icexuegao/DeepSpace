@@ -24,7 +24,7 @@ object LiquidBlocks : Load {
   val 动力泵 = Pump("kineticPump").apply {
     size = 1
     squareSprite = false
-    requirements(Category.liquid, IItems.高碳钢, 40, IItems.锌锭, 10)
+    requirements(Category.liquid, IItems.高碳钢, 20, IItems.锌锭, 5)
     bundle {
       desc(zh_CN, "动力泵")
     }
@@ -32,7 +32,7 @@ object LiquidBlocks : Load {
   val 谐振泵 = Pump("resonancePump").apply {
     size = 2
     squareSprite = false
-    requirements(Category.liquid, IItems.高碳钢, 40, IItems.锌锭, 10)
+    requirements(Category.liquid, IItems.高碳钢, 40, IItems.锌锭, 10, IItems.黄铜锭,5, IItems.石英玻璃,10)
     bundle {
       desc(zh_CN, "谐振泵")
     }

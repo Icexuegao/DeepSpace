@@ -113,7 +113,6 @@ object IUnitTypes : Load {
   val 泽塔 = Zeta()
   val 欧米茄 = Omega()
 
-
   val 炸蛛 = SpiderBomb()
   val 罗织 = Weaver()
   val 构陷 = Constrict()
@@ -241,23 +240,23 @@ object IUnitTypes : Load {
         frontColor = IceColor.r3
         lightOpacity = 0.2f
         shootEffect = Fx.none
-        hitEffect = Effect(14f) { e ->
+        hitEffect = Effect(14f) {e ->
           Draw.color(IceColor.r3, IceColor.r1, e.fin())
-          e.scaled(7f) { s ->
+          e.scaled(7f) {s ->
             Lines.stroke(0.5f + s.fout())
             Lines.circle(e.x, e.y, s.fin() * 5f)
           }
           Lines.stroke(0.5f + e.fout())
-          Angles.randLenVectors(e.id.toLong(), 5, e.fin() * 15f) { x: Float, y: Float ->
+          Angles.randLenVectors(e.id.toLong(), 5, e.fin() * 15f) {x: Float, y: Float ->
             val ang = Mathf.angle(x, y)
             Lines.lineAngle(e.x + x, e.y + y, ang, e.fout() * 3 + 1f)
           }
           Drawf.light(e.x, e.y, 20f, IceColor.r3, 0.6f * e.fout())
         }
         despawnEffect = hitEffect
-        smokeEffect = Effect(20f) { e ->
+        smokeEffect = Effect(20f) {e ->
           Draw.color(IceColor.r1, IceColor.r2, e.fin())
-          Angles.randLenVectors(e.id.toLong(), 5, e.finpow() * 6f, e.rotation, 20f) { x: Float, y: Float ->
+          Angles.randLenVectors(e.id.toLong(), 5, e.finpow() * 6f, e.rotation, 20f) {x: Float, y: Float ->
             Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f)
           }
         }

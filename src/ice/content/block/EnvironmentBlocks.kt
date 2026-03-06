@@ -320,7 +320,7 @@ object EnvironmentBlocks : Load {
       bundle {
         desc(zh_CN, "晶石地")
       }
-      attributes.set(IAttribute.bitumen, 0.1f)
+      attributes.set(IAttribute.沥青, 0.1f)
     }
     val 晶石地水 = ShallowLiquid("crystalStoneWater", 晶石地).apply {
       bundle {
@@ -489,16 +489,19 @@ object EnvironmentBlocks : Load {
       bundle {
         desc(zh_CN, "凌冰")
       }
+      attributes.set(IAttribute.寒冷, 1f)
     }
     val 凌冰水 = ShallowLiquid("tortureIceWater", 凌冰).apply {
       bundle {
         desc(zh_CN, "凌冰水")
       }
+      attributes.set(IAttribute.寒冷, 0.7f)
     }
     val 凌冰深水 = ShallowDeepLiquid("tortureIceDeepWater", 凌冰).apply {
       bundle {
         desc(zh_CN, "凌冰深水")
       }
+      attributes.set(IAttribute.寒冷, 0.8f)
     }
     val 凌冰墙 = StaticWall("tortureIceWall").apply {
       bundle {

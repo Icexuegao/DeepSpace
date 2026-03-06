@@ -1,7 +1,5 @@
 package ice.content.unit
 
-import arc.func.Floatc2
-import arc.func.Func
 import arc.func.Func2
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
@@ -22,7 +20,6 @@ import ice.world.content.unit.weapon.MayflyWeapon
 import ice.world.draw.part.CustomPart
 import mindustry.Vars
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.entities.Units
 import mindustry.entities.part.DrawPart
 import mindustry.entities.units.WeaponMount
@@ -65,7 +62,6 @@ class Emptiness : IceUnitType("emptiness") {
     hitSize = 85f
     targetFlags = BlockFlag.allLogic
     drawShields = false
-    requirements(Items.phaseFabric, 200, Items.surgeAlloy, 280)
     engineSize = 0f
     setEnginesMirror(object : UnitEngine(-15f, -60f, 8f, -90f) {
       override fun draw(unit: Unit) = kotlin.Unit

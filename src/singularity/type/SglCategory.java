@@ -14,9 +14,11 @@ public class SglCategory {
   /** 调试方块，在配置game debug mod开启时，在沙盒模式可见 */
   public static Category debugging;
 
+  public static Category environment;
   public static void load() {
     nuclear = UncCore.INSTANCE.getCategories().add("nuclear",  modName + "-nuclear");
     matrix = UncCore.INSTANCE.getCategories().add("matrix",  modName + "-matrix");
+    environment = UncCore.INSTANCE.getCategories().add("environment",  modName + "-environment");
     if (Sgl.config.debugMode) debugging = UncCore.INSTANCE.getCategories().add("debugging", modName + "-debugging");
   }
 }

@@ -78,7 +78,7 @@ class MeteoricStar : IceUnitType("meteoricStar") {
           shotDelay = 4f
         }
         shootSound = Sounds.shoot
-        this.bullet = BasicBulletType(7f, 73f).apply {
+        this.bullet = BasicBulletType(7f, 95f).apply {
           width = 8f
           height = 12f
           lifetime = 39f
@@ -112,7 +112,7 @@ class MeteoricStar : IceUnitType("meteoricStar") {
         shotDelay = 4f
       }
       shootSound = Sounds.shoot
-      bullet = BasicBulletType(9f, 73f).apply {
+      bullet = BasicBulletType(9f, 95f).apply {
         width = 8f
         height = 12f
         lifetime = 41f

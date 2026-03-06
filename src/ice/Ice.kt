@@ -20,6 +20,7 @@ import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.mod.Mod
+import mindustry.world.meta.BuildVisibility
 import singularity.Recipes
 import singularity.Singularity
 import singularity.type.SglCategory
@@ -56,6 +57,12 @@ open class Ice : Mod() {
 
     Vars.content.each {
       if (it.minfo.mod == DeepSpace.mod && it is UnlockableContent) it.unlock()
+    }
+    Vars.content.blocks().forEach {
+      if (!it.hasBuilding()) {
+        it.category = SglCategory.environment
+        it.buildVisibility = BuildVisibility.sandboxOnly
+      }
     }
   }
 
