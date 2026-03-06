@@ -25,7 +25,7 @@ import mindustry.type.UnitType
 class DarkCarving:IceUnitType("darkCarving") {
   init {
     bundle {
-      desc(zh_CN, "冥刻", "坚固的远程炮舰,可以对敌人进行远距离定点打击\n对抗单位时效果更佳")
+      desc(zh_CN, "冥刻", "中型空中突击单位.发射充能激光攻击敌人,对附近的友军提供坚忍效果")
     }
     accel = 0.04f
     drag = 0.04f
