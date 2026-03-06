@@ -17,6 +17,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.block.crafter.CulturingBarn
 import ice.content.block.crafter.Incubator
+import ice.content.block.product.CrystalMiner
 import ice.library.util.toColor
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -82,7 +83,7 @@ object ProductBlocks : Load {
     size = 3
     drillTime = 250f
     squareSprite = false
-    requirements(Category.production, IItems.强化合金,60,IItems.钴钢,110,IItems.铪锭,80,IItems.单晶硅,36,IItems.电子元件,80,IItems.暮光合金,50)
+    requirements(Category.production, IItems.强化合金, 60, IItems.钴钢, 110, IItems.铪锭, 80, IItems.单晶硅, 36, IItems.电子元件, 80, IItems.暮光合金, 50)
     bundle {
       desc(zh_CN, "曼哈德钻井", "一种高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效资源开采")
     }
@@ -141,6 +142,7 @@ object ProductBlocks : Load {
       desc(zh_CN, "血肉钻井", "骨骼构成了最坚硬的钻头,肌肉形成了最强劲的转子,预热时间较长,需要持续供给血肉赘生物,可以安置在水上")
     }
   }
+  val 晶族开采器 = CrystalMiner()
   val 抽水机 = SolidPump("waterPump").apply {
     size = 2
     baseEfficiency = 1f
@@ -167,6 +169,7 @@ object ProductBlocks : Load {
 
   val 绿藻池 = CulturingBarn()
   val 沼气池 = Incubator()
+
   var 岩层钻井机 = FloorCrafter("rock_drill").apply {
     bundle {
       desc(zh_CN, "岩层钻井机", "钻探深层的地壳,将深埋在地壳深处的较高质量的矿物送至地表")
@@ -364,9 +367,9 @@ object ProductBlocks : Load {
       init {
         simpleSpliceRegion = true
 
-        spliceBits = Intf { e: ExtendMinerBuild? -> e!!.spliceDirBits }
+        spliceBits = Intf {e: ExtendMinerBuild? -> e!!.spliceDirBits}
 
-        planSplicer = Boolf2 { plan: BuildPlan?, other: BuildPlan? ->
+        planSplicer = Boolf2 {plan: BuildPlan?, other: BuildPlan? ->
           plan!!.block is ExtendMiner && other!!.block is ExtendMiner && (other.block as ExtendMiner).chainable((plan.block as ExtendMiner)) && (plan.block as ExtendMiner).chainable((other.block as ExtendMiner))
         }
 
@@ -554,7 +557,7 @@ object ProductBlocks : Load {
     consume!!.time(180f)
     consume!!.item(Items.phaseFabric, 1)
 
-    newBoost(1f, 0.6f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.3f)
+    newBoost(1f, 0.6f, {l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f}, 0.3f)
 
     draw = DrawMulti(
       DrawDefault(), object : DrawBlock() {

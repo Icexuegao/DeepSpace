@@ -14,6 +14,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
+import ice.content.block.power.WindGenerator
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
@@ -164,6 +165,7 @@ object PowerBlocks : Load {
       desc(zh_CN, "大型能量电池")
     }
   }
+
   val 燃烧发电机 = ConsumeGenerator("combustionGenerator").apply {
     powerProduction = 1f
     itemDuration = 120f
@@ -177,6 +179,8 @@ object PowerBlocks : Load {
       desc(zh_CN, "燃烧发电机")
     }
   }
+  val 风力发电机 = WindGenerator()
+
   val 蒸汽冷凝机 = ThermalGenerator("steamCondenser").apply {
     squareSprite=false
     size = 3
@@ -202,6 +206,7 @@ object PowerBlocks : Load {
       desc(zh_CN, "蒸汽冷凝机")
     }
   }
+
   val 太阳能板 = SolarGenerator("solarPanel").apply {
     size = 2
     powerProduction = 9f

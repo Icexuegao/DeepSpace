@@ -29,6 +29,8 @@ object UI : Load {
     toolBarFrag.addTool("deepSpaceMenu", {"模组菜单"}, {Icon.menu}, {
       MenusDialog.show()
     }) {false}
+
+
     toolBarFrag.addTool("data", {"打开当前内容数据"}, {Icon.book}, {
       Vars.control.input.block?.let {
         DataDialog.showUnlockableContent(it)

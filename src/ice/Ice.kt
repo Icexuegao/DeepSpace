@@ -43,6 +43,7 @@ open class Ice : Mod() {
     IceBullet.setup()
     EventType.setup()
     IceTeam.setup()
+    IVars.setup()
   }
 
   override fun init() {
