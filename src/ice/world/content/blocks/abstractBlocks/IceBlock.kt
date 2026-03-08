@@ -13,6 +13,7 @@ import mindustry.gen.Building
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
+import mindustry.type.Item
 import mindustry.type.ItemStack
 import mindustry.type.LiquidStack
 import mindustry.world.Block
@@ -23,6 +24,7 @@ import mindustry.world.draw.DrawDefault
 
 open class IceBlock(name: String) : Block(name) {
   companion object {
+
     fun Block.requirements(category: Category, vararg items: Any) {
       requirements(category, ItemStack.with(*items))
     }

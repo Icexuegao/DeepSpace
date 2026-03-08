@@ -176,7 +176,7 @@ object IItems : Load {
   }
   val 铝土矿 = IceItem("item_alumina", "c0c0c0") {
     bundle {
-      desc(zh_CN,"铝土矿")
+      desc(zh_CN, "铝土矿")
     }
   }
   val 铀原矿 = OreItem("item_uranium_rawore", "#95B564", 4) {
@@ -644,6 +644,9 @@ object IItems : Load {
     }
   }
   val 以太能 = IceItem("item_etherealEnergy", "E6C4EE") {
+    bundle {
+      desc(zh_CN, "以太能", "封装容器中的高能粒子能量,在特定结构排列下注入相位能量后可影响时空结构.研究初期曾引发时空回溯,空间错位及乱序传送等现象", "在以太粒子以特定结构排列时注入相位能量,以太粒子会在法韦克内敛空间的能量辐射下,形成以伊塔宏粒子射线为场能的波态中子向心力场")
+    }
     frames = 2
     transitionFrames = 24
     frameTime = 6f
@@ -651,9 +654,6 @@ object IItems : Load {
     charge = 1f
     cost = 2.4f
     healthScaling = 0.8f
-    bundle {
-      desc(zh_CN, "以太能", "存储在容器种的高能粒子能量,在特定结构排列下注入相位能量后可影响时空结构.研究初期曾引发时空回溯,空间错位及乱序传送等现象", "在以太粒子以特定结构排列时注入相位能量,以太粒子会在法韦克内敛空间的能量辐射下,形成以伊塔宏粒子射线为场能的波态中子向心力场")
-    }
   }
   val 玳渊矩阵 = IceItem("item_abyssMatrix", "d7bdff") {
     bundle {
@@ -669,5 +669,4 @@ object IItems : Load {
       desc(zh_CN, "反物质", "由引力场约束隔绝的反物质,与正物质接触即发生完全湮灭并将质量转化为纯能量,危险性极高,广泛用于强攻击性武器", "通常每一个反物质储存单元都会具有一个独立的能源模块来维持约束力场,在远航星舰队伴随燃料仓库放出的耀眼的焰火消失后,停电被成为了携带反物质的情况下最危险的事")
     }
   }
-
 }

@@ -8,7 +8,7 @@ import mindustry.gen.Building
 import mindustry.world.Block
 import mindustry.world.draw.DrawBlock
 
-class DrawMulti(vararg var drawers: DrawBlock) : DrawBlock() {
+open class DrawMulti(vararg var drawers: DrawBlock) : DrawBlock() {
     override fun getRegionsToOutline(block: Block, out: Seq<TextureRegion>) {
         for (draw in drawers) {
             draw.getRegionsToOutline(block, out)

@@ -28,6 +28,7 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.power.PowerNode
 import ice.world.draw.DrawAnyLiquidTile
+import ice.world.meta.IceEffects
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.entities.Effect
@@ -41,7 +42,6 @@ import mindustry.world.Block
 import mindustry.world.blocks.power.*
 import mindustry.world.consumers.ConsumeItemFlammable
 import mindustry.world.draw.*
-import mindustry.world.draw.DrawMulti
 import mindustry.world.meta.Attribute
 import mindustry.world.meta.BlockGroup
 import singularity.world.SglFx
@@ -53,17 +53,12 @@ import singularity.world.particles.SglParticleModels
 import universecore.world.particles.MultiParticleModel
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
-import universecore.world.particles.models.DrawDefaultTrailParticle
-import universecore.world.particles.models.RandDeflectParticle
-import universecore.world.particles.models.ShapeParticle
-import universecore.world.particles.models.SizeVelRelatedParticle
-import universecore.world.particles.models.TargetMoveParticle
-import universecore.world.particles.models.TrailFadeParticle
+import universecore.world.particles.models.*
 
 @Suppress("unused")
 object PowerBlocks : Load {
   val 能量节点 = BeamNode("powerNode").apply {
-    squareSprite=false
+    squareSprite = false
     laser = Core.atlas.find(this.name + "-beam")
     laserEnd = Core.atlas.find(this.name + "-beam-end")
     requirements(Category.power, IItems.高碳钢, 2, IItems.锌锭, 5, IItems.铜锭, 5)
@@ -81,7 +76,7 @@ object PowerBlocks : Load {
     }
   }
   val 神经索节点 = PowerNode("neuralNode").apply {
-    squareSprite=false
+    squareSprite = false
     healAmount = 5f
     size = 1
     armor = 4f
@@ -98,7 +93,7 @@ object PowerBlocks : Load {
     }
   }
   val 神经束节点 = PowerNode("neuralBeamNode").apply {
-    squareSprite=false
+    squareSprite = false
     healAmount = 20f
     size = 2
     armor = 8f
@@ -119,7 +114,7 @@ object PowerBlocks : Load {
     armor = 3f
     maxNodes = 4
     laserRange = 100f
-    squareSprite=false
+    squareSprite = false
     consumesPower = true
     outputsPower = true
     consumePowerBuffered(50000f)
@@ -143,7 +138,7 @@ object PowerBlocks : Load {
   val 能量电池: Block = Battery("powerBattery").apply {
     size = 2
     health = 300
-    squareSprite=false
+    squareSprite = false
     baseExplosiveness = 1f
     emptyLightColor = IceColor.df
     fullLightColor = IceColor.b4
@@ -163,47 +158,6 @@ object PowerBlocks : Load {
     requirements(Category.power, IItems.铅锭, 150, IItems.铱板, 145, IItems.导能回路, 85, IItems.陶钢, 30)
     bundle {
       desc(zh_CN, "大型能量电池")
-    }
-  }
-
-  val 燃烧发电机 = ConsumeGenerator("combustionGenerator").apply {
-    powerProduction = 1f
-    itemDuration = 120f
-    ambientSound = Sounds.shootMerui
-    ambientSoundVolume = 0.03f
-    generateEffect = Fx.generatespark
-    consume(ConsumeItemFlammable())
-    drawer = DrawMulti(DrawDefault(), DrawWarmupRegion())
-    requirements(Category.power, IItems.高碳钢, 20, IItems.锌锭, 20)
-    bundle {
-      desc(zh_CN, "燃烧发电机")
-    }
-  }
-  val 风力发电机 = WindGenerator()
-
-  val 蒸汽冷凝机 = ThermalGenerator("steamCondenser").apply {
-    squareSprite=false
-    size = 3
-    fogRadius = 3
-    hasLiquids = true
-    attribute = Attribute.steam
-    group = BlockGroup.liquids
-    displayEfficiencyScale = 1f / 9f
-    minEfficiency = 9f - 0.0001f
-    powerProduction = 3f / 9f
-    displayEfficiency = false
-    generateEffect = Fx.turbinegenerate
-    effectChance = 0.04f
-    ambientSound = Sounds.loopHum
-    ambientSoundVolume = 0.06f
-    requirements(Category.power, IItems.高碳钢, 80)
-    drawer = DrawMulti(DrawDefault(), DrawBlurSpin("-rotator", 0.6f * 9f).apply {
-      blurThresh = 0.01f
-    })
-    outputLiquid = LiquidStack(Liquids.water, 5f / 60f / 9f)
-    liquidCapacity = 20f
-    bundle {
-      desc(zh_CN, "蒸汽冷凝机")
     }
   }
 
@@ -229,6 +183,81 @@ object PowerBlocks : Load {
       desc(zh_CN, "地热发电机")
     }
   }
+  val 燃烧发电机 = ConsumeGenerator("combustionGenerator").apply {
+    powerProduction = 1f
+    itemDuration = 120f
+    ambientSound = Sounds.shootMerui
+    ambientSoundVolume = 0.03f
+    generateEffect = Fx.generatespark
+    consume(ConsumeItemFlammable())
+    drawer = DrawMulti(DrawDefault(), DrawWarmupRegion())
+    requirements(Category.power, IItems.高碳钢, 20, IItems.锌锭, 20)
+    bundle {
+      desc(zh_CN, "燃烧发电机")
+    }
+  }
+  val 风力发电机 = WindGenerator("windGenerator").apply {
+    bundle {
+      desc(zh_CN, "风力发电机", "简易的风力发电机,效率跟随风场变化")
+    }
+    basePowerProduction = 70f
+    size = 2
+    range = 2
+    health = 100
+    requirements(Category.power, IItems.铅锭, 20, IItems.黄铜锭, 30, IItems.铜锭, 15, IItems.单晶硅, 10)
+  }
+  val 大型风力发电机 = WindGenerator("windGeneratorLarge").apply {
+    bundle {
+      desc(zh_CN, "风力发电机", "大型风力发电机,效率跟随风场变化")
+    }
+    size = 4
+    health = 500
+    range = 5
+    basePowerProduction = 270f
+    requirements(Category.power, IItems.铬锭, 60, IItems.黄铜锭, 40, IItems.铜锭, 45, IItems.电子元件, 20)
+  }
+  val 蒸汽冷凝机 = ThermalGenerator("steamCondenser").apply {
+    squareSprite = false
+    size = 3
+    fogRadius = 3
+    hasLiquids = true
+    attribute = Attribute.steam
+    group = BlockGroup.liquids
+    displayEfficiencyScale = 1f / 9f
+    minEfficiency = 9f - 0.0001f
+    powerProduction = 3f / 9f
+    displayEfficiency = false
+    generateEffect = Fx.turbinegenerate
+    effectChance = 0.04f
+    ambientSound = Sounds.loopHum
+    ambientSoundVolume = 0.06f
+    requirements(Category.power, IItems.高碳钢, 80)
+    drawer = DrawMulti(DrawDefault(), DrawBlurSpin("-rotator", 0.6f * 9f).apply {
+      blurThresh = 0.01f
+    })
+    outputLiquid = LiquidStack(Liquids.water, 5f / 60f / 9f)
+    liquidCapacity = 20f
+    bundle {
+      desc(zh_CN, "蒸汽冷凝机")
+    }
+  }
+  val 沼气发电机 = NormalCrafter("biogaGenerator").apply {
+    bundle {
+      desc(zh_CN, "沼气发电机")
+    }
+    size = 2
+    health = 100
+    updateEffect = IceEffects.square(ILiquids.沼气.color)
+    newConsume().apply {
+      liquid(ILiquids.沼气, 20f / 60f)
+    }
+    newProduce().apply {
+      power(130f / 60f)
+    }
+    draw = DrawMulti(DrawDefault(), DrawGlowRegion())
+    requirements(Category.power, IItems.高碳钢, 20, IItems.锌锭, 30, IItems.钴锭, 30)
+  }
+
   val 热核裂变反应堆 = NuclearReactor("heatNuclearReactor").apply {
     fuelItem = IItems.钍锭
     health = 1200
@@ -244,6 +273,7 @@ object PowerBlocks : Load {
     explosionDamage = 7200
     consumeItems(IItems.钍锭, 1)
     consumeLiquids(ILiquids.急冻液, 0.036f)
+
     requirements(Category.power, IItems.导能回路, 50, IItems.铬锭, 380, IItems.铱板, 325, IItems.石英玻璃, 75, IItems.铅锭, 300)
     ambientSound = Sounds.loopHum
     ambientSoundVolume = 0.2f
@@ -665,8 +695,8 @@ object PowerBlocks : Load {
     craftedSoundVolume = 1f
     val model: ParticleModel = MultiParticleModel(
       SizeVelRelatedParticle(), TargetMoveParticle().apply {
-        dest = Func { p: Particle -> p.dest }
-        deflection = Floatf { p: Particle -> p.eff }
+        dest = Func {p: Particle -> p.dest}
+        deflection = Floatf {p: Particle -> p.eff}
       }, RandDeflectParticle().apply {
         deflectAngle = 0f
         strength = 0.125f
@@ -677,29 +707,29 @@ object PowerBlocks : Load {
       }, ShapeParticle(), DrawDefaultTrailParticle()
     )
 
-    craftTrigger = Cons { e: NormalCrafterBuild ->
-      for (particle in Particle.get { p -> p.x < e.x + 20 && p.x > e.x - 20 && p.y < e.y + 20 && p.y > e.y - 20 }) {
+    craftTrigger = Cons {e: NormalCrafterBuild ->
+      for (particle in Particle.get {p -> p.x < e.x + 20 && p.x > e.x - 20 && p.y < e.y + 20 && p.y > e.y - 20}) {
         particle!!.remove()
       }
       Effect.shake(4f, 18f, e.x, e.y)
-      Angles.randLenVectors(System.nanoTime(), Mathf.random(5, 9), 4.75f, 6.25f) { x: Float, y: Float ->
+      Angles.randLenVectors(System.nanoTime(), Mathf.random(5, 9), 4.75f, 6.25f) {x: Float, y: Float ->
         Tmp.v1.set(x, y).setLength(4f)
         val p: Particle = model.create(e.x + Tmp.v1.x, e.y + Tmp.v1.y, Pal.reactorPurple, x, y, Mathf.random(5f, 7f))
         p.dest = Vec2(e.x, e.y)
         p.eff = e.workEfficiency() * 0.15f
       }
     }
-    crafting = Cons { e: NormalCrafterBuild? ->
+    crafting = Cons {e: NormalCrafterBuild? ->
       if (Mathf.chanceDelta(0.02)) Angles.randLenVectors(
         System.nanoTime(), 1, 2f, 3.5f
-      ) { x: Float, y: Float ->
+      ) {x: Float, y: Float ->
         SglParticleModels.floatParticle.create(e!!.x, e.y, Pal.reactorPurple, x, y, Mathf.random(3.25f, 4f))
       }
     }
 
     warmupSpeed = 0.0008f
 
-    newConsume().consValidCondition { e: NormalCrafterBuild? -> e!!.power.status >= 0.99f }
+    newConsume().consValidCondition {e: NormalCrafterBuild? -> e!!.power.status >= 0.99f}
     consume!!.item(IItems.浓缩铀235核燃料, 1)
     consume!!.power(80f)
     consume!!.liquid(Liquids.cryofluid, 0.6f)
@@ -707,7 +737,7 @@ object PowerBlocks : Load {
     newProduce()
     produce!!.power(400f)
 
-    newConsume().consValidCondition { e: NormalCrafterBuild? -> e!!.power.status >= 0.99f }
+    newConsume().consValidCondition {e: NormalCrafterBuild? -> e!!.power.status >= 0.99f}
     consume!!.item(IItems.浓缩钚239核燃料, 1)
     consume!!.power(80f)
     consume!!.liquid(Liquids.cryofluid, 0.6f)

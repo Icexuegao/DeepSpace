@@ -56,6 +56,7 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
   lateinit var bridgeReplacement: TransferNode
 
   init {
+    solid=false
     rotate = true
     update = true
     group = BlockGroup.transportation

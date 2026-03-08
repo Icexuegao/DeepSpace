@@ -24,7 +24,6 @@ object CrafterBlocks : Load {
   val 玳渊缚能厂 = TortoiseshellFactory()
   val 萃取固化器 = ConcentrateSolidifier()
   val 电弧炉 = ArcFurnace()
-  val 铈提取器 = CeriumExtractor()
   val 增压铈萃取器 = CeriumExtractorLarge()
   val 导能回路装配器 = ConductiveCircuitAssembler()
   val 高速粉碎机 = HighSpeedCrusher()
