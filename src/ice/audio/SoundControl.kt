@@ -1,30 +1,44 @@
 package ice.audio
 
 import arc.Core
+import arc.Events
 import arc.audio.Filters
 import arc.audio.Music
+import arc.audio.Sound
+import arc.files.Fi
 import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Time
 import ice.core.SettingValue
-import ice.library.struct.log
 import ice.ui.MenusDialog
 import mindustry.Vars
 import mindustry.audio.SoundControl
+import mindustry.game.EventType.MusicRegisterEvent
 import mindustry.gen.Musics
 import kotlin.math.log10
 
 class SoundControl : SoundControl() {
-  val iceAmbientMusic = Seq<Music>()
-  val iceDarkMusic = Seq<Music>()
-  val iceBossMusic = Seq<Music>()
 
-  init {
-    iceAmbientMusic.addAll(Musics.game1, Musics.game3, Musics.game6, Musics.game8, Musics.game9, Musics.fine)
-    iceDarkMusic.addAll(IMusics.核心过载仪式)// Seq.with(Musics.game2, Musics.game5, Musics.game7, Musics.game4)
-    iceBossMusic.addAll(IMusics.异端核心)
+init {
+  reload()
+}
+  override fun reload() {
+    current = null
+    fade = 0f
+    ambientMusic = Seq.with(IMusics.静态立场)
+    darkMusic = Seq.with(IMusics.核心过载仪式)
+    bossMusic = Seq.with(IMusics.异端核心)
+
+    //setup UI bus for all sounds that are in the UI folder
+    for (sound in Core.assets.getAll(Sound::class.java, Seq())) {
+      val file = Fi.get(Core.assets.getAssetFileName(sound))
+      if (file.parent().name() == "ui") {
+        sound.setBus(uiBus)
+      }
+    }
+
+   // Events.fire(MusicRegisterEvent())
   }
-
   override fun isDark(): Boolean {
     if (Vars.player.team().data().hasCore() && Vars.player.team().data().core().healthf() < 0.85f) {
       //core damaged -> dark
@@ -38,16 +52,6 @@ class SoundControl : SoundControl() {
 
     //dark based on enemies
     return Mathf.chance((Vars.state.enemies / 70f + 0.1f).toDouble())
-  }
-
-  override fun playRandom() {
-    if (Vars.state.boss() != null) {
-      playOnce(iceBossMusic.random())
-    } else if (isDark()) {
-      playOnce(iceDarkMusic.random())
-    } else {
-      playOnce(iceAmbientMusic.random())
-    }
   }
 
   override fun update() {
@@ -65,7 +69,7 @@ class SoundControl : SoundControl() {
       Core.audio.soundBus.fadeFilterParam(0, Filters.paramWet, if (paused) 1f else 0f, 0.4f)
     }
 
-    //play/stop ordinary effects
+    //play/stop 普通效应
     if (playing != wasPlaying) {
       wasPlaying = playing
 

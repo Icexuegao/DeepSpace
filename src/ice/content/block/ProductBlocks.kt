@@ -142,7 +142,7 @@ object ProductBlocks : Load {
       desc(zh_CN, "血肉钻井", "骨骼构成了最坚硬的钻头,肌肉形成了最强劲的转子,预热时间较长,需要持续供给血肉赘生物,可以安置在水上")
     }
   }
-  val 晶族开采器 = CrystalMiner()
+  val 晶簇粉碎器 = CrystalMiner()
   val 抽水机 = SolidPump("waterPump").apply {
     size = 2
     baseEfficiency = 1f

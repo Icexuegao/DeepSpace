@@ -2,18 +2,20 @@ package ice.content.block.power
 
 import arc.Core
 import arc.Events
+import arc.func.Boolf2
 import arc.func.Cons
 import arc.func.Prov
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
+import arc.math.geom.Point2
+import arc.struct.Seq
 import arc.util.Strings
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.IVars
 import ice.graphics.IceColor
 import ice.graphics.TextureRegionDelegate
-import ice.library.struct.log
 import ice.library.util.toStringi
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawFull
@@ -22,9 +24,11 @@ import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.game.EventType
 import mindustry.game.Team
+import mindustry.gen.Building
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
+import mindustry.input.Placement
 import mindustry.ui.Bar
 import mindustry.world.Tile
 import mindustry.world.draw.DrawDefault
@@ -34,6 +38,20 @@ import mindustry.world.meta.StatUnit
 import singularity.world.blocks.SglBlock
 
 class WindGenerator(name: String) : SglBlock(name) {
+  companion object {
+    val builds = Seq<WindGeneratorBuild>(false)
+
+    init {
+      Events.on(EventType.BlockBuildEndEvent::class.java) {
+        Core.app.post {
+          builds.forEach {
+            it.ifBuild()
+          }
+        }
+      }
+    }
+  }
+
   var basePowerProduction = 70f
   var rotator: TextureRegion by TextureRegionDelegate("${this.name}-rotator")
   var range: Int = 2
@@ -46,7 +64,7 @@ class WindGenerator(name: String) : SglBlock(name) {
     buildType = Prov(::WindGeneratorBuild)
     hasPower = true
     outputsPower = true
-    placeableLiquid=true
+    placeableLiquid = true
     draw = DrawMulti(DrawDefault(), DrawBuild<WindGeneratorBuild> {
       Draw.z(Layer.turret)
       Draw.rect(rotator, x, y, totalProgress)
@@ -69,14 +87,16 @@ class WindGenerator(name: String) : SglBlock(name) {
       addBar("powerProduction") {entity: WindGeneratorBuild ->
         Bar(
           {
-          Core.bundle.format(
-            "bar.poweroutput", Strings.fixed(entity.powerProduction * 60 * entity.timeScale(), 1)
-          )
-        }, {Pal.powerBar}, entity::powerEffecct
+            Core.bundle.format(
+              "bar.poweroutput", Strings.fixed(entity.powerProduction * 60 * entity.timeScale(), 1)
+            )
+          }, {Pal.powerBar}, entity::powerEffecct
         )
       }
     }
   }
+
+
 
   fun each(x: Int, y: Int, lenght: Int, ct: Cons<Tile>) {
     for (ox in (x..<x + lenght)) {
@@ -86,19 +106,29 @@ class WindGenerator(name: String) : SglBlock(name) {
       }
     }
   }
-
-  override fun canPlaceOn(tile: Tile, team: Team, rotation: Int): Boolean {
+  fun isCanOver(tile: Tile,build: Building?): Boolean{
     var k = true
-    var posx = tile.x - sizeOffset
-    var posy = tile.y - sizeOffset
+    var posx = tile.x+ sizeOffset
+    var posy = tile.y + sizeOffset
     posx -= range
     posy -= range
     each(posx, posy, range * 2 + size) {
-      if (it.build != null && it.block().solid){ k = false }
-      if (it.build==null&&it.block() != Blocks.air) k = false
-    }
+      build?.let { building ->
+        if (building==it.build)return@each
+      }
 
-    return super.canPlaceOn(tile, team, rotation) && k
+      if (it.build != null && it.block().solid) k = false
+      if (it.build == null && it.block() != Blocks.air) k = false
+    }
+    return k
+  }
+  override fun changePlacementPath(points: Seq<Point2>, rotation: Int) {
+    Placement.calculateNodes(points, this, rotation) {point: Point2, other: Point2 ->
+      other.dst(point).toInt() in (size ..size+ range)
+    }
+  }
+  override fun canPlaceOn(tile: Tile, team: Team, rotation: Int): Boolean {
+    return super.canPlaceOn(tile, team, rotation) && isCanOver(tile,null)
   }
 
   override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
@@ -107,9 +137,14 @@ class WindGenerator(name: String) : SglBlock(name) {
   }
 
   inner class WindGeneratorBuild : SglBuilding() {
+
     var totalProgress: Float = 0f
     var warmup: Float = 0f
     var valid = true
+    override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building? {
+      builds.add(this)
+      return super.init(tile, team, shouldAdd, rotation)
+    }
 
     override fun read(read: Reads, revision: Byte) {
       super.read(read, revision)
@@ -121,17 +156,14 @@ class WindGenerator(name: String) : SglBlock(name) {
       write.f(warmup)
     }
 
+    override fun remove() {
+      builds.remove(this)
+      super.remove()
+    }
+
     override fun afterReadAll() {
       super.afterReadAll()
       ifBuild()
-    }
-
-    init {
-      Events.on(EventType.BlockBuildEndEvent::class.java) {
-        Core.app.post {
-          ifBuild()
-        }
-      }
     }
 
     override fun drawSelect() {
@@ -140,17 +172,7 @@ class WindGenerator(name: String) : SglBlock(name) {
     }
 
     fun ifBuild() {
-      valid = true
-      var posx = tile.x + sizeOffset
-      var posy = tile.y + sizeOffset
-      posx -= range
-      posy -= range
-      each(posx, posy, range * 2 + size) {
-       if (it.build == this)return@each
-
-        if (it.build != null && it.block().solid){ valid = false }
-        if (it.build==null&&it.block() != Blocks.air) valid= false
-      }
+     valid=isCanOver(tile,this)
     }
 
     override fun updateTile() {
@@ -163,7 +185,7 @@ class WindGenerator(name: String) : SglBlock(name) {
     fun powerEffecct() = powerProduction * 60 / basePowerProduction * warmup
 
     override fun getPowerProduction(): Float {
-      return (basePowerProduction/3f*2f + IVars.windField.getWindVector(tileX(), tileY()).magnitude * basePowerProduction) / 60f * warmup
+      return (basePowerProduction / 3f * 2f + IVars.windField.getWindVector(tileX(), tileY()).magnitude * basePowerProduction) / 60f * warmup
     }
   }
 }

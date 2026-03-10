@@ -28,10 +28,14 @@ object CrafterBlocks : Load {
   val 导能回路装配器 = ConductiveCircuitAssembler()
   val 高速粉碎机 = HighSpeedCrusher()
   val 钴钢压缩机 = CobaltSteelCompressor()
+  val 以太封装器 =EtherEncapsulator()
   val 陶钢熔炼炉 = CeramicSteelFurnace()
   val 高能陶钢聚合炉 = HighEnergyCeramicSteelFurnace()
   val 铈凝块混合器 = CeriumBlockMixer()
 
+  val 生物钢重组器 = BiomassReformer()
+  val 血浆过滤器 = PlasmaFilter()
+  val 血肉分离机 = BloodExtractor()
   val 裂变编织器 = FissionWeaver()
   val 密匙编译器 = KeyCompiler()
 

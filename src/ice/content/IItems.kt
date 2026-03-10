@@ -236,6 +236,16 @@ object IItems : Load {
       desc(zh_CN, "金锭", "一种贵重金属材料,具有优异的导电性.多用于制作电子部件与能量传导部件")
     }
   }
+  val 铝锭 = IceItem("item_aluminium", "#C0ECFF") {
+    hardness = 3
+    explosiveness = 0f
+    flammability = 0f
+    radioactivity = 0f
+    cost = 0.9f
+    bundle {
+      desc(zh_CN, "铝锭", "一种耐低温的常见金属材料,质地轻盈,经处理后强度显著提升.是航空航天领域广泛使用的结构材料", "在绝大多数小质量的行星上,铝的丰富度通常都是在金属元素中排序最靠前的")
+    }
+  }
   val 钴锭 = IceItem("item_cobaltIngot", "b3f1ff") {
     bundle {
       desc(zh_CN, "钴锭", "一种具备良好耐高温与耐腐蚀特性的金属材料,广泛用于建筑结构及精密测量仪器的制造")
@@ -278,16 +288,7 @@ object IItems : Load {
       desc(zh_CN, "钴钢", "一种钴合金,具备优异的耐高温与耐腐蚀性能,质地坚硬且结构稳定.常用于高强度建筑结构及防护装备的制造")
     }
   }
-  val 铝锭 = IceItem("item_aluminium", "#C0ECFF") {
-    hardness = 3
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
-    cost = 0.9f
-    bundle {
-      desc(zh_CN, "铝锭", "一种耐低温的常见金属材料,质地轻盈,经处理后强度显著提升.是航空航天领域广泛使用的结构材料", "在绝大多数小质量的行星上,铝的丰富度通常都是在金属元素中排序最靠前的")
-    }
-  }
+
 
   val 硫化合物 = IceItem("item_sulfurCompound", "ffaa5f") {
     flammability = 1.4f
@@ -518,24 +519,6 @@ object IItems : Load {
       desc(zh_CN, "相位封装氦单元", "由相位材料包裹的氦中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氦的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氦原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
     }
   }
-  val 浓缩铀235核燃料 = IceItem("item_concentration_uranium_235", "#95B564") {
-    hardness = 4
-    explosiveness = 12f
-    flammability = 0f
-    radioactivity = 2.4f
-    bundle {
-      desc(zh_CN, "封装铀-235", "一种经高度浓缩并超低温封装的铀核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
-    }
-  }
-  val 浓缩钚239核燃料 = IceItem("item_concentration_plutonium_239", "#B0B074") {
-    hardness = 4
-    explosiveness = 12f
-    flammability = 0f
-    radioactivity = 2.4f
-    bundle {
-      desc(zh_CN, "封装钚-239", "一种经高度浓缩并超低温封装的钚核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
-    }
-  }
   val 氢聚变燃料 = IceItem("item_hydrogen_fusion_fuel", "#83D6A0") {
     hardness = 2
     explosiveness = 2.4f
@@ -554,6 +537,26 @@ object IItems : Load {
       desc(zh_CN, "氦聚变燃料", "一种核燃料,压缩氦原子同位素,原子性质易于发生聚变,属轻核聚变燃料")
     }
   }
+
+  val 浓缩铀235核燃料 = IceItem("item_concentration_uranium_235", "#95B564") {
+    hardness = 4
+    explosiveness = 12f
+    flammability = 0f
+    radioactivity = 2.4f
+    bundle {
+      desc(zh_CN, "封装铀-235", "一种经高度浓缩并超低温封装的铀核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
+    }
+  }
+  val 浓缩钚239核燃料 = IceItem("item_concentration_plutonium_239", "#B0B074") {
+    hardness = 4
+    explosiveness = 12f
+    flammability = 0f
+    radioactivity = 2.4f
+    bundle {
+      desc(zh_CN, "封装钚-239", "一种经高度浓缩并超低温封装的钚核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
+    }
+  }
+
 
   val 矩阵合金 = IceItem("item_matrix_alloy", "#929090") {
     hardness = 4

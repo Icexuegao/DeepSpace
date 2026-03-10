@@ -16,7 +16,6 @@ import mindustry.gen.Groups
 
 object EventType : Load {
   class AchievementUnlockEvent(var achievement: AchievementDialog.Achievement)
-  class LogisticsHubFire
 
   private val contentInitEvent = Seq<()->Unit>()
   private val clientLoadEvent = Seq<()->Unit>()

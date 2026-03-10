@@ -173,12 +173,12 @@ object Distribution : Load {
   }
 
   val 基础交叉器 = Junction("baseJunction").apply {
-    size = 1
-    health = 100
-    requirements(Category.distribution, IItems.低碳钢, 5, IItems.高碳钢, 2)
     bundle {
       desc(zh_CN, "基础交叉器", "两条交叉传送带的桥梁")
     }
+    size = 1
+    health = 100
+    requirements(Category.distribution, IItems.低碳钢, 5, IItems.高碳钢, 5)
   }
   val 交叉神经链路 = Junction("junctionNeuralChain").apply {
     armor = 4f
@@ -190,20 +190,21 @@ object Distribution : Load {
       desc(zh_CN, "交叉神经链路", "连接两条交叉的传送带,比交叉器更快")
     }
   }
-  val 基础路由器 = Router("baseRouter").apply {
-    size = 1
-    health = 70
-    requirements(Category.distribution, IItems.低碳钢, 5)
-    bundle {
-      desc(zh_CN, "基础路由器", "将物品平均分配至其他三个方向")
-    }
-  }
+
   val 转换分类器 = Sorter("transformSorter").apply {
     size = 1
     health = 100
     requirements(Category.distribution, IItems.高碳钢, 8, IItems.低碳钢, 6)
     bundle {
       desc(zh_CN, "转换分类器", "像分类器一样处理物品,可以通过配置调整分类状态")
+    }
+  }
+  val 基础路由器 = Router("baseRouter").apply {
+    size = 1
+    health = 70
+    requirements(Category.distribution, IItems.低碳钢, 5)
+    bundle {
+      desc(zh_CN, "基础路由器", "将物品平均分配至其他三个方向")
     }
   }
   val 转换溢流门 = TransformOverflowGate("transformOverflowGate").apply {
@@ -258,7 +259,7 @@ object Distribution : Load {
       desc(zh_CN, "传输节点")
     }
   }
-  var 运输节点 = ItemNode("transport_node").apply {
+  val 运输节点 = ItemNode("transport_node").apply {
     bundle {
       desc(zh_CN, "运输节点", "一种更高级的传送带桥,可以对节点的任意侧面配置指定物品的输入与输出")
     }
@@ -267,7 +268,7 @@ object Distribution : Load {
     arrowTimeScl = 6f
     transportTime = 3f
   }
-  var 相位运输节点 = ItemNode("phase_transport_node").apply {
+  val 相位运输节点 = ItemNode("phase_transport_node").apply {
     bundle {
       desc(zh_CN, "相位运输节点", "使用相位物制造的运输节点,具有更快的运输速度和更远的连接距离")
     }
@@ -285,7 +286,7 @@ object Distribution : Load {
     newConsume()
     consume!!.power(0.4f)
   }
-  var 铱制高效运输节点 = ItemNode("iridium_transport_node").apply {
+  val 铱制高效运输节点 = ItemNode("iridium_transport_node").apply {
     bundle {
       desc(zh_CN, "铱制高效运输节点", "使用铱建造的高级运输节点,造价昂贵,但换来的收益除更长的连接距离和更快的运输速度外,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品")
     }

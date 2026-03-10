@@ -42,7 +42,7 @@ open class BaseProducers {
     return items(*ItemStack.with(*items))
   }
 
-  fun liquid(liquid: Liquid?, amount: Float): ProduceLiquids<*> {
+  fun liquid(liquid: Liquid, amount: Float): ProduceLiquids<*> {
     return liquids(LiquidStack(liquid, amount))
   }
 

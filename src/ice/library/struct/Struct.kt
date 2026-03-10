@@ -24,7 +24,7 @@ fun <K, V> HashMap<K, V>.addP(key: K, prov: Prov<V>) {
  * @param count 要处理的元素数量，如果小于等于0则不处理任何元素
  * @param action 要对每个元素执行的操作
  */
-inline fun <T> Iterable<T>.forEach(count: Int, action: (T) -> Unit) {
+inline fun <T> Iterable<T>.forEach(count: Int, action: (T)->Unit) {
   if (count <= 0) return
   var processed = 0
   for (element in this) {
@@ -33,13 +33,13 @@ inline fun <T> Iterable<T>.forEach(count: Int, action: (T) -> Unit) {
   }
 }
 
-fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T) -> Unit = { _, _, _ -> }) = Delegates.observable(initialValue) { property, old, new ->
+fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T)->Unit = {_, _, _ ->}) = Delegates.observable(initialValue) {property, old, new ->
   if (old != new) {
     onChange(property, old, new)
   }
 }
 
-fun <E> log(e: () -> E) = Log.info(e())
+fun <E> log(e: ()->E) = Log.info(e())
 fun TextureRegion.asDrawable(scal: Float = 1f): TextureRegionDrawable = TextureRegionDrawable(this, scal)
 
 

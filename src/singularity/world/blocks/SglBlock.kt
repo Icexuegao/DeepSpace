@@ -68,6 +68,7 @@ import universecore.world.blocks.modules.BaseConsumeModule
 import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.ConsFilter
 import universecore.world.consumers.ConsumeType
+import universecore.world.producers.BaseProducers
 import kotlin.math.min
 
 /**此mod的基础方块类型，对block添加了完善的consume系统，并拥有中子能的基础模块 */
@@ -158,7 +159,6 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     consumers.add(consume)
     return consume!!
   }
-
   @Suppress("UNCHECKED_CAST")
   override fun <T : ConsumerBuildComp> newOptionalConsume(validDef: Cons2<T, BaseConsumers>, displayDef: Cons2<Stats, BaseConsumers>): BaseConsumers {
     consume = object : BaseConsumers(true) {

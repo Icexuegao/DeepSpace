@@ -16,6 +16,7 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
 import mindustry.type.Item
+import mindustry.world.Block
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawSideRegion
 import mindustry.world.meta.BlockStatus
@@ -33,7 +34,11 @@ class CrystalMiner : NormalCrafter("crystal_miner") {
     hasItems = true
     size = 2
     rotate = true
-    draw = DrawMulti(DrawDefault(), DrawSideRegion())
+    draw = DrawMulti(DrawDefault(), object :DrawSideRegion(){
+      override fun icons(block: Block?): Array<out TextureRegion?> {
+        return arrayOf()
+      }
+    })
     buildType = Prov(::CrystalMinerBuild)
     rotateDraw = false
     newConsume().apply {

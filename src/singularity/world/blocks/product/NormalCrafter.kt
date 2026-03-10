@@ -131,6 +131,10 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
     return produce!!
   }
 
+  fun newFormula(np: Cons2<BaseConsumers, BaseProducers>){
+    np[newConsume(),newProduce()]
+  }
+
   fun newOptionalProduct() {
     produce = BaseProducers()
     val prod: BaseProducers = produce!!

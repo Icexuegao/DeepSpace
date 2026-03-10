@@ -19,7 +19,6 @@ import singularity.world.blocks.nuclear.NuclearReactor
 
 class DrawReactorHeat : DrawBlock() {
   companion object {
-    const val FLASH: String = "flash"
     var NuclearReactor.NuclearReactorBuild.flash: Float by AttachedProperty(0f)
   }
     var lightColor: Color? = Color.valueOf("7f19ea")
@@ -39,10 +38,11 @@ class DrawReactorHeat : DrawBlock() {
         Fill.rect(e.x, e.y, (e.block.size * Vars.tilesize).toFloat(), (e.block.size * Vars.tilesize).toFloat())
 
         if (e.heat > flashThreshold) {
-          e.flash += (1f + ((e.heat - flashThreshold) / ((e.block as NuclearReactor).maxHeat - flashThreshold)) * 5.4f) * Time.delta
 
-            val fa: Float = e.flash// e.handleVar(FLASH, { f: Float -> f + (1f + ((e.heat - flashThreshold) / ((e.block as NuclearReactor).maxHeat - flashThreshold)) * 5.4f) * Time.delta }, 0f)
-            Draw.color(Color.red, Color.yellow, Mathf.absin(fa, 9f, 1f))
+          e.flash += (e.flash + (1f + ((e.heat - flashThreshold) / ((e.block as NuclearReactor).maxHeat - flashThreshold)) * 5.4f) * Time.delta)
+
+          val fa: Float = e.flash
+          Draw.color(Color.red, Color.yellow, Mathf.absin(fa, 9f, 1f))
             Draw.alpha(0.3f)
             Draw.rect(lightsRegion, e.x, e.y)
         }

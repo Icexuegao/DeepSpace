@@ -5,7 +5,6 @@ import arc.struct.Seq
 import arc.util.serialization.Jval
 import ice.audio.IMusics
 import ice.entities.ModeDifficulty
-import ice.library.struct.log
 import ice.library.world.Load
 import mindustry.Vars
 import mindustry.ui.dialogs.PlanetDialog

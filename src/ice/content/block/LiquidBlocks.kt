@@ -32,7 +32,7 @@ object LiquidBlocks : Load {
   val 谐振泵 = Pump("resonancePump").apply {
     size = 2
     squareSprite = false
-    requirements(Category.liquid, IItems.高碳钢, 40, IItems.锌锭, 10, IItems.黄铜锭,5, IItems.石英玻璃,10)
+    requirements(Category.liquid, IItems.高碳钢, 40, IItems.锌锭, 10, IItems.黄铜锭, 5, IItems.石英玻璃, 10)
     bundle {
       desc(zh_CN, "谐振泵")
     }
@@ -50,10 +50,10 @@ object LiquidBlocks : Load {
   }
 
   val 谐振导管 = Conduit("resonanceConduit").apply {
-    requirements(Category.liquid, IItems.高碳钢, 10, IItems.锌锭, 2)
     bundle {
       desc(zh_CN, "谐振导管")
     }
+    requirements(Category.liquid, IItems.高碳钢, 1, IItems.锌锭, 1, IItems.石英玻璃, 1)
     addContentInitEvent {
       bridgeReplacement = 导管桥
       junctionReplacement = 基础液体交叉器
@@ -62,7 +62,7 @@ object LiquidBlocks : Load {
   val 流金导管 = Conduit("fluxGoldConduit").apply {
     liquidCapacity = 40f
     liquidPressure = 1.025f
-    requirements(Category.liquid, IItems.金锭, 10, IItems.锌锭, 2)
+    requirements(Category.liquid, IItems.金锭, 2, IItems.锌锭, 1, IItems.石英玻璃, 1)
     bundle {
       desc(zh_CN, "流金导管")
     }
@@ -85,6 +85,18 @@ object LiquidBlocks : Load {
     }
     addContentInitEvent {
       bridgeReplacement = 动脉导管桥
+      junctionReplacement = 基础液体交叉器
+    }
+  }
+  val 紊态导管 = ArmoredConduit("disorderedConduit").apply {
+    bundle {
+      desc(zh_CN, "紊态导管")
+    }
+    liquidCapacity = 40f
+    liquidPressure = 1.025f
+    requirements(Category.liquid, IItems.钴钢, 1, IItems.铅锭, 2, IItems.石英玻璃, 1)
+    addContentInitEvent {
+      bridgeReplacement = 导管桥
       junctionReplacement = 基础液体交叉器
     }
   }
