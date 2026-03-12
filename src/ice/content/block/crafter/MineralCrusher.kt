@@ -50,6 +50,17 @@ class MineralCrusher : NormalCrafter("mineralCrusher") {
       items(IItems.黄铜矿,3, IItems.方铅矿,2, IItems.闪锌矿,2).random()
     }
 
+    newFormula { consumers, producers ->
+      consumers.apply {
+        items(IItems.铱锇矿,2)
+        time(60f)
+        power(2f)
+      }
+      producers.apply {
+        items(IItems.铱金混合物,1)
+      }
+    }
+
     requirements(Category.crafting, IItems.高碳钢, 50, IItems.黄铜锭, 20, IItems.铬锭, 60, IItems.单晶硅, 20)
   }
 }

@@ -1,7 +1,6 @@
 package ice.audio
 
 import arc.Core
-import arc.Events
 import arc.audio.Filters
 import arc.audio.Music
 import arc.audio.Sound
@@ -10,18 +9,20 @@ import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Time
 import ice.core.SettingValue
+import ice.library.world.Load
 import ice.ui.MenusDialog
 import mindustry.Vars
 import mindustry.audio.SoundControl
-import mindustry.game.EventType.MusicRegisterEvent
 import mindustry.gen.Musics
 import kotlin.math.log10
 
-class SoundControl : SoundControl() {
+object SoundControl : SoundControl(), Load {
 
-init {
-  reload()
-}
+  init {
+    Vars.control.sound = this
+    reload()
+  }
+
   override fun reload() {
     current = null
     fade = 0f
@@ -37,8 +38,9 @@ init {
       }
     }
 
-   // Events.fire(MusicRegisterEvent())
+    // Events.fire(MusicRegisterEvent())
   }
+
   override fun isDark(): Boolean {
     if (Vars.player.team().data().hasCore() && Vars.player.team().data().core().healthf() < 0.85f) {
       //core damaged -> dark

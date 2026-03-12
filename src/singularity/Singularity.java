@@ -25,7 +25,7 @@ public class Singularity extends Mod {
           new LiquidBlocks(),//物流方块
           new SglUnits(),//单位相关内容（单位、工厂）
           new SglPlanets(),//星球
-          new SglTechThree(),//科技树
+          //new SglTechThree(),//科技树
   };
 
   private static final OverrideContentList[] overrideContents = new OverrideContentList[]{new OverrideTechThree(),};

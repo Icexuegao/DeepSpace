@@ -4,6 +4,7 @@ import arc.graphics.Color
 import arc.math.Mathf
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
+import arc.struct.Seq
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
 import ice.world.meta.IceStats
 import mindustry.gen.Building
@@ -21,7 +22,7 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
   var showPerSecond: Boolean = true
   var displayLim: Int = 4
 
-  /*控制是否随机产出产物(也就是是否为分离机)*/
+  /**控制是否随机产出产物(也就是是否为分离机)*/
   var random: Boolean = false
 
   fun random(): ProduceItems<T> {
@@ -29,24 +30,22 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
     return this
   }
 
-  override fun type(): ProduceType<ProduceItems<*>> {
-    return ProduceType.item
-  }
+  override fun type() = ProduceType.item
 
-  override fun color(): Color? {
+  override fun color(): Color {
     return items[0].item.color
   }
 
   override fun buildIcons(table: Table) {
     if (random) {
-      val i = arrayOfNulls<ItemStack>(items.size)
-      for (l in i.indices) {
-        i[l] = items[l].copy()
-        i[l]!!.amount = 0
+      val i = Seq<ItemStack>(ItemStack::class.java)
+      for (stack in items) {
+        val copy: ItemStack = stack.copy()
+        copy.amount = 1
+        i.add(copy)
       }
-      val items1 = i as Array<ItemStack>
-      buildItemIcons(table, items1, true, displayLim)
-    } else buildItemIcons(table, items as Array<ItemStack>, false, displayLim)
+      buildItemIcons(table, i.toArray(), true, displayLim)
+    } else buildItemIcons(table, items, false, displayLim)
   }
 
   override fun merge(other: BaseProduce<T>) {
@@ -57,10 +56,10 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
       }
 
       for (stack in other.items) {
-        TMP.get(stack.item) { ItemStack(stack.item, 0) }!!.amount += stack.amount
+        TMP.get(stack.item) {ItemStack(stack.item, 0)}!!.amount += stack.amount
       }
 
-      items = TMP.values().toSeq().sort(Comparator { a: ItemStack?, b: ItemStack? -> a!!.item.id - b!!.item.id }).toArray(ItemStack::class.java)
+      items = TMP.values().toSeq().sort(Comparator {a: ItemStack?, b: ItemStack? -> a!!.item.id - b!!.item.id}).toArray(ItemStack::class.java)
       return
     }
     throw IllegalArgumentException("only merge production with same type")
@@ -71,7 +70,7 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
     if (!random) {
       for (stack in items) {
         var amount = stack.amount * (floor(f.toDouble()).toInt()) + Mathf.num(Math.random() < f % 1)
-        amount = min(amount, entity!!.block.itemCapacity - entity.items.get(stack.item))
+        amount = min(amount, entity.block.itemCapacity - entity.items.get(stack.item))
         for (i in 0..<amount) {
           entity.handleItem(entity, stack.item)
         }
@@ -112,9 +111,9 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
   }
 
   override fun display(stats: Stats) {
-    stats.add(Stat.output) { table ->
+    stats.add(Stat.output) {table ->
       table.row()
-      table.table { t ->
+      table.table {t ->
         t.defaults().left().fill().padLeft(6f)
         t.add("${IceStats.物品.localizedName}:").left()
         if (!random) {
@@ -125,7 +124,7 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
         } else {
           val total = intArrayOf(0)
           val n = intArrayOf(items.size, items.size)
-          t.table { item: Table? ->
+          t.table {item: Table? ->
             for (stack in items) {
               item!!.add(StatValues.displayItem(stack.item, 0, true))
               total[0] += stack.amount
@@ -143,7 +142,7 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
   }
 
   override fun valid(entity: T): Boolean {
-    if (entity!!.items == null) return false
+    if (entity.items == null) return false
     var res = false
     for (stack in items) {
       if (entity.items.get(stack.item) + stack.amount * multiple(entity) > entity.block.itemCapacity) {
@@ -154,6 +153,6 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
   }
 
   companion object {
-    private val TMP = ObjectMap<Item?, ItemStack?>()
+    private val TMP = ObjectMap<Item, ItemStack>()
   }
 }

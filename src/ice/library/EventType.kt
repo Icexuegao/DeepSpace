@@ -28,14 +28,7 @@ object EventType : Load {
         it.setFilter(fid, fid)
       }
     }
-    //替换原版音轨
-    Events.on(EventType.MusicRegisterEvent::class.java) {
-      Vars.control.sound.bossMusic.clear()
-      Vars.control.sound.ambientMusic.clear()
-      Vars.control.sound.darkMusic.clear()
-      //即使替换掉原版音轨,游戏内也会播放以前的音乐,我不知道这是为什么,所以我只能将他们clear()
-      Vars.control.sound = ice.audio.SoundControl()
-    }
+
     Events.on(EventType.AtlasPackEvent::class.java) {
       TextureDelegate.delegate.forEach {it()}
     }

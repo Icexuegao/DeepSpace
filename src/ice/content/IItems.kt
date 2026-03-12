@@ -7,7 +7,6 @@ import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.item.IceItem
 import ice.world.content.item.OreItem
-import mindustry.content.Items
 import singularity.core.UpdatePool
 
 @Suppress("unused")
@@ -266,7 +265,7 @@ object IItems : Load {
       desc(zh_CN, "铈锭", "一种广泛应用的金属材料,用于研磨抛光剂,特种玻璃及推进器零件等")
     }
   }
-  val 钍锭 = IceItem("item_thoriumIngot", Items.thorium.color.toString()) {
+  val 钍锭 = IceItem("item_thoriumIngot", "f9a3c7") {
     radioactivity = 1f
     cost = 2f
     bundle {

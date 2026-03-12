@@ -1,6 +1,7 @@
 package ice
 
 import ice.async.ParcelProcess
+import ice.audio.SoundControl
 import ice.content.*
 import ice.content.block.IBlocks
 import ice.core.SettingValue
@@ -20,6 +21,7 @@ import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.mod.Mod
+import mindustry.type.Category
 import mindustry.world.meta.BuildVisibility
 import singularity.Recipes
 import singularity.Singularity
@@ -55,15 +57,10 @@ open class Ice : Mod() {
     Vars.asyncCore.processes.add(ParcelProcess)
     Documents.init()
     MenusDialog.init()
+    SoundControl.init()
 
     Vars.content.each {
       if (it.minfo.mod == DeepSpace.mod && it is UnlockableContent) it.unlock()
-    }
-    Vars.content.blocks().forEach {
-      if (!it.hasBuilding()) {
-        it.category = SglCategory.environment
-        it.buildVisibility = BuildVisibility.sandboxOnly
-      }
     }
   }
 
@@ -81,7 +78,13 @@ open class Ice : Mod() {
     IWeathers.load()
     IPlanets.load()
     //  SglTechThree.load()
-
     BaseBundle.load()
+
+    Vars.content.blocks().forEach {
+      if (!it.hasBuilding() && it.category == Category.distribution) {
+        it.category = SglCategory.environment
+        it.buildVisibility = BuildVisibility.sandboxOnly
+      }
+    }
   }
 }

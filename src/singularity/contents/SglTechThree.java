@@ -1,48 +1,55 @@
 package singularity.contents;
 
 import arc.util.Time;
+import ice.content.IItems;
+import singularity.game.researchs.Inspire;
 import singularity.game.researchs.ResearchManager;
+import singularity.game.researchs.ResearchProject;
 
 public class SglTechThree extends ResearchManager.ResearchSDL implements ContentList{
- /* public static ResearchProject test1, test2, test3, test4, test5, test6, test7, test8, test9, test10, test11, test12, test13, test14, test15,
-  test16, test17, test18, test19, test20;*/
+  public static ResearchProject test1, test2, test3, test4, test5, test6, test7, test8, test9, test10, test11, test12, test13, test14, test15,
+  test16, test17, test18, test19, test20;
 
   @Override
-  public void load(){
-  /*  makePlanetContext(SglPlanets.foryust, () -> {
+  public void load() {
+
+  }
+
+ /* public void load(){
+    makePlanetContext(SglPlanets.foryust, () -> {
       test1 = research("test-1", 180, () -> {
-        contents(crystal_buffer);
+        contents(IItems.INSTANCE.getFEX水晶());
       });
       test2 = research("test-2", 180, () -> {
-        contents(matrix_miner);
+        contents(IItems.INSTANCE.getFEX水晶());
         dependencies("test-1");
       });
       test3 = research("test-3", 180, () -> {
-        contents(silicon, algae_mud);
+        contents(IItems.INSTANCE.getFEX水晶(), IItems.INSTANCE.getFEX水晶());
         dependencies("test-1");
         inspire(new Inspire.ResearchInspire(test2));
       });
       test4 = research("test-4", 180, () -> {
-        contents(soflame, crystal_container);
+        contents(IItems.INSTANCE.getFEX水晶(), IItems.INSTANCE.getFEX水晶());
         dependencies("test-1");
         inspire(new Inspire.ResearchInspire(test3));
       });
       test5 = research("test-5", 180, () -> {
-        contents(additiveReconstructor);
+        contents(IItems.INSTANCE.getFEX水晶());
         dependencies("test-1");
       });
       test6 =  research("test-6", 180, () -> {
-        contents(neutron_generator, neutron_lens, neutron_matrix_buffer);
+        contents(IItems.INSTANCE.getFEX水晶(), IItems.INSTANCE.getFEX水晶(), IItems.INSTANCE.getFEX水晶());
         dependencies("test-2");
-        inspire(new Inspire.PlaceBlockInspire(crystal_container));
+        inspire(new Inspire.PlaceBlockInspire(IItems.INSTANCE.getFEX水晶()));
       });
       test7 = research("test-7", 180, () -> {
-        contents(rock_crusher, rock_drill);
+        contents(IItems.INSTANCE.getFEX水晶(), IItems.INSTANCE.getFEX水晶());
         dependencies("test-2");
-        inspire(new Inspire.PlaceBlockInspire(ore_washer, 4));
+        inspire(new Inspire.PlaceBlockInspire(IItems.INSTANCE.getFEX水晶(), 4));
       });
       test8 = research("test-8", 180, () -> {
-        contents(ore_washer, daciteBoulder);
+        contents(IItems.INSTANCE.getFEX水晶(), IItems.INSTANCE.getFEX水晶());
         dependencies("test-3");
         inspire(new Inspire.ResearchInspire(test5));
       });
@@ -106,10 +113,10 @@ public class SglTechThree extends ResearchManager.ResearchSDL implements Content
           dependencies("test-18");
         });
       });
-    });*/
+    });
 
     Time.run(1, () -> {
      // test14.reset();
     });
-  }
+  }*/
 }
