@@ -26,7 +26,7 @@ import singularity.world.draw.DrawRegionDynamic
 class MatrixCutter:NormalCrafter("matrix_cutter"){
   init{
   bundle {
-    desc(zh_CN, "矩阵切割器", "以纳米尺度的高能激光将金属切割为纳米颗粒,并在上方雕刻微电路,以生产矩阵合金")
+    desc(zh_CN, "矩阵切割器", "将活化导能结晶雕刻入强化合金产出矩阵合金","以纳米尺度的高能激光将金属切割为纳米颗粒,并在上方雕刻微电路,以生产矩阵合金")
   }
   requirements(
     Category.crafting, IItems.强化合金, 80, IItems.充能FEX水晶, 75, IItems.石英玻璃, 80, IItems.絮凝剂, 90, IItems.暮光合金, 120

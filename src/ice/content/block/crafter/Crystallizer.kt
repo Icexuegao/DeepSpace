@@ -17,7 +17,7 @@ import singularity.world.blocks.product.NormalCrafter
 class Crystallizer : NormalCrafter("crystallizer") {
   init {
     bundle {
-      desc(zh_CN, "结晶器", "最早的FEX结晶技术,依赖电磁场波动,使FEX在载体金属上逐步形成结晶")
+      desc(zh_CN, "结晶器","使导能流体结晶于强化合金从而生产导能结晶", "最早的导能结晶技术,依赖电磁场波动,使导能流体在载体金属上逐步形成结晶")
     }
     requirements(
       Category.crafting, ItemStack.with(

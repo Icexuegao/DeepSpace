@@ -18,7 +18,7 @@ class EtherEncapsulator : NormalCrafter("etherEncapsulator") {
 
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "以太封装器", "将无序的以太粒子封装为便于运输/使用的封装容器")
+      desc(zh_CN, "以太封装器", "将游离的以太封装为便于运输的容器")
     }
     size = 5
     itemCapacity = 120

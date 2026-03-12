@@ -16,7 +16,7 @@ import singularity.world.blocks.product.NormalCrafter
 class CobaltSteelCompressor : NormalCrafter("cobaltSteelCompressor") {
   init {
     bundle {
-      desc(zh_CN, "钴钢压缩机")
+      desc(zh_CN, "钴钢压缩机","将钴锭于铬锭压缩为钴钢,需通入水")
     }
     size = 3
     hasLiquids = true

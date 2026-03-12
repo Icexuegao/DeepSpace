@@ -20,7 +20,7 @@ import universecore.world.producers.ProduceType
 class HadronReconstructor : AtomSchematicCrafter("hadron_reconstructor") {
   init {
     bundle {
-      desc(zh_CN, "强子重构仪", "微缩的定向大量强子对撞机,使得创造物质从理论成为现实")
+      desc(zh_CN, "强子重构仪","消耗介质生成原材料,可配置", "微缩的定向大量强子对撞机,使得创造物质从理论成为现实")
     }
     requirements(
       Category.crafting, ItemStack.with(

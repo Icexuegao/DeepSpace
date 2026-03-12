@@ -36,22 +36,18 @@ object CrafterBlocks : Load {
   val 生物钢重组器 = BiomassReformer()
   val 血浆过滤器 = PlasmaFilter()
   val 血肉分离机 = BloodExtractor()
-  val 裂变编织器 = FissionWeaver()
-  val 密匙编译器 = KeyCompiler()
 
   val 电解机 = Electrolytor()
   val 渗透分离槽 = OsmoticSeparationTank()
   val 反应仓 = ReactingPool()
   val 燃烧室 = CombustionChamber()
   val 真空坩埚 = VacuumVrucible()
-  val 热能冶炼炉 = ThermalSmelter()
   val 干馏塔 = RetortColumn()
   val 激光解离机 = LaserResolver()
-  val 蒸馏净化器 = DistillPurifier()
-  val 渗透净化器 = OsmoticPurifier()
+
   val 洗矿机 = OreWasher()
   val 结晶器 = Crystallizer()
-  val FEX相位混合器 = FEXPhaseMixer()
+
   val 燃料封装机 = FuelPackager()
   val 气体相位封装机 = GasPhasePacker()
   val 热能离心机 = ThermalCentrifuge()
@@ -62,6 +58,18 @@ object CrafterBlocks : Load {
   val 聚合引力发生器 = PolymerGravitationalGenerator()
   val 质量生成器 = QualityGenerator()
   val 物质逆化器 = SubstanceInverter()
-  val 析构器 = Destructors()
+
   val 强子重构仪 = HadronReconstructor()
+
+
+  //待更改
+  val 裂变编织器 = FissionWeaver()
+  val 密匙编译器 = KeyCompiler()
+  val 热能冶炼炉 = ThermalSmelter()
+  val 蒸馏净化器 = DistillPurifier()
+  val 渗透净化器 = OsmoticPurifier()
+  val FEX相位混合器 = FEXPhaseMixer()
+  val 析构器 = Destructors()
+
+
 }

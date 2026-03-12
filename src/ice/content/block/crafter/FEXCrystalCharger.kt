@@ -20,7 +20,7 @@ import singularity.world.draw.DrawRegionDynamic
 class FEXCrystalCharger:NormalCrafter("FEX_crystal_charger"){
   init{
   bundle {
-    desc(zh_CN, "FEX充能座", "对FEX结晶释放高能中子脉冲,合适的脉冲频率会令能量在晶格之内不断积累,叠加,使FEX晶体结构变得不稳定,并带来一些特别的效果")
+    desc(zh_CN, "结晶活化器", "为导能结晶充能产出活化导能结晶","对导能结晶释放高能中子脉冲,合适的脉冲频率会令能量在晶格之内不断积累,叠加,使晶体结构变得不稳定,并带来一些特别的效果")
   }
   requirements(Category.crafting, IItems.强化合金, 70, IItems.FEX水晶, 60, IItems.石英玻璃, 65, IItems.絮凝剂, 70, IItems.钴钢, 85)
   size = 3

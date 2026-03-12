@@ -10,7 +10,7 @@ import singularity.world.blocks.product.NormalCrafter
 class ExplosiveMixer : NormalCrafter("explosiveMixer") {
   init {
     bundle {
-      desc(zh_CN, "爆炸物混合器", "将硫化合物,燃素水晶混合生成爆炸物")
+      desc(zh_CN, "爆炸物混合器", "将硫化合物与燃素水晶混合生成爆炸化合物")
     }
     size = 3
     itemCapacity = 36

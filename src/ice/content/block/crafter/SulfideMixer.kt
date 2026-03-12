@@ -10,7 +10,7 @@ import singularity.world.blocks.product.NormalCrafter
 class SulfideMixer : NormalCrafter("sulfideMixer") {
   init {
     bundle {
-      desc(zh_CN, "硫化物混合器", "将煤,铅,沙混合生成硫化合物")
+      desc(zh_CN, "硫化物混合器", "将煤,铅,沙混合成硫化合物")
     }
     size = 3
     itemCapacity = 36

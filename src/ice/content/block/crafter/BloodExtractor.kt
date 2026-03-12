@@ -14,7 +14,7 @@ import singularity.world.blocks.product.NormalCrafter
 class BloodExtractor : NormalCrafter("bloodExtractor") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "血肉分离机", "分离出血肉赘生物,一种同时具有高温和易燃两种特性的高危液体")
+      desc(zh_CN, "血肉分离机", "将生物钢加热为血肉赘生物","血肉赘生物同时具有高温和易燃两种特性的高危液体")
     }
     size = 2
     itemCapacity = 24

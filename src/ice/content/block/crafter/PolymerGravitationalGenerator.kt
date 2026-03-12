@@ -34,7 +34,7 @@ import singularity.world.draw.DrawRegionDynamic
 class PolymerGravitationalGenerator : NormalCrafter("polymer_gravitational_generator") {
   init {
     bundle {
-      desc(zh_CN, "聚合引力发生器", "在真空仓内利用大量的能量制造一个引力漏斗,将物质紧密的挤压在一起至中子简并态,用负引力场外壳包裹为一份简并态中子聚合物")
+      desc(zh_CN, "聚合引力发生器","将活化导能结晶,矩阵合金,气凝胶和铱锭聚合产出简并态中子聚合物", "在真空仓内利用大量的能量制造一个引力漏斗,将物质紧密的挤压在一起至中子简并态,用负引力场外壳包裹为一份简并态中子聚合物")
     }
     requirements(
       Category.crafting, IItems.强化合金, 180, IItems.矩阵合金, 900, IItems.充能FEX水晶, 100, IItems.FEX水晶, 120, IItems.铱锭, 80, IItems.气凝胶, 100, IItems.暮光合金, 80

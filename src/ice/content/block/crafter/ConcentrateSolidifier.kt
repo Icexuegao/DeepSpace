@@ -11,7 +11,7 @@ import singularity.world.blocks.product.NormalCrafter
 class ConcentrateSolidifier : NormalCrafter("concentrateSolidifier") {
   init {
     bundle {
-      desc(zh_CN, "萃取固化器")
+      desc(zh_CN, "萃取固化器","从锆英石中萃取并熔炼为铪锭")
     }
     size = 3
     health = 400

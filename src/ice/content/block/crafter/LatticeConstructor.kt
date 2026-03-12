@@ -35,7 +35,7 @@ import universecore.components.blockcomp.FactoryBuildComp
 class LatticeConstructor:NormalCrafter("lattice_constructor"){
   init{
   bundle {
-    desc(zh_CN, "晶格构建器", "先进的FEX结晶技术,以光束引导和力场聚合的方式人工构建晶格结构,更高效地生产FEX结晶")
+    desc(zh_CN, "晶格构建器", "使充能流体结晶于强化合金从而高效生产导能结晶","先进的导能结晶技术,以光束引导和力场聚合的方式人工构建晶格结构,更高效地生产导能结晶")
   }
   requirements(
     Category.crafting, ItemStack.with(

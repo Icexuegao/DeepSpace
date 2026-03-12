@@ -24,7 +24,7 @@ import universecore.world.consumers.ConsumeType
 class Electrolytor:NormalCrafter("electrolytor"){
   init{
   bundle {
-    desc(zh_CN, "电解机", "内置了几组电极以进行一系列电化学反应,将材料电解为一些有用的东西")
+    desc(zh_CN, "电解机", "将材料电解以分离出需求产物,可配置","内置了几组电极以进行一系列电化学反应")
   }
   requirements(
     Category.crafting, IItems.铬锭, 80, IItems.铜锭, 100, IItems.铅锭, 80, IItems.单晶硅, 50, IItems.石英玻璃, 60, IItems.钴钢, 35

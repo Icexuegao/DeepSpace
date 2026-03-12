@@ -14,7 +14,7 @@ import singularity.world.blocks.product.NormalCrafter
 class CeramicSteelFurnace : NormalCrafter("ceramicSteelFurnace") {
   init {
     bundle {
-      desc(zh_CN, "陶钢熔炼炉", "使用多种原料熔炼一种前所未见的多功能装甲材料-陶钢")
+      desc(zh_CN, "陶钢熔炼炉", "将石英玻璃,钴钢和铈锭熔炼为陶钢")
     }
     size = 3
     itemCapacity = 36

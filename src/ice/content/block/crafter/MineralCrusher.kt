@@ -13,7 +13,7 @@ import singularity.world.blocks.product.NormalCrafter
 class MineralCrusher : NormalCrafter("mineralCrusher") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN,"矿石粉碎机","将融合矿物质粉碎为小块,然后筛选分类")
+      desc(zh_CN,"矿石粉碎机","将复杂矿石质粉碎并筛选分类为更易处理的矿石,可配置")
     }
     health=240
     size=4

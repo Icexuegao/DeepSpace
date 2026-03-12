@@ -9,7 +9,7 @@ import singularity.world.blocks.product.NormalCrafter
 class ArcFurnace : NormalCrafter("arcFurnace") {
   init {
     bundle {
-      desc(zh_CN, "电弧炉")
+      desc(zh_CN, "电弧炉","将铅锭,石英和金珀沙熔炼为石英玻璃")
     }
     size = 3
     itemCapacity = 36
