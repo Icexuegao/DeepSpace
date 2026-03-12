@@ -18,7 +18,7 @@ import singularity.world.blocks.product.NormalCrafter
 class PressingForge : NormalCrafter("pressingForge") {
   init {
     bundle {
-      desc(zh_CN, "冲压锻炉", "快速大批量地熔炼铱锇矿并将其锻压为铱板")
+      desc(zh_CN, "冲压锻炉", "将铱锇矿熔炼锻压为铱板,需要通入水.会产生废水")
     }
     size = 5
     armor = 4f

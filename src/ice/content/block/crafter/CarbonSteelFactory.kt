@@ -16,7 +16,7 @@ class CarbonSteelFactory : NormalCrafter("carbonSteelFactory") {
   init {
     bundle {
       desc(
-        zh_CN, "碳控熔炉", "通过精确控制碳元素配比,在同一生产线灵活产出高碳钢和低碳钢,稳定的温度控制确保钢材质量始终达标"
+        zh_CN, "碳控熔炉", "将赤铁矿冶炼为高碳钢或低碳钢,可配置","通过精确控制碳元素配比,在同一生产线灵活产出高碳钢和低碳钢."
       )
     }
     size = 3

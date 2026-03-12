@@ -20,7 +20,7 @@ import universecore.world.consumers.cons.SglConsumeFloor
 class LowTemperatureMixer : FloorCrafter("lowTemperatureMixer") {
   init {
     bundle {
-      desc(zh_CN, "低温混合器")
+      desc(zh_CN, "低温混合器","在极端低温环境中混合纯净水生产低温化合物,在特定地形上生效")
     }
     size = 2
     health = 150

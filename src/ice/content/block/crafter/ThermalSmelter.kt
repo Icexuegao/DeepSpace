@@ -26,7 +26,7 @@ import kotlin.math.max
 class ThermalSmelter : NormalCrafter("thermal_smelter") {
   init {
     bundle {
-      desc(zh_CN, "热能冶炼炉", "用于冶炼金属的设备,可以制造气流进行金属化合物的高温煅烧")
+      desc(zh_CN, "热能冶炼炉","", "用于冶炼金属的设备,可以制造气流进行金属化合物的高温煅烧")
     }
     requirements(
       Category.crafting, ItemStack.with(

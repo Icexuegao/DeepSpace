@@ -19,6 +19,9 @@ import singularity.world.blocks.product.NormalCrafter
 
 class MonocrystallineSiliconFactory : NormalCrafter("monocrystallineSiliconFactory") {
   init {
+    bundle {
+      desc(zh_CN, "单晶硅厂", "使用硫化物冲击石英生产单晶硅")
+    }
     size = 4
     health = 460
     hasPower = true
@@ -45,8 +48,5 @@ class MonocrystallineSiliconFactory : NormalCrafter("monocrystallineSiliconFacto
       Draw.color()
     }, DrawDefault(), DrawFlame(color))
     requirements(Category.crafting, IItems.铬锭, 55, IItems.高碳钢, 200, IItems.铜锭, 150)
-    bundle {
-      desc(zh_CN, "单晶硅厂", "使用硫化物和石英矿石生产纯度更高的单晶硅")
-    }
   }
 }

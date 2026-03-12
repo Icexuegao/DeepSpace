@@ -16,7 +16,7 @@ import singularity.world.blocks.product.NormalCrafter
 class PlasmaFilter : NormalCrafter("plasmaFilter") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "血浆过滤器", "用冷却剂从血肉赘生物中快速过滤生物质成分")
+      desc(zh_CN, "血浆过滤器", "冷却血肉赘生物并从中提取生物钢")
     }
     size = 5
     hasLiquids = true

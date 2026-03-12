@@ -14,7 +14,7 @@ import singularity.world.blocks.product.NormalCrafter
 class HighSpeedCrusher : NormalCrafter("highSpeedCrusher") {
   init {
     bundle {
-      desc(zh_CN, "高速粉碎机")
+      desc(zh_CN, "高速粉碎机","将黄玉髓粉碎为金珀沙")
     }
     size = 2
     itemCapacity = 24

@@ -13,7 +13,7 @@ import singularity.world.blocks.product.NormalCrafter
 class CopperFoundry : NormalCrafter("copperFoundry") {
   init {
     bundle {
-      desc(zh_CN, "铸铜厂")
+      desc(zh_CN, "铸铜厂","将铜锭和锌锭筑铸为黄铜锭")
     }
     size = 4
     health = 200

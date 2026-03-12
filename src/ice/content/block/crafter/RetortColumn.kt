@@ -16,7 +16,7 @@ import kotlin.math.max
 class RetortColumn : NormalCrafter("retort_column") {
   init {
     bundle {
-      desc(zh_CN, "干馏塔", "通过隔绝空气的高温分离煤炭中的物质,以制造焦炭")
+      desc(zh_CN, "干馏塔", "将生煤干馏为硫化合物和焦炭","通过隔绝空气的高温分离煤炭中的物质,以制造焦炭")
     }
     requirements(
       Category.crafting, ItemStack.with(

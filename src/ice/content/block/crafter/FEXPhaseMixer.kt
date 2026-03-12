@@ -18,7 +18,7 @@ import singularity.world.draw.DrawBottom
 class FEXPhaseMixer:NormalCrafter("FEX_phase_mixer"){
   init{
   bundle {
-    desc(zh_CN, "FEX相位混合器", "重建FEX的液态物质结构,使其中的能量活性化")
+    desc(zh_CN, "相位混合器", "重建FEX的液态物质结构,使其中的能量活性化")
   }
   requirements(
     Category.crafting, ItemStack.with(

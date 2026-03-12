@@ -14,7 +14,7 @@ class TortoiseshellFactory : NormalCrafter("tortoiseshellFactory") {
   init {
     bundle {
       desc(
-        zh_CN, "玳渊缚能厂", "为了生产大型能量武器设施,由枢机批准的能量生产建筑,将狂暴的玳渊能量封印在稳定的矩阵结构中,每一块矩阵都蕴含着巨大的能量"
+        zh_CN, "玳渊缚能厂", "将铪锭,暮光合金和铱锭构建为玳渊矩阵","为了生产大型能量武器设施,由枢机批准的能量生产建筑,将狂暴的玳渊能量封印在稳定的矩阵结构中,每一块矩阵都蕴含着巨大的能量"
       )
     }
     size = 4

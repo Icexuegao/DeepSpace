@@ -30,7 +30,7 @@ open class Incinerator : IceBlock("incinerator") {
 
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "焚烧炉", "焚烧液体和物品,可通过配置面板进行可选配置")
+      desc(zh_CN, "焚化炉", "销毁液体和物品,可配置")
     }
     size = 1
     flameColor = IceColor.b4

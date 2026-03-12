@@ -18,7 +18,7 @@ import singularity.world.blocks.product.NormalCrafter
 class DuskFactory : NormalCrafter("duskFactory") {
   init {
     bundle {
-      desc(zh_CN, "暮白高炉", "将金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金")
+      desc(zh_CN, "暮白高炉","将低碳钢,铬锭,钴锭,铪锭和暮光液合成暮光合金", "金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金")
     }
     size = 3
     itemCapacity = 20

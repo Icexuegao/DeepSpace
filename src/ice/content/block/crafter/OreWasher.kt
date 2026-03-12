@@ -24,7 +24,7 @@ import universecore.world.consumers.cons.ConsumeItems
 class OreWasher:NormalCrafter("ore_washer"){
   init {
   bundle {
-    desc(zh_CN, "洗矿机", "用高速的水流冲刷沥青粗矿以除去轻杂质,以及洗脱附着在岩石间的FEX物质")
+    desc(zh_CN, "洗矿机", "使用水冲刷沥青粗矿以除去杂质,并析出稀有的导能流体")
   }
   requirements(
     Category.crafting, ItemStack.with(

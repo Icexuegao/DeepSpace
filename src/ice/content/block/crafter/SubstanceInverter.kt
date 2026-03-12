@@ -34,7 +34,7 @@ import universecore.graphics.lightnings.generator.VectorLightningGenerator
 class SubstanceInverter : MediumCrafter("substance_inverter") {
   init {
     bundle {
-      desc(zh_CN, "物质逆化器", "将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到引力容器中")
+      desc(zh_CN, "物质逆化器","消耗介质,将反物质引导入简并态中子聚合物容器中" ,"将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到容器中")
     }
     requirements(Category.crafting, ItemStack.with())
     size = 5

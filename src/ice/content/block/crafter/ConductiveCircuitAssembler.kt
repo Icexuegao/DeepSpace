@@ -18,7 +18,7 @@ class ConductiveCircuitAssembler : NormalCrafter("conductiveCircuitAssembler") {
   init {
     bundle {
       desc(
-        zh_CN, "导能回路装配器", "持续开启相位时间场,减缓局部时间以同时进行多种精密零件的制作", "[#9B929D]为什么总有人管她叫灵魂熔炉[]"
+        zh_CN, "导能回路装配器", "将单晶硅于铪锭装配为导能回路", "持续开启相位时间场,减缓局部时间以同时进行多种精密零件的制作\n[#9B929D]为什么总有人管她叫灵魂熔炉[]"
       )
     }
     size = 5

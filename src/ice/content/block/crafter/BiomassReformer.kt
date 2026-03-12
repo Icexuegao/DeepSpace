@@ -14,7 +14,7 @@ import singularity.world.blocks.product.NormalCrafter
 class BiomassReformer: NormalCrafter("biomassReformer") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN,"生物钢重组器","将多种合金原料重组为生物钢,并使用相位织物抑制其活性")
+      desc(zh_CN,"生物钢重组器","将多种原料培育为生物钢")
     }
     size=3
     itemCapacity=36
