@@ -4,9 +4,7 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.audio.ISounds
 import ice.content.IItems
-import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -16,7 +14,7 @@ import mindustry.type.Category
 import mindustry.world.draw.*
 import singularity.world.blocks.product.NormalCrafter
 
-class HighEnergyCeramicSteelFurnace : NormalCrafter("highEnergyCeramicSteelFurnace") {
+class 高能陶钢聚合炉 : NormalCrafter("highEnergyCeramicSteelFurnace") {
   init {
     bundle {
       desc(

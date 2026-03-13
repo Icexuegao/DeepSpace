@@ -2,7 +2,6 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds
@@ -11,7 +10,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class HighSpeedCrusher : NormalCrafter("highSpeedCrusher") {
+class 高速粉碎机 : NormalCrafter("highSpeedCrusher") {
   init {
     bundle {
       desc(zh_CN, "高速粉碎机","将黄玉髓粉碎为金珀沙")

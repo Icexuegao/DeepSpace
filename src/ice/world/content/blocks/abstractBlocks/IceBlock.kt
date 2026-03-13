@@ -24,6 +24,11 @@ import mindustry.world.draw.DrawDefault
 
 open class IceBlock(name: String) : Block(name) {
   companion object {
+    fun Block.requirementPairs(category: Category, vararg items: Pair<Item, Int>) {
+      requirements(category, Array(items.size) {
+        ItemStack(items[it].first, items[it].second)
+      })
+    }
 
     fun Block.requirements(category: Category, vararg items: Any) {
       requirements(category, ItemStack.with(*items))

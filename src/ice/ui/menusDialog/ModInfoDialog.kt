@@ -108,15 +108,15 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             t.table {update ->
               update.add(object : Element() {
                 override fun draw() {
-                  Draw.alpha(parentAlpha * color.a)
-
                   if (checking) {
                     Draw.color(Pal.accent)
+                    Draw.alpha(parentAlpha * color.a)
                     Fill.square(x + width / 2, y + height / 2, 8f, Time.time)
                     Fill.square(x + width / 2, y + height / 2, 8f, 45 + 2 * Time.time)
                   } else {
                     if (newVersion == null) Draw.color(IceColor.b4)
                     else Draw.color(IceColor.b4, IceColor.r2, Mathf.absin(8f, 1f))
+                    Draw.alpha(parentAlpha * color.a)
 
                     Fill.square(x + width / 2, y + height / 2, 8f)
                     Fill.square(x + width / 2, y + height / 2, 8f, 45f)

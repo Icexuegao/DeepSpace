@@ -288,7 +288,6 @@ object IItems : Load {
     }
   }
 
-
   val 硫化合物 = IceItem("item_sulfurCompound", "ffaa5f") {
     flammability = 1.4f
     explosiveness = 0.4f
@@ -555,7 +554,6 @@ object IItems : Load {
       desc(zh_CN, "封装钚-239", "一种经高度浓缩并超低温封装的钚核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
     }
   }
-
 
   val 矩阵合金 = IceItem("item_matrix_alloy", "#929090") {
     hardness = 4

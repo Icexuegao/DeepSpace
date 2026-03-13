@@ -8,7 +8,7 @@ import ice.entities.bullet.BombBulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import mindustry.content.Fx
 import mindustry.entities.bullet.PointBulletType
 import mindustry.entities.effect.ParticleEffect
@@ -22,19 +22,28 @@ import mindustry.world.draw.DrawTurret
 class Beacon : PowerTurret("beacon") {
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "信标", "持续引导聚爆能量弹坠向信标标记处,毁灭半径60格内所有敌方目标")
+      desc(
+        zh_CN, "信标", "持续引导聚爆能量弹坠向信标标记处,毁灭半径60格内所有敌方目标"
+      )
     }
-    requirements(
+    requirementPairs(
       Category.turret,
 
-      IItems.铜锭, 4800, IItems.钴锭, 3200,
+      IItems.铜锭 to 4800,
 
-      IItems.铱板, 2100, IItems.导能回路, 2160,
+      IItems.钴锭 to 3200,
 
-      IItems.陶钢, 1600, IItems.暮光合金, 1200,
+      IItems.铱板 to 2100,
 
-      IItems.絮凝剂, 850, IItems.肃正协议, 1
+      IItems.导能回路 to 2160,
 
+      IItems.陶钢 to 1600,
+
+      IItems.暮光合金 to 1200,
+
+      IItems.絮凝剂 to 850,
+
+      IItems.肃正协议 to 1
     )
     health = 10800
     size = 7
@@ -78,33 +87,30 @@ class Beacon : PowerTurret("beacon") {
       smokeEffect = Fx.smokeCloud
       chargeEffect = MultiEffect().apply {
         lifetime = 80f
-        effects = arrayOf(
-          ParticleEffect().apply {
-            particles = 1
-            lenFrom = 25f
-            lenTo = 0f
-            strokeFrom = 4f
-            strokeTo = 4f
-            line = true
-            length = 150f
-            baseLength = -150f
-            lifetime = 70f
-            colorFrom = Color.valueOf("FFA05C")
-            colorTo = Color.valueOf("FFA05C")
-            cone = 360f
-          },
-          ParticleEffect().apply {
-            particles = 1
-            sizeFrom = 0f
-            sizeTo = 30f
-            length = 0f
-            baseLength = 0f
-            lifetime = 76f
-            colorFrom = Color.valueOf("FFA05C")
-            colorTo = Color.valueOf("FFA05C")
-            cone = 360f
-          }
-        )
+        effects = arrayOf(ParticleEffect().apply {
+          particles = 1
+          lenFrom = 25f
+          lenTo = 0f
+          strokeFrom = 4f
+          strokeTo = 4f
+          line = true
+          length = 150f
+          baseLength = -150f
+          lifetime = 70f
+          colorFrom = Color.valueOf("FFA05C")
+          colorTo = Color.valueOf("FFA05C")
+          cone = 360f
+        }, ParticleEffect().apply {
+          particles = 1
+          sizeFrom = 0f
+          sizeTo = 30f
+          length = 0f
+          baseLength = 0f
+          lifetime = 76f
+          colorFrom = Color.valueOf("FFA05C")
+          colorTo = Color.valueOf("FFA05C")
+          cone = 360f
+        })
       }
       trailSpacing = 10f
       trailInterval = 30f
@@ -164,27 +170,24 @@ class Beacon : PowerTurret("beacon") {
         reflectable = false
         trailInterval = 60f
         trailEffect = MultiEffect().apply {
-          effects = arrayOf(
-            WaveEffect().apply {
-              lifetime = 240f
-              sizeFrom = 0f
-              sizeTo = 240f
-              strokeFrom = 5f
-              strokeTo = 0f
-              colorFrom = Color.valueOf("FFA05C")
-              colorTo = Color.valueOf("FFA05C")
-            },
-            WaveEffect().apply {
-              lifetime = 90f
-              sizeFrom = 480f
-              sizeTo = 480f
-              strokeFrom = 960f
-              strokeTo = 960f
-              colorFrom = Color.valueOf("FF000020")
-              colorTo = Color.valueOf("FF000020")
-              layer = 0.1f
-            }
-          )
+          effects = arrayOf(WaveEffect().apply {
+            lifetime = 240f
+            sizeFrom = 0f
+            sizeTo = 240f
+            strokeFrom = 5f
+            strokeTo = 0f
+            colorFrom = Color.valueOf("FFA05C")
+            colorTo = Color.valueOf("FFA05C")
+          }, WaveEffect().apply {
+            lifetime = 90f
+            sizeFrom = 480f
+            sizeTo = 480f
+            strokeFrom = 960f
+            strokeTo = 960f
+            colorFrom = Color.valueOf("FF000020")
+            colorTo = Color.valueOf("FF000020")
+            layer = 0.1f
+          })
         }
         bulletInterval = 6f
         intervalBullets = 4
@@ -231,71 +234,65 @@ class Beacon : PowerTurret("beacon") {
             hitShake = 4f
             hitSound = Sounds.explosionPlasmaSmall
             hitEffect = MultiEffect().apply {
-              effects = arrayOf(
-                ParticleEffect().apply {
-                  lifetime = 30f
-                  particles = 13
-                  line = true
-                  strokeFrom = 10f
-                  strokeTo = 0f
-                  lenFrom = 45f
-                  lenTo = 0f
-                  cone = 360f
-                  length = 203f
-                  baseLength = 30f
-                  colorFrom = Color.valueOf("FFA05C")
-                  colorTo = Color.valueOf("FFA05C")
-                },
-                ParticleEffect().apply {
-                  lifetime = 20f
-                  particles = 7
-                  line = true
-                  strokeFrom = 10f
-                  strokeTo = 8f
-                  lenFrom = 45f
-                  lenTo = 0f
-                  cone = 360f
-                  length = 273f
-                  baseLength = 30f
-                  interp = Interp.pow10Out
-                  colorFrom = Color.valueOf("FFA05C")
-                  colorTo = Color.valueOf("FFA05C")
-                },
-                ParticleEffect().apply {
-                  lifetime = 90f
-                  particles = 13
-                  sizeFrom = 10f
-                  sizeTo = 0f
-                  cone = 360f
-                  length = 163f
-                  baseLength = 3f
-                  interp = Interp.pow5Out
-                  sizeInterp = Interp.pow10In
-                  colorFrom = Color.valueOf("FFA05C")
-                  colorTo = Color.valueOf("FFA05C")
-                },
-                ParticleEffect().apply {
-                  lifetime = 90f
-                  particles = 1
-                  sizeFrom = 80f
-                  sizeTo = 0f
-                  cone = 360f
-                  length = 0f
-                  baseLength = 0f
-                  colorFrom = Color.valueOf("FFA05CC0")
-                  colorTo = Color.valueOf("FFA05C00")
-                },
-                WaveEffect().apply {
-                  lifetime = 30f
-                  sizeFrom = 0f
-                  sizeTo = 160f
-                  strokeFrom = 6f
-                  strokeTo = 0f
-                  interp = Interp.slope
-                  colorFrom = Color.valueOf("FFA05C")
-                  colorTo = Color.valueOf("FFA05C")
-                }
-              )
+              effects = arrayOf(ParticleEffect().apply {
+                lifetime = 30f
+                particles = 13
+                line = true
+                strokeFrom = 10f
+                strokeTo = 0f
+                lenFrom = 45f
+                lenTo = 0f
+                cone = 360f
+                length = 203f
+                baseLength = 30f
+                colorFrom = Color.valueOf("FFA05C")
+                colorTo = Color.valueOf("FFA05C")
+              }, ParticleEffect().apply {
+                lifetime = 20f
+                particles = 7
+                line = true
+                strokeFrom = 10f
+                strokeTo = 8f
+                lenFrom = 45f
+                lenTo = 0f
+                cone = 360f
+                length = 273f
+                baseLength = 30f
+                interp = Interp.pow10Out
+                colorFrom = Color.valueOf("FFA05C")
+                colorTo = Color.valueOf("FFA05C")
+              }, ParticleEffect().apply {
+                lifetime = 90f
+                particles = 13
+                sizeFrom = 10f
+                sizeTo = 0f
+                cone = 360f
+                length = 163f
+                baseLength = 3f
+                interp = Interp.pow5Out
+                sizeInterp = Interp.pow10In
+                colorFrom = Color.valueOf("FFA05C")
+                colorTo = Color.valueOf("FFA05C")
+              }, ParticleEffect().apply {
+                lifetime = 90f
+                particles = 1
+                sizeFrom = 80f
+                sizeTo = 0f
+                cone = 360f
+                length = 0f
+                baseLength = 0f
+                colorFrom = Color.valueOf("FFA05CC0")
+                colorTo = Color.valueOf("FFA05C00")
+              }, WaveEffect().apply {
+                lifetime = 30f
+                sizeFrom = 0f
+                sizeTo = 160f
+                strokeFrom = 6f
+                strokeTo = 0f
+                interp = Interp.slope
+                colorFrom = Color.valueOf("FFA05C")
+                colorTo = Color.valueOf("FFA05C")
+              })
             }
             despawnEffect = Fx.none
           }
@@ -304,7 +301,9 @@ class Beacon : PowerTurret("beacon") {
     }
 
     consumePower(27f)
-    consumeLiquids(ILiquids.急冻液, 1f)
+    consumeLiquids(
+      ILiquids.急冻液, 1f
+    )
     (drawer as DrawTurret).parts.add(RegionPart().apply {
       suffix = "-side"
       mirror = true

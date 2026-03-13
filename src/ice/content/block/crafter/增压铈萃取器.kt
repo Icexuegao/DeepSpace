@@ -10,7 +10,7 @@ import mindustry.content.Liquids
 import mindustry.type.Category
 import mindustry.world.draw.*
 
-class CeriumExtractorLarge : CeriumExtractor("ceriumExtractorLarge") {
+class 增压铈萃取器 : CeriumExtractor("ceriumExtractorLarge") {
   init {
     bundle {
       desc(

@@ -2,13 +2,12 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import singularity.world.blocks.product.NormalCrafter
 
-class ConcentrateSolidifier : NormalCrafter("concentrateSolidifier") {
+class 萃取固化器 : NormalCrafter("concentrateSolidifier") {
   init {
     bundle {
       desc(zh_CN, "萃取固化器","从锆英石中萃取并熔炼为铪锭")

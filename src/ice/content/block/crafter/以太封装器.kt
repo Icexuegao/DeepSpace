@@ -14,7 +14,7 @@ import mindustry.type.Category
 import mindustry.world.draw.*
 import singularity.world.blocks.product.NormalCrafter
 
-class EtherEncapsulator : NormalCrafter("etherEncapsulator") {
+class 以太封装器 : NormalCrafter("etherEncapsulator") {
 
   init {
     BaseBundle.bundle {

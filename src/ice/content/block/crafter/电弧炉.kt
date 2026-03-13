@@ -2,11 +2,10 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import singularity.world.blocks.product.NormalCrafter
 
-class ArcFurnace : NormalCrafter("arcFurnace") {
+class 电弧炉 : NormalCrafter("arcFurnace") {
   init {
     bundle {
       desc(zh_CN, "电弧炉","将铅锭,石英和金珀沙熔炼为石英玻璃")

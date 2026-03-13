@@ -4,7 +4,6 @@ import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -18,7 +17,7 @@ import singularity.world.blocks.product.NormalCrafter
 class PressingForge : NormalCrafter("pressingForge") {
   init {
     bundle {
-      desc(zh_CN, "冲压锻炉", "将铱锇矿熔炼锻压为铱板,需要通入水.会产生废水")
+      desc(zh_CN, "冲压锻炉", "将铱锇矿熔炼锻压为铱板,需要通入水,会产生废水")
     }
     size = 5
     armor = 4f
@@ -37,7 +36,6 @@ class PressingForge : NormalCrafter("pressingForge") {
       color = Color.valueOf("F0511D")
     })
     requirements(Category.crafting, IItems.高碳钢, 450, IItems.锌锭, 180, IItems.钴锭, 135)
-
 
     newConsume().apply {
       time(45f)

@@ -3,7 +3,6 @@ package ice.content.block.crafter
 import arc.graphics.Color
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
@@ -13,7 +12,7 @@ import mindustry.type.Category
 import mindustry.world.draw.*
 import singularity.world.blocks.product.NormalCrafter
 
-class CobaltSteelCompressor : NormalCrafter("cobaltSteelCompressor") {
+class 钴钢压缩机 : NormalCrafter("cobaltSteelCompressor") {
   init {
     bundle {
       desc(zh_CN, "钴钢压缩机","将钴锭于铬锭压缩为钴钢,需通入水")

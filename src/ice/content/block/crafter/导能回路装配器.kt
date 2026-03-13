@@ -4,7 +4,6 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.WaveEffect
@@ -14,7 +13,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
 
-class ConductiveCircuitAssembler : NormalCrafter("conductiveCircuitAssembler") {
+class 导能回路装配器 : NormalCrafter("conductiveCircuitAssembler") {
   init {
     bundle {
       desc(
@@ -50,13 +49,13 @@ class ConductiveCircuitAssembler : NormalCrafter("conductiveCircuitAssembler") {
     ambientSoundVolume = 0.08f
     requirements(Category.crafting, IItems.铱板, 140, IItems.单晶硅, 50, IItems.铪锭, 30, IItems.铬锭, 100)
 
-    newConsume().apply {
-      time(120f)
-      items(IItems.单晶硅, 9, IItems.铪锭, 3)
-      power(15.25f)
-    }
-    newProduce().apply {
-      items(IItems.导能回路, 6)
+    newFormula { consumers, producers ->
+      consumers.apply {
+        time(120f)
+        items(IItems.单晶硅, 9, IItems.铪锭, 3)
+        power(15.25f)
+      }
+      producers.items(IItems.导能回路, 6)
     }
   }
 }

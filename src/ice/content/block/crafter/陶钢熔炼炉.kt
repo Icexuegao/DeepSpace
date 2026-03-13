@@ -3,7 +3,6 @@ package ice.content.block.crafter
 import ice.audio.ISounds
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
@@ -11,7 +10,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
 
-class CeramicSteelFurnace : NormalCrafter("ceramicSteelFurnace") {
+class 陶钢熔炼炉 : NormalCrafter("ceramicSteelFurnace") {
   init {
     bundle {
       desc(zh_CN, "陶钢熔炼炉", "将石英玻璃,钴钢和铈锭熔炼为陶钢")
