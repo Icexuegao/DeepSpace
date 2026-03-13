@@ -12,7 +12,6 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.library.struct.AttachedProperty
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
@@ -60,7 +59,7 @@ class CulturingBarn : SpliceCrafter("culturing_barn") {
       e.highlight = (right !is SpliceCrafterBuild || right.chains.container !== e.chains.container) && (top !is SpliceCrafterBuild || top.chains.container !== e.chains.container) && (left is SpliceCrafterBuild && left.chains.container === e.chains.container) && (bottom is SpliceCrafterBuild && bottom.chains.container === e.chains.container)
 
     }
-    draw = DrawMulti(DrawBottom(), object : DrawBlock() {
+    drawers = DrawMulti(DrawBottom(), object : DrawBlock() {
       val rand: Rand = Rand()
       val drawID: Int = SglDraw.nextTaskID()
 

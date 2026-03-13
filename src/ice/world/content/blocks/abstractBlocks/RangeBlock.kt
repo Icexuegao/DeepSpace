@@ -4,8 +4,9 @@ import arc.func.Prov
 import mindustry.Vars
 import mindustry.graphics.Drawf
 import mindustry.logic.Ranged
+import singularity.world.blocks.SglBlock
 
-open class RangeBlock(name: String) : IceBlock(name) {
+open class RangeBlock(name: String) : SglBlock(name) {
   var range = 0f
 
   init {
@@ -18,19 +19,15 @@ open class RangeBlock(name: String) : IceBlock(name) {
     if (range != 0f) Drawf.circles((x * Vars.tilesize).toFloat(), (y * Vars.tilesize).toFloat(), range, blockColor)
   }
 
-  open inner class RangeBlockBuild : IceBuild(), Ranged {
+  open inner class RangeBlockBuild : SglBuilding() {
     override fun drawSelect() {
       super.drawSelect()
-      Drawf.circles(x, y, range(), blockColor)
+      Drawf.circles(x, y, range, blockColor)
     }
 
     override fun drawConfigure() {
       super.drawConfigure()
-      Drawf.circles(x, y, range(), blockColor)
-    }
-
-    override fun range(): Float {
-      return range
+      Drawf.circles(x, y, range, blockColor)
     }
   }
 }

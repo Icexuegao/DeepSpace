@@ -19,7 +19,7 @@ class 玳渊缚能厂 : NormalCrafter("tortoiseshellFactory") {
     size = 4
     health = 700
     itemCapacity = 20
-    draw = DrawMulti(DrawDefault(), DrawFlame().apply {
+    drawers = DrawMulti(DrawDefault(), DrawFlame().apply {
       flameColor = Color.valueOf("c4aee4")
     })
     requirements(Category.crafting, IItems.铬锭, 300, IItems.铪锭, 200, IItems.黄铜锭, 170)

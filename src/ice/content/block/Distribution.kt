@@ -1,13 +1,17 @@
 package ice.content.block
 
+import arc.func.Prov
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
+import arc.scene.ui.layout.Table
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.EventType.addContentInitEvent
+import ice.library.scene.ui.ItemSelection
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.*
 import ice.world.content.blocks.distribution.conveyor.ArmoredConveyor
@@ -21,6 +25,7 @@ import ice.world.content.blocks.distribution.digitalStorage.LogisticsOutput
 import ice.world.content.blocks.distribution.droneNetwork.DroneDeliveryTerminal
 import ice.world.content.blocks.distribution.droneNetwork.DroneReceivingRnd
 import ice.world.content.blocks.distribution.itemNode.TransferNode
+import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect
@@ -154,7 +159,7 @@ object Distribution : Load {
     speed = 60f / 600f
     drawLastItems = false
     differentItem = true
-    loadEffect = Effect(30.0f) { e ->
+    loadEffect = Effect(30.0f) {e ->
       Draw.color(Color.valueOf("b8bde1"))
       Lines.stroke(0.5f * e.fout())
       val spread = 4f
@@ -309,29 +314,84 @@ object Distribution : Load {
   }
 
   val 基础卸载器 = Unloader("baseUninstalle").apply {
-    speed = 60f / 10f
-    health = 50
     bundle {
       desc(zh_CN, "基础卸载器", "卸载物品")
     }
-    requirements(Category.distribution, IItems.高碳钢, 30, IItems.低碳钢, 10, IItems.铜锭, 15)
+    speed = 60f / 10f
+    health = 50
+    requirementPairs(Category.distribution, IItems.高碳钢 to 30, IItems.低碳钢 to 10, IItems.铜锭 to 15)
+
+    buildType = Prov {
+      object : Unloader.UnloaderBuild() {
+        override fun buildConfiguration(table: Table) {
+          ItemSelection.buildTable(
+            this@apply, table, Vars.content.items(),
+            ::sortItem,
+            ::configure, true
+          )
+        }
+
+        override fun drawConfigure() {
+          Draw.color(IceColor.b4)
+          Lines.stroke(1.0f)
+          Lines.square(x, y, block.size * 8f / 2.0f + 1.0f)
+          Draw.reset()
+        }
+      }
+    }
   }
   val 极速卸载器 = Unloader("speedUninstalle").apply {
-    speed = 60f / 30f
-    health = 80
-    requirements(Category.distribution, IItems.铬锭, 30, IItems.铱板, 25, IItems.导能回路, 15)
     bundle {
       desc(zh_CN, "极速卸载器", "高速卸载物品")
     }
+    speed = 60f / 30f
+    health = 80
+    requirementPairs(Category.distribution, IItems.铬锭 to 30, IItems.铱板 to 25, IItems.导能回路 to 15)
+    buildType = Prov {
+      object : Unloader.UnloaderBuild() {
+        override fun buildConfiguration(table: Table) {
+          ItemSelection.buildTable(
+            this@apply, table, Vars.content.items(),
+            ::sortItem,
+            ::configure, true
+          )
+        }
+
+        override fun drawConfigure() {
+          Draw.color(IceColor.b4)
+          Lines.stroke(1.0f)
+          Lines.square(x, y, block.size * 8f / 2.0f + 1.0f)
+          Draw.reset()
+        }
+      }
+    }
   }
   val 量子卸载器 = Unloader("electronicUninstaller").apply {
-    speed = 60f / 60f
-    health = 200
-    squareSprite = false
     bundle {
       desc(zh_CN, "量子卸载器", "卸载物品,通过零损耗电子迁移转移高密度数据流")
     }
-    requirements(Category.distribution, IItems.电子元件, 25, IItems.钴锭, 25f, IItems.导能回路, 5)
+    speed = 60f / 60f
+    health = 200
+    squareSprite = false
+    requirementPairs(Category.distribution, IItems.电子元件 to 25, IItems.钴锭 to 25, IItems.导能回路 to 5)
+    buildType = Prov {
+      object : Unloader.UnloaderBuild() {
+        override fun buildConfiguration(table: Table) {
+          ItemSelection.buildTable(
+            this@apply, table, Vars.content.items(),
+            ::sortItem,
+            ::configure, true
+          )
+        }
+
+        override fun drawConfigure() {
+          Draw.color(IceColor.b4)
+          Lines.stroke(1.0f)
+          Lines.square(x, y, block.size * 8f / 2.0f + 1.0f)
+          Draw.reset()
+        }
+      }
+    }
   }
 
   val 重型质量驱动器 = MassDriver("heavyDutyMassDrives").apply {

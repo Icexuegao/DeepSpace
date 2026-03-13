@@ -11,8 +11,6 @@ import arc.math.geom.Geometry
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.gen.Building
@@ -27,7 +25,6 @@ import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
 import singularity.world.blocks.SglBlock
 import singularity.world.blocks.product.NormalCrafter
-import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
 import universecore.components.blockcomp.FactoryBuildComp
@@ -62,7 +59,7 @@ class LatticeConstructor:NormalCrafter("lattice_constructor"){
   initialed = Cons { e: SglBlock.SglBuilding ->
     e.drawAlphas = floatArrayOf(2.9f, 2.2f, 1.5f)
   }
-  draw = DrawMulti(DrawBottom(), object : DrawRegionDynamic<NormalCrafterBuild?>("_framework") {
+  drawers = DrawMulti(DrawBottom(), object : DrawRegionDynamic<NormalCrafterBuild?>("_framework") {
     init {
       alpha = Floatf { e: NormalCrafterBuild? -> if (e!!.items.has(IItems.强化合金) || e.progress() > 0.4f) 1f else 0f }
     }

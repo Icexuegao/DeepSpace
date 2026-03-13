@@ -5,7 +5,6 @@ import arc.func.Floatf
 import arc.math.Mathf
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.graphics.Layer
 import mindustry.type.Category
@@ -49,7 +48,7 @@ class FEXCrystalCharger:NormalCrafter("FEX_crystal_charger"){
     }
   }
 
-  draw = DrawMulti(DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild?>() {
+  drawers = DrawMulti(DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild?>() {
     init {
       alpha = Floatf { e: NormalCrafterBuild? -> if (e!!.items.has(IItems.FEX水晶) || e.progress() > 0.4f) 1f else 0f }
     }

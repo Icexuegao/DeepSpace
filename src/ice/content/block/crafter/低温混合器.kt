@@ -33,7 +33,7 @@ class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
         Fill.rect(e.x+x,e.y+y,4f,4f,e.fin())
       }
     }
-    draw = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(),DrawDefault())
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(),DrawDefault())
     requirements(Category.crafting, IItems.铜锭, 50, IItems.铬锭, 60, IItems.单晶硅, 30)
     newConsume().apply {
       time(160f)

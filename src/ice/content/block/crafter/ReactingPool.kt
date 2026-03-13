@@ -105,7 +105,7 @@ class ReactingPool : NormalCrafter("reacting_pool") {
     }
 
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), object : DrawBlock() {
         override fun draw(build: Building?) {
           val e = build as NormalCrafterBuild

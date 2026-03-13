@@ -8,7 +8,6 @@ import ice.content.IItems
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
-import mindustry.content.Items
 import mindustry.gen.Building
 import mindustry.gen.Teamc
 import mindustry.graphics.Layer
@@ -177,7 +176,7 @@ object MatrixDistNet : Load {
     size = 2
     topologyUse = 0
     matrixEnergyUse = 0.2f
-    draw = DrawMulti(DrawDefault(), DrawDirSpliceBlock<ComponentInterface.ComponentInterfaceBuild>().apply {
+    drawers = DrawMulti(DrawDefault(), DrawDirSpliceBlock<ComponentInterface.ComponentInterfaceBuild>().apply {
       simpleSpliceRegion = true
       spliceBits = Intf { e: ComponentInterface.ComponentInterfaceBuild -> e.interSplice.toInt() }
     }, DrawEdgeLinkBits<ComponentInterface.ComponentInterfaceBuild>().apply {
@@ -258,11 +257,11 @@ object MatrixDistNet : Load {
           return if (distributor.network.core === source) amount else 0
         }
 
-        override fun acceptItem(source: Building, item: Item?): Boolean {
+        override fun acceptItem(source: Building, item: Item): Boolean {
           return distributor.network.core === source
         }
 
-        override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+        override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
           return distributor.network.core === source
         }
       }

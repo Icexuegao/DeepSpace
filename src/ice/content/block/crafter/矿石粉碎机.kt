@@ -18,7 +18,7 @@ class 矿石粉碎机 : NormalCrafter("mineralCrusher") {
     size=4
     squareSprite = false
     hasLiquids = true
-    draw = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawDefault(), DrawRegion("-runner", 6f, true).apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawDefault(), DrawRegion("-runner", 6f, true).apply {
       x = 8.3f
       y = 8.3f
     }, DrawRegion("-runner", 6f, true).apply {

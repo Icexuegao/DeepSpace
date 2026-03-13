@@ -39,7 +39,7 @@ class MatrixContainer(name: String) : SglBlock(name) {
   }
 
   inner class MatrixContainerBuild : SglBuilding() {
-    public override fun acceptItem(source: Building, item: Item?): Boolean {
+    public override fun acceptItem(source: Building, item: Item): Boolean {
       if (!this@MatrixContainer.isIntegrate) {
         return super.acceptItem(source, item)
       } else {
@@ -55,7 +55,7 @@ class MatrixContainer(name: String) : SglBlock(name) {
       }
     }
 
-    public override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+    public override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       if (!this@MatrixContainer.isIntegrate) {
         return super.acceptLiquid(source, liquid)
       } else {

@@ -1,17 +1,12 @@
 package ice.world.content.blocks.distribution.digitalStorage
 
-import arc.graphics.g2d.Draw
-import arc.graphics.g2d.Fill
-import arc.math.Rand
 import ice.library.struct.graph.Vertex
-import ice.world.content.blocks.abstractBlocks.IceBlock
-import mindustry.graphics.Layer
-import mindustry.graphics.Pal
+import singularity.world.blocks.SglBlock
 
-abstract class LogisticsBlock(name: String) : IceBlock(name) {
+abstract class LogisticsBlock(name: String) : SglBlock(name) {
     abstract val blockType: Type
 
-    abstract inner class LogisticsBuild : IceBuild() {
+    abstract inner class LogisticsBuild : SglBuilding() {
         val graphVertex = Vertex(LogisticsGraph.graphRandom) { LogisticsData(this) }
 
 //        override fun drawSelect() {

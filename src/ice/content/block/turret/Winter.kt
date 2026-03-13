@@ -16,10 +16,8 @@ import ice.content.block.turret.TurretBullets.freezingField
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.Vars
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.content.Liquids
 import mindustry.entities.effect.WaveEffect
 import mindustry.entities.part.RegionPart
@@ -29,7 +27,6 @@ import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import mindustry.type.LiquidStack
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
@@ -205,7 +202,7 @@ class Winter : SglTurret("winter"){
       }
     }
 
-    draw = DrawSglTurret(object : CustomPart() {
+    drawers = DrawSglTurret(object : CustomPart() {
       init {
         progress = PartProgress.warmup
         draw = Drawer { x: Float, y: Float, r: Float, p: Float ->

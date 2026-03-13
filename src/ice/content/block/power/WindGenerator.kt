@@ -2,7 +2,6 @@ package ice.content.block.power
 
 import arc.Core
 import arc.Events
-import arc.func.Boolf2
 import arc.func.Cons
 import arc.func.Prov
 import arc.graphics.g2d.Draw
@@ -65,7 +64,7 @@ class WindGenerator(name: String) : SglBlock(name) {
     hasPower = true
     outputsPower = true
     placeableLiquid = true
-    draw = DrawMulti(DrawDefault(), DrawBuild<WindGeneratorBuild> {
+    drawers = DrawMulti(DrawDefault(), DrawBuild<WindGeneratorBuild> {
       Draw.z(Layer.turret)
       Draw.rect(rotator, x, y, totalProgress)
     }, DrawRegion("-top"), DrawFull("full"))
@@ -141,7 +140,7 @@ class WindGenerator(name: String) : SglBlock(name) {
     var totalProgress: Float = 0f
     var warmup: Float = 0f
     var valid = true
-    override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building? {
+    override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       builds.add(this)
       return super.init(tile, team, shouldAdd, rotation)
     }

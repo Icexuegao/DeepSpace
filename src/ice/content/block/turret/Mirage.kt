@@ -18,7 +18,6 @@ import ice.content.block.turret.TurretBullets.lightning
 import ice.content.block.turret.TurretBullets.破碎FEX结晶
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -29,7 +28,6 @@ import mindustry.gen.*
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import mindustry.world.meta.StatUnit
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
@@ -362,7 +360,7 @@ class Mirage : SglTurret("mirage") {
     consume!!.item(IItems.充能FEX水晶, 2)
     consume!!.time(120f)
 
-    draw = DrawSglTurret(object : RegionPart("_shooter") {
+    drawers = DrawSglTurret(object : RegionPart("_shooter") {
       init {
         mirror = false
         heatProgress = PartProgress.warmup

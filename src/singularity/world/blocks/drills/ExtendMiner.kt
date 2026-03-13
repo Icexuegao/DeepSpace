@@ -144,7 +144,7 @@ open class ExtendMiner(name: String) : SglBlock(name), SpliceBlockComp {
       }
     }
 
-    override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building? {
+    override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       super.init(tile, team, shouldAdd, rotation)
       chains = ChainsModule(this)
       chains.newContainer()
@@ -181,11 +181,11 @@ open class ExtendMiner(name: String) : SglBlock(name), SpliceBlockComp {
       }
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    override fun acceptItem(source: Building, item: Item): Boolean {
       return masterDrill != null && masterDrill!!.acceptItem(source, item)
     }
 
-    override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+    override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       return masterDrill != null && masterDrill!!.acceptLiquid(source, liquid)
     }
 

@@ -196,7 +196,12 @@ open class SglUnitFactory(name: String) : PayloadCrafter(name), DistElementBlock
       t.table { inf: Table? ->
         inf!!.left().defaults().left()
         inf.add(Core.bundle.get("infos.buildableList") + ": ")
-        inf.button(Icon.downOpen, Styles.emptyi) { coll.toggle(false) }.update { i: ImageButton? -> i!!.style.imageUp = if (!coll.isCollapsed) Icon.upOpen else Icon.downOpen }.size(8.0f).padLeft(16.0f).expandX()
+        inf.button(Icon.downOpen, Styles.emptyi) {
+          coll.toggle(false)
+        }.update {
+          i: ImageButton? ->
+
+          i!!.style.imageUp = if (!coll.isCollapsed) Icon.upOpen else Icon.downOpen }.size(8.0f).padLeft(16.0f).expandX()
       }
       t.row()
       t.add(coll)
@@ -737,7 +742,7 @@ open class SglUnitFactory(name: String) : PayloadCrafter(name), DistElementBlock
       }
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    override fun acceptItem(source: Building, item: Item): Boolean {
       return (!this@SglUnitFactory.matrixDistributeOnly || source === this.distributor.network.core) && super.acceptItem(source, item)
     }
 

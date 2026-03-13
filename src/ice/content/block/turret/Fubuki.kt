@@ -13,9 +13,7 @@ import ice.content.block.turret.TurretBullets.crushedIce
 import ice.content.block.turret.TurretBullets.rand
 import ice.entities.bullet.base.BulletType
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.content.Liquids
 import mindustry.entities.part.RegionPart
 import mindustry.gen.Bullet
@@ -25,7 +23,6 @@ import mindustry.gen.Statusc
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import singularity.graphic.MathRenderer
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
@@ -237,7 +234,7 @@ class Fubuki: LaserTurret("fubuki") {
     consume!!.energy(3.2f)
     consume!!.liquid(Liquids.cryofluid, 0.2f)
 
-    draw = DrawSglTurret(object : RegionPart("_blade") {
+    drawers = DrawSglTurret(object : RegionPart("_blade") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup

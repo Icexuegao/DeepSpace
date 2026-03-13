@@ -75,7 +75,7 @@ open class ComponentInterface(name: String) : DistNetBlock(name), SpliceBlockCom
     var connectSplice: ByteArray = ByteArray(4)
     var mark: Boolean = false
 
-    override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building {
+    override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       super.init(tile, team, shouldAdd, rotation)
       this.chains.newContainer()
       return this

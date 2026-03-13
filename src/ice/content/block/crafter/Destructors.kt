@@ -22,7 +22,7 @@ class Destructors: Destructor("destructor") {
     placeablePlayer = false
     recipeIndfo = Core.bundle.get("infos.destructItems")
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), object : DrawPlasma() {
         init {
           suffix = "_plasma_"

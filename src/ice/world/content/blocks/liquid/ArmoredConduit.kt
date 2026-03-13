@@ -21,7 +21,7 @@ class ArmoredConduit(name: String) : Conduit(name) {
   }
 
   inner class ArmoredConduitBuild : ConduitBuild() {
-    override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+    override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       //TODO接近检查是一种超级黑客解决方案，用于通过路口从块到管道......
       return super.acceptLiquid(source, liquid) && (tile == null || source.block is Conduit || source.block is DirectionLiquidBridge || source.block is LiquidJunction || source.tile.absoluteRelativeTo(tile.x.toInt(), tile.y.toInt()).toInt() == rotation || !source.proximity.contains(this))
     }

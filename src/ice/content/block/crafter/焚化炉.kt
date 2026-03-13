@@ -14,7 +14,6 @@ import arc.util.io.Writes
 import ice.content.IItems
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.struct.log
 import ice.ui.bundle.BaseBundle
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
@@ -60,7 +59,7 @@ open class 焚化炉 : SglBlock("incinerator") {
     newConsume().apply {
       power(20 / 60f)
     }
-    draw = DrawMulti(DrawDefault(), DrawBuild<IncineratorBuild> {
+    drawers = DrawMulti(DrawDefault(), DrawBuild<IncineratorBuild> {
       if (heat > 0f) {
         val g = 0.3f
         val r = 0.06f
@@ -139,7 +138,7 @@ open class 焚化炉 : SglBlock("incinerator") {
       return if (!enabled) BlockStatus.logicDisable else if (heat > 0.5f) BlockStatus.active else BlockStatus.noInput
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    override fun acceptItem(source: Building, item: Item): Boolean {
       if (config.any() && item != null && heat >= 0.5f) {
         val configuredContents = config.get(GridChildType.acceptor, ContentType.item)
         if (configuredContents != null && configuredContents.contains(item)) {
@@ -151,8 +150,8 @@ open class 焚化炉 : SglBlock("incinerator") {
       return heat > 0.5f
     }
 
-    override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
-      if (config.any() && liquid != null && heat >= 0.5f && liquid.incinerable) {
+    override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
+      if (config.any() && heat >= 0.5f && liquid.incinerable) {
         val configuredContents = config.get(GridChildType.acceptor, ContentType.liquid)
         if (configuredContents != null && configuredContents.contains(liquid)) {
           val dirBit = config.getDirections(GridChildType.acceptor, liquid)
@@ -160,7 +159,7 @@ open class 焚化炉 : SglBlock("incinerator") {
         }
         return false
       }
-      return heat > 0.5f && liquid?.incinerable ?: false
+      return heat > 0.5f && liquid.incinerable
     }
 
     override fun handleItem(source: Building?, item: Item?) {

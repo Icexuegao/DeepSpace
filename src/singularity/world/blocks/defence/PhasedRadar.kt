@@ -135,7 +135,7 @@ open class PhasedRadar(name: String) : SglBlock(name), SpliceBlockComp {
       readChains(read)
     }
 
-    override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building {
+    override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       super.init(tile, team, shouldAdd, rotation)
       chains.newContainer()
       return this

@@ -35,7 +35,7 @@ class Crystallizer : NormalCrafter("crystallizer") {
     newProduce()
     produce!!.item(IItems.FEX水晶, 2)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawDefaultBottom(), object : DrawCultivator() {
         init {
           plantColor = Color.valueOf("#C73A3A")

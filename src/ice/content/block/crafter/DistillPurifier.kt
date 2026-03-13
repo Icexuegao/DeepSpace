@@ -37,6 +37,6 @@ class DistillPurifier : NormalCrafter("distill_purifier") {init {
   produce!!.liquid(ILiquids.纯净水, 0.4f)
   produce!!.item(IItems.碱石, 1)
 
-  draw = DrawMulti(DrawBottom(), DrawLiquidTile(Liquids.water, 3f), DrawDefault())
+  drawers = DrawMulti(DrawBottom(), DrawLiquidTile(Liquids.water, 3f), DrawDefault())
 }
 }

@@ -71,7 +71,7 @@ class LaserResolver : NormalCrafter("laser_resolver") {init {
   ).random()
 
 
-  draw = DrawMulti(
+  drawers = DrawMulti(
     DrawBottom(), object : DrawBlock() {
     override fun draw(build: Building) {
       val e = build as NormalCrafterBuild

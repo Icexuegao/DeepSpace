@@ -8,9 +8,7 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.entities.part.HaloPart
 import mindustry.entities.part.RegionPart
 import mindustry.entities.part.ShapePart
@@ -23,7 +21,6 @@ import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import mindustry.type.Liquid
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
@@ -175,7 +172,7 @@ class Dew: ProjectileTurret("dew") {
     consume!!.time(20f)
     consume!!.item(IItems.FEX水晶, 1)
 
-    draw = DrawSglTurret(object : RegionPart("_blade") {
+    drawers = DrawSglTurret(object : RegionPart("_blade") {
       init {
         mirror = true
         moveX = 4f

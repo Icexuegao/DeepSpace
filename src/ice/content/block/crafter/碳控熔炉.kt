@@ -28,7 +28,7 @@ class 碳控熔炉 : NormalCrafter("carbonSteelFactory") {
       lengthOffset = 0f
       amount = 4
     }
-    draw = DrawMulti(DrawRegion("-bottom"), DrawArcSmelt().apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawArcSmelt().apply {
       x += 8
       startAngle = 135f
       endAngle = 225f

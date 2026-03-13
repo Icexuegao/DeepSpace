@@ -34,7 +34,7 @@ class PlasmaFilter : NormalCrafter("plasmaFilter") {
 
     requirements(Category.crafting, IItems.钴锭, 60, IItems.铱板, 155, IItems.石英玻璃, 40, IItems.铈锭, 85, IItems.导能回路, 30, IItems.生物钢, 15)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawRegion("-bottom"), DrawLiquidRegion(ILiquids.血肉赘生物), DrawLiquidRegion(ILiquids.纯净水),
 
       DrawCultivator().apply {

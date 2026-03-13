@@ -26,7 +26,7 @@ class CeriumBlockMixer : NormalCrafter("ceriumBlockMixer") {
       item(IItems.铈凝块, 2)
     }
     requirements(Category.crafting, IItems.铬锭, 80, IItems.铪锭, 60, IItems.铈锭, 50, IItems.单晶硅, 35)
-    draw = DrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
       rotateSpeed = 3f
     }, DrawDefault(), DrawRegion("-top"))
   }

@@ -171,14 +171,14 @@ open class GenericIOPoint(name: String) : IOPoint(name) {
 
         while (var1.hasNext()) {
           val item = var1.next()
-          this.siphonItem(item as Item?)
+          this.siphonItem(item as Item)
         }
 
         var1 = this.config!!.get(GridChildType.input, ContentType.liquid)!!.iterator()
 
         while (var1.hasNext()) {
           val liquid = var1.next()
-          this.siphonLiquid(liquid as Liquid?)
+          this.siphonLiquid(liquid as Liquid)
         }
 
         this.siphoning = false
@@ -249,7 +249,7 @@ open class GenericIOPoint(name: String) : IOPoint(name) {
       return 0.0f
     }
 
-    fun siphonItem(item: Item?) {
+    fun siphonItem(item: Item) {
       if (this.config != null) {
         val other = this.getNext("siphonItem") { e: Building? -> e!!.block.hasItems && e.items.has(item) && this.config!!.directValid(GridChildType.input, item, this.getDirectBit(e)) }
         if (other != null && this.interactable(other.team) && this.acceptItem(other, item)) {
@@ -259,7 +259,7 @@ open class GenericIOPoint(name: String) : IOPoint(name) {
       }
     }
 
-    fun siphonLiquid(liquid: Liquid?) {
+    fun siphonLiquid(liquid: Liquid) {
       if (this.config != null) {
         val other = this.getNext("siphonLiquid") { e: Building? -> e!!.block.hasLiquids && e.liquids.get(liquid) > 0.0f && this.config!!.directValid(GridChildType.input, liquid, this.getDirectBit(e)) }
         if (other != null && this.acceptLiquid(other, liquid)) {
@@ -268,7 +268,7 @@ open class GenericIOPoint(name: String) : IOPoint(name) {
       }
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    override fun acceptItem(source: Building, item: Item): Boolean {
       return if (this.siphoning) {
         super.acceptItem(source, item)
       } else {
@@ -280,7 +280,7 @@ open class GenericIOPoint(name: String) : IOPoint(name) {
       return this.interactable(source.team) && this.outItems!!.get(item) < this@GenericIOPoint.itemCapacity
     }
 
-    override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+    override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       return if (this.siphoning) {
         super.acceptLiquid(source, liquid)
       } else {
@@ -288,7 +288,7 @@ open class GenericIOPoint(name: String) : IOPoint(name) {
       }
     }
 
-    fun acceptLiquidOut(source: Building, liquid: Liquid?): Boolean {
+    fun acceptLiquidOut(source: Building, liquid: Liquid): Boolean {
       return this.interactable(source.team) && this.outLiquid!!.get(liquid) < this@GenericIOPoint.liquidCapacity
     }
 

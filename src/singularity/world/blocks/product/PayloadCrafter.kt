@@ -33,7 +33,7 @@ open class PayloadCrafter(name: String) : NormalCrafter(name) {
   var payloadRotateSpeed: Float = 5.0f
 
   init {
-    this.draw = object : DrawPayloadFactory<PayloadCrafterBuild>() {
+    this.drawers = object : DrawPayloadFactory<PayloadCrafterBuild>() {
       init {
         this.spliceBits = Intf{it.blendBit}
         this.drawPayload = Cons { e: PayloadCrafterBuild? ->
@@ -110,7 +110,7 @@ open class PayloadCrafter(name: String) : NormalCrafter(name) {
       }
     }
 
-    public override fun acceptItem(source: Building, item: Item?): Boolean {
+    public override fun acceptItem(source: Building, item: Item): Boolean {
       val stack: ItemStack?
       return source.interactable(this.team) && this@PayloadCrafter.hasItems && (source === this || !this.consumer.hasConsume() && !this.consumer.hasOptional() || this@PayloadCrafter.consFilter.filter(this, ConsumeType.item, item, this.acceptAll(ConsumeType.item))) && this.items.get(item).toFloat() < (if (((Structs.find<ItemStack>((this.consumer.current!!.get(ConsumeType.item) as ConsumeItemBase<*>).consItems, Boolf { e: ItemStack? -> e!!.item === item }) as ItemStack).also {
           stack = it

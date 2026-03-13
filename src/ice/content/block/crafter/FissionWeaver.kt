@@ -8,7 +8,6 @@ import arc.math.Mathf
 import arc.scene.ui.layout.Table
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -83,7 +82,7 @@ class FissionWeaver:NormalCrafter("fission_weaver"){
     }
   }
 
-  draw = DrawMulti(DrawBottom(), object : DrawWeave() {
+  drawers = DrawMulti(DrawBottom(), object : DrawWeave() {
     override fun load(block: Block) {
       weave = Core.atlas.find(block.name + "_top")
     }

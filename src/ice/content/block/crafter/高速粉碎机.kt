@@ -22,7 +22,7 @@ class 高速粉碎机 : NormalCrafter("highSpeedCrusher") {
     updateEffect = Fx.pulverizeSmall
     ambientSound = Sounds.loopGrind
     ambientSoundVolume = 0.025f
-    draw = DrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
       spinSprite = true
       rotateSpeed = 15f
     }, DrawDefault())

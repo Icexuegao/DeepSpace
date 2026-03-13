@@ -7,7 +7,6 @@ import arc.math.Mathf
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Building
@@ -52,7 +51,7 @@ class MatrixCutter:NormalCrafter("matrix_cutter"){
 
   craftEffect = Fx.smeltsmoke
 
-  draw = DrawMulti(DrawBottom(), object : DrawRegionDynamic<NormalCrafterBuild?>("_alloy") {
+  drawers = DrawMulti(DrawBottom(), object : DrawRegionDynamic<NormalCrafterBuild?>("_alloy") {
     init {
       alpha = Floatf { e: NormalCrafterBuild? -> if (e!!.items.get(IItems.强化合金) >= 2) 1f else 0f }
     }

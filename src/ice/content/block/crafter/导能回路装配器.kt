@@ -33,7 +33,7 @@ class 导能回路装配器 : NormalCrafter("conductiveCircuitAssembler") {
       colorFrom = Color.valueOf("B7B9C2")
       colorTo = Color.valueOf("B7B9C280")
     }
-    draw = DrawMulti(DrawDefault(), DrawFlame().apply {
+    drawers = DrawMulti(DrawDefault(), DrawFlame().apply {
       flameColor = Color.valueOf("B7B9C2")
       lightRadius = 60f
       lightAlpha = 0.6f

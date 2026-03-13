@@ -20,7 +20,6 @@ import ice.content.block.turret.TurretBullets.rand
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.audio.SoundLoop
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -291,7 +290,7 @@ class Haze : SglTurret("haze") {
     )
     consume!!.time(510f)
 
-    draw = DrawSglTurret(object : RegionPart("_missile") {
+    drawers = DrawSglTurret(object : RegionPart("_missile") {
       init {
         progress = PartProgress.warmup.mul(PartProgress.reload.inv())
         x = 0f

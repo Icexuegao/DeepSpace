@@ -48,7 +48,7 @@ class 以太封装器 : NormalCrafter("etherEncapsulator") {
     })
     requirements(Category.crafting, IItems.铱板, 230, IItems.铈锭, 115, IItems.导能回路, 85, IItems.陶钢, 45)
 
-    draw = DrawMulti(DrawRegion("-bottom"), DrawCircles().apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawCircles().apply {
       color = "FEB380".toColor()
       amount = 3
       sides = 16

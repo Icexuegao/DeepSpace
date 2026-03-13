@@ -118,7 +118,7 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
       Effect.shake(5.5f, 20f, e.x, e.y)
     }
 
-    draw = DrawMulti(DrawBottom(), object : DrawBlock() {
+    drawers = DrawMulti(DrawBottom(), object : DrawBlock() {
       override fun draw(build: Building?) {
 
         val e = build as NormalCrafterBuild

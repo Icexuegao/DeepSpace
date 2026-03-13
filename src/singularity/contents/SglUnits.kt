@@ -20,7 +20,6 @@ import ice.content.ILiquids
 import ice.content.block.turret.TurretBullets
 import ice.library.struct.AttachedProperty
 import ice.ui.bundle.BaseBundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.Vars
 import mindustry.content.Items
 import mindustry.content.Liquids
@@ -364,7 +363,7 @@ class SglUnits : ContentList {
         newBooster(2.4f)
         consume!!.liquid(ILiquids.相位态FEX流体, 2.6f)
 
-        draw = DrawMulti(
+        drawers = DrawMulti(
           DrawDefault(), object : DrawBlock() {
             override fun draw(build: Building?) {
               val b = build as HoveringUnitFactoryBuild
@@ -448,7 +447,7 @@ class SglUnits : ContentList {
         newBooster(2.4f)
         consume!!.liquid(ILiquids.相位态FEX流体, 3.8f)
 
-        draw = DrawMulti(
+        drawers = DrawMulti(
           DrawDefault(), object : DrawBlock() {
             override fun draw(build: Building?) {
               val b = build as HoveringUnitFactoryBuild

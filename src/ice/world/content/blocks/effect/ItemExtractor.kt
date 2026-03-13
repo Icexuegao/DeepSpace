@@ -31,8 +31,8 @@ class ItemExtractor(name: String) : LinksBlock(name) {
     }
 
     inner class ItemExtractorBuildEnd : LinksBlockBuildEnd() {
-        override fun acceptItem(source: Building, item: Item?): Boolean {
-            return item != null && items[item] < getMaximumAccepted(item)
+        override fun acceptItem(source: Building, item: Item): Boolean {
+            return items[item] < getMaximumAccepted(item)
         }
 
         override fun updateTile() {

@@ -1,20 +1,21 @@
 package singularity.world.blocks.liquid
 
-import arc.func.Boolf
 import arc.graphics.g2d.Draw
+import arc.graphics.g2d.Lines
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
 import arc.util.Eachable
 import arc.util.Nullable
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.graphics.IceColor
+import ice.library.scene.ui.ItemSelection
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
 import mindustry.type.Item
 import mindustry.type.Liquid
 import mindustry.world.Block
-import mindustry.world.blocks.ItemSelection
 import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Stat
 import mindustry.world.modules.LiquidModule.LiquidConsumer
@@ -37,9 +38,8 @@ open class LiquidUnloader(name: String) : Block(name) {
     saveConfig = true
     displayFlow = false
     group = BlockGroup.liquids
-    config(Liquid::class.java) { tile: LiquidUnloadedBuild?, l: Liquid? -> tile!!.current = l }
-    configClear { tile: LiquidUnloadedBuild? -> tile!!.current = null }
-
+    config(Liquid::class.java) {tile: LiquidUnloadedBuild?, l: Liquid? -> tile!!.current = l}
+    configClear {tile: LiquidUnloadedBuild? -> tile!!.current = null}
   }
 
   override fun setBars() {
@@ -61,12 +61,12 @@ open class LiquidUnloader(name: String) : Block(name) {
     var current: Liquid? = null
 
     override fun updateTile() {
-      val next = getNext("liquidsPeek") { e: Building? -> e!!.block.hasLiquids && e.canUnload() }
+      val next = getNext("liquidsPeek") {e: Building? -> e!!.block.hasLiquids && e.canUnload()}
       if (next == null) return
 
       if (next.liquids != null) {
-        val dmp = LiquidConsumer { l: Liquid?, a: Float ->
-          var dump = getNext("liquids") { e: Building? ->
+        val dmp = LiquidConsumer {l: Liquid?, a: Float ->
+          var dump = getNext("liquids") {e: Building? ->
             val dest = e!!.getLiquidDestination(this, l)
             dest.acceptLiquid(this, l) && dest !== next && dest.liquids.get(l) / dest.block.liquidCapacity < a / next.block.liquidCapacity
           }
@@ -99,7 +99,18 @@ open class LiquidUnloader(name: String) : Block(name) {
     }
 
     override fun buildConfiguration(table: Table) {
-      ItemSelection.buildTable(table, Vars.content.liquids(), { current }, { value: Liquid? -> this.configure(value) })
+     ItemSelection.buildTable(
+        this@LiquidUnloader, table, Vars.content.liquids(),
+       {current},
+        ::configure, true
+      )
+    }
+
+    override fun drawConfigure() {
+      Draw.color(IceColor.b4)
+      Lines.stroke(1.0f)
+      Lines.square(x, y, block.size * 8f / 2.0f + 1.0f)
+      Draw.reset()
     }
 
     override fun onConfigureBuildTapped(other: Building?): Boolean {

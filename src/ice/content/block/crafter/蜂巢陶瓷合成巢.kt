@@ -21,7 +21,7 @@ class 蜂巢陶瓷合成巢 : NormalCrafter("ceramicKiln") {
     size = 4
     health = 300
     squareSprite = false
-    draw = DrawMulti(DrawRegion("-bottom"), DrawCultivator().apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawCultivator().apply {
       plantColor = Liquids.water.color
       plantColorLight = Color.valueOf("abbaff")
       spread = 2 * 8f - 6f

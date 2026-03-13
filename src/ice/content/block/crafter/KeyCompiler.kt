@@ -11,7 +11,6 @@ import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
 import ice.library.util.toColor
 import ice.ui.bundle.BaseBundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawArcSmelt
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
@@ -319,7 +318,7 @@ class KeyCompiler : NormalCrafter("keyCompiler") {
 
     }
     requirements(Category.crafting, IItems.铬锭, 1800, IItems.铱板, 1200, IItems.导能回路, 1080, IItems.陶钢, 840, IItems.生物钢, 480)
-    draw = DrawMulti(DrawRegion().apply {
+    drawers = DrawMulti(DrawRegion().apply {
       suffix = "-bottom"
     }, DrawArcSmelt().apply {
       flameColor = "F58349".toColor()

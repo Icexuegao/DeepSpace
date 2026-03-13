@@ -8,7 +8,6 @@ import ice.content.IStatus
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds
 import mindustry.graphics.Pal
@@ -88,6 +87,6 @@ class Roentgen : ProjectileTurret("roentgen") {
     newCoolant(1.5f, 20f)
     consume!!.liquid(ILiquids.相位态FEX流体, 0.1f)
 
-    draw = object : DrawSglTurret() {}
+    drawers = object : DrawSglTurret() {}
   }
 }

@@ -41,7 +41,7 @@ open class TokamakOrbit(name: String) : SglBlock(name), SpliceBlockComp {
     init {
         rotate = true
 
-        draw = DrawMultiSgl(
+        drawers = DrawMultiSgl(
             object : DrawRegionDynamic<TokamakOrbitBuild?>("_corner_bottom") {
                 init {
                     alpha = Floatf { e: TokamakOrbitBuild? -> if (e!!.isCorner) 1f else 0f }
@@ -196,7 +196,7 @@ open class TokamakOrbit(name: String) : SglBlock(name), SpliceBlockComp {
         var isCorner: Boolean = false
         override var splice: Int=0
 
-        override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building? {
+        override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
             super.init(tile, team, shouldAdd, rotation)
             chains.newContainer()
             return this

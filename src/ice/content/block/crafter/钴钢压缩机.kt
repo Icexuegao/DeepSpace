@@ -24,7 +24,7 @@ class 钴钢压缩机 : NormalCrafter("cobaltSteelCompressor") {
     liquidCapacity = 36f
     craftEffect = IceEffects.square(IItems.钴钢.color)
     updateEffect = Fx.plasticburn
-    draw = DrawMulti(DrawRegion("-bottom"), DrawPistons().apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawPistons().apply {
       sinMag = 2.75f
       sinScl = 3f
       sides = 8

@@ -421,7 +421,7 @@ open class ItemNode(name: String) : SglBlock(name) {
       return this.checkDump(to)
     }
 
-    override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+    override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       return this@ItemNode.hasLiquids && this.team === source.team && (this.liquids.current() === liquid || this.liquids.get(this.liquids.current()) < 0.2f) && this.checkAccept(source, Vars.world.tile(this.link))
     }
 
@@ -572,7 +572,7 @@ open class ItemNode(name: String) : SglBlock(name) {
       }
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    override fun acceptItem(source: Building, item: Item): Boolean {
       return this@ItemNode.hasItems && this.team === source.team && this.items.get(item) < this@ItemNode.itemCapacity && this.items.total() < this@ItemNode.maxItemCapacity && this.checkAccept(source, Vars.world.tile(this.link), item)
     }
 

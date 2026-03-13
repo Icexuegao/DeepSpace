@@ -21,7 +21,6 @@ import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.scene.ui.updateE
 import ice.ui.bundle.BaseBundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
@@ -50,7 +49,7 @@ class ProspectingRadar : SglBlock("prospectingRadar") {
     configurable = true
     size = 3
     buildType = Prov(::ProspectingRadarBuild)
-    draw = DrawMulti(DrawDefault(), DrawRegion("-radar", 3f, true))
+    drawers = DrawMulti(DrawDefault(), DrawRegion("-radar", 3f, true))
 
     newConsume().apply {
       power(3.0f)

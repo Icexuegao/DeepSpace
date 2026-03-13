@@ -6,7 +6,6 @@ import arc.graphics.g2d.Lines
 import arc.math.Mathf
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
@@ -36,7 +35,7 @@ class MonocrystallineSiliconFactory : NormalCrafter("monocrystallineSiliconFacto
     }
 
     val color = Color.valueOf("ffef99")
-    draw = DrawMulti(DrawRegion("-bottom"), DrawBuild<NormalCrafterBuild> {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawBuild<NormalCrafterBuild> {
       Draw.color(color)
       Draw.alpha(warmup)
       Lines.lineAngleCenter(

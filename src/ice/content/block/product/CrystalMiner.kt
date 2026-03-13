@@ -34,7 +34,7 @@ class CrystalMiner : NormalCrafter("crystal_miner") {
     hasItems = true
     size = 2
     rotate = true
-    draw = DrawMulti(DrawDefault(), object :DrawSideRegion(){
+    drawers = DrawMulti(DrawDefault(), object :DrawSideRegion(){
       override fun icons(block: Block?): Array<out TextureRegion?> {
         return arrayOf()
       }
@@ -102,7 +102,7 @@ class CrystalMiner : NormalCrafter("crystal_miner") {
        }*/
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    override fun acceptItem(source: Building, item: Item): Boolean {
       return items.total() < getMaximumAccepted(item)
     }
 

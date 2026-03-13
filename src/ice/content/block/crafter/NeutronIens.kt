@@ -11,8 +11,6 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import ice.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.graphics.Pal
@@ -26,7 +24,6 @@ import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.util.MathTransform
 import singularity.world.blocks.product.NormalCrafter
-import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
 
@@ -80,7 +77,7 @@ class NeutronIens:NormalCrafter("neutron_lens"){
     )
   )
 
-  draw = DrawMulti(
+  drawers = DrawMulti(
     DrawBottom(), object : DrawBlock() {
       override fun draw(build: Building) {
         LiquidBlock.drawTiledFrames(

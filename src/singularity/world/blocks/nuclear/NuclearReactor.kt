@@ -213,7 +213,7 @@ open class NuclearReactor(name: String) : NormalCrafter(name) {
             return result
         }
 
-        override fun acceptItem(source: Building, item: Item?): Boolean {
+        override fun acceptItem(source: Building, item: Item): Boolean {
             return super.acceptItem(source, item) && (!consItems.contains(item) || (consItems.contains(item) && fuelItemsTotal() < itemCapacity))
         }
     }

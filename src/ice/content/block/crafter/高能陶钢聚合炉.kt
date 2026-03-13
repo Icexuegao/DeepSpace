@@ -49,7 +49,7 @@ class 高能陶钢聚合炉 : NormalCrafter("highEnergyCeramicSteelFurnace") {
       amount = 4
     })
     requirements(Category.crafting, IItems.钴钢, 230, IItems.铱板, 115, IItems.导能回路, 85, IItems.陶钢, 45)
-    draw = DrawMulti(DrawRegion("-bottom"), DrawCircles().apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawCircles().apply {
       color = Color.valueOf("FEB380")
       amount = 3
       sides = 16

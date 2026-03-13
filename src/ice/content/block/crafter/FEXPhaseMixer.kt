@@ -3,8 +3,6 @@ package ice.content.block.crafter
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import ice.world.draw.DrawMulti
 import mindustry.content.Items
 import mindustry.type.Category
@@ -38,7 +36,7 @@ class FEXPhaseMixer:NormalCrafter("FEX_phase_mixer"){
   newProduce()
   produce!!.liquid(ILiquids.相位态FEX流体, 0.2f)
 
-  draw = DrawMulti(
+  drawers = DrawMulti(
     DrawBottom(), DrawLiquidTile(ILiquids.FEX流体), object : DrawLiquidTile(ILiquids.相位态FEX流体) {
       init {
         drawLiquidLight = true

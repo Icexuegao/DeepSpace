@@ -108,7 +108,7 @@ open class MatrixMinerSector(name: String) : MatrixMinerPlugin(name) {
 
 
 
-    public override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building? {
+    public override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       drillPos!!.set(tile!!.drawx(), tile.drawy())
       return super.init(tile, team, shouldAdd, rotation)
     }

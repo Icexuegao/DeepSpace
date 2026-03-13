@@ -1,12 +1,9 @@
 package ice.world.content.blocks.abstractBlocks
 
-import arc.Core
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
-import arc.graphics.g2d.TextureRegion
 import ice.graphics.IceColor
-import ice.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.gen.Building
@@ -19,8 +16,6 @@ import mindustry.type.LiquidStack
 import mindustry.world.Block
 import mindustry.world.consumers.ConsumeItems
 import mindustry.world.consumers.ConsumeLiquids
-import mindustry.world.draw.DrawBlock
-import mindustry.world.draw.DrawDefault
 
 open class IceBlock(name: String) : Block(name) {
   companion object {
@@ -45,7 +40,6 @@ open class IceBlock(name: String) : Block(name) {
 
   var healAmount = 0f
   var damageReduction = 0f
-  var drawers = DrawMulti(DrawDefault())
   var blockColor = IceColor.b4
 
   override fun setStats() {
@@ -54,41 +48,16 @@ open class IceBlock(name: String) : Block(name) {
     if (healAmount > 0f) stats.add(IceStats.生命值恢复, "$healAmount/秒")
   }
 
-  override fun icons(): Array<TextureRegion> {
-    return if (Core.atlas.has("$name-preview")) arrayOf(Core.atlas.find("$name-preview")) else drawers.icons(this)
-  }
-
-  override fun load() {
-    super.load()
-    drawers.load(this)
-  }
-
-  fun setDrawMulti(vararg drawers: DrawBlock) {
-    this.drawers = DrawMulti(*drawers)
-  }
-
   open inner class IceBuild : Building() {
     override fun update() {
       super.update()
       if (healAmount > 0f && health / maxHealth < 1) heal(healAmount / 60f)
     }
 
-    override fun draw() {
-      try {
-        drawers.draw(this)
-      } catch (e: Exception) {
-        throw Exception("${block.localizedName} draws", e)
-      }
-    }
-
     override fun handleDamage(amount: Float): Float {
       return maxOf(0f, amount * (1 - damageReduction.coerceIn(0f, 1f)))
     }
 
-    override fun drawLight() {
-      super.drawLight()
-      drawers.drawLight(this)
-    }
 
     override fun drawConfigure() {
       Draw.color(blockColor)

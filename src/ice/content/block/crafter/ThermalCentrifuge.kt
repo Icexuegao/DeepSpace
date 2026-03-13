@@ -5,9 +5,6 @@ import arc.func.Func
 import arc.util.Tmp
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Fx
@@ -21,7 +18,6 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.graphic.SglDrawConst
 import singularity.world.blocks.product.NormalCrafter
-import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
 import universecore.world.consumers.ConsumeType
@@ -68,7 +64,7 @@ class ThermalCentrifuge:NormalCrafter("thermal_centrifuge"){
   craftEffect = Fx.smeltsmoke
   updateEffect = Fx.plasticburn
 
-  draw = DrawMulti(DrawBottom(), object : DrawBlock() {
+  drawers = DrawMulti(DrawBottom(), object : DrawBlock() {
     override fun draw(build: Building) {
       val e = build as NormalCrafterBuild
       if (e.producer!!.current == null) return

@@ -264,7 +264,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
     var scale: Int = 0
     var recooldown: Boolean = false
 
-    override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building {
+    override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       super.init(tile, team, shouldAdd, rotation)
       chains.newContainer()
 

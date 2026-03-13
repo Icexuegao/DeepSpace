@@ -10,8 +10,9 @@ import arc.scene.ui.layout.Table
 
 class ITable(back: Drawable? = null) : Table(back) {
     private var rowsiz = 0
-    fun setRowsize(int: Int) {
+    fun setRowsize(int: Int): ITable {
         rowsiz = int
+      return this
     }
 
 

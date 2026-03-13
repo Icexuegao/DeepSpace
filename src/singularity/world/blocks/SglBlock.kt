@@ -17,7 +17,6 @@ import arc.util.Eachable
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.util.toStringi
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -68,7 +67,6 @@ import universecore.world.blocks.modules.BaseConsumeModule
 import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.ConsFilter
 import universecore.world.consumers.ConsumeType
-import universecore.world.producers.BaseProducers
 import kotlin.math.min
 
 /**此mod的基础方块类型，对block添加了完善的consume系统，并拥有中子能的基础模块 */
@@ -78,7 +76,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
   var outputItems: Boolean = false
   override var consumers = Seq<BaseConsumers>()
   override var optionalCons = Seq<BaseConsumers>()
-  var draw: DrawBlock = DrawDefault()
+  var drawers: DrawBlock = DrawDefault()
 
   /**这是一个指针，用于标记当前编辑的consume */
   var consume: BaseConsumers? = null
@@ -206,7 +204,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
 
   override fun load() {
     super.load()
-    draw.load(this)
+    drawers.load(this)
   }
 
   override fun setStats() {
@@ -260,27 +258,27 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     addBar("health") { entity: Building? -> Bar("stat.health", Pal.health) { entity!!.healthf() }.blink(Color.white) }
   }
 
-  override fun drawPlanRegion(plan: BuildPlan?, list: Eachable<BuildPlan?>?) {
-    draw.drawPlan(this, plan, list)
+  override fun drawPlanRegion(plan: BuildPlan, list: Eachable<BuildPlan>) {
+    drawers.drawPlan(this, plan, list)
   }
 
   override fun getRegionsToOutline(out: Seq<TextureRegion?>?) {
-    draw.getRegionsToOutline(this, out)
+    drawers.getRegionsToOutline(this, out)
   }
 
   public override fun icons(): Array<TextureRegion> {
-    return draw.finalIcons(this)
+    return if (Core.atlas.has("$name-preview")) arrayOf(Core.atlas.find("$name-preview")) else drawers.finalIcons(this)
   }
 
   override fun postLoad() {
-    if (draw is DrawAtlasGenerator) {
-      (draw as DrawAtlasGenerator).postLoad(this)
+    if (drawers is DrawAtlasGenerator) {
+      (drawers as DrawAtlasGenerator).postLoad(this)
     }
   }
 
   override fun createIcons(packer: MultiPacker?) {
     super.createIcons(packer)
-    if (draw is DrawAtlasGenerator) (draw as DrawAtlasGenerator).generateAtlas(this, packer)
+    if (drawers is DrawAtlasGenerator) (drawers as DrawAtlasGenerator).generateAtlas(this, packer)
   }
 
   companion object {
@@ -400,7 +398,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
       return liquids as SglLiquidModule?
     }
 
-    override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building? {
+    override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       super.init(tile, team, shouldAdd, rotation)
       if (initialed != null) {
         initialed!!.get(this)
@@ -458,7 +456,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
       }
     }
     override fun draw() {
-      draw.draw(this)
+      drawers.draw(this)
      if (Vars.renderer.drawStatus)drawStatus()
       drawActivation()
     }
@@ -607,11 +605,11 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
       return autoSelect && (!canSelect || !recipeSelected)
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    override fun acceptItem(source: Building, item: Item): Boolean {
       return source.interactable(this.team) && hasItems && ((source === this && consumer.current != null && consumer.current!!.selfAccess(ConsumeType.item, item)) || !(consumer.hasConsume() || consumer.hasOptional()) || consFilter.filter(this, ConsumeType.item, item, acceptAll(ConsumeType.item))) && (if (independenceInventory) items.get(item) else items.total()) < getMaximumAccepted(item)
     }
 
-    override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+    override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       return source.interactable(this.team) && hasLiquids && ((source === this && consumer.current != null && consumer.current!!.selfAccess(ConsumeType.liquid, liquid)) || !(consumer.hasConsume() || consumer.hasOptional()) || consFilter.filter(this, ConsumeType.liquid, liquid, acceptAll(ConsumeType.liquid))) && (if (independenceLiquidTank) liquids.get(liquid) else (liquids as SglLiquidModule).total()) <= getMaximumAccepted(liquid) - 0.0001f
     }
 
@@ -622,7 +620,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
 
 
     override fun drawLight() {
-      draw.drawLight(this)
+      drawers.drawLight(this)
     }
 
     override fun version(): Byte {

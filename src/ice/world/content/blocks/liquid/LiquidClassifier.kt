@@ -17,9 +17,10 @@ import mindustry.graphics.Drawf
 import mindustry.type.Liquid
 import mindustry.world.blocks.liquid.LiquidBlock
 import mindustry.world.draw.DrawRegion
+import singularity.world.blocks.SglBlock
 import kotlin.math.min
 
-open class LiquidClassifier(name: String) : IceBlock(name) {
+open class LiquidClassifier(name: String) : SglBlock(name) {
   val top2: TextureRegion by TextureRegionDelegate("${this.name}-top2")
 
   init {
@@ -50,7 +51,7 @@ open class LiquidClassifier(name: String) : IceBlock(name) {
     }
   }
 
-  inner class LiquidClassifierBuild : IceBuild() {
+  inner class LiquidClassifierBuild : SglBuilding() {
 
     var sortLiquid: Liquid? = null
     override fun config(): Liquid? {

@@ -1,7 +1,6 @@
 package singularity.world.blocks.product
 
 import arc.Core
-import arc.Events
 import arc.func.*
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
@@ -16,7 +15,6 @@ import arc.util.io.Writes
 import ice.library.struct.AttachedProperty
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
 import ice.world.meta.IceStats
-import mindustry.game.EventType
 import mindustry.game.Team
 import mindustry.gen.Building
 import mindustry.gen.Tex
@@ -36,7 +34,6 @@ import universecore.world.blocks.chains.ChainsContainer
 import universecore.world.blocks.modules.BaseConsumeModule
 import universecore.world.blocks.modules.BaseProductModule
 import universecore.world.blocks.modules.ChainsModule
-import universecore.world.consumers.cons.ConsumeLiquidBase
 import universecore.world.consumers.ConsumeType
 import universecore.world.producers.ProduceType
 import kotlin.math.min
@@ -127,7 +124,7 @@ init {
       return this
     }
 
-    public override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building? {
+    public override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       super.init(tile, team, shouldAdd, rotation)
       this.chains!!.newContainer()
       return this
@@ -302,14 +299,14 @@ init {
       return super.getLiquidDestination(from, liquid)
     }
 
-    public override fun acceptItem(source: Building, item: Item?): Boolean {
+    public override fun acceptItem(source: Building, item: Item): Boolean {
       return source.interactable(this.team) && this@SpliceCrafter.hasItems &&
               (source !is ChainsBuildComp || !this.chains!!.container.all.contains(source as ChainsBuildComp))
               && this@SpliceCrafter.consFilter.filter(this.b, ConsumeType.item, item, this.acceptAll(ConsumeType.item))
               && this.items.get(item) < this.items()!!.allCapacity
     }
 
-    public override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+    public override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       return source.interactable(this.team) && this@SpliceCrafter.hasLiquids &&
               (source !is ChainsBuildComp || !this.chains!!.container.all.contains(source as ChainsBuildComp))
               && this@SpliceCrafter.consFilter.filter(this.b, ConsumeType.liquid, liquid, this.acceptAll(ConsumeType.liquid))

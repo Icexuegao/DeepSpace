@@ -22,7 +22,7 @@ class 暮白高炉 : NormalCrafter("duskFactory") {
     size = 3
     itemCapacity = 20
     craftEffect = IceEffects.square(IceColor.b4, length = 6f)
-    draw = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawArcSmelt().apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawArcSmelt().apply {
       y = 2f
       flameColor = IceColor.b4
       startAngle = 60f

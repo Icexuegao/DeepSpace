@@ -26,7 +26,7 @@ class 等离子蚀刻厂 : NormalCrafter("integratedFactory") {
       items(IItems.电子元件, 1)
     }
     craftEffect = MultiEffect(IceEffects.lancerLaserShoot1, IceEffects.lancerLaserChargeBegin, IceEffects.hitLaserBlast)
-    draw = DrawMulti(DrawRegion("-bottom"), DrawRegion("-top"))
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawRegion("-top"))
     requirements(Category.crafting, IItems.铜锭, 50, IItems.铬锭, 60, IItems.单晶硅, 30)
   }
 }

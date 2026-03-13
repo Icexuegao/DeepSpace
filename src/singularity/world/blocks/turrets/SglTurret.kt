@@ -190,7 +190,7 @@ open class SglTurret(name: String) : SglBlock(name) {
     priority = TargetPriority.turret
     group = BlockGroup.turrets
     flags = EnumSet.of(BlockFlag.turret)
-    draw = DrawSglTurret()
+    drawers = DrawSglTurret()
     buildType = Prov(::SglTurretBuild)
   }
 

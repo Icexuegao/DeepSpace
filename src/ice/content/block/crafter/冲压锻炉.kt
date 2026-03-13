@@ -26,7 +26,7 @@ class 冲压锻炉 : NormalCrafter("pressingForge") {
     updateEffect = Fx.fuelburn
     craftEffect = Fx.pulverizeMedium
     ambientSoundVolume = 0.07f
-    draw = DrawMulti(DrawRegion("-bottom"), DrawPistons().apply {
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawPistons().apply {
       sinMag = -2.6f
       sinScl = 3.5325f
       lenOffset = 0f

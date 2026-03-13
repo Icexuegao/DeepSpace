@@ -80,7 +80,7 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
       liquid(ILiquids.暮光液, 32f/60f)
     }
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), object : DrawBlock() {
         override fun draw(build: Building?) {
           val e = build as NormalCrafterBuild

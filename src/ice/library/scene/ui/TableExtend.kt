@@ -7,11 +7,9 @@ import arc.func.Floatp
 import arc.func.Prov
 import arc.graphics.Color
 import arc.input.KeyCode
-import arc.math.Mathf
 import arc.scene.Action
 import arc.scene.Element
 import arc.scene.Group
-import arc.scene.Scene
 import arc.scene.actions.Actions
 import arc.scene.event.EventListener
 import arc.scene.event.InputEvent
@@ -25,7 +23,6 @@ import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import ice.graphics.IStyles
-import ice.graphics.IStyles.background22
 import ice.graphics.IceColor
 import ice.library.scene.element.IceScrollPane
 import ice.library.scene.element.ProgressBar
@@ -33,7 +30,7 @@ import ice.library.scene.layout.ProgressAttribute
 import ice.library.scene.ui.layout.ITable
 import ice.library.struct.asDrawable
 import ice.library.struct.getT
-import ice.library.util.accessField
+import ice.library.struct.isNotEmpty
 import ice.library.util.accessFloat
 import ice.library.util.toStringi
 import mindustry.Vars
@@ -46,7 +43,6 @@ import mindustry.ui.dialogs.BaseDialog
 import mindustry.world.Block
 import java.util.*
 
-var Element.scenes: Scene by accessField("stage")
 var Cell<Table>.padTop: Float by accessFloat("padTop")
 var Cell<Table>.padLeft: Float by accessFloat("padLeft")
 var Cell<Table>.padBottom: Float by accessFloat("padBottom")
@@ -118,7 +114,7 @@ var dialogStyle = Dialog.DialogStyle().apply {
   stageBackground = null
 }
 
-fun getIceBaseDialog(title: String=""): BaseDialog{
+fun getIceBaseDialog(title: String = ""): BaseDialog {
   val baseDialog = BaseDialog(title, dialogStyle)
   return baseDialog
 }
@@ -141,7 +137,7 @@ fun Table.icePane(back: Drawable? = null, consumer: Cons<ITable>): Cell<IceScrol
   return add(pane)
 }
 
-fun Table.icePane(style: ScrollPaneStyle = Styles.noBarPane, cont: Table, pane: IceScrollPane.() -> Unit): Cell<IceScrollPane> {
+fun Table.icePane(style: ScrollPaneStyle = Styles.noBarPane, cont: Table, pane: IceScrollPane.()->Unit): Cell<IceScrollPane> {
   val iceScrollPane = IceScrollPane(cont, style)
   pane.invoke(iceScrollPane)
   return add(iceScrollPane)
@@ -153,7 +149,7 @@ fun Element.addListeners(listener: EventListener): Element {
 }
 
 fun <T : Element> T.itooltip(string: String): T {
-  addListener(Tooltip { tool ->
+  addListener(Tooltip {tool ->
     tool.background(IStyles.paneLeft).margin(20f)
     tool.add(string, IceColor.b4)
   }.apply {
@@ -162,8 +158,18 @@ fun <T : Element> T.itooltip(string: String): T {
   return this
 }
 
-fun <T : Element> T.itooltip(table: (Table)-> Unit): T {
-  addListener(Tooltip { tool ->
+fun <T : Element> T.itooltip(string: Prov<CharSequence>): T {
+  addListener(Tooltip {tool ->
+    tool.background(IStyles.paneLeft).margin(20f)
+    tool.add(Label(string)).color(IceColor.b4)
+  }.apply {
+    allowMobile = true
+  })
+  return this
+}
+
+fun <T : Element> T.itooltip(table: (Table)->Unit): T {
+  addListener(Tooltip {tool ->
     tool.background(IStyles.paneLeft).margin(20f)
     table.invoke(tool)
   }.apply {
@@ -172,7 +178,7 @@ fun <T : Element> T.itooltip(table: (Table)-> Unit): T {
   return this
 }
 
-fun <T : Element> Cell<T>.tapped(run: (Element) -> Unit): Cell<T> {
+fun <T : Element> Cell<T>.tapped(run: (Element)->Unit): Cell<T> {
   get().tapped {
     run(get())
   }
@@ -183,6 +189,12 @@ fun <T : Element> Cell<T>.itooltip(string: String): Cell<T> {
   get().itooltip(string)
   return this
 }
+
+fun <T : Element> Cell<T>.itooltip(string: Prov<CharSequence>): Cell<T> {
+  get().itooltip(string)
+  return this
+}
+
 
 fun <T : Element> T.updateE(cons: Cons<T>): T {
   update {
@@ -211,7 +223,7 @@ fun <T : Element> T.setPositions(x: Float, y: Float): T {
   return this
 }
 
-fun Element.tapXY(r: (x: Float, y: Float) -> Unit): InputListener {
+fun Element.tapXY(r: (x: Float, y: Float)->Unit): InputListener {
 
   val result: InputListener
   addListener(object : InputListener() {
@@ -220,7 +232,7 @@ fun Element.tapXY(r: (x: Float, y: Float) -> Unit): InputListener {
       event.stop()
       return true
     }
-  }.also { result = it })
+  }.also {result = it})
   return result
 }
 
@@ -246,9 +258,11 @@ fun Table.addProgressBar(attribute: ProgressAttribute, fraction: Floatp): Cell<P
 
 fun Table.addLine(name: String? = null, color: Color = IceColor.b4): Cell<Table> {
   val growX = table {
-    name?.let { n -> it.add(Label(n).apply {
-      setFontScale(1.5f, 1.5f)
-    }).color(color).row() }
+    name?.let {n ->
+      it.add(Label(n).apply {
+        setFontScale(1.5f, 1.5f)
+      }).color(color).row()
+    }
     it.add(Image(IStyles.whiteui)).color(color).height(3f).growX().row()
   }.growX()
   growX.row()
@@ -256,47 +270,55 @@ fun Table.addLine(name: String? = null, color: Color = IceColor.b4): Cell<Table>
 }
 
 object ItemSelection {
-  private var search: TextField? = null
-  fun <T : UnlockableContent?> buildTable(block: Block?, table: Table, items: Seq<T>, holder: Prov<T>, consumer: Cons<T>, closeSelect: Boolean = false, rows: Int = 4, columns: Int = 6) {
-    val cont = ITable()
-    cont.top()
-    cont.defaults().size(50f)
-    cont.setRowsize(columns)
+  private lateinit var search: TextField
+  fun <T : UnlockableContent?> buildTable(block: Block?, table: Table, items: Seq<T>, holder: Prov<T>, consumer: Cons<T>, closeSelect: Boolean = false, rows: Int = 4, columns: Int = 6,button: Cons<Table> = Cons{}) {
+    val cont = ITable().setRowsize(columns).top()
+    val main = Table(IStyles.paneLeft)
+    val bottons= Table()
 
-    search?.clearText()
+
+
     val rebuild = {
       cont.clearChildren()
-      val text = if (search != null) search!!.text else ""
-      val list = items.select { u: T ->
+      val text = search.text
+      val list = items.select {u: T ->
         (text.isEmpty() || u!!.localizedName.lowercase(Locale.getDefault()).contains(text.lowercase(Locale.getDefault())) || u.name.contains(text))
       }
 
-      list.forEach { item ->
+      list.forEach {item ->
         item!!
-        cont.button(Tex.whiteui, Styles.clearNoneTogglei, Mathf.clamp(item.selectionSize, 0f, 40f)) {
+        cont.button(Tex.whiteui, Styles.clearNoneTogglei, 32f) {
           if (closeSelect) Vars.control.input.config.hideConfig()
-        }.itooltip("${item.localizedName}\n${item.name}").get().apply {
+        }.size(45f).itooltip("${item.localizedName}\n${item.name}").get().apply {
           style.imageUp = item.uiIcon.asDrawable()
-          changed { consumer[if (isChecked) item else null] }
-          update { isChecked = holder.get() === item }
+          changed {consumer[if (isChecked) item else null]}
+          update {isChecked = holder.get() === item}
         }
       }
     }
 
-    rebuild()
-    val main = Table(background22)
-    main.table { search: Table ->
+    main.table {search: Table ->
       search.image(Icon.zoom).padLeft(4f).color(IceColor.b4)
-      this.search = search.field(null) { _: String -> rebuild() }.padBottom(4f).left().growX().get()
-      this.search?.messageText = "@players.search"
+      this.search = search.field(null) {_: String -> rebuild()}.padBottom(4f).left().growX().get()
+      this.search.messageText = "@players.search"
+      button.get(bottons)
+     if (bottons.children.isNotEmpty()) search.add(bottons).right()
     }.fillX().margin(13f).row()
 
-    main.icePane(Styles.noBarPane, cont) {
+    /* main.icePane(Styles.noBarPane, cont) {
+
+     }*/
+    main.pane(cont).update {
       if (block != null) {
-        setScrollYForce(block.selectScroll)
-        update { block.selectScroll = getScrollY() }
+        it.apply {
+          setScrollYForce(block.selectScroll)
+          update {block.selectScroll = getScrollY()}
+        }
       }
     }.maxHeight(50f * rows)
+
     table.top().add(main).margin(10f)
+
+    rebuild()
   }
 }

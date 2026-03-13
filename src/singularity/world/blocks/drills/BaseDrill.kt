@@ -82,7 +82,7 @@ open class BaseDrill(name: String) : SglBlock(name) {
     ambientSound = Sounds.loopDrill
     ambientSoundVolume = 0.018f
     //
-    draw = DrawMulti(DrawDefault(), DrawCracks(), DrawRim(), rotator, DrawRegion("-top"), DrawRegionColor<BaseDrillBuild>("-item") {
+    drawers = DrawMulti(DrawDefault(), DrawCracks(), DrawRim(), rotator, DrawRegion("-top"), DrawRegionColor<BaseDrillBuild>("-item") {
       it.lastItem?.color ?: IceColor.b4
     })
     buildType = Prov(::BaseDrillBuild)
@@ -244,7 +244,7 @@ open class BaseDrill(name: String) : SglBlock(name) {
     }
 
     /**不应该接受物品*/
-    override fun acceptItem(source: Building, item: Item?) = false
+    override fun acceptItem(source: Building, item: Item) = false
     fun miningAny(): Boolean {
       for (bool in currentMines) {
         if (bool) return true

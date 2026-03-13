@@ -7,7 +7,6 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IItems
 import ice.library.scene.ui.ItemSelection
-import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.draw.DrawMulti
 import ice.world.draw.DrawRegionColor
 import mindustry.Vars
@@ -17,8 +16,9 @@ import mindustry.type.Category
 import mindustry.type.Item
 import mindustry.type.ItemStack
 import mindustry.world.draw.DrawRegion
+import singularity.world.blocks.SglBlock
 
-class DroneReceivingRnd(name: String) : IceBlock(name) {
+class DroneReceivingRnd(name: String) : SglBlock(name) {
 
     init {
         size = 1
@@ -45,10 +45,10 @@ class DroneReceivingRnd(name: String) : IceBlock(name) {
         drawPlanConfigCenter(plan, plan.config, "$name-center")
     }
 
-    inner class DroneReceivingRndBuild : IceBuild() {
+    inner class DroneReceivingRndBuild : SglBuilding() {
         var sortItem: Item? = null
-        var building: DroneDeliveryTerminal.DroneDeliveryTerminalBuild? = null
-        override fun acceptItem(source: Building, item: Item?): Boolean {
+        var buildings: DroneDeliveryTerminal.DroneDeliveryTerminalBuild? = null
+        override fun acceptItem(source: Building, item: Item): Boolean {
             return items.get(item) < getMaximumAccepted(item)
         }
 

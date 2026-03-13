@@ -27,8 +27,9 @@ import mindustry.ui.Bar
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawGlowRegion
 import mindustry.world.draw.DrawRegion
+import singularity.world.blocks.SglBlock
 
-class Laboratory(name: String) : IceBlock(name) {
+class Laboratory(name: String) : SglBlock(name) {
 
     init {
         size = 4
@@ -63,7 +64,7 @@ class Laboratory(name: String) : IceBlock(name) {
         }
     }
 
-    inner class LaboratoryBuild : IceBuild() {
+    inner class LaboratoryBuild : SglBuilding() {
         var progress: Float = 0f
         var totalProgress: Float = 0f
         var warmup: Float = 0f
@@ -121,7 +122,7 @@ class Laboratory(name: String) : IceBlock(name) {
             }
         }
 
-        override fun acceptItem(source: Building?, item: Item?): Boolean {
+        override fun acceptItem(source: Building, item: Item): Boolean {
             return items.get(item) < getMaximumAccepted(item) && selectANode?.acceptItem(source, item) ?: false
         }
 

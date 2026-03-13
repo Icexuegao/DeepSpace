@@ -21,7 +21,7 @@ class 陶钢熔炼炉 : NormalCrafter("ceramicSteelFurnace") {
     updateEffect = Fx.melting
     ambientSoundVolume = 0.02f
     ambientSound = ISounds.beamLoop
-    draw = DrawMulti(DrawDefault(), DrawFlame())
+    drawers = DrawMulti(DrawDefault(), DrawFlame())
     requirements(Category.crafting, IItems.铬锭, 130, IItems.钴钢, 45, IItems.铱板, 55, IItems.导能回路, 45)
 
     newConsume().apply {

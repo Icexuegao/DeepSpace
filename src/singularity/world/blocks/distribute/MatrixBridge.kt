@@ -542,11 +542,11 @@ open class MatrixBridge(name: String) : DistNetBlock(name) {
         }
     }
 
-    public override fun acceptItem(source: Building, item: Item?): Boolean {
+    public override fun acceptItem(source: Building, item: Item): Boolean {
       return source.interactable(this.team) && this.items.get(item) < this@MatrixBridge.itemCapacity && (source.block === this.block || this.linkNext != null)
     }
 
-    public override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+    public override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       return source.interactable(this.team) && this.liquids.get(liquid) < this@MatrixBridge.liquidCapacity && (this.liquids as SglLiquidModule).total() < this@MatrixBridge.maxLiquidCapacity && (source.block === this.block || this.linkNext != null)
     }
 

@@ -11,9 +11,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.entities.Mover
 import mindustry.entities.effect.WaveEffect
 import mindustry.entities.part.HaloPart
@@ -25,7 +23,6 @@ import mindustry.gen.Sounds
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import singularity.graphic.SglDraw
 import singularity.ui.UIUtils
 import singularity.util.MathTransform
@@ -176,7 +173,7 @@ class Soflame : SglTurret("soflame") {
     consume!!.time(180f)
     consume!!.energy(5f)
 
-    draw = object : DrawSglTurret(object : RegionPart("_blade") {
+    drawers = object : DrawSglTurret(object : RegionPart("_blade") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup

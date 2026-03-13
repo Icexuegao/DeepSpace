@@ -10,9 +10,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.entities.UnitSorts
 import mindustry.entities.part.HaloPart
 import mindustry.entities.part.RegionPart
@@ -23,7 +21,6 @@ import mindustry.gen.Sounds
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import singularity.graphic.SglDraw
 import singularity.world.SglFx
 import singularity.world.blocks.turrets.HeatBulletType
@@ -135,7 +132,7 @@ class Summer : SglTurret("summer") {
     consume!!.energy(5f)
     consume!!.time(60f)
 
-    draw = DrawSglTurret(object : RegionPart("_side") {
+    drawers = DrawSglTurret(object : RegionPart("_side") {
       init {
         mirror = true
         moveX = 4f

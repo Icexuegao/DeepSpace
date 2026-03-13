@@ -5,7 +5,6 @@ import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.gen.Building
@@ -86,7 +85,7 @@ class Electrolytor:NormalCrafter("electrolytor"){
   newProduce()
   produce!!.item(IItems.绿藻素, 1)
 
-  draw = DrawMulti(
+  drawers = DrawMulti(
     DrawBottom(), object : DrawBlock() {
       override fun draw(build: Building?) {
         val e = build as NormalCrafterBuild

@@ -47,7 +47,7 @@ class 普适冶炼阵列 : NormalCrafter("universalSmelterArray") {
       items(IItems.锌锭, 2)
     }
 
-    draw = DrawMulti(DrawDefault(), DrawFlame(IceColor.b4))
+    drawers = DrawMulti(DrawDefault(), DrawFlame(IceColor.b4))
     requirements(Category.crafting, IItems.高碳钢, 100, IItems.低碳钢, 70)
   }
 }

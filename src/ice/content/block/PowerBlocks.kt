@@ -254,7 +254,7 @@ object PowerBlocks : Load {
     newProduce().apply {
       power(130f / 60f)
     }
-    draw = DrawMulti(DrawDefault(), DrawGlowRegion())
+    drawers = DrawMulti(DrawDefault(), DrawGlowRegion())
     requirements(Category.power, IItems.高碳钢, 20, IItems.锌锭, 30, IItems.钴锭, 30)
   }
 
@@ -661,7 +661,7 @@ object PowerBlocks : Load {
     newProduce()
     produce!!.power(50f)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), DrawDefault(), object : DrawPlasma() {
         init {
           suffix = "_plasma_"
@@ -732,7 +732,7 @@ object PowerBlocks : Load {
     newConsume().consValidCondition {e: NormalCrafterBuild? -> e!!.power.status >= 0.99f}
     consume!!.item(IItems.浓缩铀235核燃料, 1)
     consume!!.power(80f)
-    consume!!.liquid(Liquids.cryofluid, 0.6f)
+    consume!!.liquid(ILiquids.急冻液, 0.6f)
     consume!!.time(180f)
     newProduce()
     produce!!.power(400f)
@@ -740,12 +740,12 @@ object PowerBlocks : Load {
     newConsume().consValidCondition {e: NormalCrafterBuild? -> e!!.power.status >= 0.99f}
     consume!!.item(IItems.浓缩钚239核燃料, 1)
     consume!!.power(80f)
-    consume!!.liquid(Liquids.cryofluid, 0.6f)
+    consume!!.liquid(ILiquids.急冻液, 0.6f)
     consume!!.time(150f)
     newProduce()
     produce!!.power(425f)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), object : DrawExpandPlasma() {
         init {
           plasmas = 2

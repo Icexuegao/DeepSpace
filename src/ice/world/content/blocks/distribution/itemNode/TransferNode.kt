@@ -121,7 +121,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
     Lines.stroke(bridgeWidth)
 
-    Tmp.v1.set(ox, oy).sub(req.drawx(), req.drawy()).setLength(Vars.tilesize / 2f)
+     Tmp.v1.set(ox, oy).sub(req.drawx(), req.drawy()).setLength(Vars.tilesize / 2f)
 
     Lines.line(bridgeRegion, req.drawx() + Tmp.v1.x, req.drawy() + Tmp.v1.y, ox - Tmp.v1.x, oy - Tmp.v1.y, false)
 
@@ -148,6 +148,7 @@ class TransferNode(name: String) : IceBlock(name) {
       }
     }
     link?.let {
+      if (Tmp.v5.set(it).sub(x* vvtf,y*vvtf).len()< Vars.tilesize*2)return
       Draw.color(Pal.gray.write(Tmp.c3).a(blockColor.a))
       Lines.stroke(3f)
       Lines.line(it.drawx(), it.drawy(), x * vvtf, y * vvtf)

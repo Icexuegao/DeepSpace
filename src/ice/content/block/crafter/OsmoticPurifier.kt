@@ -4,7 +4,6 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Liquids
@@ -39,7 +38,7 @@ class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
     }
 
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), DrawLiquidTile(Liquids.water, 3f), object : DrawBlock() {
         override fun draw(build: Building?) {
           val e = build as NormalCrafterBuild

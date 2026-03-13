@@ -5,7 +5,6 @@ import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.type.Category
@@ -59,7 +58,7 @@ class Incubator : FloorCrafter("incubator") {
       )
     )
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), DrawDefault(), object : DrawCultivator() {
         init {
           plantColor = Color.valueOf("bb2912")

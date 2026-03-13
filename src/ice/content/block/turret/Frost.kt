@@ -8,8 +8,6 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.crushedIce
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
-import mindustry.content.Items
 import mindustry.content.Liquids
 import mindustry.entities.bullet.ContinuousLaserBulletType
 import mindustry.entities.part.HaloPart
@@ -19,7 +17,6 @@ import mindustry.gen.*
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
@@ -119,7 +116,7 @@ class Frost : LaserTurret("frost") {
     consume!!.energy(2.4f)
     consume!!.time(210f)
 
-    draw = DrawSglTurret(object : RegionPart("_side") {
+    drawers = DrawSglTurret(object : RegionPart("_side") {
       init {
         mirror = true
         moveX = 8f

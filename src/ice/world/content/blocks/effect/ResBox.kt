@@ -14,8 +14,9 @@ import mindustry.gen.Building
 import mindustry.type.Category
 import mindustry.world.Tile
 import mindustry.world.draw.DrawDefault
+import singularity.world.blocks.SglBlock
 
-class ResBox(name: String) : IceBlock(name) {
+class ResBox(name: String) : SglBlock(name) {
     val top = Core.atlas.find("${this.name}-top")
 
     init {
@@ -32,7 +33,7 @@ class ResBox(name: String) : IceBlock(name) {
         })
     }
 
-    inner class ResBoxBuild : IceBuild() {
+    inner class ResBoxBuild : SglBuilding() {
         override fun interactable(team: Team): Boolean {
             return true
         }

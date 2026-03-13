@@ -131,7 +131,7 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
             }
         }
 
-        override fun acceptItem(source: Building, item: Item?): Boolean {
+        override fun acceptItem(source: Building, item: Item): Boolean {
             return items[item] < getMaximumAccepted(item)
         }
 
@@ -155,7 +155,7 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
             Units.nearbyBuildings(x, y, range) {
                 if (it is DroneReceivingRndBuild) {
                     builds.addUnique(it)
-                    it.building = this
+                    it.buildings = this
                 }
             }
         }

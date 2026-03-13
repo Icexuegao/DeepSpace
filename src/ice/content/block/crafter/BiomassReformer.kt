@@ -24,7 +24,7 @@ class BiomassReformer: NormalCrafter("biomassReformer") {
     updateEffectChance=0.1f
     ambientSound= Sounds.loopCutter
     ambientSoundVolume=0.06f
-    draw = DrawMulti(DrawDefault(), DrawParticles().apply {
+    drawers = DrawMulti(DrawDefault(), DrawParticles().apply {
       color = "D86E56FF".toColor()
       alpha = 0.6f
       particles = 30

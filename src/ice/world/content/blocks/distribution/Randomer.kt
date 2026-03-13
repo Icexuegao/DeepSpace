@@ -4,11 +4,9 @@ import arc.func.Prov
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
 import arc.struct.Seq
-import ice.library.struct.asDrawable
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.type.Item
-import mindustry.type.ItemSeq
 import mindustry.type.Liquid
 import mindustry.world.blocks.heat.HeatBlock
 import mindustry.world.meta.BlockGroup
@@ -41,7 +39,7 @@ open class Randomer(name: String) : EnergySource(name) {
     val itemsArray = ObjectMap<Item, Boolean>()
     val liquidsArray = ObjectMap<Liquid, Boolean>()
     override fun draw() {
-      draw.draw(this)
+      drawers.draw(this)
     }
     override fun buildConfiguration(table: Table) {
       val nearby: Building = nearby(rotation) ?: return

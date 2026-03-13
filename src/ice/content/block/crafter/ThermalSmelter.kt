@@ -11,7 +11,6 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.draw.DrawMulti
-import mindustry.content.Liquids
 import mindustry.gen.Building
 import mindustry.type.Category
 import mindustry.type.ItemStack
@@ -62,7 +61,7 @@ class ThermalSmelter : NormalCrafter("thermal_smelter") {
     newProduce()
     produce!!.item(IItems.铱锭, 2)
 
-    draw = DrawMulti(DrawBottom(), object : DrawBlock() {
+    drawers = DrawMulti(DrawBottom(), object : DrawBlock() {
       val flameColor: Color = Color.valueOf("f58349")
 
       override fun draw(build: Building) {

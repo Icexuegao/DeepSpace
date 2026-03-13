@@ -358,7 +358,7 @@ open class MatrixGridBlock(name: String) : DistNetBlock(name), DistMatrixUnitCom
       return pair.pack()
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    override fun acceptItem(source: Building, item: Item): Boolean {
       val var10000: Boolean
       if (source is IOPointComp) {
         val io = source as IOPointComp
@@ -372,7 +372,7 @@ open class MatrixGridBlock(name: String) : DistNetBlock(name), DistMatrixUnitCom
       return var10000
     }
 
-    override fun acceptLiquid(source: Building, liquid: Liquid?): Boolean {
+    override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       val var10000: Boolean
       if (source is IOPointComp) {
         val io = source as IOPointComp

@@ -4,8 +4,6 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.draw.DrawMulti
-import mindustry.content.Items
-import mindustry.content.Liquids
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.draw.DrawCrucibleFlame
@@ -44,7 +42,7 @@ class CombustionChamber : NormalCrafter("combustion_chamber") {
     newBooster(1.65f)
     consume!!.liquid(ILiquids.沼气, 0.2f)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), DrawCrucibleFlame(), DrawDefault()
     )
   }

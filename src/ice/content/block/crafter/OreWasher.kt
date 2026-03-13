@@ -6,8 +6,6 @@ import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
@@ -50,7 +48,7 @@ class OreWasher:NormalCrafter("ore_washer"){
 
   craftEffect = Fx.pulverizeMedium
 
-  draw = DrawMulti(DrawDefault(), object : DrawLiquidRegion(Liquids.water) {
+  drawers = DrawMulti(DrawDefault(), object : DrawLiquidRegion(Liquids.water) {
     init {
       suffix = "_liquid"
     }

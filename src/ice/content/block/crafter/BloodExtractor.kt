@@ -31,6 +31,6 @@ class BloodExtractor : NormalCrafter("bloodExtractor") {
       producers.liquid(ILiquids.血肉赘生物, 0.2f)
     }
     requirements(Category.crafting, IItems.钴锭, 60, IItems.石英玻璃, 55, IItems.铱板, 75, IItems.电子元件, 60, IItems.生物钢, 45)
-    draw = DrawMulti(DrawRegion("-bottom"), DrawLiquidTile(ILiquids.血肉赘生物), DrawDefault())
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidTile(ILiquids.血肉赘生物), DrawDefault())
   }
 }

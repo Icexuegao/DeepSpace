@@ -20,7 +20,7 @@ class 特化冶炼阵列 : NormalCrafter("specializedSmelterArray") {
     size = 3
     itemCapacity = 35
     craftEffect = IceEffects.square(IceColor.b4)
-    draw = DrawMulti(DrawDefault(), DrawFlame())
+    drawers = DrawMulti(DrawDefault(), DrawFlame())
     requirements(Category.crafting, IItems.高碳钢, 150, IItems.铅锭, 40, IItems.铜锭, 30, IItems.锌锭, 30)
 
     newConsume().apply {

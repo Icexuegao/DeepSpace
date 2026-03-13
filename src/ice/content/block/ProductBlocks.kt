@@ -207,7 +207,7 @@ object ProductBlocks : Load {
     newBooster(1f)
     consume!!.add(SglConsumeFloor(IAttribute.沥青, 1.12f))
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), object : DrawLiquidRegion(Liquids.water) {
         init {
           suffix = "_liquid"
@@ -269,7 +269,7 @@ object ProductBlocks : Load {
     newBooster(1.8f)
     consume!!.liquid(Liquids.water, 0.12f)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), DrawDefault(), object : DrawBlock() {
         var rim: TextureRegion? = null
         val heatColor: Color = Color.valueOf("ff5512")
@@ -324,7 +324,7 @@ object ProductBlocks : Load {
     newBooster(3.1f)
     consume!!.liquid(ILiquids.FEX流体, 0.12f)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), object : DrawExpandPlasma() {
         init {
           plasmas = 2
@@ -363,7 +363,7 @@ object ProductBlocks : Load {
     master = 潮汐钻头 as ExtendableDrill?
     mining = SglFx.shrinkParticle(10f, 1.5f, 120f, Pal.reactorPurple)
 
-    draw = DrawMulti(DrawBottom(), DrawDefault(), object : DrawDirSpliceBlock<ExtendMinerBuild?>() {
+    drawers = DrawMulti(DrawBottom(), DrawDefault(), object : DrawDirSpliceBlock<ExtendMinerBuild?>() {
       init {
         simpleSpliceRegion = true
 
@@ -422,7 +422,7 @@ object ProductBlocks : Load {
     drillSize = 5
     energyMulti = 4f
     clipSize = (64 * Vars.tilesize).toFloat()
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawDefault(), object : DrawBlock() {
         override fun draw(build: Building) {
           if (build is MatrixMinerComponentBuild) {
@@ -463,7 +463,7 @@ object ProductBlocks : Load {
 
     clipSize = (64 * Vars.tilesize).toFloat()
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawDefault(), object : DrawBlock() {
         val param: FloatArray = FloatArray(9)
         val index = arrayOf<String?>("t1", "t2", "t3", "t4")
@@ -559,7 +559,7 @@ object ProductBlocks : Load {
 
     newBoost(1f, 0.6f, {l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f}, 0.3f)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawDefault(), object : DrawBlock() {
         override fun draw(build: Building?) {
 

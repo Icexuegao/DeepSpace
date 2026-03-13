@@ -4,8 +4,6 @@ import arc.func.Floatf
 import arc.func.Func
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
@@ -13,7 +11,6 @@ import mindustry.type.ItemStack
 import mindustry.world.draw.DrawDefault
 import singularity.graphic.SglDrawConst
 import singularity.world.blocks.product.NormalCrafter
-import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
 import singularity.world.draw.DrawRegionDynamic
 
 class FuelPackager: NormalCrafter("fuel_packager"){
@@ -44,7 +41,7 @@ class FuelPackager: NormalCrafter("fuel_packager"){
 
   craftEffect = Fx.smeltsmoke
 
-  draw = DrawMulti(DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild?>("_flue") {
+  drawers = DrawMulti(DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild?>("_flue") {
     init {
       alpha = Floatf { e: NormalCrafterBuild? -> if (e!!.items.get(IItems.强化合金) > 0 || e.progress() > 0.4f) 1f else 0f }
     }

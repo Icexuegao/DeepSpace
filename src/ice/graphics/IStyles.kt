@@ -58,6 +58,9 @@ object IStyles {
   val nuclear = IFiles.findModPng("nuclear")
   val matrix = IFiles.findModPng("matrix")
 
+  val buttonSorter0 = IFiles.findModPng("button-sorter-0")
+  val buttonSorter1 = IFiles.findModPng("button-sorter-1")
+
   val button2 = object : ImageButtonStyle() {}.apply {
     up = background41
     over = background41
@@ -134,7 +137,7 @@ object IStyles {
 
   val publicInfoIcon = IFiles.findModPng("upWel")
 
-  val contributorBack =IFiles.findModPng("contributor-back")
+  val contributorBack = IFiles.findModPng("contributor-back")
 
   val menusButton_host = IFiles.findModPng("menusButton_host").asDrawable()
   val menusButton_exit = IFiles.findModPng("menusButton_exit").asDrawable()

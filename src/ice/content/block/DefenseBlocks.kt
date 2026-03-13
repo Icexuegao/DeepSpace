@@ -30,7 +30,6 @@ import mindustry.gen.Bullet
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import mindustry.world.blocks.defense.AutoDoor
 import mindustry.world.blocks.defense.ShieldWall
 import mindustry.world.draw.DrawBlock
@@ -273,7 +272,7 @@ object DefenseBlocks : Load {
     newConsume().apply {
       power(1f)
     }
-    draw = DrawMulti(DrawDefault(), object : DrawDirSpliceBlock<PhasedRadar.PhasedRadarBuild?>() {
+    drawers = DrawMulti(DrawDefault(), object : DrawDirSpliceBlock<PhasedRadar.PhasedRadarBuild?>() {
       init {
         simpleSpliceRegion = true
         spliceBits = Intf { e: PhasedRadar.PhasedRadarBuild? -> e!!.spliceDirBit }
@@ -338,7 +337,7 @@ object DefenseBlocks : Load {
       s!!.add(SglStat.multiple, 4.toString() + "*cells")
     }
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawDefault(), object : DrawBlock() {
         override fun draw(build: Building?) {
           if (build is GameOfLife.GameOfLifeBuild) {

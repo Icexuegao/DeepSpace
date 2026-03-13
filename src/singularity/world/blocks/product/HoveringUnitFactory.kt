@@ -63,7 +63,7 @@ open class HoveringUnitFactory(name: String) : SglUnitFactory(name) {
     var hover: TextureRegion? = null
 
     init {
-        draw = DrawDefault()
+        drawers = DrawDefault()
         buildType= Prov(::HoveringUnitFactoryBuild)
     }
 
@@ -91,7 +91,7 @@ open class HoveringUnitFactory(name: String) : SglUnitFactory(name) {
         var currentOutputTarget: Building? = null
         private var configOutputting = false
 
-        public override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building? {
+        public override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
             super.init(tile, team, shouldAdd, rotation)
             for (i in hoveringStats.indices) {
                 val p = Geometry.d4(i)

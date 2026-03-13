@@ -27,7 +27,7 @@ class RetortColumn : NormalCrafter("retort_column") {
     itemCapacity = 12
     liquidCapacity = 20f
     craftEffect = Fx.smeltsmoke
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawDefault(), object : DrawFlame() {
         override fun load(block: Block) {
           top = Core.atlas.find(block.name + "_top")

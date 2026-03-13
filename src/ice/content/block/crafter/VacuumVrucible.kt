@@ -58,7 +58,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
     produce!!.item(IItems.絮凝剂, 1)
 
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), DrawCrucibleFlame(), DrawDefault()
     )
   }

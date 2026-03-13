@@ -20,11 +20,12 @@ import mindustry.world.Tile
 import mindustry.world.blocks.environment.Floor
 import mindustry.world.draw.DrawDefault
 import mindustry.world.meta.*
+import singularity.world.blocks.SglBlock
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-class SolidPump(name: String) : IceBlock(name) {
+class SolidPump(name: String) : SglBlock(name) {
     var result: Liquid = Liquids.water
     var updateEffect: Effect = Fx.none
     var updateEffectChance: Float = 0.02f
@@ -109,7 +110,7 @@ class SolidPump(name: String) : IceBlock(name) {
         return tile != null && !tile.floor().isLiquid
     }
 
-    inner class SolidPumpBuild : IceBuild() {
+    inner class SolidPumpBuild : SglBuilding() {
         var warmup: Float = 0f
         var pumpTime: Float = 0f
         var boost: Float = 0f

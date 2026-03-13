@@ -42,13 +42,13 @@ open class ExtendableDrill(name: String) : BaseDrill(name), ChainsBlockComp {
     var ores: Seq<ItemStack> = Seq<ItemStack>()
     var updatedMark: Boolean = false
 
-    override fun init(tile: Tile?, team: Team?, shouldAdd: Boolean, rotation: Int): Building {
+    override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       super.init(tile, team, shouldAdd, rotation)
       chains.newContainer()
       return this
     }
 
-    override fun acceptItem(source: Building, item: Item?): Boolean {
+    override fun acceptItem(source: Building, item: Item): Boolean {
       val b1: Boolean = source.interactable(this.team)
       val bool = (source === this && consumer.current != null && consumer.current!!.selfAccess(ConsumeType.item, item)) || !(consumer.hasConsume() || consumer.hasOptional()) || consFilter.filter(this, ConsumeType.item, item, acceptAll(ConsumeType.item))
       return b1 && hasItems && bool && (if (independenceInventory) items.get(item) else items.total()) < getMaximumAccepted(item)

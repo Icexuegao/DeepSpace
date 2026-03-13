@@ -142,7 +142,7 @@ object NuclearBlocks : Load {
     energyPotential = 1024f
     maxEnergyPressure = 4096f
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), DrawDefault(), object : DrawRegionDynamic<EnergyContainerBuild>("_top") {
         init {
           layer = Layer.effect
@@ -199,7 +199,7 @@ object NuclearBlocks : Load {
       }
     }
 
-    draw = DrawMulti(DrawBottom(), object : DrawBlock() {
+    drawers = DrawMulti(DrawBottom(), object : DrawBlock() {
       override fun draw(build: Building) {
         LiquidBlock.drawTiledFrames(
           build.block.size, build.x, build.y, 4f, ILiquids.孢子云, build.warmup()
@@ -286,7 +286,7 @@ object NuclearBlocks : Load {
     updateEffect = Fx.generatespark
     updateEffectChance = 0.01f
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawBottom(), DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild?>("_top") {
         init {
           color = Func { e: NormalCrafterBuild? ->
@@ -361,7 +361,7 @@ object NuclearBlocks : Load {
     consume!!.time(240f)
     consume!!.item(IItems.相位封装氦单元, 1)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawDefault(), object : DrawLiquidRegion(Liquids.cryofluid) {
         init {
           suffix = "_top"
@@ -403,7 +403,7 @@ object NuclearBlocks : Load {
     consume!!.time(540f)
     consume!!.item(IItems.相位封装氦单元, 1)
 
-    draw = DrawMulti(
+    drawers = DrawMulti(
       DrawDefault(), object : DrawLiquidRegion(Liquids.cryofluid) {
         init {
           suffix = "_top"
@@ -460,7 +460,7 @@ object NuclearBlocks : Load {
       }
     }
 
-    draw = DrawMulti(DrawBottom(), object : DrawPlasma() {
+    drawers = DrawMulti(DrawBottom(), object : DrawPlasma() {
       init {
         suffix = "_plasma_"
         plasma1 = Pal.reactorPurple
@@ -528,7 +528,7 @@ object NuclearBlocks : Load {
 
     conductivePower = true
 
-    draw = DrawMulti(DrawBottom(), object : DrawPlasma() {
+    drawers = DrawMulti(DrawBottom(), object : DrawPlasma() {
       init {
         suffix = "_plasma_"
         plasma1 = SglDrawConst.matrixNet

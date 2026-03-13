@@ -12,7 +12,6 @@ import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import mindustry.world.Block
 import mindustry.world.draw.DrawBlock
 import mindustry.world.draw.DrawDefault
@@ -50,7 +49,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
   newProduce()
   produce!!.item(IItems.相位封装氦单元, 1)
 
-  draw = DrawMulti(
+  drawers = DrawMulti(
     DrawBottom(), DrawLiquidTile(), object : DrawBlock() {
       var piston: TextureRegion? = null
 

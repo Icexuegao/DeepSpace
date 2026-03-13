@@ -2,10 +2,12 @@ package ice.world.content.blocks.distribution
 
 import arc.Core
 import arc.func.Prov
+import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
-import arc.scene.ui.Label
+import arc.scene.style.TextureRegionDrawable
+import arc.scene.ui.ImageButton
 import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
@@ -13,18 +15,21 @@ import arc.util.io.Writes
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.ui.ItemSelection
-import ice.world.content.blocks.abstractBlocks.IceBlock
+import ice.library.scene.ui.itooltip
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
+import mindustry.gen.Tex
 import mindustry.type.Item
+import mindustry.ui.Styles
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.BlockGroup
+import singularity.world.blocks.SglBlock
 
-class Sorter(name: String) : IceBlock(name) {
+class Sorter(name: String) : SglBlock(name) {
     val top = DrawRegion("-top")
     val invert : TextureRegion by lazy { Core.atlas.find("${this.name}-invert") }
     init {
@@ -81,7 +86,7 @@ class Sorter(name: String) : IceBlock(name) {
         return true
     }
 
-    inner class IceSorterBuild : IceBuild() {
+    inner class IceSorterBuild : SglBuilding() {
         var invert: Boolean = false
         var sortItem: Item? = null
         override fun drawSelect() {
@@ -138,31 +143,36 @@ class Sorter(name: String) : IceBlock(name) {
         }
 
         override fun buildConfiguration(table: Table) {
-            table.button({
-                it.update {
-                    it.isChecked = invert
-                }
-                Label("").apply {
-                    setColor(IceColor.b4)
-                    setText {
-                        if (invert) {
-                            "分类状态: 反"
-                        } else {
-                            "分类状态: 正"
-                        }
-                    }
-                }.also(it::add)
-            }, IStyles.backgroundButton) {
-                invert = !invert
-            }.margin(12f).growX().height(60f)
-            table.row()
-
             ItemSelection.buildTable(
                 this@Sorter, table, Vars.content.items(),
                 ::sortItem,
                 ::configure
                 ,true
-            )
+            ){
+              it.button({button ->
+                button.image(IStyles.buttonSorter0).update {image ->
+                  image.setDrawable(if (invert) IStyles.buttonSorter1 else IStyles.buttonSorter0)
+                }.color(IceColor.b4).size(40f).itooltip {
+                  if (invert) {
+                    "分类状态: 反"
+                  } else {
+                    "分类状态: 正"
+                  }
+                }
+
+              }, object : ImageButton.ImageButtonStyle() {
+                init {
+                  down = Styles.flatDown
+                  up = (Tex.whiteui as TextureRegionDrawable).tint(0f,0f,0f,0f)
+                  over = (Tex.whiteui as TextureRegionDrawable).tint(0f,0f,0f,0f)
+                  disabled = (Tex.whiteui as TextureRegionDrawable).tint(0f,0f,0f,0f)
+                  imageDisabledColor = Color.lightGray
+                  imageUpColor = Color.white
+                }
+              }){
+                invert = !invert
+              }.padRight(4f)
+            }
         }
 
         override fun config(): String {

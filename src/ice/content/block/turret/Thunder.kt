@@ -16,7 +16,6 @@ import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.entities.Damage
 import mindustry.entities.Effect
 import mindustry.entities.Units
@@ -238,7 +237,7 @@ class Thunder : SglTurret("thunder") {
     newCoolant(1.45f, 20f)
     consume!!.liquid(ILiquids.相位态FEX流体, 0.25f)
 
-    draw = DrawMulti(DrawSglTurret(object : RegionPart("_center") {
+    drawers = DrawMulti(DrawSglTurret(object : RegionPart("_center") {
       init {
         moveY = 8f
         progress = PartProgress.warmup

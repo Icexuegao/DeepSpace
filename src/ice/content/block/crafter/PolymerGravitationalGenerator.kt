@@ -11,7 +11,6 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.gen.Building
@@ -62,7 +61,7 @@ class PolymerGravitationalGenerator : NormalCrafter("polymer_gravitational_gener
     craftEffect = SglFx.polymerConstructed
     val timeId = timers++
 
-    draw = DrawMulti(DrawBottom(), object : DrawRegionDynamic<NormalCrafterBuild?>("_liquid") {
+    drawers = DrawMulti(DrawBottom(), object : DrawRegionDynamic<NormalCrafterBuild?>("_liquid") {
       init {
         color = Func { e: NormalCrafterBuild? -> SglDrawConst.ion }
         alpha = Floatf { obj: NormalCrafterBuild? -> obj!!.workEfficiency() }

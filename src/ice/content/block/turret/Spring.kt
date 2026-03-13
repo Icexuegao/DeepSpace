@@ -9,9 +9,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
-import mindustry.content.Items
 import mindustry.entities.Damage
 import mindustry.entities.Units
 import mindustry.entities.part.RegionPart
@@ -23,7 +21,6 @@ import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import singularity.Sgl
 import singularity.world.SglFx
 import singularity.world.blocks.turrets.SglTurret
@@ -129,7 +126,7 @@ class Spring: SglTurret("spring") {
     consume!!.energy(2.6f)
     consume!!.time(60f)
 
-    draw = DrawSglTurret(object : RegionPart("_side") {
+    drawers = DrawSglTurret(object : RegionPart("_side") {
       init {
         mirror = true
         moveX = 2f
