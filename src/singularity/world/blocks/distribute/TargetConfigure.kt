@@ -16,7 +16,7 @@ import singularity.world.distribution.GridChildType
 import universecore.util.DataPackable
 import universecore.util.Empties
 
-class TargetConfigure : DataPackable {
+open class TargetConfigure : DataPackable {
   @JvmField
   var offsetPos: Int = Point2.pack(0, 0)
   @JvmField
@@ -26,18 +26,18 @@ class TargetConfigure : DataPackable {
   protected var directBits = ObjectMap<GridChildType, ObjectMap<UnlockableContent, ByteArray>>()
 
   fun set(type: GridChildType?, content: UnlockableContent, dirBit: ByteArray?) {
-    data.get(type, Prov { ObjectMap() }).get(content.getContentType(), Prov { ObjectSet() }).add(content)
-    directBits.get(type, Prov { ObjectMap() }).put(content, dirBit)
+    data.get(type) {ObjectMap()}.get(content.contentType) {ObjectSet()}.add(content)
+    directBits.get(type) {ObjectMap()}.put(content, dirBit)
   }
 
   fun remove(type: GridChildType?, content: UnlockableContent): Boolean {
-    val result = data.get(type, Empties.nilMapO()).get(content.getContentType(), Empties.nilSetO<UnlockableContent?>()).remove(content)
+    val result = data.get(type, Empties.nilMapO()).get(content.contentType, Empties.nilSetO()).remove(content)
     directBits.get(type, Empties.nilMapO()).remove(content)
     return result
   }
 
   fun get(type: GridChildType?, content: UnlockableContent): Boolean {
-    return data.get(type, Empties.nilMapO()).get(content.getContentType(), Empties.nilSetO()).contains(content)
+    return data.get(type, Empties.nilMapO()).get(content.contentType, Empties.nilSetO()).contains(content)
   }
 
   fun each(cons: Cons3<GridChildType?, ContentType?, UnlockableContent?>) {
@@ -53,7 +53,7 @@ class TargetConfigure : DataPackable {
   fun eachChildType(cons: Cons2<GridChildType, ObjectMap<ContentType, ObjectSet<UnlockableContent>>>) {
     for (entry in data) {
       for (value in entry.value.values()) {
-        if (!value.isEmpty()) {
+        if (!value.isEmpty) {
           cons.get(entry.key, entry.value)
           break
         }
@@ -72,7 +72,7 @@ class TargetConfigure : DataPackable {
   }
 
   fun get(type: GridChildType?, t: ContentType?): ObjectSet<UnlockableContent>? {
-    return data.get(type, Empties.nilMapO()).get(t, Empties.nilSetO<UnlockableContent?>())
+    return data.get(type, Empties.nilMapO()).get(t, Empties.nilSetO())
   }
 
   fun get(): ObjectMap<GridChildType, ObjectMap<ContentType, ObjectSet<UnlockableContent>>> {
@@ -83,7 +83,7 @@ class TargetConfigure : DataPackable {
   fun any(): Boolean {
     for (conts in data.values()) {
       for (cont in conts.values()) {
-        if (!cont.isEmpty()) return true
+        if (!cont.isEmpty) return true
       }
     }
     return false
@@ -92,10 +92,10 @@ class TargetConfigure : DataPackable {
   fun clip() {
     for (entry in data) {
       if (entry.value != null) {
-        if (entry.value.isEmpty()) data.remove(entry.key)
+        if (entry.value.isEmpty) data.remove(entry.key)
         else {
           for (setEntry in entry.value) {
-            if (setEntry.value != null && setEntry.value.isEmpty()) entry.value.remove(setEntry.key)
+            if (setEntry.value != null && setEntry.value.isEmpty) entry.value.remove(setEntry.key)
           }
         }
       }
@@ -138,7 +138,7 @@ class TargetConfigure : DataPackable {
       write.i(entry.key!!.ordinal)
       write.i(entry.value.size)
       for (cEntry in entry.value) {
-        write.i(cEntry.key!!.getContentType().ordinal)
+        write.i(cEntry.key!!.contentType.ordinal)
         write.i(cEntry.key!!.id.toInt())
         write.b(cEntry.value!![0].toInt())
       }
@@ -154,14 +154,14 @@ class TargetConfigure : DataPackable {
     var count2: Int
     var amount: Int
     for (i in 0..<count) {
-      val map = data.get(GridChildType.entries[read.i()], Prov { ObjectMap() })
+      val map = data.get(GridChildType.entries[read.i()]) {ObjectMap()}
       count2 = read.i()
       for (l in 0..<count2) {
-        val type: ContentType? = ContentType.entries[read.i()]
-        val set = map.get(type, Prov { ObjectSet() })
+        val type: ContentType = ContentType.entries[read.i()]
+        val set = map.get(type) {ObjectSet()}
         amount = read.i()
         for (i1 in 0..<amount) {
-          set.add(Vars.content.getByID<UnlockableContent?>(type, read.i()))
+          set.add(Vars.content.getByID(type, read.i()))
         }
       }
     }
@@ -170,11 +170,11 @@ class TargetConfigure : DataPackable {
     val size = read.i()
     var length: Int
     for (i in 0..<size) {
-      val map = directBits.get(GridChildType.entries[read.i()], Prov { ObjectMap() })
+      val map = directBits.get(GridChildType.entries[read.i()]) {ObjectMap()}
       length = read.i()
       for (l in 0..<length) {
         val typeId = read.i()
-        map.get(Vars.content.getByID<UnlockableContent?>(ContentType.entries[typeId], read.i()), Prov { byteArrayOf(read.b()) })
+        map.get(Vars.content.getByID(ContentType.entries[typeId], read.i())) {byteArrayOf(read.b())}
       }
     }
   }
@@ -196,6 +196,42 @@ class TargetConfigure : DataPackable {
         arr[0] = bits.toByte()
       }
     }
+  }
+
+  fun getDirection(type: GridChildType?, content: UnlockableContent?): Int {
+    val dirBit = getDirectBit(type, content) ?: return -1
+    val bits = dirBit[0].toInt()
+
+    if (bits <= 0) return -1
+
+    // 检查是否只有一个方向被激活
+    var direction = -1
+    var count = 0
+
+    for (i in 0..<4) {
+      if ((bits and (1 shl i)) != 0) {
+        direction = i
+        count++
+      }
+    }
+
+    // 如果只有一个方向，返回该方向；否则返回 -1 表示多方向
+    return if (count == 1) direction else -1
+  }
+  fun getDirections(type: GridChildType?, content: UnlockableContent?): IntArray {
+    val dirBit = getDirectBit(type, content) ?: return intArrayOf()
+    val bits = dirBit[0].toInt()
+
+    if (bits <= 0) return intArrayOf()
+
+    val directions = mutableListOf<Int>()
+    for (i in 0..<4) {
+      if ((bits and (1 shl i)) != 0) {
+        directions.add(i)
+      }
+    }
+
+    return directions.toIntArray()
   }
 
   fun flip(x: Boolean) {
@@ -226,10 +262,10 @@ class TargetConfigure : DataPackable {
 
   val isClear: Boolean
     get() {
-      if (data.isEmpty()) return true
+      if (data.isEmpty) return true
       for (map in data.values()) {
         for (value in map.values()) {
-          if (!value.isEmpty()) return false
+          if (!value.isEmpty) return false
         }
       }
       return true
@@ -258,11 +294,15 @@ class TargetConfigure : DataPackable {
     val t1 = Point2(4, 0)
     transformer.get(t1)
 
-    if (t1.x == 0 && t1.y > 0) {
-      rotateDir(1)
-    } else if (t1.x == 0 && t1.y < 0) {
-      rotateDir(-1)
-    } else flip(t1.x < 0 && t1.y == 0)
+    when (t1.x) {
+      0 if t1.y > 0 -> {
+        rotateDir(1)
+      }
+      0 if t1.y < 0 -> {
+        rotateDir(-1)
+      }
+      else -> flip(t1.x < 0 && t1.y == 0)
+    }
   }
 
   companion object {

@@ -3,7 +3,6 @@ package ice.content.block.crafter
 import arc.graphics.Color
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.type.Category
@@ -12,7 +11,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class CeramicKiln : NormalCrafter("ceramicKiln") {
+class 蜂巢陶瓷合成巢 : NormalCrafter("ceramicKiln") {
   init {
     bundle {
       desc(

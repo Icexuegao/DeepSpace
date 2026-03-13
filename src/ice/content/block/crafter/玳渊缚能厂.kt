@@ -3,14 +3,13 @@ package ice.content.block.crafter
 import arc.graphics.Color
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
 
-class TortoiseshellFactory : NormalCrafter("tortoiseshellFactory") {
+class 玳渊缚能厂 : NormalCrafter("tortoiseshellFactory") {
   init {
     bundle {
       desc(

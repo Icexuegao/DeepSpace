@@ -14,7 +14,7 @@ import mindustry.world.draw.DrawPistons
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class PressingForge : NormalCrafter("pressingForge") {
+class 冲压锻炉 : NormalCrafter("pressingForge") {
   init {
     bundle {
       desc(zh_CN, "冲压锻炉", "将铱锇矿熔炼锻压为铱板,需要通入水,会产生废水")

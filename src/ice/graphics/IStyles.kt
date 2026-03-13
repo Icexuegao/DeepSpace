@@ -55,6 +55,9 @@ object IStyles {
   val tanksui = IFiles.findModPng("thanks")
   val search = IFiles.findModPng("search")
 
+  val nuclear = IFiles.findModPng("nuclear")
+  val matrix = IFiles.findModPng("matrix")
+
   val button2 = object : ImageButtonStyle() {}.apply {
     up = background41
     over = background41

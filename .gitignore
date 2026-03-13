@@ -9,11 +9,6 @@
 build/
 annotations/build/
 
-# 库文件
-.lib
-/lib/
 
 
-3323/src/singularity/
-3323/src/universecore/
 

@@ -2,7 +2,6 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawArcSmelt
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
@@ -12,7 +11,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class CarbonSteelFactory : NormalCrafter("carbonSteelFactory") {
+class 碳控熔炉 : NormalCrafter("carbonSteelFactory") {
   init {
     bundle {
       desc(

@@ -54,7 +54,7 @@ open class MatrixGridCore(name: String) : MatrixGridBlock(name), EdgeLinkerComp 
     buildType = Prov(::MatrixGridCoreBuild)
   }
 
-  override fun parseConfigObjects(e: SglBuilding?, obj: Any?) {
+  override fun parseConfigObjects(e: SglBuilding, obj: Any) {
     val entity = e as MatrixGridCoreBuild
     if (obj is LinkPair) {
       val p: Point2 = obj.linking!!

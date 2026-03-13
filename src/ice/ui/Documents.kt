@@ -5,15 +5,17 @@ import arc.Events
 import arc.graphics.Color
 import arc.math.Interp
 import arc.scene.actions.Actions
-import arc.scene.style.TextureRegionDrawable
+import arc.scene.style.Drawable
 import arc.scene.ui.Dialog
 import arc.scene.ui.layout.Table
 import ice.Ice
+import ice.graphics.IStyles
 import ice.graphics.IceColor
+import ice.library.IFiles
+import ice.library.struct.asDrawable
 import ice.library.world.Load
 import mindustry.Vars
 import mindustry.game.EventType.WorldLoadEndEvent
-import mindustry.gen.Icon
 import mindustry.ui.dialogs.BaseDialog
 import singularity.Sgl
 import singularity.ui.fragments.notification.Notification
@@ -26,10 +28,15 @@ object Documents : Load {
   val 节点配置 = getDialog("<<节点配置面板>>", "matrix_grid_config_help.md")
   val text = getDialog("<<text>>", "test.md")
   override fun init() {
+
     Events.on(WorldLoadEndEvent::class.java) {
-      Sgl.ui.notificationFrag.notify(DocumentNotification("中子能", "有关中子能的详细描述", 中子能))
-      Sgl.ui.notificationFrag.notify(DocumentNotification("节点配置", "有关配置面板的详细描述", 节点配置))
-     // Sgl.ui.notificationFrag.notify(DocumentNotification("text", "有关text的详细描述", text))
+      Sgl.ui.notificationFrag.notify(DocumentNotification("中子能", "有关中子能的详细描述", 中子能).apply {
+        icons = IStyles.nuclear.asDrawable()
+      })
+      Sgl.ui.notificationFrag.notify(DocumentNotification("节点配置", "有关配置面板的详细描述", 节点配置).apply {
+        icons = IStyles.matrix.asDrawable()
+      })
+      // Sgl.ui.notificationFrag.notify(DocumentNotification("text", "有关text的详细描述", text))
     }
   }
 
@@ -44,15 +51,17 @@ object Documents : Load {
   }
 
   class DocumentNotification(name: String, description: String, var dialog: Dialog) : Notification("操作指南: $name", description) {
+    lateinit var icons: Drawable
+
     companion object {
       const val typeID: Long = 12139764028768494L
       fun assign() {
-        DataPackable.assignType(typeID) { args: Array<Any> ->
+        DataPackable.assignType(typeID) {args: Array<Any> ->
         }
       }
     }
 
-    override fun getIcon(): TextureRegionDrawable = Icon.bookOpen
+    override fun getIcon() = icons
 
     override fun activity() {
       dialog.show(Core.scene, Actions.sequence(Actions.alpha(0f), Actions.fadeIn(0.4f, Interp.fade)))

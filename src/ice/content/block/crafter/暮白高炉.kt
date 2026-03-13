@@ -4,7 +4,6 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.graphics.IceColor
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawArcSmelt
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
@@ -15,7 +14,7 @@ import mindustry.world.draw.DrawFlame
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class DuskFactory : NormalCrafter("duskFactory") {
+class 暮白高炉 : NormalCrafter("duskFactory") {
   init {
     bundle {
       desc(zh_CN, "暮白高炉","将低碳钢,铬锭,钴锭,铪锭和暮光液合成暮光合金", "金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金")

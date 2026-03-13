@@ -152,7 +152,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     }
   }
 
-  open fun parseConfigObjects(e: SglBuilding?, obj: Any?) {}
+  open fun parseConfigObjects(e: SglBuilding, obj: Any) {}
 
   override fun newConsume(): BaseConsumers {
     consume = BaseConsumers(false)

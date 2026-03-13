@@ -45,7 +45,7 @@ abstract class IOPoint(name: String) : SglBlock(name), IOPointBlockComp {
     }
   }
 
-  override fun parseConfigObjects(e: SglBuilding?, obj: Any?) {
+  override fun parseConfigObjects(e: SglBuilding, obj: Any) {
     if (obj is TargetConfigure) {
       if (e is IOPointBuild) {
         val tile = e.nearby(-Point2.x(obj.offsetPos), -Point2.y(obj.offsetPos))

@@ -16,6 +16,7 @@ import ice.ui.fragment.FleshFragment
 import ice.ui.menusDialog.DataDialog
 import mindustry.Vars
 import mindustry.gen.Icon
+import mindustry.gen.Sounds
 import singularity.Sgl
 import singularity.ui.fragments.ToolBarFrag
 
@@ -77,7 +78,7 @@ object UI : Load {
   fun showUISoundCloseV(sound: Sound) {
     sound.setBus(Vars.control.sound.uiBus)
     sound.play()
-    //Sounds.uiButton.stop()
+    Sounds.uiButton.stop()
   }
 
   fun loadSystemCursors() {

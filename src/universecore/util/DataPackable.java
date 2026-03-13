@@ -72,7 +72,7 @@ public interface DataPackable{
       throw new SerializationException("conflicting id, type id: " + typeID + "was assigned");
   }
 
-  /**从一个打包的字节数组读取并返回一个具有包装信息的新的对象，注意，传入的构造参数没有类型检查，通常不建议使用和注册含有参数的构造器*/
+  /**从一个打包的字节数组读取并返回一个具有包装信息的新的对象,注意,传入的构造参数没有类型检查,通常不建议使用和注册含有参数的构造器*/
   static <T extends DataPackable> T readObject(byte[] bytes, Object... param){
     long id = new Reads(new DataInputStream(new ByteArrayInputStream(bytes))).l();
     Func<Object[], T> objProv = (Func<Object[], T>)objectProvMap.get(id);

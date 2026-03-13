@@ -17,7 +17,7 @@ import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.FloorCrafter
 import universecore.world.consumers.cons.SglConsumeFloor
 
-class LowTemperatureMixer : FloorCrafter("lowTemperatureMixer") {
+class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
   init {
     bundle {
       desc(zh_CN, "低温混合器","在极端低温环境中混合纯净水生产低温化合物,在特定地形上生效")

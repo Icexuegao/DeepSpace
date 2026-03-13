@@ -70,26 +70,26 @@ open class ItemNode(name: String) : SglBlock(name) {
   var siphon: Boolean = false
 
   init {
-    this.update = true
-    this.solid = true
-    this.underBullets = true
-    this.hasPower = true
-    this.conductivePower = false
-    this.itemCapacity = 10
-    this.outputItems = true
-    this.configurable = true
-    this.hasItems = true
-    this.unloadable = false
-    this.allowConfigInventory = false
-    this.group = BlockGroup.transportation
-    this.noUpdateDisabled = true
-    this.copyConfig = false
-    this.priority = -1.0f
-    this.config(Int::class.javaObjectType) { tile: ItemNodeBuild, i: Int -> tile.link = i }
+    update = true
+    solid = true
+    underBullets = true
+    hasPower = true
+    conductivePower = false
+    itemCapacity = 10
+    outputItems = true
+    configurable = true
+    hasItems = true
+    unloadable = false
+    allowConfigInventory = false
+    group = BlockGroup.transportation
+    noUpdateDisabled = true
+    copyConfig = false
+    priority = -1.0f
+    config(Int::class.javaObjectType) {tile: ItemNodeBuild, i: Int -> tile.link = i}
     buildType = Prov(::ItemNodeBuild)
   }
 
-  override fun parseConfigObjects(b: SglBuilding?, obj: Any?) {
+  override fun parseConfigObjects(b: SglBuilding, obj: Any) {
     super.parseConfigObjects(b, obj)
     val e = b as ItemNodeBuild
     if (obj is TargetConfigure) {
@@ -112,7 +112,7 @@ open class ItemNode(name: String) : SglBlock(name) {
 
   override fun drawPlanConfigTop(plan: BuildPlan, list: Eachable<BuildPlan?>) {
     otherReq = null
-    list.each(Cons { other: BuildPlan? ->
+    list.each(Cons {other: BuildPlan? ->
       if (other!!.block === this && plan !== other) {
         val any = plan.config
         if (any is Point2) {
@@ -156,7 +156,7 @@ open class ItemNode(name: String) : SglBlock(name) {
   override fun setBars() {
     super.setBars()
     this.removeBar("items")
-    this.addBar("items") { entity: Building -> Bar({ Core.bundle.format("bar.items", *arrayOf<Any>(entity.items.total())) }, { Pal.items }, { entity.items.total().toFloat() / this.maxItemCapacity.toFloat() }) }
+    this.addBar("items") {entity: Building -> Bar({Core.bundle.format("bar.items", *arrayOf<Any>(entity.items.total()))}, {Pal.items}, {entity.items.total().toFloat() / this.maxItemCapacity.toFloat()})}
   }
 
   override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
@@ -221,7 +221,7 @@ open class ItemNode(name: String) : SglBlock(name) {
   }
 
   override fun changePlacementPath(points: Seq<Point2?>, rotation: Int) {
-    Placement.calculateNodes(points, this, rotation) { point: Point2?, other: Point2? -> max(abs(point!!.x - other!!.x), abs(point.y - other.y)) <= this.range }
+    Placement.calculateNodes(points, this, rotation) {point: Point2?, other: Point2? -> max(abs(point!!.x - other!!.x), abs(point.y - other.y)) <= this.range}
   }
 
   open inner class ItemNodeBuild : SglBuilding(), Takeable {
@@ -259,7 +259,7 @@ open class ItemNode(name: String) : SglBlock(name) {
         this.drawInput(Vars.world.tile(this.link))
       }
 
-      this.incoming.each { pos: Int -> this.drawInput(Vars.world.tile(pos)) }
+      this.incoming.each {pos: Int -> this.drawInput(Vars.world.tile(pos))}
       Draw.reset()
     }
 
@@ -474,24 +474,24 @@ open class ItemNode(name: String) : SglBlock(name) {
 
     override fun buildConfiguration(table: Table) {
       this.showing = false
-      table.table { t: Table? ->
+      table.table {t: Table? ->
         t!!.visible = false
         t.setOrigin(1)
         t.add().width(45.0f)
-        (t.center().table(Tex.pane).get() as Table).add(DistTargetConfigTable(0, this.config, if (this@ItemNode.siphon) arrayOf(GridChildType.output, GridChildType.acceptor, GridChildType.input) else arrayOf(GridChildType.output, GridChildType.acceptor), arrayOf(ContentType.item), true, { c: TargetConfigure? ->
+        (t.center().table(Tex.pane).get() as Table).add(DistTargetConfigTable(0, this.config, if (this@ItemNode.siphon) arrayOf(GridChildType.output, GridChildType.acceptor, GridChildType.input) else arrayOf(GridChildType.output, GridChildType.acceptor), arrayOf(ContentType.item), true, {c: TargetConfigure ->
           c!!.offsetPos = 0
           this.configure(c.pack())
-        }, { Vars.control.input.config.hideConfig() })).fill().center()
+        }, {Vars.control.input.config.hideConfig()})).fill().center()
         t.top().button(Icon.info, Styles.grayi, 32.0f) {
-          //  Sgl.ui.document.showDocument("", MarkdownStyles.defaultMD, arrayOf<String?>(Singularity.getDocument("matrix_grid_config_help.md")))
+
         }.size(45.0f).top()
         this.show = Runnable {
           t.visible = true
           t.pack()
           t.isTransform = true
-          t.actions(*arrayOf<Action?>(Actions.scaleTo(0.0f, 1.0f), Actions.visible(true), Actions.scaleTo(1.0f, 1.0f, 0.07f, Interp.pow3Out)))
+          t.actions(Actions.scaleTo(0.0f, 1.0f), Actions.visible(true), Actions.scaleTo(1.0f, 1.0f, 0.07f, Interp.pow3Out))
         }
-        this.close = Runnable { t.actions(*arrayOf<Action?>(Actions.scaleTo(1.0f, 1.0f), Actions.scaleTo(0.0f, 1.0f, 0.07f, Interp.pow3Out), Actions.visible(false))) }
+        this.close = Runnable {t.actions(*arrayOf<Action?>(Actions.scaleTo(1.0f, 1.0f), Actions.scaleTo(0.0f, 1.0f, 0.07f, Interp.pow3Out), Actions.visible(false)))}
       }.fillY()
     }
 
@@ -541,7 +541,7 @@ open class ItemNode(name: String) : SglBlock(name) {
         while (var1.hasNext()) {
           val con = var1.next() as UnlockableContent?
           val item = con as Item?
-          val other = this.getNext("siphonItem") { e: Building? -> e!!.interactable(this.team) && e.block.hasItems && e.items.has(item) && this.config!!.directValid(GridChildType.input, item, this.getDirectBit(e)) }
+          val other = this.getNext("siphonItem") {e: Building? -> e!!.interactable(this.team) && e.block.hasItems && e.items.has(item) && this.config!!.directValid(GridChildType.input, item, this.getDirectBit(e))}
           if (other == null || !this@ItemNode.hasItems || this.items.get(item) >= this@ItemNode.itemCapacity || this.items.total() >= this@ItemNode.maxItemCapacity) {
             return
           }
@@ -560,7 +560,7 @@ open class ItemNode(name: String) : SglBlock(name) {
           val content = var1.next() as UnlockableContent?
           val i = content as Item?
           if (this.items.get(i) > 0) {
-            val next = this.getNext("items") { e: Building? -> e!!.interactable(this.team) && this.config!!.directValid(GridChildType.output, i, this.getDirectBit(e)) && e.acceptItem(this, i) }
+            val next = this.getNext("items") {e: Building? -> e!!.interactable(this.team) && this.config!!.directValid(GridChildType.output, i, this.getDirectBit(e)) && e.acceptItem(this, i)}
             if (next != null) {
               this.items.remove(i, 1)
               next.handleItem(this, i)

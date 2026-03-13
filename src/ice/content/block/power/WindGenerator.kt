@@ -177,7 +177,8 @@ class WindGenerator(name: String) : SglBlock(name) {
 
     override fun updateTile() {
       super.updateTile()
-      warmup = if (valid) Mathf.lerpDelta(warmup, 1f, 0.006f) else Mathf.lerpDelta(warmup, 0f, 0.006f)
+
+      warmup = if (valid && enabled) Mathf.lerpDelta(warmup, 1f, 0.006f) else Mathf.lerpDelta(warmup, 0f, 0.006f)
 
       totalProgress += delta() * warmup * powerEffecct()
     }

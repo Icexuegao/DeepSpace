@@ -79,7 +79,7 @@ open class MatrixGridBlock(name: String) : DistNetBlock(name), DistMatrixUnitCom
     }
   }
 
-  override fun parseConfigObjects(e: SglBuilding?, obj: Any?) {
+  override fun parseConfigObjects(e: SglBuilding, obj: Any) {
     val entity = e as MatrixGridBuild
     if (obj is TargetConfigure) {
       val c = obj

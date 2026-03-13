@@ -3,7 +3,6 @@ package ice.content.block.crafter
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
@@ -11,7 +10,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
 
-class SpecializedSmelterArray : NormalCrafter("specializedSmelterArray") {
+class 特化冶炼阵列 : NormalCrafter("specializedSmelterArray") {
   init {
     bundle {
       desc(
