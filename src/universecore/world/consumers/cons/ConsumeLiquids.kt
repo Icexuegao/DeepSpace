@@ -4,8 +4,6 @@ import arc.math.Mathf
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
 import arc.struct.Seq
-import arc.util.Time
-import ice.library.struct.log
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
 import ice.world.meta.IStatValues
 import ice.world.meta.IceStats
@@ -15,7 +13,6 @@ import mindustry.type.Liquid
 import mindustry.type.LiquidStack
 import mindustry.ui.ReqImage
 import mindustry.world.meta.Stat
-import mindustry.world.meta.StatValues
 import mindustry.world.meta.Stats
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsume
@@ -68,10 +65,6 @@ class ConsumeLiquids<T>(liquids: Array<out LiquidStack>) : ConsumeLiquidBase<T>(
       entity.liquids.remove(stack.liquid, stack.amount * parent!!.delta(entity) * multiple(entity))
     }
   }
-
-
-
-
 
   override fun display(stats: Stats) {
     stats.add(Stat.input) {table: Table ->

@@ -20,9 +20,10 @@ import ice.library.scene.ui.addLine
 import ice.library.scene.ui.addProgressBar
 import ice.library.scene.ui.iPaneG
 import ice.ui.dialog.BaseMenusDialog
-import ice.ui.dialog.research.node.UCLinkNode
 import ice.world.meta.IceStats
 import mindustry.Vars
+import singularity.Sgl
+import singularity.contents.SglTechThree
 
 object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.menusButton_configure) {
   override fun build(cont: Table) {
@@ -94,12 +95,8 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         SettingValue.启用调试模式 = box.isChecked
       }.row()
       it.addBox("删除科技树所有缓存物品", {true}, clean = true) {_, _ ->
-        ResearchDialog.view.links.forEach {
-          if (it is UCLinkNode) {
-            it.reset()
-            ResearchDialog.selectANode = null
-          }
-        }
+        Sgl.researches.reset()
+        SglTechThree.test1.researchProcess(2)
       }.row()
       it.addBox("星球区块调试", SettingValue::星球区块调试) {box, _ ->
         SettingValue.星球区块调试 = box.isChecked

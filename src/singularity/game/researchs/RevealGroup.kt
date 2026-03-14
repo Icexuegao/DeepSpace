@@ -1,69 +1,59 @@
-package singularity.game.researchs;
+package singularity.game.researchs
 
-import arc.Core;
-import arc.Events;
-import arc.util.Nullable;
-import singularity.Sgl;
-import singularity.core.SglEventTypes;
+import arc.Core
+import arc.Events
+import arc.util.Nullable
+import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import singularity.Sgl
+import singularity.core.SglEventTypes.ResearchCompletedEvent
+import singularity.core.SglEventTypes.RevealedEvent
 
-public abstract class RevealGroup {
-  protected final String name;
-  protected boolean revealed;
-  @Nullable protected RevealGroup require;
+abstract class RevealGroup(protected val name: String?) {
+  protected var revealed: Boolean = false
 
-  public RevealGroup(String name) {
-    this.name = name;
+  @Nullable
+  var require: RevealGroup? = null
+
+  fun init() {
+    revealed = Core.settings.getBool(name + "_revealed", false)
+    applyTrigger()
   }
 
-  public void init(){
-    revealed = Sgl.globals.getBool(name + "_revealed", false);
-    applyTrigger();
-  }
+  fun reveal() {
+    if (!revealed) {
+      revealed = true
+      Sgl.globals.put(name + "_revealed", true)
 
-  public void reveal(){
-    if(!revealed){
-      revealed = true;
-      Sgl.globals.put(name + "_revealed", true);
-
-      Events.fire(new SglEventTypes.RevealedEvent(this));
+      Events.fire(RevealedEvent(this))
     }
   }
 
-  public void reset() {
-    revealed = false;
-    Sgl.globals.put(name + "_revealed", false);
+  fun reset() {
+    revealed = false
+    Sgl.globals.put(name + "_revealed", false)
   }
 
-  public boolean isRevealed(){
-    return (require == null || require.isRevealed()) && revealed;
+  fun isRevealed(): Boolean {
+    return (require == null || require!!.isRevealed()) && revealed
   }
 
-  public String localized(){
-    return Core.bundle.get("research." + name + ".reveal");
+  open fun localized(): String? {
+    return Core.bundle.get("research.$name.reveal")
   }
 
-  public abstract void applyTrigger();
+  abstract fun applyTrigger()
 
-  public static class ResearchReveal extends RevealGroup{
-    private final ResearchProject project;
-
-    public ResearchReveal(String name, ResearchProject project) {
-      super(name);
-      this.project = project;
+  class ResearchReveal(name: String?, private val project: ResearchProject) : RevealGroup(name) {
+    override fun localized(): String {
+      return "研究 ${project.localizedName}"
     }
 
-    @Override
-    public String localized() {
-      return Core.bundle.format("research.inspire.researched", project.localizedName);
-    }
-
-    @Override
-    public void applyTrigger() {
-      Events.on(SglEventTypes.ResearchCompletedEvent.class, e -> {
-        if (!revealed && e.research == project) {
-          reveal();
+    override fun applyTrigger() {
+      Events.on(ResearchCompletedEvent::class.java) {e: ResearchCompletedEvent? ->
+        if (!revealed && e!!.research === project) {
+          reveal()
         }
-      });
+      }
     }
   }
 }

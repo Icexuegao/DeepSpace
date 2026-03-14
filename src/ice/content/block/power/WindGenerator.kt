@@ -10,6 +10,7 @@ import arc.math.Mathf
 import arc.math.geom.Point2
 import arc.struct.Seq
 import arc.util.Strings
+import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.IVars
@@ -95,8 +96,6 @@ class WindGenerator(name: String) : SglBlock(name) {
     }
   }
 
-
-
   fun each(x: Int, y: Int, lenght: Int, ct: Cons<Tile>) {
     for (ox in (x..<x + lenght)) {
       for (oy in (y..<y + lenght)) {
@@ -105,29 +104,38 @@ class WindGenerator(name: String) : SglBlock(name) {
       }
     }
   }
-  fun isCanOver(tile: Tile,build: Building?): Boolean{
+
+  fun isCanOver(tile: Tile, build: WindGeneratorBuild?): Boolean {
     var k = true
-    var posx = tile.x+ sizeOffset
+    var posx = tile.x + sizeOffset
     var posy = tile.y + sizeOffset
     posx -= range
     posy -= range
     each(posx, posy, range * 2 + size) {
-      build?.let { building ->
-        if (building==it.build)return@each
+      build?.let {building ->
+        if (building == it.build) return@each
       }
 
-      if (it.build != null && it.block().solid) k = false
-      if (it.build == null && it.block() != Blocks.air) k = false
+      if (it.build != null && it.block().solid) {
+        k = false
+        build?.tmpTile?.addUnique(it)
+      }
+      if (it.build == null && it.block() != Blocks.air) {
+        k = false
+        build?.tmpTile?.addUnique(it)
+      }
     }
     return k
   }
+
   override fun changePlacementPath(points: Seq<Point2>, rotation: Int) {
     Placement.calculateNodes(points, this, rotation) {point: Point2, other: Point2 ->
-      other.dst(point).toInt() in (size ..size+ range)
+      other.dst(point).toInt() in (size..size + range)
     }
   }
+
   override fun canPlaceOn(tile: Tile, team: Team, rotation: Int): Boolean {
-    return super.canPlaceOn(tile, team, rotation) && isCanOver(tile,null)
+    return super.canPlaceOn(tile, team, rotation) && isCanOver(tile, null)
   }
 
   override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
@@ -167,12 +175,20 @@ class WindGenerator(name: String) : SglBlock(name) {
 
     override fun drawSelect() {
       super.drawSelect()
+      tmpTile.forEach {
+        it.build?.let {it1 ->
+          Drawf.selected(it1, Tmp.c1.set(Pal.remove).a(Mathf.absin(4f, 1f)))
+        }
+      }
       Drawf.dashRect(IceColor.b4, (tileX() + sizeOffset - range - 0.5f) * vtt, (tileY() + sizeOffset - range - 0.5f) * vtt, side, side)
     }
 
     fun ifBuild() {
-     valid=isCanOver(tile,this)
+      tmpTile.clear()
+      valid = isCanOver(tile, this)
     }
+
+    val tmpTile = Seq<Tile>()
 
     override fun updateTile() {
       super.updateTile()

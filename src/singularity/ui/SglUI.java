@@ -16,6 +16,7 @@ import arc.util.Strings;
 import arc.util.Time;
 import arc.util.Tmp;
 import mindustry.Vars;
+import mindustry.game.EventType;
 import mindustry.gen.Healthc;
 import mindustry.gen.Icon;
 import mindustry.gen.Teamc;
@@ -26,6 +27,7 @@ import mindustry.ui.Styles;
 import mindustry.ui.dialogs.BaseDialog;
 import mindustry.world.meta.StatUnit;
 import singularity.Sgl;
+import singularity.contents.SglTechThree;
 import singularity.core.SglEventTypes;
 import singularity.core.UpdatePool;
 import singularity.graphic.Blur;
@@ -253,7 +255,7 @@ public class SglUI {
   }
 
   void configEventListeners() {
-  /*  Events.on(EventType.WorldLoadEndEvent.class, e -> {
+    Events.on(EventType.WorldLoadEndEvent.class, e -> {
       for (int i = 0; i < 1; i++) {
         int fi = i;
         Time.run(60 + 30*i, () -> notificationFrag.notify(
@@ -266,29 +268,29 @@ public class SglUI {
 
       Time.run(390, () -> {
         Events.fire(new SglEventTypes.ResearchInspiredEvent(
-            SglTechThree.test14.inspire, SglTechThree.test14
+                SglTechThree.test14.getInspire(), SglTechThree.test14
         ));
       });
       Time.run(420, () -> {
         Events.fire(new SglEventTypes.ResearchCompletedEvent(
-          //  SglTechThree.test14
+            SglTechThree.test14
         ));
       });
-    });*/
+    });
 
     Events.on(SglEventTypes.ResearchCompletedEvent.class, e -> notificationFrag.notify(
             new Notification.ResearchCompleted(
                     Core.bundle.get("infos.researchCompleted"),
-                    Core.bundle.format("infos.researched", e.research.localizedName),
-                    e.research
+                    Core.bundle.format("infos.researched", e.getResearch().getLocalizedName()),
+                    e.getResearch()
             )
     ));
 
     Events.on(SglEventTypes.ResearchInspiredEvent.class, e -> notificationFrag.notify(
             new Notification.Inspired(
                     Core.bundle.get("infos.inspired"),
-                    Core.bundle.format("infos.inspiredBy", e.research.localizedName),
-                    e.inspire, e.research
+                    Core.bundle.format("infos.inspiredBy", e.getResearch().getLocalizedName()),
+                    e.getInspire(), e.getResearch()
             )
     ));
   }

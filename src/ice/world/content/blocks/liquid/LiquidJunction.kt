@@ -6,12 +6,15 @@ import arc.graphics.g2d.TextureRegion
 import ice.world.content.blocks.liquid.base.LiquidBlock
 import mindustry.gen.Building
 import mindustry.type.Liquid
+import mindustry.world.draw.DrawDefault
+import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.Stat
 
 class LiquidJunction(name: String) : LiquidBlock(name) {
   init {
     floating = true
     buildType = Prov(::LiquidJunctionBuild)
+    drawers= DrawDefault()
   }
 
   override fun setStats() {
@@ -29,9 +32,6 @@ class LiquidJunction(name: String) : LiquidBlock(name) {
   }
 
   inner class LiquidJunctionBuild : LiquidBuild() {
-    override fun draw() {
-      Draw.rect(region, x, y)
-    }
 
     override fun getLiquidDestination(source: Building, liquid: Liquid?): Building? {
       if (!enabled) return this

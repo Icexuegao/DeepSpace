@@ -4,6 +4,7 @@ import ice.async.ParcelProcess
 import ice.audio.SoundControl
 import ice.content.*
 import ice.content.block.IBlocks
+import ice.core.SaveIO
 import ice.core.SettingValue
 import ice.entities.IceRegister
 import ice.entities.bullet.base.IceBullet
@@ -25,7 +26,10 @@ import mindustry.type.Category
 import mindustry.world.meta.BuildVisibility
 import singularity.Recipes
 import singularity.Singularity
+import singularity.contents.SglTechThree
 import singularity.type.SglCategory
+import singularity.type.SglContentType
+import singularity.ui.dialogs.SglTechTreeDialog
 import tmi.RecipeEntryPoint
 import universecore.UncCore
 
@@ -38,7 +42,7 @@ open class Ice : Mod() {
 
   init {
     IFiles.setup()
-    IAttribute.load()
+    IAttribute.setup()
     UncCore.setup()
     SettingValue.setup()
     IceRegister.setup()
@@ -58,6 +62,8 @@ open class Ice : Mod() {
     Documents.init()
     MenusDialog.init()
     SoundControl.init()
+    SaveIO.init()
+
 
     Vars.content.each {
       if (it.minfo.mod == DeepSpace.mod && it is UnlockableContent) it.unlock()
@@ -65,7 +71,12 @@ open class Ice : Mod() {
   }
 
   override fun loadContent() {
-    singularity.loadContent()
+    //加载方块类型
+    SglCategory.load()
+
+    //载入所有新内容类型
+    SglContentType.load()
+
     Noise2dBlock("noise2d").apply {
       requirements(SglCategory.matrix, IItems.钴锭, 10)
     }
@@ -77,8 +88,11 @@ open class Ice : Mod() {
     IBlocks.load()
     IWeathers.load()
     IPlanets.load()
-    //  SglTechThree.load()
+
+    singularity.loadContent()
     BaseBundle.load()
+
+
 
     Vars.content.blocks().forEach {
       if (!it.hasBuilding() && it.category == Category.distribution) {

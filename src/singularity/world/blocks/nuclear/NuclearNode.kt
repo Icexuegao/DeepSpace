@@ -1,5 +1,6 @@
 package singularity.world.blocks.nuclear
 
+import arc.Core
 import arc.func.*
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
@@ -20,6 +21,7 @@ import arc.util.*
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.IceColor
+import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.core.Renderer
 import mindustry.entities.units.BuildPlan
@@ -30,6 +32,7 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.input.Placement
 import mindustry.io.TypeIO
+import mindustry.ui.Bar
 import mindustry.world.Edges
 import mindustry.world.Tile
 import mindustry.world.meta.Env
@@ -45,6 +48,7 @@ open class NuclearNode(name: String) : NuclearBlock(name) {
   companion object {
     protected val tempNuclearEntity = Seq<NuclearEnergyBuildComp>()
     protected val rand: Rand = Rand()
+
   }
 
   protected var otherReq: BuildPlan? = null
@@ -103,6 +107,12 @@ open class NuclearNode(name: String) : NuclearBlock(name) {
     clipSize = max(clipSize, linkRange * Vars.tilesize * 2)
   }
 
+  override fun setBars() {
+    super.setBars()
+    addBar("linksCounts"){  e :NuclearNodeBuild ->
+      Bar(Core.bundle.formatString(IceStats.连接.localized(), e.linksCount(),maxLinks), IceColor.b4) {e.linksCount().toFloat() / maxLinks}
+    }
+  }
   override fun setStats() {
     super.setStats()
     stats.add(Stat.linkRange, linkRange, StatUnit.blocks)
@@ -389,6 +399,8 @@ open class NuclearNode(name: String) : NuclearBlock(name) {
       while (!linked.isEmpty) {
         configure(Point2.unpack(linked.get(0)))
       }
+      linkThis.clear()
+
     }
 
     fun arrowGray(x: Float, y: Float, x2: Float, y2: Float, length: Float, radius: Float, color: Color) {

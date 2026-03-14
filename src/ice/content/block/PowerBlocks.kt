@@ -1,6 +1,5 @@
 package ice.content.block
 
-import arc.Core
 import arc.func.Cons
 import arc.func.Floatf
 import arc.func.Func
@@ -58,9 +57,10 @@ import universecore.world.particles.models.*
 @Suppress("unused")
 object PowerBlocks : Load {
   val 能量节点 = BeamNode("powerNode").apply {
+    bundle {
+      desc(zh_CN, "能量节点")
+    }
     squareSprite = false
-    laser = Core.atlas.find(this.name + "-beam")
-    laserEnd = Core.atlas.find(this.name + "-beam-end")
     requirements(Category.power, IItems.高碳钢, 2, IItems.锌锭, 5, IItems.铜锭, 5)
     laserColor1 = IceColor.b4
     laserColor2 = Color.valueOf("bad7e6")
@@ -71,10 +71,25 @@ object PowerBlocks : Load {
     fogRadius = 1
     buildCostMultiplier = 2.5f
     consumePowerBuffered(200f)
-    bundle {
-      desc(zh_CN, "能量节点")
-    }
   }
+  val 大型能量节点 = BeamNode("powerNodeLarge").apply {
+    bundle {
+      desc(zh_CN, "大型能量节点")
+    }
+    size = 3
+    squareSprite = false
+    requirements(Category.power, IItems.高碳钢, 10, IItems.锌锭, 35, IItems.单晶硅, 15)
+    laserColor1 = IceColor.b4
+    laserColor2 = Color.valueOf("bad7e6")
+    consumesPower = true
+    outputsPower = true
+    health = 290
+    range = 30
+    fogRadius = 3
+    buildCostMultiplier = 2.5f
+    consumePowerBuffered(1000f)
+  }
+
   val 神经索节点 = PowerNode("neuralNode").apply {
     squareSprite = false
     healAmount = 5f
@@ -208,7 +223,7 @@ object PowerBlocks : Load {
   }
   val 大型风力发电机 = WindGenerator("windGeneratorLarge").apply {
     bundle {
-      desc(zh_CN, "风力发电机", "大型风力发电机,效率跟随风场变化")
+      desc(zh_CN, "大型风力发电机", "大型风力发电机,效率跟随风场变化")
     }
     size = 4
     health = 500
@@ -695,16 +710,16 @@ object PowerBlocks : Load {
     craftedSoundVolume = 1f
     val model: ParticleModel = MultiParticleModel(
       SizeVelRelatedParticle(), TargetMoveParticle().apply {
-        dest = Func {p: Particle -> p.dest}
-        deflection = Floatf {p: Particle -> p.eff}
-      }, RandDeflectParticle().apply {
-        deflectAngle = 0f
-        strength = 0.125f
-      }, TrailFadeParticle().apply {
-        trailFade = 0.04f
-        fadeColor = Pal.lightishGray
-        colorLerpSpeed = 0.03f
-      }, ShapeParticle(), DrawDefaultTrailParticle()
+      dest = Func {p: Particle -> p.dest}
+      deflection = Floatf {p: Particle -> p.eff}
+    }, RandDeflectParticle().apply {
+      deflectAngle = 0f
+      strength = 0.125f
+    }, TrailFadeParticle().apply {
+      trailFade = 0.04f
+      fadeColor = Pal.lightishGray
+      colorLerpSpeed = 0.03f
+    }, ShapeParticle(), DrawDefaultTrailParticle()
     )
 
     craftTrigger = Cons {e: NormalCrafterBuild ->

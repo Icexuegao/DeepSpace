@@ -78,7 +78,7 @@ public class Sgl {
   /** 模组配置存储器 */
   public static ModConfig config = new ModConfig();
   /** 持久保存的全局变量集 */
-  public static Settings globals;
+  public static Settings globals= settings;
   /** ui类存放对象 */
   public static SglUI ui;
   /** 贡献者列表 */
@@ -96,8 +96,9 @@ public class Sgl {
   public static void init() {
     //注册所有打包数据类型id
     BytePackAssign.INSTANCE.assignAll();
-
-    globals = new Settings() {
+    researches.load();
+    researches.init();
+   /* globals = new Settings() {
       {
         setAutosave(true);
         setDataDirectory(Sgl.dataDirectory);
@@ -151,8 +152,9 @@ public class Sgl {
         modified = false;
       }
     };
+    globals.load();*/
 
-    globals.load();
+
 
     contributors = new Contributors();
     matrixContainers = new DistSupportContainerTable();

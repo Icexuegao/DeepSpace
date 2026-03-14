@@ -11,9 +11,6 @@ import ice.core.SettingValue;
 import mindustry.mod.Mod;
 import singularity.contents.*;
 import singularity.contents.override.OverrideTechThree;
-import singularity.type.SglCategory;
-import singularity.type.SglContentType;
-import singularity.ui.dialogs.TestDialog;
 import universecore.util.OverrideContentList;
 
 import java.util.Locale;
@@ -24,8 +21,7 @@ public class Singularity extends Mod {
   private static final ContentList[] modContents = new ContentList[]{
           new LiquidBlocks(),//物流方块
           new SglUnits(),//单位相关内容（单位、工厂）
-          new SglPlanets(),//星球
-          //new SglTechThree(),//科技树
+          new SglTechThree(),//科技树
   };
 
   private static final OverrideContentList[] overrideContents = new OverrideContentList[]{new OverrideTechThree(),};
@@ -46,16 +42,12 @@ public class Singularity extends Mod {
   public void init() {
     //加载全局变量
     Sgl.init();
+
     //Sgl.classes.finishGenerate();
   }
 
   @Override
   public void loadContent() {
-    //加载属性类型
-    //加载方块类型
-    SglCategory.load();
-    //载入所有新内容类型
-    SglContentType.load();
 
     for (ContentList list : Singularity.modContents) {
       list.load();

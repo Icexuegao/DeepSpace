@@ -70,7 +70,7 @@ public class UIUtils {
             SglDraw.dashCircle(x + width/2f, y + height/2f, width/2f - Scl.scl(5f),
                 8, 180, Time.time);
           }
-        }, img -> img.image(project.icon == null? project.contents.first().uiIcon: project.icon).size(80f)).margin(30f)
+        }, img -> img.image(project.getIcon() == null? project.getContents().first().uiIcon: project.getIcon()).size(80f)).margin(30f)
     ).pad(40f).padTop(30f).padBottom(30f);
     table.row();
     table.stack(
@@ -80,33 +80,33 @@ public class UIUtils {
           image().color(SglDrawConst.matrixNetDark).growX().height(4f);
         }},
         new Table(){{
-          add(project.localizedName, Styles.outlineLabel).pad(6f).color(Pal.accent);
+          add(project.getLocalizedName(), Styles.outlineLabel).pad(6f).color(Pal.accent);
         }}
     ).growX();
     table.row();
-    table.add(project.description).pad(10f).padTop(30f).padBottom(30f).width(320f).growX().wrap().labelAlign(Align.center);
+    table.add(project.getDescription()).pad(10f).padTop(30f).padBottom(30f).width(320f).growX().wrap().labelAlign(Align.center);
     table.row();
     table.add(Core.bundle.get("infos.unlocked")).fontScale(0.8f).color(Color.lightGray);
     table.row();
     table.table(conts -> {
       int n = 0;
-      for (UnlockableContent content : project.contents) {
+      for (UnlockableContent content : project.getContents()) {
         conts.button(b -> b.image(content.uiIcon).grow().scaling(Scaling.fit).pad(4f), Styles.cleart, () -> Vars.ui.content.show(content)).size(42f).padLeft(4f);
 
         if (++n%6 == 0) conts.row();
       }
     }).pad(20).padBottom(10);
     table.row();
-    table.table(Tex.buttonTrans, slogan -> slogan.add(project.slogan).pad(4f).grow().wrapLabel(true).color(Color.lightGray).fontScale(0.8f).labelAlign(Align.center)).width(300f).minHeight(80f).fillY().pad(10).padBottom(30).padTop(0);
+    table.table(Tex.buttonTrans, slogan -> slogan.add(project.getSlogan()).pad(4f).grow().wrapLabel(true).color(Color.lightGray).fontScale(0.8f).labelAlign(Align.center)).width(300f).minHeight(80f).fillY().pad(10).padBottom(30).padTop(0);
   }
 
   public static void buildResearchInspired(Table table, Inspire inspire, ResearchProject project) {
     float[] prog = {0};
 
-    table.add(inspire.description).pad(10f).padTop(30f).growX().labelAlign(Align.center).wrapLabel(true);
+    table.add(inspire.getDescription()).pad(10f).padTop(30f).growX().labelAlign(Align.center).wrapLabel(true);
     table.row();
     table.table(Tex.buttonSideRightOver, card -> {
-      card.update(() -> prog[0] = Mathf.approachDelta(prog[0], project.inspire.provProgress, 0.005f));
+      card.update(() -> prog[0] = Mathf.approachDelta(prog[0], project.getInspire().getProvProgress(), 0.005f));
       card.table(SglDrawConst.grayUIAlpha, img -> img.stack(
           new BloomGroup(){{
             setFillParent(true);
@@ -133,11 +133,11 @@ public class UIUtils {
                   x + width/2, y + height/2, width/2f,
                   Scl.scl(6f), Scl.scl(3f),
                   project.progress() + prog[0],
-                  project.inspire.provProgress - prog[0],
+                  project.getInspire().getProvProgress() - prog[0],
                   SglDrawConst.matrixNet, SglDrawConst.matrixNet
               );
             }
-          }, i -> i.image(project.icon != null ? project.icon : project.contents.first().uiIcon).size(32).scaling(Scaling.fit))
+          }, i -> i.image(project.getIcon() != null ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit))
       ).grow().pad(4f)).width(64f).growY();
       card.table(new BaseDrawable(){
         @Override
@@ -168,7 +168,7 @@ public class UIUtils {
           );
         }
       }, info -> {
-        info.add(project.localizedName).growX().color(Pal.accent).fontScale(1.1f).labelAlign(Align.center).pad(5f);
+        info.add(project.getLocalizedName()).growX().color(Pal.accent).fontScale(1.1f).labelAlign(Align.center).pad(5f);
         info.row();
         info.add(Core.bundle.get("infos.researchInspired")).growX().labelAlign(Align.center).pad(5f);
       }).left().grow().margin(8f);

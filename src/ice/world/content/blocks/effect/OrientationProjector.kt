@@ -1,14 +1,19 @@
 package ice.world.content.blocks.effect
 
+import arc.Events
 import arc.func.Prov
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import arc.math.Mathf
 import arc.math.geom.Geometry
+import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
+import ice.library.struct.log
 import mindustry.Vars
+import mindustry.game.EventType
+import mindustry.game.Team
 import mindustry.gen.Building
 import mindustry.graphics.Pal
 import mindustry.type.Category
@@ -20,6 +25,16 @@ import kotlin.math.abs
 import kotlin.math.max
 
 class OrientationProjector(name: String) : LinksBlock(name) {
+  companion object{
+    val orientationProjectors= Seq<OrientationProjectorBuildEnd>()
+    init {
+      Events.on(EventType.PickupEvent::class.java){
+        for (end in orientationProjectors) {
+        end.builds.remove(it.build)
+        }
+      }
+    }
+  }
   var speedBoost = 2.5f
 
   init {
@@ -45,6 +60,15 @@ class OrientationProjector(name: String) : LinksBlock(name) {
   }
 
   inner class OrientationProjectorBuildEnd : LinksBlockBuildEnd() {
+    override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
+      orientationProjectors.add(this)
+      return super.init(tile, team, shouldAdd, rotation)
+    }
+
+    override fun remove() {
+      orientationProjectors.remove(this)
+      super.remove()
+    }
     override fun updateTile() {
       if (efficiency > 0) {
         builds.forEach {

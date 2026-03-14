@@ -8,9 +8,6 @@ import arc.graphics.g2d.Fill
 import arc.math.Mathf
 import arc.util.Tmp
 import ice.IVars
-import ice.content.block.turret.TurretBullets
-import ice.graphics.IceColor
-import ice.library.struct.log
 import mindustry.Vars
 import mindustry.content.Items
 import singularity.world.blocks.product.NormalCrafter
@@ -18,7 +15,6 @@ import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.LightningVertex
 import universecore.graphics.lightnings.generator.RandomGenerator
 import universecore.world.consumers.cons.ConsumeLiquidCond
-import kotlin.random.Random
 
 open class Noise2dBlock(name: String) : NormalCrafter(name) {
   init {
@@ -73,8 +69,6 @@ open class Noise2dBlock(name: String) : NormalCrafter(name) {
         }.create(this, x, y, Random.nextInt(0, 360).toFloat()).apply {
 
         }*/
-
-        log {   }
       }
       con.update()
     }

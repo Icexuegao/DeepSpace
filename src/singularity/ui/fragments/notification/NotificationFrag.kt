@@ -2,6 +2,7 @@ package singularity.ui.fragments.notification
 
 import arc.Core
 import arc.Graphics
+import arc.func.Boolp
 import arc.func.Cons
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
@@ -28,8 +29,10 @@ import arc.util.Scaling
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.core.SettingValue
 import ice.graphics.IceColor.b4
 import ice.library.scene.action.IceActions
+import mindustry.Vars
 import mindustry.gen.Icon
 import mindustry.gen.Tex
 import mindustry.graphics.Pal
@@ -61,6 +64,7 @@ class NotificationFrag {
 
 
   fun build(parent: Group) {
+  //
     parent.fill { main: Table ->
       this.main = main
       main.touchable = Touchable.childrenOnly
@@ -151,6 +155,7 @@ class NotificationFrag {
           ).grow()
         }.growY().fillX()
       }.fill()
+      main.visibility = Boolp { Vars.ui.hudfrag.shown }
     }
 
     parent.addChild(

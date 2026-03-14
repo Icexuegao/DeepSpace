@@ -1,169 +1,173 @@
-package singularity.game.researchs;
+package singularity.game.researchs
 
-import arc.struct.OrderedMap;
-import arc.struct.Seq;
-import mindustry.ctype.UnlockableContent;
-import mindustry.type.Planet;
-import singularity.Sgl;
-import singularity.world.blocks.research.ResearchDevice;
+import arc.struct.OrderedMap
+import arc.struct.Seq
+import mindustry.ctype.UnlockableContent
+import mindustry.type.Planet
+import singularity.Sgl
+import singularity.world.blocks.research.ResearchDevice
+import java.util.function.Consumer
 
-public class ResearchManager {
-  private final OrderedMap<Planet, ResearchGroup> allProjects = new OrderedMap<>();
+class ResearchManager {
+  private val allProjects = OrderedMap<Planet, ResearchGroup>()
 
-  public ResearchGroup makeGroup(Planet planet){
-    ResearchGroup group = new ResearchGroup(planet);
-    allProjects.put(planet, group);
+  fun makeGroup(planet: Planet): ResearchGroup {
+    val group = ResearchGroup(planet)
+    allProjects.put(planet, group)
 
-    return group;
+    return group
   }
 
-  public ResearchGroup getGroup(Planet planet){
-    return allProjects.get(planet);
+  fun getGroup(planet: Planet): ResearchGroup {
+    return allProjects.get(planet)
   }
 
-  public Seq<ResearchProject> listResearches(Planet planet){
-    return allProjects.get(planet).listResearches();
+  fun listResearches(planet: Planet): Seq<ResearchProject> {
+    return allProjects.get(planet)?.listResearches() ?: throw Exception("No research group for planet $planet")
   }
 
-  public void init(){
-    allProjects.values().forEach(ResearchGroup::init);
+  fun init() {
+    allProjects.values().forEach(Consumer {obj: ResearchGroup? -> obj!!.init()})
   }
 
-  public void reset(){
-    allProjects.values().forEach(ResearchGroup::reset);
+  fun reset() {
+    allProjects.values().forEach(Consumer {obj: ResearchGroup? -> obj!!.reset()})
   }
 
-  public void save(){
-    allProjects.values().forEach(ResearchGroup::save);
+  fun save() {
+    allProjects.values().forEach(Consumer {obj: ResearchGroup? -> obj!!.save()})
   }
 
-  public void load(){
-    allProjects.values().forEach(ResearchGroup::load);
+  fun load() {
+    allProjects.values().forEach(Consumer {obj: ResearchGroup? -> obj!!.load()})
   }
 
-  public static class ResearchSDL{
-    private static ResearchGroup context;
-    private static OrderedMap<ResearchProject, Runnable> tasks;
-    private static ResearchProject currProject;
-    private static boolean inProjectContext;
-    private static ResearchManager manager = Sgl.researches;
-    private static RevealGroup currReveal = null;
-
-    protected static void setManager(ResearchManager manager){
-      ResearchSDL.manager = manager;
+  open class ResearchSDL {
+    companion object {
+      private var context: ResearchGroup? = null
+      private var tasks: OrderedMap<ResearchProject, Runnable>? = null
+      private var currProject: ResearchProject? = null
+      private var inProjectContext = false
+      private var manager: ResearchManager = Sgl.researches
+      private var currReveal: RevealGroup? = null
     }
 
-    protected static void makePlanetContext(Planet planet, Runnable runnable){
-      ResearchGroup last = context;
-      OrderedMap<ResearchProject, Runnable> lastTasks = tasks;
-      context = manager.makeGroup(planet);
-      tasks = new OrderedMap<>();
-
-      runnable.run();
-      tasks.forEach(e -> {
-        inProjectContext = true;
-        currProject = e.key;
-        e.value.run();
-        inProjectContext = false;
-      });
-
-      context = last;
-      tasks = lastTasks;
+    protected fun setManager(manager: ResearchManager) {
+      Companion.manager = manager
     }
 
-    protected static void reveal(RevealGroup group, Runnable runnable){
-      RevealGroup last = currReveal;
-      currReveal = group;
-      group.require = last;
-      runnable.run();
-      currReveal = last;
+    protected fun makePlanetContext(planet: Planet, runnable: Runnable) {
+      context = manager.makeGroup(planet)
+      val last: ResearchGroup? = context
+      val lastTasks: OrderedMap<ResearchProject, Runnable>? = tasks
+
+      tasks = OrderedMap<ResearchProject, Runnable>()
+
+      runnable.run()
+      tasks!!.forEach {e ->
+        inProjectContext = true
+        currProject = e!!.key
+        e.value!!.run()
+        inProjectContext = false
+      }
+
+      context = last
+      tasks = lastTasks
     }
 
-    protected static ResearchProject byName(String name){
-      return context.getResearch(name);
+    protected fun reveal(group: RevealGroup, runnable: Runnable) {
+      val last = currReveal
+      currReveal = group
+      group.require = last
+      runnable.run()
+      currReveal = last
     }
 
-    protected static ResearchProject research(String name, int techRequires, int techRequiresRandom, Runnable runnable){
-      ResearchProject res = research(name, techRequires, techRequiresRandom);
-      res.setReveal(currReveal);
-      tasks.put(res, runnable);
-
-      return res;
+    protected fun byName(name: String?): ResearchProject? {
+      return context!!.getResearch(name)
     }
 
-    protected static ResearchProject research(String name, int techRequires, Runnable runnable){
-      ResearchProject res = research(name, techRequires);
-      res.setReveal(currReveal);
-      tasks.put(res, runnable);
+    protected fun research(name: String, techRequires: Int, techRequiresRandom: Int, runnable: Runnable?): ResearchProject {
+      val res = research(name, techRequires, techRequiresRandom)
+      res.setReveal(currReveal)
+      tasks!!.put(res, runnable)
 
-      return res;
+      return res
     }
 
-    protected static ResearchProject research(String name, int techRequires, int techRequiresRandom){
-      checkContext();
+    protected fun research(name: String, techRequires: Int, runnable: Runnable?): ResearchProject {
+      val res = research(name, techRequires)
+      res.setReveal(currReveal)
+      tasks!!.put(res, runnable)
 
-      ResearchProject project = new ResearchProject(name, techRequires, techRequiresRandom);
-      project.setReveal(currReveal);
-      context.addProject(project);
-
-      return project;
+      return res
     }
 
-    protected static ResearchProject research(String name, int techRequires){
-      checkContext();
+    protected fun research(name: String, techRequires: Int, techRequiresRandom: Int): ResearchProject {
+      checkContext()
 
-      ResearchProject project = new ResearchProject(name, techRequires);
-      project.setReveal(currReveal);
-      context.addProject(project);
+      val project = ResearchProject(name, techRequires, techRequiresRandom)
+      project.setReveal(currReveal)
+      context!!.addProject(project)
 
-      return project;
+      return project
     }
 
-    protected static void contents(UnlockableContent... contents){
-      checkProjectContext();
-      currProject.addContent(contents);
+    protected fun research(name: String, techRequires: Int): ResearchProject {
+      checkContext()
+
+      val project = ResearchProject(name, techRequires)
+      project.setReveal(currReveal)
+      context!!.addProject(project)
+
+      return project
     }
 
-    protected static void dependencies(ResearchProject... dependencies){
-      checkProjectContext();
-      currProject.addDependency(dependencies);
+    protected fun contents(vararg contents: UnlockableContent?) {
+      checkProjectContext()
+      currProject!!.addContent(*contents)
     }
 
-    protected static void dependencies(String... dependencies){
-      checkProjectContext();
-      for (String dependency : dependencies) {
-        currProject.addDependency(context.getResearch(dependency));
+    protected fun dependencies(vararg dependencies: ResearchProject?) {
+      checkProjectContext()
+      currProject!!.addDependency(*dependencies)
+    }
+
+    protected fun dependencies(vararg dependencies: String?) {
+      checkProjectContext()
+      for (dependency in dependencies) {
+        currProject!!.addDependency(context!!.getResearch(dependency))
       }
     }
 
-    protected static void inspire(Inspire inspire){
-      checkProjectContext();
-      currProject.setInspire(inspire);
+    protected fun inspire(inspire: Inspire?) {
+      checkProjectContext()
+      currProject!!.setInspire(inspire)
     }
 
-    protected static void showRevealess(){
-      checkProjectContext();
-      currProject.showRevealess();
+    protected fun showRevealess() {
+      checkProjectContext()
+      currProject!!.showRevealess()
     }
 
-    protected static void hideTechs(){
-      checkProjectContext();
-      currProject.hideTechs();
+    protected fun hideTechs() {
+      checkProjectContext()
+      currProject!!.hideTechs()
     }
 
-    protected static void devices(ResearchDevice... devices){
-      checkProjectContext();
-      currProject.addRequireDevice(devices);
+    protected fun devices(vararg devices: ResearchDevice?) {
+      checkProjectContext()
+      currProject!!.addRequireDevice(*devices)
     }
 
-    private static void checkContext() {
-      if (context == null) throw new IllegalStateException("No planet context");
-      if (inProjectContext) throw new IllegalStateException("Already in project context");
+    private fun checkContext() {
+      checkNotNull(context) {"No planet context"}
+      check(!inProjectContext) {"Already in project context"}
     }
 
-    private static void checkProjectContext() {
-      if (currProject == null) throw new IllegalStateException("No project context");
-      if (!inProjectContext) throw new IllegalStateException("Not in project context");
+    private fun checkProjectContext() {
+      checkNotNull(currProject) {"No project context"}
+      check(inProjectContext) {"Not in project context"}
     }
   }
 }

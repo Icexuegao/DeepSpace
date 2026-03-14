@@ -23,6 +23,7 @@ import arc.util.Align;
 import arc.util.Scaling;
 import arc.util.Time;
 import arc.util.Tmp;
+import ice.content.IPlanets;
 import mindustry.Vars;
 import mindustry.ctype.UnlockableContent;
 import mindustry.gen.Tex;
@@ -31,7 +32,7 @@ import mindustry.type.Planet;
 import mindustry.ui.Fonts;
 import mindustry.ui.Styles;
 import mindustry.ui.dialogs.BaseDialog;
-import singularity.contents.SglPlanets;
+import singularity.Sgl;
 import singularity.game.researchs.ResearchProject;
 import singularity.graphic.SglDraw;
 import singularity.graphic.SglDrawConst;
@@ -41,7 +42,7 @@ import singularity.ui.layout.TechTreeLayout;
 
 import static singularity.ui.layout.TechTreeLayout.checkCenter;
 
-public class SglTechTreeDialog extends BaseDialog {
+public class SglTechTreeDialog extends Table {
   public TechTreeLayout layout = new TechTreeLayout(){{
     alignWidth = Scl.scl(600);
     alignHeight = Scl.scl(180);
@@ -93,14 +94,14 @@ public class SglTechTreeDialog extends BaseDialog {
           curr = curr.parents.first();
         }
         boolean isCompleted = curr.project.isCompleted();
-        if (!(curr.project.showIfRevealess && curr.project.requiresRevealed()) && !curr.project.isRevealed()) continue;
+        if (!(curr.project.getShowIfRevealess() && curr.project.requiresRevealed()) && !curr.project.isRevealed()) continue;
 
         curr = line.to;
         while (curr.project == null) {
           curr = curr.children.first();
         }
         boolean childCompleted = curr.project.isCompleted();
-        if (!(curr.project.showIfRevealess && curr.project.requiresRevealed()) && !curr.project.isRevealed()) continue;
+        if (!(curr.project.getShowIfRevealess() && curr.project.requiresRevealed()) && !curr.project.isRevealed()) continue;
 
         Draw.color(
             isCompleted?
@@ -146,7 +147,7 @@ public class SglTechTreeDialog extends BaseDialog {
             curr = curr.parents.first();
           }
           boolean isCompleted = curr.project.isCompleted();
-          if (!(curr.project.showIfRevealess && curr.project.requiresRevealed()) && !curr.project.isRevealed()) continue;
+          if (!(curr.project.getShowIfRevealess() && curr.project.requiresRevealed()) && !curr.project.isRevealed()) continue;
 
           float centerOrig = checkCenter(node, true);
           
@@ -160,7 +161,7 @@ public class SglTechTreeDialog extends BaseDialog {
               curr = curr.children.first();
             }
             boolean childCompleted = curr.project.isCompleted();
-            if (!(curr.project.showIfRevealess && curr.project.requiresRevealed()) && !curr.project.isRevealed()) continue o;
+            if (!(curr.project.getShowIfRevealess() && curr.project.requiresRevealed()) && !curr.project.isRevealed()) continue o;
 
             anyCompleted |= childCompleted;
 
@@ -215,16 +216,13 @@ public class SglTechTreeDialog extends BaseDialog {
   };
 
   public SglTechTreeDialog() {
-    super(Core.bundle.get("dialog.techtree.title"));
 
     zoom.addChild(view);
-    cont.add(zoom);
+    add(zoom);
     zoom.setFillParent(true);
-    setBackground(SglDrawConst.grayUI);
+    //setBackground(SglDrawConst.grayUI);
 
-    addCloseButton();
-
-    rebuildNodes(SglPlanets.foryust);
+    rebuildNodes(IPlanets.INSTANCE.get阿德里());
 
     touchable = Touchable.enabled;
 
@@ -282,16 +280,16 @@ public class SglTechTreeDialog extends BaseDialog {
   public void rebuildNodes(Planet planet){
     this.planet = planet;
 
-    //Seq<ResearchProject> projects = Sgl.researches.listResearches(planet);
+    Seq<ResearchProject> projects = Sgl.researches.listResearches(planet);
     OrderedMap<ResearchProject, Node> nodes = new OrderedMap<>();
 
-  /*  for (ResearchProject project : projects) {
+    for (ResearchProject project : projects) {
       Node node = new Node(project);
       nodes.put(project, node);
-    }*/
+    }
 
     for (Node node : nodes.values()) {
-      for (ResearchProject project : node.project.dependencies) {
+      for (ResearchProject project : node.project.getDependencies()) {
         Node parent = nodes.get(project);
         parent.addChildren(node);
       }
@@ -342,7 +340,7 @@ public class SglTechTreeDialog extends BaseDialog {
 
     @Override
     public void updateVisibility() {
-      visible = project == null || (project.showIfRevealess && project.requiresRevealed()) || project.isRevealed();
+      visible = project == null || (project.getShowIfRevealess() && project.requiresRevealed()) || project.isRevealed();
     }
 
     @Override
@@ -384,7 +382,7 @@ public class SglTechTreeDialog extends BaseDialog {
               float frameStroke = Scl.scl(6f);
               float barStroke = Scl.scl(3f);
               float progress = project.progress();
-              float subProgress = project.inspire == null || project.inspire.applied? 0: project.inspire.provProgress;
+              float subProgress = project.getInspire() == null || project.getInspire().getApplied()? 0: project.getInspire().getProvProgress();
               float parentAlpha1 = Draw.getColor().a;
               float rad = width/2f - frameStroke/2f;
 
@@ -433,7 +431,7 @@ public class SglTechTreeDialog extends BaseDialog {
             }
           }, img -> {
             if (isReveal) {
-              img.image(project.icon != null ? project.icon : project.contents.first().uiIcon).size(32).scaling(Scaling.fit);
+              img.image(project.getIcon() != null ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit);
             }
             else {
               Font.Glyph g = Fonts.outline.getData().getGlyph('?');
@@ -491,17 +489,17 @@ public class SglTechTreeDialog extends BaseDialog {
               );
             }
           }, info -> {
-            if (isReveal) info.add(project.localizedName).growX().labelAlign(Align.left);
-            else info.add(Core.bundle.get("misc.revealess")).growX().labelAlign(Align.left);
+            if (isReveal) info.add(project.getLocalizedName()).growX().labelAlign(Align.left);
+            else info.add("未揭示").growX().labelAlign(Align.left);
 
             info.row();
             info.image().color(Color.darkGray).height(3f).growX().pad(0).padTop(6f).padBottom(6f);
             info.row();
 
             if (isReveal) {
-              if (project.contents.size > 336/32f) {
+              if (project.getContents().size > 336/32f) {
                 info.pane(Styles.noBarPane, conts -> {
-                  for (UnlockableContent content : project.contents) {
+                  for (UnlockableContent content : project.getContents()) {
                     conts.button(b -> b.image(content.uiIcon).scaling(Scaling.fit).pad(4f), Styles.cleart, () -> {
                       Vars.ui.content.show(content);
                     }).size(32f).padLeft(4f);
@@ -509,7 +507,7 @@ public class SglTechTreeDialog extends BaseDialog {
                 }).scrollY(false).left();
               } else {
                 info.table(conts -> {
-                  for (UnlockableContent content : project.contents) {
+                  for (UnlockableContent content : project.getContents()) {
                     conts.button(b -> b.image(content.uiIcon).scaling(Scaling.fit).pad(4f), Styles.cleart, () -> {
                       Vars.ui.content.show(content);
                     }).size(32f).padLeft(4f);
@@ -525,7 +523,7 @@ public class SglTechTreeDialog extends BaseDialog {
               @Override
               public void draw(float x, float y, float width, float height) {
                 if (isReveal) {
-                  if (project.isCompleted() || (project.inspire != null && project.inspire.applied)){
+                  if (project.isCompleted() || (project.getInspire() != null && project.getInspire().getApplied())){
                     Draw.color(Pal.accent, 0.3f*parentAlpha);
                   }
                   else Draw.color(Pal.darkerGray, 0.7f*parentAlpha);
@@ -544,18 +542,18 @@ public class SglTechTreeDialog extends BaseDialog {
                     });
                 prog.add("/").color(Color.lightGray).fontScale(0.75f).fill();
                 prog.add("").color(Pal.accent).fontScale(0.75f).fill()
-                    .update(l -> l.setText(project.hideTechs ? "?" : Integer.toString(project.getRealRequireTechs())));
+                    .update(l -> l.setText(project.getHideTechs() ? "?" : Integer.toString(project.getRealRequireTechs())));
                 prog.add().growX();
 
-                if (project.inspire != null) {
-                  prog.add(project.inspire.localized).color(Color.lightGray).fontScale(0.75f).fill();
+                if (project.getInspire() != null) {
+                  prog.add(project.getInspire().getLocalized()).color(Color.lightGray).fontScale(0.75f).fill();
                   prog.image(SglDrawConst.inspire).scaling(Scaling.fit).size(22f).color(SglDrawConst.matrixNet);
                 }
               }
-              else prog.add(Core.bundle.get("misc.reveal") + ": " + project.reveal.localized()).growX().padLeft(4f).labelAlign(Align.left);
+              else prog.add(Core.bundle.get("misc.reveal") + ": " + project.getReveal().localized()).growX().padLeft(4f).labelAlign(Align.left);
             }).growX().margin(4f);
             desc.row();
-            desc.add(isReveal? project.description: "???").width(388f).pad(5f).wrap().labelAlign(Align.left).color(Color.lightGray);
+            desc.add(isReveal? project.getDescription() : "???").width(388f).pad(5f).wrap().labelAlign(Align.left).color(Color.lightGray);
           }).colspan(2).left().grow();
         }).margin(4f).width(420).fillY().get();
 

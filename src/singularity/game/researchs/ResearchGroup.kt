@@ -1,58 +1,53 @@
-package singularity.game.researchs;
+package singularity.game.researchs
 
-import arc.struct.OrderedMap;
-import arc.struct.Seq;
-import mindustry.ctype.UnlockableContent;
-import mindustry.type.Planet;
+import arc.func.Boolf
+import arc.func.Prov
+import arc.struct.OrderedMap
+import arc.struct.Seq
+import mindustry.ctype.UnlockableContent
+import mindustry.type.Planet
+import java.util.function.Consumer
 
-public class ResearchGroup {
-  public final Planet onPlanet;
+class ResearchGroup(val onPlanet: Planet) {
+  private val projects = OrderedMap<String?, ResearchProject>()
+  private val revealGroups = OrderedMap<RevealGroup?, Seq<ResearchProject?>?>()
 
-  private final OrderedMap<String, ResearchProject> projects = new OrderedMap<>();
-  private final OrderedMap<RevealGroup, Seq<ResearchProject>> revealGroups = new OrderedMap<>();
-
-  public ResearchGroup(Planet planet) {
-    this.onPlanet = planet;
+  fun addProject(project: ResearchProject) {
+    projects.put(project.name, project)
+    project.group = this
   }
 
-  public void addProject(ResearchProject project){
-    projects.put(project.name, project);
-    project.group = this;
+  fun getResearch(name: String?): ResearchProject? {
+    return projects.get(name)
   }
 
-  public ResearchProject getResearch(String name){
-    return projects.get(name);
+  fun listResearches(): Seq<ResearchProject> {
+    return projects.values().toSeq()
   }
 
-  public Seq<ResearchProject> listResearches(){
-    return projects.values().toSeq();
+  fun getResearchByContent(content: UnlockableContent?): ResearchProject? {
+    return projects.values().toSeq().find(Boolf {p: ResearchProject? -> p!!.contents.contains(content)})
   }
 
-  public ResearchProject getResearchByContent(UnlockableContent content){
-    return projects.values().toSeq().find(p -> p.contents.contains(content));
-  }
-
-  public void init(){
-    load();
-
-    for (ResearchProject value : projects.values()) {
-      value.init();
-      if (value.reveal != null) revealGroups.get(value.reveal, Seq::new).add(value);
+  fun init() {
+    for (value in projects.values()) {
+      value.init()
+      if (value.reveal != null) revealGroups.get(value.reveal, Prov {Seq()})!!.add(value)
     }
 
-    revealGroups.keys().forEach(RevealGroup::init);
+    revealGroups.keys().forEach(Consumer {obj: RevealGroup? -> obj!!.init()})
   }
 
-  public void reset(){
-    projects.values().forEach(ResearchProject::reset);
-    revealGroups.keys().forEach(RevealGroup::reset);
+  fun reset() {
+    projects.values().forEach(Consumer {obj: ResearchProject? -> obj!!.reset()})
+    revealGroups.keys().forEach(Consumer {obj: RevealGroup? -> obj!!.reset()})
   }
 
-  public void save(){
-    projects.values().forEach(ResearchProject::save);
+  fun save() {
+    projects.values().forEach(Consumer {obj: ResearchProject? -> obj!!.save()})
   }
 
-  public void load(){
-    projects.values().forEach(ResearchProject::load);
+  fun load() {
+    projects.values().forEach(Consumer {obj: ResearchProject? -> obj!!.load()})
   }
 }

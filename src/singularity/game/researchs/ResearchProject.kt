@@ -1,222 +1,196 @@
-package singularity.game.researchs;
+package singularity.game.researchs
 
-import arc.Core;
-import arc.Events;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.struct.Seq;
-import arc.util.Nullable;
-import mindustry.ctype.UnlockableContent;
-import singularity.Sgl;
-import singularity.Singularity;
-import singularity.core.SglEventTypes;
-import singularity.game.planet.context.ResearchContext;
-import singularity.world.blocks.research.ResearchDevice;
+import arc.Core
+import arc.Events
+import arc.graphics.g2d.TextureRegion
+import arc.math.Mathf
+import arc.struct.Seq
+import arc.util.Nullable
+import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import mindustry.ctype.UnlockableContent
+import singularity.Singularity
+import singularity.core.SglEventTypes.ResearchCompletedEvent
+import singularity.world.blocks.research.ResearchDevice
 
-public class ResearchProject {
-  public final String name;
-  public final int techRequires;
-  public final int techRequiresRandom;
+class ResearchProject (val name: String, val techRequires: Int, val techRequiresRandom: Int = 0): BaseBundle.Bundle {
+  val dependencies: Seq<ResearchProject> = Seq<ResearchProject>()
+  val contents: Seq<UnlockableContent> = Seq<UnlockableContent>()
+  val requireDevices: Seq<ResearchDevice?> = Seq<ResearchDevice?>()
 
-  public final Seq<ResearchProject> dependencies = new Seq<>();
-  public final Seq<UnlockableContent> contents = new Seq<>();
-  public final Seq<ResearchDevice> requireDevices = new Seq<>();
+  var description: String? = Core.bundle.get("research.$name.description")
+  var slogan: String = "slogan"
+  var icon: TextureRegion? = Singularity.getModAtlas("research_$name", null)
 
-  public String localizedName;
-  public String description;
-  public String slogan = "slogan";
-  public TextureRegion icon;
+  @Nullable
+  var inspire: Inspire? = null
 
-  @Nullable public Inspire inspire;
-  @Nullable public RevealGroup reveal;
+  @Nullable
+  var reveal: RevealGroup? = null
 
-  @Nullable public ResearchContext processing;
+  var showIfRevealess: Boolean = false
+  var hideTechs: Boolean = false
+  var group: ResearchGroup? = null
 
-  public boolean showIfRevealess;
-  public boolean hideTechs;
-  public ResearchGroup group;
+  var isCompleted: Boolean = false
+    private set
+  var realRequireTechs: Int = 0
+    private set
+  var researched: Int = 0
+    private set
 
-  protected boolean isCompleted;
-  protected int techRequiresReal;
-  protected int researched;
-
-  public ResearchProject(String name, int techRequires, int techRequiresRandom) {
-    this.name = name;
-    this.techRequires = techRequires;
-    this.techRequiresRandom = techRequiresRandom;
-
-    localizedName = Core.bundle.get("research." + name + ".name");
-    description = Core.bundle.get("research." + name + ".description");
-    icon = Singularity.getModAtlas("research_" + name, null);
+  fun getLocalizedName(): String {
+    return localizedName
+  }
+  fun hideTechs(): ResearchProject {
+    hideTechs = true
+    return this
   }
 
-  public ResearchProject(String name, int techRequires) {
-    this(name, techRequires, 0);
+  fun showRevealess(): ResearchProject {
+    showIfRevealess = true
+    return this
   }
 
-  public ResearchProject hideTechs(){
-    hideTechs = true;
-    return this;
+  fun setInspire(inspire: Inspire?): ResearchProject {
+    this.inspire = inspire
+    return this
   }
 
-  public ResearchProject showRevealess(){
-    showIfRevealess = true;
-    return this;
+  fun setReveal(reveal: RevealGroup?): ResearchProject {
+    this.reveal = reveal
+    return this
   }
 
-  public ResearchProject setInspire(Inspire inspire){
-    this.inspire = inspire;
-    return this;
+  fun addDependency(vararg dependencies: ResearchProject?): ResearchProject {
+    this.dependencies.addAll(*dependencies)
+    return this
   }
 
-  public ResearchProject setReveal(RevealGroup reveal) {
-    this.reveal = reveal;
-    return this;
+  fun addContent(vararg contents: UnlockableContent?): ResearchProject {
+    this.contents.addAll(*contents)
+    return this
   }
 
-  public ResearchProject addDependency(ResearchProject... dependencies){
-    this.dependencies.addAll(dependencies);
-    return this;
+  fun addRequireDevice(vararg requireDevices: ResearchDevice?): ResearchProject {
+    this.requireDevices.addAll(*requireDevices)
+    return this
   }
 
-  public ResearchProject addContent(UnlockableContent... contents){
-    this.contents.addAll(contents);
-    return this;
-  }
-
-  public ResearchProject addRequireDevice(ResearchDevice... requireDevices){
-    this.requireDevices.addAll(requireDevices);
-    return this;
-  }
-
-  public boolean checkDeviceValid(Seq<ResearchDevice> devices){
-    o: for (ResearchDevice requireDevice : requireDevices) {
-      for (ResearchDevice device : devices) {
-        if (device.isCompatible(requireDevice)) continue o;
+  fun checkDeviceValid(devices: Seq<ResearchDevice>): Boolean {
+    o@ for (requireDevice in requireDevices) {
+      for (device in devices) {
+        if (device.isCompatible(requireDevice)) continue@o
       }
 
-      return false;
+      return false
     }
 
-    return true;
+    return true
   }
 
-  public void init(){
+  fun init() {
     if (inspire != null) {
-      inspire.init(this);
-      inspire.applyTrigger(this);
+      inspire!!.init(this)
+      inspire!!.applyTrigger(this)
     }
 
-    if (dependenciesCompleted() && researched >= techRequiresReal){
-      isCompleted = true;
+    if (dependenciesCompleted() && researched >= this.realRequireTechs) {
+      isCompleted = true
     }
   }
 
-  public boolean dependenciesCompleted(){
-    for (ResearchProject dependency : dependencies) {
-      if(!dependency.isCompleted()) return false;
+  fun dependenciesCompleted(): Boolean {
+    for (dependency in dependencies) {
+      if (!dependency.isCompleted) return false
     }
 
-    return true;
+    return true
   }
 
-  public boolean isRevealed() {
-    return reveal == null || reveal.isRevealed();
+  val isRevealed: Boolean
+    get() = reveal == null || reveal!!.isRevealed()
+
+  fun requiresRevealed(): Boolean {
+    return reveal == null || reveal!!.require == null || reveal!!.require!!.isRevealed()
   }
 
-  public boolean requiresRevealed() {
-    return reveal == null || reveal.require == null || reveal.require.isRevealed();
+  fun progress(): Float {
+    return researched.toFloat() / this.realRequireTechs
   }
 
-  public boolean isCompleted(){
-    return isCompleted;
+  val isProcessing: Boolean
+    get() = progress() > 0f
+
+  fun researchProcess(techPoints: Int): Boolean {
+    if (this.isCompleted) return true
+    researched += techPoints
+
+    val res = checkComplete()
+
+    save()
+
+    return res
   }
 
-  public int getRealRequireTechs(){
-    return techRequiresReal;
-  }
+  fun checkComplete(): Boolean {
+    if (this.isCompleted) return true
 
-  public int getResearched(){
-    return researched;
-  }
-
-  public float progress(){
-    return (float)researched / techRequiresReal;
-  }
-
-  public boolean isProcessing(){
-    return processing != null;
-  }
-
-  public boolean researchProcess(int techPoints){
-    if (isCompleted()) return true;
-    researched += techPoints;
-
-    boolean res = checkComplete();
-
-    save();
-
-    return res;
-  }
-
-  public boolean checkComplete(){
-    if (isCompleted()) return true;
-
-    for (ResearchProject dependency : dependencies) {
-      if(!dependency.checkComplete()) return false;
+    for (dependency in dependencies) {
+      if (!dependency.checkComplete()) return false
     }
 
-    if(researched >= techRequiresReal){
-      completeNow();
-      return true;
+    if (researched >= this.realRequireTechs) {
+      completeNow()
+      return true
     }
 
-    return false;
+    return false
   }
 
-  public void completeNow(){
-    isCompleted = true;
+  fun completeNow() {
+    isCompleted = true
 
-    researched = techRequiresReal;
+    researched = this.realRequireTechs
 
-    for (UnlockableContent content : contents) {
-      content.unlock();
+    for (content in contents) {
+      content.unlock()
     }
 
-    Events.fire(new SglEventTypes.ResearchCompletedEvent(this));
+    Events.fire(ResearchCompletedEvent(this))
 
-    save();
+    save()
   }
 
-  public void applyInspireNow() {
-    if (inspire != null) inspire.apply(this);
+  fun applyInspireNow() {
+    if (inspire != null) inspire!!.apply(this)
   }
 
-  public void revealNow(){
-    if (reveal != null) reveal.reveal();
+  fun revealNow() {
+    if (reveal != null) reveal!!.reveal()
   }
 
-  public void reset(){
-    techRequiresReal = techRequires + Mathf.random(techRequiresRandom);
-    researched = 0;
-    isCompleted = false;
+  fun reset() {
+    this.realRequireTechs = techRequires + Mathf.random(techRequiresRandom)
+    researched = 0
+    isCompleted = false
 
-    for (UnlockableContent content : contents) {
-      content.clearUnlock();
+    for (content in contents) {
+      content.clearUnlock()
     }
 
-    if (inspire != null) inspire.reset();
+    if (inspire != null) inspire!!.reset()
 
-    save();
+    save()
   }
 
-  public void load(){
-    techRequiresReal = Sgl.globals.getInt("research_" + name + "_requireReal", techRequires + Mathf.random(techRequiresRandom));
-    researched = Sgl.globals.getInt("research_" + name + "_researched", 0);
+  fun load() {
+    this.realRequireTechs = Core.settings.getInt("research_" + name + "_requireReal", techRequires + Mathf.random(techRequiresRandom))
+    researched = Core.settings.getInt("research_" + name + "_researched", 0)
   }
 
-  public void save(){
-    Sgl.globals.put("research_" + name + "_requireReal", techRequiresReal);
-    Sgl.globals.put("research_" + name + "_researched", researched);
+  fun save() {
+    Core.settings.put("research_" + name + "_requireReal", this.realRequireTechs)
+    Core.settings.put("research_" + name + "_researched", researched)
   }
 }

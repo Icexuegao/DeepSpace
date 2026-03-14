@@ -145,8 +145,8 @@ public abstract class Notification implements DataPackable {
     @Override
     public void write(Writes write) {
       super.write(write);
-      write.str(project.group.onPlanet.name);
-      write.str(project.name);
+      write.str(project.getGroup().getOnPlanet().name);
+      write.str(project.getName());
     }
 
     @Override
@@ -180,7 +180,7 @@ public abstract class Notification implements DataPackable {
     @Override
     public void read(Reads read) {
       super.read(read);
-      inspire = project.inspire;
+      inspire = project.getInspire();
     }
   }
 }
