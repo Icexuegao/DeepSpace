@@ -27,19 +27,27 @@ class ResearchManager {
   }
 
   fun init() {
-    allProjects.values().forEach(Consumer {obj: ResearchGroup? -> obj!!.init()})
+    for (group in allProjects.values()) {
+      group.init()
+    }
   }
 
   fun reset() {
-    allProjects.values().forEach(Consumer {obj: ResearchGroup? -> obj!!.reset()})
+    for (group in allProjects.values()) {
+      group.reset()
+    }
   }
 
   fun save() {
-    allProjects.values().forEach(Consumer {obj: ResearchGroup? -> obj!!.save()})
+    for (group in allProjects.values()) {
+      group.save()
+    }
   }
 
   fun load() {
-    allProjects.values().forEach(Consumer {obj: ResearchGroup? -> obj!!.load()})
+    for (group in allProjects.values()) {
+      group.load()
+    }
   }
 
   open class ResearchSDL {

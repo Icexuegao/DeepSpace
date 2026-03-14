@@ -299,7 +299,9 @@ public class SglTechTreeDialog extends Table {
     layout.inputNodes(nodes.values());
     layout.init();
 
-    cards.forEach(Element::remove);
+    for (TechNodeCard card : cards) {
+      card.remove();
+    }
     cards.clear();
     lines.clear();
     for (Node node : layout.getRawContexts()) {

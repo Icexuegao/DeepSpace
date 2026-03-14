@@ -65,6 +65,7 @@ dependencies {
   // compileOnly(files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar"))
    //compileOnly("com.github.TinyLake:MindustryX:v2026.02.X27")
   // compileOnly("com.github.Anuken.Arc:flabel:v149")
+  //compileOnly("com.github.Icexuegao:DeepSpace:Alpha-4178")
   compileOnly("com.github.Anuken.Mindustry:core:v155.4")
   compileOnly("com.github.EB-wilson:TooManyItems:3.1a")
   implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinCompatibility")

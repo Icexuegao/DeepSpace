@@ -9,8 +9,8 @@ import mindustry.type.Planet
 import java.util.function.Consumer
 
 class ResearchGroup(val onPlanet: Planet) {
-  private val projects = OrderedMap<String?, ResearchProject>()
-  private val revealGroups = OrderedMap<RevealGroup?, Seq<ResearchProject?>?>()
+  private val projects = OrderedMap<String, ResearchProject>()
+  private val revealGroups = OrderedMap<RevealGroup, Seq<ResearchProject>>()
 
   fun addProject(project: ResearchProject) {
     projects.put(project.name, project)
@@ -32,22 +32,33 @@ class ResearchGroup(val onPlanet: Planet) {
   fun init() {
     for (value in projects.values()) {
       value.init()
-      if (value.reveal != null) revealGroups.get(value.reveal, Prov {Seq()})!!.add(value)
+      if (value.reveal != null) revealGroups.get(value.reveal) {Seq()}.add(value)
     }
 
-    revealGroups.keys().forEach(Consumer {obj: RevealGroup? -> obj!!.init()})
+    for (group in revealGroups.keys()) {
+      group.init()
+    }
   }
 
   fun reset() {
-    projects.values().forEach(Consumer {obj: ResearchProject? -> obj!!.reset()})
-    revealGroups.keys().forEach(Consumer {obj: RevealGroup? -> obj!!.reset()})
+    for (project in projects.values()) {
+      project.reset()
+    }
+
+    for (group in revealGroups.keys()) {
+      group.reset()
+    }
   }
 
   fun save() {
-    projects.values().forEach(Consumer {obj: ResearchProject? -> obj!!.save()})
+    for (project in projects.values()) {
+      project.save()
+    }
   }
 
   fun load() {
-    projects.values().forEach(Consumer {obj: ResearchProject? -> obj!!.load()})
+    for (project in projects.values()) {
+      project.load()
+    }
   }
 }
