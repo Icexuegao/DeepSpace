@@ -597,15 +597,15 @@ object IItems : Load {
   }
   val 充能FEX水晶 = object : IceItem("item_crystal_FEX_power", "#E34248") {
     init {
+      bundle {
+        desc(zh_CN, "活化导能结晶", "一种经大量能量激发的高纯度低能阻晶体,性质极其不稳定,危险且难以储存,但在需要释放中子能的地方不可或缺", "严禁用任何致密介质接触激发态的导能结晶.在《中子工业操作管理条例》中,此类条目均以醒目字体特别标注.每一行警示背后,都是无法挽回的事故与代价")
+      }
       hardness = 3
       explosiveness = 3.6f
       flammability = 0f
       radioactivity = 3f
       cost = 1.35f
       frameTime = 9f
-      bundle {
-        desc(zh_CN, "活化导能结晶", "一种经大量能量激发的高纯度低能阻晶体,性质极其不稳定,危险且难以储存,但在需要释放中子能的地方不可或缺", "严禁用任何致密介质接触激发态的导能结晶.在《中子工业操作管理条例》中,此类条目均以醒目字体特别标注.每一行警示背后,都是无法挽回的事故与代价")
-      }
     }
 
     override fun loadIcon() {

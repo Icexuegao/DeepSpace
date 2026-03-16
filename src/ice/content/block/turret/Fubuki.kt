@@ -8,6 +8,7 @@ import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
+import ice.content.ILiquids
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.crushedIce
 import ice.content.block.turret.TurretBullets.rand
@@ -232,7 +233,7 @@ class Fubuki: LaserTurret("fubuki") {
     consume!!.time(1f)
     consume!!.showTime = false
     consume!!.energy(3.2f)
-    consume!!.liquid(Liquids.cryofluid, 0.2f)
+    consume!!.liquid(ILiquids.急冻液, 0.2f)
 
     drawers = DrawSglTurret(object : RegionPart("_blade") {
       init {

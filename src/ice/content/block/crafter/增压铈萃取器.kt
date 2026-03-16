@@ -21,8 +21,16 @@ class 增压铈萃取器 : CeriumExtractor("ceriumExtractorLarge") {
     itemCapacity = 48
     liquidCapacity = 48f
 
-    requirements(
-      Category.crafting, IItems.铬锭, 185, IItems.石英玻璃, 45, IItems.铱板, 120, IItems.导能回路, 80, IItems.铈锭, 55
+    requirementPairs(
+      Category.crafting, IItems.铬锭 to 185,
+
+      IItems.石英玻璃 to 45,
+
+      IItems.铱板 to 120,
+
+      IItems.导能回路 to 80,
+
+      IItems.钴锭 to 55
     )
     drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidTile(Liquids.water), DrawCultivator().apply {
       plantColor = Color.valueOf("A24FAA")

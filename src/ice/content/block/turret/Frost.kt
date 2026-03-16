@@ -5,6 +5,7 @@ import arc.graphics.Color
 import arc.math.Angles
 import arc.math.Mathf
 import ice.content.IItems
+import ice.content.ILiquids
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.crushedIce
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -112,7 +113,7 @@ class Frost : LaserTurret("frost") {
         }
       }
     })
-    consume!!.liquid(Liquids.cryofluid, 0.4f)
+    consume!!.liquid(ILiquids.急冻液, 0.4f)
     consume!!.energy(2.4f)
     consume!!.time(210f)
 

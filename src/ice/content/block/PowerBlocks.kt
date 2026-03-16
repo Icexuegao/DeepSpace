@@ -167,6 +167,7 @@ object PowerBlocks : Load {
     size = 4
     armor = 4f
     absorbLasers = true
+    baseExplosiveness = size.toFloat()
     emptyLightColor = IceColor.df
     fullLightColor = IceColor.b4
     consumePowerBuffered(1000000f)

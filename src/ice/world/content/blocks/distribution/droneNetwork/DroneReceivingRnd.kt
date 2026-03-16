@@ -20,59 +20,58 @@ import singularity.world.blocks.SglBlock
 
 class DroneReceivingRnd(name: String) : SglBlock(name) {
 
-    init {
-        size = 1
-        health = 300
-        update = true
-        hasItems = true
-        saveConfig = true
-        itemCapacity = 200
-        configurable = true
-        clearOnDoubleTap=true
-        buildType = Prov(::DroneReceivingRndBuild)
-        requirements(Category.distribution, ItemStack.with(IItems.铬铁矿, 10))
-        configClear { build: DroneReceivingRndBuild -> build.sortItem = null }
-        config(Item::class.java) { build: DroneReceivingRndBuild, item: Item ->
-            build.sortItem = item
-        }
-        drawers = DrawMulti(DrawRegion("-bottom"), DrawRegionColor<DroneReceivingRndBuild>("-center") {
-            it.sortItem?.color
-        }, DrawRegion("-top"))
+  init {
+    size = 1
+    health = 300
+    update = true
+    hasItems = true
+    saveConfig = true
+    itemCapacity = 200
+    configurable = true
+    clearOnDoubleTap = true
+    buildType = Prov(::DroneReceivingRndBuild)
+    requirements(Category.distribution, ItemStack.with(IItems.铬铁矿, 10))
+    configClear {build: DroneReceivingRndBuild -> build.sortItem = null}
+    config(Item::class.java) {build: DroneReceivingRndBuild, item: Item ->
+      build.sortItem = item
+    }
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawRegionColor<DroneReceivingRndBuild>("-center") {
+      it.sortItem?.color
+    }, DrawRegion("-top"))
+  }
 
+  override fun drawPlanConfig(plan: BuildPlan, list: Eachable<BuildPlan?>?) {
+    drawPlanConfigCenter(plan, plan.config, "$name-center")
+  }
+
+  inner class DroneReceivingRndBuild : SglBuilding() {
+    var sortItem: Item? = null
+    var buildings: DroneDeliveryTerminal.DroneDeliveryTerminalBuild? = null
+    override fun acceptItem(source: Building, item: Item): Boolean {
+      return items.get(item) < getMaximumAccepted(item)
     }
 
-    override fun drawPlanConfig(plan: BuildPlan, list: Eachable<BuildPlan?>?) {
-        drawPlanConfigCenter(plan, plan.config, "$name-center")
+    override fun config(): Item? {
+      return sortItem
     }
 
-    inner class DroneReceivingRndBuild : SglBuilding() {
-        var sortItem: Item? = null
-        var buildings: DroneDeliveryTerminal.DroneDeliveryTerminalBuild? = null
-        override fun acceptItem(source: Building, item: Item): Boolean {
-            return items.get(item) < getMaximumAccepted(item)
-        }
-
-        override fun config(): Item? {
-            return sortItem
-        }
-
-        override fun updateTile() {
-            dump()
-        }
-
-        override fun buildConfiguration(table: Table) {
-            ItemSelection.buildTable(block, table, Vars.content.items(), ::sortItem, ::configure,true)
-        }
-
-        override fun read(read: Reads, revision: Byte) {
-            super.read(read, revision)
-            val i = read.i()
-            sortItem = if (i == -1) null else Vars.content.item(i)
-        }
-
-        override fun write(write: Writes) {
-            super.write(write)
-            write.i(if (sortItem == null) -1 else sortItem!!.id.toInt())
-        }
+    override fun updateTile() {
+      dump()
     }
+
+    override fun buildConfiguration(table: Table) {
+      ItemSelection.buildTable(block, table, Vars.content.items(), ::sortItem, ::configure, true)
+    }
+
+    override fun read(read: Reads, revision: Byte) {
+      super.read(read, revision)
+      val i = read.i()
+      sortItem = if (i == -1) null else Vars.content.item(i)
+    }
+
+    override fun write(write: Writes) {
+      super.write(write)
+      write.i(if (sortItem == null) -1 else sortItem!!.id.toInt())
+    }
+  }
 }

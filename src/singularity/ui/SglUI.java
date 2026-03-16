@@ -266,7 +266,7 @@ public class SglUI {
         ));
       }
 
-      Time.run(390, () -> {
+     /* Time.run(390, () -> {
         Events.fire(new SglEventTypes.ResearchInspiredEvent(
                 SglTechThree.test14.getInspire(), SglTechThree.test14
         ));
@@ -275,7 +275,7 @@ public class SglUI {
         Events.fire(new SglEventTypes.ResearchCompletedEvent(
             SglTechThree.test14
         ));
-      });
+      });*/
     });
 
     Events.on(SglEventTypes.ResearchCompletedEvent.class, e -> notificationFrag.notify(

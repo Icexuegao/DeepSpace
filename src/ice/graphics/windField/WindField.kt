@@ -1,148 +1,186 @@
 package ice.graphics.windField
 
-import arc.math.Mathf
+import arc.util.Time
+import kotlin.math.cos
+import kotlin.math.floor
+import kotlin.math.sin
 
-/**
- * 风场模拟器 - 每个格子存储一个二维风力向量
- */
-class WindField(
-  val width: Int,      // 横向格子数
-  val height: Int    // 纵向格子数
-) {
-  // 存储每个格子的风力向量 (x, y)
-  private val windX = Array(width) {FloatArray(height)}
-  private val windY = Array(width) {FloatArray(height)}
-
-  // 用于 Perlin noise 计算的种子
-  private var timeSeed = 0f
+class WindField {
+  var seed = 12345
 
   /**
-   * 获取指定格子的风力向量大小
+   * 可移动的平滑噪声值（适用于动态风场、流动效果）
+   *
+   * @param x X 坐标
+   * @param y Y 坐标
+   * @param time 时间戳或帧数，用于控制移动
+   * @param angle 移动方向角度（0-360 度），0 度向右，90 度向上
+   * @param speed 移动速度，控制单位时间内移动的距离
+   * @param scale 缩放系数，控制变化的频率（默认 0.05）
+   * @param seed 随机种子
+   * @return 0-1 之间的平滑值
    */
-  fun getWindMagnitude(gridX: Int, gridY: Int): Float {
-    if (gridX !in 0 until width || gridY !in 0 until height) return 0f
-    return Mathf.len(windX[gridX][gridY], windY[gridX][gridY])
+  fun getMovingNoiseValue(
+    x: Int, y: Int, time: Float = Time.time / 20, angle: Float = 0f, speed: Float = 0.5f, scale: Float = 0.05f
+  ): Float {
+    // 将角度转换为弧度，并计算移动方向的偏移量
+    val radians = Math.toRadians(angle.toDouble())
+    val offsetX = cos(radians) * speed * time
+    val offsetY = sin(radians) * speed * time
+
+    // 应用偏移量到坐标上
+    val nx = (x + offsetX).toFloat() * scale
+    val ny = (y + offsetY).toFloat() * scale
+
+    // 找到网格的四个角点
+    val x0 = floor(nx).toInt()
+    val x1 = x0 + 1
+    val y0 = floor(ny).toInt()
+    val y1 = y0 + 1
+
+    // 计算相对位置
+    val dx = nx - x0
+    val dy = ny - y0
+
+    // 平滑插值
+    val u = smoothStep(dx)
+    val v = smoothStep(dy)
+
+    // 获取梯度值
+    val g00 = gradient(x0, y0)
+    val g10 = gradient(x1, y0)
+    val g01 = gradient(x0, y1)
+    val g11 = gradient(x1, y1)
+
+    // 线性插值
+    val x1Interp = lerp(g00, g10, u)
+    val x2Interp = lerp(g01, g11, u)
+
+    return lerp(x1Interp, x2Interp, v)
   }
 
   /**
-   * 获取指定格子的风力向量
+   * 向量版本的移动噪声（质量更高，推荐）
    */
-  fun getWindVector(gridX: Int, gridY: Int): WindVector {
-    if (gridX !in 0 until width || gridY !in 0 until height)
-      return WindVector(0f, 0f, 0f)
+  fun getMovingVectorNoiseValue(
+    x: Int, y: Int, time: Float, angle: Float = 0f, speed: Float = 0.5f, scale: Float = 0.05f
+  ): Float {
+    val radians = Math.toRadians(angle.toDouble())
+    val offsetX = cos(radians) * speed * time
+    val offsetY = sin(radians) * speed * time
 
-    val x = windX[gridX][gridY]
-    val y = windY[gridX][gridY]
-    val magnitude = Mathf.len(x, y)
-    val angle = Mathf.atan2(y, x) * Mathf.radiansToDegrees
+    val nx = (x + offsetX).toFloat() * scale
+    val ny = (y + offsetY).toFloat() * scale
 
-    return WindVector(x, y, magnitude, angle)
+    val x0 = floor(nx).toInt()
+    val x1 = x0 + 1
+    val y0 = floor(ny).toInt()
+    val y1 = y0 + 1
+
+    val dx = nx - x0
+    val dy = ny - y0
+
+    val u = smoothStep(dx)
+    val v = smoothStep(dy)
+
+    val dot00 = dotGradient(x0, y0, dx, dy, seed)
+    val dot10 = dotGradient(x1, y0, dx - 1, dy, seed)
+    val dot01 = dotGradient(x0, y1, dx, dy - 1, seed)
+    val dot11 = dotGradient(x1, y1, dx - 1, dy - 1, seed)
+
+    val x1Interp = lerp(dot00, dot10, u)
+    val x2Interp = lerp(dot01, dot11, u)
+
+    return (lerp(x1Interp, x2Interp, v) + 1.0f) * 0.5f
+  }
+
+// ... existing code ...
+// Smoothstep、lerp、gradient、dotGradient 函数保持不变
+// ... existing code ...
+
+  /**
+   * Smoothstep 平滑函数，确保在边界处导数为 0，过渡更自然
+   */
+  private fun smoothStep(t: Float): Float {
+    return t * t * (3.0f - 2.0f * t)
   }
 
   /**
-   * 更新整个风场 - 基于时间和 Perlin noise
+   * 线性插值
    */
-  fun update(deltaTime: Float) {
-    timeSeed += deltaTime * 0.1f // 降低时间流速，从 0.5 改为 0.1
+  private fun lerp(a: Float, b: Float, t: Float): Float {
+    return a + (b - a) * t
+  }
 
-    for (x in 0 until width) {
-      for (y in 0 until height) {
-        // 使用多个噪声层叠加产生自然的风场效果
-        val nx = x / (width * 0.3f)
-        val ny = y / (height * 0.3f)
+  /**
+   * 伪随机梯度生成器
+   * 使用哈希函数确保相同坐标总是返回相同的值
+   */
+  private fun gradient(x: Int, y: Int): Float {
+    var n = x + y * 57 + seed * 131
+    n = (n shl 13) xor n
+    val hash = ((n * (n * n * 15731 + 789221) + 1376312589) and 0x7fffffff)
+    return (hash.toFloat() / Int.MAX_VALUE)
+  }
 
-        // 基础风向 - 使用噪声（降低时间变化率）
-        val baseAngle = noise(nx, ny, timeSeed * 0.3f) * Mathf.PI2 * 2
-        val baseStrength = (noise(nx + 100, ny + 100, timeSeed * 0.2f) * 0.5f + 0.5f)
+  /**
+   * 简化的向量点积版本（更平滑）
+   */
+  fun getVectorNoiseValue(x: Int, y: Int, scale: Float = 0.05f, seed: Int = 12345): Float {
+    val nx = x * scale
+    val ny = y * scale
 
-        // 第二层噪声增加变化（降低频率和时间变化）
-        val detailAngle = noise(nx * 1.5f, ny * 1.5f, timeSeed * 0.25f) * Mathf.PI2
+    val x0 = floor(nx).toInt()
+    val x1 = x0 + 1
+    val y0 = floor(ny).toInt()
+    val y1 = y0 + 1
 
-        // 合成风向（减少细节层的权重）
-        val finalAngle = baseAngle + detailAngle * 0.15f
-        val finalStrength = baseStrength * (0.8f + Mathf.sin(timeSeed * 0.5f + x * 0.1f) * 0.2f)
+    val dx = nx - x0
+    val dy = ny - y0
 
-        windX[x][y] = Mathf.cos(finalAngle) * finalStrength
-        windY[x][y] = Mathf.sin(finalAngle) * finalStrength
-      }
+    val u = smoothStep(dx)
+    val v = smoothStep(dy)
+
+    // 获取梯度向量并计算点积
+    val dot00 = dotGradient(x0, y0, dx, dy, seed)
+    val dot10 = dotGradient(x1, y0, dx - 1, dy, seed)
+    val dot01 = dotGradient(x0, y1, dx, dy - 1, seed)
+    val dot11 = dotGradient(x1, y1, dx - 1, dy - 1, seed)
+
+    val x1Interp = lerp(dot00, dot10, u)
+    val x2Interp = lerp(dot01, dot11, u)
+
+    // 将结果映射到 0-1 范围
+    return (lerp(x1Interp, x2Interp, v) + 1.0f) * 0.5f
+  }
+
+  /**
+   * 生成梯度向量并计算点积
+   */
+  private fun dotGradient(x: Int, y: Int, dx: Float, dy: Float, seed: Int): Float {
+    var n = x + y * 57 + seed * 131
+    n = (n shl 13) xor n
+    val hash = ((n * (n * n * 15731 + 789221) + 1376312589) and 0x7fffffff)
+
+    // 根据哈希值选择梯度方向
+    val gx = when (hash % 12) {
+      0, 1 -> 1.0f
+      2, 3 -> -1.0f
+      4, 5 -> 0.0f
+      6, 7 -> 1.0f
+      8, 9 -> -1.0f
+      else -> 0.0f
     }
-  }
 
-  /**
-   * 简单的 Perlin noise 实现
-   */
-  private fun noise(x1: Float, y1: Float, z1: Float): Float {
-    var x = x1
-    var y = y1
-    var z = z1
+    val gy = when (hash % 12) {
+      0, 1 -> 0.0f
+      2, 3 -> 0.0f
+      4, 5 -> 1.0f
+      6, 7 -> -1.0f
+      8, 9 -> 1.0f
+      else -> -1.0f
+    }
 
-    val X = Mathf.floor(x) and 255
-    val Y = Mathf.floor(y) and 255
-    val Z = Mathf.floor(z) and 255
-
-    x -= Mathf.floor(x)
-    y -= Mathf.floor(y)
-    z -= Mathf.floor(z)
-
-    val u = fade(x)
-    val v = fade(y)
-    val w = fade(z)
-
-    val A = perm[X] + Y
-    val AA = perm[A] + Z
-    val AB = perm[A + 1] + Z
-    val B = perm[X + 1] + Y
-    val BA = perm[B] + Z
-    val BB = perm[B + 1] + Z
-
-    return lerp(
-      w,
-      lerp(
-        v,
-        lerp(u, grad(perm[AA], x, y, z), grad(perm[BA], x - 1, y, z)),
-        lerp(u, grad(perm[AB], x, y - 1, z), grad(perm[BB], x - 1, y - 1, z))
-      ),
-      lerp(
-        v,
-        lerp(u, grad(perm[AA + 1], x, y, z - 1), grad(perm[BA + 1], x - 1, y, z - 1)),
-        lerp(u, grad(perm[AB + 1], x, y - 1, z - 1), grad(perm[BB + 1], x - 1, y - 1, z - 1))
-      )
-    )
-  }
-
-  private fun fade(t: Float) = t * t * t * (t * (t * 6 - 15) + 10)
-  private fun lerp(t: Float, a: Float, b: Float) = a + t * (b - a)
-
-  private fun grad(hash: Int, x: Float, y: Float, z: Float): Float {
-    val h = hash and 15
-    val u = if (h < 8) x else y
-    val v = if (h < 4) y else if (h == 12 || h == 14) x else z
-    return ((if ((h and 1) == 0) u else -u) + (if ((h and 2) == 0) v else -v))
-  }
-
-  companion object {
-    private val perm = IntArray(512) {
-      val p = intArrayOf(
-        151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23,
-        190, 6, 148, 247, 120, 234, 75, 0, 26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33, 88, 237, 149, 56, 87, 174, 20, 125, 136, 171, 168,
-        68, 175, 74, 165, 71, 134, 139, 48, 27, 166, 77, 146, 158, 231, 83, 111, 229, 122, 60, 211, 133, 230, 220, 105, 92, 41, 55, 46, 245, 40, 244,
-        102, 143, 54, 65, 25, 63, 161, 1, 216, 80, 73, 209, 76, 132, 187, 208, 89, 18, 169, 200, 196, 135, 130, 116, 188, 159, 86, 164, 100, 109, 198,
-        173, 186, 3, 64, 52, 217, 226, 250, 124, 123, 5, 202, 38, 147, 118, 126, 255, 82, 85, 212, 207, 206, 59, 227, 47, 16, 58, 17, 182, 189, 28, 42,
-        223, 183, 170, 213, 119, 248, 152, 2, 44, 154, 163, 70, 221, 153, 101, 155, 167, 43, 172, 9, 129, 22, 39, 253, 19, 98, 108, 110, 79, 113, 224,
-        232, 178, 185, 112, 104, 218, 246, 97, 228, 251, 34, 242, 193, 238, 210, 144, 12, 191, 179, 162, 241, 81, 51, 145, 235, 249, 14, 239, 107,
-        49, 192, 214, 31, 181, 199, 106, 157, 184, 84, 204, 176, 115, 121, 50, 45, 127, 4, 150, 254, 138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180
-      )
-      if (it < 256) p[it] else p[it - 256]
-    }.let {p -> IntArray(512) {i -> p[i and 255]}}
+    return gx * dx + gy * dy
   }
 }
-
-/**
- * 风力向量数据类
- */
-data class WindVector(
-  val x: Float,
-  val y: Float,
-  val magnitude: Float,
-  val angle: Float = 0f
-)

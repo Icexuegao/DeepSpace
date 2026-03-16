@@ -353,8 +353,9 @@ class KeyCompiler : NormalCrafter("keyCompiler") {
       color = "F0511D".toColor()
     })
 
-    ambientSound = Sounds.loopElectricHum
-    ambientSoundVolume = 0.2f
+    ambientSound= Sounds.loopElectricHum
+    ambientSoundVolume=0.2f
+
     newConsume().apply {
       time(10800f)
       power(600f)

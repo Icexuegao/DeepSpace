@@ -39,13 +39,24 @@ class 冲压锻炉 : NormalCrafter("pressingForge") {
 
     newConsume().apply {
       time(45f)
-      items(IItems.铱锇矿, 45)
+      items(IItems.铱锇矿, 25)
       liquid(Liquids.water, 1f)
-      power(27.5f)
+      power(2.5f)
     }
     newProduce().apply {
-      items(IItems.铱板, 15)
-      liquid(ILiquids.废水, 1f)
+      items(IItems.铱板, 10)
+      liquid(ILiquids.废水, 25f/60f)
+    }
+
+    newConsume().apply {
+      time(90f)
+      items(IItems.铱锇矿, 50)
+      liquid(Liquids.water, 3f)
+      power(2.5f)
+    }
+    newProduce().apply {
+      items(IItems.铱板, 25)
+      liquid(ILiquids.废水, 60f/60f)
     }
   }
 }

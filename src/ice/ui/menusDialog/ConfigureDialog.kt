@@ -96,7 +96,6 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       }.row()
       it.addBox("删除科技树所有缓存物品", {true}, clean = true) {_, _ ->
         Sgl.researches.reset()
-        SglTechThree.test1.researchProcess(2)
       }.row()
       it.addBox("星球区块调试", SettingValue::星球区块调试) {box, _ ->
         SettingValue.星球区块调试 = box.isChecked

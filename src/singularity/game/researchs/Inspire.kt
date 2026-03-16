@@ -3,7 +3,6 @@ package singularity.game.researchs
 import arc.Core
 import arc.Events
 import arc.func.Boolf
-import arc.func.Cons
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.type.UnitType
@@ -39,9 +38,9 @@ abstract class Inspire {
     if (name == null) name = "inspire_" + project.name
     applied = Core.settings.getBool(name + "_applied", false)
 
-    localized = Core.bundle.get("research." + name + ".inspire")
+    localized = Core.bundle.get("research.$name.inspire")
     description = Core.bundle.get(
-      "research." + name + ".inspire.description", Core.bundle.format("infos.inspiredBy", project.getLocalizedName())
+      "research.$name.inspire.description", Core.bundle.format("infos.inspiredBy", project.getLocalizedName())
     )
   }
 
@@ -53,7 +52,7 @@ abstract class Inspire {
 
     project.researchProcess((project.realRequireTechs * provProgress).toInt())
 
-    Events.fire<ResearchInspiredEvent?>(ResearchInspiredEvent(this, project))
+    Events.fire(ResearchInspiredEvent(this, project))
   }
 
   open fun reset() {
@@ -121,15 +120,15 @@ abstract class Inspire {
     override fun init(project: ResearchProject) {
       super.init(project)
 
-      localized = Core.bundle.format("research.inspire.researched", researchProject.getLocalizedName())
+      localized = "研究 ${researchProject.getLocalizedName()}"
     }
 
     override fun applyTrigger(project: ResearchProject) {
-      Events.on<ResearchCompletedEvent?>(ResearchCompletedEvent::class.java, Cons {e: ResearchCompletedEvent? ->
-        if (!applied && e!!.research == researchProject) {
+      Events.on(ResearchCompletedEvent::class.java) {e: ResearchCompletedEvent ->
+        if (!applied && e.research == researchProject) {
           apply(project)
         }
-      })
+      }
     }
   }
 
@@ -160,11 +159,11 @@ abstract class Inspire {
     }
 
     override fun applyTrigger(project: ResearchProject) {
-      Events.on<EventType.BlockBuildEndEvent?>(EventType.BlockBuildEndEvent::class.java, Cons {e: EventType.BlockBuildEndEvent? ->
-        if (!applied && e!!.team === Vars.player.team() && e.tile.build.block === block) {
+      Events.on(EventType.BlockBuildEndEvent::class.java) {e: EventType.BlockBuildEndEvent ->
+        if (!applied && e.team === Vars.player.team() && e.tile.block() === block) {
           apply(project)
         }
-      })
+      }
     }
   }
 
@@ -195,11 +194,11 @@ abstract class Inspire {
     }
 
     override fun applyTrigger(project: ResearchProject) {
-      Events.on<EventType.UnitCreateEvent?>(EventType.UnitCreateEvent::class.java, Cons {e: EventType.UnitCreateEvent? ->
-        if (!applied && (e!!.spawner.team() === Vars.player.team() || e.spawnerUnit.team() === Vars.player.team()) && e.unit.type === unitType) {
+      Events.on(EventType.UnitCreateEvent::class.java) {e: EventType.UnitCreateEvent ->
+        if (!applied && (e.spawner.team() === Vars.player.team() || e.spawnerUnit.team() === Vars.player.team()) && e.unit.type === unitType) {
           apply(project)
         }
-      })
+      }
     }
   }
 }

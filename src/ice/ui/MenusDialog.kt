@@ -10,10 +10,12 @@ import arc.scene.ui.Dialog
 import arc.scene.ui.Image
 import arc.scene.ui.layout.Table
 import arc.util.Align
+import arc.util.Scaling
 import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.ui.iPaneG
+import ice.library.struct.asDrawable
 import ice.library.world.Load
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*
@@ -92,7 +94,9 @@ object MenusDialog : Dialog(), Load {
         it1.add(middle).grow().margin(backMargin)
         it1.table(back) { it2 ->
           it2.table { it.image(IStyles.deepSpaceVer).color(IceColor.b5).expand().top() }.grow().row()
-          it2.table { it.add(Image(IStyles.flower)).color(IceColor.b5).expand().bottom() }.grow()
+          it2.table {
+            it.add(Image(IStyles.flower.asDrawable(), Scaling.fit)).size(160f).expand().bottom()
+          }.grow()
         }.margin(backMargin).width(200f).growY()
       }.grow()
     }.pad(0f).grow()
@@ -105,7 +109,6 @@ object MenusDialog : Dialog(), Load {
   }
 
   override fun show(stage: Scene): Dialog {
-    //build()
     show(stage, Actions.sequence(Actions.alpha(0f), Actions.fadeIn(0.4f, Interp.fade)))
     centerWindow()
     return this

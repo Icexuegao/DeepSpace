@@ -149,7 +149,7 @@ object IStyles {
   val menusButton_tech_point = IFiles.findModPng("menusButton_tech_point").asDrawable()
   val menusButton_database = IFiles.findModPng("menusButton_database").asDrawable()
 
-  val flower = IFiles.findModPng("flower").apply {
+  val flower = IFiles.findModPng("menusButton-flower").apply {
     texture.setFilter(Texture.TextureFilter.linear)
   }
   val buttonDown = IFiles.findModPng("buttonDown")

@@ -36,7 +36,19 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
     bundle {
       desc(zh_CN, "物质逆化器","消耗介质,将反物质引导入简并态中子聚合物容器中" ,"将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到容器中")
     }
-    requirements(Category.crafting, ItemStack.with())
+    requirementPairs(Category.crafting,
+
+      IItems.简并态中子聚合物 to 20,
+
+      IItems.强化合金 to 50,
+
+      IItems.铪锭 to 50,
+
+      IItems.电子元件 to 40,
+
+      IItems.充能FEX水晶 to 50,
+
+      IItems.絮凝剂 to  50)
     size = 5
 
     placeablePlayer = false

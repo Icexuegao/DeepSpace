@@ -73,7 +73,7 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
     newConsume().apply {
       time(60f)
       power(1.2f)
-      item(IItems.低温化合物,1)
+      items(IItems.低温化合物 , 1, IItems.钴锭,1)
       liquid(ILiquids.碱液,32f/60f)
     }
     newProduce().apply {

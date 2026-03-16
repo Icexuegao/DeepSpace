@@ -30,7 +30,7 @@ class FEXPhaseMixer:NormalCrafter("FEX_phase_mixer"){
 
   newConsume()
   consume!!.time(120f)
-  consume!!.item(Items.phaseFabric, 1)
+  consume!!.item(IItems.钍锭, 2)
   consume!!.liquid(ILiquids.FEX流体, 0.2f)
   consume!!.power(1.9f)
   newProduce()

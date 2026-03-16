@@ -46,8 +46,8 @@ open class 焚化炉 : SglBlock("incinerator") {
 
     conductivePower = true
     hasPower = true
-    rotate = true
-    rotateDraw = false
+  //  rotate = true
+ //   rotateDraw = false
     drawArrow = false
     hasLiquids = true
     hasItems = true
@@ -103,8 +103,7 @@ open class 焚化炉 : SglBlock("incinerator") {
     override fun buildConfiguration(table: Table) {
       val distTargetConfigTable = DistTargetConfigTable(0, config, arrayOf(GridChildType.acceptor), arrayOf(ContentType.item, ContentType.liquid), true, {c ->
         configure(c.pack())
-      }) {
-      }
+      }) {}
       table.add(distTargetConfigTable)
       table.background = IStyles.paneLeft
     }
@@ -114,7 +113,7 @@ open class 焚化炉 : SglBlock("incinerator") {
     }
 
     override fun updateTile() {
-      heat = Mathf.approachDelta(heat, if (consumer.valid) 1f else 0f, 0.04f)
+      heat = Mathf.approachDelta(heat, if (consumer.valid &&enabled) 1f else 0f, 0.04f)
     }
 
     override fun read(read: Reads, revision: Byte) {
@@ -139,11 +138,13 @@ open class 焚化炉 : SglBlock("incinerator") {
     }
 
     override fun acceptItem(source: Building, item: Item): Boolean {
-      if (config.any() && item != null && heat >= 0.5f) {
+      if (config.any() && heat >= 0.5f) {
         val configuredContents = config.get(GridChildType.acceptor, ContentType.item)
         if (configuredContents != null && configuredContents.contains(item)) {
           val dirBit = config.getDirections(GridChildType.acceptor, item)
-          if (tile.relativeTo(source.tile).toInt() in dirBit) return true
+          dirBit.forEach {
+            if (source == nearby(it)) return true
+          }
         }
         return false
       }
@@ -151,11 +152,14 @@ open class 焚化炉 : SglBlock("incinerator") {
     }
 
     override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
+
       if (config.any() && heat >= 0.5f && liquid.incinerable) {
         val configuredContents = config.get(GridChildType.acceptor, ContentType.liquid)
         if (configuredContents != null && configuredContents.contains(liquid)) {
           val dirBit = config.getDirections(GridChildType.acceptor, liquid)
-          if (tile.relativeTo(source.tile).toInt() in dirBit) return true
+          dirBit.forEach {
+            if (source == nearby(it)) return true
+          }
         }
         return false
       }

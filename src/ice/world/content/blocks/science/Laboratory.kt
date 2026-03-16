@@ -66,7 +66,7 @@ class Laboratory(name: String) : SglBlock(name) {
     }
 
     override fun updateTile() {
-      SglTechThree.test1.researchProcess(1)
+      //SglTechThree.test8.researchProcess(1)
       warmup = if (efficiency > 0) {
         progress = 0f
         Mathf.approachDelta(warmup, 1f, 0.1f)

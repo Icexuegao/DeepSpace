@@ -49,8 +49,8 @@ abstract class RevealGroup(protected val name: String?) {
     }
 
     override fun applyTrigger() {
-      Events.on(ResearchCompletedEvent::class.java) {e: ResearchCompletedEvent? ->
-        if (!revealed && e!!.research === project) {
+      Events.on(ResearchCompletedEvent::class.java) {e: ResearchCompletedEvent ->
+        if (!revealed && e.research === project) {
           reveal()
         }
       }

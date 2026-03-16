@@ -93,6 +93,7 @@ object IUnitTypes : Load {
   val 重压 = HeavyPress()
   val 悲鸣 = Scream()
   val 断业 = BreakUp()
+  val 涤罪 = ClearingGround()
 
   val 幻影 = Phantom()
   val 弧光 = ArcLight()

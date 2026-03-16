@@ -10,6 +10,7 @@ import arc.math.Mathf
 import arc.math.geom.Point2
 import arc.struct.Seq
 import arc.util.Strings
+import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
@@ -201,7 +202,7 @@ class WindGenerator(name: String) : SglBlock(name) {
     fun powerEffecct() = powerProduction * 60 / basePowerProduction * warmup
 
     override fun getPowerProduction(): Float {
-      return (basePowerProduction / 3f * 2f + IVars.windField.getWindVector(tileX(), tileY()).magnitude * basePowerProduction) / 60f * warmup
+      return (basePowerProduction / 3f * 2f + IVars.windField.getMovingNoiseValue(tileX(), tileY()) * basePowerProduction) / 60f * warmup
     }
   }
 }

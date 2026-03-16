@@ -1,12 +1,10 @@
 package singularity.game.researchs
 
 import arc.func.Boolf
-import arc.func.Prov
 import arc.struct.OrderedMap
 import arc.struct.Seq
 import mindustry.ctype.UnlockableContent
 import mindustry.type.Planet
-import java.util.function.Consumer
 
 class ResearchGroup(val onPlanet: Planet) {
   private val projects = OrderedMap<String, ResearchProject>()
@@ -17,7 +15,7 @@ class ResearchGroup(val onPlanet: Planet) {
     project.group = this
   }
 
-  fun getResearch(name: String?): ResearchProject? {
+  fun getResearch(name: String): ResearchProject? {
     return projects.get(name)
   }
 
@@ -26,7 +24,7 @@ class ResearchGroup(val onPlanet: Planet) {
   }
 
   fun getResearchByContent(content: UnlockableContent?): ResearchProject? {
-    return projects.values().toSeq().find(Boolf {p: ResearchProject? -> p!!.contents.contains(content)})
+    return projects.values().toSeq().find {p: ResearchProject -> p.contents.contains(content)}
   }
 
   fun init() {

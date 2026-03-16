@@ -1,6 +1,5 @@
 package ice.content.block
 
-import ice.content.block.TurretBlocks
 import ice.library.world.Load
 
 object IBlocks : Load {
@@ -9,7 +8,7 @@ object IBlocks : Load {
     DefenseBlocks.load()
     ProductBlocks.load()
     NuclearBlocks.load()
-    Distribution.load()
+    Distributions.load()
     MatrixDistNet.load()
     PowerBlocks.load()
     LiquidBlocks.load()

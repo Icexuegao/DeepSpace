@@ -46,6 +46,7 @@ dependencies {
   implementation("org.commonmark:commonmark-ext-gfm-tables:0.20.0")
   implementation("org.commonmark:commonmark-ext-gfm-strikethrough:0.20.0")
   implementation("org.commonmark:commonmark-ext-ins:0.20.0")
+
   compileOnly(fileTree(mapOf("dir" to "lib", "include" to listOf("*.zip"))))
   compileOnly(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
   implementation("com.github.tommyettinger:RegExodus:0.1.10")

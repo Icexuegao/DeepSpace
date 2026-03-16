@@ -347,7 +347,7 @@ object NuclearBlocks : Load {
     newReact(IItems.浓缩钚239核燃料, 420f, 9.5f, true)
 
     addCoolant(0.25f)
-    consume!!.liquid(Liquids.cryofluid, 0.2f)
+    consume!!.liquid(ILiquids.急冻液, 0.2f)
 
     addTransfer(ItemStack(IItems.钚239, 1))
     consume!!.time(180f)
@@ -362,7 +362,7 @@ object NuclearBlocks : Load {
     consume!!.item(IItems.相位封装氦单元, 1)
 
     drawers = DrawMulti(
-      DrawDefault(), object : DrawLiquidRegion(Liquids.cryofluid) {
+      DrawDefault(), object : DrawLiquidRegion(ILiquids.急冻液) {
         init {
           suffix = "_top"
         }
@@ -389,7 +389,7 @@ object NuclearBlocks : Load {
     newReact(Items.thorium, 900f, 4.5f, false)
 
     addCoolant(0.25f)
-    consume!!.liquid(Liquids.cryofluid, 0.2f)
+    consume!!.liquid(ILiquids.急冻液, 0.2f)
 
     addTransfer(ItemStack(IItems.钚239, 1))
     consume!!.time(420f)
@@ -404,7 +404,7 @@ object NuclearBlocks : Load {
     consume!!.item(IItems.相位封装氦单元, 1)
 
     drawers = DrawMulti(
-      DrawDefault(), object : DrawLiquidRegion(Liquids.cryofluid) {
+      DrawDefault(), object : DrawLiquidRegion(ILiquids.急冻液) {
         init {
           suffix = "_top"
         }

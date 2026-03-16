@@ -59,10 +59,16 @@ public class Sgl {
   public static final Fi globalVars = dataDirectory.child("global_vars.bin");
   /** 模组持久全局变量备份文件 */
   public static final Fi globalVarsBackup = dataDirectory.child("global_vars.bin.bak");
-  /** 通知标签历史 */
+/*
+  */
+/** 通知标签历史 *//*
+
   public static final Fi notificationHistory = dataDirectory.child("notifyHistory.bin");
-  /** 通知标签历史备份 */
+  */
+/** 通知标签历史备份 *//*
+
   public static final Fi notificationHistoryBackup = dataDirectory.child("notifyHistory.bin");
+*/
 
   //URIs
   public static final String modDevelopGroup = "https://jq.qq.com/?_wv=1027&k=vjybgqDG";
@@ -184,7 +190,7 @@ public class Sgl {
       ui = new SglUI();
       ui.init();
 
-      configNotificationIO();
+      //configNotificationIO();
 
       //  int count = SglHint.all.size;
       // if (Sgl.config.loadInfo) Log.info("[Singularity][INFO] loading sgl hints, hints count: " + count);
@@ -202,7 +208,7 @@ public class Sgl {
 
   private static boolean saving;
 
-  private static void configNotificationIO() {
+/*  private static void configNotificationIO() {
     if (notificationHistory.exists() || notificationHistoryBackup.exists()) {
       try (Reads reads = notificationHistory.reads()) {
         ui.notificationFrag.loadHistory(reads);
@@ -231,7 +237,7 @@ public class Sgl {
         });
       }
     });
-  }
+  }*/
 
   private static void generatePostAtlas() {
     Log.info("[Singularity] load post generated atlas");

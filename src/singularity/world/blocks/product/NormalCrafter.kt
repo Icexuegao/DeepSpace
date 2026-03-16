@@ -102,6 +102,8 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
   var effectRange: Float = -1f
   var craftedSound: Sound = Sounds.none
   var craftedSoundVolume: Float = 0.5f
+
+
   var shouldConfig: Boolean = false
 
   /**同样的，这也是一个指针，指向当前编辑的produce */
@@ -296,14 +298,6 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
           ta!!.left().defaults().left()
           if (cons.showTime) {
             ta.add(TimeDisplay(cons.craftTime))
-            /*ta.stack(Table { o ->
-              o!!.left()
-              o.add(Image(SglDrawConst.time)).size(32f).scaling(Scaling.fit)
-            }, Table { o: Table? ->
-              o!!.left().bottom()
-              o.add(Strings.autoFixed(cons.craftTime / 60, 1) + StatUnit.seconds.localized()).style(Styles.outlineLabel)
-              o.pack()
-            })*/
             ta.add(" > ")
           }
           buildRecipeSimple(cons, prod, ta)
@@ -328,7 +322,6 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
   }
 
   open inner class NormalCrafterBuild : SglBuilding(), FactoryBuildComp {
-    var statusi = 2
     override var progress: Float = 0f
     override var totalProgress = 0f
     override var warmup: Float = 0f
@@ -351,7 +344,9 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
         drawcornerMark()
       }
     }
-
+    override fun shouldAmbientSound(): Boolean {
+      return consumeValid()
+    }
     override fun drawSelect() {
       super.drawSelect()
       if (!SettingValue.启用多合成角标常显&& !Vars.state.isEditor) {
@@ -359,7 +354,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       }
     }
     fun drawcornerMark(){
-      Draw.z(Layer.block + 1f)
+      Draw.z(Layer.overlayUI)
       producer?.current?.get(ProduceType.item)?.items[0]?.let {
         drawItemSelection(it.item)
         Draw.reset()
@@ -461,6 +456,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       updateProducer()
 
       updateFactory()
+
     }
 
     override fun handleItem(source: Building?, item: Item?) {

@@ -24,7 +24,7 @@ class NuclearEnergyModule(val entity: NuclearEnergyBuildComp) : BlockModule() {
 
     init {
       UpdatePool.receive("updateEnergyFlow") {
-        val nextFlowBuild = FieldHandler.getValueDefault<Building?>(Vars.ui.hudfrag.blockfrag, "nextFlowBuild")
+        val nextFlowBuild = FieldHandler.getValueDefault<Building>(Vars.ui.hudfrag.blockfrag, "nextFlowBuild")
         if (nextFlowBuild is NuclearEnergyBuildComp && nextFlowBuild.hasEnergy()) {
           if (lastShowFlow !== nextFlowBuild) {
             nextFlowBuild.energy().stopFlow()

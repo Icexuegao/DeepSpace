@@ -21,7 +21,6 @@ public class Singularity extends Mod {
   private static final ContentList[] modContents = new ContentList[]{
           new LiquidBlocks(),//物流方块
           new SglUnits(),//单位相关内容（单位、工厂）
-          new SglTechThree(),//科技树
   };
 
   private static final OverrideContentList[] overrideContents = new OverrideContentList[]{new OverrideTechThree(),};
@@ -52,6 +51,7 @@ public class Singularity extends Mod {
     for (ContentList list : Singularity.modContents) {
       list.load();
     }
+    SglTechThree.INSTANCE.load();
 
     if (Sgl.config.modReciprocalContent) {
       for (OverrideContentList override : Singularity.overrideContents) {

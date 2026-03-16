@@ -24,6 +24,7 @@ import arc.util.Scaling;
 import arc.util.Time;
 import arc.util.Tmp;
 import ice.content.IPlanets;
+import ice.ui.menusDialog.DataDialog;
 import mindustry.Vars;
 import mindustry.ctype.UnlockableContent;
 import mindustry.gen.Tex;
@@ -291,7 +292,9 @@ public class SglTechTreeDialog extends Table {
     for (Node node : nodes.values()) {
       for (ResearchProject project : node.project.getDependencies()) {
         Node parent = nodes.get(project);
-        parent.addChildren(node);
+        if (parent != null) {
+          parent.addChildren(node);
+        }
       }
     }
 
@@ -503,7 +506,7 @@ public class SglTechTreeDialog extends Table {
                 info.pane(Styles.noBarPane, conts -> {
                   for (UnlockableContent content : project.getContents()) {
                     conts.button(b -> b.image(content.uiIcon).scaling(Scaling.fit).pad(4f), Styles.cleart, () -> {
-                      Vars.ui.content.show(content);
+                      DataDialog.INSTANCE.showUnlockableContent(content);
                     }).size(32f).padLeft(4f);
                   }
                 }).scrollY(false).left();
@@ -511,7 +514,7 @@ public class SglTechTreeDialog extends Table {
                 info.table(conts -> {
                   for (UnlockableContent content : project.getContents()) {
                     conts.button(b -> b.image(content.uiIcon).scaling(Scaling.fit).pad(4f), Styles.cleart, () -> {
-                      Vars.ui.content.show(content);
+                      DataDialog.INSTANCE.showUnlockableContent(content);
                     }).size(32f).padLeft(4f);
                   }
                 }).left();

@@ -28,7 +28,7 @@ object CrafterBlocks : Load {
   val 导能回路装配器 = 导能回路装配器()
   val 高速粉碎机 = 高速粉碎机()
   val 钴钢压缩机 = 钴钢压缩机()
-  val 以太封装器 =以太封装器()
+  val 以太封装器 = 以太封装器()
   val 陶钢熔炼炉 = 陶钢熔炼炉()
   val 高能陶钢聚合炉 = 高能陶钢聚合炉()
   val 铈凝块混合器 = CeriumBlockMixer()
@@ -60,16 +60,12 @@ object CrafterBlocks : Load {
   val 物质逆化器 = SubstanceInverter()
 
   val 强子重构仪 = HadronReconstructor()
-
+  val 析构器 = Destructors()
 
   //待更改
-  val 裂变编织器 = FissionWeaver()
   val 密匙编译器 = KeyCompiler()
   val 热能冶炼炉 = ThermalSmelter()
   val 蒸馏净化器 = DistillPurifier()
   val 渗透净化器 = OsmoticPurifier()
   val FEX相位混合器 = FEXPhaseMixer()
-  val 析构器 = Destructors()
-
-
 }

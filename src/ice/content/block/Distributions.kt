@@ -41,7 +41,7 @@ import mindustry.world.meta.Env
 import singularity.world.blocks.distribute.ItemNode
 
 @Suppress("unused")
-object Distribution : Load {
+object Distributions : Load {
   val 基础传送带 = Conveyor("baseConveyor").apply {
     size = 1
     speed = 6f
@@ -418,37 +418,31 @@ object Distribution : Load {
     }
   }
 
-  val 物流枢纽 = LogisticsHub("logisticsHub").apply {
-    requirements(Category.distribution, IItems.铜锭, 10)
+  val 物流枢纽核心 = LogisticsHub("logisticsHub").apply {
     bundle {
-      desc(zh_CN, "物流枢纽")
+      desc(zh_CN, "物流枢纽核心")
     }
+    requirements(Category.distribution, IItems.电子元件, 50, IItems.导能回路, 100, IItems.钴钢, 200, IItems.强化合金, 50)
   }
   val 枢纽管道 = HubConduit("hubConduit").apply {
-    requirements(Category.distribution, IItems.铜锭, 1)
+    requirements(Category.distribution, IItems.锌锭, 1, IItems.导能回路, 1)
     bundle {
       desc(zh_CN, "枢纽管道")
     }
   }
   val 物流输入器 = LogisticsInput("logisticsInput").apply {
-    requirements(Category.distribution, IItems.铜锭, 1)
+    requirements(Category.distribution, IItems.铜锭, 20, IItems.导能回路, 5)
     bundle {
       desc(zh_CN, "物流输入器")
     }
   }
   val 物流输出器 = LogisticsOutput("logisticsOutput").apply {
-    requirements(Category.distribution, IItems.铜锭, 1)
     bundle {
       desc(zh_CN, "物流输出器")
     }
+    requirements(Category.distribution, IItems.锌锭, 1, IItems.电子元件, 1)
   }
-  val 无人机供货端 = DroneDeliveryTerminal("droneTeliveryTerminal").apply {
-    squareSprite = false
-    requirements(Category.distribution, IItems.铜锭, 50, IItems.单晶硅, 80, IItems.钴钢, 40, IItems.铪锭, 30)
-    bundle {
-      desc(zh_CN, "无人机供货端", "简约的无人运输模块,用于将物品从无人机需求端运输到无人机需求端")
-    }
-  }
+  val 无人机供货端 = DroneDeliveryTerminal("droneTeliveryTerminal")
   val 无人机需求端 = DroneReceivingRnd("droneReceivingRnd").apply {
     requirements(Category.distribution, IItems.铜锭, 20, IItems.单晶硅, 10)
     bundle {

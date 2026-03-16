@@ -42,6 +42,12 @@ open class BaseProducers {
     return items(*ItemStack.with(*items))
   }
 
+  fun items(vararg items: Pair<Item, Int>): ProduceItems<*> {
+    return add(ProduceItems(Array(items.size) {
+      ItemStack(items[it].first, items[it].second)
+    }))
+  }
+
   fun liquid(liquid: Liquid, amount: Float): ProduceLiquids<*> {
     return liquids(LiquidStack(liquid, amount))
   }
@@ -57,6 +63,7 @@ open class BaseProducers {
   fun power(prod: Float): ProducePower<*> {
     return add(ProducePower(prod))
   }
+
   fun energy(prod: Float): ProduceEnergy<*> {
     return add(ProduceEnergy(prod))
   }
@@ -102,7 +109,7 @@ open class BaseProducers {
   }
 
   fun display(stats: Stats) {
-    for (p in prod.values().toSeq().sort(Comparator { a: BaseProduce<*>, b: BaseProduce<*> -> a.type().id - b.type().id })) {
+    for (p in prod.values().toSeq().sort(Comparator {a: BaseProduce<*>, b: BaseProduce<*> -> a.type().id - b.type().id})) {
       p.display(stats)
     }
   }

@@ -10,13 +10,18 @@ import ice.ui.bundle.BaseBundle
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
 import mindustry.ctype.UnlockableContent
 import singularity.Singularity
+import singularity.contents.SglTechThree
 import singularity.core.SglEventTypes.ResearchCompletedEvent
 import singularity.world.blocks.research.ResearchDevice
 
-class ResearchProject (val name: String, val techRequires: Int, val techRequiresRandom: Int = 0): BaseBundle.Bundle {
+class ResearchProject(val name: String, val techRequires: Int, val techRequiresRandom: Int = 0) : BaseBundle.Bundle {
   val dependencies: Seq<ResearchProject> = Seq<ResearchProject>()
   val contents: Seq<UnlockableContent> = Seq<UnlockableContent>()
   val requireDevices: Seq<ResearchDevice?> = Seq<ResearchDevice?>()
+
+  init {
+    localizedName = name
+  }
 
   var description: String? = Core.bundle.get("research.$name.description")
   var slogan: String = "slogan"
@@ -42,6 +47,7 @@ class ResearchProject (val name: String, val techRequires: Int, val techRequires
   fun getLocalizedName(): String {
     return localizedName
   }
+
   fun hideTechs(): ResearchProject {
     hideTechs = true
     return this
@@ -52,22 +58,28 @@ class ResearchProject (val name: String, val techRequires: Int, val techRequires
     return this
   }
 
-  fun setInspire(inspire: Inspire?): ResearchProject {
-    this.inspire = inspire
-    return this
-  }
-
   fun setReveal(reveal: RevealGroup?): ResearchProject {
     this.reveal = reveal
     return this
   }
 
-  fun addDependency(vararg dependencies: ResearchProject?): ResearchProject {
+  fun addDependency(vararg dependencies: ResearchProject): ResearchProject {
+
     this.dependencies.addAll(*dependencies)
+
     return this
   }
 
-  fun addContent(vararg contents: UnlockableContent?): ResearchProject {
+  // 依赖应当在所有项目生成后开始
+  fun dependencies(vararg dependencies: String) {
+    SglTechThree.dependencies.add {
+      for (dependency in dependencies) {
+        addDependency(group!!.getResearch(dependency)!!)
+      }
+    }
+  }
+
+  fun addContent(vararg contents: UnlockableContent): ResearchProject {
     this.contents.addAll(*contents)
     return this
   }
@@ -124,7 +136,7 @@ class ResearchProject (val name: String, val techRequires: Int, val techRequires
 
   fun researchProcess(techPoints: Int): Boolean {
     if (this.isCompleted) return true
-    researched += techPoints
+    if (researched < realRequireTechs) researched += techPoints
 
     val res = checkComplete()
 

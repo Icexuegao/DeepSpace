@@ -14,6 +14,7 @@ import arc.math.geom.Geometry
 import arc.math.geom.Point2
 import arc.scene.Action
 import arc.scene.actions.Actions
+import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.layout.Table
 import arc.struct.IntSeq
 import arc.struct.ObjectMap
@@ -23,6 +24,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.graphics.TextureRegionDelegate
 import mindustry.Vars
 import mindustry.core.Renderer
 import mindustry.ctype.ContentType
@@ -56,9 +58,10 @@ open class ItemNode(name: String) : SglBlock(name) {
   val timerCheckMoved: Int = this.timers++
   var range: Int = 0
   var transportTime: Float = 2.0f
-  var endRegion: TextureRegion? = null
-  var bridgeRegion: TextureRegion? = null
-  var arrowRegion: TextureRegion? = null
+  var endRegion: TextureRegion by TextureRegionDelegate(this.name + "_end")
+  var bridgeRegion: TextureRegion by TextureRegionDelegate(this.name + "_bridge")
+  var arrowRegion: TextureRegion by TextureRegionDelegate(this.name + "_arrow")
+
   var fadeIn: Boolean = true
   var pulse: Boolean = false
   var arrowSpacing: Float = 4.0f
@@ -135,12 +138,6 @@ open class ItemNode(name: String) : SglBlock(name) {
     this.stats.add(Stat.itemsMoved, 60.0f / this.transportTime, StatUnit.itemsSecond)
   }
 
-  override fun load() {
-    super.load()
-    this.endRegion = Core.atlas.find(this.name + "_end")
-    this.bridgeRegion = Core.atlas.find(this.name + "_bridge")
-    this.arrowRegion = Core.atlas.find(this.name + "_arrow")
-  }
 
   fun drawBridge(req: BuildPlan, ox: Float, oy: Float, flip: Float) {
     if (!Mathf.zero(Renderer.bridgeOpacity)) {

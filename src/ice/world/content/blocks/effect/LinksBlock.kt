@@ -171,6 +171,7 @@ open class LinksBlock(name: String) : RangeBlock(name) {
         override fun afterReadAll() {
             super.afterReadAll()
             pos.forEach {
+              it?:return@forEach
                 if (addBuild(Vars.world.build(it))) {
                     builds.addUnique(Vars.world.build(it))
                 }

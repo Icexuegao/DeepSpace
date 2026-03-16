@@ -190,7 +190,7 @@ class Winter : SglTurret("winter"){
     consume!!.energy(1.1f)
     consume!!.liquids(
       *LiquidStack.with(
-        ILiquids.相位态FEX流体, 0.2f, Liquids.cryofluid, 0.2f
+        ILiquids.相位态FEX流体, 0.2f, ILiquids.急冻液, 0.2f
       )
     )
 

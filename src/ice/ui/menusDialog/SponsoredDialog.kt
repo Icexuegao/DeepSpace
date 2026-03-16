@@ -43,8 +43,8 @@ object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.me
   }
 
   init {
-    SponsoredTable("一得阁拉米∽", "762214119", 50f).itooltip("感谢Alon以及团队成员在DeepSpace模组上的辛勤付出")
-    SponsoredTable("小笨喵∽", "3881959748", 30f).itooltip("希望大家多赞助赞助作者")
+    SponsoredTable("一得阁拉米∽", "762214119", 70f).itooltip("感谢Alon以及团队成员在DeepSpace模组上的辛勤付出")
+    SponsoredTable("小笨喵∽", "3881959748", 45f).itooltip("希望大家多赞助赞助作者")
     SponsoredTable("minphea∽", "3757625379", 30f).itooltip("加入对立神教吧!")
     SponsoredTable("一无柠檬汁", "3591484752", 2f).itooltip("灌注alon喵")
   }

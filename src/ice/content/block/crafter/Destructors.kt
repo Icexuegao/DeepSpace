@@ -1,6 +1,7 @@
 package ice.content.block.crafter
 
 import arc.Core
+import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.draw.DrawMulti
 import mindustry.type.Category
@@ -16,11 +17,11 @@ class Destructors: Destructor("destructor") {
     bundle {
       desc(zh_CN, "析构器", "加速碰撞破坏物质的原子核结构,以分析物质的微观构成形态并建立原子空间构成的蓝图")
     }
-    requirements(Category.effect, ItemStack.with())
+    requirements(Category.crafting, IItems.简并态中子聚合物,100, IItems.矩阵合金,50, IItems.絮凝剂,40, IItems.强化合金,50, IItems.铱锭,60)
     size = 5
 
     placeablePlayer = false
-    recipeIndfo = Core.bundle.get("infos.destructItems")
+    recipeIndfo = "析构物品"
 
     drawers = DrawMulti(
       DrawBottom(), object : DrawPlasma() {

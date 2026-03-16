@@ -6,6 +6,7 @@ import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.math.Mathf
+import arc.util.Time
 import arc.util.Tmp
 import ice.IVars
 import mindustry.Vars
@@ -49,11 +50,11 @@ open class Noise2dBlock(name: String) : NormalCrafter(name) {
 
     override fun draw() {
       Vars.world.tiles.forEach {
-        Draw.color(Tmp.c1.set(Color.blue).lerp(Color.red,  IVars.windField.getWindVector(it.x.toInt(), it.y.toInt()).magnitude))
+        Draw.color(Tmp.c1.set(Color.blue).lerp(Color.red,  IVars.windField.getMovingNoiseValue(it.x.toInt(), it.y.toInt())))
         Fill.rect(it.x*8f, it.y*8f, 8f, 8f)
       }
       super.draw()
-      Tmp.v1.set(0f,24f).setAngle(IVars.windField.getWindVector(tileX(), tileY()).angle)
+      Tmp.v1.set(0f,24f).setAngle(IVars.windField.getMovingNoiseValue(tileX(), tileY()))
      // con.draw(x, y)
       Draw.rect(Items.copper.uiIcon, x+Tmp.v1.x, y+Tmp.v1.y)
     }

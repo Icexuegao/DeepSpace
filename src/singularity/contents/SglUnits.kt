@@ -315,7 +315,7 @@ class SglUnits : ContentList {
         machineLevel = 4
 
         newBooster(1.5f)
-        consume!!.liquid(Liquids.cryofluid, 2.4f)
+        consume!!.liquid(ILiquids.急冻液, 2.4f)
         newBooster(1.8f)
         consume!!.liquid(ILiquids.FEX流体, 2f)
       }
@@ -357,7 +357,7 @@ class SglUnits : ContentList {
         laserOffY = 2f
 
         newBooster(1.6f)
-        consume!!.liquid(Liquids.cryofluid, 3.2f)
+        consume!!.liquid(ILiquids.急冻液, 3.2f)
         newBooster(1.9f)
         consume!!.liquid(ILiquids.FEX流体, 2.6f)
         newBooster(2.4f)
@@ -441,7 +441,7 @@ class SglUnits : ContentList {
         laserOffY = 4f
 
         newBooster(1.6f)
-        consume!!.liquid(Liquids.cryofluid, 4f)
+        consume!!.liquid(ILiquids.急冻液, 4f)
         newBooster(1.9f)
         consume!!.liquid(ILiquids.FEX流体, 3.8f)
         newBooster(2.4f)

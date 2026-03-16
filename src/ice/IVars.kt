@@ -11,10 +11,7 @@ import singularity.core.UpdatePool
 object IVars : Load {
   override fun setup() {
     Events.on(EventType.WorldLoadEndEvent::class.java) {
-      windField = WindField(Vars.world.tiles.width, Vars.world.tiles.height)
-    }
-    UpdatePool.receive("windField") {
-      if (::windField.isInitialized&& !Vars.state.isPaused)windField.update(Time.delta/60f)
+      windField = WindField()
     }
   }
 

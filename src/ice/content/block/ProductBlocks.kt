@@ -144,25 +144,28 @@ object ProductBlocks : Load {
   }
   val 晶簇粉碎器 = CrystalMiner()
   val 抽水机 = SolidPump("waterPump").apply {
+    bundle {
+      desc(zh_CN, "抽水机", "抽水机,可以抽取水源")
+    }
     size = 2
     baseEfficiency = 1f
     pumpAmount = 0.2f
     liquidCapacity = 60f
-    consumePower(3f)
-    bundle {
-      desc(zh_CN, "抽水机", "抽水机,可以抽取水源")
+    newConsume().apply {
+      power(3f)
     }
     requirements(Category.production, IItems.石英玻璃, 25, IItems.高碳钢, 20, IItems.单晶硅, 10)
   }
   val 大型抽水机 = SolidPump("largeWaterPump").apply {
-    rotate
+    bundle {
+      desc(zh_CN, "大型抽水机", "大型抽水机,可以抽取水源")
+    }
     size = 3
     baseEfficiency = 1f
     pumpAmount = 0.6f
     liquidCapacity = 120f
-    consumePower(6f)
-    bundle {
-      desc(zh_CN, "大型抽水机", "大型抽水机,可以抽取水源")
+    newConsume().apply {
+      power(6f)
     }
     requirements(Category.production, IItems.石英玻璃, 75, IItems.高碳钢, 40, IItems.铬锭, 70, IItems.单晶硅, 60)
   }
@@ -199,7 +202,7 @@ object ProductBlocks : Load {
 
     newConsume()
     consume!!.time(60f)
-    consume!!.liquid(Liquids.cryofluid, 0.2f)
+    consume!!.liquid(ILiquids.急冻液, 0.2f)
     consume!!.power(1.75f)
     newProduce()
     produce!!.item(IItems.岩层沥青, 2)
@@ -209,15 +212,15 @@ object ProductBlocks : Load {
 
     drawers = DrawMulti(
       DrawBottom(), object : DrawLiquidRegion(Liquids.water) {
-        init {
-          suffix = "_liquid"
-        }
-      }, object : DrawRegion("_rotator") {
-        init {
-          rotateSpeed = 1.5f
-          spinSprite = true
-        }
-      }, DrawDefault(), DrawRegion("_top")
+      init {
+        suffix = "_liquid"
+      }
+    }, object : DrawRegion("_rotator") {
+      init {
+        rotateSpeed = 1.5f
+        spinSprite = true
+      }
+    }, DrawDefault(), DrawRegion("_top")
     )
   }
   var 岩石粉碎机 = FloorCrafter("rock_crusher").apply {
@@ -271,29 +274,29 @@ object ProductBlocks : Load {
 
     drawers = DrawMulti(
       DrawBottom(), DrawDefault(), object : DrawBlock() {
-        var rim: TextureRegion? = null
-        val heatColor: Color = Color.valueOf("ff5512")
+      var rim: TextureRegion? = null
+      val heatColor: Color = Color.valueOf("ff5512")
 
-        override fun draw(build: Building?) {
-          val e = build as NormalCrafter.NormalCrafterBuild
+      override fun draw(build: Building?) {
+        val e = build as NormalCrafter.NormalCrafterBuild
 
-          Draw.color(heatColor)
-          Draw.alpha(e.workEfficiency() * 0.6f * (1f - 0.3f + Mathf.absin(Time.time, 3f, 0.3f)))
-          Draw.blend(Blending.additive)
-          Draw.rect(rim, e.x, e.y)
-          Draw.blend()
-          Draw.color()
-        }
+        Draw.color(heatColor)
+        Draw.alpha(e.workEfficiency() * 0.6f * (1f - 0.3f + Mathf.absin(Time.time, 3f, 0.3f)))
+        Draw.blend(Blending.additive)
+        Draw.rect(rim, e.x, e.y)
+        Draw.blend()
+        Draw.color()
+      }
 
-        override fun load(block: Block) {
-          rim = Core.atlas.find(block.name + "_rim")
-        }
-      }, object : DrawRegion("_rotator") {
-        init {
-          rotateSpeed = 2.8f
-          spinSprite = true
-        }
-      }, DrawRegion("_top")
+      override fun load(block: Block) {
+        rim = Core.atlas.find(block.name + "_rim")
+      }
+    }, object : DrawRegion("_rotator") {
+      init {
+        rotateSpeed = 2.8f
+        spinSprite = true
+      }
+    }, DrawRegion("_top")
     )
   }
   var 潮汐钻头 = ExtendableDrill("tidal_drill").apply {
@@ -326,26 +329,26 @@ object ProductBlocks : Load {
 
     drawers = DrawMulti(
       DrawBottom(), object : DrawExpandPlasma() {
-        init {
-          plasmas = 2
-          plasma1 = Pal.reactorPurple
-          plasma2 = Pal.reactorPurple2
-        }
-      }, DrawDefault(), object : DrawBlock() {
-        override fun draw(build: Building) {
-          val e = build as ExtendableDrill.ExtendableDrillBuild
-          val z = Draw.z()
-          Draw.z(Layer.bullet)
-          Draw.color(Pal.reactorPurple)
-          val lerp = (-2.2 * e.warmup.toDouble().pow(2.0) + 3.2 * e.warmup).toFloat()
-          Fill.circle(e.x, e.y, 3 * e.warmup)
-          SglDraw.drawLightEdge(
-            e.x, e.y, 26 * lerp, 2.5f * lerp, e.rotatorAngle, 1f, 16 * lerp, 2f * lerp, -e.rotatorAngle, 1f
-          )
-          Draw.z(z)
-          Draw.color()
-        }
-      }, DrawRegion("_top")
+      init {
+        plasmas = 2
+        plasma1 = Pal.reactorPurple
+        plasma2 = Pal.reactorPurple2
+      }
+    }, DrawDefault(), object : DrawBlock() {
+      override fun draw(build: Building) {
+        val e = build as ExtendableDrill.ExtendableDrillBuild
+        val z = Draw.z()
+        Draw.z(Layer.bullet)
+        Draw.color(Pal.reactorPurple)
+        val lerp = (-2.2 * e.warmup.toDouble().pow(2.0) + 3.2 * e.warmup).toFloat()
+        Fill.circle(e.x, e.y, 3 * e.warmup)
+        SglDraw.drawLightEdge(
+          e.x, e.y, 26 * lerp, 2.5f * lerp, e.rotatorAngle, 1f, 16 * lerp, 2f * lerp, -e.rotatorAngle, 1f
+        )
+        Draw.z(z)
+        Draw.color()
+      }
+    }, DrawRegion("_top")
     )
   }
   var 引力延展室 = ExtendMiner("force_field_extender").apply {
