@@ -1,6 +1,7 @@
 package ice.content.block
 
 import ice.content.IItems
+import ice.content.block.liquid.P2PLiquidNode
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
@@ -56,7 +57,7 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.高碳钢, 1, IItems.锌锭, 1, IItems.石英玻璃, 1)
     addContentInitEvent {
       bridgeReplacement = 导管桥
-      junctionReplacement = 基础液体交叉器
+      junctionReplacement = 基础流体交叉器
     }
   }
   val 流金导管 = Conduit("fluxGoldConduit").apply {
@@ -68,7 +69,7 @@ object LiquidBlocks : Load {
     }
     addContentInitEvent {
       bridgeReplacement = 导管桥
-      junctionReplacement = 基础液体交叉器
+      junctionReplacement = 基础流体交叉器
     }
   }
   val 动脉导管 = Conduit("arteryConduit").apply {
@@ -85,7 +86,7 @@ object LiquidBlocks : Load {
     }
     addContentInitEvent {
       bridgeReplacement = 动脉导管桥
-      junctionReplacement = 基础液体交叉器
+      junctionReplacement = 基础流体交叉器
     }
   }
   val 紊态导管 = ArmoredConduit("disorderedConduit").apply {
@@ -97,7 +98,7 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.钴钢, 1, IItems.铅锭, 2, IItems.石英玻璃, 1)
     addContentInitEvent {
       bridgeReplacement = 导管桥
-      junctionReplacement = 基础液体交叉器
+      junctionReplacement = 基础流体交叉器
     }
   }
 
@@ -108,7 +109,7 @@ object LiquidBlocks : Load {
     liquidCapacity = 10f
     requirements(Category.liquid, IItems.锌锭, 5, IItems.石英玻璃, 10)
     bundle {
-      desc(zh_CN, "导管桥", "在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输液体")
+      desc(zh_CN, "导管桥", "在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输流体")
     }
   }
   val 装甲导管桥 = TransferNode("bridgeConduitArmored").apply {
@@ -137,7 +138,7 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.铜锭, 8, IItems.锌锭, 10, IItems.石英玻璃, 20)
 
     bundle {
-      desc(zh_CN, "长距导管桥", "消耗电力,在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输液体")
+      desc(zh_CN, "长距导管桥", "消耗电力,在以自我为中心且边长为${2 * range + 1}的正方形范围内,向任意方向传输流体")
     }
   }
   val 动脉导管桥 = TransferNode("bridgeConduitArtery").apply {
@@ -155,15 +156,18 @@ object LiquidBlocks : Load {
       desc(zh_CN, "动脉导管桥")
     }
   }
-  val 基础液体路由器 = LiquidRouter("baseLiquidRouter").apply {
+  val 基础流体路由器 = LiquidRouter("baseLiquidRouter").apply {
     size = 1
     health = 100
     requirements(Category.liquid, IItems.铜锭, 4, IItems.石英玻璃, 2)
     bundle {
-      desc(zh_CN, "基础液体路由器", "接受一个方向的液体输入,并平均输出到其他3个方向,可以储存一定量的液体")
+      desc(zh_CN, "基础流体路由器", "接受一个方向的流体输入,并平均输出到其他3个方向,可以储存一定量的流体")
     }
   }
-  val 装甲液体路由器 = LiquidRouter("armoredLiquidRouter").apply {
+  val 装甲流体路由器 = LiquidRouter("armoredLiquidRouter").apply {
+    bundle {
+      desc(zh_CN, "装甲流体路由器", "向各个方向快速运输流体")
+    }
     armor = 4f
     liquidCapacity = 60f
     liquidPressure = 1.1f
@@ -171,18 +175,14 @@ object LiquidBlocks : Load {
     underBullets = true
     placeableLiquid = true
     requirements(Category.liquid, IItems.石英玻璃, 2, IItems.陶钢, 1, IItems.铱板, 3)
-    bundle {
-      desc(zh_CN, "装甲液体路由器", "向各个方向快速运输液体")
-    }
   }
-  val 基础液体交叉器 = LiquidJunction("baseLiquidJunction").apply {
+  val 基础流体交叉器 = LiquidJunction("baseLiquidJunction").apply {
+    bundle {
+      desc(zh_CN, "基础流体交叉器")
+    }
     size = 1
     health = 80
     requirements(Category.liquid, IItems.黄铜锭, 5, IItems.石英玻璃, 5)
-
-    bundle {
-      desc(zh_CN, "基础液体交叉器")
-    }
   }
   val 流体容器 = LiquidRouter("liquidContainer").apply {
     size = 2
@@ -218,7 +218,7 @@ object LiquidBlocks : Load {
     placeableLiquid = true
     requirements(Category.liquid, IItems.铱板, 85, IItems.陶钢, 55, IItems.石英玻璃, 35)
     bundle {
-      desc(zh_CN, "装甲储液罐", "双层复合装甲,内置的修复夹层可快速修复罐体,使其更安全地储存大量液体")
+      desc(zh_CN, "装甲储液罐", "双层复合装甲,内置的修复夹层可快速修复罐体,使其更安全地储存大量流体")
     }
   }
   val 流体枢纽 = MultipleLiquidBlock("fluidJunction").apply {
@@ -246,4 +246,5 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.单晶硅, 20, IItems.铝锭, 25, IItems.铬锭, 15)
     size = 1
   }
+  val p2p流体节点= P2PLiquidNode()
 }

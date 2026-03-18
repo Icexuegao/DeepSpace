@@ -38,7 +38,7 @@ open class 焚化炉 : SglBlock("incinerator") {
 
   init {
     BaseBundle.bundle {
-      desc(zh_CN, "焚化炉", "智能销毁液体和物品,可进行二级面板配置,精准控制每一个输入源")
+      desc(zh_CN, "焚化炉", "智能销毁流体和物品,可进行二级面板配置,精准控制每一个输入源")
     }
     size = 1
     flameColor = IceColor.b4

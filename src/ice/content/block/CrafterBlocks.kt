@@ -36,6 +36,7 @@ object CrafterBlocks : Load {
   val 生物钢重组器 = BiomassReformer()
   val 血浆过滤器 = PlasmaFilter()
   val 血肉分离机 = BloodExtractor()
+  val 密匙编译器 = KeyCompiler()
 
   val 电解机 = Electrolytor()
   val 渗透分离槽 = OsmoticSeparationTank()
@@ -47,6 +48,12 @@ object CrafterBlocks : Load {
 
   val 洗矿机 = OreWasher()
   val 结晶器 = Crystallizer()
+
+
+  val 热能冶炼炉 = ThermalSmelter()
+  val 蒸馏净化器 = DistillPurifier()
+  val 渗透净化器 = OsmoticPurifier()
+  val FEX相位混合器 = FEXPhaseMixer()
 
   val 燃料封装机 = FuelPackager()
   val 气体相位封装机 = GasPhasePacker()
@@ -63,9 +70,5 @@ object CrafterBlocks : Load {
   val 析构器 = Destructors()
 
   //待更改
-  val 密匙编译器 = KeyCompiler()
-  val 热能冶炼炉 = ThermalSmelter()
-  val 蒸馏净化器 = DistillPurifier()
-  val 渗透净化器 = OsmoticPurifier()
-  val FEX相位混合器 = FEXPhaseMixer()
+
 }

@@ -104,8 +104,8 @@ init {
       return this.items as SpliceItemModule?
     }
 
-    override fun liquids(): SpliceLiquidModule? {
-      return this.liquids as SpliceLiquidModule?
+    override fun liquids(): SpliceLiquidModule {
+      return this.liquids as SpliceLiquidModule
     }
 
     public override fun create(block: Block, team: Team): NormalCrafterBuild {

@@ -15,19 +15,19 @@ open class MediumCrafter(name: String) : NormalCrafter(name), MediumComp {
 
   init {
 
-    buildType = Prov { MediumCrafterBuild() }
+    buildType = Prov(::MediumCrafterBuild)
   }
 
   override fun init() {
     super.init()
     var m: ProduceMedium<*>?
     for (producer in producers) {
-      outputMedium = outputMedium or ((producer.get(ProduceType.medium).also { m = it }) != null && (m!!.product.also { mediumMoveRate = it }) > 0)
+      outputMedium = outputMedium or ((producer.get(ProduceType.medium).also {m = it}) != null && (m!!.product.also {mediumMoveRate = it}) > 0)
     }
   }
 
   inner class MediumCrafterBuild : NormalCrafterBuild(), MediumBuildComp {
-    override var mediumContains: Float= 0f
+    override var mediumContains: Float = 0f
 
     override fun acceptMedium(source: MediumBuildComp): Boolean {
       return consumer.current != null && consumer.current!!.get(ConsumeType.medium) != null && super.acceptMedium(source)

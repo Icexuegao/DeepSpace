@@ -22,7 +22,7 @@ class TextureRegionDelegate(var initialValue: String, var def: String = "") : Te
         }
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): TextureRegion {
+operator fun getValue(thisRef: Any?, property: KProperty<*>): TextureRegion {
         val find = Core.atlas.find(initialValue)
         value = value ?: if (find.found() && def.isEmpty()) find else Core.atlas.find(def)
         return value!!

@@ -10,7 +10,6 @@ import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
-import ice.library.struct.log
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.game.Team
@@ -59,7 +58,7 @@ class OrientationProjector(name: String) : LinksBlock(name) {
     stats.add(Stat.speedIncrease, "+" + (speedBoost * 100f - 100) + "%")
   }
 
-  inner class OrientationProjectorBuildEnd : LinksBlockBuildEnd() {
+  inner class OrientationProjectorBuildEnd : LinksBlockBuild() {
     override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
       orientationProjectors.add(this)
       return super.init(tile, team, shouldAdd, rotation)

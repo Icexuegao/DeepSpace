@@ -2,10 +2,14 @@ package ice.content
 
 import arc.util.Scaling
 import ice.content.block.CrafterBlocks
+import ice.content.block.DefenseBlocks
 import ice.graphics.IceColor
+import ice.library.IFiles.appendModName
 import ice.library.scene.element.typinglabel.TLabel
+import ice.library.scene.style.DynamicTextureDrawable
 import ice.library.scene.ui.itooltip
 import ice.type.Remains
+import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
@@ -95,83 +99,12 @@ object Remainss {
       }
     }
   }
-  val 不朽者胚胎 = Remains("不朽者胚胎").apply {
-    val pos = 2
-    level = 1
-    color = IceColor.r2
-    install = {
-      slotPos += pos
-    }
-    uninstall = {
-      slotPos -= pos
-    }
-    val text = "一个被囚禁的血肉胚胎\n拥抱我,我将赐你永恒\n不必畏惧刀剑与瘟疫,不必屈服于时光与死亡\n用你的过去,换取未来\n用你的灵魂,换取存在\n直至你我合而为一"//
-    setDescriptionTable {
-      for (string in text.split("\n")) {
-        it.add(TLabel(string)).grow().wrap().pad(5f).color(color).row()
-      }
-    }
-    effect = "遗物槽位+[$pos]"
-    disabled = {
-      Vars.state.isGame || (RemainsDialog.enableSeq.contains(this) && RemainsDialog.enableSeq.size > slotPos - pos)
-    }
-  }
-  val 脊骨寄生虫 = Remains("脊骨寄生虫").apply {
-    color = IceColor.r2
-    setDescriptionTable {
-      it.add("一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合").grow().wrap().pad(5f).color(color).row()
-      it.table { table ->
-        table.add("影响单位: ").pad(5f).color(color)
-        table.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")
-      }
-    }
-    val fg = 1.2f
-    effect = "[爬行类]血肉畸变体速度提升[${((fg - 1) * 100).toInt()}%]"
-    install = {
-      IUnitTypes.蚀虻.speed *= fg
-      IUnitTypes.蚀虻.stats = Stats()
-      IUnitTypes.蚀虻.checkStats()
-      IUnitTypes.蚀虻Middle.speed *= fg
-      IUnitTypes.蚀虻Middle.stats = Stats()
-      IUnitTypes.蚀虻Middle.checkStats()
-      IUnitTypes.蚀虻End.speed *= fg
-      IUnitTypes.蚀虻End.stats = Stats()
-      IUnitTypes.蚀虻End.checkStats()
-    }
-    uninstall = {
-      IUnitTypes.蚀虻.speed /= fg
-      IUnitTypes.蚀虻.stats = Stats()
-      IUnitTypes.蚀虻.checkStats()
-      IUnitTypes.蚀虻Middle.speed /= fg
-      IUnitTypes.蚀虻Middle.stats = Stats()
-      IUnitTypes.蚀虻Middle.checkStats()
-      IUnitTypes.蚀虻End.speed /= fg
-      IUnitTypes.蚀虻End.stats = Stats()
-      IUnitTypes.蚀虻End.checkStats()
-    }
-  }
-  val 心跳鼓 = Remains("心跳鼓").apply {
-    color = IceColor.r2
-    setDescription("带有奇异弹性的心肌隔膜,沉稳的节拍能让你的心跳同步")
-
-    effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
-    install = {
-      IStatus.回响.speedMultiplier += 0.2f
-      IStatus.回响.stats = Stats()
-      IStatus.回响.checkStats()
-    }
-    uninstall = {
-      IStatus.回响.speedMultiplier -= 0.2f
-      IStatus.回响.stats = Stats()
-      IStatus.回响.checkStats()
-    }
-  }
   val 玄岩板 = Remains("玄岩板").apply {
     setDescription("由奇异,沉重的玄武岩打磨而成")
     effect = "[${CrafterBlocks.碳控熔炉.localizedName}]所需燃料减少[1]"
     var itemStack = ItemStack()
     CrafterBlocks.碳控熔炉.consumers.find {
-      it.get(ConsumeType.item)!!.consItems!!.find { stack ->
+      it.get(ConsumeType.item)!!.consItems!!.find {stack ->
         val bool: Boolean = stack.item == IItems.生煤
         if (bool) itemStack = stack
         bool
@@ -222,6 +155,100 @@ object Remainss {
       lucifer.speed -= 1f
       lucifer.stats = Stats()
       lucifer.checkStats()
+    }
+  }
+
+  val 不朽者胚胎 = Remains("不朽者胚胎").apply {
+    val pos = 2
+    level = 1
+    color = IceColor.r2
+    install = {
+      slotPos += pos
+    }
+    uninstall = {
+      slotPos -= pos
+    }
+    val text = "一个被囚禁的血肉胚胎\n拥抱我,我将赐你永恒\n不必畏惧刀剑与瘟疫,不必屈服于时光与死亡\n用你的过去,换取未来\n用你的灵魂,换取存在\n直至你我合而为一"//
+    setDescriptionTable {
+      for (string in text.split("\n")) {
+        it.add(TLabel(string)).grow().wrap().pad(5f).color(color).row()
+      }
+    }
+    effect = "遗物槽位+[$pos]"
+    disabled = {
+      Vars.state.isGame || (RemainsDialog.enableSeq.contains(this) && RemainsDialog.enableSeq.size > slotPos - pos)
+    }
+  }
+  val 脊骨寄生虫 = Remains("脊骨寄生虫").apply {
+    color = IceColor.r2
+    setDescriptionTable {
+      it.add("一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合").grow().wrap().pad(5f).color(color).row()
+      it.table {table ->
+        table.add("影响单位: ").pad(5f).color(color)
+        table.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")
+      }
+    }
+    val fg = 1.2f
+    effect = "[爬行类]血肉畸变体速度提升[${((fg - 1) * 100).toInt()}%]"
+    install = {
+      IUnitTypes.蚀虻.speed *= fg
+      IUnitTypes.蚀虻.stats = Stats()
+      IUnitTypes.蚀虻.checkStats()
+      IUnitTypes.蚀虻Middle.speed *= fg
+      IUnitTypes.蚀虻Middle.stats = Stats()
+      IUnitTypes.蚀虻Middle.checkStats()
+      IUnitTypes.蚀虻End.speed *= fg
+      IUnitTypes.蚀虻End.stats = Stats()
+      IUnitTypes.蚀虻End.checkStats()
+    }
+    uninstall = {
+      IUnitTypes.蚀虻.speed /= fg
+      IUnitTypes.蚀虻.stats = Stats()
+      IUnitTypes.蚀虻.checkStats()
+      IUnitTypes.蚀虻Middle.speed /= fg
+      IUnitTypes.蚀虻Middle.stats = Stats()
+      IUnitTypes.蚀虻Middle.checkStats()
+      IUnitTypes.蚀虻End.speed /= fg
+      IUnitTypes.蚀虻End.stats = Stats()
+      IUnitTypes.蚀虻End.checkStats()
+    }
+  }
+  val 心跳鼓 = Remains("心跳鼓").apply {
+    color = IceColor.r2
+    setDescription("带有奇异弹性的心肌隔膜,沉稳的节拍能让你的心跳同步")
+
+    effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
+    install = {
+      IStatus.回响.speedMultiplier += 0.2f
+      IStatus.回响.stats = Stats()
+      IStatus.回响.checkStats()
+    }
+    uninstall = {
+      IStatus.回响.speedMultiplier -= 0.2f
+      IStatus.回响.stats = Stats()
+      IStatus.回响.checkStats()
+    }
+  }
+  val 多余的视线 = Remains("多余的视线").apply {
+    icon = DynamicTextureDrawable("多余的视线".appendModName()) {
+      it.frameCount = 24
+      it.frameDuration = 15f
+    }
+    color = IceColor.r2
+    effect = "相控雷达锁定上限+[10]"
+    setDescription("同一片神经系统的两个节点,我们相认的媒介")
+
+    install = {
+      DefenseBlocks.相控雷达.maxTargetSize += 10
+      DefenseBlocks.相控雷达.stats = Stats()
+      DefenseBlocks.相控雷达.checkStats()
+      DataDialog.flunAll()
+    }
+    uninstall = {
+      DefenseBlocks.相控雷达.maxTargetSize -= 10
+      DefenseBlocks.相控雷达.stats = Stats()
+      DefenseBlocks.相控雷达.checkStats()
+      DataDialog.flunAll()
     }
   }
 }

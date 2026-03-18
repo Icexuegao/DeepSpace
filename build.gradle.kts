@@ -4,6 +4,7 @@ import arc.util.serialization.JsonWriter
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
   extra["proUser"] = System.getProperty("user.name")
@@ -255,3 +256,7 @@ kotlin {
     jvmToolchain(17)
 }
 */
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.compilerOptions {
+  freeCompilerArgs.set(listOf("-XXLanguage:+NestedTypeAliases"))
+}

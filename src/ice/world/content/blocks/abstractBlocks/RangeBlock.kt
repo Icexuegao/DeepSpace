@@ -21,7 +21,6 @@ open class RangeBlock(name: String) : SglBlock(name) {
 
   open inner class RangeBlockBuild : SglBuilding() {
     override fun drawSelect() {
-      super.drawSelect()
       Drawf.circles(x, y, range, blockColor)
     }
 

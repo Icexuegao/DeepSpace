@@ -50,6 +50,7 @@ open class PhasedRadar(name: String) : SglBlock(name), SpliceBlockComp {
   var range: Int = 48
   var scanTime: Float = 15f
   private val timeId: Int
+  var maxTargetSize=10
 
   init {
     update = true
@@ -74,7 +75,7 @@ open class PhasedRadar(name: String) : SglBlock(name), SpliceBlockComp {
   override fun setStats() {
     super.setStats()
     stats.add(Stat.range, range.toFloat(), StatUnit.blocks)
-    stats.add(SglStat.maxTarget, 10f)
+    stats.add(SglStat.maxTarget, maxTargetSize.toFloat())
     stats.add(SglStat.effect) { t: Table? ->
       t!!.defaults().left().padLeft(5f)
       t.row()
@@ -152,7 +153,7 @@ open class PhasedRadar(name: String) : SglBlock(name), SpliceBlockComp {
         if (timer(timeId, scanTime)) {
           for (unit in Groups.unit) {
             var lenValid = false
-            if (unit.team !== team && unit.isFlying && ((Mathf.len(unit.x - centerPos.x, unit.y - centerPos.y) < range * Vars.tilesize).also { lenValid = it }) && !locking.contains(unit) && locking.size < min(chains.container.all.size, 10)) {
+            if (unit.team !== team && unit.isFlying && ((Mathf.len(unit.x - centerPos.x, unit.y - centerPos.y) < range * Vars.tilesize).also { lenValid = it }) && !locking.contains(unit) && locking.size < min(chains.container.all.size, maxTargetSize)) {
               locking.add(unit)
             } else if (unit.isFlying && !lenValid) {
               if (locking.remove(unit)) {

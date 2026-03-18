@@ -29,6 +29,7 @@ import singularity.Singularity
 import singularity.contents.SglTechThree
 import singularity.type.SglCategory
 import singularity.type.SglContentType
+import singularity.type.SglContents
 import singularity.ui.dialogs.SglTechTreeDialog
 import tmi.RecipeEntryPoint
 import universecore.UncCore
@@ -80,8 +81,8 @@ open class Ice : Mod() {
     Noise2dBlock("noise2d").apply {
       requirements(SglCategory.matrix, IItems.钴锭, 10)
     }
-    AtomSchematics.load()
     IItems.load()
+    AtomSchematics.load()
     ILiquids.load()
     IStatus.load()
     IUnitTypes.load()

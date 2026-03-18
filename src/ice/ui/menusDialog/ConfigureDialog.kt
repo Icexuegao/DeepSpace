@@ -10,6 +10,7 @@ import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
 import ice.audio.IMusics
 import ice.audio.ISounds
+import ice.content.AtomSchematics
 import ice.core.SettingValue
 import ice.entities.ModeDifficulty
 import ice.graphics.IStyles
@@ -96,6 +97,11 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       }.row()
       it.addBox("删除科技树所有缓存物品", {true}, clean = true) {_, _ ->
         Sgl.researches.reset()
+      }.row()
+      it.addBox("删除所有物品原理图", {true}, clean = true) {_, _ ->
+        for (schematic in AtomSchematics.AtomSchematic.all) {
+          schematic.cleanLock()
+        }
       }.row()
       it.addBox("星球区块调试", SettingValue::星球区块调试) {box, _ ->
         SettingValue.星球区块调试 = box.isChecked

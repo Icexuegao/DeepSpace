@@ -211,6 +211,18 @@ object IceStats : Load {
       desc(zh_CN, "连接 {0}/{1}")
     }
   }
+
+  val 连接范围 = IceStat("linkRange", IceStatCats.流体传输).apply {
+    bundle {
+      desc(zh_CN, "连接范围")
+    }
+  }
+  val 传输速度 = IceStat( "transportSpeed", IceStatCats.流体传输).apply {
+    bundle {
+      desc(zh_CN, "传输速度")
+    }
+  }
+
   val 正面免伤 = IceStat("frontReduceHarm", StatCat.function).apply {
     bundle {
       desc(zh_CN, "正面免伤")
@@ -310,6 +322,9 @@ object IceStats : Load {
 
   val 可选输入 = getStat("optionalInputs", UncStatCat.other) {
     desc(zh_CN, "可选输入")
+  }
+  val 未选择 = getStat("noSelect"){
+    desc(zh_CN, "未选择")
   }
 
   val 物品 = getStat("item") {

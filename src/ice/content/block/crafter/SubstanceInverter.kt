@@ -17,7 +17,6 @@ import mindustry.gen.Sounds
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import mindustry.world.draw.DrawBlock
 import mindustry.world.draw.DrawDefault
 import singularity.graphic.SglDraw
@@ -34,9 +33,10 @@ import universecore.graphics.lightnings.generator.VectorLightningGenerator
 class SubstanceInverter : MediumCrafter("substance_inverter") {
   init {
     bundle {
-      desc(zh_CN, "物质逆化器","消耗介质,将反物质引导入简并态中子聚合物容器中" ,"将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到容器中")
+      desc(zh_CN, "物质逆化器", "消耗介质,将反物质引导入简并态中子聚合物容器中", "将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到容器中")
     }
-    requirementPairs(Category.crafting,
+    requirementPairs(
+      Category.crafting,
 
       IItems.简并态中子聚合物 to 20,
 
@@ -48,10 +48,10 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
 
       IItems.充能FEX水晶 to 50,
 
-      IItems.絮凝剂 to  50)
+      IItems.絮凝剂 to 50
+    )
     size = 5
 
-    placeablePlayer = false
 
     itemCapacity = 20
     energyCapacity = 1024f
@@ -79,7 +79,7 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
       maxSpread = 2.25f
 
     }
-    initialed = Cons { e: SglBuilding ->
+    initialed = Cons {e: SglBuilding ->
       e.lightningDrawer = object : LightningContainer() {
         init {
           minWidth = 0.8f
@@ -99,13 +99,13 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
       }
     }
 
-    crafting = Cons { e: NormalCrafterBuild? ->
+    crafting = Cons {e: NormalCrafterBuild? ->
 
       if (SglDraw.clipDrawable(e!!.x, e.y, clipSize) && Mathf.chanceDelta((e.workEfficiency() * 0.1f).toDouble())) e.lightningDrawer!!.create(generator)
       if (Mathf.chanceDelta((e.workEfficiency() * 0.04f).toDouble())) SglFx.randomLightning.at(e.x, e.y, 0f, Pal.reactorPurple)
     }
 
-    craftTrigger = Cons { e: NormalCrafterBuild? ->
+    craftTrigger = Cons {e: NormalCrafterBuild? ->
       if (!SglDraw.clipDrawable(e!!.x, e.y, clipSize)) return@Cons
       val a = Mathf.random(1, 3)
 
@@ -121,7 +121,7 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
           SglFx.explodeImpWave.at(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple)
           Angles.randLenVectors(
             System.nanoTime(), Mathf.random(4, 7), 2f, 3.5f
-          ) { x: Float, y: Float -> SglParticleModels.floatParticle.create(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple, x, y, Mathf.random(3.25f, 4f)) }
+          ) {x: Float, y: Float -> SglParticleModels.floatParticle.create(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple, x, y, Mathf.random(3.25f, 4f))}
         } else {
           SglFx.spreadLightning.at(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple)
         }
@@ -135,7 +135,7 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
 
         val e = build as NormalCrafterBuild
 
-        SglDraw.drawBloomUnderBlock(e) { b: NormalCrafterBuild ->
+        SglDraw.drawBloomUnderBlock(e) {b: NormalCrafterBuild ->
           val c: LightningContainer = b.lightningDrawer!!
           if (!Vars.state.isPaused) c.update()
 

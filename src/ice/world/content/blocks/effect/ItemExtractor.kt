@@ -30,7 +30,7 @@ class ItemExtractor(name: String) : LinksBlock(name) {
         buildType = Prov(::ItemExtractorBuildEnd)
     }
 
-    inner class ItemExtractorBuildEnd : LinksBlockBuildEnd() {
+    inner class ItemExtractorBuildEnd : LinksBlockBuild() {
         override fun acceptItem(source: Building, item: Item): Boolean {
             return items[item] < getMaximumAccepted(item)
         }

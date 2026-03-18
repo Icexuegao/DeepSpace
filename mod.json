@@ -3,9 +3,9 @@
 "displayName": "DeepSpace",
 "description": "半成品模组,目的是为mdt添加更多的内容",
 "author": "Alon",
-"version": "Alpha-4313",
+"version": "Alpha-4423",
 "java": true,
 "main": "ice.Ice",
 "minGameVersion": 155,
-"updateDate": "2026年03月16日"
+"updateDate": "2026年03月18日"
 }

@@ -37,7 +37,6 @@ class HadronReconstructor : AtomSchematicCrafter("hadron_reconstructor") {
     size = 4
     itemCapacity = 24
 
-    placeablePlayer = false
 
     craftEffect = SglFx.hadronReconstruct
 

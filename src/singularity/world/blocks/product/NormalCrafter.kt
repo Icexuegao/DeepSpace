@@ -498,7 +498,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       if (producers.size > 1 && canSelect) {
         table.table(Tex.buttonTrans) { prescripts ->
           prescripts!!.defaults().grow().marginTop(0f).marginBottom(0f).marginRight(5f).marginRight(5f)
-          prescripts.add(Core.bundle.get("fragment.buttons.selectPrescripts")).padLeft(5f).padTop(5f).padBottom(5f)
+          prescripts.add(recipeIndfo).padLeft(5f).padTop(5f).padBottom(5f)
           prescripts.row()
           prescripts.pane { buttons ->
             for (i in 0..<producers.size) {

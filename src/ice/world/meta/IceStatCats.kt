@@ -13,6 +13,9 @@ object IceStatCats {
   val 结构 = create("structure") {
     desc(zh_CN, "结构")
   }
+  val 流体传输 = create("liquidTransport") {
+    desc(zh_CN, "流体传输")
+  }
 
   val neutron = create("neutron", 3){
     desc(zh_CN, "中子能")

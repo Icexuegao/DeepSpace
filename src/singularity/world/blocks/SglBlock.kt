@@ -126,7 +126,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     update = true
     consumesPower = false
     appliedConfig()
-    config(ByteArray::class.java, Cons2 { e: SglBuilding, code: ByteArray ->
+    config(ByteArray::class.java, Cons2 {e: SglBuilding, code: ByteArray ->
       if (code.isEmpty()) return@Cons2
       parseConfigObjects(e, DataPackable.readObject(code, e))
     })
@@ -134,7 +134,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
   }
 
   open fun appliedConfig() {
-    config(Int::class.javaObjectType) { e: SglBuilding?, i: Int? ->
+    config(Int::class.javaObjectType) {e: SglBuilding?, i: Int? ->
       if (consumers.size > 1) {
         if (canSelect) e!!.recipeSelected = true
         e!!.reset()
@@ -144,7 +144,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
         } else e.recipeCurrent = i!!
       }
     }
-    configClear { e: SglBuilding? ->
+    configClear {e: SglBuilding? ->
       e!!.recipeSelected = false
       e.recipeCurrent = 0
     }
@@ -157,6 +157,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     consumers.add(consume)
     return consume!!
   }
+
   @Suppress("UNCHECKED_CAST")
   override fun <T : ConsumerBuildComp> newOptionalConsume(validDef: Cons2<T, BaseConsumers>, displayDef: Cons2<Stats, BaseConsumers>): BaseConsumers {
     consume = object : BaseConsumers(true) {
@@ -237,10 +238,10 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     }
 
     if (!optionalCons.isEmpty) {
-      stats.add(IceStats.可选输入) { t ->
+      stats.add(IceStats.可选输入) {t ->
         t!!.left().row()
         for (con in optionalCons) {
-          t.table(SglDrawConst.grayUIAlpha) { ta ->
+          t.table(SglDrawConst.grayUIAlpha) {ta ->
             ta!!.left().defaults().left()
             FactoryBlockComp.buildRecipe(ta, con, null)
           }.growX().fillY().pad(6f).left().margin(10f)
@@ -255,7 +256,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
   }
 
   override fun setBars() {
-    addBar("health") { entity: Building? -> Bar("stat.health", Pal.health) { entity!!.healthf() }.blink(Color.white) }
+    addBar("health") {entity: Building? -> Bar("stat.health", Pal.health) {entity!!.healthf()}.blink(Color.white)}
   }
 
   override fun drawPlanRegion(plan: BuildPlan, list: Eachable<BuildPlan>) {
@@ -314,7 +315,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     override val resident: Float = this@SglBlock.resident
 
     fun superUpdate() {
-      if ((Time.delta.let { this.timeScaleDuration -= it; this.timeScaleDuration }) <= 0.0f || !this.block.canOverdrive) {
+      if ((Time.delta.let {this.timeScaleDuration -= it; this.timeScaleDuration}) <= 0.0f || !this.block.canOverdrive) {
         this.timeScale = 1.0f
       }
 
@@ -371,7 +372,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
         if (Mathf.chanceDelta((0.1f * Mathf.maxZero(activation - 0.5f)).toDouble())) {
           Angles.randLenVectors(
             System.nanoTime(), 1, 2f, 3.5f
-          ) { x: Float, y: Float -> SglParticleModels.floatParticle.create(this.x, this.y, SglDrawConst.fexCrystal, x, y, 2.6f).strength = 0.4f }
+          ) {x: Float, y: Float -> SglParticleModels.floatParticle.create(this.x, this.y, SglDrawConst.fexCrystal, x, y, 2.6f).strength = 0.4f}
         }
       }
       updateConsumer()
@@ -394,8 +395,8 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
       return this
     }
 
-    override fun liquids(): SglLiquidModule? {
-      return liquids as SglLiquidModule?
+    override fun liquids(): SglLiquidModule {
+      return liquids as SglLiquidModule
     }
 
     override fun init(tile: Tile, team: Team, shouldAdd: Boolean, rotation: Int): Building {
@@ -416,12 +417,13 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     }
 
     //  @Override
+
     open fun efficiency(): Float {
       return consEfficiency()
     }
 
     fun dumpLiquid() {
-      liquids.each { l: Liquid, _: Float -> dumpLiquid(l) }
+      liquids.each {l: Liquid, _: Float -> dumpLiquid(l)}
     }
 
     override fun displayConsumption(table: Table) {
@@ -455,11 +457,13 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
         }
       }
     }
+
     override fun draw() {
       drawers.draw(this)
-     if (Vars.renderer.drawStatus)drawStatus()
+      if (Vars.renderer.drawStatus) drawStatus()
       drawActivation()
     }
+
     override fun drawStatus() {
       if (this.block.enableDrawStatus && consumers.size > 0) {
         val multiplier = if (block.size > 1) 1.0f else 0.64f
@@ -527,7 +531,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
           temp.add(stack.liquid)
         }
       }
-      liquids.each { key: Liquid?, `val`: Float ->
+      liquids.each {key: Liquid?, `val`: Float ->
         if (!temp.contains(key) && `val` > 0.1f) displayLiquids.add(LiquidStack(key, `val`))
       }
     }
@@ -554,7 +558,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
         bars.top().left().add(liquidsStr).left().padBottom(0f)
         bars.row()
         for (stack in displayLiquids) {
-          bars.add(Bar({ stack.liquid.localizedName }, { stack.liquid.barColor ?: stack.liquid.color }, { min(liquids.get(stack.liquid) / block.liquidCapacity, 1f) })).growX()
+          bars.add(Bar({stack.liquid.localizedName}, {stack.liquid.barColor ?: stack.liquid.color}, {min(liquids.get(stack.liquid) / block.liquidCapacity, 1f)})).growX()
           bars.row()
         }
       }
@@ -610,14 +614,16 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     }
 
     override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
-      return source.interactable(this.team) && hasLiquids && ((source === this && consumer.current != null && consumer.current!!.selfAccess(ConsumeType.liquid, liquid)) || !(consumer.hasConsume() || consumer.hasOptional()) || consFilter.filter(this, ConsumeType.liquid, liquid, acceptAll(ConsumeType.liquid))) && (if (independenceLiquidTank) liquids.get(liquid) else (liquids as SglLiquidModule).total()) <= getMaximumAccepted(liquid) - 0.0001f
+      return source.interactable(this.team) && hasLiquids && acceptConsumeLiquid(source, liquid) && (if (independenceLiquidTank) liquids.get(liquid) else (liquids as SglLiquidModule).total()) <= getMaximumAccepted(liquid) - 0.0001f
+    }
+
+    open fun acceptConsumeLiquid(source: Building, liquid: Liquid): Boolean {
+      return ((source === this && consumer.current != null && consumer.current!!.selfAccess(ConsumeType.liquid, liquid)) || !(consumer.hasConsume() || consumer.hasOptional()) || consFilter.filter(this, ConsumeType.liquid, liquid, acceptAll(ConsumeType.liquid)))
     }
 
     open fun getMaximumAccepted(liquid: Liquid?): Float {
       return block.liquidCapacity
     }
-
-
 
     override fun drawLight() {
       drawers.drawLight(this)

@@ -1,30 +1,70 @@
 package ice.content
 
+import arc.func.Prov
 import ice.library.world.Load
-import mindustry.content.Items
-import singularity.type.AtomSchematic
+import mindustry.type.Item
+import singularity.Sgl
+import universecore.world.consumers.BaseConsumers
 
-object AtomSchematics: Load{
- var copper_schematic= AtomSchematic(Items.copper, 14000).apply{
-      request.medium(0.23f)
-      request.time(30f)
+object AtomSchematics : Load {
+  var copper_schematic = AtomSchematic(IItems.铜锭, 14000).apply {
+    request.medium(0.23f)
+    request.time(30f)
   }
 
-  var lead_schematic= AtomSchematic(Items.lead, 14000).apply {
-      request.medium(0.26f)
-      request.time(30f)
+  var lead_schematic = AtomSchematic(IItems.铅锭, 14000).apply {
+    request.medium(0.26f)
+    request.time(30f)
   }
 
-  var silicon_schematic= AtomSchematic(Items.silicon, 18000).apply {
-      request.medium(0.41f)
-      request.item(Items.sand, 1)
-      request.time(45f)
+  var silicon_schematic = AtomSchematic(IItems.单晶硅, 18000).apply {
+    request.medium(0.41f)
+    request.item(IItems.金珀沙, 1)
+    request.time(45f)
   }
 
-//  var titanium_schematic
+  class AtomSchematic(val item: Item, val reqint: Int) {
+    companion object {
+      val all = mutableListOf<AtomSchematic>()
+    }
 
-//  var thorium_schematic
+    init {
+      all.add(this)
+    }
 
-//  var uranium_schematic
-//  var iridium_schematic
+    var request = BaseConsumers(false).apply {
+      selectable = Prov {if (getunlock()) BaseConsumers.Visibility.usable else BaseConsumers.Visibility.hidden}
+    }
+    var d = 0
+
+    init {
+      d = Sgl.globals.getInt("atomSchematic_${item.name}_d", d)
+    }
+
+    fun progession() = d.toFloat() / reqint
+
+    fun destructing(amount: Int = 1) {
+      if (getunlock()) return
+      if (d >= reqint) {
+        unlock()
+      } else {
+        d += amount
+        Sgl.globals.put("atomSchematic_${item.name}_d", d)
+      }
+    }
+
+    fun getunlock(): Boolean {
+      return Sgl.globals.getBool("atomSchematic_${item.name}", false)
+    }
+
+    fun unlock() {
+      Sgl.globals.put("atomSchematic_${item.name}", true)
+    }
+
+    fun cleanLock() {
+      d = 0
+      Sgl.globals.put("atomSchematic_${item.name}_d", d)
+      Sgl.globals.put("atomSchematic_${item.name}", false)
+    }
+  }
 }
