@@ -109,13 +109,14 @@ object EffectBlocks : Load {
     }
     squareSprite = false
   }
-  val 遗弃匣: Block = LostBox("lostBox").apply {
-    size = 2
-    envEnabled = Env.any
-    category = Category.effect
+  val 遗弃匣 = LostBox("lostBox").apply {
     bundle {
       desc(zh_CN, "遗弃匣")
     }
+    size = 2
+    envEnabled = Env.any
+    category = Category.effect
+
   }
   val 传输矿仓: Block = ItemExtractor("conveyOreWar").apply {
     size = 2

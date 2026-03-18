@@ -36,7 +36,7 @@ class Incubator : FloorCrafter("incubator") {
       )
     )
     newProduce()
-    produce!!.liquids(ILiquids.沼气, 3)
+    produce!!.liquids(ILiquids.沼气, 30f/60f)
 
     newConsume()
     consume!!.time(30f)

@@ -146,6 +146,9 @@ fun Table.icePane(style: ScrollPaneStyle = Styles.noBarPane, cont: Table, pane: 
 fun Element.addListeners(listener: EventListener): Element {
   addListener(listener)
   return this
+}fun Element.addCaptureListeners(listener: EventListener): Element {
+  addCaptureListener(listener)
+  return this
 }
 
 fun <T : Element> T.itooltip(string: String): T {

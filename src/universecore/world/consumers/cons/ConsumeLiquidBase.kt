@@ -21,7 +21,7 @@ abstract class ConsumeLiquidBase<T> : BaseConsume<T>() where T : Building, T : C
       var count = 0
       for (stack in liquids) {
         count++
-        if (count > 0 && or){
+        if (count > 0 && or) {
           table.add("/").set(Cell.defaults()).fillX()
         }
         if (limit in 0..count) {
@@ -29,17 +29,14 @@ abstract class ConsumeLiquidBase<T> : BaseConsume<T>() where T : Building, T : C
           break
         }
 
-        table.stack(
-          Table { o: Table ->
-            o.left()
-            o.add(Image(stack.liquid.fullIcon)).size(32f).scaling(Scaling.fit)
-          },
-          Table { t: Table ->
-            t.left().bottom()
-            t.add(if (stack.amount * 60 >= 1000) UI.formatAmount((stack.amount * 60).toLong()) + "/s" else (Mathf.round(stack.amount * 600) / 10f).toString() + "/s").style(Styles.outlineLabel)
-            t.pack()
-          }
-        )
+        table.stack(Table {o: Table ->
+          o.left()
+          o.add(Image(stack.liquid.fullIcon)).size(32f).scaling(Scaling.fit)
+        }, Table {t: Table ->
+          t.left().bottom()
+          t.add(if (stack.amount * 60 >= 1000) UI.formatAmount((stack.amount * 60).toLong()) + "/s" else (Mathf.round(stack.amount * 600) / 10f).toString() + "/s").style(Styles.outlineLabel)
+          t.pack()
+        })
       }
     }
   }
@@ -51,12 +48,7 @@ abstract class ConsumeLiquidBase<T> : BaseConsume<T>() where T : Building, T : C
 
   override fun buildBars(entity: T, bars: Table) {
     for (stack in consLiquids!!) {
-      bars.add(
-        Bar(
-          { stack.liquid.localizedName },
-          { stack.liquid.barColor ?: stack.liquid.color },
-          { min(entity.liquids.get(stack.liquid) / entity.block.liquidCapacity, 1f) }
-        ))
+      bars.add(Bar({stack.liquid.localizedName}, {stack.liquid.barColor ?: stack.liquid.color}, {min(entity.liquids.get(stack.liquid) / entity.block.liquidCapacity, 1f)}))
       bars.row()
     }
   }

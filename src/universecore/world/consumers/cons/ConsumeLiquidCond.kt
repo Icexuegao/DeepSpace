@@ -85,7 +85,7 @@ open class ConsumeLiquidCond<T> : ConsumeLiquidBase<T>() where T : Building, T :
     }
 
   override fun buildIcons(table: Table) {
-    buildLiquidIcons(table, this.cons, true, displayLim)
+    buildLiquidIcons(table, this.cons, false, displayLim)
   }
 
   override fun merge(other: BaseConsume<T>) {
@@ -140,11 +140,10 @@ open class ConsumeLiquidCond<T> : ConsumeLiquidBase<T>() where T : Building, T :
         }
         var index = 0
         for ((count, stack) in this.cons.withIndex()) {
-          // if (count != 0) t.add("[gray]/[]")
 
           if (count != 0 && count % 4 == 0) index++
 
-          tables[index].add(IStatValues.displayLiquid(stack.liquid, stack.amount * 60, true,false)).row()
+          tables[index].add(IStatValues.displayLiquid(stack.liquid, stack.amount, true,false)).row()
         }
         tables.forEach(t::add)
 

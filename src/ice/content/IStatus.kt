@@ -194,7 +194,7 @@ object IStatus : Load {
       desc(zh_CN, "流血", "流血")
     }
     setUpdate { u, s ->
-      u.health -= (u.speed() * u.hitSize() / 60)
+      u.health -= (u.vel().len() * u.hitSize() / 60)
       u.clampHealth()
     }
     init {
