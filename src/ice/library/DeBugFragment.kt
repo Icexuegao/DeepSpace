@@ -90,7 +90,7 @@ object DeBugFragment {
   private fun buildPane(table: Table) {
     val pane = Table()
     pane.setPositions(500f, 100f).setSize(130f, 250f)
-    pane.add(Image(Tex.whiteui).addListeners(DragInputListener(table))).color(IceColor.b4).height(40f).growX().row()
+    pane.add(Image(Tex.whiteui).addCaptureListeners(DragInputListener(table))).color(IceColor.b4).height(40f).growX().row()
     pane.icePane {
       fun button(name: String, icon: Drawable, runnable: Runnable = Runnable {}) {
         it.image(Tex.underlineWhite, IceColor.b3).height(3f).growX().row()

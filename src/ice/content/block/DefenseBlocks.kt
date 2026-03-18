@@ -299,7 +299,10 @@ object DefenseBlocks : Load {
   }
   val 大型简并态中子墙 = SglWall("neutron_polymer_wall_large").apply {
     bundle {
-      desc(zh_CN, "大型简并态中子墙", "利用简并态中子聚合物建造的大型的墙,强度极高,且可以产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身")
+      desc(zh_CN, """
+        大型简并态中子墙
+       d
+      """.trimIndent(), "利用简并态中子聚合物建造的大型的墙,强度极高,且可以产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身")
     }
     size = 2
     health = 简并态中子聚合物墙.health * 4

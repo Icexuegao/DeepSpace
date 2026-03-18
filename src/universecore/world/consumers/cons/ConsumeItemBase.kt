@@ -2,6 +2,7 @@ package universecore.world.consumers.cons
 
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
+import ice.library.scene.element.display.ItemDisplay
 import ice.world.meta.IStatValues
 import mindustry.type.ItemStack
 import universecore.components.blockcomp.ConsumerBuildComp
@@ -20,7 +21,7 @@ abstract class ConsumeItemBase<T : ConsumerBuildComp> : BaseConsume<T>() {
           break
         }
 
-        table.add(IStatValues.stack(stack))
+        table.add(ItemDisplay(stack.item, stack.amount))
       }
     }
   }

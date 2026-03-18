@@ -349,7 +349,7 @@ object IItems : Load {
       desc(zh_CN, "石墨烯", "超薄的单层碳原子材料,具有出色的导电性和机械强度,是高级电子设备的核心材料")
     }
   }
-  val 单晶硅 = IceItem("item_monocrystallineSilicon", "575757") {
+  val 单晶硅 = IceItem("item_monocrystallineSilicon", "b0bac0") {
     bundle {
       desc(zh_CN, "单晶硅", "一种高纯度的硅晶体,是制造高级电子设备和处理器的基础材料")
     }

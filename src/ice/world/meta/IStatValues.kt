@@ -3,31 +3,26 @@ package ice.world.meta
 import arc.Core
 import arc.func.Boolf
 import arc.graphics.Color
-import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.scene.Element
 import arc.scene.event.HandCursorListener
-import arc.scene.ui.Image
 import arc.scene.ui.Label
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Collapser
-import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectFloatMap
 import arc.struct.ObjectMap
-import arc.util.Nullable
 import arc.util.Scaling
 import arc.util.Strings
+import ice.library.scene.element.display.ItemDisplay
+import ice.library.scene.element.display.LiquidDisplay
 import ice.library.scene.ui.itooltip
 import mindustry.Vars
 import mindustry.content.StatusEffects
-import mindustry.core.UI
 import mindustry.ctype.UnlockableContent
 import mindustry.entities.bullet.BulletType
 import mindustry.gen.Icon
-import mindustry.graphics.Pal
 import mindustry.type.Item
-import mindustry.type.ItemStack
 import mindustry.type.Liquid
 import mindustry.type.UnitType
 import mindustry.ui.Styles
@@ -36,31 +31,30 @@ import mindustry.world.blocks.defense.turrets.Turret
 import mindustry.world.meta.StatUnit
 import mindustry.world.meta.StatValue
 import mindustry.world.meta.StatValues
-import mindustry.world.meta.Stats
 import kotlin.math.max
 
 object IStatValues {
-  fun funString(str: () -> String): StatValue {
+  fun funString(str: ()->String): StatValue {
     return StatValue {
-      it.add(Label { str() })
+      it.add(Label {str()})
     }
   }
 
   fun drillables(
     drillTime: Float, drillMultiplier: Float, size: Float, multipliers: ObjectFloatMap<Item>?, filter: Boolf<Block>
   ): StatValue {
-    return StatValue { table ->
+    return StatValue {table ->
       table.row()
-      table.table { c ->
+      table.table {c ->
         var i = 0
         for (block in Vars.content.blocks()) {
           if (!filter.get(block)) continue
-          c.table(Styles.grayPanel) { b ->
+          c.table(Styles.grayPanel) {b ->
             b.image(block.uiIcon).size(40f).pad(10f).left().scaling(Scaling.fit)
-            b.table { info ->
+            b.table {info ->
               info.left()
               info.add(block.localizedName).left().row()
-              info.image(block.itemDrop.uiIcon).size(18f, 21f).with { l -> StatValues.withTooltip(l, block.itemDrop) }.left()
+              info.image(block.itemDrop.uiIcon).size(18f, 21f).with {l -> StatValues.withTooltip(l, block.itemDrop)}.left()
             }.grow()
             if (multipliers != null) {
               b.add(
@@ -78,37 +72,10 @@ object IStatValues {
     }
   }
 
-  fun displayStats(stats: Stats, table: Table) {
-    val toMap = stats.toMap()
-    for (cat in toMap.keys()) {
-      val map = toMap[cat]
-
-      if (map.size == 0) continue
-
-      if (stats.useCategories) {
-        table.add("@category." + cat.name).color(Pal.accent).fillX()
-        table.row()
-      }
-
-      for (stat in map.keys()) {
-        table.table { inset: Table ->
-          inset.left()
-          inset.add("[lightgray]" + stat.localized() + ":[] ").left().top()
-          val arr = map[stat]
-          for (value in arr) {
-            value.display(inset)
-            inset.add().size(10f)
-          }
-        }.fillX()
-        table.row()
-      }
-    }
-  }
-
   fun <T : UnlockableContent> ammo(
     map: ObjectMap<T, BulletType>, nested: Boolean = false, showUnit: Boolean = false
   ): StatValue {
-    return StatValue { table ->
+    return StatValue {table ->
       table.row()
       val orderedKeys = map.keys().toSeq().sort()
       for (t in orderedKeys) {
@@ -117,17 +84,17 @@ object IStatValues {
 
         if (type.spawnUnit != null && type.spawnUnit.weapons.size > 0) {
           ammo(
-            ObjectMap.of(t, type.spawnUnit.weapons.first().bullet), nested, false
+            ObjectMap.of(t, type.spawnUnit.weapons.first().bullet), nested
           ).display(table)
           continue
         }
 
-        table.table(Styles.grayPanel) { bt ->
+        table.table(Styles.grayPanel) {bt ->
           bt.left().top().defaults().padRight(3f).left()
           //显示两次单位图标是没有意义的
           if (!compact && t !is Turret) {
-            bt.table { title ->
-              title.image(t.uiIcon).size((3 * 8).toFloat()).padRight(4f).right().scaling(Scaling.fit).top().with { i -> StatValues.withTooltip(i, t, false) }
+            bt.table {title ->
+              title.image(t.uiIcon).size((3 * 8).toFloat()).padRight(4f).right().scaling(Scaling.fit).top().with {i -> StatValues.withTooltip(i, t, false)}
               title.add(t.localizedName).padRight(10f).left().top()
               if (type.displayAmmoMultiplier && type.statLiquidConsumed > 0f) {
                 title.add(
@@ -261,7 +228,7 @@ object IStatValues {
                 ) + "[lightgray] " + Core.bundle.get(
                   "unit.seconds"
                 )))
-              ).with { c: Element -> withTooltip(c, type.status) }
+              ).with {c: Element -> withTooltip(c, type.status)}
             }
 
             if (!type.targetMissiles) {
@@ -279,14 +246,14 @@ object IStatValues {
               val coll = Collapser(ic, true)
               coll.setDuration(0.1f)
 
-              bt.table { it: Table ->
+              bt.table {it: Table ->
                 it.left().defaults().left()
                 it.add(
                   Core.bundle.format(
                     "bullet.interval", Strings.autoFixed(type.intervalBullets / type.bulletInterval * 60, 2)
                   )
                 )
-                it.button(Icon.downOpen, Styles.emptyi) { coll.toggle(false) }.update { i -> i.style.imageUp = (if (!coll.isCollapsed) Icon.upOpen else Icon.downOpen) }.size(8f).padLeft(16f).expandX()
+                it.button(Icon.downOpen, Styles.emptyi) {coll.toggle(false)}.update {i -> i.style.imageUp = (if (!coll.isCollapsed) Icon.upOpen else Icon.downOpen)}.size(8f).padLeft(16f).expandX()
               }
               bt.row()
               bt.add(coll)
@@ -298,10 +265,10 @@ object IStatValues {
               val coll = Collapser(fc, true)
               coll.setDuration(0.1f)
 
-              bt.table { ft ->
+              bt.table {ft ->
                 ft.left().defaults().left()
                 ft.add(Core.bundle.format("bullet.frags", type.fragBullets))
-                ft.button(Icon.downOpen, Styles.emptyi) { coll.toggle(false) }.update { i -> i.style.imageUp = (if (!coll.isCollapsed) Icon.upOpen else Icon.downOpen) }.size(8f).padLeft(16f).expandX()
+                ft.button(Icon.downOpen, Styles.emptyi) {coll.toggle(false)}.update {i -> i.style.imageUp = (if (!coll.isCollapsed) Icon.upOpen else Icon.downOpen)}.size(8f).padLeft(16f).expandX()
               }
               bt.row()
               bt.add(coll)
@@ -330,7 +297,7 @@ object IStatValues {
         if (tooltip) {
           element!!.itooltip(content.localizedName)
         }
-        element!!.addListener(HandCursorListener({ !content.isHidden }, true))
+        element!!.addListener(HandCursorListener({!content.isHidden}, true))
       }
     }
     return element
@@ -340,70 +307,11 @@ object IStatValues {
     return withTooltip<T?>(element, content, false)
   }
 
-  /** Displays an item with a specified amount.  */
-  private fun stack(region: TextureRegion?, amount: Int, @Nullable content: UnlockableContent?, tooltip: Boolean): Stack {
-    val stack = Stack()
-
-    stack.add(Table { o: Table ->
-      o.left()
-      o.add(Image(region)).size(32f).scaling(Scaling.fit)
-    })
-
-    if (amount != 0) {
-      stack.add(Table { t: Table ->
-        t.left().bottom()
-        t.add(if (amount >= 1000) UI.formatAmount(amount.toLong()) else amount.toString() + "").name("stack amount").style(Styles.outlineLabel)
-        t.pack()
-      })
-    }
-
-    withTooltip<Stack?>(stack, content, tooltip)
-
-    return stack
-  }
-
-  /** Displays an item with a specified amount.  */
-  private fun stack(region: TextureRegion?, amount: Int, @Nullable content: UnlockableContent?): Stack {
-    return stack(region, amount, content, true)
-  }
-
-  fun stack(stack: ItemStack): Stack {
-    return stack(stack.item.uiIcon, stack.amount, stack.item)
-  }
-
-  fun stack(item: UnlockableContent, amount: Int, tooltip: Boolean): Stack {
-    return stack(item.uiIcon, amount, item, tooltip)
-  }
-
   fun displayItem(item: Item, amount: Int, showName: Boolean): Table {
-    val t = Table()
-    t.add(stack(item, amount, !showName))
-    if (showName) t.add(item.localizedName).padLeft((if (4 + amount > 99) 4 else 0).toFloat())
-    return t
+    return ItemDisplay(item, amount, showName)
   }
 
-  fun displayLiquid(liquid: Liquid, amount: Float, perSecond: Boolean,showName: Boolean): Table {
-    val t = Table()
-
-    t.add(object : Stack() {
-      init {
-        add(Image(liquid.uiIcon).setScaling(Scaling.fit))
-
-        if (amount != 0f) {
-          val t = Table().left().bottom()
-          t.add(Strings.autoFixed(amount, 3)).style(Styles.outlineLabel)
-          add(t)
-        }
-      }
-    }).size(Vars.iconMed)
-
-    if (perSecond && amount != 0f) {
-      t.add(StatUnit.perSecond.localized()).padLeft(2f).padRight(5f).color(Color.lightGray).style(Styles.outlineLabel)
-    }
-    if (showName)t.add(liquid.localizedName)
-
-    t.itooltip("${liquid.localizedName}")
-
-    return t
+  fun displayLiquid(liquid: Liquid, amount: Float, perSecond: Boolean, showName: Boolean): Table {
+    return LiquidDisplay(liquid, amount, perSecond, showName)
   }
 }
