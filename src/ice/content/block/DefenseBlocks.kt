@@ -77,7 +77,7 @@ object DefenseBlocks : Load {
     health = 360
     requirements(Category.defense, IItems.金锭, 10)
     bundle {
-      desc(zh_CN, "流金墙", "熔融金锭构筑的壁垒,随时间缓慢自愈", "财富值++")
+      desc(zh_CN, "流金墙", "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈", "熔融金锭构筑的壁垒\n财富值+")
     }
   }
   val 大型流金墙 = Wall("fluxGoldWallLarge").apply {
@@ -86,7 +86,7 @@ object DefenseBlocks : Load {
     health = 流金墙.health * 4
     requirements(Category.defense, IItems.金锭, 10)
     bundle {
-      desc(zh_CN, "大型流金墙", "熔融金锭构筑的壁垒,随时间缓慢自愈", "财富值++")
+      desc(zh_CN, "大型流金墙", "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈", "熔融金锭构筑的壁垒\n财富值++")
     }
   }
   val 铬墙 = Wall("chromeWall").apply {
@@ -94,7 +94,7 @@ object DefenseBlocks : Load {
     size = 1
     requirements(Category.defense, IItems.铬锭, 6)
     bundle {
-      desc(zh_CN, "铬墙", "坚固耐用,保护己方建筑,挡下敌方炮弹")
+      desc(zh_CN, "铬墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
     }
   }
   val 大型铬墙 = Wall("chromeWallLarge").apply {
@@ -102,7 +102,7 @@ object DefenseBlocks : Load {
     health = 铬墙.health * 4
     requirements(Category.defense, IItems.铬锭, 6 * 4)
     bundle {
-      desc(zh_CN, "大型铬墙", "坚固耐用,保护己方建筑,挡下敌方炮弹")
+      desc(zh_CN, "大型铬墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
     }
   }
   val 钴钢墙 = Wall("cobaltSteelWall").apply {
@@ -110,7 +110,7 @@ object DefenseBlocks : Load {
     health = 550
     requirements(Category.defense, IItems.钴钢, 8)
     bundle {
-      desc(zh_CN, "钴钢墙", "坚固耐用,保护己方建筑,挡下敌方炮弹")
+      desc(zh_CN, "钴钢墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
     }
   }
   val 大型钴钢墙 = Wall("cobaltSteelWallLarge").apply {
@@ -118,7 +118,7 @@ object DefenseBlocks : Load {
     health = 钴钢墙.health * 4
     requirements(Category.defense, IItems.钴钢, 32)
     bundle {
-      desc(zh_CN, "大型钴钢墙", "坚固耐用,保护己方建筑,挡下敌方炮弹")
+      desc(zh_CN, "大型钴钢墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
     }
   }
   val 陶钢墙 = Wall("potterySteelWall").apply {
@@ -129,7 +129,7 @@ object DefenseBlocks : Load {
     absorbLasers = true
     bundle {
       desc(
-        zh_CN, "陶钢墙", "坚固耐用,保护己方建筑,挡下敌方炮弹,能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
+        zh_CN, "陶钢墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用.能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
       )
     }
     requirements(Category.defense, IItems.陶钢, 6)
@@ -143,7 +143,7 @@ object DefenseBlocks : Load {
     absorbLasers = true
     bundle {
       desc(
-        zh_CN, "大型陶钢墙", "坚固耐用,保护己方建筑,挡下敌方炮弹,能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
+        zh_CN, "大型陶钢墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用.能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
       )
     }
     requirements(Category.defense, IItems.陶钢, 24)
@@ -153,7 +153,7 @@ object DefenseBlocks : Load {
     health = 600
     crushDamageMultiplier = 2.5f
     bundle {
-      desc(zh_CN, "铱墙", "坚固耐用,保护己方建筑,挡下敌方炮弹")
+      desc(zh_CN, "铱墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
     }
     requirements(Category.defense, IItems.铱板, 6)
   }
@@ -163,20 +163,20 @@ object DefenseBlocks : Load {
     health = 铱墙.health * 4
     crushDamageMultiplier = 2.5f
     bundle {
-      desc(zh_CN, "大型铱墙", "坚固耐用,保护己方建筑,挡下敌方炮弹")
+      desc(zh_CN, "大型铱墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
     }
     requirements(Category.defense, IItems.铱板, 24)
   }
   val 强化合金墙 = Wall("strengthening_alloy_wall").apply {
     bundle {
-      desc(zh_CN, "强化合金墙", "大型的强化合金制造的墙,十分坚固")
+      desc(zh_CN, "强化合金墙", "保护己方建筑,挡下敌方炮弹,极其坚固耐用")
     }
     health = 900
     requirements(Category.defense, IItems.强化合金, 8)
   }
   val 大型强化合金墙 = Wall("strengthening_alloy_wall_large").apply {
     bundle {
-      desc(zh_CN, "大型强化合金墙", "大型的强化合金制造的墙,十分坚固")
+      desc(zh_CN, "大型强化合金墙", "保护己方建筑,挡下敌方炮弹,极其坚固耐用")
     }
     size = 2
     health = 强化合金墙.health * 4
@@ -194,7 +194,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.生物钢, 8, IItems.铱板, 4, IItems.陶钢, 4)
     bundle {
       desc(
-        zh_CN, "生物钢墙", "坚固耐用,复合装甲结构使其可以减免部分伤害,而活性生物质夹层允许其快速自我修复,\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
+        zh_CN, "生物钢墙", "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
       )
     }
   }
@@ -211,13 +211,13 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.生物钢, 32, IItems.铱板, 16, IItems.陶钢, 16)
     bundle {
       desc(
-        zh_CN, "大型生物钢墙", "坚固耐用,复合装甲结构使其可以减免部分伤害,而活性生物质夹层允许其快速自我修复,\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
+        zh_CN, "大型生物钢墙", "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
       )
     }
   }
   val 相位合金墙 = ShieldWall("phaseAlloyWall").apply {
     bundle {
-      desc(zh_CN, "相位合金墙", "创建一个力场保护自身,具有大多数墙的特点")
+      desc(zh_CN, "相位合金墙", "保护己方建筑,挡下敌方炮弹,极其坚固耐用.会以自身为中心投射一片小型立场护盾")
     }
     health = 1000
     armor = 6f
@@ -247,7 +247,7 @@ object DefenseBlocks : Load {
     crushDamageMultiplier = 1f
     requirements(Category.defense, IItems.导能回路, 8, IItems.金锭, 8, IItems.铪锭, 8)
     bundle {
-      desc(zh_CN, "大型相位合金墙", "创建一个力场保护自身,具有大多数墙的特点")
+      desc(zh_CN, "大型相位合金墙", "保护己方建筑,挡下敌方炮弹,极其坚固耐用.会以自身为中心投射一片小型立场护盾")
     }
   }
   val 装甲闸门 = AutoDoor("armorGate").apply {
@@ -260,13 +260,13 @@ object DefenseBlocks : Load {
     crushDamageMultiplier = 1f
     requirements(Category.defense, IItems.铱板, 24, IItems.导能回路, 16)
     bundle {
-      desc(zh_CN, "装甲闸门", "安全可靠,坚实耐用,自动开关")
+      desc(zh_CN, "装甲闸门", "允许单位通过的装甲门,自动开关")
     }
   }
 
   val 相控雷达 = PhasedRadar("phased_radar").apply {
     bundle {
-      desc(zh_CN, "相控雷达", "雷达单元,可构成相控雷达阵列,锁定范围内的敌方空中单位,攻击被锁定的目标有概率造成额外大量伤害,杀伤倍率和概率都取决于阵列大小")
+      desc(zh_CN, "相控雷达", "锁定范围内的敌方空中单位,攻击被锁定的目标有概率造成额外大量伤害,杀伤倍率和概率都取决于阵列大小")
     }
     squareSprite = false
     newConsume().apply {
@@ -289,7 +289,7 @@ object DefenseBlocks : Load {
 
   val 简并态中子聚合物墙 = SglWall("neutron_polymer_wall").apply {
     bundle {
-      desc(zh_CN, "简并态中子墙", "利用简并态中子聚合物建造的墙,强度极高,且可以产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身")
+      desc(zh_CN, "简并态中子墙", "保护己方建筑,挡下敌方炮弹,极其坚固耐用.产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身")
     }
     health = 2400
     density = 1024f
@@ -299,7 +299,7 @@ object DefenseBlocks : Load {
   }
   val 大型简并态中子墙 = SglWall("neutron_polymer_wall_large").apply {
     bundle {
-      desc(zh_CN, "大型简并态中子墙", "利用简并态中子聚合物建造的大型的墙,强度极高,且可以产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身")
+      desc(zh_CN, "大型简并态中子墙", "保护己方建筑,挡下敌方炮弹,极其坚固耐用.产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身")
     }
     size = 2
     health = 简并态中子聚合物墙.health * 4
@@ -313,8 +313,8 @@ object DefenseBlocks : Load {
     bundle {
       desc(
         zh_CN,
-        "生命游戏-混沌矩阵",
-        "庞大且有效的重型防御系统,反物质在力场的引导下,会按照生命游戏的规则在网格中不断演化,并衍生出可怕的效果\n具体来说,生命游戏所在的网格上,每一个单元格都是一个细胞,细胞只有两种状态,生与死,每一个细胞在一次刷新后的状态由它周围8个细胞决定,会遵循如下规则进行演化:\n[accent]当这个细胞处于死亡状态时[]\n[green]1.若周围的存活细胞数量为3则在下一刻转变为存活状态[]\n[gray]2.任何其他情况,细胞状态不变[]\n[accent]当这个细胞处于存活状态时[]\n[red]  1.若周围的存活细胞数量多于4(含4)则下一刻细胞死亡[]\n[red]2.若周围存活细胞数量少于2(不含2)则下一刻细胞死亡[] \n[gray]3.任何其他情况,细胞状态不变[]\n每一次刷新,所有存活的细胞寿命会增加1,在细胞死亡时,根据细胞的年龄会触发相应的效果,随细胞寿命的增加,强度会大幅度增强",
+        "混沌矩阵",
+        "集成防御系统,反物质在力场的引导下,会按照生命游戏的规则在网格中不断演化\n具体来说,生命游戏所在的网格上,每一个单元格都是一个细胞,细胞只有两种状态,生与死,每一个细胞在一次刷新后的状态由它周围8个细胞决定,会遵循如下规则进行演化:\n[accent]当这个细胞处于死亡状态时[]\n[green]1.若周围的存活细胞数量为3则在下一刻转变为存活状态[]\n[gray]2.任何其他情况,细胞状态不变[]\n[accent]当这个细胞处于存活状态时[]\n[red]  1.若周围的存活细胞数量多于4(含4)则下一刻细胞死亡[]\n[red]2.若周围存活细胞数量少于2(不含2)则下一刻细胞死亡[] \n[gray]3.任何其他情况,细胞状态不变[]\n每一次刷新,所有存活的细胞寿命会增加1,在细胞死亡时,根据细胞的年龄会触发相应的效果,随细胞寿命的增加,强度会大幅度增强",
         "生命游戏这一概念原本是由数学家康威设计的一个计算机程序,早期,人们仅仅研究与探索了生命游戏在计算机程序程序级别的规律,其与自然科学的重叠几乎完全被忽视了,直到二十一世纪60年代,科学家发现在真空仓内的粒子涨落规律与生命游戏在形式上高度重合,生命游戏规则成为了一项科学规律\n在这一规则下进行受控的反物质湮灭可以得到最接近理论数据的能量利用效率,因此这一规则广泛被应用于能源与武装,不过,像混沌矩阵这样彻底的巨型网格本身还是一个过于大胆的尝试,所幸在巨大的学术压力下中止数次数次后该项目还是收获了非常突出的成果"
       )
     }
