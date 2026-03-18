@@ -33,7 +33,7 @@ class LostBox(name: String) : IceBlock(name) {
 
     val color = if (valid) Pal.accent else Pal.remove
     val font = Fonts.outline
-    val layout = Pools.obtain<GlyphLayout?>(GlyphLayout::class.java, Prov { GlyphLayout() })
+    val layout = Pools.obtain(GlyphLayout::class.java, Prov { GlyphLayout() })
     val ints = font.usesIntegerPositions()
     font.setUseIntegerPositions(false)
     font.getData().setScale(1f / 4f / Scl.scl(1f))

@@ -16,6 +16,7 @@ import mindustry.type.LiquidStack
 import mindustry.world.Block
 import mindustry.world.consumers.ConsumeItems
 import mindustry.world.consumers.ConsumeLiquids
+import mindustry.world.meta.BuildVisibility
 
 open class IceBlock(name: String) : Block(name) {
   companion object {
@@ -28,6 +29,10 @@ open class IceBlock(name: String) : Block(name) {
     fun Block.requirements(category: Category, vararg items: Any) {
       requirements(category, ItemStack.with(*items))
     }
+    fun Block.requirements(category: Category,visibility: BuildVisibility = BuildVisibility.shown, vararg items: Any) {
+      requirements(category,visibility, ItemStack.with(*items))
+    }
+
 
     fun <T : Block> T.consumeItems(vararg items: Any): ConsumeItems {
       return consume(ConsumeItems(ItemStack.with(*items)))

@@ -216,6 +216,9 @@ object DefenseBlocks : Load {
     }
   }
   val 相位合金墙 = ShieldWall("phaseAlloyWall").apply {
+    bundle {
+      desc(zh_CN, "相位合金墙", "创建一个力场保护自身,具有大多数墙的特点")
+    }
     health = 1000
     armor = 6f
     flashHit = true
@@ -228,9 +231,6 @@ object DefenseBlocks : Load {
     breakCooldown = 300f
     crushDamageMultiplier = 1f
     requirements(Category.defense, IItems.导能回路, 2, IItems.金锭, 2, IItems.铪锭, 2)
-    bundle {
-      desc(zh_CN, "相位合金墙", "创建一个力场保护自身,具有大多数墙的特点")
-    }
   }
   val 大型相位合金墙 = ShieldWall("phaseAlloyWallLarge").apply {
     health = 相位合金墙.health * 4
