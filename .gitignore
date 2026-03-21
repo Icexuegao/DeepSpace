@@ -6,6 +6,7 @@
 # Gradle 相关
 .gradle
 .gradle/
+/lib
 build/
 annotations/build/
 

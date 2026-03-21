@@ -296,8 +296,6 @@ object Distributions : Load {
       desc(zh_CN, "铱制高效运输节点", "使用铱建造的高级运输节点,造价昂贵,但换来的收益除更长的连接距离和更快的运输速度外,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品")
     }
     requirements(Category.distribution, IItems.絮凝剂, 4, IItems.铱锭, 4, IItems.FEX水晶, 6, IItems.气凝胶, 12, IItems.铝锭, 12)
-
-
     researchCostMultiplier = 2f
     itemCapacity = 20
     maxItemCapacity = 80
@@ -308,7 +306,7 @@ object Distributions : Load {
     hasPower = true
     pulse = true
     envEnabled = envEnabled or Env.space
-    transportTime = 0.05f
+    transportTime = 0.5f
     newConsume()
     consume!!.power(1f)
   }

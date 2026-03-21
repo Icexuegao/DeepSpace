@@ -15,7 +15,7 @@ import singularity.world.draw.DrawBottom
 class VacuumVrucible : NormalCrafter("vacuum_crucible") {
   init {
     bundle {
-      desc(zh_CN, "真空坩埚", "将多种材料进行低压处理并生产特定产物,可配置","在低压高温环境下进行特殊工序时使用的设备")
+      desc(zh_CN, "真空坩埚", "将多种材料进行低压处理并生产特定产物,可配置", "在低压高温环境下进行特殊工序时使用的设备")
     }
     requirements(
       Category.crafting, ItemStack.with(
@@ -27,36 +27,42 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
     liquidCapacity = 45f
     itemCapacity = 30
 
-    newConsume()
-    consume!!.time(60f)
-    consume!!.liquids(
-      *LiquidStack.with(
-        ILiquids.氯化硅溶胶, 0.2f, ILiquids.氢气, 0.4f
-      )
-    )
-    consume!!.item(IItems.金珀沙, 5)
-    consume!!.power(2f)
-    newProduce()
-    produce!!.item(
-      IItems.单晶硅, 8
-    )
+    newFormula { consumers, producers ->
+      consumers.apply {
+        time(60f)
+        liquids(
+          ILiquids.氯化硅溶胶, 0.2f, ILiquids.氢气, 0.4f
+        )
+        item(IItems.金珀沙, 5)
+      }
+      producers.apply {
+        item(IItems.单晶硅, 8)
+      }
 
-    newConsume()
-    consume!!.time(120f)
-    consume!!.liquid(ILiquids.氯化硅溶胶, 0.4f)
-    consume!!.item(IItems.石英玻璃, 10)
-    consume!!.power(1.8f)
-    newProduce()
-    produce!!.item(IItems.气凝胶, 5)
+    }
+    newFormula { consumers, producers ->
+      consumers.apply {
+        time(120f)
+        liquid(ILiquids.氯化硅溶胶, 0.4f)
+        item(IItems.石英玻璃, 50)
+        power(1.8f)
+      }
+      producers.apply {
+        item(IItems.气凝胶, 5)
+      }
+    }
 
-    newConsume()
-    consume!!.time(120f)
-    consume!!.item(IItems.绿藻块, 1)
-    consume!!.liquid(ILiquids.酸液, 0.2f)
-    consume!!.power(1.6f)
-    newProduce()
-    produce!!.item(IItems.絮凝剂, 1)
-
+    newFormula { consumers, producers ->
+      consumers.apply {
+        time(120f)
+        item(IItems.绿藻块, 1)
+        liquid(ILiquids.酸液, 0.2f)
+        power(1.6f)
+      }
+      producers.apply {
+        item(IItems.絮凝剂, 1)
+      }
+    }
 
     drawers = DrawMulti(
       DrawBottom(), DrawCrucibleFlame(), DrawDefault()

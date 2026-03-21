@@ -2,8 +2,14 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.world.draw.DrawMulti
+import mindustry.content.Fx
 import mindustry.type.Category
+import mindustry.world.draw.DrawDefault
+import mindustry.world.draw.DrawFlame
+import mindustry.world.draw.DrawFrames
 import singularity.world.blocks.product.NormalCrafter
+import singularity.world.draw.DrawFrame
 
 class 电弧炉 : NormalCrafter("arcFurnace") {
   init {
@@ -13,7 +19,8 @@ class 电弧炉 : NormalCrafter("arcFurnace") {
     size = 3
     itemCapacity = 36
     requirements(Category.crafting, IItems.高碳钢, 80, IItems.铅锭, 50, IItems.铜锭, 50, IItems.锌锭, 30)
-
+    craftEffect = Fx.smeltsmoke
+    drawers= DrawMulti(DrawDefault(), DrawFlame())
     newConsume().apply {
       time(4f * 60f)
       items(IItems.铅锭, 3, IItems.石英, 2, IItems.金珀沙, 2)

@@ -435,7 +435,8 @@ class TransferNode(name: String) : IceBlock(name) {
         val angle: Float = Vec2(x, y).sub(other!!.drawx(), other.drawy()).angle() + 180f
 
         Draw.rect(endRegion, x, y, angle + 90)
-        Draw.rect(endRegion, other.drawx(), other.drawy(), angle - 90)/* Draw.rect(endRegion, x, y, i * 90 + 90);
+        Draw.rect(endRegion, other.drawx(), other.drawy(), angle - 90)
+        /* Draw.rect(endRegion, x, y, i * 90 + 90);
     Draw.rect(endRegion, other.drawx(), other.drawy(), i * 90 + 270);*/
         Lines.stroke(bridgeWidth)
         Tmp.v1.set(x, y).sub(other.worldx(), other.worldy()).setLength(1f).scl(-1f)
@@ -460,12 +461,10 @@ class TransferNode(name: String) : IceBlock(name) {
           )
           a++
         }
-        Draw.reset()
       }
-
       Draw.alpha(1f)
-      Draw.z(Layer.power + 1)
       Draw.rect(topRegion, x, y)
+      Draw.reset()
     }
 
     override fun acceptItem(source: Building, item: Item): Boolean {

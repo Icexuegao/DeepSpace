@@ -378,7 +378,7 @@ open class ItemNode(name: String) : SglBlock(name) {
         }
 
         if (!any) {
-          this.transportCounter %= this@ItemNode.transportTime
+         // this.transportCounter %= this@ItemNode.transportTime
         }
       }
     }
