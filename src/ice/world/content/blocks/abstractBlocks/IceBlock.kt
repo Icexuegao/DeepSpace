@@ -4,6 +4,7 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import ice.graphics.IceColor
+import ice.library.util.toStringi
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.gen.Building
@@ -17,6 +18,7 @@ import mindustry.world.Block
 import mindustry.world.consumers.ConsumeItems
 import mindustry.world.consumers.ConsumeLiquids
 import mindustry.world.meta.BuildVisibility
+import kotlin.math.roundToInt
 
 open class IceBlock(name: String) : Block(name) {
   companion object {
@@ -49,8 +51,8 @@ open class IceBlock(name: String) : Block(name) {
 
   override fun setStats() {
     super.setStats()
-    if (damageReduction > 0f) stats.add(IceStats.伤害减免, "${damageReduction * 100}%")
-    if (healAmount > 0f) stats.add(IceStats.生命值恢复, "$healAmount/秒")
+    if (damageReduction > 0f) stats.add(IceStats.伤害减免, "${ (damageReduction * 100).roundToInt()}%")
+    if (healAmount > 0f) stats.add(IceStats.生命值恢复, "${healAmount.toStringi(1)}/秒")
   }
 
   open inner class IceBuild : Building() {
@@ -62,7 +64,6 @@ open class IceBlock(name: String) : Block(name) {
     override fun handleDamage(amount: Float): Float {
       return maxOf(0f, amount * (1 - damageReduction.coerceIn(0f, 1f)))
     }
-
 
     override fun drawConfigure() {
       Draw.color(blockColor)

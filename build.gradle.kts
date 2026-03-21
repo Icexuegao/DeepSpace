@@ -2,14 +2,15 @@ import arc.files.Fi
 import arc.util.serialization.JsonReader
 import arc.util.serialization.JsonWriter
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.gradle.kotlin.dsl.extra
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
   extra["proUser"] = System.getProperty("user.name")
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
-
+  extra["kotlinCompatibility"] = "2.3.20"
   repositories {
     mavenLocal()
     mavenCentral()
@@ -22,14 +23,15 @@ buildscript {
   }
   dependencies {
     classpath("com.github.Anuken.Mindustry:core:v154.3")
+    classpath(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
   }
 }
-val kotlinCompatibility = "2.2.10"
+val kotlinCompatibility : String by extra
 val proUser: String by extra
 val sdkRoot: String by extra
 plugins {
   java
-  kotlin("jvm") version "2.2.10"
+  kotlin("jvm") version "2.3.20"
   id("com.gradleup.shadow") version "9.3.0"
   id("com.scalified.plugins.gradle.proguard") version "1.7.0"
 }
@@ -40,7 +42,6 @@ repositories {
   maven { url = uri("https://jitpack.io") }
   maven { url = uri("https://www.jitpack.io") }
 }
-val uncVersion = "2.3.1"
 dependencies {
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")
@@ -68,7 +69,6 @@ dependencies {
    //compileOnly("com.github.TinyLake:MindustryX:v2026.02.X27")
   // compileOnly("com.github.Anuken.Arc:flabel:v149")
   //compileOnly("com.github.Icexuegao:DeepSpace:Alpha-4178")
-  compileOnly("com.github.Anuken.Mindustry:core:v155.4")
   compileOnly("com.github.EB-wilson:TooManyItems:3.1a")
   implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinCompatibility")
 }
@@ -80,7 +80,12 @@ sourceSets {
     resources.setSrcDirs(listOf("assets"))
   }
   kotlin {
-    jvmToolchain(17)
+    jvmToolchain(25)
+  }
+  java {
+    toolchain {
+      languageVersion.set(JavaLanguageVersion.of(25))
+    }
   }
 }
 proguard {
@@ -99,14 +104,13 @@ fun execute(string: String, path: File? = null, vararg args: Any?) {
 
 tasks {
   withType<JavaCompile>().configureEach {
-    sourceCompatibility = 17.toString()
-    targetCompatibility = 17.toString()
+    sourceCompatibility = 25.toString()
+    targetCompatibility = 25.toString()
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(arrayOf( "--add-exports", "java.base/jdk.internal.misc=ALL-UNNAMED",
       "--add-exports", "java.base/jdk.internal.module=ALL-UNNAMED",
       "--add-exports", "java.base/jdk.internal.reflect=ALL-UNNAMED",
       "--add-exports", "java.base/sun.nio.ch=ALL-UNNAMED")
-
     )
   }
 
@@ -224,38 +228,7 @@ tasks {
     from("build/libs/${project.name}.jar") //源
     into("C:/Users/$proUser/AppData/Roaming/Mindustry/mods")
   }
-}/*
-
-  register<JavaExec>("runWithJavaExec") {
-
-        //  group = "zi"
-        classpath = sourceSets.main.get().runtimeClasspath
-        mainClass.set("ice.MainKt")
-        //  main("ice.Main")
-        args = listOf("我喜欢你", "你喜欢我")
-    }
-
-tasks.register('deploy', Jar) {
-    dependsOn(jarAndroid)
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "${project.name}.jar"//存档文件名
-    from {
-        [zipTree("${buildLibDir}\\${project.name}Desktop.jar"),
-         zipTree("${buildLibDir}\\${project.name}Android.jar")]
-    }
 }
-
-tasks.register("myCopy", Copy) {
-    dependsOn(deploy)
-    from "${buildLibDir}\\$project.name" + ".jar"//源
-    into {
-        "C:/Users/$proUser/AppData/Roaming/Mindustry/mods"
-    }
-}
-kotlin {
-    jvmToolchain(17)
-}
-*/
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.compilerOptions {
   freeCompilerArgs.set(listOf("-XXLanguage:+NestedTypeAliases"))

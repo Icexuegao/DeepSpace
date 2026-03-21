@@ -14,7 +14,6 @@ import arc.math.geom.Geometry
 import arc.math.geom.Point2
 import arc.scene.Action
 import arc.scene.actions.Actions
-import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.layout.Table
 import arc.struct.IntSeq
 import arc.struct.ObjectMap
@@ -55,6 +54,10 @@ import kotlin.math.abs
 import kotlin.math.max
 
 open class ItemNode(name: String) : SglBlock(name) {
+  companion object {
+    val EMP: ByteArray = ByteArray(0)
+    private var otherReq: BuildPlan? = null
+  }
   val timerCheckMoved: Int = this.timers++
   var range: Int = 0
   var transportTime: Float = 2.0f
@@ -92,12 +95,12 @@ open class ItemNode(name: String) : SglBlock(name) {
     buildType = Prov(::ItemNodeBuild)
   }
 
-  override fun parseConfigObjects(b: SglBuilding, obj: Any) {
-    super.parseConfigObjects(b, obj)
-    val e = b as ItemNodeBuild
+  override fun parseConfigObjects(e: SglBuilding, obj: Any) {
+    super.parseConfigObjects(e, obj)
+    val build = e as ItemNodeBuild
     if (obj is TargetConfigure) {
-      e.config = if (obj.isClear) null else obj
-      e.link = if (obj.offsetPos != 0) Point2.unpack(obj.offsetPos).add(e.tileX(), e.tileY()).pack() else e.link
+      build.config = if (obj.isClear) null else obj
+      build.link = if (obj.offsetPos != 0) Point2.unpack(obj.offsetPos).add(build.tileX(), build.tileY()).pack() else build.link
     }
   }
 
@@ -476,7 +479,7 @@ open class ItemNode(name: String) : SglBlock(name) {
         t.setOrigin(1)
         t.add().width(45.0f)
         (t.center().table(Tex.pane).get() as Table).add(DistTargetConfigTable(0, this.config, if (this@ItemNode.siphon) arrayOf(GridChildType.output, GridChildType.acceptor, GridChildType.input) else arrayOf(GridChildType.output, GridChildType.acceptor), arrayOf(ContentType.item), true, {c: TargetConfigure ->
-          c!!.offsetPos = 0
+          c.offsetPos = 0
           this.configure(c.pack())
         }, {Vars.control.input.config.hideConfig()})).fill().center()
         t.top().button(Icon.info, Styles.grayi, 32.0f) {
@@ -536,7 +539,7 @@ open class ItemNode(name: String) : SglBlock(name) {
         val var1 = this.config!!.get(GridChildType.input, ContentType.item)!!.iterator()
 
         while (var1.hasNext()) {
-          val con = var1.next() as UnlockableContent?
+          val con = var1.next()
           val item = con as Item?
           val other = this.getNext("siphonItem") {e: Building? -> e!!.interactable(this.team) && e.block.hasItems && e.items.has(item) && this.config!!.directValid(GridChildType.input, item, this.getDirectBit(e))}
           if (other == null || !this@ItemNode.hasItems || this.items.get(item) >= this@ItemNode.itemCapacity || this.items.total() >= this@ItemNode.maxItemCapacity) {
@@ -554,7 +557,7 @@ open class ItemNode(name: String) : SglBlock(name) {
         val var1 = this.config!!.get(GridChildType.output, ContentType.item)!!.iterator()
 
         while (var1.hasNext()) {
-          val content = var1.next() as UnlockableContent?
+          val content = var1.next()
           val i = content as Item?
           if (this.items.get(i) > 0) {
             val next = this.getNext("items") {e: Building? -> e!!.interactable(this.team) && this.config!!.directValid(GridChildType.output, i, this.getDirectBit(e)) && e.acceptItem(this, i)}
@@ -630,14 +633,7 @@ open class ItemNode(name: String) : SglBlock(name) {
         this.config!!.read(read.b(len))
       }
     }
-
-    fun heaps(): ObjectMap<String, Heaps<*>> {
-      return this.heaps
-    }
   }
 
-  companion object {
-    val EMP: ByteArray = ByteArray(0)
-    private var otherReq: BuildPlan? = null
-  }
+
 }

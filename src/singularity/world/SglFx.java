@@ -795,18 +795,18 @@ public class SglFx{
     final RandomGenerator branch = new RandomGenerator();
 
     final RandomGenerator generator = new RandomGenerator(){{
-      branchChance=(0.15f);
-      branchMaker=((vert, str) -> {
-        branch.originAngle=(vert.angle + random(-90, 90));
+      setBranchChance((0.15f));
+      setBranchMaker(((vert, str) -> {
+        branch.setOriginAngle((vert.getAngle() + random(-90, 90)));
 
-        branch.maxLength=(60 * str);
+        branch.setMaxLength((60 * str));
 
         return branch;
-      });
+      }));
     }};
 
     {
-      branch.maxDeflect=(60);
+      branch.setMaxDeflect((60));
       lifetime = 60;
     }
 
@@ -824,11 +824,11 @@ public class SglFx{
     public LightningContainer createLightning(float x, float y){
 
       if(!(data instanceof Float)) data = 90f;
-      LightningContainer.PoolLightningContainer lightning = LightningContainer.PoolLightningContainer.create(lifetime, 1.4f, 2.5f);
+      LightningContainer.PoolLightningContainer lightning = LightningContainer.PoolLightningContainer.Companion.create(lifetime, 1.4f, 2.5f);
 
-      lightning.lerp=(Interp.pow2Out);
-      lightning.time=(lifetime / 2);
-      generator.maxLength=(random(((float) data) / 2, (float) data));
+      lightning.setLerp((Interp.pow2Out));
+      lightning.setTime((lifetime / 2));
+      generator.setMaxLength((random(((float) data) / 2, (float) data)));
       lightning.create(generator);
 
       Time.run(lifetime + 5, () -> Pools.free(lightning));
@@ -838,18 +838,18 @@ public class SglFx{
 
   public final static Effect spreadLightning = new LightningEffect(){
     final RandomGenerator branch = new RandomGenerator(){{
-      maxDeflect=(50);
+      setMaxDeflect((50));
     }};
 
     final RandomGenerator generator = new RandomGenerator(){{
-      maxDeflect=(60);
-      branchChance=(0.15f);
-      branchMaker=((vert, str) -> {
-        branch.originAngle=(vert.angle + random(-90, 90));
-        branch.maxLength=(60 * str);
+      setMaxDeflect((60));
+      setBranchChance((0.15f));
+      setBranchMaker(((vert, str) -> {
+        branch.setOriginAngle((vert.getAngle() + random(-90, 90)));
+        branch.setMaxLength((60 * str));
 
         return branch;
-      });
+      }));
     }};
 
     {
@@ -871,13 +871,13 @@ public class SglFx{
 
     public LightningContainer createLightning(float x, float y){
 
-      LightningContainer.PoolLightningContainer lightning = LightningContainer.PoolLightningContainer.create(lifetime, 1.5f,2.6f);
+      LightningContainer.PoolLightningContainer lightning = LightningContainer.PoolLightningContainer.Companion.create(lifetime, 1.5f,2.6f);
 
-      lightning.lerp=(Interp.pow2Out);
-      lightning.time=(lifetime / 2);
+      lightning.setLerp((Interp.pow2Out));
+      lightning.setTime((lifetime / 2));
       int amount = random(4, 6);
       for(int i = 0; i < amount; i++){
-        generator.maxLength=(random(50, 75));
+        generator.setMaxLength((random(50, 75)));
         lightning.create(generator);
       }
 

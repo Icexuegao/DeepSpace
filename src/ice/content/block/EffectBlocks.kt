@@ -65,6 +65,7 @@ object EffectBlocks : Load {
   val 传颂核心 = CoreBlock("eulogyCore").apply {
     size = 4
     health = 5000
+    powerProduct = 600 / 60f
     unitType = IUnitTypes.路西法
     squareSprite = false
     itemCapacity = 10000
@@ -75,33 +76,64 @@ object EffectBlocks : Load {
       desc(zh_CN, "传颂核心")
     }
   }
+  val 永耀天枢 = CoreBlock("foreverShineCore").apply {
+    bundle {
+      desc(zh_CN, "永耀天枢")
+    }
+    size = 5
+    health = 8000
+    powerProduct = 1200 / 60f
+    unitType = IUnitTypes.路西法
+    squareSprite = false
+    itemCapacity = 22000
+    unitCapModifier = 15
+    buildCostMultiplier = 3f
+    requirements(
+      Category.effect,
+      IItems.强化合金,
+      3000,
+      IItems.高碳钢,
+      7500,
+      IItems.钴锭,
+      5000,
+      IItems.铬锭,
+      4000,
+      IItems.金锭,
+      2000
+    )
+
+  }
+
   val 血肉枢纽: Block = FleshAndBloodCoreBlock("fleshAndBloodhinge").apply {
+    bundle {
+      desc(zh_CN, "血肉枢纽")
+    }
     health = -1
     size = 4
     itemCapacity = 6000
     squareSprite = false
     requirements(Category.effect, IItems.无名肉块, 2300, IItems.碎骨, 2000)
-    bundle {
-      desc(zh_CN, "血肉枢纽")
-    }
+
   }
   val 真菌塔: Block = FungusCore("fungusTower").apply {
-    size = 2
-    squareSprite = false
-    category = Category.effect
     bundle {
       desc(zh_CN, "真菌塔")
     }
+    size = 2
+    squareSprite = false
+    category = Category.effect
+
   }
 
   val 勘探雷达 = ProspectingRadar()
   val 定向超速器: Block = OrientationProjector("orientationProjector").apply {
-    size = 2
-    buildSize = 5
-    range = 8 * 20f
     bundle {
       desc(zh_CN, "定向超速器")
     }
+    size = 2
+    buildSize = 5
+    range = 8 * 20f
+
   }
   val 遗弃资源箱: Block = ResBox("resBox").apply {
     bundle {

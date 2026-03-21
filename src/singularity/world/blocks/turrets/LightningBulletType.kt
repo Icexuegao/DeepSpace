@@ -9,7 +9,7 @@ import singularity.world.SglFx
 import universecore.graphics.lightnings.LightningContainer
 
 open class LightningBulletType : BulletType {
-  constructor(time: Float, damage: Float) : super(time, damage)
+  constructor(speed: Float, damage: Float) : super(speed, damage)
 
   constructor() : super()
 

@@ -37,7 +37,7 @@ import mindustry.ui.Bar
 class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
   // 无人机相关配置
   var unitBuildTime = 60f * 8f  // 生成单个无人机所需时间
-  var unitSize = 3              // 最大无人机数量
+  var unitMaxSize = 3              // 最大无人机数量
 
   // 多边形装饰配置
   var polyStroke = 1.8f         // 多边形线条宽度
@@ -63,17 +63,29 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
     squareSprite = false
     requirements(Category.distribution, IItems.铜锭, 50, IItems.单晶硅, 80, IItems.钴钢, 40, IItems.铪锭, 30)
     newConsume().apply {
-      liquids(ILiquids.氢气,12f/60f)
-      items(IItems.铬锭,1, IItems.单晶硅,1)
+      liquids(ILiquids.氢气, 12f / 60f)
+      items(IItems.铬锭, 10, IItems.单晶硅, 10)
+      power(2f)
+      time(60f)
+    }
+  }
+
+  override fun setStats() {
+    super.setStats()
+    for (baseConsumers in consumers) {
+      baseConsumers.display(stats)
     }
   }
 
   override fun setBars() {
     super.setBars()
-    addBar("units") {build: DroneDeliveryTerminalBuild ->
-      Bar({"${IceStats.单位数量.localized()} :${build.units.size}/$unitSize"}, {Pal.power}, {build.units.size / unitSize.toFloat()})
+    addBar("units") { build: DroneDeliveryTerminalBuild ->
+      Bar(
+        { "${IceStats.单位数量.localized()} :${build.units.size}/$unitMaxSize" },
+        { Pal.power },
+        { build.units.size / unitMaxSize.toFloat() })
     }
-    addBar("productionProgress") {build: DroneDeliveryTerminalBuild ->
+    addBar("productionProgress") { build: DroneDeliveryTerminalBuild ->
       Bar(
         IceStats.生产进度::localized, Pal::power, build::buildProgress
       )
@@ -83,7 +95,7 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
   inner class DroneDeliveryTerminalBuild : RangeBlockBuild() {
     // 接收站和无人机集合
     val builds = Seq<DroneReceivingRndBuild>()
-    val units = Seq<Unit>(Unit::class.java)
+    val units = Seq<Unit>()
 
     // 状态变量
     var warmup = 0f
@@ -95,10 +107,7 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
     private val readUnit = Seq<Int>()
     override fun draw() {
       super.draw()
-      if (units.size == unitSize) {
-        /**
-         * 绘制激活状态的多边形装饰
-         */
+      if (units.size == unitMaxSize) {
         Draw.z(Layer.bullet - 0.01f)
         Draw.color(polyColor)
         Lines.stroke(polyStroke * readyness)
@@ -106,9 +115,6 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
         Draw.reset()
         Draw.z(Layer.block)
       } else {
-        /**
-         * 绘制建造进度
-         */
         Draw.draw(Layer.blockOver) {
           // TODO: 确保外观正常
           Drawf.construct(this, IUnitTypes.和弦.fullIcon, 0f, buildProgress, warmup, totalProgress)
@@ -118,16 +124,10 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
 
     override fun drawSelect() {
       super.drawSelect()
-      drawDronePaths()
-    }
-
-    /**
-     * 绘制无人机路径
-     */
-    private fun drawDronePaths() {
-      units.forEach {unit ->
+      /**绘制无人机路径*/
+      units.forEach { unit ->
         val ai = unit.controller() as CarryTaskAI
-        ai.getTask()?.let {task ->
+        ai.getTask()?.let { task ->
           Drawf.dashLine(blockColor, unit.x, unit.y, task.target.x, task.target.y)
         }
       }
@@ -138,22 +138,21 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
     }
 
     override fun updateTile() {
+      super.updateTile()
       updateNearbyBuildings()
       updateStateVariables()
       if (shouldBuildUnit()) {
         updateUnitProduction()
       }
-      if (efficiency > 0) {
+      if (efficiency() > 0) {
         assignDroneTasks()
       }
     }
 
-    /**
-     * 更新附近的接收站
-     */
+    /**更新附近的接收站*/
     private fun updateNearbyBuildings() {
       builds.clear()
-      units.remove {it.dead()}
+      units.remove { it.dead() }
       Units.nearbyBuildings(x, y, range) {
         if (it is DroneReceivingRndBuild) {
           builds.addUnique(it)
@@ -162,33 +161,26 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
       }
     }
 
-    /**
-     * 更新状态变量
-     */
+    /**更新状态变量*/
     private fun updateStateVariables() {
       readyness = Mathf.approachDelta(readyness, if (units.isEmpty) 0f else 1f, 1f / 60f)
-      warmup = Mathf.approachDelta(warmup, efficiency, 1f / 60f)
+      warmup = Mathf.approachDelta(warmup, efficiency(), 1f / 60f)
     }
 
-    /**
-     * 判断是否应该建造新无人机
-     */
-    private fun shouldBuildUnit() = units.size < unitSize && efficiency > 0
+    /**判断是否应该建造新无人机*/
+    private fun shouldBuildUnit() = units.size < unitMaxSize && efficiency() > 0
 
-    /**
-     * 更新无人机生产进度
-     */
+    /**更新无人机生产进度*/
     private fun updateUnitProduction() {
       buildProgress += edelta() / unitBuildTime
       totalProgress += edelta()
       if (buildProgress >= 1f) {
+        consume()
         createNewDrone()
       }
     }
 
-    /**
-     * 创建新无人机
-     */
+    /**创建新无人机*/
     private fun createNewDrone() {
       if (Vars.net.client()) return
       val newUnit = unit.create(team)
@@ -201,11 +193,9 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
       buildProgress = 0f
     }
 
-    /**
-     * 为空闲无人机分配任务
-     */
+    /**为空闲无人机分配任务*/
     private fun assignDroneTasks() {
-      units.forEach {unit ->
+      units.forEach { unit ->
         val ai = unit.controller() as CarryTaskAI
         if (ai.hasTask()) return@forEach
         val target = builds.random() ?: return@forEach
@@ -219,23 +209,19 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
       }
     }
 
-    /**
-     * 检查是否可以向目标转移物品
-     */
+    /**检查是否可以向目标转移物品*/
     private fun canTransferToTarget(target: DroneReceivingRndBuild, item: Item, unit: Unit): Boolean {
       return target.items.get(item) <= unit.itemCapacity()
     }
 
-    /**
-     * 计算转移物品数量
-     */
+    /**计算转移物品数量*/
     private fun calculateTransferAmount(availableAmount: Int, unit: Unit): Int {
       return if (availableAmount <= unit.itemCapacity()) availableAmount else unit.itemCapacity()
     }
 
     override fun afterReadAll() {
-      readUnit.forEach {unitId ->
-        Groups.unit.getByID(unitId)?.also {unit ->
+      readUnit.forEach { unitId ->
+        Groups.unit.getByID(unitId)?.also { unit ->
           units.addUnique(unit)
           (unit.controller() as CarryTaskAI).source = this
         }
@@ -245,7 +231,7 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
     override fun read(read: Reads, revision: Byte) {
       super.read(read, revision)
       val size = read.i()
-      (1..size).forEach {_ ->
+      (1..size).forEach { _ ->
         val unitId = read.i()
         readUnit.add(unitId)
       }
@@ -254,7 +240,7 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
     override fun write(write: Writes) {
       super.write(write)
       write.i(units.size)
-      units.forEach {unit ->
+      units.forEach { unit ->
         write.i(unit.id)
       }
     }

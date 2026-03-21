@@ -10,11 +10,11 @@ import ice.library.scene.style.DynamicTextureDrawable
 import ice.library.scene.ui.itooltip
 import ice.type.Remains
 import ice.ui.menusDialog.DataDialog
-import ice.ui.menusDialog.RemainsDialog
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
 import ice.world.content.unit.ability.InterceptAbilty
 import mindustry.Vars
+import mindustry.content.StatusEffects
 import mindustry.type.ItemStack
 import mindustry.type.UnitType
 import mindustry.world.meta.Stats
@@ -161,30 +161,37 @@ object Remainss {
   val 不朽者胚胎 = Remains("不朽者胚胎").apply {
     val pos = 2
     level = 1
-    color = IceColor.r2
+    remainsColor = IceColor.r2
     install = {
       slotPos += pos
     }
     uninstall = {
       slotPos -= pos
     }
-    val text = "一个被囚禁的血肉胚胎\n拥抱我,我将赐你永恒\n不必畏惧刀剑与瘟疫,不必屈服于时光与死亡\n用你的过去,换取未来\n用你的灵魂,换取存在\n直至你我合而为一"//
+    val text = """
+      一个被囚禁的血肉胚胎
+      拥抱我,我将赐你永恒
+      不必畏惧刀剑与瘟疫,不必屈服于时光与死亡
+      用你的过去,换取未来
+      用你的灵魂,换取存在
+      直至你我合而为一
+    """.trimIndent()
     setDescriptionTable {
       for (string in text.split("\n")) {
-        it.add(TLabel(string)).grow().wrap().pad(5f).color(color).row()
+        it.add(TLabel(string)).pad(5f).color(remainsColor).row()
       }
     }
     effect = "遗物槽位+[$pos]"
     disabled = {
-      Vars.state.isGame || (RemainsDialog.enableSeq.contains(this) && RemainsDialog.enableSeq.size > slotPos - pos)
+      Vars.state.isGame || (Remains.getEnableds().contains(this) && Remains.getEnableds().size > slotPos - pos)
     }
   }
   val 脊骨寄生虫 = Remains("脊骨寄生虫").apply {
-    color = IceColor.r2
+    remainsColor = IceColor.r2
     setDescriptionTable {
-      it.add("一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合").grow().wrap().pad(5f).color(color).row()
+      it.add("一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合").grow().wrap().pad(5f).color(remainsColor).row()
       it.table {table ->
-        table.add("影响单位: ").pad(5f).color(color)
+        table.add("影响单位: ").pad(5f).color(remainsColor)
         table.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")
       }
     }
@@ -214,7 +221,7 @@ object Remainss {
     }
   }
   val 心跳鼓 = Remains("心跳鼓").apply {
-    color = IceColor.r2
+    remainsColor = IceColor.r2
     setDescription("带有奇异弹性的心肌隔膜,沉稳的节拍能让你的心跳同步")
 
     effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
@@ -234,7 +241,7 @@ object Remainss {
       it.frameCount = 24
       it.frameDuration = 15f
     }
-    color = IceColor.r2
+    remainsColor = IceColor.r2
     effect = "相控雷达锁定上限+[10]"
     setDescription("同一片神经系统的两个节点,我们相认的媒介")
 
@@ -248,6 +255,40 @@ object Remainss {
       DefenseBlocks.相控雷达.maxTargetSize -= 10
       DefenseBlocks.相控雷达.stats = Stats()
       DefenseBlocks.相控雷达.checkStats()
+      DataDialog.flunAll()
+    }
+  }
+  val 血腥玛丽 = Remains("血腥玛丽").apply {
+    icon = DynamicTextureDrawable("血腥玛丽".appendModName()) {
+      it.frameCount = 13
+      it.frameDuration = 15f
+    }
+    remainsColor = IceColor.r2
+    effect = "为核心机攻击附加流血效果"
+    setDescription("血与酒液在杯中摇匀,辛辣之后,只余缓慢扩散的猩红")
+
+    install = {
+      for (type in IUnitTypes.getCoreUnits()) {
+        for (weapon in type.weapons) {
+          if (weapon.bullet.status == StatusEffects.none) {
+            weapon.bullet.status = IStatus.流血
+          }
+        }
+        type.stats = Stats()
+        type.checkStats()
+      }
+      DataDialog.flunAll()
+    }
+    uninstall = {
+      for (type in IUnitTypes.getCoreUnits()) {
+        for (weapon in type.weapons) {
+          if (weapon.bullet.status == IStatus.流血) {
+            weapon.bullet.status = StatusEffects.none
+          }
+        }
+        type.stats = Stats()
+        type.checkStats()
+      }
       DataDialog.flunAll()
     }
   }

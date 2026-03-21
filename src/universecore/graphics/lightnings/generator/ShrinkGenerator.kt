@@ -1,66 +1,61 @@
-package universecore.graphics.lightnings.generator;
+package universecore.graphics.lightnings.generator
 
-import arc.math.geom.Vec2;
-import arc.util.Tmp;
-import universecore.graphics.lightnings.LightningVertex;
+import arc.math.geom.Vec2
+import arc.util.Tmp
+import universecore.graphics.lightnings.LightningVertex
 
 /**收缩闪电的生成器，这会生成一定范围内向中心蔓延的闪电
  *
  * @since 2.3
  * @author EBwilson
- * */
-public class ShrinkGenerator extends LightningGenerator{
-  public float minRange, maxRange;
+ */
+class ShrinkGenerator : LightningGenerator() {
+  var minRange: Float = 0f
+  var maxRange: Float = 0f
 
-  Vec2 vec = new Vec2();
-  float distance;
-  float currentDistance;
-  boolean first;
-  
-  @Override
-  public void reset(){
-    super.reset();
-    vec.rnd(distance = seed.random(minRange, maxRange));
-    currentDistance = distance;
-    first = true;
-  }
-  
-  @Override
-  public boolean hasNext(){
-    return super.hasNext() && currentDistance > 0;
+  var vec: Vec2 = Vec2()
+  var distance: Float = 0f
+  var currentDistance: Float = 0f
+  var first: Boolean = false
+
+  override fun reset() {  
+    super.reset()
+    vec.rnd(seed.random(minRange, maxRange).also {distance = it})
+    currentDistance = distance
+    first = true
   }
 
-  @Override
-  protected void handleVertex(LightningVertex vertex){
-    currentDistance -= seed.random(minInterval, maxInterval);
+  override fun hasNext(): Boolean {
+    return super.hasNext() && currentDistance > 0
+  }
 
-    if(currentDistance > minInterval){
-      if(first){
-        Tmp.v2.set(vec);
+  override fun handleVertex(vertex: LightningVertex) {
+    currentDistance -= seed.random(minInterval, maxInterval)
+
+    if (currentDistance > minInterval) {
+      if (first) {
+        Tmp.v2.set(vec)
+      } else {
+        val offset = seed.random(-maxSpread, maxSpread)
+        Tmp.v2.set(vec).setLength(currentDistance).add(Tmp.v1.set(vec).rotate90(1).setLength(offset).scl((if (offset < 0) -1 else 1).toFloat()))
       }
-      else{
-        float offset = seed.random(-maxSpread, maxSpread);
-        Tmp.v2.set(vec).setLength(currentDistance).add(Tmp.v1.set(vec).rotate90(1).setLength(offset).scl(offset < 0? -1: 1));
-      }
-    }
-    else{
-      currentDistance = 0;
-      Tmp.v2.setZero();
-      vertex.isEnd = true;
+    } else {
+      currentDistance = 0f
+      Tmp.v2.setZero()
+      vertex.isEnd = true
     }
 
-    vertex.x = Tmp.v2.x;
-    vertex.y = Tmp.v2.y;
+    vertex.x = Tmp.v2.x
+    vertex.y = Tmp.v2.y
 
-    if(first){
-      vertex.isStart = true;
-      vertex.valid = true;
-      first = false;
+    if (first) {
+      vertex.isStart = true
+      vertex.valid = true
+      first = false
     }
   }
 
-  @Override
-  public float clipSize(){
-    return 0;
+  override fun clipSize(): Float {
+    return 0f
   }
 }

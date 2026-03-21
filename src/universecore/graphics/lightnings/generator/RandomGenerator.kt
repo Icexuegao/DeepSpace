@@ -1,69 +1,64 @@
-package universecore.graphics.lightnings.generator;
+package universecore.graphics.lightnings.generator
 
-import arc.math.geom.Vec2;
-import arc.util.Tmp;
-import universecore.graphics.lightnings.LightningVertex;
+import arc.math.geom.Vec2
+import arc.util.Tmp
+import universecore.graphics.lightnings.LightningVertex
+import kotlin.math.max
 
 /**随机路径的闪电生成器，给出起点路径总长度生成随机闪电路径
  *
  * @since 2.3
  * @author EBwilson
- * */
-public class RandomGenerator extends LightningGenerator {
-  public float maxLength = 80;
-  public float maxDeflect = 70;
-  public float originAngle = Float.MIN_VALUE;
+ */
+open class RandomGenerator : LightningGenerator() {
+  var maxLength: Float = 80f
+  var maxDeflect: Float = 70f
+  var originAngle: Float = Float.MIN_VALUE
 
-  float currLength;
-  Vec2 curr = new Vec2();
+  var currLength: Float = 0f
+  var currVec2: Vec2 = Vec2()
 
-  boolean first;
-  float maxDistance;
+  var first: Boolean = false
+  var maxDistance: Float = 0f
 
-  @Override
-  public void reset(){
-    super.reset();
-    currLength = 0;
-    maxDistance = 0;
-    first = true;
-    if(originAngle == Float.MIN_VALUE){
-      curr.rnd(0.001f);
-    }
-    else{
-      curr.set(0.001f, 0).setAngle(originAngle);
+  override fun reset() {
+    super.reset()
+    currLength = 0f
+    maxDistance = 0f
+    first = true
+    if (originAngle == Float.MIN_VALUE) {
+      currVec2.rnd(0.001f)
+    } else {
+      currVec2.set(0.001f, 0f).setAngle(originAngle)
     }
   }
 
-  @Override
-  protected void handleVertex(LightningVertex vertex){
-    if(first){
-      vertex.isStart = true;
-      vertex.valid = true;
-      first = false;
-    }
-    else{
-      float distance = seed.random(minInterval, maxInterval);
-      if(currLength + distance > maxLength){
-        vertex.isEnd = true;
+  override fun handleVertex(vertex: LightningVertex) {
+    if (first) {
+      vertex.isStart = true
+      vertex.valid = true
+      first = false
+    } else {
+      val distance = seed.random(minInterval, maxInterval)
+      if (currLength + distance > maxLength) {
+        vertex.isEnd = true
       }
 
-      currLength += distance;
-      Tmp.v1.setLength(distance).setAngle(curr.angle() + seed.random(-maxDeflect, maxDeflect));
-      curr.add(Tmp.v1);
-      maxDistance = Math.max(maxDistance, curr.len());
+      currLength += distance
+      Tmp.v1.setLength(distance).setAngle(currVec2.angle() + seed.random(-maxDeflect, maxDeflect))
+      currVec2.add(Tmp.v1)
+      maxDistance = max(maxDistance, currVec2.len())
     }
 
-    vertex.x = curr.x;
-    vertex.y = curr.y;
+    vertex.x = currVec2.x
+    vertex.y = currVec2.y
   }
 
-  @Override
-  public float clipSize(){
-    return maxDistance;
+  override fun clipSize(): Float {
+    return maxDistance
   }
 
-  @Override
-  public boolean hasNext(){
-    return super.hasNext() && currLength < maxLength;
+  override fun hasNext(): Boolean {
+    return super.hasNext() && currLength < maxLength
   }
 }

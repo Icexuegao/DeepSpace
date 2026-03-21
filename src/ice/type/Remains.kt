@@ -4,30 +4,45 @@ import arc.Core
 import arc.func.Cons
 import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.layout.Table
+import arc.struct.Seq
 import ice.DeepSpace
 import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.IFiles
+import ice.library.scene.ui.addLine
 import ice.library.scene.ui.itooltip
 import ice.ui.UI
 import ice.ui.menusDialog.RemainsDialog
+
 import mindustry.Vars
 
 open class Remains(val name: String) {
+  companion object {
+    val remainsSeq = Seq<Remains>()
+
+    fun getEnableds(): Seq<Remains> {
+      return remainsSeq.select {it.equippedWith()}
+    }
+
+    fun getNoEnableds(): Seq<Remains> {
+      return remainsSeq.select {!it.equippedWith()}
+    }
+  }
+
   var level = 0
   var localizedName: String = ""
   var effect = ""
   var icon = TextureRegionDrawable(IFiles.findModPng(name))
-  var color = IceColor.b4
+  var remainsColor = IceColor.b4
   var install = {}
   var uninstall = {}
-  var disabled: () -> Boolean = { Vars.state.isGame }
+  var disabled: ()->Boolean = {Vars.state.isGame}
   var customTable = Table()
   var buttonStyle = IStyles.button5
 
   init {
-    RemainsDialog.remainsSeq.add(this)
+    remainsSeq.add(this)
   }
 
   fun setDescriptionTable(table: Cons<Table>) {
@@ -35,20 +50,34 @@ open class Remains(val name: String) {
   }
 
   fun setDescription(desc: String) {
-    customTable.add(desc).grow().wrap().pad(5f).color(color).row()
+    customTable.add(desc).grow().wrap().pad(5f).color(remainsColor).row()
   }
 
   fun setEnabled(enabled: Boolean) {
-    if (enabled) {
-      RemainsDialog.enableSeq.addUnique(this)
-      RemainsDialog.remainsSeq.remove(this)
-      install()
-    } else {
-      RemainsDialog.enableSeq.remove(this)
-      RemainsDialog.remainsSeq.addUnique(this)
-      uninstall()
-    }
+    if (enabled) install() else uninstall()
+
     Core.settings.put("${DeepSpace.name}-remains-$name-enabled", enabled)
+  }
+
+  fun equippedWith(): Boolean {
+    return Core.settings.getBool("${DeepSpace.name}-remains-$name-enabled", false)
+  }
+
+  fun getTiTleTable(): Table {
+    return Table().also {
+      it.image(icon).size(120f).pad(30f).padTop(0f).row()
+      it.table {table ->
+        table.table(IFiles.createNinePatch("Uwdwdqddw")) {it1 ->
+          it1.add("遗物").color(IceColor.b4).expandX().left().padLeft(4f)
+        }.width(100f).height(30f).color(IceColor.b6).expandX().left().row()
+        table.add(name).color(remainsColor).fontScale(1.5f).pad(5f).padLeft(0f).expandX().left().row()
+      }.grow().row()
+      it.addLine().pad(3f)
+      it.table {table ->
+        table.add("效果: $effect").color(remainsColor).pad(5f).fontScale(1.3f).wrap().grow()
+      }.marginLeft(9f).grow().row()
+      it.add(customTable).grow().row()
+    }
   }
 
   fun rebuildEnableRemains(table: Table) {
@@ -68,7 +97,7 @@ open class Remains(val name: String) {
 
   fun rebuildRemains(table: Table) {
     table.button(icon, IStyles.button) {
-      if (RemainsDialog.enableSeq.size < RemainsDialog.slotPos) {
+      if (getEnableds().size < RemainsDialog.slotPos) {
         setEnabled(true)
         ISounds.remainInstall.play()
         RemainsDialog.flunRemains()

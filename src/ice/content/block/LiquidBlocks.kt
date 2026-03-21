@@ -113,6 +113,9 @@ object LiquidBlocks : Load {
     }
   }
   val 装甲导管桥 = TransferNode("bridgeConduitArmored").apply {
+    bundle {
+      desc(zh_CN, "装甲导管桥")
+    }
     directionAny = false
     armor = 4f
     allowDiagonal = false
@@ -126,9 +129,6 @@ object LiquidBlocks : Load {
     placeableLiquid = true
     selectionColumns = 6
     requirements(Category.liquid, IItems.石英玻璃, 8, IItems.陶钢, 3, IItems.铱板, 5)
-    bundle {
-      desc(zh_CN, "装甲导管桥")
-    }
   }
   val 长距导管桥 = TransferNode("bridgeConduitLarge").apply {
     range = 10

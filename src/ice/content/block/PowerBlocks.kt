@@ -179,7 +179,7 @@ object PowerBlocks : Load {
 
   val 太阳能板 = SolarGenerator("solarPanel").apply {
     size = 2
-    powerProduction = 9f
+    powerProduction = 108f/60f
     bundle {
       desc(zh_CN, "太阳能板")
     }
@@ -264,12 +264,16 @@ object PowerBlocks : Load {
     size = 2
     health = 100
     updateEffect = IceEffects.square(ILiquids.沼气.color)
-    newConsume().apply {
-      liquid(ILiquids.沼气, 20f / 60f)
+    newFormula { consumers, producers ->
+      consumers.apply {
+        liquid(ILiquids.沼气, 20f / 60f)
+      }
+      producers.apply {
+        power(210f / 60f)
+      }
     }
-    newProduce().apply {
-      power(130f / 60f)
-    }
+
+
     drawers = DrawMulti(DrawDefault(), DrawGlowRegion())
     requirements(Category.power, IItems.高碳钢, 20, IItems.锌锭, 30, IItems.钴锭, 30)
   }
@@ -438,7 +442,7 @@ object PowerBlocks : Load {
         fragVelocityMin = 1f
         fragVelocityMax = 2f
 
-        fragBullet = BasicBulletType(8f, 225f, "star".appendModName()).apply {
+        fragBullet = BasicBulletType(8f, 225f, "star").apply {
           lifetime = 60f
           height = 24f
           width = 24f

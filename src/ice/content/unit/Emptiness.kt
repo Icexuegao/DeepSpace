@@ -307,9 +307,6 @@ class Emptiness : IceUnitType("emptiness") {
 
                 val branch = RandomGenerator()
                 val g: RandomGenerator = object : RandomGenerator() {
-                  override fun remove() {
-
-                  }
 
                   init {
                     maxLength = 140f

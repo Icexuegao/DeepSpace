@@ -30,6 +30,7 @@ import mindustry.graphics.Pal
 import mindustry.input.Placement
 import mindustry.type.Item
 import mindustry.type.Liquid
+import mindustry.world.Edges
 import mindustry.world.Tile
 import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Env
@@ -61,7 +62,7 @@ class TransferNode(name: String) : IceBlock(name) {
   var bridgeWidth = 6.5f
 
   //for autolink
-  var lastBuild: ItemNodeBuild? = null
+  var lastBuild: TransferNodeBuild? = null
   var directionAny = true
 
   init {
@@ -86,11 +87,11 @@ class TransferNode(name: String) : IceBlock(name) {
     group = BlockGroup.liquids
     allowConfigInventory = false
     priority = TargetPriority.transport
-    buildType = Prov(::ItemNodeBuild)
-    config(Point2::class.java) { tile: ItemNodeBuild, i: Point2 ->
+    buildType = Prov(::TransferNodeBuild)
+    config(Point2::class.java) { tile: TransferNodeBuild, i: Point2 ->
       tile.link = Point2.pack(i.x + tile.tileX(), i.y + tile.tileY())
     }
-    config(Int::class.javaObjectType) { tile: ItemNodeBuild, i: Int ->
+    config(Int::class.javaObjectType) { tile: TransferNodeBuild, i: Int ->
       tile.link = i
     }
   }
@@ -121,7 +122,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
     Lines.stroke(bridgeWidth)
 
-     Tmp.v1.set(ox, oy).sub(req.drawx(), req.drawy()).setLength(Vars.tilesize / 2f)
+    Tmp.v1.set(ox, oy).sub(req.drawx(), req.drawy()).setLength(Vars.tilesize / 2f)
 
     Lines.line(bridgeRegion, req.drawx() + Tmp.v1.x, req.drawy() + Tmp.v1.y, ox - Tmp.v1.x, oy - Tmp.v1.y, false)
 
@@ -140,24 +141,52 @@ class TransferNode(name: String) : IceBlock(name) {
 
     if (directionAny) {
       Drawf.dashRect(
-        blockColor, (x - range - 0.5f) * vvtf, (y - range - 0.5f) * vvtf, 2 * (range + 0.5f) * vvtf, 2 * (range + 0.5f) * vvtf
+        blockColor,
+        (x - range - 0.5f) * vvtf,
+        (y - range - 0.5f) * vvtf,
+        2 * (range + 0.5f) * vvtf,
+        2 * (range + 0.5f) * vvtf
       )
     } else {
       Geometry.d4.forEach { pos ->
-        Drawf.dashLine(blockColor, (x + pos.x * 0.5f) * vvtf, (y + pos.y * 0.5f) * vvtf, (x + pos.x * range) * vvtf, (y + pos.y * range) * vvtf)
+        Drawf.dashLine(
+          blockColor,
+          (x + pos.x * 0.5f) * vvtf,
+          (y + pos.y * 0.5f) * vvtf,
+          (x + pos.x * range) * vvtf,
+          (y + pos.y * range) * vvtf
+        )
       }
     }
     link?.let {
-      if (Tmp.v5.set(it).sub(x* vvtf,y*vvtf).len()< Vars.tilesize*2)return
-      Draw.color(Pal.gray.write(Tmp.c3).a(blockColor.a))
-      Lines.stroke(3f)
-      Lines.line(it.drawx(), it.drawy(), x * vvtf, y * vvtf)
-      Draw.color(blockColor)
-      Lines.stroke(1f)
-      Lines.line(it.drawx(), it.drawy(), x * vvtf, y * vvtf)
+      if (directionAny) {
+        if (Tmp.v5.set(it).sub(x * vvtf, y * vvtf).len() < Vars.tilesize * 2) return
+        Draw.color(Pal.gray.write(Tmp.c3).a(blockColor.a))
+        Lines.stroke(3f)
+        Lines.line(it.drawx(), it.drawy(), x * vvtf, y * vvtf)
+        Draw.color(blockColor)
+        Lines.stroke(1f)
+        Lines.line(it.drawx(), it.drawy(), x * vvtf, y * vvtf)
 
-      Drawf.square(x * vvtf, y * vvtf, size.toFloat(), 45f, blockColor)
-      Drawf.square(it.drawx(), it.drawy(), size.toFloat(), 45f, blockColor)
+        Drawf.square(x * vvtf, y * vvtf, size.toFloat(), 45f, blockColor)
+      } else {
+        if (abs(link.x - x) + abs(link.y - y) > 1) {
+          val rot = link.absoluteRelativeTo(x, y).toInt()
+          val w =
+            (if (link.x.toInt() == x) Vars.tilesize else abs(link.x - x) * Vars.tilesize - Vars.tilesize).toFloat()
+          val h =
+            (if (link.y.toInt() == y) Vars.tilesize else abs(link.y - y) * Vars.tilesize - Vars.tilesize).toFloat()
+          Lines.stroke(1f, blockColor)
+          Lines.rect((x + link.x) / 2f * Vars.tilesize - w / 2f, (y + link.y) / 2f * Vars.tilesize - h / 2f, w, h)
+
+          Draw.rect(
+            "bridge-arrow",
+            (link.x * Vars.tilesize + Geometry.d4(rot).x * Vars.tilesize).toFloat(),
+            (link.y * Vars.tilesize + Geometry.d4(rot).y * Vars.tilesize).toFloat(),
+            (link.absoluteRelativeTo(x, y) * 90).toFloat()
+          )
+        }
+      }
     }
 
     Draw.reset()
@@ -167,9 +196,11 @@ class TransferNode(name: String) : IceBlock(name) {
     if (other == null) return false
     if (tile == null) return false
     if (!positionsValid(tile.x.toInt(), tile.y.toInt(), other.x.toInt(), other.y.toInt())) return false
-    val block = (other.block() === tile.block() && tile.block() === this) || (tile.block() !is TransferNode && other.block() === this)
+    val block =
+      (other.block() === tile.block() && tile.block() === this) || (tile.block() !is TransferNode && other.block() === this)
     val team = (other.team() == tile.team() || tile.block() != this)
-    val build = (other.build is ItemNodeBuild) && (!checkDouble || (other.build as ItemNodeBuild).link != tile.pos())
+    val build =
+      (other.build is TransferNodeBuild) && (!checkDouble || (other.build as TransferNodeBuild).link != tile.pos())
 
 
     return block && team && build
@@ -223,7 +254,7 @@ class TransferNode(name: String) : IceBlock(name) {
     }
   }
 
-  open inner class ItemNodeBuild : IceBuild() {
+  open inner class TransferNodeBuild : IceBuild() {
     var link = -1
     private var incoming = IntSeq(false, 4)
     private var warmup = 0f
@@ -296,9 +327,12 @@ class TransferNode(name: String) : IceBlock(name) {
           if (linkValid(tile, other)) {
             val linked: Boolean = other!!.pos() == link
             Drawf.select(
-              other.drawx(), other.drawy(), other.block().size * Vars.tilesize / 2f + 2f + (if (linked) 0f else Mathf.absin(
+              other.drawx(),
+              other.drawy(),
+              other.block().size * Vars.tilesize / 2f + 2f + (if (linked) 0f else Mathf.absin(
                 Time.time, 4f, 1f
-              )), if (linked) Pal.place else Pal.breakInvalid
+              )),
+              if (linked) Pal.place else Pal.breakInvalid
             )
           }
         }
@@ -307,7 +341,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
     override fun onConfigureBuildTapped(other: Building): Boolean {
       //反向连接
-      if (other is ItemNodeBuild && other.link == pos()) {
+      if (other is TransferNodeBuild && other.link == pos()) {
         configure(other.pos())
         other.configure(-1)
         return true
@@ -329,7 +363,7 @@ class TransferNode(name: String) : IceBlock(name) {
       while (idx < incoming.size) {
         val i: Int = incoming.items[idx]
         val other: Tile = Vars.world.tile(i)
-        if (!linkValid(tile, other, false) || (other.build as ItemNodeBuild).link != tile.pos()) {
+        if (!linkValid(tile, other, false) || (other.build as TransferNodeBuild).link != tile.pos()) {
           incoming.removeIndex(idx)
           idx--
         }
@@ -353,7 +387,7 @@ class TransferNode(name: String) : IceBlock(name) {
         doDump()
         warmup = 0f
       } else {
-        val inc: IntSeq = (other!!.build as ItemNodeBuild).incoming
+        val inc: IntSeq = (other!!.build as TransferNodeBuild).incoming
         val pos: Int = tile.pos()
         if (!inc.contains(pos)) {
           inc.add(pos)
@@ -419,7 +453,10 @@ class TransferNode(name: String) : IceBlock(name) {
         while (a < arrows - 2) {
           Draw.alpha(Mathf.absin(a - time / arrowTimeScl, arrowPeriod, 1f) * warmup * Renderer.bridgeOpacity)
           Draw.rect(
-            arrowRegion, x + dx * (Vars.tilesize / 2f + a * arrowSpacing + arrowOffset), y + dy * (Vars.tilesize / 2f + a * arrowSpacing + arrowOffset), angle
+            arrowRegion,
+            x + dx * (Vars.tilesize / 2f + a * arrowSpacing + arrowOffset),
+            y + dy * (Vars.tilesize / 2f + a * arrowSpacing + arrowOffset),
+            angle
           )
           a++
         }
@@ -450,13 +487,17 @@ class TransferNode(name: String) : IceBlock(name) {
     private fun checkAccept(source: Building, other: Tile?): Boolean {
       if (tile == null || linked(source)) return true
       if (linkValid(tile, other)) {
-        return true
+        if (directionAny) return true
+        val rel = relativeTo(other).toInt()
+        val facing = Edges.getFacingEdge(source, this)
+        val rel2 = (if (facing == null) -1 else relativeTo(facing)).toInt()
+        return rel != rel2
       }
       return false
     }
 
     private fun linked(source: Building): Boolean {
-      return source is ItemNodeBuild && linkValid(source.tile, tile) && source.link == pos()
+      return source is TransferNodeBuild && linkValid(source.tile, tile) && source.link == pos()
     }
 
     override fun canDump(to: Building, item: Item): Boolean {

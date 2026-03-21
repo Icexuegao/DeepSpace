@@ -29,9 +29,6 @@ open class LightLaserBulletType : EmpLightningBulletType() {
   var lightnings: Int = 2
   var lightningTime: Float = 5f
   var generator: VectorLightningGenerator = object : VectorLightningGenerator() {
-    override fun remove() {
-
-    }
 
     init {
       minInterval = 4f

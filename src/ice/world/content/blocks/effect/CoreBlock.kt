@@ -44,7 +44,6 @@ open class CoreBlock(name: String) : CoreBlock(name) {
   inner class CoreBuild : CoreBlock.CoreBuild() {
 
     var add = false
-
     override fun updateTile() {
       super.updateTile()
       if (!add) {
@@ -55,16 +54,17 @@ open class CoreBlock(name: String) : CoreBlock(name) {
         }
       }
     }
-
     override fun read(read: Reads, revision: Byte) {
       super.read(read, revision)
-      add=read.bool()
+      add = read.bool()
     }
 
     override fun write(write: Writes) {
       super.write(write)
       write.bool(add)
     }
+
+
     override fun getPowerProduction(): Float {
       return if (enabled) powerProduct else 0f
     }

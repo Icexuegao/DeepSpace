@@ -15,7 +15,6 @@ import ice.content.block.turret.TurretBullets.rand
 import ice.entities.bullet.base.BulletType
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.content.Fx
-import mindustry.content.Liquids
 import mindustry.entities.part.RegionPart
 import mindustry.gen.Bullet
 import mindustry.gen.Hitboxc
@@ -31,15 +30,25 @@ import singularity.world.SglFx
 import singularity.world.blocks.turrets.LaserTurret
 import singularity.world.draw.DrawSglTurret
 
-class Fubuki: LaserTurret("fubuki") {
-  init{
+class Fubuki : LaserTurret("fubuki") {
+  init {
     bundle {
       desc(zh_CN, "吹雪", "向前喷发凛冽的冰霜风暴,凛冽的风雪足以将敌人冻结成冰雕")
     }
-    requirements(
+    requirementPairs(
       Category.turret,
-        IItems.强化合金, 100, IItems.铝锭, 140, IItems.充能FEX水晶, 60, IItems.气凝胶, 80,
-        IItems.铱锭, 30,  IItems.絮凝剂, 60
+
+      IItems.强化合金 to 100,
+
+      IItems.铝锭 to 140,
+
+      IItems.充能FEX水晶 to 60,
+
+      IItems.气凝胶 to 80,
+
+      IItems.铱锭 to 30,
+
+      IItems.絮凝剂 to 60
     )
     size = 4
     scaledHealth = 400f
@@ -90,7 +99,7 @@ class Fubuki: LaserTurret("fubuki") {
 
           Draw.z(Layer.flyingUnit + 1)
           SglDraw.gradientCircle(b.x, b.y, 14f, 0.6f)
-          SglDraw.drawBloomUponFlyUnit(b) { e: Bullet ->
+          SglDraw.drawBloomUponFlyUnit(b) {e: Bullet ->
             Draw.color(hitColor)
             SglDraw.drawDiamond(e.x, e.y, 14f, 6 + Mathf.absin(1f, 2f), e.rotation())
           }
@@ -127,14 +136,14 @@ class Fubuki: LaserTurret("fubuki") {
           Draw.z(Layer.flyingUnit + 1)
           SglDraw.gradientCircle(b.x, b.y, 14f, 0.6f)
 
-          SglDraw.drawBloomUponFlyUnit(b) { e: Bullet ->
+          SglDraw.drawBloomUponFlyUnit(b) {e: Bullet ->
             Draw.color(Color.white)
             Fill.circle(e.x, e.y, 2f)
             Lines.stroke(1f, hitColor)
             Lines.circle(e.x, e.y, 4f)
             val step = 360f / 6
             for (i in 0..5) {
-              SglDraw.drawTransform(e.x, e.y, 6f, 0f, step * i + Time.time * 2) { x: Float, y: Float, r: Float ->
+              SglDraw.drawTransform(e.x, e.y, 6f, 0f, step * i + Time.time * 2) {x: Float, y: Float, r: Float ->
                 Drawf.tri(x, y, 2.5f, 2.5f, r)
                 Drawf.tri(x, y, 2.5f, 6f, r + 180)
               }

@@ -26,11 +26,8 @@ import mindustry.type.Category
 import mindustry.world.meta.BuildVisibility
 import singularity.Recipes
 import singularity.Singularity
-import singularity.contents.SglTechThree
 import singularity.type.SglCategory
 import singularity.type.SglContentType
-import singularity.type.SglContents
-import singularity.ui.dialogs.SglTechTreeDialog
 import tmi.RecipeEntryPoint
 import universecore.UncCore
 
@@ -69,6 +66,7 @@ open class Ice : Mod() {
     Vars.content.each {
       if (it.minfo.mod == DeepSpace.mod && it is UnlockableContent) it.unlock()
     }
+
   }
 
   override fun loadContent() {

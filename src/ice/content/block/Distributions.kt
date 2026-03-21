@@ -275,7 +275,7 @@ object Distributions : Load {
   }
   val 相位运输节点 = ItemNode("phase_transport_node").apply {
     bundle {
-      desc(zh_CN, "相位运输节点", "使用相位物制造的运输节点,具有更快的运输速度和更远的连接距离")
+      desc(zh_CN, "相位运输节点", "使用相位技术制造的运输节点,具有更快的运输速度和更远的连接距离")
     }
     requirements(Category.distribution, IItems.絮凝剂, 6, IItems.气凝胶, 10, IItems.强化合金, 8, IItems.铝锭, 12)
     researchCostMultiplier = 1.5f
@@ -308,7 +308,7 @@ object Distributions : Load {
     hasPower = true
     pulse = true
     envEnabled = envEnabled or Env.space
-    transportTime = 0.5f
+    transportTime = 0.05f
     newConsume()
     consume!!.power(1f)
   }

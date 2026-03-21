@@ -74,9 +74,9 @@ object SglParticleModels {
                 tmp1.perCloud = cloud.perCloud
                 tmp1.nextCloud = tmp2
 
-                tmp2.x = cloud.nextCloud.x
-                tmp2.y = cloud.nextCloud.y
-                tmp2.size = cloud.nextCloud.size / 2
+                tmp2.x = cloud.nextCloud!!.x
+                tmp2.y = cloud.nextCloud!!.y
+                tmp2.size = cloud.nextCloud!!.size / 2
 
                 Draw.z(Layer.bullet - 1)
                 tmp1.draw()
@@ -108,8 +108,8 @@ object SglParticleModels {
                 } else p.owner = null
             }
 
-            if (p.bullet != null && p.bullet.isAdded) {
-                p.bullet.keepAlive = true
+            if (p.bullet != null && p.bullet!!.isAdded) {
+                p.bullet!!.keepAlive = true
             }
         }
 
@@ -118,8 +118,8 @@ object SglParticleModels {
 
             val b = p.bullet
             if (b != null && b.isAdded && p.timer.get(5f) && c.nextCloud != null) {
-                val dx = c.nextCloud.x - c.x
-                val dy = c.nextCloud.y - c.y
+                val dx = c.nextCloud!!.x - c.x
+                val dy = c.nextCloud!!.y - c.y
 
                 val expand = 3f
 
@@ -130,7 +130,7 @@ object SglParticleModels {
                     if (u!!.checkTarget(b.type.collidesAir, b.type.collidesGround) && u.hittable()) {
                         u.hitbox(hitrect)
 
-                        val vec = Geometry.raycastRect(c.x, c.y, c.nextCloud.x, c.nextCloud.y, hitrect.grow(expand * 2))
+                        val vec = Geometry.raycastRect(c.x, c.y, c.nextCloud!!.x, c.nextCloud!!.y, hitrect.grow(expand * 2))
 
                         if (vec != null) {
                             if (!b.collided.contains(u.id)) {

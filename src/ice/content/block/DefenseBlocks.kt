@@ -75,6 +75,7 @@ object DefenseBlocks : Load {
     size = 1
     armor = 5f
     health = 360
+    healAmount=10f
     requirements(Category.defense, IItems.金锭, 10)
     bundle {
       desc(zh_CN, "流金墙", "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈", "熔融金锭构筑的壁垒\n财富值+")
@@ -84,6 +85,7 @@ object DefenseBlocks : Load {
     size = 2
     armor = 5f
     health = 流金墙.health * 4
+    healAmount=流金墙.healAmount*4
     requirements(Category.defense, IItems.金锭, 10)
     bundle {
       desc(zh_CN, "大型流金墙", "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈", "熔融金锭构筑的壁垒\n财富值++")

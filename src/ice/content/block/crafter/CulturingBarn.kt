@@ -44,12 +44,16 @@ class CulturingBarn : SpliceCrafter("culturing_barn") {
     allowRectanglePlacement = true
     buildType = Prov(::CulturingBarnBuild)
 
-    newConsume().apply {
-      liquid(Liquids.water, 0.02f)
+    newFormula { consumers, producers ->
+      consumers.apply {
+        liquid(Liquids.water, 2.4f/60f)
+      }
+      producers.apply {
+        liquids(ILiquids.氧气,1.2f/60f, ILiquids.藻泥, 0.8f/60f)
+      }
     }
-    newProduce().apply {
-      liquids(ILiquids.氧气, 0.01f, ILiquids.藻泥, 0.006f)
-    }
+
+
 
     structUpdated = Cons {e: SpliceCrafterBuild ->
       val right = e.nearby(0)

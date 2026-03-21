@@ -2,44 +2,32 @@ package singularity.ui;
 
 import arc.Core;
 import arc.Events;
-import arc.input.KeyCode;
 import arc.math.Mathf;
-import arc.math.WindowedMean;
-import arc.math.geom.Vec3;
 import arc.scene.actions.Actions;
-import arc.scene.event.ElementGestureListener;
-import arc.scene.event.InputEvent;
 import arc.scene.ui.TextButton;
 import arc.scene.ui.layout.Table;
 import arc.util.Align;
 import arc.util.Strings;
 import arc.util.Time;
-import arc.util.Tmp;
 import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.gen.Healthc;
 import mindustry.gen.Icon;
 import mindustry.gen.Teamc;
 import mindustry.gen.Unit;
-import mindustry.graphics.g3d.PlanetParams;
-import mindustry.graphics.g3d.PlanetRenderer;
 import mindustry.ui.Styles;
-import mindustry.ui.dialogs.BaseDialog;
 import mindustry.world.meta.StatUnit;
 import singularity.Sgl;
-import singularity.contents.SglTechThree;
 import singularity.core.SglEventTypes;
 import singularity.core.UpdatePool;
 import singularity.graphic.Blur;
 import singularity.graphic.SglDrawConst;
-import singularity.graphic.renders.SglPlanetRender;
 import singularity.ui.dialogs.*;
 import singularity.ui.dialogs.ModConfigDialog.ConfigButton;
 import singularity.ui.dialogs.ModConfigDialog.ConfigCheck;
 import singularity.ui.dialogs.ModConfigDialog.ConfigSepLine;
 import singularity.ui.dialogs.ModConfigDialog.ConfigSlider;
 import singularity.ui.fragments.DebugInfos;
-import singularity.ui.fragments.ToolBarFrag;
 import singularity.ui.fragments.entityinfo.EntityHealthDisplay;
 import singularity.ui.fragments.entityinfo.EntityInfoFrag;
 import singularity.ui.fragments.entityinfo.HealthBarStyle;
@@ -57,7 +45,6 @@ public class SglUI {
   /** 主菜单 */
   public MainMenu mainMenu;
   public PublicInfoDialog publicInfo;
-  public ContributorsDialog contributors;
   public DocumentDialog document;
   public ModConfigDialog config;
   public SupportUsDialog support;
@@ -90,121 +77,6 @@ public class SglUI {
           {3, true, 1f, true, true, 4096, true},
   };
 
-  public BaseDialog setPosDialog = new BaseDialog(Core.bundle.get("settings.setCamPos")) {
-    private final PlanetParams params = new PlanetParams();
-    private final Vec3 camRight = new Vec3(1, 0, 0);
-
-    private final PlanetRenderer renderer = new SglPlanetRender();
-
-    private float lastDx, lastDy, speed;
-    private boolean controlling, paning = false;
-    private final WindowedMean dxMean = new WindowedMean(12), dyMean = new WindowedMean(12);
-
-    {
-      buttons.button(Core.bundle.get("misc.sure"), Icon.ok, () -> {
-        hide();
-        Sgl.config.defaultCameraPos = new float[]{
-                params.camPos.x,
-                params.camPos.y,
-                params.camPos.z,
-                Tmp.v1.set(params.camDir.x, params.camDir.z).angle(),
-                Tmp.v2.set(Tmp.v1.len(), params.camDir.y).angle()
-        };
-      }).size(210f, 64f);
-
-      cont.setSize(Core.graphics.getWidth(), Core.graphics.getHeight());
-      cont.fill((x, y, w, h) -> renderer.render(params));
-      shown(() -> {
-        float[] arr = Sgl.config.defaultCameraPos;
-        params.camPos.set(arr[0], arr[1], arr[2]);
-
-        params.camDir.set(1, 0, 0);
-        params.camUp.set(0, 1, 0);
-        camRight.set(0, 0, 1);
-
-        params.camDir.rotate(params.camUp, arr[3]);
-        camRight.rotate(params.camUp, arr[3]);
-
-        params.camDir.rotate(camRight, arr[4]);
-        params.camUp.rotate(camRight, arr[4]);
-      });
-
-      resized(() -> cont.setSize(Core.graphics.getWidth(), Core.graphics.getHeight()));
-
-      update(() -> {
-        if (Core.scene.hit(Core.input.mouseX(), Core.input.mouseY(), true) == this) {
-          Core.scene.setScrollFocus(this);
-        }
-
-        float dx = lastDx / 9 * Time.delta, dy = lastDy / 9 * Time.delta;
-        if (!controlling) {
-          params.camDir.rotate(camRight, dy);
-          params.camUp.rotate(camRight, dy);
-
-          params.camDir.rotate(params.camUp, dx);
-          camRight.rotate(params.camUp, dx);
-          lastDx = Mathf.lerpDelta(lastDx, 0, 0.035f);
-          lastDy = Mathf.lerpDelta(lastDy, 0, 0.035f);
-        }
-
-        speed = Mathf.lerpDelta(speed, 0, 0.05f);
-        if (Math.abs(speed) > 0.001f) {
-          params.camPos.add(
-                  params.camDir.cpy().setLength(speed).scl(speed > 0 ? 1 : -1)
-          );
-        }
-
-        if (paning) {
-          paning = false;
-        } else {
-          dxMean.add(0);
-          dyMean.add(0);
-        }
-      });
-
-      scrolled(d -> speed = Mathf.clamp(speed - d * 0.25f, -1, 1));
-
-      addCaptureListener(new ElementGestureListener() {
-        @Override
-        public void touchDown(InputEvent event, float x, float y, int pointer, KeyCode button) {
-          controlling = true;
-          Core.graphics.restoreCursor();
-
-          super.touchDown(event, x, y, pointer, button);
-        }
-
-        @Override
-        public void touchUp(InputEvent event, float x, float y, int pointer, KeyCode button) {
-          controlling = false;
-          lastDx = dxMean.rawMean();
-          lastDy = dyMean.rawMean();
-
-          super.touchUp(event, x, y, pointer, button);
-        }
-
-        @Override
-        public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
-          paning = true;
-          params.camDir.rotate(camRight, deltaY / 9);
-          params.camUp.rotate(camRight, deltaY / 9);
-
-          params.camDir.rotate(params.camUp, deltaX / 9);
-          camRight.rotate(params.camUp, deltaX / 9);
-
-          dxMean.add(deltaX);
-          dyMean.add(deltaY);
-          super.pan(event, x, y, deltaX, deltaY);
-        }
-
-        @Override
-        public void zoom(InputEvent event, float initialDistance, float distance) {
-          speed = Mathf.clamp((distance - initialDistance) / 450, -1, 1);
-
-          super.zoom(event, initialDistance, distance);
-        }
-      });
-    }
-  };
 
   public void init() {
     entityInfoFrag = new EntityInfoFrag();
@@ -213,7 +85,7 @@ public class SglUI {
 
     mainMenu = new MainMenu();
     publicInfo = new PublicInfoDialog();
-    contributors = new ContributorsDialog();
+
     config = new ModConfigDialog();
     support = new SupportUsDialog();
     bufferStat = new DistNetMonitorDialog();
@@ -228,7 +100,7 @@ public class SglUI {
     Vars.ui.hints.build(Vars.ui.hudGroup);
 
     mainMenu.build();
-    contributors.build();
+
     unitFactoryCfg.build();
 
     debugInfos.build(Vars.ui.hudGroup);
@@ -304,9 +176,7 @@ public class SglUI {
             new ConfigCheck("showModMenuWenLaunch", b -> Sgl.config.showModMenuWenLaunch = b, () -> Sgl.config.showModMenuWenLaunch),
             new ConfigCheck("mainMenuUniverseBackground", b -> Sgl.config.mainMenuUniverseBackground = b, () -> Sgl.config.mainMenuUniverseBackground),
             new ConfigCheck("staticMainMenuBackground", b -> Sgl.config.staticMainMenuBackground = b, () -> Sgl.config.staticMainMenuBackground),
-            new ConfigButton("defaultCameraPos", () -> new TextButton(Core.bundle.get("settings.setCamPos"), Styles.flatt) {{
-              clicked(setPosDialog::show);
-            }}),
+
             new ConfigCheck("movementCamera", b -> Sgl.config.movementCamera = b, () -> Sgl.config.movementCamera),
             new ConfigSepLine("infoDisplay", Core.bundle.get("infos.infoDisplay")),
             new ConfigCheck("showInfos", b -> Sgl.config.showInfos = b, () -> Sgl.config.showInfos),

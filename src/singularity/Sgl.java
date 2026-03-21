@@ -87,8 +87,6 @@ public class Sgl {
   public static Settings globals= settings;
   /** ui类存放对象 */
   public static SglUI ui;
-  /** 贡献者列表 */
-  public static Contributors contributors;
 
   public static DistSupportContainerTable matrixContainers;
 
@@ -161,8 +159,6 @@ public class Sgl {
     globals.load();*/
 
 
-
-    contributors = new Contributors();
     matrixContainers = new DistSupportContainerTable();
     empHealth = new EMPHealthManager();
 

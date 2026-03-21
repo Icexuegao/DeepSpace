@@ -1,319 +1,315 @@
-package universecore.world.particles;
+package universecore.world.particles
 
-import arc.func.Boolf;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Fill;
-import arc.math.Angles;
-import arc.math.geom.Vec2;
-import arc.struct.ObjectSet;
-import arc.struct.Seq;
-import arc.util.Interval;
-import arc.util.Time;
-import arc.util.Tmp;
-import arc.util.pooling.Pool;
-import arc.util.pooling.Pools;
-import mindustry.entities.EntityGroup;
-import mindustry.gen.Bullet;
-import mindustry.gen.Decal;
-import mindustry.gen.Groups;
-import org.jetbrains.annotations.NotNull;
+import arc.func.Boolf
+import arc.graphics.Color
+import arc.graphics.g2d.Draw
+import arc.graphics.g2d.Fill
+import arc.math.Angles
+import arc.math.geom.Vec2
+import arc.struct.ObjectSet
+import arc.struct.Seq
+import arc.util.Interval
+import arc.util.Time
+import arc.util.Tmp
+import arc.util.pooling.Pool
+import arc.util.pooling.Pools
+import mindustry.entities.EntityGroup
+import mindustry.gen.Bullet
+import mindustry.gen.Decal
+import mindustry.gen.Groups
+import kotlin.math.max
 
-import java.util.Iterator;
+class Particle : Decal(), Iterable<Particle.Cloud> {
+  companion object {
+    private var counter = 0
 
-public class Particle extends Decal implements Iterable<Particle.Cloud> {
+    /**粒子的最大共存数量,总量大于此数目时,创建新的粒子会清除最先产生的粒子 */
+    var maxAmount: Int = 1024
 
-    public Vec2 dest = new Vec2();
-    public float eff = 0f;
+     val all: ObjectSet<Particle?> = ObjectSet<Particle?>()
+     val temp = Seq<Particle>()
 
-    public Interval timer = new Interval(6);
-    public Bullet owner;
-    public Bullet bullet;
-
-    public float strength = 1;
-    public float deflectAngle = 45;
-
-    private static int counter = 0;
-    /**粒子的最大共存数量,总量大于此数目时,创建新的粒子会清除最先产生的粒子*/
-    public static int maxAmount = 1024;
-
-    protected static final ObjectSet<Particle> all = new ObjectSet<>();
-    protected static final Seq<Particle> temp = new Seq<>();
-
-    protected Vec2 startPos = new Vec2();
-    protected float clipSize;
-
-    Cloud currentCloud, firstCloud;
-    int cloudCount;
-
-    public int maxCloudCounts = -1;
-
-    public Particle parent;
-
-    /**粒子的速,矢量*/
-    public Vec2 speed = new Vec2();
-    /**粒子当前的尺寸*/
-    public float size;
-
-    public float defSpeed;
-    public float defSize;
-
-    /**粒子模型,决定了该粒子的行为*/
-    public ParticleModel model;
-    public float layer;
-
-    public static int count() {
-        return all.size;
+    fun count(): Int {
+      return all.size
     }
 
-    public float cloudCount() {
-        return cloudCount;
+    fun get(filter: Boolf<Particle>): Seq<Particle> {
+      temp.clear()
+      for (particle in all) {
+        if (filter.get(particle)) temp.add(particle)
+      }
+      return temp
+    }
+  }
+  var dest: Vec2 = Vec2()
+  var eff: Float = 0f
+
+  var timer: Interval = Interval(6)
+  var owner: Bullet? = null
+  var bullet: Bullet? = null
+
+  var strength: Float = 1f
+  var deflectAngle: Float = 45f
+
+   var startPos: Vec2 = Vec2()
+   var clipSize: Float = 0f
+
+  var currentCloud: Cloud? = null
+  var firstCloud: Cloud? = null
+  var cloudCount: Int = 0
+
+  var maxCloudCounts: Int = -1
+
+  var parent: Particle? = null
+
+  /**粒子的速,矢量 */
+  var speed: Vec2 = Vec2()
+
+  /**粒子当前的尺寸 */
+  var size: Float = 0f
+
+  var defSpeed: Float = 0f
+  var defSize: Float = 0f
+
+  /**粒子模型,决定了该粒子的行为 */
+  var model: ParticleModel? = null
+  var layer: Float = 0f
+
+  fun cloudCount(): Float {
+    return cloudCount.toFloat()
+  }
+
+  override fun add() {
+    index__all = Groups.all.addIndex(this)
+    index__draw = Groups.draw.addIndex(this)
+
+    all.add(this)
+
+    counter++
+
+    currentCloud = Pools.get<Cloud?>(Cloud::class.java,::Cloud, 65536).obtain()
+    currentCloud!!.x = x
+    currentCloud!!.y = y
+    currentCloud!!.size = 0f
+    currentCloud!!.color.set(model!!.trailColor(this))
+
+    firstCloud = currentCloud
+
+    added = true
+
+    model!!.init(this)
+
+    if (counter >= maxAmount) {
+      remove()
+    }
+  }
+
+  override fun draw() {
+    val l = Draw.z()
+    Draw.z(layer)
+
+    if (parent != null) {
+      x += parent!!.x
+      y += parent!!.y
     }
 
-    public static Seq<Particle> get(Boolf<Particle> filter) {
-        temp.clear();
-        for (Particle particle : all) {
-            if (filter.get(particle)) temp.add(particle);
-        }
-        return temp;
+    model!!.draw(this)
+
+    if (currentCloud != null) {
+      model!!.drawTrail(this)
     }
 
-    @Override
-    public void add() {
-        index__all = Groups.all.addIndex(this);
-        index__draw = Groups.draw.addIndex(this);
-
-        all.add(this);
-
-        counter++;
-
-        currentCloud = Pools.get(Cloud.class, Cloud::new, 65536).obtain();
-        currentCloud.x = x;
-        currentCloud.y = y;
-        currentCloud.size = 0;
-        currentCloud.color.set(model.trailColor(this));
-
-        firstCloud = currentCloud;
-
-        added = true;
-
-        model.init(this);
-
-        if (counter >= maxAmount) {
-            remove();
-        }
+    if (parent != null) {
+      x -= parent!!.x
+      y -= parent!!.y
     }
 
-    @Override
-    public void draw() {
-        float l = Draw.z();
-        Draw.z(layer);
+    Draw.z(l)
+    Draw.reset()
+  }
 
-        if (parent != null) {
-            x += parent.x;
-            y += parent.y;
-        }
+  override fun update() {
+    model!!.deflect(this)
+    x += speed.x * Time.delta
+    y += speed.y * Time.delta
+    size = model!!.currSize(this)
+    model!!.update(this)
+    val c = Pools.get(Cloud::class.java,::Cloud, 65536).obtain()
+    c.x = if (parent == null) x else x + parent!!.x
+    c.y = if (parent == null) y else y + parent!!.y
+    c.size = size
+    c.color.set(model!!.trailColor(this))
 
-        model.draw(this);
+    c.perCloud = currentCloud
+    currentCloud!!.nextCloud = c
 
-        if (currentCloud != null) {
-            model.drawTrail(this);
-        }
+    currentCloud = c
 
-        if (parent != null) {
-            x -= parent.x;
-            y -= parent.y;
-        }
+    cloudCount++
 
-        Draw.z(l);
-        Draw.reset();
+    for (cloud in currentCloud!!) {
+      model!!.updateTrail(this, cloud!!)
     }
 
-    @Override
-    public void update() {
-        model.deflect(this);
-        x += speed.x * Time.delta;
-        y += speed.y * Time.delta;
-        size = model.currSize(this);
-        model.update(this);
-        Cloud c = Pools.get(Cloud.class, Cloud::new, 65536).obtain();
-        c.x = parent == null ? x : x + parent.x;
-        c.y = parent == null ? y : y + parent.y;
-        c.size = size;
-        c.color.set(model.trailColor(this));
-
-        c.perCloud = currentCloud;
-        currentCloud.nextCloud = c;
-
-        currentCloud = c;
-
-        cloudCount++;
-
-        for (Cloud cloud : currentCloud) {
-            model.updateTrail(this, cloud);
-        }
-
-        boolean mark = false;
-        while (firstCloud.nextCloud != null) {
-            if (maxCloudCounts > 0 && cloudCount > maxCloudCounts || model.isFaded(this, firstCloud)) {
-                mark = !(maxCloudCounts > 0 && cloudCount > maxCloudCounts);
-                popFirst();
-            } else break;
-        }
-
-        if (!mark && (parent != null && !parent.isAdded() || model.isFinal(this))) {
-            popFirst();
-            if (cloudCount > 4) popFirst();
-        }
-
-        if (cloudCount <= 4 && model.isFinal(this)) remove();
+    var mark = false
+    while (firstCloud!!.nextCloud != null) {
+      if (maxCloudCounts in 1..<cloudCount || model!!.isFaded(this, firstCloud!!)) {
+        mark = !(maxCloudCounts > 0 && cloudCount > maxCloudCounts)
+        popFirst()
+      } else break
     }
 
-    private void popFirst() {
-        Cloud n = firstCloud.nextCloud;
-        n.perCloud = null;
-        Pools.free(firstCloud);
-        firstCloud = n;
-        cloudCount--;
+    if (!mark && (parent != null && !parent!!.isAdded || model!!.isFinal(this))) {
+      popFirst()
+      if (cloudCount > 4) popFirst()
     }
 
-    @Override
-    public void remove() {
-        if (added) {
-            Groups.all.removeIndex(this, this.index__all);
-            index__all = -1;
-            Groups.draw.removeIndex(this, this.index__draw);
-            index__draw = -1;
-            Groups.queueFree(this);
+    if (cloudCount <= 4 && model!!.isFinal(this)) remove()
+  }
 
-            all.remove(this);
-            counter--;
-            added = false;
-        }
+  private fun popFirst() {
+    val n = firstCloud!!.nextCloud
+    n!!.perCloud = null
+    Pools.free(firstCloud)
+    firstCloud = n
+    cloudCount--
+  }
+
+  override fun remove() {
+    if (added) {
+      Groups.all.removeIndex(this, this.index__all)
+      index__all = -1
+      Groups.draw.removeIndex(this, this.index__draw)
+      index__draw = -1
+      Groups.queueFree(this)
+
+      all.remove(this)
+      counter--
+      added = false
+    }
+  }
+
+  override fun classId(): Int {
+    return 102
+  }
+
+  override fun clipSize(): Float {
+    return max(Tmp.v1.set(x, y).sub(startPos).len(), clipSize).also { clipSize = it }
+  }
+
+  override fun reset() {
+    added = false
+    parent = null
+    id = EntityGroup.nextId()
+    lifetime = 0f
+    region = null
+    rotation = 0f
+    time = 0f
+    x = 0f
+    y = 0f
+
+    maxCloudCounts = -1
+
+    speed.setZero()
+    startPos.setZero()
+
+    layer = 0f
+    clipSize = 0f
+
+    while (firstCloud!!.nextCloud != null) {
+      popFirst()
+    }
+    Pools.free(firstCloud)
+
+    currentCloud = null
+    firstCloud = null
+
+    cloudCount = 0
+    size = 0f
+
+    //extra().clear();
+    model = null
+
+    color.set(Color.white)
+  }
+
+  override fun iterator(): Iterator<Cloud> {
+    return currentCloud!!.iterator()
+  }
+
+  class Cloud : Pool.Poolable, Iterable<Cloud> {
+    val color: Color = Color()
+
+    var x: Float = 0f
+    var y: Float = 0f
+    var size: Float = 0f
+    var perCloud: Cloud? = null
+    var nextCloud: Cloud? = null
+
+    var itr =Itr()
+
+    @JvmOverloads
+    fun draw(modulate: Float = 1f, modulateNext: Float = 1f) {
+      Draw.color(color)
+
+      if (perCloud != null && nextCloud != null) {
+        var angle = Angles.angle(x - perCloud!!.x, y - perCloud!!.y)
+        val dx1 = Angles.trnsx(angle + 90, size * modulate)
+        val dy1 = Angles.trnsy(angle + 90, size * modulate)
+        angle = Angles.angle(nextCloud!!.x - x, nextCloud!!.y - y)
+        val dx2 = Angles.trnsx(angle + 90, nextCloud!!.size * modulateNext)
+        val dy2 = Angles.trnsy(angle + 90, nextCloud!!.size * modulateNext)
+
+        Fill.quad(
+          x + dx1,
+          y + dy1,
+          x - dx1,
+          y - dy1,
+          nextCloud!!.x - dx2,
+          nextCloud!!.y - dy2,
+          nextCloud!!.x + dx2,
+          nextCloud!!.y + dy2
+        )
+      } else if (perCloud == null && nextCloud != null) {
+        val angle = Angles.angle(nextCloud!!.x - x, nextCloud!!.y - y)
+        val dx2 = Angles.trnsx(angle + 90, nextCloud!!.size * modulate)
+        val dy2 = Angles.trnsy(angle + 90, nextCloud!!.size * modulate)
+
+        Fill.quad(x, y, x, y, nextCloud!!.x - dx2, nextCloud!!.y - dy2, nextCloud!!.x + dx2, nextCloud!!.y + dy2)
+      }
     }
 
-    @Override
-    public int classId() {
-        return 102;
+    override fun reset() {
+      x = 0f
+      y = 0f
+      size = 0f
+      color.set(Color.clear)
+
+      perCloud = null
+      nextCloud = null
     }
 
-    @Override
-    public float clipSize() {
-        return clipSize = Math.max(Tmp.v1.set(x, y).sub(startPos).len(), clipSize);
+    override fun iterator(): Iterator<Cloud> {
+      itr.reset()
+      return itr
     }
 
-    @Override
-    public void reset() {
-        added = false;
-        parent = null;
-        id = EntityGroup.nextId();
-        lifetime = 0;
-        region = null;
-        rotation = 0;
-        time = 0;
-        x = 0;
-        y = 0;
+     inner class Itr : Iterator<Cloud> {
+      var curr: Cloud? = this@Cloud
 
-        maxCloudCounts = -1;
+      fun reset() {
+        curr = this@Cloud
+      }
 
-        speed.setZero();
-        startPos.setZero();
+      override fun hasNext(): Boolean {
+        return curr!!.perCloud != null
+      }
 
-        layer = 0;
-        clipSize = 0;
-
-        while (firstCloud.nextCloud != null) {
-            popFirst();
-        }
-        Pools.free(firstCloud);
-
-        currentCloud = null;
-        firstCloud = null;
-
-        cloudCount = 0;
-        size = 0;
-        //extra().clear();
-
-        model = null;
-
-        color.set(Color.white);
+      override fun next(): Cloud {
+        return curr!!.perCloud.also { curr = it }!!
+      }
     }
+  }
 
-    @NotNull
-    @Override
-    public Iterator<Cloud> iterator() {
-        return currentCloud.iterator();
-    }
 
-    public static class Cloud implements Pool.Poolable, Iterable<Cloud> {
-        public final Color color = new Color();
-
-        public float x, y, size;
-        public Cloud perCloud, nextCloud;
-
-        Itr itr = new Itr();
-
-        public void draw() {
-            draw(1, 1);
-        }
-
-        public void draw(float modulate, float modulateNext) {
-            Draw.color(color);
-
-            if (perCloud != null && nextCloud != null) {
-                float angle = Angles.angle(x - perCloud.x, y - perCloud.y);
-                float dx1 = Angles.trnsx(angle + 90, size * modulate);
-                float dy1 = Angles.trnsy(angle + 90, size * modulate);
-                angle = Angles.angle(nextCloud.x - x, nextCloud.y - y);
-                float dx2 = Angles.trnsx(angle + 90, nextCloud.size * modulateNext);
-                float dy2 = Angles.trnsy(angle + 90, nextCloud.size * modulateNext);
-
-                Fill.quad(x + dx1, y + dy1, x - dx1, y - dy1, nextCloud.x - dx2, nextCloud.y - dy2, nextCloud.x + dx2, nextCloud.y + dy2);
-            } else if (perCloud == null && nextCloud != null) {
-                float angle = Angles.angle(nextCloud.x - x, nextCloud.y - y);
-                float dx2 = Angles.trnsx(angle + 90, nextCloud.size * modulate);
-                float dy2 = Angles.trnsy(angle + 90, nextCloud.size * modulate);
-
-                Fill.quad(x, y, x, y, nextCloud.x - dx2, nextCloud.y - dy2, nextCloud.x + dx2, nextCloud.y + dy2);
-            }
-        }
-
-        @Override
-        public void reset() {
-            x = 0;
-            y = 0;
-            size = 0;
-            color.set(Color.clear);
-
-            perCloud = null;
-            nextCloud = null;
-        }
-
-        @NotNull
-        @SuppressWarnings("ReturnOfInnerClass")
-        @Override
-        public Iterator<Cloud> iterator() {
-            itr.reset();
-            return itr;
-        }
-
-        class Itr implements Iterator<Cloud> {
-            Cloud curr = Cloud.this;
-
-            public void reset() {
-                curr = Cloud.this;
-            }
-
-            @Override
-            public boolean hasNext() {
-                return curr.perCloud != null;
-            }
-
-            @Override
-            public Cloud next() {
-                return curr = curr.perCloud;
-            }
-        }
-    }
 }
-

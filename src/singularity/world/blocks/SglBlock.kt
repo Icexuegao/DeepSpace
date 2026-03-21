@@ -314,24 +314,8 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     override fun energyLinked() = Seq<NuclearEnergyBuildComp>()
     override val resident: Float = this@SglBlock.resident
 
-    fun superUpdate() {
-      if ((Time.delta.let {this.timeScaleDuration -= it; this.timeScaleDuration}) <= 0.0f || !this.block.canOverdrive) {
-        this.timeScale = 1.0f
-      }
-
-      if (!Vars.headless && this.block.ambientSound !== Sounds.none && this.shouldAmbientSound()) {
-        Vars.control.sound.loop(this.block.ambientSound, this, this.block.ambientSoundVolume * this.ambientVolume())
-      }
-
-      this.updateConsumption()
-      if (this.enabled || !this.block.noUpdateDisabled) {
-        updateTile()
-      }
-    }
 
     override fun update() {
-      updateEnergy()
-
       updateRecipe = false
       if (!recipeSelected && autoSelect && consumer.hasConsume() && (consumer.current == null || !consumer.valid())) {
         var f = -1
@@ -355,7 +339,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
       if (updateRecipe) fieldHandler.setValue(Vars.ui.hudfrag.blockfrag, "wasHovered", false)
 
 
-      superUpdate()
+      super.update()
 
       if (updating != null) updating!!.get(this)
 
@@ -375,6 +359,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
           ) {x: Float, y: Float -> SglParticleModels.floatParticle.create(this.x, this.y, SglDrawConst.fexCrystal, x, y, 2.6f).strength = 0.4f}
         }
       }
+      updateEnergy()
       updateConsumer()
     }
 

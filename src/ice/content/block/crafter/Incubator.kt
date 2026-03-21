@@ -8,7 +8,6 @@ import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.type.Category
-import mindustry.type.LiquidStack
 import mindustry.world.Block
 import mindustry.world.draw.DrawCultivator
 import mindustry.world.draw.DrawDefault
@@ -23,31 +22,31 @@ class Incubator : FloorCrafter("incubator") {
     bundle {
       desc(zh_CN, "沼气池", "厌氧消化产甲烷耦合活化能供器\n人话:厕所")
     }
-    requirements(Category.production, IItems.钴钢, 85, IItems.铬锭, 90, IItems.气凝胶, 80, IItems.铜锭, 90)
+    requirements(Category.production, IItems.钴钢, 85, IItems.铬锭, 90, IItems.气凝胶, 40, IItems.铜锭, 90)
     size = 3
     liquidCapacity = 20f
 
-    newConsume()
-    consume!!.time(45f)
-    consume!!.power(2.2f)
-    consume!!.liquids(
-      *LiquidStack.with(
-        Liquids.water, 0.4f, ILiquids.藻泥, 0.1f
-      )
-    )
-    newProduce()
-    produce!!.liquids(ILiquids.沼气, 30f/60f)
 
-    newConsume()
-    consume!!.time(30f)
-    consume!!.power(2.2f)
-    consume!!.liquids(
-      *LiquidStack.with(
-        ILiquids.纯净水, 0.3f, ILiquids.藻泥, 0.1f
-      )
-    )
-    newProduce()
-    produce!!.liquids(ILiquids.沼气, 3)
+    newFormula { consumers, producers ->
+      consumers.apply {
+        time(45f)
+        power(2.2f)
+        liquids(Liquids.water, 24f / 60f, ILiquids.藻泥, 6f / 60f)
+      }
+      producers.apply {
+        liquids(ILiquids.沼气, 30f / 60f)
+      }
+    }
+    newFormula { consumers, producers ->
+      consumers.apply {
+        time(30f)
+        power(2.2f)
+        liquids(ILiquids.纯净水, 0.3f, ILiquids.藻泥, 0.1f)
+      }
+      producers!!.liquids(ILiquids.沼气,  30f / 60f)
+    }
+
+
 
     newBooster(1f)
     consume!!.add(

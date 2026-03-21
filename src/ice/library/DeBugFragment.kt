@@ -139,7 +139,7 @@ object DeBugFragment {
           }
         }
       }
-      val weapon= IUnitTypes.路西法.weapons.last()
+
       val table= Table()
       table.button("关闭"){
         table.remove()
@@ -147,13 +147,13 @@ object DeBugFragment {
       table.field("x"){ it1 ->
         it1.toFloatOrNull().let { it2 ->
           it2?:return@let
-          weapon.x=-it2
+          Vars.player.unit().type.weapons.last().x=-it2
         }
       }.growX().row()
       table.field("y"){ it1 ->
         it1.toFloatOrNull().let { it1 ->
           it1?:return@let
-          weapon.y=it1
+          Vars.player.unit().type.weapons.last().y=it1
         }
       }.growX().row()
       table.setSize(400f,400f)

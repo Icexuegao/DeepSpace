@@ -22,7 +22,7 @@ public class DebugInfos {
 
   {
     addMonitor("显示", () -> displays.size);
-    addMonitor("粒子数量", Particle::count);
+    addMonitor("粒子数量", Particle.Companion::count);
     addMonitor("cloudCouts", () -> Pools.get(Particle.Cloud.class, Particle.Cloud::new, 65536).peak);
   }
 
