@@ -59,6 +59,7 @@ open class Wall(name: String) : IceBlock(name) {
 
   inner class WallBuild : IceBuild() {
     var hit: Float = 0f
+
     override fun draw() {
       super.draw()
       //绘制闪烁的白色叠加层（如果启用）
