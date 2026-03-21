@@ -18,6 +18,7 @@ import ice.content.IItems
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.world.content.blocks.defense.AutoWall
 import ice.world.content.blocks.defense.Wall
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -89,7 +90,7 @@ object DefenseBlocks : Load {
       desc(zh_CN, "大型流金墙", "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈", "熔融金锭构筑的壁垒\n财富值++")
     }
   }
-  val 铬墙 = Wall("chromeWall").apply {
+  val 铬墙 = AutoWall("chromeWall").apply {
     health = 450
     size = 1
     requirements(Category.defense, IItems.铬锭, 6)
@@ -97,14 +98,14 @@ object DefenseBlocks : Load {
       desc(zh_CN, "铬墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
     }
   }
-  val 大型铬墙 = Wall("chromeWallLarge").apply {
-    size = 2
-    health = 铬墙.health * 4
-    requirements(Category.defense, IItems.铬锭, 6 * 4)
-    bundle {
-      desc(zh_CN, "大型铬墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
-    }
-  }
+//  val 大型铬墙 = Wall("chromeWallLarge").apply {
+//    size = 2
+//    health = 铬墙.health * 4
+//    requirements(Category.defense, IItems.铬锭, 6 * 4)
+//    bundle {
+//      desc(zh_CN, "大型铬墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
+//    }
+//  }
   val 钴钢墙 = Wall("cobaltSteelWall").apply {
     size = 1
     health = 550
