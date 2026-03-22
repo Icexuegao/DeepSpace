@@ -354,32 +354,31 @@ open class ItemNode(name: String) : SglBlock(name) {
     }
 
     fun updateTransport(other: Building) {
-      this.transportCounter += this.consEfficiency() * this.delta()
 
-      while (this.transportCounter >= this@ItemNode.transportTime) {
+      transportCounter += consEfficiency() * delta()
+      while (transportCounter >= transportTime) {
         val items = Vars.content.items()
         var any = false
-
         var i = 0
-        while (this.transportCounter >= this@ItemNode.transportTime && i < items.size) {
-          this.itemTakeCursor = (this.itemTakeCursor + 1) % items.size
-          val id = this.itemTakeCursor
-          if (this.items.get(id) > 0) {
-            val item = items.get(id)
-            if (other.acceptItem(this, item)) {
-              this.items.remove(item, 1)
-              other.handleItem(this, item)
-              this.transportCounter -= this@ItemNode.transportTime
-              this.moved = true
-              any = true
-            }
+        while (transportCounter >= transportTime && i < items.size) {
+          itemTakeCursor = (itemTakeCursor + 1) % items.size
+          val id = itemTakeCursor
+          if (this.items.get(id) <= 0) {
+            i++
+            continue
           }
-          ++i
-        }
 
-        if (!any) {
-          this.transportCounter %= this@ItemNode.transportTime
+          val item = items.get(id)
+          if (other.acceptItem(this, item)) {
+            this.items.remove(item, 1)
+            other.handleItem(this, item)
+            transportCounter -= transportTime
+            moved = true
+            any = true
+          }
+          i++
         }
+        if (!any) transportCounter %= transportTime
       }
     }
 
@@ -521,7 +520,7 @@ open class ItemNode(name: String) : SglBlock(name) {
           inc.add(pos)
         }
 
-        this.warmup = Mathf.approachDelta(this.warmup, this.efficiency, 0.033333335f)
+        this.warmup = Mathf.approachDelta(this.warmup, this.efficiency(), 0.033333335f)
         this.updateTransport(other.build)
       }
 

@@ -11,7 +11,6 @@ import ice.core.SettingValue
 import ice.library.DeBugFragment
 import ice.library.EventType.addClientLoadEvent
 import ice.library.IFiles
-import ice.library.struct.log
 import ice.library.world.Load
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.ConversationFragment

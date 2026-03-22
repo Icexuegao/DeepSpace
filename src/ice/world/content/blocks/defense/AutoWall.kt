@@ -1,6 +1,6 @@
 package ice.world.content.blocks.defense
 
-import arc.Core
+import arc.func.Prov
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
@@ -13,13 +13,14 @@ import mindustry.graphics.Layer
 
 class AutoWall(name: String) : Wall(name) {
   var regions: Array<TextureRegion?> = arrayOfNulls(48)
-  var regionLarge: TextureRegion by TextureRegionDelegate("$name-large")
-  val regionAtlas: TextureRegion by TextureRegionDelegate("$name-atlas")
+  var regionLarge: TextureRegion by TextureRegionDelegate("${this.name}-large")
+  val regionAtlas: TextureRegion by TextureRegionDelegate("${this.name}-atlas")
 
-  var baseColor: Color = Color.valueOf("#C8C8E4")
 
   init {
     allowRectanglePlacement = true
+    blockColor = Color.valueOf("#C8C8E4")
+    buildType = Prov(::AutoWallBuild)
   }
 
   override fun load() {
@@ -43,7 +44,7 @@ class AutoWall(name: String) : Wall(name) {
   override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
     super.drawPlace(x, y, rotation, valid)
     Drawf.dashSquare(
-      baseColor,
+      blockColor,
       ((x and 1.inv()) * Vars.tilesize + 4).toFloat(),
       ((y and 1.inv()) * Vars.tilesize + 4).toFloat(),
       (2 * Vars.tilesize).toFloat()
@@ -54,7 +55,7 @@ class AutoWall(name: String) : Wall(name) {
     private var index = 0
     private var isLarge = false
 
-    fun checkBuild(other: Building): Boolean {
+    fun checkBuild(other: Building?): Boolean {
       return other is AutoWallBuild && other.team === team
     }
 
@@ -85,7 +86,7 @@ class AutoWall(name: String) : Wall(name) {
       proximityTileUpdate()
       var other: Building
       for (point in StaticTile.proximityPoint) {
-        other = Vars.world.build(tileX() + point.x, tileY() + point.y)
+        other = Vars.world.build(tileX() + point.x, tileY() + point.y)?: continue
         if (other is AutoWallBuild && other.team === this.team) other.proximityTileUpdate()
       }
     }

@@ -93,12 +93,12 @@ object DefenseBlocks : Load {
     }
   }
   val 铬墙 = AutoWall("chromeWall").apply {
-    health = 450
-    size = 1
-    requirements(Category.defense, IItems.铬锭, 6)
     bundle {
       desc(zh_CN, "铬墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
     }
+    health = 450
+    size = 1
+    requirements(Category.defense, IItems.铬锭, 6)
   }
   val 大型铬墙 = Wall("chromeWallLarge").apply {
     size = 2
