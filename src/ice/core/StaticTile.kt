@@ -1,4 +1,4 @@
-package ice.core;
+package ice.core
 
 class StaticTile {
     companion object {
