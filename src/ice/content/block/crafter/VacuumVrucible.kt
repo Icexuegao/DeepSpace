@@ -18,9 +18,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
       desc(zh_CN, "真空坩埚", "将多种材料进行低压处理并生产特定产物,可配置", "在低压高温环境下进行特殊工序时使用的设备")
     }
     requirements(
-      Category.crafting, ItemStack.with(
-        IItems.铬锭, 90, IItems.单晶硅, 80, IItems.钴钢, 60, IItems.石英玻璃, 75, IItems.钴锭, 80
-      )
+      Category.crafting, IItems.铬锭, 90, IItems.单晶硅, 80, IItems.钴钢, 60, IItems.石英玻璃, 75, IItems.钴锭, 80
     )
     size = 3
     squareSprite = false
@@ -30,9 +28,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
     newFormula { consumers, producers ->
       consumers.apply {
         time(60f)
-        liquids(
-          ILiquids.氯化硅溶胶, 0.2f, ILiquids.氢气, 0.4f
-        )
+        liquids(ILiquids.氯化硅溶胶, 0.2f, ILiquids.氢气, 0.4f)
         item(IItems.金珀沙, 5)
       }
       producers.apply {
@@ -44,7 +40,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
       consumers.apply {
         time(120f)
         liquid(ILiquids.氯化硅溶胶, 0.4f)
-        item(IItems.石英玻璃, 50)
+        item(IItems.石英玻璃, 5)
         power(1.8f)
       }
       producers.apply {
