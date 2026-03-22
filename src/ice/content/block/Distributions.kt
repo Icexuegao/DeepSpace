@@ -43,6 +43,9 @@ import singularity.world.blocks.distribute.ItemNode
 @Suppress("unused")
 object Distributions : Load {
   val 基础传送带 = Conveyor("baseConveyor").apply {
+    bundle {
+      desc(zh_CN, "基础传送带", "基础的运输设施,用于在建筑之间运输物品,造价低廉")
+    }
     size = 1
     speed = 6f
     health = 30
@@ -51,11 +54,11 @@ object Distributions : Load {
       bridgeReplacement = 装甲传送带桥
     }
     requirements(Category.distribution, IItems.低碳钢, 1)
-    bundle {
-      desc(zh_CN, "基础传送带", "基础的运输设施,用于在建筑之间运输物品,造价低廉")
-    }
   }
   val 强化传送带 = Conveyor("reinforcedConveyor").apply {
+    bundle {
+      desc(zh_CN, "强化传送带", "基础的运输设施,用于在建筑之间运输物品,造价低廉")
+    }
     size = 1
     speed = 13f
     health = 45
@@ -64,11 +67,12 @@ object Distributions : Load {
       bridgeReplacement = 装甲传送带桥
     }
     requirements(Category.distribution, IItems.高碳钢, 1, IItems.锌锭, 1)
-    bundle {
-      desc(zh_CN, "强化传送带", "基础的运输设施,用于在建筑之间运输物品,造价低廉")
-    }
+
   }
   val 血肉装甲传送带 = Conveyor("fleshArmorConveyor").apply {
+    bundle {
+      desc(zh_CN, "血肉装甲传送带", "在传送带内部模拟血肉蠕动来快速输送物品")
+    }
     health = 600
     armor = 8f
     speed = 42f
@@ -79,12 +83,13 @@ object Distributions : Load {
       bridgeReplacement = 增生传送带桥
       junctionReplacement = 交叉神经链路
     }
-    bundle {
-      desc(zh_CN, "血肉装甲传送带", "在传送带内部模拟血肉蠕动来快速输送物品")
-    }
+
   }
 
   val 特种传送带 = ArmoredConveyor("specialConveyor").apply {
+    bundle {
+      desc(zh_CN, "特种传送带", "基础的运输设施,用于在建筑之间运输物品,不接收侧面输入")
+    }
     size = 1
     speed = 15f
     health = 55
@@ -93,17 +98,16 @@ object Distributions : Load {
       bridgeReplacement = 装甲传送带桥
     }
     requirements(Category.distribution, IItems.钴锭, 1, IItems.铬锭, 1, IItems.复合陶瓷, 1)
-    bundle {
-      desc(zh_CN, "特种传送带", "基础的运输设施,用于在建筑之间运输物品,不接收侧面输入")
-    }
+
   }
 
   val 钴熠传送带 = StackConveyor("cobaltBrightConveyor").apply {
-    speed = 50f / 600f
-    requirements(Category.distribution, IItems.高碳钢, 2, IItems.钴钢, 1, IItems.铬锭, 1)
     bundle {
       desc(zh_CN, "钴熠传送带")
     }
+    speed = 50f / 600f
+    requirements(Category.distribution, IItems.高碳钢, 2, IItems.钴钢, 1, IItems.铬锭, 1)
+
     loadEffect = WaveEffect().apply {
       lifetime = 20f
       sides = 3
@@ -116,6 +120,9 @@ object Distributions : Load {
     }
   }
   val 生物钢传送带 = StackConveyor("biologicalSteelConveyor").apply {
+    bundle {
+      desc(zh_CN, "生物钢传送带", "打包物品进行运输,一次能携带100件物品,比塑钢传送带更快,可以用电力加速")
+    }
     healAmount = 10f
     health = 300
     armor = 8f
@@ -151,15 +158,16 @@ object Distributions : Load {
     }
     researchCostMultiplier = 40f
     requirements(Category.distribution, IItems.导能回路, 1, IItems.生物钢, 1)
-    bundle {
-      desc(zh_CN, "生物钢传送带", "打包物品进行运输,一次能携带100件物品,比塑钢传送带更快,可以用电力加速")
-    }
+
   }
   val 梯度传送带 = PackStackConveyor("gradedConveyor").apply {
+    bundle {
+      desc(zh_CN, "梯度传送带", "能打包多种物品的传送带,如果末端没有阻挡,会对包裹进行跑出")
+    }
     speed = 60f / 600f
     drawLastItems = false
     differentItem = true
-    loadEffect = Effect(30.0f) {e ->
+    loadEffect = Effect(30.0f) { e ->
       Draw.color(Color.valueOf("b8bde1"))
       Lines.stroke(0.5f * e.fout())
       val spread = 4f
@@ -168,13 +176,15 @@ object Distributions : Load {
       for (i in 0..7) {
         val ang = e.rotation + Fx.rand.range(8f) + i
         Fx.v.trns(ang, Fx.rand.random(e.fin() * 10f))
-        Lines.lineAngle(e.x + Fx.v.x + Fx.rand.range(spread), e.y + Fx.v.y + Fx.rand.range(spread), ang, e.fout() * Fx.rand.random(1f) + 1f)
+        Lines.lineAngle(
+          e.x + Fx.v.x + Fx.rand.range(spread),
+          e.y + Fx.v.y + Fx.rand.range(spread),
+          ang,
+          e.fout() * Fx.rand.random(1f) + 1f
+        )
       }
     }
     requirements(Category.distribution, IItems.铪锭, 20)
-    bundle {
-      desc(zh_CN, "梯度传送带")
-    }
   }
 
   val 基础交叉器 = Junction("baseJunction").apply {
@@ -186,42 +196,49 @@ object Distributions : Load {
     requirements(Category.distribution, IItems.低碳钢, 5, IItems.高碳钢, 5)
   }
   val 交叉神经链路 = Junction("junctionNeuralChain").apply {
+    bundle {
+      desc(zh_CN, "交叉神经链路", "连接两条交叉的传送带,比交叉器更快")
+    }
     armor = 4f
     health = 250
     displayedSpeed = 30f
     placeableLiquid = true
     requirements(Category.distribution, IItems.生物钢, 1, IItems.铱板, 1)
-    bundle {
-      desc(zh_CN, "交叉神经链路", "连接两条交叉的传送带,比交叉器更快")
-    }
+
   }
 
   val 转换分类器 = Sorter("transformSorter").apply {
-    size = 1
-    health = 100
-    requirements(Category.distribution, IItems.高碳钢, 8, IItems.低碳钢, 6)
     bundle {
       desc(zh_CN, "转换分类器", "像分类器一样处理物品,可以通过配置调整分类状态")
     }
+    size = 1
+    health = 100
+    requirements(Category.distribution, IItems.高碳钢, 8, IItems.低碳钢, 6)
+
   }
   val 基础路由器 = Router("baseRouter").apply {
-    size = 1
-    health = 70
-    requirements(Category.distribution, IItems.低碳钢, 5)
     bundle {
       desc(zh_CN, "基础路由器", "将物品平均分配至其他三个方向")
     }
+    size = 1
+    health = 70
+    requirements(Category.distribution, IItems.低碳钢, 5)
+
   }
   val 转换溢流门 = TransformOverflowGate("transformOverflowGate").apply {
-    size = 1
-    health = 200
-    requirements(Category.distribution, IItems.高碳钢, 8, IItems.低碳钢, 6)
     bundle {
       desc(zh_CN, "转换溢流门", "像溢流门一样处理物品,可以通过配置调整溢流状态")
     }
+    size = 1
+    health = 200
+    requirements(Category.distribution, IItems.高碳钢, 8, IItems.低碳钢, 6)
+
   }
 
   val 装甲传送带桥 = TransferNode("armorBridge").apply {
+    bundle {
+      desc(zh_CN, "装甲传送带桥", "跨越任何地形货建筑传输物品,比普通桥更快,更远")
+    }
     allowDiagonal = false
     directionAny = false
     health = 40
@@ -236,9 +253,7 @@ object Distributions : Load {
     placeableLiquid = true
     selectionColumns = 6
     requirements(Category.distribution, IItems.陶钢, 4, IItems.铱板, 4)
-    bundle {
-      desc(zh_CN, "装甲传送带桥", "跨越任何地形货建筑传输物品,比普通桥更快,更远")
-    }
+
   }
   val 增生传送带桥 = TransferNode("growthBridge").apply {
     directionAny = false
@@ -293,12 +308,18 @@ object Distributions : Load {
   }
   val 铱制高效运输节点 = ItemNode("iridium_transport_node").apply {
     bundle {
-      desc(zh_CN, "铱制高效运输节点", "使用铱建造的高级运输节点,造价昂贵,但换来的收益除更长的连接距离和更快的运输速度外,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品")
+      desc(
+        zh_CN,
+        "铱制高效运输节点",
+        "使用铱建造的高级运输节点,造价昂贵,但换来的收益除更长的连接距离和更快的运输速度外,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品"
+      )
     }
-    requirements(Category.distribution, IItems.絮凝剂, 4, IItems.铱锭, 4, IItems.FEX水晶, 6, IItems.气凝胶, 12, IItems.铝锭, 12)
+    requirements(
+      Category.distribution, IItems.絮凝剂, 4, IItems.铱锭, 4, IItems.FEX水晶, 6, IItems.气凝胶, 12, IItems.铝锭, 12
+    )
     researchCostMultiplier = 2f
-    itemCapacity = 20
-    maxItemCapacity = 80
+    itemCapacity = 60
+    maxItemCapacity = 180
     range = 20
     siphon = true
     arrowPeriod = 1.1f
@@ -318,25 +339,7 @@ object Distributions : Load {
     speed = 60f / 10f
     health = 50
     requirementPairs(Category.distribution, IItems.高碳钢 to 30, IItems.低碳钢 to 10, IItems.铜锭 to 15)
-
-    buildType = Prov {
-      object : Unloader.UnloaderBuild() {
-        override fun buildConfiguration(table: Table) {
-          ItemSelection.buildTable(
-            this@apply, table, Vars.content.items(),
-            ::sortItem,
-            ::configure, true
-          )
-        }
-
-        override fun drawConfigure() {
-          Draw.color(IceColor.b4)
-          Lines.stroke(1.0f)
-          Lines.square(x, y, block.size * 8f / 2.0f + 1.0f)
-          Draw.reset()
-        }
-      }
-    }
+    setUnloaderUI(this)
   }
   val 极速卸载器 = Unloader("speedUninstalle").apply {
     bundle {
@@ -345,24 +348,7 @@ object Distributions : Load {
     speed = 60f / 30f
     health = 80
     requirementPairs(Category.distribution, IItems.铬锭 to 30, IItems.铱板 to 25, IItems.导能回路 to 15)
-    buildType = Prov {
-      object : Unloader.UnloaderBuild() {
-        override fun buildConfiguration(table: Table) {
-          ItemSelection.buildTable(
-            this@apply, table, Vars.content.items(),
-            ::sortItem,
-            ::configure, true
-          )
-        }
-
-        override fun drawConfigure() {
-          Draw.color(IceColor.b4)
-          Lines.stroke(1.0f)
-          Lines.square(x, y, block.size * 8f / 2.0f + 1.0f)
-          Draw.reset()
-        }
-      }
-    }
+    setUnloaderUI(this)
   }
   val 量子卸载器 = Unloader("electronicUninstaller").apply {
     bundle {
@@ -372,24 +358,7 @@ object Distributions : Load {
     health = 200
     squareSprite = false
     requirementPairs(Category.distribution, IItems.电子元件 to 25, IItems.钴锭 to 25, IItems.导能回路 to 5)
-    buildType = Prov {
-      object : Unloader.UnloaderBuild() {
-        override fun buildConfiguration(table: Table) {
-          ItemSelection.buildTable(
-            this@apply, table, Vars.content.items(),
-            ::sortItem,
-            ::configure, true
-          )
-        }
-
-        override fun drawConfigure() {
-          Draw.color(IceColor.b4)
-          Lines.stroke(1.0f)
-          Lines.square(x, y, block.size * 8f / 2.0f + 1.0f)
-          Draw.reset()
-        }
-      }
-    }
+    setUnloaderUI(this)
   }
 
   val 重型质量驱动器 = MassDriver("heavyDutyMassDrives").apply {
@@ -412,7 +381,11 @@ object Distributions : Load {
     receiveEffect = Fx.hitSquaresColor
     requirements(Category.distribution, IItems.钴锭, 335, IItems.铱板, 285, IItems.导能回路, 225, IItems.钴钢, 175)
     bundle {
-      desc(zh_CN, "重型质量驱动器", "超远距离传输物品,收集一定物品后将其发射到另一个重型质量驱动器中,容量巨大但转速及发射速度缓慢")
+      desc(
+        zh_CN,
+        "重型质量驱动器",
+        "超远距离传输物品,收集一定物品后将其发射到另一个重型质量驱动器中,容量巨大但转速及发射速度缓慢"
+      )
     }
   }
 
@@ -420,7 +393,9 @@ object Distributions : Load {
     bundle {
       desc(zh_CN, "物流枢纽核心")
     }
-    requirements(Category.distribution, IItems.电子元件, 50, IItems.导能回路, 100, IItems.钴钢, 200, IItems.强化合金, 50)
+    requirements(
+      Category.distribution, IItems.电子元件, 50, IItems.导能回路, 100, IItems.钴钢, 200, IItems.强化合金, 50
+    )
   }
   val 枢纽管道 = HubConduit("hubConduit").apply {
     requirements(Category.distribution, IItems.锌锭, 1, IItems.导能回路, 1)
@@ -452,5 +427,27 @@ object Distributions : Load {
       desc(zh_CN, "随机源", "随机输出所有资源")
     }
     buildVisibility = BuildVisibility.sandboxOnly
+  }
+
+  fun setUnloaderUI(block: Unloader) {
+    block.apply {
+      buildType = Prov {
+        object : Unloader.UnloaderBuild() {
+          override fun buildConfiguration(table: Table) {
+            ItemSelection.buildTable(
+              this@apply, table, Vars.content.items(), ::sortItem, ::configure, true
+            )
+          }
+
+          override fun drawConfigure() {
+            Draw.color(IceColor.b4)
+            Lines.stroke(1.0f)
+            Lines.square(x, y, block.size * 8f / 2.0f + 1.0f)
+            Draw.reset()
+          }
+        }
+      }
+    }
+
   }
 }

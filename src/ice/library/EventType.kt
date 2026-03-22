@@ -21,14 +21,6 @@ object EventType : Load {
   private val clientLoadEvent = Seq<()->Unit>()
   private val atlasPackEvent = Seq<()->Unit>()
   override fun setup() {
-    //字体缩放模糊问题
-    addClientLoadEvent {
-      Core.atlas.textures.forEach {
-        val fid = Texture.TextureFilter.nearest
-        it.setFilter(fid, fid)
-      }
-    }
-
     Events.on(EventType.AtlasPackEvent::class.java) {
       TextureDelegate.delegate.forEach {it()}
     }
@@ -66,11 +58,11 @@ object EventType : Load {
       }
     }
   }
-
+  /** 添加内容初始化事件,在所以内容初始化以后调用*/
   fun addContentInitEvent(run: ()->Unit) {
     contentInitEvent.add(run)
   }
-
+  /** 客户端游戏首次加载时调用,update第一次运行 */
   fun addClientLoadEvent(run: ()->Unit) {
     clientLoadEvent.add(run)
   }

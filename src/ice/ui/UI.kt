@@ -3,12 +3,15 @@ package ice.ui
 import arc.Core
 import arc.Graphics
 import arc.audio.Sound
+import arc.graphics.Texture
 import arc.util.OS
 import ice.DeepSpace
 import ice.audio.ISounds
 import ice.core.SettingValue
 import ice.library.DeBugFragment
+import ice.library.EventType.addClientLoadEvent
 import ice.library.IFiles
+import ice.library.struct.log
 import ice.library.world.Load
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.ConversationFragment
@@ -67,6 +70,13 @@ object UI : Load {
 
     if (OS.isWindows) {
       loadSystemCursors()
+    }
+    //字体缩放模糊问题
+    addClientLoadEvent {
+      Core.atlas.textures.forEach {
+        val fid = Texture.TextureFilter.nearest
+        it.setFilter(fid, fid)
+      }
     }
 
     Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.displayName}[]", Icon.menu) {
