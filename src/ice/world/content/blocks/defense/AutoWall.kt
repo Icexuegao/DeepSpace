@@ -4,6 +4,7 @@ import arc.Core
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
+import arc.math.geom.Geometry.d8
 import ice.core.StaticTile
 import mindustry.Vars
 import mindustry.gen.Building
@@ -53,7 +54,7 @@ class AutoWall(name: String) : Wall(name) {
         private var index = 0
         private var isLarge = false
 
-        fun checkBuild(other: Building): Boolean {
+        fun checkBuild(other: Building?): Boolean {
             return other is AutoWallBuild && other.team === team
         }
 
@@ -79,8 +80,8 @@ class AutoWall(name: String) : Wall(name) {
         override fun updateProximity() {
             super.updateProximity()
             proximityTileUpdate()
-            var other: Building
-            for (point in StaticTile.proximityPoint) {
+            var other: Building?
+            for (point in d8) {
                 other = Vars.world.build(tileX() + point.x, tileY() + point.y)
                 if (other is AutoWallBuild && other.team === this.team)
                     other.proximityTileUpdate()
@@ -93,10 +94,10 @@ class AutoWall(name: String) : Wall(name) {
 
             index = 0
             var i = 0
-            while (i < StaticTile.proximityPoint.size) {
+            while (i < d8.size) {
                 if (checkBuild(Vars.world.build(
-                    tileX() + StaticTile.proximityPoint[i].x,
-                    tileY() + StaticTile.proximityPoint[i].y
+                    tileX() + d8[i].x,
+                    tileY() + d8[i].y
                 ))) index = index or (1 shl i)
                 i += 1
             }

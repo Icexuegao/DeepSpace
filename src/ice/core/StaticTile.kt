@@ -1,7 +1,5 @@
 package ice.core;
 
-import arc.math.geom.Point2
-
 class StaticTile {
     companion object {
         var tileMap = charArrayOf(
@@ -37,16 +35,6 @@ class StaticTile {
             12.toChar(),  8.toChar(), 12.toChar(),  8.toChar(), 24.toChar(), 16.toChar(), 24.toChar(), 20.toChar(),
             11.toChar(), 10.toChar(), 11.toChar(), 10.toChar(), 19.toChar(),  9.toChar(), 19.toChar(), 17.toChar(),
             11.toChar(), 10.toChar(), 11.toChar(), 10.toChar(), 35.toChar(), 18.toChar(), 35.toChar(), 33.toChar()
-        )
-        var proximityPoint: Array<Point2> = arrayOf(
-            Point2(1, 0),
-            Point2(1, 1),
-            Point2(0, 1),
-            Point2(-1, 1),
-            Point2(-1, 0),
-            Point2(-1, -1),
-            Point2(0, -1),
-            Point2(1, -1),
         )
     }
 }

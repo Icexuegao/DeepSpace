@@ -98,14 +98,14 @@ object DefenseBlocks : Load {
       desc(zh_CN, "铬墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
     }
   }
-//  val 大型铬墙 = Wall("chromeWallLarge").apply {
-//    size = 2
-//    health = 铬墙.health * 4
-//    requirements(Category.defense, IItems.铬锭, 6 * 4)
-//    bundle {
-//      desc(zh_CN, "大型铬墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
-//    }
-//  }
+  val 大型铬墙 = Wall("chromeWallLarge").apply {
+    size = 2
+    health = 铬墙.health * 4
+    requirements(Category.defense, IItems.铬锭, 6 * 4)
+    bundle {
+      desc(zh_CN, "大型铬墙", "保护己方建筑,挡下敌方炮弹,更坚固耐用")
+    }
+  }
   val 钴钢墙 = Wall("cobaltSteelWall").apply {
     size = 1
     health = 550
