@@ -5,6 +5,7 @@ import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import ice.core.StaticTile
+import ice.graphics.TextureRegionDelegate
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Drawf
@@ -12,7 +13,9 @@ import mindustry.graphics.Layer
 
 class AutoWall(name: String) : Wall(name) {
   var regions: Array<TextureRegion?> = arrayOfNulls(48)
-  var regionLarge: TextureRegion? = null
+  var regionLarge: TextureRegion by TextureRegionDelegate("$name-large")
+  val regionAtlas: TextureRegion by TextureRegionDelegate("$name-atlas")
+
   var baseColor: Color = Color.valueOf("#C8C8E4")
 
   init {
@@ -21,18 +24,16 @@ class AutoWall(name: String) : Wall(name) {
 
   override fun load() {
     super.load()
-    regionLarge = Core.atlas.find("$name-large")
-    val region: TextureRegion = Core.atlas.find("$name-atlas")
 
-    val width = region.width + region.x
-    val height = region.height + region.y
+    val width = regionAtlas.width + regionAtlas.x
+    val height = regionAtlas.height + regionAtlas.y
 
     var idx = 0
-    var arrY = region.y
+    var arrY = regionAtlas.y
     while (arrY < height) {
-      var arrX = region.x
+      var arrX = regionAtlas.x
       while (arrX < width) {
-        regions[idx++] = TextureRegion(region.texture, arrX, arrY, 32, 32)
+        regions[idx++] = TextureRegion(regionAtlas.texture, arrX, arrY, 32, 32)
         arrX += 32
       }
       arrY += 32
