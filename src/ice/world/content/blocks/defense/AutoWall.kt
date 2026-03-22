@@ -64,7 +64,7 @@ class AutoWall(name: String) : Wall(name) {
                 Draw.rect(regionLarge, x + 4, y + 4)
             if (index != 255) {
                 Draw.z(Layer.block + 0.1f)
-                Draw.rect(regions[StaticTile.tileMap[index].toInt()], x, y)
+                Draw.rect(regions[StaticTile.tileMap[index]], x, y)
             }
         }
 

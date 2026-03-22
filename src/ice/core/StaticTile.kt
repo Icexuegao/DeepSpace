@@ -1,52 +1,44 @@
-package ice.core;
+package ice.core
 
+import arc.math.geom.Geometry
 import arc.math.geom.Point2
 
 class StaticTile {
     companion object {
-        var tileMap = charArrayOf(
-             0.toChar(),  1.toChar(),  0.toChar(),  1.toChar(), 36.toChar(), 37.toChar(), 36.toChar(), 44.toChar(),
-             0.toChar(),  1.toChar(),  0.toChar(),  1.toChar(), 36.toChar(), 37.toChar(), 36.toChar(), 44.toChar(),
-             3.toChar(),  2.toChar(),  3.toChar(),  2.toChar(), 39.toChar(), 38.toChar(), 39.toChar(), 41.toChar(),
-             3.toChar(),  2.toChar(),  3.toChar(),  2.toChar(), 47.toChar(), 42.toChar(), 47.toChar(), 45.toChar(),
-             0.toChar(),  1.toChar(),  0.toChar(),  1.toChar(), 36.toChar(), 37.toChar(), 36.toChar(), 44.toChar(),
-             0.toChar(),  1.toChar(),  0.toChar(),  1.toChar(), 36.toChar(), 37.toChar(), 36.toChar(), 44.toChar(),
-             3.toChar(),  2.toChar(),  3.toChar(),  2.toChar(), 39.toChar(), 38.toChar(), 39.toChar(), 41.toChar(),
-             3.toChar(),  2.toChar(),  3.toChar(),  2.toChar(), 47.toChar(), 42.toChar(), 47.toChar(), 45.toChar(),
-            12.toChar(), 13.toChar(), 12.toChar(), 13.toChar(), 24.toChar(), 25.toChar(), 24.toChar(), 28.toChar(),
-            12.toChar(), 13.toChar(), 12.toChar(), 13.toChar(), 24.toChar(), 25.toChar(), 24.toChar(), 28.toChar(),
-            15.toChar(), 14.toChar(), 15.toChar(), 14.toChar(), 27.toChar(), 26.toChar(), 27.toChar(),  7.toChar(),
-            15.toChar(), 14.toChar(), 15.toChar(), 14.toChar(), 31.toChar(),  4.toChar(), 31.toChar(), 46.toChar(),
-            12.toChar(), 13.toChar(), 12.toChar(), 13.toChar(), 24.toChar(), 25.toChar(), 24.toChar(), 28.toChar(),
-            12.toChar(), 13.toChar(), 12.toChar(), 13.toChar(), 24.toChar(), 25.toChar(), 24.toChar(), 28.toChar(),
-            11.toChar(),  6.toChar(), 11.toChar(),  6.toChar(), 19.toChar(), 40.toChar(), 19.toChar(), 21.toChar(),
-            11.toChar(),  6.toChar(), 11.toChar(),  6.toChar(), 35.toChar(), 23.toChar(), 35.toChar(), 30.toChar(),
-             0.toChar(),  1.toChar(),  0.toChar(),  1.toChar(), 36.toChar(), 37.toChar(), 36.toChar(), 44.toChar(),
-             0.toChar(),  1.toChar(),  0.toChar(),  1.toChar(), 36.toChar(), 37.toChar(), 36.toChar(), 44.toChar(),
-             3.toChar(),  2.toChar(),  3.toChar(),  2.toChar(), 39.toChar(), 38.toChar(), 39.toChar(), 41.toChar(),
-             3.toChar(),  2.toChar(),  3.toChar(),  2.toChar(), 47.toChar(), 42.toChar(), 47.toChar(), 45.toChar(),
-             0.toChar(),  1.toChar(),  0.toChar(),  1.toChar(), 36.toChar(), 37.toChar(), 36.toChar(), 44.toChar(),
-             0.toChar(),  1.toChar(),  0.toChar(),  1.toChar(), 36.toChar(), 37.toChar(), 36.toChar(), 44.toChar(),
-             3.toChar(),  2.toChar(),  3.toChar(),  2.toChar(), 39.toChar(), 38.toChar(), 39.toChar(), 41.toChar(),
-             3.toChar(),  2.toChar(),  3.toChar(),  2.toChar(), 47.toChar(), 42.toChar(), 47.toChar(), 45.toChar(),
-            12.toChar(),  8.toChar(), 12.toChar(),  8.toChar(), 24.toChar(), 16.toChar(), 24.toChar(), 20.toChar(),
-            12.toChar(),  8.toChar(), 12.toChar(),  8.toChar(), 24.toChar(), 16.toChar(), 24.toChar(), 20.toChar(),
-            15.toChar(),  5.toChar(), 15.toChar(),  5.toChar(), 27.toChar(), 43.toChar(), 27.toChar(), 32.toChar(),
-            15.toChar(),  5.toChar(), 15.toChar(),  5.toChar(), 31.toChar(), 22.toChar(), 31.toChar(), 29.toChar(),
-            12.toChar(),  8.toChar(), 12.toChar(),  8.toChar(), 24.toChar(), 16.toChar(), 24.toChar(), 20.toChar(),
-            12.toChar(),  8.toChar(), 12.toChar(),  8.toChar(), 24.toChar(), 16.toChar(), 24.toChar(), 20.toChar(),
-            11.toChar(), 10.toChar(), 11.toChar(), 10.toChar(), 19.toChar(),  9.toChar(), 19.toChar(), 17.toChar(),
-            11.toChar(), 10.toChar(), 11.toChar(), 10.toChar(), 35.toChar(), 18.toChar(), 35.toChar(), 33.toChar()
+        var tileMap = intArrayOf(
+             0,  1,  0,  1, 36, 37, 36, 44,
+             0,  1,  0,  1, 36, 37, 36, 44,
+             3,  2,  3,  2, 39, 38, 39, 41,
+             3,  2,  3,  2, 47, 42, 47, 45,
+             0,  1,  0,  1, 36, 37, 36, 44,
+             0,  1,  0,  1, 36, 37, 36, 44,
+             3,  2,  3,  2, 39, 38, 39, 41,
+             3,  2,  3,  2, 47, 42, 47, 45,
+            12, 13, 12, 13, 24, 25, 24, 28,
+            12, 13, 12, 13, 24, 25, 24, 28,
+            15, 14, 15, 14, 27, 26, 27,  7,
+            15, 14, 15, 14, 31,  4, 31, 46,
+            12, 13, 12, 13, 24, 25, 24, 28,
+            12, 13, 12, 13, 24, 25, 24, 28,
+            11,  6, 11,  6, 19, 40, 19, 21,
+            11,  6, 11,  6, 35, 23, 35, 30,
+             0,  1,  0,  1, 36, 37, 36, 44,
+             0,  1,  0,  1, 36, 37, 36, 44,
+             3,  2,  3,  2, 39, 38, 39, 41,
+             3,  2,  3,  2, 47, 42, 47, 45,
+             0,  1,  0,  1, 36, 37, 36, 44,
+             0,  1,  0,  1, 36, 37, 36, 44,
+             3,  2,  3,  2, 39, 38, 39, 41,
+             3,  2,  3,  2, 47, 42, 47, 45,
+            12,  8, 12,  8, 24, 16, 24, 20,
+            12,  8, 12,  8, 24, 16, 24, 20,
+            15,  5, 15,  5, 27, 43, 27, 32,
+            15,  5, 15,  5, 31, 22, 31, 29,
+            12,  8, 12,  8, 24, 16, 24, 20,
+            12,  8, 12,  8, 24, 16, 24, 20,
+            11, 10, 11, 10, 19,  9, 19, 17,
+            11, 10, 11, 10, 35, 18, 35, 33
         )
-        var proximityPoint: Array<Point2> = arrayOf(
-            Point2(1, 0),
-            Point2(1, 1),
-            Point2(0, 1),
-            Point2(-1, 1),
-            Point2(-1, 0),
-            Point2(-1, -1),
-            Point2(0, -1),
-            Point2(1, -1),
-        )
+        var proximityPoint: Array<Point2> = Geometry.d8
     }
 }
