@@ -12,6 +12,7 @@ import arc.math.geom.Vec2;
 import arc.util.Align;
 import arc.util.Time;
 import arc.util.Tmp;
+import ice.DeepSpace;
 import mindustry.game.Team;
 import mindustry.gen.*;
 import mindustry.graphics.Pal;
@@ -67,12 +68,10 @@ public enum HealthBarStyle {
     this.infoHeight = infoHeight;
   }
 
-  HealthBarStyle(){}
-
   public void load(){
-    frame = Core.atlas.find(Sgl.modName + "-health_bar_" + name() + "_frame");
-    healthBar = Core.atlas.find(Sgl.modName + "-health_bar_" + name());
-    empBar = Core.atlas.find(Sgl.modName + "-emp_bar_" + name());
+    frame = Core.atlas.find(DeepSpace.INSTANCE.getModName()+ "-health_bar_" + name() + "_frame");
+    healthBar = Core.atlas.find(DeepSpace.INSTANCE.getModName() + "-health_bar_" + name());
+    empBar = Core.atlas.find(DeepSpace.INSTANCE.getModName()+ "-emp_bar_" + name());
   }
 
   public <T extends Teamc & Healthc> float draw(float x, float y, EntityInfoFrag.EntityEntry<T> entry, Team team, float dy, float alpha, float scl) {

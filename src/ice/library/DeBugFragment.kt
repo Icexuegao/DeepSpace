@@ -164,8 +164,8 @@ object DeBugFragment {
 
       button("ac", Icon.up) {
         val random = AchievementDialog.achievements.random()
-        random.unlock()
-        random.clearUnlock()
+        random.unlocked=true
+        random.unlocked=false
       }
       button("帝国折跃", Icon.units) {
         /*  IceEffects.phaseJumpEmpire.at(Vars.player.x, Vars.player.y, 0f, Vars.content.unit("curse-of-flesh-无畏"))*/

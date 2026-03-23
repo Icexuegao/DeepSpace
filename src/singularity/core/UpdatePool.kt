@@ -1,27 +1,27 @@
-package singularity.core;
+package singularity.core
 
-import arc.Events;
-import arc.struct.ObjectMap;
-import mindustry.game.EventType;
+import arc.Events
+import arc.struct.ObjectMap
+import mindustry.game.EventType
 
-public class UpdatePool{
-  static {
-    Events.run(EventType.Trigger.update, UpdatePool::update);
+object UpdatePool {
+  init {
+    Events.run(EventType.Trigger.update, ::update)
   }
-  
-  private static final ObjectMap<String, Runnable> updateTasks = new ObjectMap<>();
-  
-  public static void receive(String key, Runnable task){
-    updateTasks.put(key, task);
+
+  private val updateTasks = ObjectMap<String, Runnable>()
+
+  fun receive(key: String, task: Runnable) {
+    updateTasks.put(key, task)
   }
-  
-  public static boolean remove(String key){
-    return updateTasks.remove(key) != null;
+
+  fun remove(key: String): Boolean {
+    return updateTasks.remove(key) != null
   }
-  
-  public static void update(){
-    for(Runnable task : updateTasks.values()){
-      task.run();
+
+  fun update() {
+    for (task in updateTasks.values()) {
+      task.run()
     }
   }
 }

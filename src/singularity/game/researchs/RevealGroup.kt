@@ -3,6 +3,7 @@ package singularity.game.researchs
 import arc.Core
 import arc.Events
 import arc.util.Nullable
+import ice.DeepSpace
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
 import singularity.Sgl
 import singularity.core.SglEventTypes.ResearchCompletedEvent
@@ -22,7 +23,7 @@ abstract class RevealGroup(protected val name: String?) {
   fun reveal() {
     if (!revealed) {
       revealed = true
-      Sgl.globals.put(name + "_revealed", true)
+      DeepSpace.globals.put(name + "_revealed", true)
 
       Events.fire(RevealedEvent(this))
     }
@@ -30,7 +31,7 @@ abstract class RevealGroup(protected val name: String?) {
 
   fun reset() {
     revealed = false
-    Sgl.globals.put(name + "_revealed", false)
+    DeepSpace.globals.put(name + "_revealed", false)
   }
 
   fun isRevealed(): Boolean {

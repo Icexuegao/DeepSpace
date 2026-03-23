@@ -63,7 +63,7 @@ class SglMenuFrag : MenuFragment() {
       }));
     }*/
     val versionText = (if (Version.build == -1) "[#fc8140aa]" else "[#ffffffba]") + Version.combined()
-    val modVersionText = "[#${IceColor.b4}]UniverseCore:${UncCore.version} ${DeepSpace.displayName}:${DeepSpace.version}"
+    val modVersionText = "[#${IceColor.b4}]UniverseCore:${UncCore.version} ${DeepSpace.modDisplayName}:${DeepSpace.modVersion}"
 
     group.fill { t: Table? ->
       t!!.defaults().top()

@@ -162,11 +162,11 @@ public class ModConfig {
   }
 
   public void save() {
-    try {
+   /* try {
       save(Sgl.configFile);
     } catch (IOException e) {
       Log.err(e);
-    }
+    }*/
   }
 
   @SuppressWarnings({"HardcodedFileSeparator", "unchecked"})
@@ -298,8 +298,8 @@ public class ModConfig {
   }
 
   public void reset() {
-    Sgl.configFile.copyTo(Sgl.configDirectory.child("mod_config.hjson.bak"));
-    Sgl.configFile.delete();
+   /* Sgl.configFile.copyTo(Sgl.configDirectory.child("mod_config.hjson.bak"));
+    Sgl.configFile.delete();*/
 
     Log.info("[Singularity][INFO] mod config has been reset, old config file saved to file named \"mod_config.hjson.bak\"");
     load();

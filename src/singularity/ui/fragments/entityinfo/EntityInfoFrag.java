@@ -64,7 +64,7 @@ public class EntityInfoFrag{
 
   static {
     Element cap = new Element();
-    UpdatePool.receive("lockScl", () -> {
+    UpdatePool.INSTANCE.receive("lockScl", () -> {
       if (Core.app.isDesktop() && (Sgl.ui.entityInfoFrag.resizing || Core.input.alt())){
         Core.scene.setScrollFocus(cap);
       }

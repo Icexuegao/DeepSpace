@@ -3,6 +3,7 @@ package singularity.game.researchs
 import arc.Core
 import arc.Events
 import arc.func.Boolf
+import ice.DeepSpace
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.type.UnitType
@@ -57,7 +58,7 @@ abstract class Inspire {
 
   open fun reset() {
     applied = false
-    Sgl.globals.put(name + "_applied", false)
+    DeepSpace.globals.put(name + "_applied", false)
   }
 
   abstract fun applyTrigger(project: ResearchProject)
@@ -88,19 +89,19 @@ abstract class Inspire {
 
     override fun init(project: ResearchProject) {
       super.init(project)
-      count = Sgl.globals.getInt(name + "_count", 0)
+      count = DeepSpace.globals.getInt(name + "_count", 0)
     }
 
     override fun reset() {
       super.reset()
       count = 0
-      Sgl.globals.put(name + "_count", 0)
+      DeepSpace.globals.put(name + "_count", 0)
     }
 
     override fun apply(project: ResearchProject) {
       if (applied || !project.isRevealed) return
       count++
-      Sgl.globals.put(name + "_count", count)
+      DeepSpace.globals.put(name + "_count", count)
 
       if (count >= requireCount) super.apply(project)
     }

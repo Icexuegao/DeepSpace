@@ -78,7 +78,7 @@ object UI : Load {
       }
     }
 
-    Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.displayName}[]", Icon.menu) {
+    Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.modDisplayName}[]", Icon.menu) {
       MenusDialog.show()
       showUISoundCloseV(ISounds.进入模组界面)
     }

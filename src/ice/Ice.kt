@@ -39,8 +39,12 @@ open class Ice : Mod() {
   }
 
   init {
+    DeepSpace.globals.load()
+    // researches.init();
+
     IFiles.setup()
     IAttribute.setup()
+    SglCategory.setup()
     UncCore.setup()
     SettingValue.setup()
     IceRegister.setup()
@@ -70,8 +74,6 @@ open class Ice : Mod() {
   }
 
   override fun loadContent() {
-    //加载方块类型
-    SglCategory.load()
 
     //载入所有新内容类型
     SglContentType.load()

@@ -19,6 +19,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pool.Poolable
 import arc.util.pooling.Pools
+import ice.DeepSpace
 import ice.library.struct.AttachedProperty
 import ice.ui.bundle.BaseBundle
 import mindustry.Vars
@@ -146,7 +147,7 @@ class MornstarType : AirSeaAmphibiousUnit("mornstar") {
       }
     })
 
-    weapons.addAll(object : SglWeapon(Sgl.modName + "-mornstar_cannon") {
+    weapons.addAll(object : SglWeapon(DeepSpace.modName + "-mornstar_cannon") {
       init {
         recoil = 0f
         recoilTime = 120f
@@ -269,7 +270,7 @@ class MornstarType : AirSeaAmphibiousUnit("mornstar") {
           }
         })
       }
-    }, object : SglWeapon(Sgl.modName + "-mornstar_turret") {
+    }, object : SglWeapon(DeepSpace.modName + "-mornstar_turret") {
       init {
         x = 26f
         y = -28f
@@ -333,7 +334,7 @@ class MornstarType : AirSeaAmphibiousUnit("mornstar") {
           }
         }
       }
-    }, object : RelatedWeapon(Sgl.modName + "-lightedge") {
+    }, object : RelatedWeapon(DeepSpace.modName + "-lightedge") {
       init {
         useAlternative = isFlying
         mirror = false

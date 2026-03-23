@@ -11,7 +11,6 @@ import mindustry.world.blocks.liquid.LiquidJunction
 
 class ArmoredConduit(name: String) : Conduit(name) {
   init {
-    leaks = false
     buildType = Prov(::ArmoredConduitBuild)
     botColor = Pal.darkestMetal
   }

@@ -60,7 +60,7 @@ public class SglUI {
   public static Blur uiBlur = new Blur(Blur.DEf_B);
 
   static {
-    UpdatePool.receive("syncUIBlurCfg", () -> {
+    UpdatePool.INSTANCE.receive("syncUIBlurCfg", () -> {
       uiBlur.blurScl = Sgl.config.blurLevel;
       uiBlur.blurSpace = Sgl.config.backBlurLen;
 

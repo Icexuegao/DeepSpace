@@ -16,6 +16,7 @@ import arc.scene.ui.layout.Table
 import arc.util.Interval
 import arc.util.Time
 import arc.util.Tmp
+import ice.DeepSpace
 import ice.library.struct.AttachedProperty
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.content.Fx
@@ -143,7 +144,7 @@ class KaguyaType : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.jav
     })
 
     val laser: Func2<Float?, Float?, Weapon?> = Func2 { dx: Float?, dy: Float? ->
-      object : SglWeapon(Sgl.modName + "-kaguya_laser") {
+      object : SglWeapon(DeepSpace.modName + "-kaguya_laser") {
         init {
           this.x = dx!!
           this.y = dy!!
@@ -177,7 +178,7 @@ class KaguyaType : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.jav
       }
     }
 
-    weapons.addAll(laser.get(19.25f, 16f), laser.get(13.5f, 33.5f), object : SglWeapon(Sgl.modName + "-kaguya_cannon") {
+    weapons.addAll(laser.get(19.25f, 16f), laser.get(13.5f, 33.5f), object : SglWeapon(DeepSpace.modName + "-kaguya_cannon") {
       init {
         x = 30.5f
         y = -3.5f
@@ -255,7 +256,7 @@ class KaguyaType : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.jav
           }
         }
       }
-    }, object : PointDefenseWeapon(Sgl.modName + "-kaguya_point_laser") {
+    }, object : PointDefenseWeapon(DeepSpace.modName + "-kaguya_point_laser") {
       init {
         x = 30.5f
         y = -3.5f
@@ -275,7 +276,7 @@ class KaguyaType : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.jav
           }
         }
       }
-    }, object : DataWeapon(Sgl.modName + "-lightedge") {
+    }, object : DataWeapon(DeepSpace.modName + "-lightedge") {
       init {
         x = 0f
         y = -14f

@@ -45,7 +45,9 @@ class OrientationProjector(name: String) : LinksBlock(name) {
     configurable = true
     group = BlockGroup.projectors
     buildType = Prov(::OrientationProjectorBuildEnd)
-    consumePower(200 / 60f)
+    newConsume().apply {
+      power(200 / 60f)
+    }
     requirements(Category.effect, ItemStack.with(IItems.铪锭, 30))
   }
 
@@ -56,6 +58,9 @@ class OrientationProjector(name: String) : LinksBlock(name) {
   override fun setStats() {
     super.setStats()
     stats.add(Stat.speedIncrease, "+" + (speedBoost * 100f - 100) + "%")
+    for (baseConsumers in consumers) {
+      baseConsumers.display(stats)
+    }
   }
 
   inner class OrientationProjectorBuildEnd : LinksBlockBuild() {
@@ -69,12 +74,16 @@ class OrientationProjector(name: String) : LinksBlock(name) {
       super.remove()
     }
     override fun updateTile() {
-      if (efficiency > 0) {
+      if (efficiency() > 0) {
         builds.forEach {
           if (it.dead()) builds.remove(it)
           it.applyBoost(speedBoost, 1f)
         }
       }
+    }
+
+    override fun pickedUp() {
+      builds.clear()
     }
 
     override fun addBuild(build: Building): Boolean {
@@ -83,7 +92,7 @@ class OrientationProjector(name: String) : LinksBlock(name) {
 
     override fun draw() {
       super.draw()
-      if (efficiency <= 0) return
+      if (efficiency() <= 0) return
       val f = 1f - (Time.time / 100f) % 1f
       Draw.alpha(0.8f)
       Lines.stroke((2f * f + 0.1f) * 1)

@@ -1,6 +1,5 @@
 package ice.ui.menusDialog
 
-import arc.Core
 import arc.Events
 import arc.graphics.Color
 import arc.math.Interp
@@ -18,6 +17,7 @@ import ice.graphics.IceColor
 import ice.library.EventType
 import ice.library.scene.action.IceActions
 import ice.library.scene.ui.*
+import ice.library.struct.ConfigPropertyDelegate
 import ice.library.struct.asDrawable
 import ice.ui.MenusDialog
 import ice.ui.dialog.BaseMenusDialog
@@ -31,10 +31,10 @@ import universecore.util.DataPackable
 object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.menusButton_host) {
   val achievements = Seq<Achievement>()
   private lateinit var list: Table
-  private var tmpSt = ""
+  private var tmpSt = "全部"
 
   init {
-    Events.on(EventType.AchievementUnlockEvent::class.java) {e ->
+    Events.on(EventType.AchievementUnlockEvent::class.java) { e ->
       Sgl.ui.notificationFrag.notify(AchievementNotification(e.achievement.name, e.achievement.description))
     }
     Achievement("孢子进化论", "升级一次孢子单位", 2)
@@ -53,23 +53,23 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
   }
 
   override fun build(cont: Table) {
-    cont.table {k ->
-      k.table {t ->
+    cont.table { k ->
+      k.table { t ->
         t.image(TextureRegionDrawable(IStyles.achievement)).scaling(Scaling.fit)
       }.height(170f).pad(20f).padTop(5f).padBottom(5f).row()
 
-      k.table(Styles.grayPanel) {ta ->
-        ta.table {img ->
+      k.table(Styles.grayPanel) { ta ->
+        ta.table { img ->
           img.image().height(34f).color(IceColor.b4).growX()
           img.row()
           img.image().height(6f).color(IceColor.b4.cpy().mul(0.8f, 0.8f, 0.8f, 1f)).growX()
         }.growX().row()
 
-        ta.table {jk ->
+        ta.table { jk ->
 
-          jk.iPane {cns ->
+          jk.iPane { cns ->
 
-            cns.iTableG {cn ->
+            cns.iTableG { cn ->
               cn.top()
               cn.defaults().growX()
 
@@ -79,38 +79,38 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
                   flunActions {
                     tmpSt = "已锁定"
                     list.clearChildren()
-                    achievements.select {it1 -> !it1.unlocked()}.forEach(::flunOne)
+                    achievements.select { it1 -> !it1.unlocked }.forEach(::flunOne)
                   }
                 }.height(40f).marginRight(-2f).grow()
                 it.button("已完成", Styles.nonet) {
                   flunActions {
                     tmpSt = "已完成"
                     list.clearChildren()
-                    achievements.select {it1 -> it1.unlocked()}.forEach(::flunOne)
+                    achievements.select { it1 -> it1.unlocked }.forEach(::flunOne)
                   }
                 }.height(40f).grow()
               }.row()
 
               cn.table(IStyles.paneBottom) {
-                it.table {table ->
+                it.table { table ->
                   table.image(IStyles.afehs).color(IceColor.b4).size(80f).padRight(4f)
-                  val pross = (achievements.select {it1 -> it1.unlocked()}.size.toFloat() / achievements.size)
-                  table.add(Label {"${Mathf.round(pross * 100f)}%"}.apply {
+                  val pross = (achievements.select { it1 -> it1.unlocked }.size.toFloat() / achievements.size)
+                  table.add(Label { "${Mathf.round(pross * 100f)}%" }.apply {
                     setFontScale(2f)
                   }).color(IceColor.b4)
                 }.row()
-                it.table {table ->
-                  table.addCR({"已完成 ${achievements.select {achievement -> achievement.unlocked()}.size} 个 共 ${achievements.size} 个"})
+                it.table { table ->
+                  table.addCR({ "已完成 ${achievements.select { achievement -> achievement.unlocked }.size} 个 共 ${achievements.size} 个" })
                 }.pad(2f)
               }.row()
               cn.addLine()
 
               cn.table(IStyles.paneBottom) {
                 it.left()
-                it.table {it1 ->
+                it.table { it1 ->
                   it1.image(IStyles.achievementHourglass).color(IceColor.b4).size(50f)
                 }.padRight(10f)
-                it.table {it1 ->
+                it.table { it1 ->
                   it1.left()
                   it1.addCR("进行中").growX().pad(2f)
                   it1.addCR("0").growX().pad(2f)
@@ -120,13 +120,13 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
 
               cn.table(IStyles.paneBottom) {
                 it.left()
-                it.table {it1 ->
+                it.table { it1 ->
                   it1.image(IStyles.achievementGodQuality).color(IceColor.b4).size(50f)
                 }.padRight(10f)
-                it.table {it1 ->
+                it.table { it1 ->
                   it1.left()
                   it1.addCR("神质").growX().pad(2f).row()
-                  it1.addCR({"${SettingValue.神质}"}).growX().pad(2f).row()
+                  it1.addCR({ "${SettingValue.godpod}" }).growX().pad(2f).row()
                 }.grow()
               }.row()
               cn.addLine()
@@ -134,14 +134,14 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
 
           }.minWidth(400f).growY()
 
-          jk.table {t2 ->
+          jk.table { t2 ->
 
             t2.iPaneG {
               it.top()
               list = it
               //优先展示已解锁
-              achievements.select {it1 -> it1.unlocked()}.forEach(::flunOne)
-              achievements.select {it1 -> !it1.unlocked()}.forEach(::flunOne)
+              achievements.select { it1 -> it1.unlocked }.forEach(::flunOne)
+              achievements.select { it1 -> !it1.unlocked }.forEach(::flunOne)
 
             }
           }.grow().padRight(30f)
@@ -158,8 +158,8 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
       tmpSt = "全部"
       list.clearChildren()
       //优先展示已解锁
-      achievements.select {it1 -> it1.unlocked()}.forEach(::flunOne)
-      achievements.select {it1 -> !it1.unlocked()}.forEach(::flunOne)
+      achievements.select { it1 -> it1.unlocked }.forEach(::flunOne)
+      achievements.select { it1 -> !it1.unlocked }.forEach(::flunOne)
     }
   }
 
@@ -168,22 +168,22 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
   }
 
   fun flunOne(ach: Achievement) {
-    list.iTableGX(if (ach.unlocked()) IStyles.background101 else IStyles.background91) {b ->
-      b.image(if (ach.unlocked()) IStyles.achievementUnlock else IStyles.achievementLock).size(80f).pad(5f)
-      b.iTableG {b1 ->
-        b1.add(Label(ach.name).colorR(if (ach.unlocked()) IceColor.b4 else Color.gray)).padTop(10f).row()
-        b1.add(Label(ach.description).colorR(if (ach.unlocked()) IceColor.b4 else Color.gray)).growX().expandY().wrap()
+    list.iTableGX(if (ach.unlocked) IStyles.background101 else IStyles.background91) { b ->
+      b.image(if (ach.unlocked) IStyles.achievementUnlock else IStyles.achievementLock).size(80f).pad(5f)
+      b.iTableG { b1 ->
+        b1.add(Label(ach.name).colorR(if (ach.unlocked) IceColor.b4 else Color.gray)).padTop(10f).row()
+        b1.add(Label(ach.description).colorR(if (ach.unlocked) IceColor.b4 else Color.gray)).growX().expandY().wrap()
       }
-      if (ach.unlocked() && SettingValue.启用调试模式) {
+      if (ach.unlocked && SettingValue.启用调试模式) {
         b.button(Icon.trash, IStyles.button3) {
-          ach.clearUnlock()
+          ach.unlocked=false
           b.actions(IceActions.moveToAlphaAction(b.width + 50f, b.y, 1f, 0f, Interp.pow2In), Actions.run {
             flunActions {
 
               list.clearChildren()
               //优先展示已解锁
               if (tmpSt == "全部") allAchievement()
-              if (tmpSt == "已完成") achievements.select {it1 -> it1.unlocked()}.forEach(::flunOne)
+              if (tmpSt == "已完成") achievements.select { it1 -> it1.unlocked }.forEach(::flunOne)
             }
           })
         }.size(40f).pad(12f).expandY().bottom()
@@ -194,28 +194,15 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
   }
 
   open class Achievement(var name: String, var description: String, var dot: Int) {
-    private var unlocked = false
+    var unlocked: Boolean by ConfigPropertyDelegate(false, "${DeepSpace.modName}-achievement-$name") { old, new ->
+      if (!old && new) {
+        Events.fire(EventType.AchievementUnlockEvent(this))
+        SettingValue.godpod += dot
+      }
+    }
 
     init {
       achievements.add(this)
-      unlocked = Core.settings.getBool("${DeepSpace.name}-achievement-$name", false)
-    }
-
-    fun unlocked() = unlocked
-    fun unlock() {
-      if (!unlocked) {
-        unlocked = true
-        Core.settings.put("${DeepSpace.name}-achievement-$name", true)
-        Events.fire(EventType.AchievementUnlockEvent(this))
-        SettingValue.神质 += dot
-      }
-    }
-
-    fun clearUnlock() {
-      if (unlocked) {
-        unlocked = false
-        Core.settings.put("${DeepSpace.name}-achievement-$name", false)
-      }
     }
   }
 
@@ -223,7 +210,7 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
     companion object {
       const val typeID: Long = 12133159028768494L
       fun assign() {
-        DataPackable.assignType(typeID) {args: Array<Any> ->
+        DataPackable.assignType(typeID) { args: Array<Any> ->
         }
       }
     }

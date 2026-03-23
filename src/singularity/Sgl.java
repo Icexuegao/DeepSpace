@@ -5,17 +5,14 @@ import arc.Events;
 import arc.Settings;
 import arc.files.Fi;
 import arc.util.Log;
-import arc.util.Strings;
-import arc.util.Threads;
-import arc.util.io.Reads;
-import arc.util.io.Writes;
+import ice.DeepSpace;
+import ice.library.IFiles;
 import singularity.graphic.ScreenSampler;
 import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.game.Team;
 import singularity.core.ModConfig;
 import singularity.core.ModsInteropAPI;
-import singularity.core.UpdatePool;
 import singularity.game.researchs.ResearchManager;
 import singularity.graphic.MathRenderer;
 import singularity.graphic.PostAtlasGenerator;
@@ -29,38 +26,16 @@ import singularity.world.unit.EMPHealthManager;
 import universecore.util.mods.ModGetter;
 import universecore.util.mods.ModInfo;
 
-import java.util.concurrent.ExecutorService;
-
-import static arc.Core.settings;
-
 public class Sgl {
   public static final String NL = System.lineSeparator();
 
-  /** 此mod内部名称 */
-  public static final String modName = "ice";
-  /** 模组文件夹位置 */
-  public static final Fi modDirectory = settings.getDataDirectory().child("mods");
+
+
   /** 本模组的文件位置 */
-  public static final ModInfo mod = ModGetter.INSTANCE.getModWithName(modName);
+  public static final ModInfo mod = IFiles.INSTANCE.getModWithClass();
   /** 此模组的压缩包对象 */
   public static final Fi modFile = mod.getFile();
 
-  /** 模组内配置文件存放位置 */
-  public static final Fi internalConfigDir = modFile.child("config");
-  /** 模组数据文件夹 */
-  public static final Fi dataDirectory = modDirectory.child("data").child(modName);
-  /** 行星上下文目录 */
-  public static final Fi planetDataDirectory = dataDirectory.child("planet_contexts");
-  /** 模组配置文件夹 */
-  public static final Fi configDirectory = modDirectory.child("config").child(modName);
-  /** 模组的mod_config.hjson配置文件 */
-  public static final Fi configFile = configDirectory.child("mod_config.hjson");
-  /** 模组持久全局变量存储文件 */
-  public static final Fi globalVars = dataDirectory.child("global_vars.bin");
-  /** 模组持久全局变量备份文件 */
-  public static final Fi globalVarsBackup = dataDirectory.child("global_vars.bin.bak");
-/*
-  */
 /** 通知标签历史 *//*
 
   public static final Fi notificationHistory = dataDirectory.child("notifyHistory.bin");
@@ -83,8 +58,7 @@ public class Sgl {
 
   /** 模组配置存储器 */
   public static ModConfig config = new ModConfig();
-  /** 持久保存的全局变量集 */
-  public static Settings globals= settings;
+
   /** ui类存放对象 */
   public static SglUI ui;
 
@@ -95,69 +69,11 @@ public class Sgl {
   public static ResearchManager researches = new ResearchManager();
   public static ModsInteropAPI interopAPI = new ModsInteropAPI();
 
-  public static ExecutorService executor = Threads.unboundedExecutor("SGL_EXEC", 1);
-
   public static void init() {
     //注册所有打包数据类型id
     BytePackAssign.INSTANCE.assignAll();
     researches.load();
     researches.init();
-   /* globals = new Settings() {
-      {
-        setAutosave(true);
-        setDataDirectory(Sgl.dataDirectory);
-      }
-
-      @Override
-      public Fi getSettingsFile() {
-        return globalVars;
-      }
-
-      @Override
-      public Fi getBackupFolder() {
-        return Sgl.dataDirectory.child("global_backups");
-      }
-
-      @Override
-      public Fi getBackupSettingsFile() {
-        return globalVarsBackup;
-      }
-
-      @Override
-      public synchronized void load() {
-        try {
-          loadValues();
-        } catch (Throwable error) {
-          Log.err("Error in load: " + Strings.getStackTrace(error));
-          if (errorHandler != null) {
-            if (!hasErrored) errorHandler.get(error);
-          } else {
-            throw error;
-          }
-          hasErrored = true;
-        }
-        loaded = true;
-      }
-
-      @Override
-      public synchronized void forceSave() {
-        if (!loaded) return;
-        try {
-          saveValues();
-        } catch (Throwable error) {
-          Log.err("Error in forceSave to " + getSettingsFile() + ":\n" + Strings.getStackTrace(error));
-          if (errorHandler != null) {
-            if (!hasErrored) errorHandler.get(error);
-          } else {
-            throw error;
-          }
-          hasErrored = true;
-        }
-        modified = false;
-      }
-    };
-    globals.load();*/
-
 
     matrixContainers = new DistSupportContainerTable();
     empHealth = new EMPHealthManager();
@@ -168,7 +84,7 @@ public class Sgl {
     empHealth.init();
     // researches.init();
 
-    UpdatePool.receive("autosaveGlobal", globals::autosave);
+
 
     if (!Core.app.isHeadless()) {
       generatePostAtlas();

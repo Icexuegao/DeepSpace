@@ -65,8 +65,13 @@ object SettingValue : Load {
   var 启用包裹物品时限 by observable(true)
   var 启用QQ头像获取 by observable(true)
 
-  var 神质 by observable(0)
 
+  @delegate:Order
+  var godpod by observable(0)
+
+  @Retention(AnnotationRetention.RUNTIME)
+  @Target(AnnotationTarget.FIELD)
+  private annotation class Order
   private fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T) -> Unit = { _, _, _ -> }) = Delegates.observable(initialValue) { property, old, new ->
       onChange(property, old, new)
       scheduleSave()

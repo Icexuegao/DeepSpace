@@ -52,8 +52,7 @@ class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
     newProduce().apply {
       items(IItems.低温化合物, 1)
     }
-    newBooster(1f)
-    consume!!.add(SglConsumeFloor(IAttribute.寒冷, 0.1f))
+    newBooster(1f).add(SglConsumeFloor(IAttribute.寒冷, 0.1f))
 
   }
 }

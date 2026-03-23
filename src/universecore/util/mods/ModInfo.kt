@@ -9,6 +9,7 @@ class ModInfo(modFile: Fi) {
   val name: String
   val version: String
   val displayName: String
+  val author: String
   val file: Fi
 
   init {
@@ -16,8 +17,10 @@ class ModInfo(modFile: Fi) {
     val info = Jval.read(modMeta.reader())
     file = modFile
     name = info.get("name").asString()
+    author=info.get("author").asString()
     version = info.getNull("version")
     displayName = info.getNull("displayName")
+
   }
 
   fun Jval.getNull(key: String): String {

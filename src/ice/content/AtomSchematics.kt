@@ -1,6 +1,7 @@
 package ice.content
 
 import arc.func.Prov
+import ice.DeepSpace
 import ice.library.world.Load
 import mindustry.type.Item
 import singularity.Sgl
@@ -38,7 +39,7 @@ object AtomSchematics : Load {
     var d = 0
 
     init {
-      d = Sgl.globals.getInt("atomSchematic_${item.name}_d", d)
+      d = DeepSpace.globals.getInt("atomSchematic_${item.name}_d", d)
     }
 
     fun progession() = d.toFloat() / reqint
@@ -49,22 +50,22 @@ object AtomSchematics : Load {
         unlock()
       } else {
         d += amount
-        Sgl.globals.put("atomSchematic_${item.name}_d", d)
+        DeepSpace.globals.put("atomSchematic_${item.name}_d", d)
       }
     }
 
     fun getunlock(): Boolean {
-      return Sgl.globals.getBool("atomSchematic_${item.name}", false)
+      return DeepSpace.globals.getBool("atomSchematic_${item.name}", false)
     }
 
     fun unlock() {
-      Sgl.globals.put("atomSchematic_${item.name}", true)
+      DeepSpace.globals.put("atomSchematic_${item.name}", true)
     }
 
     fun cleanLock() {
       d = 0
-      Sgl.globals.put("atomSchematic_${item.name}_d", d)
-      Sgl.globals.put("atomSchematic_${item.name}", false)
+      DeepSpace.globals.put("atomSchematic_${item.name}_d", d)
+      DeepSpace.globals.put("atomSchematic_${item.name}", false)
     }
   }
 }

@@ -11,6 +11,9 @@ buildscript {
   extra["proUser"] = System.getProperty("user.name")
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
   extra["kotlinCompatibility"] = "2.3.20"
+  extra["java"] = 25
+  extra["mdtVersion"]="com.github.Anuken.Mindustry:core:v155.4"
+  var mdtVersion: String by extra
   repositories {
     mavenLocal()
     mavenCentral()
@@ -22,16 +25,19 @@ buildscript {
     maven { url = uri("https://jitpack.io") }
   }
   dependencies {
-    classpath("com.github.Anuken.Mindustry:core:v154.3")
+    classpath(mdtVersion)
     classpath(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
   }
 }
 val kotlinCompatibility : String by extra
 val proUser: String by extra
 val sdkRoot: String by extra
+val java:Int by extra
+var mdtVersion: String by extra
 plugins {
+  var kotlinCompatibility : String by extra
   java
-  kotlin("jvm") version "2.3.20"
+  kotlin("jvm") version kotlinCompatibility
   id("com.gradleup.shadow") version "9.3.0"
   id("com.scalified.plugins.gradle.proguard") version "1.7.0"
 }
@@ -68,7 +74,7 @@ dependencies {
   // compileOnly(files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar"))
    //compileOnly("com.github.TinyLake:MindustryX:v2026.02.X27")
   // compileOnly("com.github.Anuken.Arc:flabel:v149")
-  //compileOnly("com.github.Icexuegao:DeepSpace:Alpha-4178")
+  compileOnly(mdtVersion)
   compileOnly("com.github.EB-wilson:TooManyItems:3.1a")
   implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinCompatibility")
 }
@@ -80,11 +86,11 @@ sourceSets {
     resources.setSrcDirs(listOf("assets"))
   }
   kotlin {
-    jvmToolchain(25)
+    jvmToolchain(java)
   }
   java {
     toolchain {
-      languageVersion.set(JavaLanguageVersion.of(25))
+      languageVersion.set(JavaLanguageVersion.of(java))
     }
   }
 }
@@ -104,8 +110,8 @@ fun execute(string: String, path: File? = null, vararg args: Any?) {
 
 tasks {
   withType<JavaCompile>().configureEach {
-    sourceCompatibility = 25.toString()
-    targetCompatibility = 25.toString()
+    sourceCompatibility = java.toString()
+    targetCompatibility = java.toString()
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(arrayOf( "--add-exports", "java.base/jdk.internal.misc=ALL-UNNAMED",
       "--add-exports", "java.base/jdk.internal.module=ALL-UNNAMED",
@@ -174,7 +180,7 @@ tasks {
     val platformRoot = platformDir.listFiles { f ->
       f.isDirectory && File(f, "android.jar").exists()
     }?.maxByOrNull { it.name } ?: throw GradleException("找不到有效的安卓平台")
-    classpath(files("$sdkRoot/build-tools/36.0.0/lib/d8.jar"))
+    classpath(files("$sdkRoot/build-tools/37.0.0-rc2/lib/d8.jar"))
     mainClass.set("com.android.tools.r8.D8")
     val classpathFiles = (configurations.compileClasspath.get().files + configurations.runtimeClasspath.get().files + File(platformRoot, "android.jar"))
     val argsList = mutableListOf<String>()

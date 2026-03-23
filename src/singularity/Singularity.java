@@ -7,6 +7,7 @@ import arc.graphics.g2d.TextureRegion;
 import arc.scene.style.Drawable;
 import arc.struct.ObjectMap;
 import arc.util.Log;
+import ice.DeepSpace;
 import ice.core.SettingValue;
 import mindustry.mod.Mod;
 import singularity.contents.*;
@@ -62,15 +63,15 @@ public class Singularity extends Mod {
   }
 
   public static TextureRegion getModAtlas(String name) {
-    return Core.atlas.find(Sgl.modName + "-" + name);
+    return Core.atlas.find(DeepSpace.INSTANCE.getModName() + "-" + name);
   }
 
   public static TextureRegion getModAtlas(String name, TextureRegion def) {
-    return Core.atlas.find(Sgl.modName + "-" + name, def);
+    return Core.atlas.find(DeepSpace.INSTANCE.getModName() + "-" + name, def);
   }
 
   public static <T extends Drawable> T getModDrawable(String name) {
-    return Core.atlas.getDrawable(Sgl.modName + "-" + name);
+    return Core.atlas.getDrawable(DeepSpace.INSTANCE.getModName() + "-" + name);
   }
 
   public static Fi getInternalFile(String path) {

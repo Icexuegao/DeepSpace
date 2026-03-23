@@ -13,9 +13,8 @@ import mindustry.graphics.Layer
 
 class AutoWall(name: String) : Wall(name) {
   var regions: Array<TextureRegion?> = arrayOfNulls(48)
-  var regionLarge: TextureRegion by TextureRegionDelegate("${this.name}-large")
+  var regionLarge: TextureRegion? = null
   val regionAtlas: TextureRegion by TextureRegionDelegate("${this.name}-atlas")
-
 
   init {
     allowRectanglePlacement = true
@@ -29,10 +28,13 @@ class AutoWall(name: String) : Wall(name) {
     val width = regionAtlas.width + regionAtlas.x
     val height = regionAtlas.height + regionAtlas.y
 
+    regionLarge = TextureRegion(regionAtlas.texture, regionAtlas.x, regionAtlas.y, 64, 64)
+    uiIcon = TextureRegion(regionAtlas.texture, regionAtlas.x+64, regionAtlas.y, 32, 32)
+    fullIcon = uiIcon
     var idx = 0
     var arrY = regionAtlas.y
     while (arrY < height) {
-      var arrX = regionAtlas.x
+      var arrX = regionAtlas.x + 64
       while (arrX < width) {
         regions[idx++] = TextureRegion(regionAtlas.texture, arrX, arrY, 32, 32)
         arrX += 32
@@ -86,7 +88,7 @@ class AutoWall(name: String) : Wall(name) {
       proximityTileUpdate()
       var other: Building
       for (point in StaticTile.proximityPoint) {
-        other = Vars.world.build(tileX() + point.x, tileY() + point.y)?: continue
+        other = Vars.world.build(tileX() + point.x, tileY() + point.y) ?: continue
         if (other is AutoWallBuild && other.team === this.team) other.proximityTileUpdate()
       }
     }

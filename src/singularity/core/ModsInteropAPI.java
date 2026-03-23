@@ -5,6 +5,7 @@ import arc.struct.ObjectMap;
 import arc.struct.OrderedSet;
 import arc.util.Log;
 import arc.util.serialization.Jval;
+import ice.DeepSpace;
 import mindustry.Vars;
 import mindustry.ctype.Content;
 import mindustry.ctype.ContentType;
@@ -64,7 +65,7 @@ public class ModsInteropAPI {
     if (!Sgl.config.enableModsInterops) return;
 
     for (Mods.LoadedMod mod : Vars.mods.list()) {
-      if (mod.name.equals(Sgl.modName)) continue;
+      if (mod.name.equals(DeepSpace.INSTANCE.getModName())) continue;
 
       Fi api = mod.root.child("singularity_api.json");
       api = api.exists()? api: mod.root.child("singularity_api.hjson");

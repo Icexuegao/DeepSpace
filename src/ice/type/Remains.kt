@@ -1,6 +1,5 @@
 package ice.type
 
-import arc.Core
 import arc.func.Cons
 import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.layout.Table
@@ -12,9 +11,9 @@ import ice.graphics.IceColor
 import ice.library.IFiles
 import ice.library.scene.ui.addLine
 import ice.library.scene.ui.itooltip
+import ice.library.struct.ConfigPropertyDelegate
 import ice.ui.UI
 import ice.ui.menusDialog.RemainsDialog
-
 import mindustry.Vars
 
 open class Remains(val name: String) {
@@ -22,11 +21,11 @@ open class Remains(val name: String) {
     val remainsSeq = Seq<Remains>()
 
     fun getEnableds(): Seq<Remains> {
-      return remainsSeq.select {it.equippedWith()}
+      return remainsSeq.select {it.unlock}
     }
 
     fun getNoEnableds(): Seq<Remains> {
-      return remainsSeq.select {!it.equippedWith()}
+      return remainsSeq.select {!it.unlock}
     }
   }
 
@@ -40,6 +39,8 @@ open class Remains(val name: String) {
   var disabled: ()->Boolean = {Vars.state.isGame}
   var customTable = Table()
   var buttonStyle = IStyles.button5
+
+  var unlock: Boolean by ConfigPropertyDelegate(false, "${DeepSpace.modName}-remains-$name-enabled")
 
   init {
     remainsSeq.add(this)
@@ -55,14 +56,8 @@ open class Remains(val name: String) {
 
   fun setEnabled(enabled: Boolean) {
     if (enabled) install() else uninstall()
-
-    Core.settings.put("${DeepSpace.name}-remains-$name-enabled", enabled)
+    unlock=enabled
   }
-
-  fun equippedWith(): Boolean {
-    return Core.settings.getBool("${DeepSpace.name}-remains-$name-enabled", false)
-  }
-
   fun getTiTleTable(): Table {
     return Table().also {
       it.image(icon).size(120f).pad(30f).padTop(0f).row()

@@ -9,6 +9,7 @@ import ice.content.block.EnvironmentBlocks
 import ice.graphics.TextureRegionDelegate
 import ice.ui.bundle.BaseBundle
 import ice.world.draw.DrawMulti
+import mindustry.content.Fx
 import mindustry.gen.Building
 import mindustry.gen.Sounds
 import mindustry.graphics.Drawf
@@ -41,6 +42,8 @@ class CrystalMiner : NormalCrafter("crystal_miner") {
     })
     buildType = Prov(::CrystalMinerBuild)
     rotateDraw = false
+    updateEffect =Fx.mine
+    updateEffectColor = IItems.燃素水晶.color
     newConsume().apply {
       power(120f / 60f)
       time(130f)
@@ -94,16 +97,6 @@ class CrystalMiner : NormalCrafter("crystal_miner") {
           k = true
         }
       }
-
-      /* if ( consumer.valid){
-         tile.nearby(rotation).nearby(rotation).nearby(rotation).nearby(rotation-1)?.let {
-           Fx.mine.at(it.drawx(), it.drawy())
-         }
-       }*/
-    }
-
-    override fun acceptItem(source: Building, item: Item): Boolean {
-      return items.total() < getMaximumAccepted(item)
     }
 
     override fun draw() {

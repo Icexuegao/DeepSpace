@@ -29,7 +29,6 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.graphics.RandSetTextrue
 import ice.library.IFiles
-import ice.library.scene.element.IceScrollPane
 import ice.library.scene.ui.*
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
 import ice.ui.dialog.BaseMenusDialog
@@ -47,7 +46,7 @@ import java.util.regex.Pattern
 
 object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menusButton_infos) {
 
-  private val UNC_RELEASE_FILE: Pattern = Pattern.compile("^${DeepSpace.displayName}.+\\.(jar|zip)$")
+  private val UNC_RELEASE_FILE: Pattern = Pattern.compile("^${DeepSpace.modDisplayName}.+\\.(jar|zip)$")
 
   private var newVersion: String? = null
   private var updateUrl: String? = null
@@ -96,15 +95,15 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
         t3.table {t2 ->
           t2.table {t ->
             t.defaults().left().pad(5f).growX().height(40f)
-            t.add(DeepSpace.displayName).color(Pal.accent)
+            t.add(DeepSpace.modDisplayName).color(Pal.accent)
             t.row()
             t.add(IceStats.作者.localizedName).color(Pal.accent)
-            t.add(DeepSpace.author)
+            t.add(DeepSpace.modAuthor)
             t.button(IceStats.亲爱的贡献者.localizedName, SglDrawConst.contributeIcon, Styles.nonet, 28f) {
             }.update {b: TextButton -> b.setChecked(false)}.width(230f)
             t.row()
             t.add(IceStats.版本.localizedName).color(Pal.accent)
-            t.add(DeepSpace.version)
+            t.add(DeepSpace.modVersion)
             t.table {update ->
               update.add(object : Element() {
                 override fun draw() {
@@ -133,7 +132,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             }.width(230f)
             t.row()
             t.add(Core.bundle.get("infos.releaseDate")).color(Pal.accent)
-            t.add(DeepSpace.updateDate)
+            t.add(DeepSpace.modUpdateDate)
             t.button("", Icon.upload, Styles.nonet, 28f) {
               checkOrDoUpdate()
             }.update {b: TextButton? ->
@@ -325,14 +324,14 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     Vars.ui.loadfrag.setProgress {downloadProgress}
     Http.get(updateUrl, {result: Http.HttpResponse? ->
       try {
-        val file = Vars.tmpDirectory.child("${DeepSpace.displayName}-$newVersion.jar")
+        val file = Vars.tmpDirectory.child("${DeepSpace.modDisplayName}-$newVersion.jar")
         val len = result!!.contentLength
 
         file.write(false).use {stream ->
           Streams.copyProgress(result.resultAsStream, stream, len, 4096, if (len <= 0) Floatc {_: Float ->} else Floatc {p: Float -> downloadProgress = p})
         }
         val mod = Vars.mods.importMod(file)
-        mod.repo = DeepSpace.repo
+        mod.repo = DeepSpace.REPO
         file.delete()
 
         Core.app.post {
@@ -356,7 +355,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     var newestVersion = false
     try {
       val newVersion = version.filter {it.isDigit()}
-      val currVersion = DeepSpace.version.filter {it.isDigit()}
+      val currVersion = DeepSpace.modVersion.filter {it.isDigit()}
       newestVersion = newVersion.toInt() > currVersion.toInt()
     } catch (_: Throwable) {
     }

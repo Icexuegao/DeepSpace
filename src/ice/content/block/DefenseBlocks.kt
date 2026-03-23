@@ -254,17 +254,15 @@ object DefenseBlocks : Load {
     }
   }
   val 装甲闸门 = AutoDoor("armorGate").apply {
+    bundle {
+      desc(zh_CN, "装甲闸门", "允许单位通过的装甲门,自动开关")
+    }
     size = 2
     armor = 20f
     health = 大型铱墙.health - 150
     insulated = true
     absorbLasers = true
-    placeableLiquid = true
-    crushDamageMultiplier = 1f
     requirements(Category.defense, IItems.铱板, 24, IItems.导能回路, 16)
-    bundle {
-      desc(zh_CN, "装甲闸门", "允许单位通过的装甲门,自动开关")
-    }
   }
 
   val 相控雷达 = PhasedRadar("phased_radar").apply {

@@ -1,11 +1,9 @@
 package ice.ui.menusDialog
 
-import arc.Core
 import arc.scene.ui.Image
 import arc.scene.ui.Label
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
-import ice.DeepSpace
 import ice.content.Remainss
 import ice.graphics.IStyles
 import ice.graphics.IceColor
@@ -26,8 +24,7 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
   var slotPos: Int = 8
   override fun init() {
     Remains.remainsSeq.sort {it.level.toFloat()}.reversed().forEach {
-      val enabled = Core.settings.getBool("${DeepSpace.name}-remains-${it.name}-enabled", false)
-      if (enabled) {
+      if (it.unlock) {
         it.setEnabled(true)
       }
     }
@@ -43,7 +40,7 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
         ta.table {gh ->
           gh.table(IFiles.createNinePatch("adwdddqddw")) {
             it.add(Label {
-              "正在生效: ${Remains.remainsSeq.select {remains -> remains.equippedWith()}.size} / $slotPos"
+              "正在生效: ${Remains.getEnableds().size} / $slotPos"
             }).color(IceColor.b4)
           }.margin(5f).marginLeft(20f).marginRight(20f).pad(10f).row()
           gh.iTable {

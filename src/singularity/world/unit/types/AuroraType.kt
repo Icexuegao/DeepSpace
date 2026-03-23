@@ -12,6 +12,7 @@ import arc.math.Rand
 import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pools
+import ice.DeepSpace
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import mindustry.Vars
 import mindustry.content.Fx
@@ -98,7 +99,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
       }
     })
 
-    weapons.addAll(object : SglWeapon(Sgl.modName + "-aurora_lightcone") {
+    weapons.addAll(object : SglWeapon(DeepSpace.modName + "-aurora_lightcone") {
       init {
         shake = 5f
         shootSound = Sounds.blockExplode1
@@ -298,7 +299,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
           }
         }
       }
-    }, object : SglWeapon(Sgl.modName + "-aurora_turret") {
+    }, object : SglWeapon(DeepSpace.modName + "-aurora_turret") {
       init {
         shake = 4f
         shootSound = Sounds.shootLaser
@@ -335,7 +336,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
           }
         }
       }
-    }, object : RelatedWeapon(Sgl.modName + "-lightedge") {
+    }, object : RelatedWeapon(DeepSpace.modName + "-lightedge") {
       init {
         x = 0f
         y = -22f
