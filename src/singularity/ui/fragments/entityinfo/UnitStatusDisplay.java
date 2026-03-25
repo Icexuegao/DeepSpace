@@ -4,6 +4,7 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.GlyphLayout;
 import arc.util.Align;
 import arc.util.Tmp;
+import ice.core.SettingValue;
 import mindustry.Vars;
 import mindustry.game.Team;
 import mindustry.gen.Unit;
@@ -18,7 +19,7 @@ public class UnitStatusDisplay<T extends Unit> extends EntityInfoDisplay<T>{
   @Override
   public float draw(EntityInfoFrag.EntityEntry<T> entry, Team team, float maxWight, float dy, float alpha, float scl) {
     T entity = entry.entity;
-    float size = Sgl.config.statusSize;
+    float size = SettingValue.INSTANCE.get状态指示器尺寸();
 
     Draw.alpha(alpha);
 

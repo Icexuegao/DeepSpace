@@ -6,8 +6,12 @@ import arc.math.Mathf
 import arc.scene.ui.Label
 import arc.scene.ui.Slider
 import arc.scene.ui.layout.Table
+import ice.library.struct.log
+import ice.ui.Documents
 import mindustry.gen.Icon
 import mindustry.ui.Styles
+import mindustry.world.Block
+import mindustry.world.Tile
 import singularity.world.blocks.SglBlock
 import singularity.world.meta.SglBlockGroup
 
@@ -18,7 +22,6 @@ open class NuclearBlock(name: String) : SglBlock(name) {
     update = true
     group = SglBlockGroup.nuclear
   }
-
   protected fun buildEnergySlider(sli: Table, min: Float, max: Float, yet: Floatp, slid: Floatc) {
     sli.button(Icon.leftOpen, Styles.clearNonei) { slid.get(Mathf.clamp(Mathf.pow(2, Mathf.log2(yet.get()).toInt() - 1).toFloat(), min, max)) }.size(32f)
     sli.slider(Mathf.log2(min), Mathf.log2(max), 0.01f, Mathf.log2(yet.get())) { f: Float -> slid.get(Mathf.pow(2f, f)) }.size(200f, 40f).padLeft(8f).padRight(8f).update { s: Slider? -> s!!.setValue(Mathf.log2(yet.get())) }

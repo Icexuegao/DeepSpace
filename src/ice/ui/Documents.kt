@@ -8,10 +8,13 @@ import arc.scene.actions.Actions
 import arc.scene.style.Drawable
 import arc.scene.ui.Dialog
 import arc.scene.ui.layout.Table
+import arc.struct.Seq
+import ice.DeepSpace
 import ice.Ice
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.IFiles
+import ice.library.struct.ConfigPropertyDelegate
 import ice.library.struct.asDrawable
 import ice.library.world.Load
 import mindustry.Vars
@@ -23,26 +26,47 @@ import universecore.ui.elements.markdown.Markdown
 import universecore.ui.elements.markdown.MarkdownStyles
 import universecore.util.DataPackable
 
-object Documents : Load {
-  val 中子能 = getDialog("<<中子能操作手册>>", "nuclear_energy_blocks.md")
-  val 节点配置 = getDialog("<<节点配置面板>>", "matrix_grid_config_help.md")
-  val text = getDialog("<<text>>", "test.md")
-  override fun init() {
+object Documents {
+  val 中子能 = DocumentNotificationData("中子能") {
+    DocumentNotification("中子能", "有关中子能的详细描述", getDialog("<<中子能操作手册>>", "nuclear_energy_blocks.md")).apply {
+      icons = IStyles.nuclear.asDrawable()
+    }
+  }
 
-    Events.on(WorldLoadEndEvent::class.java) {
-      Sgl.ui.notificationFrag.notify(DocumentNotification("中子能", "有关中子能的详细描述", 中子能).apply {
-        icons = IStyles.nuclear.asDrawable()
-      })
-      Sgl.ui.notificationFrag.notify(DocumentNotification("节点配置", "有关配置面板的详细描述", 节点配置).apply {
-        icons = IStyles.matrix.asDrawable()
-      })
-      // Sgl.ui.notificationFrag.notify(DocumentNotification("text", "有关text的详细描述", text))
+  val 节点配置 = DocumentNotificationData("节点配置") {
+    DocumentNotification("节点配置", "有关配置面板的详细描述", getDialog("<<节点配置面板>>", "matrix_grid_config_help.md")).apply {
+      icons = IStyles.matrix.asDrawable()
+    }
+  }
+
+  // val text = getDialog("<<text>>", "test.md")
+
+  class DocumentNotificationData(name: String, val noti: () -> DocumentNotification) {
+    companion object{
+      val setKey= Seq<String>(false)
+      fun reset(){
+        setKey.forEach {
+          DeepSpace.globals.put(it, false)
+        }
+      }
+    }
+    var showed: Boolean by ConfigPropertyDelegate(false, "DocumentNotification_${name}")
+    init {
+      setKey.add("DocumentNotification_${name}")
+    }
+    /** 只展示一次 */
+    fun shouldShowOne() {
+      if (!showed) {
+        showed=true
+        Sgl.ui.notificationFrag.notify(noti())
+      }
     }
   }
 
   fun getDialog(title: String, md: String): BaseDialog {
     return BaseDialog(title).apply {
-      val element = Markdown(Vars.mods.getMod(Ice::class.java).root.child("documents").child("zh_CN").child(md).readString(), MarkdownStyles.defaultMD)
+      val element =
+        Markdown(Vars.mods.getMod(Ice::class.java).root.child("documents").child("zh_CN").child(md).readString(), MarkdownStyles.defaultMD)
       cont.pane {
         it.add(element).grow()
       }.grow()
@@ -56,7 +80,7 @@ object Documents : Load {
     companion object {
       const val typeID: Long = 12139764028768494L
       fun assign() {
-        DataPackable.assignType(typeID) {args: Array<Any> ->
+        DataPackable.assignType(typeID) { args: Array<Any> ->
         }
       }
     }

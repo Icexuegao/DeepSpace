@@ -66,7 +66,14 @@ object SettingValue : Load {
   var 禁用mod主界面背景 by observable(false)
 
   //游戏目标内信息显示
-  var 显示实体信息 by observable(false)
+  var 显示实体信息 by observable(true)
+  var 状态指示器不透明度 by observable(0.3f)
+  var 信息显示刷新间隔 by observable(0.5f)
+  var 最多信息显示数目 by observable(4f)
+  var 信息面板缩放 by observable(1f)
+  var 范围显示模式选中半径 by observable(64f)
+  var 状态指示器尺寸 by observable(4f)
+  var 显示状态效果的剩余时间 by observable(false)
 
 
   @delegate:Order

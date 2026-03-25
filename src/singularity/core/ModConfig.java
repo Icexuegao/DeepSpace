@@ -27,22 +27,10 @@ public class ModConfig {
 
   //游戏目标内信息显示
 
-  @Order(7f)
-  public float statusInfoAlpha;
-  @Order(8f)
-  public float flushInterval;
-  @Order(9f)
-  public int maxDisplay;
-  @Order(10f)
-  public float showInfoScl;
-  @Order(11f)
-  public float holdDisplayRange;
 
   @Order(12f)
   public HealthBarStyle healthBarStyle=HealthBarStyle.shape;
 
-  @Order(13f)
-  public float statusSize;
   @Order(14f)
   public boolean showStatusTime;
 

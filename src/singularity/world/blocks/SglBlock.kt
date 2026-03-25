@@ -17,6 +17,7 @@ import arc.util.Eachable
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.ui.Documents
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -267,6 +268,10 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     drawers.getRegionsToOutline(this, out)
   }
 
+  override fun drawPlan(plan: BuildPlan?, list: Eachable<BuildPlan?>?, valid: Boolean) {
+    if (hasEnergy) Documents.中子能.shouldShowOne()
+    super.drawPlan(plan, list, valid)
+  }
   public override fun icons(): Array<TextureRegion> {
     return if (Core.atlas.has("$name-preview")) arrayOf(Core.atlas.find("$name-preview")) else drawers.finalIcons(this)
   }

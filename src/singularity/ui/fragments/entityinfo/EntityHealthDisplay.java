@@ -31,7 +31,7 @@ public class EntityHealthDisplay<T extends Teamc & Healthc> extends EntityInfoDi
 
   @Override
   public void updateVar(EntityInfoFrag.EntityEntry<T> entry, float delta) {
-  //  entry.handleVar("over", (float f) -> Mathf.lerp(f, entry.entity.health(), delta*0.04f), entry.entity.health());
+   // entry.handleVar("over", (float f) -> Mathf.lerp(f, entry.entity.health(), delta*0.04f), entry.entity.health());
   }
 
   @Override

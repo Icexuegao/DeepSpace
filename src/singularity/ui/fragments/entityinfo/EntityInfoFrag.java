@@ -21,6 +21,8 @@ import arc.struct.Seq;
 import arc.util.*;
 import arc.util.pooling.Pool;
 import arc.util.pooling.Pools;
+import ice.core.SettingValue;
+import ice.ui.UI;
 import mindustry.Vars;
 import mindustry.gen.*;
 import mindustry.graphics.Pal;
@@ -76,7 +78,7 @@ public class EntityInfoFrag{
   @SuppressWarnings({"unchecked", "rawtypes"})
   public void build(Group parent){
     parent.fill((x, y, w, h) -> {
-      if (!Sgl.config.showInfos){
+      if (!SettingValue.INSTANCE.get显示实体信息()){
         alphaQueue.clear();
 
         return;
@@ -107,13 +109,13 @@ public class EntityInfoFrag{
         float heightOff = entry.size();
         float maxWight = 0;
 
-        float scl = Sgl.config.showInfoScl*Math.max(entry.size()/60f, 0.32f);
+        float scl = SettingValue.INSTANCE.get信息面板缩放()*Math.max(entry.size()/60f, 0.32f);
         for (EntityInfoDisplay<?> display : entry.display) {
           maxWight = Math.max(maxWight, display.wight(scl));
         }
 
         for (EntityInfoDisplay<?> display : entry.display) {
-          heightOff += ((EntityInfoDisplay)display).draw(entry, Vars.player.team(), maxWight, heightOff, entry.alpha*Sgl.config.statusInfoAlpha, scl);
+          heightOff += ((EntityInfoDisplay)display).draw(entry, Vars.player.team(), maxWight, heightOff, entry.alpha*SettingValue.INSTANCE.get状态指示器不透明度(), scl);
         }
       }
       Draw.proj(mat);
@@ -126,7 +128,7 @@ public class EntityInfoFrag{
 
       if (sclAlpha > 0.001) {
         float alpha = 1 - Mathf.pow(1 - sclAlpha, 4);
-        String str = Strings.autoFixed(Sgl.config.showInfoScl, 2) + "x";
+        String str = Strings.autoFixed(SettingValue.INSTANCE.get信息面板缩放(), 2) + "x";
         String str1 = Core.bundle.get(Core.app.isMobile()? "infos.zoomMobile": "infos.zoomDesktop");
         Fonts.def.draw(str1, Core.graphics.getWidth()/2f, Core.graphics.getHeight()*0.24f - 1f, Tmp.c1.set(Color.gray).a(alpha), Scl.scl(1.4f), true, Align.center);
         Fonts.def.draw(str1, Core.graphics.getWidth()/2f, Core.graphics.getHeight()*0.24f, Tmp.c1.set(Color.white).a(alpha), Scl.scl(1.4f), true, Align.center);
@@ -139,40 +141,40 @@ public class EntityInfoFrag{
 
         Lines.stroke(4, Color.lightGray);
         Draw.alpha(0.3f + Mathf.absin(Time.globalTime, 5, 0.3f));
-        SglDraw.dashCircle(v.x, v.y, Sgl.config.holdDisplayRange, 40, 180, MathTransform.gradientRotateDeg(Time.globalTime/5, 45, 8));
+        SglDraw.dashCircle(v.x, v.y, SettingValue.INSTANCE.get范围显示模式选中半径(), 40, 180, MathTransform.gradientRotateDeg(Time.globalTime/5, 45, 8));
       }
     });
 
     Interval t = new Interval();
-    /*Sgl.ui.toolBar.addTool(
+    UI.INSTANCE.getToolBarFrag().addTool(
         "showInfos",
-        () -> Core.bundle.get(Sgl.config.showInfos? "infos.showInfos": "infos.hideInfos"),
-        () -> Sgl.config.showInfos? SglDrawConst.showInfos: SglDrawConst.unShowInfos,
+        () -> Core.bundle.get(SettingValue.INSTANCE.get显示实体信息()? "infos.showInfos": "infos.hideInfos"),
+        () -> SettingValue.INSTANCE.get显示实体信息()? SglDrawConst.showInfos: SglDrawConst.unShowInfos,
         () -> {
-          Sgl.config.showInfos = !Sgl.config.showInfos;
-          if (Sgl.config.showInfos){
-            Sgl.ui.toolBar.showTool("changeMode");
-            Sgl.ui.toolBar.showTool("infoScl");
+          SettingValue.INSTANCE.set显示实体信息(!SettingValue.INSTANCE.get显示实体信息()) ;
+          if (SettingValue.INSTANCE.get显示实体信息()){
+            UI.INSTANCE.getToolBarFrag().showTool("changeMode");
+            UI.INSTANCE.getToolBarFrag().showTool("infoScl");
           }
           else {
-            Sgl.ui.toolBar.hideTool("changeMode");
-            Sgl.ui.toolBar.hideTool("infoScl");
+            UI.INSTANCE.getToolBarFrag().hideTool("changeMode");
+            UI.INSTANCE.getToolBarFrag().hideTool("infoScl");
           }
 
           if(t.get(60)){
             Sgl.config.save();
           }
         },
-        () -> Sgl.config.showInfos
-    );*/
-  /*  Sgl.ui.toolBar.addTool(
+            SettingValue.INSTANCE::get显示实体信息
+    );
+    UI.INSTANCE.getToolBarFrag().addTool(
         "changeMode",
         () -> Core.bundle.get("infos.changeMode"),
         () -> showRange? SglDrawConst.showRange: wasHold? SglDrawConst.hold: showAllUnits? Icon.admin: Icon.zoom,
         this::changeMode,
         () -> false
     );
-    Sgl.ui.toolBar.addTool(
+    UI.INSTANCE.getToolBarFrag().addTool(
         "infoScl",
         () -> Core.bundle.get("infos.resizeInfoScl"),
         () -> Icon.resize,
@@ -183,7 +185,7 @@ public class EntityInfoFrag{
           }
         },
         () -> resizing
-    );*/
+    );
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
@@ -191,10 +193,10 @@ public class EntityInfoFrag{
     if (!invalided && Core.app.isMobile() && resizing && Core.input.isTouched()){
       sclAlpha = Mathf.lerpDelta(sclAlpha, 1, 0.1f);
       if (touchY >= 0){
-        Sgl.config.showInfoScl = Mathf.clamp(lastScl - (touchY - Core.input.mouseY())/Core.graphics.getHeight()*2, 0.5f, 4f);
+        SettingValue.INSTANCE.set信息面板缩放(Mathf.clamp(lastScl - (touchY - Core.input.mouseY())/Core.graphics.getHeight()*2, 0.5f, 4f))  ;
       }
       else{
-        lastScl = Sgl.config.showInfoScl;
+        lastScl = SettingValue.INSTANCE.get信息面板缩放();
         touchY = Core.input.mouseY();
       }
     }
@@ -220,8 +222,8 @@ public class EntityInfoFrag{
       sclAlpha = Mathf.lerpDelta(sclAlpha, 1, 0.1f);
       float scroll = Core.input.axis(KeyCode.scroll);
       if (scroll != 0){
-        Sgl.config.showInfoScl += scroll/20;
-        Sgl.config.showInfoScl = Mathf.clamp(Sgl.config.showInfoScl, 0.5f, 4f);
+        SettingValue.INSTANCE.set信息面板缩放(SettingValue.INSTANCE.get信息面板缩放()+scroll/20) ;
+        SettingValue.INSTANCE.set信息面板缩放(Mathf.clamp(SettingValue.INSTANCE.get信息面板缩放(), 0.5f, 4f));
       }
     }
 
@@ -234,7 +236,7 @@ public class EntityInfoFrag{
     }
 
     delta += Time.delta;
-    if (!touched && Time.globalTime - timer < Sgl.config.flushInterval) return;
+    if (!touched && Time.globalTime - timer < SettingValue.INSTANCE.get信息显示刷新间隔()) return;
     timer = Time.globalTime;
 
     Vec2 v = Core.input.mouseWorld();
@@ -245,7 +247,7 @@ public class EntityInfoFrag{
 
       if (showRange) {
         Core.camera.project(Tmp.v1.set(v));
-        Tmp.v1.x += Sgl.config.holdDisplayRange;
+        Tmp.v1.x += SettingValue.INSTANCE.get范围显示模式选中半径();
       }
       float range = showRange? Math.abs(Core.camera.unproject(Tmp.v1).x - v.x): 0;
 
@@ -295,7 +297,7 @@ public class EntityInfoFrag{
     Iterator<EntityEntry<?>> itr = alphaQueue.iterator();
     while(itr.hasNext()){
       EntityEntry<?> entry = itr.next();
-      if (count <= MAX_LIMITED && count >= Sgl.config.maxDisplay){
+      if (count <= MAX_LIMITED && count >=  SettingValue.INSTANCE.get最多信息显示数目()){
         entry.hovering = false;
         entry.alpha = Mathf.approach(entry.alpha, 0, 0.025f*delta);
         continue;

@@ -24,6 +24,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.TextureRegionDelegate
+import ice.ui.Documents
 import mindustry.Vars
 import mindustry.core.Renderer
 import mindustry.ctype.ContentType
@@ -158,7 +159,10 @@ open class ItemNode(name: String) : SglBlock(name) {
     this.removeBar("items")
     this.addBar("items") {entity: Building -> Bar({Core.bundle.format("bar.items", *arrayOf<Any>(entity.items.total()))}, {Pal.items}, {entity.items.total().toFloat() / this.maxItemCapacity.toFloat()})}
   }
-
+  override fun drawPlan(plan: BuildPlan?, list: Eachable<BuildPlan?>?, valid: Boolean) {
+     Documents.节点配置.shouldShowOne()
+    super.drawPlan(plan, list, valid)
+  }
   override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
     super.drawPlace(x, y, rotation, valid)
     val link = this.findLink(x, y)

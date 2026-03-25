@@ -12,6 +12,7 @@ import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
 import arc.util.Align
 import arc.util.Strings
+import ice.DeepSpace
 import ice.audio.IMusics
 import ice.audio.ISounds
 import ice.content.AtomSchematics
@@ -21,6 +22,8 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.element.ProgressBar
 import ice.library.scene.element.typinglabel.TLabel
+import ice.library.util.toStringi
+import ice.ui.Documents
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
@@ -102,36 +105,34 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       ConfigCheck("显示实体信息", { SettingValue.显示实体信息 = it }, SettingValue::显示实体信息),
       ConfigSlider(
         "状态指示器不透明度",
-        { f: Float? -> (Mathf.round(f!! * 1000) / 10f).toString() + "%" },
-        { f: Float -> Sgl.config.statusInfoAlpha = f },
-        { Sgl.config.statusInfoAlpha },
+        { (it * 100).toStringi(1) + "%" },
+        { SettingValue.状态指示器不透明度 = it },
+        SettingValue::状态指示器不透明度,
         0.3f,
         1f,
         0.001f
       ),
       object : ConfigSlider(
-        "信息显示刷新间隔", Floatc { f: Float -> Sgl.config.flushInterval = f }, Floatp { Sgl.config.flushInterval }, 0f, 60f, 1f
+        "信息显示刷新间隔",{SettingValue.信息显示刷新间隔 = it},SettingValue::信息显示刷新间隔 , 0f, 60f, 1f
       ) {
         init {
-          str = Prov { Strings.autoFixed(Sgl.config.flushInterval / 60, 2) + StatUnit.seconds.localized() }
+          str = Prov { Strings.autoFixed(SettingValue.信息显示刷新间隔 / 60, 2) + StatUnit.seconds.localized() }
         }
       },
       ConfigSlider(
         "最多信息显示数目",
-        { f: Float? -> if (f!! <= 64) f.toInt().toString() else Core.bundle.get("misc.unlimited") },
-        { f: Float -> Sgl.config.maxDisplay = f.toInt() },
-        { Sgl.config.maxDisplay.toFloat() },
+        { if (it <= 64) it.toInt().toString() else Core.bundle.get("misc.unlimited") },
+        { SettingValue.最多信息显示数目 = it },
+        {  SettingValue.最多信息显示数目},
         4f,
         (EntityInfoFrag.MAX_LIMITED + 1).toFloat(),
         1f
       ),
-      ConfigSlider(
-        "信息面板缩放", { f: Float -> Sgl.config.showInfoScl = f }, { Sgl.config.showInfoScl }, 0.5f, 4f, 0.1f
-      ),
+      ConfigSlider("信息面板缩放", { SettingValue.信息面板缩放 = it },SettingValue::信息面板缩放, 0.5f, 4f, 0.1f),
       ConfigSlider(
         "范围显示模式选中半径",
-        { f: Float -> Sgl.config.holdDisplayRange = f.toInt().toFloat() },
-        { Sgl.config.holdDisplayRange },
+        {  SettingValue.范围显示模式选中半径=it },
+        { SettingValue.范围显示模式选中半径 },
         64f,
         512f,
         1f
@@ -174,10 +175,8 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
           }
         }
       },
-      ConfigSlider(
-        "状态指示器尺寸", { f: Float -> Sgl.config.statusSize = f }, { Sgl.config.statusSize }, 4f, 16f, 1f
-      ),
-      ConfigCheck("显示状态效果的剩余时间", { b: Boolean -> Sgl.config.showStatusTime = b }, { Sgl.config.showStatusTime }),
+      ConfigSlider("状态指示器尺寸", { SettingValue.状态指示器尺寸 = it }, { SettingValue.状态指示器尺寸 }, 4f, 16f, 1f),
+      ConfigCheck("显示状态效果的剩余时间", {  SettingValue.显示状态效果的剩余时间 = it },SettingValue::显示状态效果的剩余时间),
       ConfigSepLine("data", IceStats.数据.localizedName),
       ConfigButton("重置已阅读的mod提示信息") {
         object : TextButton(Core.bundle.get("settings.reset"), Styles.flatt) {
@@ -185,7 +184,9 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
             clicked {
               Vars.ui.showConfirm(Core.bundle.get("settings.resetHintsConfirm")) {
                 //  SglHint.resetCompletedHints();
-                config.requireRelaunch()
+              //  config.requireRelaunch()
+
+                Documents.DocumentNotificationData.reset()
               }
             }
           }
@@ -197,7 +198,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
             clicked {
               Vars.ui.showConfirm(Core.bundle.get("settings.resetAllHintsConfirm")) {
                 //  SglHint.resetAllCompletedHints();
-                config.requireRelaunch()
+              //  config.requireRelaunch()
               }
             }
           }

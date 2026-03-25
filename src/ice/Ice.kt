@@ -1,5 +1,6 @@
 package ice
 
+import arc.Events
 import ice.async.ParcelProcess
 import ice.audio.SoundControl
 import ice.content.*
@@ -41,7 +42,9 @@ open class Ice : Mod() {
   init {
     DeepSpace.globals.load()
     // researches.init();
-
+    Events.on(mindustry.game.EventType.MusicRegisterEvent::class.java){
+      SoundControl.init()
+    }
     IFiles.setup()
     IAttribute.setup()
     SglCategory.setup()
@@ -61,9 +64,7 @@ open class Ice : Mod() {
     UI.init()
     Schematics.init()
     Vars.asyncCore.processes.add(ParcelProcess)
-    Documents.init()
     MenusDialog.init()
-    SoundControl.init()
     SaveIO.init()
 
 

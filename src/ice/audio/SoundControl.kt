@@ -3,8 +3,6 @@ package ice.audio
 import arc.Core
 import arc.audio.Filters
 import arc.audio.Music
-import arc.audio.Sound
-import arc.files.Fi
 import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Time
@@ -24,21 +22,19 @@ object SoundControl : SoundControl(), Load {
   }
 
   override fun reload() {
-    current = null
-    fade = 0f
     ambientMusic = Seq.with(IMusics.静态立场)
     darkMusic = Seq.with(IMusics.核心过载仪式)
     bossMusic = Seq.with(IMusics.异端核心)
+  }
 
-    //setup UI bus for all sounds that are in the UI folder
-    for (sound in Core.assets.getAll(Sound::class.java, Seq())) {
-      val file = Fi.get(Core.assets.getAssetFileName(sound))
-      if (file.parent().name() == "ui") {
-        sound.setBus(uiBus)
-      }
+  override fun playRandom() {
+    if (Vars.state.boss() != null) {
+      playOnce(bossMusic.random(lastRandomPlayed))
+    } else if (isDark()) {
+      playOnce(darkMusic.random(lastRandomPlayed))
+    } else {
+      playOnce(ambientMusic.random(lastRandomPlayed))
     }
-
-    // Events.fire(MusicRegisterEvent())
   }
 
   override fun isDark(): Boolean {
