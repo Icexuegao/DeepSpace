@@ -1,22 +1,29 @@
 package ice.ui.menusDialog
 
+import arc.input.KeyCode
+import arc.scene.event.InputEvent
+import arc.scene.event.InputListener
 import arc.scene.ui.Image
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
+import arc.util.Tmp
 import ice.graphics.IStyles
 import ice.graphics.IceColor
+import ice.library.scene.ui.addListeners
 import ice.library.struct.asDrawable
 import ice.ui.dialog.BaseMenusDialog
+import ice.world.meta.IceEffects
 import ice.world.meta.IceStats
+import universecore.ui.elements.SceneEffect
 
 object PublicInfoDialog : BaseMenusDialog(IceStats.公告.localized(), IStyles.menusButton_publicInfo) {
   override fun build(cont: Table) {
     cont.top()
-    val element = Image(IStyles.publicInfoIcon.asDrawable(0.5f).apply {
-
-    }, Scaling.fit)
+    val element = Image(IStyles.publicInfoIcon.asDrawable(0.5f), Scaling.fit)
     cont.add(element).row()
-    cont.add(
+    cont.add("@Alon(\"帝皇\") 我的错就是让你活着了[天使]你的三观应该是没有的，同理心也是没有的，你和那些在癌症患者家属的诉苦视频评论区说“全家遇不到”“不接”的一桌，bro肯定觉得自己老帅了吧，实际上是阴暗哥布林一个，而且是被别人孤立的哥布林[委屈]").pad(20f).growX().wrap().row()
+    cont.add("呜呜呜你真的好可怜呢也就是说你也很可恨呢[温馨]").pad(20f).row()
+    val get = cont.add(
       "我想了一天,我觉得是时候该反击了[流汗表情]" +
 
               "既然大家想知道在说谁,我帮你补充吧,联合城是超过一年前的作品,如果想要嘲讽请嘲讽我们的最近作品," +
@@ -37,17 +44,27 @@ object PublicInfoDialog : BaseMenusDialog(IceStats.公告.localized(), IStyles.m
 
               "除了你这个人以外,我只想看到你的作品\n" +
 
-              "我是玩家,我只管我玩的开心,如果作者本人让我有不好体验,那是作者本人的问题(ps:虽然别看Alon的外表可可爱爱但是内部对任何新人极度仇视,"+
+              "我是玩家,我只管我玩的开心,如果作者本人让我有不好体验,那是作者本人的问题(ps:虽然别看Alon的外表可可爱爱但是内部对任何新人极度仇视," +
 
               "而且本人抽象得要命),而且我早就放弃了Mindustry开发了,AMO是最后的作品\n" +
 
-              "大不了大会员结末了,我就像以前2021年开mc服那会被外挂团伙盯上了那会又注销一次账号呗,你猜我为什么lv3,"+
+              "大不了大会员结末了,我就像以前2021年开mc服那会被外挂团伙盯上了那会又注销一次账号呗,你猜我为什么lv3," +
 
               "而且老觉得你有点精神疾病,因为外挂团伙那群人也有点精神疾病,\n" +
 
               "但之后呢?内容更新怎么更?如何回应粉丝期望?更新频率需要的个人时间够吗?我们一次更新多少策划案的内容?UGC怎么回应?[流汗表情]" +
 
               "你赢了,赢得很彻底,非常彻底,赢了所有mindustry玩家,制作者,贡献者,请你继续你的道路,但我还有事要做,我为什么要和你死缠烂打?[流汗表情]"
-    ).pad(20f).color(IceColor.y2).grow().wrap()
+    ).pad(20f).color(IceColor.y2).growX().wrap().get()
+    get.addListeners(object : InputListener() {
+      override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: KeyCode?): Boolean {
+        val localToStageCoordinates = get.localToStageCoordinates(Tmp.v1.set(x, y))
+        val showOnStage =
+          SceneEffect.showOnStage(IceEffects.基础子弹击中特效, localToStageCoordinates.x, localToStageCoordinates.y)
+        showOnStage.setScale(4f)
+        return super.touchDown(event, x, y, pointer, button)
+      }
+
+    })
   }
 }

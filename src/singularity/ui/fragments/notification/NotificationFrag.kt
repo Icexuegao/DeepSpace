@@ -250,7 +250,7 @@ class NotificationFrag {
 
   fun notify(notification: Notification?) {
     history.insert(0, notification)
-    if (history.size > Sgl.config.maxNotifyHistories) history.removeRange(Sgl.config.maxNotifyHistories, history.size - 1)
+   // if (history.size > Sgl.config.maxNotifyHistories) history.removeRange(Sgl.config.maxNotifyHistories, history.size - 1)
     if (!historyPaneShown) notifyQueue.add(notification)
 
     rebuildHistory()

@@ -40,6 +40,13 @@ object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.me
     add("好烦,想说又觉得没必要,还是不听算了")
     add("SoundControl是一坨大的")
     add("学学学写写写")
+    add("我说unk牛逼,尼尔多龙马?")
+    add("难道你是衣钵继承者")
+    add("那cyber io也给你")
+    add("修了")
+    add("能跑起来吗?")
+    add("还有bug吗?")
+    add("你们倒是说话啊>:(")
   }
 
   init {

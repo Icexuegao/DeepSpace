@@ -32,7 +32,7 @@ public class MainMenu extends BaseDialog {
           () -> Color.white, () -> { hide(); launch = false; }),
       new ButtonEntry(SglDrawConst.databaseIcon, Core.bundle.get("misc.modDatabase"), Pal.accent, lookForward),
       new ButtonEntry(SglDrawConst.configureIcon, Core.bundle.get("misc.modConfigure"), Color.lightGray, () -> {
-        Sgl.ui.config.show();
+     //   Sgl.ui.config.show();
       }),
       new ButtonEntry(SglDrawConst.publicInfoIcon, () -> Core.bundle.get("misc.publicInfo"), () -> Liquids.cryofluid.color, () -> {
         Sgl.ui.publicInfo.show();

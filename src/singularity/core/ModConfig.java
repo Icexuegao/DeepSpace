@@ -20,26 +20,13 @@ public class ModConfig {
   private static final int configVersion = 10;
   private static final Field[] configs = ModConfig.class.getFields();
 
-  //basic/基础设置
-  //主菜单界面设置
-  @Order(0f)
-  public boolean disableModMainMenu;
-  @Order(1f)
-  public boolean showModMenuWenLaunch;
-  @Order(2f)
-  public boolean mainMenuUniverseBackground;
-  @Order(3f)
-  public boolean staticMainMenuBackground;
-  @Order(4f)
-  public float[] defaultCameraPos;
-  @Order(5f)
-  public boolean movementCamera;
+
+
   @Order(5.5f)
-  public int maxNotifyHistories=30;
+  public int maxNotifyHistories=11;
 
   //游戏目标内信息显示
-  @Order(6f)
-  public boolean showInfos;
+
   @Order(7f)
   public float statusInfoAlpha;
   @Order(8f)
@@ -66,6 +53,22 @@ public class ModConfig {
   public int blurLevel;
   @Order(17f)
   public float backBlurLen;
+
+  //图形效果
+  @Order(18f)
+  public int animateLevel;
+  @Order(19f)
+  public boolean enableShaders;
+  @Order(20f)
+  public float mathShapePrecision;
+  @Order(21f)
+  public boolean enableDistortion;
+  @Order(22f)
+  public boolean enableParticle;
+  @Order(23f)
+  public int maxParticleCount;
+  @Order(24f)
+  public boolean enableLightning;
 
   //Advanced/高级设置
   @Order(25f)

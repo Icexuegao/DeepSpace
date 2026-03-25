@@ -1,404 +1,356 @@
-package singularity.ui.dialogs;
+package singularity.ui.dialogs
 
-import arc.Core;
-import arc.func.*;
-import arc.graphics.Color;
-import arc.math.Mathf;
-import arc.scene.actions.Actions;
-import arc.scene.style.Drawable;
-import arc.scene.style.TextureRegionDrawable;
-import arc.scene.ui.Button;
-import arc.scene.ui.TextButton;
-import arc.scene.ui.Tooltip;
-import arc.scene.ui.layout.Cell;
-import arc.scene.ui.layout.Scl;
-import arc.scene.ui.layout.Table;
-import arc.struct.ObjectMap;
-import arc.struct.OrderedMap;
-import arc.struct.Seq;
-import arc.util.Align;
-import arc.util.Strings;
-import mindustry.gen.Icon;
-import mindustry.gen.Tex;
-import mindustry.graphics.Pal;
-import mindustry.ui.Fonts;
-import mindustry.ui.Styles;
-import mindustry.ui.dialogs.BaseDialog;
-import singularity.Sgl;
-import singularity.graphic.SglDrawConst;
-import singularity.ui.SglStyles;
-import universecore.util.Empties;
+import arc.Core
+import arc.func.*
+import arc.graphics.Color
+import arc.math.Mathf
+import arc.scene.actions.Actions
+import arc.scene.style.Drawable
+import arc.scene.style.TextureRegionDrawable
+import arc.scene.ui.*
+import arc.scene.ui.TextButton.TextButtonStyle
+import arc.scene.ui.layout.Cell
+import arc.scene.ui.layout.Scl
+import arc.scene.ui.layout.Table
+import arc.struct.ObjectMap
+import arc.struct.OrderedMap
+import arc.struct.Seq
+import arc.util.Strings
+import ice.graphics.IStyles.checkCheckBoxStyle
+import ice.graphics.IStyles.defaultSlider
+import ice.graphics.IceColor.b4
+import ice.library.scene.ui.icePane
+import mindustry.gen.Icon
+import mindustry.gen.Tex
+import mindustry.graphics.Pal
+import mindustry.ui.Fonts
+import mindustry.ui.Styles
+import universecore.util.Empties
 
-import static mindustry.Vars.ui;
+class ModConfigDialog : Table() {
+  var settings: Table? = null
+  var hover: Table? = null
+  var entries: OrderedMap<String, Seq<ConfigLayout>?> = OrderedMap<String, Seq<ConfigLayout>?>()
+  var icons: ObjectMap<String?, Drawable?> = ObjectMap<String?, Drawable?>()
 
-public class ModConfigDialog extends BaseDialog{
-  Table settings;
-  Table hover;
-  OrderedMap<String, Seq<ConfigLayout>> entries = new OrderedMap<>();
-  ObjectMap<String, Drawable> icons = new ObjectMap<>();
+  var currCat: String? = null
+  var catTable: Table? = null
+  var relaunchTip: Table? = null
+  var currIndex: Int = 0
 
-  String currCat;
-  Table catTable, relaunchTip;
-  int currIndex;
+  var requireRelaunch: Boolean = false
 
-  boolean requireRelaunch;
+  fun rebuild() {
+    clearHover()
 
-  static int cfgCount = 0;
+    clearChildren()
+    table { main: Table ->
+      main.table { cats: Table ->
+        if (Scl.scl((entries.size * 280).toFloat()) > Core.graphics.width * 0.85f) {
+          val rebuild = Runnable {
+            currCat = entries.orderedKeys().get(currIndex)
+            catTable!!.clearActions()
+            catTable!!.actions(
+              Actions.alpha(0f, 0.3f),
+              Actions.run {
+                catTable!!.clearChildren()
+                catTable!!.image(icons.get(currCat, Core.atlas.drawable("settings_$currCat"))).size(38f)
+                catTable!!.add(Core.bundle.get("settings.category.$currCat"))
+              },
+              Actions.alpha(1f, 0.3f)
+            )
+          }
 
-  public ModConfigDialog(){
-    super("");
-    titleTable.clear();
+          cats.button(Icon.leftOpen, Styles.clearNonei) {
+            currIndex = Mathf.mod(currIndex - 1, entries.size)
+            rebuild.run()
+            settings!!.clearActions()
+            settings!!.actions(
+              Actions.alpha(0f, 0.3f),
+              Actions.run { this.rebuildSettings() },
+              Actions.alpha(1f, 0.3f)
+            )
+          }.size(60f).padLeft(12f)
+          cats.table(Tex.underline) { t: Table -> catTable = t }.height(60f).growX().padLeft(4f).padRight(4f)
+          cats.button(Icon.rightOpen, Styles.clearNonei) {
+            currIndex = Mathf.mod(currIndex + 1, entries.size)
+            rebuild.run()
+            settings!!.clearActions()
+            settings!!.actions(
+              Actions.alpha(0f, 0.3f),
+              Actions.run { this.rebuildSettings() },
+              Actions.alpha(1f, 0.3f)
+            )
+          }.size(60f).padRight(12f)
 
-    addCloseButton();
-    buttons.button(Core.bundle.get("misc.recDefault"), Icon.redo, () -> {
-      ui.showConfirm(Core.bundle.get("infos.confirmResetConfig"), () -> Sgl.config.reset());
-    });
-
-    hidden(() -> {
-      Sgl.config.save();
-
-      if (requireRelaunch){
-        new BaseDialog("") {{
-          setStyle(SglStyles.transparentBack);
-
-          cont.table(SglDrawConst.grayUIAlpha, t -> {
-            t.add(Core.bundle.get("infos.relaunchEnsure")).padBottom(12).center().labelAlign(Align.center).grow();
-            t.row();
-            t.table(bu -> {
-              bu.defaults().size(230, 54);
-              bu.button(Core.bundle.get("misc.later"), Icon.left, Styles.flatt, this::hide).margin(6);
-              bu.button(Core.bundle.get("misc.exitGame"), Icon.ok, Styles.flatt, () -> Core.app.exit()).margin(6);
-            }).fill();
-          }).fill().margin(16);
-        }}.show();
-      }
-    });
-
-    resized(this::rebuild);
-    shown(this::rebuild);
-  }
-
-  public void rebuild(){
-    clearHover();
-
-    cont.clearChildren();
-    cont.table(Tex.pane, main -> {
-      main.table(cats -> {
-        if(Scl.scl(entries.size*280) > Core.graphics.getWidth()*0.85f){
-          Runnable rebuild = () -> {
-            currCat = entries.orderedKeys().get(currIndex);
-
-            catTable.clearActions();
-            catTable.actions(
-                Actions.alpha(0, 0.3f),
-                Actions.run(() -> {
-                  catTable.clearChildren();
-                  catTable.image(icons.get(currCat, Core.atlas.drawable("settings_" + currCat))).size(38);
-                  catTable.add(Core.bundle.get("settings.category." + currCat));
-                }),
-                Actions.alpha(1, 0.3f));
-          };
-
-          cats.button(Icon.leftOpen, Styles.clearNonei, () -> {
-            currIndex = Mathf.mod(currIndex - 1, entries.size);
-            rebuild.run();
-            settings.clearActions();
-            settings.actions(
-                Actions.alpha(0, 0.3f),
-                Actions.run(this::rebuildSettings),
-                Actions.alpha(1, 0.3f)
-            );
-          }).size(60).padLeft(12);
-          cats.table(Tex.underline, t -> catTable = t).height(60).growX().padLeft(4).padRight(4);
-          cats.button(Icon.rightOpen, Styles.clearNonei, () -> {
-            currIndex = Mathf.mod(currIndex + 1, entries.size);
-            rebuild.run();
-            settings.clearActions();
-            settings.actions(
-                Actions.alpha(0, 0.3f),
-                Actions.run(this::rebuildSettings),
-                Actions.alpha(1, 0.3f)
-            );
-          }).size(60).padRight(12);
-
-          rebuild.run();
-        }
-        else{
-          cats.defaults().height(60).growX().padLeft(2).padRight(2);
-          for(String key: entries.keys()){
+          rebuild.run()
+        } else {
+          cats.defaults().height(60f).growX()
+          for (key in entries.keys()) {
             cats.button(
-                Core.bundle.get("settings.category." + key),
-                icons.get(key, Core.atlas.drawable("settings_" + key)),
-                new TextButton.TextButtonStyle(){{
-                  font = Fonts.def;
-                  fontColor = Color.white;
-                  disabledFontColor = Color.lightGray;
-                  down = Styles.flatOver;
-                  checked = Styles.flatOver;
-                  up = Tex.underline;
-                  over = Tex.underlineOver;
-                  disabled = Tex.underlineDisabled;
-                }},
-                38,
-                () -> {
-                  currCat = key;
-                  settings.clearActions();
-                  settings.actions(
-                      Actions.alpha(0, 0.3f),
-                      Actions.run(this::rebuildSettings),
-                      Actions.alpha(1, 0.3f)
-                  );
+              Core.bundle.get("settings.category.$key"),
+              icons.get(key, Core.atlas.drawable("settings_$key")),
+              object : TextButtonStyle() {
+                init {
+                  font = Fonts.def
+                  fontColor = Color.white
+                  disabledFontColor = Color.lightGray
+                  down = Styles.flatOver
+                  checked = Styles.flatOver
+                  up = Tex.underline
+                  over = Tex.underlineOver
+                  disabled = Tex.underlineDisabled
                 }
-            ).update(b -> b.setChecked(key.equals(currCat)));
+              },
+              38f
+            ) {
+              currCat = key
+              settings!!.clearActions()
+              settings!!.actions(
+                Actions.alpha(0f, 0.3f),
+                Actions.run { this.rebuildSettings() },
+                Actions.alpha(1f, 0.3f)
+              )
+            }.update { b: TextButton? -> b!!.setChecked(key == currCat) }
           }
         }
-      }).growX().fillY();
-      main.row();
-      main.image().color(Color.gray).height(4).growX().pad(-6).padTop(4).padBottom(4);
-      main.row();
-      main.top().pane(pane -> {
-        pane.top().table(settings -> {
-          settings.defaults().top().growX().height(50);
-          this.settings = settings;
-        }).growX().top();
+      }.growX().fillY()
+      main.row()
 
-        hover = new Table(Tex.pane);
-        hover.visible = false;
-        pane.addChild(hover);
-      }).growX().fillY().top().get().setScrollingDisabledX(true);
-    }).grow().pad(4).padLeft(12).padRight(12);
-    cont.row();
-    relaunchTip = cont.table(SglDrawConst.grayUIAlpha, t -> t.add(Core.bundle.get("infos.requireRelaunch")).color(Color.red)).fill().center().margin(10).pad(4).get();
-    relaunchTip.color.a(0);
+      main.image().color(b4).height(4f).pad(2f).growX()
+      main.row()
+      main.top().icePane { pane: Table ->
+        pane.top().table { settings: Table ->
+          settings.defaults().top().growX() /*.height(50)*/
+          this.settings = settings
+        }.growX().top()
+        hover = Table(Tex.pane).also { it.visible = false }
+        pane.addChild(hover)
+      }.growX().fillY().top().get().setScrollingDisabledX(true)
+    }.grow()
+    row()
 
-    rebuildSettings();
+    // relaunchTip = table(SglDrawConst.grayUIAlpha, t -> t.add(Core.bundle.get("infos.requireRelaunch")).color(Color.red)).fill().center().margin(10).pad(4).get();
+    //relaunchTip.color.a(0);
+    rebuildSettings()
   }
 
-  void rebuildSettings(){
-    if(currCat == null){
-      currCat = entries.orderedKeys().first();
+  fun rebuildSettings() {
+    if (currCat == null) {
+      currCat = entries.orderedKeys().first()
     }
 
-    settings.clearChildren();
-    cfgCount = 0;
-    for(ConfigLayout entry: entries.get(currCat)){
-      cfgCount++;
-      settings.table(((TextureRegionDrawable)Tex.whiteui).tint(Pal.darkestGray.cpy().a(0.5f*(cfgCount % 2))), ent -> {
-        ent.setClip(false);
-        ent.defaults().growY();
-        entry.build(ent);
-      });
-      settings.row();
+    settings!!.clearChildren()
+    cfgCount = 0
+    for (entry in entries.get(currCat)!!) {
+      cfgCount++
+      settings!!.table(
+        (Tex.whiteui as TextureRegionDrawable).tint(Pal.darkestGray.cpy().a(0.5f * (cfgCount % 2)))
+      ) { ent: Table ->
+        ent.setClip(false)
+        ent.defaults().growY()
+        entry.build(ent)
+      }.height(entry.getHieght())
+      settings!!.row()
     }
   }
 
-  public void requireRelaunch(){
-    requireRelaunch = true;
-    relaunchTip.clearActions();
-    relaunchTip.actions(Actions.alpha(1, 0.5f));
+  fun requireRelaunch() {
+    requireRelaunch = true
+    relaunchTip!!.clearActions()
+    relaunchTip!!.actions(Actions.alpha(1f, 0.5f))
   }
 
-  public void addConfig(String category, ConfigLayout... config){
-    entries.get(category, Seq::new).addAll(config);
-    if(category.equals(currCat)) rebuildSettings();
+  fun addConfig(category: String, vararg config: ConfigLayout?) {
+    entries.get(category) { Seq() }!!.addAll(*config)
+    if (category == currCat) rebuildSettings()
   }
 
-  public void addConfig(String category, Drawable icon, ConfigLayout... config){
-    entries.get(category, Seq::new).addAll(config);
-    icons.put(category, icon);
-    if(category.equals(currCat)) rebuildSettings();
+  fun addConfig(category: String, icon: Drawable?, vararg config: ConfigLayout?) {
+    entries.get(category) { Seq() }!!.addAll(*config)
+    icons.put(category, icon)
+    if (category == currCat) rebuildSettings()
   }
 
-  public void removeCfg(String category, String name){
-    entries.get(category, Empties.nilSeq()).remove(e -> e.name.equals(name));
-    if(category.equals(currCat)) rebuildSettings();
+  fun removeCfg(category: String, name: String?) {
+    entries.get(category, Empties.nilSeq())!!.remove { e: ConfigLayout? -> e!!.name == name }
+    if (category == currCat) rebuildSettings()
   }
 
-  public void removeCat(String category){
-    entries.remove(category);
-    icons.remove(category);
+  fun removeCat(category: String?) {
+    entries.remove(category)
+    icons.remove(category)
   }
 
-  public void clearHover(){
-    if(hover == null) return;
-    hover.clear();
-    hover.visible = false;
+  fun clearHover() {
+    if (hover == null) return
+    hover!!.clear()
+    hover!!.visible = false
   }
 
-  public void setHover(Cons<Table> build){
-    if(hover == null) return;
+  fun setHover(build: Cons<Table>) {
+    if (hover == null) return
 
-    clearHover();
-    build.get(hover);
+    clearHover()
+    build.get(hover)
   }
 
-  public static abstract class ConfigLayout{
-    public final String name;
+  abstract class ConfigLayout(val name: String) {
+    abstract fun build(table: Table)
 
-    public ConfigLayout(String name){
-      this.name = name;
-    }
-
-    public abstract void build(Table table);
+  open  fun getHieght()= 50f
   }
 
-  public static class ConfigSepLine extends ConfigLayout{
-    String string;
-    Color lineColor = Pal.accent, lineColorBack = Pal.accentBack;
+  class ConfigSepLine(name: String, var string: String?) : ConfigLayout(name) {
+    var lineColor: Color = b4
+    var lineColorBack: Color = lineColor.cpy().mul(0.8f, 0.8f, 0.8f, 1f)
 
-    public ConfigSepLine(String name, String str){
-      super(name);
-      this.string = str;
-    }
-
-    @Override
-    public void build(Table table){
+    override fun build(table: Table) {
       table.stack(
-          new Table(t -> {
-            t.image().color(lineColor).pad(0).grow();
-            t.row();
-            t.image().color(lineColorBack).pad(0).height(4).growX();
-          }),
-          new Table(t -> {
-            t.left().add(string, Styles.outlineLabel).fill().left().padLeft(5);
-          })
-      ).grow().pad(-5).padBottom(4).padTop(4);
-      table.row();
-    }
-  }
-
-  public static abstract class ConfigEntry extends ConfigLayout{
-    public Prov<String> str;
-    public Prov<String> tip;
-    public Boolp disabled = () -> false;
-
-    public ConfigEntry(String name){
-      super(name);
-      if(Core.bundle.has("settings.tip." + name)){
-        tip = () -> Core.bundle.get("settings.tip." + name);
-      }
-    }
-
-    @Override
-    public void build(Table table){
-      table.left().add(Core.bundle.get("settings.item." + name)).left().padLeft(4);
-      table.right().table(t -> {
-        t.setClip(false);
-        t.right().defaults().right().padRight(0);
-        if(str != null){
-          t.add("").update(l -> {
-            l.setText(str.get());
-          });
+        Table { t: Table? ->
+          t!!.image().color(lineColor).pad(0f).grow()
+          t.row()
+          t.image().color(lineColorBack).pad(0f).height(4f).growX()
+        },
+        Table { t: Table? ->
+          t!!.left().add(string, Styles.outlineLabel).fill().left().padLeft(5f)
         }
-        buildCfg(t);
-      }).growX().height(60).padRight(4);
+      ).grow().pad(-5f).padBottom(4f).padTop(4f)
+      table.row()
+    }
+  }
 
-      if(tip != null){
-        table.addListener(new Tooltip(ta -> ta.add(tip.get()).update(l -> l.setText(tip.get()))){{allowMobile = true;}});
+  abstract class ConfigEntry(name: String) : ConfigLayout(name) {
+    var str: Prov<String?>? = null
+    var tip: Prov<String?>? = null
+    var disabled: Boolp = Boolp { false }
+
+    init {
+      if (Core.bundle.has("settings.tip.$name")) {
+        tip = Prov { Core.bundle.get("settings.tip.$name") }
       }
     }
 
-    public abstract void buildCfg(Table table);
-  }
-
-  public static class ConfigButton extends ConfigEntry{
-    Prov<Button> button;
-
-    public ConfigButton(String name, Prov<Button> button){
-      super(name);
-      this.button = button;
-    }
-
-    @Override
-    public void buildCfg(Table table){
-      table.add(button.get()).width(180).growY().pad(4).get().setDisabled(disabled);
-    }
-  }
-
-  public static class ConfigTable extends ConfigEntry{
-    Cons<Table> table;
-    Cons<Cell<Table>> handler;
-
-    public ConfigTable(String name, Cons<Table> builder, Cons<Cell<Table>> handler){
-      super(name);
-      this.table = builder;
-      this.handler = handler;
-    }
-
-    @Override
-    public void buildCfg(Table table){
-      handler.get(table.table(t -> {
-        t.setClip(false);
-        this.table.get(t);
-      }));
-    }
-  }
-
-  public static class ConfigCheck extends ConfigEntry{
-    Boolp checked;
-    Boolc click;
-
-    public ConfigCheck(String name, Boolc click, Boolp checked){
-      super(name);
-      this.checked = checked;
-      this.click = click;
-    }
-
-    @Override
-    public void buildCfg(Table table){
-      table.check("", checked.get(), click).update(c -> c.setChecked(checked.get())).get().setDisabled(disabled);
-    }
-  }
-
-  public static class ConfigSlider extends ConfigEntry{
-    Floatc slided;
-    Floatp curr;
-    Func<Float, String> show;
-    float min, max, step;
-
-    public ConfigSlider(String name, Floatc slided, Floatp curr, float min, float max, float step){
-      super(name);
-      this.slided = slided;
-      this.curr = curr;
-      this.min = min;
-      this.max = max;
-      this.step = step;
-
-      int fix;
-      step %= 1;
-      for (int i = 0; ; i++) {
-        if (Mathf.zero(step)){
-          fix = i;
-          break;
+    override fun build(table: Table) {
+      table.left().add(name).color(b4).left().padLeft(4f)
+      table.right().table { t: Table ->
+        t.setClip(false)
+        t.right().defaults().right().padRight(0f)
+        if (str != null) {
+          t.add("").color(b4).update { l: Label? ->
+            l!!.setText(str!!.get())
+          }
         }
-        step *= 10;
-        step %= 1;
+        buildCfg(t)
+      }.growX().height(60f).padRight(4f)
+
+      if (tip != null) {
+        table.addListener(object :
+          Tooltip(Cons { ta: Table? -> ta!!.add(tip!!.get()).update { l: Label? -> l!!.setText(tip!!.get()) } }) {
+          init {
+            allowMobile = true
+          }
+        })
+      }
+    }
+
+    abstract fun buildCfg(table: Table)
+  }
+
+  class ConfigButton(name: String, var button: Prov<Button?>) : ConfigEntry(name) {
+    override fun buildCfg(table: Table) {
+      table.add<Button>(button.get()).width(180f).growY().pad(4f).get().setDisabled(disabled)
+    }
+  }
+
+  class ConfigTableCfg(name: String, var table: Cons<Table?>, var handler: Cons<Cell<Table?>?>) : ConfigEntry(name) {
+    override fun buildCfg(table: Table) {
+      handler.get(table.table { t: Table ->
+        t.setClip(false)
+        this.table.get(t)
+      })
+    }
+  }
+
+  open class ConfigTable(name: String, var builder: Cons<Table>) : ConfigLayout(name) {
+    override fun build(table: Table) {
+      builder.get(table)
+    }
+  }
+
+  open class ConfigCheck(name: String, var click: Boolc, var checked: Boolp) : ConfigEntry(name) {
+    override fun buildCfg(table: Table) {
+      val checkBox =
+        table.check("", checked.get(), click).update { c: CheckBox -> c.setChecked(checked.get()) }.get()
+      checkBox.setDisabled(disabled)
+      checkBox.setStyle(checkCheckBoxStyle)
+    }
+  }
+
+  open class ConfigSlider : ConfigEntry {
+    var slided: Floatc?
+    var curr: Floatp
+    var show: Func<Float, String>
+    var min: Float
+    var max: Float
+    var step: Float
+
+    constructor(name: String, slided: Floatc?, curr: Floatp, min: Float, max: Float, step: Float) : super(name) {
+      var step = step
+      this.slided = slided
+      this.curr = curr
+      this.min = min
+      this.max = max
+      this.step = step
+
+      val fix: Int
+      step %= 1f
+      var i = 0
+      while (true) {
+        if (Mathf.zero(step)) {
+          fix = i
+          break
+        }
+        step *= 10f
+        step %= 1f
+        i++
       }
 
-      this.show = f -> Strings.autoFixed(f, fix);
+      this.show = Func { f: Float? -> Strings.autoFixed(f!!, fix) }
     }
 
-    public ConfigSlider(String name, Func<Float, String> show, Floatc slided, Floatp curr, float min, float max, float step){
-      super(name);
-      this.show = show;
-      this.slided = slided;
-      this.curr = curr;
-      this.min = min;
-      this.max = max;
-      this.step = step;
+    constructor(
+      name: String,
+      show: Func<Float, String>,
+      slided: Floatc?,
+      curr: Floatp,
+      min: Float,
+      max: Float,
+      step: Float
+    ) : super(name) {
+      this.show = show
+      this.slided = slided
+      this.curr = curr
+      this.min = min
+      this.max = max
+      this.step = step
     }
 
-    @Override
-    public void buildCfg(Table table){
-      if(str == null){
-        table.add("").update(l -> {
-          l.setText(show.get(curr.get()));
-        }).padRight(0);
+    override fun buildCfg(table: Table) {
+      if (str == null) {
+        table.add("").update { l: Label? ->
+          l!!.setColor(b4)
+          l.setText(show.get(curr.get()))
+        }.padRight(0f)
       }
-      table.slider(min, max, step, curr.get(), slided).width(360).padLeft(4).update(s -> {
-        s.setValue(curr.get());
-        s.setDisabled(disabled.get());
-      });
+      table.slider(min, max, step, curr.get(), slided).width(360f).height(45f).padLeft(4f).update { s: Slider? ->
+        s!!.setValue(curr.get())
+        s.isDisabled = disabled.get()
+      }.get().setStyle(defaultSlider)
     }
+  }
+
+  companion object {
+    var cfgCount: Int = 0
   }
 }

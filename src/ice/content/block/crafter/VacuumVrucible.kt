@@ -30,6 +30,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
         time(60f)
         liquids(ILiquids.氯化硅溶胶, 0.2f, ILiquids.氢气, 0.4f)
         item(IItems.金珀沙, 5)
+        power(70f/60f)
       }
       producers.apply {
         item(IItems.单晶硅, 8)
@@ -57,6 +58,16 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
       }
       producers.apply {
         item(IItems.絮凝剂, 1)
+      }
+    }
+    newFormula { consumers, producers ->
+      consumers.apply {
+        time(120f)
+        item(IItems.生煤, 3)
+        power(140f/60f)
+      }
+      producers.apply {
+        item(IItems.焦炭, 2)
       }
     }
 

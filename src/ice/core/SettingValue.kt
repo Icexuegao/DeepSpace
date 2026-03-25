@@ -48,7 +48,7 @@ object SettingValue : Load {
   var 视野最大缩放限制 by observable(6f) { _, _, new ->
     Vars.renderer.maxZoom = new
   }
-  var 视野缩放最小限制 by observable(1.5f) { _, _, new ->
+  var 视野最小缩放限制 by observable(1.5f) { _, _, new ->
     Vars.renderer.minZoom = new
   }
   var 启用星球区块ID by observable(false)
@@ -60,10 +60,13 @@ object SettingValue : Load {
   }
   var 启用多合成角标常显 by observable(false)
 
-  var 启用扭曲效果绘制 by observable(true)
   var 启用包裹物品绘制 by observable(false)
-  var 启用包裹物品时限 by observable(true)
   var 启用QQ头像获取 by observable(true)
+  var 进入游戏自动弹出mod主菜单 by  observable(false)
+  var 禁用mod主界面背景 by observable(false)
+
+  //游戏目标内信息显示
+  var 显示实体信息 by observable(false)
 
 
   @delegate:Order

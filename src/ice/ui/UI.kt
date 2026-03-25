@@ -80,8 +80,8 @@ object UI : Load {
 
     Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.modDisplayName}[]", Icon.menu) {
       MenusDialog.show()
-      showUISoundCloseV(ISounds.进入模组界面)
     }
+    if (SettingValue.进入游戏自动弹出mod主菜单)MenusDialog.show()
   }
 
   fun showUISoundCloseV(sound: Sound) {

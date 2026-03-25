@@ -13,6 +13,7 @@ import mindustry.world.blocks.environment.Floor
 
 open class Floor(name: String) : Floor(name) {
     var BlockRenderer.updateFloors: Seq<UpdateRenderState> by accessField("updateFloors")
+
     var updateFloor = false
 
     init {

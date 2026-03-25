@@ -5,7 +5,7 @@ import ice.library.util.MultipleAny
 import java.io.File
 
 fun main() {
-   repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\remains\\血腥玛丽")
+   repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\remains\\流光罗盘")
   // val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\environment\\ore")
   // req(file)
 
@@ -26,7 +26,7 @@ fun repName(path: String) {
   val file = File(path)
 
   file.listFiles()?.forEach {
-    val replace1 = it.name.replace("0","")
+    val replace1 = it.name.replace("流光罗盘","流光罗盘-")
     it.renameTo(File("$path\\$replace1"))
   }
 }

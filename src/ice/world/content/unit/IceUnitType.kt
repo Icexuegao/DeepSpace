@@ -298,7 +298,6 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
       commands.add(UnitCommand.moveCommand, UnitCommand.enterPayloadCommand)
 
       if (canBoost) {
-        commands.add(UnitCommand.boostCommand)
 
         if (buildSpeed > 0f) {
           commands.add(UnitCommand.rebuildCommand, UnitCommand.assistCommand)

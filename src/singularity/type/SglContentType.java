@@ -7,7 +7,7 @@ import singularity.world.blocks.structure.BlockStructure;
 import universecore.util.UncContentType;
 
 public class SglContentType extends UncContentType{
-  public static SglContentType ability, structure, researchDevice;
+  public static SglContentType  structure, researchDevice;
 
   public static SglContentType[] allSglContentType;
   
@@ -28,10 +28,9 @@ public class SglContentType extends UncContentType{
   }
   
   public static void load(){
-    ability = new SglContentType("ability", PlayerAbility.class);
     structure = new SglContentType("structure", BlockStructure.class);
     researchDevice = new SglContentType("researchDevice", ResearchDevice.class);
 
-    allSglContentType = new SglContentType[]{ability, structure, researchDevice};
+    allSglContentType = new SglContentType[]{ structure, researchDevice};
   }
 }

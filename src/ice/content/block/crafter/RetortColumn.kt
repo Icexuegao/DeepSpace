@@ -51,5 +51,15 @@ class RetortColumn : NormalCrafter("retort_column") {
         items(IItems.生煤, 3, IItems.碱石, 1)
       }
     }
+    newFormula {consumers, producers ->
+      consumers.apply {
+        time(120f)
+        power(70f/60f)
+        item(IItems.绿藻块,1)
+      }
+      producers.apply {
+        items(IItems.焦炭,1)
+      }
+    }
   }
 }

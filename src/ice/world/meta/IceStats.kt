@@ -279,20 +279,19 @@ object IceStats : Load {
     }
   }
 
+  val 主菜单= getStat("mainMenu") {
+    desc(zh_CN,"主菜单")
+  }
   val 作者 = IceStat("author").apply {
     bundle {
       desc(zh_CN, "作者")
     }
   }
-  val 亲爱的贡献者 = IceStat("contributors").apply {
-    bundle {
+  val 亲爱的贡献者 = getStat("contributors") {
       desc(zh_CN, "亲爱的贡献者")
-    }
   }
-  val 版本 = IceStat("version").apply {
-    bundle {
+  val 版本 = getStat("version") {
       desc(zh_CN, "版本")
-    }
   }
 
   val 支持详情 = getStat("support.info") {

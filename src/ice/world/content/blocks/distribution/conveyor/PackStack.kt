@@ -172,7 +172,7 @@ class PackStack : Drawc, Hitboxc, Velc, Physicsc {
 
     Draw.z(Layer.block + 0.001f)
     Draw.color(Pal.shadow)
-    if (SettingValue.启用包裹物品时限) Draw.alpha(time / (60 * 10f))
+    Draw.alpha(time / (60 * 10f))
     Draw.rect(texShadow, x, y)
     Draw.color()
     Draw.alpha(time / (60 * 10f))
@@ -205,12 +205,8 @@ class PackStack : Drawc, Hitboxc, Velc, Physicsc {
 
   override fun update() {
     if (!Vars.net.client()) {
-      if (SettingValue.启用包裹物品时限) {
         time -= Time.delta
         if (time <= 0f) remove()
-      } else {
-        time = 60 * 10f
-      }
       val px = x
       val py = y
       move(vel.x * Time.delta, vel.y * Time.delta)

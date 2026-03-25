@@ -5,6 +5,7 @@ import arc.graphics.Texture
 import arc.scene.style.Drawable
 import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.Button.ButtonStyle
+import arc.scene.ui.CheckBox
 import arc.scene.ui.ImageButton.ImageButtonStyle
 import arc.scene.ui.Slider.SliderStyle
 import arc.scene.ui.TextButton.TextButtonStyle
@@ -19,6 +20,7 @@ import mindustry.ui.Styles
 
 object IStyles {
   val background11 = IFiles.createNinePatch("background1-1")
+  val background12 = IFiles.createNinePatch("background1-2")
   val background21 = IFiles.createNinePatch("background2-1")
   val background22 = IFiles.createNinePatch("background2-2")
   val background23 = IFiles.createNinePatch("background2-3")
@@ -249,6 +251,12 @@ object IStyles {
     down = on
     over = off
     up = off
+  }
+
+  val checkCheckBoxStyle= CheckBox.CheckBoxStyle().apply {
+    checkboxOn = buttonUp.asDrawable()
+    font=Fonts.def
+    checkboxOff = buttonDown.asDrawable()
   }
   val cleanBoxStyle = ImageButtonStyle().apply {
     val off = buttonDown.asDrawable()

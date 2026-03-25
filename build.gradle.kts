@@ -12,7 +12,7 @@ buildscript {
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
   extra["kotlinCompatibility"] = "2.3.20"
   extra["java"] = 25
-  extra["mdtVersion"]="com.github.Anuken.Mindustry:core:v155.4"
+  extra["mdtVersion"]="Anuken:Mindustry:v156"
   var mdtVersion: String by extra
   repositories {
     mavenLocal()
@@ -23,6 +23,15 @@ buildscript {
     maven { url = uri("https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
     maven { url = uri("https://maven.aliyun.com/repository/public") }
     maven { url = uri("https://jitpack.io") }
+    ivy {
+      url = uri("https://github.com/")
+      patternLayout {
+        artifact("/[organisation]/[module]/releases/download/[revision]/dependencies.jar")
+      }
+      metadataSources {
+        artifact()
+      }
+    }
   }
   dependencies {
     classpath(mdtVersion)
@@ -47,8 +56,19 @@ repositories {
   mavenLocal()
   maven { url = uri("https://jitpack.io") }
   maven { url = uri("https://www.jitpack.io") }
+  ivy {
+    url = uri("https://github.com/")
+    patternLayout {
+      artifact("/[organisation]/[module]/releases/download/[revision]/dependencies.jar")
+    }
+    metadataSources {
+      artifact()
+    }
+  }
+
 }
 dependencies {
+  compileOnly(mdtVersion)
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")
   implementation("org.commonmark:commonmark-ext-gfm-tables:0.20.0")
@@ -74,7 +94,7 @@ dependencies {
   // compileOnly(files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar"))
    //compileOnly("com.github.TinyLake:MindustryX:v2026.02.X27")
   // compileOnly("com.github.Anuken.Arc:flabel:v149")
-  compileOnly(mdtVersion)
+  //compileOnly(mdtVersion)
   compileOnly("com.github.EB-wilson:TooManyItems:3.1a")
   implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinCompatibility")
 }

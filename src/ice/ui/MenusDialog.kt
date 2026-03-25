@@ -17,13 +17,14 @@ import ice.graphics.IceColor
 import ice.library.scene.ui.iPaneG
 import ice.library.struct.asDrawable
 import ice.library.world.Load
+import ice.ui.UI.showUISoundCloseV
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*
 import ice.world.meta.IceStats
 
 object MenusDialog : Dialog(), Load {
   const val backMargin = 10f
-  val back = IStyles.background11
+  val back = IStyles.background12
   var button: BaseMenusDialog = PublicInfoDialog
   lateinit var conts: Table
 
@@ -39,6 +40,10 @@ object MenusDialog : Dialog(), Load {
     BaseMenusDialog.dalogs.add(ConfigureDialog)
   }
 
+  override fun show(): Dialog {
+    showUISoundCloseV(ISounds.进入模组界面)
+    return super.show()
+  }
   init {
     reset()
     setFillParent(true)
@@ -74,7 +79,7 @@ object MenusDialog : Dialog(), Load {
                     button = mb
                     mb.build(conts)
                   }
-                  UI.showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
+                  showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
 
                 }
               }, IStyles.rootButton) {
@@ -87,7 +92,7 @@ object MenusDialog : Dialog(), Load {
               b.image(IStyles.menusButton_exit).size(50f).color(IceColor.b5).table.add(IceStats.关闭.localized()).color(IceColor.b5)
             }, IStyles.rootCleanButton) {
               hide()
-              UI.showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
+              showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
             }.pad(2f).margin(20f).growX().row()
           }
         }.width(200f).margin(10f).growY()

@@ -31,6 +31,7 @@ import ice.library.scene.ui.layout.ITable
 import ice.library.struct.asDrawable
 import ice.library.struct.getT
 import ice.library.struct.isNotEmpty
+import ice.library.util.accessField
 import ice.library.util.accessFloat
 import ice.library.util.toStringi
 import mindustry.Vars
@@ -47,6 +48,7 @@ var Cell<Table>.padTop: Float by accessFloat("padTop")
 var Cell<Table>.padLeft: Float by accessFloat("padLeft")
 var Cell<Table>.padBottom: Float by accessFloat("padBottom")
 var Cell<Table>.padRight: Float by accessFloat("padRight")
+
 fun Table.iTable(back: Drawable? = null, cons: Cons<ITable>): Cell<ITable> {
   return add(cons.getT(ITable(back)))
 }
