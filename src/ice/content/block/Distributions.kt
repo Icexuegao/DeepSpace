@@ -44,7 +44,7 @@ import singularity.world.blocks.distribute.ItemNode
 object Distributions : Load {
   val 基础传送带 = Conveyor("baseConveyor").apply {
     bundle {
-      desc(zh_CN, "基础传送带", "基础的运输设施,用于在建筑之间运输物品,造价低廉")
+      desc(zh_CN, "基础传送带", "运输设施,造价低廉")
     }
     size = 1
     speed = 6f
@@ -57,7 +57,7 @@ object Distributions : Load {
   }
   val 强化传送带 = Conveyor("reinforcedConveyor").apply {
     bundle {
-      desc(zh_CN, "强化传送带", "基础的运输设施,用于在建筑之间运输物品,造价低廉")
+      desc(zh_CN, "强化传送带", "运输设施,造价低廉,比基础传送带更快")
     }
     size = 1
     speed = 13f
@@ -69,9 +69,25 @@ object Distributions : Load {
     requirements(Category.distribution, IItems.高碳钢, 1, IItems.锌锭, 1)
 
   }
+
+  val 特种传送带 = ArmoredConveyor("specialConveyor").apply {
+    bundle {
+      desc(zh_CN, "特种传送带", "运输设施,比强化传送带更快,不接收侧面输入")
+    }
+    size = 1
+    speed = 15f
+    health = 55
+    addContentInitEvent {
+      junctionReplacement = 基础交叉器
+      bridgeReplacement = 装甲传送带桥
+    }
+    requirements(Category.distribution, IItems.钴锭, 1, IItems.铬锭, 1, IItems.复合陶瓷, 1)
+
+  }
+
   val 血肉装甲传送带 = Conveyor("fleshArmorConveyor").apply {
     bundle {
-      desc(zh_CN, "血肉装甲传送带", "在传送带内部模拟血肉蠕动来快速输送物品")
+      desc(zh_CN, "血肉装甲传送带", "运输设施,比特种传送带更快,会缓慢回复生命值")
     }
     health = 600
     armor = 8f
@@ -83,21 +99,6 @@ object Distributions : Load {
       bridgeReplacement = 增生传送带桥
       junctionReplacement = 交叉神经链路
     }
-
-  }
-
-  val 特种传送带 = ArmoredConveyor("specialConveyor").apply {
-    bundle {
-      desc(zh_CN, "特种传送带", "基础的运输设施,用于在建筑之间运输物品,不接收侧面输入")
-    }
-    size = 1
-    speed = 15f
-    health = 55
-    addContentInitEvent {
-      junctionReplacement = 基础交叉器
-      bridgeReplacement = 装甲传送带桥
-    }
-    requirements(Category.distribution, IItems.钴锭, 1, IItems.铬锭, 1, IItems.复合陶瓷, 1)
 
   }
 
@@ -121,7 +122,7 @@ object Distributions : Load {
   }
   val 生物钢传送带 = StackConveyor("biologicalSteelConveyor").apply {
     bundle {
-      desc(zh_CN, "生物钢传送带", "打包物品进行运输,一次能携带100件物品,比塑钢传送带更快,可以用电力加速")
+      desc(zh_CN, "生物钢传送带", "运输设施,打包物品进行运输,通电后加快运输速度")
     }
     healAmount = 10f
     health = 300
@@ -162,7 +163,7 @@ object Distributions : Load {
   }
   val 梯度传送带 = PackStackConveyor("gradedConveyor").apply {
     bundle {
-      desc(zh_CN, "梯度传送带", "能打包多种物品的传送带,如果末端没有阻挡,会对包裹进行跑出")
+      desc(zh_CN, "梯度传送带", "运输设施,打包多种物品进行运输.如果末端未被阻挡,则包裹会被抛出")
     }
     speed = 60f / 600f
     drawLastItems = false
@@ -197,7 +198,7 @@ object Distributions : Load {
   }
   val 交叉神经链路 = Junction("junctionNeuralChain").apply {
     bundle {
-      desc(zh_CN, "交叉神经链路", "连接两条交叉的传送带,比交叉器更快")
+      desc(zh_CN, "交叉神经链路", "两条交叉传送带的桥梁,比交叉器更快")
     }
     armor = 4f
     health = 250
@@ -209,7 +210,7 @@ object Distributions : Load {
 
   val 转换分类器 = Sorter("transformSorter").apply {
     bundle {
-      desc(zh_CN, "转换分类器", "像分类器一样处理物品,可以通过配置调整分类状态")
+      desc(zh_CN, "转换分类器", "如果物品与所选种类 相同/不同 ,则允许其通过.否则,物品将向两侧输出.可配置")
     }
     size = 1
     health = 100
@@ -227,7 +228,7 @@ object Distributions : Load {
   }
   val 转换溢流门 = TransformOverflowGate("transformOverflowGate").apply {
     bundle {
-      desc(zh_CN, "转换溢流门", "像溢流门一样处理物品,可以通过配置调整溢流状态")
+      desc(zh_CN, "转换溢流门", "当 前方/两侧 被阻塞时才会向 两侧/前方 输出,用于处理多余的物品.可配置")
     }
     size = 1
     health = 200
@@ -268,7 +269,7 @@ object Distributions : Load {
     consumePower(0.5f)
     requirements(Category.distribution, IItems.导能回路, 10, IItems.生物钢, 5)
     bundle {
-      desc(zh_CN, "增生传送带桥", "先进的物品传输建筑,能超远距离快速传输物品")
+      desc(zh_CN, "增生传送带桥", "跨越任何地形货建筑传输物品,比装甲传送带桥更快,更远.会缓慢回复生命")
     }
   }
   val 传输节点 = TransferNode("transferNode").apply {
@@ -281,7 +282,7 @@ object Distributions : Load {
   }
   val 运输节点 = ItemNode("transport_node").apply {
     bundle {
-      desc(zh_CN, "运输节点", "一种更高级的传送带桥,可以对节点的任意侧面配置指定物品的输入与输出")
+      desc(zh_CN, "运输节点", "高级的传送带桥,可以对节点的任意侧面配置指定物品的输入与输出")
     }
     requirements(Category.distribution, IItems.电子元件, 8, IItems.气凝胶, 8, IItems.铝锭, 10)
     range = 4
@@ -290,7 +291,7 @@ object Distributions : Load {
   }
   val 相位运输节点 = ItemNode("phase_transport_node").apply {
     bundle {
-      desc(zh_CN, "相位运输节点", "使用相位技术制造的运输节点,具有更快的运输速度和更远的连接距离")
+      desc(zh_CN, "相位运输节点", "高级的传送带桥,具有更快的运输速度和更远的连接距离")
     }
     requirements(Category.distribution, IItems.絮凝剂, 6, IItems.气凝胶, 10, IItems.强化合金, 8, IItems.铝锭, 12)
     researchCostMultiplier = 1.5f
@@ -310,8 +311,8 @@ object Distributions : Load {
     bundle {
       desc(
         zh_CN,
-        "铱制高效运输节点",
-        "使用铱建造的高级运输节点,造价昂贵,但换来的收益除更长的连接距离和更快的运输速度外,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品"
+        "高效运输节点",
+        "高级的传送带桥,具有更快的运输速度和更远的连接距离,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品"
       )
     }
     requirements(
@@ -334,7 +335,7 @@ object Distributions : Load {
 
   val 基础卸载器 = Unloader("baseUninstalle").apply {
     bundle {
-      desc(zh_CN, "基础卸载器", "卸载物品")
+      desc(zh_CN, "基础卸载器", "从容器中卸载物品")
     }
     speed = 60f / 10f
     health = 50
@@ -343,7 +344,7 @@ object Distributions : Load {
   }
   val 极速卸载器 = Unloader("speedUninstalle").apply {
     bundle {
-      desc(zh_CN, "极速卸载器", "高速卸载物品")
+      desc(zh_CN, "极速卸载器", "从容器中高速卸载物品")
     }
     speed = 60f / 30f
     health = 80
@@ -352,7 +353,7 @@ object Distributions : Load {
   }
   val 量子卸载器 = Unloader("electronicUninstaller").apply {
     bundle {
-      desc(zh_CN, "量子卸载器", "卸载物品,通过零损耗电子迁移转移高密度数据流")
+      desc(zh_CN, "量子卸载器", "从容器中超高速卸载物品")
     }
     speed = 60f / 60f
     health = 200
@@ -384,7 +385,7 @@ object Distributions : Load {
       desc(
         zh_CN,
         "重型质量驱动器",
-        "超远距离传输物品,收集一定物品后将其发射到另一个重型质量驱动器中,容量巨大但转速及发射速度缓慢"
+        "超远距离传输物品,收集若干物品后将其发射到另一个重型质量驱动器中,容量巨大但转速和发射速度缓慢"
       )
     }
   }
