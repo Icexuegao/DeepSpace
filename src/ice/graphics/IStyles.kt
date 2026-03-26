@@ -43,6 +43,7 @@ object IStyles {
   val background122 = IFiles.createNinePatch("background12-2")
   val background131 = IFiles.createNinePatch("background13-1")
 
+  val contributors =IFiles.createNinePatch("contributors")
   val achievementUnlock = IFiles.findModPng("achievement-unlock")
   val achievementLock = IFiles.findModPng("achievement-lock")
   val achievement = IFiles.findModPng("achievement")

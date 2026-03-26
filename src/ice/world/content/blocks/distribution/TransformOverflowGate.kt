@@ -10,8 +10,9 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.graphics.TextureRegionDelegate
+
 import ice.library.scene.ui.itooltip
+import ice.library.struct.texture.TextureRegionDelegate
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import mindustry.gen.Building

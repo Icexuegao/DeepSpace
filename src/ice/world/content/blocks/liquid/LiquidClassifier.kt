@@ -6,9 +6,8 @@ import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.graphics.TextureRegionDelegate
 import ice.library.scene.ui.ItemSelection
-import ice.world.content.blocks.abstractBlocks.IceBlock
+import ice.library.struct.texture.TextureRegionDelegate
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import mindustry.Vars

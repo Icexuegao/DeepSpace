@@ -2,11 +2,9 @@ package ice.library
 
 import arc.Core
 import arc.Events
-import arc.graphics.Texture
 import arc.input.KeyCode
 import arc.struct.Seq
 import arc.util.Tmp
-import ice.graphics.TextureDelegate
 import ice.library.world.Load
 import ice.ui.menusDialog.AchievementDialog
 import ice.world.content.blocks.distribution.conveyor.PackStack
@@ -21,9 +19,6 @@ object EventType : Load {
   private val clientLoadEvent = Seq<()->Unit>()
   private val atlasPackEvent = Seq<()->Unit>()
   override fun setup() {
-    Events.on(EventType.AtlasPackEvent::class.java) {
-      TextureDelegate.delegate.forEach {it()}
-    }
     Events.on(EventType.AtlasPackEvent::class.java) {
       atlasPackEvent.forEach {it()}
     }

@@ -83,6 +83,12 @@ object ProductBlocks : Load {
     size = 3
     drillTime = 250f
     squareSprite = false
+    newConsume().apply {
+      power(1f)
+    }
+    newBooster(1.5f).apply {
+      liquid(Liquids.water, 12f/60f)
+    }
     requirements(Category.production, IItems.强化合金, 60, IItems.钴钢, 110, IItems.铪锭, 80, IItems.单晶硅, 36, IItems.电子元件, 80, IItems.暮光合金, 50)
     bundle {
       desc(zh_CN, "曼哈德钻井", "一种高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效资源开采")

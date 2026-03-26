@@ -23,7 +23,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.graphics.TextureRegionDelegate
+import ice.library.struct.texture.TextureRegionDelegate
 import ice.ui.Documents
 import mindustry.Vars
 import mindustry.core.Renderer
@@ -140,6 +140,9 @@ open class ItemNode(name: String) : SglBlock(name) {
     this.stats.add(Stat.linkRange, this.range.toFloat(), StatUnit.blocks)
     this.stats.add(Stat.itemCapacity, Core.bundle.format("infos.mixedItemCapacity", *arrayOf<Any>(this.itemCapacity, this.maxItemCapacity)), *arrayOfNulls<Any>(0))
     this.stats.add(Stat.itemsMoved, 60.0f / this.transportTime, StatUnit.itemsSecond)
+    for (baseConsumers in consumers) {
+      baseConsumers.display(stats)
+    }
   }
 
 

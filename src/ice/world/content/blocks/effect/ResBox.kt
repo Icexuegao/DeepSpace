@@ -4,7 +4,8 @@ import arc.func.Prov
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import ice.content.IItems
-import ice.graphics.TextureRegionDelegate
+import ice.library.struct.texture.TextureRegionDelegate
+
 import ice.world.content.item.IceItem
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti

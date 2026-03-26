@@ -10,15 +10,17 @@ import arc.scene.ui.layout.Cell;
 import arc.scene.ui.layout.Table;
 import arc.struct.ObjectMap;
 import arc.struct.Seq;
+import arc.util.Log;
 import arc.util.Nullable;
 import mindustry.Vars;
 import mindustry.gen.Icon;
 import mindustry.type.Category;
 import mindustry.ui.Styles;
+import singularity.core.UpdatePool;
 
 import java.util.Arrays;
 
-/*** 用于增加右下角方块选择栏分类条目的工具
+/** 用于增加右下角方块选择栏分类条目的工具
  *
  * @author EBwilson
  * @since 1.0 */
@@ -27,10 +29,23 @@ public class CategoryHandler {
   protected boolean hasNew = false;
   protected static final KeyBind empBind = KeyBind.add("unBind", KeyCode.unset);
 
-  public void handleBlockFrag() {
+  public Table lastable;
 
+  {
+    //适配mdtx的解禁 ps:这很愚蠢
+    UpdatePool.INSTANCE.receive("CategoryHandler",()->{
+      if (lastable!=null&&lastable.parent!=null&&lastable.parent.parent!=null&&!lastable.parent.parent.parent.hasParent()){
+        Core.app.post(this::handleBlockFrag);
+      }
+    });
+  }
+  public void handleBlockFrag() {
     if (!hasNew) return;
+
+
     Table catTable = FieldHandler.getValueDefault(Vars.ui.hudfrag.blockfrag, "blockCatTable");
+    lastable = catTable;
+
 
     Table blockSelect = (Table) catTable.getChildren().get(0);
     Table categories = (Table) catTable.getChildren().get(1);
@@ -54,9 +69,9 @@ public class CategoryHandler {
 
       if (catButtons.size % 2 != 0) t.image(Styles.black6);
     }).size(catButtons.size > 12 ? 125 : 100, 300).update(pane1 -> {
-      if(pane1.hasScroll()){
+      if (pane1.hasScroll()) {
         Element result = Core.scene.getHoverElement();
-        if(result == null || !result.isDescendantOf(pane1)){
+        if (result == null || !result.isDescendantOf(pane1)) {
           Core.scene.setScrollFocus(null);
         }
       }
@@ -65,7 +80,6 @@ public class CategoryHandler {
 
   /**
    * 新增一个建筑类型到列表中，这会在游戏中的方块选择栏呈现
-   *
    * @param name 类别的内部名称
    * @param ordinal 这个类别在选择栏的显示位置序数
    * @param iconName 这个类别的图标的资源文件名称
@@ -76,7 +90,6 @@ public class CategoryHandler {
 
   /**
    * 新增一个建筑类型到列表中，这会在游戏中的方块选择栏呈现
-   *
    * @param name 类别的内部名称
    * @param iconName 这个类别的图标的资源文件名称
    */
@@ -86,7 +99,6 @@ public class CategoryHandler {
 
   /**
    * 新增一个建筑类型到列表中，这会在游戏中的方块选择栏呈现
-   *
    * @param name 类别的内部名称
    * @param bind 这个类别绑定到的目标键位
    * @param iconName 这个类别的图标的资源文件名称
@@ -97,7 +109,6 @@ public class CategoryHandler {
 
   /**
    * 新增一个建筑类型到列表中，这会在游戏中的方块选择栏呈现
-   *
    * @param name 类别的内部名称
    * @param ordinal 这个类别在选择栏的显示位置序数
    * @param bind 这个类别绑定到的目标键位

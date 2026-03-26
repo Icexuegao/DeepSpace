@@ -4,7 +4,7 @@ import arc.func.Prov
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.util.Eachable
-import ice.graphics.TextureRegionArrDelegate
+import ice.library.struct.texture.TextureRegionArrDelegate
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.game.Team

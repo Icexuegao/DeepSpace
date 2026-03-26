@@ -10,13 +10,12 @@ import arc.math.Mathf
 import arc.math.geom.Point2
 import arc.struct.Seq
 import arc.util.Strings
-import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.IVars
 import ice.graphics.IceColor
-import ice.graphics.TextureRegionDelegate
+import ice.library.struct.texture.TextureRegionDelegate
 import ice.library.util.toStringi
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawFull

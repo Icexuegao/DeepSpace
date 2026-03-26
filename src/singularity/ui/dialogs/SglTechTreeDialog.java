@@ -19,10 +19,7 @@ import arc.scene.ui.layout.Scl;
 import arc.scene.ui.layout.Table;
 import arc.struct.OrderedMap;
 import arc.struct.Seq;
-import arc.util.Align;
-import arc.util.Scaling;
-import arc.util.Time;
-import arc.util.Tmp;
+import arc.util.*;
 import ice.content.IPlanets;
 import ice.ui.menusDialog.DataDialog;
 import mindustry.Vars;
@@ -221,7 +218,6 @@ public class SglTechTreeDialog extends Table {
     zoom.addChild(view);
     add(zoom);
     zoom.setFillParent(true);
-    //setBackground(SglDrawConst.grayUI);
 
     rebuildNodes(IPlanets.INSTANCE.get阿德里());
 
@@ -372,39 +368,38 @@ public class SglTechTreeDialog extends Table {
               Tex.buttonSideRight
           ));
 
-          t.table(new BaseDrawable(){
+          Table table = t.table(new BaseDrawable() {
             @Override
             public void draw(float x, float y, float width, float height) {
-              if (project.isCompleted()){
-                Draw.color(Pal.accent, 0.3f*parentAlpha);
-              }
-              else Draw.color(Pal.darkerGray, 0.7f*parentAlpha);
-              Fill.rect(x + width/2f, y + height/2f, width, height);
+              if (project.isCompleted()) {
+                Draw.color(Pal.accent, 0.3f * parentAlpha);
+              } else Draw.color(Pal.darkerGray, 0.7f * parentAlpha);
+              Fill.rect(x + width / 2f, y + height / 2f, width, height);
 
               Draw.color(Pal.darkestGray, parentAlpha);
-              Fill.circle(x + width/2f, y + height/2f, width/2f - Scl.scl(4f));
+              Fill.circle(x + width / 2f, y + height / 2f, width / 2f - Scl.scl(4f));
 
               float frameStroke = Scl.scl(6f);
               float barStroke = Scl.scl(3f);
               float progress = project.progress();
-              float subProgress = project.getInspire() == null || project.getInspire().getApplied()? 0: project.getInspire().getProvProgress();
+              float subProgress = project.getInspire() == null || project.getInspire().getApplied() ? 0 : project.getInspire().getProvProgress();
               float parentAlpha1 = Draw.getColor().a;
-              float rad = width/2f - frameStroke/2f;
+              float rad = width / 2f - frameStroke / 2f;
 
               Draw.color(Color.black, parentAlpha1);
               Lines.stroke(frameStroke);
-              Lines.circle(x + width/2, y + height/2, rad);
-              Draw.color(SglDrawConst.matrixNet, 0.6f*parentAlpha1);
-              Lines.circle(x + width/2, y + height/2, rad);
-              Draw.color(Color.black, 0.6f*parentAlpha1);
+              Lines.circle(x + width / 2, y + height / 2, rad);
+              Draw.color(SglDrawConst.matrixNet, 0.6f * parentAlpha1);
+              Lines.circle(x + width / 2, y + height / 2, rad);
+              Draw.color(Color.black, 0.6f * parentAlpha1);
               Lines.stroke(barStroke);
-              Lines.circle(x + width/2, y + height/2, rad);
+              Lines.circle(x + width / 2, y + height / 2, rad);
 
               if (project.isProcessing()) {
                 Lines.stroke(barStroke);
                 Draw.color(SglDrawConst.matrixNetDark, parentAlpha);
                 SglDraw.dashCircle(
-                    x + width/2, y + height/2, width/2f - Scl.scl(3f), 10, 180, -Time.globalTime
+                        x + width / 2, y + height / 2, width / 2f - Scl.scl(3f), 10, 180, -Time.globalTime
                 );
               }
 
@@ -412,57 +407,67 @@ public class SglTechTreeDialog extends Table {
                 Lines.stroke(barStroke);
                 Draw.color(SglDrawConst.matrixNet, parentAlpha1);
                 SglDraw.arc(
-                    x + width/2, y + height/2, rad,
-                    -360f*progress, 90
+                        x + width / 2, y + height / 2, rad,
+                        -360f * progress, 90
                 );
               }
 
-              if (subProgress > 0){
+              if (subProgress > 0) {
                 Lines.stroke(frameStroke);
-                Draw.color(SglDrawConst.matrixNet, 0.5f*parentAlpha1);
-                float angel = -360f*Math.min(subProgress, 1 - progress);
+                Draw.color(SglDrawConst.matrixNet, 0.5f * parentAlpha1);
+                float angel = -360f * Math.min(subProgress, 1 - progress);
                 SglDraw.arc(
-                    x + width/2, y + height/2, rad, angel,
-                    90 - progress*360f
+                        x + width / 2, y + height / 2, rad, angel,
+                        90 - progress * 360f
                 );
 
-                Draw.color(Color.black, 0.2f*parentAlpha1);
-                Lines.stroke(frameStroke/3f);
+                Draw.color(Color.black, 0.2f * parentAlpha1);
+                Lines.stroke(frameStroke / 3f);
                 SglDraw.arc(
-                    x + width/2, y + height/2, rad, angel,
-                    90 - progress*360f
+                        x + width / 2, y + height / 2, rad, angel,
+                        90 - progress * 360f
                 );
               }
             }
           }, img -> {
             if (isReveal) {
               img.image(project.getIcon() != null ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit);
-            }
-            else {
+            } else {
               Font.Glyph g = Fonts.outline.getData().getGlyph('?');
               img.image(new TextureRegion(Fonts.outline.getRegion().texture, g.u, g.v2, g.u2, g.v)).size(32).scaling(Scaling.fit).color(SglDrawConst.fexCrystal);
             }
-          }).width(64f).growY().get().fill((x, y, w, h) -> {
+          }).width(64f).growY().get();
+
+
+          var ref = new Object() {
+            Element fill = null;
+          };
+          ref.fill =table.fill((x, y, w, h) -> {
             Lines.stroke(3f);
             Draw.color();
             Draw.alpha(parentAlpha);
+            x=ref.fill.x;
+            y=ref.fill.y;
+
             SglDraw.arc(
-                x + w/2f, y + h/2f, w/3f,
-                15f, 90f
+                    x + w / 2f, y + h / 2f, w / 3f,
+                    15f, 90f
             );
             SglDraw.arc(
-                x + w/2f, y + h/2f, w/3f,
-                70f, 0f
+                    x + w / 2f, y + h / 2f, w / 3f,
+                    70f, 0f
             );
             SglDraw.arc(
-                x + w/2f, y + h/2f, w/3f,
-                15f, 210f
+                    x + w / 2f, y + h / 2f, w / 3f,
+                    15f, 210f
             );
             SglDraw.arc(
-                x + w/2f, y + h/2f, w/3f,
-                10f, 250f
+                    x + w / 2f, y + h / 2f, w / 3f,
+                    10f, 250f
             );
           });
+
+
           t.table(new BaseDrawable(){
             @Override
             public void draw(float x, float y, float width, float height) {

@@ -16,7 +16,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.core.Placement
-import ice.graphics.TextureRegionArrArrDelegate
+import ice.library.struct.texture.TextureRegionArrArrDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.content.blocks.distribution.Junction
 import ice.world.content.blocks.distribution.conveyor.Autotiler.SliceMode

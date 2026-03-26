@@ -21,8 +21,12 @@ object PublicInfoDialog : BaseMenusDialog(IceStats.公告.localized(), IStyles.m
     cont.top()
     val element = Image(IStyles.publicInfoIcon.asDrawable(0.5f), Scaling.fit)
     cont.add(element).row()
-    cont.add("@Alon(\"帝皇\") 我的错就是让你活着了[天使]你的三观应该是没有的，同理心也是没有的，你和那些在癌症患者家属的诉苦视频评论区说“全家遇不到”“不接”的一桌，bro肯定觉得自己老帅了吧，实际上是阴暗哥布林一个，而且是被别人孤立的哥布林[委屈]").pad(20f).growX().wrap().row()
-    cont.add("呜呜呜你真的好可怜呢也就是说你也很可恨呢[温馨]").pad(20f).row()
+    cont.add("过去的这一年,不管是我们DS制作组还是我,其实都经历了焦虑和迷茫,因为我们确确实实感觉经历了很多特别艰难的时刻,有的声音特别的,特别特别的尖锐,然后把我们整个DS和DS项目组都贬的一无是处,还有很多人说,听不进大家的声音,但就像猫猫讲的.其实我们跟大家一样,我们也是玩家,大家感受到的事情我们也在感受,只是对于我们来讲呢,我们听到的声音实在是太多了,我们需要沉下心来,去弄清楚到底哪些是来自各位主教真实的声音(抽泣)").growX().wrap().padLeft(20f)
+      .padRight(20f).color(IceColor.b4).row()
+    cont.add("无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼").growX().wrap().padLeft(20f)
+      .padRight(20f).color(IceColor.b4).row()
+    cont.add("@Alon(\"帝皇\") 我的错就是让你活着了[天使]你的三观应该是没有的，同理心也是没有的，你和那些在癌症患者家属的诉苦视频评论区说“全家遇不到”“不接”的一桌，bro肯定觉得自己老帅了吧，实际上是阴暗哥布林一个，而且是被别人孤立的哥布林[委屈],呜呜呜你真的好可怜呢也就是说你也很可恨呢[温馨]")
+      .pad(20f).color(IceColor.b4).growX().wrap().row()
     val get = cont.add(
       "我想了一天,我觉得是时候该反击了[流汗表情]" +
 
@@ -55,12 +59,11 @@ object PublicInfoDialog : BaseMenusDialog(IceStats.公告.localized(), IStyles.m
               "但之后呢?内容更新怎么更?如何回应粉丝期望?更新频率需要的个人时间够吗?我们一次更新多少策划案的内容?UGC怎么回应?[流汗表情]" +
 
               "你赢了,赢得很彻底,非常彻底,赢了所有mindustry玩家,制作者,贡献者,请你继续你的道路,但我还有事要做,我为什么要和你死缠烂打?[流汗表情]"
-    ).pad(20f).color(IceColor.y2).growX().wrap().get()
+    ).padLeft(20f).padRight(20f).color(IceColor.y2).growX().wrap().get()
     get.addListeners(object : InputListener() {
       override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: KeyCode?): Boolean {
         val localToStageCoordinates = get.localToStageCoordinates(Tmp.v1.set(x, y))
-        val showOnStage =
-          SceneEffect.showOnStage(IceEffects.基础子弹击中特效, localToStageCoordinates.x, localToStageCoordinates.y)
+        val showOnStage = SceneEffect.showOnStage(IceEffects.基础子弹击中特效, localToStageCoordinates.x, localToStageCoordinates.y)
         showOnStage.setScale(4f)
         return super.touchDown(event, x, y, pointer, button)
       }

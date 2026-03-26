@@ -20,9 +20,9 @@ import ice.content.IItems
 import ice.content.IPlanets
 import ice.entities.IceRegister
 import ice.graphics.IceColor
-import ice.graphics.TextureRegionDelegate
 import ice.library.IFiles
 import ice.library.IFiles.appendModName
+import ice.library.struct.texture.TextureRegionDelegate
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars
 import mindustry.ai.ControlPathfinder
@@ -48,7 +48,6 @@ import mindustry.type.Weapon
 import mindustry.world.meta.Env
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
-import mindustry.world.meta.StatValues
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.Unit as KUnit

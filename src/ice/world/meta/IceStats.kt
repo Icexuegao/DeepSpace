@@ -293,6 +293,9 @@ object IceStats : Load {
   val 版本 = getStat("version") {
       desc(zh_CN, "版本")
   }
+  val 版本发布日期 = getStat("releaseDate") {
+    desc(zh_CN, "版本发布日期")
+  }
 
   val 支持详情 = getStat("support.info") {
     desc(zh_CN, "首先,谢谢您愿意点开这个页面,若您喜欢这个mod,您的支持将是我们继续这个项目的莫大动力")

@@ -16,8 +16,8 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.IceColor
-import ice.graphics.TextureRegionArrDelegate
-import ice.graphics.TextureRegionDelegate
+import ice.library.struct.texture.TextureRegionArrDelegate
+import ice.library.struct.texture.TextureRegionDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
 import mindustry.content.Fx
@@ -56,7 +56,7 @@ open class StackConveyor(name: String) : IceBlock(name), Autotiler {
     var glowRegion: TextureRegion by TextureRegionDelegate("${this.name}-glow")
     var glowAlpha: Float = 1f
     var glowColor: Color = Pal.redLight
-    var regions : Array<TextureRegion> by TextureRegionArrDelegate(this.name,3)
+    var regions : Array<TextureRegion> by TextureRegionArrDelegate(this.name, 3)
     var loadEffect: Effect = Fx.conveyorPoof
     var unloadEffect = Effect(35.0f) { e: Effect.EffectContainer ->
         Draw.color(Pal.plasticBurn, IceColor.b4, e.fin())

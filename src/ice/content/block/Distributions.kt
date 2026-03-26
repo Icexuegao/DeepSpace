@@ -1,14 +1,11 @@
 package ice.content.block
 
-import arc.func.Prov
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
-import arc.scene.ui.layout.Table
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.EventType.addContentInitEvent
-import ice.library.scene.ui.ItemSelection
 import ice.library.world.Load
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
@@ -25,7 +22,6 @@ import ice.world.content.blocks.distribution.digitalStorage.LogisticsOutput
 import ice.world.content.blocks.distribution.droneNetwork.DroneDeliveryTerminal
 import ice.world.content.blocks.distribution.droneNetwork.DroneReceivingRnd
 import ice.world.content.blocks.distribution.itemNode.TransferNode
-import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect
@@ -35,7 +31,6 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.world.blocks.distribution.MassDriver
-import mindustry.world.blocks.storage.Unloader
 import mindustry.world.meta.BuildVisibility
 import mindustry.world.meta.Env
 import singularity.world.blocks.distribute.ItemNode
@@ -329,8 +324,9 @@ object Distributions : Load {
     pulse = true
     envEnabled = envEnabled or Env.space
     transportTime = 0.5f
-    newConsume()
-    consume!!.power(1f)
+    newConsume().apply {
+      power(1f)
+    }
   }
 
   val 基础卸载器 = Unloader("baseUninstalle").apply {
@@ -340,7 +336,6 @@ object Distributions : Load {
     speed = 60f / 10f
     health = 50
     requirementPairs(Category.distribution, IItems.高碳钢 to 30, IItems.低碳钢 to 10, IItems.铜锭 to 15)
-    setUnloaderUI(this)
   }
   val 极速卸载器 = Unloader("speedUninstalle").apply {
     bundle {
@@ -349,17 +344,20 @@ object Distributions : Load {
     speed = 60f / 30f
     health = 80
     requirementPairs(Category.distribution, IItems.铬锭 to 30, IItems.铱板 to 25, IItems.导能回路 to 15)
-    setUnloaderUI(this)
   }
   val 量子卸载器 = Unloader("electronicUninstaller").apply {
     bundle {
       desc(zh_CN, "量子卸载器", "从容器中超高速卸载物品")
     }
+    squareSprite=false
     speed = 60f / 60f
     health = 200
     squareSprite = false
     requirementPairs(Category.distribution, IItems.电子元件 to 25, IItems.钴锭 to 25, IItems.导能回路 to 5)
-    setUnloaderUI(this)
+
+    newConsume().apply {
+      power(20f/60f)
+    }
   }
 
   val 重型质量驱动器 = MassDriver("heavyDutyMassDrives").apply {
@@ -428,27 +426,5 @@ object Distributions : Load {
       desc(zh_CN, "随机源", "随机输出所有资源")
     }
     buildVisibility = BuildVisibility.sandboxOnly
-  }
-
-  fun setUnloaderUI(block: Unloader) {
-    block.apply {
-      buildType = Prov {
-        object : Unloader.UnloaderBuild() {
-          override fun buildConfiguration(table: Table) {
-            ItemSelection.buildTable(
-              this@apply, table, Vars.content.items(), ::sortItem, ::configure, true
-            )
-          }
-
-          override fun drawConfigure() {
-            Draw.color(IceColor.b4)
-            Lines.stroke(1.0f)
-            Lines.square(x, y, block.size * 8f / 2.0f + 1.0f)
-            Draw.reset()
-          }
-        }
-      }
-    }
-
   }
 }

@@ -155,8 +155,7 @@ public class EntityInfoFrag{
           if (SettingValue.INSTANCE.get显示实体信息()){
             UI.INSTANCE.getToolBarFrag().showTool("changeMode");
             UI.INSTANCE.getToolBarFrag().showTool("infoScl");
-          }
-          else {
+          } else {
             UI.INSTANCE.getToolBarFrag().hideTool("changeMode");
             UI.INSTANCE.getToolBarFrag().hideTool("infoScl");
           }
@@ -186,6 +185,13 @@ public class EntityInfoFrag{
         },
         () -> resizing
     );
+    if (SettingValue.INSTANCE.get显示实体信息()){
+      UI.INSTANCE.getToolBarFrag().showTool("changeMode");
+      UI.INSTANCE.getToolBarFrag().showTool("infoScl");
+    } else {
+      UI.INSTANCE.getToolBarFrag().hideTool("changeMode");
+      UI.INSTANCE.getToolBarFrag().hideTool("infoScl");
+    }
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})

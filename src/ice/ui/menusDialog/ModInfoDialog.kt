@@ -85,26 +85,26 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
   }
 
   override fun build(cont: Table) {
-    cont.iPaneG {ta ->
+    cont.iPaneG { ta ->
       ta.top()
       ta.image(IStyles.tanksui).height(200f).pad(10f).row()
 
       ta.addLine("模组信息").padBottom(20f)
 
-      ta.table(SglDrawConst.grayUIAlpha) {t3 ->
-        t3.table {t2 ->
-          t2.table {t ->
+      ta.table(SglDrawConst.grayUIAlpha) { t3 ->
+        t3.table { t2 ->
+          t2.table { t ->
             t.defaults().left().pad(5f).growX().height(40f)
             t.add(DeepSpace.modDisplayName).color(Pal.accent)
             t.row()
             t.add(IceStats.作者.localizedName).color(Pal.accent)
-            t.add(DeepSpace.modAuthor)
+            t.add(DeepSpace.modAuthor).color(IceColor.b4)
             t.button(IceStats.亲爱的贡献者.localizedName, SglDrawConst.contributeIcon, Styles.nonet, 28f) {
-            }.update {b: TextButton -> b.setChecked(false)}.width(230f)
+            }.update { b: TextButton -> b.setChecked(false) }.width(230f)
             t.row()
             t.add(IceStats.版本.localizedName).color(Pal.accent)
-            t.add(DeepSpace.modVersion)
-            t.table {update ->
+            t.add(DeepSpace.modVersion).color(IceColor.b4)
+            t.table { update ->
               update.add(object : Element() {
                 override fun draw() {
                   if (checking) {
@@ -122,7 +122,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
                   }
                 }
               }).size(40f)
-              update.add("").update {l: Label? ->
+              update.add("").update { l: Label? ->
                 l!!.setText(
                   if (checking) Core.bundle.get("infos.checkingUpgrade")
                   else if (newVersion != null) Core.bundle.format("infos.hasUpdate", newVersion)
@@ -131,11 +131,11 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
               }
             }.width(230f)
             t.row()
-            t.add(Core.bundle.get("infos.releaseDate")).color(Pal.accent)
-            t.add(DeepSpace.modUpdateDate)
+            t.add(IceStats.版本发布日期.localizedName).color(Pal.accent)
+            t.add(DeepSpace.modUpdateDate).color(IceColor.b4)
             t.button("", Icon.upload, Styles.nonet, 28f) {
               checkOrDoUpdate()
-            }.update {b: TextButton? ->
+            }.update { b: TextButton? ->
               b!!.setText(
                 if (newVersion != null) Core.bundle.get("misc.update")
                 else Core.bundle.get("infos.checkUpdate")
@@ -144,21 +144,19 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
           }.fillY().padTop(40f).margin(4f).padBottom(20f).minWidth(700f)
         }.row()
 
-        t3.table {t3 ->
+        t3.table { t3 ->
           t3.defaults().pad(3f)
 
-          t3.table {ta ->
+          t3.table { ta ->
             ta.add("模组的部分内容融合自以下已停更的模组").color(Pal.accent)
           }.row()
-          t3.table {ta ->
-            ta.table {t1 ->
+          t3.table { ta ->
+            ta.table { t1 ->
 
-              t1.table(IFiles.createNinePatch("contributors")) {
+              t1.table(IStyles.contributors) {
                 it.image(TextureRegion(Texture(DeepSpace.mod.root.child("icon_singularity.png")))).grow()
               }.margin(5f).size(100f).pad(5f).row()
-              t1.table {
-                it.add("Singularity").color(Pal.accent)
-              }.growX().row()
+              t1.table { it.add("Singularity").color(Pal.accent) }.growX().row()
 
               t1.table {
                 it.add("作者:").expand().left().color(Pal.accent)
@@ -167,15 +165,13 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
 
             }.padRight(30f)
 
-            ta.table {t1 ->
+            ta.table { t1 ->
 
-              t1.table(IFiles.createNinePatch("contributors")) {
+              t1.table(IStyles.contributors) {
                 it.image(TextureRegion(Texture(DeepSpace.mod.root.child("icon_curseOfFlesh.png")))).grow()
               }.margin(5f).size(100f).pad(5f).row()
 
-              t1.table {
-                it.add("CurseOfFlesh").color(Pal.accent)
-              }.growX().row()
+              t1.table { it.add("CurseOfFlesh").color(Pal.accent) }.growX().row()
 
               t1.table {
                 it.add("作者:").expand().left().color(Pal.accent)
@@ -184,7 +180,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             }
 
           }.growX().row()
-          t3.table {ta ->
+          t3.table { ta ->
             ta.add("所有内容均已获得授权,感谢各mod作者的帮助").color(Pal.accent)
           }.row()
 
@@ -194,9 +190,9 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
 
       ta.addLine("亲爱贡献者").padBottom(20f)
       ta.table {
-        it.table(SglDrawConst.grayUIAlpha) {table ->
+        it.table(SglDrawConst.grayUIAlpha) { table ->
           table.defaults().pad(8f)
-          table.table(Tex.underline) {t ->
+          table.table(Tex.underline) { t ->
             t.left().defaults().left().fill()
             t.add("在此,特别谢鸣为mod开发过程提供了不可或缺的帮助的开发者和贡献者").color(Pal.accent)
           }.growX().row()
@@ -205,14 +201,14 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             RandSetTextrue("contributors", 11)
           }
           val interval = Interval()
-          table.iTable {cons ->
+          table.iTable { cons ->
             cons.defaults().pad(4f)
             cons.setRowsize(5)
 
 
 
-            ContributorTable.contributors.forEach {contributor ->
-              cons.table(radst[ContributorTable.contributors.indexOf(contributor)].def) {t ->
+            ContributorTable.contributors.forEach { contributor ->
+              cons.table(radst[ContributorTable.contributors.indexOf(contributor)].def) { t ->
                 t.top().defaults().center().top().pad(16f).padTop(12f)
                 t.image(contributor.work.icon()).color(IceColor.b4).size(64f)
                 t.row()
@@ -231,21 +227,21 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
       }.padBottom(20f).row()
 
       ta.addLine("特别感谢").padBottom(20f)
-      ta.iTable {itable ->
+      ta.iTable { itable ->
 
-        itable.table(SglDrawConst.grayUIAlpha) {table ->
+        itable.table(SglDrawConst.grayUIAlpha) { table ->
           table.defaults().pad(8f)
-          table.table(Tex.underline) {t ->
+          table.table(Tex.underline) { t ->
             t.left().defaults().left().fill()
             t.addCR("感谢所有为DeepSpace mod项目开发提供了帮助的贡献者")
           }.growX().row()
 
-          table.iTable {cons ->
+          table.iTable { cons ->
             cons.defaults().pad(4f)
             cons.left()
             cons.setRowsize(5)
-            AssistedTable.assisteds.forEach {assisted ->
-              cons.table(IFiles.createNinePatch("contributors")) {t ->
+            AssistedTable.assisteds.forEach { assisted ->
+              cons.table(IFiles.createNinePatch("contributors")) { t ->
                 t.top().defaults().center().top().pad(16f).padTop(12f)
                 t.add(assisted).fillY()
                 t.row()
@@ -269,7 +265,8 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
         SponsoredDialog.buildButton(it, Icon.discord, Pal.lightOrange, "Discord论坛", "DeepSpace的discord聊天室") {
 
         }.growX().row()
-        SponsoredDialog.buildButton(it, SglDrawConst.telegramIcon, Color.valueOf("7289da"), "Telegram页面", "Telegram上的本mod群组") {}.growX().row()
+        SponsoredDialog.buildButton(it, SglDrawConst.telegramIcon, Color.valueOf("7289da"), "Telegram页面", "Telegram上的本mod群组") {}
+          .growX().row()
       }.growX()
 
     }
@@ -291,7 +288,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     } else {
       checking = true
 
-      Http.get(DeepSpace.githubProjReleaseApi, ConsT {res: Http.HttpResponse ->
+      Http.get(DeepSpace.githubProjReleaseApi, ConsT { res: Http.HttpResponse ->
 
         val response = Jval.read(res.resultAsString)
         if (!checking) return@ConsT
@@ -303,13 +300,13 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
               updateUrl = asset.getString("browser_download_url")
             }
           }
-          Core.app.post {Vars.ui.showInfoFade("[#${IceColor.r2}]模组有最新版本: ${response.getString("tag_name")}[]")}
+          Core.app.post { Vars.ui.showInfoFade("[#${IceColor.r2}]模组有最新版本: ${response.getString("tag_name")}[]") }
         } else {
-          Core.app.post {Vars.ui.showInfoFade("[#${IceColor.b4}]模组当前已是最新版本[]")}
+          Core.app.post { Vars.ui.showInfoFade("[#${IceColor.b4}]模组当前已是最新版本[]") }
         }
 
-        Core.app.post {checking = false}
-      }) {_ ->
+        Core.app.post { checking = false }
+      }) { _ ->
         Core.app.post {
           checking = false
           Vars.ui.showInfoFade("[crimson]检查更新失败,请检查网络连接")
@@ -321,14 +318,19 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
   private fun downloadMod() {
     downloadProgress = 0f
     Vars.ui.loadfrag.show("@downloading")
-    Vars.ui.loadfrag.setProgress {downloadProgress}
-    Http.get(updateUrl, {result: Http.HttpResponse? ->
+    Vars.ui.loadfrag.setProgress { downloadProgress }
+    Http.get(updateUrl, { result: Http.HttpResponse? ->
       try {
         val file = Vars.tmpDirectory.child("${DeepSpace.modDisplayName}-$newVersion.jar")
         val len = result!!.contentLength
 
-        file.write(false).use {stream ->
-          Streams.copyProgress(result.resultAsStream, stream, len, 4096, if (len <= 0) Floatc {_: Float ->} else Floatc {p: Float -> downloadProgress = p})
+        file.write(false).use { stream ->
+          Streams.copyProgress(
+            result.resultAsStream,
+            stream,
+            len,
+            4096,
+            if (len <= 0) Floatc { _: Float -> } else Floatc { p: Float -> downloadProgress = p })
         }
         val mod = Vars.mods.importMod(file)
         mod.repo = DeepSpace.REPO
@@ -345,7 +347,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
         Vars.ui.showException(e)
         Log.err(e)
       }
-    }, {e: Throwable? ->
+    }, { e: Throwable? ->
       Vars.ui.showException(e)
       Log.err(e)
     })
@@ -354,8 +356,8 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
   private fun isNewVersion(version: String): Boolean {
     var newestVersion = false
     try {
-      val newVersion = version.filter {it.isDigit()}
-      val currVersion = DeepSpace.modVersion.filter {it.isDigit()}
+      val newVersion = version.filter { it.isDigit() }
+      val currVersion = DeepSpace.modVersion.filter { it.isDigit() }
       newestVersion = newVersion.toInt() > currVersion.toInt()
     } catch (_: Throwable) {
     }

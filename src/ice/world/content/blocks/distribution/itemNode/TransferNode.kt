@@ -17,7 +17,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.graphics.TextureRegionDelegate
+import ice.library.struct.texture.TextureRegionDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
 import mindustry.core.Renderer
@@ -423,6 +423,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
     override fun draw() {
       Draw.rect(bottomRegion, x, y)
+      val z= Draw.z()
       Draw.z(Layer.power)
       val other: Tile? = Vars.world.tile(link)
       if (!(!linkValid(tile, other) || Mathf.zero(Renderer.bridgeOpacity))) {
@@ -436,8 +437,6 @@ class TransferNode(name: String) : IceBlock(name) {
 
         Draw.rect(endRegion, x, y, angle + 90)
         Draw.rect(endRegion, other.drawx(), other.drawy(), angle - 90)
-        /* Draw.rect(endRegion, x, y, i * 90 + 90);
-    Draw.rect(endRegion, other.drawx(), other.drawy(), i * 90 + 270);*/
         Lines.stroke(bridgeWidth)
         Tmp.v1.set(x, y).sub(other.worldx(), other.worldy()).setLength(1f).scl(-1f)
 
@@ -463,6 +462,7 @@ class TransferNode(name: String) : IceBlock(name) {
         }
       }
       Draw.alpha(1f)
+      Draw.z(Layer.power+0.1f)
       Draw.rect(topRegion, x, y)
       Draw.reset()
     }

@@ -13,6 +13,7 @@ import ice.game.IceTeam
 import ice.library.EventType
 import ice.library.IFiles
 import ice.library.Schematics
+import ice.library.struct.log
 import ice.ui.Documents
 import ice.ui.MenusDialog
 import ice.ui.UI
@@ -38,7 +39,13 @@ open class Ice : Mod() {
   companion object {
     val singularity = Singularity()
   }
-
+init {
+  /*val ad= Category::class.accessEnum0()
+  ad.newEnumInstance("xaw,",2)
+  Category.entries.toTypedArray().forEach {
+    log { it.name+"  "+it.ordinal }
+  }*/
+}
   init {
     DeepSpace.globals.load()
     // researches.init();

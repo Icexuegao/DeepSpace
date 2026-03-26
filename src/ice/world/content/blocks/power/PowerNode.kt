@@ -18,7 +18,7 @@ import arc.struct.ObjectSet
 import arc.struct.Seq
 import arc.util.*
 import ice.graphics.IceColor
-import ice.graphics.TextureRegionDelegate
+import ice.library.struct.texture.TextureRegionDelegate
 import mindustry.Vars
 import mindustry.core.Renderer
 import mindustry.core.UI

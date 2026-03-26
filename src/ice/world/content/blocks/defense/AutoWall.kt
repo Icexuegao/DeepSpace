@@ -5,7 +5,7 @@ import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import ice.core.StaticTile
-import ice.graphics.TextureRegionDelegate
+import ice.library.struct.texture.TextureRegionDelegate
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Drawf

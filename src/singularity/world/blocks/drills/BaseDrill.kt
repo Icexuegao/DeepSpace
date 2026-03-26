@@ -300,7 +300,7 @@ open class BaseDrill(name: String) : SglBlock(name) {
         if (!currentMines[index]) continue
         val ore = outputItems.get(index)
 
-        progress[index] += (if (consumer.hasConsume()) consumer.consDelta() else delta()) * ore.amount * warmup * speed
+        progress[index] += (if (consumer.hasConsume()) consumer.consDelta()  else delta()) * ore.amount * warmup * speed
 
         lastDrillSpeed[index] = (ore.amount * warmup * speed) / (drillTime + ore.item.hardness * hardMultiple)
         val delay = drillTime + ore.item.hardness * hardMultiple
