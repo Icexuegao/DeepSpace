@@ -1,5 +1,6 @@
 package ice.world.content.blocks.distribution.itemNode
 
+import arc.func.Boolf
 import arc.func.Prov
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
@@ -30,6 +31,7 @@ import mindustry.graphics.Pal
 import mindustry.input.Placement
 import mindustry.type.Item
 import mindustry.type.Liquid
+import mindustry.world.Block
 import mindustry.world.Edges
 import mindustry.world.Tile
 import mindustry.world.meta.BlockGroup
@@ -42,7 +44,12 @@ import kotlin.math.sqrt
 
 class TransferNode(name: String) : IceBlock(name) {
   companion object {
-    private var otherReq: BuildPlan? = null
+    var currentFindX = 0
+    var currentFindY = 0
+    var currentPlan: BuildPlan? = null;
+    var planFinder = Boolf<BuildPlan> { other ->
+      other.block == currentPlan!!.block && currentPlan != other && currentFindX == other.x && currentFindY == other.y
+    }
   }
 
   val timerCheckMoved: Int = timers++
@@ -84,7 +91,6 @@ class TransferNode(name: String) : IceBlock(name) {
     outputsLiquid = true
     liquidCapacity = 10f
     noUpdateDisabled = true
-    group = BlockGroup.liquids
     allowConfigInventory = false
     priority = TargetPriority.transport
     buildType = Prov(::TransferNodeBuild)
@@ -96,6 +102,19 @@ class TransferNode(name: String) : IceBlock(name) {
     }
   }
 
+  override fun canReplace(other: Block): Boolean {
+    if (other.alwaysReplace) return true
+    if (other.privileged) return false
+    return other.replaceable &&
+
+            (other !== this || (rotate && quickRotate)) &&
+
+            ((((hasItems&&other.group == BlockGroup.transportation)||(hasLiquids&&other.group== BlockGroup.liquids))) || other === this) &&
+
+            (size == other.size || (size >= other.size && ((subclass != null && subclass == other.subclass) ||
+
+                    group.anyReplace)))
+  }
   override fun setStats() {
     super.setStats()
     stats.add(Stat.range, range.toFloat(), StatUnit.blocks)
@@ -104,17 +123,28 @@ class TransferNode(name: String) : IceBlock(name) {
 
   override fun icons(): Array<out TextureRegion> = arrayOf(bottomRegion, topRegion)
   override fun drawPlanConfigTop(plan: BuildPlan, list: Eachable<BuildPlan>) {
-    otherReq = null
-    list.each { other ->
-      if (other.block === this && plan !== other && plan.config is Point2 && (plan.config as Point2).equals(
-          other.x - plan.x, other.y - plan.y
-        )
-      ) {
-        otherReq = other
+    /* otherReq = null
+     list.each { other ->
+       if (other.block === this && plan !== other && plan.config is Point2 && (plan.config as Point2).equals(
+           other.x - plan.x, other.y - plan.y
+         )
+       ) {
+         otherReq = other
+       }
+     }
+     otherReq?.let {
+       drawBridge(plan, it.drawx(), it.drawy())
+     }*/
+    val config = plan.config
+    if (config is Point2 && (abs(config.x) <= range && abs(config.y) <= range && ((config.x == 0 || config.y == 0) || directionAny))) {
+      currentFindX = plan.x + config.x
+      currentFindY = plan.y + config.y
+      currentPlan = plan
+      val otherReq = findPlan(list, currentFindX, currentFindY, planFinder)
+
+      if (otherReq != null) {
+        drawBridge(plan, otherReq.drawx(), otherReq.drawy())
       }
-    }
-    otherReq?.let {
-      drawBridge(plan, it.drawx(), it.drawy())
     }
   }
 
@@ -124,14 +154,15 @@ class TransferNode(name: String) : IceBlock(name) {
 
     Lines.stroke(bridgeWidth)
 
-    Tmp.v1.set(ox, oy).sub(req.drawx(), req.drawy()).setLength(Vars.tilesize / 2f)
+    Tmp.v1.set(ox, oy).sub(req.drawx(), req.drawy()).setLength(Vars.tilesize / 2f - 6f)
 
     Lines.line(bridgeRegion, req.drawx() + Tmp.v1.x, req.drawy() + Tmp.v1.y, ox - Tmp.v1.x, oy - Tmp.v1.y, false)
 
     Draw.rect(
       arrowRegion, (req.drawx() + ox) / 2f, (req.drawy() + oy) / 2f, Angles.angle(req.drawx(), req.drawy(), ox, oy)
     )
-
+    Draw.rect(topRegion, req.drawx(), req.drawy())
+    Draw.rect(topRegion, ox, oy)
     Draw.reset()
   }
 
@@ -398,28 +429,38 @@ class TransferNode(name: String) : IceBlock(name) {
         warmup = Mathf.approachDelta(warmup, efficiency, 1f / 30f)
         updateTransport(other.build)
       }
+
     }
 
     private fun doDump() {
-      if (hasItems) dumpAccumulate()
+      if (hasItems) {
+        var f = true
+        while (f) f = dump()
+      }
       if (hasLiquids) dumpLiquid(liquids.current(), 1f)
     }
 
     private fun updateTransport(other: Building) {
       transportCounter += edelta()
-      while (hasItems && transportCounter >= transportTime) {
+      var i=0
+      while (hasItems && transportCounter >= transportTime ) {
         val item: Item? = items.take()
         if (item != null && other.acceptItem(this, item)) {
           other.handleItem(this, item)
+
           moved = true
         } else if (item != null) {
           items.add(item, 1)
           items.undoFlow(item)
         }
+        i++
         transportCounter -= transportTime
+
       }
+
       if (hasLiquids && warmup >= 0.25f) {
-        moved = moved or (moveLiquid(other, liquids.current()) > 0.05f)
+        moveLiquid(other, liquids.current())
+        moved = true
       }
     }
 

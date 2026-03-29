@@ -44,6 +44,9 @@ open class Ice : Mod() {
     d,f,w
   }
 init {
+  Events.on(mindustry.game.EventType.AtlasPackEvent::class.java){
+
+  }
   val ad=  A::class.accessEnum0()
   ad.newEnumInstance("xaw",1)
   A.entries.toTypedArray().forEach {

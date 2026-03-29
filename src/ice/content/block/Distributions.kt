@@ -290,7 +290,9 @@ object Distributions : Load {
       desc(zh_CN, "传输节点","能同时运输液体和物品,拥有较远的范围")
     }
     size = 1
-    health = 200
+    health = 100
+    itemCapacity=20
+    transportTime = 60f/22f
     requirements(Category.distribution, IItems.锌锭,4, IItems.铜锭, 4, IItems.钴锭, 8, IItems.石英玻璃, 10)
   }
   val 运输节点 = ItemNode("transport_node").apply {

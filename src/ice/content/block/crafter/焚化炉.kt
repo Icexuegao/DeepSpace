@@ -47,8 +47,8 @@ open class 焚化炉 : SglBlock("incinerator") {
 
     conductivePower = true
     hasPower = true
-    //  rotate = true
-    //   rotateDraw = false
+  //  rotate = true
+ //   rotateDraw = false
     drawArrow = false
     hasLiquids = true
     hasItems = true
@@ -102,10 +102,9 @@ open class 焚化炉 : SglBlock("incinerator") {
     var config = TargetConfigure()
 
     override fun buildConfiguration(table: Table) {
-      val distTargetConfigTable =
-        DistTargetConfigTable(0, config, arrayOf(GridChildType.acceptor), arrayOf(ContentType.item, ContentType.liquid), true, { c ->
-          configure(c.pack())
-        }) {}
+      val distTargetConfigTable = DistTargetConfigTable(0, config, arrayOf(GridChildType.acceptor), arrayOf(ContentType.item, ContentType.liquid), true, {c ->
+        configure(c.pack())
+      }) {}
       table.add(distTargetConfigTable)
       table.background = IStyles.paneLeft
     }
@@ -115,7 +114,7 @@ open class 焚化炉 : SglBlock("incinerator") {
     }
 
     override fun updateTile() {
-      heat = Mathf.approachDelta(heat, if (consumer.valid && enabled) 1f else 0f, 0.04f)
+      heat = Mathf.approachDelta(heat, if (consumer.valid &&enabled) 1f else 0f, 0.04f)
     }
 
     override fun read(read: Reads, revision: Byte) {
@@ -144,7 +143,11 @@ open class 焚化炉 : SglBlock("incinerator") {
         val configuredContents = config.get(GridChildType.acceptor, ContentType.item)
         if (configuredContents != null && configuredContents.contains(item)) {
           val dirBit = config.getDirections(GridChildType.acceptor, item)
-          for (it in dirBit) return heandDirBit(source, it)
+          for (it in dirBit) {
+            if (nearby(it) === source) return true
+            if (nearby(it) is LiquidJunction.LiquidJunctionBuild || nearby(it) is mindustry.world.blocks.liquid.LiquidJunction.LiquidJunctionBuild) return true
+
+          }
         }
         return false
       }
@@ -156,17 +159,15 @@ open class 焚化炉 : SglBlock("incinerator") {
         val configuredContents = config.get(GridChildType.acceptor, ContentType.liquid)
         if (configuredContents != null && configuredContents.contains(liquid)) {
           val dirBit = config.getDirections(GridChildType.acceptor, liquid)
-          for (it in dirBit) return heandDirBit(source, it)
+          for (it in dirBit) {
+            if (nearby(it) === source) return true
+            if (nearby(it) is LiquidJunction.LiquidJunctionBuild || nearby(it) is mindustry.world.blocks.liquid.LiquidJunction.LiquidJunctionBuild) return true
+
+          }
         }
         return false
       }
       return heat > 0.5f && liquid.incinerable
-    }
-
-    fun heandDirBit(build: Building, dirBit: Int): Boolean {
-      if (nearby(dirBit) == build) return true
-      if (nearby(dirBit) is LiquidJunction.LiquidJunctionBuild || nearby(dirBit) is mindustry.world.blocks.liquid.LiquidJunction.LiquidJunctionBuild) return true
-      return false
     }
 
     override fun handleItem(source: Building?, item: Item?) {
