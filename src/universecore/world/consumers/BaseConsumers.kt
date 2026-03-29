@@ -15,12 +15,12 @@ import mindustry.type.LiquidStack
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
 import mindustry.world.meta.Stats
-import universecore.world.consumers.cons.SglConsumeEnergy
-import universecore.world.consumers.cons.SglConsumeMedium
+import universecore.world.consumers.cons.ConsumeEnergy
+import universecore.world.consumers.cons.ConsumeMedium
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.util.Empties
-import universecore.world.consumers.cons.ConsumeItems
-import universecore.world.consumers.cons.ConsumeLiquids
+import universecore.world.consumers.cons.item.ConsumeItems
+import universecore.world.consumers.cons.liquid.ConsumeLiquids
 import universecore.world.consumers.cons.ConsumePower
 import kotlin.math.max
 
@@ -139,12 +139,12 @@ open class BaseConsumers(
     return add(ConsumeLiquids(LiquidStack.with(*items)))
   }
 
-  fun energy(usage: Float): SglConsumeEnergy<*> {
-    return add(SglConsumeEnergy(usage))
+  fun energy(usage: Float): ConsumeEnergy<*> {
+    return add(ConsumeEnergy(usage))
   }
 
-  fun medium(cons: Float): SglConsumeMedium<*> {
-    return add(SglConsumeMedium(cons))
+  fun medium(cons: Float): ConsumeMedium<*> {
+    return add(ConsumeMedium(cons))
   }
 
   fun power(usage: Float): ConsumePower<*> {

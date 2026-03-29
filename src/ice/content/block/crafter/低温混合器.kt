@@ -15,7 +15,7 @@ import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.FloorCrafter
-import universecore.world.consumers.cons.SglConsumeFloor
+import universecore.world.consumers.cons.ConsumeFloor
 
 class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
   init {
@@ -52,7 +52,7 @@ class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
     newProduce().apply {
       items(IItems.低温化合物, 1)
     }
-    newBooster(1f).add(SglConsumeFloor(IAttribute.寒冷, 0.1f))
+    newBooster(1f).add(ConsumeFloor(IAttribute.寒冷, 0.1f))
 
   }
 }

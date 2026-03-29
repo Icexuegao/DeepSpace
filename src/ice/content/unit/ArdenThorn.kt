@@ -17,7 +17,7 @@ import ice.entities.bullet.RandomDamageBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.ui.bundle.BaseBundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.Entity
@@ -154,7 +154,7 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
 
   class ArdenThornUnit : Entity() {
     companion object {
-      val regions: TextureRegion by TextureRegionDelegate("ardenThorn-propeller".appendModName())
+      val regions: TextureRegion by LazyTextureSingleDelegate("ardenThorn-propeller".appendModName())
     }
 
     override fun drawBodyRegion(rotation: Float) {

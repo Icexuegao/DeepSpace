@@ -7,28 +7,31 @@ import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.library.scene.ui.ItemSelection
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
+import mindustry.gen.Building
 import mindustry.graphics.Drawf
 import mindustry.type.Liquid
 import mindustry.world.blocks.liquid.LiquidBlock
 import mindustry.world.draw.DrawRegion
+import mindustry.world.meta.BlockGroup
+import mindustry.world.meta.Stat
 import singularity.world.blocks.SglBlock
 import kotlin.math.min
 
 open class LiquidClassifier(name: String) : SglBlock(name) {
-  val top2: TextureRegion by TextureRegionDelegate("${this.name}-top2")
+  val top2: TextureRegion by LazyTextureSingleDelegate("${this.name}-top2")
 
   init {
     update = true
     saveConfig = true
-    hasLiquids = false
+    hasLiquids = true
     configurable = true
-    destructible = true
     underBullets = true
+    group = BlockGroup.liquids
     outputsLiquid = true
     clearOnDoubleTap = true
     buildType = Prov(::LiquidClassifierBuild)
@@ -50,6 +53,11 @@ open class LiquidClassifier(name: String) : SglBlock(name) {
     }
   }
 
+  override fun setStats() {
+    super.setStats()
+    stats.remove(Stat.liquidCapacity)
+  }
+
   inner class LiquidClassifierBuild : SglBuilding() {
 
     var sortLiquid: Liquid? = null
@@ -57,10 +65,10 @@ open class LiquidClassifier(name: String) : SglBlock(name) {
       return sortLiquid
     }
 
+    override fun acceptLiquid(source: Building, liquid: Liquid)=false
+
     override fun buildConfiguration(table: Table) {
-      ItemSelection.buildTable(
-        block, table, Vars.content.liquids(), { sortLiquid }, { value: Liquid? -> this.configure(value) }, true
-      )
+      ItemSelection.buildTable(block, table, Vars.content.liquids(), ::sortLiquid, this::configure, true)
     }
 
     override fun updateTile() {
@@ -68,11 +76,14 @@ open class LiquidClassifier(name: String) : SglBlock(name) {
       proximity.forEach {
         if (it is MultipleLiquidBlock.MultipleBlockBuild) {
           proximity.forEach { building ->
-            if (building.acceptLiquid(this, sortLiquid)) {
+
+            it.moveLiquid(building, sortLiquid)
+
+            /*if (building.acceptLiquid(this, sortLiquid)) {
               val amount: Float = min(it.liquids.get(sortLiquid), building.block.liquidCapacity - building.liquids.get(sortLiquid))
               building.handleLiquid(this, sortLiquid, amount)
               it.liquids.remove(sortLiquid, amount)
-            }
+            }*/
           }
         }
       }

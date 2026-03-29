@@ -20,46 +20,48 @@ import mindustry.world.Tile
 import singularity.graphic.SglDraw
 import singularity.graphic.SglShaders
 import singularity.type.ReactLiquid
-import singularity.type.ReactLiquid.effectWith
+import singularity.type.ReactLiquid.Companion.effectWith
 import singularity.world.SglFx
 
 @Suppress("unused")
 object ILiquids : Load {
   val 腐殖浆体 = IceLiquid("liquid_humusSlurry", "a09bbd") {
-    viscosity = 0.6f
-    temperature = 0.3f
     bundle {
       desc(zh_CN, "腐殖浆体", "一种富含有机质的浆体,可用于土壤改良")
     }
+    viscosity = 0.6f
+    temperature = 0.3f
   }
   val 温热孢液 = IceLiquid("liquid_warmSpore", "fa9c28") {
-    temperature = 0.8f
-    viscosity = 0.5f
     bundle {
       desc(zh_CN, "温热孢液", "一种温暖的孢子悬浮液,具有生物活性")
     }
+    temperature = 0.8f
+    viscosity = 0.5f
+
   }
   val 芥蒂液 = IceLiquid("liquid_cressLiquid", "7f7f7f") {
-    viscosity = 0.4f
-    temperature = 0.5f
     bundle {
       desc(zh_CN, "芥蒂液", "一种灰色的中性液体,可用于中和反应")
     }
+    viscosity = 0.4f
+    temperature = 0.5f
   }
   val 废水 = IceLiquid("liquid_wasteWater", "666666") {
+    bundle {
+      desc(zh_CN, "废水", "一种由工业生产排放的强放射性废水,被其污染过的地区极难再次使用")
+    }
+    incinerable=false
     effect = IStatus.辐射
     heatCapacity = 0.25f
     viscosity = 0.99f
     temperature = 1.5f
-    bundle {
-      desc(zh_CN, "废水", "一种由工业生产排放的强放射性废水,被其污染过的地区极难再次使用")
-    }
   }
   val 浓稠血浆 = IceLiquid("liquid_thickPlasma", "cc3737") {
-    nutrientConcentration = 0.2f
     bundle {
       desc(zh_CN, "浓稠血浆", "从朔方蔓延而来")
     }
+    nutrientConcentration = 0.2f
     setUpdate { pud ->
       pud.buildOn()?.let {
         if (pud is IcePuddle) {
@@ -71,23 +73,26 @@ object ILiquids : Load {
     }
   }
   val 急冻液 = IceLiquid("liquid_swiftCryofluid", "E1E9F0") {
+    bundle {
+      desc(zh_CN, "急冻液", "由低温化合物与冷却液混合而成,比冷却液效果更强")
+    }
     lightColor = Color.valueOf("E1E9F09A")
     effect = StatusEffects.freezing
     heatCapacity = 1.4f
     viscosity = 0.6f
     temperature = 0.15f
-    bundle {
-      desc(zh_CN, "急冻液", "由低温化合物与冷却液混合而成,比冷却液效果更强")
-    }
   }
   val 灵液 = IceLiquid("liquid_ichors", "ffaa5f") {
-    viscosity = 0.7f
-    boilPoint = 1.7f
     bundle {
       desc(zh_CN, "灵液", "一种酸性极强的溶液,可以用来处理金属")
     }
+    viscosity = 0.7f
+    boilPoint = 1.7f
   }
   val 血肉赘生物 = CellLiquid("liquid_bloodSlime").apply {
+    bundle {
+      desc(zh_CN, "血肉赘生物", "一种高温且易燃易爆的烈性流体液体,制取或运输该液体时,请使用专用管道!", "[red]鲜血必将流淌[]")
+    }
     incinerable = false
     cells = 8
     maxSpread = 0.5f
@@ -106,11 +111,11 @@ object ILiquids : Load {
     heatCapacity = 0.25f
     viscosity = 0.9f
     temperature = 0.7f
-    bundle {
-      desc(zh_CN, "血肉赘生物", "一种高温且易燃易爆的烈性流体液体,制取或运输该液体时,请使用专用管道!", "[red]鲜血必将流淌[]")
-    }
   }
   val 超临界流体 = IceLiquid("liquid_supercriticalFluids", "E1776A") {
+    bundle {
+      desc(zh_CN, "超临界流体", "一种通过复杂工业化处理萃取出的特殊流体,具有良好的传质、传热及溶解性能")
+    }
     incinerable = false
     lightColor = Color.valueOf("E1776A9A")
     effect = IStatus.蚀骨
@@ -118,15 +123,12 @@ object ILiquids : Load {
     heatCapacity = 2.1f
     viscosity = 0.5f
     temperature = 0.1f
-    bundle {
-      desc(zh_CN, "超临界流体", "一种通过复杂工业化处理萃取出的特殊流体,具有良好的传质、传热及溶解性能")
-    }
   }
   val 暮光液 = IceLiquid("liquid_duskLiquid", "deedff") {
-    temperature = 0.2f
     bundle {
       desc(zh_CN, "暮光液", "暮光液")
     }
+    temperature = 0.2f
   }
   var 纯净水 = object : Liquid("liquid_purified_water", Color.valueOf("#C3DFFF").a(0.8f)) {
     init {
@@ -341,12 +343,12 @@ object ILiquids : Load {
 
   }
   val 沼气 = IceLiquid("liquid_methane", "bb2912") {
-    gas = true
-    explosiveness = 0.5f
-    flammability = 0.8f
     bundle {
       desc(zh_CN, "沼气", "一种天然气体,主要成分是甲烷,可替代部分工厂的燃料需求")
     }
+    gas = true
+    explosiveness = 0.5f
+    flammability = 0.8f
   }
 
   val 氢气 = IceLiquid("liquid_hydrogen", Color.valueOf("#9eabf7")) {

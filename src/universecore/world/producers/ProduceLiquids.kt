@@ -13,7 +13,7 @@ import mindustry.ui.Bar
 import mindustry.world.meta.Stat
 import mindustry.world.meta.Stats
 import universecore.components.blockcomp.ProducerBuildComp
-import universecore.world.consumers.cons.ConsumeLiquidBase
+import universecore.world.consumers.cons.liquid.ConsumeLiquidBase
 import kotlin.math.min
 
 class ProduceLiquids<T>(var liquids: Array<out LiquidStack>) : BaseProduce<T>() where T : Building, T : ProducerBuildComp {

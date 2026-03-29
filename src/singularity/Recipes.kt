@@ -11,8 +11,8 @@ import mindustry.world.blocks.environment.Floor
 import mindustry.world.meta.StatUnit
 import singularity.recipes.EnergyMarker
 import singularity.recipes.NormalCrafterParser
-import universecore.world.consumers.cons.SglConsumeEnergy
-import universecore.world.consumers.cons.SglConsumeFloor
+import universecore.world.consumers.cons.ConsumeEnergy
+import universecore.world.consumers.cons.ConsumeFloor
 
 import singularity.world.meta.SglStatUnit
 import singularity.world.products.ProduceEnergy
@@ -23,11 +23,11 @@ import tmi.recipe.RecipeItemGroup
 import tmi.recipe.RecipeItemStack
 import tmi.recipe.types.PowerMark
 import universecore.world.consumers.*
-import universecore.world.consumers.cons.ConsumeItemBase
-import universecore.world.consumers.cons.ConsumeItemCond
-import universecore.world.consumers.cons.ConsumeLiquidBase
-import universecore.world.consumers.cons.ConsumeLiquidCond
-import universecore.world.consumers.cons.ConsumeLiquids
+import universecore.world.consumers.cons.item.ConsumeItemBase
+import universecore.world.consumers.cons.item.ConsumeItemCond
+import universecore.world.consumers.cons.liquid.ConsumeLiquidBase
+import universecore.world.consumers.cons.liquid.ConsumeLiquidCond
+import universecore.world.consumers.cons.liquid.ConsumeLiquids
 import universecore.world.consumers.cons.ConsumePayload
 import universecore.world.consumers.cons.ConsumePower
 import universecore.world.producers.*
@@ -108,7 +108,7 @@ class Recipes : RecipeEntry {
     NormalCrafterParser.registerProduceParser(ProduceType.power) { b: Block?, r: Recipe?, p: ProducePower<*>?, h: Cons<RecipeItemStack<*>>? -> h!!.get(r!!.addProductionPersec(PowerMark, p!!.powerProduction)) }
 
     //neutron energy
-    NormalCrafterParser.registerConsumeParser(ConsumeType.energy) { b: Block?, r: Recipe?, c: SglConsumeEnergy<*>?, h: Cons<RecipeItemStack<*>>? -> h!!.get(r!!.addMaterialPersec(EnergyMarker.INSTANCE, c!!.usage).setFormat { f: Float -> (if (f * 60.0f > 1000.0f) UI.formatAmount((f * 60.0f).toLong()) else Strings.autoFixed(f * 60.0f, 2)) + SglStatUnit.neutronFluxSecond.localized() }) }
+    NormalCrafterParser.registerConsumeParser(ConsumeType.energy) { b: Block?, r: Recipe?, c: ConsumeEnergy<*>?, h: Cons<RecipeItemStack<*>>? -> h!!.get(r!!.addMaterialPersec(EnergyMarker.INSTANCE, c!!.usage).setFormat { f: Float -> (if (f * 60.0f > 1000.0f) UI.formatAmount((f * 60.0f).toLong()) else Strings.autoFixed(f * 60.0f, 2)) + SglStatUnit.neutronFluxSecond.localized() }) }
     NormalCrafterParser.registerProduceParser(ProduceType.energy) { b: Block?, r: Recipe?, p: ProduceEnergy<*>, h: Cons<RecipeItemStack<*>>? -> h!!.get(r!!.addProductionPersec(EnergyMarker.INSTANCE, p.product).setFormat { f: Float -> (if (f * 60.0f > 1000.0f) UI.formatAmount((f * 60.0f).toLong()) else Strings.autoFixed(f * 60.0f, 2)) + SglStatUnit.neutronFluxSecond.localized() }) }
 
     //payloads
@@ -126,7 +126,7 @@ class Recipes : RecipeEntry {
     }
 
     //floors
-    NormalCrafterParser.registerConsumeParser(ConsumeType.floor) { b: Block?, r: Recipe?, c: SglConsumeFloor<*>?, h: Cons<RecipeItemStack<*>>? ->
+    NormalCrafterParser.registerConsumeParser(ConsumeType.floor) { b: Block?, r: Recipe?, c: ConsumeFloor<*>?, h: Cons<RecipeItemStack<*>>? ->
       for (entry in c!!.floorEff) {
         val eff = entry.value * b!!.size * b.size
         h!!.get(r!!.addMaterialInteger(TooManyItems.itemsManager.getItem<Floor?>(entry.key), b.size * b.size).setOptional(c.baseEfficiency > 0).setEff(c.baseEfficiency + eff)/*.setAttribute(c).setAttribute()*/)

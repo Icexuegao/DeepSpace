@@ -6,7 +6,7 @@ import arc.graphics.g2d.TextureRegion
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.block.EnvironmentBlocks
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.ui.bundle.BaseBundle
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
@@ -22,9 +22,9 @@ import mindustry.world.meta.BlockStatus
 import singularity.world.blocks.product.NormalCrafter
 
 class CrystalMiner : NormalCrafter("crystal_miner") {
-  val rotatorBottomRegion: TextureRegion by TextureRegionDelegate("$name-rotator-bottom")
-  val rotatorRegion: TextureRegion by TextureRegionDelegate("$name-rotator")
-  val rotatorRegionHeat: TextureRegion by TextureRegionDelegate("$name-rotator-heat")
+  val rotatorBottomRegion: TextureRegion by LazyTextureSingleDelegate("$name-rotator-bottom")
+  val rotatorRegion: TextureRegion by LazyTextureSingleDelegate("$name-rotator")
+  val rotatorRegionHeat: TextureRegion by LazyTextureSingleDelegate("$name-rotator-heat")
 
   init {
     BaseBundle.bundle {

@@ -4,7 +4,7 @@ import arc.scene.ui.layout.Table
 import mindustry.gen.Building
 import mindustry.world.meta.Stats
 import singularity.world.components.NuclearEnergyBuildComp
-import universecore.world.consumers.cons.SglConsumeEnergy
+import universecore.world.consumers.cons.ConsumeEnergy
 import singularity.world.meta.SglStat
 import singularity.world.meta.SglStatUnit
 import universecore.components.blockcomp.ProducerBuildComp
@@ -17,7 +17,7 @@ class ProduceEnergy<T>(var product: Float) : BaseProduce<T>() where T : Building
   }
 
   override fun buildIcons(table: Table) {
-    SglConsumeEnergy.buildNuclearIcon(table, product)
+    ConsumeEnergy.buildNuclearIcon(table, product)
   }
 
   override fun merge(other: BaseProduce<T>) {

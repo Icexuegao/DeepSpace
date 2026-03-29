@@ -5,7 +5,7 @@ import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import ice.core.StaticTile
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Drawf
@@ -14,7 +14,7 @@ import mindustry.graphics.Layer
 class AutoWall(name: String) : Wall(name) {
   var regions: Array<TextureRegion?> = arrayOfNulls(48)
   var regionLarge: TextureRegion? = null
-  val regionAtlas: TextureRegion by TextureRegionDelegate("${this.name}-atlas")
+  val regionAtlas: TextureRegion by LazyTextureSingleDelegate("${this.name}-atlas")
 
   init {
     allowRectanglePlacement = true

@@ -49,8 +49,8 @@ import singularity.world.draw.DrawRegionDynamic
 import singularity.world.meta.SglStat
 import singularity.world.particles.SglParticleModels
 import universecore.world.consumers.BaseConsumers
-import universecore.world.consumers.cons.ConsumeItems
-import universecore.world.consumers.cons.ConsumeLiquids
+import universecore.world.consumers.cons.item.ConsumeItems
+import universecore.world.consumers.cons.liquid.ConsumeLiquids
 import kotlin.math.max
 
 @Suppress("unused")

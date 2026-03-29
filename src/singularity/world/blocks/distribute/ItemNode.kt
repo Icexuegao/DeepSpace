@@ -23,7 +23,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.ui.Documents
 import mindustry.Vars
 import mindustry.core.Renderer
@@ -62,9 +62,9 @@ open class ItemNode(name: String) : SglBlock(name) {
   val timerCheckMoved: Int = this.timers++
   var range: Int = 0
   var transportTime: Float = 2.0f
-  var endRegion: TextureRegion by TextureRegionDelegate(this.name + "_end")
-  var bridgeRegion: TextureRegion by TextureRegionDelegate(this.name + "_bridge")
-  var arrowRegion: TextureRegion by TextureRegionDelegate(this.name + "_arrow")
+  var endRegion: TextureRegion by LazyTextureSingleDelegate(this.name + "_end")
+  var bridgeRegion: TextureRegion by LazyTextureSingleDelegate(this.name + "_bridge")
+  var arrowRegion: TextureRegion by LazyTextureSingleDelegate(this.name + "_arrow")
 
   var fadeIn: Boolean = true
   var pulse: Boolean = false

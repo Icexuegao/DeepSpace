@@ -2,11 +2,11 @@ package universecore.world.consumers
 
 import arc.struct.Seq
 import mindustry.ctype.ContentType
-import universecore.world.consumers.cons.SglConsumeEnergy
-import universecore.world.consumers.cons.SglConsumeFloor
-import universecore.world.consumers.cons.SglConsumeMedium
-import universecore.world.consumers.cons.ConsumeItemBase
-import universecore.world.consumers.cons.ConsumeLiquidBase
+import universecore.world.consumers.cons.ConsumeEnergy
+import universecore.world.consumers.cons.ConsumeFloor
+import universecore.world.consumers.cons.ConsumeMedium
+import universecore.world.consumers.cons.item.ConsumeItemBase
+import universecore.world.consumers.cons.liquid.ConsumeLiquidBase
 import universecore.world.consumers.cons.ConsumePayload
 import universecore.world.consumers.cons.ConsumePower
 
@@ -24,9 +24,9 @@ open class ConsumeType<T : BaseConsume<*>>(private val type: Class<T>, cType: Co
     val item: ConsumeType<out ConsumeItemBase<*>> = add(ConsumeItemBase::class.java, ContentType.item)
     val liquid: ConsumeType<out ConsumeLiquidBase<*>> = add(ConsumeLiquidBase::class.java, ContentType.liquid)
     val payload: ConsumeType<out ConsumePayload<*>> = add(ConsumePayload::class.java, null)
-    val energy: ConsumeType<out SglConsumeEnergy<*>> = add(SglConsumeEnergy::class.java, null)
-    val medium: ConsumeType<out SglConsumeMedium<*>> = add(SglConsumeMedium::class.java, null)
-    val floor: ConsumeType<out SglConsumeFloor<*>> = add(SglConsumeFloor::class.java, null)
+    val energy: ConsumeType<out ConsumeEnergy<*>> = add(ConsumeEnergy::class.java, null)
+    val medium: ConsumeType<out ConsumeMedium<*>> = add(ConsumeMedium::class.java, null)
+    val floor: ConsumeType<out ConsumeFloor<*>> = add(ConsumeFloor::class.java, null)
   }
 
   private val id: Int = allType.size

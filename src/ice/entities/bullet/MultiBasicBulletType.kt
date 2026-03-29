@@ -6,12 +6,12 @@ import arc.math.Mathf
 import arc.util.Tmp
 import ice.entities.bullet.base.BasicBulletType
 import ice.library.IFiles.appendModName
-import ice.library.struct.texture.TextureRegionNoArrDelegate
+import ice.library.struct.texture.LazyTextureAutoSequenceDelegate
 import mindustry.gen.Bullet
 
 open class MultiBasicBulletType(sprite: String) : BasicBulletType() {
-  var sprites: Array<TextureRegion> by TextureRegionNoArrDelegate(sprite.appendModName())
-  var spriteBacks: Array<TextureRegion> by TextureRegionNoArrDelegate("$sprite-back".appendModName())
+  var sprites: Array<TextureRegion> by LazyTextureAutoSequenceDelegate(sprite.appendModName())
+  var spriteBacks: Array<TextureRegion> by LazyTextureAutoSequenceDelegate("$sprite-back".appendModName())
 
   override fun draw(b: Bullet) {
     drawTrail(b)

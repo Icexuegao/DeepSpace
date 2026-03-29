@@ -20,7 +20,7 @@ import singularity.world.components.PayloadBuildComp
 import singularity.world.components.PayloadBuildComp.Companion.temp
 import singularity.world.draw.DrawPayloadFactory
 import singularity.world.modules.PayloadModule
-import universecore.world.consumers.cons.ConsumeItemBase
+import universecore.world.consumers.cons.item.ConsumeItemBase
 import universecore.world.consumers.ConsumeType
 import universecore.world.producers.ProducePayload
 import universecore.world.producers.ProduceType

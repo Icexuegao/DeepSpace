@@ -22,7 +22,7 @@ import ice.entities.IceRegister
 import ice.graphics.IceColor
 import ice.library.IFiles
 import ice.library.IFiles.appendModName
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars
 import mindustry.ai.ControlPathfinder
@@ -54,8 +54,8 @@ import kotlin.Unit as KUnit
 
 open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, applys: IceUnitType.() -> KUnit ={}) : UnitType(name) {
   companion object {
-    var imineLaserRegion: TextureRegion by TextureRegionDelegate("minelaser".appendModName())
-    var imineLaserEndRegion: TextureRegion by TextureRegionDelegate("minelaser-end".appendModName())
+    var imineLaserRegion: TextureRegion by LazyTextureSingleDelegate("minelaser".appendModName())
+    var imineLaserEndRegion: TextureRegion by LazyTextureSingleDelegate("minelaser-end".appendModName())
     val legOffsetIce = Vec2()
     val rand: Rand = Rand()
   }

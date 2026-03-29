@@ -1,4 +1,4 @@
-package universecore.world.consumers.cons
+package universecore.world.consumers.cons.item
 
 import arc.func.Boolf
 import arc.func.Cons

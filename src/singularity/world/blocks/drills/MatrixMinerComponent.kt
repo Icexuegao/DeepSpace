@@ -18,8 +18,7 @@ import mindustry.world.meta.Stats
 import singularity.world.blocks.drills.MatrixMiner.MatrixMinerBuild
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsumers
-import universecore.world.consumers.cons.ConsumeLiquidBase
-import universecore.world.consumers.cons.ConsumeLiquidCond
+import universecore.world.consumers.cons.liquid.ConsumeLiquidCond
 import universecore.world.consumers.ConsumeType
 import kotlin.math.max
 

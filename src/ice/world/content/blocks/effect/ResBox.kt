@@ -4,7 +4,7 @@ import arc.func.Prov
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import ice.content.IItems
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 
 import ice.world.content.item.IceItem
 import ice.world.draw.DrawBuild
@@ -20,7 +20,7 @@ import mindustry.world.meta.BuildVisibility
 import singularity.world.blocks.SglBlock
 
 class ResBox(name: String) : SglBlock(name) {
-  var top: TextureRegion by TextureRegionDelegate("${this.name}-top")
+  var top: TextureRegion by LazyTextureSingleDelegate("${this.name}-top")
 
   init {
     size = 1

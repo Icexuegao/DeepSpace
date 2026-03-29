@@ -12,12 +12,11 @@ import arc.util.io.Writes
 import arc.util.pooling.Pool.Poolable
 import arc.util.pooling.Pools
 import ice.library.scene.ui.ItemSelection
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
 import mindustry.type.Item
-import mindustry.world.Block
 import mindustry.world.blocks.storage.CoreBlock
 import mindustry.world.blocks.storage.StorageBlock.StorageBuild
 import mindustry.world.meta.Stat
@@ -31,7 +30,7 @@ class Unloader(name: String) : SglBlock(name) {
     lateinit var allItems: Array<Item>
   }
 
-  var centerRegion: TextureRegion by TextureRegionDelegate(this.name + "-center", "unloader-center")
+  var centerRegion: TextureRegion by LazyTextureSingleDelegate(this.name + "-center", "unloader-center")
 
   var speed: Float = 1f
   var allowCoreUnload: Boolean = true
@@ -50,7 +49,7 @@ class Unloader(name: String) : SglBlock(name) {
 
     config(Item::class.java) { tile: UnloaderBuild, item: Item -> tile.sortItem = item }
     configClear { tile: UnloaderBuild -> tile.sortItem = null }
-    buildType= Prov(::UnloaderBuild)
+    buildType = Prov(::UnloaderBuild)
   }
 
   override fun init() {
@@ -162,7 +161,9 @@ class Unloader(name: String) : SglBlock(name) {
 
     override fun updateTile() {
       super.updateTile()
-      if (((consumer.consDelta().let { unloadTimer += it; unloadTimer }) < speed) || (possibleBlocks.size < 2)) return
+
+      unloadTimer +=if (consumer.hasConsume()) consumer.consDelta() else delta()
+      if ((unloadTimer < speed) || (possibleBlocks.size < 2)) return
       var item: Item? = null
       var any = false
 
@@ -258,6 +259,7 @@ class Unloader(name: String) : SglBlock(name) {
     override fun config(): Item? {
       return sortItem
     }
+
     override fun write(write: Writes) {
       super.write(write)
       write.s((if (sortItem == null) -1 else sortItem!!.id).toInt())

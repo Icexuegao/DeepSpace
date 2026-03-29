@@ -55,7 +55,7 @@ public class EntityInfoFrag{
   float timer, delta;
 
   boolean wasHold, showRange, mark, showAllUnits;
-  int currCfg = 0;
+
   float holdTime;
 
   String showModeTip = "";
@@ -146,6 +146,9 @@ public class EntityInfoFrag{
     });
 
     Interval t = new Interval();
+    DFWFWF.INSTANCE.setCurrCfg(DFWFWF.INSTANCE.getCurrCfg()-1);
+    changeMode();
+
     UI.INSTANCE.getToolBarFrag().addTool(
         "showInfos",
         () -> Core.bundle.get(SettingValue.INSTANCE.get显示实体信息()? "infos.showInfos": "infos.hideInfos"),
@@ -336,10 +339,11 @@ public class EntityInfoFrag{
     hold = null;
 
     showRange = wasHold = showAllUnits = false;
-    currCfg++;
-    currCfg%=4;
+    DFWFWF.INSTANCE.setCurrCfg(DFWFWF.INSTANCE.getCurrCfg()+1);
 
-    switch(currCfg){
+    DFWFWF.INSTANCE.setCurrCfg(DFWFWF.INSTANCE.getCurrCfg()%4);
+
+    switch( DFWFWF.INSTANCE.getCurrCfg()){
       case 0:
         showModeTip = Core.bundle.get("infos.holdOff");
         break;

@@ -15,6 +15,7 @@ import ice.content.IItems
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.ui.bundle.BaseBundle
+import ice.world.content.blocks.liquid.LiquidJunction
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
@@ -46,8 +47,8 @@ open class 焚化炉 : SglBlock("incinerator") {
 
     conductivePower = true
     hasPower = true
-  //  rotate = true
- //   rotateDraw = false
+    //  rotate = true
+    //   rotateDraw = false
     drawArrow = false
     hasLiquids = true
     hasItems = true
@@ -101,9 +102,10 @@ open class 焚化炉 : SglBlock("incinerator") {
     var config = TargetConfigure()
 
     override fun buildConfiguration(table: Table) {
-      val distTargetConfigTable = DistTargetConfigTable(0, config, arrayOf(GridChildType.acceptor), arrayOf(ContentType.item, ContentType.liquid), true, {c ->
-        configure(c.pack())
-      }) {}
+      val distTargetConfigTable =
+        DistTargetConfigTable(0, config, arrayOf(GridChildType.acceptor), arrayOf(ContentType.item, ContentType.liquid), true, { c ->
+          configure(c.pack())
+        }) {}
       table.add(distTargetConfigTable)
       table.background = IStyles.paneLeft
     }
@@ -113,7 +115,7 @@ open class 焚化炉 : SglBlock("incinerator") {
     }
 
     override fun updateTile() {
-      heat = Mathf.approachDelta(heat, if (consumer.valid &&enabled) 1f else 0f, 0.04f)
+      heat = Mathf.approachDelta(heat, if (consumer.valid && enabled) 1f else 0f, 0.04f)
     }
 
     override fun read(read: Reads, revision: Byte) {
@@ -142,9 +144,7 @@ open class 焚化炉 : SglBlock("incinerator") {
         val configuredContents = config.get(GridChildType.acceptor, ContentType.item)
         if (configuredContents != null && configuredContents.contains(item)) {
           val dirBit = config.getDirections(GridChildType.acceptor, item)
-          dirBit.forEach {
-            if (source == nearby(it)) return true
-          }
+          for (it in dirBit) return heandDirBit(source, it)
         }
         return false
       }
@@ -152,18 +152,21 @@ open class 焚化炉 : SglBlock("incinerator") {
     }
 
     override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
-
       if (config.any() && heat >= 0.5f && liquid.incinerable) {
         val configuredContents = config.get(GridChildType.acceptor, ContentType.liquid)
         if (configuredContents != null && configuredContents.contains(liquid)) {
           val dirBit = config.getDirections(GridChildType.acceptor, liquid)
-          dirBit.forEach {
-            if (source == nearby(it)) return true
-          }
+          for (it in dirBit) return heandDirBit(source, it)
         }
         return false
       }
       return heat > 0.5f && liquid.incinerable
+    }
+
+    fun heandDirBit(build: Building, dirBit: Int): Boolean {
+      if (nearby(dirBit) == build) return true
+      if (nearby(dirBit) is LiquidJunction.LiquidJunctionBuild || nearby(dirBit) is mindustry.world.blocks.liquid.LiquidJunction.LiquidJunctionBuild) return true
+      return false
     }
 
     override fun handleItem(source: Building?, item: Item?) {

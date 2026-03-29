@@ -43,6 +43,18 @@ object IStyles {
   val background122 = IFiles.createNinePatch("background12-2")
   val background131 = IFiles.createNinePatch("background13-1")
 
+  val frameButtonDown2 = IFiles.createNinePatch("frameButtonDown2")
+  val frameButtonUp2 = IFiles.createNinePatch("frameButtonUp2")
+
+  val frameButtonStyle =TextButtonStyle().apply{
+    over = frameButtonUp2
+    font = Fonts.def
+    fontColor = Color.white
+    disabledFontColor = Color.gray
+    down = frameButtonDown2
+    up = frameButtonUp2
+  }
+
   val contributors =IFiles.createNinePatch("contributors")
   val achievementUnlock = IFiles.findModPng("achievement-unlock")
   val achievementLock = IFiles.findModPng("achievement-lock")

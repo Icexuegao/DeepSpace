@@ -17,7 +17,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
 import mindustry.core.Renderer
@@ -48,11 +48,11 @@ class TransferNode(name: String) : IceBlock(name) {
   val timerCheckMoved: Int = timers++
   var range = 10
   var transportTime = 2f
-  val endRegion: TextureRegion by TextureRegionDelegate("${this.name}-end")
-  var bridgeRegion: TextureRegion by TextureRegionDelegate("${this.name}-bridge")
-  var arrowRegion: TextureRegion by TextureRegionDelegate("${this.name}-arrow")
-  var topRegion: TextureRegion by TextureRegionDelegate("${this.name}-top")
-  var bottomRegion: TextureRegion by TextureRegionDelegate("${this.name}-bottom")
+  val endRegion: TextureRegion by LazyTextureSingleDelegate("${this.name}-end")
+  var bridgeRegion: TextureRegion by LazyTextureSingleDelegate("${this.name}-bridge")
+  var arrowRegion: TextureRegion by LazyTextureSingleDelegate("${this.name}-arrow")
+  var topRegion: TextureRegion by LazyTextureSingleDelegate("${this.name}-top")
+  var bottomRegion: TextureRegion by LazyTextureSingleDelegate("${this.name}-bottom")
   var fadeIn = true
   var pulse = false
   var arrowSpacing = 4f
@@ -99,8 +99,10 @@ class TransferNode(name: String) : IceBlock(name) {
   override fun setStats() {
     super.setStats()
     stats.add(Stat.range, range.toFloat(), StatUnit.blocks)
+    stats.add(Stat.speed, 60 / transportTime, StatUnit.itemsSecond)
   }
 
+  override fun icons(): Array<out TextureRegion> = arrayOf(bottomRegion, topRegion)
   override fun drawPlanConfigTop(plan: BuildPlan, list: Eachable<BuildPlan>) {
     otherReq = null
     list.each { other ->
@@ -153,8 +155,8 @@ class TransferNode(name: String) : IceBlock(name) {
           blockColor,
           (x + pos.x * 0.5f) * vvtf,
           (y + pos.y * 0.5f) * vvtf,
-          (x + pos.x * range) * vvtf,
-          (y + pos.y * range) * vvtf
+          (x + pos.x * (range - 1)) * vvtf,
+          (y + pos.y * (range - 1)) * vvtf
         )
       }
     }
@@ -423,7 +425,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
     override fun draw() {
       Draw.rect(bottomRegion, x, y)
-      val z= Draw.z()
+      val z = Draw.z()
       Draw.z(Layer.power)
       val other: Tile? = Vars.world.tile(link)
       if (!(!linkValid(tile, other) || Mathf.zero(Renderer.bridgeOpacity))) {
@@ -462,7 +464,7 @@ class TransferNode(name: String) : IceBlock(name) {
         }
       }
       Draw.alpha(1f)
-      Draw.z(Layer.power+0.1f)
+      Draw.z(Layer.power + 0.1f)
       Draw.rect(topRegion, x, y)
       Draw.reset()
     }

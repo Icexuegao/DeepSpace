@@ -28,7 +28,7 @@ import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsume
 import universecore.world.consumers.ConsumeType
 
-class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildComp, T : FloorCrafterBuildComp {
+class ConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildComp, T : FloorCrafterBuildComp {
   val floorEff: ObjectFloatMap<Floor> = ObjectFloatMap<Floor>()
   var baseEfficiency: Float = 1f
 
@@ -88,7 +88,7 @@ class SglConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildC
   }
 
   override fun merge(other: BaseConsume<T>) {
-    if (other is SglConsumeFloor<*>) {
+    if (other is ConsumeFloor<*>) {
       for (o in other.floorEff) {
         floorEff.put(o.key, floorEff.get(o.key, 1f) * o.value)
       }

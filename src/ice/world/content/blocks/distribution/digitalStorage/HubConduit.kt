@@ -4,7 +4,7 @@ import arc.func.Prov
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.util.Eachable
-import ice.library.struct.texture.TextureRegionArrDelegate
+import ice.library.struct.texture.LazyTextureArrayDelegate
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.game.Team
@@ -14,7 +14,7 @@ import mindustry.world.Tile
 import mindustry.world.blocks.production.GenericCrafter
 
 class HubConduit(name: String) : LogisticsBlock(name) {
-    val texture: Array<TextureRegion> by TextureRegionArrDelegate(this.name, 11)
+    val texture: Array<TextureRegion> by LazyTextureArrayDelegate(this.name, 11)
     val textureLookup = listOf(
         10,
         0,

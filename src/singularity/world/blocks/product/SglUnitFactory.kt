@@ -57,7 +57,7 @@ import singularity.world.meta.SglStat
 import singularity.world.modules.DistributeModule
 import singularity.world.modules.PayloadModule
 import universecore.world.consumers.BaseConsumers
-import universecore.world.consumers.cons.ConsumeItemBase
+import universecore.world.consumers.cons.item.ConsumeItemBase
 import universecore.world.consumers.ConsumeType
 import universecore.world.producers.BaseProducers
 import universecore.world.producers.ProducePayload

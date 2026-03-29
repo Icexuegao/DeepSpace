@@ -257,7 +257,6 @@ object LiquidBlocks : Load {
       desc(zh_CN, "流体抽离器", "流体枢纽的流体卸载装置,将流体卸载于相邻的可输入建筑,本身并不存储流体")
     }
     size = 1
-    liquidCapacity = 0f
     requirements(Category.liquid, IItems.铜锭, 20, IItems.黄铜锭, 10, IItems.铬锭, 10, IItems.石英玻璃, 10)
   }
   val 流体装卸器 = LiquidUnloader("liquid_unloader").apply {

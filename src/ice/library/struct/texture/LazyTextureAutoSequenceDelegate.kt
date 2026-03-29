@@ -4,7 +4,7 @@ import arc.graphics.g2d.TextureRegion
 import ice.library.IFiles
 import kotlin.reflect.KProperty
 
-class TextureRegionNoArrDelegate(private var basePath: String) : TextureDelegate() {
+class LazyTextureAutoSequenceDelegate(private var basePath: String) : LazyTextureDelegate() {
   private var cachedRegions: Array<TextureRegion>? = null
 
   init {

@@ -6,13 +6,14 @@ import arc.func.*
 import arc.graphics.Color
 import arc.math.Mathf
 import arc.scene.actions.Actions
+import arc.scene.ui.Button
 import arc.scene.ui.ImageButton
 import arc.scene.ui.TextButton
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
 import arc.util.Align
 import arc.util.Strings
-import ice.DeepSpace
+import arc.util.Tmp
 import ice.audio.IMusics
 import ice.audio.ISounds
 import ice.content.AtomSchematics
@@ -22,6 +23,7 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.element.ProgressBar
 import ice.library.scene.element.typinglabel.TLabel
+import ice.library.struct.log
 import ice.library.util.toStringi
 import ice.ui.Documents
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
@@ -36,7 +38,6 @@ import singularity.graphic.SglDrawConst
 import singularity.ui.SglUI
 import singularity.ui.dialogs.ModConfigDialog
 import singularity.ui.dialogs.ModConfigDialog.*
-import singularity.ui.dialogs.ModConfigDialog.ConfigCheck
 import singularity.ui.fragments.entityinfo.EntityInfoFrag
 import singularity.ui.fragments.entityinfo.HealthBarStyle
 
@@ -138,15 +139,16 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         1f
       ),
       ConfigButton("生命指示器风格") {
-        object : TextButton("", Styles.flatt) {
-          val self: TextButton = this
 
+        object : TextButton("", IStyles.frameButtonStyle) {
           init {
+            label.setColor(IceColor.b4)
             clicked {
               config.setHover { t ->
                 t.setSize(220f, 0f)
                 t.update {
-                  t.setPosition(self.getX(Align.bottom), self.getY(Align.bottom), Align.bottomLeft)
+                val d= localToStageCoordinates(Tmp.v1.set(x-width, y))
+                  t.setPosition(d.x,d.y)
                   t.isTransform = true
                 }
                 t.visible = true
@@ -179,22 +181,22 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       ConfigCheck("显示状态效果的剩余时间", {  SettingValue.显示状态效果的剩余时间 = it },SettingValue::显示状态效果的剩余时间),
       ConfigSepLine("data", IceStats.数据.localizedName),
       ConfigButton("重置已阅读的mod提示信息") {
-        object : TextButton(Core.bundle.get("settings.reset"), Styles.flatt) {
-          init {
-            clicked {
-              Vars.ui.showConfirm(Core.bundle.get("settings.resetHintsConfirm")) {
-                //  SglHint.resetCompletedHints();
+        Button(IStyles.frameButtonUp2,IStyles.frameButtonDown2).apply {
+          add(Core.bundle.get("settings.reset")).color(IceColor.b4)
+          clicked {
+            Vars.ui.showConfirm(Core.bundle.get("settings.resetHintsConfirm")) {
+              //  SglHint.resetCompletedHints();
               //  config.requireRelaunch()
 
-                Documents.DocumentNotificationData.reset()
-              }
+              Documents.DocumentNotificationData.reset()
             }
           }
         }
       },
       ConfigButton("重置所有已阅读的提示信息") {
-        object : TextButton(Core.bundle.get("settings.reset"), Styles.flatt) {
+        object : TextButton(Core.bundle.get("settings.reset"), IStyles.frameButtonStyle) {
           init {
+            label.setColor(IceColor.b4)
             clicked {
               Vars.ui.showConfirm(Core.bundle.get("settings.resetAllHintsConfirm")) {
                 //  SglHint.resetAllCompletedHints();

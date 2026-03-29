@@ -43,6 +43,11 @@ import singularity.world.draw.DrawSglTurret
 import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.ConsumeType
 import universecore.world.consumers.cons.*
+import universecore.world.consumers.cons.item.ConsumeItemBase
+import universecore.world.consumers.cons.item.ConsumeItems
+import universecore.world.consumers.cons.liquid.ConsumeLiquidBase
+import universecore.world.consumers.cons.liquid.ConsumeLiquidCond
+import universecore.world.consumers.cons.liquid.ConsumeLiquids
 import kotlin.math.max
 
 @Suppress("UNCHECKED_CAST")

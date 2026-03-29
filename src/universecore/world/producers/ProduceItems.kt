@@ -14,7 +14,7 @@ import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValues
 import mindustry.world.meta.Stats
 import universecore.components.blockcomp.ProducerBuildComp
-import universecore.world.consumers.cons.ConsumeItemBase.Companion.buildItemIcons
+import universecore.world.consumers.cons.item.ConsumeItemBase.Companion.buildItemIcons
 import kotlin.math.floor
 import kotlin.math.min
 

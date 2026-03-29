@@ -15,7 +15,7 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.IVars
 import ice.graphics.IceColor
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.library.util.toStringi
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawFull
@@ -53,7 +53,7 @@ class WindGenerator(name: String) : SglBlock(name) {
   }
 
   var basePowerProduction = 70f
-  var rotator: TextureRegion by TextureRegionDelegate("${this.name}-rotator")
+  var rotator: TextureRegion by LazyTextureSingleDelegate("${this.name}-rotator")
   var range: Int = 2
   val vtt = Vars.tilesize.toFloat()
   private val side: Float by lazy {(2 * range + size) * vtt}

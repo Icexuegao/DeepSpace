@@ -55,7 +55,7 @@ import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawDirSpliceBlock
 import singularity.world.draw.DrawExpandPlasma
-import universecore.world.consumers.cons.SglConsumeFloor
+import universecore.world.consumers.cons.ConsumeFloor
 import kotlin.math.pow
 
 @Suppress("unused")
@@ -214,7 +214,7 @@ object ProductBlocks : Load {
     produce!!.item(IItems.岩层沥青, 2)
 
     newBooster(1f)
-    consume!!.add(SglConsumeFloor(IAttribute.沥青, 1.12f))
+    consume!!.add(ConsumeFloor(IAttribute.沥青, 1.12f))
 
     drawers = DrawMulti(
       DrawBottom(), object : DrawLiquidRegion(Liquids.water) {
@@ -252,7 +252,7 @@ object ProductBlocks : Load {
     consume!!.time(30f)
     consume!!.power(2.2f)
     consume!!.add(
-      SglConsumeFloor<FloorCrafterBuild>(
+      ConsumeFloor<FloorCrafterBuild>(
         Blocks.stone, 1.2f / 9f, Blocks.craters, 0.8f / 9f, Blocks.dacite, 0.8f / 9f, Blocks.shale, 1f / 9f, Blocks.salt, 1f / 9f, Blocks.moss, 0.6f / 9f, Blocks.sporeMoss, 0.4f / 9f
       )
     ).baseEfficiency = 0f
@@ -263,7 +263,7 @@ object ProductBlocks : Load {
     newOptionalProduct()
     consume!!.time(45f)
     consume!!.add(
-      SglConsumeFloor<FloorCrafterBuild>(
+      ConsumeFloor<FloorCrafterBuild>(
         Blocks.stone, 0.4f / 9f, Blocks.craters, 0.5f / 9f, Blocks.salt, 2f / 9f
       )
     ).baseEfficiency = 0f

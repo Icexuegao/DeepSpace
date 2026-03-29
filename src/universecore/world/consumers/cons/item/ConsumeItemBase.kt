@@ -1,9 +1,8 @@
-package universecore.world.consumers.cons
+package universecore.world.consumers.cons.item
 
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
 import ice.library.scene.element.display.ItemDisplay
-import ice.world.meta.IStatValues
 import mindustry.type.ItemStack
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsume

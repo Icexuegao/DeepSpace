@@ -12,7 +12,7 @@ buildscript {
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
   extra["kotlinCompatibility"] = "2.3.20"
   extra["java"] = 25
-  extra["mdtVersion"]="Anuken:Mindustry:v156"
+  extra["mdtVersion"]="Anuken:Mindustry:v156.2"
   var mdtVersion: String by extra
   repositories {
     mavenLocal()
@@ -68,8 +68,8 @@ repositories {
 
 }
 dependencies {
- // implementation("com.github.EB-wilson.UniverseKit:reflection:1.0")
- // implementation("com.github.EB-wilson.UniverseKit:platform:1.0")
+  implementation("com.github.EB-wilson.UniverseKit:reflection:1.0")
+
   compileOnly(mdtVersion)
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")
@@ -150,7 +150,7 @@ tasks {
     manifest.attributes("Main-Class" to "ice.Ice")
   }
 
-  register<proguard.gradle.ProGuardTask>("proGuardTask") {
+  /*register<proguard.gradle.ProGuardTask>("proGuardTask") {
     // 重要：依赖 shadowJar，而不是 jar
     dependsOn(shadowJar)
     group = "alon"
@@ -173,7 +173,7 @@ tasks {
     printmapping("build/mapping.txt")
     printseeds("build/seeds.txt")
     printusage("build/usage.txt")
-  }
+  }*/
 
   register<Copy>("myCopyJar") {
     group = "alon"
@@ -247,14 +247,6 @@ tasks {
     val file1: File = file("build/libs/version")
     destinationDirectory.set(file1)
     from(zipTree("build/libs/${project.name}.jar"))
-  }
-
-
-  register<Copy>("myCopy") {
-    group = "alon"
-    dependsOn("deploy")
-    from("build/libs/${project.name}.jar") //源
-    into("C:/Users/$proUser/AppData/Roaming/Mindustry/mods")
   }
 }
 val compileKotlin: KotlinCompile by tasks

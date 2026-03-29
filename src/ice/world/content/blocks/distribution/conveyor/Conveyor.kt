@@ -16,7 +16,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.core.Placement
-import ice.library.struct.texture.TextureRegionArrArrDelegate
+import ice.library.struct.texture.LazyTextureMatrixDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.content.blocks.distribution.Junction
 import ice.world.content.blocks.distribution.conveyor.Autotiler.SliceMode
@@ -49,7 +49,7 @@ open class Conveyor(name: String) : IceBlock(name), Autotiler {
     private const val capacity = 3
   }
 
-  var regions: Array<Array<TextureRegion>> by TextureRegionArrArrDelegate(this.name, 5, 4)
+  var regions: Array<Array<TextureRegion>> by LazyTextureMatrixDelegate(this.name, 5, 4)
   var speed: Float = 0f
   var pushUnits: Boolean = true
   lateinit var junctionReplacement: Junction

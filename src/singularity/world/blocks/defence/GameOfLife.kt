@@ -59,8 +59,8 @@ import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.components.blockcomp.FactoryBlockComp
 import universecore.world.consumers.BaseConsume
 import universecore.world.consumers.BaseConsumers
-import universecore.world.consumers.cons.ConsumeItems
-import universecore.world.consumers.cons.ConsumeLiquids
+import universecore.world.consumers.cons.item.ConsumeItems
+import universecore.world.consumers.cons.liquid.ConsumeLiquids
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.roundToInt

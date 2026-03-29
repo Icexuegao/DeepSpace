@@ -31,6 +31,7 @@ import singularity.Singularity
 import singularity.type.SglCategory
 import singularity.type.SglContentType
 import tmi.RecipeEntryPoint
+import universe.util.reflect.Enums.accessEnum0
 import universecore.UncCore
 
 @RecipeEntryPoint(Recipes::class)
@@ -39,12 +40,15 @@ open class Ice : Mod() {
   companion object {
     val singularity = Singularity()
   }
+  enum class A{
+    d,f,w
+  }
 init {
-  /*val ad= Category::class.accessEnum0()
-  ad.newEnumInstance("xaw,",2)
-  Category.entries.toTypedArray().forEach {
+  val ad=  A::class.accessEnum0()
+  ad.newEnumInstance("xaw",1)
+  A.entries.toTypedArray().forEach {
     log { it.name+"  "+it.ordinal }
-  }*/
+  }
 }
   init {
     DeepSpace.globals.load()

@@ -12,7 +12,7 @@ import mindustry.world.blocks.environment.Floor
 import singularity.world.components.FloorCrafterBuildComp
 import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.ConsumeType
-import universecore.world.consumers.cons.SglConsumeFloor
+import universecore.world.consumers.cons.ConsumeFloor
 import universecore.world.producers.BaseProducers
 
 open class FloorCrafter(name: String) : NormalCrafter(name) {
@@ -49,14 +49,14 @@ open class FloorCrafter(name: String) : NormalCrafter(name) {
     val t = Vars.world.tile(x, y)
     if (t != null) {
       for (consumer in consumers) {
-        val cons: SglConsumeFloor<*> = consumer.get(ConsumeType.floor)?: continue
+        val cons: ConsumeFloor<*> = consumer.get(ConsumeType.floor)?: continue
           c++
           eff = cons.getEff(FloorCrafterBuildComp.getFloors(t, this))
       }
 
       if (c == 0) eff = 1f
       for (boost in boosts) {
-        val cons: SglConsumeFloor<*>? = boost.key!!.get(ConsumeType.floor)
+        val cons: ConsumeFloor<*>? = boost.key!!.get(ConsumeType.floor)
         if (cons != null) {
           c++
           eff *= cons.getEff(FloorCrafterBuildComp.getFloors(t, this))
@@ -66,7 +66,7 @@ open class FloorCrafter(name: String) : NormalCrafter(name) {
       for (product in optionalProducts) {
         if (!valid && !product.key.optionalAlwaysValid) continue
 
-        val cons: SglConsumeFloor<*>? = product.key.get(ConsumeType.floor)
+        val cons: ConsumeFloor<*>? = product.key.get(ConsumeType.floor)
         if (cons != null) {
           val optEff: Float = cons.getEff(FloorCrafterBuildComp.getFloors(t, this))
           if (optEff <= 0) continue

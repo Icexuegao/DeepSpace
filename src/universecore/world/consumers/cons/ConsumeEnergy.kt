@@ -16,7 +16,7 @@ import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsume
 import universecore.world.consumers.ConsumeType
 
-class SglConsumeEnergy<T>(var usage: Float) : BaseConsume<T>() where T : Building, T : NuclearEnergyBuildComp, T : ConsumerBuildComp {
+class ConsumeEnergy<T>(var usage: Float) : BaseConsume<T>() where T : Building, T : NuclearEnergyBuildComp, T : ConsumerBuildComp {
   companion object {
     fun buildNuclearIcon(table: Table, amount: Float) {
       table.stack(Table { o: Table? ->
@@ -43,7 +43,7 @@ class SglConsumeEnergy<T>(var usage: Float) : BaseConsume<T>() where T : Buildin
   }
 
   override fun merge(other: BaseConsume<T>) {
-    if (other is SglConsumeEnergy<*>) {
+    if (other is ConsumeEnergy<*>) {
       buffer = buffer or other.buffer
       usage += other.usage
 

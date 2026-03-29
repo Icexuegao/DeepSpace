@@ -17,7 +17,7 @@ import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawRegionDynamic
 import universecore.world.consumers.BaseConsumers
-import universecore.world.consumers.cons.ConsumeItems
+import universecore.world.consumers.cons.item.ConsumeItems
 
 class OreWasher:NormalCrafter("ore_washer"){
   init {

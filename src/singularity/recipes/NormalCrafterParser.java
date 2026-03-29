@@ -14,7 +14,7 @@ import universecore.components.blockcomp.ConsumerBuildComp;
 import universecore.world.consumers.BaseConsume;
 import universecore.world.consumers.BaseConsumers;
 import universecore.world.consumers.ConsumeType;
-import universecore.world.consumers.cons.SglConsumeFloor;
+import universecore.world.consumers.cons.ConsumeFloor;
 import universecore.world.producers.BaseProduce;
 import universecore.world.producers.BaseProducers;
 import universecore.world.producers.ProduceType;
@@ -60,7 +60,7 @@ public class NormalCrafterParser extends RecipeParser<NormalCrafter> {
         if (consParsers.containsKey(consume.type())) {
           consParsers.get(consume.type()).get(normalCrafter, recipe, consume, s -> {
           });
-          if (consume instanceof SglConsumeFloor<?> cf) {
+          if (consume instanceof ConsumeFloor<?> cf) {
             recipe.setEff(new Recipe.EffFunc() {
               @Override
               public float calculateMultiple(@NotNull Recipe recipe, @NotNull InputTable envParameter) {

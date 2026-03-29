@@ -4,6 +4,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.BaseBundle.Companion.bundle
 import ice.world.draw.DrawMulti
+import mindustry.content.Liquids
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.draw.DrawCrucibleFlame
@@ -26,18 +27,50 @@ class CombustionChamber : NormalCrafter("combustion_chamber") {
     itemCapacity = 25
 
 
-    newConsume()
-    consume!!.liquids(ILiquids.氢气, 0.8f, ILiquids.氧气,36f/60f)
-    newProduce()
-    produce!!.liquid(ILiquids.纯净水, 0.4f)
-    produce!!.power(5f)
+    newFormula { consumers, producers ->
+      consumers.apply {
+        liquids(ILiquids.氢气, 0.8f, ILiquids.氧气,36f/60f)
+      }
+      producers.apply {
+        liquid(ILiquids.纯净水, 0.4f)
+        power(5f)
+      }
+    }
+    newFormula { consumers, producers ->
+      consumers.apply {
+        item(IItems.硫化合物, 1)
+        time(120f)
+      }
+      producers.apply {
+        liquid(ILiquids.二氧化硫, 0.4f)
+        power(4.5f)
+      }
+    }
 
-    newConsume()
-    consume!!.time(120f)
-    consume!!.item(IItems.硫化合物, 1)
-    newProduce()
-    produce!!.liquid(ILiquids.二氧化硫, 0.4f)
-    produce!!.power(4.5f)
+    newFormula { consumers, producers ->
+      consumers.apply {
+        item(IItems.生煤, 3)
+        liquid(Liquids.water,24f/60)
+        time(120f)
+        power(2f)
+      }
+      producers.apply {
+        liquids(ILiquids.废水, 12f/60f, ILiquids.氢气,20f/60f)
+      }
+    }
+
+    newFormula { consumers, producers ->
+      consumers.apply {
+        liquids(ILiquids.氢气,14f/60,ILiquids.氯气,24f/60)
+        time(60f)
+      }
+      producers.apply {
+        liquids(ILiquids.酸液,12f/60f)
+        power(280f/60f)
+      }
+    }
+
+
 
     newBooster(1.65f)
     consume!!.liquid(ILiquids.沼气, 0.2f)

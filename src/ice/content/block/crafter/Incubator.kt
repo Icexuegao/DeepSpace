@@ -15,7 +15,7 @@ import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.Attribute
 import singularity.world.blocks.product.FloorCrafter
 import singularity.world.draw.DrawBottom
-import universecore.world.consumers.cons.SglConsumeFloor
+import universecore.world.consumers.cons.ConsumeFloor
 
 class Incubator : FloorCrafter("incubator") {
   init {
@@ -50,7 +50,7 @@ class Incubator : FloorCrafter("incubator") {
 
     newBooster(1f)
     consume!!.add(
-      SglConsumeFloor<FloorCrafterBuild>(
+      ConsumeFloor<FloorCrafterBuild>(
         checkDeep = true, checkLiquid = true, attributes = arrayOf(
           Attribute.heat, 0.22f, Attribute.spores, 0.1f
         )

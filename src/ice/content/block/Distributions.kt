@@ -231,6 +231,24 @@ object Distributions : Load {
 
   }
 
+  val 基础传送带桥 = TransferNode("baseBridge").apply {
+    bundle {
+      desc(zh_CN, "基础传送带桥", "跨越地形货建筑传输物品")
+    }
+    allowDiagonal = false
+    directionAny = false
+    health = 30
+    range = 5
+    hasLiquids = false
+    fadeIn = true
+    bridgeWidth = 8f
+    hasPower = false
+    arrowSpacing = 6f
+    transportTime = 60f/17f
+    placeableLiquid = true
+    selectionColumns = 6
+    requirements(Category.distribution, IItems.高碳钢, 6, IItems.锌锭, 4)
+  }
   val 装甲传送带桥 = TransferNode("armorBridge").apply {
     bundle {
       desc(zh_CN, "装甲传送带桥", "跨越任何地形货建筑传输物品,比普通桥更快,更远")
@@ -268,12 +286,12 @@ object Distributions : Load {
     }
   }
   val 传输节点 = TransferNode("transferNode").apply {
+    bundle {
+      desc(zh_CN, "传输节点","能同时运输液体和物品,拥有较远的范围")
+    }
     size = 1
     health = 200
-    requirements(Category.distribution, IItems.铜锭, 8, IItems.铬锭, 8, IItems.石英玻璃, 10)
-    bundle {
-      desc(zh_CN, "传输节点")
-    }
+    requirements(Category.distribution, IItems.锌锭,4, IItems.铜锭, 4, IItems.钴锭, 8, IItems.石英玻璃, 10)
   }
   val 运输节点 = ItemNode("transport_node").apply {
     bundle {

@@ -1,4 +1,4 @@
-package universecore.world.consumers.cons
+package universecore.world.consumers.cons.liquid
 
 import arc.math.Mathf
 import arc.scene.ui.layout.Table

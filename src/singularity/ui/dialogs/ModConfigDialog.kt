@@ -51,13 +51,11 @@ class ModConfigDialog : Table() {
             currCat = entries.orderedKeys().get(currIndex)
             catTable!!.clearActions()
             catTable!!.actions(
-              Actions.alpha(0f, 0.3f),
-              Actions.run {
+              Actions.alpha(0f, 0.3f), Actions.run {
                 catTable!!.clearChildren()
                 catTable!!.image(icons.get(currCat, Core.atlas.drawable("settings_$currCat"))).size(38f)
                 catTable!!.add(Core.bundle.get("settings.category.$currCat"))
-              },
-              Actions.alpha(1f, 0.3f)
+              }, Actions.alpha(1f, 0.3f)
             )
           }
 
@@ -66,9 +64,7 @@ class ModConfigDialog : Table() {
             rebuild.run()
             settings!!.clearActions()
             settings!!.actions(
-              Actions.alpha(0f, 0.3f),
-              Actions.run { this.rebuildSettings() },
-              Actions.alpha(1f, 0.3f)
+              Actions.alpha(0f, 0.3f), Actions.run { this.rebuildSettings() }, Actions.alpha(1f, 0.3f)
             )
           }.size(60f).padLeft(12f)
           cats.table(Tex.underline) { t: Table -> catTable = t }.height(60f).growX().padLeft(4f).padRight(4f)
@@ -77,9 +73,7 @@ class ModConfigDialog : Table() {
             rebuild.run()
             settings!!.clearActions()
             settings!!.actions(
-              Actions.alpha(0f, 0.3f),
-              Actions.run { this.rebuildSettings() },
-              Actions.alpha(1f, 0.3f)
+              Actions.alpha(0f, 0.3f), Actions.run { this.rebuildSettings() }, Actions.alpha(1f, 0.3f)
             )
           }.size(60f).padRight(12f)
 
@@ -88,9 +82,7 @@ class ModConfigDialog : Table() {
           cats.defaults().height(60f).growX()
           for (key in entries.keys()) {
             cats.button(
-              Core.bundle.get("settings.category.$key"),
-              icons.get(key, Core.atlas.drawable("settings_$key")),
-              object : TextButtonStyle() {
+              Core.bundle.get("settings.category.$key"), icons.get(key, Core.atlas.drawable("settings_$key")), object : TextButtonStyle() {
                 init {
                   font = Fonts.def
                   fontColor = Color.white
@@ -101,15 +93,12 @@ class ModConfigDialog : Table() {
                   over = Tex.underlineOver
                   disabled = Tex.underlineDisabled
                 }
-              },
-              38f
+              }, 38f
             ) {
               currCat = key
               settings!!.clearActions()
               settings!!.actions(
-                Actions.alpha(0f, 0.3f),
-                Actions.run { this.rebuildSettings() },
-                Actions.alpha(1f, 0.3f)
+                Actions.alpha(0f, 0.3f), Actions.run { this.rebuildSettings() }, Actions.alpha(1f, 0.3f)
               )
             }.update { b: TextButton? -> b!!.setChecked(key == currCat) }
           }
@@ -147,8 +136,6 @@ class ModConfigDialog : Table() {
       settings!!.table(
         (Tex.whiteui as TextureRegionDrawable).tint(Pal.darkestGray.cpy().a(0.5f * (cfgCount % 2)))
       ) { ent: Table ->
-        ent.setClip(false)
-        ent.defaults().growY()
         entry.build(ent)
       }.height(entry.getHieght())
       settings!!.row()
@@ -198,7 +185,7 @@ class ModConfigDialog : Table() {
   abstract class ConfigLayout(val name: String) {
     abstract fun build(table: Table)
 
-  open  fun getHieght()= 50f
+    open fun getHieght() = 50f
   }
 
   class ConfigSepLine(name: String, var string: String?) : ConfigLayout(name) {
@@ -206,16 +193,13 @@ class ModConfigDialog : Table() {
     var lineColorBack: Color = lineColor.cpy().mul(0.8f, 0.8f, 0.8f, 1f)
 
     override fun build(table: Table) {
-      table.stack(
-        Table { t: Table? ->
-          t!!.image().color(lineColor).pad(0f).grow()
-          t.row()
-          t.image().color(lineColorBack).pad(0f).height(4f).growX()
-        },
-        Table { t: Table? ->
-          t!!.left().add(string, Styles.outlineLabel).fill().left().padLeft(5f)
-        }
-      ).grow().pad(-5f).padBottom(4f).padTop(4f)
+      table.stack(Table { t: Table? ->
+        t!!.image().color(lineColor).pad(0f).grow()
+        t.row()
+        t.image().color(lineColorBack).pad(0f).height(4f).growX()
+      }, Table { t: Table? ->
+        t!!.left().add(string, Styles.outlineLabel).fill().left().padLeft(5f)
+      }).grow().pad(-5f).padBottom(4f).padTop(4f)
       table.row()
     }
   }
@@ -233,20 +217,18 @@ class ModConfigDialog : Table() {
 
     override fun build(table: Table) {
       table.left().add(name).color(b4).left().padLeft(4f)
-      table.right().table { t: Table ->
-        t.setClip(false)
-        t.right().defaults().right().padRight(0f)
+      table.table { t: Table ->
+
         if (str != null) {
           t.add("").color(b4).update { l: Label? ->
             l!!.setText(str!!.get())
           }
         }
         buildCfg(t)
-      }.growX().height(60f).padRight(4f)
+      }.expandX().right().height(60f).padRight(4f)
 
       if (tip != null) {
-        table.addListener(object :
-          Tooltip(Cons { ta: Table? -> ta!!.add(tip!!.get()).update { l: Label? -> l!!.setText(tip!!.get()) } }) {
+        table.addListener(object : Tooltip(Cons { ta: Table? -> ta!!.add(tip!!.get()).update { l: Label? -> l!!.setText(tip!!.get()) } }) {
           init {
             allowMobile = true
           }
@@ -257,13 +239,18 @@ class ModConfigDialog : Table() {
     abstract fun buildCfg(table: Table)
   }
 
-  class ConfigButton(name: String, var button: Prov<Button?>) : ConfigEntry(name) {
+  class ConfigButton(name: String, var button: Prov<Button>) : ConfigEntry(name) {
+    var minHieght=80f
     override fun buildCfg(table: Table) {
       table.add<Button>(button.get()).width(180f).growY().pad(4f).get().setDisabled(disabled)
     }
+    override fun getHieght()=minHieght
   }
 
-  class ConfigTableCfg(name: String, var table: Cons<Table?>, var handler: Cons<Cell<Table?>?>) : ConfigEntry(name) {
+
+
+
+  class ConfigTableCfg(name: String, var table: Cons<Table>, var handler: Cons<Cell<Table>>) : ConfigEntry(name) {
     override fun buildCfg(table: Table) {
       handler.get(table.table { t: Table ->
         t.setClip(false)
@@ -280,8 +267,7 @@ class ModConfigDialog : Table() {
 
   open class ConfigCheck(name: String, var click: Boolc, var checked: Boolp) : ConfigEntry(name) {
     override fun buildCfg(table: Table) {
-      val checkBox =
-        table.check("", checked.get(), click).update { c: CheckBox -> c.setChecked(checked.get()) }.get()
+      val checkBox = table.check("", checked.get(), click).update { c: CheckBox -> c.setChecked(checked.get()) }.get()
       checkBox.setDisabled(disabled)
       checkBox.setStyle(checkCheckBoxStyle)
     }
@@ -320,13 +306,7 @@ class ModConfigDialog : Table() {
     }
 
     constructor(
-      name: String,
-      show: Func<Float, String>,
-      slided: Floatc?,
-      curr: Floatp,
-      min: Float,
-      max: Float,
-      step: Float
+      name: String, show: Func<Float, String>, slided: Floatc?, curr: Floatp, min: Float, max: Float, step: Float
     ) : super(name) {
       this.show = show
       this.slided = slided

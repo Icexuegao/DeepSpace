@@ -44,26 +44,15 @@ class Electrolytor:NormalCrafter("electrolytor"){
   consume!!.liquid(ILiquids.纯净水, 0.4f)
   consume!!.power(5.8f)
   newProduce()
-  produce!!.liquids(
-    *LiquidStack.with(ILiquids.氧气, 0.6f, ILiquids.氢气, 0.8f
-    )
-  )
+  produce!!.liquids(ILiquids.氧气, 0.6f, ILiquids.氢气, 0.8f)
 
   newConsume()
   consume!!.time(120f)
-  consume!!.liquids(
-    *LiquidStack.with(
-      ILiquids.复合矿物溶液, 0.4f, ILiquids.碱液, 0.2f
-    )
-  )
+  consume!!.liquids(ILiquids.复合矿物溶液, 0.4f, ILiquids.碱液, 0.2f)
   consume!!.item(IItems.絮凝剂, 2)
   consume!!.power(3.5f)
   newProduce()
-  produce!!.items(
-    *ItemStack.with(
-      IItems.铝锭, 4, IItems.铅锭, 3, IItems.铬锭, 1, IItems.钍锭, 2
-    )
-  )
+  produce!!.items(IItems.铝锭, 4, IItems.铅锭, 3, IItems.铬锭, 1, IItems.钍锭, 2)
 
   newConsume()
   consume!!.time(60f)
@@ -71,11 +60,7 @@ class Electrolytor:NormalCrafter("electrolytor"){
   consume!!.item(IItems.碱石, 1)
   consume!!.power(3f)
   newProduce()
-  produce!!.liquids(
-    *LiquidStack.with(
-      ILiquids.碱液, 0.4f, ILiquids.氯气, 0.6f
-    )
-  )
+  produce!!.liquids(ILiquids.碱液, 0.4f, ILiquids.氯气, 0.6f)
 
   newConsume()
   consume!!.item(IItems.绿藻块, 1)

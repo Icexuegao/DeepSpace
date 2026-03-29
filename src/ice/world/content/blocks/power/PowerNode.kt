@@ -18,7 +18,7 @@ import arc.struct.ObjectSet
 import arc.struct.Seq
 import arc.util.*
 import ice.graphics.IceColor
-import ice.library.struct.texture.TextureRegionDelegate
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import mindustry.Vars
 import mindustry.core.Renderer
 import mindustry.core.UI
@@ -127,8 +127,8 @@ open class PowerNode(name: String) : PowerBlock(name) {
     }
   }
 
-  var laser: TextureRegion by TextureRegionDelegate("${this.name}-laser", "laser")
-  var laserEnd: TextureRegion by TextureRegionDelegate("${this.name}-laser-end", "laser-end")
+  var laser: TextureRegion by LazyTextureSingleDelegate("${this.name}-laser", "laser")
+  var laserEnd: TextureRegion by LazyTextureSingleDelegate("${this.name}-laser-end", "laser-end")
   var laserRange: Float = 6f
   var maxNodes: Int = 3
   var autolink: Boolean = true

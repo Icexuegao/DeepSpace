@@ -23,7 +23,7 @@ import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsume
 import universecore.world.consumers.ConsumeType
 
-class SglConsumeMedium<T>(var request: Float) : BaseConsume<T>() where T : Building, T : MediumBuildComp, T : ConsumerBuildComp {
+class ConsumeMedium<T>(var request: Float) : BaseConsume<T>() where T : Building, T : MediumBuildComp, T : ConsumerBuildComp {
   override fun type() = ConsumeType.medium
 
   override fun hasIcons() = true
@@ -81,7 +81,7 @@ class SglConsumeMedium<T>(var request: Float) : BaseConsume<T>() where T : Build
   }
 
   override fun merge(other: BaseConsume<T>) {
-    if (other is SglConsumeMedium<*>) {
+    if (other is ConsumeMedium<*>) {
       request += other.request
 
       return

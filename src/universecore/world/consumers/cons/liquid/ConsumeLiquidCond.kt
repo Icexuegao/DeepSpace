@@ -1,4 +1,4 @@
-package universecore.world.consumers.cons
+package universecore.world.consumers.cons.liquid
 
 import arc.func.Boolf
 import arc.func.Cons
@@ -143,7 +143,7 @@ open class ConsumeLiquidCond<T> : ConsumeLiquidBase<T>() where T : Building, T :
 
           if (count != 0 && count % 4 == 0) index++
 
-          tables[index].add(IStatValues.displayLiquid(stack.liquid, stack.amount, true,false)).row()
+          tables[index].add(IStatValues.displayLiquid(stack.liquid, stack.amount, perSecond = true, showName = false)).row()
         }
         tables.forEach(t::add)
 

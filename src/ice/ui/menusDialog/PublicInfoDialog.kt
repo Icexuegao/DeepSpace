@@ -1,33 +1,38 @@
 package ice.ui.menusDialog
 
-import arc.input.KeyCode
-import arc.scene.event.InputEvent
-import arc.scene.event.InputListener
 import arc.scene.ui.Image
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
-import arc.util.Tmp
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.scene.ui.addListeners
 import ice.library.struct.asDrawable
 import ice.ui.dialog.BaseMenusDialog
-import ice.world.meta.IceEffects
 import ice.world.meta.IceStats
-import universecore.ui.elements.SceneEffect
 
 object PublicInfoDialog : BaseMenusDialog(IceStats.公告.localized(), IStyles.menusButton_publicInfo) {
+  lateinit var conts: Table
+  fun addLabel(a: String){
+    conts.add(a).growX().wrap().pad(10f).padLeft(20f)
+      .padRight(20f).color(IceColor.b4).row()
+  }
   override fun build(cont: Table) {
+    conts=cont
     cont.top()
     val element = Image(IStyles.publicInfoIcon.asDrawable(0.5f), Scaling.fit)
     cont.add(element).row()
-    cont.add("过去的这一年,不管是我们DS制作组还是我,其实都经历了焦虑和迷茫,因为我们确确实实感觉经历了很多特别艰难的时刻,有的声音特别的,特别特别的尖锐,然后把我们整个DS和DS项目组都贬的一无是处,还有很多人说,听不进大家的声音,但就像猫猫讲的.其实我们跟大家一样,我们也是玩家,大家感受到的事情我们也在感受,只是对于我们来讲呢,我们听到的声音实在是太多了,我们需要沉下心来,去弄清楚到底哪些是来自各位主教真实的声音(抽泣)").growX().wrap().padLeft(20f)
-      .padRight(20f).color(IceColor.b4).row()
-    cont.add("无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼").growX().wrap().padLeft(20f)
-      .padRight(20f).color(IceColor.b4).row()
-    cont.add("@Alon(\"帝皇\") 我的错就是让你活着了[天使]你的三观应该是没有的，同理心也是没有的，你和那些在癌症患者家属的诉苦视频评论区说“全家遇不到”“不接”的一桌，bro肯定觉得自己老帅了吧，实际上是阴暗哥布林一个，而且是被别人孤立的哥布林[委屈],呜呜呜你真的好可怜呢也就是说你也很可恨呢[温馨]")
-      .pad(20f).color(IceColor.b4).growX().wrap().row()
-    val get = cont.add(
+
+    addLabel("@val alon =Alon(\"抽象\") 说话别这么冲，也别带脏字。大家都是玩模组的，没必要戾气这么重。好好说话，互相尊重，比什么都强\n" +
+            "什么玩意跟我要尊重\n" +
+            "@val alon =Alon(\"抽象\") 尊重是互相的，不是谁求谁给的。我只是提醒你好好说话，没别的意思，没必要这么冲。\n" +
+            "你说的对,但是我是皇帝\n" +
+            "@val alon =Alon(\"抽象\") 道理说得过就讲道理，说不过就拿权限禁言，这下看懂了\n" +
+            "我是懒得说了 绒影灭神使被你禁言29天\n" +
+            "@val alon =Alon(\"抽象\") 懒得说就等于禁言我一个月，这格局和阿Q也没什么区别了 \n" +
+            "绒影灭神使被你禁言29天")
+    addLabel("过去的这一年,不管是我们DS制作组还是我,其实都经历了焦虑和迷茫,因为我们确确实实感觉经历了很多特别艰难的时刻,有的声音特别的,特别特别的尖锐,然后把我们整个DS和DS项目组都贬的一无是处,还有很多人说,听不进大家的声音,但就像猫猫讲的.其实我们跟大家一样,我们也是玩家,大家感受到的事情我们也在感受,只是对于我们来讲呢,我们听到的声音实在是太多了,我们需要沉下心来,去弄清楚到底哪些是来自各位主教真实的声音(抽泣)")
+    addLabel("无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼无尽压缩牛逼")
+    addLabel("@Alon(\"帝皇\") 我的错就是让你活着了[天使]你的三观应该是没有的，同理心也是没有的，你和那些在癌症患者家属的诉苦视频评论区说“全家遇不到”“不接”的一桌，bro肯定觉得自己老帅了吧，实际上是阴暗哥布林一个，而且是被别人孤立的哥布林[委屈],呜呜呜你真的好可怜呢也就是说你也很可恨呢[温馨]")
+    addLabel(
       "我想了一天,我觉得是时候该反击了[流汗表情]" +
 
               "既然大家想知道在说谁,我帮你补充吧,联合城是超过一年前的作品,如果想要嘲讽请嘲讽我们的最近作品," +
@@ -59,8 +64,8 @@ object PublicInfoDialog : BaseMenusDialog(IceStats.公告.localized(), IStyles.m
               "但之后呢?内容更新怎么更?如何回应粉丝期望?更新频率需要的个人时间够吗?我们一次更新多少策划案的内容?UGC怎么回应?[流汗表情]" +
 
               "你赢了,赢得很彻底,非常彻底,赢了所有mindustry玩家,制作者,贡献者,请你继续你的道路,但我还有事要做,我为什么要和你死缠烂打?[流汗表情]"
-    ).padLeft(20f).padRight(20f).color(IceColor.y2).growX().wrap().get()
-    get.addListeners(object : InputListener() {
+    )
+    /*get.addListeners(object : InputListener() {
       override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: KeyCode?): Boolean {
         val localToStageCoordinates = get.localToStageCoordinates(Tmp.v1.set(x, y))
         val showOnStage = SceneEffect.showOnStage(IceEffects.基础子弹击中特效, localToStageCoordinates.x, localToStageCoordinates.y)
@@ -68,6 +73,6 @@ object PublicInfoDialog : BaseMenusDialog(IceStats.公告.localized(), IStyles.m
         return super.touchDown(event, x, y, pointer, button)
       }
 
-    })
+    }*/
   }
 }
