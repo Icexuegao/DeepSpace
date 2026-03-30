@@ -19,29 +19,29 @@ import mindustry.ui.Fonts
 import mindustry.ui.Styles
 
 object IStyles {
-  val background11 = IFiles.createNinePatch("background1-1")
-  val background12 = IFiles.createNinePatch("background1-2")
-  val background21 = IFiles.createNinePatch("background2-1")
-  val background22 = IFiles.createNinePatch("background2-2")
-  val background23 = IFiles.createNinePatch("background2-3")
-  val background31 = IFiles.createNinePatch("background3-1")
-  val background32 = IFiles.createNinePatch("background3-2")
-  val background33 = IFiles.createNinePatch("background3-3")
-  val background41 = IFiles.createNinePatch("background4-1")
-  val background42 = IFiles.createNinePatch("background4-2")
-  val background43 = IFiles.createNinePatch("background4-3")
-  val background44 = IFiles.createNinePatch("background4-4")
-  val background45 = IFiles.createNinePatch("background4-5")
-  val background61 = IFiles.createNinePatch("background6-1")
-  val background62 = IFiles.createNinePatch("background6-2")
-  val background71 = IFiles.createNinePatch("background7-1")
-  val background81 = IFiles.createNinePatch("background8-1")
-  val background91 = IFiles.createNinePatch("background9-1")
-  val background101 = IFiles.createNinePatch("background10-1")
-  val background111 = IFiles.createNinePatch("background11-1")
-  val background121 = IFiles.createNinePatch("background12-1")
-  val background122 = IFiles.createNinePatch("background12-2")
-  val background131 = IFiles.createNinePatch("background13-1")
+  val background11 = IFiles.createNinePatch("background1_1")
+  val background12 = IFiles.createNinePatch("background1_2")
+  val background21 = IFiles.createNinePatch("background2_1")
+  val background22 = IFiles.createNinePatch("background2_2")
+  val background23 = IFiles.createNinePatch("background2_3")
+  val background31 = IFiles.createNinePatch("background3_1")
+  val background32 = IFiles.createNinePatch("background3_2")
+  val background33 = IFiles.createNinePatch("background3_3")
+  val background41 = IFiles.createNinePatch("background4_1")
+  val background42 = IFiles.createNinePatch("background4_2")
+  val background43 = IFiles.createNinePatch("background4_3")
+  val background44 = IFiles.createNinePatch("background4_4")
+  val background45 = IFiles.createNinePatch("background4_5")
+  val background61 = IFiles.createNinePatch("background6_1")
+  val background62 = IFiles.createNinePatch("background6_2")
+  val background71 = IFiles.createNinePatch("background7_1")
+  val background81 = IFiles.createNinePatch("background8_1")
+  val background91 = IFiles.createNinePatch("background9_1")
+  val background101 = IFiles.createNinePatch("background10_1")
+  val background111 = IFiles.createNinePatch("background11_1")
+  val background121 = IFiles.createNinePatch("background12_1")
+  val background122 = IFiles.createNinePatch("background12_2")
+  val background131 = IFiles.createNinePatch("background13_1")
 
   val frameButtonDown2 = IFiles.createNinePatch("frameButtonDown2")
   val frameButtonUp2 = IFiles.createNinePatch("frameButtonUp2")
@@ -122,7 +122,7 @@ object IStyles {
     down = background62
     checked = background62
     font = Fonts.def
-    fontColor = Color.white
+    fontColor = IceColor.b4
     overFontColor = IceColor.b4
     disabledFontColor = Color.gray
   }

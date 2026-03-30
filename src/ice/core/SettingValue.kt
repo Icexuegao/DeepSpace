@@ -3,6 +3,7 @@ package ice.core
 import arc.Core
 import arc.struct.Seq
 import arc.util.serialization.Jval
+import ice.DeepSpace
 import ice.audio.IMusics
 import ice.entities.ModeDifficulty
 import ice.library.world.Load
@@ -52,7 +53,7 @@ object SettingValue : Load {
     Vars.renderer.minZoom = new
   }
   var 启用星球区块ID by observable(false)
-  var 启用调试模式 by observable(false){_, _, new ->
+  var 启用调试模式 by observable(false) { _, _, new ->
     deBugRunSeq.forEach { it.invoke(new) }
   }
   var 星球区块调试 by observable(false) { _, _, new ->
@@ -62,7 +63,7 @@ object SettingValue : Load {
 
   var 启用包裹物品绘制 by observable(false)
   var 启用QQ头像获取 by observable(true)
-  var 进入游戏自动弹出mod主菜单 by  observable(false)
+  var 进入游戏自动弹出mod主菜单 by observable(false)
   var 禁用mod主界面背景 by observable(false)
 
   //游戏目标内信息显示
@@ -75,20 +76,20 @@ object SettingValue : Load {
   var 状态指示器尺寸 by observable(4f)
   var 显示状态效果的剩余时间 by observable(false)
 
-
-  @delegate:Order
-  var godpod by observable(0)
+  @delegate:Order var godpod by observable(0)
 
   @Retention(AnnotationRetention.RUNTIME)
   @Target(AnnotationTarget.FIELD)
   private annotation class Order
-  private fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T) -> Unit = { _, _, _ -> }) = Delegates.observable(initialValue) { property, old, new ->
+
+  private fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T) -> Unit = { _, _, _ -> }) =
+    Delegates.observable(initialValue) { property, old, new ->
       onChange(property, old, new)
       scheduleSave()
-  }
+    }
 
   override fun setup() {
-    val get = Core.settings.getString("ice-SettingValue", write())
+    val get = DeepSpace.globals.getString("ice-SettingValue", write())
     val config: Jval = Jval.read(get)
     for (cfg in configs) {
       val name = cfg.name
@@ -102,7 +103,7 @@ object SettingValue : Load {
   }
 
   fun save() {
-    Core.settings.put("ice-SettingValue", write())
+    DeepSpace.globals.put("ice-SettingValue", write())
   }
 
   private fun write(): String {
@@ -122,7 +123,7 @@ object SettingValue : Load {
   }
 
   fun clear() {
-    Core.settings.put("ice-SettingValue", "")
+    DeepSpace.globals.put("ice-SettingValue", "")
   }
 
   private inline fun <reified T> warp(type: KType, value: String): T {

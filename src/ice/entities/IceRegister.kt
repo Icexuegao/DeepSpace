@@ -26,26 +26,24 @@ object IceRegister : Load {
   /**根据实体类型获取其对应的ID
    * @param type 实体类的Class对象,必须是Entityc或其子类
    * @return 该实体类型对应的ID
-   * @throws Exception 如果该实体类型未注册（ID为-1时抛出）
-   */
+   * @throws Exception 如果该实体类型未注册（ID为-1时抛出）*/
   fun getId(type: Class<out Entityc>): Int {
     val id = ids[type, -1]
-    return if (id == -1) throw Exception("Unit ${type.canonicalName } 没有注册") else id
+    return if (id == -1) throw Exception("Unit ${type.canonicalName} 没有注册") else id
   }
 
   /**获取并注册指定Unit类的提供者,会自动注册[EntityMapping]
    * @param clazz 要获取提供者的类对象,可以是任意类型
-   * @return 返回一个[Prov]类型的提供者,用于创建指定类的实例
-   */
+   * @return 返回一个[Prov]类型的提供者,用于创建指定类的实例 */
   fun getPutUnits(clazz: Class<*>): Prov<Unit> {
-    put(clazz.canonicalName , clazz as Class<Unit>) {
+    put(clazz.canonicalName, clazz as Class<Unit>) {
       TmpClassConstruntor.get(clazz) { clazz.getDeclaredConstructor() }.also { it.isAccessible = true }.newInstance()
     }
-    return getUnit(clazz.canonicalName ) as Prov<Unit>
+    return getUnit(clazz.canonicalName) as Prov<Unit>
   }
 
   override fun setup() {
-    put(PackStack::class.java.canonicalName , PackStack::class.java) {
+    put(PackStack::class.java.canonicalName, PackStack::class.java) {
       return@put PackStack::class.java.getDeclaredConstructor().newInstance()
     }
   }

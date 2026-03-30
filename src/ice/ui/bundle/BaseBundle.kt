@@ -43,11 +43,13 @@ class BaseBundle(val name: String) {
   interface Bundle {
     companion object {
       var Bundle.localizedName: String by AttachedProperty("")
+      var Bundle.description: String by AttachedProperty("")
     }
 
-    fun desc(bundle: BaseBundle, name: String) {
+    fun desc(bundle: BaseBundle, localizedName: String, description: String = "") {
       bundle.runBun.add {
-        localizedName = name
+        this.localizedName = localizedName
+        this.description = description
       }
     }
   }

@@ -11,7 +11,6 @@ import arc.scene.ui.ImageButton
 import arc.scene.ui.TextButton
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
-import arc.util.Align
 import arc.util.Strings
 import arc.util.Tmp
 import ice.audio.IMusics
@@ -23,9 +22,9 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.element.ProgressBar
 import ice.library.scene.element.typinglabel.TLabel
-import ice.library.struct.log
 import ice.library.util.toStringi
 import ice.ui.Documents
+import ice.ui.bundle.BaseBundle.Bundle.Companion.description
 import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
@@ -76,7 +75,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
 
       ConfigSepLine("mode", "游戏模式"),
       object : ConfigTable("musicBar", {
-        val fLabel = TLabel(SettingValue.difficulty.bun).also { it1 ->
+        val fLabel = TLabel(SettingValue.difficulty.description).also { it1 ->
           it1.setColor(SettingValue.difficulty.color)
         }
         it.table { it1 ->
@@ -85,14 +84,20 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         it.table { it2 ->
           ModeDifficulty.entries.forEach { mod ->
             it2.addBox(
-              mod.na, { SettingValue.difficulty == mod }, if (SettingValue.difficulty == mod) mod.color else IceColor.b4
-            ) { _, la ->
+              mod.localizedName,
+              { SettingValue.difficulty == mod },
+              if (SettingValue.difficulty == mod) mod.color else IceColor.b4,
+              { x, f ->
+                f.update {
+                  f.update {
+                    f.setColor(if (SettingValue.difficulty == mod) mod.color else IceColor.b4)
+                  }
+                }
+              }) {
               SettingValue.difficulty = mod
-              fLabel.restart(mod.bun)
+              fLabel.restart(mod.description)
               fLabel.setColor(mod.color)
-              la.update {
-                la.setColor(if (SettingValue.difficulty == mod) mod.color else IceColor.b4)
-              }
+
             }
           }
         }.expand().left().row()
@@ -114,7 +119,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         0.001f
       ),
       object : ConfigSlider(
-        "信息显示刷新间隔",{SettingValue.信息显示刷新间隔 = it},SettingValue::信息显示刷新间隔 , 0f, 60f, 1f
+        "信息显示刷新间隔", { SettingValue.信息显示刷新间隔 = it }, SettingValue::信息显示刷新间隔, 0f, 60f, 1f
       ) {
         init {
           str = Prov { Strings.autoFixed(SettingValue.信息显示刷新间隔 / 60, 2) + StatUnit.seconds.localized() }
@@ -124,19 +129,14 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         "最多信息显示数目",
         { if (it <= 64) it.toInt().toString() else Core.bundle.get("misc.unlimited") },
         { SettingValue.最多信息显示数目 = it },
-        {  SettingValue.最多信息显示数目},
+        { SettingValue.最多信息显示数目 },
         4f,
         (EntityInfoFrag.MAX_LIMITED + 1).toFloat(),
         1f
       ),
-      ConfigSlider("信息面板缩放", { SettingValue.信息面板缩放 = it },SettingValue::信息面板缩放, 0.5f, 4f, 0.1f),
+      ConfigSlider("信息面板缩放", { SettingValue.信息面板缩放 = it }, SettingValue::信息面板缩放, 0.5f, 4f, 0.1f),
       ConfigSlider(
-        "范围显示模式选中半径",
-        {  SettingValue.范围显示模式选中半径=it },
-        { SettingValue.范围显示模式选中半径 },
-        64f,
-        512f,
-        1f
+        "范围显示模式选中半径", { SettingValue.范围显示模式选中半径 = it }, { SettingValue.范围显示模式选中半径 }, 64f, 512f, 1f
       ),
       ConfigButton("生命指示器风格") {
 
@@ -147,8 +147,8 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
               config.setHover { t ->
                 t.setSize(220f, 0f)
                 t.update {
-                val d= localToStageCoordinates(Tmp.v1.set(x-width, y))
-                  t.setPosition(d.x,d.y)
+                  val d = localToStageCoordinates(Tmp.v1.set(x - width, y))
+                  t.setPosition(d.x, d.y)
                   t.isTransform = true
                 }
                 t.visible = true
@@ -178,10 +178,10 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         }
       },
       ConfigSlider("状态指示器尺寸", { SettingValue.状态指示器尺寸 = it }, { SettingValue.状态指示器尺寸 }, 4f, 16f, 1f),
-      ConfigCheck("显示状态效果的剩余时间", {  SettingValue.显示状态效果的剩余时间 = it },SettingValue::显示状态效果的剩余时间),
+      ConfigCheck("显示状态效果的剩余时间", { SettingValue.显示状态效果的剩余时间 = it }, SettingValue::显示状态效果的剩余时间),
       ConfigSepLine("data", IceStats.数据.localizedName),
       ConfigButton("重置已阅读的mod提示信息") {
-        Button(IStyles.frameButtonUp2,IStyles.frameButtonDown2).apply {
+        Button(IStyles.frameButtonUp2, IStyles.frameButtonDown2).apply {
           add(Core.bundle.get("settings.reset")).color(IceColor.b4)
           clicked {
             Vars.ui.showConfirm(Core.bundle.get("settings.resetHintsConfirm")) {
@@ -200,12 +200,15 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
             clicked {
               Vars.ui.showConfirm(Core.bundle.get("settings.resetAllHintsConfirm")) {
                 //  SglHint.resetAllCompletedHints();
-              //  config.requireRelaunch()
+                //  config.requireRelaunch()
               }
             }
           }
         }
       })
+  }
+
+  init {
     config.addConfig(
       "graphic", Icon.image,
       ConfigSepLine("uiView", "UI视效"),
@@ -282,7 +285,9 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       ),
       ConfigCheck("启用星球区块ID", { b: Boolean -> SettingValue.启用星球区块ID = b }, SettingValue::启用星球区块ID),
     )
+  }
 
+  init {
     config.addConfig(
       "advance",
       SglDrawConst.configureIcon,
@@ -384,24 +389,24 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
   }
 
   fun Table.addBox(
-    name: String, checked: Boolp, color: Color = IceColor.b4, clean: Boolean = false, run: Cons2<ImageButton, FLabel>
+    name: String, checked: Boolp, color: Color = IceColor.b4, configure: Cons2<ImageButton, FLabel>, clicked: Runnable = {}
   ): Cell<Table> {
-    val label = FLabel(name)
-    val button = ImageButton(if (clean) IStyles.cleanBoxStyle else IStyles.checkBoxStyle).apply {
+    val label = FLabel(name).also { it.setColor(color) }
+    val button = ImageButton(if (checked.get()) IStyles.cleanBoxStyle else IStyles.checkBoxStyle).apply {
       isChecked = checked.get()
       imageCell.size(32f, 44f).expand().left()
       clicked {
         ISounds.remainInstall.play()
-        run.get(this, label)
+        clicked.run()
       }
       update {
         isChecked = checked.get()
       }
     }
-
+    configure.get(button, label)
     return add(Table().apply {
       add(button).padRight(8f)
-      add(label.also { it.setColor(color) })
+      add(label)
     }).margin(10f).top().left().pad(5f)
   }
 }

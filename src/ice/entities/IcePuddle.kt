@@ -13,7 +13,12 @@ class IcePuddle : Puddle() {
     }
   }
 
-  var team: Team = Team.sharded
+  override fun reset() {
+    super.reset()
+    team=Team.derelict
+  }
+
+  var team: Team = Team.derelict
   override fun read(read: Reads?) {
     super.read(read)
     this.team = mindustry.io.TypeIO.readTeam(read)

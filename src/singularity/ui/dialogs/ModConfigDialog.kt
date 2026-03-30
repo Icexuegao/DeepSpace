@@ -16,10 +16,13 @@ import arc.struct.ObjectMap
 import arc.struct.OrderedMap
 import arc.struct.Seq
 import arc.util.Strings
+import ice.audio.ISounds
+import ice.graphics.IStyles
 import ice.graphics.IStyles.checkCheckBoxStyle
 import ice.graphics.IStyles.defaultSlider
 import ice.graphics.IceColor.b4
 import ice.library.scene.ui.icePane
+import ice.ui.UI
 import mindustry.gen.Icon
 import mindustry.gen.Tex
 import mindustry.graphics.Pal
@@ -31,7 +34,7 @@ class ModConfigDialog : Table() {
   var settings: Table? = null
   var hover: Table? = null
   var entries: OrderedMap<String, Seq<ConfigLayout>?> = OrderedMap<String, Seq<ConfigLayout>?>()
-  var icons: ObjectMap<String?, Drawable?> = ObjectMap<String?, Drawable?>()
+  var icons= ObjectMap<String, Drawable>()
 
   var currCat: String? = null
   var catTable: Table? = null
@@ -85,16 +88,19 @@ class ModConfigDialog : Table() {
               Core.bundle.get("settings.category.$key"), icons.get(key, Core.atlas.drawable("settings_$key")), object : TextButtonStyle() {
                 init {
                   font = Fonts.def
-                  fontColor = Color.white
+                  fontColor = b4
                   disabledFontColor = Color.lightGray
-                  down = Styles.flatOver
-                  checked = Styles.flatOver
-                  up = Tex.underline
-                  over = Tex.underlineOver
-                  disabled = Tex.underlineDisabled
+                  down = IStyles.background62
+                  checked =IStyles.background62
+                  up = IStyles.background61
+                  over = IStyles.background61
+                  disabled = IStyles.background61
                 }
               }, 38f
-            ) {
+            ,{
+              it.color(b4)
+              }) {
+              UI.showUISoundCloseV(ISounds.数据板块顶部选择按钮反馈)
               currCat = key
               settings!!.clearActions()
               settings!!.actions(
@@ -123,7 +129,14 @@ class ModConfigDialog : Table() {
     //relaunchTip.color.a(0);
     rebuildSettings()
   }
-
+  fun Table.button(text: String, image: Drawable, style: TextButtonStyle, imagesize: Float, vc: Cons<Cell<Image>>, clicked: Runnable): Cell<TextButton> {
+    val button = TextButton(text, style)
+    vc(button.add(Image(image)).size(imagesize))
+    button.cells.reverse()
+    button.clicked(clicked)
+    return add(button)
+  }
+  operator fun <P> Cons<P>.invoke(p: P) = get(p)
   fun rebuildSettings() {
     if (currCat == null) {
       currCat = entries.orderedKeys().first()
@@ -153,7 +166,7 @@ class ModConfigDialog : Table() {
     if (category == currCat) rebuildSettings()
   }
 
-  fun addConfig(category: String, icon: Drawable?, vararg config: ConfigLayout?) {
+  fun addConfig(category: String, icon: Drawable, vararg config: ConfigLayout?) {
     entries.get(category) { Seq() }!!.addAll(*config)
     icons.put(category, icon)
     if (category == currCat) rebuildSettings()
@@ -242,7 +255,7 @@ class ModConfigDialog : Table() {
   class ConfigButton(name: String, var button: Prov<Button>) : ConfigEntry(name) {
     var minHieght=80f
     override fun buildCfg(table: Table) {
-      table.add<Button>(button.get()).width(180f).growY().pad(4f).get().setDisabled(disabled)
+      table.add(button.get()).width(180f).growY().pad(4f).get().setDisabled(disabled)
     }
     override fun getHieght()=minHieght
   }

@@ -14,6 +14,7 @@ import mindustry.content.Liquids
 import mindustry.content.StatusEffects
 import mindustry.gen.Puddle
 import mindustry.graphics.Pal
+import mindustry.type.Category
 import mindustry.type.CellLiquid
 import mindustry.type.Liquid
 import mindustry.world.Tile
@@ -22,9 +23,11 @@ import singularity.graphic.SglShaders
 import singularity.type.ReactLiquid
 import singularity.type.ReactLiquid.Companion.effectWith
 import singularity.world.SglFx
+import universe.util.reflect.Reflection.accessField
 
 @Suppress("unused")
 object ILiquids : Load {
+  val allAccessor = Category::class.accessField<Array<Category>>("all")
   val 腐殖浆体 = IceLiquid("liquid_humusSlurry", "a09bbd") {
     bundle {
       desc(zh_CN, "腐殖浆体", "一种富含有机质的浆体,可用于土壤改良")
