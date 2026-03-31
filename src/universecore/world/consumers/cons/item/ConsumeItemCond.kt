@@ -4,7 +4,7 @@ import arc.func.Boolf
 import arc.func.Cons
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import ice.ui.bundle.localizedName
 import ice.world.meta.IStatValues
 import ice.world.meta.IceStats
 import mindustry.Vars

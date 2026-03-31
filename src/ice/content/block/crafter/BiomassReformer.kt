@@ -2,7 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds
@@ -13,7 +13,7 @@ import singularity.world.blocks.product.NormalCrafter
 
 class BiomassReformer: NormalCrafter("biomassReformer") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN,"生物钢重组器","将多种原料培育为生物钢")
     }
     size=3

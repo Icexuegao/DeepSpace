@@ -10,7 +10,7 @@ import ice.content.IUnitTypes.重压
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.UnitSpawnAbility
 import mindustry.content.Fx
@@ -28,8 +28,13 @@ import mindustry.graphics.Pal
 
 class Scream : IceUnitType("scream") {
   init {
-    BaseBundle.bundle {
-      desc(zh_CN, "悲鸣", "重型地面突击单位.对远距离敌人发射集束弹轰击,对近距离敌人则切换为速射粒子炮与弧光冲击炮.对附近的友军提供庇护和突袭效果.配备单位构筑器,会随时间向战场投放\"重压\"", "战场沉默的天灾,\n可怜蝼蚁的悲鸣.")
+    bundle {
+      desc(
+        zh_CN,
+        "悲鸣",
+        "重型地面突击单位.对远距离敌人发射集束弹轰击,对近距离敌人则切换为速射粒子炮与弧光冲击炮.对附近的友军提供庇护和突袭效果.配备单位构筑器,会随时间向战场投放\"重压\"",
+        "战场沉默的天灾,\n可怜蝼蚁的悲鸣."
+      )
     }
     squareShape = true
     omniMovement = false

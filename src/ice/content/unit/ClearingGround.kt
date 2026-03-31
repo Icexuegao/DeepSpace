@@ -9,7 +9,7 @@ import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect
@@ -17,7 +17,6 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.game.EventType
 import mindustry.gen.Bullet
-import mindustry.gen.Unit
 import mindustry.graphics.Drawf
 import singularity.core.UpdatePool
 import universecore.graphics.lightnings.LightningContainer

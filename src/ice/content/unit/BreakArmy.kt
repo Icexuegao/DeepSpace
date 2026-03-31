@@ -7,7 +7,7 @@ import arc.math.Angles
 import arc.math.Mathf
 import arc.math.geom.Rect
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.Effect

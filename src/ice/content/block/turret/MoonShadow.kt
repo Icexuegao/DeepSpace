@@ -7,7 +7,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
@@ -23,7 +23,7 @@ import mindustry.world.draw.DrawTurret
 
 class MoonShadow : PowerTurret("moonShadow") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "月隐", "中型能量炮塔,可以快速向敌人发射闪电能量团")
     }
     requirements(

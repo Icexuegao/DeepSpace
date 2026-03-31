@@ -3,7 +3,7 @@ package ice.content.block.crafter
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Liquids
@@ -29,7 +29,7 @@ class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
     newConsume().apply {
       time(60f)
       liquid(Liquids.water, 2f)
-      item(IItems.钴锭, 1)
+      item(IItems.铝锭, 1)
       power(1f)
     }
     newProduce().apply {

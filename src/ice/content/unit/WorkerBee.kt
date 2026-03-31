@@ -1,14 +1,14 @@
 package ice.content.unit
 
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.ai.UnitCommand
 import mindustry.gen.BuildingTetherPayloadUnit
 
 class WorkerBee : IceUnitType("unit_workerBee", BuildingTetherPayloadUnit::class.java) {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "工蜂", "轻型空中工程单位.配备精密的模块化建造系统,负责大型单位的建造与装配任务")
     }
     defaultCommand = UnitCommand.assistCommand

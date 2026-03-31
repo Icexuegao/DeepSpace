@@ -1,7 +1,7 @@
 package ice.content.unit.naval
 
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.bullet.MissileBulletType
@@ -11,7 +11,7 @@ import mindustry.gen.UnitWaterMove
 class Witness : IceUnitType("unit_witness", UnitWaterMove::class.java) {
 
   init {
-    BaseBundle.Companion.bundle {
+    bundle {
       desc(zh_CN, "见证", "轻型海栖突击单位.发射机炮与小型鱼雷攻击敌人,机动性能优异,擅长清理落单的敌方舰只")
     }
     health = 300f

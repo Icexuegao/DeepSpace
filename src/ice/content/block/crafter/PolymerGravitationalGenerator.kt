@@ -10,7 +10,7 @@ import arc.scene.style.TextureRegionDrawable
 import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.gen.Building

@@ -2,7 +2,7 @@ package ice.content.unit
 
 import arc.graphics.Color
 import arc.math.Interp
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.bullet.ExplosionBulletType
 import mindustry.entities.effect.MultiEffect
@@ -14,7 +14,7 @@ import mindustry.type.unit.MissileUnitType
 
 class Spark : MissileUnitType("unit_spark") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "火花")
     }
     health = 385f

@@ -19,7 +19,7 @@ import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.rand
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import mindustry.audio.SoundLoop
 import mindustry.content.Fx
 import mindustry.content.Items

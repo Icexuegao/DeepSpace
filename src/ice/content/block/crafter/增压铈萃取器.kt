@@ -8,7 +8,7 @@ import arc.math.Mathf
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.entities.Damage

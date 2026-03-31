@@ -4,7 +4,7 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.audio.ISounds
 import ice.content.IItems
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids

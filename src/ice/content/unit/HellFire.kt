@@ -6,8 +6,7 @@ import ice.entities.bullet.ExplosionBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
-import ice.world.content.unit.IceUnitType
+import ice.ui.bundle.bundle
 import mindustry.content.Fx
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.bullet.ShrapnelBulletType
@@ -21,7 +20,7 @@ import mindustry.type.unit.MissileUnitType
 
 class HellFire : MissileUnitType("unit_hellFire") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "火狱")
     }
 

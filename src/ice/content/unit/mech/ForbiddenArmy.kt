@@ -7,7 +7,7 @@ import ice.audio.ISounds
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.ArmorPlateAbility
 import mindustry.content.Fx
@@ -25,8 +25,12 @@ import mindustry.gen.Sounds
 
 class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
   init {
-    BaseBundle.bundle {
-      desc(zh_CN, "禁军", "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,并对附近的友军提供坚忍效果.会缓慢恢复生命值,开火时减少所受伤害")
+    bundle {
+      desc(
+        zh_CN,
+        "禁军",
+        "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,并对附近的友军提供坚忍效果.会缓慢恢复生命值,开火时减少所受伤害"
+      )
     }
     health = 119000f
     armor = 29f

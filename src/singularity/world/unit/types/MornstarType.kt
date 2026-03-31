@@ -21,7 +21,7 @@ import arc.util.pooling.Pool.Poolable
 import arc.util.pooling.Pools
 import ice.DeepSpace
 import ice.library.struct.AttachedProperty
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -40,7 +40,6 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.graphics.Trail
 import mindustry.world.meta.BlockFlag
-import singularity.Sgl
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
@@ -54,8 +53,12 @@ import universecore.graphics.lightnings.LightningContainer
 
 class MornstarType : AirSeaAmphibiousUnit("mornstar") {
   init {
-    BaseBundle.bundle {
-      desc(zh_CN, "晨星", "搭载光束引擎的巨型护卫舰,装载光棱蜉蚴模块,能够引导光束能量体发动猛烈的攻击,同时它搭载的重型电磁脉冲主炮也能对敌人造成致命的打击")
+    bundle {
+      desc(
+        zh_CN,
+        "晨星",
+        "搭载光束引擎的巨型护卫舰,装载光棱蜉蚴模块,能够引导光束能量体发动猛烈的攻击,同时它搭载的重型电磁脉冲主炮也能对敌人造成致命的打击"
+      )
     }
 
     armor = 19f

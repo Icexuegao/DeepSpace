@@ -14,7 +14,7 @@ import ice.content.block.turret.TurretBullets.branch
 import ice.content.block.turret.TurretBullets.lightning
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import mindustry.content.Fx
 import mindustry.entities.Damage
 import mindustry.entities.Effect

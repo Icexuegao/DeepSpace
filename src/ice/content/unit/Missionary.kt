@@ -9,7 +9,7 @@ import ice.entities.bullet.BombBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -23,9 +23,12 @@ import singularity.world.blocks.turrets.LightningBulletType
 
 class Missionary : IceUnitType("missionary") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(
-        zh_CN, "传教者", "重型空中突击单位.发射磁轨弹和等离子爆裂弹攻击,并投掷粒子冲击弹轰炸敌人,火力强悍", "枢机教廷[净化之翼]军团\n枢机的例行祷告"
+        zh_CN,
+        "传教者",
+        "重型空中突击单位.发射磁轨弹和等离子爆裂弹攻击,并投掷粒子冲击弹轰炸敌人,火力强悍",
+        "枢机教廷[净化之翼]军团\n枢机的例行祷告"
       )
     }
     speed = 0.9f

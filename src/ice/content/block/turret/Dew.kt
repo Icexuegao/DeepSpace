@@ -7,7 +7,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import mindustry.content.Fx
 import mindustry.entities.part.HaloPart
 import mindustry.entities.part.RegionPart

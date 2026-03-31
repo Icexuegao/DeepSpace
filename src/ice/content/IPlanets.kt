@@ -8,7 +8,7 @@ import ice.game.IceTeam
 import ice.graphics.IceColor
 import ice.library.world.Load
 import ice.maps.planet.ardery.ArderyPlanetGenerator
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import mindustry.game.Team
 import mindustry.graphics.g3d.HexMesh
 import mindustry.graphics.g3d.HexSkyMesh

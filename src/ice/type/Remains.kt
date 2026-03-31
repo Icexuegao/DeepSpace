@@ -4,6 +4,7 @@ import arc.func.Cons
 import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
+import arc.util.Scaling
 import ice.DeepSpace
 import ice.audio.ISounds
 import ice.graphics.IStyles
@@ -13,10 +14,12 @@ import ice.library.scene.ui.addLine
 import ice.library.scene.ui.itooltip
 import ice.library.struct.ConfigPropertyDelegate
 import ice.ui.UI
+import ice.ui.bundle.Bundle
+import ice.ui.bundle.localizedName
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
 
-open class Remains(val name: String) {
+open class Remains(val name: String): Bundle {
   companion object {
     val remainsSeq = Seq<Remains>()
 
@@ -30,7 +33,6 @@ open class Remains(val name: String) {
   }
 
   var level = 0
-  var localizedName: String = ""
   var effect = ""
   var icon = TextureRegionDrawable(IFiles.findModPng(name))
   var remainsColor = IceColor.b4
@@ -44,6 +46,7 @@ open class Remains(val name: String) {
 
   init {
     remainsSeq.add(this)
+    localizedName=name
   }
 
   fun setDescriptionTable(table: Cons<Table>) {
@@ -60,12 +63,12 @@ open class Remains(val name: String) {
   }
   fun getTiTleTable(): Table {
     return Table().also {
-      it.image(icon).size(120f).pad(30f).padTop(0f).row()
+      it.image(icon).scaling(Scaling.fit).size(120f).pad(30f).padTop(0f).row()
       it.table {table ->
         table.table(IFiles.createNinePatch("Uwdwdqddw")) {it1 ->
           it1.add("遗物").color(IceColor.b4).expandX().left().padLeft(4f)
         }.width(100f).height(30f).color(IceColor.b6).expandX().left().row()
-        table.add(name).color(remainsColor).fontScale(1.5f).pad(5f).padLeft(0f).expandX().left().row()
+        table.add(localizedName).color(remainsColor).fontScale(1.5f).pad(5f).padLeft(0f).expandX().left().row()
       }.grow().row()
       it.addLine().pad(3f)
       it.table {table ->
@@ -82,7 +85,7 @@ open class Remains(val name: String) {
       RemainsDialog.flunRemains()
     }.disabled {
       disabled()
-    }.size(60f).pad(10f).itooltip(name).get().hovered {
+    }.size(60f).pad(10f).itooltip(localizedName).get().hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this
         RemainsDialog.flunRemains()
@@ -99,7 +102,7 @@ open class Remains(val name: String) {
       }
     }.disabled {
       disabled()
-    }.size(60f).pad(10f).itooltip(name).get().hovered {
+    }.size(60f).pad(10f).itooltip(localizedName).get().hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this
         RemainsDialog.flunRemains()

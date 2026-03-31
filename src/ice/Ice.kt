@@ -1,20 +1,18 @@
 package ice
 
 import arc.Events
-import ice.async.ParcelProcess
 import ice.audio.SoundControl
 import ice.content.*
 import ice.content.block.IBlocks
 import ice.core.SaveIO
 import ice.core.SettingValue
-import ice.entities.IceRegister
+import ice.entities.ArcFieldBulletType
 import ice.entities.bullet.base.IceBullet
 import ice.game.IceTeam
 import ice.library.EventType
 import ice.library.IFiles
 import ice.library.Schematics
 import ice.library.struct.log
-import ice.ui.Documents
 import ice.ui.MenusDialog
 import ice.ui.UI
 import ice.ui.bundle.BaseBundle
@@ -23,8 +21,10 @@ import ice.world.content.blocks.effect.Noise2dBlock
 import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
+import mindustry.gen.Sounds
 import mindustry.mod.Mod
 import mindustry.type.Category
+import mindustry.world.blocks.defense.turrets.ContinuousLiquidTurret
 import mindustry.world.meta.BuildVisibility
 import singularity.Recipes
 import singularity.Singularity
@@ -40,23 +40,23 @@ open class Ice : Mod() {
   companion object {
     val singularity = Singularity()
   }
-  enum class A{
-    d,f,w
-  }
-init {
-  Events.on(mindustry.game.EventType.AtlasPackEvent::class.java){
 
+  enum class A {
+    d, f, w
   }
-  val ad=  A::class.accessEnum0()
-  ad.newEnumInstance("xaw",1)
-  A.entries.toTypedArray().forEach {
-    log { it.name+"  "+it.ordinal }
+
+  init {
+    val ad = A::class.accessEnum0()
+    ad.newEnumInstance("xaw", 1)
+    A.entries.toTypedArray().forEach {
+      log { it.name + "  " + it.ordinal }
+    }
   }
-}
+
   init {
     DeepSpace.globals.load()
     // researches.init();
-    Events.on(mindustry.game.EventType.MusicRegisterEvent::class.java){
+    Events.on(mindustry.game.EventType.MusicRegisterEvent::class.java) {
       SoundControl.init()
     }
     IFiles.setup()
@@ -64,7 +64,6 @@ init {
     SglCategory.setup()
     UncCore.setup()
     SettingValue.setup()
-    IceRegister.setup()
     IceBullet.setup()
     EventType.setup()
     IceTeam.setup()
@@ -77,7 +76,6 @@ init {
     //  SglTechTreeDialog().show()
     UI.init()
     Schematics.init()
-    Vars.asyncCore.processes.add(ParcelProcess)
     MenusDialog.init()
     SaveIO.init()
 
@@ -89,7 +87,15 @@ init {
   }
 
   override fun loadContent() {
-
+    ContinuousLiquidTurret("cuttex").apply {
+      requirements(Category.turret, BuildVisibility.shown,IItems.导能回路,1)
+      size = 3
+      shootSound = Sounds.none
+      shootY = 2.8f
+      rotateSpeed = 8f
+      shootWarmupSpeed = 0.05f
+ammo(ILiquids.氯气, ArcFieldBulletType())
+    }
     //载入所有新内容类型
     SglContentType.load()
 

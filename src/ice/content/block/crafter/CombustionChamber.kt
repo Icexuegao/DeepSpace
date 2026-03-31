@@ -2,7 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.type.Category

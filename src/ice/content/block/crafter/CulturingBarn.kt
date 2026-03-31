@@ -11,7 +11,7 @@ import arc.util.Time
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.library.struct.AttachedProperty
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks

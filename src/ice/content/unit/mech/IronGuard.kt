@@ -6,7 +6,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.ArmorPlateAbility
 import mindustry.content.Fx
@@ -20,7 +20,7 @@ import mindustry.type.ammo.ItemAmmoType
 
 class IronGuard : IceUnitType("unit_ironGuard", MechUnit::class.java) {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "铁卫", "中型地面突击单位.快速交替发射炮弹攻击敌人,会缓慢恢复生命值,开火时减少所受伤害")
     }
     health = 11000f

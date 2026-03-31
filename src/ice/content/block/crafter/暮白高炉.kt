@@ -3,7 +3,7 @@ package ice.content.block.crafter
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.graphics.IceColor
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawArcSmelt
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti

@@ -5,8 +5,7 @@ import ice.content.IItems
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.ui.bundle.bundle
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.bullet.LightningBulletType
@@ -19,7 +18,7 @@ import singularity.world.blocks.turrets.SglTurret
 
 class Flash : SglTurret("flash") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "闪光", "发射带电巨浪子弹贯穿敌人,释放的大量闪电能够对集群造成十分可观的打击")
     }
 

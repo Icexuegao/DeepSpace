@@ -5,7 +5,7 @@ import arc.math.Mathf
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
 import arc.struct.Seq
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import ice.ui.bundle.localizedName
 import ice.world.meta.IceStats
 import mindustry.gen.Building
 import mindustry.type.Item

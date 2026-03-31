@@ -10,7 +10,7 @@ import arc.math.Mathf
 import arc.math.geom.Geometry
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.gen.Building

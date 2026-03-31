@@ -24,8 +24,8 @@ import ice.library.scene.element.ProgressBar
 import ice.library.scene.element.typinglabel.TLabel
 import ice.library.util.toStringi
 import ice.ui.Documents
-import ice.ui.bundle.BaseBundle.Bundle.Companion.description
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import ice.ui.bundle.description
+import ice.ui.bundle.localizedName
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
 import mindustry.Vars

@@ -1,8 +1,8 @@
+
 import arc.files.Fi
 import arc.util.serialization.JsonReader
 import arc.util.serialization.JsonWriter
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.gradle.kotlin.dsl.extra
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

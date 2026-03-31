@@ -4,7 +4,7 @@ import ice.content.IItems
 import ice.content.block.liquid.P2PLiquidNode
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import ice.world.content.blocks.liquid.*
@@ -115,6 +115,18 @@ object LiquidBlocks : Load {
     }
   }
 
+  val 基础导管桥 = TransferNode("baseBridgeConduit").apply {
+    bundle {
+      desc(zh_CN, "基础导管桥", "向被连接的输出节点传输液体,传输节点面向连接的一侧不可接收液体")
+    }
+    directionAny = false
+    range = 5
+    hasPower = false
+    arrowSpacing = 6f
+    liquidCapacity = 14f
+    placeableLiquid = true
+    requirements(Category.liquid, IItems.高碳钢,2,IItems.锌锭, 5, IItems.石英玻璃, 5)
+  }
   val 装甲导管桥 = TransferNode("bridgeConduitArmored").apply {
     bundle {
       desc(zh_CN, "装甲导管桥", "向被连接的输出节点传输液体,传输节点面向连接的一侧不可接收液体")
@@ -130,7 +142,6 @@ object LiquidBlocks : Load {
     arrowSpacing = 6f
     liquidCapacity = 24f
     placeableLiquid = true
-    selectionColumns = 6
     requirements(Category.liquid, IItems.石英玻璃, 8, IItems.陶钢, 3, IItems.铱板, 5)
   }
   val 导管桥 = TransferNode("bridgeConduit").apply {
@@ -141,7 +152,7 @@ object LiquidBlocks : Load {
     hasItems = false
     hasPower = false
     liquidCapacity = 10f
-    requirements(Category.liquid, IItems.锌锭, 5, IItems.石英玻璃, 10)
+    requirements(Category.liquid, IItems.单晶硅,3, IItems.锌锭, 5, IItems.石英玻璃, 10)
   }
   val 长距导管桥 = TransferNode("bridgeConduitLarge").apply {
     bundle {
@@ -155,7 +166,7 @@ object LiquidBlocks : Load {
     hasItems = false
     liquidCapacity = 10f
     consumePower(30f / 60f)
-    requirements(Category.liquid, IItems.铜锭, 8, IItems.锌锭, 10, IItems.石英玻璃, 20)
+    requirements(Category.liquid, IItems.单晶硅,6, IItems.铜锭, 8, IItems.锌锭, 10, IItems.石英玻璃, 20)
   }
   val 动脉导管桥 = TransferNode("bridgeConduitArtery").apply {
     bundle {

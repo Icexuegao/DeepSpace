@@ -4,8 +4,7 @@ import arc.Core
 import arc.Events
 import arc.util.Nullable
 import ice.DeepSpace
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
-import singularity.Sgl
+import ice.ui.bundle.localizedName
 import singularity.core.SglEventTypes.ResearchCompletedEvent
 import singularity.core.SglEventTypes.RevealedEvent
 

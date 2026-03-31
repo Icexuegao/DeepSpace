@@ -12,7 +12,7 @@ import ice.content.IStatus
 import ice.content.IUnitTypes
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.Vars
 import mindustry.audio.SoundLoop
@@ -35,7 +35,7 @@ import kotlin.math.min
 class SpiderBomb : IceUnitType("unit_spiderBomb") {
 
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "炸蛛", "中型地面突击单位.向敌人发起剧烈自杀式攻击.配备推进器以快速接近敌人.阵亡后会分裂出爆蚊")
     }
 

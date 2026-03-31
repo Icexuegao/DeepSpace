@@ -44,7 +44,7 @@ object SettingValue : Load {
   var 启用主菜单音乐 by observable(true) { _, _, new ->
     if (!new) IMusics.title.stop()
   }
-  var difficulty by observable(ModeDifficulty.General)
+  var difficulty by observable(ModeDifficulty.洗礼)
   var menuMusicVolume by observable(1f)
   var 视野最大缩放限制 by observable(6f) { _, _, new ->
     Vars.renderer.maxZoom = new
@@ -141,7 +141,7 @@ object SettingValue : Load {
       classifier.isSubclassOf(CharSequence::class) -> value as T
       classifier.isSubclassOf(Array::class) -> toArray(type, value)
       classifier.isSubclassOf(Enum::class) -> {
-        classifier.java.enumConstants?.find { (it as Enum<*>).name == value } as T
+        classifier.java.enumConstants?.find { (it as Enum<*>).name == value } as? T ?:classifier.java.enumConstants.first() as T
       }
 
       else -> throw IllegalArgumentException("Invalid type: $type")

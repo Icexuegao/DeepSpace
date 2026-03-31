@@ -1,11 +1,9 @@
 package ice
 
-import arc.struct.Seq
-import ice.library.util.MultipleAny
 import java.io.File
 
 fun main() {
-   repName("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\ice\\ui\\background")
+   repName(File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\remains\\can"))
   // val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\environment\\ore")
   // req(file)
 
@@ -22,12 +20,15 @@ fun req(file: File) {
   }
 }
 
-fun repName(path: String) {
-  val file = File(path)
+fun repName(file: File) {
 
   file.listFiles()?.forEach {
-    val replace1 = it.name.replace("-","_")
-    it.renameTo(File("$path\\$replace1"))
+    if (it.isDirectory){
+      repName(it)
+      return@forEach
+    }
+    val replace1 = "remains_mystic_sea-"+it.name.replace("remains_mystic_sea--","")
+    it.renameTo(File("${file.path}\\$replace1"))
   }
 }
 

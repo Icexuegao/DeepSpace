@@ -4,7 +4,7 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.entities.part.DrawPart

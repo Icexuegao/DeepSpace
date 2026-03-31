@@ -4,7 +4,7 @@ import arc.func.Floatf
 import arc.func.Func
 import arc.util.Tmp
 import ice.content.IItems
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Fx

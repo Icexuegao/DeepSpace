@@ -9,7 +9,7 @@ import arc.math.Mathf
 import arc.util.Time
 import ice.content.IItems
 import ice.library.util.toStringi
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.entities.Effect
@@ -26,7 +26,7 @@ class Rainbow : PowerTurret("turret_rainbow") {
   var change = 120f
 
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "霓虹", "快速发射渐变霓虹攻击敌人\n其聚能速度会随持续射击而逐渐提升")
     }
     health = 820

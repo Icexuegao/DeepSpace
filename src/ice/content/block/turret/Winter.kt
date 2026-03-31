@@ -15,10 +15,9 @@ import ice.content.ILiquids
 import ice.content.block.turret.TurretBullets.freezingField
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import mindustry.Vars
 import mindustry.content.Fx
-import mindustry.content.Liquids
 import mindustry.entities.effect.WaveEffect
 import mindustry.entities.part.RegionPart
 import mindustry.gen.Bullet

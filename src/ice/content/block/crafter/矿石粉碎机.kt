@@ -1,7 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import mindustry.type.Category
@@ -11,8 +11,8 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 矿石粉碎机 : NormalCrafter("mineralCrusher") {
   init {
-    BaseBundle.bundle {
-      desc(zh_CN,"矿石粉碎机","将复杂矿石质粉碎并筛选分类为更易处理的矿石,可配置")
+    bundle {
+      desc(zh_CN, "矿石粉碎机", "将复杂矿石质粉碎并筛选分类为更易处理的矿石,可配置")
     }
     health=240
     size=4

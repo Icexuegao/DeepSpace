@@ -1,13 +1,13 @@
 package ice.content.unit
 
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.gen.CrawlUnit
 
 class Barb: IceUnitType("unit_barb", CrawlUnit::class.java) {
   init {
-    BaseBundle.bundle {
-      desc(zh_CN,"绒刺","请输入文本")
+    bundle {
+      desc(zh_CN, "绒刺", "请输入文本")
     }
     health = 120f
     armor = 2f

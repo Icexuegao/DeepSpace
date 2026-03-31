@@ -1,16 +1,14 @@
 package ice.content.unit.flying.fire
 
-import ice.Ice
 import ice.content.IItems
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
-import mindustry.gen.Unit
 
 class PutotFire : IceUnitType("putotFire") {
   init {

@@ -6,7 +6,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.WrapEffect
@@ -17,7 +17,7 @@ import singularity.world.blocks.product.NormalCrafter
 class 以太封装器 : NormalCrafter("etherEncapsulator") {
 
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "以太封装器", "将游离的以太封装为便于运输的容器")
     }
     size = 5

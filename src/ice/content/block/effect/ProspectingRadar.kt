@@ -20,7 +20,7 @@ import ice.audio.ISounds
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.scene.ui.updateE
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
@@ -42,7 +42,7 @@ class ProspectingRadar : SglBlock("prospectingRadar") {
   var baseSpeed = 0.5f
 
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "勘探雷达")
     }
     update = true

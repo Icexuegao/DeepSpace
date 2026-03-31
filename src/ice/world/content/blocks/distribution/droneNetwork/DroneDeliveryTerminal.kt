@@ -13,7 +13,7 @@ import ice.ai.CarryTaskAI
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IUnitTypes
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.RangeBlock
 import ice.world.content.blocks.distribution.droneNetwork.DroneReceivingRnd.DroneReceivingRndBuild
 import ice.world.meta.IceStats

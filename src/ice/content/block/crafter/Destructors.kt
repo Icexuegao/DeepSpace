@@ -3,8 +3,8 @@ package ice.content.block.crafter
 import arc.Core
 import ice.content.AtomSchematics
 import ice.content.IItems
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.localizedName
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.graphics.Pal

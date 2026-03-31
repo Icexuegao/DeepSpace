@@ -1,16 +1,10 @@
 package ice.library
 
-import arc.Core
 import arc.Events
-import arc.input.KeyCode
 import arc.struct.Seq
-import arc.util.Tmp
 import ice.library.world.Load
 import ice.ui.menusDialog.AchievementDialog
-import ice.world.content.blocks.distribution.conveyor.PackStack
-import mindustry.Vars
 import mindustry.game.EventType
-import mindustry.gen.Groups
 
 object EventType : Load {
   class AchievementUnlockEvent(var achievement: AchievementDialog.Achievement)
@@ -27,30 +21,6 @@ object EventType : Load {
     }
     Events.on(EventType.ClientLoadEvent::class.java) {
       clientLoadEvent.forEach {it()}
-    }
-
-    var df: PackStack? = null
-    Events.run(EventType.Trigger.update) {
-      if (Core.input.isTouched) {
-        if (!Core.input.keyDown(KeyCode.mouseLeft)) return@run
-        val mouseWorld = Core.input.mouseWorld()
-        val find = Groups.draw.find {entityc ->
-          entityc is PackStack && entityc.dst2(mouseWorld.x, mouseWorld.y) <= 5 * 5
-        } as? PackStack
-        if (df == null) {
-          df = find
-        }
-      } else {
-        df = null
-      }
-      df?.let {
-        if (!it.added) {
-          return@run
-        }
-        val mouseWorld = Core.input.mouseWorld()
-        val sub = Tmp.v1.set(mouseWorld).sub(df).scl(0.1f)
-        if (!Vars.state.isPaused) it.move(sub)
-      }
     }
   }
   /** 添加内容初始化事件,在所以内容初始化以后调用*/

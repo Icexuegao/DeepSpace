@@ -13,7 +13,7 @@ import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.shader.IceShader
 import ice.type.Dup
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.environment.*
 import ice.world.meta.IAttribute
 import mindustry.Vars

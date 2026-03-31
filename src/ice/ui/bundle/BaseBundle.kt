@@ -9,9 +9,6 @@ import mindustry.ctype.UnlockableContent
 
 class BaseBundle(val name: String) {
   companion object : Load {
-    fun bundle(bundle: Companion.() -> Unit) {
-      bundle.invoke(Companion)
-    }
 
     fun <T : UnlockableContent> T.desc(bundle: BaseBundle, name: String, desc: String = "", deta: String = "") {
       bundle.runBun.add {
@@ -22,35 +19,48 @@ class BaseBundle(val name: String) {
     }
 
     private val bundle = HashMap<String, BaseBundle>()
+    var initializer = false
+
     override fun load() {
       IceStats.load()
       bundle["${Core.settings.getString("locale", "zh_CN")}"]?.load()
+      initializer = true
     }
 
     val zh_CN = BaseBundle("zh_CN")
   }
 
-  private val runBun = Seq<Runnable>()
+  val runBun = Seq<() -> Unit>()
 
   init {
     bundle[name] = this
   }
 
   fun load() {
-    runBun.forEach { it.run() }
+    runBun.forEach { it() }
+    runBun.clear()
   }
 
-  interface Bundle {
-    companion object {
-      var Bundle.localizedName: String by AttachedProperty("")
-      var Bundle.description: String by AttachedProperty("")
-    }
+}
 
-    fun desc(bundle: BaseBundle, localizedName: String, description: String = "") {
-      bundle.runBun.add {
-        this.localizedName = localizedName
-        this.description = description
-      }
+fun bundle(bundle: BaseBundle.Companion.() -> Unit) {
+  bundle.invoke(BaseBundle.Companion)
+}
+
+var Bundle.localizedName: String by AttachedProperty("")
+var Bundle.description: String by AttachedProperty("")
+
+interface Bundle {
+
+  fun desc(bundle: BaseBundle, localizedName: String, description: String = "") {
+    val d = {
+      this.localizedName = localizedName
+      this.description = description
+    }
+    if (BaseBundle.initializer) {
+      d()
+    } else {
+      bundle.runBun.add(d)
     }
   }
 }

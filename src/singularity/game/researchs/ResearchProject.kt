@@ -6,15 +6,15 @@ import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Nullable
-import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import ice.ui.bundle.Bundle
+import ice.ui.bundle.localizedName
 import mindustry.ctype.UnlockableContent
 import singularity.Singularity
 import singularity.contents.SglTechThree
 import singularity.core.SglEventTypes.ResearchCompletedEvent
 import singularity.world.blocks.research.ResearchDevice
 
-class ResearchProject(val name: String, val techRequires: Int, val techRequiresRandom: Int = 0) : BaseBundle.Bundle {
+class ResearchProject(val name: String, val techRequires: Int, val techRequiresRandom: Int = 0) : Bundle {
   val dependencies: Seq<ResearchProject> = Seq<ResearchProject>()
   val contents: Seq<UnlockableContent> = Seq<UnlockableContent>()
   val requireDevices: Seq<ResearchDevice?> = Seq<ResearchDevice?>()

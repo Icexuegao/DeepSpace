@@ -6,7 +6,7 @@ import ice.audio.ISounds
 import ice.content.IItems
 import ice.entities.bullet.base.BasicBulletType
 import ice.graphics.IceColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.meta.IceEffects
 import mindustry.entities.Effect
@@ -20,7 +20,7 @@ import mindustry.world.draw.DrawTurret
 
 class TrashIce:ItemTurret("trashIce") {
   init{
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "碎冰")
     }
     size = 1

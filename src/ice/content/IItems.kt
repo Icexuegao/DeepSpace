@@ -4,7 +4,7 @@ import arc.Core
 import arc.graphics.g2d.TextureRegion
 import arc.util.Time
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.item.IceItem
 import ice.world.content.item.OreItem
 import singularity.core.UpdatePool

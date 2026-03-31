@@ -6,7 +6,7 @@ import ice.content.IStatus
 import ice.content.IUnitTypes
 import ice.entities.bullet.LaserBulletType
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.LiquidExplodeAbility
@@ -30,8 +30,12 @@ class Mosquito : IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
     createScorch = false
     playerControllable = false
     itemCapacity = 0
-    BaseBundle.bundle {
-      desc(zh_CN, "疟蚊", "轻型空中突击单位.由飞蠓改进而成,体型略有增长,体表覆盖轻便的几丁质甲壳,在保持机动性的同时获得了一定的防护能力.阵亡后会洒下一滩血肉赘生物.")
+    bundle {
+      desc(
+        zh_CN,
+        "疟蚊",
+        "轻型空中突击单位.由飞蠓改进而成,体型略有增长,体表覆盖轻便的几丁质甲壳,在保持机动性的同时获得了一定的防护能力.阵亡后会洒下一滩血肉赘生物."
+      )
     }
     targetFlags = arrayOf(
       BlockFlag.reactor,

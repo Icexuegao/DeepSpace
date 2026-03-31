@@ -3,7 +3,7 @@ package ice.content.unit
 import arc.graphics.Color
 import arc.math.geom.Rect
 import ice.entities.bullet.LaserBulletType
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.gen.Sounds

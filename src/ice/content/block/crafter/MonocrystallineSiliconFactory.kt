@@ -5,7 +5,7 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import arc.math.Mathf
 import ice.content.IItems
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects

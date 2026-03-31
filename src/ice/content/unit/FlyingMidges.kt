@@ -5,7 +5,7 @@ import ice.content.ILiquids
 import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.LiquidExplodeAbility
@@ -28,7 +28,7 @@ class FlyingMidges : IceUnitType("unit_flyingMidges", TimedKillUnit::class.java)
     playerControllable = false
     itemCapacity = 0
 
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "飞蠓", "轻型空中突击单位.体型轻盈,行动敏捷,以其机动性在进攻中占据主导地位,集群作战中有显著优势")
     }
     targetFlags = arrayOf(

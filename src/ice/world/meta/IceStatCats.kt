@@ -1,11 +1,9 @@
 package ice.world.meta
 
-import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
-import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
+import ice.ui.bundle.localizedName
+import ice.ui.bundle.bundle
 import ice.ui.bundle.BaseBundle.Companion.zh_CN
-import ice.world.meta.IceStatCats.create
+import ice.ui.bundle.Bundle
 import mindustry.world.meta.StatCat
 import universecore.util.handler.FieldHandler
 
@@ -46,7 +44,7 @@ object IceStatCats {
     return res
   }
 
-  class IceStatCat(name: String) : StatCat(name), BaseBundle.Bundle {
+  class IceStatCat(name: String) : StatCat(name), Bundle {
     override fun localized(): String = localizedName
   }
 }

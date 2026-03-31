@@ -4,7 +4,7 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.StatusEffects
 import mindustry.entities.bullet.ContinuousFlameBulletType
@@ -14,7 +14,7 @@ import mindustry.world.blocks.defense.turrets.ContinuousLiquidTurret
 
 class FlowingFire : ContinuousLiquidTurret("flowingFire") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "流火", "小型等离子炮塔\n持续消耗燃料以喷射高热的等离子火焰,近距离内十分有效")
     }
     health = 1800

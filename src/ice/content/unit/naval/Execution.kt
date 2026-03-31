@@ -1,7 +1,7 @@
 package ice.content.unit.naval
 
 import ice.entities.bullet.ArtilleryBulletType
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -11,7 +11,7 @@ import mindustry.gen.UnitWaterMove
 
 class Execution : IceUnitType("unit_execution", UnitWaterMove::class.java) {
   init {
-    BaseBundle.Companion.bundle {
+    bundle {
       desc(zh_CN, "履行", "轻型海栖突击单位.发射炮弹与导弹攻击敌人,在见证的火力上进行了增强")
     }
     health = 750f

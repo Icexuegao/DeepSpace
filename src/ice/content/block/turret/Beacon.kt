@@ -6,7 +6,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.entities.bullet.BombBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import mindustry.content.Fx
@@ -21,7 +21,7 @@ import mindustry.world.draw.DrawTurret
 
 class Beacon : PowerTurret("beacon") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(
         zh_CN, "信标", "持续引导聚爆能量弹坠向信标标记处,毁灭半径60格内所有敌方目标"
       )

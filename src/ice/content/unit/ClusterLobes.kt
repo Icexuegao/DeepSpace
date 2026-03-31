@@ -20,7 +20,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.graphics.IceColor
 import ice.library.util.IMathf
 import ice.library.util.toStringi
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.BarAbility
 import ice.world.content.unit.entity.base.Entity

@@ -13,7 +13,7 @@ import arc.util.Strings
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.library.struct.AttachedProperty
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import ice.ui.bundle.localizedName
 import ice.world.meta.IceStats
 import mindustry.game.Team
 import mindustry.gen.Building

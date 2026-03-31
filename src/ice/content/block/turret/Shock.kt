@@ -13,7 +13,7 @@ import ice.entities.bullet.PointBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -31,7 +31,7 @@ import mindustry.world.consumers.ConsumeCoolant
 class Shock : ItemTurret("turret_shock") {
 
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "震击", "以相位技术传送炮弹,使其瞬间到达目标点")
     }
     health = 4680

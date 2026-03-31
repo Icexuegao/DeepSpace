@@ -5,14 +5,12 @@ package ice.entities
 import arc.func.Prov
 import arc.struct.ObjectIntMap
 import arc.struct.ObjectMap
-import ice.library.world.Load
-import ice.world.content.blocks.distribution.conveyor.PackStack
 import mindustry.gen.EntityMapping
 import mindustry.gen.Entityc
 import mindustry.gen.Unit
 import java.lang.reflect.Constructor
 
-object IceRegister : Load {
+object IceRegister  {
   private val ids = ObjectIntMap<Class<out Entityc>>()
   private val map: ObjectMap<String, Prov<out Entityc>> = ObjectMap()
   private val TmpClassConstruntor = ObjectMap<Class<Unit>, Constructor<Unit>>()
@@ -40,11 +38,5 @@ object IceRegister : Load {
       TmpClassConstruntor.get(clazz) { clazz.getDeclaredConstructor() }.also { it.isAccessible = true }.newInstance()
     }
     return getUnit(clazz.canonicalName) as Prov<Unit>
-  }
-
-  override fun setup() {
-    put(PackStack::class.java.canonicalName, PackStack::class.java) {
-      return@put PackStack::class.java.getDeclaredConstructor().newInstance()
-    }
   }
 }

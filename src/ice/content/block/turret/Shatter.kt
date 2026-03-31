@@ -7,7 +7,7 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.entities.effect.ExplosionEffect
@@ -20,8 +20,8 @@ import mindustry.world.consumers.ConsumeCoolant
 
 class Shatter : ItemTurret("turret_shatter") {
   init {
-    BaseBundle.bundle {
-      desc(zh_CN, "碎爆","新式炮台,可兼容各种弹药")
+    bundle {
+      desc(zh_CN, "碎爆", "新式炮台,可兼容各种弹药")
     }
 
     health = 1280

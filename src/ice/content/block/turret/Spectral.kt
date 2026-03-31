@@ -4,7 +4,7 @@ import arc.math.Interp
 import ice.content.IItems
 import ice.entities.bullet.LaserBulletType
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.StatusEffects
 import mindustry.entities.effect.ParticleEffect
@@ -87,7 +87,7 @@ class Spectral:PowerTurret("spectral") {
       })
     }
     requirements(Category.turret, IItems.铜锭, 120, IItems.铬锭, 140, IItems.钍锭, 60, IItems.单晶硅, 120)
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "光谱", "中型能量炮塔,可以快速向敌人发射高热激光")
     }
   }

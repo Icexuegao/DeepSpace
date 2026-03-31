@@ -5,7 +5,7 @@ import ice.content.IUnitTypes
 import ice.content.block.effect.ProspectingRadar
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.*
 import ice.world.content.blocks.science.Laboratory

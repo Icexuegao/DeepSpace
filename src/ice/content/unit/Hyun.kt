@@ -6,7 +6,7 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.ArmorPlateAbility
@@ -20,7 +20,7 @@ import mindustry.gen.Sounds
 
 class Hyun : IceUnitType("unit_hyun") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "玄")
     }
     circleTarget = true

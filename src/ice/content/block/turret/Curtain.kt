@@ -7,14 +7,12 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.graphiteCloud
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.ui.bundle.bundle
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import singularity.world.blocks.turrets.SglTurret
 
 class Curtain : SglTurret("curtain") {

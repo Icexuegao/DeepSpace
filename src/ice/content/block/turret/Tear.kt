@@ -8,7 +8,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
@@ -68,7 +68,7 @@ class Tear :PowerTurret("tear"){
         heatColor = "F03B0E".toColor()
       })
     }
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "撕裂", "一座强大的电磁轨道炮,超长轨道,超大力度,可以快速地进行精准射击")
     }
     requirements(Category.turret, IItems.铜锭, 9600, IItems.铬锭, 6400, IItems.铱板, 3600, IItems.导能回路, 2400, IItems.陶钢, 1920, IItems.生物钢, 1200)

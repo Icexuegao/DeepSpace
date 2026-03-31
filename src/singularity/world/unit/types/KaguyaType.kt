@@ -18,7 +18,7 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.DeepSpace
 import ice.library.struct.AttachedProperty
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import mindustry.content.Fx
 import mindustry.entities.Units
 import mindustry.entities.bullet.BulletType
@@ -36,7 +36,6 @@ import mindustry.type.Weapon
 import mindustry.type.weapons.PointDefenseWeapon
 import mindustry.ui.Styles
 import mindustry.world.meta.BlockFlag
-import singularity.Sgl
 import singularity.graphic.MathRenderer
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst

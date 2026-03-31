@@ -24,7 +24,7 @@ import ice.entities.bullet.MultiBasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.CorrodflyEnd
 import ice.world.content.unit.entity.CorrodflyHead

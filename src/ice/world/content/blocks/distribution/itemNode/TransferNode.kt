@@ -409,19 +409,21 @@ class TransferNode(name: String) : IceBlock(name) {
         wasMoved = moved
         moved = false
       }
-      //平滑动画，使其不会立即停止/启动
+
+      //smooth out animation, so it doesn't stop/start immediately
       timeSpeed = Mathf.approachDelta(timeSpeed, if (wasMoved) 1f else 0f, 1f / 60f)
 
       time += timeSpeed * delta()
 
       checkIncoming()
-      val other: Tile? = Vars.world.tile(link)
+
+      val other = Vars.world.tile(link)
       if (!linkValid(tile, other)) {
         doDump()
         warmup = 0f
       } else {
-        val inc: IntSeq = (other!!.build as TransferNodeBuild).incoming
-        val pos: Int = tile.pos()
+        val inc = (other.build as TransferNodeBuild).incoming
+        val pos = tile.pos()
         if (!inc.contains(pos)) {
           inc.add(pos)
         }
@@ -429,38 +431,29 @@ class TransferNode(name: String) : IceBlock(name) {
         warmup = Mathf.approachDelta(warmup, efficiency, 1f / 30f)
         updateTransport(other.build)
       }
-
     }
 
     private fun doDump() {
-      if (hasItems) {
-        var f = true
-        while (f) f = dump()
-      }
+      if (hasItems) dump()
       if (hasLiquids) dumpLiquid(liquids.current(), 1f)
     }
 
     private fun updateTransport(other: Building) {
       transportCounter += edelta()
-      var i=0
-      while (hasItems && transportCounter >= transportTime ) {
-        val item: Item? = items.take()
+      while (hasItems&&transportCounter >= transportTime ) {
+        val item = items.take()
         if (item != null && other.acceptItem(this, item)) {
           other.handleItem(this, item)
-
           moved = true
         } else if (item != null) {
           items.add(item, 1)
           items.undoFlow(item)
         }
-        i++
         transportCounter -= transportTime
-
       }
 
       if (hasLiquids && warmup >= 0.25f) {
-        moveLiquid(other, liquids.current())
-        moved = true
+        if (moveLiquid(other, liquids.current())>0.001f) moved = true
       }
     }
 

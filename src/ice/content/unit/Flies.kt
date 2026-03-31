@@ -7,7 +7,7 @@ import arc.util.Interval
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.FleshEntity
 import ice.world.meta.IceEffects

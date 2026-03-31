@@ -17,7 +17,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.Effect
@@ -43,8 +43,13 @@ class Veto : IceUnitType("units_veto") {
   val by: Color = Pal.bulletYellow
 
   init {
-    BaseBundle.bundle {
-      desc(zh_CN, "否决", "重型空中突击单位.舰首舰尾发射导弹,四门近程激光与两门远程磁轨炮交替射击,中央主炮投送高爆弹.加装护盾辅助发生器以维持友军护盾持续作战","否决,人类?")
+    bundle {
+      desc(
+        zh_CN,
+        "否决",
+        "重型空中突击单位.舰首舰尾发射导弹,四门近程激光与两门远程磁轨炮交替射击,中央主炮投送高爆弹.加装护盾辅助发生器以维持友军护盾持续作战",
+        "否决,人类?"
+      )
     }
     flying = true
     lowAltitude = true

@@ -5,7 +5,7 @@ import arc.math.geom.Rect
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.ArmorPlateAbility
@@ -15,8 +15,8 @@ import mindustry.world.meta.BlockFlag
 
 class HeavyPress : IceUnitType("heavyPress") {
   init {
-    BaseBundle.bundle {
-      desc(zh_CN, "重压", "中型地面突击单位.持续以履带碾压对敌方建筑.正面投射弧形护盾抵御攻击,碾压时减少所受伤害","钢铁的履带滚滚向前")
+    bundle {
+      desc(zh_CN, "重压", "中型地面突击单位.持续以履带碾压对敌方建筑.正面投射弧形护盾抵御攻击,碾压时减少所受伤害", "钢铁的履带滚滚向前")
     }
     squareShape = true
     omniMovement = false

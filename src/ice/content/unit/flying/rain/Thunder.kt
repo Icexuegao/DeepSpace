@@ -3,7 +3,7 @@ package ice.content.unit.flying.rain
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -15,7 +15,7 @@ import mindustry.gen.Sounds
 
 class Thunder : IceUnitType("unit_thunder") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "惊雷", "重型空中突击单位.发射缓慢移动的球状闪电攻击敌人,同时以闪电场电击附近敌军并治疗友军")
     }
     lowAltitude = true

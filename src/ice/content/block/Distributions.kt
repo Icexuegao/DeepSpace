@@ -7,13 +7,12 @@ import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.*
 import ice.world.content.blocks.distribution.conveyor.ArmoredConveyor
 import ice.world.content.blocks.distribution.conveyor.Conveyor
-import ice.world.content.blocks.distribution.conveyor.PackStackConveyor
 import ice.world.content.blocks.distribution.conveyor.StackConveyor
 import ice.world.content.blocks.distribution.digitalStorage.HubConduit
 import ice.world.content.blocks.distribution.digitalStorage.LogisticsHub
@@ -156,7 +155,7 @@ object Distributions : Load {
     requirements(Category.distribution, IItems.导能回路, 1, IItems.生物钢, 1)
 
   }
-  val 梯度传送带 = PackStackConveyor("gradedConveyor").apply {
+  val 梯度传送带 = StackConveyor("gradedConveyor").apply {
     bundle {
       desc(zh_CN, "梯度传送带", "运输设施,打包多种物品进行运输.如果末端未被阻挡,则包裹会被抛出")
     }
@@ -245,8 +244,6 @@ object Distributions : Load {
     hasPower = false
     arrowSpacing = 6f
     transportTime = 60f/17f
-    placeableLiquid = true
-    selectionColumns = 6
     requirements(Category.distribution, IItems.高碳钢, 6, IItems.锌锭, 4)
   }
   val 装甲传送带桥 = TransferNode("armorBridge").apply {
@@ -289,6 +286,8 @@ object Distributions : Load {
     bundle {
       desc(zh_CN, "传输节点","能同时运输液体和物品,拥有较远的范围")
     }
+    hasPower=false
+    fadeIn = true
     size = 1
     health = 100
     itemCapacity=20
@@ -410,27 +409,27 @@ object Distributions : Load {
 
   val 物流枢纽核心 = LogisticsHub("logisticsHub").apply {
     bundle {
-      desc(zh_CN, "物流枢纽核心")
+      desc(zh_CN, "物流枢纽核心","简易的物品管理模块,通过管道统一分发物品")
     }
     requirements(
       Category.distribution, IItems.电子元件, 50, IItems.导能回路, 100, IItems.钴钢, 200, IItems.强化合金, 50
     )
   }
   val 枢纽管道 = HubConduit("hubConduit").apply {
-    requirements(Category.distribution, IItems.锌锭, 1, IItems.导能回路, 1)
     bundle {
-      desc(zh_CN, "枢纽管道")
+      desc(zh_CN, "枢纽管道","物流枢纽通过此管道分发物品,必须临近放置")
     }
+    requirements(Category.distribution, IItems.锌锭, 1, IItems.导能回路, 1)
   }
   val 物流输入器 = LogisticsInput("logisticsInput").apply {
-    requirements(Category.distribution, IItems.铜锭, 20, IItems.导能回路, 5)
     bundle {
-      desc(zh_CN, "物流输入器")
+      desc(zh_CN, "物流输入器","通过枢纽管道向当前核心输入物品")
     }
+    requirements(Category.distribution, IItems.铜锭, 20, IItems.导能回路, 5)
   }
   val 物流输出器 = LogisticsOutput("logisticsOutput").apply {
     bundle {
-      desc(zh_CN, "物流输出器")
+      desc(zh_CN, "物流输出器","通过枢纽管道从当前核心抽出物品")
     }
     requirements(Category.distribution, IItems.锌锭, 1, IItems.电子元件, 1)
   }

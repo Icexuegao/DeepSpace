@@ -1,7 +1,7 @@
 package ice.content.unit.mech
 
 import arc.graphics.Color
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.ArmorPlateAbility
 import mindustry.content.Fx
@@ -13,8 +13,8 @@ import mindustry.gen.Sounds
 
 class Enclosure:IceUnitType("unit_enclosure", MechUnit::class.java) {
   init {
-    BaseBundle.bundle {
-      desc(zh_CN,"围护","轻型地面突击单位.快速发射散射激光打击敌人,对近距离目标尤为有效,会缓慢恢复生命值,并在开火时减少所受伤害")
+    bundle {
+      desc(zh_CN, "围护", "轻型地面突击单位.快速发射散射激光打击敌人,对近距离目标尤为有效,会缓慢恢复生命值,并在开火时减少所受伤害")
     }
     health = 640f
     armor = 5f

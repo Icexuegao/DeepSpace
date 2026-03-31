@@ -6,7 +6,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds

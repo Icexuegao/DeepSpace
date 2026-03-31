@@ -1,9 +1,7 @@
 package ice.content.block
 
-import ice.library.world.Load
-
-object IBlocks : Load {
-  override fun load() {
+object IBlocks {
+  fun load() {
     EnvironmentBlocks.load()
     DefenseBlocks.load()
     ProductBlocks.load()

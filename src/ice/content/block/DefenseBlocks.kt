@@ -16,7 +16,7 @@ import arc.util.pooling.Pool
 import arc.util.pooling.Pools
 import ice.content.IItems
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.defense.AutoWall
 import ice.world.content.blocks.defense.Wall

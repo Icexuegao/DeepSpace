@@ -3,7 +3,7 @@ package ice.content.unit
 import arc.graphics.g2d.Draw
 import ice.entities.bullet.RandomDamageBulletType
 import ice.graphics.IceColor
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.entities.part.DrawPart

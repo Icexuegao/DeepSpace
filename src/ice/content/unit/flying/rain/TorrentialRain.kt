@@ -2,14 +2,14 @@ package ice.content.unit.flying.rain
 
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 
 class TorrentialRain : IceUnitType("unit_torrentialRain") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "骤雨", "轻型空中突击单位.发射聚焦激光攻击敌人")
     }
     lowAltitude = true

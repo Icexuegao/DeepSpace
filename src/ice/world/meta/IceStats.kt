@@ -1,8 +1,9 @@
 package ice.world.meta
 
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.ui.bundle.BaseBundle.Companion.zh_CN
+
 import mindustry.world.meta.StatCat
 import universecore.world.meta.UncStatCat
 
@@ -334,6 +335,9 @@ object IceStats : Load {
   }
   val 流体 = getStat("liquid") {
     desc(zh_CN, "流体")
+  }
+  val 热量 = getStat("heat") {
+    desc(zh_CN, "热量")
   }
 
   private fun getStat(name: String, cat: StatCat = StatCat.general, desc: IceStat.()->Unit): IceStat {

@@ -14,7 +14,7 @@ import ice.content.block.turret.TurretBullets
 import ice.entities.bullet.BlastLaser
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.weapon.MayflyWeapon
 import ice.world.draw.part.CustomPart
@@ -38,7 +38,6 @@ import singularity.world.SglFx
 import singularity.world.blocks.turrets.EmpBulletType
 import singularity.world.blocks.turrets.MultiTrailBulletType
 import singularity.world.particles.SglParticleModels
-import singularity.world.unit.abilities.MirrorArmorAbility
 import singularity.world.unit.types.TrailMoveLightning
 import universecore.graphics.lightnings.LightningVertex
 import universecore.graphics.lightnings.generator.RandomGenerator

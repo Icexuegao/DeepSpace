@@ -3,7 +3,7 @@ package ice.content.unit.flying.rain
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.bullet.LightningBulletType
@@ -14,7 +14,7 @@ import mindustry.gen.Sounds
 
 class Storm : IceUnitType("unit_storm") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "暴雨", "中型空中突击单位.发射双联球状闪电攻击敌人")
     }
     lowAltitude = true

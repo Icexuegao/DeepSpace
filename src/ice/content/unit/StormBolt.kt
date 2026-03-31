@@ -7,7 +7,7 @@ import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.ArmorPlateAbility
 import mindustry.content.Fx
@@ -21,8 +21,13 @@ import mindustry.gen.Sounds
 
 class StormBolt : IceUnitType("unit_storBolt") {
   init {
-    BaseBundle.bundle {
-      desc(zh_CN, "风暴", "重型空中突击单位.对远距离敌人发射能量弹,对近距离的敌人则发射高热激光.加装护盾辅助发生器以维持友军护盾持续作战,开火时减少所受伤害.攻击时无法移动","风雨欲来...")
+    bundle {
+      desc(
+        zh_CN,
+        "风暴",
+        "重型空中突击单位.对远距离敌人发射能量弹,对近距离的敌人则发射高热激光.加装护盾辅助发生器以维持友军护盾持续作战,开火时减少所受伤害.攻击时无法移动",
+        "风雨欲来..."
+      )
     }
     flying = true
     health = 75000f

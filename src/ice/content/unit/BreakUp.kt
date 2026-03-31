@@ -20,7 +20,7 @@ import ice.entities.bullet.TrailFadeBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.content.Fx

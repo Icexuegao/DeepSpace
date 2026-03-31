@@ -1,8 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.ui.bundle.bundle
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import singularity.world.blocks.product.NormalCrafter

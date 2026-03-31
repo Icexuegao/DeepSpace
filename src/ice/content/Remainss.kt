@@ -9,6 +9,8 @@ import ice.library.scene.element.typinglabel.TLabel
 import ice.library.scene.style.DynamicTextureDrawable
 import ice.library.scene.ui.itooltip
 import ice.type.Remains
+import ice.ui.bundle.bundle
+import ice.ui.bundle.description
 import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
@@ -22,8 +24,11 @@ import universecore.world.consumers.ConsumeType
 
 @Suppress("unused")
 object Remainss {
-  val 娜雅的手串 = Remains("娜雅的手串").apply {
-    setDescription("一串温润的玉石手串,在帝国任职期间由娜雅赠予")
+  val 娜雅的手串 = Remains("remains_naya_bracelet").apply {
+    bundle {
+      desc(zh_CN, "娜雅的手串", "一串温润的玉石手串,在帝国任职期间由娜雅赠予")
+    }
+    setDescription(this.description)
     effect = "核心机增加拦截护盾"
     val units = IUnitTypes.getCoreUnits()
     var map = HashMap<UnitType, InterceptAbilty>()
@@ -45,9 +50,12 @@ object Remainss {
       }
     }
   }
-  val 坚固的装甲板 = Remains("坚固的装甲板").apply {
+  val 坚固的装甲板 = Remains("remains_armor_plates").apply {
+    bundle {
+      desc(zh_CN, "坚固的装甲板", "多层淬火钢板铆接而成,表面布满划痕与凹坑")
+    }
     val hea = 500
-    setDescription("多层淬火钢板铆接而成,表面布满划痕与凹坑")
+    setDescription(description)
     effect = "单位[${IUnitTypes.断业.localizedName}]的生命值提升[$hea]"
     install = {
       IUnitTypes.断业.health += hea
@@ -60,9 +68,12 @@ object Remainss {
       IUnitTypes.断业.checkStats()
     }
   }
-  val 不焚者的余烬 = Remains("不焚者的余烬").apply {
+  val 不焚者的余烬 = Remains("remains_unburnt_ashes").apply {
+    bundle {
+      desc(zh_CN, "不焚者的余烬", "温热的结晶体,烈焰中被焚尽却未曾死去之人的最后残留")
+    }
     val f = 5
-    setDescription("温热的结晶体,烈焰中被焚尽却未曾死去之人的最后残留")
+    setDescription(description)
     effect = "单位[${IUnitTypes.仆从.localizedName}]的武器伤害提升[$f]"
     install = {
       IUnitTypes.仆从.weapons.forEach {
@@ -79,8 +90,11 @@ object Remainss {
       IUnitTypes.仆从.checkStats()
     }
   }
-  val 纯净水晶坠饰 = Remains("纯净水晶坠饰").apply {
-    setDescription("一块天然形成,毫无杂质的透明白水晶")
+  val 纯净水晶坠饰 = Remains("remains_pure_crystal_pendant").apply {
+    bundle {
+      desc(zh_CN, "纯净水晶坠饰", "一块天然形成,毫无杂质的透明白水晶")
+    }
+    setDescription(description)
     effect = "玩家核心机[免疫所有状态]"
     val units = IUnitTypes.getCoreUnits()
     install = {
@@ -99,12 +113,15 @@ object Remainss {
       }
     }
   }
-  val 玄岩板 = Remains("玄岩板").apply {
-    setDescription("由奇异,沉重的玄武岩打磨而成")
+  val 玄岩板 = Remains("remains_basalt_plate").apply {
+    bundle {
+      desc(zh_CN, "玄岩板", "由奇异,沉重的玄武岩打磨而成")
+    }
+    setDescription(description)
     effect = "[${CrafterBlocks.碳控熔炉.localizedName}]所需燃料减少[1]"
     var itemStack = ItemStack()
     CrafterBlocks.碳控熔炉.consumers.find {
-      it.get(ConsumeType.item)!!.consItems!!.find {stack ->
+      it.get(ConsumeType.item)!!.consItems!!.find { stack ->
         val bool: Boolean = stack.item == IItems.生煤
         if (bool) itemStack = stack
         bool
@@ -122,8 +139,11 @@ object Remainss {
       CrafterBlocks.碳控熔炉.checkStats()
     }
   }
-  val 谐振探针 = Remains("谐振探针").apply {
-    setDescription("一种用于探测矿物谐振频率的装置")
+  val 谐振探针 = Remains("remains_resonance_probe").apply {
+    bundle {
+      desc(zh_CN, "谐振探针", "一种用于探测矿物谐振频率的装置")
+    }
+    setDescription(description)
     effect = "矿物地板不再[隐藏]"
     install = {
       Vars.content.blocks().forEach {
@@ -142,11 +162,14 @@ object Remainss {
       Vars.renderer.blocks.floor.reload()
     }
   }
-  val 流光罗盘 = Remains("流光罗盘").apply {
-    setDescription("表面刻有古老的符文,会发出淡淡的光芒")
-    icon = DynamicTextureDrawable("流光罗盘".appendModName()) {
+  val 流光罗盘 = Remains("remains_flowing_compass").apply {
+    bundle {
+      desc(zh_CN, "流光罗盘", "表面刻有古老的符文,会发出淡淡的光芒")
+    }
+    setDescription(description)
+    icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 19
-      it.frameDuration = 60f/7f
+      it.frameDuration = 60f / 7f
     }
     effect = "核心机增加[1]速度"
     val lucifer = IUnitTypes.路西法
@@ -162,7 +185,15 @@ object Remainss {
     }
   }
 
-  val 不朽者胚胎 = Remains("不朽者胚胎").apply {
+  val 不朽者胚胎 = Remains("remains_immortal_embryo").apply {
+    bundle {
+      desc(zh_CN, "不朽者胚胎")
+    }
+
+    icon = DynamicTextureDrawable(name.appendModName()) {
+      it.frameCount = 16
+      it.frameDuration = 60f / 4f
+    }
     val pos = 2
     level = 1
     remainsColor = IceColor.r2
@@ -190,11 +221,14 @@ object Remainss {
       Vars.state.isGame || (Remains.getEnableds().contains(this) && Remains.getEnableds().size > slotPos - pos)
     }
   }
-  val 脊骨寄生虫 = Remains("脊骨寄生虫").apply {
+  val 脊骨寄生虫 = Remains("remains_spine_parasite").apply {
+    bundle {
+      desc(zh_CN, "脊骨寄生虫")
+    }
     remainsColor = IceColor.r2
     setDescriptionTable {
       it.add("一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合").grow().wrap().pad(5f).color(remainsColor).row()
-      it.table {table ->
+      it.table { table ->
         table.add("影响单位: ").pad(5f).color(remainsColor)
         table.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")
       }
@@ -224,9 +258,12 @@ object Remainss {
       IUnitTypes.蚀虻End.checkStats()
     }
   }
-  val 心跳鼓 = Remains("心跳鼓").apply {
+  val 心跳鼓 = Remains("remains_heartbeat_drum").apply {
     remainsColor = IceColor.r2
-    setDescription("带有奇异弹性的心肌隔膜,沉稳的节拍能让你的心跳同步")
+    bundle {
+      desc(zh_CN, "心跳鼓", "带有奇异弹性的心肌隔膜,沉稳的节拍能让你的心跳同步")
+    }
+    setDescription(description)
 
     effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
     install = {
@@ -240,14 +277,19 @@ object Remainss {
       IStatus.回响.checkStats()
     }
   }
-  val 多余的视线 = Remains("多余的视线").apply {
-    icon = DynamicTextureDrawable("多余的视线".appendModName()) {
+  val 多余的视线 = Remains("remains_extra_gaze").apply {
+    remainsColor = IceColor.r2
+    bundle {
+      desc(zh_CN, "多余的视线", "同一片神经系统的两个节点,我们相认的媒介")
+    }
+    setDescription("同一片神经系统的两个节点,我们相认的媒介")
+    icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 24
       it.frameDuration = 15f
     }
-    remainsColor = IceColor.r2
+
     effect = "相控雷达锁定上限+[10]"
-    setDescription("同一片神经系统的两个节点,我们相认的媒介")
+
 
     install = {
       DefenseBlocks.相控雷达.maxTargetSize += 10
@@ -262,15 +304,18 @@ object Remainss {
       DataDialog.flunAll()
     }
   }
-  val 血腥玛丽 = Remains("血腥玛丽").apply {
-    icon = DynamicTextureDrawable("血腥玛丽".appendModName()) {
+  val 血腥玛丽 = Remains("remains_bloody_mary").apply {
+    remainsColor = IceColor.r2
+    bundle {
+      desc(zh_CN, "血腥玛丽", "血与酒液在杯中摇匀,辛辣之后,只余缓慢扩散的猩红")
+    }
+    setDescription(description)
+    icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 13
       it.frameDuration = 15f
     }
-    remainsColor = IceColor.r2
-    effect = "为核心机攻击附加流血效果"
-    setDescription("血与酒液在杯中摇匀,辛辣之后,只余缓慢扩散的猩红")
 
+    effect = "为核心机攻击附加流血效果"
     install = {
       for (type in IUnitTypes.getCoreUnits()) {
         for (weapon in type.weapons) {
@@ -295,5 +340,18 @@ object Remainss {
       }
       DataDialog.flunAll()
     }
+  }
+
+  val 迷思海 = Remains("remains_mystic_sea").apply {
+    remainsColor = IceColor.r2
+    bundle {
+      desc(zh_CN, "迷思海", "你可悲的一部分正期望着回到你的身上")
+    }
+    setDescription(description)
+    icon = DynamicTextureDrawable(name.appendModName()) {
+      it.frameCount = 32
+      it.frameDuration = 60f / 8f
+    }
+    effect = "未完成"
   }
 }

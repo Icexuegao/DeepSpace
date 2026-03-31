@@ -13,7 +13,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pools
 import ice.DeepSpace
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -33,7 +33,6 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Trail
 import mindustry.type.Weapon
 import mindustry.world.meta.BlockFlag
-import singularity.Sgl
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx

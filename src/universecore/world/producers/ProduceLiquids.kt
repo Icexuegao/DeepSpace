@@ -3,7 +3,7 @@ package universecore.world.producers
 import arc.graphics.Color
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import ice.ui.bundle.localizedName
 import ice.world.meta.IStatValues
 import ice.world.meta.IceStats
 import mindustry.gen.Building

@@ -16,7 +16,7 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IItems
 import ice.graphics.IceColor
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -37,7 +37,7 @@ import kotlin.math.min
 class P2PLiquidNode : SglBlock("p2pLiquidNode") {
 
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "P2P流体节点", "分散流体交换通信方式")
     }
     size = 2

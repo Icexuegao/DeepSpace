@@ -30,7 +30,7 @@ import ice.graphics.IceColor
 import ice.graphics.RandSetTextrue
 import ice.library.IFiles
 import ice.library.scene.ui.*
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import ice.ui.bundle.localizedName
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceEffects
 import ice.world.meta.IceStats

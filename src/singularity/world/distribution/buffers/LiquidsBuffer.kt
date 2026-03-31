@@ -1,6 +1,5 @@
 package singularity.world.distribution.buffers
 
-import arc.Core
 import arc.func.Boolf2
 import arc.graphics.Color
 import arc.graphics.g2d.TextureRegion
@@ -9,7 +8,7 @@ import arc.struct.IntMap
 import arc.struct.Seq
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.ui.bundle.BaseBundle.Bundle.Companion.localizedName
+import ice.ui.bundle.localizedName
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.Liquids

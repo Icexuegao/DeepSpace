@@ -1,14 +1,14 @@
 package ice.content.unit.flying.rain
 
 import arc.graphics.Color
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.entities.bullet.LightningBulletType
 import mindustry.gen.Sounds
 
 class Raindrop : IceUnitType("unit_raindrop") {
   init {
-    BaseBundle.bundle {
+    bundle {
       desc(zh_CN, "雨滴", "轻型空中突击单位.发射速射电弧攻击敌人", "从小小的雨滴开始")
     }
     circleTarget = true

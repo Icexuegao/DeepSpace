@@ -7,9 +7,7 @@ import ice.audio.ISounds
 import ice.content.IStatus
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
-import ice.ui.bundle.BaseBundle.Companion.bundle
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
+import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.StatusFieldAbility

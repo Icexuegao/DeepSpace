@@ -1,15 +1,13 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.BaseBundle.Companion.bundle
+import ice.ui.bundle.bundle
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
-import mindustry.world.draw.DrawFrames
 import singularity.world.blocks.product.NormalCrafter
-import singularity.world.draw.DrawFrame
 
 class 电弧炉 : NormalCrafter("arcFurnace") {
   init {

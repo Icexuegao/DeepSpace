@@ -118,6 +118,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
   override var producers = Seq<BaseProducers>()
 
   init {
+    conductivePower=true
     saveConfig=true
     update = true
     solid = true
