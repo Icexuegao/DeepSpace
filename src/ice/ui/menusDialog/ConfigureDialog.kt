@@ -88,11 +88,9 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
               { SettingValue.difficulty == mod },
               if (SettingValue.difficulty == mod) mod.color else IceColor.b4,
               { x, f ->
-                f.update {
                   f.update {
                     f.setColor(if (SettingValue.difficulty == mod) mod.color else IceColor.b4)
                   }
-                }
               }) {
               SettingValue.difficulty = mod
               fLabel.restart(mod.description)
@@ -130,7 +128,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         { if (it <= 64) it.toInt().toString() else Core.bundle.get("misc.unlimited") },
         { SettingValue.最多信息显示数目 = it },
         { SettingValue.最多信息显示数目 },
-        4f,
+        1f,
         (EntityInfoFrag.MAX_LIMITED + 1).toFloat(),
         1f
       ),
@@ -392,7 +390,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
     name: String, checked: Boolp, color: Color = IceColor.b4, configure: Cons2<ImageButton, FLabel>, clicked: Runnable = {}
   ): Cell<Table> {
     val label = FLabel(name).also { it.setColor(color) }
-    val button = ImageButton(if (checked.get()) IStyles.cleanBoxStyle else IStyles.checkBoxStyle).apply {
+    val button = ImageButton(IStyles.checkBoxStyle).apply {
       isChecked = checked.get()
       imageCell.size(32f, 44f).expand().left()
       clicked {

@@ -1,9 +1,9 @@
 package ice.world.meta
 
-import ice.ui.bundle.localizedName
-import ice.ui.bundle.bundle
 import ice.ui.bundle.BaseBundle.Companion.zh_CN
 import ice.ui.bundle.Bundle
+import ice.ui.bundle.bundle
+import ice.ui.bundle.localizedName
 import mindustry.world.meta.StatCat
 import universecore.util.handler.FieldHandler
 
@@ -13,6 +13,9 @@ object IceStatCats {
   }
   val 流体传输 = create("liquidTransport") {
     desc(zh_CN, "流体传输")
+  }
+  val 其他 = create("other") {
+    desc(zh_CN, "其他")
   }
 
   val neutron = create("neutron", 3){

@@ -1,40 +1,47 @@
-package singularity.core;
+package singularity.core
 
-import arc.struct.ObjectMap;
-import mindustry.world.Tile;
-import mindustry.world.Tiles;
+import arc.Events
+import arc.struct.ObjectMap
+import ice.library.world.Load
+import mindustry.Vars
+import mindustry.game.EventType
+import mindustry.world.Tile
+import mindustry.world.Tiles
 
-public class UpdateTiles{
-  protected final ObjectMap<Tile, Updatable> updaters = new ObjectMap<>();
-  
-  public void update(){
-    for(ObjectMap.Entry<Tile, Updatable> updater: updaters){
-      updater.value.update(updater.key);
+object UpdateTiles: Load {
+  val updaters = ObjectMap<Tile, Updatable>()
+
+  init {
+    Events.on(EventType.WorldLoadEvent::class.java) {
+      loadAll(Vars.world.tiles)
     }
   }
-  
-  public void add(Tile tile, Updatable updater){
-    if(tile == null) return;
-    updaters.put(tile, updater);
+
+  fun update() {
+    for (updater in updaters) {
+      updater.value.update(updater.key)
+    }
   }
-  
-  public void clear(Tile tile){
-    updaters.remove(tile);
+
+  fun add(tile: Tile, updater: Updatable) {
+    updaters.put(tile, updater)
   }
-  
-  public void clear(){
-    updaters.clear();
+
+  fun clear(tile: Tile) {
+    updaters.remove(tile)
   }
-  
-  public void loadAll(Tiles all){
-    updaters.clear();
-    all.eachTile(t -> {
-      if(t.floor() instanceof Updatable) add(t, (Updatable) t.floor());
-      if(t.overlay() instanceof Updatable) add(t, (Updatable) t.overlay());
-    });
+
+  fun clear() = updaters.clear()
+
+  fun loadAll(all: Tiles) {
+    updaters.clear()
+    all.eachTile { t: Tile ->
+      if (t.floor() is Updatable) add(t, t.floor() as Updatable)
+      if (t.overlay() is Updatable) add(t, t.overlay() as Updatable)
+    }
   }
-  
-  public interface Updatable{
-    void update(Tile tile);
+
+  interface Updatable {
+    fun update(tile: Tile)
   }
 }

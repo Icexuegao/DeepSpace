@@ -1,39 +1,55 @@
-package singularity.world.unit;
+package singularity.world.unit
 
-import arc.util.pooling.Pool;
-import arc.util.pooling.Pools;
-import mindustry.gen.Unit;
+import arc.util.Time
+import arc.util.pooling.Pool.Poolable
+import arc.util.pooling.Pools
+import ice.content.IStatus.电磁损毁
+import mindustry.content.Fx
+import mindustry.gen.Unit
 
-public class EMPModel {
-  public float maxEmpHealth;
-  public float empArmor;
-  public float empRepair;
-  public float empContinuousDamage;
+open class EMPModel {
+  var maxEmpHealth: Float = 0f
+  var empArmor: Float = 0f
+  var empRepair: Float = 0f
+  var empContinuousDamage: Float = 0f
 
-  public boolean disabled;
+  var disabled: Boolean = false
 
-  public EMPHealth generate(Unit unit){
-    EMPHealth res = Pools.obtain(EMPHealth.class, EMPHealth::new);
-    res.model = this;
-    res.empHealth = maxEmpHealth;
-    res.unit = unit;
-    res.bind = true;
+  fun generate(unit: Unit): EMPHealth {
+    val res = Pools.obtain(EMPHealth::class.java, ::EMPHealth)
+    res.model = this
+    res.empHealth = maxEmpHealth
+    res.unit = unit
+    res.bind = true
 
-    return res;
+    return res
   }
 
-  public static class EMPHealth implements Pool.Poolable {
-    public EMPModel model;
-    public float empHealth;
-    Unit unit;
-    boolean bind;
+  class EMPHealth : Poolable {
+    /** 始终不应该为Null */
+    var model: EMPModel? = null
+    var empHealth: Float = 0f
+    /** 始终不应该为Null */
+    var unit: Unit? = null
+    var bind: Boolean = false
 
-    @Override
-    public void reset() {
-      model = null;
-      bind = false;
-      unit = null;
-      empHealth = 0;
+    override fun reset() {
+      model = null
+      bind = false
+      empHealth = 0f
+    }
+
+    fun update() {
+      if (model!!.disabled) return
+      if (!unit!!.hasEffect(电磁损毁)) {
+        if (empHealth <= 0) {
+          unit!!.shield = 0f
+          Fx.unitShieldBreak.at(unit!!.x, unit!!.y, 0.0f, unit!!.team.color, unit)
+          unit!!.apply(电磁损毁, 660f)
+        } else if (empHealth < model!!.maxEmpHealth) {
+          empHealth += model!!.empRepair * Time.delta
+        }
+      }
     }
   }
 }

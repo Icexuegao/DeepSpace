@@ -261,7 +261,7 @@ object Remainss {
   val 心跳鼓 = Remains("remains_heartbeat_drum").apply {
     remainsColor = IceColor.r2
     bundle {
-      desc(zh_CN, "心跳鼓", "带有奇异弹性的心肌隔膜,沉稳的节拍能让你的心跳同步")
+      desc(zh_CN, "心跳鼓", "弹性心肌隔膜,回响着怀念之音")
     }
     setDescription(description)
 

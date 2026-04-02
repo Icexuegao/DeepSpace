@@ -1,44 +1,42 @@
-package singularity.world.unit;
+package singularity.world.unit
 
-import arc.Events;
-import arc.math.Mathf;
-import arc.struct.ObjectMap;
-import arc.util.Interval;
-import arc.util.Log;
-import arc.util.Time;
-import arc.util.io.Reads;
-import arc.util.io.Writes;
-import arc.util.pooling.Pools;
-import arc.util.serialization.Jval;
-import ice.content.IStatus;
-import mindustry.Vars;
-import mindustry.content.Fx;
-import mindustry.ctype.ContentType;
-import mindustry.game.EventType;
-import mindustry.gen.Groups;
-import mindustry.gen.Unit;
-import mindustry.io.SaveFileReader;
-import mindustry.io.SaveVersion;
-import mindustry.mod.Mods;
-import mindustry.type.UnitType;
-import mindustry.world.meta.StatUnit;
-import singularity.Sgl;
-import singularity.core.ModsInteropAPI;
-import singularity.world.meta.SglStat;
+import arc.Events
+import arc.func.Cons
+import arc.math.Mathf
+import arc.struct.ObjectMap
+import arc.util.Log
+import arc.util.io.Reads
+import arc.util.io.Writes
+import arc.util.pooling.Pools
+import arc.util.serialization.Jval
+import ice.content.IStatus.电磁损毁
+import mindustry.Vars
+import mindustry.ctype.ContentType
+import mindustry.game.EventType
+import mindustry.gen.Groups
+import mindustry.gen.Unit
+import mindustry.io.SaveFileReader.CustomChunk
+import mindustry.io.SaveVersion
+import mindustry.mod.Mods.LoadedMod
+import mindustry.type.UnitType
+import mindustry.world.meta.StatUnit
+import singularity.Sgl
+import singularity.core.ModsInteropAPI
+import singularity.core.ModsInteropAPI.ConfigModel
+import singularity.world.meta.SglStat
+import singularity.world.unit.EMPModel.EMPHealth
+import java.io.DataInput
+import java.io.DataOutput
+import kotlin.math.min
 
-import java.io.DataInput;
-import java.io.DataOutput;
+class EMPHealthManager {
+  private val healthMap = ObjectMap<Unit, EMPHealth>()
+  private val unitDefaultHealthMap = ObjectMap<UnitType, EMPModel>()
 
-public class EMPHealthManager {
-  private final ObjectMap<Unit, EMPModel.EMPHealth> healthMap = new ObjectMap<>();
-  private final ObjectMap<UnitType, EMPModel> unitDefaultHealthMap = new ObjectMap<>();
+  private var lastGetter: Unit? = null
+  private var lastGetted: EMPHealth? = null
 
-  private Unit lastGetter;
-  private EMPModel.EMPHealth lastGetted;
-
-  private static final EMPModel.EMPHealth ZERO = new EMPModel.EMPHealth();
-
-  public void init() {
+  fun init() {
     /*添加mod交互API模型，用于其他mod定义单位的EMP生命模型
      * 通常条目格式:
      * ...
@@ -58,7 +56,6 @@ public class EMPHealthManager {
      *   ...
      * }
      * ...
-     *
      * 若需要禁用某一单位的EMP损伤机制则作如下声明:
      * ...
      * "empHealthModels": {
@@ -70,236 +67,209 @@ public class EMPHealthManager {
      * ...
      * */
     if (Sgl.config.interopAssignEmpModels) {
-      Sgl.interopAPI.addModel(new ModsInteropAPI.ConfigModel("empHealthModels") {
-        @Override
-        public void parse(Mods.LoadedMod mod, Jval declaring) {
-          Jval.JsonMap declares = declaring.asObject();
+      Sgl.interopAPI.addModel(object : ConfigModel("empHealthModels") {
+        override fun parse(mod: LoadedMod, declaring: Jval) {
+          val declares = declaring.asObject()
 
-          for (ObjectMap.Entry<String, Jval> entry : declares) {
-            UnitType unit = ModsInteropAPI.selectContent(ContentType.unit, entry.key, mod, true);
+          for (entry in declares) {
+            val unit = ModsInteropAPI.selectContent<UnitType>(ContentType.unit, entry.key, mod, true)
 
-            EMPModel model = new EMPModel();
-            model.disabled = entry.value.getBool("disabled", false);
+            val model = EMPModel()
+            model.disabled = entry.value.getBool("disabled", false)
 
             if (!model.disabled) {
-              model.maxEmpHealth = entry.value.getFloat("maxEmpHealth", unit.health / Mathf.pow(unit.hitSize - unit.armor, 2) * 200);
-              model.empArmor = entry.value.getFloat("empArmor", Mathf.clamp(unit.armor / 100));
-              model.empRepair = entry.value.getFloat("empRepair", unit.hitSize / 60);
-              model.empContinuousDamage = entry.value.getFloat("empContinuousDamage", unit.hitSize / 30);
+              model.maxEmpHealth = entry.value.getFloat("maxEmpHealth", unit.health / Mathf.pow(unit.hitSize - unit.armor, 2f) * 200)
+              model.empArmor = entry.value.getFloat("empArmor", Mathf.clamp(unit.armor / 100))
+              model.empRepair = entry.value.getFloat("empRepair", unit.hitSize / 60)
+              model.empContinuousDamage = entry.value.getFloat("empContinuousDamage", unit.hitSize / 30)
 
-              unit.stats.add(SglStat.empHealth, model.maxEmpHealth);
-              unit.stats.add(SglStat.empArmor, model.empArmor * 100, StatUnit.percent);
-              unit.stats.add(SglStat.empRepair, model.empRepair * 60, StatUnit.perSecond);
+              unit.stats.add(SglStat.empHealth, model.maxEmpHealth)
+              unit.stats.add(SglStat.empArmor, model.empArmor * 100, StatUnit.percent)
+              unit.stats.add(SglStat.empRepair, model.empRepair * 60, StatUnit.perSecond)
             }
 
-            unitDefaultHealthMap.put(unit, model);
+            unitDefaultHealthMap.put(unit, model)
           }
         }
 
-        @Override
-        public void disable(Mods.LoadedMod mod) {
-          for (UnitType unit : Vars.content.units()) {
-            if (unit.minfo.mod == mod) {
-              EMPModel model = new EMPModel();
-              model.disabled = true;
+        override fun disable(mod: LoadedMod) {
+          for (unit in Vars.content.units()) {
+            if (unit.minfo.mod === mod) {
+              val model = EMPModel()
+              model.disabled = true
 
-              unitDefaultHealthMap.put(unit, model);
+              unitDefaultHealthMap.put(unit, model)
             }
           }
         }
-      }, false);
+      }, false)
     }
-    var i = new Interval();
-    Events.run(EventType.Trigger.update, () -> {
 
-      Groups.unit.each(u -> {
-        if (Vars.state.isGame()) {
-          update(u);
+    Events.run(EventType.Trigger.update) {
+      Groups.unit.each(Cons { u: Unit ->
+        if (Vars.state.isGame) {
+          if (!healthMap.containsKey(u)) healthMap.put(u, getInst(u))
         }
-      });
-      if (!i.get(60)) return;
-      Groups.unit.each(u -> {
-        if (Vars.state.isGame()) {
-          if (u == null) return;
-          if (!healthMap.containsKey(u)) healthMap.put(u, getInst(u));
-          healthMap.each((unit, health) -> {
-            if (unit != null && !unit.isAdded()) {
-              EMPModel.EMPHealth h = healthMap.remove(unit);
-              if (h != null) Pools.free(h);
-            }
-          });
-
+      })
+      healthMap.each { unit: Unit, health: EMPHealth ->
+        if (Vars.state.isGame)health.update()
+        if ( !unit.isAdded) {
+          val h = healthMap.remove(unit)
+          if (h != null) Pools.free(h)
         }
-      });
-    });
+      }
+    }
 
-    SaveVersion.addCustomChunk("empHealth", new SaveFileReader.CustomChunk() {
-      @Override
-      public boolean shouldWrite() {
-        return true;
+    SaveVersion.addCustomChunk("empHealth", object : CustomChunk {
+      override fun shouldWrite() = true
+
+      override fun read(stream: DataInput, length: Int) = read(stream)
+
+      override fun write(stream: DataOutput?) {
+        val write = Writes(stream)
+        write.i(healthMap.size)
+        for (entry in healthMap) {
+          write.f(entry.key!!.x)
+          write.f(entry.key!!.y)
+          write.i(entry.key!!.type.id.toInt())
+          write.f(entry.value!!.empHealth)
+        }
       }
 
-      @Override
-      public void read(DataInput stream, int length) {
-        read(stream);
-      }
+      override fun read(stream: DataInput?) {
+        Reads(stream).use { read ->
+          val len = read.i()
+          for (i in 0..<len) {
+            val x = read.f()
+            val y = read.f()
+            val id = read.i().toFloat()
 
-      @Override
-      public void write(DataOutput stream) {
-        Writes write = new Writes(stream);
-        write.i(healthMap.size);
-        for (ObjectMap.Entry<Unit, EMPModel.EMPHealth> entry : healthMap) {
-          write.f(entry.key.x);
-          write.f(entry.key.y);
-          write.i(entry.key.type.id);
-          write.f(entry.value.empHealth);
-        }
+            val health = read.f()
 
-      }
-
-      @Override
-      public void read(DataInput stream) {
-
-        try (Reads read = new Reads(stream)) {
-          int len = read.i();
-          for (int i = 0; i < len; i++) {
-            float x = read.f();
-            float y = read.f();
-            float id = read.i();
-
-            float health = read.f();
-
-            Unit unit = null;
-            for (Unit u : Groups.unit) {
-              if (!Mathf.equal(u.x, x) || !Mathf.equal(u.y, y)) continue;
-              if (u.type.id != id) continue;
-
-              unit = u;
-              break;
+            var unit: Unit? = null
+            for (u in Groups.unit) {
+              if (u.type.id.toFloat() != id || !Mathf.equal(u.x, x) || !Mathf.equal(u.y, y)) continue
+              unit = u
+              break
             }
 
             if (unit == null) {
-              Log.err("emp index unit not found in (" + x + ", " + y + ")");
-              continue;
+              Log.err("emp index unit not found in ($x, $y)")
+              continue
             }
 
-            EMPModel.EMPHealth heal = getInst(unit);
-            heal.empHealth = health;
-            healthMap.put(heal.unit, heal);
 
-            // unit.update();
+            val heal = getInst(unit)
+            heal.empHealth = health
+            healthMap.put(heal.unit, heal)
           }
         }
       }
-    });
+    })
 
-    for (UnitType unit : Vars.content.units()) {
-      getModel(unit);
+    for (unit in Vars.content.units()) {
+      getModel(unit)
     }
   }
 
-  public void setEmpModel(UnitType type, float maxHealth, float armor, float repair, float empContDam) {
-    type.immunities.remove(IStatus.INSTANCE.get电磁损毁());
-    unitDefaultHealthMap.put(type, new EMPModel() {{
-      this.maxEmpHealth = maxHealth;
-      this.empArmor = armor;
-      this.empRepair = repair;
-      this.empContinuousDamage = empContDam;
-    }});
+  fun setEmpModel(type: UnitType, maxHealth: Float, armor: Float, repair: Float, empContDam: Float) {
+    type.immunities.remove(电磁损毁)
+    unitDefaultHealthMap.put(type, object : EMPModel() {
+      init {
+        this.maxEmpHealth = maxHealth
+        this.empArmor = armor
+        this.empRepair = repair
+        this.empContinuousDamage = empContDam
+      }
+    })
   }
 
-  public void setEmpDisabled(UnitType type) {
-    unitDefaultHealthMap.put(type, new EMPModel() {{
-      disabled = true;
-    }});
+  fun setEmpDisabled(type: UnitType?) {
+    unitDefaultHealthMap.put(type, object : EMPModel() {
+      init {
+        disabled = true
+      }
+    })
   }
 
-  public EMPModel getModel(UnitType type) {
-    return unitDefaultHealthMap.get(type, () -> {
-      type.immunities.remove(IStatus.INSTANCE.get电磁损毁());
+  fun getModel(type: UnitType): EMPModel {
+    return unitDefaultHealthMap.get(type) {
+      type.immunities.remove(电磁损毁)
+      val res = EMPModel()
+      res.maxEmpHealth = type.health / Mathf.pow(type.hitSize - type.armor, 2f) * 200
+      res.empArmor = Mathf.clamp(type.armor / 100, 0f, 0.9f)
+      res.empRepair = type.hitSize / 60
+      res.empContinuousDamage = res.empRepair * 2
 
-      EMPModel res = new EMPModel();
-      res.maxEmpHealth = type.health / Mathf.pow(type.hitSize - type.armor, 2) * 200;
-      res.empArmor = Mathf.clamp(type.armor / 100, 0, 0.9f);
-      res.empRepair = type.hitSize / 60;
-      res.empContinuousDamage = res.empRepair * 2;
-
-      type.stats.add(SglStat.empHealth, res.maxEmpHealth);
-      type.stats.add(SglStat.empArmor, res.empArmor * 100, StatUnit.percent);
-      type.stats.add(SglStat.empRepair, res.empRepair * 60, StatUnit.perSecond);
-      return res;
-    });
-  }
-
-  public EMPModel.EMPHealth getInst(Unit unit) {
-    return getModel(unit.type).generate(unit);
-  }
-
-  public EMPModel.EMPHealth zeroInst(Unit unit) {
-    ZERO.model = getModel(unit.type);
-    ZERO.unit = unit;
-    ZERO.empHealth = 0;
-    return ZERO;
-  }
-
-  public void update(Unit unit) {
-    if (Vars.state.isPaused()) return;
-    EMPModel.EMPHealth h = get(unit);
-    if (h.model.disabled) return;
-    if (!unit.hasEffect(IStatus.INSTANCE.get电磁损毁())) {
-      if (h.empHealth <= 0) {
-        unit.shield = 0;
-        Fx.unitShieldBreak.at(unit.x, unit.y, 0.0F, unit.team.color, unit);
-        unit.apply(IStatus.INSTANCE.get电磁损毁(), 660);
-      } else if (h.empHealth < h.model.maxEmpHealth) h.empHealth += h.model.empRepair * Time.delta;
+      type.stats.add(SglStat.empHealth, res.maxEmpHealth)
+      type.stats.add(SglStat.empArmor, res.empArmor * 100, StatUnit.percent)
+      type.stats.add(SglStat.empRepair, res.empRepair * 60, StatUnit.perSecond)
+      res
     }
   }
 
-  public EMPModel.EMPHealth get(Unit unit) {
-    if (!unit.isAdded()) return zeroInst(unit);
-    if (lastGetted != null && unit == lastGetter && lastGetted.bind) return lastGetted;
-
-    return lastGetted = healthMap.get(lastGetter = unit, () -> getInst(unit));
+  fun getInst(unit: Unit): EMPHealth {
+    return getModel(unit.type).generate(unit)
   }
 
-  public boolean empDamaged(Unit unit) {
-    EMPModel.EMPHealth h = get(unit);
-
-    if (h.model.disabled) return false;
-
-    return h.empHealth < h.model.maxEmpHealth;
+  fun zeroInst(unit: Unit): EMPHealth {
+    ZERO.model = getModel(unit.type)
+    ZERO.unit = unit
+    ZERO.empHealth = 0f
+    return ZERO
   }
 
-  public float getHealth(Unit unit) {
-    if (get(unit).model.disabled) return 1;
-    return get(unit).empHealth;
+
+  fun get(unit: Unit): EMPHealth {
+    if (!unit.isAdded) return zeroInst(unit)
+    if (lastGetted != null && unit === lastGetter && lastGetted!!.bind) return lastGetted!!
+
+    return healthMap.get(unit.also { lastGetter = it }) { getInst(unit) }.also { lastGetted = it }!!
   }
 
-  public float healthPresent(Unit unit) {
-    EMPModel.EMPHealth h = get(unit);
+  fun empDamaged(unit: Unit): Boolean {
+    val health = get(unit)
+    val model = health.model
 
-    if (h.model.disabled) return 1;
+    if (model!!.disabled) return false
 
-    return Mathf.clamp(h.empHealth / h.model.maxEmpHealth);
+    return health.empHealth < model.maxEmpHealth
   }
 
-  public float empDamage(Unit unit, float damage, boolean realDam) {
-    EMPModel.EMPHealth h = get(unit);
-
-    if (h.model.disabled) return 0;
-
-    float real = Mathf.maxZero(realDam ? damage : damage - damage * h.model.empArmor);
-    float orig = h.empHealth;
-    h.empHealth = Mathf.maxZero(h.empHealth - real);
-
-    return orig - h.empHealth;
+  fun getHealth(unit: Unit): Float {
+    if (get(unit).model!!.disabled) return 1f
+    return get(unit).empHealth
   }
 
-  public void heal(Unit unit, float heal) {
-    EMPModel.EMPHealth h = get(unit);
+  fun healthPresent(unit: Unit): Float {
+    val h = get(unit)
 
-    if (h.model.disabled) return;
+    if (h.model!!.disabled) return 1f
 
-    h.empHealth = Math.min(h.empHealth + heal, h.model.maxEmpHealth);
+    return Mathf.clamp(h.empHealth / h.model!!.maxEmpHealth)
+  }
+
+  fun empDamage(unit: Unit, damage: Float, realDam: Boolean): Float {
+    val h = get(unit)
+
+    if (h.model!!.disabled) return 0f
+
+    val real = Mathf.maxZero(if (realDam) damage else damage - damage * h.model!!.empArmor)
+    val orig = h.empHealth
+    h.empHealth = Mathf.maxZero(h.empHealth - real)
+
+    return orig - h.empHealth
+  }
+
+  fun heal(unit: Unit, heal: Float) {
+    val h = get(unit)
+
+    if (h.model!!.disabled) return
+
+    h.empHealth = min(h.empHealth + heal, h.model!!.maxEmpHealth)
+  }
+
+  companion object {
+    private val ZERO = EMPHealth()
   }
 }

@@ -1038,6 +1038,7 @@ object IStatus : Load {
         t.add(Core.bundle.get("infos.empDamagedInfo"))
       }
     }
+
     setUpdate { unit, entry ->
       if (Sgl.empHealth.empDamaged(unit)) {
         if (unit.getDuration(this) <= 60) {
@@ -1049,7 +1050,7 @@ object IStatus : Load {
         }
 
         unit.shield = 0f
-        unit.damageContinuousPierce((1 - Sgl.empHealth.healthPresent(unit)) * Sgl.empHealth.get(unit).model.empContinuousDamage)
+        unit.damageContinuousPierce((1 - Sgl.empHealth.healthPresent(unit)) * Sgl.empHealth.get(unit).model!!.empContinuousDamage)
 
         for (i in unit.abilities.indices) {
           if (unit.abilities[i] !is BanedAbility) {

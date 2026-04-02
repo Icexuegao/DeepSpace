@@ -17,8 +17,7 @@ import mindustry.gen.Healthc
 import mindustry.gen.Hitboxc
 import mindustry.world.blocks.ControlBlock
 
-
-class ArcFieldBulletType : ContinuousBulletType() {
+open class ArcFieldBulletType : ContinuousBulletType() {
   @JvmField var angle: Float = 80f
   @JvmField var lengthInterp: Interp = Interp.slope
   @JvmField var fieldAlpha = 0.3f
@@ -50,13 +49,17 @@ class ArcFieldBulletType : ContinuousBulletType() {
   }
 
   override fun draw(b: Bullet) = b.run {
+
     val curLen = currentLength(this)
-    if (lightenIntensity > 0f)
-      Draw.color(Tmp.c1.set(hitColor).lighten(lightenIntensity))
-    else Draw.color(hitColor)
-    if (fdata < highlightTime) Draw.alpha(1f)
-    else Draw.alpha(fieldAlpha * fin(lengthInterp))
-    Fill.arc(x, y, curLen, angle / 360f, this.rotation() - angle / 2f)
+
+      if (lightenIntensity > 0f)
+        Draw.color(Tmp.c1.set(hitColor).lighten(lightenIntensity))
+      else Draw.color(hitColor)
+      if (fdata < highlightTime) Draw.alpha(1f)
+      else Draw.alpha(fieldAlpha * fin(lengthInterp))
+      Fill.arc(x, y, curLen, angle / 360f, this.rotation() - angle / 2f)
+
+
     Draw.reset()
   }
 
@@ -117,7 +120,6 @@ class ArcFieldBulletType : ContinuousBulletType() {
   }
 
   companion object {
-
     fun Color.lighten(strength: Float): Color {
       r *= 1f - strength
       g *= 1f - strength

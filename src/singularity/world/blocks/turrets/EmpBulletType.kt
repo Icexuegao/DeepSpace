@@ -30,7 +30,7 @@ open class EmpBulletType : BulletType {
 
   override fun createSplashDamage(b: Bullet, x: Float, y: Float) {
     super.createSplashDamage(b, x, y)
-    if (empRange > 0 && empDamage > 0) Units.nearbyEnemies(b.team, b.x, b.y, empRange, Cons { u: Unit? ->
+    if (empRange > 0 && empDamage > 0) Units.nearbyEnemies(b.team, b.x, b.y, empRange, Cons { u: Unit ->
       Sgl.empHealth.empDamage(u, empDamage, false)
     })
   }

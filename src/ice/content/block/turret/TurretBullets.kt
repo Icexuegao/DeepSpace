@@ -38,7 +38,6 @@ import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.LightningVertex
 import universecore.graphics.lightnings.generator.LightningGenerator
 import universecore.graphics.lightnings.generator.RandomGenerator
-import universecore.util.funcs.Floatp2
 import kotlin.math.min
 
 object TurretBullets {
@@ -291,7 +290,7 @@ object TurretBullets {
 
       override fun update(b: Bullet) {
         super.update(b)
-        if (empDamage > 0) Units.nearbyEnemies(b.team, b.x, b.y, size, Cons { u: Unit? -> Sgl.empHealth.empDamage(u, empDamage, false) })
+        if (empDamage > 0) Units.nearbyEnemies(b.team, b.x, b.y, size, Cons { u: Unit -> Sgl.empHealth.empDamage(u, empDamage, false) })
         if (b.timer(0, 6f)) {
           Damage.status(b.team, b.x, b.y, size, IStatus.电子干扰, min(lifeTime - b.time, 120f), air, ground)
         }

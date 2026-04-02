@@ -14,7 +14,7 @@ import universecore.world.DirEdges;
 
 import static mindustry.Vars.tilesize;
 
-public class DrawEdgeLinkBits<T> extends DrawBlock{
+public class DrawEdgeLinkBits<T> extends DrawBlock {
   public static final byte[] EMP = new byte[]{0, 0, 0, 0};
   public Func<T, byte[]> compLinked = e -> EMP;
 
@@ -38,7 +38,7 @@ public class DrawEdgeLinkBits<T> extends DrawBlock{
   @Override
   public void draw(Building build){
     float z = Draw.z();
-    if (layer > 0) Draw.z(layer);
+    if(layer > 0) Draw.z(layer);
     for(int dir = 0; dir < 4; dir++){
       Point2[] arr = DirEdges.get(build.block.size, dir);
       byte[] linkBits = this.compLinked.get((T) build);
@@ -46,7 +46,7 @@ public class DrawEdgeLinkBits<T> extends DrawBlock{
         if((linkBits[dir] & 1 << i) == 0) continue;
         float dx = 0, dy = 0;
 
-        Draw.scl(1, dir == 1 || dir == 2? -1: 1);
+        Draw.scl(1, dir == 1 || dir == 2? -1 : 1);
         switch(dir){
           case 0 -> dx = -1;
           case 1 -> dy = -1;

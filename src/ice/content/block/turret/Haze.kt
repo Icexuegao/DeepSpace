@@ -164,7 +164,7 @@ class Haze : SglTurret("haze") {
 
             override fun update(b: Bullet) {
               super.update(b)
-              Units.nearbyEnemies(b.team, b.x, b.y, r, Cons { u: Unit? -> Sgl.empHealth.empDamage(u, 0.8f, false) })
+              Units.nearbyEnemies(b.team, b.x, b.y, r, Cons { u: Unit -> Sgl.empHealth.empDamage(u, 0.8f, false) })
               if (b.timer(0, 6f)) {
                 Damage.status(b.team, b.x, b.y, r, IStatus.电子干扰, min(450 - b.time, 120f), true, true)
               }

@@ -265,12 +265,6 @@ object IStyles {
     over = off
     up = off
   }
-
-  val checkCheckBoxStyle= CheckBox.CheckBoxStyle().apply {
-    checkboxOn = buttonUp.asDrawable()
-    font=Fonts.def
-    checkboxOff = buttonDown.asDrawable()
-  }
   val cleanBoxStyle = ImageButtonStyle().apply {
     val off = buttonDown.asDrawable()
     val on = buttonUp.asDrawable()
@@ -278,6 +272,12 @@ object IStyles {
     up = on
     down = off
   }
+  val checkCheckBoxStyle= CheckBox.CheckBoxStyle().apply {
+    checkboxOn = buttonUp.asDrawable()
+    font=Fonts.def
+    checkboxOff = buttonDown.asDrawable()
+  }
+
   val defaultSlider = SliderStyle().apply {
     background = sliderFrame
     knob = sliderKnob
