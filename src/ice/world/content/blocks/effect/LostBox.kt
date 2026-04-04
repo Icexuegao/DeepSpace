@@ -21,7 +21,7 @@ import mindustry.Vars
 import mindustry.graphics.Pal
 import mindustry.ui.Fonts
 
-class LostBox(name: String) : IceBlock(name) {
+open class LostBox(name: String) : IceBlock(name) {
   init {
     update = true
     solid = true

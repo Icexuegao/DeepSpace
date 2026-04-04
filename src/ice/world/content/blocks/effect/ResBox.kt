@@ -19,7 +19,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.meta.BuildVisibility
 import singularity.world.blocks.SglBlock
 
-class ResBox(name: String) : SglBlock(name) {
+open class ResBox(name: String) : SglBlock(name) {
   var top: TextureRegion by LazyTextureSingleDelegate("${this.name}-top")
 
   init {

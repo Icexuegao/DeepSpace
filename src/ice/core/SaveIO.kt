@@ -1,16 +1,22 @@
 package ice.core
 
+import arc.Events
+import arc.struct.Seq
 import arc.util.Log
 import arc.util.io.Reads
 import ice.library.world.Load
 import mindustry.Vars
 import mindustry.content.Blocks
+import mindustry.ctype.ContentType
+import mindustry.ctype.MappableContent
+import mindustry.game.EventType.ContentPatchLoadEvent
 import mindustry.io.SaveIO
 import mindustry.io.versions.Save11
 import mindustry.world.WorldContext
 import java.io.ByteArrayInputStream
 import java.io.DataInput
 import java.io.DataInputStream
+import java.io.DataOutput
 
 object SaveIO : Load {
   override fun init() {
@@ -128,6 +134,47 @@ object SaveIO : Load {
           }
         } finally {
           if (!generating) context.end()
+        }
+      }
+
+      override fun writeContentHeader(stream: DataOutput?) {
+        super.writeContentHeader(stream)
+      }
+
+      override fun readContentHeader(stream: DataInput?) {
+        val mapped = stream!!.readUnsignedByte()
+
+        val map = Array<Array<MappableContent?>?>(ContentType.all.size) { arrayOfNulls(0) }
+
+        for(i in 0..<mapped) {
+          val toInt = stream.readByte().toInt()
+          val type = ContentType.all[toInt.coerceIn(0, ContentType.all.size-1)]
+          val total = stream.readShort()
+          map[type.ordinal] = arrayOfNulls(total.toInt())
+
+          for(j in 0..<total) {
+            val name = stream.readUTF()
+            //fallback only for blocks
+            map[type.ordinal.coerceIn(type.ordinal,map.size)]!![j] =
+              Vars.content.getByName(type, if (type == ContentType.block) fallback.get(name, name) else name)
+          }
+        }
+
+        Vars.content.setTemporaryMapper(map)
+
+        //HACK: versions below 11 don't read the patch chunk, which means the event for reading patches is never triggered.
+        //manually fire the event here for older versions.
+        if (version < 11) {
+          val patches = Seq<String?>()
+          Events.fire<ContentPatchLoadEvent?>(ContentPatchLoadEvent(patches))
+
+          if (patches.size > 0) {
+            try {
+              Vars.state.patcher.apply(patches)
+            } catch(e: Throwable) {
+              Log.err("Failed to apply patches: " + patches, e)
+            }
+          }
         }
       }
     })

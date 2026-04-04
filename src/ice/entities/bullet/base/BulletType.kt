@@ -154,15 +154,15 @@ open class BulletType(speed: Float = 1f, damage: Float = 1f) : mindustry.entitie
     table.row()
   }
 
-  override fun hit(b: Bullet?, x: Float, y: Float, createFrags: Boolean) {
-    hitEffect.at(x, y, b!!.rotation(), hitColor)
+  override fun hit(b: Bullet, x: Float, y: Float, createFrags: Boolean) {
+    hitEffect.at(x, y, b.rotation(), hitColor)
     hitSound.at(x, y, hitSoundPitch, hitSoundVolume)
 
     Effect.shake(hitShake, hitShake, b)
 
     if (fragOnHit) {
       if (delayFrags && fragBullet != null && fragBullet.delayFrags) {
-        Time.run(0f, Runnable { createFrags(b, x, y) })
+        Time.run(0f) { createFrags(b, x, y) }
       } else {
         createFrags(b, x, y)
       }

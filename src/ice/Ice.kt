@@ -45,7 +45,7 @@ import universe.util.reflect.Enums.accessEnum0
 import universecore.UncCore
 
 @RecipeEntryPoint(Recipes::class)
-open class Ice : Mod() {
+open class Ice :Mod() {
 
   companion object {
     val singularity = Singularity()
@@ -97,13 +97,13 @@ open class Ice : Mod() {
   }
 
   override fun loadContent() {
-    object : ContinuousLiquidTurret("mendTower") {
+    object :ContinuousLiquidTurret("mendTower") {
       init {
         bundle {
           desc(zh_CN, "洛华", "使用方菱折射投射出扇形修复光束覆盖建筑进行修复")
         }
         buildType = Prov {
-          object : ContinuousLiquidTurretBuild() {
+          object :ContinuousLiquidTurretBuild() {
             val mat = CubeCalculator()
             val mat2 = CubeCalculator()
             override fun draw() {
@@ -117,8 +117,8 @@ open class Ice : Mod() {
                 val start = mat.projectedPoints[startIdx]
                 val end = mat.projectedPoints[endIdx]
                 Tmp.v1.set(shootX, shootY).rotate(rotation - 90f)
-                var ox = Tmp.v1.x
-                var oy = Tmp.v1.y
+                val ox = Tmp.v1.x
+                val oy = Tmp.v1.y
                 Lines.line(start.x + x + ox, start.y + y + oy, end.x + x + ox, end.y + y + oy)
               }
 
@@ -127,8 +127,8 @@ open class Ice : Mod() {
                 val start = mat2.projectedPoints[startIdx]
                 val end = mat2.projectedPoints[endIdx]
                 Tmp.v2.set(shootX, shootY).rotate(rotation - 90f)
-                var ox = Tmp.v2.x
-                var oy = Tmp.v2.y
+                val ox = Tmp.v2.x
+                val oy = Tmp.v2.y
                 Lines.line(start.x + x + ox, start.y + y + oy, end.x + x + ox, end.y + y + oy)
               }
 
@@ -146,7 +146,7 @@ open class Ice : Mod() {
         }
       }
     }.apply {
-      requirements(Category.effect, IItems.单晶硅,30, IItems.绿藻块,10, IItems.石英玻璃,40, IItems.高碳钢,30, IItems.金锭,20)
+      requirements(Category.effect, IItems.单晶硅, 30, IItems.绿藻块, 10, IItems.石英玻璃, 40, IItems.高碳钢, 30, IItems.金锭, 20)
       size = 3
       shootSound = Sounds.none
       shootY = 8.8f
@@ -155,7 +155,7 @@ open class Ice : Mod() {
       rotateSpeed = 8f
       shootWarmupSpeed = 0.05f
       range = 20f * 8f
-      ammo(ILiquids.氯气, object : ArcFieldBulletType() {}.apply {
+      ammo(ILiquids.氯气, object :ArcFieldBulletType() {}.apply {
         damage = 1f
         healAmount = 10f / 60f
         hitColor = Pal.heal

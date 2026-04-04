@@ -37,7 +37,7 @@ import singularity.world.blocks.SglBlock
 import kotlin.math.absoluteValue
 import kotlin.math.max
 
-class ProspectingRadar : SglBlock("prospectingRadar") {
+class ProspectingRadar :SglBlock("prospectingRadar") {
   var range = 50
   var baseSpeed = 0.5f
 
@@ -75,7 +75,7 @@ class ProspectingRadar : SglBlock("prospectingRadar") {
     Drawf.circles((x * Vars.tilesize).toFloat(), (y * Vars.tilesize).toFloat(), (range * Vars.tilesize).toFloat(), IceColor.b4)
   }
 
-  inner class ProspectingRadarBuild : SglBuilding() {
+  inner class ProspectingRadarBuild :SglBuilding() {
     val polyFloats = FloatSeq()
     val ores = Seq<OresData>()
 
@@ -83,7 +83,7 @@ class ProspectingRadar : SglBlock("prospectingRadar") {
     var totalProgress: Float = 0f
     var speed: Float
       set(_) {}
-      get() = max(baseSpeed * consEfficiency(),0f)
+      get() = max(baseSpeed * consEfficiency(), 0f)
     var shown = true
 
     override fun buildConfiguration(table: Table) {
@@ -121,7 +121,9 @@ class ProspectingRadar : SglBlock("prospectingRadar") {
         Draw.z(Layer.block + 0.51f)
 
         Draw.alpha(time / genTime)
-        Draw.rect(ore.variantRegions[Mathf.randomSeed(tile.pos().toLong(), 0, max(0, ore.variantRegions.size - 1))], tile.worldx(), tile.worldy())
+        Draw.rect(
+          ore.variantRegions[Mathf.randomSeed(tile.pos().toLong(), 0, max(0, ore.variantRegions.size - 1))], tile.worldx(), tile.worldy()
+        )
       }
     }
 
@@ -143,7 +145,7 @@ class ProspectingRadar : SglBlock("prospectingRadar") {
       ores.forEach { it.update() }
       if (!(shouldConsume() && consumeValid())) return
       atSound()
-      for (i in 1..range) {
+      for(i in 1..range) {
         val rotate2: Vec2 = Tmp.v2.set(0f, i.toFloat()).rotate(-Time.time * speed - 90f)
         val tile1: Tile? = Vars.world.tile(tileX() + rotate2.x.toInt(), tileY() + rotate2.y.toInt())
         tile1?.overlay()?.let {
@@ -176,6 +178,7 @@ class ProspectingRadar : SglBlock("prospectingRadar") {
       }
       lastRad = rad
     }
+
     fun drawRadar() {
       if (!(shouldConsume() && consumeValid())) return
       Draw.z(70f)
@@ -219,7 +222,7 @@ class ProspectingRadar : SglBlock("prospectingRadar") {
       polyFloats.add(x, y, centerColor)
 
       Tmp.c1.set(color1)
-      for (i in 0..max) {
+      for(i in 0..max) {
         val f = i.toFloat() / max
         val a = fraction * f * 360f + rotation
         val x1 = Angles.trnsx(a, radius)
@@ -233,8 +236,19 @@ class ProspectingRadar : SglBlock("prospectingRadar") {
       val items = polyFloats.items
       val size = polyFloats.size
 
-      for (i in 3 until size - 6 step 6) Fill.quad(
-        items[0], items[1], items[2], items[i], items[i + 1], items[i + 2], items[i + 3], items[i + 4], items[i + 5], items[i + 6], items[i + 7], items[i + 8]
+      for(i in 3 until size - 6 step 6) Fill.quad(
+        items[0],
+        items[1],
+        items[2],
+        items[i],
+        items[i + 1],
+        items[i + 2],
+        items[i + 3],
+        items[i + 4],
+        items[i + 5],
+        items[i + 6],
+        items[i + 7],
+        items[i + 8]
       )
     }
   }

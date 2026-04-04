@@ -30,7 +30,7 @@ open class ProjectileTurret(name: String) : SglTurret(name) {
     super.init()
     for (type in ammoTypes) {
       for (coating in coatings) {
-        realAmmos.get(type.value!!.bulletType) { ObjectMap() }!!.put(coating.key, coating.value!!.coatingFunc!!.get(type.value!!.bulletType))
+        realAmmos.get(type.value!!.bulletType) { ObjectMap() }!!.put(coating.key, coating.value!!.coatingFunc.get(type.value!!.bulletType))
       }
     }
   }
@@ -47,8 +47,7 @@ open class ProjectileTurret(name: String) : SglTurret(name) {
     }
   }
 
-  @JvmOverloads
-  fun newAmmoCoating(name: String, color: Color, ammoType: Func<BulletType, BulletType>, display: Cons<Table>, amount: Int = 1) {
+  fun newAmmoCoating(name: String, color: Color, ammoType: Func<ice.entities.bullet.base.BulletType, ice.entities.bullet.base.BulletType>, display: Cons<Table>, amount: Int = 1) {
     consume = object : BaseConsumers(true) {
       init {
         showTime = false
@@ -60,14 +59,14 @@ open class ProjectileTurret(name: String) : SglTurret(name) {
         return this
       }
     }
-    consume!!.optionalDef = Cons2 { e: ConsumerBuildComp?, c: BaseConsumers? -> }
+    consume!!.optionalDef = Cons2 { e: ConsumerBuildComp, c: BaseConsumers -> }
     consume!!.display = Cons2 { s: Stats, c: BaseConsumers ->
-      s.add(SglStat.bulletCoating) { t: Table? ->
-        t!!.row()
+      s.add(SglStat.bulletCoating) { t ->
+        t.row()
         t.add("< $name >").color(Pal.accent).left().padLeft(15f)
         t.row()
-        t.table { ta: Table? ->
-          ta!!.defaults().left().padLeft(15f).padTop(4f)
+        t.table { ta ->
+          ta.defaults().left().padLeft(15f).padTop(4f)
           display.get(ta)
         }
       }
@@ -81,10 +80,7 @@ open class ProjectileTurret(name: String) : SglTurret(name) {
       }
     }
     consume!!.consValidCondition { e: ProjectileTurretBuild -> e.coatCursor + amount <= maxBufferCoatings }
-    val model = CoatingModel()
-    model.name = name
-    model.color = color
-    model.coatingFunc = ammoType
+    val model = CoatingModel(name,color,ammoType)
 
     coatings.put(consume, model)
   }
@@ -115,9 +111,5 @@ open class ProjectileTurret(name: String) : SglTurret(name) {
     }
   }
 
-  class CoatingModel {
-    var name: String? = null
-    var color: Color? = null
-    var coatingFunc: Func<BulletType, BulletType>? = null
-  }
+  class CoatingModel(var name: String, var color: Color, var coatingFunc: Func<ice.entities.bullet.base.BulletType, ice.entities.bullet.base.BulletType>)
 }

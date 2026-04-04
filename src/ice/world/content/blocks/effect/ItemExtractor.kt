@@ -17,7 +17,7 @@ import mindustry.type.Item
 import mindustry.world.draw.DrawDefault
 import kotlin.math.sin
 
-class ItemExtractor(name: String) : LinksBlock(name) {
+open class ItemExtractor(name: String) : LinksBlock(name) {
 
     init {
         hasItems = true

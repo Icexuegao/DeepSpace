@@ -12,13 +12,14 @@ import ice.world.draw.DrawRegionColor
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
+import mindustry.gen.Teamc
 import mindustry.type.Category
 import mindustry.type.Item
 import mindustry.type.ItemStack
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.SglBlock
 
-class DroneReceivingRnd(name: String) : SglBlock(name) {
+class DroneReceivingRnd(name: String) :SglBlock(name) {
 
   init {
     size = 1
@@ -31,8 +32,8 @@ class DroneReceivingRnd(name: String) : SglBlock(name) {
     clearOnDoubleTap = true
     buildType = Prov(::DroneReceivingRndBuild)
     requirements(Category.distribution, ItemStack.with(IItems.铬铁矿, 10))
-    configClear {build: DroneReceivingRndBuild -> build.sortItem = null}
-    config(Item::class.java) {build: DroneReceivingRndBuild, item: Item ->
+    configClear { build: DroneReceivingRndBuild -> build.sortItem = null }
+    config(Item::class.java) { build: DroneReceivingRndBuild, item: Item ->
       build.sortItem = item
     }
     drawers = DrawMulti(DrawRegion("-bottom"), DrawRegionColor<DroneReceivingRndBuild>("-center") {
@@ -44,11 +45,15 @@ class DroneReceivingRnd(name: String) : SglBlock(name) {
     drawPlanConfigCenter(plan, plan.config, "$name-center")
   }
 
-  inner class DroneReceivingRndBuild : SglBuilding() {
+  inner class DroneReceivingRndBuild :SglBuilding() {
     var sortItem: Item? = null
     var buildings: DroneDeliveryTerminal.DroneDeliveryTerminalBuild? = null
     override fun acceptItem(source: Building, item: Item): Boolean {
-      return items.get(item) < getMaximumAccepted(item)
+      return false
+    }
+
+    override fun handleStack(item: Item?, amount: Int, source: Teamc?) {
+      super.handleStack(item, amount, source)
     }
 
     override fun config(): Item? {

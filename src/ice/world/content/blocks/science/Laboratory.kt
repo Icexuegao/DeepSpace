@@ -20,7 +20,7 @@ import mindustry.world.draw.DrawRegion
 import singularity.contents.SglTechThree
 import singularity.world.blocks.SglBlock
 
-class Laboratory(name: String) : SglBlock(name) {
+open class Laboratory(name: String) : SglBlock(name) {
 
   init {
     size = 4

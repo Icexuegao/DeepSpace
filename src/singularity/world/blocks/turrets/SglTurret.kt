@@ -42,7 +42,8 @@ import singularity.world.blocks.SglBlock
 import singularity.world.draw.DrawSglTurret
 import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.ConsumeType
-import universecore.world.consumers.cons.*
+import universecore.world.consumers.cons.ConsumePayload
+import universecore.world.consumers.cons.ConsumePower
 import universecore.world.consumers.cons.item.ConsumeItemBase
 import universecore.world.consumers.cons.item.ConsumeItems
 import universecore.world.consumers.cons.liquid.ConsumeLiquidBase
@@ -180,7 +181,7 @@ open class SglTurret(name: String) : SglBlock(name) {
 
   /**炮塔充能时是否保持预热状态 */
   var chargingWarm: Boolean = true
-  var ammoTypes: ObjectMap<BaseConsumers, AmmoDataEntry> = ObjectMap<BaseConsumers, AmmoDataEntry>()
+  var ammoTypes= ObjectMap<BaseConsumers, AmmoDataEntry>()
 
   init {
     canOverdrive = false
@@ -219,11 +220,11 @@ open class SglTurret(name: String) : SglBlock(name) {
     super.init()
   }
 
-  fun newAmmo(ammoType: BulletType, value: Cons2<Table, BulletType>): AmmoDataEntry {
+  fun newAmmo(ammoType: ice.entities.bullet.base.BulletType, value: Cons2<Table, BulletType>): AmmoDataEntry {
     return newAmmo(ammoType, false, value)
   }
 
-  fun newAmmo(ammoType: BulletType, override: Boolean = false, value: Cons2<Table, BulletType> = Cons2 {_, _ -> }): AmmoDataEntry {
+  fun newAmmo(ammoType: ice.entities.bullet.base.BulletType, override: Boolean = false, value: Cons2<Table, BulletType> = Cons2 {_, _ -> }): AmmoDataEntry {
     consume = object : BaseConsumers(false) {
       init {
         showTime = false
@@ -733,7 +734,7 @@ open class SglTurret(name: String) : SglBlock(name) {
     }
   }
 
-  class AmmoDataEntry(val bulletType: BulletType, val override: Boolean) {
+  class AmmoDataEntry(val bulletType: ice.entities.bullet.base.BulletType, val override: Boolean) {
     var reloadAmount: Int = 1
     val statValues = Seq<Cons2<Table, BulletType>>()
 

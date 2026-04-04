@@ -23,7 +23,7 @@ import mindustry.world.meta.Stat
 import kotlin.math.abs
 import kotlin.math.max
 
-class OrientationProjector(name: String) : LinksBlock(name) {
+open class OrientationProjector(name: String) : LinksBlock(name) {
   companion object{
     val orientationProjectors= Seq<OrientationProjectorBuildEnd>()
     init {

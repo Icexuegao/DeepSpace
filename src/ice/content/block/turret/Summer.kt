@@ -127,7 +127,7 @@ class Summer : SglTurret("summer") {
 
       override fun drawTrail(b: Bullet?) {}
 
-      override fun removed(b: Bullet?) {}
+      override fun removed(b: Bullet) {}
     })
     consume!!.energy(5f)
     consume!!.time(60f)

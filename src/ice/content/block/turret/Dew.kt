@@ -14,9 +14,7 @@ import mindustry.entities.part.RegionPart
 import mindustry.entities.part.ShapePart
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Bullet
-import mindustry.gen.Hitboxc
 import mindustry.gen.Sounds
-import mindustry.gen.Unit
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
@@ -29,17 +27,14 @@ import singularity.world.blocks.turrets.ProjectileTurret
 import singularity.world.blocks.turrets.WarpedBulletType
 import singularity.world.draw.DrawSglTurret
 import singularity.world.meta.SglStat
-import kotlin.math.max
-import kotlin.math.min
 
-class Dew: ProjectileTurret("dew") {
-  init{
+class Dew :ProjectileTurret("dew") {
+  init {
     bundle {
       desc(zh_CN, "白露", "连续高速发射一连串穿甲弹,向敌人倾泻如同暴雨般的火力")
     }
     requirements(
-      Category.turret,
-        IItems.强化合金, 150, IItems.铝锭, 110, IItems.气凝胶, 120,
+      Category.turret, IItems.强化合金, 150, IItems.铝锭, 110, IItems.气凝胶, 120,
 
       IItems.矩阵合金, 160, IItems.钍锭, 100, IItems.电子元件, 85, IItems.铀238, 85
     )
@@ -57,17 +52,17 @@ class Dew: ProjectileTurret("dew") {
 
     shootSound = Sounds.shootCollaris
 
-    shoot = object : ShootPattern() {
+    shoot = object :ShootPattern() {
       override fun shoot(totalShots: Int, handler: BulletHandler) {
         val off = totalShots % 2 - 0.5f
 
-        for (i in 0..2) {
+        for(i in 0..2) {
           handler.shoot(off * 16, 0f, 0f, firstShotDelay + 3 * i)
         }
       }
     }
 
-    newAmmo(object : BulletType() {
+    newAmmo(object :BulletType() {
       init {
         damage = 80f
         speed = 8f
@@ -94,25 +89,23 @@ class Dew: ProjectileTurret("dew") {
       override fun draw(b: Bullet) {
         SglDraw.drawDiamond(b.x, b.y, 18f, 6f, b.rotation(), SglDrawConst.matrixNet)
         Draw.color(SglDrawConst.matrixNet)
-        for (i in Mathf.signs) {
+        for(i in Mathf.signs) {
           Drawf.tri(b.x, b.y, 6f * b.fin(), 20f * b.fin(), b.rotation() + 156f * i)
         }
       }
-    }).apply {
-
-    }
+    })
     consume!!.item(IItems.钍锭, 1)
     consume!!.time(10f)
 
-    newAmmoCoating(Core.bundle.get("coating.depletedUranium"), Pal.accent, { b: mindustry.entities.bullet.BulletType ->
-      object : WarpedBulletType<mindustry.entities.bullet.BulletType>(b) {
+    newAmmoCoating("贫铀穿甲弹头", Pal.accent, { b: BulletType ->
+      object :WarpedBulletType<BulletType>(b) {
         init {
           damage = b.damage * 1.15f
           pierceArmor = true
           pierceCap = 5
         }
 
-        override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
+       /* override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
           if (entity is Unit) {
             if (entity.shield > 0) {
               val damageShield = min(max(entity.shield, 0f), damage * 0.85f)
@@ -121,12 +114,12 @@ class Dew: ProjectileTurret("dew") {
             }
           }
           super.hitEntity(b, entity, health)
-        }
+        }*/
 
         override fun draw(b: Bullet) {
           SglDraw.drawDiamond(b.x, b.y, 24f, 6f, b.rotation(), Pal.accent)
           Draw.color(SglDrawConst.matrixNet)
-          for (i in Mathf.signs) {
+          for(i in Mathf.signs) {
             Drawf.tri(b.x, b.y, 6f * b.fin(), 30f * b.fin(), b.rotation() + 162f * i)
           }
         }
@@ -143,10 +136,10 @@ class Dew: ProjectileTurret("dew") {
     consume!!.time(10f)
     consume!!.item(IItems.铀238, 1)
 
-    newAmmoCoating(Core.bundle.get("coating.crystal_fex"), SglDrawConst.fexCrystal, { b: mindustry.entities.bullet.BulletType? ->
-      object : WarpedBulletType<mindustry.entities.bullet.BulletType>(b) {
+    newAmmoCoating("FEX_结晶壳", SglDrawConst.fexCrystal, { b: BulletType ->
+      object :WarpedBulletType<BulletType>(b) {
         init {
-          damage = b!!.damage * 1.25f
+          damage = b.damage * 1.25f
           hitColor = SglDrawConst.fexCrystal
           trailEffect = SglFx.movingCrystalFrag
           trailInterval = 6f
@@ -159,20 +152,20 @@ class Dew: ProjectileTurret("dew") {
         override fun draw(b: Bullet) {
           SglDraw.drawDiamond(b.x, b.y, 24f, 6f, b.rotation(), hitColor)
           Draw.color(SglDrawConst.matrixNet)
-          for (i in Mathf.signs) {
+          for(i in Mathf.signs) {
             Drawf.tri(b.x, b.y, 6f * b.fin(), 30f * b.fin(), b.rotation() + 162f * i)
           }
         }
       }
     }, { t ->
-      t!!.add(SglStat.exDamageMultiplier.localized() + 125 + "%")
+      t.add(SglStat.exDamageMultiplier.localized() + 125 + "%")
       t.row()
       t.add(IStatus.结晶化.localizedName + "[lightgray] ~ [stat]0.25[lightgray] " + Core.bundle.get("unit.seconds"))
     }, 2)
     consume!!.time(20f)
     consume!!.item(IItems.FEX水晶, 1)
 
-    drawers = DrawSglTurret(object : RegionPart("_blade") {
+    drawers = DrawSglTurret(object :RegionPart("_blade") {
       init {
         mirror = true
         moveX = 4f
@@ -182,7 +175,7 @@ class Dew: ProjectileTurret("dew") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2.6f, 0f))
       }
-    }, object : RegionPart("_side") {
+    }, object :RegionPart("_side") {
       init {
         mirror = true
         moveX = 8f
@@ -193,12 +186,12 @@ class Dew: ProjectileTurret("dew") {
 
         moves.add(PartMove(PartProgress.recoil, 1f, -1f, -5f))
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         heatColor = SglDrawConst.dew
         heatProgress = PartProgress.warmup.delay(0.25f)
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         layer = Layer.effect
         color = SglDrawConst.matrixNet
@@ -212,7 +205,7 @@ class Dew: ProjectileTurret("dew") {
         radiusTo = 8f
         progress = PartProgress.warmup
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = SglDrawConst.matrixNet
@@ -226,7 +219,7 @@ class Dew: ProjectileTurret("dew") {
         radius = 0f
         radiusTo = 4f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = SglDrawConst.matrixNet
@@ -241,7 +234,7 @@ class Dew: ProjectileTurret("dew") {
         radius = 0f
         radiusTo = 4f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = SglDrawConst.matrixNet
@@ -256,7 +249,7 @@ class Dew: ProjectileTurret("dew") {
         radius = 0f
         radiusTo = 2.5f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.recoil.delay(0.3f)
         color = SglDrawConst.matrixNet
@@ -273,7 +266,7 @@ class Dew: ProjectileTurret("dew") {
         radius = 0f
         radiusTo = 6f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.recoil.delay(0.3f)
         color = SglDrawConst.matrixNet
@@ -291,7 +284,7 @@ class Dew: ProjectileTurret("dew") {
         radiusTo = 6f
         shapeRotation = 180f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.recoil.delay(0.3f)
         color = SglDrawConst.matrixNet
@@ -308,7 +301,7 @@ class Dew: ProjectileTurret("dew") {
         radius = 0f
         radiusTo = 4.5f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.recoil.delay(0.3f)
         color = SglDrawConst.matrixNet
@@ -326,7 +319,7 @@ class Dew: ProjectileTurret("dew") {
         radiusTo = 4.5f
         shapeRotation = 180f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.recoil.delay(0.3f)
         color = SglDrawConst.matrixNet
@@ -343,7 +336,7 @@ class Dew: ProjectileTurret("dew") {
         radius = 0f
         radiusTo = 5f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.recoil.delay(0.3f)
         color = SglDrawConst.matrixNet

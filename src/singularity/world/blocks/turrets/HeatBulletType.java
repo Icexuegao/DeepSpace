@@ -1,8 +1,8 @@
 package singularity.world.blocks.turrets;
 
 import ice.content.IStatus;
+import ice.entities.bullet.base.BulletType;
 import mindustry.entities.Units;
-import mindustry.entities.bullet.BulletType;
 import mindustry.gen.Bullet;
 import mindustry.gen.Hitboxc;
 import mindustry.gen.Unit;

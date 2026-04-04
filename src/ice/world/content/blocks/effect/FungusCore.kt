@@ -13,7 +13,7 @@ import mindustry.world.Tile
 import mindustry.world.blocks.storage.CoreBlock
 import mindustry.world.meta.Env
 
-class FungusCore(name: String) : CoreBlock(name) {
+open class FungusCore(name: String) : CoreBlock(name) {
     init {
         size = 2
         buildType = Prov(::FungusCoreBuild)

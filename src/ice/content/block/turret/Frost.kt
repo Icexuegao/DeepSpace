@@ -8,8 +8,8 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.crushedIce
+import ice.entities.bullet.ContinuousLaserBulletType
 import ice.ui.bundle.bundle
-import mindustry.entities.bullet.ContinuousLaserBulletType
 import mindustry.entities.part.HaloPart
 import mindustry.entities.part.RegionPart
 import mindustry.entities.part.ShapePart
