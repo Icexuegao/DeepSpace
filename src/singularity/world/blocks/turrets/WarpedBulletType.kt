@@ -12,6 +12,7 @@ import mindustry.world.blocks.ControlBlock
 import universecore.util.handler.ObjectHandler
 
 open class WarpedBulletType<Type :BulletType>(inst: Type) :BulletType() {
+  @Suppress("UNCHECKED_CAST")
   private val inst: Type = inst.copy() as Type
 
   init {
@@ -144,6 +145,14 @@ open class WarpedBulletType<Type :BulletType>(inst: Type) :BulletType() {
     this.inst.hit(b)
   }
 
+  override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
+    this.inst.hitEntity(b, entity, health)
+  }
+
+  override fun hitTile(b: Bullet, build: Building?, x: Float, y: Float, initialHealth: Float, direct: Boolean) {
+    this.inst.hitTile(b, build, x, y, initialHealth, direct)
+  }
+
   override fun load() {
     this.inst.load()
   }
@@ -213,10 +222,12 @@ open class WarpedBulletType<Type :BulletType>(inst: Type) :BulletType() {
     aimY: Float,
     target: Teamc?
   ): Bullet? {
-    return this.inst.create(owner, shooter, team, x, y, angle, damage, velocityScl, lifetimeScl, data, mover, aimX, aimY, target)
+    val create = this.inst.create(owner, shooter, team, x, y, angle, damage, velocityScl, lifetimeScl, data, mover, aimX, aimY, target)
+    create.type = this
+    return create
   }
 
-  override fun create(owner: Entityc, team: Team?, x: Float, y: Float, angle: Float, velocityScl: Float): Bullet? {
+  override fun create(owner: Entityc, team: Team?, x: Float, y: Float, angle: Float, velocityScl: Float): Bullet {
     return this.inst.create(owner, team, x, y, angle, velocityScl)
   }
 
@@ -250,7 +261,9 @@ open class WarpedBulletType<Type :BulletType>(inst: Type) :BulletType() {
     aimX: Float,
     aimY: Float
   ): Bullet? {
-    return this.inst.create(owner, shooter, team, x, y, angle, damage, velocityScl, lifetimeScl, data, mover, aimX, aimY)
+    val create = this.inst.create(owner, shooter, team, x, y, angle, damage, velocityScl, lifetimeScl, data, mover, aimX, aimY)
+    create.type = this
+    return create
   }
 
   override fun create(
@@ -264,23 +277,21 @@ open class WarpedBulletType<Type :BulletType>(inst: Type) :BulletType() {
     lifetimeScl: Float,
     data: Any?
   ): Bullet? {
-    return this.inst.create(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data)
+    val create = this.inst.create(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data)
+    create.type = this
+    return create
   }
 
-  override fun buildingDamage(b: Bullet?): Float {
+  override fun buildingDamage(b: Bullet): Float {
     return this.inst.buildingDamage(b)
   }
 
-  override fun copy(): mindustry.entities.bullet.BulletType? {
+  override fun copy(): mindustry.entities.bullet.BulletType {
     return this.inst.copy()
   }
 
-  override fun drawLight(b: Bullet?) {
+  override fun drawLight(b: Bullet) {
     this.inst.drawLight(b)
-  }
-
-  override fun hitTile(b: Bullet, build: Building?, x: Float, y: Float, initialHealth: Float, direct: Boolean) {
-    this.inst.hitTile(b, build, x, y, initialHealth, direct)
   }
 
   override fun afterPatch() {
@@ -315,10 +326,6 @@ open class WarpedBulletType<Type :BulletType>(inst: Type) :BulletType() {
     return this.inst.isVanilla
   }
 
-  override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
-    this.inst.hitEntity(b, entity, health)
-  }
-
   override fun createNet(team: Team, x: Float, y: Float, angle: Float, damage: Float, velocityScl: Float, lifetimeScl: Float) {
     this.inst.createNet(team, x, y, angle, damage, velocityScl, lifetimeScl)
   }
@@ -332,6 +339,7 @@ open class WarpedBulletType<Type :BulletType>(inst: Type) :BulletType() {
   }
 
   override fun hit(b: Bullet, x: Float, y: Float, createFrags: Boolean) {
+
     this.inst.hit(b, x, y, createFrags)
   }
 

@@ -88,7 +88,7 @@ class Mist: SglTurret("mist") {
         table.add(IStatus.电子干扰.emoji() + "[stat]" + IStatus.电子干扰.localizedName + "[lightgray] ~ [stat]6[lightgray] " + Core.bundle.get("unit.seconds"))
       }.padLeft(15f)
     }
-    consume!!.item(Items.graphite, 6)
+    consume!!.item(IItems.石墨烯, 6)
     consume!!.time(120f)
   }
 }

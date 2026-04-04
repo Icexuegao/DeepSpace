@@ -5,11 +5,11 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import arc.util.Time
 import arc.util.Timer
+import ice.library.struct.isNotEmpty
 import ice.world.content.blocks.IceBlockComponents.timesex
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
-import ice.library.struct.isNotEmpty
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Layer
@@ -32,7 +32,7 @@ open class ItemExtractor(name: String) : LinksBlock(name) {
 
     inner class ItemExtractorBuildEnd : LinksBlockBuild() {
         override fun acceptItem(source: Building, item: Item): Boolean {
-            return items[item] < getMaximumAccepted(item)
+            return builds.contains(source)&& items[item] < getMaximumAccepted(item)
         }
 
         override fun updateTile() {

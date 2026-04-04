@@ -34,7 +34,7 @@ import mindustry.ui.Bar
 /**
  * 无人机配送终端 - 用于生成和管理无人机，并将物品配送到接收站
  */
-class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
+class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
   // 无人机相关配置
   var unitBuildTime = 60f * 8f  // 生成单个无人机所需时间
   var unitMaxSize = 3              // 最大无人机数量
@@ -48,6 +48,7 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
 
   // 无人机类型
   val unit = IUnitTypes.和弦
+  val stacks: Array<ItemStack> = ItemStack.with(IItems.铬锭, 10, IItems.单晶硅, 10)
 
   init {
     bundle {
@@ -64,15 +65,13 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
     requirements(Category.distribution, IItems.铜锭, 50, IItems.单晶硅, 80, IItems.钴钢, 40, IItems.铪锭, 30)
     newConsume().apply {
       liquids(ILiquids.氢气, 12f / 60f)
-      items(IItems.铬锭, 10, IItems.单晶硅, 10)
       power(2f)
-      time(60f)
     }
   }
 
   override fun setStats() {
     super.setStats()
-    for (baseConsumers in consumers) {
+    for(baseConsumers in consumers) {
       baseConsumers.display(stats)
     }
   }
@@ -92,7 +91,7 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
     }
   }
 
-  inner class DroneDeliveryTerminalBuild : RangeBlockBuild() {
+  inner class DroneDeliveryTerminalBuild :RangeBlockBuild() {
     // 接收站和无人机集合
     val builds = Seq<DroneReceivingRndBuild>()
     val units = Seq<Unit>()
@@ -140,9 +139,14 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
     override fun updateTile() {
       super.updateTile()
       updateNearbyBuildings()
-      updateStateVariables()
-      if (shouldBuildUnit()) {
-        updateUnitProduction()
+
+      readyness = Mathf.approachDelta(readyness, if (units.isEmpty) 0f else 1f, 1f / 60f)
+      warmup = Mathf.approachDelta(warmup, efficiency(), 1f / 60f)
+
+      if (units.size < unitMaxSize) {
+        totalProgress += edelta()
+
+        buildProgress += edelta() * consumer.getOptionalEff(consumers.last()) / unitBuildTime
       }
       if (efficiency() > 0) {
         assignDroneTasks()
@@ -161,27 +165,9 @@ class DroneDeliveryTerminal(name: String) : RangeBlock(name) {
       }
     }
 
-    /**更新状态变量*/
-    private fun updateStateVariables() {
-      readyness = Mathf.approachDelta(readyness, if (units.isEmpty) 0f else 1f, 1f / 60f)
-      warmup = Mathf.approachDelta(warmup, efficiency(), 1f / 60f)
-    }
-
-    /**判断是否应该建造新无人机*/
-    private fun shouldBuildUnit() = units.size < unitMaxSize && efficiency() > 0
-
-    /**更新无人机生产进度*/
-    private fun updateUnitProduction() {
-      buildProgress += edelta() / unitBuildTime
-      totalProgress += edelta()
-      if (buildProgress >= 1f) {
-        consume()
-        createNewDrone()
-      }
-    }
 
     /**创建新无人机*/
-    private fun createNewDrone() {
+    fun createNewDrone() {
       if (Vars.net.client()) return
       val newUnit = unit.create(team)
       units.add(newUnit)

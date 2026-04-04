@@ -25,7 +25,6 @@ import mindustry.entities.units.BuildPlan
 import mindustry.game.Team
 import mindustry.gen.Building
 import mindustry.gen.Iconc
-import mindustry.gen.Sounds
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
 import mindustry.graphics.MultiPacker
@@ -405,9 +404,6 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     override fun shouldConsume(): Boolean {
       return super<IceBuild>.shouldConsume() && super<ConsumerBuildComp>.shouldConsume()
     }
-
-    //  @Override
-
     open fun efficiency(): Float {
       return consEfficiency()
     }

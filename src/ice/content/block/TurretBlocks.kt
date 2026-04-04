@@ -7,6 +7,7 @@ import ice.library.world.Load
 object TurretBlocks : Load {
   val 碎冰 = TrashIce()
   val 神矢 = DivineArrow()
+  val 泉涌 = Quicksand()
   val 攫取 = Grab()
   val 流火 = FlowingFire()
   val 碎爆 = Shatter()
@@ -26,17 +27,25 @@ object TurretBlocks : Load {
   val 月隐 = MoonShadow()
   val 信标 = Beacon()
   val 闪光 = Flash()
-  val 伦琴 = Roentgen()
+
+
   val 遮幕 = Curtain()
   val 迷雾 = Mist()
   val 阴霾 = Haze()
+
+  val 伦琴 = Roentgen()
   val 惊蛰 = Thunder()
-  val 白露 = Dew()
+
   val 春分 = Spring()
+
   val 吹雪 = Fubuki()
   val 霜降 = Frost()
   val 冬至 = Winter()
-  val 虚妄 = Mirage()
+
+  val 白露 = Dew()
+
   val 阳炎 = Soflame()
   val 夏至 = Summer()
+
+  val 虚妄 = Mirage()
 }

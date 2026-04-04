@@ -33,12 +33,12 @@ class Rainbow : PowerTurret("turret_rainbow") {
     size = 2
     range = 160f
     reload = 30f
+    shootY+=2f
     shootType = PointBulletType().apply {
       damage = 35f
       lifetime = 8f
       speed = 20f
       ammoMultiplier = 1f
-
       shootEffect = Effect(20f) { e ->
         val rgb = Color(1f, 1f, 1f, 1f)
         rgb.fromHsv((Time.time * 3) % 360, 1f, 1f)
@@ -89,13 +89,13 @@ class Rainbow : PowerTurret("turret_rainbow") {
     var speedup = 0f
 
     override fun baseReloadSpeed(): Float {
-      return if (efficiency * speedup > 1f) speedup else 1f
+      return if (efficiency * speedup > 1f) speedup else super.baseReloadSpeed()
     }
 
     override fun updateTile() {
       super.updateTile()
       speedup = reload / min * speed
-      val target = if (isShooting) 1f else 0f
+      val target = if ( isShooting) 1f else 0f
       speed = Mathf.approachDelta(speed, target, 1f / change * (if (target > 0) efficiency else 1f))
     }
   }

@@ -12,6 +12,7 @@ import mindustry.type.Category
     bundle {
       desc(zh_CN, "永耀天枢")
     }
+    armor=25f
     size = 5
     health = 8000
     powerProduct = 1200 / 60f

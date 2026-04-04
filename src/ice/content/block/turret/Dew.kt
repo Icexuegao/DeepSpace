@@ -7,6 +7,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
+import ice.library.struct.log
 import ice.ui.bundle.bundle
 import mindustry.content.Fx
 import mindustry.entities.part.HaloPart
@@ -14,7 +15,9 @@ import mindustry.entities.part.RegionPart
 import mindustry.entities.part.ShapePart
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Bullet
+import mindustry.gen.Hitboxc
 import mindustry.gen.Sounds
+import mindustry.gen.Unit
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
@@ -27,6 +30,8 @@ import singularity.world.blocks.turrets.ProjectileTurret
 import singularity.world.blocks.turrets.WarpedBulletType
 import singularity.world.draw.DrawSglTurret
 import singularity.world.meta.SglStat
+import kotlin.math.max
+import kotlin.math.min
 
 class Dew :ProjectileTurret("dew") {
   init {
@@ -78,6 +83,8 @@ class Dew :ProjectileTurret("dew") {
         shootEffect = MultiEffect(Fx.shootBig, Fx.colorSparkBig)
         hittable = true
         pierceBuilding = true
+        collidesTiles=true
+        collidesGround=true
         pierceCap = 4
       }
 
@@ -98,14 +105,15 @@ class Dew :ProjectileTurret("dew") {
     consume!!.time(10f)
 
     newAmmoCoating("贫铀穿甲弹头", Pal.accent, { b: BulletType ->
+
       object :WarpedBulletType<BulletType>(b) {
         init {
           damage = b.damage * 1.15f
           pierceArmor = true
           pierceCap = 5
         }
-
-       /* override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
+        override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
+          log { 1 }
           if (entity is Unit) {
             if (entity.shield > 0) {
               val damageShield = min(max(entity.shield, 0f), damage * 0.85f)
@@ -114,7 +122,7 @@ class Dew :ProjectileTurret("dew") {
             }
           }
           super.hitEntity(b, entity, health)
-        }*/
+        }
 
         override fun draw(b: Bullet) {
           SglDraw.drawDiamond(b.x, b.y, 24f, 6f, b.rotation(), Pal.accent)

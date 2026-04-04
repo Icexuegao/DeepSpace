@@ -10,6 +10,7 @@ import mindustry.type.Category
 class 虔信方垒 :CoreBlock("pietasCornerCore") {
   init {
     size = 3
+    armor=20f
     health = 1000
     squareSprite = false
     unitType = IUnitTypes.加百列

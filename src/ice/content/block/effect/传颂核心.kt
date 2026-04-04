@@ -10,6 +10,7 @@ import mindustry.type.Category
 class 传颂核心 :CoreBlock("eulogyCore") {
   init {
     size = 4
+    armor=30f
     health = 5000
     powerProduct = 600 / 60f
     unitType = IUnitTypes.路西法

@@ -17,6 +17,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import mindustry.Vars
+import mindustry.audio.SoundLoop
 import mindustry.content.Fx
 import mindustry.content.UnitTypes
 import mindustry.core.World
@@ -33,6 +34,7 @@ import mindustry.logic.LAccess
 import mindustry.logic.Ranged
 import mindustry.type.ItemStack
 import mindustry.type.Liquid
+import mindustry.ui.Bar
 import mindustry.world.blocks.ControlBlock
 import mindustry.world.blocks.defense.turrets.Turret
 import mindustry.world.meta.*
@@ -52,7 +54,7 @@ import universecore.world.consumers.cons.liquid.ConsumeLiquids
 import kotlin.math.max
 
 @Suppress("UNCHECKED_CAST")
-open class SglTurret(name: String) : SglBlock(name) {
+open class SglTurret(name: String) :SglBlock(name) {
   private val timerTarget = timers++
 
   /**炮塔的索敌范围 */
@@ -88,6 +90,8 @@ open class SglTurret(name: String) : SglBlock(name) {
   /**能否由玩家控制 */
   var playerControllable: Boolean = true
 
+  var loopSound = Sounds.none
+  var loopSoundVolume =0.5f
   /**索敌时间间隔，以刻为单位 */
   var targetInterval: Float = 20f
 
@@ -181,7 +185,7 @@ open class SglTurret(name: String) : SglBlock(name) {
 
   /**炮塔充能时是否保持预热状态 */
   var chargingWarm: Boolean = true
-  var ammoTypes= ObjectMap<BaseConsumers, AmmoDataEntry>()
+  var ammoTypes = ObjectMap<BaseConsumers, AmmoDataEntry>()
 
   init {
     canOverdrive = false
@@ -206,13 +210,17 @@ open class SglTurret(name: String) : SglBlock(name) {
     if (shootY == Float.NEGATIVE_INFINITY) shootY = size * Vars.tilesize / 2f
     if (elevation < 0) elevation = size / 2f
 
-    for (consumer in consumers) {
-      for (baseConsume in consumer.all()) {
+    for(consumer in consumers) {
+      for(baseConsume in consumer.all()) {
         if (baseConsume is ConsumePower<*>) baseConsume.showIcon = true
 
         if (baseConsume !is ConsumeItemBase<*> && baseConsume !is ConsumePayload<*>) {
           val old: Floatf<Any>? = baseConsume.consMultiplier as Floatf<Any>?
-          baseConsume.setMultiple(if (old == null) Floatf { e: Any? -> ((e as SglTurretBuild).coolantScl) } else (Floatf { e: Any -> old.get(e) * (e as SglTurretBuild).coolantScl }))
+          baseConsume.setMultiple(if (old == null) Floatf { e: Any? -> ((e as SglTurretBuild).coolantScl) } else (Floatf { e: Any ->
+            old.get(
+              e
+            ) * (e as SglTurretBuild).coolantScl
+          }))
         }
       }
     }
@@ -224,8 +232,12 @@ open class SglTurret(name: String) : SglBlock(name) {
     return newAmmo(ammoType, false, value)
   }
 
-  fun newAmmo(ammoType: ice.entities.bullet.base.BulletType, override: Boolean = false, value: Cons2<Table, BulletType> = Cons2 {_, _ -> }): AmmoDataEntry {
-    consume = object : BaseConsumers(false) {
+  open fun newAmmo(
+    ammoType: ice.entities.bullet.base.BulletType,
+    override: Boolean = false,
+    value: Cons2<Table, BulletType> = Cons2 { _, _ -> }
+  ): AmmoDataEntry {
+    consume = object :BaseConsumers(false) {
       init {
         showTime = false
       }
@@ -257,7 +269,7 @@ open class SglTurret(name: String) : SglBlock(name) {
       s!!.add(Stat.booster) { t: Table? ->
         t!!.table { req: Table? ->
           req!!.left().defaults().left().padLeft(3f)
-          for (co in c!!.all()) {
+          for(co in c!!.all()) {
             co.buildIcons(req)
           }
         }.left().padRight(40f)
@@ -273,7 +285,11 @@ open class SglTurret(name: String) : SglBlock(name) {
   /**使用默认的冷却模式，与原版的冷却稍有不同，液体的温度和热容共同确定冷却力，热容同时影响液体消耗倍率 */
   fun newCoolant(baseCoolantScl: Float, attributeMultiplier: Float, filter: Boolf<Liquid?>, usageBase: Float, duration: Float) {
     newCoolant(
-      { liquid: Liquid? -> baseCoolantScl + (liquid!!.heatCapacity * 1.2f - (liquid.temperature - 0.35f) * 0.6f) * attributeMultiplier }, { liquid: Liquid? -> !liquid!!.gas && liquid.coolant && filter.get(liquid) }, usageBase, { liquid: Liquid? -> usageBase / (liquid!!.heatCapacity * 0.7f) }, duration
+      { liquid: Liquid? -> baseCoolantScl + (liquid!!.heatCapacity * 1.2f - (liquid.temperature - 0.35f) * 0.6f) * attributeMultiplier },
+      { liquid: Liquid? -> !liquid!!.gas && liquid.coolant && filter.get(liquid) },
+      usageBase,
+      { liquid: Liquid? -> usageBase / (liquid!!.heatCapacity * 0.7f) },
+      duration
     )
     val c: BaseConsumers? = consume
     consume!!.optionalAlwaysValid = false
@@ -293,7 +309,7 @@ open class SglTurret(name: String) : SglBlock(name) {
         t.row()
         val get = c!!.get(ConsumeType.liquid)
         if (get is ConsumeLiquidCond<*>) {
-          for (stack in get.cons) {
+          for(stack in get.cons) {
             val liquid: Liquid = stack.liquid
 
             t.add(StatValues.displayLiquid(liquid, usageBase * usageMult.get(liquid) * 60, true)).padRight(40f).left().top().height(50f)
@@ -306,7 +322,7 @@ open class SglTurret(name: String) : SglBlock(name) {
       }
     })
     consume!!.optionalAlwaysValid = false
-    consume!!.add(object : ConsumeLiquidCond<SglTurretBuild>() {
+    consume!!.add(object :ConsumeLiquidCond<SglTurretBuild>() {
       init {
         filter = filters
         usage = usageBase
@@ -321,6 +337,14 @@ open class SglTurret(name: String) : SglBlock(name) {
     consume!!.consValidCondition { t: SglTurretBuild? -> t!!.consumer.current != null && t.reloadCounter < t.consumer.current!!.craftTime && (t.currCoolant == null || t.currCoolant === c) }
   }
 
+  override fun setBars() {
+    super.setBars()
+    addBar("warmup"){e:SglTurretBuild->
+      Bar("warmup", Pal.accent){
+        e.warmup()
+      }
+    }
+  }
   override fun setStats() {
     super.setStats()
 
@@ -331,7 +355,7 @@ open class SglTurret(name: String) : SglBlock(name) {
 
     stats.add(Stat.ammo) { table ->
       table!!.defaults().padLeft(15f)
-      for (entry in ammoTypes) {
+      for(entry in ammoTypes) {
         table.row()
         table.table(SglDrawConst.grayUIAlpha, Cons { t ->
           t!!.left().defaults().left().growX()
@@ -339,7 +363,7 @@ open class SglTurret(name: String) : SglBlock(name) {
             st!!.left().defaults().left()
             st.table { c ->
               c!!.left().defaults().left()
-              for (consume in entry.key!!.all()) {
+              for(consume in entry.key!!.all()) {
                 c.table { cons: Table? ->
                   cons!!.left().defaults().left().padLeft(3f).fill()
                   consume.buildIcons(cons)
@@ -348,7 +372,12 @@ open class SglTurret(name: String) : SglBlock(name) {
             }.fill()
 
             st.row()
-            st.add(Stat.reload.localized() + ":" + Strings.autoFixed(60f / entry.key!!.craftTime * shoot.shots, 1) + StatUnit.perSecond.localized())
+            st.add(
+              Stat.reload.localized() + ":" + Strings.autoFixed(
+                60f / entry.key!!.craftTime * shoot.shots,
+                1
+              ) + StatUnit.perSecond.localized()
+            )
             if (entry.value!!.reloadAmount > 1) {
               st.row()
               st.add(Core.bundle.format("bullet.multiplier", entry.value!!.reloadAmount))
@@ -369,7 +398,7 @@ open class SglTurret(name: String) : SglBlock(name) {
             if (!ammoEntry.override) {
               UIUtils.buildAmmo(bt, type)
             }
-            for (value in ammoEntry.statValues) {
+            for(value in ammoEntry.statValues) {
               value.get(bt, type)
             }
           }.left()
@@ -383,13 +412,13 @@ open class SglTurret(name: String) : SglBlock(name) {
     Drawf.dashCircle(x * Vars.tilesize + offset, y * Vars.tilesize + offset, range, Pal.placing)
   }
 
-  fun interface IceBulletHandler : ShootPattern.BulletHandler {
+  fun interface IceBulletHandler :ShootPattern.BulletHandler {
     override fun shoot(x: Float, y: Float, rotation: Float, delay: Float) {
       shoot(x, y, rotation, delay, null)
     }
   }
 
-  open inner class SglTurretBuild : SglBuilding(), ControlBlock, Ranged {
+  open inner class SglTurretBuild :SglBuilding(), ControlBlock, Ranged {
     var recoilOffset: Vec2 = Vec2()
     var charge: Float = 0f
     var reloadCounter: Float = 0f
@@ -410,6 +439,8 @@ open class SglTurret(name: String) : SglBlock(name) {
     var queuedBullets: Int = 0
     var logicControlTime: Float = 0f
     var currCoolant: BaseConsumers? = null
+
+    var soundLoop: SoundLoop? = (if (loopSound === Sounds.none) null else SoundLoop(loopSound, loopSoundVolume))
 
     override fun shouldAutoTarget(): Boolean {
       return true
@@ -435,7 +466,57 @@ open class SglTurret(name: String) : SglBlock(name) {
       return logicControlTime > 0
     }
 
+
+    open fun updateReload() {
+
+      val tarValid = validateTarget()
+      val targetRot = angleTo(targetPos)
+
+      if (wasShooting() && shootValid()) {
+        if (canShoot() && tarValid) {
+          warmup = if (linearWarmup) Mathf.approachDelta(warmup, 1f, warmupSpeed * consEfficiency()) else Mathf.lerpDelta(
+            warmup,
+            1f,
+            warmupSpeed * consEfficiency()
+          )
+          wasShooting = true
+
+          if (!charging() && warmup >= fireWarmupThreshold) {
+            if (reloadCounter >= consumer.current!!.craftTime) {
+              if (Angles.angleDist(rotationu, targetRot) < shootCone) {
+                doShoot(currentAmmo!!.bulletType)
+              }
+            }
+          }
+        }
+      } else if (!chargingWarm || !charging()) {
+        warmup = if (linearWarmup) Mathf.approachDelta(warmup, 0f, warmupSpeed) else Mathf.lerpDelta(warmup, 0f, warmupSpeed)
+      }
+
+    }
+    override fun remove() {
+      super.remove()
+      if (soundLoop != null) {
+        soundLoop!!.stop()
+      }
+    }
+
+    open fun shouldActiveSound(): Boolean {
+      return warmup > 0.01f && loopSound !== Sounds.none
+    }
+    override fun onDestroyed() {
+      super.onDestroyed()
+      if (soundLoop != null) {
+        soundLoop!!.stop()
+      }
+    }
+    open fun activeSoundVolume(): Float {
+      return warmup
+    }
     override fun updateTile() {
+
+        soundLoop?.update(x, y, shouldActiveSound(), activeSoundVolume())
+
       wasShooting = false
       if (consumer.current == null) return
 
@@ -466,27 +547,24 @@ open class SglTurret(name: String) : SglBlock(name) {
       val tarValid = validateTarget()
       val targetRot = angleTo(targetPos)
 
+      updateReload()
+
       if (tarValid && (shootValid() || isControlled) && (moveWhileCharging || !charging())) {
         turnToTarget(targetRot)
       }
 
-      if (wasShooting() && shootValid()) {
-        if (canShoot() && tarValid) {
-          warmup = if (linearWarmup) Mathf.approachDelta(warmup, 1f, warmupSpeed * consEfficiency()) else Mathf.lerpDelta(warmup, 1f, warmupSpeed * consEfficiency())
-          wasShooting = true
 
-          if (!charging() && warmup >= fireWarmupThreshold) {
-            if (reloadCounter >= consumer.current!!.craftTime) {
-              if (Angles.angleDist(rotationu, targetRot) < shootCone) {
-                doShoot(currentAmmo!!.bulletType)
-              }
-            }
-          }
-        }
-      } else if (!chargingWarm || !charging()) {
-        warmup = if (linearWarmup) Mathf.approachDelta(warmup, 0f, warmupSpeed) else Mathf.lerpDelta(warmup, 0f, warmupSpeed)
+      updateReloadCoolant()
+
+
+      if (coolantSclTimer > 0) coolantSclTimer -= Time.delta
+      else {
+        currCoolant = null
+        coolantScl = 1f
       }
+    }
 
+    open fun updateReloadCoolant() {
       if (canShoot() && shootValid() && !charging() && reloadCounter < consumer.current!!.craftTime) {
         reloadCounter += consEfficiency() * delta() * coolantScl
         if (coolantSclTimer > 0) {
@@ -496,7 +574,7 @@ open class SglTurret(name: String) : SglBlock(name) {
             val l = (c as ConsumeLiquidCond<*>).getCurrCons(this)
             if (l != null) usage = c.usageMultiplier.get(l)
           } else if (c is ConsumeLiquids<*>) {
-            for (liquid in c.consLiquids!!) {
+            for(liquid in c.consLiquids!!) {
               usage += liquid.amount
             }
           }
@@ -504,12 +582,6 @@ open class SglTurret(name: String) : SglBlock(name) {
             coolEffect.at(x + Mathf.range(size * Vars.tilesize / 2f), y + Mathf.range(size * Vars.tilesize / 2f))
           }
         }
-      }
-
-      if (coolantSclTimer > 0) coolantSclTimer -= Time.delta
-      else {
-        currCoolant = null
-        coolantScl = 1f
       }
     }
 
@@ -572,9 +644,28 @@ open class SglTurret(name: String) : SglBlock(name) {
       val bulletX = x + Angles.trnsx(rotationu - 90, shootX + xOffset + xSpread, shootY + yOffset)
       val bulletY = y + Angles.trnsy(rotationu - 90, shootX + xOffset + xSpread, shootY + yOffset)
       val shootAngle = rotationu + angleOffset + Mathf.range(inaccuracy)
-      val lifeScl = if (type.scaleLife) Mathf.clamp(Mathf.dst(bulletX, bulletY, targetPos.x, targetPos.y) / type.range, minRange / type.range, range() / type.range) else 1f
+      val lifeScl = if (type.scaleLife) Mathf.clamp(
+        Mathf.dst(bulletX, bulletY, targetPos.x, targetPos.y) / type.range,
+        minRange / type.range,
+        range() / type.range
+      ) else 1f
 
-      handleBullet(type.create(this, team, bulletX, bulletY, shootAngle, -1f, (1f - velocityRnd) + Mathf.random(velocityRnd), lifeScl, null, mover, targetPos.x, targetPos.y), xOffset, yOffset, shootAngle - rotationu)
+      handleBullet(
+        type.create(
+          this,
+          team,
+          bulletX,
+          bulletY,
+          shootAngle,
+          -1f,
+          (1f - velocityRnd) + Mathf.random(velocityRnd),
+          lifeScl,
+          null,
+          mover,
+          targetPos.x,
+          targetPos.y
+        ), xOffset, yOffset, shootAngle - rotationu
+      )
 
       (if (shootEffect == null) type.shootEffect else shootEffect)!!.at(bulletX, bulletY, rotationu + angleOffset, type.hitColor)
       (if (smokeEffect == null) type.smokeEffect else smokeEffect)!!.at(bulletX, bulletY, rotationu + angleOffset, type.hitColor)
@@ -621,7 +712,7 @@ open class SglTurret(name: String) : SglBlock(name) {
     }
 
     override fun sense(sensor: LAccess): Double {
-      return when (sensor) {
+      return when(sensor) {
         LAccess.ammo -> items.total()
         LAccess.ammoCapacity -> itemCapacity
         LAccess.rotation -> rotationu
@@ -647,6 +738,9 @@ open class SglTurret(name: String) : SglBlock(name) {
       return if (isControlled) unit.isShooting else if (logicControlled()) logicShooting else target != null
     }
 
+    override fun shouldAmbientSound(): Boolean {
+      return warmup() > 0.01f && loopSound !== Sounds.none
+    }
     fun updateTarget() {
       if (timer(timerTarget, targetInterval)) {
         findTarget()
@@ -668,7 +762,15 @@ open class SglTurret(name: String) : SglBlock(name) {
       }
 
       if (accurateSpeed) {
-        targetPos.set(Predict.intercept(this, pos, offset.x, offset.y, if (currentAmmo!!.bulletType.speed <= 0.01f) 1.0E8f else currentAmmo!!.bulletType.speed))
+        targetPos.set(
+          Predict.intercept(
+            this,
+            pos,
+            offset.x,
+            offset.y,
+            if (currentAmmo!!.bulletType.speed <= 0.01f) 1.0E8f else currentAmmo!!.bulletType.speed
+          )
+        )
       } else targetPos.set(pos)
 
       if (targetPos.isZero) {
@@ -692,7 +794,13 @@ open class SglTurret(name: String) : SglBlock(name) {
         val heal = canHeal()
 
         target = Units.bestTarget(
-          null, x, y, range, Boolf { e: Unit? -> (e!!.team !== team || (heal && targetHealUnit && e.damaged())) && !e.dead() && unitFilter.get(e) && (e.isGrounded || targetAir) && (!e.isGrounded || targetGround) }, Boolf { b: Building? -> (b!!.team !== team || (heal && b.damaged())) && targetGround && buildingFilter.get(b) }, unitSort
+          null,
+          x,
+          y,
+          range,
+          Boolf { e: Unit? -> (e!!.team !== team || (heal && targetHealUnit && e.damaged())) && !e.dead() && unitFilter.get(e) && (e.isGrounded || targetAir) && (!e.isGrounded || targetGround) },
+          Boolf { b: Building? -> (b!!.team !== team || (heal && b.damaged())) && targetGround && buildingFilter.get(b) },
+          unitSort
         )
       }
     }

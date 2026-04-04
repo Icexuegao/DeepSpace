@@ -25,7 +25,7 @@ class Curtain : SglTurret("curtain") {
     range = 144f
     targetGround = false
 
-    newAmmo(object : BasicBulletType(1.6f, 30f, "missile") {
+    newAmmo(object : BasicBulletType(1.6f, 30f, "missile-large") {
       init {
         frontColor = Items.graphite.color.cpy().lerp(Color.white, 0.7f)
         backColor = Items.graphite.color
@@ -61,7 +61,46 @@ class Curtain : SglTurret("curtain") {
       bt.row()
       bt.add(IStatus.电子干扰.emoji() + "[stat]" + IStatus.电子干扰.localizedName + "[lightgray] ~ [stat]2[lightgray] " + Core.bundle.get("unit.seconds"))
     }
-    consume!!.item(Items.graphite, 1)
+    consume!!.item(IItems.生煤, 1)
+    consume!!.time(90f)
+
+    newAmmo(object : BasicBulletType(1.6f, 30f, "missile-large") {
+      init {
+        frontColor = Items.graphite.color.cpy().lerp(Color.white, 0.7f)
+        backColor = Items.graphite.color
+        width = 7f
+        height = 12f
+        lifetime = 100f
+        ammoMultiplier = 0.8f
+        hitShake = 0.35f
+        scaleLife = true
+        splashDamageRadius = 52f
+        splashDamage = 16f
+        collidesGround = false
+        collidesTiles = false
+        hitEffect = Fx.explosion
+        trailEffect = Fx.smoke
+        trailChance = 0.12f
+        trailColor = Items.graphite.color
+
+        hitSound = Sounds.explosion
+
+        fragOnHit = true
+        fragBullets = 1
+        fragVelocityMin = 0f
+        fragVelocityMax = 0f
+        fragBullet = graphiteCloud(360f, 36f, true, ground = false, empDamage = 0.2f)
+      }
+    }, true) { bt, ammo: mindustry.entities.bullet.BulletType? ->
+      bt!!.add(Core.bundle.format("bullet.damage", ammo!!.damage))
+      bt.row()
+      bt.add(Core.bundle.format("bullet.splashdamage", ammo.splashDamage.toInt(), Strings.fixed(ammo.splashDamageRadius / Vars.tilesize, 1)))
+      bt.row()
+      bt.add(Core.bundle.get("infos.curtainAmmo"))
+      bt.row()
+      bt.add(IStatus.电子干扰.emoji() + "[stat]" + IStatus.电子干扰.localizedName + "[lightgray] ~ [stat]2[lightgray] " + Core.bundle.get("unit.seconds"))
+    }
+    consume!!.item(IItems.石墨烯, 1)
     consume!!.time(90f)
   }
 }

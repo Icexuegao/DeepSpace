@@ -48,7 +48,7 @@ class TransformOverflowGate(name: String) : SglBlock(name) {
       alpha = 0.5f
     }, DrawBuild<OverflowGateBuild> {
       Draw.color()
-      if (invert) {
+      if (invert||!enabled) {
         Draw.rect(this@TransformOverflowGate.invert, x, y)
       }
     })

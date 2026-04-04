@@ -269,7 +269,7 @@ class Haze : SglTurret("haze") {
     }
     consume!!.items(
       *ItemStack.with(
-        Items.graphite, 12, IItems.浓缩铀235核燃料, 1
+        IItems.石墨烯, 12, IItems.浓缩铀235核燃料, 1
       )
     )
     consume!!.time(480f)
@@ -285,7 +285,7 @@ class Haze : SglTurret("haze") {
     }
     consume!!.items(
       *ItemStack.with(
-        Items.graphite, 12, IItems.浓缩钚239核燃料, 1
+        IItems.石墨烯, 12, IItems.浓缩钚239核燃料, 1
       )
     )
     consume!!.time(510f)
