@@ -1,23 +1,30 @@
 package ice.entities
 
+import arc.Core
+import arc.Events
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
+import arc.graphics.gl.FrameBuffer
 import arc.math.Angles
 import arc.math.Interp
+import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
-import ice.library.math.invoke
+import ice.entities.bullet.ContinuousBulletType
+import ice.library.math.slope
+import mindustry.Vars
 import mindustry.entities.Damage
 import mindustry.entities.Units
-import mindustry.entities.bullet.ContinuousBulletType
+import mindustry.game.EventType
 import mindustry.gen.Building
 import mindustry.gen.Bullet
 import mindustry.gen.Healthc
 import mindustry.gen.Hitboxc
+import mindustry.graphics.Layer
 import mindustry.world.blocks.ControlBlock
 
-open class ArcFieldBulletType : ContinuousBulletType() {
+open class ArcFieldBulletType :ContinuousBulletType() {
   @JvmField var angle: Float = 80f
   @JvmField var lengthInterp: Interp = Interp.slope
   @JvmField var fieldAlpha = 0.3f
@@ -34,33 +41,18 @@ open class ArcFieldBulletType : ContinuousBulletType() {
 
   override fun init() {
     super.init()
-    if (!pointField)
-      pointFieldEnabledWhenPlayer = false
+    if (!pointField) pointFieldEnabledWhenPlayer = false
   }
 
   override fun init(b: Bullet) {
     super.init(b)
     b.fdata = highlightTime
+    bullets.add(b)
   }
 
   override fun update(b: Bullet) {
     super.update(b)
     b.fdata += Time.delta
-  }
-
-  override fun draw(b: Bullet) = b.run {
-
-    val curLen = currentLength(this)
-
-      if (lightenIntensity > 0f)
-        Draw.color(Tmp.c1.set(hitColor).lighten(lightenIntensity))
-      else Draw.color(hitColor)
-      if (fdata < highlightTime) Draw.alpha(1f)
-      else Draw.alpha(fieldAlpha * fin(lengthInterp))
-      Fill.arc(x, y, curLen, angle / 360f, this.rotation() - angle / 2f)
-
-
-    Draw.reset()
   }
 
   var hasCausedDamage = false
@@ -73,8 +65,7 @@ open class ArcFieldBulletType : ContinuousBulletType() {
     }
     if (collidesGround) {
       Units.nearbyBuildings(x, y, curLen) {
-        if (it.team != this.team || collidesTeam)
-          tryHit(it)
+        if (it.team != this.team || collidesTeam) tryHit(it)
       }
     }
     if (hasCausedDamage) {
@@ -85,8 +76,7 @@ open class ArcFieldBulletType : ContinuousBulletType() {
   fun Bullet.tryHit(t: Healthc) {
     val ang = rotation()
     val angToTarget = angleTo(t)
-    if (Angles.within(ang, angToTarget, angle / 2f))
-      Damage.collidePoint(this, team, hitEffect, t.x, t.y)
+    if (Angles.within(ang, angToTarget, angle / 2f)) Damage.collidePoint(this, team, hitEffect, t.x, t.y)
   }
 
   fun Bullet.hitTarget(target: Hitboxc) {
@@ -104,22 +94,52 @@ open class ArcFieldBulletType : ContinuousBulletType() {
     return turret?.isControlled ?: false
   }
 
-  override fun currentLength(b: Bullet): Float = b.run {
-    if (pointField) {
-      if (pointFieldEnabledWhenPlayer && isControlledByPlayer(this)) {
-        return@run Tmp.v1.set(aimX, aimY).sub(x, y).len() * lengthInterp(fin())
-      } else {
-        return@run length * lengthInterp(fin())
-      }
-    } else {
-      return@run length * lengthInterp(fin())
-    }
-  }
-
-  override fun drawLight(b: Bullet) {
-  }
-
   companion object {
+    val buffer = FrameBuffer()
+    val bullets = Seq<Bullet>()
+
+    init {
+      Events.run(EventType.Trigger.draw) {
+        buffer.resize(Core.graphics.width, Core.graphics.height)
+        drawRange {
+          for(bullet in bullets) {
+            if (!bullet.isAdded) {
+              bullets.remove(bullet)
+              continue
+            }
+            val apply = (bullet.type as ArcFieldBulletType)
+            Draw.color(apply.hitColor)
+            Draw.alpha(0.6f)
+            Fill.arc(bullet.x, bullet.y, apply.length * bullet.fin().slope, apply.angle / 360f, bullet.rotation() - apply.angle / 2f)
+          }
+        }
+
+      }
+    }
+
+    fun drawRange(runnable: Runnable) {
+      Draw.draw(Layer.bullet + 1) {
+        buffer.begin(Color.clear)
+        runnable.run()
+        buffer.end()
+        Tmp.tr1.set(Draw.wrap(buffer.texture))
+        Tmp.tr1.flip(false, true)
+        Draw.scl(4 / Vars.renderer.displayScale)
+
+
+
+        Draw.rect(Tmp.tr1, Core.camera.position.x, Core.camera.position.y)
+
+        Draw.reset()
+      }
+    /*  Draw.draw(Layer.bullet + 1) {
+        buffer.begin(Color.clear)
+        runnable.run()
+        buffer.end()
+        buffer.blit(Shaders.water)
+      }*/
+    }
+
     fun Color.lighten(strength: Float): Color {
       r *= 1f - strength
       g *= 1f - strength
@@ -129,7 +149,7 @@ open class ArcFieldBulletType : ContinuousBulletType() {
       b += strength
       return this
     }
-    inline operator fun invoke(config: ArcFieldBulletType.() -> Unit) =
-      ArcFieldBulletType().apply(config)
+
+    inline operator fun invoke(config: ArcFieldBulletType.() -> Unit) = ArcFieldBulletType().apply(config)
   }
 }

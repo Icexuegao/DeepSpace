@@ -50,7 +50,7 @@ open class ContinuousTurret(name: String):SglTurret(name) {
 
     return res
   }
-  inner class ContinuousTurretBuild: SglTurretBuild() {
+  open inner class ContinuousTurretBuild: SglTurretBuild() {
     var bullets= Seq<BulletEntry>()
     var lastLength = 0f
 
@@ -59,6 +59,12 @@ open class ContinuousTurret(name: String):SglTurret(name) {
 
     }
 
+    override fun drawSelect() {
+      super.drawSelect()
+    }
+    override fun range(): Float {
+      return currentAmmo?.bulletType?.range?:super.range()
+    }
     override fun updateTile() {
 
       super.updateTile()
@@ -111,7 +117,7 @@ open class ContinuousTurret(name: String):SglTurret(name) {
       entry.bullet.set(bulletX, bulletY)
 
       //target length of laser
-      val shootLength = min(dst(targetPos), range)
+      val shootLength = min(dst(targetPos), range())
       //current length of laser
       val curLength = dst(entry.bullet.aimX, entry.bullet.aimY)
       //resulting length of the bullet (smoothed)

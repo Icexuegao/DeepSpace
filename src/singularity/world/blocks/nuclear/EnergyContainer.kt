@@ -5,7 +5,6 @@ import arc.func.Prov
 import arc.math.Mathf
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.util.toStringi
 import ice.world.meta.IceStats
 import mindustry.world.meta.Stats
 import singularity.world.blocks.SglBlock
@@ -13,7 +12,7 @@ import singularity.world.components.NuclearEnergyBuildComp
 import singularity.world.meta.SglStatUnit
 import kotlin.math.min
 
-open class EnergyContainer(name: String) : SglBlock(name) {
+open class EnergyContainer(name: String) :SglBlock(name) {
   var energyPotential: Float = 256f
   var warmupSpeed: Float = 0.04f
   var nonCons: Cons<EnergyContainerBuild>? = null
@@ -21,17 +20,18 @@ open class EnergyContainer(name: String) : SglBlock(name) {
 
   init {
     hasEnergy = true
+    solid = true
     buildType = Prov(::EnergyContainerBuild)
   }
 
   override fun setStats() {
     super.setStats()
     stats.remove(IceStats.最大能量势)
-    stats.add(IceStats.最大能量势,energyPotential,SglStatUnit.neutronFlux)
+    stats.add(IceStats.最大能量势, energyPotential, SglStatUnit.neutronFlux)
     if (setStats != null) setStats!!.get(stats)
   }
 
-  inner class EnergyContainerBuild : SglBuilding() {
+  inner class EnergyContainerBuild :SglBuilding() {
     var warmup: Float = 0f
 
     override val inputPotential: Float

@@ -155,7 +155,36 @@ class ProspectingRadar :SglBlock("prospectingRadar") {
         }
       }
     }
+    fun drawRadar() {
+      if (!(shouldConsume() && consumeValid())) return
+      Draw.z(70f)
+      Draw.color(IceColor.b4)
+      val drawX = x
+      val drawY = y
+      Draw.alpha(0.1f)
+      Fill.circle(drawX, drawY, (range * Vars.tilesize).toFloat())
+      Draw.alpha(1f)
+      Drawf.circles(drawX, drawY, (range * Vars.tilesize).toFloat(), IceColor.b4)
 
+      Lines.stroke(5f, IceColor.b4)
+
+      val rad: Float = Time.time % (range * Vars.tilesize).toFloat()
+      Draw.alpha(0.4f * Interp.pow2In.apply(1 - rad / (range * Vars.tilesize)))
+      Lines.circle(drawX, drawY, rad)
+
+      Tmp.v1.set(0f, (Vars.tilesize * range).toFloat()).rotate(-Time.time * speed - 90f)
+      val dx = Tmp.v1.x
+      val dy = Tmp.v1.y
+      Lines.stroke(1f, IceColor.b4)
+      Lines.line(drawX, drawY, drawX + dx, drawY + dy)
+
+
+      Draw.color()
+      test(x, y, (Vars.tilesize * range).toFloat(), 0.07f, -Time.time * speed , IceColor.b4)
+
+      Drawf.square(x, y, 1f, totalProgress - 90f, IceColor.b4)
+      Draw.reset()
+    }
     override fun remove() {
       ISounds.radar.stop()
       super.remove()
@@ -179,36 +208,7 @@ class ProspectingRadar :SglBlock("prospectingRadar") {
       lastRad = rad
     }
 
-    fun drawRadar() {
-      if (!(shouldConsume() && consumeValid())) return
-      Draw.z(70f)
-      Draw.color(IceColor.b4)
-      val drawX = x
-      val drawY = y
-      Draw.alpha(0.1f)
-      Fill.circle(drawX, drawY, (range * Vars.tilesize).toFloat())
-      Draw.alpha(1f)
-      Drawf.circles(drawX, drawY, (range * Vars.tilesize).toFloat(), IceColor.b4)
 
-      Lines.stroke(5f, IceColor.b4)
-
-      val rad: Float = Time.time % (range * Vars.tilesize).toFloat()
-      Draw.alpha(0.4f * Interp.pow2In.apply(1 - rad / (range * Vars.tilesize)))
-      Lines.circle(drawX, drawY, rad)
-
-      Tmp.v1.set(0f, (Vars.tilesize * range).toFloat()).rotate(-totalProgress - 90f)
-      val dx = Tmp.v1.x
-      val dy = Tmp.v1.y
-      Lines.stroke(1f, IceColor.b4)
-      Lines.line(drawX, drawY, drawX + dx, drawY + dy)
-
-
-      Draw.color()
-      test(x, y, (Vars.tilesize * range).toFloat(), 0.07f, -totalProgress, IceColor.b4)
-
-      Drawf.square(x, y, 1f, totalProgress - 90f, IceColor.b4)
-      Draw.reset()
-    }
 
     override fun drawSelect() {
       super.drawSelect()

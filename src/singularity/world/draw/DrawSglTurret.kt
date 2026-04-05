@@ -139,7 +139,7 @@ open class DrawSglTurret : DrawBlock {
     }
 
     if (!base.found()) base = Core.atlas.find((basePrefix + "block_" + block.size).appendModName())
-    if (!base.found()) base = Core.atlas.find(basePrefix + "block-" + block.size, Singularity.getModAtlas(basePrefix + "block-" + block.size))
+    if (!base.found()) base = Singularity.getModAtlas(basePrefix + "block-" + block.size)
   }
 
   /** @return the generated icons to be used for this block.

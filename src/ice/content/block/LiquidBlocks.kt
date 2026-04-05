@@ -123,7 +123,7 @@ object LiquidBlocks : Load {
     range = 5
     hasPower = false
     arrowSpacing = 6f
-    liquidCapacity = 14f
+    liquidCapacity = 50f
     placeableLiquid = true
     requirements(Category.liquid, IItems.高碳钢,2,IItems.锌锭, 5, IItems.石英玻璃, 5)
   }
@@ -140,7 +140,7 @@ object LiquidBlocks : Load {
     bridgeWidth = 8f
     hasPower = false
     arrowSpacing = 6f
-    liquidCapacity = 24f
+    liquidCapacity = 80f
     placeableLiquid = true
     requirements(Category.liquid, IItems.石英玻璃, 8, IItems.陶钢, 3, IItems.铱板, 5)
   }
@@ -188,6 +188,7 @@ object LiquidBlocks : Load {
     bundle {
       desc(zh_CN, "基础流体路由器", "接受一个方向的流体输入,并平均输出到其他3个方向,可以储存一定量的流体")
     }
+    liquidCapacity=50f
     size = 1
     health = 100
     requirements(Category.liquid, IItems.铜锭, 4, IItems.石英玻璃, 2)
@@ -197,7 +198,7 @@ object LiquidBlocks : Load {
       desc(zh_CN, "装甲流体路由器", "向各个方向快速运输流体")
     }
     armor = 4f
-    liquidCapacity = 60f
+    liquidCapacity = 80f
     liquidPressure = 1.1f
     solid = false
     underBullets = true

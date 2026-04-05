@@ -3,7 +3,7 @@ package ice
 import java.io.File
 
 fun main() {
-   repName(File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\remains\\can"))
+   repName(File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\remains\\spine_parasite"))
   // val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\blocks\\environment\\ore")
   // req(file)
 
@@ -27,7 +27,7 @@ fun repName(file: File) {
       repName(it)
       return@forEach
     }
-    val replace1 = "remains_mystic_sea-"+it.name.replace("remains_mystic_sea--","")
+    val replace1 = it.name.replace("0","")
     it.renameTo(File("${file.path}\\$replace1"))
   }
 }

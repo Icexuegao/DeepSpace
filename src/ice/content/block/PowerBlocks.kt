@@ -58,7 +58,7 @@ import universecore.world.particles.models.*
 object PowerBlocks : Load {
   val 能量节点 = BeamNode("powerNode").apply {
     bundle {
-      desc(zh_CN, "能量节点")
+      desc(zh_CN, "能量节点","通过激光束传输电力,可连接多个节点扩展电网范围")
     }
     squareSprite = false
     requirements(Category.power, IItems.高碳钢, 2, IItems.锌锭, 5, IItems.铜锭, 5)
@@ -74,7 +74,7 @@ object PowerBlocks : Load {
   }
   val 大型能量节点 = BeamNode("powerNodeLarge").apply {
     bundle {
-      desc(zh_CN, "大型能量节点")
+      desc(zh_CN, "大型能量节点","通过激光束传输电力,可连接多个节点扩展电网范围")
     }
     size = 3
     squareSprite = false
@@ -147,7 +147,7 @@ object PowerBlocks : Load {
     consumePowerBuffered(3500f)
     requirements(Category.power, IItems.低碳钢, 5, IItems.高碳钢, 20, IItems.铅锭, 20)
     bundle {
-      desc(zh_CN, "小型能量电池")
+      desc(zh_CN, "小型能量电池","存储少量电力,缓冲工厂消耗")
     }
   }
   val 能量电池: Block = Battery("powerBattery").apply {
@@ -160,7 +160,7 @@ object PowerBlocks : Load {
     consumePowerBuffered(15000f)
     requirements(Category.power, IItems.低碳钢, 10, IItems.高碳钢, 20, IItems.黄铜锭, 30, IItems.铅锭, 50)
     bundle {
-      desc(zh_CN, "能量电池")
+      desc(zh_CN, "能量电池","存储电力,缓冲工厂消耗")
     }
   }
   val 大型能量电池: Block = Battery("largePowerBattery").apply {
@@ -173,19 +173,22 @@ object PowerBlocks : Load {
     consumePowerBuffered(1000000f)
     requirements(Category.power, IItems.铅锭, 150, IItems.铱板, 145, IItems.导能回路, 85, IItems.陶钢, 30)
     bundle {
-      desc(zh_CN, "大型能量电池")
+      desc(zh_CN, "大型能量电池","存储大量电力,缓冲工厂消耗")
     }
   }
 
-  val 太阳能板 = SolarGenerator("solarPanel").apply {
+  val 光伏板 = SolarGenerator("solarPanel").apply {
+    bundle {
+      desc(zh_CN, "光伏板","利用环境光产生电力,无需维护即可持续运作,提供基础能源支持")
+    }
     size = 2
     powerProduction = 108f/60f
-    bundle {
-      desc(zh_CN, "太阳能板")
-    }
     requirements(Category.power, IItems.铈锭, 15, IItems.导能回路, 25, IItems.单晶硅, 30)
   }
   val 地热发电机 = ThermalGenerator("geothermalGenerator").apply {
+    bundle {
+      desc(zh_CN, "地热发电机","利用地热能持续产生电力,需要建造在高热量区域以发挥最大效率,稳定供能")
+    }
     size = 3
     floating = true
     attribute = Attribute.heat
@@ -195,11 +198,11 @@ object PowerBlocks : Load {
     effectChance = 0.1f
     generateEffect = Fx.redgeneratespark
     drawer = DrawMulti(DrawRegion("-bottom"), DrawAnyLiquidTile(), DrawDefault(), DrawGlowRegion())
-    bundle {
-      desc(zh_CN, "地热发电机")
-    }
   }
   val 燃烧发电机 = ConsumeGenerator("combustionGenerator").apply {
+    bundle {
+      desc(zh_CN, "燃烧发电机","燃烧可燃物产生电力,结构简单,效率较低")
+    }
     powerProduction = 1f
     itemDuration = 120f
     ambientSound = Sounds.shootMerui
@@ -208,9 +211,6 @@ object PowerBlocks : Load {
     consume(ConsumeItemFlammable())
     drawer = DrawMulti(DrawDefault(), DrawWarmupRegion())
     requirements(Category.power, IItems.高碳钢, 20, IItems.锌锭, 20)
-    bundle {
-      desc(zh_CN, "燃烧发电机")
-    }
   }
   val 风力发电机 = WindGenerator("windGenerator").apply {
     bundle {
@@ -233,6 +233,9 @@ object PowerBlocks : Load {
     requirements(Category.power, IItems.铬锭, 60, IItems.黄铜锭, 40, IItems.铜锭, 45, IItems.电子元件, 20)
   }
   val 蒸汽冷凝机 = ThermalGenerator("steamCondenser").apply {
+    bundle {
+      desc(zh_CN, "蒸汽冷凝机","建造在喷气口获取蒸汽,转换为水和热量")
+    }
     squareSprite = false
     size = 3
     fogRadius = 3
@@ -253,13 +256,10 @@ object PowerBlocks : Load {
     })
     outputLiquid = LiquidStack(Liquids.water, 5f / 60f / 9f)
     liquidCapacity = 20f
-    bundle {
-      desc(zh_CN, "蒸汽冷凝机")
-    }
   }
   val 沼气发电机 = NormalCrafter("biogaGenerator").apply {
     bundle {
-      desc(zh_CN, "沼气发电机")
+      desc(zh_CN, "沼气发电机","燃烧沼气生产电力,低级的能量获取方式")
     }
     size = 2
     health = 100
@@ -279,6 +279,9 @@ object PowerBlocks : Load {
   }
 
   val 热核裂变反应堆 = NuclearReactor("heatNuclearReactor").apply {
+    bundle {
+      desc(zh_CN, "热核裂变反应堆")
+    }
     fuelItem = IItems.钍锭
     health = 1200
     size = 3
@@ -297,9 +300,6 @@ object PowerBlocks : Load {
     requirements(Category.power, IItems.导能回路, 50, IItems.铬锭, 380, IItems.铱板, 325, IItems.石英玻璃, 75, IItems.铅锭, 300)
     ambientSound = Sounds.loopHum
     ambientSoundVolume = 0.2f
-    bundle {
-      desc(zh_CN, "热核裂变反应堆")
-    }
   }
   val 血肉反应堆 = ImpactReactor("bloodImpactReactor").apply {
     size = 5
@@ -334,7 +334,7 @@ object PowerBlocks : Load {
     ambientSound = Sounds.loopPulse
     ambientSoundVolume = 0.08f
     bundle {
-      desc(zh_CN, "血肉反应堆")
+      desc(zh_CN, "血肉反应堆","利用钍燃料进行核裂变反应产生大量电力,需要大量急冻液冷却以防止过热,高风险高回报的能源设施")
     }
   }
   val 终归反应堆 = ImpactReactor("endImpactReactor").apply {
@@ -356,7 +356,7 @@ object PowerBlocks : Load {
     explosionDamage = 12000
     explodeSound = Sounds.shootCollaris
     bundle {
-      desc(zh_CN, "终归反应堆")
+      desc(zh_CN, "终归反应堆","通过约束以太能的剧烈反应产生巨量电力,需要持续输入能量维持力场稳定,失控时将引发灾难性爆炸")
     }
     destroyEffect = MultiEffect(ParticleEffect().apply {
       particles = 1

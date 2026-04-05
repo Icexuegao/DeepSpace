@@ -33,13 +33,13 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.mod.Mod
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.ContinuousLiquidTurret
-import mindustry.world.draw.DrawTurret
 import mindustry.world.meta.BuildVisibility
 import singularity.Recipes
 import singularity.Singularity
 import singularity.type.SglCategory
 import singularity.type.SglContentType
+import singularity.world.blocks.turrets.ContinuousTurret
+import singularity.world.draw.DrawSglTurret
 import tmi.RecipeEntryPoint
 import universe.util.reflect.Enums.accessEnum0
 import universecore.UncCore
@@ -97,41 +97,43 @@ open class Ice :Mod() {
   }
 
   override fun loadContent() {
-    object :ContinuousLiquidTurret("mendTower") {
+    val turret = object :ContinuousTurret("mendTower") {
       init {
         bundle {
           desc(zh_CN, "洛华", "使用方菱折射投射出扇形修复光束覆盖建筑进行修复")
         }
+
         buildType = Prov {
-          object :ContinuousLiquidTurretBuild() {
+          object :ContinuousTurretBuild() {
             val mat = CubeCalculator()
             val mat2 = CubeCalculator()
+
+
             override fun draw() {
               super.draw()
               // 绘制每条边
 
               Draw.z(Layer.effect)
-              Lines.stroke(0.25f, Pal.heal)
-              mat.size = 1f * warmup()
+              Lines.stroke(0.5f, Pal.heal)
+              mat.size = 2f * warmup()
               mat.edges.forEach { (startIdx, endIdx) ->
                 val start = mat.projectedPoints[startIdx]
                 val end = mat.projectedPoints[endIdx]
-                Tmp.v1.set(shootX, shootY).rotate(rotation - 90f)
+                Tmp.v1.set(shootX, shootY).rotate(rotationu - 90f)
                 val ox = Tmp.v1.x
                 val oy = Tmp.v1.y
                 Lines.line(start.x + x + ox, start.y + y + oy, end.x + x + ox, end.y + y + oy)
               }
 
-              mat2.size = 0.4f * warmup()
+              mat2.size = 0.8f * warmup()
               mat2.edges.forEach { (startIdx, endIdx) ->
                 val start = mat2.projectedPoints[startIdx]
                 val end = mat2.projectedPoints[endIdx]
-                Tmp.v2.set(shootX, shootY).rotate(rotation - 90f)
+                Tmp.v2.set(shootX, shootY).rotate(rotationu - 90f)
                 val ox = Tmp.v2.x
                 val oy = Tmp.v2.y
                 Lines.line(start.x + x + ox, start.y + y + oy, end.x + x + ox, end.y + y + oy)
               }
-
 
               Draw.reset()
 
@@ -140,30 +142,38 @@ open class Ice :Mod() {
             override fun updateTile() {
               super.updateTile()
               mat.update(0.005f)
-              mat2.update(0.003f)
+              mat2.update(-0.003f)
             }
           }
         }
       }
-    }.apply {
+    }
+    turret.apply {
       requirements(Category.effect, IItems.单晶硅, 30, IItems.绿藻块, 10, IItems.石英玻璃, 40, IItems.高碳钢, 30, IItems.金锭, 20)
       size = 3
       shootSound = Sounds.none
       shootY = 8.8f
-
+      targetAir=false
+      targetGround = true
+      buildingFilter={b,build ->
+        b.team==build.team
+      }
       targetHealing = true
       rotateSpeed = 8f
-      shootWarmupSpeed = 0.05f
       range = 20f * 8f
-      ammo(ILiquids.氯气, object :ArcFieldBulletType() {}.apply {
-        damage = 1f
+      newAmmo( object :ArcFieldBulletType() {}.apply {
+        shootEffect=Fx.none
+        smokeEffect= Fx.none
+        damage = 0.1f
         healAmount = 10f / 60f
         hitColor = Pal.heal
         hitEffect = Fx.none
         collidesGround = true
         collidesTeam = true
       })
-      val parts = (drawer as DrawTurret).parts
+      consume!!.liquid(ILiquids.氯气, 0.5f)
+
+      val parts = (drawers as DrawSglTurret).parts
       parts.add(RegionPart("-mid"))
       parts.add(RegionPart("-blade-l").apply {
         x = -6.375f

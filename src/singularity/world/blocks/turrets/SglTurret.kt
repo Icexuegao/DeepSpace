@@ -82,7 +82,7 @@ open class SglTurret(name: String) :SglBlock(name) {
   var unitFilter: Boolf<Unit?> = Boolf { _ -> true }
 
   /**建筑目标选择过滤器 */
-  var buildingFilter: Boolf<Building?> = Boolf { b: Building? -> !b!!.block.underBullets }
+  var buildingFilter: Boolf2<SglTurretBuild,Building> = Boolf2{ s,b -> !b.block.underBullets }
 
   /**单位索敌排序准则，默认为最近目标 */
   var unitSort: Sortf? = UnitSorts.closest
@@ -799,7 +799,7 @@ open class SglTurret(name: String) :SglBlock(name) {
           y,
           range,
           Boolf { e: Unit? -> (e!!.team !== team || (heal && targetHealUnit && e.damaged())) && !e.dead() && unitFilter.get(e) && (e.isGrounded || targetAir) && (!e.isGrounded || targetGround) },
-          Boolf { b: Building? -> (b!!.team !== team || (heal && b.damaged())) && targetGround && buildingFilter.get(b) },
+          Boolf { b: Building? -> (b!!.team !== team || (heal && b.damaged())) && targetGround && buildingFilter.get(this,b) },
           unitSort
         )
       }
@@ -812,7 +812,7 @@ open class SglTurret(name: String) :SglBlock(name) {
     override fun drawSelect() {
       super.drawSelect()
 
-      Drawf.dashCircle(x, y, range, Pal.placing)
+      Drawf.dashCircle(x, y, range(), Pal.placing)
     }
 
     override fun warmup(): Float {

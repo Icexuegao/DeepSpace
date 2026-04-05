@@ -62,6 +62,8 @@ class Unloader(name: String) : SglBlock(name) {
     stats.add(Stat.speed, 60f / speed, StatUnit.itemsSecond)
   }
 
+  override fun outputsItems()=true
+
   override fun drawPlanConfig(plan: BuildPlan, list: Eachable<BuildPlan?>?) {
     drawPlanConfigCenter(plan, plan.config, "unloader-center")
   }

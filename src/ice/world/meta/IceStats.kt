@@ -22,6 +22,9 @@ object IceStats :Load {
   val 立场强度 = getStat("fieldStrength", StatCat.function) {
     desc(zh_CN, "立场强度")
   }
+  val 无人机制造 = getStat("mechs", StatCat.function) {
+    desc(zh_CN, "无人机制造")
+  }
   val 格挡数量 = getStat("resistCont", StatCat.function) {
     desc(zh_CN, "格挡数量")
   }
@@ -230,7 +233,7 @@ object IceStats :Load {
     desc(zh_CN, "热量")
   }
 
-  private fun getStat(name: String, cat: StatCat = StatCat.general, desc: IceStat.() -> Unit): IceStat {
+   fun getStat(name: String, cat: StatCat = StatCat.general, desc: IceStat.() -> Unit): IceStat {
     return IceStat(name, cat).apply {
       bundle {
         desc()

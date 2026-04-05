@@ -116,6 +116,7 @@ sourceSets {
     }
   }
 }
+
 proguard {
   configurations {
     overwriteArtifact.set(false)
@@ -143,13 +144,19 @@ tasks {
   }
 
   withType<ShadowJar> {
-    dependsOn("updateVersion")
+
+    dependsOn("updateVersion","sourcesJar")
     group = "alon"
     archiveFileName.set("${project.name}Desktop.jar")
     from(files("README.md", "LICENSE", "mod.json"))
     manifest.attributes("Main-Class" to "ice.Ice")
   }
-
+  register<Jar>("sourcesJar") {
+    group = "alon"
+    archiveClassifier.set("sources")
+    from("src")
+    include("**/*.java", "**/*.kt")
+  }
   /*register<proguard.gradle.ProGuardTask>("proGuardTask") {
     // 重要：依赖 shadowJar，而不是 jar
     dependsOn(shadowJar)

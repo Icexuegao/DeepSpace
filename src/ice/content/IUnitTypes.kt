@@ -47,6 +47,7 @@ object IUnitTypes : Load {
   val 火狱 = HellFire()
   val 火苗 = FlameMissile()
   val 重创 = HeavyDamageMissile()
+  val 雷精 = Lightning()
 
   val 工蜂 = WorkerBee()
   val 绒刺 = Barb()
@@ -103,6 +104,7 @@ object IUnitTypes : Load {
   val 风暴 = StormBolt()
 
   val 黑棘 = BlackThorns()
+  val 噬星 = StarEater()
 
   val 毒刺 = PoisonBarb()
   val 爆蚊 = ExplosiveMosquito()
@@ -118,10 +120,13 @@ object IUnitTypes : Load {
   val 罗织 = Weaver()
   val 构陷 = Constrict()
   val 甘霖 = Ganlin()
+  val 摧枯 = Gravestone()
   val 异种 = Heterogeneous()
+  val 奔袭 = 奔袭()
 
   val 冥 = Pluto()
   val 玄 = Hyun()
+  val 文漪 = Wripple()
 
   val 仆从 = Footman()
   val 传教者 = Missionary()

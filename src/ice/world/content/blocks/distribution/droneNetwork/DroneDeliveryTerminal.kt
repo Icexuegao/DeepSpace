@@ -30,6 +30,7 @@ import mindustry.type.Category
 import mindustry.type.Item
 import mindustry.type.ItemStack
 import mindustry.ui.Bar
+import universecore.world.consumers.cons.item.ConsumeItemBase
 
 /**
  * 无人机配送终端 - 用于生成和管理无人机，并将物品配送到接收站
@@ -52,7 +53,7 @@ class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
 
   init {
     bundle {
-      desc(zh_CN, "无人机供货端", "简约的无人运输模块,用于将物品从无人机需求端运输到无人机需求端")
+      desc(zh_CN, "无人机供货端", "简约的物品运输模块,用于将物品从无人机供货端运输到无人机需求端")
     }
     size = 3
     health = 300
@@ -73,6 +74,9 @@ class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
     super.setStats()
     for(baseConsumers in consumers) {
       baseConsumers.display(stats)
+    }
+    stats.add(IceStats.无人机制造) {
+      ConsumeItemBase.buildItemIcons(it, stacks, false, 4)
     }
   }
 
@@ -115,7 +119,6 @@ class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
         Draw.z(Layer.block)
       } else {
         Draw.draw(Layer.blockOver) {
-          // TODO: 确保外观正常
           Drawf.construct(this, IUnitTypes.和弦.fullIcon, 0f, buildProgress, warmup, totalProgress)
         }
       }
@@ -143,10 +146,14 @@ class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
       readyness = Mathf.approachDelta(readyness, if (units.isEmpty) 0f else 1f, 1f / 60f)
       warmup = Mathf.approachDelta(warmup, efficiency(), 1f / 60f)
 
-      if (units.size < unitMaxSize) {
+      if (units.size < unitMaxSize && items.has(stacks)) {
         totalProgress += edelta()
 
-        buildProgress += edelta() * consumer.getOptionalEff(consumers.last()) / unitBuildTime
+        buildProgress += edelta() * efficiency() / unitBuildTime
+        if (buildProgress > 1f) {
+          items.remove(stacks)
+          createNewDrone()
+        }
       }
       if (efficiency() > 0) {
         assignDroneTasks()
@@ -164,7 +171,6 @@ class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
         }
       }
     }
-
 
     /**创建新无人机*/
     fun createNewDrone() {

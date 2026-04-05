@@ -31,17 +31,20 @@ class CubeCalculator {
 
   var angleY = 0f
   var angleX = 0f
+  var angleZ = 0f
   var size = 1f
 
   fun update(delta: Float) {
     angleY += delta * 45f
     angleX += delta * 30f
+    angleZ += delta * 30f
     if (angleY > 360f) angleY -= 360f
     if (angleX > 360f) angleX -= 360f
 
     matrix.idt()
     matrix.rotate(Vec3.Y, angleY)
     matrix.rotate(Vec3.X, angleX)
+    matrix.rotate(Vec3.Z, angleZ)
 
     for (i in vertices.indices) {
       val v = vertices[i]

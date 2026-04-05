@@ -233,6 +233,10 @@ object Remainss {
         table.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")
       }
     }
+    icon=DynamicTextureDrawable(name.appendModName()) {
+      it.frameCount = 10
+      it.frameDuration = 60f / 4f
+    }
     val fg = 1.2f
     effect = "[爬行类]血肉畸变体速度提升[${((fg - 1) * 100).toInt()}%]"
     install = {
@@ -266,6 +270,10 @@ object Remainss {
     setDescription(description)
 
     effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
+    icon=DynamicTextureDrawable(name.appendModName()) {
+      it.frameCount = 9
+      it.frameDuration = 60f / 6f
+    }
     install = {
       IStatus.回响.speedMultiplier += 0.2f
       IStatus.回响.stats = Stats()

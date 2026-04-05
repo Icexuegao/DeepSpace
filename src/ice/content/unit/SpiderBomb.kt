@@ -14,6 +14,8 @@ import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
 import ice.world.content.unit.IceUnitType
+import ice.world.content.unit.ability.DeathGiftAbility
+import ice.world.content.unit.ability.HealthRequireAbility
 import mindustry.Vars
 import mindustry.audio.SoundLoop
 import mindustry.content.Fx
@@ -72,6 +74,11 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
         amount = 3
         randAmount = 1
       })
+    abilities.add(
+      DeathGiftAbility(80f, IStatus.庇护, 120f, 0.05f, 240f),
+      HealthRequireAbility(0.2f, StatusEffects.none, IStatus.迅疗)
+    )
+
 
     setWeapon("weapon_name") {
       x = 0f

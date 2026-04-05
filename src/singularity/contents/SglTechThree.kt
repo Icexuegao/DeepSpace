@@ -52,7 +52,7 @@ object SglTechThree : ResearchSDL(), ContentList {
 
                   val 初级能量设施 = research("初级能量设施", 120) {
                     addDependency(初级科技)
-                    addContent(能量节点, 大型能量节点, 小型能量电池, 能量电池,太阳能板,地热发电机,风力发电机,蒸汽冷凝机,沼气发电机)
+                    addContent(能量节点, 大型能量节点, 小型能量电池, 能量电池,光伏板,地热发电机,风力发电机,蒸汽冷凝机,沼气发电机)
                   }
                   val 增益装置 = research("增益装置", 120) {
                     addDependency(初级能量设施)

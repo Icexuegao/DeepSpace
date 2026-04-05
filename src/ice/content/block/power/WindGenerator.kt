@@ -17,9 +17,11 @@ import ice.IVars
 import ice.graphics.IceColor
 import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.library.util.toStringi
+import ice.ui.bundle.BaseBundle
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawFull
 import ice.world.draw.DrawMulti
+import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.game.EventType
@@ -34,6 +36,7 @@ import mindustry.world.Tile
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.Stat
+import mindustry.world.meta.StatCat
 import mindustry.world.meta.StatUnit
 import singularity.world.blocks.SglBlock
 
@@ -74,6 +77,9 @@ class WindGenerator(name: String) : SglBlock(name) {
   override fun setStats() {
     super.setStats()
     stats.add(Stat.basePowerGeneration, basePowerProduction, StatUnit.powerSecond)
+    stats.add(IceStats.getStat("noBuildZone", StatCat.function) {
+      desc(BaseBundle.zh_CN,"禁建范围")
+    },"$range")
   }
 
   override fun setBars() {

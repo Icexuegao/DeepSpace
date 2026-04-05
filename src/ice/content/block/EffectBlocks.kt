@@ -8,6 +8,7 @@ object EffectBlocks :Load {
   val 盒子 = 盒子()
   val 压缩存储器 = 压缩存储器()
   val 仓库 = 仓库()
+  val 晶格数据矩阵 =晶格数据矩阵()
 
   val 虔信方垒 = 虔信方垒()
   val 传颂核心 = 传颂核心()
