@@ -17,6 +17,14 @@ object Schematics: Load{
         strings.put("name", "虔信方垒")
         tiles.add(Stile(EffectBlocks.虔信方垒, 1, 1, EffectBlocks.虔信方垒.lastConfig, 0))
     }
+  var 传颂核心 = createSchematic(4, 4) { tiles, strings ->
+    strings.put("name", "传颂核心")
+    tiles.add(Stile(EffectBlocks.传颂核心, 1, 1, EffectBlocks.传颂核心.lastConfig, 0))
+  }
+  var 永耀天枢 = createSchematic(5, 5) { tiles, strings ->
+    strings.put("name", "永耀天枢")
+    tiles.add(Stile(EffectBlocks.永耀天枢, 2, 2, EffectBlocks.永耀天枢.lastConfig, 0))
+  }
 
    override fun init() {
         allSch.forEach { schematic ->

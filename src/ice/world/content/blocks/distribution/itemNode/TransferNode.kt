@@ -118,7 +118,7 @@ class TransferNode(name: String) : IceBlock(name) {
   override fun setStats() {
     super.setStats()
     stats.add(Stat.range, range.toFloat(), StatUnit.blocks)
-    stats.add(Stat.speed, 60 / transportTime, StatUnit.itemsSecond)
+   if (hasItems) stats.add(Stat.speed, 60 / transportTime, StatUnit.itemsSecond)
   }
 
   override fun icons(): Array<out TextureRegion> = arrayOf(bottomRegion, topRegion)

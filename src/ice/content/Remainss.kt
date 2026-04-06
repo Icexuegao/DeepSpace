@@ -1,6 +1,7 @@
 package ice.content
 
 import arc.util.Scaling
+import arc.util.Time
 import ice.content.block.CrafterBlocks
 import ice.content.block.DefenseBlocks
 import ice.graphics.IceColor
@@ -11,6 +12,7 @@ import ice.library.scene.ui.itooltip
 import ice.type.Remains
 import ice.ui.bundle.bundle
 import ice.ui.bundle.description
+import ice.ui.fragment.FleshFragment
 import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
@@ -20,6 +22,7 @@ import mindustry.content.StatusEffects
 import mindustry.type.ItemStack
 import mindustry.type.UnitType
 import mindustry.world.meta.Stats
+import singularity.core.UpdatePool
 import universecore.world.consumers.ConsumeType
 
 @Suppress("unused")
@@ -149,17 +152,21 @@ object Remainss {
       Vars.content.blocks().forEach {
         if (it is IceOreBlock) {
           it.display = true
+          it.useColor=true
         }
       }
       Vars.renderer.blocks.floor.reload()
+      Vars.renderer.minimap.reset()
     }
     uninstall = {
       Vars.content.blocks().forEach {
         if (it is IceOreBlock) {
           it.display = false
+          it.useColor=false
         }
       }
       Vars.renderer.blocks.floor.reload()
+      Vars.renderer.minimap.reset()
     }
   }
   val 流光罗盘 = Remains("remains_flowing_compass").apply {
@@ -212,7 +219,7 @@ object Remainss {
       直至你我合而为一
     """.trimIndent()
     setDescriptionTable {
-      for (string in text.split("\n")) {
+      for(string in text.split("\n")) {
         it.add(TLabel(string)).pad(5f).color(remainsColor).row()
       }
     }
@@ -233,7 +240,7 @@ object Remainss {
         table.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")
       }
     }
-    icon=DynamicTextureDrawable(name.appendModName()) {
+    icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 10
       it.frameDuration = 60f / 4f
     }
@@ -270,7 +277,7 @@ object Remainss {
     setDescription(description)
 
     effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
-    icon=DynamicTextureDrawable(name.appendModName()) {
+    icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 9
       it.frameDuration = 60f / 6f
     }
@@ -325,8 +332,8 @@ object Remainss {
 
     effect = "为核心机攻击附加流血效果"
     install = {
-      for (type in IUnitTypes.getCoreUnits()) {
-        for (weapon in type.weapons) {
+      for(type in IUnitTypes.getCoreUnits()) {
+        for(weapon in type.weapons) {
           if (weapon.bullet.status == StatusEffects.none) {
             weapon.bullet.status = IStatus.流血
           }
@@ -337,8 +344,8 @@ object Remainss {
       DataDialog.flunAll()
     }
     uninstall = {
-      for (type in IUnitTypes.getCoreUnits()) {
-        for (weapon in type.weapons) {
+      for(type in IUnitTypes.getCoreUnits()) {
+        for(weapon in type.weapons) {
           if (weapon.bullet.status == IStatus.流血) {
             weapon.bullet.status = StatusEffects.none
           }
@@ -361,5 +368,19 @@ object Remainss {
       it.frameDuration = 60f / 8f
     }
     effect = "未完成"
+    install = {
+      var i = 0f
+      UpdatePool.receive("remains_mystic_sea") {
+        if (!Vars.state.isGame) return@receive
+        i += Time.delta
+        if (i > 300f) {
+          FleshFragment.addText()
+          i = 0f
+        }
+      }
+    }
+    uninstall = {
+      UpdatePool.remove("remains_mystic_sea")
+    }
   }
 }

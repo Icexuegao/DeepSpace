@@ -41,12 +41,89 @@ open class FloorCrafter(name: String) : NormalCrafter(name) {
   }
 
   override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
-
-    var eff = 0f
-    var c = 0
+    var eff = 1f
     var line = 0
+    var hasValidFloorCheck = false
+    var currentBaseEff = 1f
 
     val t = Vars.world.tile(x, y)
+    if (t != null) {
+      for (consumer in consumers) {
+        val cons: ConsumeFloor<*> = consumer.get(ConsumeType.floor)?: continue
+        hasValidFloorCheck = true
+        currentBaseEff = cons.baseEfficiency
+        val currentEff = cons.getEff(FloorCrafterBuildComp.getFloors(t, this))
+        if (currentEff > cons.baseEfficiency) {
+          eff = currentEff
+          break
+        }
+      }
+
+      if (!hasValidFloorCheck) {
+        for (boost in boosts) {
+          val cons: ConsumeFloor<*>? = boost.key!!.get(ConsumeType.floor)
+          if (cons != null) {
+            hasValidFloorCheck = true
+            currentBaseEff = cons.baseEfficiency
+            val boostEff = cons.getEff(FloorCrafterBuildComp.getFloors(t, this))
+            if (boostEff > cons.baseEfficiency) {
+              eff = boostEff
+              break
+            }
+          }
+        }
+      } else {
+        for (boost in boosts) {
+          val cons: ConsumeFloor<*>? = boost.key!!.get(ConsumeType.floor)
+          if (cons != null) {
+            val boostEff = cons.getEff(FloorCrafterBuildComp.getFloors(t, this))
+            if (boostEff > cons.baseEfficiency) {
+              eff *= boostEff
+              break
+            }
+          }
+        }
+      }
+
+      for (product in optionalProducts) {
+        if (!valid && !product.key.optionalAlwaysValid) continue
+
+        val cons: ConsumeFloor<*>? = product.key.get(ConsumeType.floor)
+        if (cons != null) {
+          val optEff: Float = cons.getEff(FloorCrafterBuildComp.getFloors(t, this))
+          if (optEff <= cons.baseEfficiency) continue
+
+          val ta = buildIconsTable(product)
+
+          val width = drawPlaceText(
+            Core.bundle.format("bar.efficiency", (optEff * 100f).toInt()),
+            x, y + line, valid
+          )
+          val dx = x * Vars.tilesize + offset - width / 2f
+          val dy = y * Vars.tilesize + offset + size * Vars.tilesize / 2f + 5 - line * 8f
+          ta.setPosition(dx - ta.getWidth() / 8f, dy - ta.getHeight() / 16f)
+          ta.setTransform(true)
+          ta.setScale(1f / 8f)
+          ta.draw()
+          line++
+        }
+      }
+    }
+
+    drawPlaceText(
+      if (hasValidFloorCheck && eff > currentBaseEff && valid) "效率：${(eff * 100f).toInt()}%" else if (valid) "放置点可用" else "放置点不可用",
+      x, y + line, valid
+    )
+
+
+
+
+
+   /* var eff = 0f
+    var c = 0
+    var line = 0*/
+
+  /*  val t = Vars.world.tile(x, y)
     if (t != null) {
       for (consumer in consumers) {
         val cons: ConsumeFloor<*> = consumer.get(ConsumeType.floor)?: continue
@@ -86,19 +163,20 @@ open class FloorCrafter(name: String) : NormalCrafter(name) {
           line++
         }
       }
-    }
+    }*/
 
-    drawPlaceText(
-      if (c == 1 && valid) Core.bundle.format(
-        "bar.efficiency",
-        (eff * 100f).toInt()
-      ) else if (valid) Core.bundle.get("infos.placeValid") else Core.bundle.get("infos.placeInvalid"),
+
+    /*drawPlaceText(
+      if (c == 1 && valid) "效率：${(eff * 100f).toInt()}%"
+      else if (valid) "放置点可用" else "放置点不可用",
       x, y + line, valid
-    )
+    )*/
+
+
   }
 
-  override fun canPlaceOn(tile: Tile, team: Team?, rotation: Int): Boolean {
-    var eff = 0f
+  override fun canPlaceOn(tile: Tile, team: Team, rotation: Int): Boolean {
+   /* var eff = 0f
     var c = 0
 
     for (product in optionalProducts) {
@@ -131,7 +209,44 @@ open class FloorCrafter(name: String) : NormalCrafter(name) {
       }
     }
 
-    return c > 0 && eff > 0
+    return c > 0 && eff > 0*/
+
+    var c = 0
+
+    for (product in optionalProducts) {
+      val cons = product.key!!.get(ConsumeType.floor)
+      if (cons != null) {
+        if (product.key!!.optionalAlwaysValid && cons.getEff(
+            FloorCrafterBuildComp.getFloors(
+              tile,
+              this
+            )
+          ) > 0
+        ) return true
+      }
+    }
+
+    for (consumer in consumers) {
+      val cons = consumer.get(ConsumeType.floor)
+      if (cons != null) {
+        c++
+        if (cons.getEff(FloorCrafterBuildComp.getFloors(tile, this)) > 0) {
+          return true
+        }
+      }
+    }
+
+    for (boost in boosts) {
+      val cons = boost.key!!.get(ConsumeType.floor)
+      if (cons != null) {
+        c++
+        if (cons.getEff(FloorCrafterBuildComp.getFloors(tile, this)) > 0) {
+          return true
+        }
+      }
+    }
+
+    return c == 0
   }
 
   inner class FloorCrafterBuild : NormalCrafterBuild(), FloorCrafterBuildComp {

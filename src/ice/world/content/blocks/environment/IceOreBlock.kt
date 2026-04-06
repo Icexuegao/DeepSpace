@@ -1,6 +1,5 @@
 package ice.world.content.blocks.environment
 
-import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.math.Mathf
 import arc.struct.Seq
@@ -19,7 +18,6 @@ class IceOreBlock(name: String, ore: Item) : OreBlock("${name}Ore", ore) {
   }
 
   var display = false
-
   init {
     ores.add(this)
     useColor = false

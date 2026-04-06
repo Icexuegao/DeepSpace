@@ -25,7 +25,12 @@ import singularity.world.SglFx
 
 @Suppress("unused")
 object ILiquids : Load {
+init {
+  EventType.addContentInitEvent {
+    Liquids.water.shownPlanets.add(IPlanets.阿德里)
+  }
 
+}
   val 腐殖浆体 = IceLiquid("liquid_humusSlurry", "a09bbd") {
     bundle {
       desc(zh_CN, "腐殖浆体", "一种富含有机质的浆体,可用于土壤改良")

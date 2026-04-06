@@ -83,7 +83,7 @@ class ProspectingRadar :SglBlock("prospectingRadar") {
     var totalProgress: Float = 0f
     var speed: Float
       set(_) {}
-      get() = max(baseSpeed * consEfficiency(), 0f)
+      get() = max(baseSpeed * warmup(), 0f)
     var shown = true
 
     override fun buildConfiguration(table: Table) {
@@ -94,6 +94,9 @@ class ProspectingRadar :SglBlock("prospectingRadar") {
       }
     }
 
+    override fun warmup(): Float {
+      return warmup
+    }
     override fun write(write: Writes) {
       super.write(write)
       write.f(warmup)
@@ -146,7 +149,7 @@ class ProspectingRadar :SglBlock("prospectingRadar") {
       if (!(shouldConsume() && consumeValid())) return
       atSound()
       for(i in 1..range) {
-        val rotate2: Vec2 = Tmp.v2.set(0f, i.toFloat()).rotate(-Time.time * speed - 90f)
+        val rotate2: Vec2 = Tmp.v2.set(0f, i.toFloat()).rotate(-totalProgress)
         val tile1: Tile? = Vars.world.tile(tileX() + rotate2.x.toInt(), tileY() + rotate2.y.toInt())
         tile1?.overlay()?.let {
           if (it is OreBlock && tile1.block() == Blocks.air) {
@@ -172,7 +175,7 @@ class ProspectingRadar :SglBlock("prospectingRadar") {
       Draw.alpha(0.4f * Interp.pow2In.apply(1 - rad / (range * Vars.tilesize)))
       Lines.circle(drawX, drawY, rad)
 
-      Tmp.v1.set(0f, (Vars.tilesize * range).toFloat()).rotate(-Time.time * speed - 90f)
+      Tmp.v1.set(0f, (Vars.tilesize * range).toFloat()).setAngle(-totalProgress+ 90f)
       val dx = Tmp.v1.x
       val dy = Tmp.v1.y
       Lines.stroke(1f, IceColor.b4)
@@ -180,7 +183,7 @@ class ProspectingRadar :SglBlock("prospectingRadar") {
 
 
       Draw.color()
-      test(x, y, (Vars.tilesize * range).toFloat(), 0.07f, -Time.time * speed , IceColor.b4)
+      test(x, y, (Vars.tilesize * range).toFloat(), 0.07f, -totalProgress+ 90f , IceColor.b4)
 
       Drawf.square(x, y, 1f, totalProgress - 90f, IceColor.b4)
       Draw.reset()

@@ -19,6 +19,7 @@ import mindustry.type.Category
     unitType = IUnitTypes.路西法
     squareSprite = false
     itemCapacity = 22000
+    thrusterLength = 40/4f
     unitCapModifier = 15
     buildCostMultiplier = 3f
     requirements(

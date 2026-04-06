@@ -38,7 +38,7 @@ class 钴钢压缩机 : NormalCrafter("cobaltSteelCompressor") {
 
     newConsume().apply {
       time(36f)
-      items(IItems.钴锭, 4, IItems.铬锭, 2)
+      items(IItems.钴锭, 2, IItems.铬锭, 2)
       liquid(Liquids.water, 20f / 60f)
       power(7.5f)
     }

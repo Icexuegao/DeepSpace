@@ -1,15 +1,10 @@
 package ice.content.block
 
-import arc.Core
 import arc.func.Boolf2
 import arc.func.Intf
-import arc.graphics.Blending
-import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
-import arc.graphics.g2d.TextureRegion
-import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
 import ice.audio.ISounds
@@ -18,6 +13,7 @@ import ice.content.ILiquids
 import ice.content.block.crafter.CulturingBarn
 import ice.content.block.crafter.Incubator
 import ice.content.block.product.CrystalMiner
+import ice.content.block.product.岩石粉碎机
 import ice.library.util.toColor
 import ice.library.world.Load
 import ice.ui.bundle.bundle
@@ -26,7 +22,6 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.liquid.SolidPump
 import ice.world.meta.IAttribute
 import mindustry.Vars
-import mindustry.content.Blocks
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids
@@ -50,8 +45,6 @@ import singularity.world.blocks.drills.ExtendMiner.ExtendMinerBuild
 import singularity.world.blocks.drills.MatrixMinerComponent.MatrixMinerComponentBuild
 import singularity.world.blocks.drills.MatrixMinerSector.MatrixMinerSectorBuild
 import singularity.world.blocks.product.FloorCrafter
-import singularity.world.blocks.product.FloorCrafter.FloorCrafterBuild
-import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawDirSpliceBlock
 import singularity.world.draw.DrawExpandPlasma
@@ -229,82 +222,7 @@ object ProductBlocks : Load {
     }, DrawDefault(), DrawRegion("_top")
     )
   }
-  var 岩石粉碎机 = FloorCrafter("rock_crusher").apply {
-    bundle {
-      desc(zh_CN, "岩石粉碎机", "将岩石粉碎成细小的颗粒,对于没有沙子的地方来说十分有用,同时某些岩石含盐量高,因此还可以从中得到一些有用的副产物", "事实上这台机器的效率并不算高,或者说它浪费掉的材料太多了,为了产出能够供应工业使用的富硅沙砾,几乎每生产一吨石英沙就要消耗掉几十吨原石,更别提硅纯度更低的一些岩石了")
-    }
-    requirements(
-      Category.production, IItems.强化合金, 40, IItems.气凝胶, 55, IItems.单晶硅, 60, IItems.铬锭, 50, IItems.黄铜锭, 60
-    )
-    size = 3
-
-    warmupSpeed = 0.004f
-    updateEffect = Fx.pulverizeSmall
-    craftEffect = Fx.mine
-    craftEffectColor = Items.sand.color
-
-    oneOfOptionCons = false
-
-    itemCapacity = 25
-    liquidCapacity = 30f
-
-    newConsume()
-    consume!!.time(30f)
-    consume!!.power(2.2f)
-    consume!!.add(
-      ConsumeFloor<FloorCrafterBuild>(
-        Blocks.stone, 1.2f / 9f, Blocks.craters, 0.8f / 9f, Blocks.dacite, 0.8f / 9f, Blocks.shale, 1f / 9f, Blocks.salt, 1f / 9f, Blocks.moss, 0.6f / 9f, Blocks.sporeMoss, 0.4f / 9f
-      )
-    ).baseEfficiency = 0f
-
-    newProduce()
-    produce!!.item(Items.sand, 1)
-
-    newOptionalProduct()
-    consume!!.time(45f)
-    consume!!.add(
-      ConsumeFloor<FloorCrafterBuild>(
-        Blocks.stone, 0.4f / 9f, Blocks.craters, 0.5f / 9f, Blocks.salt, 2f / 9f
-      )
-    ).baseEfficiency = 0f
-    consume!!.optionalAlwaysValid = false
-    produce!!.item(IItems.碱石, 1)
-
-    /*newOptionalProduct()
-    consume!!.add(SglConsumeFloor<FloorCrafterBuild>(Attribute.spores, 1f)).baseEfficiency = 0f
-    consume!!.optionalAlwaysValid = false
-    produce!!.liquid(ILiquids.孢子云, 0.2f)*/
-
-    newBooster(1.8f)
-    consume!!.liquid(Liquids.water, 0.12f)
-
-    drawers = DrawMulti(
-      DrawBottom(), DrawDefault(), object : DrawBlock() {
-      var rim: TextureRegion? = null
-      val heatColor: Color = Color.valueOf("ff5512")
-
-      override fun draw(build: Building?) {
-        val e = build as NormalCrafter.NormalCrafterBuild
-
-        Draw.color(heatColor)
-        Draw.alpha(e.workEfficiency() * 0.6f * (1f - 0.3f + Mathf.absin(Time.time, 3f, 0.3f)))
-        Draw.blend(Blending.additive)
-        Draw.rect(rim, e.x, e.y)
-        Draw.blend()
-        Draw.color()
-      }
-
-      override fun load(block: Block) {
-        rim = Core.atlas.find(block.name + "_rim")
-      }
-    }, object : DrawRegion("_rotator") {
-      init {
-        rotateSpeed = 2.8f
-        spinSprite = true
-      }
-    }, DrawRegion("_top")
-    )
-  }
+  var 岩石粉碎机 = 岩石粉碎机()
   var 潮汐钻头 = ExtendableDrill("tidal_drill").apply {
     bundle {
       desc(zh_CN, "潮汐钻头", "使用最前沿力场控制技术制造的高级钻头,以粒子束冲击破坏挖掘物的物质结构后通过控制引力场震荡完成矿石解体和采集的过程")
