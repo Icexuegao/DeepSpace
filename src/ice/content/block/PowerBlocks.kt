@@ -139,6 +139,7 @@ object PowerBlocks : Load {
       desc(zh_CN, "远程能量节点", "具有超大范围的高级电力节点")
     }
   }
+
   val 小型能量电池: Block = Battery("smallPowerBattery").apply {
     size = 1
     health = 50
@@ -185,6 +186,29 @@ object PowerBlocks : Load {
     size = 2
     powerProduction = 58f/60f
     requirements(Category.power, IItems.低碳钢, 35, IItems.锌锭,20, IItems.单晶硅, 10)
+  }
+  val 铈基热电机组 = NormalCrafter("ceriumBasedThermal").apply {
+    bundle {
+      desc(zh_CN, "铈基热电机组","裂解铈进行热能转换,可以产生大量电力")
+    }
+    size=2
+    health=300
+    craftEffect= Fx.flakExplosion
+    drawers= ice.world.draw.DrawMulti(DrawBottom(), DrawPistons().also{
+      it.sinMag = 1.5f
+      it.lenOffset=3.5f
+    }, DrawDefault())
+    requirements(Category.power, IItems.高碳钢, 50, IItems.锌锭, 20, IItems.黄铜锭, 15)
+    newFormula { consumers, producers ->
+      consumers.items(IItems.铈锭,2)
+      consumers.time(120f)
+      producers.power(150f/60f)
+    }
+    newFormula { consumers, producers ->
+      consumers.items(IItems.铈凝块,1)
+      consumers.time(60f)
+      producers.power(450f/60f)
+    }
   }
   val 地热发电机 = ThermalGenerator("geothermalGenerator").apply {
     bundle {
