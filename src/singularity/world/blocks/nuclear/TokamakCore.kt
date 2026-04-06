@@ -182,8 +182,8 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
         SglDraw.drawBloomUnderBlock(particle) { p: Particle? -> super.draw(p!!) }
       }
     }, object : DrawDefaultTrailParticle() {
-      override fun drawTrail(p: Particle) {
-        SglDraw.drawBloomUnderBlock(p) { particle: Particle? -> super.drawTrail(particle!!) }
+      override fun drawTrail(particle: Particle) {
+        SglDraw.drawBloomUnderBlock(particle) { particle: Particle? -> super.drawTrail(particle!!) }
       }
     })
   }
@@ -206,7 +206,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
     newProduce()
     produce!!.energy(energyOut).setMultiple { e: TokamakCoreBuild -> e.energyOutMulti }
     val res = BooleanArray(1)
-    newConsume()!!.consValidCondition { b: TokamakCoreBuild? ->
+    newConsume().consValidCondition { b: TokamakCoreBuild? ->
       res[0] = true
       b!!.items.each { i: Item?, a: Int ->
         if (res[0] && a < itemCapacity * 0.33f) {

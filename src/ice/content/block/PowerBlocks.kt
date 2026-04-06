@@ -22,6 +22,7 @@ import ice.library.IFiles.appendModName
 import ice.library.util.toColor
 import ice.library.world.Load
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
@@ -182,8 +183,8 @@ object PowerBlocks : Load {
       desc(zh_CN, "光伏板","利用环境光产生电力,无需维护即可持续运作,提供基础能源支持")
     }
     size = 2
-    powerProduction = 108f/60f
-    requirements(Category.power, IItems.铈锭, 15, IItems.导能回路, 25, IItems.单晶硅, 30)
+    powerProduction = 58f/60f
+    requirements(Category.power, IItems.低碳钢, 35, IItems.锌锭,20, IItems.单晶硅, 10)
   }
   val 地热发电机 = ThermalGenerator("geothermalGenerator").apply {
     bundle {

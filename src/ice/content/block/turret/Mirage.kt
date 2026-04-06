@@ -18,6 +18,7 @@ import ice.content.block.turret.TurretBullets.lightning
 import ice.content.block.turret.TurretBullets.破碎FEX结晶
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage

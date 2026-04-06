@@ -4,7 +4,6 @@ import arc.func.Boolf
 import arc.func.Cons
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
-import ice.ui.bundle.localizedName
 import ice.world.meta.IStatValues
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -109,7 +108,7 @@ class ConsumeItemCond<T> : ConsumeItemBase<T>() where T : Building, T : Consumer
       table.row()
       table.table { t ->
         t.defaults().left().padLeft(6f)
-        t.add("${IceStats.物品.localizedName}:")
+        t.add("${IceStats.物品.getLocalizedName()}:")
         for ((count, stack) in this.cons.withIndex()) {
           if (count != 0) t.add("[gray]/[]")
           if (count != 0 && count % 6 == 0) t.row()

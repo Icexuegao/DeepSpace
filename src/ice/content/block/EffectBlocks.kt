@@ -17,7 +17,8 @@ object EffectBlocks :Load {
   val 血肉枢纽 = 血肉枢纽()
   val 真菌塔 = 真菌塔()
 
-  val 勘探雷达 = ProspectingRadar()
+  val 洛华 =洛华()
+  val 勘探雷达 = 勘探雷达()
   val 定向超速器 = 定向超速器()
 
   val 遗弃资源箱 = 遗弃资源箱()

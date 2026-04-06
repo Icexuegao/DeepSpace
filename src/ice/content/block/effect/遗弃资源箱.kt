@@ -1,6 +1,7 @@
 package ice.content.block.effect
 
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.effect.ResBox
 
 class 遗弃资源箱:ResBox("resBox"){

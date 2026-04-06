@@ -2,6 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
@@ -9,7 +10,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class CeriumBlockMixer : NormalCrafter("ceriumBlockMixer") {
+class 铈凝块混合器 : NormalCrafter("ceriumBlockMixer") {
   init {
     bundle {
       desc(zh_CN, "铈凝块混合器","将铈锭与爆炸混合物压制成铈凝块", "在特制的防静电车间内,研磨铈并与爆炸混合物混合后压制成型")
@@ -25,7 +26,7 @@ class CeriumBlockMixer : NormalCrafter("ceriumBlockMixer") {
     newProduce().apply {
       item(IItems.铈凝块, 2)
     }
-    requirements(Category.crafting, IItems.铬锭, 80, IItems.铪锭, 60, IItems.铈锭, 50, IItems.单晶硅, 35)
+    requirements(Category.crafting, IItems.铬锭, 50, IItems.铪锭, 60, IItems.铈锭, 30, IItems.单晶硅, 35)
     drawers = DrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
       rotateSpeed = 3f
     }, DrawDefault(), DrawRegion("-top"))

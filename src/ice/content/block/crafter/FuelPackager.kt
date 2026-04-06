@@ -4,6 +4,7 @@ import arc.func.Floatf
 import arc.func.Func
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category

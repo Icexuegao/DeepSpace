@@ -11,6 +11,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.graphics.Pal

@@ -5,6 +5,7 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.block.EnvironmentBlocks
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.Entity
 import ice.world.meta.IceEffects

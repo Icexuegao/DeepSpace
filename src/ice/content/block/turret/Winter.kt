@@ -16,6 +16,7 @@ import ice.content.block.turret.TurretBullets.freezingField
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.effect.WaveEffect

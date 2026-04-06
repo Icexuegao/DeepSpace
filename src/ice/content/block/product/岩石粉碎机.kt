@@ -10,6 +10,7 @@ import arc.util.Time
 import ice.content.IItems
 import ice.content.block.EnvironmentBlocks
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids

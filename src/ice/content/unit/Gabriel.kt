@@ -4,6 +4,7 @@ import arc.graphics.g2d.Draw
 import ice.entities.bullet.RandomDamageBulletType
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.entities.part.DrawPart
@@ -31,7 +32,7 @@ class Gabriel : IceUnitType("gabriel") {
     circleTarget = true
     engineColor = IceColor.b4
     itemCapacity = 30
-    buildSpeed = 0.75f
+    buildSpeed = 2f
     buildRange = 8 * 40f
     drag = 0.05f
     accel = 0.11f

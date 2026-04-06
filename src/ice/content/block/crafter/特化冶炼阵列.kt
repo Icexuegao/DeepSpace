@@ -3,6 +3,7 @@ package ice.content.block.crafter
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
@@ -41,7 +42,7 @@ class 特化冶炼阵列 : NormalCrafter("specializedSmelterArray") {
     }
     newConsume().apply {
       time(60f)
-      item(IItems.金矿, 5)
+      item(IItems.金矿, 4)
       power(80 / 60f)
     }
     newProduce().apply {

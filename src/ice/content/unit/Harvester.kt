@@ -3,6 +3,7 @@ package ice.content.unit
 import arc.func.Prov
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.Vars
 import mindustry.ai.UnitCommand

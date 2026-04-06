@@ -2,6 +2,7 @@ package ice.content.block.effect
 
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.science.Laboratory
 import mindustry.type.Category
 

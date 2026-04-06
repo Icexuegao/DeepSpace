@@ -7,6 +7,7 @@ import ice.content.IUnitTypes
 import ice.entities.bullet.LaserBulletType
 import ice.library.util.toColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.LiquidExplodeAbility

@@ -17,7 +17,6 @@ import arc.util.io.Writes
 import ice.content.IItems
 import ice.core.SettingValue
 import ice.library.util.toStringi
-import ice.ui.bundle.localizedName
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.Fx
@@ -135,7 +134,7 @@ open class NuclearReactor(name: String) : NormalCrafter(name) {
     }
     addBar("heat") { e: NuclearReactorBuild ->
       Bar(
-        { IceStats.热量.localizedName + if (SettingValue.启用调试模式) ": ${e.heat.toStringi(1)}" else "" }, Pal::lightOrange
+        { IceStats.热量.getLocalizedName() + if (SettingValue.启用调试模式) ": ${e.heat.toStringi(1)}" else "" }, Pal::lightOrange
       ) { e.heat / maxHeat }
     }
   }

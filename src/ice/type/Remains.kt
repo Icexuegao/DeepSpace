@@ -15,7 +15,7 @@ import ice.library.scene.ui.itooltip
 import ice.library.struct.ConfigPropertyDelegate
 import ice.ui.UI
 import ice.ui.bundle.Bundle
-import ice.ui.bundle.localizedName
+import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
 
@@ -46,7 +46,6 @@ open class Remains(val name: String): Bundle {
 
   init {
     remainsSeq.add(this)
-    localizedName=name
   }
 
   fun setDescriptionTable(table: Cons<Table>) {
@@ -60,6 +59,7 @@ open class Remains(val name: String): Bundle {
   fun setEnabled(enabled: Boolean) {
     if (enabled) install() else uninstall()
     unlock=enabled
+    DataDialog.contentDialog.flunAll()
   }
   fun getTiTleTable(): Table {
     return Table().also {
@@ -68,7 +68,7 @@ open class Remains(val name: String): Bundle {
         table.table(IFiles.createNinePatch("Uwdwdqddw")) {it1 ->
           it1.add("遗物").color(IceColor.b4).expandX().left().padLeft(4f)
         }.width(100f).height(30f).color(IceColor.b6).expandX().left().row()
-        table.add(localizedName).color(remainsColor).fontScale(1.5f).pad(5f).padLeft(0f).expandX().left().row()
+        table.add(getLocalizedName()).color(remainsColor).fontScale(1.5f).pad(5f).padLeft(0f).expandX().left().row()
       }.grow().row()
       it.addLine().pad(3f)
       it.table {table ->
@@ -85,7 +85,7 @@ open class Remains(val name: String): Bundle {
       RemainsDialog.flunRemains()
     }.disabled {
       disabled()
-    }.size(60f).pad(10f).itooltip(localizedName).get().hovered {
+    }.size(60f).pad(10f).itooltip(getLocalizedName()).get().hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this
         RemainsDialog.flunRemains()
@@ -102,7 +102,7 @@ open class Remains(val name: String): Bundle {
       }
     }.disabled {
       disabled()
-    }.size(60f).pad(10f).itooltip(localizedName).get().hovered {
+    }.size(60f).pad(10f).itooltip(getLocalizedName()).get().hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this
         RemainsDialog.flunRemains()

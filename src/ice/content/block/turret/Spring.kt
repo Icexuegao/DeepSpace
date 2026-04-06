@@ -9,6 +9,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.entities.Damage
 import mindustry.entities.Units

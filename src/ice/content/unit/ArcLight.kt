@@ -7,6 +7,7 @@ import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.ai.UnitCommand
 import mindustry.content.Fx

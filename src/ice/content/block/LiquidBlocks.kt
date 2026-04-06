@@ -5,6 +5,7 @@ import ice.content.block.liquid.P2PLiquidNode
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import ice.world.content.blocks.liquid.*

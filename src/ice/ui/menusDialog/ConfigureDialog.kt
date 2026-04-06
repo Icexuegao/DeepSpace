@@ -24,8 +24,6 @@ import ice.library.scene.element.ProgressBar
 import ice.library.scene.element.typinglabel.TLabel
 import ice.library.util.toStringi
 import ice.ui.Documents
-import ice.ui.bundle.description
-import ice.ui.bundle.localizedName
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -69,13 +67,13 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         0.1f
       ),
 
-      ConfigSepLine("mainMenu", IceStats.主菜单.localizedName),
+      ConfigSepLine("mainMenu", IceStats.主菜单.getLocalizedName()),
       ConfigCheck("禁用mod主界面背景", { SettingValue.禁用mod主界面背景 = it }, SettingValue::禁用mod主界面背景),
       ConfigCheck("进入游戏自动弹出mod主菜单", { SettingValue.进入游戏自动弹出mod主菜单 = it }, SettingValue::进入游戏自动弹出mod主菜单),
 
       ConfigSepLine("mode", "游戏模式"),
       object : ConfigTable("musicBar", {
-        val fLabel = TLabel(SettingValue.difficulty.description).also { it1 ->
+        val fLabel = TLabel(SettingValue.difficulty.getDescription()).also { it1 ->
           it1.setColor(SettingValue.difficulty.color)
         }
         it.table { it1 ->
@@ -84,7 +82,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         it.table { it2 ->
           ModeDifficulty.entries.forEach { mod ->
             it2.addBox(
-              mod.localizedName,
+              mod.getLocalizedName(),
               { SettingValue.difficulty == mod },
               if (SettingValue.difficulty == mod) mod.color else IceColor.b4,
               { x, f ->
@@ -93,7 +91,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
                   }
               }) {
               SettingValue.difficulty = mod
-              fLabel.restart(mod.description)
+              fLabel.restart(mod.getDescription())
               fLabel.setColor(mod.color)
 
             }
@@ -177,7 +175,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       },
       ConfigSlider("状态指示器尺寸", { SettingValue.状态指示器尺寸 = it }, { SettingValue.状态指示器尺寸 }, 4f, 16f, 1f),
       ConfigCheck("显示状态效果的剩余时间", { SettingValue.显示状态效果的剩余时间 = it }, SettingValue::显示状态效果的剩余时间),
-      ConfigSepLine("data", IceStats.数据.localizedName),
+      ConfigSepLine("data", IceStats.数据.getLocalizedName()),
       ConfigButton("重置已阅读的mod提示信息") {
         Button(IStyles.frameButtonUp2, IStyles.frameButtonDown2).apply {
           add(Core.bundle.get("settings.reset")).color(IceColor.b4)

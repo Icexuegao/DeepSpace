@@ -1,5 +1,6 @@
 package ice.ui.menusDialog
 
+import arc.scene.actions.Actions
 import arc.scene.ui.Image
 import arc.scene.ui.Label
 import arc.scene.ui.layout.Table
@@ -76,8 +77,12 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
   }
 
   fun flunTiTleTable() {
-    tiTleTable.clearChildren()
-    tiTleTable.add(tempRemain.getTiTleTable()).grow()
+    tiTleTable.actions(Actions.alpha(0f,0.15f), Actions.run {
+      tiTleTable.clearChildren()
+      tiTleTable.add(tempRemain.getTiTleTable()).grow()
+      tiTleTable.actions(Actions.alpha(1f,0.15f))
+    })
+
   }
 
   private fun flunRemainsSeq() {

@@ -13,6 +13,7 @@ import ice.content.IUnitTypes
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.DeathGiftAbility
 import ice.world.content.unit.ability.HealthRequireAbility

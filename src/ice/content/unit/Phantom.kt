@@ -4,6 +4,7 @@ import arc.func.Prov
 import arc.graphics.Color
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.Vars
 import mindustry.ai.UnitCommand

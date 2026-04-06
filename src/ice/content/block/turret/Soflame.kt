@@ -11,6 +11,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.entities.Mover
 import mindustry.entities.effect.WaveEffect

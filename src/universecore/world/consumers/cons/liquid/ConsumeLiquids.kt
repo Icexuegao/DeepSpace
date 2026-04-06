@@ -4,7 +4,6 @@ import arc.math.Mathf
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
 import arc.struct.Seq
-import ice.ui.bundle.localizedName
 import ice.world.meta.IStatValues
 import ice.world.meta.IceStats
 import mindustry.ctype.Content
@@ -71,7 +70,7 @@ class ConsumeLiquids<T>(liquids: Array<out LiquidStack>) : ConsumeLiquidBase<T>(
       table.row()
       table.table {t: Table ->
         t.defaults().left().fill().padLeft(6f)
-        t.add("${IceStats.流体.localizedName}:")
+        t.add("${IceStats.流体.getLocalizedName()}:")
         for (stack in consLiquids!!) {
           t.add(IStatValues.displayLiquid(stack.liquid, stack.amount, true, showName = true))
         }

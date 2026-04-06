@@ -3,6 +3,7 @@ package ice.content.block.nuclear
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.type.ItemStack
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawLiquidRegion

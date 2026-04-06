@@ -20,6 +20,7 @@ import ice.content.ILiquids
 import ice.content.block.turret.TurretBullets
 import ice.library.struct.AttachedProperty
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.Vars
 import mindustry.content.Items
 import mindustry.entities.Damage

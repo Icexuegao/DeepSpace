@@ -2,6 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawArcSmelt
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
@@ -48,19 +49,19 @@ class 碳控熔炉 : NormalCrafter("carbonSteelFactory") {
 
     newConsume().apply {
       time(45f)
-      item(IItems.赤铁矿, 2)
+      item(IItems.赤铁矿, 3)
       power(60 / 60f)
     }
     newProduce().apply {
-      items(IItems.低碳钢, 1)
+      items(IItems.低碳钢, 2)
     }
     newConsume().apply {
       time(60f)
-      items(IItems.赤铁矿, 2, IItems.生煤, 3)
+      items(IItems.赤铁矿, 3, IItems.生煤, 2)
       power(90 / 60f)
     }
     newProduce().apply {
-      items(IItems.高碳钢, 1)
+      items(IItems.高碳钢, 2)
     }
   }
 }

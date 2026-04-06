@@ -4,6 +4,7 @@ import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects

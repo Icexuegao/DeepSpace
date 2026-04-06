@@ -8,15 +8,7 @@ import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
 
 class BaseBundle(val name: String) {
-  companion object : Load {
-
-    fun <T : UnlockableContent> T.desc(bundle: BaseBundle, name: String, desc: String = "", deta: String = "") {
-      bundle.runBun.add {
-        localizedName = name
-        description = desc
-        details = deta
-      }
-    }
+  companion object :Load {
 
     private val bundle = HashMap<String, BaseBundle>()
     var initializer = false
@@ -47,11 +39,16 @@ fun bundle(bundle: BaseBundle.Companion.() -> Unit) {
   bundle.invoke(BaseBundle.Companion)
 }
 
-var Bundle.localizedName: String by AttachedProperty("")
-var Bundle.description: String by AttachedProperty("")
+private var Bundle.localizedName: String by AttachedProperty("")
+private var Bundle.description: String by AttachedProperty("")
 
 interface Bundle {
 
+  fun getLocalizedName()=localizedName
+  fun setLocalizedName(localizedName: String) {
+    this.localizedName = localizedName
+  }
+  fun getDescription()=description
   fun desc(bundle: BaseBundle, localizedName: String, description: String = "") {
     val d = {
       this.localizedName = localizedName
@@ -62,5 +59,13 @@ interface Bundle {
     } else {
       bundle.runBun.add(d)
     }
+  }
+}
+
+fun <T :UnlockableContent> T.desc(bundle: BaseBundle, name: String, desc: String = "", deta: String = "") {
+  bundle.runBun.add {
+    localizedName = name
+    description = desc
+    details = deta
   }
 }

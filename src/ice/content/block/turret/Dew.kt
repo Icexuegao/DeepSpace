@@ -9,6 +9,7 @@ import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.library.struct.log
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.entities.part.HaloPart
 import mindustry.entities.part.RegionPart

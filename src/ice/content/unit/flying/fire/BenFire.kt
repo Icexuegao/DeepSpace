@@ -3,6 +3,7 @@ package ice.content.unit.flying.fire
 import arc.graphics.Color
 import ice.entities.bullet.BombBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects

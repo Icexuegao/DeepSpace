@@ -4,7 +4,7 @@ import arc.graphics.Color
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.BaseBundle.Companion.desc
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.entities.abilities.EnergyFieldAbility
 import mindustry.entities.effect.ParticleEffect

@@ -1,8 +1,7 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
+import ice.ui.bundle.desc
 import ice.ui.bundle.bundle
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category

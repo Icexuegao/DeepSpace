@@ -15,6 +15,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.block.turret.TurretBullets
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.game.Team
 import mindustry.gen.Building
 import mindustry.graphics.Layer

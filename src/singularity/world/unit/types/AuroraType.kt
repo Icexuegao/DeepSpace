@@ -14,6 +14,7 @@ import arc.util.Tmp
 import arc.util.pooling.Pools
 import ice.DeepSpace
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage

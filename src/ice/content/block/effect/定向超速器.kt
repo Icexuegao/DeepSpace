@@ -1,7 +1,6 @@
 package ice.content.block.effect
 
-import ice.ui.bundle.BaseBundle.Companion.desc
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
+import ice.ui.bundle.desc
 import ice.ui.bundle.bundle
 import ice.world.content.blocks.effect.OrientationProjector
 

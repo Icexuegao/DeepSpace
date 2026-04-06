@@ -1,6 +1,7 @@
 package ice.content.block.effect
 
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.effect.FungusCore
 import mindustry.type.Category
 

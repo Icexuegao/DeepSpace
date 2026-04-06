@@ -4,7 +4,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.BaseBundle.Companion.desc
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import mindustry.content.Fx
 import mindustry.content.Liquids

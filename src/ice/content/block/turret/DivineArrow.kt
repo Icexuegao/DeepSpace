@@ -6,6 +6,7 @@ import arc.util.Time
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.part.IcePartProgress
 import ice.world.meta.IceEffects
 import mindustry.entities.bullet.MissileBulletType

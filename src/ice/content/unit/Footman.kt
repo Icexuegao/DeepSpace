@@ -3,6 +3,7 @@ package ice.content.unit
 import ice.entities.bullet.base.BulletType
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.content.Fx

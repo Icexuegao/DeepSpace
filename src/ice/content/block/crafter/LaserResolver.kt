@@ -4,10 +4,11 @@ import arc.func.Floatf
 import arc.graphics.g2d.Draw
 import arc.util.Tmp
 import ice.content.IItems
+import ice.content.ILiquids
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.Vars
-import mindustry.content.Items
 import mindustry.content.Liquids
 import mindustry.gen.Building
 import mindustry.graphics.Drawf
@@ -49,15 +50,11 @@ class LaserResolver : NormalCrafter("laser_resolver") {init {
 
   newConsume()
   consume!!.time(30f)
-  consume!!.item(Items.scrap, 2)
-  consume!!.liquid(Liquids.slag, 0.1f)
+  consume!!.item(IItems.黄玉髓, 2)
+  consume!!.liquid(ILiquids.复合矿物溶液, 0.1f)
   consume!!.power(3.5f)
-  newProduce().color = Items.scrap.color
-  produce!!.items(
-    *ItemStack.with(
-      IItems.钍锭, 3, IItems.铬锭, 4, IItems.铅锭, 5, IItems.铜锭, 3
-    )
-  ).random()
+  newProduce().color = ILiquids.复合矿物溶液.color
+  produce!!.items(IItems.钍锭, 3, IItems.铬锭, 4, IItems.铅锭, 5, IItems.铜锭, 3).random()
 
   newConsume()
   consume!!.time(60f)

@@ -7,6 +7,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.entities.effect.ParticleEffect

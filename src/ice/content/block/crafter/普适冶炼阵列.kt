@@ -3,6 +3,7 @@ package ice.content.block.crafter
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
@@ -48,6 +49,6 @@ class 普适冶炼阵列 : NormalCrafter("universalSmelterArray") {
     }
 
     drawers = DrawMulti(DrawDefault(), DrawFlame(IceColor.b4))
-    requirements(Category.crafting, IItems.高碳钢, 100, IItems.低碳钢, 70)
+    requirements(Category.crafting, IItems.高碳钢, 50, IItems.低碳钢, 60)
   }
 }

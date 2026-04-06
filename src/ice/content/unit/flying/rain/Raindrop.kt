@@ -2,6 +2,7 @@ package ice.content.unit.flying.rain
 
 import arc.graphics.Color
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.entities.bullet.LightningBulletType
 import mindustry.gen.Sounds

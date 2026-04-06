@@ -7,6 +7,7 @@ import ice.entities.IcePuddle
 import ice.library.EventType
 import ice.library.world.Load
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.liquid.IceLiquid
 import mindustry.content.Fx
 import mindustry.content.Fx.flakExplosionBig

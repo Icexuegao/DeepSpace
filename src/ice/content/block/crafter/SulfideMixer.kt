@@ -2,6 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import singularity.world.blocks.product.NormalCrafter
@@ -14,7 +15,7 @@ class SulfideMixer :NormalCrafter("sulfideMixer") {
     size = 3
     itemCapacity = 30
     craftEffect = IceEffects.square(IItems.硫化合物.color)
-    requirements(Category.crafting, IItems.高碳钢, 150, IItems.铜锭, 30, IItems.铬锭, 30)
+    requirements(Category.crafting, IItems.高碳钢, 77, IItems.铜锭, 30, IItems.铬锭, 30)
 
     newConsume().apply {
       time(45f)
@@ -22,7 +23,7 @@ class SulfideMixer :NormalCrafter("sulfideMixer") {
       power(1f)
     }
     newProduce().apply {
-      items(IItems.硫化合物, 3)
+      items(IItems.硫化合物, 4)
     }
   }
 }

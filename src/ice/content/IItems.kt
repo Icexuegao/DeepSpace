@@ -5,6 +5,7 @@ import arc.graphics.g2d.TextureRegion
 import arc.util.Time
 import ice.library.world.Load
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.item.IceItem
 import ice.world.content.item.OreItem
 import singularity.core.UpdatePool
@@ -36,6 +37,7 @@ object IItems : Load {
     }
   }
   val 骨钢 = IceItem("item_fleshSteel", "bf3e47") {
+    nutrientConcentration = 0.15f
     bundle {
       desc(zh_CN, "骨钢", "一种由血肉与骸骨组成的复合生物材料,坚硬且有微弱光泽,用于建造自愈型建筑")
     }
@@ -74,7 +76,7 @@ object IItems : Load {
     }
   }
   val 寂温疮体 = IceItem("item_lonelyHeatSoreSpore", "b3f1ff") {
-    flammability = 0.1f
+    flammability = -0.1f
     bundle {
       desc(zh_CN, "寂温疮体", "一种奇特的低温孢子,表面覆盖有冰晶,可稳定吸收并传导热能,可用于冷却系统构建或低温材料的制备")
     }
@@ -116,6 +118,7 @@ object IItems : Load {
     }
   }
   val 燃素水晶 = IceItem("item_phlogistonCrystal", "b38f8d") {
+    explosiveness=0.3f
     bundle {
       desc(zh_CN, "燃素水晶", "一种蕴含高能量的晶体,燃烧时能释放大量热能,是高效燃料的重要原料")
     }
@@ -132,7 +135,6 @@ object IItems : Load {
     }
   }
   val 方铅矿 = OreItem("item_galena", "8c7fa9", 2) {
-    hardness = 2
     radioactivity = 0.1f
     bundle {
       desc(zh_CN, "方铅矿", "一种重要的铅矿石,呈立方晶体结构,常伴有银等贵金属,具有弱放射性.是提炼铅的主要原料之一")
@@ -236,10 +238,6 @@ object IItems : Load {
     }
   }
   val 铝锭 = IceItem("item_aluminium", "#C0ECFF") {
-    hardness = 3
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
     cost = 0.9f
     bundle {
       desc(zh_CN, "铝锭", "一种耐低温的常见金属材料,质地轻盈,经处理后强度显著提升.是航空航天领域广泛使用的结构材料", "在绝大多数小质量的行星上,铝的丰富度通常都是在金属元素中排序最靠前的")
@@ -259,7 +257,6 @@ object IItems : Load {
     explosiveness = 0.25f
     flammability = 1.2f
     radioactivity = 0.6f
-    cost = 1.2f
     healthScaling = 0.6f
     bundle {
       desc(zh_CN, "铈锭", "一种广泛应用的金属材料,用于研磨抛光剂,特种玻璃及推进器零件等")
@@ -267,16 +264,11 @@ object IItems : Load {
   }
   val 钍锭 = IceItem("item_thoriumIngot", "f9a3c7") {
     radioactivity = 1f
-    cost = 2f
     bundle {
       desc(zh_CN, "钍锭", "一种放射性金属材料,具有高能量密度,常用于核反应堆和核武器")
     }
   }
   val 铱锭 = IceItem("item_iridium", "#E4EFEF") {
-    hardness = 6
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
     cost = 2.5f
     bundle {
       desc(zh_CN, "铱锭", "一种强度极高的稀有金属材料,其复合物具备核能的半导体特性(类似硅在电子工业中的半导体特性),是精密核电路制造的核心材料")
@@ -316,17 +308,11 @@ object IItems : Load {
     }
   }
   val 铱板 = IceItem("item_iridiumPlate", "656565") {
-    cost = 1.8f
-    healthScaling = 1f
     bundle {
       desc(zh_CN, "铱板", "已经完成了压铸工序的铱合金,具备极强的抗冲击性能,是一种优秀的各向异性介质,适用于精密核电路及高性能防护结构的制造")
     }
   }
-  val 燃能晶 = IceItem("item_burningCrystal", "737373") {
-    bundle {
-      desc(zh_CN, "燃能晶", "一种经过特殊工艺处理的晶体,燃烧时可释放巨大能量,是驱动各类工业设备的核心能源材料")
-    }
-  }
+
   val 石英玻璃 = IceItem("item_quartzGlass", "ebeef5") {
     bundle {
       desc(zh_CN, "石英玻璃", "由高纯度石英熔制而成的玻璃,具备优异的耐高温性能和极低的热膨胀系数,能够有效抵御大部分化学反应侵蚀,是理想的反应容器")
@@ -338,8 +324,6 @@ object IItems : Load {
     }
   }
   val 陶钢 = IceItem("item_potterySteel", "D6DEC6") {
-    cost = 1.8f
-    healthScaling = 0.8f
     bundle {
       desc(zh_CN, "陶钢", "复合装甲材料,能够快速且均匀地将电磁粒子辐射分散传导至装甲各处,从而大幅降低高强度动能冲击造成的局部破坏")
     }
@@ -359,41 +343,27 @@ object IItems : Load {
       desc(zh_CN, "导能回路", "将高纯度单晶硅回路蚀刻于放射性能级降低的钍基座中制成的能量传导组件,拥有极强的导能性与稳固性")
     }
     charge = 0.8f
-    cost = 1.5f
-    healthScaling = 0.5f
   }
   val 绿藻块 = IceItem("item_chlorella_block", "#6CB855") {
-    hardness = 1
-    explosiveness = 0.4f
+    explosiveness = 0.1f
     flammability = 1.2f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "绿藻块", "一种经分离杂质后整合而成的绿藻细胞生物材料,可用于提取更有价值的绿藻素")
     }
   }
   val 绿藻素 = IceItem("item_chlorella", "#7BD261") {
-    hardness = 1
     explosiveness = 1.2f
     flammability = 1.6f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "绿藻素", "从绿藻细胞中分离出的生物活性成分,是绿藻进行光合作用的核心物质.用于将光合作用机制应用于工业生产")
     }
   }
   val 碱石 = IceItem("item_alkali_stone", "#B0BAC0") {
-    hardness = 1
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "碱石", "一种以碱石灰为主要成分的矿石,内部富含多种含氯金属盐类.用于电离处理分离出碱液与氯气", "通常来说,河流会携带附着在河床上的盐类物质,并汇入海洋或者湖泊,长久的积累使得水体中的盐浓度不断升高,进而形成高含盐量的海洋和咸水湖,绝大多数表面具有活跃水圈的星球都是符合这样的规律")
     }
   }
   val 絮凝剂 = IceItem("item_flocculant", "ffffff") {
-    hardness = 1
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "絮凝剂", "投入水中可形成大量多孔絮状胶质的化工材料,用于吸附或者分离固形物质,是重要的化工材料", "注意防潮\n请于阴凉环境储存,避免阳光直射\n保质期：六个月\n若不慎误食,请立即就医并向医师提供此说明书")
     }
@@ -401,56 +371,34 @@ object IItems : Load {
 
   val 核废料 = IceItem("item_nuclear_waste", "#AAB3AE") {
     hardness = 1
-    explosiveness = 0f
-    flammability = 0f
     radioactivity = 0.25f
     bundle {
       desc(zh_CN, "核废料", "核反应后残留的放射性物质,仍具有较强的辐射性.虽已无太大核能利用价值,但仍能作为提炼铱元素的非常规来源")
     }
   }
   val 岩层沥青 = IceItem("item_rock_bitumen", "#808A73") {
-    hardness = 1
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "岩层沥青", "一种从地壳深层钻取的沥青状矿石,质地粘稠,内含有多种重矿物成分", "矿石碎屑在某些条件下会自发的富集并成块,大部分都会形成矿层,但许多未成型的矿屑被粘度很高的胶体裹挟时会在深层底层中形成沥青状的矿石胶结物,成分复杂")
     }
   }
   val 铀原料 = IceItem("item_uranium_rawmaterial", "#B5D980") {
-    hardness = 0
-    explosiveness = 0f
-    flammability = 0f
     radioactivity = 0.1f
     bundle {
       desc(zh_CN, "铀原料", "铀矿石的化学冶炼中间物,经过增热离心可以制造燃料级的铀235和高纯度的铀238")
     }
   }
   val 铱金混合物 = IceItem("item_iridium_mixed_rawmaterial", "#AECBCB") {
-    hardness = 0
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "铱金混合物", "一种含有铱金属氧化物固体化合物,经过加工提纯可以获得冶炼铱的进一步中间物", "在足够高压的核裂变反应中,原子核的衰变和四处弹射的中子总是能带来一些令人意想不到的东西,它们会残留在核废料里,等待着变成更有用的东西")
     }
   }
   val 氯铱酸盐 = IceItem("item_iridium_chloride", "#CBE0E0") {
-    hardness = 0
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "氯铱酸盐", "一种高纯度含铱化合物,经过煅烧脱氯后可以得到产品铱", "几乎所有行星上都有铱,但它们几乎都下沉到了行星的核部,只有少量与铂族金属聚合伴生为矿物构成,可利用量极少")
     }
   }
 
   val 强化合金 = IceItem("item_strengthening_alloy", "#B1B1B0") {
-    hardness = 5
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
-    cost = 1.25f
     bundle {
       desc(zh_CN, "强化合金", "一种各项性能均衡优异的合金,具备极高的结构强度与抗性,广泛应用于各类领域")
     }
@@ -461,39 +409,25 @@ object IItems : Load {
     }
   }
   val 气凝胶 = IceItem("item_aerogel", "#D5EBEE") {
-    hardness = 3
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
-    cost = 1.1f
     bundle {
       desc(zh_CN, "气凝胶", "硅基结构的超轻材料.内部由大量细微蜂窝状孔洞填充,具备强度高,密度极小,绝缘绝热等优异特性,广泛应用于各领域")
     }
   }
 
   val 铀238 = IceItem("item_uranium_238", "#7CA73D") {
-    hardness = 2
-    explosiveness = 0f
-    flammability = 0f
     radioactivity = 0.4f
-    cost = 1.5f
     bundle {
       desc(zh_CN, "铀-238", "俗称贫铀的放射性同位素,硬度较高且结构致密.可用作中子反射板及动能穿甲弹头,亦可吸收中子后衰变为更有用的钚-239", "无论在哪一个星球上,自然状态下的铀238总是占据铀的绝大部分的丰富度,所幸它可以转变为更有用的东西,如果全部都用来造穿甲弹和防弹装甲之类的话,保有量可能可以用到下个地质纪...")
     }
   }
   val 铀235 = IceItem("item_uranium_235", "#B5D980") {
     hardness = 2
-    explosiveness = 0f
-    flammability = 0f
     radioactivity = 1.6f
     bundle {
       desc(zh_CN, "铀-235", "一种主要的裂变核燃料,同时也是天然的中子放射源")
     }
   }
   val 钚239 = IceItem("item_plutonium_239", "#D1D19F") {
-    hardness = 2
-    explosiveness = 0f
-    flammability = 0f
     radioactivity = 1.6f
     bundle {
       desc(zh_CN, "钚-239", "由铀-238吸收中子后衰变而成的强放射性同位素,与铀-235同为常用的裂变核燃料", "尽管铀238可以转换为钚239,但也许你需要一个不小规模的反应堆阵列才能实现量产钚239了")
@@ -503,7 +437,6 @@ object IItems : Load {
     hardness = 2
     explosiveness = 2.4f
     flammability = 1.8f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "相位封装氢单元", "由相位材料包裹的氢中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氢的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氢原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
     }
@@ -511,8 +444,6 @@ object IItems : Load {
   val 相位封装氦单元 = IceItem("item_encapsulated_helium_cell", "#F9FFDE") {
     hardness = 2
     explosiveness = 0.3f
-    flammability = 0f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "相位封装氦单元", "由相位材料包裹的氦中子靶丸,可在核反应堆中接收中子并转化为核燃料", "相位物的中子光路学结构会将中子聚焦到中心存储氦的空腔,以最大化中央接收到的中子流,在中子流的轰击下,大量氦原子会转化为较为容易发生核聚变反应的同位素,继而参与核聚变")
     }
@@ -529,8 +460,6 @@ object IItems : Load {
   val 氦聚变燃料 = IceItem("item_helium_fusion_fuel", "#D0D6B7") {
     hardness = 2
     explosiveness = 0.3f
-    flammability = 0f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "氦聚变燃料", "一种核燃料,压缩氦原子同位素,原子性质易于发生聚变,属轻核聚变燃料")
     }
@@ -539,7 +468,7 @@ object IItems : Load {
   val 浓缩铀235核燃料 = IceItem("item_concentration_uranium_235", "#95B564") {
     hardness = 4
     explosiveness = 12f
-    flammability = 0f
+
     radioactivity = 2.4f
     bundle {
       desc(zh_CN, "封装铀-235", "一种经高度浓缩并超低温封装的铀核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
@@ -548,7 +477,7 @@ object IItems : Load {
   val 浓缩钚239核燃料 = IceItem("item_concentration_plutonium_239", "#B0B074") {
     hardness = 4
     explosiveness = 12f
-    flammability = 0f
+
     radioactivity = 2.4f
     bundle {
       desc(zh_CN, "封装钚-239", "一种经高度浓缩并超低温封装的钚核燃料,可在超过常温的临界压缩状态下稳定存储,是反应堆的主要燃料之一")
@@ -556,11 +485,6 @@ object IItems : Load {
   }
 
   val 矩阵合金 = IceItem("item_matrix_alloy", "#929090") {
-    hardness = 4
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
-    cost = 1.4f
     bundle {
       desc(zh_CN, "矩阵合金", "一种由大量纳米机器人聚合而成的可编程合金,机械强度较低,但能够自由变换形态甚至物态,具备极高的适应性与灵活性")
     }
@@ -580,15 +504,12 @@ object IItems : Load {
     healthScaling = 2.4f
   }
   val 肃正协议 = IceItem("item_solemnProtocol", "FF5845") {
-    cost = 600f
     bundle {
       desc(zh_CN, "肃正协议", "装载特定密匙的激活协议,授权后即可解锁高级军械的控制权限与制造权限")
     }
   }
   val FEX水晶 = IceItem("item_crystal_FEX", "#D2393E") {
     hardness = 3
-    explosiveness = 0f
-    flammability = 0f
     radioactivity = 0.4f
     cost = 1.25f
     bundle {
@@ -602,7 +523,6 @@ object IItems : Load {
       }
       hardness = 3
       explosiveness = 3.6f
-      flammability = 0f
       radioactivity = 3f
       cost = 1.35f
       frameTime = 9f
@@ -629,11 +549,6 @@ object IItems : Load {
   }
 
   val 简并态中子聚合物 = IceItem("item_degenerate_neutron_polymer", "#FF7FE0") {
-    hardness = 10
-    explosiveness = 0f
-    flammability = 0f
-    radioactivity = 0f
-    cost = 3f
     bundle {
       desc(zh_CN, "简并态中子聚合物", "由中子简并态构成的超高密度聚合物,硬度难以测量,韧性与塑性趋近于零.除作为极端环境下的结构材料外,亦是引力场技术的理想场源")
     }
@@ -663,8 +578,6 @@ object IItems : Load {
   val 反物质 = IceItem("item_anti_metter", "734CD2") {
     hardness = 12
     explosiveness = 64f
-    flammability = 0f
-    radioactivity = 0f
     bundle {
       desc(zh_CN, "反物质", "由引力场约束隔绝的反物质,与正物质接触即发生完全湮灭并将质量转化为纯能量,危险性极高,广泛用于强攻击性武器", "通常每一个反物质储存单元都会具有一个独立的能源模块来维持约束力场,在远航星舰队伴随燃料仓库放出的耀眼的焰火消失后,停电被成为了携带反物质的情况下最危险的事")
     }

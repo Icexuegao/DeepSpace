@@ -11,9 +11,7 @@ import ice.library.scene.style.DynamicTextureDrawable
 import ice.library.scene.ui.itooltip
 import ice.type.Remains
 import ice.ui.bundle.bundle
-import ice.ui.bundle.description
 import ice.ui.fragment.FleshFragment
-import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
 import ice.world.content.unit.ability.InterceptAbilty
@@ -31,7 +29,7 @@ object Remainss {
     bundle {
       desc(zh_CN, "娜雅的手串", "一串温润的玉石手串,在帝国任职期间由娜雅赠予")
     }
-    setDescription(this.description)
+    setDescription(this.getDescription())
     effect = "核心机增加拦截护盾"
     val units = IUnitTypes.getCoreUnits()
     var map = HashMap<UnitType, InterceptAbilty>()
@@ -58,7 +56,7 @@ object Remainss {
       desc(zh_CN, "坚固的装甲板", "多层淬火钢板铆接而成,表面布满划痕与凹坑")
     }
     val hea = 500
-    setDescription(description)
+    setDescription(getDescription())
     effect = "单位[${IUnitTypes.断业.localizedName}]的生命值提升[$hea]"
     install = {
       IUnitTypes.断业.health += hea
@@ -76,7 +74,7 @@ object Remainss {
       desc(zh_CN, "不焚者的余烬", "温热的结晶体,烈焰中被焚尽却未曾死去之人的最后残留")
     }
     val f = 5
-    setDescription(description)
+    setDescription(getDescription())
     effect = "单位[${IUnitTypes.仆从.localizedName}]的武器伤害提升[$f]"
     install = {
       IUnitTypes.仆从.weapons.forEach {
@@ -97,7 +95,7 @@ object Remainss {
     bundle {
       desc(zh_CN, "纯净水晶坠饰", "一块天然形成,毫无杂质的透明白水晶")
     }
-    setDescription(description)
+    setDescription(getDescription())
     effect = "玩家核心机[免疫所有状态]"
     val units = IUnitTypes.getCoreUnits()
     install = {
@@ -120,7 +118,7 @@ object Remainss {
     bundle {
       desc(zh_CN, "玄岩板", "由奇异,沉重的玄武岩打磨而成")
     }
-    setDescription(description)
+    setDescription(getDescription())
     effect = "[${CrafterBlocks.碳控熔炉.localizedName}]所需燃料减少[1]"
     var itemStack = ItemStack()
     CrafterBlocks.碳控熔炉.consumers.find {
@@ -146,7 +144,7 @@ object Remainss {
     bundle {
       desc(zh_CN, "谐振探针", "一种用于探测矿物谐振频率的装置")
     }
-    setDescription(description)
+    setDescription(getDescription())
     effect = "矿物地板不再[隐藏]"
     install = {
       Vars.content.blocks().forEach {
@@ -173,7 +171,7 @@ object Remainss {
     bundle {
       desc(zh_CN, "流光罗盘", "表面刻有古老的符文,会发出淡淡的光芒")
     }
-    setDescription(description)
+    setDescription(getDescription())
     icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 19
       it.frameDuration = 60f / 7f
@@ -274,7 +272,7 @@ object Remainss {
     bundle {
       desc(zh_CN, "心跳鼓", "弹性心肌隔膜,回响着怀念之音")
     }
-    setDescription(description)
+    setDescription(getDescription())
 
     effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
     icon = DynamicTextureDrawable(name.appendModName()) {
@@ -302,21 +300,16 @@ object Remainss {
       it.frameCount = 24
       it.frameDuration = 15f
     }
-
     effect = "相控雷达锁定上限+[10]"
-
-
     install = {
       DefenseBlocks.相控雷达.maxTargetSize += 10
       DefenseBlocks.相控雷达.stats = Stats()
       DefenseBlocks.相控雷达.checkStats()
-      DataDialog.flunAll()
     }
     uninstall = {
       DefenseBlocks.相控雷达.maxTargetSize -= 10
       DefenseBlocks.相控雷达.stats = Stats()
       DefenseBlocks.相控雷达.checkStats()
-      DataDialog.flunAll()
     }
   }
   val 血腥玛丽 = Remains("remains_bloody_mary").apply {
@@ -324,7 +317,7 @@ object Remainss {
     bundle {
       desc(zh_CN, "血腥玛丽", "血与酒液在杯中摇匀,辛辣之后,只余缓慢扩散的猩红")
     }
-    setDescription(description)
+    setDescription(getDescription())
     icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 13
       it.frameDuration = 15f
@@ -341,7 +334,6 @@ object Remainss {
         type.stats = Stats()
         type.checkStats()
       }
-      DataDialog.flunAll()
     }
     uninstall = {
       for(type in IUnitTypes.getCoreUnits()) {
@@ -353,7 +345,6 @@ object Remainss {
         type.stats = Stats()
         type.checkStats()
       }
-      DataDialog.flunAll()
     }
   }
 
@@ -362,7 +353,7 @@ object Remainss {
     bundle {
       desc(zh_CN, "迷思海", "你可悲的一部分正期望着回到你的身上")
     }
-    setDescription(description)
+    setDescription(getDescription())
     icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 32
       it.frameDuration = 60f / 8f

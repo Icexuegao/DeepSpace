@@ -30,7 +30,6 @@ import ice.graphics.IceColor
 import ice.graphics.RandSetTextrue
 import ice.library.IFiles
 import ice.library.scene.ui.*
-import ice.ui.bundle.localizedName
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceEffects
 import ice.world.meta.IceStats
@@ -97,12 +96,12 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             t.defaults().left().pad(5f).growX().height(40f)
             t.add(DeepSpace.modDisplayName).color(Pal.accent)
             t.row()
-            t.add(IceStats.作者.localizedName).color(Pal.accent)
+            t.add(IceStats.作者.getLocalizedName()).color(Pal.accent)
             t.add(DeepSpace.modAuthor).color(IceColor.b4)
-            t.button(IceStats.亲爱的贡献者.localizedName, SglDrawConst.contributeIcon, Styles.nonet, 28f) {
+            t.button(IceStats.亲爱的贡献者.getLocalizedName(), SglDrawConst.contributeIcon, Styles.nonet, 28f) {
             }.update { b: TextButton -> b.setChecked(false) }.width(230f)
             t.row()
-            t.add(IceStats.版本.localizedName).color(Pal.accent)
+            t.add(IceStats.版本.getLocalizedName()).color(Pal.accent)
             t.add(DeepSpace.modVersion).color(IceColor.b4)
             t.table { update ->
               update.add(object : Element() {
@@ -131,7 +130,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
               }
             }.width(230f)
             t.row()
-            t.add(IceStats.版本发布日期.localizedName).color(Pal.accent)
+            t.add(IceStats.版本发布日期.getLocalizedName()).color(Pal.accent)
             t.add(DeepSpace.modUpdateDate).color(IceColor.b4)
             t.button("", Icon.upload, Styles.nonet, 28f) {
               checkOrDoUpdate()

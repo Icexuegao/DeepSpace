@@ -3,6 +3,7 @@ package ice.content.unit.flying.rain
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.gen.Sounds

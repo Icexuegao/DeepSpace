@@ -7,6 +7,7 @@ import ice.content.ILiquids
 import ice.entities.bullet.BombBulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import mindustry.content.Fx

@@ -3,6 +3,7 @@ package ice.content.unit
 import arc.graphics.Color
 import arc.math.Interp
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.bullet.ExplosionBulletType
 import mindustry.entities.effect.MultiEffect

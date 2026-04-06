@@ -2,6 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category

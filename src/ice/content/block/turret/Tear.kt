@@ -9,6 +9,7 @@ import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
 import ice.library.util.toColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements

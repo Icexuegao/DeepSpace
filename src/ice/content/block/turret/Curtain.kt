@@ -8,6 +8,7 @@ import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.graphiteCloud
 import ice.entities.bullet.base.BasicBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Items

@@ -11,7 +11,6 @@ import arc.util.Tmp
 import ice.entities.bullet.base.BulletType
 import mindustry.gen.Bullet
 import mindustry.type.ItemStack
-import singularity.world.draw.DrawSglTurret
 import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.cons.item.ConsumeItems
 import kotlin.math.min
@@ -21,7 +20,6 @@ open class ContinuousTurret(name: String):SglTurret(name) {
 
   var aimChangeSpeed: Float = Float.POSITIVE_INFINITY
   init {
-    DrawSglTurret()
     buildType= Prov{ ContinuousTurretBuild() }
   }
 
@@ -59,12 +57,6 @@ open class ContinuousTurret(name: String):SglTurret(name) {
 
     }
 
-    override fun drawSelect() {
-      super.drawSelect()
-    }
-    override fun range(): Float {
-      return currentAmmo?.bulletType?.range?:super.range()
-    }
     override fun updateTile() {
 
       super.updateTile()

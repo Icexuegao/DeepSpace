@@ -6,6 +6,7 @@ import arc.graphics.g2d.Lines
 import arc.math.Mathf
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
@@ -46,6 +47,6 @@ class MonocrystallineSiliconFactory : NormalCrafter("monocrystallineSiliconFacto
       )
       Draw.color()
     }, DrawDefault(), DrawFlame(color))
-    requirements(Category.crafting, IItems.铬锭, 55, IItems.高碳钢, 200, IItems.铜锭, 150)
+    requirements(Category.crafting, IItems.铬锭, 55, IItems.高碳钢, 150, IItems.铜锭, 100)
   }
 }

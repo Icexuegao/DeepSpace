@@ -8,6 +8,7 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx

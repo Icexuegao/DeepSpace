@@ -4,6 +4,7 @@ import arc.graphics.Color
 import arc.math.geom.Rect
 import ice.entities.bullet.LaserBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.gen.Sounds

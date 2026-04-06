@@ -10,6 +10,7 @@ import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect

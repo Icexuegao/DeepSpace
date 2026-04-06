@@ -5,7 +5,7 @@ import ice.content.IUnitTypes
 import ice.entities.bullet.spawnBulletType
 import ice.library.util.toColor
 import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.BaseBundle.Companion.desc
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.DeathGiftAbility
 import ice.world.content.unit.ability.FlashbackAbility

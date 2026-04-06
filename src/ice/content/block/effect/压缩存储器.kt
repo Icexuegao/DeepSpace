@@ -2,6 +2,7 @@ package ice.content.block.effect
 
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.storage.StorageBlock

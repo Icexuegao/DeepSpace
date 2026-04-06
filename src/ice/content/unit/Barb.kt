@@ -1,6 +1,7 @@
 package ice.content.unit
 
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.gen.CrawlUnit
 

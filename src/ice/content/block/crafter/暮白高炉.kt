@@ -4,6 +4,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawArcSmelt
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti

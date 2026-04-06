@@ -4,6 +4,7 @@ import arc.graphics.g2d.Draw
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.gen.Building
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal

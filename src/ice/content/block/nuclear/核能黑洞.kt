@@ -1,6 +1,7 @@
 package ice.content.block.nuclear
 
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.type.ItemStack
 import mindustry.world.meta.BuildVisibility
 import singularity.type.SglCategory

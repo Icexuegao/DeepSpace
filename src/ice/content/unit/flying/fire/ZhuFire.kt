@@ -6,6 +6,7 @@ import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects

@@ -4,6 +4,7 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.WaveEffect

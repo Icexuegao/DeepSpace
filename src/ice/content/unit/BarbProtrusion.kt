@@ -3,6 +3,7 @@ package ice.content.unit
 import arc.math.geom.Rect
 import ice.entities.bullet.base.BasicBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.graphics.Pal

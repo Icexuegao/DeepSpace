@@ -49,7 +49,6 @@ open class ArcFieldBulletType :ContinuousBulletType() {
     b.fdata = highlightTime
     bullets.add(b)
   }
-
   override fun update(b: Bullet) {
     super.update(b)
     b.fdata += Time.delta
@@ -110,7 +109,7 @@ open class ArcFieldBulletType :ContinuousBulletType() {
             val apply = (bullet.type as ArcFieldBulletType)
             Draw.color(apply.hitColor)
             Draw.alpha(0.6f)
-            Fill.arc(bullet.x, bullet.y, apply.length * bullet.fin().slope, apply.angle / 360f, bullet.rotation() - apply.angle / 2f)
+            Fill.arc(bullet.x, bullet.y, apply.calculateRange() * bullet.fin().slope, apply.angle / 360f, bullet.rotation() - apply.angle / 2f)
           }
         }
 

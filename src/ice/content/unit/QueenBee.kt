@@ -8,6 +8,7 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.ai.types.DefenderAI
 import mindustry.content.Fx

@@ -13,7 +13,6 @@ import arc.util.Strings
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.library.struct.AttachedProperty
-import ice.ui.bundle.localizedName
 import ice.world.meta.IceStats
 import mindustry.game.Team
 import mindustry.gen.Building
@@ -183,7 +182,7 @@ init {
             t!!.defaults().grow().margin(0.0f)
             t.table(Tex.pane2, Cons { liquid: Table? ->
               liquid!!.defaults().growX().margin(0.0f).pad(4.0f).height(18.0f)
-              liquid.left().add(IceStats.流体.localizedName).color(Pal.gray)
+              liquid.left().add(IceStats.流体.getLocalizedName()).color(Pal.gray)
               liquid.row()
               for (stack in cl.consLiquids!!) {
                 val bar = Func { entity: Building? -> Bar(Prov { stack.liquid.localizedName }, Prov { if (stack.liquid.barColor != null) stack.liquid.barColor else stack.liquid.color }, Floatp { min(entity!!.liquids.get(stack.liquid) / this.liquids()!!.allCapacity, 1.0f) }) }
@@ -204,7 +203,7 @@ init {
               t!!.defaults().grow().margin(0.0f)
               t.table(Tex.pane2, Cons { liquid: Table? ->
                 liquid!!.defaults().growX().margin(0.0f).pad(4.0f).height(18.0f)
-                liquid.add(IceStats.流体.localizedName).color(Pal.gray)
+                liquid.add(IceStats.流体.getLocalizedName()).color(Pal.gray)
                 liquid.row()
                 for (stack in pl.liquids) {
                   val bar = Func { entity: Building? -> Bar(Prov { stack.liquid.localizedName }, Prov { if (stack.liquid.barColor != null) stack.liquid.barColor else stack.liquid.color }, Floatp { min(entity!!.liquids.get(stack.liquid) / this.liquids()!!.allCapacity, 1.0f) }) }

@@ -15,6 +15,7 @@ import ice.entities.bullet.BlastLaser
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.weapon.MayflyWeapon
 import ice.world.draw.part.CustomPart

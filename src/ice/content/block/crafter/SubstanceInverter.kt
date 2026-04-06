@@ -9,6 +9,7 @@ import arc.util.Time
 import arc.util.noise.Noise
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.Effect

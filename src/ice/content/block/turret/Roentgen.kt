@@ -7,6 +7,7 @@ import ice.content.ILiquids
 import ice.content.IStatus
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds

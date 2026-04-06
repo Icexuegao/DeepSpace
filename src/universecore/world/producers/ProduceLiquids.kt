@@ -3,7 +3,6 @@ package universecore.world.producers
 import arc.graphics.Color
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
-import ice.ui.bundle.localizedName
 import ice.world.meta.IStatValues
 import ice.world.meta.IceStats
 import mindustry.gen.Building
@@ -86,7 +85,7 @@ class ProduceLiquids<T>(var liquids: Array<out LiquidStack>) : BaseProduce<T>() 
       table.row()
       table.table {t: Table ->
         t.defaults().left().fill().padLeft(6f)
-        t.add("${IceStats.流体.localizedName}:").left()
+        t.add("${IceStats.流体.getLocalizedName()}:").left()
         for (stack in liquids) {
           t.add(IStatValues.displayLiquid(stack.liquid, stack.amount, true, showName = true))
         }

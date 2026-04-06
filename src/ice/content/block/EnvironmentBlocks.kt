@@ -14,6 +14,7 @@ import ice.library.world.Load
 import ice.shader.IceShader
 import ice.type.Dup
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.environment.*
 import ice.world.meta.IAttribute
 import mindustry.Vars

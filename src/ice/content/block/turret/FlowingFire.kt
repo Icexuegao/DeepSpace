@@ -6,6 +6,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.entities.bullet.ContinuousFlameBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds
 import mindustry.type.Category

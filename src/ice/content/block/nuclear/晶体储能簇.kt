@@ -5,6 +5,7 @@ import arc.func.Func
 import arc.math.Mathf
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.graphics.Layer
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawMulti

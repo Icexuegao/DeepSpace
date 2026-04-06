@@ -21,6 +21,7 @@ import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.scene.ui.updateE
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
@@ -37,7 +38,7 @@ import singularity.world.blocks.SglBlock
 import kotlin.math.absoluteValue
 import kotlin.math.max
 
-class ProspectingRadar :SglBlock("prospectingRadar") {
+class 勘探雷达 :SglBlock("prospectingRadar") {
   var range = 50
   var baseSpeed = 0.5f
 

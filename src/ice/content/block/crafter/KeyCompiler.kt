@@ -11,6 +11,7 @@ import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
 import ice.library.util.toColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawArcSmelt
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx

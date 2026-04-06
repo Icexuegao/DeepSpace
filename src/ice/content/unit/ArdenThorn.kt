@@ -19,6 +19,7 @@ import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
 import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.Entity
 import ice.world.content.unit.weapon.ChargeWeapon

@@ -8,6 +8,7 @@ import ice.graphics.IceColor
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.*

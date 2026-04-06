@@ -4,6 +4,7 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.StatusEffects
 import mindustry.entities.bullet.SapBulletType

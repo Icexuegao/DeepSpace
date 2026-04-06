@@ -5,6 +5,7 @@ import arc.func.Func
 import arc.graphics.Color
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.world.draw.DrawDefault

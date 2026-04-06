@@ -7,7 +7,6 @@ import arc.struct.IntMap
 import arc.util.Nullable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.ui.bundle.localizedName
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.Items
@@ -130,7 +129,7 @@ class ItemsBuffer : BaseBuffer<ItemStack, Item, ItemsBuffer.ItemPacket>() {
         return BufferItemModule()
     }
 
-    override fun localization()=IceStats.物品.localizedName
+    override fun localization()=IceStats.物品.getLocalizedName()
 
     override fun displayColor(): Color? {
         return Pal.accent

@@ -7,6 +7,7 @@ import arc.math.Mathf
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Building

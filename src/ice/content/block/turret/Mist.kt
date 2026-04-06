@@ -8,6 +8,7 @@ import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.graphiteCloud
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Items
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds

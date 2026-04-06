@@ -8,6 +8,7 @@ import ice.content.IItems
 import ice.content.block.EnvironmentBlocks
 import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds

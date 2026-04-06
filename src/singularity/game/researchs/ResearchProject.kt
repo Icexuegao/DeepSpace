@@ -7,7 +7,6 @@ import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Nullable
 import ice.ui.bundle.Bundle
-import ice.ui.bundle.localizedName
 import mindustry.ctype.UnlockableContent
 import singularity.Singularity
 import singularity.contents.SglTechThree
@@ -20,10 +19,9 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
   val requireDevices: Seq<ResearchDevice?> = Seq<ResearchDevice?>()
 
   init {
-    localizedName = name
+    setLocalizedName(name)
   }
 
-  var description: String? = Core.bundle.get("research.$name.description")
   var slogan: String = "slogan"
   var icon: TextureRegion? = Singularity.getModAtlas("research_$name", null)
 
@@ -43,10 +41,6 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
     private set
   var researched: Int = 0
     private set
-
-  fun getLocalizedName(): String {
-    return localizedName
-  }
 
   fun hideTechs(): ResearchProject {
     hideTechs = true

@@ -17,6 +17,7 @@ import ice.content.block.product.岩石粉碎机
 import ice.library.util.toColor
 import ice.library.world.Load
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.liquid.SolidPump

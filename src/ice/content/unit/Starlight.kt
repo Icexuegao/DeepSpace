@@ -5,6 +5,7 @@ import arc.math.Interp
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.entities.part.DrawPart

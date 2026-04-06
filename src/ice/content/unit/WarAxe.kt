@@ -7,6 +7,7 @@ import ice.entities.bullet.ExplosionBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.effect.WaveEffect

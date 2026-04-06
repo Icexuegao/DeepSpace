@@ -5,7 +5,6 @@ import arc.math.Mathf
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
 import arc.struct.Seq
-import ice.ui.bundle.localizedName
 import ice.world.meta.IceStats
 import mindustry.gen.Building
 import mindustry.type.Item
@@ -115,7 +114,7 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
       table.row()
       table.table {t ->
         t.defaults().left().fill().padLeft(6f)
-        t.add("${IceStats.物品.localizedName}:").left()
+        t.add("${IceStats.物品.getLocalizedName()}:").left()
         if (!random) {
 
           for (stack in items) {

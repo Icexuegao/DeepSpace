@@ -4,7 +4,6 @@ import arc.math.Mathf
 import arc.scene.ui.layout.Table
 import arc.struct.ObjectMap
 import arc.struct.Seq
-import ice.ui.bundle.localizedName
 import ice.world.meta.IceStats
 import mindustry.ctype.Content
 import mindustry.gen.Building
@@ -65,7 +64,7 @@ class ConsumeItems<T>(items: Array<out ItemStack>) : ConsumeItemBase<T>() where 
       table.row()
       table.table { t ->
         t.defaults().left().grow().fill().padLeft(6f)
-        t.add("${IceStats.物品.localizedName}:")
+        t.add("${IceStats.物品.getLocalizedName()}:")
         for (stack in consItems!!) {
           t.add(if (showPerSecond) StatValues.displayItem(stack.item, stack.amount, parent!!.craftTime, true) else StatValues.displayItem(stack.item, stack.amount, true))
         }

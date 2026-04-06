@@ -4,7 +4,6 @@ import arc.Core
 import arc.Events
 import arc.util.Nullable
 import ice.DeepSpace
-import ice.ui.bundle.localizedName
 import singularity.core.SglEventTypes.ResearchCompletedEvent
 import singularity.core.SglEventTypes.RevealedEvent
 
@@ -45,7 +44,7 @@ abstract class RevealGroup(protected val name: String?) {
 
   class ResearchReveal(name: String?, private val project: ResearchProject) : RevealGroup(name) {
     override fun localized(): String {
-      return "研究 ${project.localizedName}"
+      return "研究 ${project.getLocalizedName()}"
     }
 
     override fun applyTrigger() {

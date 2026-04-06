@@ -2,6 +2,7 @@ package ice.content.unit
 
 import ice.library.util.toColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.ai.UnitCommand
 import mindustry.gen.BuildingTetherPayloadUnit

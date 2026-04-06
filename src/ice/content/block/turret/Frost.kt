@@ -10,6 +10,7 @@ import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.crushedIce
 import ice.entities.bullet.ContinuousLaserBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.entities.part.HaloPart
 import mindustry.entities.part.RegionPart
 import mindustry.entities.part.ShapePart

@@ -2,6 +2,7 @@ package ice.content.block.nuclear
 
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.NuclearNode
 

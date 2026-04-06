@@ -3,8 +3,8 @@ package ice.content.block.crafter
 import arc.Core
 import ice.content.AtomSchematics
 import ice.content.IItems
-import ice.ui.bundle.localizedName
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.graphics.Pal
@@ -58,7 +58,7 @@ class Destructors : NormalCrafter("destructor") {
       val schematic = if (e.consumeCurrent == -1) null else AtomSchematics.AtomSchematic.all[e.consumeCurrent]
       Bar({
         if (schematic != null) Core.bundle.formatString("解析进度: {0}/{1}", schematic.d, schematic.reqint)
-        else IceStats.未选择.localizedName
+        else IceStats.未选择.localized()
       }, {Pal.bar}, {schematic?.progession() ?: 0f})
     }
   }

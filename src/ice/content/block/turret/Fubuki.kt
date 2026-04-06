@@ -14,6 +14,7 @@ import ice.content.block.turret.TurretBullets.crushedIce
 import ice.content.block.turret.TurretBullets.rand
 import ice.entities.bullet.base.BulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.entities.part.RegionPart
 import mindustry.gen.Bullet

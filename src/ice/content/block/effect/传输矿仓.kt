@@ -4,6 +4,7 @@ import ice.content.IItems
 import ice.content.block.ProductBlocks
 import ice.library.EventType.addContentInitEvent
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.effect.ItemExtractor
 import mindustry.type.Category
 import mindustry.type.ItemStack

@@ -3,6 +3,7 @@ package ice.content.block.crafter
 import arc.graphics.Color
 import ice.content.IItems
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
@@ -38,7 +39,7 @@ class 钴钢压缩机 : NormalCrafter("cobaltSteelCompressor") {
 
     newConsume().apply {
       time(36f)
-      items(IItems.钴锭, 2, IItems.铬锭, 2)
+      items(IItems.钴锭, 1, IItems.铬锭, 2)
       liquid(Liquids.water, 20f / 60f)
       power(7.5f)
     }

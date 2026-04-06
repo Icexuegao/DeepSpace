@@ -46,7 +46,7 @@ open class ContinuousBulletType :BulletType() {
   }
 
   override fun calculateRange(): Float {
-    return max(length, maxRange)
+    return max(length+rangeChange, maxRange)
   }
 
   override fun init() {

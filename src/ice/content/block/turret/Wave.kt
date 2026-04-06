@@ -6,6 +6,7 @@ import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.ArtilleryBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects

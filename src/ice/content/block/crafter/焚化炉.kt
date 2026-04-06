@@ -15,6 +15,7 @@ import ice.content.IItems
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.liquid.LiquidJunction
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti

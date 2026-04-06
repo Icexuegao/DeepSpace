@@ -8,7 +8,6 @@ import arc.struct.IntMap
 import arc.struct.Seq
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.ui.bundle.localizedName
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.Liquids
@@ -142,7 +141,7 @@ class LiquidsBuffer : BaseBuffer<LiquidsBuffer.LiquidIntegerStack, Liquid, Liqui
         return BufferLiquidModule()
     }
 
-    override fun localization()=IceStats.流体.localizedName
+    override fun localization()=IceStats.流体.getLocalizedName()
 
     override fun displayColor(): Color? {
         return Liquids.water.color

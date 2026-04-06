@@ -21,6 +21,7 @@ import ice.content.block.turret.TurretBullets.破碎FEX结晶
 import ice.entities.effect.MultiEffect
 import ice.library.world.Load
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.status.IceStatusEffect
 import ice.world.content.status.PercentStatus
 import ice.world.meta.IceEffects

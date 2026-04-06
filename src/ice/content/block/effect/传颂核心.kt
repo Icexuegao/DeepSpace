@@ -3,6 +3,7 @@ package ice.content.block.effect
 import ice.content.IItems
 import ice.content.IUnitTypes
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.CoreBlock
 import mindustry.type.Category

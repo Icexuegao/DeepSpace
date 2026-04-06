@@ -4,6 +4,7 @@ import arc.graphics.g2d.Draw
 import ice.entities.bullet.RandomDamageBulletType
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.entities.part.DrawPart
@@ -35,7 +36,7 @@ class Lucifer : IceUnitType("lucifer") {
     circleTarget = true
     engineColor = IceColor.b4
     itemCapacity = 30
-    buildSpeed = 0.75f
+    buildSpeed = 3f
     buildRange = 8 * 40f
     outlines = false
     setWeapon("weapon1") {

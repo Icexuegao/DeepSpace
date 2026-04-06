@@ -17,6 +17,7 @@ import arc.util.io.Writes
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.Vars

@@ -11,12 +11,15 @@ object CrafterBlocks : Load {
 
   val 铸铜厂 = 铸铜厂()
   val 特化冶炼阵列 = 特化冶炼阵列()
+
   val 硫化物混合器 = SulfideMixer()
   val 爆炸物混合器 = ExplosiveMixer()
+  val 低温混合器 = 低温混合器()
+
   val 单晶硅厂 = MonocrystallineSiliconFactory()
   val 等离子蚀刻厂 = 等离子蚀刻厂()
 
-  val 低温混合器 = 低温混合器()
+
   val 矿石粉碎机 = 矿石粉碎机()
   val 蜂巢陶瓷合成巢 = 蜂巢陶瓷合成巢()
   val 冲压锻炉 = 冲压锻炉()
@@ -31,7 +34,7 @@ object CrafterBlocks : Load {
   val 以太封装器 = 以太封装器()
   val 陶钢熔炼炉 = 陶钢熔炼炉()
   val 高能陶钢聚合炉 = 高能陶钢聚合炉()
-  val 铈凝块混合器 = CeriumBlockMixer()
+  val 铈凝块混合器 = 铈凝块混合器()
 
   val 生物钢重组器 = BiomassReformer()
   val 血浆过滤器 = PlasmaFilter()

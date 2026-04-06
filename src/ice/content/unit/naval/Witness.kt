@@ -2,6 +2,7 @@ package ice.content.unit.naval
 
 import ice.entities.bullet.base.BasicBulletType
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.bullet.MissileBulletType

@@ -3,6 +3,7 @@ package ice.content.unit
 import arc.func.Func
 import ice.ai.CarryTaskAI
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 
 class Chord : IceUnitType("chord") {

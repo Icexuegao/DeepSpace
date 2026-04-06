@@ -7,6 +7,7 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.ArmorPlateAbility
 import mindustry.content.Fx

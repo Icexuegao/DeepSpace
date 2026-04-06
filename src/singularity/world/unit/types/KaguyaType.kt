@@ -19,6 +19,7 @@ import arc.util.Tmp
 import ice.DeepSpace
 import ice.library.struct.AttachedProperty
 import ice.ui.bundle.bundle
+import ice.ui.bundle.desc
 import mindustry.content.Fx
 import mindustry.entities.Units
 import mindustry.entities.bullet.BulletType
