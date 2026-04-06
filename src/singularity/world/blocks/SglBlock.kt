@@ -299,7 +299,7 @@ open class SglBlock(name: String) : IceBlock(name), ConsumerBlockComp, PostAtlas
     var drawAlphas: FloatArray = floatArrayOf()
     var CONTAINER: LightningContainer? = null
     override lateinit var consumer: BaseConsumeModule
-    var energy = NuclearEnergyModule(this)
+    open var energy = NuclearEnergyModule(this)
     var recipeSelected: Boolean = false
     protected val displayLiquids: Seq<LiquidStack> = Seq<LiquidStack>()
 
