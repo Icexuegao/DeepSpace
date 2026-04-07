@@ -3,8 +3,6 @@ package ice.ui.fragment
 import arc.Core
 import arc.flabel.FLabel
 import arc.func.Boolp
-import arc.graphics.g2d.Draw
-import arc.graphics.g2d.Fill
 import arc.math.Rand
 import arc.scene.Group
 import arc.scene.actions.Actions
@@ -12,63 +10,40 @@ import arc.scene.event.Touchable
 import arc.scene.ui.layout.WidgetGroup
 import arc.struct.Seq
 import ice.graphics.IceColor
-import ice.library.math.slope
 import ice.library.scene.ui.colorR
 import ice.library.util.accessFloat
 import ice.world.meta.IceEffects
 import mindustry.Vars
-import mindustry.entities.Effect
-import universecore.ui.elements.SceneEffect
 
 object FleshFragment {
   var group: Group = WidgetGroup()
   var text = Seq<String>(String::class.java).apply {
     addAll(
       """
-                都怪你
-                你在哪
-                我喜欢你
-                捅死你喵
-                为什么要给别人画贴图
-                我哪里对你不好了
-                不要走
-                不要离开我好不好
-                求你了
-                都是你的错
-                永远在一起好不好
-                你是我的
-                只能看着我
-                不许看别人
-                我要把你锁起来
-                这样你就不会离开了
-                好爱你啊
-                为什么要逃呢
-                我会好好对你的
-                把你的眼睛挖出来
-                这样就只能看到我了
-                嘻嘻嘻
-                你是我的玩具
-                不许对别人笑
-                我要把你吃掉
-                融为一体
-                永远不分开
-                你只能属于我
-                背叛的话就杀掉哦
-                开玩笑的啦
-                才怪
-                为什么要发抖呢
-                我又不会伤害你
-                大概
-                乖乖听话就好
-                你是我的全部
-                没有你我活不下去
-                所以你也别想离开
-                呵呵呵
-                抓到你了
-                这次不会再放手了
-                你的血好温暖
-                让我再多感受一点
-                
+         ・ｿ關ｽ蜈･逋ｽ蜈皮噪豢樒ｩｴ荵倶ｸｭ
+         蜿ｯ謔ｲ逧・諢夊｢逧・蟆丞ｧ大ｨ倡鯵荳ｽ荳・
+         蝨ｨ荳榊庄諤晁ｮｮ荵句嵜貍ｫ豁･逹
+         迢よｰ秘先ｸ蝉ｾｵ陏 迪ｫ蜆ｿ蜿大・蝌ｲ隨・
+         譌莨第裏豁｢逧・幻莨壻ｸ・郤｢闌ｶ荵溷ｷｲ扈丞・蜃・
+         蟆ｱ霑櫁ｿ呎ｨ｡讓｡邉顔ｳ顔噪諢剰ｯ・ｹ・
+         豺｡蛹悶∵ｺ｢蜃ｺ 豺ｷ蜷亥惠荳襍ｷ
+         蜿ｪ譛我ｸ画律譛育噪譛亥ｽｱ 譏ｭ遉ｺ逹邇ｰ蝨ｨ逧・慮髣ｴ
+         隨醍捩逧・賢蜥ｪ 螯よｭ､貂ｩ譟・
+         辷ｸ辷ｸ荵溷･ｽ縲∝ｦ亥ｦ井ｹ溽ｽ｢縲∝・驛ｽ荳埼怙隕∽ｺ・
+         譛臥擅鮠蜿ｯ莉･蜿匁囑 譛句暑荵溷ｷｲ扈丈ｸ榊ｿ・ｦ∽ｺ・
+         蜈ｨ驛ｨ 驛ｽ蝮乗脂蜷ｧ 荵ｱ菴應ｸ蝗｢逧・
+         謨ｴ荳ｪ荳也阜
+         蟆ｱ霑櫁ｿ咎復蟄宣㈹ 荵滓裏豕墓丐蜃ｺ譴ｦ諠ｳ荳主ｸ梧悍
+         逵句賦 閭悟鋤逧・辷ｱ荳ｽ荳・
+         蟆ｱ霑樊ｵｷ鮴滓ｱ､蝠・
+         螯ゆｻ贋ｹ溯・螟・荳句朕莠・操
+         蛛夂捩莉取悄蠕・ｸｭ騾・ｵｰ逧・｢ｦ
+         逵句賦 閭悟鋤逧・辷ｱ荳ｽ荳・
+         螟ｱ譛帷噪逵ｼ逾樣㈹ 鬚､謚也捩縲∝ｮｳ諤慕捩縲∝働豕｣逹
+         蟆ｱ霑櫁ｿ咎復蟄宣㈹ 荵滓裏豕墓丐蜃ｺ譴ｦ諠ｳ荳主ｸ梧悍蜻｢
+         逵句操 譏ｯ辷ｱ蜩ｭ鬯ｼ 辷ｱ荳ｽ荳・
+         蜿ｪ譏ｯ蟄伜惠莠取ｭ､螟・ｰｱ蜿ｯ莉･莠・逃
+         蜿ｯ謔ｲ逧・諢夊｢逧・蟆丞ｧ大ｨ倡鯵荳ｽ荳
         """.trimIndent().split("\n")
     )
   }
@@ -102,22 +77,6 @@ object FleshFragment {
       IceEffects.rand.nextFloat(Core.graphics.width.toFloat()-fLabel.width),
       IceEffects.rand.nextFloat((Core.graphics.height).toFloat())
     )
-    SceneEffect.showOnStage(  Effect(2*60f){e->
-
-      for(i in (1..33)) {
-        random.setSeed((e.id+i).toLong())
-        val x= random(0f,Core.graphics.width.toFloat())
-        val y=random(0f,Core.graphics.height.toFloat())
-
-        Draw.color(IceColor.r2)
-        Draw.alpha(e.fin().slope)
-        Fill.rect(x,y,8f,8f)
-      }
-
-
-    },fLabel.x,fLabel.y).apply {
-      setScale(4f)
-    }
     group.addChild(fLabel)
   }
 }
