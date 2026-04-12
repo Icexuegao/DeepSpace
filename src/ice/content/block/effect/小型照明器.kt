@@ -16,7 +16,7 @@ class 小型照明器:LightBlock("illuminatorSmall"){
     consumePower(0.2f)
     requirements(Category.effect, IItems.铜锭, 10f, IItems.高碳钢, 10f)
     bundle {
-      desc(zh_CN, "照明器", "高效的照明设备,功耗低照明范围广")
+      desc(zh_CN, "照明器", "为自身周围区域提供照明","高效的照明设备,功耗低照明范围广")
     }
   }
 }

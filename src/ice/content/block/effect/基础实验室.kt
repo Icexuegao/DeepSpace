@@ -10,7 +10,7 @@ class 基础实验室:Laboratory("laboratory"){
   init  {
     consumePower(100f / 60)
     bundle {
-      desc(zh_CN, "基础实验室")
+      desc(zh_CN, "基础实验室","提供资源后会缓慢研究选定科技.可配置")
     }
     itemCapacity = 100
     alwaysUnlocked = true

@@ -22,7 +22,7 @@ import singularity.world.draw.DrawSglTurret
 class 洛华 :ContinuousTurret("mendTower") {
   init {
     bundle {
-      desc(zh_CN, "洛华", "使用方菱折射投射出扇形修复光束覆盖建筑进行修复")
+      desc(zh_CN, "洛华", "折射投射出扇形修复光束覆盖建筑进行修复")
     }
 
     buildType = Prov {

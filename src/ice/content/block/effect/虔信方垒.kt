@@ -10,6 +10,9 @@ import mindustry.type.Category
 
 class 虔信方垒 :CoreBlock("pietasCornerCore") {
   init {
+    bundle {
+      desc(zh_CN, "虔信方垒","控制区块的基础.一旦被摧毁,所在区块将重归于敌人控制")
+    }
     size = 3
     armor=20f
     health = 1000
@@ -22,8 +25,5 @@ class 虔信方垒 :CoreBlock("pietasCornerCore") {
     alwaysUnlocked = true
     buildCostMultiplier = 2f
     requirements(Category.effect, IItems.高碳钢, 1000, IItems.低碳钢, 1200, IItems.锌锭, 400, IItems.铜锭, 200)
-    bundle {
-      desc(zh_CN, "虔信方垒")
-    }
   }
 }

@@ -10,7 +10,7 @@ import mindustry.world.blocks.storage.StorageBlock
 class 晶格数据矩阵 :StorageBlock("effect_latticeDataMatrix"){
   init{
     bundle {
-      desc(zh_CN, "晶格数据矩阵", "通过灵能解构技术,将物品转为数据存储在灵能晶格之中")
+      desc(zh_CN, "晶格数据矩阵", "巨量存储各种类型的物品,物品将被解构为数据进行存储.可以用装卸器卸载物品")
     }
     size = 4
     health = 16000
