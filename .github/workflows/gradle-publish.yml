@@ -21,6 +21,16 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android Build Tools
+        run: sdkmanager "build-tools;37.0.0-rc2"
+
+
+
+
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
@@ -31,6 +41,9 @@ jobs:
 
       - name: Build JAR
         run: ./gradlew deployVersion
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
