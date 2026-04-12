@@ -100,7 +100,7 @@ object LiquidBlocks : Load {
   }
   val 动脉导管 = Conduit("arteryConduit").apply {
     bundle {
-      desc(zh_CN, "动脉导管", "向前急速传输液体并且不接受侧面输出,同时阻止流体泄露")
+      desc(zh_CN, "动脉导管", "向前急速传输流体并且不接受侧面输出,同时阻止流体泄露")
     }
     healAmount = 30f
     health = 600
@@ -118,7 +118,7 @@ object LiquidBlocks : Load {
 
   val 基础导管桥 = TransferNode("baseBridgeConduit").apply {
     bundle {
-      desc(zh_CN, "基础导管桥", "向被连接的输出节点传输液体,传输节点面向连接的一侧不可接收液体")
+      desc(zh_CN, "基础导管桥", "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体")
     }
     directionAny = false
     range = 5
@@ -130,7 +130,7 @@ object LiquidBlocks : Load {
   }
   val 装甲导管桥 = TransferNode("bridgeConduitArmored").apply {
     bundle {
-      desc(zh_CN, "装甲导管桥", "向被连接的输出节点传输液体,传输节点面向连接的一侧不可接收液体.拥有更厚的装甲")
+      desc(zh_CN, "装甲导管桥", "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体.拥有更厚的装甲")
     }
     directionAny = false
     armor = 4f
@@ -173,7 +173,7 @@ object LiquidBlocks : Load {
   }
   val 动脉导管桥 = TransferNode("bridgeConduitArtery").apply {
     bundle {
-      desc(zh_CN, "动脉导管桥", "消耗电力,向被连接的输出节点长距离传输液体,传输节点面向连接的一侧不可接收液体")
+      desc(zh_CN, "动脉导管桥", "消耗电力,向被连接的输出节点长距离传输流体,传输节点面向连接的一侧不可接收流体")
     }
     healAmount = 60f
     allowDiagonal = false
@@ -219,7 +219,7 @@ object LiquidBlocks : Load {
 
   val 流体容器 = LiquidRouter("liquidContainer").apply {
     bundle {
-      desc(zh_CN, "流体容器","可以储存少量单一液体")
+      desc(zh_CN, "流体容器","可以储存少量单一流体")
     }
     size = 2
     solid = true
