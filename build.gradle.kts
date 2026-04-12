@@ -157,30 +157,6 @@ tasks {
     from("src")
     include("**/*.java", "**/*.kt")
   }
-  /*register<proguard.gradle.ProGuardTask>("proGuardTask") {
-    // 重要：依赖 shadowJar，而不是 jar
-    dependsOn(shadowJar)
-    group = "alon"
-    // 输入 JAR - 使用 ShadowJar 生成的 JAR
-    injars("build/libs/${project.name}Desktop.jar")
-    // 输出 JAR
-    outjars("build/libs/${project.name}DesktopProGuard.jar")
-    // 使用 Set 确保唯一性
-    val jarSet = mutableSetOf<File>()
-    // 添加编译类路径
-    configurations.compileClasspath.get().files.filter { it.name.endsWith(".jar") }.forEach { jarSet.add(it) }
-    // 库 JAR
-    libraryjars(jarSet)
-
-    libraryjars("${System.getProperty("java.home")}/jmods/")
-    // ProGuard 配置文件
-    configuration("proguard-rules.pro")
-    // 添加详细输出选项
-
-    printmapping("build/mapping.txt")
-    printseeds("build/seeds.txt")
-    printusage("build/usage.txt")
-  }*/
 
   register<Copy>("myCopyJar") {
     group = "alon"
