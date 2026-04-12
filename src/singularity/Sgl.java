@@ -15,7 +15,6 @@ import singularity.core.ModConfig;
 import singularity.core.ModsInteropAPI;
 import singularity.game.researchs.ResearchManager;
 import singularity.graphic.MathRenderer;
-import singularity.graphic.PostAtlasGenerator;
 import singularity.graphic.SglDrawConst;
 import singularity.graphic.SglShaders;
 import singularity.ui.SglStyles;
@@ -29,12 +28,6 @@ import universecore.util.mods.ModInfo;
 public class Sgl {
   public static final String NL = System.lineSeparator();
 
-
-
-  /** 本模组的文件位置 */
-  public static final ModInfo mod = IFiles.INSTANCE.getModWithClass();
-  /** 此模组的压缩包对象 */
-  public static final Fi modFile = mod.getFile();
 
 /** 通知标签历史 *//*
 
@@ -87,7 +80,6 @@ public class Sgl {
 
 
     if (!Core.app.isHeadless()) {
-      generatePostAtlas();
       //设置屏幕采样器
       ScreenSampler.INSTANCE.setup();
       //载入着色器
@@ -151,12 +143,4 @@ public class Sgl {
     });
   }*/
 
-  private static void generatePostAtlas() {
-    Log.info("[Singularity] load post generated atlas");
-    Vars.content.each(c -> {
-      if (c instanceof PostAtlasGenerator gen) {
-        gen.postLoad();
-      }
-    });
-  }
 }

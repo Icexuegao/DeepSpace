@@ -83,6 +83,7 @@ abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val co
     flunInfo()
   }
   open fun flunList() {
+    list.clearChildren()
     list.setRowsize(5)
     contetnArray.select { content ->
       searchSelect(content)

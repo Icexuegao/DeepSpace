@@ -15,12 +15,7 @@ import mindustry.content.Liquids
 import mindustry.entities.Damage
 import mindustry.graphics.Layer
 import mindustry.type.Category
-import mindustry.world.draw.DrawCultivator
-import mindustry.world.draw.DrawDefault
-import mindustry.world.draw.DrawGlowRegion
-import mindustry.world.draw.DrawLiquidTile
-import mindustry.world.draw.DrawParticles
-import mindustry.world.draw.DrawRegion
+import mindustry.world.draw.*
 import singularity.world.blocks.product.NormalCrafter
 import kotlin.math.min
 
@@ -110,8 +105,9 @@ open class 增压铈萃取器 : NormalCrafter("ceriumExtractorLarge") {
       super.draw()
       Draw.z(Layer.shields)
       Draw.color(Color.valueOf("F9A3C7"))
-      Draw.alpha(0.4f + Mathf.absin(3.14f * 5f, 0.4f) * efficiency)
+      Draw.alpha(0.4f)
       Fill.poly(this.x, this.y, 16, this.range() * this.warmup * size)
+      Draw.reset()
     }
 
     override fun updateTile() {

@@ -43,12 +43,10 @@ import mindustry.world.meta.*
 import singularity.Sgl
 import singularity.contents.SglUnits
 import singularity.contents.SglUnits.Companion.controlTime
-import singularity.graphic.PostAtlasGenerator
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
 import singularity.world.components.NuclearEnergyBuildComp
-import singularity.world.draw.DrawAtlasGenerator
 import singularity.world.meta.SglStat
 import singularity.world.meta.SglStatUnit
 import singularity.world.modules.NuclearEnergyModule
@@ -70,7 +68,7 @@ import universecore.world.consumers.ConsumeType
 import kotlin.math.min
 
 /**此mod的基础方块类型，对block添加了完善的consume系统，并拥有中子能的基础模块 */
-open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp, PostAtlasGenerator {
+open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
   var autoSelect: Boolean = false
   var canSelect: Boolean = true
   var outputItems: Boolean = false
@@ -279,16 +277,6 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp, PostAtlasG
     return if (Core.atlas.has("$name-preview")) arrayOf(Core.atlas.find("$name-preview")) else drawers.finalIcons(this)
   }
 
-  override fun postLoad() {
-    if (drawers is DrawAtlasGenerator) {
-      (drawers as DrawAtlasGenerator).postLoad(this)
-    }
-  }
-
-  override fun createIcons(packer: MultiPacker) {
-    super.createIcons(packer)
-    if (drawers is DrawAtlasGenerator) (drawers as DrawAtlasGenerator).generateAtlas(this, packer)
-  }
 
   companion object {
     const val BASE_EXBLOSIVE_ENERGY: Int = 128
@@ -303,7 +291,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp, PostAtlasG
     var drawAlphas: FloatArray = floatArrayOf()
     var CONTAINER: LightningContainer? = null
     override lateinit var consumer: BaseConsumeModule
-    open var energy = NuclearEnergyModule(this)
+    open var energyModule = NuclearEnergyModule(this)
     var recipeSelected: Boolean = false
     protected val displayLiquids: Seq<LiquidStack> = Seq<LiquidStack>()
 
@@ -378,14 +366,14 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp, PostAtlasG
     override fun consumeEnergy() = consumeEnergy
     override fun basicPotentialEnergy() = basicPotentialEnergy
     override fun maxEnergyPressure() = maxEnergyPressure
-    override fun energy(): NuclearEnergyModule = energy
+    override fun energy(): NuclearEnergyModule = energyModule
 
     override fun create(block: Block, team: Team): Building {
       super.create(block, team)
       liquids = SglLiquidModule()
       if (consumers.size == 1) recipeCurrent = 0
       consumer = BaseConsumeModule(this)
-      if (hasEnergy) energy = NuclearEnergyModule(this)
+      if (hasEnergy) energyModule = NuclearEnergyModule(this)
       return this
     }
 
@@ -671,7 +659,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp, PostAtlasG
 
       write.i(recipeCurrent)
       consumer.write(write)
-      energy.write(write)
+      energyModule.write(write)
     }
 
     override fun read(read: Reads, revision: Byte) {
@@ -681,7 +669,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp, PostAtlasG
 
       recipeCurrent = read.i()
       consumer.read(read)
-      energy.read(read)
+      energyModule.read(read)
     }
 
     override var heaps = ObjectMap<String, Takeable.Heaps<*>>()

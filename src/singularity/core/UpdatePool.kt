@@ -20,7 +20,7 @@ object UpdatePool {
   }
 
   fun update() {
-    for (task in updateTasks.values()) {
+    for(task in updateTasks.values()) {
       task.run()
     }
   }

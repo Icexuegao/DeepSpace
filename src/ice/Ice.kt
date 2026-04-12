@@ -1,6 +1,7 @@
 package ice
 
 import arc.Events
+import arc.files.Fi
 import ice.audio.SoundControl
 import ice.content.*
 import ice.content.block.IBlocks
@@ -11,7 +12,6 @@ import ice.game.IceTeam
 import ice.library.EventType
 import ice.library.IFiles
 import ice.library.Schematics
-import ice.library.struct.log
 import ice.ui.MenusDialog
 import ice.ui.UI
 import ice.ui.bundle.BaseBundle
@@ -20,6 +20,7 @@ import ice.world.content.blocks.effect.Noise2dBlock
 import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
+import mindustry.graphics.MultiPacker.PageType
 import mindustry.mod.Mod
 import mindustry.type.Category
 import mindustry.world.meta.BuildVisibility
@@ -28,7 +29,6 @@ import singularity.Singularity
 import singularity.type.SglCategory
 import singularity.type.SglContentType
 import tmi.RecipeEntryPoint
-import universe.util.reflect.Enums.accessEnum0
 import universecore.UncCore
 
 @RecipeEntryPoint(Recipes::class)
@@ -42,12 +42,45 @@ open class Ice :Mod() {
     d, f, w
   }
 
+  private fun getPage(file: Fi): PageType {
+    val path = file.path()
+    return if (path.contains("sprites/blocks/environment") || path.contains("sprites-override/blocks/environment")) PageType.environment else if (path.contains(
+        "sprites/rubble"
+      ) || path.contains("sprites-override/rubble")
+    ) PageType.rubble else if (path.contains("sprites/ui") || path.contains("sprites-override/ui")) PageType.ui else PageType.main
+  }
   init {
+   /* Events.on(mindustry.game.EventType.AtlasPackEvent::class.java){packEvent ->
+      IFiles.modWithClass.file.child("sprites_out").walk {
+       if (it.extension()=="png_"){
+         val pix = Pixmap(it.readBytes())
+         packEvent.multiPacker.add(getPage(it),"ice-${it.nameWithoutExtension()}", PixmapRegion(pix))
+         pix.dispose()
+       }
+      }
+      //replace old atlas data
+      packEvent.multiPacker.flush( TextureFilter.linear, Core.atlas)
+      //generate new icons
+      for(arr in Vars.content.contentMap) {
+        arr.each(Cons { c: Content? ->
+          if (c is UnlockableContent && c.minfo.mod == DeepSpace.mod) {
+            log { c.localizedName }
+            c.load()
+            c.loadIcon()
+            if (c.generateIcons && !c.minfo.mod.meta.pregenerated) {
+              c.createIcons(packEvent.multiPacker)
+            }
+          }
+        })
+      }
+
+    }
+
     val ad = A::class.accessEnum0()
     ad.newEnumInstance("xaw", 1)
     A.entries.toTypedArray().forEach {
       log { it.name + "  " + it.ordinal }
-    }
+    }*/
   }
 
   init {

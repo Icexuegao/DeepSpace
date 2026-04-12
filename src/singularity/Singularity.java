@@ -75,30 +75,7 @@ public class Singularity extends Mod {
   }
 
   public static Fi getInternalFile(String path) {
-    return Sgl.modFile.child(path);
+    return DeepSpace.INSTANCE.getModFile().child(path);
   }
 
-  public static Fi getDocumentFile(String name) {
-    return getInternalFile("documents").child(Core.bundle.getLocale().toString()).child(name);
-  }
-
-  public static Fi getDocumentFile(Locale locale, String name) {
-    Fi docs = getInternalFile("documents").child(locale.toString());
-    return docs.exists() ? docs.child(name) : getInternalFile("documents").child("zh_CN");
-  }
-
-  private static final ObjectMap<Fi, String> docCache = new ObjectMap<>();
-
-  public static String getDocument(String name) {
-    return getDocument(name, true);
-  }
-
-  public static String getDocument(String name, boolean cache) {
-    Fi fi = getDocumentFile(name);
-    return cache ? docCache.get(fi, fi::readString) : fi.readString();
-  }
-
-  public static String getDocument(Locale locale, String name) {
-    return getDocumentFile(locale, name).readString();
-  }
 }

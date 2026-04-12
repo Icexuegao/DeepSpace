@@ -6,7 +6,6 @@ import arc.audio.Sound
 import arc.graphics.Texture
 import arc.util.OS
 import ice.DeepSpace
-import ice.audio.ISounds
 import ice.core.SettingValue
 import ice.library.DeBugFragment
 import ice.library.EventType.addClientLoadEvent
@@ -14,7 +13,6 @@ import ice.library.IFiles
 import ice.library.world.Load
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.ConversationFragment
-import ice.ui.fragment.FleshFragment
 import ice.ui.menusDialog.DataDialog
 import mindustry.Vars
 import mindustry.gen.Icon
@@ -59,7 +57,6 @@ object UI : Load {
     //解决第一次选择星球报错问题
     Core.settings.put("campaignselect", true)
     Vars.ui.planet = IcePlanetDialog
-    FleshFragment.build(Vars.ui.hudGroup)
     //  ScenarioFragment.build(Vars.ui.hudGroup)
     DeBugFragment.build(Vars.ui.hudGroup)
     //  BossHealthFragment.build(Vars.ui.hudGroup)
@@ -91,6 +88,7 @@ object UI : Load {
   }
 
   fun loadSystemCursors() {
+
     Graphics.Cursor.SystemCursor.arrow.set(IFiles.newCursor("cursor"))
     Graphics.Cursor.SystemCursor.hand.set(IFiles.newCursor("hand"))
     Graphics.Cursor.SystemCursor.ibeam.set(IFiles.newCursor("ibeam"))

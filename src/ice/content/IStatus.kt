@@ -58,7 +58,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("unused")
-object IStatus : Load {
+object IStatus :Load {
   val lastHealth = ObjectMap<Unit, Float>()
   val rand: Rand = Rand()
   val 封冻 = IceStatusEffect("freeze") {
@@ -66,10 +66,11 @@ object IStatus : Load {
       desc(zh_CN, "封冻", "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成毁灭性打击")
     }
     setUpdate { unit, e ->
-      val ice = (600 / e.time) - 1f
-      if (unit.healthMultiplier > 0.4) unit.healthMultiplier *= ice
-      if (unit.speedMultiplier > 0.4) unit.speedMultiplier *= ice
-      if (unit.reloadMultiplier > 0.4) unit.reloadMultiplier *= ice
+      val f = 1 - (e.time / 600f)
+
+      if (unit.healthMultiplier > 0.4) unit.healthMultiplier *= f
+      if (unit.speedMultiplier > 0.4) unit.speedMultiplier *= f
+      if (unit.reloadMultiplier > 0.4) unit.reloadMultiplier *= f
     }
     transitionDamage = 36f
     init {
@@ -607,7 +608,8 @@ object IStatus : Load {
     init {
       affinity(status) { unit, result, time ->
         unit.damagePierce(unit.type.health / 100 * 2)
-        Fx.dynamicSpikes.wrap(Color.valueOf("C0ECFF"), unit.hitSize / 2).at(unit.x + Mathf.range(unit.bounds() / 2), unit.y + Mathf.range(unit.bounds() / 2))
+        Fx.dynamicSpikes.wrap(Color.valueOf("C0ECFF"), unit.hitSize / 2)
+          .at(unit.x + Mathf.range(unit.bounds() / 2), unit.y + Mathf.range(unit.bounds() / 2))
         result.set(this, min(time + result.time, 60f))
       }
     }
@@ -826,7 +828,11 @@ object IStatus : Load {
   }
   val 结晶化 = IceStatusEffect("crystallize") {
     bundle {
-      desc(zh_CN, "结晶化", "FEX物质在单位表面富集结晶产生不稳定的晶体壳,使单位会与活性的FEX结晶相互作用,同时在受到攻击时会造成额外的衍生伤害")
+      desc(
+        zh_CN,
+        "结晶化",
+        "FEX物质在单位表面富集结晶产生不稳定的晶体壳,使单位会与活性的FEX结晶相互作用,同时在受到攻击时会造成额外的衍生伤害"
+      )
     }
     speedMultiplier = 0.34f
     reloadMultiplier = 0.8f
@@ -854,11 +860,17 @@ object IStatus : Load {
       val t = unit.tileOn()
       val p = Puddles.get(t)
       if (t != null && p != null && p.liquid === 相位态FEX流体 && Mathf.chanceDelta(0.02)) {
-        for (i in 0..2) {
+        for(i in 0..2) {
           val len = Mathf.random(1f, 7f)
           val a = Mathf.range(360f)
           破碎FEX结晶.create(
-            null, Team.derelict, unit.x + Angles.trnsx(a, len), unit.y + Angles.trnsy(a, len), a, Mathf.random(0.2f, 1f), Mathf.random(0.6f, 1f)
+            null,
+            Team.derelict,
+            unit.x + Angles.trnsx(a, len),
+            unit.y + Angles.trnsy(a, len),
+            a,
+            Mathf.random(0.2f, 1f),
+            Mathf.random(0.6f, 1f)
           )
         }
       }
@@ -942,7 +954,7 @@ object IStatus : Load {
       Tmp.v1.set(unit.hitSize + 4, 0f)
       Tmp.v2.set(unit.hitSize + 12, 0f)
 
-      for (i in 0..3) {
+      for(i in 0..3) {
         Drawf.line(
           Pal.remove, unit.x + Tmp.v1.x, unit.y + Tmp.v1.y, unit.x + Tmp.v2.x, unit.y + Tmp.v2.y
         )
@@ -967,7 +979,7 @@ object IStatus : Load {
       }
     }
   }
-  val 熔毁 = object : IceStatusEffect("meltdown", {
+  val 熔毁 = object :IceStatusEffect("meltdown", {
     bundle {
       desc(zh_CN, "熔毁")
     }
@@ -1009,8 +1021,14 @@ object IStatus : Load {
         Draw.alpha(rate * 0.7f)
         Lines.circle(u.x, u.y, u.hitSize / 2 + rate * u.hitSize / 2)
         rand.setSeed(unit.id.toLong())
-        for (i in 0..7) {
-          SglDraw.drawTransform(u.x, u.y, u.hitSize / 2 + rate * u.hitSize / 2, 0f, Time.time + rand.random(360f)) { x: Float, y: Float, r: Float ->
+        for(i in 0..7) {
+          SglDraw.drawTransform(
+            u.x,
+            u.y,
+            u.hitSize / 2 + rate * u.hitSize / 2,
+            0f,
+            Time.time + rand.random(360f)
+          ) { x: Float, y: Float, r: Float ->
             val len = rand.random(u.hitSize / 4, u.hitSize / 1.5f)
             SglDraw.drawDiamond(x, y, len, len * 0.135f, r)
           }
@@ -1053,7 +1071,7 @@ object IStatus : Load {
         unit.shield = 0f
         unit.damageContinuousPierce((1 - Sgl.empHealth.healthPresent(unit)) * Sgl.empHealth.get(unit).model!!.empContinuousDamage)
 
-        for (i in unit.abilities.indices) {
+        for(i in unit.abilities.indices) {
           if (unit.abilities[i] !is BanedAbility) {
             val baned = Pools.obtain(BanedAbility::class.java, ::BanedAbility)
             baned.index = i
@@ -1068,7 +1086,7 @@ object IStatus : Load {
 
   }
 
-  val 冻结: IceStatusEffect = object : IceStatusEffect("frost", {
+  val 冻结: IceStatusEffect = object :IceStatusEffect("frost", {
     bundle {
       desc(zh_CN, "冻结", "在极低的温度下,单位的系统将很难正常工作,在寒气完全渗透到单位的核心后,它将被冻成一个巨大的冰块")
     }
@@ -1110,7 +1128,7 @@ object IStatus : Load {
       SglDraw.drawDiamond(unit.x, unit.y, unit.hitSize * 2.35f * rate, unit.hitSize * 2 * rate, ro, 0.2f * rate)
     }
   }
-  val 凛冻: IceStatusEffect = object : IceStatusEffect("frost_freeze", {
+  val 凛冻: IceStatusEffect = object :IceStatusEffect("frost_freeze", {
     bundle {
       desc(zh_CN, "凛冻", "单位被寒气被彻底冰封,无法行动,如果寒气继续加深,在冰块碎裂时,它会彻底碎成一堆粉末")
     }
@@ -1154,7 +1172,7 @@ object IStatus : Load {
 
       Draw.alpha(0.7f)
       val n = (unit.hitSize / 8 + rand.random(2, 5)).toInt()
-      for (i in 0..<n) {
+      for(i in 0..<n) {
         val v = rand.random(0.75f)
         val re = 1 - Mathf.clamp((1 - rate - v) / (1 - v))
 
@@ -1168,7 +1186,7 @@ object IStatus : Load {
     }
   }
 
-  class BanedAbility : Ability(), Pool.Poolable {
+  class BanedAbility :Ability(), Pool.Poolable {
     var masked: Ability? = null
     var index: Int = -1
     override fun update(unit: Unit) {

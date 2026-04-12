@@ -7,7 +7,7 @@ import ice.ui.menusDialog.AchievementDialog
 import mindustry.game.EventType
 import singularity.core.UpdateTiles
 
-object EventType : Load {
+object EventType :Load {
   class AchievementUnlockEvent(var achievement: AchievementDialog.Achievement)
 
   private val contentInitEvent = Seq<() -> Unit>()

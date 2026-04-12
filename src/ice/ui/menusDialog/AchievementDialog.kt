@@ -28,7 +28,7 @@ import singularity.Sgl
 import singularity.ui.fragments.notification.Notification
 import universecore.util.DataPackable
 
-object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.menusButton_host) {
+object AchievementDialog :BaseMenusDialog(IceStats.成就.localized(), IStyles.menusButton_host) {
   val achievements = Seq<Achievement>()
   private lateinit var list: Table
   private var tmpSt = "全部"
@@ -59,16 +59,12 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
       }.height(170f).pad(20f).padTop(5f).padBottom(5f).row()
 
       k.table(Styles.grayPanel) { ta ->
-        ta.table { img ->
-          img.image().height(34f).color(IceColor.b4).growX()
-          img.row()
-          img.image().height(6f).color(IceColor.b4.cpy().mul(0.8f, 0.8f, 0.8f, 1f)).growX()
-        }.growX().row()
 
         ta.table { jk ->
 
           jk.iPane { cns ->
-
+            cns.image().height(34f).color(IceColor.b4).growX().row()
+            cns.image().height(6f).color(IceColor.b4.cpy().mul(0.8f, 0.8f, 0.8f, 1f)).growX().row()
             cns.iTableG { cn ->
               cn.top()
               cn.defaults().growX()
@@ -130,19 +126,15 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
                 }.grow()
               }.row()
               cn.addLine()
-            }.growX()
-
+            }.growX().row()
           }.minWidth(400f).growY()
-
           jk.table { t2 ->
-
             t2.iPaneG {
               it.top()
               list = it
               //优先展示已解锁
               achievements.select { it1 -> it1.unlocked }.forEach(::flunOne)
               achievements.select { it1 -> !it1.unlocked }.forEach(::flunOne)
-
             }
           }.grow().padRight(30f)
 
@@ -176,7 +168,7 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
       }
       if (ach.unlocked && SettingValue.启用调试模式) {
         b.button(Icon.trash, IStyles.button3) {
-          ach.unlocked=false
+          ach.unlocked = false
           b.actions(IceActions.moveToAlphaAction(b.width + 50f, b.y, 1f, 0f, Interp.pow2In), Actions.run {
             flunActions {
 
@@ -206,7 +198,7 @@ object AchievementDialog : BaseMenusDialog(IceStats.成就.localized(), IStyles.
     }
   }
 
-  open class AchievementNotification(name: String, description: String) : Notification("成就解锁: $name", description) {
+  open class AchievementNotification(name: String, description: String) :Notification("成就解锁: $name", description) {
     companion object {
       const val typeID: Long = 12133159028768494L
       fun assign() {

@@ -12,7 +12,7 @@ buildscript {
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
   extra["kotlinCompatibility"] = "2.3.20"
   extra["java"] = 25
-  extra["mdtVersion"]="Anuken:Mindustry:v156.2"
+  extra["mdtVersion"]="Anuken:Mindustry:v157"
   var mdtVersion: String by extra
   repositories {
     mavenLocal()

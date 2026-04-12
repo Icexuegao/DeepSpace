@@ -305,7 +305,7 @@ object PowerBlocks : Load {
 
   val 热核裂变反应堆 = NuclearReactor("heatNuclearReactor").apply {
     bundle {
-      desc(zh_CN, "热核裂变反应堆")
+      desc(zh_CN, "热核裂变反应堆","利用钍燃料进行核裂变反应产生大量电力,需要大量急冻液冷却以防止过热,高风险高回报的能源设施")
     }
     fuelItem = IItems.钍锭
     health = 1200
@@ -359,7 +359,7 @@ object PowerBlocks : Load {
     ambientSound = Sounds.loopPulse
     ambientSoundVolume = 0.08f
     bundle {
-      desc(zh_CN, "血肉反应堆","利用钍燃料进行核裂变反应产生大量电力,需要大量急冻液冷却以防止过热,高风险高回报的能源设施")
+      desc(zh_CN, "血肉反应堆","刺激生物钢进行高能核聚变反应,产生大量电力,运行时会产生强烈的生物能量波动")
     }
   }
   val 终归反应堆 = ImpactReactor("endImpactReactor").apply {

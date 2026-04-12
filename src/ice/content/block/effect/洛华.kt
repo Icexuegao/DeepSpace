@@ -19,7 +19,7 @@ import mindustry.type.Category
 import singularity.world.blocks.turrets.ContinuousTurret
 import singularity.world.draw.DrawSglTurret
 
-class 洛华:ContinuousTurret("mendTower") {
+class 洛华 :ContinuousTurret("mendTower") {
   init {
     bundle {
       desc(zh_CN, "洛华", "使用方菱折射投射出扇形修复光束覆盖建筑进行修复")
@@ -81,8 +81,8 @@ class 洛华:ContinuousTurret("mendTower") {
     rotateSpeed = 8f
     range = 20f * 8f
     newAmmo(object :ArcFieldBulletType() {}.apply {
-      damage=1f
-      rangeChange=5*8f
+      damage = 1f
+      rangeChange = 5 * 8f
       shootEffect = Fx.none
       smokeEffect = Fx.none
       healAmount = 10f / 60f
@@ -107,9 +107,13 @@ class 洛华:ContinuousTurret("mendTower") {
       moveY = -1.25f
       moveRot = -10f
     })
+  }
+
+  override fun init() {
+    super.init()
     for(entry in ammoTypes) {
       entry.value.bulletType.apply {
-        (this as ArcFieldBulletType).length=this@洛华.range
+        (this as ArcFieldBulletType).length = this@洛华.range
       }
     }
   }

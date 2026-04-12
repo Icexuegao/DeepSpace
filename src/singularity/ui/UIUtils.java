@@ -110,7 +110,7 @@ public class UIUtils {
       card.table(SglDrawConst.grayUIAlpha, img -> img.stack(
           new BloomGroup(){{
             setFillParent(true);
-            bloomIntensity = 1.8f;
+            setBloomIntensity(1.8f);
             addChild(new Element(){
               { setFillParent(true); }
 

@@ -62,15 +62,21 @@ object ProductBlocks : Load {
     bundle {
       desc(zh_CN, "纤汲钻井", "一种基础钻井,配备了最基础的钻芯,可用于开采基础资源")
     }
+    newBooster(2.3f).apply {
+      liquid(Liquids.water, 12f/60f)
+    }
   }
   val 蛮荒钻井: Block = BaseDrill("uncivilizedDrill").apply {
     bundle {
       desc(zh_CN, "蛮荒钻井", "一种次级钻井,在纤汲钻井的基础上进行了迭代,钻芯材料改进,可用于开采更高级资源")
     }
+    newBooster(3.6f).apply {
+      liquid(Liquids.water, 12f/60f)
+    }
     bitHardness = 4
     size = 3
     drillTime = 350f
-    requirements(Category.production, IItems.铬锭, 45, IItems.低碳钢, 50, IItems.高碳钢, 40, IItems.黄铜锭, 10)
+    requirements(Category.production, IItems.铬锭, 25, IItems.低碳钢, 20, IItems.高碳钢, 30, IItems.黄铜锭, 10)
   }
   val 曼哈德钻井: Block = BaseDrill("manhardDrill").apply {
     bitHardness = 5
@@ -80,15 +86,18 @@ object ProductBlocks : Load {
     newConsume().apply {
       power(1f)
     }
-    newBooster(1.5f).apply {
+    newBooster(4.7f).apply {
       liquid(Liquids.water, 12f/60f)
     }
-    requirements(Category.production, IItems.强化合金, 60, IItems.钴钢, 110, IItems.铪锭, 80, IItems.单晶硅, 36, IItems.电子元件, 80, IItems.暮光合金, 50)
+    requirements(Category.production, IItems.钴钢, 30, IItems.铪锭, 20, IItems.单晶硅, 25, IItems.电子元件, 10)
     bundle {
       desc(zh_CN, "曼哈德钻井", "一种高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效资源开采")
     }
   }
   val 热熔钻井: Block = BaseDrill("hotMeltDrill").apply {
+    bundle {
+      desc(zh_CN, "热熔钻井", "通过多种合金制成的钻头融化地层以快速开采所有矿物")
+    }
     size = 5
     bitHardness = 6
     itemCapacity = 60
@@ -97,10 +106,9 @@ object ProductBlocks : Load {
     newConsume().apply {
       power(4f)
     }
-    newBooster(2f).apply {
+    newBooster(4.7f).apply {
       liquid(Liquids.water, 0.3f)
     }
-
     drillEffect = Fx.mine
     updateEffect = mindustry.entities.effect.WaveEffect().apply {
       lifetime = 60f
@@ -111,10 +119,7 @@ object ProductBlocks : Load {
     }
     rotator.rotateSpeed = 6f
     warmupSpeed = 0.06f
-    bundle {
-      desc(zh_CN, "热熔钻井", "通过多种合金制成的钻头融化地层以快速开采所有矿物")
-    }
-    requirements(Category.production, IItems.铱板, 125, IItems.导能回路, 85, IItems.陶钢, 55)
+    requirements(Category.production, IItems.铱板, 125, IItems.导能回路, 85, IItems.陶钢, 55, IItems.强化合金,30)
   }
   val 血肉钻井: Block = BurstDrill("fleshBloodDrill").apply {
     size = 5

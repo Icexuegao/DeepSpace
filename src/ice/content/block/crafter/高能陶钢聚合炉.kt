@@ -27,12 +27,12 @@ class 高能陶钢聚合炉 : NormalCrafter("highEnergyCeramicSteelFurnace") {
     liquidCapacity = 60f
     newConsume().apply {
       power(23.8f)
-      time(240f)
+      time(4*60f)
       items(IItems.钴钢, 12, IItems.铈锭, 12, IItems.石英玻璃, 12)
       liquid(Liquids.water, 30f / 60f)
     }
     newProduce().apply {
-      item(IItems.陶钢, 12)
+      item(IItems.陶钢, 20)
     }
     canOverdrive = false
     updateEffect = Fx.redgeneratespark

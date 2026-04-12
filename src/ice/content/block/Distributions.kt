@@ -46,7 +46,7 @@ object Distributions : Load {
     health = 30
     addContentInitEvent {
       junctionReplacement = 基础交叉器
-      bridgeReplacement = 装甲传送带桥
+      bridgeReplacement = 基础传送带桥
     }
     requirements(Category.distribution, IItems.低碳钢, 1)
   }
@@ -59,7 +59,7 @@ object Distributions : Load {
     health = 45
     addContentInitEvent {
       junctionReplacement = 基础交叉器
-      bridgeReplacement = 装甲传送带桥
+      bridgeReplacement = 基础传送带桥
     }
     requirements(Category.distribution, IItems.高碳钢, 1, IItems.锌锭, 1)
 
@@ -380,7 +380,40 @@ object Distributions : Load {
     }
   }
 
+  val 质量驱动器 = MassDriver("massDrives").apply {
+    bundle {
+      desc(
+        zh_CN,
+        "质量驱动器",
+        "收集若干物品后将其发射到另一个质量驱动器中"
+      )
+    }
+    size = 2
+    reload =120f
+    range = 40*8f
+    consumePower(3.75f)
+    dumpTime = 1
+    knockback = 4f
+    translation = 2f
+    bulletSpeed = 6f
+    rotateSpeed = 2f
+    itemCapacity = 50
+    bulletLifetime = 160f
+    shootSound = Sounds.shootCollaris
+    shootEffect = Fx.shootBig2
+    smokeEffect = Fx.shootSmokeTitan
+    receiveEffect = Fx.hitSquaresColor
+    requirements(Category.distribution, IItems.铬锭, 135, IItems.铱板, 25, IItems.导能回路, 55, IItems.钴锭, 35)
+  }
+
   val 重型质量驱动器 = MassDriver("heavyDutyMassDrives").apply {
+    bundle {
+      desc(
+        zh_CN,
+        "重型质量驱动器",
+        "超远距离传输物品,收集若干物品后将其发射到另一个重型质量驱动器中,容量巨大但转速和发射速度缓慢"
+      )
+    }
     size = 5
     reload = 600f
     range = 1280f
@@ -399,13 +432,6 @@ object Distributions : Load {
     smokeEffect = Fx.shootSmokeTitan
     receiveEffect = Fx.hitSquaresColor
     requirements(Category.distribution, IItems.钴锭, 335, IItems.铱板, 285, IItems.导能回路, 225, IItems.钴钢, 175)
-    bundle {
-      desc(
-        zh_CN,
-        "重型质量驱动器",
-        "超远距离传输物品,收集若干物品后将其发射到另一个重型质量驱动器中,容量巨大但转速和发射速度缓慢"
-      )
-    }
   }
 
   val 物流枢纽核心 = LogisticsHub("logisticsHub").apply {
@@ -448,6 +474,6 @@ object Distributions : Load {
     buildVisibility = BuildVisibility.sandboxOnly
   }
   val dirSource = DirSource("dirSource").apply {
-    bundle { desh(zh_CN, "定向源", "定向输出所有资源") }
+    bundle { desc(zh_CN, "定向源", "定向输出所有资源") }
   }
 }

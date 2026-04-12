@@ -14,6 +14,8 @@ import mindustry.world.Block
 
 class BlockContentDialog :ContentDialogBase<Block>("建筑", BaseContentSeq.blocks) {
   override fun flunList() {
+    list.clearChildren()
+
     val values = Category.entries.toTypedArray()
     val tables = Array(values.size) { ITable().apply { setRowsize(5) } }
 

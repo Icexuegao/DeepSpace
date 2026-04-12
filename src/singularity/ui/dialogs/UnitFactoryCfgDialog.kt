@@ -651,7 +651,7 @@ class UnitFactoryCfgDialog : BaseDialog(Core.bundle.get("dialog.unitFactor.title
                 )
             })
             status!!.row()
-            status!!.add<Bar?>(Bar(Prov { Core.bundle.format("fragment.bars.nuclearContain", factory.energy, factory.energyCapacity(), factory.energy()!!.displayAdding) }, Prov { SglDrawConst.matrixNetDark }, Floatp { factory.getEnergy() / factory.energyCapacity() })).height(24f).update(Cons { b: Bar? -> factory.energy()!!.updateFlow() })
+            status!!.add<Bar?>(Bar(Prov { Core.bundle.format("fragment.bars.nuclearContain", factory.energyModule, factory.energyCapacity(), factory.energy()!!.displayAdding) }, Prov { SglDrawConst.matrixNetDark }, Floatp { factory.getEnergy() / factory.energyCapacity() })).height(24f).update(Cons { b: Bar? -> factory.energy()!!.updateFlow() })
         }
         status!!.row()
         status!!.add<Bar?>(Bar(Prov { Core.bundle.format("bar.efficiency", Mathf.round(factory.workEfficiency() * 100)) }, Prov { Pal.lightOrange }, Floatp { factory.workEfficiency() })).height(24f)

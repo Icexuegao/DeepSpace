@@ -1,35 +1,24 @@
 package ice.content
 
-import arc.Core
-import arc.graphics.g2d.Draw
-import arc.graphics.g2d.Fill
-import arc.math.Mathf
 import arc.util.Scaling
-import arc.util.Time
 import ice.content.block.CrafterBlocks
 import ice.content.block.DefenseBlocks
+import ice.content.remains.迷思海
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
-import ice.library.math.slope
 import ice.library.scene.element.typinglabel.TLabel
 import ice.library.scene.style.DynamicTextureDrawable
 import ice.library.scene.ui.itooltip
 import ice.type.Remains
 import ice.ui.bundle.bundle
-import ice.ui.fragment.FleshFragment
-import ice.ui.fragment.FleshFragment.random
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
 import ice.world.content.unit.ability.InterceptAbilty
-import ice.world.meta.IceEffects
 import mindustry.Vars
 import mindustry.content.StatusEffects
-import mindustry.entities.Effect
 import mindustry.type.ItemStack
 import mindustry.type.UnitType
 import mindustry.world.meta.Stats
-import singularity.core.UpdatePool
-import universecore.ui.elements.SceneEffect
 import universecore.world.consumers.ConsumeType
 
 @Suppress("unused")
@@ -356,50 +345,5 @@ object Remainss {
       }
     }
   }
-
-  val 迷思海 = Remains("remains_mystic_sea").apply {
-    remainsColor = IceColor.r2
-    bundle {
-      desc(zh_CN, "迷思海", "你可悲的一部分正期望着回到你的身上")
-    }
-    setDescription(getDescription())
-    icon = DynamicTextureDrawable(name.appendModName()) {
-      it.frameCount = 32
-      it.frameDuration = 60f / 8f
-    }
-    effect = "未完成"
-    install = {
-      var i = 0f
-      val fx = Effect(2 * 60f) { e ->
-        Draw.color(IceColor.r2)
-        Draw.alpha(e.fin().slope)
-        Fill.rect(e.x, e.y, 8f, 8f, Time.time%360f *e.fin())
-      }
-      UpdatePool.receive("remains_mystic_sea") {
-        if (!Vars.state.isGame|| Core.scene.hasDialog()|| Vars.state.isPaused) return@receive
-
-        if (Mathf.chance(0.02)) {
-          SceneEffect.showOnStage(fx, random(0f, Core.graphics.width.toFloat()), random(0f, Core.graphics.height.toFloat())){
-            IceEffects.rand.setSeed(it.id.toLong())
-            val f = Time.delta * 3f
-            if ( IceEffects.rand.nextInt(2)==0){it.x+=f}else it.x-=f
-
-            it.y-= f
-          }.apply {
-            setScale(4f)
-          }
-        }
-
-
-        i += Time.delta
-        if (i > 300f) {
-          FleshFragment.addText()
-          i = 0f
-        }
-      }
-    }
-    uninstall = {
-      UpdatePool.remove("remains_mystic_sea")
-    }
-  }
+  val 迷思海 = 迷思海()
 }

@@ -12,7 +12,7 @@ import mindustry.world.Block
 object BaseContentSeq {
     val items = Seq<IceItem>().apply {
         Vars.content.items().forEach {
-            if (it is IceItem) add(it)
+            if (it is IceItem) addUnique(it)
         }
     }
     val liquids = Seq<Liquid>().apply {

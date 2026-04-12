@@ -89,9 +89,9 @@ class Institute(name: String) : SglBlock(name), ChainsBlockComp {
      //   context!!.devices.clear()
 
         for (room in rooms) {
-          if (room.device != null) {
+      //    if (room.device != null) {
           //  context!!.devices.add(room.device)
-          }
+        //  }
         }
       //  context!!.updateTechs(baseTechPoints)
       }

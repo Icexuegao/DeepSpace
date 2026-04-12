@@ -61,7 +61,7 @@ open class Remains(val name: String): Bundle {
     unlock=enabled
     DataDialog.contentDialog.flunAll()
   }
-  fun getTiTleTable(): Table {
+  open fun getTiTleTable(): Table {
     return Table().also {
       it.image(icon).scaling(Scaling.fit).size(120f).pad(30f).padTop(0f).row()
       it.table {table ->

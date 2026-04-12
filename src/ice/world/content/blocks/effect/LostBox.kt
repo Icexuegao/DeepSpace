@@ -1,21 +1,17 @@
 package ice.world.content.blocks.effect
 
-import arc.Core
 import arc.flabel.FLabel
 import arc.func.Prov
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.GlyphLayout
 import arc.graphics.g2d.Lines
-import arc.scene.actions.Actions
 import arc.scene.ui.layout.Scl
 import arc.util.Align
 import arc.util.pooling.Pools
 import ice.graphics.IceColor
-import ice.library.scene.element.typinglabel.TLabel
 import ice.library.scene.ui.getIceBaseDialog
 import ice.library.struct.addP
-import ice.ui.fragment.FleshFragment
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
 import mindustry.graphics.Pal
@@ -63,30 +59,6 @@ open class LostBox(name: String) : IceBlock(name) {
     var b1=true
     override fun update() {
       super.update()
-
-
-      if((Vars.player.unit()?.dst(this) ?: 0f) < 8 * 10f && b1){
-        b1=false
-        val actor = TLabel("{SICK}{SPEED=0.1}我喜欢你,你喜欢我")
-        actor.setColor(IceColor.r1)
-
-
-        actor.actions(Actions.alpha(0f), Actions.alpha(1f,2f), Actions.delay(3f))
-        var b=true
-
-        val dx = x  + offset - actor.width
-        val dy = y + offset + size * Vars.tilesize / 2f + 3
-
-        actor.update {
-          val mouseScreen = Core.input.mouseScreen(dx, dy)
-          actor.setPosition(mouseScreen.x,mouseScreen.y)
-          if (actor.hasEnded()&&b&&actor.actions.isEmpty){
-            actor.actions(Actions.alpha(0f,2f), Actions.remove())
-            b=false
-          }
-        }
-        FleshFragment.group.addChild(actor)
-      }
     }
     override fun tapped() {
       val tile = "祭祀残篇"

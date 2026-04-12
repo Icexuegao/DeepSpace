@@ -23,7 +23,6 @@ import ice.library.scene.ui.*
 import ice.library.util.isNumericWithSign
 import ice.ui.UI
 import ice.ui.fragment.ConversationFragment
-import ice.ui.fragment.FleshFragment
 import ice.ui.menusDialog.AchievementDialog
 import ice.world.meta.IceEffects
 import mindustry.Vars
@@ -122,9 +121,6 @@ object DeBugFragment {
         Groups.weather.clear()
       }
 
-      button("血肉文本", Icon.fileTextSmall) {
-        FleshFragment.addText()
-      }
       button("游戏胜利", Icon.bookOpenSmall) {
         Vars.state.won = true
         Vars.state.rules.winWave

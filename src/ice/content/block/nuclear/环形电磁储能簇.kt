@@ -75,7 +75,7 @@ class 环形电磁储能簇:EnergyContainer("magnetic_energy_container"){
       nonCons = Cons { ne: EnergyContainerBuild? ->
         val leak: Float = ne!!.getEnergy().coerceAtMost(60f)
         if (leak > 0) {
-          ne.energy.handle(-leak * Time.delta * (1 - ne.warmup))
+          ne.energyModule.handle(-leak * Time.delta * (1 - ne.warmup))
           val rate = Mathf.clamp(ne.getEnergy() / ne.energyCapacity())
           if (rate > 0.5f) {
             if (Mathf.chanceDelta((rate * 0.007f).toDouble())) {

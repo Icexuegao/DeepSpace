@@ -36,7 +36,7 @@ object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBut
       ContentDialogBase.contentDialog.forEach {
         val textButton = TextButton(it.cName, IStyles.button1)
         textButton.changed {
-          if (contentDialog==it)return@changed
+          if (contentDialog == it) return@changed
           toggleMenu(it)
           UI.showUISoundCloseV(ISounds.数据板块顶部选择按钮反馈)
         }
@@ -53,9 +53,11 @@ object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBut
 
   fun toggleMenu(contentDialog: ContentDialogBase<*>) {
     this.contentDialog = contentDialog
+
     tmp.actions(Actions.alpha(0f, 0.15f), Actions.run {
       tmp.clearChildren()
-      tmp.add(DataDialog.contentDialog).grow()
+      contentDialog.flunAll()
+      tmp.add(contentDialog).grow()
       tmp.actions(Actions.alpha(1f, 0.15f))
     })
   }

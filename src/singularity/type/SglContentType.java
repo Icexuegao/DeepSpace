@@ -2,12 +2,11 @@ package singularity.type;
 
 import mindustry.ctype.Content;
 import mindustry.ctype.ContentType;
-import singularity.world.blocks.research.ResearchDevice;
 import singularity.world.blocks.structure.BlockStructure;
 import universecore.util.UncContentType;
 
 public class SglContentType extends UncContentType{
-  public static SglContentType  structure, researchDevice;
+  public static SglContentType  structure;
 
   public static SglContentType[] allSglContentType;
   
@@ -29,8 +28,7 @@ public class SglContentType extends UncContentType{
   
   public static void load(){
     structure = new SglContentType("structure", BlockStructure.class);
-    researchDevice = new SglContentType("researchDevice", ResearchDevice.class);
 
-    allSglContentType = new SglContentType[]{ structure, researchDevice};
+    allSglContentType = new SglContentType[]{ structure};
   }
 }

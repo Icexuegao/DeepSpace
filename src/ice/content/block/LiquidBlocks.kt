@@ -69,7 +69,7 @@ object LiquidBlocks : Load {
     }
     requirements(Category.liquid, IItems.高碳钢, 1, IItems.锌锭, 1, IItems.石英玻璃, 1)
     addContentInitEvent {
-      bridgeReplacement = 导管桥
+      bridgeReplacement = 基础导管桥
       junctionReplacement = 基础流体交叉器
     }
   }
@@ -81,7 +81,7 @@ object LiquidBlocks : Load {
     liquidPressure = 1.025f
     requirements(Category.liquid, IItems.金锭, 2, IItems.锌锭, 1, IItems.石英玻璃, 1)
     addContentInitEvent {
-      bridgeReplacement = 导管桥
+      bridgeReplacement = 基础导管桥
       junctionReplacement = 基础流体交叉器
     }
   }
@@ -276,7 +276,7 @@ object LiquidBlocks : Load {
     bundle {
       desc(zh_CN, "流体装卸器", "从方块中卸载流体,就像装卸器提取物品一样")
     }
-    requirements(Category.liquid, IItems.单晶硅, 20, IItems.铝锭, 25, IItems.铬锭, 15)
+    requirements(Category.liquid, IItems.单晶硅, 20, IItems.铝锭, 15, IItems.铬锭, 15)
     size = 1
   }
   val p2p流体节点 = P2PLiquidNode()

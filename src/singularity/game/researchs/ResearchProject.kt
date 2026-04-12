@@ -11,12 +11,10 @@ import mindustry.ctype.UnlockableContent
 import singularity.Singularity
 import singularity.contents.SglTechThree
 import singularity.core.SglEventTypes.ResearchCompletedEvent
-import singularity.world.blocks.research.ResearchDevice
 
 class ResearchProject(val name: String, val techRequires: Int, val techRequiresRandom: Int = 0) : Bundle {
   val dependencies: Seq<ResearchProject> = Seq<ResearchProject>()
   val contents: Seq<UnlockableContent> = Seq<UnlockableContent>()
-  val requireDevices: Seq<ResearchDevice?> = Seq<ResearchDevice?>()
 
   init {
     setLocalizedName(name)
@@ -78,22 +76,7 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
     return this
   }
 
-  fun addRequireDevice(vararg requireDevices: ResearchDevice?): ResearchProject {
-    this.requireDevices.addAll(*requireDevices)
-    return this
-  }
 
-  fun checkDeviceValid(devices: Seq<ResearchDevice>): Boolean {
-    o@ for (requireDevice in requireDevices) {
-      for (device in devices) {
-        if (device.isCompatible(requireDevice)) continue@o
-      }
-
-      return false
-    }
-
-    return true
-  }
 
   fun init() {
     if (inspire != null) {

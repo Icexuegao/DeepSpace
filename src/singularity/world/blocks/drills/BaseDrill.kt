@@ -98,8 +98,8 @@ open class BaseDrill(name: String) : SglBlock(name) {
     return newOptionalConsume({ entity: ConsumerBuildComp, cons: BaseConsumers ->
       (entity as BaseDrillBuild).efficiencyIncrease = increase
       entity.boostTime = cons.craftTime
-    }, { stats: Stats?, _: BaseConsumers? ->
-      stats!!.add(Stat.boostEffect, increase, StatUnit.timesSpeed)
+    }, { stats: Stats, _: BaseConsumers ->
+      stats.add(Stat.boostEffect, increase, StatUnit.timesSpeed)
     })
   }
 
@@ -241,6 +241,11 @@ open class BaseDrill(name: String) : SglBlock(name) {
 
     override fun shouldConsume(): Boolean {
       return super.shouldConsume() && !this.isFull && miningAny()
+    }
+
+    /** 没有主消耗也应该触发可选消耗 */
+    override fun shouldConsumeOptions(): Boolean {
+      return consumer.hasOptional() && !this.isFull && miningAny()
     }
 
     /**不应该接受物品*/

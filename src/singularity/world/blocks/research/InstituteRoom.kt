@@ -28,7 +28,7 @@ class InstituteRoom(name: String) : SglBlock(name), ChainsBlockComp {
     }
 
     inner class InstituteRoomBuild : SglBuilding(), ChainsBuildComp {
-        var device: ResearchDevice? = null
+       // var device: ResearchDevice? = null
         override var loadingInvalidPos= IntSet()
         override var chains= ChainsModule(this)
         override fun onProximityAdded() {

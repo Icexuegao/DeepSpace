@@ -12,7 +12,8 @@ import mindustry.gen.Sounds
 import mindustry.type.Category
 import singularity.world.blocks.turrets.ContinuousTurret
 
-class FlowingFire : ContinuousTurret("flowingFire") {
+class FlowingFire :ContinuousTurret("flowingFire") {
+
   init {
     bundle {
       desc(zh_CN, "流火", "小型等离子炮塔\n持续消耗燃料以喷射高热的等离子火焰,近距离内十分有效")
@@ -24,7 +25,7 @@ class FlowingFire : ContinuousTurret("flowingFire") {
     range = 115f
     recoil = 1f
     shootCone = 10f
-
+    outlinedIcon=-1
     loopSound = Sounds.loopTech
     shootSound = Sounds.none
     loopSoundVolume = 1f
@@ -33,7 +34,7 @@ class FlowingFire : ContinuousTurret("flowingFire") {
     requirements(
       Category.turret, IItems.铜锭, 155, IItems.石英玻璃, 55, IItems.铬锭, 85, IItems.钍锭, 65
     )
-    newAmmo( ContinuousFlameBulletType().apply {
+    newAmmo(ContinuousFlameBulletType().apply {
       length = 120f
       damage = 30f
       oscScl = 0.8f
@@ -52,9 +53,9 @@ class FlowingFire : ContinuousTurret("flowingFire") {
       colors = arrayOf(
         Color.valueOf("FAAF878C"), Color.valueOf("FAAF87B2"), Color.valueOf("FAAF87CC"), Color.valueOf("FAAF87"), Color.valueOf("FFFFFFCC")
       )
-    },false){ a, b-> }
+    }, false) { a, b -> }
     consume!!.apply {
-      liquid(ILiquids.沼气, 15f/60f)
+      liquid(ILiquids.沼气, 15f / 60f)
     }
 
     newAmmo(ContinuousFlameBulletType().apply {
@@ -65,7 +66,7 @@ class FlowingFire : ContinuousTurret("flowingFire") {
       status = StatusEffects.burning
       statusDuration = 30f
       drawFlare = true
-      flareColor =ILiquids.氢气.color
+      flareColor = ILiquids.氢气.color
       flareWidth = 3f
       flareLength = 40f
       lengthInterp = Interp.slope
@@ -74,11 +75,15 @@ class FlowingFire : ContinuousTurret("flowingFire") {
       rotateFlare = true
       flareRotSpeed = 1.2f
       colors = arrayOf(
-        ILiquids.氢气.color.cpy().mul(0.6f,0.6f,0.6f,1f),ILiquids.氢气.color.cpy().mul(0.7f,0.7f,0.7f,1f),ILiquids.氢气.color.cpy().mul(0.8f,0.8f,0.8f,1f), ILiquids.氢气.color, Color.valueOf("FFFFFFCC")
+        ILiquids.氢气.color.cpy().mul(0.6f, 0.6f, 0.6f, 1f),
+        ILiquids.氢气.color.cpy().mul(0.7f, 0.7f, 0.7f, 1f),
+        ILiquids.氢气.color.cpy().mul(0.8f, 0.8f, 0.8f, 1f),
+        ILiquids.氢气.color,
+        Color.valueOf("FFFFFFCC")
       )
     })
     consume!!.apply {
-      liquids(ILiquids.氢气, 10f/60f, ILiquids.氧气,10f/60f)
+      liquids(ILiquids.氢气, 10f / 60f, ILiquids.氧气, 10f / 60f)
     }
   }
 }

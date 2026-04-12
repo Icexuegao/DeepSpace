@@ -12,8 +12,9 @@ import ice.ui.UI
 import ice.world.content.BaseContentSeq
 import mindustry.type.UnitType
 
-class UnitContentDialog:ContentDialogBase<UnitType>("单位", BaseContentSeq.units) {
+class UnitContentDialog :ContentDialogBase<UnitType>("单位", BaseContentSeq.units) {
   override fun flunList() {
+    list.clearChildren()
     val types = arrayOf("ground", "air", "naval")
     val tables = Array(types.size) { ITable().apply { setRowsize(5) } }
 

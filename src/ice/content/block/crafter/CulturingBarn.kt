@@ -45,6 +45,9 @@ class CulturingBarn :SpliceCrafter("culturing_barn") {
     allowRectanglePlacement = true
     buildType = Prov(::CulturingBarnBuild)
 
+    autoSelect = true
+    canSelect = false
+
     newFormula { consumers, producers ->
       consumers.apply {
         liquid(Liquids.water, 2.4f / 60f)
