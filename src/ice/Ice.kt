@@ -49,6 +49,7 @@ open class Ice :Mod() {
       ) || path.contains("sprites-override/rubble")
     ) PageType.rubble else if (path.contains("sprites/ui") || path.contains("sprites-override/ui")) PageType.ui else PageType.main
   }
+
   init {
    /* Events.on(mindustry.game.EventType.AtlasPackEvent::class.java){packEvent ->
       IFiles.modWithClass.file.child("sprites_out").walk {
