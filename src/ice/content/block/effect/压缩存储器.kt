@@ -14,7 +14,7 @@ class 压缩存储器 :StorageBlock("compressorMemory") {
     itemCapacity = 1200
     requirements(Category.effect, IItems.钴锭, 250, IItems.铱板, 150, IItems.钴钢, 100)
     bundle {
-      desc(zh_CN, "压缩存储器", "坚固耐用,新型空间压缩技术使其具有更大的空间")
+      desc(zh_CN, "压缩存储器", "存储各种类型的物品.可以用装卸器卸载物品")
     }
   }
 }

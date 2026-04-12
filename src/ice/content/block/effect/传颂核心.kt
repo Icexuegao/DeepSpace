@@ -11,7 +11,7 @@ import mindustry.type.Category
 class 传颂核心 :CoreBlock("eulogyCore") {
   init {
     bundle {
-      desc(zh_CN, "传颂核心")
+      desc(zh_CN, "传颂核心","控制区块的基础.有更大的容量与中型装甲.一旦被摧毁,所在区块将重归于敌人控制")
     }
     size = 4
     armor=30f

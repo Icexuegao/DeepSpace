@@ -44,7 +44,7 @@ class 勘探雷达 :SglBlock("prospectingRadar") {
 
   init {
     bundle {
-      desc(zh_CN, "勘探雷达")
+      desc(zh_CN, "勘探雷达","定期使大范围内隐藏于地下的矿物显现")
     }
     update = true
     configurable = true

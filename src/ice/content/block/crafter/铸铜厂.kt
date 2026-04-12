@@ -17,7 +17,7 @@ class 铸铜厂 : NormalCrafter("copperFoundry") {
       desc(zh_CN, "铸铜厂","将铜锭和锌锭筑铸为黄铜锭")
     }
     size = 4
-    health = 200
+    health = 550
     drawers = DrawMulti(DrawDefault(), DrawFlame())
     craftEffect = IceEffects.square(IItems.铜锭.color)
     requirements(Category.crafting, ItemStack.with(IItems.铜锭, 200, IItems.低碳钢, 150))

@@ -14,7 +14,7 @@ class 仓库:StorageBlock("warehouse"){
     itemCapacity = 5560
     requirements(Category.effect, IItems.高碳钢, 330, IItems.低碳钢, 120, IItems.铜锭, 65)
     bundle {
-      desc(zh_CN, "仓库", "存储各种类型的物品,可以用装卸器卸载物品")
+      desc(zh_CN, "仓库", "大量存储各种类型的物品.可以用装卸器卸载物品")
     }
   }
 }

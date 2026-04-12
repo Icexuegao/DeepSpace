@@ -60,7 +60,7 @@ object ProductBlocks : Load {
     requirements(Category.production, IItems.高碳钢, 10, IItems.低碳钢, 5)
     drillTime = 400f
     bundle {
-      desc(zh_CN, "纤汲钻井", "一种基础钻井,配备了最基础的钻芯,可用于开采基础资源")
+      desc(zh_CN, "纤汲钻井", "基础钻井,配备了最基础的钻芯,可用于开采基础资源")
     }
     newBooster(2.3f).apply {
       liquid(Liquids.water, 12f/60f)
@@ -68,7 +68,7 @@ object ProductBlocks : Load {
   }
   val 蛮荒钻井: Block = BaseDrill("uncivilizedDrill").apply {
     bundle {
-      desc(zh_CN, "蛮荒钻井", "一种次级钻井,在纤汲钻井的基础上进行了迭代,钻芯材料改进,可用于开采更高级资源")
+      desc(zh_CN, "蛮荒钻井", "次级钻井,在纤汲钻井的基础上进行了迭代,钻芯材料改进,可用于开采更高级资源")
     }
     newBooster(3.6f).apply {
       liquid(Liquids.water, 12f/60f)
@@ -91,12 +91,12 @@ object ProductBlocks : Load {
     }
     requirements(Category.production, IItems.钴钢, 30, IItems.铪锭, 20, IItems.单晶硅, 25, IItems.电子元件, 10)
     bundle {
-      desc(zh_CN, "曼哈德钻井", "一种高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效资源开采")
+      desc(zh_CN, "曼哈德钻井", "高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效的资源开采")
     }
   }
   val 热熔钻井: Block = BaseDrill("hotMeltDrill").apply {
     bundle {
-      desc(zh_CN, "热熔钻井", "通过多种合金制成的钻头融化地层以快速开采所有矿物")
+      desc(zh_CN, "热熔钻井", "高级钻井,通过加热多种合金制成的钻头融毁地层以实现高效的资源开采")
     }
     size = 5
     bitHardness = 6
@@ -144,13 +144,13 @@ object ProductBlocks : Load {
     }
     requirements(Category.production, IItems.铱板, 450, IItems.导能回路, 225, IItems.钴锭, 32, IItems.生物钢, 75, IItems.肃正协议, 1)
     bundle {
-      desc(zh_CN, "血肉钻井", "骨骼构成了最坚硬的钻头,肌肉形成了最强劲的转子,预热时间较长,需要持续供给血肉赘生物,可以安置在水上")
+      desc(zh_CN, "血肉钻井", "高级钻井,能够自主驱动钻探.需要持续供给血肉赘生物,可以安置在水上")
     }
   }
   val 晶簇粉碎器 = CrystalMiner()
   val 抽水机 = SolidPump("waterPump").apply {
     bundle {
-      desc(zh_CN, "抽水机", "抽水机,可以抽取水源")
+      desc(zh_CN, "抽水机", "抽取地下水资源,但无法抽取地表水资源")
     }
     size = 2
     baseEfficiency = 1f
@@ -163,7 +163,7 @@ object ProductBlocks : Load {
   }
   val 大型抽水机 = SolidPump("largeWaterPump").apply {
     bundle {
-      desc(zh_CN, "大型抽水机", "大型抽水机,可以抽取水源")
+      desc(zh_CN, "大型抽水机", "高效抽取地下水资源,但无法抽取地表水资源")
     }
     size = 3
     baseEfficiency = 1f
@@ -180,7 +180,7 @@ object ProductBlocks : Load {
 
   var 岩层钻井机 = FloorCrafter("rock_drill").apply {
     bundle {
-      desc(zh_CN, "岩层钻井机", "钻探深层的地壳,将深埋在地壳深处的较高质量的矿物送至地表")
+      desc(zh_CN, "岩层钻井机", "特种钻井,钻探深层的地壳,将深埋在地壳深处的较高质量的矿物送至地表")
     }
     requirements(Category.production, IItems.铬锭, 45, IItems.铅锭, 30, IItems.铜锭, 30)
     size = 2
@@ -231,7 +231,7 @@ object ProductBlocks : Load {
   var 岩石粉碎机 = 岩石粉碎机()
   var 潮汐钻头 = ExtendableDrill("tidal_drill").apply {
     bundle {
-      desc(zh_CN, "潮汐钻头", "使用最前沿力场控制技术制造的高级钻头,以粒子束冲击破坏挖掘物的物质结构后通过控制引力场震荡完成矿石解体和采集的过程")
+      desc(zh_CN, "潮汐钻井", "高级钻井,使用最前沿力场控制技术制造的高级钻头,以粒子束冲击破坏挖掘物的物质结构后通过控制引力场震荡完成矿石解体和采集的过程")
     }
     requirements(
       Category.production, IItems.简并态中子聚合物, 50, IItems.强化合金, 120,
@@ -284,7 +284,7 @@ object ProductBlocks : Load {
   var 引力延展室 = ExtendMiner("force_field_extender").apply {
     squareSprite = false
     bundle {
-      desc(zh_CN, "引力延展室", "用于延伸潮汐钻头的设备,贴近潮汐钻头,并与其他延展室彼此正对连接可扩大钻头覆盖的范围")
+      desc(zh_CN, "引力延展室", "用于延伸潮汐钻头的设备,贴近潮汐钻井,并与其他延展室彼此正对连接可扩大钻头覆盖的范围")
     }
     requirements(
       Category.production, ItemStack.with(

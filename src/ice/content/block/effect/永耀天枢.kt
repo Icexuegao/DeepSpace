@@ -11,7 +11,7 @@ import mindustry.type.Category
  class 永耀天枢 :CoreBlock("foreverShineCore") {
   init {
     bundle {
-      desc(zh_CN, "永耀天枢")
+      desc(zh_CN, "永耀天枢","控制区块的基础.有最大的容量与重型装甲.一旦被摧毁,所在区块将重归于敌人控制")
     }
     armor=25f
     size = 5
