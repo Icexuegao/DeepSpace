@@ -30,7 +30,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build JAR
-        run: ./gradlew jar
+        run: ./gradlew deployVersion
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
