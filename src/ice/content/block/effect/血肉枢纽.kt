@@ -10,7 +10,7 @@ import mindustry.type.Category
 open class 血肉枢纽 :FleshAndBloodCoreBlock("fleshAndBloodhinge") {
   init {
     bundle {
-      desc(zh_CN, "血肉枢纽")
+      desc(zh_CN, "血肉枢纽","操控血肉生物的唯一途径...")
     }
     health = -1
     size = 4

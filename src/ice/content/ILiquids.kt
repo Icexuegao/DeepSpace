@@ -98,7 +98,7 @@ init {
   }
   val 血肉赘生物 = CellLiquid("liquid_bloodSlime").apply {
     bundle {
-      desc(zh_CN, "血肉赘生物", "一种高温且易燃易爆的烈性流体液体,制取或运输该液体时,请使用专用管道!", "[red]鲜血必将流淌[]")
+      desc(zh_CN, "血肉赘生物", "一种高温且易燃易爆的烈性流体,制取或运输该液体时,请使用专用管道!", "[red]鲜血必将流淌[]")
     }
     incinerable = false
     cells = 8
