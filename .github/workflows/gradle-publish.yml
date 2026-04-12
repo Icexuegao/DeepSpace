@@ -49,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: DeepSpace-Build
-          path: build/libs/*.jar
+          path: build/libs/version/DeepSpace-Alpha-*.jar
