@@ -60,10 +60,12 @@ class 迷思海 :Remains("remains_mystic_sea") {
         Draw.alpha(e.fin().slope)
         Fill.rect(e.x, e.y, 8f, 8f, Time.time % 360f * e.fin())
       }
+
+
       UpdatePool.receive("remains_mystic_sea") {
         if (!Vars.state.isGame || Core.scene.hasDialog() || Vars.state.isPaused) return@receive
 
-        if (Mathf.chance(0.02)) {
+        if (Mathf.chance(0.06 * b)) {
           SceneEffect.showOnStage(fx, random(0f, Core.graphics.width.toFloat()), random(0f, Core.graphics.height.toFloat())) {
             IceEffects.rand.setSeed(it.id.toLong())
             val f = Time.delta * 3f
@@ -72,15 +74,13 @@ class 迷思海 :Remains("remains_mystic_sea") {
             } else it.x -= f
             it.setScale(max(4 * (1f - it.time / it.lifetime), 1f))
             it.y -= f
-          }.apply {
-            setScale(4f)
           }
         }
 
 
         i += Time.delta
-        if (i > 300f) {
-          addText(b)
+        if (i > 600f * (1f - b)) {
+          addText(1f - b)
           i = 0f
         }
       }
@@ -104,24 +104,29 @@ class 迷思海 :Remains("remains_mystic_sea") {
         table.add("效果: $effect").color(remainsColor).pad(5f).fontScale(1.3f).wrap().grow()
       }.marginLeft(9f).grow().row()
       it.add(customTable).grow().row()
-      it.field(b.toString()) {
-        it.toFloatOrNull()?.let {
-          b = it
+      it.table {
+        it.add("同化程度: ").color(remainsColor)
+        it.field(b.toString()) { it1 ->
+          it1.toFloatOrNull()?.let { it2 ->
+            b = Mathf.clamp(it2, 0.1f, 0.9f)
+          }
+        }.color(remainsColor).growX().get().style = TextFieldStyle().apply {
+
+          font = Fonts.def
+          fontColor = remainsColor
+          disabledFontColor = Color.gray
+          disabledBackground = Tex.underlineDisabled
+          selection = Tex.selection
+          background = Tex.underlineWhite
+          invalidBackground = Tex.underlineWhite
+
+          cursor = Tex.cursor
+          messageFont = Fonts.def
+          messageFontColor = Color.gray
+
         }
-      }.color(remainsColor).growX().get().style = TextFieldStyle().apply {
+      }.growX()
 
-        font = Fonts.def
-        fontColor = remainsColor
-        disabledFontColor = Color.gray
-        disabledBackground = Tex.underlineDisabled
-        selection = Tex.selection
-        background = Tex.underline
-        invalidBackground = Tex.underlineRed
-        cursor = Tex.cursor
-        messageFont = Fonts.def
-        messageFontColor = Color.gray
-
-      }
     }
   }
 
@@ -137,22 +142,42 @@ class 迷思海 :Remains("remains_mystic_sea") {
         中华文明五千年的历史跟说着玩一样
         但是和畜牲一样的脾气管理能力
         他在我眼里的人类含量＜0%
-        我曾遭到三度背叛,因而懂得世间万物不过是欺瞒的幌子,其一为神,我的创造者,我的母亲,其为力量所困,视我为无用之物,其二为人,我的家人,我的朋友,及为恐惧所困,视我为可憎恶之物,其三为同类,我的期盼,羽翼尚未丰满的鸟省,其为寿限所限,背弃与我的约定.我的愤怒,绝不平息,我拼弃所有,否定并嗤笑人间一切,我的胸膛注定不会再被世俗染指,并弃掉人类低劣的情感,空洞的部分将如诞生之初的纯白卷轴那般,以满载神性的神明之心来填满.无需恐惧,死亡只是一瞬,你们的时代,就要结束了
         你赢了,赢得很彻底,非常彻底,赢了所有mindustry玩家,制作者,贡献者,请你继续你的道路,但我还有事要做,我为什么要和你死缠烂打
+        我想了一天,我觉得是时候该反击了[流汗表情]
+        既然大家想知道在说谁,我帮你补充吧,联合城是超过一年前的作品,如果想要嘲讽请嘲讽我们的最近作品
+        我们每周内部测试还不够找出所有缺点,虽然内部测试不公开[流汗表情]"
+        玩家市场是不调查的,工程量事实上是不预估的大到上天的,剧本是半吊子的,世界观是没构建完的(一个成熟的,逻辑自洽的世界观IP起码一年,再少也是几个月)
+        ,观众期望是过高的,核心玩法是一点也见不着的,内容开放是极慢的,公开内容更是只有碎片的
+        视觉小说向剧情怎么融入RTS+自动化+塔防也是不知道的,我难道前线压力巨大快爆炸的时候还
+        要看到你们卿卿我我吗?这是策划最忌讳的问题,也是独游最忌讳的问题,你的粉丝能在一两年内玩到你的内容吗?请打破我的质疑[流汗表情]
+        世处重在快+多人兼容性而不是单机高质,这句话相当于否认资源站近12000张地图,数百名地图作
+        以及所有逻辑人的全部努力,如果你要挑起Mindustry圈内战争,那我无话可说
+        除了你这个人以外,我只想看到你的作品
+        我是玩家,我只管我玩的开心,如果作者本人让我有不好体验,那是作者本人的问题(ps:虽然别看Alon的外表可可爱爱但是内部对任何新人极度仇视
+        而且本人抽象得要命),而且我早就放弃了Mindustry开发了,AMO是最后的作品
+        大不了大会员结末了,我就像以前2021年开mc服那会被外挂团伙盯上了那会又注销一次账号呗,你猜我为什么lv3,"
+        而且老觉得你有点精神疾病,因为外挂团伙那群人也有点精神疾病
+        但之后呢?内容更新怎么更?如何回应粉丝期望?更新频率需要的个人时间够吗?我们一次更新多少策划案的内容?UGC怎么回应?[流汗表情]
+        你赢了,赢得很彻底,非常彻底,赢了所有mindustry玩家,制作者,贡献者,请你继续你的道路,但我还有事要做,我为什么要和你死缠烂打?[流汗表情]
+        我的错就是让你活着了[天使]你的三观应该是没有的,同理心也是没有的,你和那些在癌症患者家属的诉苦视频评论区说“全家遇不到”“不接”的一桌
+        bro肯定觉得自己老帅了吧,实际上是阴暗哥布林一个,而且是被别人孤立的哥布林[委屈],呜呜呜你真的好可怜呢也就是说你也很可恨呢[温馨]
     """.trimIndent().split("\n")
     )
   }
-init {
-  build(Vars.ui.hudGroup)
-}
+
+  init {
+    build(Vars.ui.hudGroup)
+  }
+
   fun build(parent: Group) {
     group.setFillParent(true)
     group.touchable = Touchable.childrenOnly
     group.visibility = Boolp(::unlock)
     parent.addChild(group)
+
     group.fill { f, f1, f2, f3 ->
       Draw.color(IceColor.r1)
-      Draw.alpha(0.1f+0.2f* sin(Time.time/60f))
+      Draw.alpha(0.1f + 0.2f * sin(Time.time / 60f))
       Draw.rect("whiteui", f, f1, f2 * 2, f3 * 2)
     }
   }
@@ -183,12 +208,25 @@ init {
     random.setSeed(System.currentTimeMillis())
     fLabel.setFontScale(random(1f, 3f))
     fLabel.setScale(random(1f, 3f))
+    fLabel.setRotation(random(-30f, 30f))
     fLabel.textSpeed = 0.3f
-    fLabel.touchable = Touchable.disabled
+
+    val rotation = random(-30f, 30f)
+    val container = object :Group() {
+      init {
+        transform = true
+      }
+    }
+
+    container.setRotation(rotation)
+    container.addChild(fLabel)
+
     val x = IceEffects.rand.nextFloat(max(Core.graphics.width.toFloat() - fLabel.width, 1f))
     val y = IceEffects.rand.nextFloat((Core.graphics.height).toFloat())
-    fLabel.setPosition(x, y)
-    group.addChild(fLabel)
+    /* fLabel.setPosition(x, y)
+     group.addChild(fLabel)*/
+    container.setPosition(x, y)
+    group.addChild(container)
   }
 
   fun generateRandomIndices(length: Int, ratio: Float): List<Int> {

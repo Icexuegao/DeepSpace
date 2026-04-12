@@ -19,6 +19,7 @@ class LiquidContentDialog :ContentDialogBase<Liquid>("流体", BaseContentSeq.li
   }
 
   override fun flunList() {
+    list.clearChildren()
     val types = arrayOf("liquid", "gas")
     val tables = Array(types.size) { ITable().apply { setRowsize(5) } }
 

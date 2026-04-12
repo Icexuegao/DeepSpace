@@ -158,7 +158,7 @@ object Distributions : Load {
   }
   val 梯度传送带 = StackConveyor("gradedConveyor").apply {
     bundle {
-      desc(zh_CN, "梯度传送带", "运输设施,打包多种物品进行运输.如果末端未被阻挡,则包裹会被抛出")
+      desc(zh_CN, "梯度传送带", "运输设施,打包多种物品进行运输")
     }
     speed = 60f / 600f
     drawLastItems = false

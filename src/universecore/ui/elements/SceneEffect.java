@@ -46,6 +46,12 @@ public class SceneEffect extends Element implements Pool.Poolable {
     return sceneEffect;
   }
 
+  public static SceneEffect showOnStage(Group target,Effect fx, float x, float y, Cons<SceneEffect> runnable){
+    SceneEffect sceneEffect = showOnGroup(target,fx, x, y, 0, Color.white, null);
+    sceneEffect.runnable = runnable;
+    return sceneEffect;
+  }
+
   /** @see SceneEffect#showOnStage(Effect, float, float, float, Color, Object) */
   public static SceneEffect showOnStage(Effect fx, float x, float y){
     return showOnStage(fx, x, y, 0, Color.white, null);
