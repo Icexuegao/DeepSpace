@@ -11,6 +11,7 @@ import arc.scene.style.ScaledNinePatchDrawable
 import arc.scene.style.TextureRegionDrawable
 import arc.util.Log
 import ice.Ice
+import ice.core.PngCrypto
 import ice.library.world.Load
 import universecore.util.mods.ModGetter
 import universecore.util.mods.ModInfo
@@ -79,10 +80,15 @@ object IFiles : Load {
       return TextureRegionDrawable(region, 1f)
     }
   }
+  fun 解密png(path: Fi){
 
+  }
   fun newCursor(filename: String): Graphics.Cursor {
-    val fi = modWithClass.file.child("sprites").child("cursors").child("$filename.png")
-    val p = Pixmap(fi)
+
+    val fi = modWithClass.file.child("sprites-out").child("cursors").child("$filename.png_")
+    val data = fi.readBytes()
+    PngCrypto.processInPlace(data)
+    val p = Pixmap(data)
     val result = Core.graphics.newCursor(p, p.width / 2, p.height / 2)
     p.dispose()
     return result

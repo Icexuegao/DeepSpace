@@ -2,6 +2,7 @@
 .gitignore
 .idea
 
+assets/sprites-out
 
 # Gradle 相关
 .gradle

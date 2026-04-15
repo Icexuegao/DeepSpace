@@ -130,7 +130,9 @@ fun execute(string: String, path: File? = null, vararg args: Any?) {
   val message = process.errorReader().readText()
   if (message.isNotEmpty()) throw Exception(message)
 }
-
+tasks.processResources {
+  dependsOn("encryptSprites")
+}
 tasks {
   withType<JavaCompile>().configureEach {
     sourceCompatibility = java.toString()
@@ -145,11 +147,43 @@ tasks {
 
   withType<ShadowJar> {
 
-    dependsOn("updateVersion","sourcesJar")
+    dependsOn("updateVersion","sourcesJar","encryptSprites")
     group = "alon"
     archiveFileName.set("${project.name}Desktop.jar")
     from(files("README.md", "LICENSE", "mod.json"))
     manifest.attributes("Main-Class" to "ice.Ice")
+    exclude("spritese/**")
+  }
+
+  register("encryptSprites") {
+    group = "alon"
+    val sourceDir = file("assets/spritese")
+    val targetDir = file("assets/sprites-out")
+
+    inputs.dir(sourceDir)
+    outputs.dir(targetDir)
+
+    doLast {
+      if (!targetDir.exists()) {
+        targetDir.mkdirs()
+      }
+
+      sourceDir.walkTopDown().filter { it.isFile && it.name.endsWith(".png") }.forEach { sourceFile ->
+        val relativePath = sourceFile.relativeTo(sourceDir).path
+        val targetEncrypted = File(targetDir, relativePath.replace(".png", ".png_"))
+
+        if (targetEncrypted.exists() && targetEncrypted.lastModified() >= sourceFile.lastModified()) {
+          return@forEach
+        }
+
+        val data = sourceFile.readBytes()
+        for (i in data.indices) {
+          data[i] = (data[i].toInt() xor 0x5A).toByte()
+        }
+        targetEncrypted.parentFile?.mkdirs()
+        targetEncrypted.writeBytes(data)
+      }
+    }
   }
   register<Jar>("sourcesJar") {
     group = "alon"

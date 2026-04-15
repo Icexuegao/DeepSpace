@@ -5,8 +5,8 @@ import java.io.RandomAccessFile
 
 fun main() {
   // repName(File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\remains\\spine_parasite"))
-   val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites_out")
-   req(file)
+  // val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites_out")
+ //  req(file)
   //removeLeadingZeros("B:\\inCommonUse\\Videos\\bilibili\\37331271901\\37331271901-1-30280.m4s")
 
 }
@@ -51,7 +51,7 @@ interface dw
 fun req(file: File) {
   file.listFiles()?.forEach {
     if (it.isDirectory) req(it)
-    if (it.extension == "png_}") {
+    if (it.extension == "png") {
       val replace1 = "${it.nameWithoutExtension}.png_"
       it.renameTo(File("${file.absolutePath}\\$replace1"))
     }
