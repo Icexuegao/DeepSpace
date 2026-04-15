@@ -14,14 +14,10 @@ buildscript {
   extra["java"] = 25
   extra["mdtVersion"]="Anuken:Mindustry:v157"
   var mdtVersion: String by extra
+
   repositories {
     mavenLocal()
     mavenCentral()
-    maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public/") }
-    maven { url = uri("https://maven.aliyun.com/nexus/content/repositories/jcenter") }
-    maven { url = uri("https://repo.huaweicloud.com/repository/maven/") }
-    maven { url = uri("https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
-    maven { url = uri("https://maven.aliyun.com/repository/public") }
     maven { url = uri("https://jitpack.io") }
     ivy {
       url = uri("https://github.com/")
@@ -34,7 +30,8 @@ buildscript {
     }
   }
   dependencies {
-    classpath(mdtVersion)
+   // classpath(mdtVersion)
+    classpath("com.github.Anuken.Mindustry:core:v157.1")
     classpath(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
   }
 }
@@ -48,7 +45,6 @@ plugins {
   java
   kotlin("jvm") version kotlinCompatibility
   id("com.gradleup.shadow") version "9.3.0"
-  id("com.scalified.plugins.gradle.proguard") version "1.7.0"
 }
 
 repositories {
@@ -70,7 +66,8 @@ repositories {
 dependencies {
   implementation("com.github.EB-wilson.UniverseKit:reflection:1.0")
 
-  compileOnly(mdtVersion)
+//  compileOnly(mdtVersion)
+  compileOnly("com.github.Anuken.Mindustry:core:v157.1")
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")
   implementation("org.commonmark:commonmark-ext-gfm-tables:0.20.0")
@@ -114,13 +111,6 @@ sourceSets {
     toolchain {
       languageVersion.set(JavaLanguageVersion.of(java))
     }
-  }
-}
-
-proguard {
-  configurations {
-    overwriteArtifact.set(false)
-    autoRun.set(false)
   }
 }
 
