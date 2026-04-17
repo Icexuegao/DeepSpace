@@ -20,7 +20,7 @@ class Lucifer : IceUnitType("lucifer") {
     }
     armor = 1f
     accel = 0.2f
-    health = 200f
+    health = 300f
     speed = 3.5f
     flying = true
     hitSize = 16f
@@ -35,7 +35,7 @@ class Lucifer : IceUnitType("lucifer") {
     engineOffset = 8f
     circleTarget = true
     engineColor = IceColor.b4
-    itemCapacity = 30
+    itemCapacity = 120
     buildSpeed = 3f
     buildRange = 8 * 40f
     outlines = false
