@@ -60,10 +60,10 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
     produce!!.liquid(ILiquids.纯净水, 0.2f)
 
     newConsume().apply {
-      time(30f)
+      time(60f)
       power(1f)
       item(IItems.低温化合物,1)
-      liquid(ILiquids.氢气,6f/60f)
+      liquid(ILiquids.氢气,24f/60f)
     }
 
     newProduce().apply {
