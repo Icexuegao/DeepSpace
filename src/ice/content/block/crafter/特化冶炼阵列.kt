@@ -30,7 +30,7 @@ class 特化冶炼阵列 :NormalCrafter("specializedSmelterArray") {
     newConsume().apply {
       time(240f)
       items(IItems.铬铁矿, 5)
-      power(180f / 60f)
+      power(100f / 60f)
     }
     newProduce().apply {
       items(IItems.铬锭, 3, IItems.低碳钢, 1)
