@@ -37,7 +37,7 @@ class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
     drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(),DrawDefault())
     requirements(Category.crafting, IItems.铜锭, 50, IItems.铬锭, 60, IItems.单晶硅, 30)
     newConsume().apply {
-      time(160f)
+      time(120f)
       liquid(Liquids.water, 50f / 60f)
       power(210 / 60f)
     }
@@ -46,7 +46,7 @@ class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
     }
 
     newConsume().apply {
-      time(120f)
+      time(60f)
       liquid(ILiquids.纯净水, 40f / 60f)
       power(180 / 60f)
     }
