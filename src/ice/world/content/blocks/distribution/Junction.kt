@@ -51,12 +51,27 @@ class Junction(name: String) : IceBlock(name) {
         override fun acceptStack(item: Item?, amount: Int, source: Teamc?): Int {
             return 0
         }
+      private val checkingPath = ThreadLocal<MutableSet<Building>>()
 
-        override fun acceptItem(source: Building, item: Item?): Boolean {
-            val relative = source.relativeTo(tile).toInt()
-            if (relative == -1) return false
-            val to = nearby(relative)
-            return to != null && to.team === team && next[relative] && to.acceptItem(this, item)
+      override fun acceptItem(source: Building, item: Item?): Boolean {
+        val relative = source.relativeTo(tile).toInt()
+        if (relative == -1) return false
+        val to = nearby(relative)
+        if (to == null || to.team !== team || !next[relative]) return false
+
+        val path = checkingPath.get() ?: run {
+          val newSet = mutableSetOf<Building>()
+          checkingPath.set(newSet)
+          newSet
+        }
+
+        if (path.contains(this)) return false
+
+        path.add(this)
+        val result = to.acceptItem(this, item)
+        path.remove(this)
+
+        return result
         }
 
         override fun handleItem(source: Building, item: Item?) {

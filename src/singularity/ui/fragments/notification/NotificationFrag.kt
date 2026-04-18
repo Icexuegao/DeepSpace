@@ -1,6 +1,7 @@
 package singularity.ui.fragments.notification
 
 import arc.Core
+import arc.Events
 import arc.Graphics
 import arc.func.Boolp
 import arc.func.Cons
@@ -29,15 +30,14 @@ import arc.util.Scaling
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.core.SettingValue
 import ice.graphics.IceColor.b4
 import ice.library.scene.action.IceActions
 import mindustry.Vars
+import mindustry.game.EventType
 import mindustry.gen.Icon
 import mindustry.gen.Tex
 import mindustry.graphics.Pal
 import mindustry.ui.Styles
-import singularity.Sgl
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.ui.SglStyles
@@ -62,16 +62,15 @@ class NotificationFrag {
   var historyPaneShown: Boolean = false
   var anyHistoryUnsaved: Boolean = false
 
-
   fun build(parent: Group) {
-  //
+    //
     parent.fill { main: Table ->
       this.main = main
       main.touchable = Touchable.childrenOnly
       main.left().table { tab ->
         tab.left().button({ t -> t.image(Icon.rightOpen).size(24f).scaling(Scaling.fit) }, SglStyles.sideButtonRight, {
           notifyQueue.clear()
-          for (bar in showing) {
+          for(bar in showing) {
             removeNotificationBar(bar)
           }
           showHistoryPane()
@@ -79,10 +78,10 @@ class NotificationFrag {
         tab.table { pane ->
           pane!!.left()
           pane.add(
-            object : Table(Cons { top ->
+            object :Table(Cons { top ->
               val lab = top.left().button("\ue86f " + Core.bundle.get("misc.clear"), Styles.nonet) {
                 notifyQueue.clear()
-                for (bar in showing) {
+                for(bar in showing) {
                   removeNotificationBar(bar)
                 }
               }.fill().margin(4f).padLeft(8f).padBottom(-4f).get().labelCell
@@ -114,7 +113,7 @@ class NotificationFrag {
             }
           ).grow()
           pane.row()
-          pane.add<Group?>(object : Group() {
+          pane.add(object :Group() {
             init {
               touchable = Touchable.childrenOnly
             }
@@ -129,7 +128,10 @@ class NotificationFrag {
           }.also { notifies = it }).width(380f).height(440f)
           pane.row()
           pane.add(
-            object : Table(Cons { bottom: Table? -> bottom!!.left().add("", Styles.outlineLabel).color(Pal.accent).fill().update { l: Label? -> l!!.setText("\uf181 +" + max(notifyQueue.size - (5 - showing.size), 0)) }.padLeft(8f) }) {
+            object :Table(Cons { bottom: Table? ->
+              bottom!!.left().add("", Styles.outlineLabel).color(Pal.accent).fill()
+                .update { l: Label? -> l!!.setText("\uf181 +" + max(notifyQueue.size - (5 - showing.size), 0)) }.padLeft(8f)
+            }) {
               init {
                 color.a = 0f
               }
@@ -159,7 +161,7 @@ class NotificationFrag {
     }
 
     parent.addChild(
-      object : Table(SglDrawConst.darkgrayUIAlpha) {
+      object :Table(SglDrawConst.darkgrayUIAlpha) {
         var acting: Boolean = false
 
         init {
@@ -186,25 +188,26 @@ class NotificationFrag {
 
     parent.addChild(Table(Tex.pane).margin(4f).top().also { historyPane = it })
 
-    if (Core.graphics.isPortrait){
-      historyPane!!.setSize(
-        Core.graphics.height * 0.75f,
-        Core.graphics.width * 0.75f
-      )
-    }else{
+    val resize = {
       historyPane!!.setSize(
         Core.graphics.width * 0.75f,
         Core.graphics.height * 0.75f
       )
+      historyPane!!.setPosition(Core.graphics.width / 2f, Core.graphics.height / 2f, Align.center)
     }
 
-    historyPane!!.setPosition(historyPane!!.getWidth() / 2, Core.graphics.height / 2f, Align.center)
+    resize.invoke()
+    Events.on(EventType.ResizeEvent::class.java) {
+      resize.invoke()
+    }
+
     historyPane!!.visible = false
 
     historyPane!!.table { pane ->
       pane.top().table { top ->
         top.add().size(32f)
-        top.add(Core.bundle.get("infos.notificationHistory"), Styles.outlineLabel).color(Pal.accent).fontScale(1.1f).growX().labelAlign(Align.center)
+        top.add(Core.bundle.get("infos.notificationHistory"), Styles.outlineLabel).color(Pal.accent).fontScale(1.1f).growX()
+          .labelAlign(Align.center)
         top.button(Icon.cancel, Styles.clearNonei, 24f) { this.hideHistoryPane() }.size(32f)
       }.fillY().growX()
       pane.row()
@@ -238,7 +241,9 @@ class NotificationFrag {
 
     historyPane!!.update {
       historyList!!.forEach { item: Element? ->
-        if (item is NotifyLogBar && historyList!!.getCullingArea() != null && historyList!!.getCullingArea().overlaps(item.x, item.y, item.getWidth(), item.getHeight())) {
+        if (item is NotifyLogBar && historyList!!.getCullingArea() != null && historyList!!.getCullingArea()
+            .overlaps(item.x, item.y, item.getWidth(), item.getHeight())
+        ) {
           if (!item.notification.readed) {
             item.notification.readed = true
             anyHistoryUnsaved = true
@@ -250,7 +255,7 @@ class NotificationFrag {
 
   fun notify(notification: Notification?) {
     history.insert(0, notification)
-   // if (history.size > Sgl.config.maxNotifyHistories) history.removeRange(Sgl.config.maxNotifyHistories, history.size - 1)
+    // if (history.size > Sgl.config.maxNotifyHistories) history.removeRange(Sgl.config.maxNotifyHistories, history.size - 1)
     if (!historyPaneShown) notifyQueue.add(notification)
 
     rebuildHistory()
@@ -259,12 +264,12 @@ class NotificationFrag {
   }
 
   private fun rebuildHistory() {
-    if (Core.graphics.isPortrait){
+    if (Core.graphics.isPortrait) {
       historyPane!!.setSize(
         Core.graphics.height * 0.75f,
         Core.graphics.width * 0.75f
       )
-    }else{
+    } else {
       historyPane!!.setSize(
         Core.graphics.width * 0.75f,
         Core.graphics.height * 0.75f
@@ -272,7 +277,7 @@ class NotificationFrag {
     }
 
     historyList!!.clearChildren()
-    for (notification in history) {
+    for(notification in history) {
       historyList!!.add(logHistory.get(notification) { NotifyLogBar(notification) }).growX().height(80f).pad(4f)
       historyList!!.row()
     }
@@ -326,7 +331,8 @@ class NotificationFrag {
     bar.color.a = 0f
     bar.setSize(Scl.scl(380f), Scl.scl(80f))
     bar.x = -bar.getWidth()
-    bar.y = if (showing.isEmpty) notifies!!.getHeight() - bar.getHeight() else showing.peek().getY(Align.bottom) - Scl.scl(10f) - bar.getHeight()
+    bar.y =
+      if (showing.isEmpty) notifies!!.getHeight() - bar.getHeight() else showing.peek().getY(Align.bottom) - Scl.scl(10f) - bar.getHeight()
 
     showing.add(bar)
     if (notification.duration < 0) {
@@ -356,7 +362,7 @@ class NotificationFrag {
 
   private fun showWindow(notification: Notification) {
     showingDialogs++
-    object : Dialog("", SglStyles.transparentBack) {
+    object :Dialog("", SglStyles.transparentBack) {
       val lay: Int = showingDialogs
 
       init {
@@ -396,7 +402,7 @@ class NotificationFrag {
         ),
         Actions.run {
           showing.remove(bar)
-          for (i in bar.index..<showing.size) {
+          for(i in bar.index..<showing.size) {
             showing.get(i).index = i
           }
           bar.remove()
@@ -411,7 +417,7 @@ class NotificationFrag {
 
   fun saveHistory(write: Writes) {
     write.i(history.size)
-    for (n in history) {
+    for(n in history) {
       val bytes = n.pack()
       write.i(bytes.size)
       write.b(bytes)
@@ -422,12 +428,12 @@ class NotificationFrag {
   fun loadHistory(read: Reads) {
     history.clear()
     val n = read.i()
-    for (i in 0..<n) {
+    for(i in 0..<n) {
       history.add(DataPackable.readObject<Notification?>(read.b(read.i())))
     }
   }
 
-  private inner class NotifyItemBar(noti: Notification) : Table(Tex.paneLeft) {
+  private inner class NotifyItemBar(noti: Notification) :Table(Tex.paneLeft) {
     val notification: Notification
     var act: DelayAction? = null
     var index: Int = 0
@@ -452,13 +458,13 @@ class NotificationFrag {
 
       touchable = Touchable.enabled
 
-      table(object : BaseDrawable() {
+      table(object :BaseDrawable() {
         override fun draw(x: Float, y: Float, width: Float, height: Float) {
           colorLerp(0f, 0.4f)
           Fill.rect(x + width / 2f, y + height / 2f, width, height)
         }
       }) { img: Table? ->
-        img!!.table(object : BaseDrawable() {
+        img!!.table(object :BaseDrawable() {
           override fun draw(x: Float, y: Float, width: Float, height: Float) {
             if (act == null) return
 
@@ -481,7 +487,7 @@ class NotificationFrag {
         }.fill().pad(0f)
       }.fillX().growY().margin(4f)
 
-      table(object : BaseDrawable() {
+      table(object :BaseDrawable() {
         override fun draw(x: Float, y: Float, width: Float, height: Float) {
           colorLerp(0f, 0.4f)
           Fill.tri(x, y, x, y + height, x + width / 3f, y)
@@ -562,7 +568,7 @@ class NotificationFrag {
     }
   }
 
-  private inner class NotifyLogBar(noti: Notification) : Button(SglStyles.underline) {
+  private inner class NotifyLogBar(noti: Notification) :Button(SglStyles.underline) {
     val notification: Notification
 
     var lerp: Float
@@ -584,7 +590,7 @@ class NotificationFrag {
 
       touchable = Touchable.enabled
 
-      table(object : BaseDrawable() {
+      table(object :BaseDrawable() {
         override fun draw(x: Float, y: Float, width: Float, height: Float) {
           colorLerp()
           Fill.rect(x + width / 2f, y + height / 2f, width, height)
@@ -599,7 +605,7 @@ class NotificationFrag {
         }.fill().pad(0f)
       }.fillX().growY().margin(4f)
 
-      table(object : BaseDrawable() {
+      table(object :BaseDrawable() {
         override fun draw(x: Float, y: Float, width: Float, height: Float) {
           colorLerp()
           val c1 = Draw.getColor().toFloatBits()
@@ -631,12 +637,11 @@ class NotificationFrag {
 
       button(Icon.leftOpenSmall, Styles.clearNonei, 22f) {
 
-        actions(IceActions.moveToAlphaAction(-width-10f,y,0.5f,0f), Actions.run {
+        actions(IceActions.moveToAlphaAction(-width - 10f, y, 0.5f, 0f), Actions.run {
           history.remove(noti)
           rebuildHistory()
           anyHistoryUnsaved = true
         })
-
 
       }.margin(4f).growY().get().addListener { event: SceneEvent? ->
         event!!.stop()

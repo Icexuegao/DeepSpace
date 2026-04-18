@@ -12,7 +12,6 @@ import ice.world.draw.DrawRegionColor
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
-import mindustry.gen.Teamc
 import mindustry.type.Category
 import mindustry.type.Item
 import mindustry.type.ItemStack
@@ -48,13 +47,7 @@ class DroneReceivingRnd(name: String) :SglBlock(name) {
   inner class DroneReceivingRndBuild :SglBuilding() {
     var sortItem: Item? = null
     var buildings: DroneDeliveryTerminal.DroneDeliveryTerminalBuild? = null
-    override fun acceptItem(source: Building, item: Item): Boolean {
-      return false
-    }
-
-    override fun handleStack(item: Item?, amount: Int, source: Teamc?) {
-      super.handleStack(item, amount, source)
-    }
+    override fun acceptItem(source: Building, item: Item) = false
 
     override fun config(): Item? {
       return sortItem

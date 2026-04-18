@@ -473,7 +473,7 @@ object Distributions : Load {
     }
     buildVisibility = BuildVisibility.sandboxOnly
   }
-  val dirSource = DirSource("dirSource").apply {
+  val 定向源 = DirSource("dirSource").apply {
     bundle { desc(zh_CN, "定向源", "定向输出所有资源") }
   }
 }

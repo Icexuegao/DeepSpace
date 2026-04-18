@@ -33,7 +33,6 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.logic.LAccess
 import mindustry.type.Item
-import mindustry.type.ItemStack
 import mindustry.type.Liquid
 import mindustry.type.LiquidStack
 import mindustry.ui.Bar
@@ -486,8 +485,10 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       }
 
       if (updateRecipe && producer!!.current != null) {
-        if (producer!!.current!!.get(ProduceType.item) != null) outputItems = Seq(producer!!.current!!.get(ProduceType.item)!!.items).map { e: ItemStack? -> e!!.item }
-        if (producer!!.current!!.get(ProduceType.liquid) != null) outputLiquids = Seq(producer!!.current!!.get(ProduceType.liquid)!!.liquids).map { e: LiquidStack? -> e!!.liquid }
+        val items1 = producer!!.current!!.get(ProduceType.item)
+        if (items1 != null) outputItems = Seq(items1.items).map { it.item }
+        val liquids1 = producer!!.current!!.get(ProduceType.liquid)
+        if (liquids1 != null) outputLiquids = Seq(liquids1.liquids).map {it.liquid }
       }
 
       for (byproduct in byproducts.values()) {

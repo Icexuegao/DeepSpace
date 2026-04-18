@@ -111,6 +111,7 @@ object IUnitTypes : Load {
   val 爆蚊 = ExplosiveMosquito()
 
   val 加百列 = Gabriel()
+  val 米迦勒 = Michael()
   val 路西法 = Lucifer()
 
   val 伊普西龙 = Ipsiglon()

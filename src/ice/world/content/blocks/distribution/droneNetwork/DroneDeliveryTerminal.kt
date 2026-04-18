@@ -204,7 +204,7 @@ class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
 
     /**检查是否可以向目标转移物品*/
     private fun canTransferToTarget(target: DroneReceivingRndBuild, item: Item, unit: Unit): Boolean {
-      return target.items.get(item) <= unit.itemCapacity()
+      return target.items.get(item) <= unit.itemCapacity() && !unit.hasItem()
     }
 
     /**计算转移物品数量*/

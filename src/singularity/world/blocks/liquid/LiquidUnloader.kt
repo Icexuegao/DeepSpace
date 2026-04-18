@@ -24,7 +24,7 @@ import kotlin.math.min
 
 /**液体提取器，可从周围的方块中抽取液体并送向下一个方块
  * 类似物品装卸器
- * @see mindustry.world.blocks.storage.Unloader*/
+ * @see ice.world.content.blocks.distribution.Unloader*/
 open class LiquidUnloader(name: String) : Block(name) {
 
   init {
@@ -56,7 +56,7 @@ open class LiquidUnloader(name: String) : Block(name) {
     drawPlanConfigCenter(req, req.config, "center", true)
   }
 
-  inner class LiquidUnloadedBuild : Building(), Takeable {
+  open inner class LiquidUnloadedBuild : Building(), Takeable {
     @Nullable
     var current: Liquid? = null
 

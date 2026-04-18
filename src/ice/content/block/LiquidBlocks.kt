@@ -2,6 +2,8 @@ package ice.content.block
 
 import ice.content.IItems
 import ice.content.block.liquid.P2PLiquidNode
+import ice.content.block.liquid.流体分类阀
+import ice.content.block.liquid.流体装卸器
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
 import ice.ui.bundle.bundle
@@ -13,7 +15,6 @@ import ice.world.content.blocks.liquid.base.LiquidRouter
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.blocks.production.Pump
-import singularity.world.blocks.liquid.LiquidUnloader
 
 @Suppress("unused")
 object LiquidBlocks : Load {
@@ -271,12 +272,7 @@ object LiquidBlocks : Load {
     size = 1
     requirements(Category.liquid, IItems.铜锭, 20, IItems.黄铜锭, 10, IItems.铬锭, 10, IItems.石英玻璃, 10)
   }
-  val 流体装卸器 = LiquidUnloader("liquid_unloader").apply {
-    bundle {
-      desc(zh_CN, "流体装卸器", "从建筑中抽取流体,就像装卸器提取物品一样")
-    }
-    requirements(Category.liquid, IItems.单晶硅, 20, IItems.铝锭, 15, IItems.铬锭, 15)
-    size = 1
-  }
+  val 流体分类阀= 流体分类阀()
+  val 流体装卸器 = 流体装卸器()
   val p2p流体节点 = P2PLiquidNode()
 }

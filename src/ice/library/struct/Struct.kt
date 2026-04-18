@@ -19,19 +19,6 @@ fun <K, V> HashMap<K, V>.addP(key: K, prov: Prov<V>) {
   put(key, prov.get())
 }
 
-/**
- * 对集合中的前 [count] 个元素执行指定的操作
- * @param count 要处理的元素数量，如果小于等于0则不处理任何元素
- * @param action 要对每个元素执行的操作
- */
-inline fun <T> Iterable<T>.forEach(count: Int, action: (T)->Unit) {
-  if (count <= 0) return
-  var processed = 0
-  for (element in this) {
-    action(element)
-    if (++processed >= count) break
-  }
-}
 
 fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T)->Unit = {_, _, _ ->}) = Delegates.observable(initialValue) {property, old, new ->
   if (old != new) {

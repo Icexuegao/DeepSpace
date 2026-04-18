@@ -27,7 +27,6 @@ import mindustry.gen.Building
 import mindustry.gen.Iconc
 import mindustry.gen.Unit
 import mindustry.graphics.Layer
-import mindustry.graphics.MultiPacker
 import mindustry.graphics.Pal
 import mindustry.type.Item
 import mindustry.type.Liquid

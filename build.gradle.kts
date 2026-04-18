@@ -12,7 +12,7 @@ buildscript {
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
   extra["kotlinCompatibility"] = "2.3.20"
   extra["java"] = 25
-  extra["mdtVersion"]="Anuken:Mindustry:v157"
+  extra["mdtVersion"]="com.github.Anuken.Mindustry:core:v157.2"
   var mdtVersion: String by extra
 
   repositories {
@@ -30,8 +30,7 @@ buildscript {
     }
   }
   dependencies {
-   // classpath(mdtVersion)
-    classpath("com.github.Anuken.Mindustry:core:v157.1")
+    classpath(mdtVersion)
     classpath(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
   }
 }
@@ -66,8 +65,7 @@ repositories {
 dependencies {
   implementation("com.github.EB-wilson.UniverseKit:reflection:1.0")
 
-//  compileOnly(mdtVersion)
-  compileOnly("com.github.Anuken.Mindustry:core:v157.1")
+  compileOnly(mdtVersion)
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")
   implementation("org.commonmark:commonmark-ext-gfm-tables:0.20.0")
@@ -167,8 +165,10 @@ tasks {
         }
 
         val data = sourceFile.readBytes()
+
+
         for (i in data.indices) {
-          data[i] = (data[i].toInt() xor 0x5A).toByte()
+          data[i] = (data[i].toInt() xor 920).toByte()
         }
         targetEncrypted.parentFile?.mkdirs()
         targetEncrypted.writeBytes(data)
@@ -244,15 +244,18 @@ tasks {
     dependsOn("removeVer")
     dependsOn("deploy")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    val file = Fi("mod.json")
-    val parse = JsonReader().parse(file)
-    val message = parse.get("version")
-    val split: List<String> = message.asString().split("-")
-    val toInt= split[1].toInt()+1
 
-    archiveFileName.set("${project.name}-${split[0]}-${toInt}.jar") //存档文件名
-    val file1: File = file("build/libs/version")
-    destinationDirectory.set(file1)
+    val versionInfo = provider {
+      val file = Fi("mod.json")
+      val parse = JsonReader().parse(file)
+      val message = parse.get("version")
+      val split: List<String> = message.asString().split("-")
+      split[0] to split[1].toInt()
+    }
+
+    archiveFileName.set(versionInfo.map { "${project.name}-${it.first}-${it.second}.jar" })
+    destinationDirectory.set(file("build/libs/version"))
+
     from(zipTree("build/libs/${project.name}.jar"))
   }
 }
