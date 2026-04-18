@@ -19,7 +19,7 @@ class Chord : IceUnitType("chord") {
     useUnitCap = false
     rotateSpeed = 3f
     lowAltitude = false
-    itemCapacity = 30
+    itemCapacity = 40
     allowedInPayloads = false
     logicControllable = false
     playerControllable = false

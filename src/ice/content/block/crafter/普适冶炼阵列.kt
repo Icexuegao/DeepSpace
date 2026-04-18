@@ -33,7 +33,7 @@ class 普适冶炼阵列 : NormalCrafter("universalSmelterArray") {
     newConsume().apply {
       time(180f)
       item(IItems.方铅矿, 5)
-      power(90 / 60f)
+      power(80 / 60f)
     }
     newProduce().apply {
       items(IItems.铅锭, 4)
@@ -42,7 +42,7 @@ class 普适冶炼阵列 : NormalCrafter("universalSmelterArray") {
     newConsume().apply {
       time(120f)
       item(IItems.闪锌矿, 3)
-      power(180 / 60f)
+      power(100 / 60f)
     }
     newProduce().apply {
       items(IItems.锌锭, 2)
