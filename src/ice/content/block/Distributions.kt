@@ -397,7 +397,7 @@ object Distributions : Load {
     translation = 2f
     bulletSpeed = 6f
     rotateSpeed = 2f
-    itemCapacity = 50
+    itemCapacity = 90
     bulletLifetime = 160f
     shootSound = Sounds.shootCollaris
     shootEffect = Fx.shootBig2
