@@ -200,14 +200,14 @@ object PowerBlocks : Load {
     }, DrawDefault())
     requirements(Category.power, IItems.高碳钢, 50, IItems.锌锭, 20, IItems.黄铜锭, 15)
     newFormula { consumers, producers ->
-      consumers.items(IItems.铈锭,2)
+      consumers.items(IItems.铈锭,1)
       consumers.time(120f)
-      producers.power(150f/60f)
+      producers.power(400f/60f)
     }
     newFormula { consumers, producers ->
       consumers.items(IItems.铈凝块,1)
-      consumers.time(60f)
-      producers.power(450f/60f)
+      consumers.time(120f)
+      producers.power(1000f/60f)
     }
   }
   val 地热发电机 = ThermalGenerator("geothermalGenerator").apply {
@@ -294,7 +294,7 @@ object PowerBlocks : Load {
         liquid(ILiquids.沼气, 20f / 60f)
       }
       producers.apply {
-        power(210f / 60f)
+        power(500f / 60f)
       }
     }
 
