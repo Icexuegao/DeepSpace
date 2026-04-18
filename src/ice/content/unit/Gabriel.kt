@@ -10,6 +10,7 @@ import ice.world.meta.IceEffects
 import mindustry.entities.part.DrawPart
 import mindustry.gen.Sounds
 import mindustry.gen.Unit
+import mindustry.graphics.Layer
 import mindustry.graphics.MultiPacker
 import mindustry.graphics.MultiPacker.PageType
 
@@ -26,12 +27,12 @@ class Gabriel : IceUnitType("gabriel") {
     mineTier = 2
     mineSpeed = 4f
     engineSize = 2.5f
+    engineLayer= Layer.flyingUnitLow-1f
     rotateSpeed = 7f
     itemCapacity = 30
     engineOffset = 6f
     circleTarget = true
     engineColor = IceColor.b4
-    itemCapacity = 30
     buildSpeed = 2f
     buildRange = 8 * 40f
     drag = 0.05f

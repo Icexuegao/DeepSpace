@@ -69,7 +69,9 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
   fun requirements(vararg req: Any) {
     requirements = ItemStack.with(*req)
   }
-
+  override fun drawEngines(unit: Unit?) {
+    super.drawEngines(unit)
+  }
   override fun setStats() {
     super.setStats()
     fun abilities(abilities: Seq<Ability>): StatValue {

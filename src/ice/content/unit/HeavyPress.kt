@@ -3,15 +3,14 @@ package ice.content.unit
 import arc.graphics.Color
 import arc.math.geom.Rect
 import ice.content.IStatus
-import ice.entities.bullet.base.BulletType
 import ice.library.IFiles.appendModName
 import ice.ui.bundle.bundle
 import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
-import mindustry.content.Fx
+import mindustry.entities.abilities.Ability
 import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.abilities.ShieldArcAbility
-import mindustry.gen.Sounds
+import mindustry.gen.Unit
 import mindustry.world.meta.BlockFlag
 
 class HeavyPress : IceUnitType("heavyPress") {
@@ -39,29 +38,7 @@ class HeavyPress : IceUnitType("heavyPress") {
     treadPullOffset = 4
     targetFlags = arrayOf(BlockFlag.turret)
     treadRects = arrayOf(Rect(-55f, -61f, 27f, 130f))
-    setWeapon {
-      x = 0f
-      shake = 0f
-      reload = 30f
-      mirror = false
-      display = false
-      useAmmo = false
-      shootCone = 360f
-      shootSound = Sounds.none
-      shootStatus = IStatus.突袭
-      shootStatusDuration = 60f
-      bullet = BulletType().apply {
-        damage = 0f
-        lifetime = 30f
-        speed = 8f
-        collidesAir = false
-        instantDisappear = true
-        shootEffect = Fx.none
-        smokeEffect = Fx.none
-        despawnEffect = Fx.none
-        hitEffect = Fx.none
-      }
-    }
+
     abilities.add(ShieldArcAbility().apply {
       region = "heavyPress-shield".appendModName()
       whenShooting = false
@@ -75,6 +52,13 @@ class HeavyPress : IceUnitType("heavyPress") {
     })
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 1f
-    })
+    },DWDFAbility())
+  }
+  class DWDFAbility :Ability(){
+    override fun update(unit: Unit) {
+      if (unit.isShooting){
+        unit.apply(IStatus.突袭, 60f)
+      }
+    }
   }
 }

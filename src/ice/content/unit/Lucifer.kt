@@ -10,6 +10,7 @@ import ice.world.meta.IceEffects
 import mindustry.entities.part.DrawPart
 import mindustry.gen.Sounds
 import mindustry.gen.Unit
+import mindustry.graphics.Layer
 import mindustry.graphics.MultiPacker
 import mindustry.graphics.MultiPacker.PageType
 
@@ -33,6 +34,7 @@ class Lucifer : IceUnitType("lucifer") {
     rotateSpeed = 7f
     itemCapacity = 40
     engineOffset = 8f
+    engineLayer= Layer.flyingUnitLow-1f
     circleTarget = true
     engineColor = IceColor.b4
     itemCapacity = 120

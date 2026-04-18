@@ -45,11 +45,8 @@ open class 焚化炉 : SglBlock("incinerator") {
     size = 1
     flameColor = IceColor.b4
     configurable = true
-
     conductivePower = true
     hasPower = true
-  //  rotate = true
- //   rotateDraw = false
     drawArrow = false
     hasLiquids = true
     hasItems = true
@@ -78,6 +75,10 @@ open class 焚化炉 : SglBlock("incinerator") {
     })
   }
 
+  override fun setStats() {
+    super.setStats()
+    consumers.forEach{it.display(stats)}
+  }
   override fun pointConfig(config: Any?, transformer: Cons<Point2>): Any? {
     if (config is ByteArray) {
       val var5 = DataPackable.readObject<DataPackable?>(config, *arrayOfNulls<Any>(0))

@@ -39,6 +39,7 @@ import singularity.world.SglFx
 import singularity.world.blocks.turrets.EmpBulletType
 import singularity.world.blocks.turrets.MultiTrailBulletType
 import singularity.world.particles.SglParticleModels
+import singularity.world.unit.abilities.MirrorArmorAbility
 import singularity.world.unit.types.TrailMoveLightning
 import universecore.graphics.lightnings.LightningVertex
 import universecore.graphics.lightnings.generator.RandomGenerator
@@ -68,7 +69,7 @@ class Emptiness : IceUnitType("emptiness") {
     }, object : UnitEngine(-40f, -50f, 8f, -90f) {
       override fun draw(unit: Unit) = kotlin.Unit
     })
-   /* abilities.addAll(MirrorArmorAbility().apply {
+    abilities.addAll(MirrorArmorAbility().apply {
       strength = 240f
       maxShield = 8200f
       recoverSpeed = 3f
@@ -76,7 +77,7 @@ class Emptiness : IceUnitType("emptiness") {
       minAlbedo = 0.5f
       maxAlbedo = 0.8f
       shieldArmor = 10f
-    })*/
+    })
     val turretBullet = object : EmpBulletType() {
       init {
         damage = 420f
