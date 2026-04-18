@@ -27,7 +27,6 @@ import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
-import mindustry.type.LiquidStack
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
@@ -188,11 +187,7 @@ class Winter : SglTurret("winter"){
     }
     consume!!.time(720f)
     consume!!.energy(1.1f)
-    consume!!.liquids(
-      *LiquidStack.with(
-        ILiquids.相位态FEX流体, 0.2f, ILiquids.急冻液, 0.2f
-      )
-    )
+    consume!!.liquids(ILiquids.相位态FEX流体, 0.2f, ILiquids.急冻液, 0.2f)
 
     updating = Cons { e: SglBuilding? ->
       val t = e as SglTurretBuild?

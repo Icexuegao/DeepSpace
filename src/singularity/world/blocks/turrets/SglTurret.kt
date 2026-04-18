@@ -354,18 +354,18 @@ open class SglTurret(name: String) :SglBlock(name) {
     stats.add(Stat.targetsGround, targetGround)
 
     stats.add(Stat.ammo) { table ->
-      table!!.defaults().padLeft(15f)
+      table.defaults().padLeft(15f)
       for(entry in ammoTypes) {
         table.row()
         table.table(SglDrawConst.grayUIAlpha, Cons { t ->
-          t!!.left().defaults().left().growX()
+          t.left().defaults().left().growX()
           t.table { st ->
-            st!!.left().defaults().left()
+            st.left().defaults().left()
             st.table { c ->
-              c!!.left().defaults().left()
-              for(consume in entry.key!!.all()) {
-                c.table { cons: Table? ->
-                  cons!!.left().defaults().left().padLeft(3f).fill()
+              c.left().defaults().left()
+              for(consume in entry.key.all()) {
+                c.table { cons ->
+                  cons.left().defaults().left().padLeft(3f).fill()
                   consume.buildIcons(cons)
                 }.fill()
               }
@@ -375,7 +375,7 @@ open class SglTurret(name: String) :SglBlock(name) {
             st.add(
               Stat.reload.localized() + ":" + Strings.autoFixed(
                 60f / entry.key!!.craftTime * shoot.shots,
-                1
+                3
               ) + StatUnit.perSecond.localized()
             )
             if (entry.value!!.reloadAmount > 1) {

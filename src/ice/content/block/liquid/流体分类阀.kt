@@ -9,12 +9,15 @@ import ice.library.scene.ui.ItemSelection
 import ice.ui.bundle.BaseBundle
 import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import mindustry.gen.Building
 import mindustry.type.Category
 import mindustry.type.Liquid
 import mindustry.world.blocks.liquid.LiquidBlock
+import mindustry.world.modules.LiquidModule
 import singularity.world.blocks.liquid.LiquidUnloader
 import singularity.world.blocks.product.NormalCrafter
 import universecore.world.producers.ProduceType
+import kotlin.math.min
 
 class 流体分类阀 :LiquidUnloader("liquid_classifier") {
 
@@ -36,6 +39,32 @@ class 流体分类阀 :LiquidUnloader("liquid_classifier") {
       Draw.rect(region, x, y)
     }
 
+    override fun updateTile() {
+      val next = getNext("liquidsPeek") {e: Building? -> e!!.block.hasLiquids && e.canUnload()}
+      if (next == null) return
+
+      if (next.liquids != null) {
+        val dmp = LiquidModule.LiquidConsumer { l: Liquid?, a: Float ->
+          var dump = getNext("liquids") { e: Building? ->
+            val dest = e!!.getLiquidDestination(this, l)
+            dest.acceptLiquid(this, l) && dest !== next && dest.liquids.get(l) / dest.block.liquidCapacity < a / next.block.liquidCapacity
+          }
+          if (dump == null) return@LiquidConsumer
+
+          dump = dump.getLiquidDestination(this, l)
+          var move =
+            (a * dump.block.liquidCapacity - dump.liquids.get(l) * next.block.liquidCapacity) / (dump.block.liquidCapacity + next.block.liquidCapacity)
+          move = min(min(move, dump.block.liquidCapacity - dump.liquids.get(l)), a)
+
+          next.liquids.remove(l, move)
+          dump.handleLiquid(this, l, move)
+        }
+
+        if (current != null) {
+          dmp.accept(current, next.liquids.get(current))
+        }
+      }
+    }
     override fun buildConfiguration(table: Table) {
       cliquids.clear()
       proximity.forEach {
