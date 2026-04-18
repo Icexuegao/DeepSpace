@@ -19,9 +19,9 @@ class 铈凝块混合器 : NormalCrafter("ceriumBlockMixer") {
     itemCapacity = 36
     craftEffect = IceEffects.square(IItems.铈凝块.color)
     newConsume().apply {
-      power(2f)
+      power(1.5f)
       time(90f)
-      items(IItems.爆炸化合物, 3, IItems.铈锭, 2)
+      items(IItems.爆炸化合物, 2, IItems.铈锭, 2)
     }
     newProduce().apply {
       item(IItems.铈凝块, 2)

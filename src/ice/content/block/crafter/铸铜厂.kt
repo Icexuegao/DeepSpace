@@ -20,7 +20,7 @@ class 铸铜厂 : NormalCrafter("copperFoundry") {
     health = 550
     drawers = DrawMulti(DrawDefault(), DrawFlame())
     craftEffect = IceEffects.square(IItems.铜锭.color)
-    requirements(Category.crafting, ItemStack.with(IItems.铜锭, 200, IItems.低碳钢, 150))
+    requirements(Category.crafting, ItemStack.with(IItems.铜锭, 150, IItems.低碳钢, 150))
 
     newConsume().apply {
       time(90f)
