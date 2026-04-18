@@ -106,7 +106,7 @@ object ProductBlocks : Load {
     newConsume().apply {
       power(4f)
     }
-    newBooster(4.7f).apply {
+    newBooster(5f).apply {
       liquid(Liquids.water, 0.3f)
     }
     drillEffect = Fx.mine
@@ -199,7 +199,7 @@ object ProductBlocks : Load {
     autoSelect = true
 
     newConsume()
-    consume!!.time(90f)
+    consume!!.time(60f)
     consume!!.liquid(Liquids.water, 0.2f)
     consume!!.power(1.75f)
     newProduce()
