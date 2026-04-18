@@ -36,10 +36,10 @@ class 冲压锻炉 : NormalCrafter("pressingForge") {
       glowScale = 3.53429f
       color = Color.valueOf("F0511D")
     })
-    requirements(Category.crafting, IItems.高碳钢, 450, IItems.锌锭, 180, IItems.钴锭, 135)
+    requirements(Category.crafting, IItems.高碳钢, 350, IItems.锌锭, 180, IItems.钴锭, 135)
 
     newConsume().apply {
-      time(45f)
+      time(60f)
       items(IItems.铱锇矿, 25)
       liquid(Liquids.water, 1f)
       power(2.5f)
@@ -50,10 +50,10 @@ class 冲压锻炉 : NormalCrafter("pressingForge") {
     }
 
     newConsume().apply {
-      time(90f)
+      time(72f)
       items(IItems.铱锇矿, 50)
-      liquid(Liquids.water, 3f)
-      power(2.5f)
+      liquid(Liquids.water, 2f)
+      power(3f)
     }
     newProduce().apply {
       items(IItems.铱板, 25)
