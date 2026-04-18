@@ -30,6 +30,8 @@ object LiquidBlocks : Load {
     }
     size = 1
     squareSprite = false
+    pumpAmount = 0.2f
+    liquidCapacity = 20f
     requirements(Category.liquid, IItems.高碳钢, 20, IItems.锌锭, 5)
   }
   val 谐振泵 = Pump("resonancePump").apply {
@@ -38,7 +40,9 @@ object LiquidBlocks : Load {
     }
     size = 2
     squareSprite = false
-    requirements(Category.liquid, IItems.高碳钢, 40, IItems.锌锭, 10, IItems.黄铜锭, 5, IItems.石英玻璃, 10)
+    pumpAmount = 0.3f
+    liquidCapacity = 80f
+    requirements(Category.liquid, IItems.高碳钢, 20, IItems.锌锭, 10, IItems.黄铜锭, 5, IItems.石英玻璃, 10, IItems.铬锭, 10)
   }
   val 心肌泵 = Pump("myocardialPump").apply {
     bundle {
