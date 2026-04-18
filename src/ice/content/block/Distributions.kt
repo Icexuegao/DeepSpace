@@ -395,7 +395,7 @@ object Distributions : Load {
     dumpTime = 1
     knockback = 4f
     translation = 2f
-    bulletSpeed = 6f
+    bulletSpeed = 9f
     rotateSpeed = 2f
     itemCapacity = 90
     bulletLifetime = 160f
