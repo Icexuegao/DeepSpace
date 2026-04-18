@@ -68,6 +68,7 @@ object LiquidBlocks : Load {
     bundle {
       desc(zh_CN, "谐振导管", "向前传输流体")
     }
+    liquidCapacity = 20f
     requirements(Category.liquid, IItems.高碳钢, 1, IItems.锌锭, 1, IItems.石英玻璃, 1)
     addContentInitEvent {
       bridgeReplacement = 基础导管桥
@@ -154,7 +155,7 @@ object LiquidBlocks : Load {
     range = 6
     hasItems = false
     hasPower = false
-    liquidCapacity = 10f
+    liquidCapacity = 20f
     requirements(Category.liquid, IItems.单晶硅,3, IItems.锌锭, 5, IItems.石英玻璃, 10)
   }
   val 长距导管桥 = TransferNode("bridgeConduitLarge").apply {
@@ -168,7 +169,7 @@ object LiquidBlocks : Load {
     }
     range = 10
     hasItems = false
-    liquidCapacity = 10f
+    liquidCapacity = 20f
     consumePower(30f / 60f)
     requirements(Category.liquid, IItems.单晶硅,6, IItems.铜锭, 8, IItems.锌锭, 10, IItems.石英玻璃, 20)
   }
@@ -182,7 +183,7 @@ object LiquidBlocks : Load {
     directionAny = false
     armor = 4f
     range = 18
-    liquidCapacity = 32f
+    liquidCapacity = 100f
     placeableLiquid = true
     consumePower(0.5f)
     requirements(Category.liquid, IItems.石英玻璃, 20, IItems.导能回路, 10, IItems.生物钢, 5)
