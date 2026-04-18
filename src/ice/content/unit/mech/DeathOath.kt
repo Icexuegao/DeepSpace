@@ -1,66 +1,66 @@
-package ice.content.unit.mech
+包ice.content.unit.mech
 
-import arc.graphics.Blending
-import arc.graphics.Color
-import arc.math.Interp
-import ice.content.IItems
-import ice.content.IStatus
-import ice.entities.bullet.LaserBulletType
-import ice.entities.bullet.base.BasicBulletType
-import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
-import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.ArmorPlateAbility
-import mindustry.content.Fx
-import mindustry.entities.abilities.RegenAbility
-import mindustry.entities.effect.ExplosionEffect
-import mindustry.entities.effect.ParticleEffect
-import mindustry.entities.part.RegionPart
-import mindustry.gen.MechUnit
-import mindustry.gen.Sounds
-import mindustry.type.ammo.ItemAmmoType
+进口弧.图形.混合
+进口弧光.图形.颜色
+进口arc.math.Interp
+进口ice.content.IItems
+进口ice.content.IStatus
+进口ice.ities.bullet.激光子弹类型
+进口ice.ities.bullet.base.BasicBulletType
+进口冰.实体.效果.多效果
+进口ice.ui.bundle.bundle
+进口ice.ui.bundle.desc
+进口ice.world.content.unit.IceUnitType
+进口冰。世界。内容。单元。能力。ArmorPlateAbility
+进口mindustry.content.Fx
+进口心智产业。ities。能力。再生能力
+进口心智产业.实体.效果.爆炸效果
+进口mindustry.ities.effect.ParticleEffect
+进口mindustry.ities.part.RegionPart
+进口mindustry.gen.MechUnit
+进口mindustry.gen.Sounds
+进口mindustry.type.ammo.ItemAmmoType
 
-class DeathOath : IceUnitType("unit_deathOath", MechUnit::class.java) {
+班级死誓：IceUnitType("unit_deathOath"，MechUnit：：班级.Java){
   init {
-    bundle {
-      desc(zh_CN, "死誓", "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,会缓慢恢复生命值,开火时减少所受伤害")
+捆绑{
+DESC(zh_CN，"死誓", "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,会缓慢恢复生命值,开火时减少所受伤害")
     }
-    health = 29000f
-    armor = 25f
-    hitSize = 30f
-    speed = 0.36f
-    range = 388f
-    rotateSpeed = 1.8f
-    riseSpeed = 0.05f
-    canBoost = true
-    lowAltitude = true
-    boostMultiplier = 2f
-    mechLandShake = 4f
-    stepShake = 0.75f
-    mechSideSway = 0.6f
+健康=29000f
+铠装=15F
+hitSize=30F
+速度=0.36F
+范围=388f
+rotateSpeed=1.8F
+riseSpeed=0.05F
+canBoost=正确
+低空=正确
+boostMultiplier=2F
+mechLandShake=4F
+stepShake=0.75f
+mechSideSway=0.6F
     mechFrontSway = 1.9f
-    drownTimeMultiplier = 6f
-    mechStepParticles = true
+    drownTimeMultiplier = 6F
+    mechStepParticles = 正确
     ammoType = ItemAmmoType(IItems.钍锭)
     ammoCapacity = 240
-    engineSize = 6f
+    engineSize = 6F
     engineOffset = 15f
 
     engines.add(UnitEngine().apply {
       x = 15f
-      y = -18f
-      radius = 4f
-      rotation = -90f
+      y = -18F
+      radius = 4F
+      rotation = -90F
     }, UnitEngine().apply {
       x = -15f
-      y = -18f
-      radius = 4f
-      rotation = -90f
+      y = -18F
+      radius = 4F
+      rotation = -90F
     })
 
     abilities.add(ArmorPlateAbility().apply {
-      healthMultiplier = 0.5f
+      healthMultiplier = 0.5F
     }, RegenAbility().apply {
       percentAmount = 0.0125f
     })
