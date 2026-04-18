@@ -169,8 +169,8 @@ object LiquidBlocks : Load {
     }
     range = 10
     hasItems = false
-    liquidCapacity = 20f
-    consumePower(30f / 60f)
+    liquidCapacity = 30f
+    consumePower(10f / 60f)
     requirements(Category.liquid, IItems.单晶硅,6, IItems.铜锭, 8, IItems.锌锭, 10, IItems.石英玻璃, 20)
   }
   val 动脉导管桥 = TransferNode("bridgeConduitArtery").apply {
