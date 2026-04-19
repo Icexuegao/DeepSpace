@@ -18,7 +18,16 @@ object Strings {
 fun String.isNumericWithSign() = matches(regex)
 
 /**返回float保存x位数的字符串*/
-fun Float.toStringi(precision: Int) = "%.${precision}f".format(this)
+fun Float.toStringi(precision: Int): String {
+  val formatted = "%.${precision}f".format(this)
+  return formatted.removeTrailingZeros()
+}
+
+private fun String.removeTrailingZeros(): String {
+  if (!contains('.')) return this
+  val trimmed = trimEnd('0')
+  return trimmed.trimEnd('.')
+}
 
 fun String.toColor(): Color = Color.valueOf(this)
 fun percent(cur: Float, max: Float, percent: Float = cur / max, showPercent: Boolean = percent < 0.95f): String {

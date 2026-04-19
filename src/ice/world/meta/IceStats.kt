@@ -16,6 +16,12 @@ object IceStats :Load {
   val 电磁脉冲伤害 = getStat("empDamage") {
     desc(zh_CN, "电磁脉冲伤害")
   }
+  val 修复 = getStat("repair", StatCat.function) {
+    desc(zh_CN, "修复")
+  }
+  val 修复量 = getStat("repairAmount", StatCat.function) {
+    desc(zh_CN, "修复量")
+  }
   val 反射率 = getStat("albedo", StatCat.function) {
     desc(zh_CN, "反射率")
   }
@@ -88,8 +94,15 @@ object IceStats :Load {
   val 状态持续时间 = getStat("statusTime") {
     desc(zh_CN, "状态持续时间")
   }
+  val 秒 = getStat("seconds") {
+    desc(zh_CN, "秒")
+  }
   val 范围 = getStat("radius", StatCat.function) {
     desc(zh_CN, "范围")
+  }
+
+  val 状态 = getStat("status") {
+    desc(zh_CN,"状态")
   }
   val 生产进度 = getStat("productionProgress") {
     desc(zh_CN, "生产进度")

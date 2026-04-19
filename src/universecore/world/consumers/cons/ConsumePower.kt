@@ -21,17 +21,19 @@ import mindustry.world.meta.Stats
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsume
 import universecore.world.consumers.ConsumeType
+import kotlin.math.roundToInt
 
 /*仅仅保存消耗参数，能量消耗本身实际应用仍为默认consumes*/
-open class ConsumePower<T>(var usage: Float, var capacity: Float) : BaseConsume<T>() where T : Building, T : ConsumerBuildComp {
+open class ConsumePower<T>(var usage: Float, var capacity: Float) :BaseConsume<T>() where T :Building, T :ConsumerBuildComp {
   companion object {
     fun buildPowerImage(table: Table, usage: Float) {
-      table.stack(Table { o: Table? ->
-        o!!.left()
+      table.stack(Table { o: Table ->
+        o.left()
         o.add(Image(Icon.power)).size(32f).scaling(Scaling.fit)
-      }, Table { t: Table? ->
-        t!!.left().bottom()
-        t.add(if (usage * 60 >= 1000) UI.formatAmount((usage * 60).toLong()) + "/s" else (usage * 60).toInt().toString() + "/s").style(Styles.outlineLabel)
+      }, Table { t: Table ->
+        t.left().bottom()
+        t.add(if (usage * 60 >= 1000) UI.formatAmount((usage * 60).toLong()) + "/s" else  "${(usage * 60).roundToInt()}/s")
+          .style(Styles.outlineLabel)
         t.pack()
       })
     }
@@ -68,7 +70,7 @@ open class ConsumePower<T>(var usage: Float, var capacity: Float) : BaseConsume<
 
   open fun requestedPower(entity: T): Float {
     var res = usage
-    for (other in others.items) {
+    for(other in others.items) {
       if (other == null) continue
       res += other.requestedPower(entity)
     }
@@ -79,7 +81,8 @@ open class ConsumePower<T>(var usage: Float, var capacity: Float) : BaseConsume<
     val buffered = Boolp { entity.block.consPower.buffered }
     val capacity = Floatp { entity.block.consPower.capacity }
     bars.add(
-      Bar({
+      Bar(
+        {
         if (buffered.get()) {
           val naN = (entity.power.status * capacity.get()).isNaN()
           val format = Core.bundle.format(
@@ -93,7 +96,9 @@ open class ConsumePower<T>(var usage: Float, var capacity: Float) : BaseConsume<
           val get = Core.bundle.get("bar.power")
           get
         }
-      }, { Pal.powerBar }, { if (Mathf.zero(entity.block.consPower.requestedPower(entity)) && entity.power.graph.getPowerProduced() + entity.power.graph.getBatteryStored() > 0f) 1f else entity.power.status })
+      },
+        { Pal.powerBar },
+        { if (Mathf.zero(entity.block.consPower.requestedPower(entity)) && entity.power.graph.getPowerProduced() + entity.power.graph.getBatteryStored() > 0f) 1f else entity.power.status })
     ).growX()
     bars.row()
   }

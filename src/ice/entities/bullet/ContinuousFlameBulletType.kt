@@ -12,7 +12,11 @@ import mindustry.gen.Bullet
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 
-class ContinuousFlameBulletType :ContinuousBulletType {
+class ContinuousFlameBulletType(damage: Float = 0f) :ContinuousBulletType() {
+  init {
+    this.damage = damage
+  }
+
   var lightStroke: Float = 40f
   var width: Float = 3.7f
   var oscScl: Float = 1.2f
@@ -39,19 +43,13 @@ class ContinuousFlameBulletType :ContinuousBulletType {
     0.25f, 0.7f, 0.1f,
   )
 
-  var colors: Array<Color?> = arrayOf<Color?>(
+  var colors = arrayOf(
     Color.valueOf("eb7abe").a(0.55f),
     Color.valueOf("e189f5").a(0.7f),
     Color.valueOf("907ef7").a(0.8f),
     Color.valueOf("91a4ff"),
     Color.white.cpy()
   )
-
-  constructor(damage: Float) {
-    this.damage = damage
-  }
-
-  constructor()
 
   init {
     optimalLifeFract = 0.5f
@@ -77,7 +75,10 @@ class ContinuousFlameBulletType :ContinuousBulletType {
     for(i in colors.indices) {
       Draw.color(colors[i]!!.write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)))
       Drawf.flame(
-        b.x, b.y, divisions, b.rotation(),
+        b.x,
+        b.y,
+        divisions,
+        b.rotation(),
         realLength * lengthWidthPans[i * 3] * (1f - sin),
         width * lengthWidthPans[i * 3 + 1] * mult * (1f + sin),
         lengthWidthPans[i * 3 + 2]

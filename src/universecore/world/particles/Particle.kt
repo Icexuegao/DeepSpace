@@ -13,21 +13,22 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pool
 import arc.util.pooling.Pools
-import mindustry.entities.EntityGroup
+import ice.library.util.accessBoolean
 import mindustry.gen.Bullet
 import mindustry.gen.Decal
 import mindustry.gen.Groups
 import kotlin.math.max
 
-class Particle : Decal(), Iterable<Particle.Cloud> {
+class Particle :Decal(), Iterable<Particle.Cloud> {
   companion object {
+    @Suppress("EXTENSION_SHADOWED_BY_MEMBER") var Decal.added: Boolean by accessBoolean("added")
     private var counter = 0
 
     /**粒子的最大共存数量,总量大于此数目时,创建新的粒子会清除最先产生的粒子 */
     var maxAmount: Int = 1024
 
-     val all: ObjectSet<Particle?> = ObjectSet<Particle?>()
-     val temp = Seq<Particle>()
+    val all: ObjectSet<Particle?> = ObjectSet<Particle?>()
+    val temp = Seq<Particle>()
 
     fun count(): Int {
       return all.size
@@ -35,14 +36,15 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
 
     fun get(filter: Boolf<Particle>): Seq<Particle> {
       temp.clear()
-      for (particle in all) {
+      for(particle in all) {
         if (filter.get(particle)) temp.add(particle)
       }
       return temp
     }
   }
-  var dest: Vec2 = Vec2()
-  var eff: Float = 0f
+
+
+
 
   var timer: Interval = Interval(6)
   var owner: Bullet? = null
@@ -51,8 +53,8 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
   var strength: Float = 1f
   var deflectAngle: Float = 45f
 
-   var startPos: Vec2 = Vec2()
-   var clipSize: Float = 0f
+  var startPos: Vec2 = Vec2()
+  var clipSize: Float = 0f
 
   var currentCloud: Cloud? = null
   var firstCloud: Cloud? = null
@@ -87,7 +89,7 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
 
     counter++
 
-    currentCloud = Pools.get<Cloud?>(Cloud::class.java,::Cloud, 65536).obtain()
+    currentCloud = Pools.get<Cloud?>(Cloud::class.java, ::Cloud, 65536).obtain()
     currentCloud!!.x = x
     currentCloud!!.y = y
     currentCloud!!.size = 0f
@@ -95,7 +97,7 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
 
     firstCloud = currentCloud
 
-    added = true
+    this@Particle.added = true
 
     model!!.init(this)
 
@@ -134,7 +136,7 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
     y += speed.y * Time.delta
     size = model!!.currSize(this)
     model!!.update(this)
-    val c = Pools.get(Cloud::class.java,::Cloud, 65536).obtain()
+    val c = Pools.get(Cloud::class.java, ::Cloud, 65536).obtain()
     c.x = if (parent == null) x else x + parent!!.x
     c.y = if (parent == null) y else y + parent!!.y
     c.size = size
@@ -147,14 +149,14 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
 
     cloudCount++
 
-    for (cloud in currentCloud!!) {
-      model!!.updateTrail(this, cloud!!)
+    for(cloud in currentCloud!!) {
+      model!!.updateTrail(this, cloud)
     }
 
     var mark = false
-    while (firstCloud!!.nextCloud != null) {
+    while(firstCloud!!.nextCloud != null) {
       if (maxCloudCounts in 1..<cloudCount || model!!.isFaded(this, firstCloud!!)) {
-        mark = !(maxCloudCounts > 0 && cloudCount > maxCloudCounts)
+        mark = maxCloudCounts !in 1..<cloudCount
         popFirst()
       } else break
     }
@@ -167,7 +169,7 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
     if (cloudCount <= 4 && model!!.isFinal(this)) remove()
   }
 
-  private fun popFirst() {
+  fun popFirst() {
     val n = firstCloud!!.nextCloud
     n!!.perCloud = null
     Pools.free(firstCloud)
@@ -176,7 +178,7 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
   }
 
   override fun remove() {
-    if (added) {
+    if (this@Particle.added) {
       Groups.all.removeIndex(this, this.index__all)
       index__all = -1
       Groups.draw.removeIndex(this, this.index__draw)
@@ -185,7 +187,7 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
 
       all.remove(this)
       counter--
-      added = false
+      this@Particle.added = false
     }
   }
 
@@ -198,46 +200,15 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
   }
 
   override fun reset() {
-    added = false
-    parent = null
-    id = EntityGroup.nextId()
-    lifetime = 0f
-    region = null
-    rotation = 0f
-    time = 0f
-    x = 0f
-    y = 0f
-
-    maxCloudCounts = -1
-
-    speed.setZero()
-    startPos.setZero()
-
-    layer = 0f
-    clipSize = 0f
-
-    while (firstCloud!!.nextCloud != null) {
-      popFirst()
-    }
-    Pools.free(firstCloud)
-
-    currentCloud = null
-    firstCloud = null
-
-    cloudCount = 0
-    size = 0f
-
-    //extra().clear();
+    model!!.reset(this)
     model = null
-
-    color.set(Color.white)
   }
 
   override fun iterator(): Iterator<Cloud> {
     return currentCloud!!.iterator()
   }
 
-  class Cloud : Pool.Poolable, Iterable<Cloud> {
+  class Cloud :Pool.Poolable, Iterable<Cloud> {
     val color: Color = Color()
 
     var x: Float = 0f
@@ -246,7 +217,7 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
     var perCloud: Cloud? = null
     var nextCloud: Cloud? = null
 
-    var itr =Itr()
+    var itr = Itr()
 
     @JvmOverloads
     fun draw(modulate: Float = 1f, modulateNext: Float = 1f) {
@@ -261,14 +232,7 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
         val dy2 = Angles.trnsy(angle + 90, nextCloud!!.size * modulateNext)
 
         Fill.quad(
-          x + dx1,
-          y + dy1,
-          x - dx1,
-          y - dy1,
-          nextCloud!!.x - dx2,
-          nextCloud!!.y - dy2,
-          nextCloud!!.x + dx2,
-          nextCloud!!.y + dy2
+          x + dx1, y + dy1, x - dx1, y - dy1, nextCloud!!.x - dx2, nextCloud!!.y - dy2, nextCloud!!.x + dx2, nextCloud!!.y + dy2
         )
       } else if (perCloud == null && nextCloud != null) {
         val angle = Angles.angle(nextCloud!!.x - x, nextCloud!!.y - y)
@@ -294,7 +258,7 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
       return itr
     }
 
-     inner class Itr : Iterator<Cloud> {
+    inner class Itr :Iterator<Cloud> {
       var curr: Cloud? = this@Cloud
 
       fun reset() {
@@ -310,6 +274,5 @@ class Particle : Decal(), Iterable<Particle.Cloud> {
       }
     }
   }
-
 
 }

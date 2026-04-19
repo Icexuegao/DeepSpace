@@ -11,9 +11,10 @@ import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
 import mindustry.world.meta.Stats
 import universecore.components.blockcomp.ProducerBuildComp
-import universecore.world.consumers.cons.ConsumePower
 import universecore.world.consumers.ConsumeType
+import universecore.world.consumers.cons.ConsumePower
 import kotlin.math.max
+import kotlin.math.roundToInt
 
 class ProducePower<T>(var powerProduction: Float) : BaseProduce<T>() where T : Building, T : ProducerBuildComp {
   var showIcon: Boolean = true
@@ -70,7 +71,7 @@ class ProducePower<T>(var powerProduction: Float) : BaseProduce<T>() where T : B
   }
 
   override fun display(stats: Stats) {
-    stats.add(Stat.basePowerGeneration, powerProduction * 60.0f, StatUnit.powerSecond)
+    stats.add(Stat.basePowerGeneration, (powerProduction * 60f).roundToInt().toFloat(), StatUnit.powerSecond)
   }
 
   override fun valid(entity: T): Boolean {

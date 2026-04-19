@@ -54,6 +54,8 @@ import universecore.world.particles.MultiParticleModel
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
 import universecore.world.particles.models.*
+import universecore.world.particles.models.TargetMoveParticle.Companion.dest
+import universecore.world.particles.models.TargetMoveParticle.Companion.eff
 
 @Suppress("unused")
 object PowerBlocks : Load {
