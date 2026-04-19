@@ -100,16 +100,16 @@ object SglParticleModels {
             return if (b1) p.defSize else Mathf.approachDelta(p.size, 0f, 0.04f)
         }
 
-        override fun update(p: Particle) {
-            val b = p.owner
+        override fun update(particle: Particle) {
+            val b = particle.owner
             if (b != null) {
                 if (b.isAdded) {
-                    p.set(b.x, b.y)
-                } else p.owner = null
+                    particle.set(b.x, b.y)
+                } else particle.owner = null
             }
 
-            if (p.bullet != null && p.bullet!!.isAdded) {
-                p.bullet!!.keepAlive = true
+            if (particle.bullet != null && particle.bullet!!.isAdded) {
+                particle.bullet!!.keepAlive = true
             }
         }
 

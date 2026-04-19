@@ -27,7 +27,7 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
     /**粒子的最大共存数量,总量大于此数目时,创建新的粒子会清除最先产生的粒子 */
     var maxAmount: Int = 1024
 
-    val all: ObjectSet<Particle?> = ObjectSet<Particle?>()
+    val all = ObjectSet<Particle>()
     val temp = Seq<Particle>()
 
     fun count(): Int {
@@ -42,9 +42,6 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
       return temp
     }
   }
-
-
-
 
   var timer: Interval = Interval(6)
   var owner: Bullet? = null
@@ -89,7 +86,7 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
 
     counter++
 
-    currentCloud = Pools.get<Cloud?>(Cloud::class.java, ::Cloud, 65536).obtain()
+    currentCloud = Pools.get(Cloud::class.java, ::Cloud, 65536).obtain()
     currentCloud!!.x = x
     currentCloud!!.y = y
     currentCloud!!.size = 0f

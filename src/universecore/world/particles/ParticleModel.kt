@@ -95,29 +95,19 @@ open class ParticleModel {
       time = 0f
       x = 0f
       y = 0f
-
       maxCloudCounts = -1
-
       speed.setZero()
       startPos.setZero()
-
       layer = 0f
       clipSize = 0f
-
       while(firstCloud!!.nextCloud != null) {
         popFirst()
       }
       Pools.free(firstCloud)
-
       currentCloud = null
       firstCloud = null
-
       cloudCount = 0
       size = 0f
-
-
-      model = null
-
       color.set(Color.white)
     }
   }

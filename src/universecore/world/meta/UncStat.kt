@@ -1,13 +1,12 @@
 package universecore.world.meta
 
-import ice.world.meta.IceStatCats.结构
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatCat
 import universecore.util.handler.FieldHandler
 
 object UncStat {
   val inputs: Stat = create("inputs", StatCat.crafting)
-  val maxStructureSize: Stat = create("maxStructureSize", 结构)
+
 
   private fun create(name: String?, cat: StatCat?): Stat {
     return create(name, Stat.all.size, cat)

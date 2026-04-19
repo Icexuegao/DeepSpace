@@ -6,7 +6,6 @@ import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.GlyphLayout
-import arc.math.Angles
 import arc.math.Mathf
 import arc.math.geom.Vec2
 import arc.struct.IntSet
@@ -40,7 +39,6 @@ import universecore.components.blockcomp.SpliceBlockComp
 import universecore.components.blockcomp.SpliceBuildComp
 import universecore.world.blocks.chains.ChainsContainer
 import universecore.world.blocks.modules.ChainsModule
-import universecore.world.meta.UncStat
 import universecore.world.particles.MultiParticleModel
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
@@ -50,29 +48,28 @@ import universecore.world.particles.models.TimeParticle
 import universecore.world.particles.models.TrailFadeParticle
 import kotlin.math.max
 
-open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
-
+open class TokamakCore(name: String) :NormalCrafter(name), SpliceBlockComp {
   companion object {
-    var ChainsContainer.TOTAL_ITEM_CAPACITY by AttachedProperty(0)
-    var ChainsContainer.TOTAL_LIQUID_CAPACITY by AttachedProperty(0f)
+    var ChainsContainer.totalItemCapacity by AttachedProperty(0)
+    var ChainsContainer.totalLiquidCapacity by AttachedProperty(0f)
     var ChainsContainer.valid by AttachedProperty(false)
     var Particle.OWNER: TokamakCoreBuild? by AttachedProperty(null)
     var Particle.inCorner: Vec2? by AttachedProperty(null)
     const val INV: Float = 0.01f
 
-    private val model: ParticleModel = MultiParticleModel(object : TrailFadeParticle() {
+    private val model: ParticleModel = MultiParticleModel(object :TrailFadeParticle() {
       init {
         linear = true
         trailFade = 0.01f
         colorLerpSpeed = 0.03f
         fadeColor = Pal.reactorPurple.cpy().a(0.4f)
       }
-    }, object : TimeParticle() {
+    }, object :TimeParticle() {
       init {
         defLifeMin = 240f
         defLifeMax = 360f
       }
-    }, object : ParticleModel() {
+    }, object :ParticleModel() {
       val cacheVecs = Seq<Vec2>()
       var cursor: Int = -1
 
@@ -97,7 +94,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
           if (p.inCorner == null) {
             val angle = p.speed.angle()
             val dir = Mathf.round(angle / 90) % 4
-            when (dir) {
+            when(dir) {
               0 -> p.x = b.x - b.block.size * Vars.tilesize / 2f
               1 -> p.y = b.y - b.block.size * Vars.tilesize / 2f
               2 -> p.x = b.x + b.block.size * Vars.tilesize / 2f
@@ -106,7 +103,12 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
             val out: Vec2 = (if (cursor < 0) Vec2() else cacheVecs.get(cursor--))!!
             out.set(p.x - b.x, p.y - b.y)
 
-            p.speed.setAngle(angle + Angles.angleDist(angle, rot) / 2)
+            // 原代码
+            // p.speed.setAngle(angle + Angles.angleDist(angle, rot) / 2)
+            var angleDiff = rot - angle
+            if (angleDiff > 180f) angleDiff -= 360f
+            if (angleDiff < -180f) angleDiff += 360f
+            p.speed.setAngle(angle + angleDiff / 2)
 
             out.setAngle(2 * (p.speed.angle() + 90) - out.angle()).add(b.x, b.y)
 
@@ -139,7 +141,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
             return
           }
 
-          when (tile.build) {
+          when(tile.build) {
             is TokamakOrbitBuild -> {
               p.speed.setAngle((tile.build.rotation * 90).toFloat())
 
@@ -177,13 +179,13 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
           cacheVecs.set(cursor, v)
         } else cacheVecs.add(v)
       }
-    }, object : ShapeParticle() {
+    }, object :ShapeParticle() {
       override fun draw(particle: Particle) {
         SglDraw.drawBloomUnderBlock(particle) { p: Particle? -> super.draw(p!!) }
       }
-    }, object : DrawDefaultTrailParticle() {
+    }, object :DrawDefaultTrailParticle() {
       override fun drawTrail(particle: Particle) {
-        SglDraw.drawBloomUnderBlock(particle) { particle: Particle? -> super.drawTrail(particle!!) }
+        SglDraw.drawBloomUnderBlock(particle) { particle -> super.drawTrail(particle) }
       }
     })
   }
@@ -217,48 +219,41 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
     }
   }
 
-  override fun setStats() {
-    super.setStats()
-    stats.remove(UncStat.maxStructureSize)
-    setChainsStats(stats)
-  }
-
   override fun init() {
     super.init()
-    for (consumer in consumers) {
-      for (cons in consumer.all()) {
-        cons.setMultiple<TokamakCoreBuild?> { e: TokamakCoreBuild? -> e!!.fuelConsMulti }
+    for(consumer in consumers) {
+      for(cons in consumer.all()) {
+        cons.setMultiple<TokamakCoreBuild> { e: TokamakCoreBuild -> e.fuelConsMulti }
       }
     }
   }
 
-  override fun chainable(other: ChainsBlockComp): Boolean {
-    return other is TokamakOrbit
-  }
+  override fun chainable(other: ChainsBlockComp) = other is TokamakOrbit
 
   override fun setBars() {
     super.setBars()
     addBar<TokamakCoreBuild?>("efficiency") { e: TokamakCoreBuild? ->
-      Bar({ Core.bundle.format("bar.efficiency", Strings.autoFixed(Mathf.round(Mathf.pow(e!!.warmup(), 3f) * 100).toFloat(), 1)) }, { Pal.powerBar }, { Mathf.pow(e!!.warmup(), 3f) })
+      Bar(
+        { Core.bundle.format("bar.efficiency", Strings.autoFixed(Mathf.round(Mathf.pow(e!!.warmup(), 3f) * 100).toFloat(), 1)) },
+        { Pal.powerBar },
+        { Mathf.pow(e!!.warmup(), 3f) })
     }
     addBar<TokamakCoreBuild?>("scale") { e: TokamakCoreBuild? ->
-      Bar({ Core.bundle.format("bar.scale", Strings.autoFixed(e!!.fuelConsMulti, 1), Strings.autoFixed(e.energyOutMulti, 1)) }, { Pal.powerBar }, { if (e!!.scale > 0f) 1f else 0f })
+      Bar(
+        { Core.bundle.format("bar.scale", Strings.autoFixed(e!!.fuelConsMulti, 1), Strings.autoFixed(e.energyOutMulti, 1)) },
+        { Pal.powerBar },
+        { if (e!!.scale > 0f) 1f else 0f })
     }
   }
 
-  inner class TokamakCoreBuild : NormalCrafterBuild(), SpliceBuildComp {
-    //   const val : String = "totalItemCapacity"
-//        const val : String = "totalLiquidCapacity"
-
+  inner class TokamakCoreBuild :NormalCrafterBuild(), SpliceBuildComp {
     override var loadingInvalidPos = IntSet()
     override var chains = ChainsModule(this)
     override var splice = 0
 
-    @Nullable
-    var outLinked: TokamakOrbitBuild? = null
+    @Nullable var outLinked: TokamakOrbitBuild? = null
 
-    @Nullable
-    var inLinked: TokamakOrbitBuild? = null
+    @Nullable var inLinked: TokamakOrbitBuild? = null
     var fuelConsMulti: Float = 0f
     var energyOutMulti: Float = 0f
     var scale: Int = 0
@@ -306,7 +301,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
     override fun onProximityUpdate() {
       inLinked = null
       outLinked = null
-      for (build in chainBuilds()) {
+      for(build in chainBuilds()) {
         if (build is TokamakOrbitBuild) {
           if (relativeTo(build).toInt() == build.rotation) {
             if (outLinked == null) {
@@ -337,7 +332,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
 
       if (inLinked == null) return
 
-      for (comp in chains.container.all) {
+      for(comp in chains.container.all) {
         if (comp is TokamakCoreBuild && comp !== this) {
           return
         }
@@ -351,7 +346,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
       var liqCap = 0f
       var enclosed = false
 
-      while (curr != null) {
+      while(curr != null) {
         itemCap += curr.block.itemCapacity
         liqCap += curr.block.liquidCapacity
         val next = curr.facingNext
@@ -401,28 +396,28 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
         fuelConsMulti = Mathf.sqrt(area) * (outLinked!!.block as TokamakOrbit).flueMulti
         energyOutMulti = area * (outLinked!!.block as TokamakOrbit).efficiencyPow
 
-        chains.container.TOTAL_ITEM_CAPACITY = itemCap
-        chains.container.TOTAL_LIQUID_CAPACITY = liqCap
+        chains.container.totalItemCapacity = itemCap
+        chains.container.totalLiquidCapacity = liqCap
       } else {
         chains.container.valid = false
         energyOutMulti = 0f
         fuelConsMulti = energyOutMulti
         scale = 0
 
-        chains.container.TOTAL_ITEM_CAPACITY = 0
-        chains.container.TOTAL_LIQUID_CAPACITY = 0f
+        chains.container.totalItemCapacity = 0
+        chains.container.totalLiquidCapacity = 0f
       }
     }
 
     override fun getMaximumAccepted(item: Item?): Int {
       return if (structValid()) {
-        chains.container.TOTAL_ITEM_CAPACITY
+        chains.container.totalItemCapacity
       } else 0
     }
 
     override fun getMaximumAccepted(liquid: Liquid?): Float {
       return if (structValid()) {
-        chains.container.TOTAL_LIQUID_CAPACITY
+        chains.container.totalLiquidCapacity
       } else 0f
     }
 
@@ -436,7 +431,8 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
 
     override fun drawStatus() {
       super.drawStatus()
-      val status = if (!structValid()) Core.bundle.get("infos.structInvalid") else if (recooldown) Core.bundle.get("infos.recoolanting") else null
+      val status =
+        if (!structValid()) Core.bundle.get("infos.structInvalid") else if (recooldown) Core.bundle.get("infos.recoolanting") else null
 
       if (status == null) return
       val layout = GlyphLayout.obtain()
@@ -447,7 +443,14 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
       layout.free()
       Draw.color(Color.darkGray, 0.6f)
       Fill.quad(
-        x - w / 2 - 2, y + size * Vars.tilesize / 2f + h + 2, x - w / 2 - 2, y + size * Vars.tilesize / 2f - 2, x + w / 2 + 2, y + size * Vars.tilesize / 2f - 2, x + w / 2 + 2, y + size * Vars.tilesize / 2f + h + 2
+        x - w / 2 - 2,
+        y + size * Vars.tilesize / 2f + h + 2,
+        x - w / 2 - 2,
+        y + size * Vars.tilesize / 2f - 2,
+        x + w / 2 + 2,
+        y + size * Vars.tilesize / 2f - 2,
+        x + w / 2 + 2,
+        y + size * Vars.tilesize / 2f + h + 2
       )
 
       Fonts.outline.draw(status, x, y + size * Vars.tilesize / 2f + h, Color.white, 0.185f, false, Align.center)
@@ -470,7 +473,7 @@ open class TokamakCore(name: String) : NormalCrafter(name), SpliceBlockComp {
 
       if (structValid() && Mathf.chanceDelta((warmup() * warmup() * warmup() * particleDensity).toDouble())) {
         val blockSize = outLinked!!.block.size * Vars.tilesize
-        when (relativeTo(outLinked).toInt()) {
+        when(relativeTo(outLinked).toInt()) {
           0 -> Tmp.v1.set(outLinked!!.x - blockSize / 2f, outLinked!!.y + Mathf.range(blockSize / 4f))
           1 -> Tmp.v1.set(outLinked!!.x + Mathf.range(blockSize / 4f), outLinked!!.y - blockSize / 2f)
           2 -> Tmp.v1.set(outLinked!!.x + blockSize / 2f, outLinked!!.y + Mathf.range(blockSize / 4f))
