@@ -46,12 +46,12 @@ class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
     }
 
     newConsume().apply {
-      time(60f)
+      time(120f)
       liquid(ILiquids.纯净水, 40f / 60f)
       power(180 / 60f)
     }
     newProduce().apply {
-      items(IItems.低温化合物, 1)
+      items(IItems.低温化合物, 3)
     }
     newBooster(1f).add(ConsumeFloor(IAttribute.寒冷, 0.1f))
 

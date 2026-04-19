@@ -62,7 +62,7 @@ class CombustionChamber : NormalCrafter("combustion_chamber") {
 
     newFormula { consumers, producers ->
       consumers.apply {
-        liquids(ILiquids.氢气,14f/60,ILiquids.氯气,24f/60)
+        liquids(ILiquids.氢气,12f/60,ILiquids.氯气,24f/60)
         time(60f)
       }
       producers.apply {

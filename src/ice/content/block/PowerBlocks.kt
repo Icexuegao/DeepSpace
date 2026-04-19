@@ -294,7 +294,7 @@ object PowerBlocks : Load {
         liquid(ILiquids.沼气, 20f / 60f)
       }
       producers.apply {
-        power(500f / 60f)
+        power(550f / 60f)
       }
     }
 

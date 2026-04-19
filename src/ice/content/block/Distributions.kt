@@ -396,7 +396,7 @@ object Distributions : Load {
     knockback = 4f
     translation = 2f
     bulletSpeed = 9f
-    rotateSpeed = 2f
+    rotateSpeed = 6f
     itemCapacity = 90
     bulletLifetime = 160f
     shootSound = Sounds.shootCollaris
