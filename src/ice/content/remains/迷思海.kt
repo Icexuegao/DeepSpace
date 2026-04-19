@@ -40,7 +40,7 @@ import kotlin.math.sin
 
 class 迷思海 :Remains("remains_mystic_sea") {
 
-  var b: Float by ConfigPropertyDelegate(0.5f, "remains_mystic_sea-fleshFragmentSeed")
+  var b: Float by ConfigPropertyDelegate(0.5f, "$name-fleshFragmentSeed")
 
   init {
     remainsColor = IceColor.r2
