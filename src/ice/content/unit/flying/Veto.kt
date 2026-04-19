@@ -55,7 +55,7 @@ class Veto : IceUnitType("units_veto") {
     flying = true
     lowAltitude = true
     health = 173000f
-    armor = 40f
+    armor = 8f
     hitSize = 87f
     speed = 0.8f
     accel = 0.04f
