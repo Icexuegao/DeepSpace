@@ -16,12 +16,15 @@ import ice.world.content.unit.ability.ShieldAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.RegenAbility
 import mindustry.entities.pattern.ShootPattern
-import mindustry.gen.*
+import mindustry.gen.Bullet
+import mindustry.gen.Hitboxc
+import mindustry.gen.Sounds
 import mindustry.gen.Unit
 import mindustry.graphics.Pal
 import mindustry.type.UnitType
 import mindustry.type.Weapon
 import mindustry.type.weapons.RepairBeamWeapon
+import kotlin.math.max
 
 class Ganlin : IceUnitType("ganlin") {
   init {
@@ -103,9 +106,9 @@ class Ganlin : IceUnitType("ganlin") {
       }
 
       override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
-        var size = if (entity is Unit) entity.hitSize else (entity as Building).block.size * 8f
-        val unit = b.owner as Unit
-        var scale = unit.hitSize / if (size > 1) unit.hitSize / size else 1f
+        var size = (entity as Unit).hitSize
+        val shooter = b.owner as Unit
+        var scale = shooter.hitSize / max(size,1f)
         b.damage = damage * scale
         super.hitEntity(b, entity, health)
       }

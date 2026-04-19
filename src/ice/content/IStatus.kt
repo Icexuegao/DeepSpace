@@ -63,10 +63,10 @@ object IStatus :Load {
   val rand: Rand = Rand()
   val 封冻 = IceStatusEffect("freeze") {
     bundle {
-      desc(zh_CN, "封冻", "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成毁灭性打击")
+      desc(zh_CN, "封冻", "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成打击")
     }
     setUpdate { unit, e ->
-      val f = 1 - (e.time / 600f)
+      val f = max(1f - (e.time / 600f),0f)
 
       if (unit.healthMultiplier > 0.4) unit.healthMultiplier *= f
       if (unit.speedMultiplier > 0.4) unit.speedMultiplier *= f
