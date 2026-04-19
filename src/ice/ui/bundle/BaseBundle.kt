@@ -44,11 +44,12 @@ private var Bundle.description: String by AttachedProperty("")
 
 interface Bundle {
 
-  fun getLocalizedName()=localizedName
+  fun getLocalizedName() = localizedName
   fun setLocalizedName(localizedName: String) {
     this.localizedName = localizedName
   }
-  fun getDescription()=description
+
+  fun getDescription() = description
   fun desc(bundle: BaseBundle, localizedName: String, description: String = "") {
     val d = {
       this.localizedName = localizedName

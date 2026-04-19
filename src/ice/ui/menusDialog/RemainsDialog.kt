@@ -16,7 +16,7 @@ import ice.type.Remains
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
 
-object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menusButton_remains) {
+object RemainsDialog :BaseMenusDialog(IceStats.遗物.localized(), IStyles.menusButton_remains) {
 
   var tempRemain = Remainss.娜雅的手串
   lateinit var tiTleTable: Table
@@ -24,7 +24,7 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
   lateinit var remainsTable: Table
   var slotPos: Int = 8
   override fun init() {
-    Remains.remainsSeq.sort {it.level.toFloat()}.reversed().forEach {
+    Remains.remainsSeq.sort { it.level.toFloat() }.reversed().forEach {
       if (it.unlock) {
         it.setEnabled(true)
       }
@@ -35,10 +35,10 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
     cont.table {
       it.add(Image(IStyles.remains, Scaling.fit))
     }.row()
-    cont.iTableG {cont1 ->
+    cont.iTableG { cont1 ->
 
-      cont1.iTable {ta ->
-        ta.table {gh ->
+      cont1.iTable { ta ->
+        ta.table { gh ->
           gh.table(IFiles.createNinePatch("adwdddqddw")) {
             it.add(Label {
               "正在生效: ${Remains.getEnableds().size} / $slotPos"
@@ -49,12 +49,12 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
             enableTable = it
           }
         }.growX().row()
-        ta.iTable {gh ->
+        ta.iTable { gh ->
           gh.image(IStyles.whiteui).color(IceColor.b1).height(3f).growX().row()
           gh.iTable {
             it.top()
             it.add("已拥有:").color(IceColor.b4).pad(10f).row()
-            it.icePane {ip ->
+            it.icePane { ip ->
               ip.setRowsize(7)
               remainsTable = ip
             }
@@ -62,7 +62,7 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
         }.growX()
       }.expand().top()
 
-      cont1.iTable {tiTle ->
+      cont1.iTable { tiTle ->
         tiTleTable = tiTle
       }.minWidth(400f).expandX().top()
 
@@ -77,27 +77,27 @@ object RemainsDialog : BaseMenusDialog(IceStats.遗物.localized(), IStyles.menu
   }
 
   fun flunTiTleTable() {
-    tiTleTable.actions(Actions.alpha(0f,0.15f), Actions.run {
+    tiTleTable.actions(Actions.alpha(0f, 0.15f), Actions.run {
       tiTleTable.clearChildren()
       tiTleTable.add(tempRemain.getTiTleTable()).grow()
-      tiTleTable.actions(Actions.alpha(1f,0.15f))
+      tiTleTable.actions(Actions.alpha(1f, 0.15f))
     })
 
   }
 
-  private fun flunRemainsSeq() {
+  fun flunRemainsSeq() {
     remainsTable.clearChildren()
-    Remains.getNoEnableds().forEach {item ->
+    Remains.getNoEnableds().forEach { item ->
       item.rebuildRemains(remainsTable)
     }
   }
 
-  private fun flunEnableSeq() {
+  fun flunEnableSeq() {
     enableTable.clearChildren()
-    Remains.getEnableds().forEach {item ->
+    Remains.getEnableds().forEach { item ->
       item.rebuildEnableRemains(enableTable)
     }
-    (1..(slotPos - Remains.getEnableds().size)).forEach {_ ->
+    (1..(slotPos - Remains.getEnableds().size)).forEach { _ ->
       enableTable.add(Image(IStyles.button.up)).size(60f).pad(10f)
     }
   }

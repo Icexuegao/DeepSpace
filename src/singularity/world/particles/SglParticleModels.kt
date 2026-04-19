@@ -1,4 +1,4 @@
-package singularity.world.particles;
+package singularity.world.particles
 
 import arc.func.Cons
 import arc.graphics.Color

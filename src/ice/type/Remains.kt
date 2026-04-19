@@ -2,6 +2,7 @@ package ice.type
 
 import arc.func.Cons
 import arc.scene.style.TextureRegionDrawable
+import arc.scene.ui.ImageButton
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Scaling
@@ -19,16 +20,16 @@ import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
 
-open class Remains(val name: String): Bundle {
+open class Remains(val name: String) :Bundle {
   companion object {
     val remainsSeq = Seq<Remains>()
 
     fun getEnableds(): Seq<Remains> {
-      return remainsSeq.select {it.unlock}
+      return remainsSeq.select { it.unlock }
     }
 
     fun getNoEnableds(): Seq<Remains> {
-      return remainsSeq.select {!it.unlock}
+      return remainsSeq.select { !it.unlock }
     }
   }
 
@@ -38,7 +39,7 @@ open class Remains(val name: String): Bundle {
   var remainsColor = IceColor.b4
   var install = {}
   var uninstall = {}
-  var disabled: ()->Boolean = {Vars.state.isGame}
+  var disabled: () -> Boolean = { Vars.state.isGame }
   var customTable = Table()
   var buttonStyle = IStyles.button5
 
@@ -58,20 +59,21 @@ open class Remains(val name: String): Bundle {
 
   fun setEnabled(enabled: Boolean) {
     if (enabled) install() else uninstall()
-    unlock=enabled
+    unlock = enabled
     DataDialog.contentDialog.flunAll()
   }
+
   open fun getTiTleTable(): Table {
     return Table().also {
       it.image(icon).scaling(Scaling.fit).size(120f).pad(30f).padTop(0f).row()
-      it.table {table ->
-        table.table(IFiles.createNinePatch("Uwdwdqddw")) {it1 ->
+      it.table { table ->
+        table.table(IStyles.gradient_right) { it1 ->
           it1.add("遗物").color(IceColor.b4).expandX().left().padLeft(4f)
         }.width(100f).height(30f).color(IceColor.b6).expandX().left().row()
         table.add(getLocalizedName()).color(remainsColor).fontScale(1.5f).pad(5f).padLeft(0f).expandX().left().row()
       }.grow().row()
       it.addLine().pad(3f)
-      it.table {table ->
+      it.table { table ->
         table.add("效果: $effect").color(remainsColor).pad(5f).fontScale(1.3f).wrap().grow()
       }.marginLeft(9f).grow().row()
       it.add(customTable).grow().row()
@@ -94,15 +96,22 @@ open class Remains(val name: String): Bundle {
   }
 
   fun rebuildRemains(table: Table) {
-    table.button(icon, IStyles.button) {
+    val button = ImageButton(icon, IStyles.button)
+    button.clicked {
       if (getEnableds().size < RemainsDialog.slotPos) {
         setEnabled(true)
         ISounds.remainInstall.play()
         RemainsDialog.flunRemains()
       }
-    }.disabled {
+    }
+
+    button.resizeImage(32f)
+
+
+    table.add(button).disabled {
       disabled()
-    }.size(60f).pad(10f).itooltip(getLocalizedName()).get().hovered {
+    }.size(60f).pad(10f).itooltip(getLocalizedName()).get()
+    button.hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this
         RemainsDialog.flunRemains()

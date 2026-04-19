@@ -55,6 +55,8 @@ object IStyles {
     up = frameButtonUp2
   }
 
+  val  gradient_right =IFiles.createNinePatch("gradient_right")
+
   val contributors =IFiles.createNinePatch("contributors")
   val achievementUnlock = IFiles.findModPng("achievement-unlock")
   val achievementLock = IFiles.findModPng("achievement-lock")

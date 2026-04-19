@@ -10,6 +10,7 @@ import ice.library.scene.element.typinglabel.TLabel
 import ice.library.scene.style.DynamicTextureDrawable
 import ice.library.scene.ui.itooltip
 import ice.type.Remains
+import ice.ui.bundle.BaseBundle
 import ice.ui.bundle.bundle
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
@@ -346,4 +347,13 @@ object Remainss {
     }
   }
   val 迷思海 = 迷思海()
+  val 现彼岸 = Remains("remains_higanbana").apply {
+    desc(BaseBundle.zh_CN, "现彼岸", "")
+    remainsColor= IceColor.r2
+    setDescription(getDescription())
+    icon = DynamicTextureDrawable(name.appendModName()) {
+      it.frameCount = 8
+      it.frameDuration = 60f/3f
+    }
+  }
 }
