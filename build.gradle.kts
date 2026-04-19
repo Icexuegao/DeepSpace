@@ -1,4 +1,3 @@
-
 import arc.files.Fi
 import arc.util.serialization.JsonReader
 import arc.util.serialization.JsonWriter
@@ -12,7 +11,7 @@ buildscript {
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
   extra["kotlinCompatibility"] = "2.3.20"
   extra["java"] = 25
-  extra["mdtVersion"]="com.github.Anuken.Mindustry:core:v157.3"
+  extra["mdtVersion"] = "com.github.Anuken.Mindustry:core:v157.3"
   var mdtVersion: String by extra
 
   repositories {
@@ -33,20 +32,23 @@ buildscript {
     classpath(mdtVersion)
     classpath(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
   }
+
 }
-val kotlinCompatibility : String by extra
+val kotlinCompatibility: String by extra
 val proUser: String by extra
 val sdkRoot: String by extra
-val java:Int by extra
+val java: Int by extra
 var mdtVersion: String by extra
 plugins {
-  var kotlinCompatibility : String by extra
+  var kotlinCompatibility: String by extra
   java
   kotlin("jvm") version kotlinCompatibility
   id("com.gradleup.shadow") version "9.3.0"
 }
 
+
 repositories {
+
   mavenCentral()
   mavenLocal()
   maven { url = uri("https://jitpack.io") }
@@ -63,7 +65,7 @@ repositories {
 
 }
 dependencies {
-  implementation("com.github.EB-wilson.UniverseKit:reflection:1.0")
+  implementation("com.github.EB-wilson.UniverseKit:reflection:1.1")
 
   compileOnly(mdtVersion)
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
@@ -89,7 +91,7 @@ dependencies {
   //  implementation files("lib/pinyin4j-2.5.0.jar")
   //  implementation 'org.tomlj:tomlj:1.1.1'
   // compileOnly(files("B:\\game\\mindustry-windows-64-bit\\jre\\Mindustry.jar"))
-   //compileOnly("com.github.TinyLake:MindustryX:v2026.02.X27")
+  //compileOnly("com.github.TinyLake:MindustryX:v2026.02.X27")
   // compileOnly("com.github.Anuken.Arc:flabel:v149")
   //compileOnly(mdtVersion)
   compileOnly("com.github.EB-wilson:TooManyItems:3.1a")
@@ -114,7 +116,8 @@ sourceSets {
 
 fun execute(string: String, path: File? = null, vararg args: Any?) {
   val cmd = string.split(Regex("\\s+")).toMutableList().apply { addAll(args.map { it?.toString() ?: "null" }) }.toTypedArray()
-  val process = ProcessBuilder(*cmd).directory(path ?: rootDir).redirectOutput(ProcessBuilder.Redirect.INHERIT).redirectError(ProcessBuilder.Redirect.INHERIT).start()
+  val process = ProcessBuilder(*cmd).directory(path ?: rootDir).redirectOutput(ProcessBuilder.Redirect.INHERIT)
+    .redirectError(ProcessBuilder.Redirect.INHERIT).start()
   val message = process.errorReader().readText()
   if (message.isNotEmpty()) throw Exception(message)
 }
@@ -126,16 +129,23 @@ tasks {
     sourceCompatibility = java.toString()
     targetCompatibility = java.toString()
     options.encoding = "UTF-8"
-    options.compilerArgs.addAll(arrayOf( "--add-exports", "java.base/jdk.internal.misc=ALL-UNNAMED",
-      "--add-exports", "java.base/jdk.internal.module=ALL-UNNAMED",
-      "--add-exports", "java.base/jdk.internal.reflect=ALL-UNNAMED",
-      "--add-exports", "java.base/sun.nio.ch=ALL-UNNAMED")
+    options.compilerArgs.addAll(
+      arrayOf(
+        "--add-exports",
+        "java.base/jdk.internal.misc=ALL-UNNAMED",
+        "--add-exports",
+        "java.base/jdk.internal.module=ALL-UNNAMED",
+        "--add-exports",
+        "java.base/jdk.internal.reflect=ALL-UNNAMED",
+        "--add-exports",
+        "java.base/sun.nio.ch=ALL-UNNAMED"
+      )
     )
   }
 
   withType<ShadowJar> {
 
-    dependsOn("updateVersion","sourcesJar","encryptSprites")
+    dependsOn("updateVersion", "sourcesJar", "encryptSprites")
     group = "alon"
     archiveFileName.set("${project.name}Desktop.jar")
     from(files("README.md", "LICENSE", "mod.json"))
@@ -167,7 +177,7 @@ tasks {
         val data = sourceFile.readBytes()
 
 
-        for (i in data.indices) {
+        for(i in data.indices) {
           data[i] = (data[i].toInt() xor 920).toByte()
         }
         targetEncrypted.parentFile?.mkdirs()
@@ -211,7 +221,8 @@ tasks {
     }?.maxByOrNull { it.name } ?: throw GradleException("找不到有效的安卓平台")
     classpath(files("$sdkRoot/build-tools/37.0.0-rc2/lib/d8.jar"))
     mainClass.set("com.android.tools.r8.D8")
-    val classpathFiles = (configurations.compileClasspath.get().files + configurations.runtimeClasspath.get().files + File(platformRoot, "android.jar"))
+    val classpathFiles =
+      (configurations.compileClasspath.get().files + configurations.runtimeClasspath.get().files + File(platformRoot, "android.jar"))
     val argsList = mutableListOf<String>()
     classpathFiles.forEach { file ->
       argsList.add("--classpath")

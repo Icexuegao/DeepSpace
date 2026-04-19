@@ -87,8 +87,8 @@ class Quicksand :LiquidTurret("turret_quicksand") {
       orbSize = 4f
       puddleSize = 8f
       knockback = 1.5f
-      liquid = Liquids.cryofluid
-      status = StatusEffects.freezing
+      liquid = ILiquids.急冻液
+      status = IStatus.封冻
       statusDuration = 240f
       ammoMultiplier = 0.4f
       shootEffect = Fx.shootLiquid

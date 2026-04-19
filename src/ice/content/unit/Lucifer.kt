@@ -25,7 +25,7 @@ class Lucifer : IceUnitType("lucifer") {
     speed = 3.5f
     flying = true
     hitSize = 16f
-    drag = 0.05f
+    drag = 0.1f
     accel = 0.11f
     accel = 0.4f
     mineTier = 3
