@@ -20,11 +20,11 @@ class 铈凝块混合器 : NormalCrafter("ceriumBlockMixer") {
     craftEffect = IceEffects.square(IItems.铈凝块.color)
     newConsume().apply {
       power(1.5f)
-      time(90f)
-      items(IItems.爆炸化合物, 2, IItems.铈锭, 2)
+      time(120f)
+      items(IItems.爆炸化合物, 2, IItems.铈锭, 3)
     }
     newProduce().apply {
-      item(IItems.铈凝块, 2)
+      item(IItems.铈凝块, 3)
     }
     requirements(Category.crafting, IItems.铬锭, 50, IItems.铪锭, 60, IItems.铈锭, 30, IItems.单晶硅, 35)
     drawers = DrawMulti(DrawRegion("-bottom"), DrawRegion("-rotate").apply {
