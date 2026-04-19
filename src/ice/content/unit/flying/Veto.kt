@@ -1,76 +1,76 @@
-package ice.content.unit.flying
+包 ice.content.unit.flying
 
-import arc.graphics.Color
-import arc.graphics.g2d.Draw
-import arc.graphics.g2d.Fill
-import arc.graphics.g2d.Lines
-import arc.math.Angles
-import arc.math.Interp
-import arc.math.Mathf
-import arc.math.Rand
-import arc.scene.ui.layout.Table
-import arc.util.Time
-import arc.util.Tmp
-import ice.content.IStatus
-import ice.entities.bullet.LaserBulletType
-import ice.entities.bullet.base.BasicBulletType
-import ice.entities.effect.MultiEffect
-import ice.library.IFiles.appendModName
-import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
-import ice.world.content.unit.IceUnitType
-import mindustry.content.Fx
-import mindustry.entities.Effect
-import mindustry.entities.abilities.ShieldRegenFieldAbility
-import mindustry.entities.bullet.ContinuousFlameBulletType
-import mindustry.entities.effect.ExplosionEffect
-import mindustry.entities.effect.ParticleEffect
-import mindustry.entities.effect.WaveEffect
-import mindustry.entities.pattern.ShootHelix
-import mindustry.entities.pattern.ShootPattern
-import mindustry.gen.Bullet
-import mindustry.gen.Hitboxc
-import mindustry.gen.Sounds
-import mindustry.gen.Unit
-import mindustry.graphics.Drawf
-import mindustry.graphics.Pal
-import mindustry.type.UnitType
-import mindustry.type.Weapon
-import java.lang.Float.max
+进口弧光.图形.颜色
+进口arc.graphics.g2d.Draw
+进口弧.图形.g2d.填充
+进口弧.图形.g2d.线条
+进口弧.数学.角度
+进口arc.math.Interp
+进口arc.math.Mathf
+进口arc.math.Rand
+进口arc.scene.ui.layout.Table
+进口arc.util.Time
+进口arc.util.Tmp
+进口ice.content.IStatus
+进口冰。ities。子弹。激光子弹类型
+进口ice.ities.bullet.base.BasicBulletType
+进口冰.实体.效果.多效果
+进口ice.library.IFiles.appendModName
+进口ice.library.util.toColor
+进口ice.ui.bundle.bundle
+进口ice.ui.bundle.desc
+进口ice.world.content.unit.IceUnitType
+进口mindustry.content.Fx
+进口思维产业.实体.效果
+进口心智。实体。能力。盾牌重生领域能力
+进口思想工业，实体。子弹。ContinuousFlameBulletType
+进口心智产业.实体.效果.爆炸效果
+进口mindustry.ities.effect.ParticleEffect
+进口mindustry.ities.效果.波浪效果
+进口mindustry.ities.pattern.ShootHelix
+进口mindustry.ities.pattern.ShootPattern
+进口mindustry.gen.Bullet
+进口mindustry.gen.Hitboxc
+进口mindustry.gen.Sounds
+进口mindustry.gen.Unit
+进口思维工业.图形学。绘图
+进口mindustry.graphics.Pal
+进口mindustry.type.UnitType
+进口mindustry.type。武器
+进口java.lang.Float.max
 
-class Veto : IceUnitType("units_veto") {
-  val byb: Color = Pal.bulletYellowBack
-  val by: Color = Pal.bulletYellow
+班级否决：IceUnitType("单位_否决") {
+Val byb:Color=Pal.BulletYellowBack
+Val通过：color=Pal.Bullet黄色
 
   init {
-    bundle {
-      desc(
-        zh_CN,
+捆绑{
+DESC(
+ZH_CN，
         "否决",
         "重型空中突击单位.舰首舰尾发射导弹,四门近程激光与两门远程磁轨炮交替射击,中央主炮投送高爆弹.加装护盾辅助发生器以维持友军护盾持续作战",
         "否决,人类?"
       )
     }
-    flying = true
-    lowAltitude = true
-    health = 173000f
-    armor = 40f
-    hitSize = 87f
-    speed = 0.8f
-    accel = 0.04f
-    drag = 0.05f
-    rotateSpeed = 0.6f
-    engineSize = 8f
-    engineOffset = 45f
-    outlineColor = "1F1F1F".toColor()
-    setEnginesMirror(UnitEngine(12.25f, -64.25f, 6f, -90f))
-    abilities.add(ShieldRegenFieldAbility(450f, 1800f, 160f, 240f))
-    weapons.add(Weapon("否决主炮").apply {
-      x = 0f
-      recoil = 0f
-      reload = 480f
-      mirror = false
+飞行=正确
+低空=正确
+健康=173000f
+铠装=8F
+hitSize=87F
+速度=0.8F
+加速度=0.04f
+drag=0.05F
+rotateSpeed=0.6F
+engineSize=8F
+engineOffset=45f
+outlineColor="1F1F1F".toColor()
+setEnginesMirror(单元发动机(12.25f, -64.25f, 6F, -90F))
+tabilities.add(ShieldRegenFieldAbility(450F, 1800f, 160F, 240F))
+武器.add(武器("否决主炮").应用{
+X=0f
+反冲=0f
+重新加载=480F
+      mirror = 假的
       chargeSound = Sounds.chargeLancer
       shootSound = Sounds.shootLancer
       shoot = ShootPattern().apply {
