@@ -139,7 +139,7 @@ public class SglUI {
     Events.on(SglEventTypes.ResearchCompletedEvent.class, e -> notificationFrag.notify(
             new Notification.ResearchCompleted(
                     Core.bundle.get("infos.researchCompleted"),
-                    Core.bundle.format("infos.researched", e.getResearch().localizedName),
+                    Core.bundle.format("infos.researched", e.getResearch().getLocalizedName()),
                     e.getResearch()
             )
     ));
@@ -147,7 +147,7 @@ public class SglUI {
     Events.on(SglEventTypes.ResearchInspiredEvent.class, e -> notificationFrag.notify(
             new Notification.Inspired(
                     Core.bundle.get("infos.inspired"),
-                    Core.bundle.format("infos.inspiredBy", e.getResearch().localizedName),
+                    Core.bundle.format("infos.inspiredBy", e.getResearch().getLocalizedName()),
                     e.getInspire(), e.getResearch()
             )
     ));

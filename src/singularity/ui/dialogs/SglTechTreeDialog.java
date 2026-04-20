@@ -499,7 +499,7 @@ public class SglTechTreeDialog extends Table {
               );
             }
           }, info -> {
-            if (isReveal) info.add(project.localizedName).growX().labelAlign(Align.left);
+            if (isReveal) info.add(project.getLocalizedName()).growX().labelAlign(Align.left);
             else info.add("未揭示").growX().labelAlign(Align.left);
 
             info.row();
@@ -563,7 +563,7 @@ public class SglTechTreeDialog extends Table {
               else prog.add(Core.bundle.get("misc.reveal") + ": " + project.getReveal().localized()).growX().padLeft(4f).labelAlign(Align.left);
             }).growX().margin(4f);
             desc.row();
-            desc.add(isReveal? project.description : "???").width(388f).pad(5f).wrap().labelAlign(Align.left).color(Color.lightGray);
+            desc.add(isReveal? project.getDescription() : "???").width(388f).pad(5f).wrap().labelAlign(Align.left).color(Color.lightGray);
           }).colspan(2).left().grow();
         }).margin(4f).width(420).fillY().get();
 

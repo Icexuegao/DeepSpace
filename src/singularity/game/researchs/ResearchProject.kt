@@ -16,20 +16,11 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
   val dependencies: Seq<ResearchProject> = Seq<ResearchProject>()
   val contents: Seq<UnlockableContent> = Seq<UnlockableContent>()
 
-  @JvmField var localizedName = ""
-  @JvmField var description = ""
-  @JvmField var details = ""
-  override fun setLocalizedName(localizedName: String) {
-    this.localizedName = localizedName
-  }
+  override var localizedName: String = ""
 
-  override fun setDescription(description: String) {
-    this.description = description
-  }
+  override var description: String = ""
 
-  override fun setDetails(details: String) {
-    this.details = details
-  }
+  override var details: String = ""
 
   init {
     localizedName = name

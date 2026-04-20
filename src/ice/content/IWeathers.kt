@@ -11,19 +11,25 @@ import mindustry.type.weather.ParticleWeather
 import mindustry.type.weather.RainWeather
 import mindustry.world.meta.Attribute
 
+@Suppress("PROPERTY_HIDES_JAVA_FIELD")
 object IWeathers :Load {
   var 凌雪: ParticleWeather = object :ParticleWeather("tortureSnow"), Localizable {
-    override fun setLocalizedName(localizedName: String) {
-      this.localizedName = localizedName
-    }
+    override var localizedName: String
+      get() = super.localizedName
+      set(value) {
+        super.localizedName = value
+      }
 
-    override fun setDescription(description: String) {
-      this.description = description
-    }
-
-    override fun setDetails(details: String) {
-      this.details = details
-    }
+    override var description: String
+      get() = super.description
+      set(value) {
+        super.description = value
+      }
+    override var details: String
+      get() = super.details
+      set(value) {
+        super.details = value
+      }
   }.apply {
     randomParticleRotation = true
     particleRegion = "tortureSnow".appendModName()
@@ -43,17 +49,22 @@ object IWeathers :Load {
     }
   }
   var 血雨: Weather = object :RainWeather("bloodRain"), Localizable {
-    override fun setLocalizedName(localizedName: String) {
-      this.localizedName = localizedName
-    }
+    override var localizedName: String
+      get() = super.localizedName
+      set(value) {
+        super.localizedName = value
+      }
 
-    override fun setDescription(description: String) {
-      this.description = description
-    }
-
-    override fun setDetails(details: String) {
-      this.details = details
-    }
+    override var description: String
+      get() = super.description
+      set(value) {
+        super.description = value
+      }
+    override var details: String
+      get() = super.details
+      set(value) {
+        super.details = value
+      }
   }.apply {
     attrs.set(Attribute.light, -0.2f)
     attrs.set(Attribute.water, 0.2f)

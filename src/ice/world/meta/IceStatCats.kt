@@ -42,19 +42,11 @@ object IceStatCats {
 
   class IceStatCat(name: String) :StatCat(name), Localizable {
     override fun localized() = localizedName
-    @JvmField var localizedName = name
-    @JvmField var description = ""
-    @JvmField var details = ""
-    override fun setLocalizedName(localizedName: String) {
-      this.localizedName = localizedName
-    }
 
-    override fun setDescription(description: String) {
-      this.description = description
-    }
+    override var localizedName: String = ""
 
-    override fun setDetails(details: String) {
-      this.details = details
-    }
+    override var description: String = ""
+
+    override var details: String = ""
   }
 }

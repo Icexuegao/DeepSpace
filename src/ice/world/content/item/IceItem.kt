@@ -7,8 +7,10 @@ import ice.world.meta.IceStats
 import mindustry.type.Item
 import mindustry.world.meta.Stat
 
+@Suppress("PROPERTY_HIDES_JAVA_FIELD")
 open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Unit = {}) :
   Item(name, Color.valueOf(color)), Localizable {
+
   var nutrientConcentration = 0f
 
   init {
@@ -32,15 +34,20 @@ open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Uni
     stats.add(IceStats.是否用于建造, buildable)
   }
 
-  override fun setLocalizedName(localizedName: String) {
-    this.localizedName = localizedName
-  }
+  override var localizedName: String
+    get() = super.localizedName
+    set(value) {
+      super.localizedName = value
+    }
 
-  override fun setDescription(description: String) {
-    this.description = description
-  }
-
-  override fun setDetails(details: String) {
-    this.details = details
-  }
+  override var description: String
+    get() = super.description
+    set(value) {
+      super.description = value
+    }
+  override var details: String
+    get() = super.details
+    set(value) {
+      super.details = value
+    }
 }

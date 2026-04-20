@@ -77,21 +77,11 @@ open class Remains(val name: String) :Localizable {
     }
   }
 
- @JvmField var localizedName = ""
-  @JvmField var description = ""
-  @JvmField var details = ""
+  override var localizedName: String = ""
 
-  override fun setLocalizedName(localizedName: String) {
-    this.localizedName = localizedName
-  }
+  override var description: String = ""
 
-  override fun setDescription(description: String) {
-    this.description = description
-  }
-
-  override fun setDetails(details: String) {
-    this.details = details
-  }
+  override var details: String = ""
 
   fun rebuildEnableRemains(table: Table) {
     table.button(icon, buttonStyle) {

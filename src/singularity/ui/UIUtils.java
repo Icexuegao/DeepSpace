@@ -80,11 +80,11 @@ public class UIUtils {
           image().color(SglDrawConst.matrixNetDark).growX().height(4f);
         }},
         new Table(){{
-          add(project.localizedName, Styles.outlineLabel).pad(6f).color(Pal.accent);
+          add(project.getLocalizedName(), Styles.outlineLabel).pad(6f).color(Pal.accent);
         }}
     ).growX();
     table.row();
-    table.add(project.description).pad(10f).padTop(30f).padBottom(30f).width(320f).growX().wrap().labelAlign(Align.center);
+    table.add(project.getDescription()).pad(10f).padTop(30f).padBottom(30f).width(320f).growX().wrap().labelAlign(Align.center);
     table.row();
     table.add(Core.bundle.get("infos.unlocked")).fontScale(0.8f).color(Color.lightGray);
     table.row();
@@ -168,7 +168,7 @@ public class UIUtils {
           );
         }
       }, info -> {
-        info.add(project.localizedName).growX().color(Pal.accent).fontScale(1.1f).labelAlign(Align.center).pad(5f);
+        info.add(project.getLocalizedName()).growX().color(Pal.accent).fontScale(1.1f).labelAlign(Align.center).pad(5f);
         info.row();
         info.add(Core.bundle.get("infos.researchInspired")).growX().labelAlign(Align.center).pad(5f);
       }).left().grow().margin(8f);

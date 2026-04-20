@@ -21,18 +21,24 @@ import mindustry.world.consumers.ConsumeLiquids
 import mindustry.world.meta.BuildVisibility
 import kotlin.math.roundToInt
 
+@Suppress("PROPERTY_HIDES_JAVA_FIELD")
 open class IceBlock(name: String) : Block(name), Localizable {
-  override fun setLocalizedName(localizedName: String) {
-    this.localizedName = localizedName
-  }
+  override var localizedName: String
+    get() = super.localizedName
+    set(value) {
+      super.localizedName = value
+    }
 
-  override fun setDescription(description: String) {
-    this.description = description
-  }
-
-  override fun setDetails(details: String) {
-    this.details = details
-  }
+  override var description: String
+    get() = super.description
+    set(value) {
+      super.description = value
+    }
+  override var details: String
+    get() = super.details
+    set(value) {
+      super.details = value
+    }
   companion object {
     fun Block.requirementPairs(category: Category, vararg items: Pair<Item, Int>) {
       requirements(category, Array(items.size) {

@@ -7,6 +7,7 @@ import ice.world.meta.IceStats
 import mindustry.gen.Puddle
 import mindustry.type.Liquid
 
+@Suppress("PROPERTY_HIDES_JAVA_FIELD")
 open class IceLiquid(name: String, color: Color, app: IceLiquid.() -> Unit = {}) :Liquid(name, color), Localizable {
 
   constructor(name: String, color: String, app: IceLiquid.() -> Unit = {}) :this(name, Color.valueOf(color), app)
@@ -37,15 +38,20 @@ open class IceLiquid(name: String, color: Color, app: IceLiquid.() -> Unit = {})
     updateFun(puddle)
   }
 
-  override fun setLocalizedName(localizedName: String) {
-    this.localizedName = localizedName
-  }
+  override var localizedName: String
+    get() = super.localizedName
+    set(value) {
+      super.localizedName = value
+    }
 
-  override fun setDescription(description: String) {
-    this.description = description
-  }
-
-  override fun setDetails(details: String) {
-    this.details = details
-  }
+  override var description: String
+    get() = super.description
+    set(value) {
+      super.description = value
+    }
+  override var details: String
+    get() = super.details
+    set(value) {
+      super.details = value
+    }
 }

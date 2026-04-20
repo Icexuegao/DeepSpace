@@ -22,9 +22,9 @@ object LocalizationManager :Load {
       data?.let {
         when(target) {
           is Localizable -> {
-            if (it.name.isNotEmpty()) target.setLocalizedName(it.name)
-            if (it.description.isNotEmpty()) target.setDescription(it.description)
-            if (it.details.isNotEmpty()) target.setDetails(it.details)
+            if (it.name.isNotEmpty()) target.localizedName=it.name
+            if (it.description.isNotEmpty()) target.description=it.description
+            if (it.details.isNotEmpty()) target.details=it.details
           }
 
           is UnlockableContent -> {
@@ -42,11 +42,9 @@ object LocalizationManager :Load {
   internal fun register(target: Any, map: LocalizationMap) {
     if (loaded && target is Localizable) {
       map.getData(Core.settings.getString("locale", "zh_CN"))?.let {
-
-        if (it.name.isNotEmpty()) target.setLocalizedName(it.name)
-        if (it.description.isNotEmpty()) target.setDescription(it.description)
-        if (it.details.isNotEmpty()) target.setDetails(it.details)
-
+        if (it.name.isNotEmpty()) target.localizedName=it.name
+        if (it.description.isNotEmpty()) target.description=it.description
+        if (it.details.isNotEmpty()) target.details=it.details
       }
       return
     }

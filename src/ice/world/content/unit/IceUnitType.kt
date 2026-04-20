@@ -53,6 +53,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.Unit as KUnit
 
+@Suppress("PROPERTY_HIDES_JAVA_FIELD")
 open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, applys: IceUnitType.() -> KUnit = {}) :UnitType(name),
   Localizable {
   companion object {
@@ -531,17 +532,22 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     Draw.reset()
   }
 
-  override fun setLocalizedName(localizedName: String) {
-    this.localizedName = localizedName
-  }
+  override var localizedName: String
+    get() = super.localizedName
+    set(value) {
+      super.localizedName = value
+    }
 
-  override fun setDescription(description: String) {
-    this.description = description
-  }
-
-  override fun setDetails(details: String) {
-    this.details = details
-  }
+  override var description: String
+    get() = super.description
+    set(value) {
+      super.description = value
+    }
+  override var details: String
+    get() = super.details
+    set(value) {
+      super.details = value
+    }
 
   inner class IUnitEngine(x: Float, y: Float, radius: Float, rotate: Float, var width: Float = 8f) :UnitEngine(x, y, radius, rotate) {
     override fun draw(unit: Unit) {

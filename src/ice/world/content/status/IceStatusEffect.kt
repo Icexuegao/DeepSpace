@@ -8,6 +8,7 @@ import mindustry.gen.Unit
 import mindustry.type.StatusEffect
 import kotlin.Unit as kUnit
 
+@Suppress("PROPERTY_HIDES_JAVA_FIELD")
 open class IceStatusEffect(name: String, apply: IceStatusEffect.() -> kUnit = {}) : StatusEffect(name), Localizable {
   var armorBreak = 0f
   var armorBreakPercent = 0f
@@ -65,15 +66,20 @@ open class IceStatusEffect(name: String, apply: IceStatusEffect.() -> kUnit = {}
   }
 
   override fun isHidden() = hideDatabase
-  override fun setLocalizedName(localizedName: String) {
-    this.localizedName = localizedName
-  }
+  override var localizedName: String
+    get() = super.localizedName
+    set(value) {
+      super.localizedName = value
+    }
 
-  override fun setDescription(description: String) {
-    this.description = description
-  }
-
-  override fun setDetails(details: String) {
-    this.details = details
-  }
+  override var description: String
+    get() = super.description
+    set(value) {
+      super.description = value
+    }
+  override var details: String
+    get() = super.details
+    set(value) {
+      super.details = value
+    }
 }

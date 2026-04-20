@@ -39,18 +39,10 @@ enum class ModeDifficulty(var color: Color) :Localizable {
     }
   };
 
-  @JvmField var localizedName = ""
-  @JvmField  var description = ""
-  @JvmField var details = ""
-  override fun setLocalizedName(localizedName: String) {
-    this.localizedName = localizedName
-  }
+  override var localizedName: String = ""
 
-  override fun setDescription(description: String) {
-    this.description = description
-  }
+  override var description: String = ""
 
-  override fun setDetails(details: String) {
-    this.details = details
-  }
+  override var details: String = ""
+
 }
