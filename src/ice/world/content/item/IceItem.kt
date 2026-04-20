@@ -4,12 +4,16 @@ import arc.graphics.Color
 import ice.content.IPlanets
 import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
+import mindustry.ctype.UnlockableContent
 import mindustry.type.Item
 import mindustry.world.meta.Stat
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
-open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Unit = {}) :
-  Item(name, Color.valueOf(color)), Localizable {
+open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Unit = {}) :Item(name, Color.valueOf(color)), Localizable {
+
+  override var localizedName: String by UnlockableContent::localizedName
+  override var description: String by UnlockableContent::description
+  override var details: String by UnlockableContent::details
 
   var nutrientConcentration = 0f
 
@@ -34,20 +38,4 @@ open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Uni
     stats.add(IceStats.是否用于建造, buildable)
   }
 
-  override var localizedName: String
-    get() = super.localizedName
-    set(value) {
-      super.localizedName = value
-    }
-
-  override var description: String
-    get() = super.description
-    set(value) {
-      super.description = value
-    }
-  override var details: String
-    get() = super.details
-    set(value) {
-      super.details = value
-    }
 }

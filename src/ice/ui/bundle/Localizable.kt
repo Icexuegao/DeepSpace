@@ -21,22 +21,9 @@ package ice.ui.bundle
  * ```
  * ps:
  * ```kotlin
- * override var localizedName: String
- *     get() = super.localizedName
- *     set(value) {
- *       super.localizedName = value
- *     }
- *
- * override var description: String
- *     get() = super.description
- *     set(value) {
- *       super.description = value
- *     }
- * override var details: String
- *     get() = super.details
- *     set(value) {
- *       super.details = value
- *     }
+override var localizedName: String by UnlockableContent::localizedName
+override var description: String by UnlockableContent::description
+override var details: String by UnlockableContent::details
  * ```
  *
  * @author Alon

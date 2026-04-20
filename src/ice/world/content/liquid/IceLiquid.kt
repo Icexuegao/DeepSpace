@@ -4,6 +4,7 @@ import arc.graphics.Color
 import ice.content.IPlanets
 import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
+import mindustry.ctype.UnlockableContent
 import mindustry.gen.Puddle
 import mindustry.type.Liquid
 
@@ -11,6 +12,10 @@ import mindustry.type.Liquid
 open class IceLiquid(name: String, color: Color, app: IceLiquid.() -> Unit = {}) :Liquid(name, color), Localizable {
 
   constructor(name: String, color: String, app: IceLiquid.() -> Unit = {}) :this(name, Color.valueOf(color), app)
+
+  override var localizedName: String by UnlockableContent::localizedName
+  override var description: String by UnlockableContent::description
+  override var details: String by UnlockableContent::details
 
   var updateFun: (Puddle) -> Unit = {}
   var nutrientConcentration = 0f
@@ -37,21 +42,4 @@ open class IceLiquid(name: String, color: Color, app: IceLiquid.() -> Unit = {})
     super.update(puddle)
     updateFun(puddle)
   }
-
-  override var localizedName: String
-    get() = super.localizedName
-    set(value) {
-      super.localizedName = value
-    }
-
-  override var description: String
-    get() = super.description
-    set(value) {
-      super.description = value
-    }
-  override var details: String
-    get() = super.details
-    set(value) {
-      super.details = value
-    }
 }

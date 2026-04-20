@@ -8,6 +8,7 @@ import ice.library.util.toStringi
 import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.Vars
+import mindustry.ctype.UnlockableContent
 import mindustry.gen.Building
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
@@ -23,22 +24,6 @@ import kotlin.math.roundToInt
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
 open class IceBlock(name: String) : Block(name), Localizable {
-  override var localizedName: String
-    get() = super.localizedName
-    set(value) {
-      super.localizedName = value
-    }
-
-  override var description: String
-    get() = super.description
-    set(value) {
-      super.description = value
-    }
-  override var details: String
-    get() = super.details
-    set(value) {
-      super.details = value
-    }
   companion object {
     fun Block.requirementPairs(category: Category, vararg items: Pair<Item, Int>) {
       requirements(category, Array(items.size) {
@@ -62,6 +47,9 @@ open class IceBlock(name: String) : Block(name), Localizable {
       return consume(ConsumeLiquids(LiquidStack.with(*liquids)))
     }
   }
+  override var localizedName: String by UnlockableContent::localizedName
+  override var description: String by UnlockableContent::description
+  override var details: String by UnlockableContent::details
 
   var healAmount = 0f
   var damageReduction = 0f

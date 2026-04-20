@@ -33,6 +33,7 @@ import mindustry.ai.UnitStance
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.core.Renderer
+import mindustry.ctype.UnlockableContent
 import mindustry.entities.Effect
 import mindustry.entities.Effect.EffectContainer
 import mindustry.entities.abilities.Ability
@@ -49,8 +50,10 @@ import mindustry.type.Weapon
 import mindustry.world.meta.Env
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
+import kotlin.getValue
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.setValue
 import kotlin.Unit as KUnit
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
@@ -62,6 +65,10 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     val legOffsetIce = Vec2()
     val rand: Rand = Rand()
   }
+
+  override var localizedName: String by UnlockableContent::localizedName
+  override var description: String by UnlockableContent::description
+  override var details: String by UnlockableContent::details
 
   private var requirements: Array<ItemStack> = arrayOf(ItemStack(IItems.低碳钢, 100))
 
@@ -531,23 +538,6 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
 
     Draw.reset()
   }
-
-  override var localizedName: String
-    get() = super.localizedName
-    set(value) {
-      super.localizedName = value
-    }
-
-  override var description: String
-    get() = super.description
-    set(value) {
-      super.description = value
-    }
-  override var details: String
-    get() = super.details
-    set(value) {
-      super.details = value
-    }
 
   inner class IUnitEngine(x: Float, y: Float, radius: Float, rotate: Float, var width: Float = 8f) :UnitEngine(x, y, radius, rotate) {
     override fun draw(unit: Unit) {

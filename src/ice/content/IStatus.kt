@@ -1153,7 +1153,7 @@ object IStatus :Load {
     override fun draw(unit: Unit, time: Float) {
       super.draw(unit, time)
 
-      SglDraw.drawBloomUponFlyUnit<Unit?>(unit, DrawAcceptor { u: Unit ->
+      SglDraw.drawBloomUponFlyUnit<Unit>(unit, DrawAcceptor { u: Unit ->
         val rate = Mathf.clamp(90 / (time / 30))
         Lines.stroke(2.2f * rate, Pal.lighterOrange)
         Draw.alpha(rate * 0.7f)
