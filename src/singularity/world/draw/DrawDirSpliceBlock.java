@@ -45,6 +45,7 @@ public class DrawDirSpliceBlock<E> extends DrawBlock {
       int bit = 1 << move;
       if((dirBits & bit) != 0){
 
+        Draw.yscl = 1 <= move && move <= 2 ? -1 : 1;
         Draw.rect(splicers[move], x, y, move*90);
       }
       move++;
