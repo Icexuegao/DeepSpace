@@ -10,8 +10,7 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.entities.Mover
 import mindustry.entities.effect.WaveEffect
@@ -37,8 +36,11 @@ import singularity.world.particles.SglParticleModels
 
 class Soflame : SglTurret("soflame") {
   init {
-    bundle {
-      desc(zh_CN, "阳炎", "将能量聚集到“太阳分子”上,直到能量足够高时发射出去,极热的物质云会留下灼热的轨迹,并在碰撞时爆炸,将目标化为灰烬")
+    localization {
+      zh_CN {
+        name = "阳炎"
+        description = "将能量聚集到“太阳分子”上,直到能量足够高时发射出去,极热的物质云会留下灼热的轨迹,并在碰撞时爆炸,将目标化为灰烬"
+      }
     }
     requirements(
       Category.turret,

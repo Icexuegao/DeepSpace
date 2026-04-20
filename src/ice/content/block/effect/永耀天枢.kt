@@ -2,16 +2,19 @@ package ice.content.block.effect
 
 import ice.content.IItems
 import ice.content.IUnitTypes
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.CoreBlock
 import mindustry.type.Category
 
  class 永耀天枢 :CoreBlock("foreverShineCore") {
   init {
-    bundle {
-      desc(zh_CN, "永耀天枢","控制区块的基础.有最大的容量与重型装甲.一旦被摧毁,所在区块将重归于敌人控制")
+    localization {
+      zh_CN {
+        name = "永耀天枢"
+        description = "控制区块的基础.有最大的容量与重型装甲.一旦被摧毁,所在区块将重归于敌人控制"
+      }
     }
     armor=25f
     size = 5

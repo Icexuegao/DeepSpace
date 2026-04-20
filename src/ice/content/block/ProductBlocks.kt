@@ -16,8 +16,7 @@ import ice.content.block.product.CrystalMiner
 import ice.content.block.product.岩石粉碎机
 import ice.library.util.toColor
 import ice.library.world.Load
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.liquid.SolidPump
@@ -59,16 +58,22 @@ object ProductBlocks : Load {
     size = 2
     requirements(Category.production, IItems.高碳钢, 10, IItems.低碳钢, 5)
     drillTime = 400f
-    bundle {
-      desc(zh_CN, "纤汲钻井", "基础钻井,配备了最基础的钻芯,可用于开采基础资源")
+    localization {
+      zh_CN {
+        name = "纤汲钻井"
+        description = "基础钻井,配备了最基础的钻芯,可用于开采基础资源"
+      }
     }
     newBooster(2.3f).apply {
       liquid(Liquids.water, 12f/60f)
     }
   }
   val 蛮荒钻井: Block = BaseDrill("uncivilizedDrill").apply {
-    bundle {
-      desc(zh_CN, "蛮荒钻井", "次级钻井,在纤汲钻井的基础上进行了迭代,钻芯材料改进,可用于开采更高级资源")
+    localization {
+      zh_CN {
+        name = "蛮荒钻井"
+        description = "次级钻井,在纤汲钻井的基础上进行了迭代,钻芯材料改进,可用于开采更高级资源"
+      }
     }
     newBooster(3.6f).apply {
       liquid(Liquids.water, 12f/60f)
@@ -90,13 +95,19 @@ object ProductBlocks : Load {
       liquid(Liquids.water, 12f/60f)
     }
     requirements(Category.production, IItems.钴钢, 30, IItems.铪锭, 20, IItems.单晶硅, 25, IItems.电子元件, 10)
-    bundle {
-      desc(zh_CN, "曼哈德钻井", "高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效的资源开采")
+    localization {
+      zh_CN {
+        name = "曼哈德钻井"
+        description = "高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效的资源开采"
+      }
     }
   }
   val 热熔钻井: Block = BaseDrill("hotMeltDrill").apply {
-    bundle {
-      desc(zh_CN, "热熔钻井", "高级钻井,通过加热多种合金制成的钻头融毁地层以实现高效的资源开采")
+    localization {
+      zh_CN {
+        name = "热熔钻井"
+        description = "高级钻井,通过加热多种合金制成的钻头融毁地层以实现高效的资源开采"
+      }
     }
     size = 5
     bitHardness = 6
@@ -143,14 +154,20 @@ object ProductBlocks : Load {
       cone = 360f
     }
     requirements(Category.production, IItems.铱板, 450, IItems.导能回路, 225, IItems.钴锭, 32, IItems.生物钢, 75, IItems.肃正协议, 1)
-    bundle {
-      desc(zh_CN, "血肉钻井", "高级钻井,能够自主驱动钻探.需要持续供给血肉赘生物,可以安置在水上")
+    localization {
+      zh_CN {
+        name = "血肉钻井"
+        description = "高级钻井,能够自主驱动钻探.需要持续供给血肉赘生物,可以安置在水上"
+      }
     }
   }
   val 晶簇粉碎器 = CrystalMiner()
   val 抽水机 = SolidPump("waterPump").apply {
-    bundle {
-      desc(zh_CN, "抽水机", "抽取地下水资源,但无法抽取地表水资源")
+    localization {
+      zh_CN {
+        name = "抽水机"
+        description = "抽取地下水资源,但无法抽取地表水资源"
+      }
     }
     size = 2
     baseEfficiency = 1f
@@ -162,8 +179,11 @@ object ProductBlocks : Load {
     requirements(Category.production, IItems.石英玻璃, 25, IItems.高碳钢, 20, IItems.单晶硅, 10)
   }
   val 大型抽水机 = SolidPump("largeWaterPump").apply {
-    bundle {
-      desc(zh_CN, "大型抽水机", "高效抽取地下水资源,但无法抽取地表水资源")
+    localization {
+      zh_CN {
+        name = "大型抽水机"
+        description = "高效抽取地下水资源,但无法抽取地表水资源"
+      }
     }
     size = 3
     baseEfficiency = 1f
@@ -179,8 +199,11 @@ object ProductBlocks : Load {
   val 沼气池 = Incubator()
 
   var 岩层钻井机 = FloorCrafter("rock_drill").apply {
-    bundle {
-      desc(zh_CN, "岩层钻井机", "特种钻井,钻探深层的地壳,将深埋在地壳深处的较高质量的矿物送至地表")
+    localization {
+      zh_CN {
+        name = "岩层钻井机"
+        description = "特种钻井,钻探深层的地壳,将深埋在地壳深处的较高质量的矿物送至地表"
+      }
     }
     requirements(Category.production, IItems.铬锭, 45, IItems.铅锭, 30, IItems.铜锭, 30)
     size = 2
@@ -230,8 +253,11 @@ object ProductBlocks : Load {
   }
   var 岩石粉碎机 = 岩石粉碎机()
   var 潮汐钻头 = ExtendableDrill("tidal_drill").apply {
-    bundle {
-      desc(zh_CN, "潮汐钻井", "高级钻井,使用最前沿力场控制技术制造的高级钻头,以粒子束冲击破坏挖掘物的物质结构后通过控制引力场震荡完成矿石解体和采集的过程")
+    localization {
+      zh_CN {
+        name = "潮汐钻井"
+        description = "高级钻井,使用最前沿力场控制技术制造的高级钻头,以粒子束冲击破坏挖掘物的物质结构后通过控制引力场震荡完成矿石解体和采集的过程"
+      }
     }
     requirements(
       Category.production, IItems.简并态中子聚合物, 50, IItems.强化合金, 120,
@@ -283,8 +309,11 @@ object ProductBlocks : Load {
   }
   var 引力延展室 = ExtendMiner("force_field_extender").apply {
     squareSprite = false
-    bundle {
-      desc(zh_CN, "引力延展室", "用于延伸潮汐钻头的设备,贴近潮汐钻井,并与其他延展室彼此正对连接可扩大钻头覆盖的范围")
+    localization {
+      zh_CN {
+        name = "引力延展室"
+        description = "用于延伸潮汐钻头的设备,贴近潮汐钻井,并与其他延展室彼此正对连接可扩大钻头覆盖的范围"
+      }
     }
     requirements(
       Category.production, ItemStack.with(
@@ -321,8 +350,11 @@ object ProductBlocks : Load {
   }
 
   var 矩阵矿床 = MatrixMiner("matrix_miner").apply {
-    bundle {
-      desc(zh_CN, "矩阵矿床", "矩阵矿床的控制中心,四面可安装矿床的工作组件以进行开采工作")
+    localization {
+      zh_CN {
+        name = "矩阵矿床"
+        description = "矩阵矿床的控制中心,四面可安装矿床的工作组件以进行开采工作"
+      }
     }
     requirements(Category.production, IItems.矩阵合金, 130, IItems.充能FEX水晶, 80, IItems.强化合金, 90, IItems.气凝胶, 90, IItems.絮凝剂, 65, IItems.锌锭, 90, IItems.铱锭, 45)
     size = 5
@@ -331,8 +363,11 @@ object ProductBlocks : Load {
     baseRange = 32
   }
   var 采掘扇区 = MatrixMinerSector("matrix_miner_node").apply {
-    bundle {
-      desc(zh_CN, "采掘扇区", "矩阵矿床的采掘工作组件,提供一个基础开采角度区间")
+    localization {
+      zh_CN {
+        name = "采掘扇区"
+        description = "矩阵矿床的采掘工作组件,提供一个基础开采角度区间"
+      }
     }
     requirements(
       Category.production, ItemStack.with(
@@ -346,8 +381,11 @@ object ProductBlocks : Load {
     energyMulti = 2f
   }
   var 谐振增压组件 = MatrixMinerComponent("matrix_miner_extend").apply {
-    bundle {
-      desc(zh_CN, "谐振增压组件", "矩阵矿床的增幅组件,使矩阵矿床的采集范围增大,可以大幅提高钻头的采掘效率")
+    localization {
+      zh_CN {
+        name = "谐振增压组件"
+        description = "矩阵矿床的增幅组件,使矩阵矿床的采集范围增大,可以大幅提高钻头的采掘效率"
+      }
     }
     requirements(Category.production, IItems.矩阵合金, 40, IItems.充能FEX水晶, 40, IItems.强化合金, 60, IItems.铱锭, 12, IItems.简并态中子聚合物, 20)
     size = 3
@@ -383,8 +421,11 @@ object ProductBlocks : Load {
   }
   var 量子隧穿仪 = MatrixMinerComponent("matrix_miner_pierce").apply {
 
-    bundle {
-      desc(zh_CN, "量子隧穿仪", "矩阵矿床的增幅组件,安装此组件后,矩阵矿床将能够透过建筑挖掘被建筑覆盖的矿石")
+    localization {
+      zh_CN {
+        name = "量子隧穿仪"
+        description = "矩阵矿床的增幅组件,安装此组件后,矩阵矿床将能够透过建筑挖掘被建筑覆盖的矿石"
+      }
     }
     requirements(
       Category.production, IItems.矩阵合金, 40, IItems.充能FEX水晶, 40, IItems.FEX水晶, 50, IItems.强化合金, 30, IItems.铱锭, 20, IItems.絮凝剂, 40
@@ -471,8 +512,11 @@ object ProductBlocks : Load {
   }
   var 矩阵增幅器 = MatrixMinerComponent("matrix_miner_overdrive").apply {
 
-    bundle {
-      desc(zh_CN, "矩阵增幅器", "矩阵矿床的增幅组件,提高矩阵矿床的最大范围,并消耗液体增加矩阵矿床的工作效率")
+    localization {
+      zh_CN {
+        name = "矩阵增幅器"
+        description = "矩阵矿床的增幅组件,提高矩阵矿床的最大范围,并消耗液体增加矩阵矿床的工作效率"
+      }
     }
     requirements(
       Category.production, IItems.矩阵合金, 40, IItems.充能FEX水晶, 50, IItems.强化合金, 40, IItems.气凝胶, 40, IItems.铱锭, 15, IItems.絮凝剂, 60

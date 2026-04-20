@@ -3,16 +3,28 @@ package ice.content
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
 import ice.library.world.Load
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.Localizable
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds
+import mindustry.type.Weather
 import mindustry.type.weather.ParticleWeather
 import mindustry.type.weather.RainWeather
 import mindustry.world.meta.Attribute
 
-object IWeathers : Load {
-  var 凌雪 = ParticleWeather("tortureSnow").apply {
+object IWeathers :Load {
+  var 凌雪: ParticleWeather = object :ParticleWeather("tortureSnow"), Localizable {
+    override fun setLocalizedName(localizedName: String) {
+      this.localizedName = localizedName
+    }
+
+    override fun setDescription(description: String) {
+      this.description = description
+    }
+
+    override fun setDetails(details: String) {
+      this.details = details
+    }
+  }.apply {
     randomParticleRotation = true
     particleRegion = "tortureSnow".appendModName()
     sizeMax = 13f
@@ -24,19 +36,35 @@ object IWeathers : Load {
     soundVolOscMag = 1.5f
     soundVolOscScl = 1100f
     soundVolMin = 0.02f
-    bundle {
-      desc(zh_CN, "凌雪")
+    localization {
+      zh_CN {
+        name = "凌雪"
+      }
     }
   }
-  var 血雨 = RainWeather("bloodRain").apply {
+  var 血雨: Weather = object :RainWeather("bloodRain"), Localizable {
+    override fun setLocalizedName(localizedName: String) {
+      this.localizedName = localizedName
+    }
+
+    override fun setDescription(description: String) {
+      this.description = description
+    }
+
+    override fun setDetails(details: String) {
+      this.details = details
+    }
+  }.apply {
     attrs.set(Attribute.light, -0.2f)
     attrs.set(Attribute.water, 0.2f)
     status = StatusEffects.wet
     sound = Sounds.rain
     color = IceColor.r1
     soundVol = 0.25f
-    bundle {
-      desc(zh_CN, "血雨")
+    localization {
+      zh_CN {
+        name = "血雨"
+      }
     }
   }
 }

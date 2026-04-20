@@ -1,16 +1,18 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import singularity.world.blocks.product.NormalCrafter
 
 class SulfideMixer :NormalCrafter("sulfideMixer") {
   init {
-    bundle {
-      desc(zh_CN, "硫化物混合器", "将煤,铅,沙混合成硫化合物")
+    localization {
+      zh_CN {
+        name = "硫化物混合器"
+        description = "将煤,铅,沙混合成硫化合物"
+      }
     }
     size = 3
     itemCapacity = 30

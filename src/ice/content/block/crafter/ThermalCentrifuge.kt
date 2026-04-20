@@ -4,8 +4,7 @@ import arc.func.Floatf
 import arc.func.Func
 import arc.util.Tmp
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Fx
@@ -25,8 +24,12 @@ import universecore.world.consumers.ConsumeType
 
 class ThermalCentrifuge : NormalCrafter("thermal_centrifuge") {
   init {
-    bundle {
-      desc(zh_CN, "热能离心机", "离心原矿石并分解出特定产物,可配置", "以极高的温度将物质熔化成液态,以差速离心分离其中不同质量的物质")
+    localization {
+      zh_CN {
+        name = "热能离心机"
+        description = "离心原矿石并分解出特定产物,可配置"
+        details = "以极高的温度将物质熔化成液态,以差速离心分离其中不同质量的物质"
+      }
     }
     requirements(
       Category.crafting, IItems.强化合金, 100, IItems.气凝胶, 80, IItems.铜锭, 120, IItems.单晶硅, 70, IItems.钴钢, 75

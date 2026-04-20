@@ -10,8 +10,6 @@ import ice.library.scene.element.typinglabel.TLabel
 import ice.library.scene.style.DynamicTextureDrawable
 import ice.library.scene.ui.itooltip
 import ice.type.Remains
-import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.bundle
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock
 import ice.world.content.unit.ability.InterceptAbilty
@@ -25,10 +23,12 @@ import universecore.world.consumers.ConsumeType
 @Suppress("unused")
 object Remainss {
   val 娜雅的手串 = Remains("remains_naya_bracelet").apply {
-    bundle {
-      desc(zh_CN, "娜雅的手串", "一串温润的玉石手串,在帝国任职期间由娜雅赠予")
+    localization {
+      zh_CN {
+        name = "娜雅的手串"
+        description = "一串温润的玉石手串,在帝国任职期间由娜雅赠予"
+      }
     }
-    setDescription(this.getDescription())
     effect = "核心机增加拦截护盾"
     val units = IUnitTypes.getCoreUnits()
     var map = HashMap<UnitType, InterceptAbilty>()
@@ -51,11 +51,13 @@ object Remainss {
     }
   }
   val 坚固的装甲板 = Remains("remains_armor_plates").apply {
-    bundle {
-      desc(zh_CN, "坚固的装甲板", "多层淬火钢板铆接而成,表面布满划痕与凹坑")
+    localization {
+      zh_CN {
+        name = "坚固的装甲板"
+        description = "多层淬火钢板铆接而成,表面布满划痕与凹坑"
+      }
     }
     val hea = 500
-    setDescription(getDescription())
     effect = "单位[${IUnitTypes.断业.localizedName}]的生命值提升[$hea]"
     install = {
       IUnitTypes.断业.health += hea
@@ -69,11 +71,13 @@ object Remainss {
     }
   }
   val 不焚者的余烬 = Remains("remains_unburnt_ashes").apply {
-    bundle {
-      desc(zh_CN, "不焚者的余烬", "温热的结晶体,烈焰中被焚尽却未曾死去之人的最后残留")
+    localization {
+      zh_CN {
+        name = "不焚者的余烬"
+        description = "温热的结晶体,烈焰中被焚尽却未曾死去之人的最后残留"
+      }
     }
     val f = 5
-    setDescription(getDescription())
     effect = "单位[${IUnitTypes.仆从.localizedName}]的武器伤害提升[$f]"
     install = {
       IUnitTypes.仆从.weapons.forEach {
@@ -91,10 +95,12 @@ object Remainss {
     }
   }
   val 纯净水晶坠饰 = Remains("remains_pure_crystal_pendant").apply {
-    bundle {
-      desc(zh_CN, "纯净水晶坠饰", "一块天然形成,毫无杂质的透明白水晶")
+    localization {
+      zh_CN {
+        name = "纯净水晶坠饰"
+        description = "一块天然形成,毫无杂质的透明白水晶"
+      }
     }
-    setDescription(getDescription())
     effect = "玩家核心机[免疫所有状态]"
     val units = IUnitTypes.getCoreUnits()
     install = {
@@ -114,10 +120,12 @@ object Remainss {
     }
   }
   val 玄岩板 = Remains("remains_basalt_plate").apply {
-    bundle {
-      desc(zh_CN, "玄岩板", "由奇异,沉重的玄武岩打磨而成")
+    localization {
+      zh_CN {
+        name = "玄岩板"
+        description = "由奇异,沉重的玄武岩打磨而成"
+      }
     }
-    setDescription(getDescription())
     effect = "[${CrafterBlocks.碳控熔炉.localizedName}]所需燃料减少[1]"
     var itemStack = ItemStack()
     CrafterBlocks.碳控熔炉.consumers.find {
@@ -140,10 +148,12 @@ object Remainss {
     }
   }
   val 谐振探针 = Remains("remains_resonance_probe").apply {
-    bundle {
-      desc(zh_CN, "谐振探针", "一种用于探测矿物谐振频率的装置")
+    localization {
+      zh_CN {
+        name = "谐振探针"
+        description = "一种用于探测矿物谐振频率的装置"
+      }
     }
-    setDescription(getDescription())
     effect = "矿物地板不再[隐藏]"
     install = {
       Vars.content.blocks().forEach {
@@ -167,10 +177,12 @@ object Remainss {
     }
   }
   val 流光罗盘 = Remains("remains_flowing_compass").apply {
-    bundle {
-      desc(zh_CN, "流光罗盘", "表面刻有古老的符文,会发出淡淡的光芒")
+    localization {
+      zh_CN {
+        name = "流光罗盘"
+        description = "表面刻有古老的符文,会发出淡淡的光芒"
+      }
     }
-    setDescription(getDescription())
     icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 19
       it.frameDuration = 60f / 7f
@@ -190,8 +202,10 @@ object Remainss {
   }
 
   val 不朽者胚胎 = Remains("remains_immortal_embryo").apply {
-    bundle {
-      desc(zh_CN, "不朽者胚胎")
+    localization {
+      zh_CN {
+        name = "不朽者胚胎"
+      }
     }
 
     icon = DynamicTextureDrawable(name.appendModName()) {
@@ -226,12 +240,14 @@ object Remainss {
     }
   }
   val 脊骨寄生虫 = Remains("remains_spine_parasite").apply {
-    bundle {
-      desc(zh_CN, "脊骨寄生虫")
+    localization {
+      zh_CN {
+        name = "脊骨寄生虫"
+        description = "一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合"
+      }
     }
     remainsColor = IceColor.r2
     setDescriptionTable {
-      it.add("一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合").grow().wrap().pad(5f).color(remainsColor).row()
       it.table { table ->
         table.add("影响单位: ").pad(5f).color(remainsColor)
         table.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")
@@ -268,10 +284,12 @@ object Remainss {
   }
   val 心跳鼓 = Remains("remains_heartbeat_drum").apply {
     remainsColor = IceColor.r2
-    bundle {
-      desc(zh_CN, "心跳鼓", "弹性心肌隔膜,回响着怀念之音")
+    localization {
+      zh_CN {
+        name = "心跳鼓"
+        description = "弹性心肌隔膜,回响着怀念之音"
+      }
     }
-    setDescription(getDescription())
 
     effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
     icon = DynamicTextureDrawable(name.appendModName()) {
@@ -291,10 +309,12 @@ object Remainss {
   }
   val 多余的视线 = Remains("remains_extra_gaze").apply {
     remainsColor = IceColor.r2
-    bundle {
-      desc(zh_CN, "多余的视线", "同一片神经系统的两个节点,我们相认的媒介")
+    localization {
+      zh_CN {
+        name = "多余的视线"
+        description = "同一片神经系统的两个节点,我们相认的媒介"
+      }
     }
-    setDescription("同一片神经系统的两个节点,我们相认的媒介")
     icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 24
       it.frameDuration = 15f
@@ -313,10 +333,12 @@ object Remainss {
   }
   val 血腥玛丽 = Remains("remains_bloody_mary").apply {
     remainsColor = IceColor.r2
-    bundle {
-      desc(zh_CN, "血腥玛丽", "血与酒液在杯中摇匀,辛辣之后,只余缓慢扩散的猩红")
+    localization {
+      zh_CN {
+        name = "血腥玛丽"
+        description = "血与酒液在杯中摇匀,辛辣之后,只余缓慢扩散的猩红"
+      }
     }
-    setDescription(getDescription())
     icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 13
       it.frameDuration = 15f
@@ -348,12 +370,15 @@ object Remainss {
   }
   val 迷思海 = 迷思海()
   val 现彼岸 = Remains("remains_higanbana").apply {
-    desc(BaseBundle.zh_CN, "现彼岸", "")
-    remainsColor= IceColor.r2
-    setDescription(getDescription())
+    localization {
+      zh_CN {
+        name = "现彼岸"
+      }
+    }
+    remainsColor = IceColor.r2
     icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 8
-      it.frameDuration = 60f/3f
+      it.frameDuration = 60f / 3f
     }
   }
 }

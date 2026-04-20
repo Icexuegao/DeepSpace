@@ -20,8 +20,7 @@ import ice.entities.bullet.TrailFadeBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.content.Fx
@@ -42,8 +41,12 @@ import kotlin.math.min
 
 class BreakUp : IceUnitType("breakUp") {
   init {
-    bundle {
-      desc(zh_CN, "断业", "断业是神殿[净罪计划]的产物,其装甲内层熔铸了经神祝圣的暮光合金,主炮能对建筑与重甲单位造成毁灭性伤害,能撕裂红雾中的畸变体集群", "帝国腐朽的装甲部队节节败退,唯有枢机的神术能短暂驱散腐化,帝国残部讥讽其为伪神的铁棺材,但无人能否认——当它的履带碾过焦土时,连红雾都会为之退散")
+    localization {
+      zh_CN {
+        name = "断业"
+        description = "断业是神殿[净罪计划]的产物,其装甲内层熔铸了经神祝圣的暮光合金,主炮能对建筑与重甲单位造成毁灭性伤害,能撕裂红雾中的畸变体集群"
+        details = "帝国腐朽的装甲部队节节败退,唯有枢机的神术能短暂驱散腐化,帝国残部讥讽其为伪神的铁棺材,但无人能否认——当它的履带碾过焦土时,连红雾都会为之退散"
+      }
     }
     speed = 0.48f
     armor = 26f

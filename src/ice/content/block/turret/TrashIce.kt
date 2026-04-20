@@ -6,8 +6,8 @@ import ice.audio.ISounds
 import ice.content.IItems
 import ice.entities.bullet.base.BasicBulletType
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.meta.IceEffects
 import mindustry.entities.Effect
@@ -21,8 +21,10 @@ import mindustry.world.draw.DrawTurret
 
 class TrashIce:ItemTurret("trashIce") {
   init{
-    bundle {
-      desc(zh_CN, "碎冰")
+    localization {
+      zh_CN {
+        name = "碎冰"
+      }
     }
     size = 1
     health = 250

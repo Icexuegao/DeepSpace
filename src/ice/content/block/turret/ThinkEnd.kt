@@ -4,8 +4,8 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import mindustry.entities.part.DrawPart
 import mindustry.entities.part.RegionPart
 import mindustry.type.Category
@@ -15,8 +15,10 @@ import mindustry.world.draw.DrawTurret
 
 class ThinkEnd:ItemTurret("thinkEnd") {
   init{
-    bundle {
-      desc(zh_CN, "绪终")
+    localization {
+      zh_CN {
+        name = "绪终"
+      }
     }
     size = 5
     shoot.apply {
@@ -65,8 +67,10 @@ class ThinkEnd:ItemTurret("thinkEnd") {
         heatColor = Color.valueOf("c3baff").a(0.5f)
         heatProgress = DrawPart.PartProgress.warmup
       })
-      bundle {
-        desc(zh_CN, "绪终")
+      localization {
+        zh_CN {
+          name = "绪终"
+        }
       }
     }
   }

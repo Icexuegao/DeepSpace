@@ -14,8 +14,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.block.turret.TurretBullets
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.game.Team
 import mindustry.gen.Building
 import mindustry.graphics.Layer
@@ -37,8 +36,11 @@ import singularity.world.particles.SglParticleModels
 
 class 环形电磁储能簇:EnergyContainer("magnetic_energy_container"){
   init {
-      bundle {
-        desc(zh_CN, "环形电磁储能簇", "约束式主动中子能存储设备,可以存储极大量的能量,但是需要消耗电力,若电力供应不足会发生泄漏")
+      localization {
+        zh_CN {
+          name = "环形电磁储能簇"
+          description = "约束式主动中子能存储设备,可以存储极大量的能量,但是需要消耗电力,若电力供应不足会发生泄漏"
+        }
       }
       requirements(
         SglCategory.nuclear,

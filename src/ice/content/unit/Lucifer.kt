@@ -3,8 +3,6 @@ package ice.content.unit
 import arc.graphics.g2d.Draw
 import ice.entities.bullet.RandomDamageBulletType
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.entities.part.DrawPart
@@ -16,8 +14,11 @@ import mindustry.graphics.MultiPacker.PageType
 
 class Lucifer : IceUnitType("lucifer") {
   init {
-    bundle {
-      desc(zh_CN, "路西法"," ")
+    localization {
+      zh_CN {
+        name = "路西法"
+        description = " "
+      }
     }
     armor = 1f
     accel = 0.2f

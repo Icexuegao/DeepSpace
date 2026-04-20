@@ -1,16 +1,19 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.storage.StorageBlock
 
 class 晶格数据矩阵 :StorageBlock("effect_latticeDataMatrix"){
   init{
-    bundle {
-      desc(zh_CN, "晶格数据矩阵", "巨量存储各种类型的物品,物品将被解构为数据进行存储.可以用装卸器卸载物品")
+    localization {
+      zh_CN {
+        name = "晶格数据矩阵"
+        description = "巨量存储各种类型的物品,物品将被解构为数据进行存储.可以用装卸器卸载物品"
+      }
     }
     size = 4
     health = 16000

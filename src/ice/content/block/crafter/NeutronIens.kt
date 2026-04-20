@@ -10,8 +10,7 @@ import arc.math.Mathf
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.graphics.Pal
@@ -30,8 +29,12 @@ import singularity.world.draw.DrawRegionDynamic
 
 class NeutronIens:NormalCrafter("neutron_lens"){
   init{
-  bundle {
-    desc(zh_CN, "中子透镜","将特定材料由中子冲击为特定产物,可配置", "通过相位物折射及引力透镜偏转中子流进行对焦,使中子直接轰击靶材料,在舱内完成需要高能中子流轰击的过程")
+  localization {
+    zh_CN {
+      name = "中子透镜"
+      description = "将特定材料由中子冲击为特定产物,可配置"
+      details = "通过相位物折射及引力透镜偏转中子流进行对焦,使中子直接轰击靶材料,在舱内完成需要高能中子流轰击的过程"
+    }
   }
   requirements(
     Category.crafting, ItemStack.with(

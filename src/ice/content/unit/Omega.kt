@@ -11,8 +11,6 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.ArmorPlateAbility
@@ -28,8 +26,11 @@ import mindustry.graphics.Layer
 
 class Omega : IceUnitType("unit_omega") {
   init {
-    bundle {
-      desc(zh_CN, "欧米茄", "舍弃了建造及挖掘能力换取了更大的载弹量和更强劲的武器系统\n向敌人喷射等离子火焰的同时发射电磁震爆弹")
+    localization {
+      zh_CN {
+        name = "欧米茄"
+        description = "舍弃了建造及挖掘能力换取了更大的载弹量和更强劲的武器系统\n向敌人喷射等离子火焰的同时发射电磁震爆弹"
+      }
     }
     lowAltitude = true
     flying = true

@@ -3,8 +3,7 @@ package ice.content.block.crafter
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Liquids
@@ -19,8 +18,11 @@ import singularity.world.draw.DrawBottom
 
 class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
   init {
-    bundle {
-      desc(zh_CN, "渗透净化器", "使用物质吸附及反渗透过滤技术制造的高效净化装置,能更有效的分离水中的杂质")
+    localization {
+      zh_CN {
+        name = "渗透净化器"
+        description = "使用物质吸附及反渗透过滤技术制造的高效净化装置,能更有效的分离水中的杂质"
+      }
     }
     size = 3
     hasLiquids = true

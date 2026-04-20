@@ -3,8 +3,8 @@ package ice.content.block.turret
 import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.StatusEffects
 import mindustry.entities.bullet.SapBulletType
@@ -22,8 +22,11 @@ class Grab : PowerTurret("grab") {
     rotateSpeed = 5f
     outlineRadius = 3
     shootSound = Sounds.shootSpectre
-    bundle {
-      desc(zh_CN, "攫取", "快速发射汲取光束,攻击敌人的同时修复自身")
+    localization {
+      zh_CN {
+        name = "攫取"
+        description = "快速发射汲取光束,攻击敌人的同时修复自身"
+      }
     }
     requirements(Category.turret, IItems.钍锭, 40, IItems.铬锭, 30, IItems.单晶硅, 20)
     consumePower(1.5f)

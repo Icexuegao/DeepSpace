@@ -4,8 +4,7 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.entities.part.DrawPart
@@ -16,8 +15,10 @@ import mindustry.type.unit.MissileUnitType
 
 class Starlight : MissileUnitType("starlight") {
   init {
-    bundle {
-      desc(zh_CN, "星光")
+    localization {
+      zh_CN {
+        name = "星光"
+      }
     }
     health = 130f
     hitSize = 4f

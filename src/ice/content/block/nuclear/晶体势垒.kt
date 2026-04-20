@@ -1,15 +1,17 @@
 package ice.content.block.nuclear
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.EnergyBuffer
 
 class 晶体势垒: EnergyBuffer("crystal_buffer"){
   init{
-    bundle {
-      desc(zh_CN, "晶体势垒", "中型能量缓冲设施,具有更大的能量缓冲空间,可进行中压区调压")
+    localization {
+      zh_CN {
+        name = "晶体势垒"
+        description = "中型能量缓冲设施,具有更大的能量缓冲空间,可进行中压区调压"
+      }
     }
     squareSprite = false
     requirements(

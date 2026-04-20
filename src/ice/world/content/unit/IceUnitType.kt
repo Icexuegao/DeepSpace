@@ -23,6 +23,7 @@ import ice.graphics.IceColor
 import ice.library.IFiles
 import ice.library.IFiles.appendModName
 import ice.library.struct.texture.LazyTextureSingleDelegate
+import ice.ui.bundle.Localizable
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars
 import mindustry.ai.ControlPathfinder
@@ -52,13 +53,15 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.Unit as KUnit
 
-open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, applys: IceUnitType.() -> KUnit ={}) : UnitType(name) {
+open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, applys: IceUnitType.() -> KUnit = {}) :UnitType(name),
+  Localizable {
   companion object {
     var imineLaserRegion: TextureRegion by LazyTextureSingleDelegate("minelaser".appendModName())
     var imineLaserEndRegion: TextureRegion by LazyTextureSingleDelegate("minelaser-end".appendModName())
     val legOffsetIce = Vec2()
     val rand: Rand = Rand()
   }
+
   private var requirements: Array<ItemStack> = arrayOf(ItemStack(IItems.低碳钢, 100))
 
   init {
@@ -69,16 +72,14 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
   fun requirements(vararg req: Any) {
     requirements = ItemStack.with(*req)
   }
-  override fun drawEngines(unit: Unit?) {
-    super.drawEngines(unit)
-  }
+
   override fun setStats() {
     super.setStats()
     fun abilities(abilities: Seq<Ability>): StatValue {
-      return StatValue { table->
+      return StatValue { table ->
         table.row()
         table.table { t ->
-          for (ability in abilities) {
+          for(ability in abilities) {
             if (ability.display) {
               ability.display(t)
               t.row()
@@ -92,6 +93,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
       stats.add(Stat.abilities, abilities(abilities))
     }
   }
+
   override fun getRequirements(prevReturn: Array<UnitType?>?, timeReturn: FloatArray?): Array<ItemStack>? {
     if (totalRequirements != null) return totalRequirements
 
@@ -99,7 +101,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     buildTime = 0f
     if (prevReturn != null) prevReturn[0] = null
 
-    for (stack in requirements) {
+    for(stack in requirements) {
       buildTime += stack.item.cost * stack.amount
     }
     if (timeReturn != null) timeReturn[0] = buildTime
@@ -165,11 +167,13 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     }
 
     if (flowfieldPathType == -1) {
-      flowfieldPathType = if (naval) Pathfinder.costNaval else if (allowLegStep) Pathfinder.costLegs else if (flying) Pathfinder.costNone else if (hovering) Pathfinder.costHover else Pathfinder.costGround
+      flowfieldPathType =
+        if (naval) Pathfinder.costNaval else if (allowLegStep) Pathfinder.costLegs else if (flying) Pathfinder.costNone else if (hovering) Pathfinder.costHover else Pathfinder.costGround
     }
 
     if (pathCost == null) {
-      pathCost = if (naval) ControlPathfinder.costNaval else if (allowLegStep) ControlPathfinder.costLegs else if (hovering) ControlPathfinder.costHover else ControlPathfinder.costGround
+      pathCost =
+        if (naval) ControlPathfinder.costNaval else if (allowLegStep) ControlPathfinder.costLegs else if (hovering) ControlPathfinder.costHover else ControlPathfinder.costGround
     }
 
     pathCostId = ControlPathfinder.costTypes.indexOf(pathCost)
@@ -199,7 +203,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     //set up default range
     if (range < 0) {
       range = Float.MAX_VALUE
-      for (weapon in weapons) {
+      for(weapon in weapons) {
         if (!weapon.useAttackRange) continue
 
         range = min(range, weapon.range() - margin)
@@ -210,7 +214,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     if (maxRange < 0) {
       maxRange = max(0f, range)
 
-      for (weapon in weapons) {
+      for(weapon in weapons) {
         if (!weapon.useAttackRange) continue
 
         maxRange = max(maxRange, weapon.range() - margin)
@@ -254,7 +258,9 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
         repeat(3) {
           Fx.v.trns(e.rotation + Fx.rand.range(40f), Fx.rand.random(6f * e.finpow()))
           Fill.circle(
-            e.x + Fx.v.x + Fx.rand.range(4f), e.y + Fx.v.y + Fx.rand.range(4f), min(e.fout(), e.fin() * e.lifetime / 8f) * hitSize / 28f * 3f * Fx.rand.random(
+            e.x + Fx.v.x + Fx.rand.range(4f),
+            e.y + Fx.v.y + Fx.rand.range(4f),
+            min(e.fout(), e.fin() * e.lifetime / 8f) * hitSize / 28f * 3f * Fx.rand.random(
               0.8f, 1.1f
             ) + 0.3f
           )
@@ -264,12 +270,12 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
 
     if (mineBeamOffset == Float.NEGATIVE_INFINITY) mineBeamOffset = hitSize / 2
 
-    for (ab in abilities) {
+    for(ab in abilities) {
       ab.init(this)
     }
     //add mirrored weapon variants
     val mapped = Seq<Weapon>()
-    for (w in weapons) {
+    for(w in weapons) {
       if (w.recoilTime < 0) w.recoilTime = w.reload
       mapped.add(w)
       //mirrors are copies with X values negated
@@ -364,7 +370,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     ).apply(configurator).also(weapons::add)
   }
 
-  inline fun <reified T : Weapon> setWeaponT(weaponName: String = "", configurator: T.() -> KUnit): T {
+  inline fun <reified T :Weapon> setWeaponT(weaponName: String = "", configurator: T.() -> KUnit): T {
     val constructor = T::class.java.getDeclaredConstructor(String::class.java)
     val instance = constructor.newInstance(if (weaponName.isEmpty()) "" else "$name-$weaponName")
     return instance.apply(configurator).also { weapons.add(it) }
@@ -483,12 +489,20 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     }
     //TODO 我该如何/在哪里画画？
     if (parts.size > 0) {
-      for (i in 0..<parts.size) {
+      for(i in 0..<parts.size) {
         val part = parts.get(i)
         val mount = if (unit.mounts.size > part.weaponIndex) unit.mounts[part.weaponIndex] else null
         if (mount != null) {
           DrawPart.params.set(
-            mount.warmup, mount.reload / mount.weapon.reload, mount.smoothReload, mount.heat, mount.recoil, mount.charge, unit.x, unit.y, unit.rotation
+            mount.warmup,
+            mount.reload / mount.weapon.reload,
+            mount.smoothReload,
+            mount.heat,
+            mount.recoil,
+            mount.charge,
+            unit.x,
+            unit.y,
+            unit.rotation
           )
         } else {
           DrawPart.params.set(0f, 0f, 0f, 0f, 0f, 0f, unit.x, unit.y, unit.rotation)
@@ -504,7 +518,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     }
 
     if (unit.isAdded) {
-      for (a in unit.abilities) {
+      for(a in unit.abilities) {
         Draw.reset()
         a.draw(unit)
       }
@@ -517,7 +531,19 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     Draw.reset()
   }
 
-  inner class IUnitEngine(x: Float, y: Float, radius: Float, rotate: Float, var width: Float = 8f) : UnitEngine(x, y, radius, rotate) {
+  override fun setLocalizedName(localizedName: String) {
+    this.localizedName = localizedName
+  }
+
+  override fun setDescription(description: String) {
+    this.description = description
+  }
+
+  override fun setDetails(details: String) {
+    this.details = details
+  }
+
+  inner class IUnitEngine(x: Float, y: Float, radius: Float, rotate: Float, var width: Float = 8f) :UnitEngine(x, y, radius, rotate) {
     override fun draw(unit: Unit) {
       val type = unit.type
       val scale = if (type.useEngineElevation) unit.elevation else 1f

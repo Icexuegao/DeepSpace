@@ -2,8 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.type.Category
@@ -15,8 +14,11 @@ import singularity.world.draw.DrawBottom
 
 class CombustionChamber : NormalCrafter("combustion_chamber") {
   init {
-    bundle {
-      desc(zh_CN, "燃烧室", "将多种材料置入燃烧,生产特定产物并输出电力,可配置","密闭耐高温的舱室,用于执行化学燃烧过程,为最大化利用燃烧释放的能量,燃烧会将在活塞室内进行以推动线圈产生电力")
+    localization {
+      zh_CN {
+        name = "燃烧室"
+        description = "将多种材料置入燃烧,生产特定产物并输出电力,可配置\n密闭耐高温的舱室,用于执行化学燃烧过程,为最大化利用燃烧释放的能量,燃烧会将在活塞室内进行以推动线圈产生电力"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

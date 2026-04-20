@@ -1,8 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.entities.effect.MultiEffect
@@ -12,8 +11,12 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 等离子蚀刻厂 : NormalCrafter("integratedFactory") {
   init {
-    bundle {
-      desc(zh_CN, "等离子蚀刻厂","将石墨烯通过石英玻璃蚀刻于单晶硅上,产出电子原件","采用等离子蚀刻技术,在硅晶圆上雕刻出微米级电路,电子工业的基础设施")
+    localization {
+      zh_CN {
+        name = "等离子蚀刻厂"
+        description = "将石墨烯通过石英玻璃蚀刻于单晶硅上,产出电子原件"
+        details = "采用等离子蚀刻技术,在硅晶圆上雕刻出微米级电路,电子工业的基础设施"
+      }
     }
     size = 3
     health = 200

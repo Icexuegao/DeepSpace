@@ -57,7 +57,7 @@ open class Wall(name: String) : IceBlock(name) {
     }
   }
 
-  inner class WallBuild : IceBuild() {
+  open inner class WallBuild : IceBuild() {
     var hit: Float = 0f
 
     override fun draw() {

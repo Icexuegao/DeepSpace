@@ -8,8 +8,7 @@ import arc.math.Mathf
 import arc.util.Time
 import arc.util.noise.Noise
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.Effect
@@ -33,8 +32,12 @@ import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
 class SubstanceInverter : MediumCrafter("substance_inverter") {
   init {
-    bundle {
-      desc(zh_CN, "物质逆化器", "消耗介质,将反物质引导入简并态中子聚合物容器中", "将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到容器中")
+    localization {
+      zh_CN {
+        name = "物质逆化器"
+        description = "消耗介质,将反物质引导入简并态中子聚合物容器中"
+        details = "将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到容器中"
+      }
     }
     requirementPairs(
       Category.crafting,

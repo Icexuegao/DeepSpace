@@ -1,16 +1,21 @@
 package ice.content.unit
 
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.ai.UnitCommand
 import mindustry.gen.BuildingTetherPayloadUnit
 
-class WorkerBee : IceUnitType("unit_workerBee", BuildingTetherPayloadUnit::class.java) {
+class WorkerBee :IceUnitType("unit_workerBee", BuildingTetherPayloadUnit::class.java) {
   init {
-    bundle {
-      desc(zh_CN, "工蜂", "轻型空中工程单位.配备精密的模块化建造系统,负责大型单位的建造与装配任务")
+    localization {
+      zh_CN {
+        name = "工蜂"
+        description = "轻型空中工程单位.配备精密的模块化建造系统,负责大型单位的建造与装配任务"
+      }
+      en {
+        name = "Worker Bee"
+        description = "Light aerial engineering unit with modular construction system"
+      }
     }
     defaultCommand = UnitCommand.assistCommand
 

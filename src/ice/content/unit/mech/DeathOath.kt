@@ -8,8 +8,6 @@ import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.ArmorPlateAbility
 import mindustry.content.Fx
@@ -23,8 +21,11 @@ import mindustry.type.ammo.ItemAmmoType
 
 class DeathOath : IceUnitType("unit_deathOath", MechUnit::class.java) {
   init {
-    bundle {
-      desc(zh_CN, "死誓", "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,会缓慢恢复生命值,开火时减少所受伤害")
+    localization {
+      zh_CN {
+        name = "死誓"
+        description = "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,会缓慢恢复生命值,开火时减少所受伤害"
+      }
     }
     health = 29000f
     armor = 25f

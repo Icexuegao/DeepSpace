@@ -4,8 +4,7 @@ import arc.func.Floatf
 import arc.func.Func
 import arc.graphics.Color
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.world.draw.DrawDefault
@@ -19,8 +18,11 @@ import universecore.world.consumers.cons.item.ConsumeItems
 import universecore.world.consumers.cons.liquid.ConsumeLiquids
 
 class 衰变仓:NormalCrafter("decay_bin"){init {
-  bundle {
-    desc(zh_CN, "衰变仓", "放射性物质进行衰变产生少量的核能量,可能存在副产物")
+  localization {
+    zh_CN {
+      name = "衰变仓"
+      description = "放射性物质进行衰变产生少量的核能量,可能存在副产物"
+    }
   }
   requirements(
     SglCategory.nuclear, IItems.强化合金, 60, IItems.FEX水晶, 40, IItems.单晶硅, 50, IItems.铅锭, 80, IItems.石英玻璃, 40

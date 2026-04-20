@@ -14,8 +14,7 @@ import arc.util.io.Writes
 import ice.content.IItems
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.blocks.liquid.LiquidJunction
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
@@ -39,8 +38,11 @@ open class 焚化炉 : SglBlock("incinerator") {
   var flameColor: Color = Color.valueOf("ffad9d")
 
   init {
-    bundle {
-      desc(zh_CN, "焚化炉", "智能销毁流体和物品,可进行二级面板配置,精准控制每一个输入源")
+    localization {
+      zh_CN {
+        name = "焚化炉"
+        description = "智能销毁流体和物品,可进行二级面板配置,精准控制每一个输入源"
+      }
     }
     size = 1
     flameColor = IceColor.b4

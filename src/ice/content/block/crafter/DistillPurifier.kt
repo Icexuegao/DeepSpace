@@ -2,8 +2,6 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -15,8 +13,11 @@ import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 
 class DistillPurifier : NormalCrafter("distill_purifier") {init {
-  bundle {
-    desc(zh_CN, "蒸馏净化器", "用原始的蒸馏方式分离水中的杂质")
+  localization {
+    zh_CN {
+      name = "蒸馏净化器"
+      description = "用原始的蒸馏方式分离水中的杂质"
+    }
   }
   requirements(
     Category.crafting, ItemStack.with(

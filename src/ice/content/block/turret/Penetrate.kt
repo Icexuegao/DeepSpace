@@ -5,8 +5,8 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -19,8 +19,11 @@ import mindustry.world.consumers.ConsumeCoolant
 
 class Penetrate : ItemTurret("turret_penetrate") {
   init {
-    bundle {
-      desc(zh_CN, "贯通", "向指定方位发射一道强劲的定向爆破束")
+    localization {
+      zh_CN {
+        name = "贯通"
+        description = "向指定方位发射一道强劲的定向爆破束"
+      }
     }
     health = 1930
     armor = 4f

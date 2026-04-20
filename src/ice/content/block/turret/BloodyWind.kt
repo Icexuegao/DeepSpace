@@ -6,8 +6,8 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.entities.effect.ParticleEffect
@@ -23,8 +23,11 @@ import mindustry.world.draw.DrawTurret
 
 class BloodyWind : PowerTurret("bloodyWind") {
   init {
-    bundle {
-      desc(zh_CN, "腥风", "改进型四联速射粒子炮,向敌人发射高热的粒子束\n为了更强的电热转换回路拆除了部分气冷系统,使用液体时冷却效果更佳")
+    localization {
+      zh_CN {
+        name = "腥风"
+        description = "改进型四联速射粒子炮,向敌人发射高热的粒子束\n为了更强的电热转换回路拆除了部分气冷系统,使用液体时冷却效果更佳"
+      }
     }
     squareSprite = false
     health = 6400

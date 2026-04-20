@@ -1,8 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawArcSmelt
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
@@ -14,10 +13,12 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 碳控熔炉 : NormalCrafter("carbonSteelFactory") {
   init {
-    bundle {
-      desc(
-        zh_CN, "碳控熔炉", "将赤铁矿冶炼为高碳钢或低碳钢,可配置","通过精确控制碳元素配比,在同一生产线灵活产出高碳钢和低碳钢."
-      )
+    localization {
+      zh_CN {
+        name = "碳控熔炉"
+        description = "将赤铁矿冶炼为高碳钢或低碳钢,可配置"
+        details = "通过精确控制碳元素配比,在同一生产线灵活产出高碳钢和低碳钢."
+      }
     }
     size = 3
     itemCapacity = 20

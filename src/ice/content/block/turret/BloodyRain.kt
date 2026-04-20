@@ -10,8 +10,8 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -26,8 +26,11 @@ import mindustry.world.blocks.defense.turrets.ItemTurret
 
 class BloodyRain : ItemTurret("bloodyRain") {
   init {
-    bundle {
-      desc(zh_CN, "血雨", " 改进型双联速射炮,向敌人发射大型穿甲弹,兼容各种弹药\n其恐怖的穿透力足以击穿建筑装甲")
+    localization {
+      zh_CN {
+        name = "血雨"
+        description = " 改进型双联速射炮,向敌人发射大型穿甲弹,兼容各种弹药\n其恐怖的穿透力足以击穿建筑装甲"
+      }
     }
     health = 5400
     size = 5

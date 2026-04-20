@@ -6,8 +6,7 @@ import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import mindustry.ai.UnitCommand
 import mindustry.content.Fx
@@ -19,8 +18,11 @@ import mindustry.gen.Sounds
 
 class ArcLight : IceUnitType("unit_arcLight") {
   init {
-    bundle {
-      desc(zh_CN, "弧光", "中型空中支援单位.发射激光与湍能弹攻击附近敌人,会自动修复受损建筑,并对附近的友军提供迅疗效果")
+    localization {
+      zh_CN {
+        name = "弧光"
+        description = "中型空中支援单位.发射激光与湍能弹攻击附近敌人,会自动修复受损建筑,并对附近的友军提供迅疗效果"
+      }
     }
 
     defaultCommand = UnitCommand.repairCommand

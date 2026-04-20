@@ -1,8 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
@@ -12,8 +11,11 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 电弧炉 : NormalCrafter("arcFurnace") {
   init {
-    bundle {
-      desc(zh_CN, "电弧炉","将铅锭,石英和金珀沙熔炼为石英玻璃")
+    localization {
+      zh_CN {
+        name = "电弧炉"
+        description = "将铅锭,石英和金珀沙熔炼为石英玻璃"
+      }
     }
     size = 3
     itemCapacity = 36

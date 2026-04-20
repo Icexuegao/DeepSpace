@@ -2,8 +2,7 @@ package ice.content.block.crafter
 
 import ice.audio.ISounds
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
@@ -13,8 +12,11 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 陶钢熔炼炉 : NormalCrafter("ceramicSteelFurnace") {
   init {
-    bundle {
-      desc(zh_CN, "陶钢熔炼炉", "将石英玻璃,钴钢和铈锭熔炼为陶钢")
+    localization {
+      zh_CN {
+        name = "陶钢熔炼炉"
+        description = "将石英玻璃,钴钢和铈锭熔炼为陶钢"
+      }
     }
     size = 3
     itemCapacity = 36

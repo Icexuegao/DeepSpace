@@ -6,8 +6,8 @@ import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -100,8 +100,11 @@ class TunnelOpening:ItemTurret("tunnelOpening") {
       })
     }
     requirements(Category.turret, IItems.铜锭, 1120, IItems.钴锭, 470, IItems.钍锭, 390, IItems.铬锭, 280, IItems.铱板, 225, IItems.爆炸化合物, 65)
-    bundle {
-      desc(zh_CN, "隧穿", "向指定方位发射三道强劲的定向爆破束,并在到达极限距离后原路返回")
+    localization {
+      zh_CN {
+        name = "隧穿"
+        description = "向指定方位发射三道强劲的定向爆破束,并在到达极限距离后原路返回"
+      }
     }
     shoot = ShootSpread().apply {
       shots = 3

@@ -2,8 +2,8 @@ package ice.content.unit
 
 import arc.graphics.Color
 import arc.math.Interp
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.bullet.ExplosionBulletType
 import mindustry.entities.effect.MultiEffect
@@ -15,8 +15,10 @@ import mindustry.type.unit.MissileUnitType
 
 class Spark : MissileUnitType("unit_spark") {
   init {
-    bundle {
-      desc(zh_CN, "火花")
+    localization {
+      zh_CN {
+        name = "火花"
+      }
     }
     health = 385f
     hitSize = 11f

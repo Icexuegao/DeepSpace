@@ -5,8 +5,7 @@ import arc.func.Func
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
@@ -22,8 +21,11 @@ import universecore.world.consumers.cons.item.ConsumeItems
 
 class OreWasher:NormalCrafter("ore_washer"){
   init {
-  bundle {
-    desc(zh_CN, "洗矿机", "使用水冲刷沥青粗矿以除去杂质,并析出稀有的导能流体")
+  localization {
+    zh_CN {
+      name = "洗矿机"
+      description = "使用水冲刷沥青粗矿以除去杂质,并析出稀有的导能流体"
+    }
   }
   requirements(
     Category.crafting, ItemStack.with(

@@ -2,8 +2,7 @@ package ice.content.unit.flying.fire
 
 import ice.content.IItems
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -13,8 +12,11 @@ import mindustry.gen.Sounds
 
 class Tuihuo : IceUnitType("tuihuo") {
   init {
-    bundle {
-      desc(zh_CN, "趋火", "轻型空中突击单位.快速投掷航弹杀伤敌军,开火时减少所受伤害")
+    localization {
+      zh_CN {
+        name = "趋火"
+        description = "轻型空中突击单位.快速投掷航弹杀伤敌军,开火时减少所受伤害"
+      }
     }
     requirements(IItems.低碳钢,35, IItems.高碳钢,15, IItems.单晶硅,10, IItems.铬锭,10)
     immunities.add(StatusEffects.wet)

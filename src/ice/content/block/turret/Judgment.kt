@@ -5,8 +5,8 @@ import arc.math.Interp
 import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.entities.effect.MultiEffect
@@ -24,8 +24,11 @@ import mindustry.world.draw.DrawTurret
 
 class Judgment : PowerTurret("judgment") {
   init {
-    bundle {
-      desc(zh_CN, "决断", "一次性发射四道湍能弹精准攻击敌人")
+    localization {
+      zh_CN {
+        name = "决断"
+        description = "一次性发射四道湍能弹精准攻击敌人"
+      }
     }
     health = 6350
     armor = 6f

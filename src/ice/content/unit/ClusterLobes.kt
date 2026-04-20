@@ -20,8 +20,6 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.graphics.IceColor
 import ice.library.util.IMathf
 import ice.library.util.toStringi
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.BarAbility
 import ice.world.content.unit.entity.base.Entity
@@ -47,8 +45,12 @@ import kotlin.random.Random
 
 class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
   init {
-    bundle {
-      desc(zh_CN, "裂片集群","超重型空中毁灭单位.","阴影宣告到来,\n灰白落定尘埃.")
+    localization {
+      zh_CN {
+        name = "裂片集群"
+        description = "超重型空中毁灭单位."
+        details = "阴影宣告到来,\n灰白落定尘埃."
+      }
     }
     setWeapon {
       shoot.apply {

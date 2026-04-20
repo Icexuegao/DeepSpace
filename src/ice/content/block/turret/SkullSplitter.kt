@@ -6,8 +6,8 @@ import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.RailBulletType
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -22,8 +22,11 @@ import mindustry.world.draw.DrawTurret
 
 class SkullSplitter : ItemTurret("turret_skullSplitter") {
   init {
-    bundle {
-      desc(zh_CN, "裂颅", "以临界速度发射三道远程穿透磁轨炮摧毁敌人,能够扫除一切障碍")
+    localization {
+      zh_CN {
+        name = "裂颅"
+        description = "以临界速度发射三道远程穿透磁轨炮摧毁敌人,能够扫除一切障碍"
+      }
     }
     health = 3600
     size = 4

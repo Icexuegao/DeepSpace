@@ -3,8 +3,7 @@ package ice.content.unit
 import arc.graphics.Color
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
-import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
 import mindustry.content.Fx
 import mindustry.entities.abilities.EnergyFieldAbility
 import mindustry.entities.effect.ParticleEffect
@@ -17,7 +16,11 @@ import mindustry.type.weapons.RepairBeamWeapon
 
 class Lightning :MissileUnitType("unit_lightning") {
   init {
-    desc(BaseBundle.zh_CN, "雷精")
+    localization {
+      zh_CN {
+        name = "雷精"
+      }
+    }
 
     health = 480f
     armor = 8f

@@ -3,8 +3,7 @@ package ice.content.block.nuclear
 import arc.graphics.g2d.Draw
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.gen.Building
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
@@ -19,12 +18,11 @@ import singularity.world.draw.DrawBottom
 class 托卡马克点火装置:TokamakCore("tokamak_firer"){
   init  {
     quickRotate = false
-    bundle {
-      desc(
-        zh_CN,
-        "托卡马克点火装置",
-        "托卡马克核聚变装置的核心组件,是添加材料与输出能量的端口,在一个核聚变装置中必须有且只有一个此设备。将此设备使用聚变约束导轨链接成一个闭环(这个闭环有且只能有4个拐角)构成完整的托卡马克聚变反应堆,而此反应堆的功率取决于整个结构的规模大小"
-      )
+    localization {
+      zh_CN {
+        name = "托卡马克点火装置"
+        description = "托卡马克核聚变装置的核心组件,是添加材料与输出能量的端口,在一个核聚变装置中必须有且只有一个此设备。将此设备使用聚变约束导轨链接成一个闭环(这个闭环有且只能有4个拐角)构成完整的托卡马克聚变反应堆,而此反应堆的功率取决于整个结构的规模大小"
+      }
     }
     requirements(
       SglCategory.nuclear,

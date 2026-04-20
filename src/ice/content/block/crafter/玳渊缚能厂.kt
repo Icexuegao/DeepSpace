@@ -2,8 +2,7 @@ package ice.content.block.crafter
 
 import arc.graphics.Color
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
@@ -12,10 +11,12 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 玳渊缚能厂 : NormalCrafter("tortoiseshellFactory") {
   init {
-    bundle {
-      desc(
-        zh_CN, "玳渊缚能厂", "将铪锭,暮光合金和铱锭构建为玳渊矩阵","为了生产大型能量武器设施,由枢机批准的能量生产建筑,将狂暴的玳渊能量封印在稳定的矩阵结构中,每一块矩阵都蕴含着巨大的能量"
-      )
+    localization {
+      zh_CN {
+        name = "玳渊缚能厂"
+        description = "将铪锭,暮光合金和铱锭构建为玳渊矩阵"
+        details = "为了生产大型能量武器设施,由枢机批准的能量生产建筑,将狂暴的玳渊能量封印在稳定的矩阵结构中,每一块矩阵都蕴含着巨大的能量"
+      }
     }
     size = 4
     health = 700

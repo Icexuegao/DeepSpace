@@ -19,8 +19,7 @@ import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.rand
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.audio.SoundLoop
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -49,8 +48,11 @@ import kotlin.math.min
 
 class Haze : SglTurret("haze") {
   init {
-    bundle {
-      desc(zh_CN, "阴霾", "大型石墨导弹发射器,发射一枚电磁脉冲核弹,包裹的巨量石墨会产生一片巨大的石墨云传导电磁脉冲,造成严重的电子损伤")
+    localization {
+      zh_CN {
+        name = "阴霾"
+        description = "大型石墨导弹发射器,发射一枚电磁脉冲核弹,包裹的巨量石墨会产生一片巨大的石墨云传导电磁脉冲,造成严重的电子损伤"
+      }
     }
     requirements(
       Category.turret, IItems.强化合金, 180, IItems.气凝胶, 180,

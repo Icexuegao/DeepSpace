@@ -13,8 +13,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pools
 import ice.DeepSpace
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -49,10 +48,12 @@ import kotlin.math.min
 
 class AuroraType : AirSeaAmphibiousUnit("aurora") {
   init {
-    bundle{
-      desc(zh_CN,"极光","搭载光束引擎的战列旗舰,将引擎功率最大程度内化,其装载的两门'光锥'主炮能够贯穿任何强互作用材料之外的装甲,给敌人以毁灭性的打击")
+    localization {
+      zh_CN {
+        localizedName="极光"
+        description="搭载光束引擎的战列旗舰,将引擎功率最大程度内化,其装载的两门'光锥'主炮能够贯穿任何强互作用材料之外的装甲,给敌人以毁灭性的打击"
+      }
     }
-
     armor = 10f
     speed = 0.65f
     accel = 0.06f

@@ -7,8 +7,6 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.DeathGiftAbility
 import ice.world.content.unit.ability.RepairFieldAbility
@@ -28,8 +26,11 @@ import kotlin.math.max
 
 class Ganlin : IceUnitType("ganlin") {
   init {
-    bundle {
-      desc(zh_CN, "甘霖", "重型地面支援单位.交替发射机炮攻击敌人,同时对友军发射治疗光线.在场时会治疗附近的友军,缓慢恢复生命值")
+    localization {
+      zh_CN {
+        name = "甘霖"
+        description = "重型地面支援单位.交替发射机炮攻击敌人,同时对友军发射治疗光线.在场时会治疗附近的友军,缓慢恢复生命值"
+      }
     }
     health = 68700f
     hitSize = 48f

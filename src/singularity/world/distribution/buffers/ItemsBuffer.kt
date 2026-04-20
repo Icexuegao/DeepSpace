@@ -129,7 +129,7 @@ class ItemsBuffer : BaseBuffer<ItemStack, Item, ItemsBuffer.ItemPacket>() {
         return BufferItemModule()
     }
 
-    override fun localization()=IceStats.物品.getLocalizedName()
+    override fun localization()=IceStats.物品.localized()
 
     override fun displayColor(): Color? {
         return Pal.accent

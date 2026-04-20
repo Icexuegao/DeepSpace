@@ -8,8 +8,7 @@ import ice.CubeCalculator
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.entities.ArcFieldBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.entities.part.RegionPart
 import mindustry.gen.Sounds
@@ -21,8 +20,11 @@ import singularity.world.draw.DrawSglTurret
 
 class 洛华 :ContinuousTurret("mendTower") {
   init {
-    bundle {
-      desc(zh_CN, "洛华", "折射投射出扇形修复光束覆盖建筑进行修复")
+    localization {
+      zh_CN {
+        name = "洛华"
+        description = "折射投射出扇形修复光束覆盖建筑进行修复"
+      }
     }
 
     buildType = Prov {

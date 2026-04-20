@@ -6,8 +6,7 @@ import arc.func.Prov
 import arc.struct.ObjectMap
 import ice.content.IItems
 import ice.library.world.Load
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.gen.Building
 import mindustry.gen.Teamc
@@ -34,8 +33,11 @@ import singularity.world.draw.DrawEdgeLinkBits
 object MatrixDistNet : Load {
 
   var 矩阵中枢伺服器 = DistNetCore("matrix_core").apply {
-    bundle {
-      desc(zh_CN, "矩阵中枢伺服器", "一个矩阵网络的核心设备,矩阵网络必须有且只有一个中枢伺服器,矩阵桥连接此方块时只能单向连接")
+    localization {
+      zh_CN {
+        name = "矩阵中枢伺服器"
+        description = "一个矩阵网络的核心设备,矩阵网络必须有且只有一个中枢伺服器,矩阵桥连接此方块时只能单向连接"
+      }
     }
     requirements(
       SglCategory.matrix, IItems.矩阵合金, 200, IItems.强化合金, 240, IItems.FEX水晶, 220, IItems.气凝胶, 200, IItems.铱锭, 90, IItems.单晶硅, 260, IItems.铬锭, 220, IItems.絮凝剂, 180
@@ -53,8 +55,11 @@ object MatrixDistNet : Load {
     newConsume()
     consume!!.powerCond(0.8f, 0f) { e: MatrixBridgeBuild? -> !e!!.distributor.network.netStructValid() }
     matrixEnergyUse = 0.02f
-    bundle {
-      desc(zh_CN, "矩阵桥", "矩阵建立的物质运输桥,可任意方向链接的物质运输桥,可运输物品和液体\n同时,这也是矩阵网络中用于连接设备的节点,只能呈树状结构建立矩阵网络")
+    localization {
+      zh_CN {
+        name = "矩阵桥"
+        description = "矩阵建立的物质运输桥,可任意方向链接的物质运输桥,可运输物品和液体\n同时,这也是矩阵网络中用于连接设备的节点,只能呈树状结构建立矩阵网络"
+      }
     }
   }
   var 矩阵塔 = MatrixBridge("matrix_tower").apply {
@@ -72,8 +77,11 @@ object MatrixDistNet : Load {
     consume!!.powerCond(1.6f, 0f) { e: MatrixBridgeBuild -> !e.distributor.network.netStructValid() }
 
     matrixEnergyUse = 0.05f
-    bundle {
-      desc(zh_CN, "矩阵塔", "大型的矩阵连接柱,比矩阵桥有更远的连接距离,但是只能向四个方向进行连接")
+    localization {
+      zh_CN {
+        name = "矩阵塔"
+        description = "大型的矩阵连接柱,比矩阵桥有更远的连接距离,但是只能向四个方向进行连接"
+      }
     }
   }
   var 网格控制器 = MatrixGridCore("matrix_controller").apply {
@@ -88,13 +96,19 @@ object MatrixDistNet : Load {
     size = 4
     squareSprite = false
     matrixEnergyUse = 1.2f
-    bundle {
-      desc(zh_CN, "网格控制器", "矩阵网格的控制中枢,与矩阵网格框架建立矩阵网格,在网格中通过此设备配置网格内io点的的输入输出和存储设备,是一个重要的物流管理模型")
+    localization {
+      zh_CN {
+        name = "网格控制器"
+        description = "矩阵网格的控制中枢,与矩阵网格框架建立矩阵网格,在网格中通过此设备配置网格内io点的的输入输出和存储设备,是一个重要的物流管理模型"
+      }
     }
   }
   var 网格框架 = MatrixEdgeBlock("matrix_grid_node").apply {
-    bundle {
-      desc(zh_CN, "网格框架", "矩阵网格的构建设备,彼此连接,与一个网络控制器构成闭环后建立其矩阵网格")
+    localization {
+      zh_CN {
+        name = "网格框架"
+        description = "矩阵网格的构建设备,彼此连接,与一个网络控制器构成闭环后建立其矩阵网格"
+      }
     }
     requirements(
       SglCategory.matrix, ItemStack.with(
@@ -105,8 +119,11 @@ object MatrixDistNet : Load {
     size = 2
   }
   var 通用IO端口 = GenericIOPoint("io_point").apply {
-    bundle {
-      desc(zh_CN, "通用IO端口", "矩阵网格使用的IO设施,物品及液体的通用端口,通过网格控制器进行端口配置")
+    localization {
+      zh_CN {
+        name = "通用IO端口"
+        description = "矩阵网格使用的IO设施,物品及液体的通用端口,通过网格控制器进行端口配置"
+      }
     }
     requirements(
       SglCategory.matrix, ItemStack.with(
@@ -117,8 +134,11 @@ object MatrixDistNet : Load {
     squareSprite = false
   }
   var 能源管理器 = DistEnergyManager("matrix_energy_manager").apply {
-    bundle {
-      desc(zh_CN, "能源管理器", "对能源接受和管理的设备,与相邻的能源设备形成一个能源管理模块,用于接受和缓存能量以供应网络使用")
+    localization {
+      zh_CN {
+        name = "能源管理器"
+        description = "对能源接受和管理的设备,与相邻的能源设备形成一个能源管理模块,用于接受和缓存能量以供应网络使用"
+      }
     }
     requirements(
       SglCategory.matrix, ItemStack.with(
@@ -136,8 +156,11 @@ object MatrixDistNet : Load {
       )
     )
     size = 3
-    bundle {
-      desc(zh_CN, "能源簇", "网络缓存能源能的设备,可以存储一定量的矩阵能源以避免停电等情况造成的致命问题")
+    localization {
+      zh_CN {
+        name = "能源簇"
+        description = "网络缓存能源能的设备,可以存储一定量的矩阵能源以避免停电等情况造成的致命问题"
+      }
     }
     matrixEnergyCapacity = 16384f
   }
@@ -149,8 +172,11 @@ object MatrixDistNet : Load {
       )
     )
     size = 2
-    bundle {
-      desc(zh_CN, "能量接口", "接收能量供应网络消耗而设备,需要邻近能源管理器放置")
+    localization {
+      zh_CN {
+        name = "能量接口"
+        description = "接收能量供应网络消耗而设备,需要邻近能源管理器放置"
+      }
     }
     consPower = 1000f
     eneProd = 480f
@@ -163,8 +189,11 @@ object MatrixDistNet : Load {
       )
     )
     size = 2
-    bundle {
-      desc(zh_CN, "中子接口", "网络接受中子能输入的设备,需要邻近能源管理器放置")
+    localization {
+      zh_CN {
+        name = "中子接口"
+        description = "网络接受中子能输入的设备,需要邻近能源管理器放置"
+      }
     }
   }
   var 矩阵组件接口 = ComponentInterface("matrix_component_interface").apply {
@@ -184,8 +213,11 @@ object MatrixDistNet : Load {
       layer = Layer.blockOver
       compLinked = Func { e: ComponentInterface.ComponentInterfaceBuild -> e.connectSplice }
     })
-    bundle {
-      desc(zh_CN, "矩阵组件接口", "用于将矩阵功能组件接入网络中,需要彼此连接形成连续的接口结构,且与组件设备需要的连接方式匹配才可接入网络")
+    localization {
+      zh_CN {
+        name = "矩阵组件接口"
+        description = "用于将矩阵功能组件接入网络中,需要彼此连接形成连续的接口结构,且与组件设备需要的连接方式匹配才可接入网络"
+      }
     }
   }
   var 矩阵处理单元 = CoreNeighbourComponent("matrix_process_unit").apply {
@@ -200,8 +232,11 @@ object MatrixDistNet : Load {
     computingPower = 8
     matrixEnergyUse = 0.6f
 
-    bundle {
-      desc(zh_CN, "矩阵处理单元", "需要紧贴矩阵中枢伺服器放置,提供网络核心的运算力,使网络每次刷新可以处理更多的请求任务")
+    localization {
+      zh_CN {
+        name = "矩阵处理单元"
+        description = "需要紧贴矩阵中枢伺服器放置,提供网络核心的运算力,使网络每次刷新可以处理更多的请求任务"
+      }
     }
   }
   var 矩阵拓扑容器 = CoreNeighbourComponent("matrix_topology_container").apply {
@@ -215,8 +250,11 @@ object MatrixDistNet : Load {
     squareSprite = false
     topologyCapaity = 16
     matrixEnergyUse = 0.8f
-    bundle {
-      desc(zh_CN, "矩阵拓扑容器", "需要紧贴矩阵中枢伺服器放置,提供整个网络的拓扑容量,使网络可以安装更多的设备")
+    localization {
+      zh_CN {
+        name = "矩阵拓扑容器"
+        description = "需要紧贴矩阵中枢伺服器放置,提供整个网络的拓扑容量,使网络可以安装更多的设备"
+      }
     }
   }
   var 通用物质缓存器 = NetPluginComp("matrix_buffer").apply {
@@ -231,8 +269,11 @@ object MatrixDistNet : Load {
       DistBufferType.itemBuffer, 512, DistBufferType.liquidBuffer, 512
     )
     matrixEnergyUse = 0.6f
-    bundle {
-      desc(zh_CN, "通用物质缓存器", "网络组件,提供网络的物品和流体缓存区容量")
+    localization {
+      zh_CN {
+        name = "通用物质缓存器"
+        description = "网络组件,提供网络的物品和流体缓存区容量"
+      }
     }
   }
   var 自动回收组件 = AutoRecyclerComp("automatic_recycler_component").apply {
@@ -245,8 +286,11 @@ object MatrixDistNet : Load {
     squareSprite = false
     hasLiquids = true
     hasItems = true
-    bundle {
-      desc(zh_CN, "自动回收组件", "可以配置缓存的溢出资源回收,在已安装该设备的网络中,若所有网络容器都已满,接收的在配置回收清单中的资源将被自动销毁,以避免网络堵死\n有两种配置模式：\n    [accent]黑名单模式[]: 销毁溢出的已选中资源\n    [accent]白名单模式[]: 配置选中的资源在溢出时被保留")
+    localization {
+      zh_CN {
+        name = "自动回收组件"
+        description = "可以配置缓存的溢出资源回收,在已安装该设备的网络中,若所有网络容器都已满,接收的在配置回收清单中的资源将被自动销毁,以避免网络堵死\n有两种配置模式：\n    [accent]黑名单模式[]: 销毁溢出的已选中资源\n    [accent]白名单模式[]: 配置选中的资源在溢出时被保留"
+      }
     }
     setRecycle(DistBufferType.itemBuffer) { e: Building? -> e!!.items.clear() }
     setRecycle(DistBufferType.liquidBuffer) { e: Building? -> e!!.liquids.clear() }

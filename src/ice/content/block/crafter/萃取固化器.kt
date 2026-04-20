@@ -1,8 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
@@ -10,8 +9,11 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 萃取固化器 : NormalCrafter("concentrateSolidifier") {
   init {
-    bundle {
-      desc(zh_CN, "萃取固化器","从锆英石中萃取并熔炼为铪锭")
+    localization {
+      zh_CN {
+        name = "萃取固化器"
+        description = "从锆英石中萃取并熔炼为铪锭"
+      }
     }
     size = 3
     health = 400

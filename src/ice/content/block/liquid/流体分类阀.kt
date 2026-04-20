@@ -6,8 +6,8 @@ import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import ice.content.IItems
 import ice.library.scene.ui.ItemSelection
-import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.gen.Building
 import mindustry.type.Category
@@ -22,7 +22,12 @@ import kotlin.math.min
 class 流体分类阀 :LiquidUnloader("liquid_classifier") {
 
   init {
-    desc(BaseBundle.zh_CN, "流体分类阀", "允许卸载临近工厂配方的可输出流体")
+    localization {
+      zh_CN {
+        name = "流体分类阀"
+        description = "允许卸载临近工厂配方的可输出流体"
+      }
+    }
     size = 1
     buildType = Prov(::流体分类阀Build)
     health = 40

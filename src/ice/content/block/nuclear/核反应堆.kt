@@ -2,8 +2,7 @@ package ice.content.block.nuclear
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.type.ItemStack
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawLiquidRegion
@@ -13,12 +12,11 @@ import singularity.world.blocks.nuclear.NuclearReactor
 import singularity.world.draw.DrawReactorHeat
 
 class 核反应堆 : NuclearReactor("nuclear_reactor") {init {
-  bundle {
-    desc(
-      zh_CN,
-      "核反应堆",
-      "标准的核裂变反应堆,使用压缩核燃料以高效率产出核能,燃料越紧凑效率越高,需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发剧烈的[accent]爆炸[]"
-    )
+  localization {
+    zh_CN {
+      name = "核反应堆"
+      description = "标准的核裂变反应堆,使用压缩核燃料以高效率产出核能,燃料越紧凑效率越高,需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发剧烈的[accent]爆炸[]"
+    }
   }
   requirements(
     SglCategory.nuclear,

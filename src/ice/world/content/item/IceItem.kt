@@ -2,12 +2,13 @@ package ice.world.content.item
 
 import arc.graphics.Color
 import ice.content.IPlanets
+import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.type.Item
 import mindustry.world.meta.Stat
 
 open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Unit = {}) :
-  Item(name, Color.valueOf(color)) {
+  Item(name, Color.valueOf(color)), Localizable {
   var nutrientConcentration = 0f
 
   init {
@@ -29,5 +30,17 @@ open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Uni
     stats.add(IceStats.建筑血量系数, healthScaling)
     stats.add(IceStats.硬度, "$hardness")
     stats.add(IceStats.是否用于建造, buildable)
+  }
+
+  override fun setLocalizedName(localizedName: String) {
+    this.localizedName = localizedName
+  }
+
+  override fun setDescription(description: String) {
+    this.description = description
+  }
+
+  override fun setDetails(details: String) {
+    this.details = details
   }
 }

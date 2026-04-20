@@ -1,14 +1,14 @@
 package ice.world.content.status
 
 import arc.func.Cons2
-import ice.library.util.accessMethod2
+import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.entities.units.StatusEntry
 import mindustry.gen.Unit
 import mindustry.type.StatusEffect
 import kotlin.Unit as kUnit
 
-open class IceStatusEffect(name: String, apply: IceStatusEffect.() -> kUnit = {}) : StatusEffect(name) {
+open class IceStatusEffect(name: String, apply: IceStatusEffect.() -> kUnit = {}) : StatusEffect(name), Localizable {
   var armorBreak = 0f
   var armorBreakPercent = 0f
   var armorRecovery: Boolean = false
@@ -65,4 +65,15 @@ open class IceStatusEffect(name: String, apply: IceStatusEffect.() -> kUnit = {}
   }
 
   override fun isHidden() = hideDatabase
+  override fun setLocalizedName(localizedName: String) {
+    this.localizedName = localizedName
+  }
+
+  override fun setDescription(description: String) {
+    this.description = description
+  }
+
+  override fun setDetails(details: String) {
+    this.details = details
+  }
 }

@@ -9,8 +9,7 @@ import arc.math.Mathf
 import arc.util.Time
 import ice.content.IItems
 import ice.content.block.EnvironmentBlocks
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids
@@ -27,13 +26,12 @@ import universecore.world.consumers.cons.ConsumeFloor
 
 class 岩石粉碎机 :FloorCrafter("rock_crusher") {
   init {
-    bundle {
-      desc(
-        zh_CN,
-        "岩石粉碎机",
-        "将岩石粉碎成细小的颗粒,对于没有沙子的地方来说十分有用,同时某些岩石含盐量高,因此还可以从中得到一些有用的副产物",
-        "事实上这台机器的效率并不算高,或者说它浪费掉的材料太多了,为了产出能够供应工业使用的富硅沙砾,几乎每生产一吨石英沙就要消耗掉几十吨原石,更别提硅纯度更低的一些岩石了"
-      )
+    localization {
+      zh_CN {
+        name = "岩石粉碎机"
+        description = "将岩石粉碎成细小的颗粒,对于没有沙子的地方来说十分有用,同时某些岩石含盐量高,因此还可以从中得到一些有用的副产物"
+        details = "事实上这台机器的效率并不算高,或者说它浪费掉的材料太多了,为了产出能够供应工业使用的富硅沙砾,几乎每生产一吨石英沙就要消耗掉几十吨原石,更别提硅纯度更低的一些岩石了"
+      }
     }
     requirements(
       Category.production, IItems.强化合金, 40, IItems.气凝胶, 55, IItems.单晶硅, 60, IItems.铬锭, 50, IItems.黄铜锭, 60

@@ -1,16 +1,17 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import singularity.world.blocks.product.NormalCrafter
 
 class ExplosiveMixer : NormalCrafter("explosiveMixer") {
   init {
-    bundle {
-      desc(zh_CN, "爆炸物混合器", "将硫化合物与燃素水晶混合生成爆炸化合物")
+    localization {
+      zh_CN {
+        name = "爆炸物混合器"
+        description = "将硫化合物与燃素水晶混合生成爆炸化合物"
+      }
     }
     size = 3
     itemCapacity = 36

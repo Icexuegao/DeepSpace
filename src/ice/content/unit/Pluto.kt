@@ -6,8 +6,6 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.ArmorPlateAbility
@@ -21,8 +19,10 @@ import mindustry.gen.Sounds
 
 class Pluto : IceUnitType("unit_pluto") {
   init {
-    bundle {
-      desc(zh_CN, "冥")
+    localization {
+      zh_CN {
+        name = "冥"
+      }
     }
     circleTarget = true
     lowAltitude = true

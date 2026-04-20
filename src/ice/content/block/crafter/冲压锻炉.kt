@@ -3,8 +3,7 @@ package ice.content.block.crafter
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -17,8 +16,11 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 冲压锻炉 : NormalCrafter("pressingForge") {
   init {
-    bundle {
-      desc(zh_CN, "冲压锻炉", "将铱锇矿熔炼锻压为铱板,需要通入水,会产生废水")
+    localization {
+      zh_CN {
+        name = "冲压锻炉"
+        description = "将铱锇矿熔炼锻压为铱板,需要通入水,会产生废水"
+      }
     }
     size = 5
     armor = 4f

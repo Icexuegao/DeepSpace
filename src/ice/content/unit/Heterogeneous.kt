@@ -4,8 +4,6 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -17,8 +15,11 @@ import mindustry.gen.Sounds
 
 class Heterogeneous : IceUnitType("unit_heterogeneous") {
   init {
-    bundle {
-      desc(zh_CN, "异种", "重型地面突击单位.对远距离敌人发射不稳定的聚变能量弹,对近距离敌人则发射密集弱化激光")
+    localization {
+      zh_CN {
+        name = "异种"
+        description = "重型地面突击单位.对远距离敌人发射不稳定的聚变能量弹,对近距离敌人则发射密集弱化激光"
+      }
     }
     health = 127000f
     armor = 31f

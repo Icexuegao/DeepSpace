@@ -3,8 +3,6 @@ package ice.content.unit
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -16,8 +14,10 @@ import mindustry.gen.Sounds
 
 class Ipsiglon : IceUnitType("unit_ipsiglon") {
   init {
-    bundle {
-      desc(zh_CN, "伊普西龙")
+    localization {
+      zh_CN {
+        name = "伊普西龙"
+      }
     }
     coreUnitDock = true
     lowAltitude = true

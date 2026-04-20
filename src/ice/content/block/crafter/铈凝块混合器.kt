@@ -1,8 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
@@ -12,8 +11,12 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 铈凝块混合器 : NormalCrafter("ceriumBlockMixer") {
   init {
-    bundle {
-      desc(zh_CN, "铈凝块混合器","将铈锭与爆炸混合物压制成铈凝块", "在特制的防静电车间内,研磨铈并与爆炸混合物混合后压制成型")
+    localization {
+      zh_CN {
+        name = "铈凝块混合器"
+        description = "将铈锭与爆炸混合物压制成铈凝块"
+        details = "在特制的防静电车间内,研磨铈并与爆炸混合物混合后压制成型"
+      }
     }
     size = 2
     itemCapacity = 36

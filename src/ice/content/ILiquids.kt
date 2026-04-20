@@ -6,8 +6,6 @@ import arc.struct.ObjectSet
 import ice.entities.IcePuddle
 import ice.library.EventType
 import ice.library.world.Load
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.liquid.IceLiquid
 import mindustry.content.Fx
 import mindustry.content.Fx.flakExplosionBig
@@ -15,58 +13,73 @@ import mindustry.content.Liquids
 import mindustry.content.StatusEffects
 import mindustry.gen.Puddle
 import mindustry.graphics.Pal
-import mindustry.type.CellLiquid
 import mindustry.type.Liquid
 import mindustry.world.Tile
 import singularity.graphic.SglDraw
 import singularity.graphic.SglShaders
+import singularity.type.CellLiquid
 import singularity.type.ReactLiquid
 import singularity.type.ReactLiquid.Companion.effectWith
 import singularity.world.SglFx
 
 @Suppress("unused")
-object ILiquids : Load {
-init {
-  EventType.addContentInitEvent {
-    Liquids.water.shownPlanets.add(IPlanets.阿德里)
+object ILiquids :Load {
+  init {
+    EventType.addContentInitEvent {
+      Liquids.water.shownPlanets.add(IPlanets.阿德里)
+    }
   }
 
-}
   val 腐殖浆体 = IceLiquid("liquid_humusSlurry", "a09bbd") {
-    bundle {
-      desc(zh_CN, "腐殖浆体", "一种富含有机质的浆体,可用于土壤改良")
+    localization {
+      zh_CN {
+        name = "腐殖浆体"
+        description = "一种富含有机质的浆体,可用于土壤改良"
+      }
     }
     viscosity = 0.6f
     temperature = 0.3f
   }
   val 温热孢液 = IceLiquid("liquid_warmSpore", "fa9c28") {
-    bundle {
-      desc(zh_CN, "温热孢液", "一种温暖的孢子悬浮液,具有生物活性")
+    localization {
+      zh_CN {
+        name = "温热孢液"
+        description = "一种温暖的孢子悬浮液,具有生物活性"
+      }
     }
     temperature = 0.8f
     viscosity = 0.5f
 
   }
   val 芥蒂液 = IceLiquid("liquid_cressLiquid", "7f7f7f") {
-    bundle {
-      desc(zh_CN, "芥蒂液", "一种灰色的中性液体,可用于中和反应")
+    localization {
+      zh_CN {
+        name = "芥蒂液"
+        description = "一种灰色的中性液体,可用于中和反应"
+      }
     }
     viscosity = 0.4f
     temperature = 0.5f
   }
   val 废水 = IceLiquid("liquid_wasteWater", "666666") {
-    bundle {
-      desc(zh_CN, "废水", "一种由工业生产排放的强放射性废水,被其污染过的地区极难再次使用")
+    localization {
+      zh_CN {
+        name = "废水"
+        description = "一种由工业生产排放的强放射性废水,被其污染过的地区极难再次使用"
+      }
     }
-    incinerable=false
+    incinerable = false
     effect = IStatus.辐射
     heatCapacity = 0.25f
     viscosity = 0.99f
     temperature = 1.5f
   }
   val 浓稠血浆 = IceLiquid("liquid_thickPlasma", "cc3737") {
-    bundle {
-      desc(zh_CN, "浓稠血浆", "从朔方蔓延而来")
+    localization {
+      zh_CN {
+        name = "浓稠血浆"
+        description = "从朔方蔓延而来"
+      }
     }
     nutrientConcentration = 0.2f
     setUpdate { pud ->
@@ -80,8 +93,11 @@ init {
     }
   }
   val 急冻液 = IceLiquid("liquid_swiftCryofluid", "E1E9F0") {
-    bundle {
-      desc(zh_CN, "急冻液", "由低温化合物与冷却液混合而成,比冷却液效果更强")
+    localization {
+      zh_CN {
+        name = "急冻液"
+        description = "由低温化合物与冷却液混合而成,比冷却液效果更强"
+      }
     }
     lightColor = Color.valueOf("E1E9F09A")
     effect = StatusEffects.freezing
@@ -90,15 +106,22 @@ init {
     temperature = 0.15f
   }
   val 灵液 = IceLiquid("liquid_ichors", "ffaa5f") {
-    bundle {
-      desc(zh_CN, "灵液", "一种酸性极强的溶液,可以用来处理金属")
+    localization {
+      zh_CN {
+        name = "灵液"
+        description = "一种酸性极强的溶液,可以用来处理金属"
+      }
     }
     viscosity = 0.7f
     boilPoint = 1.7f
   }
-  val 血肉赘生物 = CellLiquid("liquid_bloodSlime").apply {
-    bundle {
-      desc(zh_CN, "血肉赘生物", "一种高温且易燃易爆的烈性流体,制取或运输该液体时,请使用专用管道!", "[red]鲜血必将流淌[]")
+  val 血肉赘生物 = CellLiquid("liquid_bloodSlime", "C74E48").apply {
+    localization {
+      zh_CN {
+        name = "血肉赘生物"
+        description = "一种高温且易燃易爆的烈性流体,制取或运输该液体时,请使用专用管道!"
+        details = "[red]鲜血必将流淌[]"
+      }
     }
     incinerable = false
     cells = 8
@@ -109,7 +132,6 @@ init {
     effect = IStatus.熔融
     colorFrom = Color.valueOf("FF5845")
     colorTo = Color.valueOf("BF3E47")
-    color = Color.valueOf("C74E48")
     lightColor = Color.valueOf("C74E489A")
     canStayOn = ObjectSet.with(Liquids.water)
     particleEffect = flakExplosionBig
@@ -120,8 +142,11 @@ init {
     temperature = 0.7f
   }
   val 超临界流体 = IceLiquid("liquid_supercriticalFluids", "E1776A") {
-    bundle {
-      desc(zh_CN, "超临界流体", "一种通过复杂工业化处理萃取出的特殊流体,具有良好的传质、传热及溶解性能")
+    localization {
+      zh_CN {
+        name = "超临界流体"
+        description = "一种通过复杂工业化处理萃取出的特殊流体,具有良好的传质、传热及溶解性能"
+      }
     }
     incinerable = false
     lightColor = Color.valueOf("E1776A9A")
@@ -132,15 +157,22 @@ init {
     temperature = 0.1f
   }
   val 暮光液 = IceLiquid("liquid_duskLiquid", "deedff") {
-    bundle {
-      desc(zh_CN, "暮光液", "暮光液")
+    localization {
+      zh_CN {
+        name = "暮光液"
+        description = "暮光液"
+      }
     }
     temperature = 0.2f
   }
-  var 纯净水 = object : Liquid("liquid_purified_water", Color.valueOf("#C3DFFF").a(0.8f)) {
+  var 纯净水 = object :IceLiquid("liquid_purified_water", Color.valueOf("#C3DFFF").a(0.8f)) {
     init {
-      bundle {
-        desc(zh_CN, "纯净水", "分离掉其中的杂质的水,在各类严格的流程中是必要的", "为避免引入杂质,作为溶剂的水必须经过净化去除其中可能影响产品质量的其他物质")
+      localization {
+        zh_CN {
+          name = "纯净水"
+          description = "分离掉其中的杂质的水,在各类严格的流程中是必要的"
+          details = "为避免引入杂质,作为溶剂的水必须经过净化去除其中可能影响产品质量的其他物质"
+        }
       }
       heatCapacity = 0.45f
       temperature = 0.4f
@@ -163,35 +195,42 @@ init {
       puddle.liquid = Liquids.water
     }
   }
-  var 藻泥 = object : CellLiquid("liquid_algae_mud", Color.valueOf("#6EA145")) {
-    init {
-      bundle {
-        desc(zh_CN, "藻泥浆", "藻类微生物繁衍的集合体,用途广泛", "微生物在极端恶劣的环境下会脱去水分进入休眠状态,抗逆性极大提高")
+  var 藻泥 = CellLiquid("liquid_algae_mud", Color.valueOf("#6EA145")).apply {
+    localization {
+      zh_CN {
+        name = "藻泥浆"
+        description = "藻类微生物繁衍的集合体,用途广泛"
+        details = "微生物在极端恶劣的环境下会脱去水分进入休眠状态,抗逆性极大提高"
       }
-      heatCapacity = 0.4f
-      explosiveness = 0f
-      flammability = 0f
-      temperature = 0.5f
-      viscosity = 0.5f
-
-      coolant = false
-
-      boilPoint = 0.5f
-
-      spreadDamage = 0f
-      spreadTarget = Liquids.water
-      spreadConversion = 1.1f
-      maxSpread = 0.4f
-
-      colorFrom = color.cpy().lerp(Color.white, 0.25f)
-      colorTo = color.cpy().lerp(Color.white, 0.5f)
-
-      canStayOn.addAll(Liquids.oil, Liquids.water)
     }
+    heatCapacity = 0.4f
+    explosiveness = 0f
+    flammability = 0f
+    temperature = 0.5f
+    viscosity = 0.5f
+
+    coolant = false
+
+    boilPoint = 0.5f
+
+    spreadDamage = 0f
+    spreadTarget = Liquids.water
+    spreadConversion = 1.1f
+    maxSpread = 0.4f
+
+    colorFrom = color.cpy().lerp(Color.white, 0.25f)
+    colorTo = color.cpy().lerp(Color.white, 0.5f)
+
+    canStayOn.addAll(Liquids.oil, Liquids.water)
   }
+
   var 酸液: ReactLiquid = ReactLiquid("liquid_acid", Color.valueOf("#EDF3A9").a(0.75f)).apply {
-    bundle {
-      desc(zh_CN, "酸液", "复合酸液,工业用途广泛,金属冶炼和物质合成都不可或缺", "“当心腐蚀”\n“穿戴防护措施”\n”挥发性“")
+    localization {
+      zh_CN {
+        name = "酸液"
+        description = "复合酸液,工业用途广泛,金属冶炼和物质合成都不可或缺"
+        details = "\"当心腐蚀\"\n\"穿戴防护措施\"\n\"挥发性\""
+      }
     }
     heatCapacity = 0.5f
     temperature = 0.45f
@@ -205,8 +244,12 @@ init {
     }
   }
   var 碱液 = ReactLiquid("liquid_lye", Color.valueOf("#DBFAFF").a(0.75f)).apply {
-    bundle {
-      desc(zh_CN, "碱液", "复合碱液,工业用途广泛,金属冶炼和物质合成都不可或缺", "“当心腐蚀”\n“穿戴防护措施”\n”挥发性“")
+    localization {
+      zh_CN {
+        name = "碱液"
+        description = "复合碱液,工业用途广泛,金属冶炼和物质合成都不可或缺"
+        details = "\"当心腐蚀\"\n\"穿戴防护措施\"\n\"挥发性\""
+      }
     }
     temperature = 0.45f
     flammability = 0f
@@ -220,8 +263,11 @@ init {
     }
   }
   var 氯化硅溶胶 = IceLiquid("liquid_silicon_chloride_sol", Color.valueOf("#C0B4B0").a(0.8f)) {
-    bundle {
-      desc(zh_CN, "氯化硅溶胶", "富含硅的胶状化合物,易富集硅元素,可用于制造硅或者气凝胶")
+    localization {
+      zh_CN {
+        name = "氯化硅溶胶"
+        description = "富含硅的胶状化合物,易富集硅元素,可用于制造硅或者气凝胶"
+      }
     }
     heatCapacity = 0.65f
     temperature = 0.6f
@@ -235,8 +281,13 @@ init {
 
   }
   var 复合矿物溶液 = IceLiquid("liquid_mixed_ore_solution", Color.valueOf("#CBE0E0")) {
-    bundle {
-      desc(zh_CN, "复合矿物溶液", "含有各种矿物离子的盐溶液,经过电离可以获得各种金属产物", "通常来说在自然地壳中的金属矿物会有一定的富集作用,往往矿物集团伴生的金属种类不会很多,但在软流层上部这一规律似乎就不适用了,岩浆流会把各种矿物搅和在一起,在靠近那里开采的矿石里几乎什么都能弄到")
+    localization {
+      zh_CN {
+        name = "复合矿物溶液"
+        description = "含有各种矿物离子的盐溶液,经过电离可以获得各种金属产物"
+        details =
+          "通常来说在自然地壳中的金属矿物会有一定的富集作用,往往矿物集团伴生的金属种类不会很多,但在软流层上部这一规律似乎就不适用了,岩浆流会把各种矿物搅和在一起,在靠近那里开采的矿石里几乎什么都能弄到"
+      }
     }
     heatCapacity = 0.6f
     temperature = 0.65f
@@ -250,8 +301,11 @@ init {
 
   }
   var 铀盐溶液 = IceLiquid("liquid_uranium_salt_solution", Color.valueOf("#DAF2AA")) {
-    bundle {
-      desc(zh_CN, "铀盐溶液", "富含大量铀金属离子的溶液,是铀矿物处理的中间物")
+    localization {
+      zh_CN {
+        name = "铀盐溶液"
+        description = "富含大量铀金属离子的溶液,是铀矿物处理的中间物"
+      }
     }
     heatCapacity = 0.6f
     temperature = 0.65f
@@ -261,10 +315,14 @@ init {
     coolant = false
     boilPoint = 1f
   }
-  var FEX流体 = object : Liquid("liquid_FEX_liquid", Color.valueOf("#E34248")) {
+  var FEX流体 = object :IceLiquid("liquid_FEX_liquid", Color.valueOf("#E34248")) {
     init {
-      bundle {
-        desc(zh_CN, "FEX流体", "经分离杂质后的FEX的原始形态,一种半流体,需要结晶为高纯度的晶体才能满足工业需求", "流动的越快,流动就会越慢...流动速度会决定FEX的粘度,它会在任何接触的致密介质上发生富集和弱结晶")
+      localization {
+        zh_CN {
+          name = "FEX流体"
+          description = "经分离杂质后的FEX的原始形态,一种半流体,需要结晶为高纯度的晶体才能满足工业需求"
+          details = "流动的越快,流动就会越慢...流动速度会决定FEX的粘度,它会在任何接触的致密介质上发生富集和弱结晶"
+        }
       }
       heatCapacity = 1f
       explosiveness = 0f
@@ -277,8 +335,8 @@ init {
 
     val taskID: Int = SglDraw.nextTaskID()
 
-    override fun drawPuddle(puddle: Puddle?) {
-      SglDraw.drawTask<Puddle?, SglShaders.WaveShader?>(taskID, puddle, SglShaders.wave, { s: SglShaders.WaveShader? ->
+    override fun drawPuddle(puddle: Puddle) {
+      SglDraw.drawTask(taskID, puddle, SglShaders.wave, { s: SglShaders.WaveShader? ->
         s!!.waveMix = Pal.lightishGray
         s.mixAlpha = 0.2f + Mathf.absin(5f, 0.2f)
         s.waveScl = 0.2f
@@ -287,10 +345,14 @@ init {
       }, { puddle: Puddle? -> super.drawPuddle(puddle) })
     }
   }
-  var 相位态FEX流体 = object : Liquid("liquid_phase_FEX_liquid", Color.valueOf("#E34248")) {
+  var 相位态FEX流体 = object :IceLiquid("liquid_phase_FEX_liquid", Color.valueOf("#E34248")) {
     init {
-      bundle {
-        desc(zh_CN, "相位态FEX流体", "相位化后的FEX流体,物理性质改变,表面张力有自发性的剧烈波动,且具会与其接触介质发生共振,性能优越的流质能量载体", "严禁在无谐振防护的情况下靠近储存相位态FEX的储罐或者储液槽")
+      localization {
+        zh_CN {
+          name = "相位态FEX流体"
+          description = "相位化后的FEX流体,物理性质改变,表面张力有自发性的剧烈波动,且具会与其接触介质发生共振,性能优越的流质能量载体"
+          details = "严禁在无谐振防护的情况下靠近储存相位态FEX的储罐或者储液槽"
+        }
       }
       heatCapacity = 1.25f
       explosiveness = 0f
@@ -316,8 +378,11 @@ init {
   }
 
   val 氧气 = IceLiquid("liquid_oxygen", Color.valueOf("#d7d9e2")) {
-    bundle {
-      desc(zh_CN, "氧气", "最常用的气体,在工业生产中都作为氧化剂")
+    localization {
+      zh_CN {
+        name = "氧气"
+        description = "最常用的气体,在工业生产中都作为氧化剂"
+      }
     }
     gas = true
     explosiveness = 0f
@@ -326,8 +391,11 @@ init {
     viscosity = 0f
   }
   var 二氧化碳 = IceLiquid("liquid_carbon_dioxide", Color.white) {
-    bundle {
-      desc(zh_CN, "二氧化碳", "大气中普遍存在的温室气体,在工业生产中,二氧化碳常被用作制冷剂,惰性保护气体")
+    localization {
+      zh_CN {
+        name = "二氧化碳"
+        description = "大气中普遍存在的温室气体,在工业生产中,二氧化碳常被用作制冷剂,惰性保护气体"
+      }
     }
     gas = true
     heatCapacity = 1.2f
@@ -337,8 +405,11 @@ init {
     viscosity = 0f
   }
   var 二氧化硫 = IceLiquid("liquid_sulfur_dioxide", Color.valueOf("#FFCF76")) {
-    bundle {
-      desc(zh_CN, "二氧化硫", "一种氧化性气体,通常用于制备硫酸")
+    localization {
+      zh_CN {
+        name = "二氧化硫"
+        description = "一种氧化性气体,通常用于制备硫酸"
+      }
     }
     gas = true
 
@@ -350,8 +421,11 @@ init {
 
   }
   val 沼气 = IceLiquid("liquid_methane", "bb2912") {
-    bundle {
-      desc(zh_CN, "沼气", "一种天然气体,主要成分是甲烷,可替代部分工厂的燃料需求")
+    localization {
+      zh_CN {
+        name = "沼气"
+        description = "一种天然气体,主要成分是甲烷,可替代部分工厂的燃料需求"
+      }
     }
     gas = true
     explosiveness = 0.5f
@@ -359,15 +433,22 @@ init {
   }
 
   val 氢气 = IceLiquid("liquid_hydrogen", Color.valueOf("#9eabf7")) {
-    bundle {
-      desc(zh_CN, "氢气")
+    localization {
+      zh_CN {
+        name = "氢气"
+        description = ""
+      }
     }
     gas = true
     flammability = 1f
   }
   var 氦气 = IceLiquid("liquid_helium", Color.valueOf("#D6FFFC")) {
-    bundle {
-      desc(zh_CN, "氦气", "较为常见的0族惰性气体,常用作工业保护气或通过中子流轰击生产核聚变燃料", "一般来说氦气在行星岩层中的分布会比较丰富,由于原子质量过轻,在有大气的行星地表很难大量存在")
+    localization {
+      zh_CN {
+        name = "氦气"
+        description = "较为常见的0族惰性气体,常用作工业保护气或通过中子流轰击生产核聚变燃料"
+        details = "一般来说氦气在行星岩层中的分布会比较丰富,由于原子质量过轻,在有大气的行星地表很难大量存在"
+      }
     }
     gas = true
     heatCapacity = 0.4f
@@ -377,8 +458,11 @@ init {
     viscosity = 0f
   }
   var 氯气 = IceLiquid("liquid_chlorine", Color.valueOf("#DAF2AA")) {
-    bundle {
-      desc(zh_CN, "氯气", "生物毒性的气体,水系当中往往含有一定量的氯及其盐离子,工业上十分常用的气体")
+    localization {
+      zh_CN {
+        name = "氯气"
+        description = "生物毒性的气体,水系当中往往含有一定量的氯及其盐离子,工业上十分常用的气体"
+      }
     }
     gas = true
     heatCapacity = 0.35f

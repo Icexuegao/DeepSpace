@@ -10,8 +10,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -26,8 +25,11 @@ import mindustry.gen.Sounds
 
 class BlackThorns : IceUnitType("unit_blackThorns") {
   init {
-    bundle {
-      desc(zh_CN, "黑棘", "重型空中突击单位.向远处敌人发射导弹与穿透激光,对近距离目标则切换为穿透激光与空爆火箭快速打击")
+    localization {
+      zh_CN {
+        name = "黑棘"
+        description = "重型空中突击单位.向远处敌人发射导弹与穿透激光,对近距离目标则切换为穿透激光与空爆火箭快速打击"
+      }
     }
 
     lowAltitude = true

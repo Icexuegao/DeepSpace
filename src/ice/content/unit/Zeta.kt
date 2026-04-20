@@ -6,8 +6,6 @@ import ice.audio.ISounds
 import ice.entities.bullet.EmpBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -20,8 +18,11 @@ import mindustry.type.weapons.RepairBeamWeapon
 
 class Zeta : IceUnitType("unit_zeta") {
   init {
-    bundle {
-      desc(zh_CN, "泽塔", "拥有快速建造能力与强劲的武器系统,\n向敌人喷射等离子火焰的同时发射电磁震爆弹")
+    localization {
+      zh_CN {
+        name = "泽塔"
+        description = "拥有快速建造能力与强劲的武器系统,\n向敌人喷射等离子火焰的同时发射电磁震爆弹"
+      }
     }
     coreUnitDock = true
     lowAltitude = true

@@ -8,7 +8,6 @@ import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.type.UnitType
 import mindustry.world.Block
-import singularity.Sgl
 import singularity.core.SglEventTypes.ResearchCompletedEvent
 import singularity.core.SglEventTypes.ResearchInspiredEvent
 
@@ -41,7 +40,7 @@ abstract class Inspire {
 
     localized = Core.bundle.get("research.$name.inspire")
     description = Core.bundle.get(
-      "research.$name.inspire.description", Core.bundle.format("infos.inspiredBy", project.getLocalizedName())
+      "research.$name.inspire.description", Core.bundle.format("infos.inspiredBy", project.localizedName)
     )
   }
 
@@ -121,7 +120,7 @@ abstract class Inspire {
     override fun init(project: ResearchProject) {
       super.init(project)
 
-      localized = "研究 ${researchProject.getLocalizedName()}"
+      localized = "研究 ${researchProject.localizedName}"
     }
 
     override fun applyTrigger(project: ResearchProject) {

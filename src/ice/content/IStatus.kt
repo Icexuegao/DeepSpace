@@ -20,8 +20,6 @@ import ice.content.ILiquids.相位态FEX流体
 import ice.content.block.turret.TurretBullets.破碎FEX结晶
 import ice.entities.effect.MultiEffect
 import ice.library.world.Load
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.status.IceStatusEffect
 import ice.world.content.status.PercentStatus
 import ice.world.meta.IceEffects
@@ -62,11 +60,14 @@ object IStatus :Load {
   val lastHealth = ObjectMap<Unit, Float>()
   val rand: Rand = Rand()
   val 封冻 = IceStatusEffect("freeze") {
-    bundle {
-      desc(zh_CN, "封冻", "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成打击")
+    localization {
+      zh_CN {
+        name = "封冻"
+        description = "超低温将快速脆化装甲直至开裂,而后渗透的寒气会对内部结构造成打击"
+      }
     }
     setUpdate { unit, e ->
-      val f = max(1f - (e.time / 600f),0f)
+      val f = max(1f - (e.time / 600f), 0f)
 
       if (unit.healthMultiplier > 0.4) unit.healthMultiplier *= f
       if (unit.speedMultiplier > 0.4) unit.speedMultiplier *= f
@@ -98,63 +99,90 @@ object IStatus :Load {
   }
   val 集群 = IceStatusEffect("assemble") {
     speedMultiplier = 1.5f
-    bundle {
-      desc(zh_CN, "集群", "激活协同协议,单位间建立纳米机器人共享网络,效应随范围内友方单位数量增强")
+    localization {
+      zh_CN {
+        name = "集群"
+        description = "激活协同协议,单位间建立纳米机器人共享网络,效应随范围内友方单位数量增强"
+      }
     }
   }
   val 圣火 = IceStatusEffect("holyFlame") {
     damage = 70 / 60f
-    bundle {
-      desc(zh_CN, "圣火", "持续造成目标最大生命值百分比的火焰伤害")
+    localization {
+      zh_CN {
+        name = "圣火"
+        description = "持续造成目标最大生命值百分比的火焰伤害"
+      }
     }
   }
   val 邪火 = IceStatusEffect("evilFlame") {
     damage = 75 / 60f
-    bundle {
-      desc(zh_CN, "邪火", "持续侵蚀生命,扣除单位生命上限")
+    localization {
+      zh_CN {
+        name = "邪火"
+        description = "持续侵蚀生命,扣除单位生命上限"
+      }
     }
   }
   val 破甲I = IceStatusEffect("armorBreakI") {
     healthMultiplier = 0.8f
     speedMultiplier = 1.2f
     color = Color.valueOf("D1EFFF")
-    bundle {
-      desc(zh_CN, "破甲I", "扣除目标单位护甲,使其遭受的伤害显著提升")
+    localization {
+      zh_CN {
+        name = "破甲I"
+        description = "扣除目标单位护甲,使其遭受的伤害显著提升"
+      }
     }
   }
   val 破甲II = IceStatusEffect("armorBreakII") {
     speedMultiplier = 1.1f
     armorBreak = 10f
-    bundle {
-      desc(zh_CN, "破甲II", "扣除目标单位护甲,使其遭受的伤害显著提升")
+    localization {
+      zh_CN {
+        name = "破甲II"
+        description = "扣除目标单位护甲,使其遭受的伤害显著提升"
+      }
     }
   }
   val 破甲III = IceStatusEffect("armorBreakIII") {
     speedMultiplier = 1.1f
     armorBreak = 20f
-    bundle {
-      desc(zh_CN, "破甲III", "扣除目标单位护甲,使其遭受的伤害显著提升")
+    localization {
+      zh_CN {
+        name = "破甲III"
+        description = "扣除目标单位护甲,使其遭受的伤害显著提升"
+      }
     }
   }
   val 破甲IV = IceStatusEffect("armorBreakIV") {
     speedMultiplier = 1.1f
     armorBreak = 30f
-    bundle {
-      desc(zh_CN, "破甲IV", "扣除目标单位护甲,使其遭受的伤害显著提升")
+    localization {
+      zh_CN {
+        name = "破甲IV"
+        description = "扣除目标单位护甲,使其遭受的伤害显著提升"
+      }
     }
   }
   val 穿甲 = IceStatusEffect("armorPiercing") {
     speedMultiplier = 1.5f
     armorBreakPercent = 0.8f
-    bundle {
-      desc(zh_CN, "穿甲", "完全无视目标护甲,直接穿透对本体造成伤害")
+    localization {
+      zh_CN {
+        name = "穿甲"
+        description = "完全无视目标护甲,直接穿透对本体造成伤害"
+      }
     }
   }
   val 电磁脉冲 = IceStatusEffect("electromagneticPulse") {
     speedMultiplier = 0.7f
     healthMultiplier = 0.9f
-    bundle {
-      desc(zh_CN, "电磁脉冲", "突发宽带电磁辐射的高强度脉冲,用于破坏敌人的电子设备")
+    localization {
+      zh_CN {
+        name = "电磁脉冲"
+        description = "突发宽带电磁辐射的高强度脉冲,用于破坏敌人的电子设备"
+      }
     }
   }
   val 辐射 = IceStatusEffect("radiation") {
@@ -175,25 +203,37 @@ object IStatus :Load {
       colorFrom = Color.valueOf("F9A3C7")
       colorTo = Color.valueOf("A24FAA")
     }
-    bundle {
-      desc(zh_CN, "辐射", "经过一次能级降低的辐射,依旧能干扰精密电路并对其造成相当程度的损伤")
+    localization {
+      zh_CN {
+        name = "辐射"
+        description = "经过一次能级降低的辐射,依旧能干扰精密电路并对其造成相当程度的损伤"
+      }
     }
   }
   val 染血 = IceStatusEffect("stainedBlood") {
     speedMultiplier = 0.8f
-    bundle {
-      desc(zh_CN, "染血", "染血")
+    localization {
+      zh_CN {
+        name = "染血"
+        description = "染血"
+      }
     }
   }
   val 憎恨 = IceStatusEffect("hatred") {
-    bundle {
-      desc(zh_CN, "憎恨", "憎恨")
+    localization {
+      zh_CN {
+        name = "憎恨"
+        description = "憎恨"
+      }
     }
   }
   val 流血 = IceStatusEffect("bleed") {
     color = Color.red
-    bundle {
-      desc(zh_CN, "流血", "流血")
+    localization {
+      zh_CN {
+        name = "流血"
+        description = "流血"
+      }
     }
     setUpdate { u, s ->
       u.health -= (u.vel().len() * u.hitSize() / 60)
@@ -206,41 +246,59 @@ object IStatus :Load {
   val 回响 = IceStatusEffect("resound") {
     speedMultiplier = 0.5f
     effect = Fx.absorb
-    bundle {
-      desc(zh_CN, "回响")
+    localization {
+      zh_CN {
+        name = "回响"
+        description = ""
+      }
     }
   }
   val 搏动 = IceStatusEffect("throb") {
     healthMultiplier = 1.7f
     speedMultiplier = 1.4f
     effect = Fx.absorb
-    bundle {
-      desc(zh_CN, "搏动", "畸变在血管中蔓延,欢愉在骨髓中滋长,血肉在律动中苏醒")
+    localization {
+      zh_CN {
+        name = "搏动"
+        description = "畸变在血管中蔓延,欢愉在骨髓中滋长,血肉在律动中苏醒"
+      }
     }
   }
   val 寄生 = IceStatusEffect("parasitism") {
     healthMultiplier = 0.9f
     speedMultiplier = 0.9f
-    bundle {
-      desc(zh_CN, "寄生", "异种的胚胎在脏器间扎根,血肉在无声中溃烂,骨骼在无序里软化,直到我们新增一员")
+    localization {
+      zh_CN {
+        name = "寄生"
+        description = "异种的胚胎在脏器间扎根,血肉在无声中溃烂,骨骼在无序里软化,直到我们新增一员"
+      }
     }
   }
   val 融合 = IceStatusEffect("merge") {
     healthMultiplier = 1.5f
-    bundle {
-      desc(zh_CN, "融合", "生物的界限在混沌中消融,纠缠,渗透,重组,褪去残存的躯壳,将我们的力量合为一体")
+    localization {
+      zh_CN {
+        name = "融合"
+        description = "生物的界限在混沌中消融,纠缠,渗透,重组,褪去残存的躯壳,将我们的力量合为一体"
+      }
     }
   }
   val 维生I = IceStatusEffect("vitalFixI") {
     damage = -30f / 60
-    bundle {
-      desc(zh_CN, "维生I", "激活纳米机器人集群,将储存的硅矿微粒与裂解液转化为生物修复单元,持续重构受损机体")
+    localization {
+      zh_CN {
+        name = "维生I"
+        description = "激活纳米机器人集群,将储存的硅矿微粒与裂解液转化为生物修复单元,持续重构受损机体"
+      }
     }
   }
   val 维生II = IceStatusEffect("vitalFixII") {
     damage = -60f / 60
-    bundle {
-      desc(zh_CN, "维生II", "激活纳米机器人集群,将储存的硅矿微粒与裂解液转化为生物修复单元,持续重构受损机体")
+    localization {
+      zh_CN {
+        name = "维生II"
+        description = "激活纳米机器人集群,将储存的硅矿微粒与裂解液转化为生物修复单元,持续重构受损机体"
+      }
     }
   }
   val 脉冲 = IceStatusEffect("pulse") {
@@ -271,8 +329,12 @@ object IStatus :Load {
       lenTo = 16f
       colorTo = Color.valueOf("5A58C4")
     }
-    bundle {
-      desc(zh_CN, "脉冲", "脉冲", " E!M!P!")
+    localization {
+      zh_CN {
+        name = "脉冲"
+        description = "脉冲"
+        details = " E!M!P!"
+      }
     }
   }
   val 鼓舞 = IceStatusEffect("inspires") {
@@ -287,10 +349,11 @@ object IStatus :Load {
         }
       }
     }
-    bundle {
-      desc(
-        zh_CN, "鼓舞", "为周围友军持续提供(具有鼓舞的单位)20%的属性倍率,且每秒回复相当于(具有鼓舞的单位)0.1%生命上限的生命值"
-      )
+    localization {
+      zh_CN {
+        name = "鼓舞"
+        description = "为周围友军持续提供(具有鼓舞的单位)20%的属性倍率,且每秒回复相当于(具有鼓舞的单位)0.1%生命上限的生命值"
+      }
     }
     effectChance = 0.05f
     reloadMultiplier = 1.2f
@@ -342,10 +405,12 @@ object IStatus :Load {
     })
   }
   val 过热 = IceStatusEffect("overheat") {
-    bundle {
-      desc(
-        zh_CN, "过热", "过载动力炉并重导向其能量配给以进行主炮开火或特殊行动,期间过量的能量可能损坏管路", "以此为信"
-      )
+    localization {
+      zh_CN {
+        name = "过热"
+        description = "过载动力炉并重导向其能量配给以进行主炮开火或特殊行动,期间过量的能量可能损坏管路"
+        details = "以此为信"
+      }
     }
     disarm = true
     dragMultiplier = 1f
@@ -364,8 +429,11 @@ object IStatus :Load {
     }
   }
   val 屠戮 = IceStatusEffect("massacre") {
-    bundle {
-      desc(zh_CN, "屠戮", "屠戮")
+    localization {
+      zh_CN {
+        name = "屠戮"
+        description = "屠戮"
+      }
     }
     damageMultiplier = 1.5f
     healthMultiplier = 0.8f
@@ -386,8 +454,11 @@ object IStatus :Load {
     color = Color.valueOf("F3E979")
   }
   val 损毁 = IceStatusEffect("destroyed") {
-    bundle {
-      desc(zh_CN, "损毁", "损毁")
+    localization {
+      zh_CN {
+        name = "损毁"
+        description = "损毁"
+      }
     }
     healthMultiplier = 0.77f
     speedMultiplier = 0.85f
@@ -405,8 +476,11 @@ object IStatus :Load {
     color = Color.valueOf("989AA4")
   }
   val 迅疗 = PercentStatus("rapidHealing", 0.8f, -6f) {
-    bundle {
-      desc(zh_CN, "迅疗", "释放纳米机器人极速修复机体")
+    localization {
+      zh_CN {
+        name = "迅疗"
+        description = "释放纳米机器人极速修复机体"
+      }
     }
     healthMultiplier = 1.2f
     speedMultiplier = 1.05f
@@ -422,8 +496,11 @@ object IStatus :Load {
     }
   }
   val 熔融 = PercentStatus("melt", 0.2f, 0.25f, 25f, true) {
-    bundle {
-      desc(zh_CN, "熔融", "利用超高温的金属射流摧毁敌方单位的装甲及内部结构")
+    localization {
+      zh_CN {
+        name = "熔融"
+        description = "利用超高温的金属射流摧毁敌方单位的装甲及内部结构"
+      }
     }
     healthMultiplier = 0.8f
     speedMultiplier = 0.9f
@@ -432,8 +509,11 @@ object IStatus :Load {
     color = Color.valueOf("FF5845")
   }
   val 衰变 = IceStatusEffect("decay") {
-    bundle {
-      desc(zh_CN, "衰变", "使原子迅速衰变,n被附着的单位会转变为放射源,持续辐射周围的一切事物")
+    localization {
+      zh_CN {
+        name = "衰变"
+        description = "使原子迅速衰变,n被附着的单位会转变为放射源,持续辐射周围的一切事物"
+      }
     }
     reloadMultiplier = 0.8f
     healthMultiplier = 0.8f
@@ -479,13 +559,19 @@ object IStatus :Load {
       colorTo = Color.valueOf("FF6666")
     }
     color = Color.valueOf("FF6666")
-    bundle {
-      desc(zh_CN, "蚀骨", "烈焰如附骨之疽,除之不尽")
+    localization {
+      zh_CN {
+        name = "蚀骨"
+        description = "烈焰如附骨之疽,除之不尽"
+      }
     }
   }
   val 突袭 = IceStatusEffect("pounces") {
-    bundle {
-      desc(zh_CN, "突袭")
+    localization {
+      zh_CN {
+        name = "突袭"
+        description = ""
+      }
     }
     damageMultiplier = 1.6f
     healthMultiplier = 1.8f
@@ -526,8 +612,12 @@ object IStatus :Load {
     }
   }
   val 秽蚀 = IceStatusEffect("filthyErosion") {
-    bundle {
-      desc(zh_CN, "秽蚀", "打散目标的分子结构并干扰原子链,进而液化装甲与软组织", "污秽涌动,侵蚀不息")
+    localization {
+      zh_CN {
+        name = "秽蚀"
+        description = "打散目标的分子结构并干扰原子链,进而液化装甲与软组织"
+        details = "污秽涌动,侵蚀不息"
+      }
     }
     damage = 5f
     effectChance = 0.2f
@@ -551,8 +641,11 @@ object IStatus :Load {
     }
   }
   val 湍能 = PercentStatus("turbulentEnergy", 1f, 80f / 60f) {
-    bundle {
-      desc(zh_CN, "湍能", "利用剧烈反应的能量破坏表层装甲稳定性,而后侵蚀内部结构")
+    localization {
+      zh_CN {
+        name = "湍能"
+        description = "利用剧烈反应的能量破坏表层装甲稳定性,而后侵蚀内部结构"
+      }
     }
     healthMultiplier = 0.9f
     color = Color.valueOf("A9D8FF")
@@ -571,8 +664,11 @@ object IStatus :Load {
     healthMultiplier = 0.6f
     speedMultiplier = 0.7f
     reloadMultiplier = 0.7f
-    bundle {
-      desc(zh_CN, "日耀", "将太阳之力汇于指尖")
+    localization {
+      zh_CN {
+        name = "日耀"
+        description = "将太阳之力汇于指尖"
+      }
     }
     effect = ParticleEffect().apply {
       particles = 3
@@ -594,8 +690,11 @@ object IStatus :Load {
     parentizeEffect = true
     effect = Fx.chainLightning
 
-    bundle {
-      desc(zh_CN, "电链", "闪电,会连击两次")
+    localization {
+      zh_CN {
+        name = "电链"
+        description = "闪电,会连击两次"
+      }
     }
     val range = 8 * 30f
     val reload = 60f
@@ -654,15 +753,19 @@ object IStatus :Load {
     speedMultiplier = 0f
     dragMultiplier = 0f
     buildSpeedMultiplier = 0f
-    bundle {
-      desc(zh_CN, "坍缩")
+    localization {
+      zh_CN {
+        name = "坍缩"
+        description = ""
+      }
     }
   }
   val 幻像 = IceStatusEffect("illusion") {
-    bundle {
-      desc(
-        zh_CN, "幻像", "通过全相投影装置,将光线转化为可以承受一定程度打击的固体形态,创造出作战单位的三维复制体"
-      )
+    localization {
+      zh_CN {
+        name = "幻像"
+        description = "通过全相投影装置,将光线转化为可以承受一定程度打击的固体形态,创造出作战单位的三维复制体"
+      }
     }
     damageMultiplier = 0f
     color = Color.valueOf("AFCCF4")
@@ -678,8 +781,11 @@ object IStatus :Load {
     speedMultiplier = 3f
     effect = Fx.overdriven
     color = Color.valueOf("D75B6E")
-    bundle {
-      desc(zh_CN, "狂乱", "混乱与疯狂")
+    localization {
+      zh_CN {
+        name = "狂乱"
+        description = "混乱与疯狂"
+      }
     }
   }
   val 坚忍 = IceStatusEffect("stoical") {
@@ -696,13 +802,19 @@ object IStatus :Load {
       colorFrom = Color.valueOf("E8895C")
       colorTo = Color.valueOf("FFA665")
     }
-    bundle {
-      desc(zh_CN, "坚忍")
+    localization {
+      zh_CN {
+        name = "坚忍"
+        description = ""
+      }
     }
   }
   val 庇护 = IceStatusEffect("asylum") {
-    bundle {
-      desc(zh_CN, "庇护", "为单位填充一层动能泡沫内衬,内衬在伸缩之间将大量分散装甲承受的猛烈冲击")
+    localization {
+      zh_CN {
+        name = "庇护"
+        description = "为单位填充一层动能泡沫内衬,内衬在伸缩之间将大量分散装甲承受的猛烈冲击"
+      }
     }
     reloadMultiplier = 1.1f
     healthMultiplier = 3f
@@ -738,8 +850,11 @@ object IStatus :Load {
     }
   }
   val 复仇 = IceStatusEffect("revenge") {
-    bundle {
-      desc(zh_CN, "复仇")
+    localization {
+      zh_CN {
+        name = "复仇"
+        description = ""
+      }
     }
     damageMultiplier = 1.8f
     healthMultiplier = 0.8f
@@ -759,8 +874,11 @@ object IStatus :Load {
     }
   }
   val 反扑 = IceStatusEffect("counter") {
-    bundle {
-      desc(zh_CN, "反扑", "每损失1%生命值获得1.5%各项属性值")
+    localization {
+      zh_CN {
+        name = "反扑"
+        description = "每损失1%生命值获得1.5%各项属性值"
+      }
     }
     color = Color.valueOf("FB7A83")
     effectChance = 0.01f
@@ -773,8 +891,11 @@ object IStatus :Load {
     }
   }
   val 作弊 = IceStatusEffect("cheat") {
-    bundle {
-      desc(zh_CN, "作弊", "没关就是开了?")
+    localization {
+      zh_CN {
+        name = "作弊"
+        description = "没关就是开了?"
+      }
     }
     damageMultiplier = 99e9f
     healthMultiplier = 99e9f
@@ -796,8 +917,11 @@ object IStatus :Load {
     }
   }
   val 斩杀 = IceStatusEffect("kill") {
-    bundle {
-      desc(zh_CN, "斩杀")
+    localization {
+      zh_CN {
+        name = "斩杀"
+        description = ""
+      }
     }
     setUpdate { unit, e ->
       val x = unit.x
@@ -827,12 +951,11 @@ object IStatus :Load {
     }
   }
   val 结晶化 = IceStatusEffect("crystallize") {
-    bundle {
-      desc(
-        zh_CN,
-        "结晶化",
-        "FEX物质在单位表面富集结晶产生不稳定的晶体壳,使单位会与活性的FEX结晶相互作用,同时在受到攻击时会造成额外的衍生伤害"
-      )
+    localization {
+      zh_CN {
+        name = "结晶化"
+        description = "FEX物质在单位表面富集结晶产生不稳定的晶体壳,使单位会与活性的FEX结晶相互作用,同时在受到攻击时会造成额外的衍生伤害"
+      }
     }
     speedMultiplier = 0.34f
     reloadMultiplier = 0.8f
@@ -889,8 +1012,11 @@ object IStatus :Load {
 
   }
   val 暮春 = IceStatusEffect("wild_growth") {
-    bundle {
-      desc(zh_CN, "暮春", "受力场控制的纳米机器人会干扰单位的行动,破坏其设施")
+    localization {
+      zh_CN {
+        name = "暮春"
+        description = "受力场控制的纳米机器人会干扰单位的行动,破坏其设施"
+      }
     }
     color = Tmp.c1.set(Pal.heal).lerp(Color.black, 0.25f).cpy()
     speedMultiplier = 0.3f
@@ -899,8 +1025,11 @@ object IStatus :Load {
     damage = 1.5f
   }
   val 临春 = IceStatusEffect("spring_coming") {
-    bundle {
-      desc(zh_CN, "临春", "纳米机器人矩阵会在力场的引导下为单位提供增益")
+    localization {
+      zh_CN {
+        name = "临春"
+        description = "纳米机器人矩阵会在力场的引导下为单位提供增益"
+      }
     }
     color = Pal.heal
     speedMultiplier = 1.23f
@@ -909,8 +1038,11 @@ object IStatus :Load {
     damage = -1f
   }
   val 电子干扰 = IceStatusEffect("electric_disturb") {
-    bundle {
-      desc(zh_CN, "电子干扰", "电子设备受到外部干扰,火控系统将无法正常工作")
+    localization {
+      zh_CN {
+        name = "电子干扰"
+        description = "电子设备受到外部干扰,火控系统将无法正常工作"
+      }
     }
     init {
       color = Pal.accent
@@ -936,8 +1068,11 @@ object IStatus :Load {
     }
   }
   val 锁定 = IceStatusEffect("locking") {
-    bundle {
-      desc(zh_CN, "锁定", "单位受到的攻击有概率造成更高的伤害,这取决于锁定的强度")
+    localization {
+      zh_CN {
+        name = "锁定"
+        description = "单位受到的攻击有概率造成更高的伤害,这取决于锁定的强度"
+      }
     }
     color = Pal.remove
     init {
@@ -980,8 +1115,11 @@ object IStatus :Load {
     }
   }
   val 熔毁 = object :IceStatusEffect("meltdown", {
-    bundle {
-      desc(zh_CN, "熔毁")
+    localization {
+      zh_CN {
+        name = "熔毁"
+        description = ""
+      }
     }
     damage = 2.2f
     effect = Fx.melting
@@ -1023,11 +1161,7 @@ object IStatus :Load {
         rand.setSeed(unit.id.toLong())
         for(i in 0..7) {
           SglDraw.drawTransform(
-            u.x,
-            u.y,
-            u.hitSize / 2 + rate * u.hitSize / 2,
-            0f,
-            Time.time + rand.random(360f)
+            u.x, u.y, u.hitSize / 2 + rate * u.hitSize / 2, 0f, Time.time + rand.random(360f)
           ) { x: Float, y: Float, r: Float ->
             val len = rand.random(u.hitSize / 4, u.hitSize / 1.5f)
             SglDraw.drawDiamond(x, y, len, len * 0.135f, r)
@@ -1038,8 +1172,11 @@ object IStatus :Load {
     }
   }
   val 电磁损毁 = IceStatusEffect("emp_damaged") {
-    bundle {
-      desc(zh_CN, "电磁损毁", "单位的系统中枢及各周边电子设备严重损毁,火控核心几乎失效,所有功能设备完全失效,近乎废铁")
+    localization {
+      zh_CN {
+        name = "电磁损毁"
+        description = "单位的系统中枢及各周边电子设备严重损毁,火控核心几乎失效,所有功能设备完全失效,近乎废铁"
+      }
     }
     color = Pal.accent
     speedMultiplier = 0.5f
@@ -1087,8 +1224,11 @@ object IStatus :Load {
   }
 
   val 冻结: IceStatusEffect = object :IceStatusEffect("frost", {
-    bundle {
-      desc(zh_CN, "冻结", "在极低的温度下,单位的系统将很难正常工作,在寒气完全渗透到单位的核心后,它将被冻成一个巨大的冰块")
+    localization {
+      zh_CN {
+        name = "冻结"
+        description = "在极低的温度下,单位的系统将很难正常工作,在寒气完全渗透到单位的核心后,它将被冻成一个巨大的冰块"
+      }
     }
     color = SglDrawConst.frost
     speedMultiplier = 0.5f
@@ -1129,8 +1269,11 @@ object IStatus :Load {
     }
   }
   val 凛冻: IceStatusEffect = object :IceStatusEffect("frost_freeze", {
-    bundle {
-      desc(zh_CN, "凛冻", "单位被寒气被彻底冰封,无法行动,如果寒气继续加深,在冰块碎裂时,它会彻底碎成一堆粉末")
+    localization {
+      zh_CN {
+        name = "凛冻"
+        description = "单位被寒气被彻底冰封,无法行动,如果寒气继续加深,在冰块碎裂时,它会彻底碎成一堆粉末"
+      }
     }
     speedMultiplier = 0f
     reloadMultiplier = 0f

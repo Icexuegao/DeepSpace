@@ -7,8 +7,7 @@ import arc.math.Angles
 import arc.math.Mathf
 import arc.math.geom.Rect
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.Effect
@@ -18,8 +17,11 @@ import mindustry.graphics.Pal
 
 class BreakArmy : IceUnitType("breakArmy") {
   init {
-    bundle {
-      desc(zh_CN, "破军","中型地面突击单位.发射高爆炮弹攻击敌人")
+    localization {
+      zh_CN {
+        name = "破军"
+        description = "中型地面突击单位.发射高爆炮弹攻击敌人"
+      }
     }
     armor = 14f
     speed = 0.7f

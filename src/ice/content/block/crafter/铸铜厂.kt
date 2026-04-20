@@ -1,8 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
@@ -13,8 +12,11 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 铸铜厂 : NormalCrafter("copperFoundry") {
   init {
-    bundle {
-      desc(zh_CN, "铸铜厂","将铜锭和锌锭筑铸为黄铜锭")
+    localization {
+      zh_CN {
+        name = "铸铜厂"
+        description = "将铜锭和锌锭筑铸为黄铜锭"
+      }
     }
     size = 4
     health = 550

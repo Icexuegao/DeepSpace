@@ -15,8 +15,7 @@ import ice.content.ILiquids
 import ice.content.block.turret.TurretBullets.freezingField
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.effect.WaveEffect
@@ -37,8 +36,11 @@ import singularity.world.draw.part.CustomPart
 
 class Winter : SglTurret("winter"){
   init {
-    bundle {
-      desc(zh_CN, "冬至", "它用力场,将周围的物质分子的移动牢牢的限制,在极寒领域展开的瞬间,有如时间也被冻结一般,一切都停了下来,并破碎成无数微小的碎片")
+    localization {
+      zh_CN {
+        name = "冬至"
+        description = "它用力场,将周围的物质分子的移动牢牢的限制,在极寒领域展开的瞬间,有如时间也被冻结一般,一切都停了下来,并破碎成无数微小的碎片"
+      }
     }
     requirements(
       Category.turret,

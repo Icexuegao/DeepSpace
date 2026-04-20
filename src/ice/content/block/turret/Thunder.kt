@@ -14,8 +14,7 @@ import ice.content.block.turret.TurretBullets.branch
 import ice.content.block.turret.TurretBullets.lightning
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.entities.Damage
 import mindustry.entities.Effect
@@ -45,8 +44,12 @@ import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
 class Thunder : SglTurret("thunder") {
   init {
-    bundle {
-      desc(zh_CN, "惊蛰", "大功率电离轰击武器,它会用耀眼的闪电将敌人化为灰烬", "这座庞然大物凭借其如同雷鸣般的声响和能够与雷电平齐的杀伤力")
+    localization {
+      zh_CN {
+        name = "惊蛰"
+        description = "大功率电离轰击武器,它会用耀眼的闪电将敌人化为灰烬"
+        details = "这座庞然大物凭借其如同雷鸣般的声响和能够与雷电平齐的杀伤力"
+      }
     }
     requirements(
       Category.turret, ItemStack.with(

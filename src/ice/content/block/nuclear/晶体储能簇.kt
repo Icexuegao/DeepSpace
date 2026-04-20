@@ -4,8 +4,7 @@ import arc.func.Floatf
 import arc.func.Func
 import arc.math.Mathf
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.graphics.Layer
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawMulti
@@ -18,8 +17,11 @@ import singularity.world.draw.DrawRegionDynamic
 class 晶体储能簇:EnergyContainer("crystal_container"){
   init {
 
-      bundle {
-        desc(zh_CN, "晶体储能簇", "晶体式中子能存储器,用于存储中子能")
+      localization {
+        zh_CN {
+          name = "晶体储能簇"
+          description = "晶体式中子能存储器,用于存储中子能"
+        }
       }
       squareSprite = false
       requirements(

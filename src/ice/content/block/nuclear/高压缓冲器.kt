@@ -1,15 +1,17 @@
 package ice.content.block.nuclear
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.EnergyBuffer
 
 class 高压缓冲器:EnergyBuffer("high_voltage_buffer"){
   init {
-    bundle {
-      desc(zh_CN, "高压缓冲器", "大型能量缓冲设施,更大的缓冲空间基本可以满足任何情况的能量缓冲,可用于进行高压区调压")
+    localization {
+      zh_CN {
+        name = "高压缓冲器"
+        description = "大型能量缓冲设施,更大的缓冲空间基本可以满足任何情况的能量缓冲,可用于进行高压区调压"
+      }
     }
     squareSprite = false
     requirements(

@@ -17,8 +17,7 @@ import ice.content.block.turret.TurretBullets.branch
 import ice.content.block.turret.TurretBullets.lightning
 import ice.content.block.turret.TurretBullets.破碎FEX结晶
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -42,8 +41,11 @@ import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
 class Mirage : SglTurret("mirage") {
   init {
-    bundle {
-      desc(zh_CN, "虚妄", "高能FEX结晶弹射器,将大块结晶态FEX发射向目标,不同的结晶状态会产生截然不同的效果,在互相作用下可以造成相当大的杀伤效果")
+    localization {
+      zh_CN {
+        name = "虚妄"
+        description = "高能FEX结晶弹射器,将大块结晶态FEX发射向目标,不同的结晶状态会产生截然不同的效果,在互相作用下可以造成相当大的杀伤效果"
+      }
     }
     requirements(
       Category.turret,

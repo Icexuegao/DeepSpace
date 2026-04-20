@@ -2,8 +2,7 @@ package ice.content.unit.flying.fire
 
 import arc.graphics.Color
 import ice.entities.bullet.BombBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -15,8 +14,11 @@ import mindustry.gen.Sounds
 
 class BenFire : IceUnitType("benFire") {
   init {
-    bundle {
-      desc(zh_CN, "奔火", "中型空中突击单位.投掷高爆航弹攻击敌人,并加装护盾辅助发生器以维持友军护盾持续作战.开火时减少所受伤害")
+    localization {
+      zh_CN {
+        name = "奔火"
+        description = "中型空中突击单位.投掷高爆航弹攻击敌人,并加装护盾辅助发生器以维持友军护盾持续作战.开火时减少所受伤害"
+      }
     }
     circleTarget = true
     faceTarget = false

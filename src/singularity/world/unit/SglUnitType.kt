@@ -8,7 +8,7 @@ import mindustry.gen.Unit
 import mindustry.type.ItemStack
 import mindustry.type.UnitType
 
-open class SglUnitType<T : Unit>(name: String,private val clazz: Class<T>) : UnitType(name) {
+open class SglUnitType<T :Unit>(name: String, clazz: Class<T>) :UnitType(name) {
   @Nullable
   var requirements: Array<ItemStack>? = null
   fun requirements(vararg req: Any?) {
@@ -16,7 +16,8 @@ open class SglUnitType<T : Unit>(name: String,private val clazz: Class<T>) : Uni
   }
 
   init {
-    constructor= IceRegister.getPutUnits(clazz)
+
+    constructor = IceRegister.getPutUnits(clazz)
   }
 
   override fun getRequirements(prevReturn: Array<UnitType?>?, timeReturn: FloatArray?): Array<ItemStack>? {
@@ -28,7 +29,7 @@ open class SglUnitType<T : Unit>(name: String,private val clazz: Class<T>) : Uni
     buildTime = 0f
     if (prevReturn != null) prevReturn[0] = null
 
-    for (stack in requirements) {
+    for(stack in requirements) {
       buildTime += stack.item.cost * stack.amount
     }
     if (timeReturn != null) timeReturn[0] = buildTime

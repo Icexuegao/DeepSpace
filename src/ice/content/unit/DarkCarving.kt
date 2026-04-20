@@ -7,8 +7,6 @@ import ice.audio.ISounds
 import ice.content.IStatus
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.StatusFieldAbility
@@ -23,8 +21,11 @@ import mindustry.type.UnitType
 
 class DarkCarving:IceUnitType("darkCarving") {
   init {
-    bundle {
-      desc(zh_CN, "冥刻", "中型空中突击单位.发射充能激光攻击敌人,对附近的友军提供坚忍效果")
+    localization {
+      zh_CN {
+        name = "冥刻"
+        description = "中型空中突击单位.发射充能激光攻击敌人,对附近的友军提供坚忍效果"
+      }
     }
     accel = 0.04f
     drag = 0.04f

@@ -3,8 +3,6 @@ package ice.content.block.crafter
 import arc.Core
 import ice.content.AtomSchematics
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.graphics.Pal
@@ -19,8 +17,11 @@ import universecore.components.blockcomp.ConsumerBuildComp
 
 class Destructors : NormalCrafter("destructor") {
   init {
-    bundle {
-      desc(zh_CN, "析构器", "加速碰撞破坏物质的原子核结构,以分析物质的微观构成形态并建立原子空间构成的蓝图")
+    localization {
+      zh_CN {
+        name = "析构器"
+        description = "加速碰撞破坏物质的原子核结构,以分析物质的微观构成形态并建立原子空间构成的蓝图"
+      }
     }
     requirements(Category.crafting, IItems.简并态中子聚合物, 100, IItems.矩阵合金, 50, IItems.絮凝剂, 40, IItems.强化合金, 50, IItems.铱锭, 60)
     size = 5

@@ -44,7 +44,7 @@ abstract class RevealGroup(protected val name: String?) {
 
   class ResearchReveal(name: String?, private val project: ResearchProject) : RevealGroup(name) {
     override fun localized(): String {
-      return "研究 ${project.getLocalizedName()}"
+      return "研究 ${project.localizedName}"
     }
 
     override fun applyTrigger() {

@@ -5,8 +5,8 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.ArtilleryBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -22,8 +22,11 @@ import mindustry.world.draw.DrawTurret
 
 class Wave : ItemTurret("turret_wave") {
   init {
-    bundle {
-      desc(zh_CN, "浪潮", "大型抛射炮塔,能够快速交替发射散射炮弹\n使用聚能装药爆破弹,极大提升了炮弹毁伤力")
+    localization {
+      zh_CN {
+        name = "浪潮"
+        description = "大型抛射炮塔,能够快速交替发射散射炮弹\n使用聚能装药爆破弹,极大提升了炮弹毁伤力"
+      }
     }
     health = 2080
     size = 4

@@ -114,7 +114,7 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
       table.row()
       table.table {t ->
         t.defaults().left().fill().padLeft(6f)
-        t.add("${IceStats.物品.getLocalizedName()}:").left()
+        t.add("${IceStats.物品.localized()}:").left()
         if (!random) {
 
           for (stack in items) {

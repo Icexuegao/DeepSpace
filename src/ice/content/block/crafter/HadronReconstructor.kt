@@ -2,8 +2,6 @@ package ice.content.block.crafter
 
 import arc.graphics.g2d.Draw
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.graphics.Pal
@@ -18,8 +16,12 @@ import universecore.world.producers.ProduceType
 
 class HadronReconstructor : AtomSchematicCrafter("hadron_reconstructor") {
   init {
-    bundle {
-      desc(zh_CN, "强子重构仪", "消耗介质生成原材料,可配置", "微缩的定向大量强子对撞机,使得创造物质从理论成为现实")
+    localization {
+      zh_CN {
+        name = "强子重构仪"
+        description = "消耗介质生成原材料,可配置"
+        details = "微缩的定向大量强子对撞机,使得创造物质从理论成为现实"
+      }
     }
     requirementPairs(
       Category.crafting,

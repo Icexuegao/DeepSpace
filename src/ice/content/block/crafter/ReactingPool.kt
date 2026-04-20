@@ -5,8 +5,7 @@ import arc.graphics.Color
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.gen.Building
@@ -23,8 +22,12 @@ import kotlin.math.max
 
 class ReactingPool : NormalCrafter("reacting_pool") {
   init {
-    bundle {
-      desc(zh_CN, "反应仓","将多种材料置入反应并生产特定产物,可配置" ,"一个精准控制进料的化学反应容器,是普遍使用的化工设备")
+    localization {
+      zh_CN {
+        name = "反应仓"
+        description = "将多种材料置入反应并生产特定产物,可配置"
+        details = "一个精准控制进料的化学反应容器,是普遍使用的化工设备"
+      }
     }
     requirements(
       Category.crafting, IItems.铬锭, 100, IItems.石英玻璃, 100, IItems.铅锭, 80, IItems.钴锭, 85, IItems.单晶硅, 80, IItems.钴钢, 70

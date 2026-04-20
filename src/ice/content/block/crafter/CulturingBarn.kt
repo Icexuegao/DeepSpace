@@ -11,8 +11,6 @@ import arc.util.Time
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.library.struct.AttachedProperty
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
@@ -36,8 +34,11 @@ class CulturingBarn :SpliceCrafter("culturing_barn") {
   var SpliceCrafterBuild.highlight: Boolean by AttachedProperty(false)
 
   init {
-    bundle {
-      desc(zh_CN, "绿藻池", "使用光水培养低等的藻类生物,除氧气外,还能收获不少藻泥")
+    localization {
+      zh_CN {
+        name = "绿藻池"
+        description = "使用光水培养低等的藻类生物,除氧气外,还能收获不少藻泥"
+      }
     }
     requirements(Category.production, IItems.铜锭, 10, IItems.石英玻璃, 12, IItems.钴锭, 8)
     hasLiquids = true

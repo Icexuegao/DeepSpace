@@ -2,8 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.world.draw.DrawCrucibleFlame
@@ -13,8 +12,12 @@ import singularity.world.draw.DrawBottom
 
 class VacuumVrucible : NormalCrafter("vacuum_crucible") {
   init {
-    bundle {
-      desc(zh_CN, "真空坩埚", "将多种材料进行低压处理并生产特定产物,可配置", "在低压高温环境下进行特殊工序时使用的设备")
+    localization {
+      zh_CN {
+        name = "真空坩埚"
+        description = "将多种材料进行低压处理并生产特定产物,可配置"
+        details = "在低压高温环境下进行特殊工序时使用的设备"
+      }
     }
     requirements(
       Category.crafting, IItems.铬锭, 90, IItems.单晶硅, 80, IItems.钴钢, 60, IItems.石英玻璃, 75, IItems.钴锭, 80

@@ -17,7 +17,6 @@ import ice.IVars
 import ice.graphics.IceColor
 import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.library.util.toStringi
-import ice.ui.bundle.BaseBundle
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawFull
 import ice.world.draw.DrawMulti
@@ -40,7 +39,7 @@ import mindustry.world.meta.StatCat
 import mindustry.world.meta.StatUnit
 import singularity.world.blocks.SglBlock
 
-class WindGenerator(name: String) : SglBlock(name) {
+class WindGenerator(name: String) :SglBlock(name) {
   companion object {
     val builds = Seq<WindGeneratorBuild>(false)
 
@@ -59,7 +58,7 @@ class WindGenerator(name: String) : SglBlock(name) {
   var rotator: TextureRegion by LazyTextureSingleDelegate("${this.name}-rotator")
   var range: Int = 2
   val vtt = Vars.tilesize.toFloat()
-  private val side: Float by lazy {(2 * range + size) * vtt}
+  private val side: Float by lazy { (2 * range + size) * vtt }
 
   init {
     solid = true
@@ -78,33 +77,37 @@ class WindGenerator(name: String) : SglBlock(name) {
     super.setStats()
     stats.add(Stat.basePowerGeneration, basePowerProduction, StatUnit.powerSecond)
     stats.add(IceStats.getStat("noBuildZone", StatCat.function) {
-      desc(BaseBundle.zh_CN,"禁建范围")
-    },"$range")
+      localization {
+        zh_CN {
+          name = "禁建范围"
+        }
+      }
+    }, "$range")
   }
 
   override fun setBars() {
     super.setBars()
     if (hasPower && outputsPower) {
-      addBar("powerEffecct") {entity: WindGeneratorBuild ->
+      addBar("powerEffecct") { entity: WindGeneratorBuild ->
         Bar({
           "发电效率: ${(entity.powerEffecct() * 100).toStringi(0)}%"
-        }, {Pal.powerBar}, entity::powerEffecct)
+        }, { Pal.powerBar }, entity::powerEffecct)
       }
-      addBar("powerProduction") {entity: WindGeneratorBuild ->
+      addBar("powerProduction") { entity: WindGeneratorBuild ->
         Bar(
           {
-            Core.bundle.format(
-              "bar.poweroutput", Strings.fixed(entity.powerProduction * 60 * entity.timeScale(), 1)
-            )
-          }, {Pal.powerBar}, entity::powerEffecct
+          Core.bundle.format(
+            "bar.poweroutput", Strings.fixed(entity.powerProduction * 60 * entity.timeScale(), 1)
+          )
+        }, { Pal.powerBar }, entity::powerEffecct
         )
       }
     }
   }
 
   fun each(x: Int, y: Int, lenght: Int, ct: Cons<Tile>) {
-    for (ox in (x..<x + lenght)) {
-      for (oy in (y..<y + lenght)) {
+    for(ox in (x..<x + lenght)) {
+      for(oy in (y..<y + lenght)) {
         val tile: Tile = Vars.world.tile(ox, oy) ?: continue
         ct.get(tile)
       }
@@ -118,7 +121,7 @@ class WindGenerator(name: String) : SglBlock(name) {
     posx -= range
     posy -= range
     each(posx, posy, range * 2 + size) {
-      build?.let {building ->
+      build?.let { building ->
         if (building == it.build) return@each
       }
 
@@ -135,7 +138,7 @@ class WindGenerator(name: String) : SglBlock(name) {
   }
 
   override fun changePlacementPath(points: Seq<Point2>, rotation: Int) {
-    Placement.calculateNodes(points, this, rotation) {point: Point2, other: Point2 ->
+    Placement.calculateNodes(points, this, rotation) { point: Point2, other: Point2 ->
       other.dst(point).toInt() in (size..size + range)
     }
   }
@@ -149,7 +152,7 @@ class WindGenerator(name: String) : SglBlock(name) {
     Drawf.dashRect(IceColor.b4, (x + sizeOffset - range - 0.5f) * vtt, (y + sizeOffset - range - 0.5f) * vtt, side, side)
   }
 
-  inner class WindGeneratorBuild : SglBuilding() {
+  inner class WindGeneratorBuild :SglBuilding() {
 
     var totalProgress: Float = 0f
     var warmup: Float = 0f
@@ -182,7 +185,7 @@ class WindGenerator(name: String) : SglBlock(name) {
     override fun drawSelect() {
       super.drawSelect()
       tmpTile.forEach {
-        it.build?.let {it1 ->
+        it.build?.let { it1 ->
           Drawf.selected(it1, Tmp.c1.set(Pal.remove).a(Mathf.absin(4f, 1f)))
         }
       }

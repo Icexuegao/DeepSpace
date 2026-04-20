@@ -9,8 +9,7 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.entities.UnitSorts
 import mindustry.entities.part.HaloPart
@@ -30,8 +29,11 @@ import singularity.world.draw.DrawSglTurret
 
 class Summer : SglTurret("summer") {
   init {
-    bundle {
-      desc(zh_CN, "夏至", "高速释放巨量的受控热能团,以太阳风暴摧毁一切敌人,它开火伴随着猛烈的热浪,将被击中的一切化为铁水灰烬")
+    localization {
+      zh_CN {
+        name = "夏至"
+        description = "高速释放巨量的受控热能团,以太阳风暴摧毁一切敌人,它开火伴随着猛烈的热浪,将被击中的一切化为铁水灰烬"
+      }
     }
     requirements(
       Category.turret, IItems.强化合金, 210, IItems.简并态中子聚合物, 80, IItems.絮凝剂, 180, IItems.铱锭, 120, IItems.气凝胶, 240, IItems.矩阵合金, 140, IItems.充能FEX水晶, 150, IItems.FEX水晶, 100

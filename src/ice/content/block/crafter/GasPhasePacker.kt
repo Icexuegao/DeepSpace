@@ -7,8 +7,6 @@ import arc.math.Angles
 import arc.math.Mathf
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import mindustry.gen.Building
@@ -22,8 +20,11 @@ import singularity.world.draw.DrawBottom
 
 class GasPhasePacker:NormalCrafter("gas_phase_packer"){
   init{
-  bundle {
-    desc(zh_CN, "气体相位封装机","将气体封装进由絮凝剂和气凝胶构成的容器中,可配置", "用于将一份流体用相位物封装成中子靶丸,以进一步转变为核聚变所使用的燃料")
+  localization {
+    zh_CN {
+      name = "气体相位封装机"
+      description = "将气体封装进由絮凝剂和气凝胶构成的容器中,可配置\n用于将一份流体用相位物封装成中子靶丸,以进一步转变为核聚变所使用的燃料"
+    }
   }
   requirements(Category.crafting, IItems.强化合金, 80, IItems.气凝胶, 80, IItems.絮凝剂, 60, IItems.单晶硅, 60, IItems.钴锭, 45)
   size = 3

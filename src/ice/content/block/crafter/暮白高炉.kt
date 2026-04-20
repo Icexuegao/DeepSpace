@@ -3,8 +3,7 @@ package ice.content.block.crafter
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawArcSmelt
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
@@ -17,8 +16,12 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 暮白高炉 : NormalCrafter("duskFactory") {
   init {
-    bundle {
-      desc(zh_CN, "暮白高炉","将低碳钢,铬锭,钴锭,铪锭和暮光液合成暮光合金", "金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金")
+    localization {
+      zh_CN {
+        name = "暮白高炉"
+        description = "将低碳钢,铬锭,钴锭,铪锭和暮光液合成暮光合金"
+        details = "金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金"
+      }
     }
     size = 3
     itemCapacity = 20

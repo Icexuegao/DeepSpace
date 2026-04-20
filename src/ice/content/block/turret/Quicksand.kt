@@ -3,8 +3,8 @@ package ice.content.block.turret
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
-import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -19,7 +19,12 @@ import mindustry.world.blocks.defense.turrets.LiquidTurret
 
 class Quicksand :LiquidTurret("turret_quicksand") {
   init {
-    desc(BaseBundle.zh_CN, "泉涌", "使用增压器高速喷射液体攻击敌人,使用水作为弹药时可以灭火")
+    localization {
+      zh_CN {
+        name = "泉涌"
+        description = "使用增压器高速喷射液体攻击敌人,使用水作为弹药时可以灭火"
+      }
+    }
     health = 2430
     size = 3
     recoil = 2f

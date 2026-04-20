@@ -5,8 +5,8 @@ import arc.math.Mathf
 import arc.util.Time
 import ice.content.IItems
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.draw.part.IcePartProgress
 import ice.world.meta.IceEffects
 import mindustry.entities.bullet.MissileBulletType
@@ -22,8 +22,10 @@ import mindustry.world.draw.DrawTurret
 
 class DivineArrow:PowerTurret("divineArrow") {
   init{
-    bundle {
-      desc(zh_CN, "神矢")
+    localization {
+      zh_CN {
+        name = "神矢"
+      }
     }
     size = 2
     health = 1000

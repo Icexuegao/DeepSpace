@@ -10,8 +10,6 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.BaseBundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.HealthRequireAbility
 import mindustry.content.Fx
@@ -29,12 +27,13 @@ import mindustry.graphics.Layer
 
 class StarEater :IceUnitType("unit_starEater") {
   init {
-    desc(
-      BaseBundle.zh_CN,
-      "噬星",
-      "由黑棘二次蛹化蜕变而成的生物战舰\n可以向敌人发射离散电浆炮和远距离穿透激光,且可以发射火花导弹摧毁敌军工事,对于近距离的敌人则快速发射穿透激光",
-      "[#D75B6E]她多美啊!"
-    )
+    localization {
+      zh_CN {
+        name = "噬星"
+        description = "由黑棘二次蛹化蜕变而成的生物战舰\n可以向敌人发射离散电浆炮和远距离穿透激光,且可以发射火花导弹摧毁敌军工事,对于近距离的敌人则快速发射穿透激光"
+        details = "[#D75B6E]她多美啊!"
+      }
+    }
     lowAltitude = true
     flying = true
     health = 261000f

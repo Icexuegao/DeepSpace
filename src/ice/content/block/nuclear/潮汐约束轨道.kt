@@ -1,15 +1,17 @@
 package ice.content.block.nuclear
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.TokamakOrbit
 
 class 潮汐约束轨道:TokamakOrbit("tidal_confinement_orbit"){
   init {
-    bundle {
-      desc(zh_CN, "潮汐约束导轨", "利用引力场强制约束等离子流的聚变导轨,体积巨大,但具有非常高的功率倍数")
+    localization {
+      zh_CN {
+        name = "潮汐约束导轨"
+        description = "利用引力场强制约束等离子流的聚变导轨,体积巨大,但具有非常高的功率倍数"
+      }
     }
     quickRotate = false
     requirements(

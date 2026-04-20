@@ -6,8 +6,7 @@ import ice.content.IStatus
 import ice.content.IUnitTypes
 import ice.entities.bullet.LaserBulletType
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -32,8 +31,11 @@ class BloodAltar : IceUnitType("unit_bloodAltar", TimedKillUnit::class.java) {
     createScorch = false
     playerControllable = false
     itemCapacity = 0
-    bundle {
-      desc(zh_CN, "血俎", "中型空中突击单位.由疟蚊改进而成,体表覆盖坚韧的几丁质甲壳.阵亡后会分裂出飞蠓并洒下一滩血肉赘生物")
+    localization {
+      zh_CN {
+        name = "血俎"
+        description = "中型空中突击单位.由疟蚊改进而成,体表覆盖坚韧的几丁质甲壳.阵亡后会分裂出飞蠓并洒下一滩血肉赘生物"
+      }
     }
     health = 3240f
     armor = 3f

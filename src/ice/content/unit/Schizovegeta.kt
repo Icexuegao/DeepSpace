@@ -12,8 +12,6 @@ import ice.content.IUnitTypes
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.FleshEntity
 import ice.world.meta.IceEffects
@@ -24,10 +22,11 @@ import kotlin.math.min
 
 class Schizovegeta : IceUnitType("schizovegeta", SchizovegetaUnit::class.java) {
   init {
-    bundle {
-      desc(
-        zh_CN, "青壤", "小型陆行污染生物.无法攻击,只能笨拙地蠕行移动.死亡后会释放出数颗丰瘤."
-      )
+    localization {
+      zh_CN {
+        name = "青壤"
+        description = "小型陆行污染生物.无法攻击,只能笨拙地蠕行移动.死亡后会释放出数颗丰瘤."
+      }
     }
     speed = 0.3f
     health = 200f

@@ -70,7 +70,7 @@ class ConsumeLiquids<T>(liquids: Array<out LiquidStack>) : ConsumeLiquidBase<T>(
       table.row()
       table.table {t: Table ->
         t.defaults().left().fill().padLeft(6f)
-        t.add("${IceStats.流体.getLocalizedName()}:")
+        t.add("${IceStats.流体.localized()}:")
         for (stack in consLiquids!!) {
           t.add(IStatValues.displayLiquid(stack.liquid, stack.amount, true, showName = true))
         }

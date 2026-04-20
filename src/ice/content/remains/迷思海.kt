@@ -24,7 +24,6 @@ import ice.library.scene.ui.colorR
 import ice.library.struct.ConfigPropertyDelegate
 import ice.library.util.accessFloat
 import ice.type.Remains
-import ice.ui.bundle.bundle
 import ice.world.meta.IceEffects
 import mindustry.Vars
 import mindustry.entities.Effect
@@ -40,11 +39,15 @@ class 迷思海 :Remains("remains_mystic_sea") {
   var b: Float by ConfigPropertyDelegate(0.5f, "$name-fleshFragmentSeed")
 
   init {
-    remainsColor = IceColor.r2
-    bundle {
-      desc(zh_CN, "迷思海", "你可悲的一部分正期望着回到你的身上")
+    localization {
+      zh_CN {
+        name="迷思海"
+        description="你可悲的一部分正期望着回到你的身上"
+      }
     }
-    setDescription(getDescription())
+    remainsColor = IceColor.r2
+
+
     icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 32
       it.frameDuration = 60f / 8f

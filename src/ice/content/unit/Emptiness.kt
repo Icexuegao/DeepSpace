@@ -14,8 +14,6 @@ import ice.content.block.turret.TurretBullets
 import ice.entities.bullet.BlastLaser
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.weapon.MayflyWeapon
 import ice.world.draw.part.CustomPart
@@ -48,8 +46,11 @@ import kotlin.math.max
 
 class Emptiness : IceUnitType("emptiness") {
   init {
-    bundle {
-      desc(zh_CN, "虚宿", "巨型光棱战列舰,光束反应堆的最终产物,火力至上原则的最终答案,拥有强大的能量护盾")
+    localization {
+      zh_CN {
+        name = "虚宿"
+        description = "巨型光棱战列舰,光束反应堆的最终产物,火力至上原则的最终答案,拥有强大的能量护盾"
+      }
     }
     armor = 9f
     speed = 0.8f

@@ -5,8 +5,6 @@ import arc.graphics.g2d.Draw
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Liquids
@@ -24,8 +22,12 @@ import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
 
 class LaserResolver : NormalCrafter("laser_resolver") {init {
-  bundle {
-    desc(zh_CN, "激光解离机", "将特定物品解离并回收为原材料,可配置","使用不同频段的激光来定向分离物质以得到更加有用的东西")
+  localization {
+    zh_CN {
+      name = "激光解离机"
+      description = "将特定物品解离并回收为原材料,可配置"
+      details = "使用不同频段的激光来定向分离物质以得到更加有用的东西"
+    }
   }
   requirements(
     Category.crafting, ItemStack.with(

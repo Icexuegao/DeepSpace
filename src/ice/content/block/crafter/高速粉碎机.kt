@@ -1,8 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds
@@ -13,8 +12,11 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 高速粉碎机 : NormalCrafter("highSpeedCrusher") {
   init {
-    bundle {
-      desc(zh_CN, "高速粉碎机","将黄玉髓粉碎为金珀沙")
+    localization {
+      zh_CN {
+        name = "高速粉碎机"
+        description = "将黄玉髓粉碎为金珀沙"
+      }
     }
     size = 2
     itemCapacity = 24

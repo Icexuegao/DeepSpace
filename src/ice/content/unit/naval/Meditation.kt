@@ -1,8 +1,6 @@
 package ice.content.unit.naval
 
 import ice.entities.bullet.ArtilleryBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -14,8 +12,11 @@ import mindustry.gen.UnitWaterMove
 
 class Meditation : IceUnitType("unit_meditation", UnitWaterMove::class.java) {
   init {
-    bundle {
-      desc(zh_CN, "苦修", "中型海栖突击单位.发射炮弹与导弹攻击敌人,并加装护盾辅助发生器以维持友军护盾持续作战")
+    localization {
+      zh_CN {
+        name = "苦修"
+        description = "中型海栖突击单位.发射炮弹与导弹攻击敌人,并加装护盾辅助发生器以维持友军护盾持续作战"
+      }
     }
     health = 1365f
     hitSize = 25f

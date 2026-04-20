@@ -21,8 +21,7 @@ import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
 import ice.library.util.toColor
 import ice.library.world.Load
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
@@ -60,8 +59,11 @@ import universecore.world.particles.models.TargetMoveParticle.Companion.eff
 @Suppress("unused")
 object PowerBlocks : Load {
   val 能量节点 = BeamNode("powerNode").apply {
-    bundle {
-      desc(zh_CN, "能量节点","通过激光束传输电力,可连接多个节点扩展电网范围")
+    localization {
+      zh_CN {
+        name = "能量节点"
+        description = "通过激光束传输电力,可连接多个节点扩展电网范围"
+      }
     }
     squareSprite = false
     requirements(Category.power, IItems.高碳钢, 2, IItems.锌锭, 5, IItems.铜锭, 5)
@@ -76,8 +78,11 @@ object PowerBlocks : Load {
     consumePowerBuffered(200f)
   }
   val 大型能量节点 = BeamNode("powerNodeLarge").apply {
-    bundle {
-      desc(zh_CN, "大型能量节点","通过激光束传输电力,可连接多个节点扩展电网范围")
+    localization {
+      zh_CN {
+        name = "大型能量节点"
+        description = "通过激光束传输电力,可连接多个节点扩展电网范围"
+      }
     }
     size = 3
     squareSprite = false
@@ -106,8 +111,11 @@ object PowerBlocks : Load {
     laserColor1 = Color.valueOf("E78F92")
     laserColor2 = Color.valueOf("D75B6E")
     requirements(Category.power, IItems.铱板, 5, IItems.导能回路, 2, IItems.生物钢, 1)
-    bundle {
-      desc(zh_CN, "神经索节点", "向连接的建筑传输电力")
+    localization {
+      zh_CN {
+        name = "神经索节点"
+        description = "向连接的建筑传输电力"
+      }
     }
   }
   val 神经束节点 = PowerNode("neuralBeamNode").apply {
@@ -123,8 +131,11 @@ object PowerBlocks : Load {
     laserColor1 = Color.valueOf("E78F92")
     laserColor2 = Color.valueOf("D75B6E")
     requirements(Category.power, IItems.铱板, 10, IItems.导能回路, 5, IItems.生物钢, 1)
-    bundle {
-      desc(zh_CN, "神经束节点", "向更大范围连接的建筑传输电力")
+    localization {
+      zh_CN {
+        name = "神经束节点"
+        description = "向更大范围连接的建筑传输电力"
+      }
     }
   }
   val 远程能量节点 = PowerNode("remotePowerNode").apply {
@@ -137,8 +148,11 @@ object PowerBlocks : Load {
     outputsPower = true
     consumePowerBuffered(50000f)
     requirements(Category.power, IItems.铅锭, 15, IItems.铱板, 15, IItems.导能回路, 10, IItems.暮光合金, 5)
-    bundle {
-      desc(zh_CN, "远程能量节点", "向超大范围连接的建筑传输电力")
+    localization {
+      zh_CN {
+        name = "远程能量节点"
+        description = "向超大范围连接的建筑传输电力"
+      }
     }
   }
 
@@ -150,8 +164,11 @@ object PowerBlocks : Load {
     fullLightColor = IceColor.b4
     consumePowerBuffered(3500f)
     requirements(Category.power, IItems.低碳钢, 5, IItems.高碳钢, 20, IItems.铅锭, 20)
-    bundle {
-      desc(zh_CN, "小型能量电池","存储少量电力,受损会发生爆炸")
+    localization {
+      zh_CN {
+        name = "小型能量电池"
+        description = "存储少量电力,受损会发生爆炸"
+      }
     }
   }
   val 能量电池: Block = Battery("powerBattery").apply {
@@ -163,8 +180,11 @@ object PowerBlocks : Load {
     fullLightColor = IceColor.b4
     consumePowerBuffered(15000f)
     requirements(Category.power, IItems.低碳钢, 10, IItems.高碳钢, 20, IItems.黄铜锭, 30, IItems.铅锭, 50)
-    bundle {
-      desc(zh_CN, "能量电池","存储大量电力,受损会发生爆炸")
+    localization {
+      zh_CN {
+        name = "能量电池"
+        description = "存储大量电力,受损会发生爆炸"
+      }
     }
   }
   val 大型能量电池: Block = Battery("largePowerBattery").apply {
@@ -176,22 +196,31 @@ object PowerBlocks : Load {
     fullLightColor = IceColor.b4
     consumePowerBuffered(1000000f)
     requirements(Category.power, IItems.铅锭, 150, IItems.铱板, 145, IItems.导能回路, 85, IItems.陶钢, 30)
-    bundle {
-      desc(zh_CN, "大型能量电池","存储巨量电力,受损会发生爆炸")
+    localization {
+      zh_CN {
+        name = "大型能量电池"
+        description = "存储巨量电力,受损会发生爆炸"
+      }
     }
   }
 
   val 光伏板 = SolarGenerator("solarPanel").apply {
-    bundle {
-      desc(zh_CN, "光伏板","利用恒星光产生电力,无需维护即可持续运作,提供基础能源支持")
+    localization {
+      zh_CN {
+        name = "光伏板"
+        description = "利用恒星光产生电力,无需维护即可持续运作,提供基础能源支持"
+      }
     }
     size = 2
     powerProduction = 58f/60f
     requirements(Category.power, IItems.低碳钢, 35, IItems.锌锭,20, IItems.单晶硅, 10)
   }
   val 铈基热电机组 = NormalCrafter("ceriumBasedThermal").apply {
-    bundle {
-      desc(zh_CN, "铈基热电机组","裂解铈进行热能转换,可以产生大量电力")
+    localization {
+      zh_CN {
+        name = "铈基热电机组"
+        description = "裂解铈进行热能转换,可以产生大量电力"
+      }
     }
     size=2
     health=300
@@ -213,8 +242,11 @@ object PowerBlocks : Load {
     }
   }
   val 地热发电机 = ThermalGenerator("geothermalGenerator").apply {
-    bundle {
-      desc(zh_CN, "地热发电机","利用地热能持续产生电力,需要建造在高热量区域以发挥最大效率,稳定供能")
+    localization {
+      zh_CN {
+        name = "地热发电机"
+        description = "利用地热能持续产生电力,需要建造在高热量区域以发挥最大效率,稳定供能"
+      }
     }
     size = 3
     floating = true
@@ -227,8 +259,11 @@ object PowerBlocks : Load {
     drawer = DrawMulti(DrawRegion("-bottom"), DrawAnyLiquidTile(), DrawDefault(), DrawGlowRegion())
   }
   val 燃烧发电机 = ConsumeGenerator("combustionGenerator").apply {
-    bundle {
-      desc(zh_CN, "燃烧发电机","燃烧可燃物缓慢生产电力")
+    localization {
+      zh_CN {
+        name = "燃烧发电机"
+        description = "燃烧可燃物缓慢生产电力"
+      }
     }
     powerProduction = 1f
     itemDuration = 120f
@@ -240,8 +275,11 @@ object PowerBlocks : Load {
     requirements(Category.power, IItems.高碳钢, 20, IItems.锌锭, 20)
   }
   val 风力发电机 = WindGenerator("windGenerator").apply {
-    bundle {
-      desc(zh_CN, "风力发电机", "依靠风场发电,无需维护即可持续运作,但无法稳定提供电力来源.工作区域内不能放置大型建筑,否则无法工作")
+    localization {
+      zh_CN {
+        name = "风力发电机"
+        description = "依靠风场发电,无需维护即可持续运作,但无法稳定提供电力来源.工作区域内不能放置大型建筑,否则无法工作"
+      }
     }
     basePowerProduction = 70f
     size = 2
@@ -250,8 +288,11 @@ object PowerBlocks : Load {
     requirements(Category.power, IItems.铅锭, 20, IItems.黄铜锭, 30, IItems.铜锭, 15, IItems.单晶硅, 10)
   }
   val 大型风力发电机 = WindGenerator("windGeneratorLarge").apply {
-    bundle {
-      desc(zh_CN, "大型风力发电机", "高效依靠风场发电,无需维护即可持续运作,但无法稳定提供电力来源.工作区域内不能放置大型建筑,否则无法工作")
+    localization {
+      zh_CN {
+        name = "大型风力发电机"
+        description = "高效依靠风场发电,无需维护即可持续运作,但无法稳定提供电力来源.工作区域内不能放置大型建筑,否则无法工作"
+      }
     }
     size = 4
     health = 500
@@ -260,8 +301,11 @@ object PowerBlocks : Load {
     requirements(Category.power, IItems.铬锭, 60, IItems.黄铜锭, 40, IItems.铜锭, 45, IItems.电子元件, 20)
   }
   val 蒸汽冷凝机 = ThermalGenerator("steamCondenser").apply {
-    bundle {
-      desc(zh_CN, "蒸汽冷凝机","建造在喷气口上时生产少量电力与水")
+    localization {
+      zh_CN {
+        name = "蒸汽冷凝机"
+        description = "建造在喷气口上时生产少量电力与水"
+      }
     }
     squareSprite = false
     size = 3
@@ -285,8 +329,11 @@ object PowerBlocks : Load {
     liquidCapacity = 20f
   }
   val 沼气发电机 = NormalCrafter("biogaGenerator").apply {
-    bundle {
-      desc(zh_CN, "沼气发电机","燃烧沼气缓慢生产电力")
+    localization {
+      zh_CN {
+        name = "沼气发电机"
+        description = "燃烧沼气缓慢生产电力"
+      }
     }
     size = 2
     health = 100
@@ -306,8 +353,11 @@ object PowerBlocks : Load {
   }
 
   val 热核裂变反应堆 = NuclearReactor("heatNuclearReactor").apply {
-    bundle {
-      desc(zh_CN, "热核裂变反应堆","利用钍燃料进行核裂变反应产生大量电力,需要大量急冻液冷却以防止过热,否则将发生剧烈爆炸")
+    localization {
+      zh_CN {
+        name = "热核裂变反应堆"
+        description = "利用钍燃料进行核裂变反应产生大量电力,需要大量急冻液冷却以防止过热,否则将发生剧烈爆炸"
+      }
     }
     fuelItem = IItems.钍锭
     health = 1200
@@ -360,8 +410,11 @@ object PowerBlocks : Load {
     }, DrawGlowRegion(), DrawDefault(), DrawGlowRegion("-glow"))
     ambientSound = Sounds.loopPulse
     ambientSoundVolume = 0.08f
-    bundle {
-      desc(zh_CN, "血肉反应堆","刺激生物钢产生大量电力,运行时会产生强烈波动")
+    localization {
+      zh_CN {
+        name = "血肉反应堆"
+        description = "刺激生物钢产生大量电力,运行时会产生强烈波动"
+      }
     }
   }
   val 终归反应堆 = ImpactReactor("endImpactReactor").apply {
@@ -382,8 +435,11 @@ object PowerBlocks : Load {
     explosionRadius = 84
     explosionDamage = 12000
     explodeSound = Sounds.shootCollaris
-    bundle {
-      desc(zh_CN, "终归反应堆","约束以太能的剧烈反应产生巨量电力,需要持续输入能量维持力场稳定,否则将引发灾难性爆炸")
+    localization {
+      zh_CN {
+        name = "终归反应堆"
+        description = "约束以太能的剧烈反应产生巨量电力,需要持续输入能量维持力场稳定,否则将引发灾难性爆炸"
+      }
     }
     destroyEffect = MultiEffect(ParticleEffect().apply {
       particles = 1
@@ -691,8 +747,11 @@ object PowerBlocks : Load {
     ambientSoundVolume = 0.12f
   }
   val 中子能发电机 = NormalCrafter("neutron_generator").apply {
-    bundle {
-      desc(zh_CN, "中子能发电机", "分解中子生产大量电力")
+    localization {
+      zh_CN {
+        name = "中子能发电机"
+        description = "分解中子生产大量电力"
+      }
     }
     requirements(
       Category.power, IItems.强化合金, 100, IItems.充能FEX水晶, 80, IItems.铀238, 75, IItems.絮凝剂, 70, IItems.气凝胶, 90
@@ -719,8 +778,11 @@ object PowerBlocks : Load {
     )
   }
   val 核子冲击反应堆 = NormalCrafter("nuclear_impact_reactor").apply {
-    bundle {
-      desc(zh_CN, "核子冲击反应堆", "定向约束核爆炸并推动压电转子发电")
+    localization {
+      zh_CN {
+        name = "核子冲击反应堆"
+        description = "定向约束核爆炸并推动压电转子发电"
+      }
     }
     requirements(
       Category.power, IItems.强化合金, 260, IItems.气凝胶, 240, IItems.铀238, 300, IItems.钴钢, 220, IItems.单晶硅, 280, IItems.絮凝剂, 160, IItems.暮光合金, 200

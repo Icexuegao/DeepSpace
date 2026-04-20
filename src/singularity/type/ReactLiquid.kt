@@ -1,11 +1,11 @@
 package singularity.type
 
-import arc.func.Prov
 import arc.graphics.Color
 import arc.math.Mathf
 import arc.math.geom.Geometry
 import arc.struct.ObjectMap
 import arc.struct.Seq
+import ice.world.content.liquid.IceLiquid
 import mindustry.Vars
 import mindustry.entities.Effect
 import mindustry.entities.Puddles
@@ -14,7 +14,7 @@ import mindustry.type.Liquid
 import mindustry.world.Tile
 import universecore.util.Empties
 
-class ReactLiquid : Liquid {
+class ReactLiquid : IceLiquid {
   companion object {
     fun effectWith(fx: Effect, delScl: Float): ReactHandler {
       return effectWith(fx, 0.16f, delScl)
@@ -37,7 +37,6 @@ class ReactLiquid : Liquid {
 
   var init: Runnable = Runnable {}
 
-  constructor(name: String) : super(name)
 
   constructor(name: String, color: Color) : super(name, color)
 

@@ -3,8 +3,7 @@ package ice.content.block.crafter
 import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.WaveEffect
@@ -16,10 +15,12 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 导能回路装配器 : NormalCrafter("conductiveCircuitAssembler") {
   init {
-    bundle {
-      desc(
-        zh_CN, "导能回路装配器", "将单晶硅于铪锭装配为导能回路", "持续开启相位时间场,减缓局部时间以同时进行多种精密零件的制作\n[#9B929D]为什么总有人管她叫灵魂熔炉[]"
-      )
+    localization {
+      zh_CN {
+        name = "导能回路装配器"
+        description = "将单晶硅于铪锭装配为导能回路"
+        details = "持续开启相位时间场,减缓局部时间以同时进行多种精密零件的制作\n[#9B929D]为什么总有人管她叫灵魂熔炉[]"
+      }
     }
     size = 5
     armor = 4f

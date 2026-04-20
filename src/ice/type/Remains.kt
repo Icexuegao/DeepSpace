@@ -15,12 +15,12 @@ import ice.library.scene.ui.addLine
 import ice.library.scene.ui.itooltip
 import ice.library.struct.ConfigPropertyDelegate
 import ice.ui.UI
-import ice.ui.bundle.Bundle
+import ice.ui.bundle.Localizable
 import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
 
-open class Remains(val name: String) :Bundle {
+open class Remains(val name: String) :Localizable {
   companion object {
     val remainsSeq = Seq<Remains>()
 
@@ -53,10 +53,6 @@ open class Remains(val name: String) :Bundle {
     table.get(customTable)
   }
 
-  fun setDescription(desc: String) {
-    customTable.add(desc).grow().wrap().pad(5f).color(remainsColor).row()
-  }
-
   fun setEnabled(enabled: Boolean) {
     if (enabled) install() else uninstall()
     unlock = enabled
@@ -70,14 +66,31 @@ open class Remains(val name: String) :Bundle {
         table.table(IStyles.gradient_right) { it1 ->
           it1.add("遗物").color(IceColor.b4).expandX().left().padLeft(4f)
         }.width(100f).height(30f).color(IceColor.b6).expandX().left().row()
-        table.add(getLocalizedName()).color(remainsColor).fontScale(1.5f).pad(5f).padLeft(0f).expandX().left().row()
+        table.add(localizedName).color(remainsColor).fontScale(1.5f).pad(5f).padLeft(0f).expandX().left().row()
       }.grow().row()
       it.addLine().pad(3f)
       it.table { table ->
         table.add("效果: $effect").color(remainsColor).pad(5f).fontScale(1.3f).wrap().grow()
       }.marginLeft(9f).grow().row()
+      customTable.add(description).grow().wrap().pad(5f).color(remainsColor).row()
       it.add(customTable).grow().row()
     }
+  }
+
+ @JvmField var localizedName = ""
+  @JvmField var description = ""
+  @JvmField var details = ""
+
+  override fun setLocalizedName(localizedName: String) {
+    this.localizedName = localizedName
+  }
+
+  override fun setDescription(description: String) {
+    this.description = description
+  }
+
+  override fun setDetails(details: String) {
+    this.details = details
   }
 
   fun rebuildEnableRemains(table: Table) {
@@ -87,7 +100,7 @@ open class Remains(val name: String) :Bundle {
       RemainsDialog.flunRemains()
     }.disabled {
       disabled()
-    }.size(60f).pad(10f).itooltip(getLocalizedName()).get().hovered {
+    }.size(60f).pad(10f).itooltip(localizedName).get().hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this
         RemainsDialog.flunRemains()
@@ -110,7 +123,7 @@ open class Remains(val name: String) :Bundle {
 
     table.add(button).disabled {
       disabled()
-    }.size(60f).pad(10f).itooltip(getLocalizedName()).get()
+    }.size(60f).pad(10f).itooltip(localizedName).get()
     button.hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this

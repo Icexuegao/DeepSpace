@@ -8,8 +8,7 @@ import arc.math.Mathf
 import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.entities.Damage
 import mindustry.entities.Units
@@ -30,8 +29,12 @@ import singularity.world.draw.part.CustomPart
 
 class Spring: SglTurret("spring") {
   init{
-    bundle {
-      desc(zh_CN, "春分", "这座炮塔能够引导能量够修复我方单位和建筑,同时它会侵入敌方的机械结构中,阻止其行动", "成熟的能量引导技术赋予了这座巨物十分突出的能力")
+    localization {
+      zh_CN {
+        name = "春分"
+        description = "这座炮塔能够引导能量够修复我方单位和建筑,同时它会侵入敌方的机械结构中,阻止其行动"
+        details = "成熟的能量引导技术赋予了这座巨物十分突出的能力"
+      }
     }
     requirements(
       Category.turret,

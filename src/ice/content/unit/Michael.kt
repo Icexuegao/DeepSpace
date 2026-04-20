@@ -3,8 +3,6 @@ package ice.content.unit
 import arc.graphics.g2d.Draw
 import ice.entities.bullet.RandomDamageBulletType
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.entities.part.DrawPart
@@ -16,8 +14,10 @@ import mindustry.graphics.MultiPacker.PageType
 
 class Michael :IceUnitType("unit_michael") {
   init {
-    bundle {
-      desc(zh_CN, "米迦勒")
+    localization {
+      zh_CN {
+        name = "米迦勒"
+      }
     }
     armor = 1f
     speed = 3.5f

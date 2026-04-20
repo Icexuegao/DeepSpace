@@ -4,8 +4,6 @@ import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.block.EnvironmentBlocks
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.Entity
 import ice.world.meta.IceEffects
@@ -31,10 +29,11 @@ class RichTumor : IceUnitType("richTumor", RichTumorUnit::class.java) {
     playerControllable = false
     deathSound = Sounds.plantBreak
     deathExplosionEffect = IceEffects.bloodNeoplasma
-    bundle {
-      desc(
-        zh_CN, "丰瘤", "小型陆行污染生物.无法移动与攻击,不会被任何单位视为目标.落地后进入短暂的潜伏期,随后将下方地表同化为活性肿瘤地"
-      )
+    localization {
+      zh_CN {
+        name = "丰瘤"
+        description = "小型陆行污染生物.无法移动与攻击,不会被任何单位视为目标.落地后进入短暂的潜伏期,随后将下方地表同化为活性肿瘤地"
+      }
     }
   }
 

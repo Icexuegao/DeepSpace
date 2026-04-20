@@ -132,7 +132,7 @@ open class ConsumeLiquidCond<T> : ConsumeLiquidBase<T>() where T : Building, T :
       table.table { t: Table ->
         t.defaults().left().padLeft(6f)
 
-        t.add("${IceStats.流体.getLocalizedName()}:").expandY().top()
+        t.add("${IceStats.流体.localized()}:").expandY().top()
 
         val tables = Array(cons.size / 4 + 1) {
           Table()

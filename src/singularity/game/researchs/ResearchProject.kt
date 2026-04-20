@@ -6,18 +6,33 @@ import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Nullable
-import ice.ui.bundle.Bundle
+import ice.ui.bundle.Localizable
 import mindustry.ctype.UnlockableContent
 import singularity.Singularity
 import singularity.contents.SglTechThree
 import singularity.core.SglEventTypes.ResearchCompletedEvent
 
-class ResearchProject(val name: String, val techRequires: Int, val techRequiresRandom: Int = 0) : Bundle {
+class ResearchProject(val name: String, val techRequires: Int, val techRequiresRandom: Int = 0) :Localizable {
   val dependencies: Seq<ResearchProject> = Seq<ResearchProject>()
   val contents: Seq<UnlockableContent> = Seq<UnlockableContent>()
 
+  @JvmField var localizedName = ""
+  @JvmField var description = ""
+  @JvmField var details = ""
+  override fun setLocalizedName(localizedName: String) {
+    this.localizedName = localizedName
+  }
+
+  override fun setDescription(description: String) {
+    this.description = description
+  }
+
+  override fun setDetails(details: String) {
+    this.details = details
+  }
+
   init {
-    setLocalizedName(name)
+    localizedName = name
   }
 
   var slogan: String = "slogan"
@@ -65,7 +80,7 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
   // 依赖应当在所有项目生成后开始
   fun dependencies(vararg dependencies: String) {
     SglTechThree.dependencies.add {
-      for (dependency in dependencies) {
+      for(dependency in dependencies) {
         addDependency(group!!.getResearch(dependency)!!)
       }
     }
@@ -75,8 +90,6 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
     this.contents.addAll(*contents)
     return this
   }
-
-
 
   fun init() {
     if (inspire != null) {
@@ -90,7 +103,7 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
   }
 
   fun dependenciesCompleted(): Boolean {
-    for (dependency in dependencies) {
+    for(dependency in dependencies) {
       if (!dependency.isCompleted) return false
     }
 
@@ -125,7 +138,7 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
   fun checkComplete(): Boolean {
     if (this.isCompleted) return true
 
-    for (dependency in dependencies) {
+    for(dependency in dependencies) {
       if (!dependency.checkComplete()) return false
     }
 
@@ -142,7 +155,7 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
 
     researched = this.realRequireTechs
 
-    for (content in contents) {
+    for(content in contents) {
       content.unlock()
     }
 
@@ -164,7 +177,7 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
     researched = 0
     isCompleted = false
 
-    for (content in contents) {
+    for(content in contents) {
       content.clearUnlock()
     }
 

@@ -6,8 +6,6 @@ import arc.math.geom.Rect
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -21,8 +19,12 @@ import mindustry.world.meta.BlockFlag
 
 class Siege : IceUnitType("siege") {
   init {
-    bundle {
-      desc(zh_CN, "攻城", "中型地面突击单位.使用冲击炮越过防御工事轰击敌方建筑.开火时无法移动", "炮平四海!!!")
+    localization {
+      zh_CN {
+        name = "攻城"
+        description = "中型地面突击单位.使用冲击炮越过防御工事轰击敌方建筑.开火时无法移动"
+        details = "炮平四海!!!"
+      }
     }
     health = 8400f
     armor = 12f

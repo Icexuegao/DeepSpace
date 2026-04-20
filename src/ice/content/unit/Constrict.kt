@@ -6,8 +6,6 @@ import ice.entities.bullet.MissileBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.IFiles.appendModName
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.DeathGiftAbility
 import mindustry.content.Fx
@@ -20,13 +18,12 @@ import mindustry.type.Weapon
 
 class Constrict : IceUnitType("unit_constrict", LegsUnit::class.java) {
   init {
-    bundle {
-      desc(
-        zh_CN,
-        "构陷",
-        "重型地面突击单位.发射大量追踪导弹打击敌人.会缓慢恢复生命值",
-        "以一种取之不尽的原生六足甲壳生物为基底,移除不必要的器官,进行代谢优化,植入控制芯片,然后整体置入标准外骨骼中"
-      )
+    localization {
+      zh_CN {
+        name = "构陷"
+        description = "重型地面突击单位.发射大量追踪导弹打击敌人.会缓慢恢复生命值"
+        details = "以一种取之不尽的原生六足甲壳生物为基底,移除不必要的器官,进行代谢优化,植入控制芯片,然后整体置入标准外骨骼中"
+      }
     }
     health = 57900f
     hitSize = 32f

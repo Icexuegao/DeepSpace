@@ -7,8 +7,6 @@ import ice.entities.bullet.ArtilleryBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -88,12 +86,11 @@ class Abyss : IceUnitType("unit_abyss", UnitWaterMove::class.java) {
   }
 
   init {
-    bundle {
-      desc(
-        zh_CN,
-        "沧溟",
-        "重型海栖突击单位.发射炮弹和大型鱼雷并辅以机炮攻击敌人,加装护盾辅助发生器维持友军护盾,同时为附近友军提供反扑效果,对舰攻击能力极强"
-      )
+    localization {
+      zh_CN {
+        name = "沧溟"
+        description = "重型海栖突击单位.发射炮弹和大型鱼雷并辅以机炮攻击敌人,加装护盾辅助发生器维持友军护盾,同时为附近友军提供反扑效果,对舰攻击能力极强"
+      }
     }
     health = 8800f
     armor = 14f

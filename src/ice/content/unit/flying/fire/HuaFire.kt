@@ -7,8 +7,7 @@ import ice.content.IUnitTypes.星光
 import ice.entities.bullet.BombBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -23,8 +22,11 @@ import singularity.world.blocks.turrets.EmpBulletType
 
 class HuaFire : IceUnitType("huaFire") {
   init {
-    bundle {
-      desc(zh_CN, "化火", "重型空中突击单位.部署导弹投掷高爆航弹并辅以机炮攻击敌人,特种装甲外壳使其足以应对绝大部分负面状况.开火时减少所受伤害")
+    localization {
+      zh_CN {
+        name = "化火"
+        description = "重型空中突击单位.部署导弹投掷高爆航弹并辅以机炮攻击敌人,特种装甲外壳使其足以应对绝大部分负面状况.开火时减少所受伤害"
+      }
     }
 
     circleTarget = true

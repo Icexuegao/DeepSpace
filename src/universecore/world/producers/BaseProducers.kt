@@ -53,7 +53,7 @@ open class BaseProducers {
   }
 
   fun liquids(vararg liquids: LiquidStack): ProduceLiquids<*> {
-    return add(ProduceLiquids(liquids))
+    return add(ProduceLiquids(liquids,))
   }
 
   fun liquids(vararg liquids: Any): ProduceLiquids<*> {

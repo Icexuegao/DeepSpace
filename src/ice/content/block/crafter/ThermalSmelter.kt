@@ -9,8 +9,7 @@ import arc.math.Mathf
 import arc.util.Time
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.type.Category
@@ -25,8 +24,12 @@ import kotlin.math.max
 
 class ThermalSmelter : NormalCrafter("thermal_smelter") {
   init {
-    bundle {
-      desc(zh_CN, "热能冶炼炉","", "用于冶炼金属的设备,可以制造气流进行金属化合物的高温煅烧")
+    localization {
+      zh_CN {
+        name = "热能冶炼炉"
+        description = ""
+        details = "用于冶炼金属的设备,可以制造气流进行金属化合物的高温煅烧"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

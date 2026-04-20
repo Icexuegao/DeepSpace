@@ -7,8 +7,6 @@ import arc.util.Interval
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.FleshEntity
 import ice.world.meta.IceEffects
@@ -18,8 +16,11 @@ import mindustry.gen.Sounds
 
 class Flies : IceUnitType("flies", FliesUnit::class.java) {
   init {
-    bundle {
-      desc(zh_CN, "糜蝇", "小型飞行污染生物.常成群结队出现,并对任何被视作威胁的个体发动自杀式袭击")
+    localization {
+      zh_CN {
+        name = "糜蝇"
+        description = "小型飞行污染生物.常成群结队出现,并对任何被视作威胁的个体发动自杀式袭击"
+      }
     }
     speed += 1f
     health = 300f

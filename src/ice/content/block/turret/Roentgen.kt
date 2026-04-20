@@ -6,8 +6,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds
@@ -23,8 +22,11 @@ import singularity.world.meta.SglStat
 
 class Roentgen : ProjectileTurret("roentgen") {
   init {
-    bundle {
-      desc(zh_CN, "伦琴", "发射极具穿透力的高能激光束,杀伤力极强")
+    localization {
+      zh_CN {
+        name = "伦琴"
+        description = "发射极具穿透力的高能激光束,杀伤力极强"
+      }
     }
     requirements(
       Category.turret, ItemStack.with(

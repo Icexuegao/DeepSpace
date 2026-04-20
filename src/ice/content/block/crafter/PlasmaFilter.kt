@@ -3,8 +3,7 @@ package ice.content.block.crafter
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import mindustry.type.Category
@@ -16,8 +15,11 @@ import singularity.world.blocks.product.NormalCrafter
 
 class PlasmaFilter : NormalCrafter("plasmaFilter") {
   init {
-    bundle {
-      desc(zh_CN, "血浆过滤器", "冷却血肉赘生物并从中提取生物钢")
+    localization {
+      zh_CN {
+        name = "血浆过滤器"
+        description = "冷却血肉赘生物并从中提取生物钢"
+      }
     }
     size = 5
     hasLiquids = true

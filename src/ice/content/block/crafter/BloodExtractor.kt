@@ -2,8 +2,6 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
@@ -14,8 +12,12 @@ import singularity.world.blocks.product.NormalCrafter
 
 class BloodExtractor : NormalCrafter("bloodExtractor") {
   init {
-    bundle {
-      desc(zh_CN, "血肉分离机", "将生物钢加热为血肉赘生物", "血肉赘生物同时具有高温和易燃两种特性的高危流体")
+    localization {
+      zh_CN {
+        name = "血肉分离机"
+        description="将生物钢加热为血肉赘生物"
+        details="血肉赘生物同时具有高温和易燃两种特性的高危流体"
+      }
     }
     size = 2
     itemCapacity = 24

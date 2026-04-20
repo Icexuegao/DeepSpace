@@ -2,8 +2,7 @@ package ice.content.block.nuclear
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.type.ItemStack
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawLiquidRegion
@@ -14,12 +13,11 @@ import singularity.world.draw.DrawReactorHeat
 
 class 晶格反应堆 : NuclearReactor("lattice_reactor") {
   init {
-    bundle {
-      desc(
-        zh_CN,
-        "晶格反应堆",
-        "特制的缓速反应堆,不使用压缩燃料,直接对燃料晶格结构排列化进行可控裂变,产能较低,但利用率极高\n需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发小范围[accent]爆炸[]"
-      )
+    localization {
+      zh_CN {
+        name = "晶格反应堆"
+        description = "特制的缓速反应堆,不使用压缩燃料,直接对燃料晶格结构排列化进行可控裂变,产能较低,但利用率极高\n需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发小范围[accent]爆炸[]"
+      }
     }
     requirements(
       SglCategory.nuclear,

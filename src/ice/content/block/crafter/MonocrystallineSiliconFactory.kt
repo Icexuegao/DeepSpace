@@ -5,8 +5,7 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import arc.math.Mathf
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
@@ -19,8 +18,11 @@ import singularity.world.blocks.product.NormalCrafter
 
 class MonocrystallineSiliconFactory : NormalCrafter("monocrystallineSiliconFactory") {
   init {
-    bundle {
-      desc(zh_CN, "单晶硅厂", "使用硫化物冲击石英生产单晶硅")
+    localization {
+      zh_CN {
+        name = "单晶硅厂"
+        description = "使用硫化物冲击石英生产单晶硅"
+      }
     }
     size = 4
     health = 460

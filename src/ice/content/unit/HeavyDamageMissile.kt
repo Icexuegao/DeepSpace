@@ -5,8 +5,7 @@ import ice.content.IStatus
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.bullet.ContinuousFlameBulletType
 import mindustry.entities.effect.ParticleEffect
@@ -17,8 +16,10 @@ import mindustry.type.unit.MissileUnitType
 
 class HeavyDamageMissile : MissileUnitType("unit_heavyDamageMissile") {
   init {
-    bundle {
-      desc(zh_CN, "重创")
+    localization {
+      zh_CN {
+        name = "重创"
+      }
     }
 
     health = 3000f

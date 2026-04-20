@@ -1,255 +1,252 @@
 package ice.world.meta
 
 import ice.library.world.Load
-import ice.ui.bundle.BaseBundle.Companion.zh_CN
-import ice.ui.bundle.bundle
 import mindustry.world.meta.StatCat
 
 object IceStats :Load {
   val 最大能量势 = getStat("maxEnergyPotential", IceStatCats.neutron) {
-    desc(zh_CN, "最大能量势")
+    localizedName = "最大能量势"
   }
   val 最大结构尺寸 = getStat("maxStructureSize", IceStatCats.结构) {
-    desc(zh_CN, "最大结构尺寸")
+    localizedName = "最大结构尺寸"
   }
 
   val 电磁脉冲伤害 = getStat("empDamage") {
-    desc(zh_CN, "电磁脉冲伤害")
+    localizedName = "电磁脉冲伤害"
   }
   val 修复 = getStat("repair", StatCat.function) {
-    desc(zh_CN, "修复")
+    localizedName = "修复"
   }
   val 修复量 = getStat("repairAmount", StatCat.function) {
-    desc(zh_CN, "修复量")
+    localizedName = "修复量"
   }
   val 反射率 = getStat("albedo", StatCat.function) {
-    desc(zh_CN, "反射率")
+    localizedName = "反射率"
   }
   val 立场强度 = getStat("fieldStrength", StatCat.function) {
-    desc(zh_CN, "立场强度")
+    localizedName = "立场强度"
   }
   val 无人机制造 = getStat("mechs", StatCat.function) {
-    desc(zh_CN, "无人机制造")
+    localizedName = "无人机制造"
   }
   val 格挡数量 = getStat("resistCont", StatCat.function) {
-    desc(zh_CN, "格挡数量")
+    localizedName = "格挡数量"
   }
   val 伤害减免 = getStat("damagereduction", StatCat.function) {
-    desc(zh_CN, "伤害减免")
+    localizedName = "伤害减免"
   }
   val 生命值恢复 = getStat("regenAmount", StatCat.function) {
-    desc(zh_CN, "生命值恢复")
+    localizedName = "生命值恢复"
   }
   val 连锁伤害 = getStat("chaindamage") {
-    desc(zh_CN, "连锁伤害")
+    localizedName = "连锁伤害"
   }
   val 护甲降低 = getStat("reducearmor") {
-    desc(zh_CN, "护甲降低")
+    localizedName = "护甲降低"
   }
   val 生命上限降低 = getStat("reducemaxhealth") {
-    desc(zh_CN, "生命上限降低")
+    localizedName = "生命上限降低"
   }
   val 斩杀生命值 = getStat("killhealth") {
-    desc(zh_CN, "斩杀生命值")
+    localizedName = "斩杀生命值"
   }
   val 单位数量 = getStat("unitcap") {
-    desc(zh_CN, "单位数量")
+    localizedName = "单位数量"
   }
   val 百分比护盾伤害 = getStat("percentshielddamage") {
-    desc(zh_CN, "百分比护盾伤害")
+    localizedName = "百分比护盾伤害"
   }
   val 最小护盾伤害 = getStat("minshielddamage") {
-    desc(zh_CN, "最小护盾伤害")
+    localizedName = "最小护盾伤害"
   }
   val 可连接建筑 = getStat("linkBlocks", StatCat.function) {
-    desc(zh_CN, "可连接建筑")
+    localizedName = "可连接建筑"
   }
   val 最大连接 = getStat("maxLinks", StatCat.function) {
-    desc(zh_CN, "最大连接")
+    localizedName = "最大连接"
   }
   val 营养浓度 = getStat("nutrientConcentration") {
-    desc(zh_CN, "营养浓度")
+    localizedName = "营养浓度"
   }
   val 反射概率基数 = getStat("baseDeflectChance") {
-    desc(zh_CN, "反射概率基数")
+    localizedName = "反射概率基数"
   }
   val 建造时间花费 = getStat("cost") {
-    desc(zh_CN, "建造时间花费")
+    localizedName = "建造时间花费"
   }
   val 建筑血量系数 = getStat("healthScaling") {
-    desc(zh_CN, "建筑血量系数")
+    localizedName = "建筑血量系数"
   }
   val 硬度 = getStat("hardness") {
-    desc(zh_CN, "硬度")
+    localizedName = "硬度"
   }
   val 是否用于建造 = getStat("buildable") {
-    desc(zh_CN, "是否用于建造")
+    localizedName = "是否用于建造"
   }
   val 状态效果 = getStat("effect") {
-    desc(zh_CN, "状态效果")
+    localizedName = "状态效果"
   }
   val 破甲 = getStat("armorBreak") {
-    desc(zh_CN, "破甲")
+    localizedName = "破甲"
   }
   val 状态持续时间 = getStat("statusTime") {
-    desc(zh_CN, "状态持续时间")
+    localizedName = "状态持续时间"
   }
   val 秒 = getStat("seconds") {
-    desc(zh_CN, "秒")
+    localizedName = "秒"
   }
   val 范围 = getStat("radius", StatCat.function) {
-    desc(zh_CN, "范围")
+    localizedName = "范围"
   }
 
   val 状态 = getStat("status") {
-    desc(zh_CN,"状态")
+    localizedName = "状态"
   }
   val 生产进度 = getStat("productionProgress") {
-    desc(zh_CN, "生产进度")
+    localizedName = "生产进度"
   }
   val 模组 = getStat("mod") {
-    desc(zh_CN, "模组")
+    localizedName = "模组"
   }
   val 发射数量 = getStat("shots") {
-    desc(zh_CN, "发射数量")
+    localizedName = "发射数量"
   }
   val 关闭 = getStat("close") {
-    desc(zh_CN, "关闭")
+    localizedName = "关闭"
   }
   val 科技 = getStat("tree") {
-    desc(zh_CN, "科技")
+    localizedName = "科技"
   }
   val 研究 = getStat("research") {
-    desc(zh_CN, "研究")
+    localizedName = "研究"
   }
   val 数据 = getStat("datas") {
-    desc(zh_CN, "数据")
+    localizedName = "数据"
   }
   val 成就 = getStat("achievement") {
-    desc(zh_CN, "成就")
+    localizedName = "成就"
   }
   val 遗物 = getStat("remains") {
-    desc(zh_CN, "遗物")
+    localizedName = "遗物"
   }
   val 设置 = getStat("settings") {
-    desc(zh_CN, "设置")
+    localizedName = "设置"
   }
   val 日志 = getStat("logs") {
-    desc(zh_CN, "日志")
+    localizedName = "日志"
   }
   val 公告 = getStat("publicInfo") {
-    desc(zh_CN, "公告")
+    localizedName = "公告"
   }
   val 连接 = getStat("links") {
-    desc(zh_CN, "连接 {0}/{1}")
+    localizedName = "连接 {0}/{1}"
   }
 
   val 连接范围 = getStat("linkRange", IceStatCats.流体传输) {
-    desc(zh_CN, "连接范围")
+    localizedName = "连接范围"
   }
   val 传输速度 = getStat("transportSpeed", IceStatCats.流体传输) {
-    desc(zh_CN, "传输速度")
+    localizedName = "传输速度"
   }
 
   val 正面免伤 = getStat("frontReduceHarm", StatCat.function) {
-    desc(zh_CN, "正面免伤")
+    localizedName = "正面免伤"
   }
   val 伤害 = getStat("damage") {
-    desc(zh_CN, "伤害")
+    localizedName = "伤害"
   }
   val 拦截护盾 = getStat("interceptShield") {
-    desc(zh_CN, "拦截护盾")
+    localizedName = "拦截护盾"
   }
   val 拦截伤害 = getStat("interceptDamage") {
-    desc(zh_CN, "拦截伤害")
+    localizedName = "拦截伤害"
   }
   val 拦截范围 = getStat("interceptRange") {
-    desc(zh_CN, "拦截范围")
+    localizedName = "拦截范围"
   }
   val 钻探等级 = getStat("drillLevel", StatCat.crafting) {
-    desc(zh_CN, "钻探等级")
+    localizedName = "钻探等级"
   }
   val 百分比治疗 = getStat("percentHealth") {
-    desc(zh_CN, "百分比治疗")
+    localizedName = "百分比治疗"
   }
   val 最小治疗 = getStat("minhealth") {
-    desc(zh_CN, "最小治疗")
+    localizedName = "最小治疗"
   }
   val 百分比伤害 = getStat("percentdamage") {
-    desc(zh_CN, "百分比伤害")
+    localizedName = "百分比伤害"
   }
   val 最小伤害 = getStat("mindamage") {
-    desc(zh_CN, "最小伤害")
+    localizedName = "最小伤害"
   }
   val 捐赠 = getStat("contribute") {
-    desc(zh_CN, "捐赠")
+    localizedName = "捐赠"
   }
 
   val 主菜单 = getStat("mainMenu") {
-    desc(zh_CN, "主菜单")
+    localizedName = "主菜单"
   }
   val 作者 = getStat("author") {
-    desc(zh_CN, "作者")
+    localizedName = "作者"
   }
   val 亲爱的贡献者 = getStat("contributors") {
-    desc(zh_CN, "亲爱的贡献者")
+    localizedName = "亲爱的贡献者"
   }
   val 版本 = getStat("version") {
-    desc(zh_CN, "版本")
+    localizedName = "版本"
   }
   val 版本发布日期 = getStat("releaseDate") {
-    desc(zh_CN, "版本发布日期")
+    localizedName = "版本发布日期"
   }
 
   val 支持详情 = getStat("support.info") {
-    desc(zh_CN, "首先,谢谢您愿意点开这个页面,若您喜欢这个mod,您的支持将是我们继续这个项目的莫大动力")
+    localizedName = "首先,谢谢您愿意点开这个页面,若您喜欢这个mod,您的支持将是我们继续这个项目的莫大动力"
   }
   val 支持github = getStat("support.star") {
-    desc(zh_CN, "如果您想要支持这个mod,我们比较推荐您从下面的这个按钮跳转到这个项目的github页面,并为我们点亮一个star")
+    localizedName = "如果您想要支持这个mod,我们比较推荐您从下面的这个按钮跳转到这个项目的github页面,并为我们点亮一个star"
   }
   val 支持githubStar = getStat("support.githubStar") {
-    desc(zh_CN, "前往mod的github页面,并点亮一个star")
+    localizedName = "前往mod的github页面,并点亮一个star"
   }
   val 支持捐赠 = getStat("support.donate") {
-    desc(
-      zh_CN,
-      "如果您认为我们的作品值得您提供物质上的支持,您可以通过爱发电或者patreon来向我们提供赞助,我们无意要求您为我们的工作买单,但是如果您愿意为我们的所做给予肯定,我们亦会万分感激."
-    )
+    localizedName = "如果您认为我们的作品值得您提供物质上的支持,您可以通过爱发电或者patreon来向我们提供赞助,我们无意要求您为我们的工作买单,但是如果您愿意为我们的所做给予肯定,我们亦会万分感激."
   }
   val 爱发电 = getStat("afdian") {
-    desc(zh_CN, "爱发电")
+    localizedName = "爱发电"
   }
   val Patreon = getStat("patreon") {
-    desc(zh_CN, "Patreon")
+    localizedName = "Patreon"
   }
   val 支持爱发电 = getStat("support.afdian") {
-    desc(zh_CN, "来自中国的玩家可以选择通过爱发电赞助")
+    localizedName = "来自中国的玩家可以选择通过爱发电赞助"
   }
   val 支持patreon = getStat("support.patreon") {
-    desc(zh_CN, "通过patreon赞助我们")
+    localizedName = "通过patreon赞助我们"
   }
 
   val 可选输入 = getStat("optionalInputs", IceStatCats.其他) {
-    desc(zh_CN, "可选输入")
+    localizedName = "可选输入"
   }
   val 未选择 = getStat("noSelect") {
-    desc(zh_CN, "未选择")
+    localizedName = "未选择"
   }
 
   val 物品 = getStat("item") {
-    desc(zh_CN, "物品")
+    localizedName = "物品"
   }
   val 流体 = getStat("liquid") {
-    desc(zh_CN, "流体")
+    localizedName = "流体"
   }
   val 热量 = getStat("heat") {
-    desc(zh_CN, "热量")
+    localizedName = "热量"
   }
 
-   fun getStat(name: String, cat: StatCat = StatCat.general, desc: IceStat.() -> Unit): IceStat {
-    return IceStat(name, cat).apply {
-      bundle {
-        desc()
+   fun getStat(localizedName: String, cat: StatCat = StatCat.general, block: IceStat.() -> Unit): IceStat {
+    return IceStat(localizedName, cat).apply {
+      localization {
+        zh_CN {
+          block()
+        }
       }
     }
   }

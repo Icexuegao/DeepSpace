@@ -1,16 +1,19 @@
 package ice.content.unit.flying.rain
 
 import arc.graphics.Color
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import mindustry.entities.bullet.LightningBulletType
 import mindustry.gen.Sounds
 
 class Raindrop : IceUnitType("unit_raindrop") {
   init {
-    bundle {
-      desc(zh_CN, "雨滴", "轻型空中突击单位.发射速射电弧攻击敌人", "从小小的雨滴开始")
+    localization {
+      zh_CN {
+        name = "雨滴"
+        description = "轻型空中突击单位.发射速射电弧攻击敌人"
+        details = "从小小的雨滴开始"
+      }
     }
     circleTarget = true
     lowAltitude = true

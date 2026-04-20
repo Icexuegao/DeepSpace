@@ -13,8 +13,7 @@ import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.crushedIce
 import ice.content.block.turret.TurretBullets.rand
 import ice.entities.bullet.base.BulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.entities.part.RegionPart
 import mindustry.gen.Bullet
@@ -33,8 +32,11 @@ import singularity.world.draw.DrawSglTurret
 
 class Fubuki : LaserTurret("fubuki") {
   init {
-    bundle {
-      desc(zh_CN, "吹雪", "向前喷发凛冽的冰霜风暴,凛冽的风雪足以将敌人冻结成冰雕")
+    localization {
+      zh_CN {
+        name = "吹雪"
+        description = "向前喷发凛冽的冰霜风暴,凛冽的风雪足以将敌人冻结成冰雕"
+      }
     }
     requirementPairs(
       Category.turret,

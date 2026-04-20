@@ -24,8 +24,6 @@ import ice.entities.bullet.MultiBasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.world.Load
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.CorrodflyEnd
 import ice.world.content.unit.entity.CorrodflyHead
@@ -165,8 +163,11 @@ object IUnitTypes : Load {
     outlineRadius = 3
     outlineColor = IceColor.r2
     deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
-    bundle {
-      desc(zh_CN, "蚀虻", "小型陆行污染生物.拥有多段体节,尾部体节带有喷口,会喷射腐蚀胶体")
+    localization {
+      zh_CN {
+        name = "蚀虻"
+        description = "小型陆行污染生物.拥有多段体节,尾部体节带有喷口,会喷射腐蚀胶体"
+      }
     }
   }
   val 蚀虻Middle = IceUnitType("corrodfly-middle", CorrodflyMiddle::class.java) {

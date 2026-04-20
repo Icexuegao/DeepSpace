@@ -2,13 +2,15 @@ package ice.world.content.liquid
 
 import arc.graphics.Color
 import ice.content.IPlanets
+import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.gen.Puddle
 import mindustry.type.Liquid
 
-open class IceLiquid(name: String, color: Color , app: IceLiquid.() -> Unit = {}) : Liquid(name, color) {
+open class IceLiquid(name: String, color: Color, app: IceLiquid.() -> Unit = {}) :Liquid(name, color), Localizable {
 
-  constructor(name: String,color: String, app: IceLiquid.() -> Unit = {}) : this(name,Color.valueOf(color),app)
+  constructor(name: String, color: String, app: IceLiquid.() -> Unit = {}) :this(name, Color.valueOf(color), app)
+
   var updateFun: (Puddle) -> Unit = {}
   var nutrientConcentration = 0f
 
@@ -33,5 +35,17 @@ open class IceLiquid(name: String, color: Color , app: IceLiquid.() -> Unit = {}
   override fun update(puddle: Puddle) {
     super.update(puddle)
     updateFun(puddle)
+  }
+
+  override fun setLocalizedName(localizedName: String) {
+    this.localizedName = localizedName
+  }
+
+  override fun setDescription(description: String) {
+    this.description = description
+  }
+
+  override fun setDetails(details: String) {
+    this.details = details
   }
 }

@@ -141,7 +141,7 @@ class LiquidsBuffer : BaseBuffer<LiquidsBuffer.LiquidIntegerStack, Liquid, Liqui
         return BufferLiquidModule()
     }
 
-    override fun localization()=IceStats.流体.getLocalizedName()
+    override fun localization()=IceStats.流体.localized()
 
     override fun displayColor(): Color? {
         return Liquids.water.color

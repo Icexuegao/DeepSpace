@@ -7,8 +7,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.content.block.EnvironmentBlocks
 import ice.library.struct.texture.LazyTextureSingleDelegate
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds
@@ -28,8 +27,10 @@ class CrystalMiner : NormalCrafter("crystal_miner") {
   val rotatorRegionHeat: TextureRegion by LazyTextureSingleDelegate("$name-rotator-heat")
 
   init {
-    bundle {
-      desc(zh_CN, "晶簇粉碎器")
+    localization {
+      zh_CN {
+        name = "晶簇粉碎器"
+      }
     }
     hasItems = true
     size = 2

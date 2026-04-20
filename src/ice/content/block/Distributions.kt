@@ -7,8 +7,7 @@ import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.*
@@ -38,8 +37,11 @@ import singularity.world.blocks.distribute.ItemNode
 @Suppress("unused")
 object Distributions : Load {
   val 基础传送带 = Conveyor("baseConveyor").apply {
-    bundle {
-      desc(zh_CN, "基础传送带", "运输设施,造价低廉")
+    localization {
+      zh_CN {
+        name = "基础传送带"
+        description = "运输设施,造价低廉"
+      }
     }
     size = 1
     speed = 6f
@@ -51,8 +53,11 @@ object Distributions : Load {
     requirements(Category.distribution, IItems.低碳钢, 1)
   }
   val 强化传送带 = Conveyor("reinforcedConveyor").apply {
-    bundle {
-      desc(zh_CN, "强化传送带", "运输设施,造价低廉,比基础传送带更快")
+    localization {
+      zh_CN {
+        name = "强化传送带"
+        description = "运输设施,造价低廉,比基础传送带更快"
+      }
     }
     size = 1
     speed = 13f
@@ -66,8 +71,11 @@ object Distributions : Load {
   }
 
   val 特种传送带 = ArmoredConveyor("specialConveyor").apply {
-    bundle {
-      desc(zh_CN, "特种传送带", "运输设施,比强化传送带更快,不接收侧面输入")
+    localization {
+      zh_CN {
+        name = "特种传送带"
+        description = "运输设施,比强化传送带更快,不接收侧面输入"
+      }
     }
     size = 1
     speed = 15f
@@ -81,8 +89,11 @@ object Distributions : Load {
   }
 
   val 血肉装甲传送带 = Conveyor("fleshArmorConveyor").apply {
-    bundle {
-      desc(zh_CN, "血肉装甲传送带", "运输设施,比特种传送带更快,会缓慢回复生命值")
+    localization {
+      zh_CN {
+        name = "血肉装甲传送带"
+        description = "运输设施,比特种传送带更快,会缓慢回复生命值"
+      }
     }
     health = 600
     armor = 8f
@@ -98,8 +109,10 @@ object Distributions : Load {
   }
 
   val 钴熠传送带 = StackConveyor("cobaltBrightConveyor").apply {
-    bundle {
-      desc(zh_CN, "钴熠传送带")
+    localization {
+      zh_CN {
+        name = "钴熠传送带"
+      }
     }
     speed = 50f / 600f
     requirements(Category.distribution, IItems.高碳钢, 2, IItems.钴钢, 1, IItems.铬锭, 1)
@@ -116,8 +129,11 @@ object Distributions : Load {
     }
   }
   val 生物钢传送带 = StackConveyor("biologicalSteelConveyor").apply {
-    bundle {
-      desc(zh_CN, "生物钢传送带", "运输设施,打包物品进行运输,通电后加快运输速度")
+    localization {
+      zh_CN {
+        name = "生物钢传送带"
+        description = "运输设施,打包物品进行运输,通电后加快运输速度"
+      }
     }
     healAmount = 10f
     health = 300
@@ -157,8 +173,11 @@ object Distributions : Load {
 
   }
   val 梯度传送带 = StackConveyor("gradedConveyor").apply {
-    bundle {
-      desc(zh_CN, "梯度传送带", "运输设施,打包多种物品进行运输")
+    localization {
+      zh_CN {
+        name = "梯度传送带"
+        description = "运输设施,打包多种物品进行运输"
+      }
     }
     speed = 60f / 600f
     drawLastItems = false
@@ -184,16 +203,22 @@ object Distributions : Load {
   }
 
   val 基础交叉器 = Junction("baseJunction").apply {
-    bundle {
-      desc(zh_CN, "基础交叉器", "两条交叉传送带的桥梁")
+    localization {
+      zh_CN {
+        name = "基础交叉器"
+        description = "两条交叉传送带的桥梁"
+      }
     }
     size = 1
     health = 100
     requirements(Category.distribution, IItems.低碳钢, 5, IItems.高碳钢, 5)
   }
   val 交叉神经链路 = Junction("junctionNeuralChain").apply {
-    bundle {
-      desc(zh_CN, "交叉神经链路", "两条交叉传送带的桥梁,比交叉器更快")
+    localization {
+      zh_CN {
+        name = "交叉神经链路"
+        description = "两条交叉传送带的桥梁,比交叉器更快"
+      }
     }
     armor = 4f
     health = 250
@@ -204,8 +229,11 @@ object Distributions : Load {
   }
 
   val 转换分类器 = Sorter("transformSorter").apply {
-    bundle {
-      desc(zh_CN, "转换分类器", "如果物品与所选种类 相同/不同 ,则允许其通过.否则,物品将向两侧输出.可配置")
+    localization {
+      zh_CN {
+        name = "转换分类器"
+        description = "如果物品与所选种类 相同/不同 ,则允许其通过.否则,物品将向两侧输出.可配置"
+      }
     }
     size = 1
     health = 100
@@ -213,8 +241,11 @@ object Distributions : Load {
 
   }
   val 基础路由器 = Router("baseRouter").apply {
-    bundle {
-      desc(zh_CN, "基础路由器", "将物品平均分配至其他三个方向")
+    localization {
+      zh_CN {
+        name = "基础路由器"
+        description = "将物品平均分配至其他三个方向"
+      }
     }
     size = 1
     health = 70
@@ -222,8 +253,11 @@ object Distributions : Load {
 
   }
   val 转换溢流门 = TransformOverflowGate("transformOverflowGate").apply {
-    bundle {
-      desc(zh_CN, "转换溢流门", "当 前方/两侧 被阻塞时才会向 两侧/前方 输出,用于处理多余的物品.可配置")
+    localization {
+      zh_CN {
+        name = "转换溢流门"
+        description = "当 前方/两侧 被阻塞时才会向 两侧/前方 输出,用于处理多余的物品.可配置"
+      }
     }
     size = 1
     health = 200
@@ -232,8 +266,11 @@ object Distributions : Load {
   }
 
   val 基础传送带桥 = TransferNode("baseBridge").apply {
-    bundle {
-      desc(zh_CN, "基础传送带桥", "跨越地形货建筑传输物品")
+    localization {
+      zh_CN {
+        name = "基础传送带桥"
+        description = "跨越地形货建筑传输物品"
+      }
     }
     allowDiagonal = false
     directionAny = false
@@ -248,8 +285,11 @@ object Distributions : Load {
     requirements(Category.distribution, IItems.高碳钢, 6, IItems.锌锭, 4)
   }
   val 装甲传送带桥 = TransferNode("armorBridge").apply {
-    bundle {
-      desc(zh_CN, "装甲传送带桥", "跨越任何地形货建筑传输物品,比普通桥更快,更远")
+    localization {
+      zh_CN {
+        name = "装甲传送带桥"
+        description = "跨越任何地形货建筑传输物品,比普通桥更快,更远"
+      }
     }
     allowDiagonal = false
     directionAny = false
@@ -279,13 +319,19 @@ object Distributions : Load {
     placeableLiquid = true
     consumePower(0.5f)
     requirements(Category.distribution, IItems.导能回路, 10, IItems.生物钢, 5)
-    bundle {
-      desc(zh_CN, "增生传送带桥", "跨越任何地形货建筑传输物品,比装甲传送带桥更快,更远.会缓慢回复生命")
+    localization {
+      zh_CN {
+        name = "增生传送带桥"
+        description = "跨越任何地形货建筑传输物品,比装甲传送带桥更快,更远.会缓慢回复生命"
+      }
     }
   }
   val 传输节点 = TransferNode("transferNode").apply {
-    bundle {
-      desc(zh_CN, "传输节点","能同时运输液体和物品,拥有较远的范围")
+    localization {
+      zh_CN {
+        name = "传输节点"
+        description = "能同时运输液体和物品,拥有较远的范围"
+      }
     }
     hasPower=false
     fadeIn = true
@@ -296,8 +342,11 @@ object Distributions : Load {
     requirements(Category.distribution, IItems.锌锭,4, IItems.铜锭, 4, IItems.钴锭, 8, IItems.石英玻璃, 10)
   }
   val 运输节点 = ItemNode("transport_node").apply {
-    bundle {
-      desc(zh_CN, "运输节点", "高级的传送带桥,可以对节点的任意侧面配置指定物品的输入与输出")
+    localization {
+      zh_CN {
+        name = "运输节点"
+        description = "高级的传送带桥,可以对节点的任意侧面配置指定物品的输入与输出"
+      }
     }
     requirements(Category.distribution, IItems.电子元件, 8, IItems.气凝胶, 8, IItems.铝锭, 10)
     range = 4
@@ -305,8 +354,11 @@ object Distributions : Load {
     transportTime = 3f
   }
   val 相位运输节点 = ItemNode("phase_transport_node").apply {
-    bundle {
-      desc(zh_CN, "相位运输节点", "高级的传送带桥,具有更快的运输速度和更远的连接距离")
+    localization {
+      zh_CN {
+        name = "相位运输节点"
+        description = "高级的传送带桥,具有更快的运输速度和更远的连接距离"
+      }
     }
     requirements(Category.distribution, IItems.絮凝剂, 6, IItems.气凝胶, 10, IItems.强化合金, 8, IItems.铝锭, 12)
     researchCostMultiplier = 1.5f
@@ -323,12 +375,11 @@ object Distributions : Load {
     consume!!.power(0.4f)
   }
   val 铱制高效运输节点 = ItemNode("iridium_transport_node").apply {
-    bundle {
-      desc(
-        zh_CN,
-        "高效运输节点",
-        "高级的传送带桥,具有更快的运输速度和更远的连接距离,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品"
-      )
+    localization {
+      zh_CN {
+        name = "高效运输节点"
+        description = "高级的传送带桥,具有更快的运输速度和更远的连接距离,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品"
+      }
     }
     requirements(
       Category.distribution, IItems.絮凝剂, 4, IItems.铱锭, 4, IItems.FEX水晶, 6, IItems.气凝胶, 12, IItems.铝锭, 12
@@ -350,24 +401,33 @@ object Distributions : Load {
   }
 
   val 基础卸载器 = Unloader("baseUninstalle").apply {
-    bundle {
-      desc(zh_CN, "基础卸载器", "从容器中卸载物品")
+    localization {
+      zh_CN {
+        name = "基础卸载器"
+        description = "从容器中卸载物品"
+      }
     }
     speed = 60f / 10f
     health = 50
     requirementPairs(Category.distribution, IItems.高碳钢 to 30, IItems.低碳钢 to 10, IItems.铜锭 to 15)
   }
   val 极速卸载器 = Unloader("speedUninstalle").apply {
-    bundle {
-      desc(zh_CN, "极速卸载器", "从容器中高速卸载物品")
+    localization {
+      zh_CN {
+        name = "极速卸载器"
+        description = "从容器中高速卸载物品"
+      }
     }
     speed = 60f / 30f
     health = 80
     requirementPairs(Category.distribution, IItems.铬锭 to 30, IItems.铱板 to 25, IItems.导能回路 to 15)
   }
   val 量子卸载器 = Unloader("electronicUninstaller").apply {
-    bundle {
-      desc(zh_CN, "量子卸载器", "从容器中超高速卸载物品")
+    localization {
+      zh_CN {
+        name = "量子卸载器"
+        description = "从容器中超高速卸载物品"
+      }
     }
     squareSprite=false
     speed = 60f / 60f
@@ -381,12 +441,11 @@ object Distributions : Load {
   }
 
   val 质量驱动器 = MassDriver("massDrives").apply {
-    bundle {
-      desc(
-        zh_CN,
-        "质量驱动器",
-        "远距离传输物品,收集若干物品后将其发射到另一个质量驱动器中"
-      )
+    localization {
+      zh_CN {
+        name = "质量驱动器"
+        description = "远距离传输物品,收集若干物品后将其发射到另一个质量驱动器中"
+      }
     }
     size = 2
     reload =120f
@@ -407,12 +466,11 @@ object Distributions : Load {
   }
 
   val 重型质量驱动器 = MassDriver("heavyDutyMassDrives").apply {
-    bundle {
-      desc(
-        zh_CN,
-        "重型质量驱动器",
-        "超远距离传输物品,收集若干物品后将其发射到另一个重型质量驱动器中,容量巨大但转速和发射速度缓慢"
-      )
+    localization {
+      zh_CN {
+        name = "重型质量驱动器"
+        description = "超远距离传输物品,收集若干物品后将其发射到另一个重型质量驱动器中,容量巨大但转速和发射速度缓慢"
+      }
     }
     size = 5
     reload = 600f
@@ -435,45 +493,68 @@ object Distributions : Load {
   }
 
   val 物流枢纽核心 = LogisticsHub("logisticsHub").apply {
-    bundle {
-      desc(zh_CN, "物流枢纽核心","简易的物品管理模块,通过管道统一分发物品")
+    localization {
+      zh_CN {
+        name = "物流枢纽核心"
+        description = "简易的物品管理模块,通过管道统一分发物品"
+      }
     }
     requirements(
       Category.distribution, IItems.电子元件, 50, IItems.导能回路, 100, IItems.钴钢, 200, IItems.强化合金, 50
     )
   }
   val 枢纽管道 = HubConduit("hubConduit").apply {
-    bundle {
-      desc(zh_CN, "枢纽管道","物流枢纽通过此管道分发物品,必须临近放置")
+    localization {
+      zh_CN {
+        name = "枢纽管道"
+        description = "物流枢纽通过此管道分发物品,必须临近放置"
+      }
     }
     requirements(Category.distribution, IItems.锌锭, 1, IItems.导能回路, 1)
   }
   val 物流输入器 = LogisticsInput("logisticsInput").apply {
-    bundle {
-      desc(zh_CN, "物流输入器","通过枢纽管道向当前核心输入物品")
+    localization {
+      zh_CN {
+        name = "物流输入器"
+        description = "通过枢纽管道向当前核心输入物品"
+      }
     }
     requirements(Category.distribution, IItems.铜锭, 20, IItems.导能回路, 5)
   }
   val 物流输出器 = LogisticsOutput("logisticsOutput").apply {
-    bundle {
-      desc(zh_CN, "物流输出器","通过枢纽管道从当前核心抽出物品")
+    localization {
+      zh_CN {
+        name = "物流输出器"
+        description = "通过枢纽管道从当前核心抽出物品"
+      }
     }
     requirements(Category.distribution, IItems.锌锭, 1, IItems.电子元件, 1)
   }
   val 无人机供货端 = DroneDeliveryTerminal("droneTeliveryTerminal")
   val 无人机需求端 = DroneReceivingRnd("droneReceivingRnd").apply {
     requirements(Category.distribution, IItems.铜锭, 20, IItems.单晶硅, 10)
-    bundle {
-      desc(zh_CN, "无人机需求端", "用于从供货端接受物品")
+    localization {
+      zh_CN {
+        name = "无人机需求端"
+        description = "用于从供货端接受物品"
+      }
     }
   }
   val 随机源 = Randomer("randomSource").apply {
-    bundle {
-      desc(zh_CN, "随机源", "随机输出所有资源")
+    localization {
+      zh_CN {
+        name = "随机源"
+        description = "随机输出所有资源"
+      }
     }
     buildVisibility = BuildVisibility.sandboxOnly
   }
   val 定向源 = DirSource("dirSource").apply {
-    bundle { desc(zh_CN, "定向源", "定向输出所有资源") }
+    localization {
+      zh_CN {
+        name = "定向源"
+        description = "定向输出所有资源"
+      }
+    }
   }
 }

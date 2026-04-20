@@ -10,6 +10,7 @@ import arc.util.Time;
 import arc.util.Tmp;
 import arc.util.pooling.Pool;
 import arc.util.pooling.Pools;
+import ice.world.content.blocks.defense.Wall;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.game.Team;
@@ -17,7 +18,6 @@ import mindustry.gen.Building;
 import mindustry.gen.Bullet;
 import mindustry.gen.Groups;
 import mindustry.world.Tile;
-import mindustry.world.blocks.defense.Wall;
 import universecore.math.gravity.GravityField;
 import universecore.util.path.BFSPathFinder;
 import universecore.util.path.IPath;
@@ -26,7 +26,7 @@ import universecore.util.path.PathFindFunc;
 import static mindustry.Vars.tilesize;
 
 
-public class SglWall extends Wall{
+public class SglWall extends Wall {
   /**一格方块的质量，mass不指定的情况下用size计算质量，设为0禁用*/
   public float density = 0;
   public float mass = 0;

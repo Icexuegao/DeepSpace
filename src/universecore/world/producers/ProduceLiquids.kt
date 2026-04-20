@@ -15,7 +15,9 @@ import universecore.components.blockcomp.ProducerBuildComp
 import universecore.world.consumers.cons.liquid.ConsumeLiquidBase
 import kotlin.math.min
 
-class ProduceLiquids<T>(var liquids: Array<out LiquidStack>) : BaseProduce<T>() where T : Building, T : ProducerBuildComp {
+class ProduceLiquids<T>(
+  var liquids: Array<out LiquidStack>
+) : BaseProduce<T>() where T : Building, T : ProducerBuildComp {
   var displayLim: Int = 4
   var portion: Boolean = false
 
@@ -85,7 +87,7 @@ class ProduceLiquids<T>(var liquids: Array<out LiquidStack>) : BaseProduce<T>() 
       table.row()
       table.table {t: Table ->
         t.defaults().left().fill().padLeft(6f)
-        t.add("${IceStats.流体.getLocalizedName()}:").left()
+        t.add("${IceStats.流体.localized()}:").left()
         for (stack in liquids) {
           t.add(IStatValues.displayLiquid(stack.liquid, stack.amount, true, showName = true))
         }

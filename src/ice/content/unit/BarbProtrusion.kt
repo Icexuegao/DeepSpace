@@ -2,16 +2,18 @@ package ice.content.unit
 
 import arc.math.geom.Rect
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.graphics.Pal
 
 class BarbProtrusion : IceUnitType("barbProtrusion") {
   init {
-    bundle {
-      desc(zh_CN, "突刺","轻型地面突击单位.发射炮弹攻击敌人")
+    localization {
+      zh_CN {
+        name = "突刺"
+        description = "轻型地面突击单位.发射炮弹攻击敌人"
+      }
     }
     armor = 8f
     speed = 0.7f

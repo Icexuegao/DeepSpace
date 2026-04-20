@@ -2,8 +2,6 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.type.ItemStack
@@ -15,8 +13,11 @@ import singularity.world.draw.DrawBottom
 
 class FEXPhaseMixer:NormalCrafter("FEX_phase_mixer"){
   init{
-  bundle {
-    desc(zh_CN, "相位混合器", "重建FEX的液态物质结构,使其中的能量活性化")
+  localization {
+    zh_CN {
+      name = "相位混合器"
+      description = "重建FEX的液态物质结构,使其中的能量活性化"
+    }
   }
   requirements(
     Category.crafting, ItemStack.with(

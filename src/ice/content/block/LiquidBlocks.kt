@@ -6,8 +6,7 @@ import ice.content.block.liquid.流体分类阀
 import ice.content.block.liquid.流体装卸器
 import ice.library.EventType.addContentInitEvent
 import ice.library.world.Load
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import ice.world.content.blocks.liquid.*
@@ -20,13 +19,19 @@ import mindustry.world.blocks.production.Pump
 object LiquidBlocks : Load {
   val 泵腔 = PumpChamber("pumpChamber").apply {
     requirements(Category.liquid, ItemStack.with(IItems.肌腱, 40, IItems.碎骨, 10, IItems.无名肉块, 60))
-    bundle {
-      desc(zh_CN, "泵腔","一边跳动...一边泵出流体...")
+    localization {
+      zh_CN {
+        name = "泵腔"
+        description = "一边跳动...一边泵出流体..."
+      }
     }
   }
   val 动力泵 = Pump("kineticPump").apply {
-    bundle {
-      desc(zh_CN, "动力泵", "泵送流体")
+    localization {
+      zh_CN {
+        name = "动力泵"
+        description = "泵送流体"
+      }
     }
     size = 1
     squareSprite = false
@@ -35,8 +40,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.高碳钢, 20, IItems.锌锭, 5)
   }
   val 谐振泵 = Pump("resonancePump").apply {
-    bundle {
-      desc(zh_CN, "谐振泵", "快速泵送流体")
+    localization {
+      zh_CN {
+        name = "谐振泵"
+        description = "快速泵送流体"
+      }
     }
     size = 2
     squareSprite = false
@@ -45,8 +53,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.高碳钢, 20, IItems.锌锭, 10, IItems.黄铜锭, 5, IItems.石英玻璃, 10, IItems.铬锭, 10)
   }
   val 心肌泵 = Pump("myocardialPump").apply {
-    bundle {
-      desc(zh_CN, "心肌泵", "急速泵送流体,需要电力")
+    localization {
+      zh_CN {
+        name = "心肌泵"
+        description = "急速泵送流体,需要电力"
+      }
     }
     size = 4
     squareSprite = false
@@ -69,8 +80,11 @@ object LiquidBlocks : Load {
   }
 
   val 谐振导管 = Conduit("resonanceConduit").apply {
-    bundle {
-      desc(zh_CN, "谐振导管", "向前传输流体")
+    localization {
+      zh_CN {
+        name = "谐振导管"
+        description = "向前传输流体"
+      }
     }
     liquidCapacity = 20f
     requirements(Category.liquid, IItems.高碳钢, 1, IItems.锌锭, 1, IItems.石英玻璃, 1)
@@ -80,8 +94,11 @@ object LiquidBlocks : Load {
     }
   }
   val 流金导管 = Conduit("fluxGoldConduit").apply {
-    bundle {
-      desc(zh_CN, "流金导管", "向前快速传输流体")
+    localization {
+      zh_CN {
+        name = "流金导管"
+        description = "向前快速传输流体"
+      }
     }
     liquidCapacity = 40f
     liquidPressure = 1.025f
@@ -92,8 +109,11 @@ object LiquidBlocks : Load {
     }
   }
   val 紊态导管 = ArmoredConduit("disorderedConduit").apply {
-    bundle {
-      desc(zh_CN, "紊态导管", "向前快速传输流体并且不接受侧面输出,同时阻止流体泄露")
+    localization {
+      zh_CN {
+        name = "紊态导管"
+        description = "向前快速传输流体并且不接受侧面输出,同时阻止流体泄露"
+      }
     }
     leaks = false
     liquidCapacity = 40f
@@ -105,8 +125,11 @@ object LiquidBlocks : Load {
     }
   }
   val 动脉导管 = Conduit("arteryConduit").apply {
-    bundle {
-      desc(zh_CN, "动脉导管", "向前急速传输流体并且不接受侧面输出,同时阻止流体泄露")
+    localization {
+      zh_CN {
+        name = "动脉导管"
+        description = "向前急速传输流体并且不接受侧面输出,同时阻止流体泄露"
+      }
     }
     healAmount = 30f
     health = 600
@@ -123,8 +146,11 @@ object LiquidBlocks : Load {
   }
 
   val 基础导管桥 = TransferNode("baseBridgeConduit").apply {
-    bundle {
-      desc(zh_CN, "基础导管桥", "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体")
+    localization {
+      zh_CN {
+        name = "基础导管桥"
+        description = "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体"
+      }
     }
     directionAny = false
     range = 5
@@ -135,8 +161,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.高碳钢,2,IItems.锌锭, 5, IItems.石英玻璃, 5)
   }
   val 装甲导管桥 = TransferNode("bridgeConduitArmored").apply {
-    bundle {
-      desc(zh_CN, "装甲导管桥", "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体.拥有更厚的装甲")
+    localization {
+      zh_CN {
+        name = "装甲导管桥"
+        description = "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体.拥有更厚的装甲"
+      }
     }
     directionAny = false
     armor = 4f
@@ -152,9 +181,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.石英玻璃, 8, IItems.陶钢, 3, IItems.铱板, 5)
   }
   val 导管桥 = TransferNode("bridgeConduit").apply {
-    bundle {
-      //在以自我为中心且边长为${2 * 6 + 1}的正方形范围内,
-      desc(zh_CN, "导管桥", "向任意方向传输流体,4个方向皆可输入输出")
+    localization {
+      zh_CN {
+        name = "导管桥"
+        description = "向任意方向传输流体,4个方向皆可输入输出"
+      }
     }
     range = 6
     hasItems = false
@@ -163,13 +194,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.单晶硅,3, IItems.锌锭, 5, IItems.石英玻璃, 10)
   }
   val 长距导管桥 = TransferNode("bridgeConduitLarge").apply {
-    bundle {
-      //在以自我为中心且边长为${2 * 10 + 1}的正方形范围内,
-      desc(
-        zh_CN,
-        "长距导管桥",
-        "消耗电力,向任意方向长距离传输流体,4个方向皆可输入输出"
-      )
+    localization {
+      zh_CN {
+        name = "长距导管桥"
+        description = "消耗电力,向任意方向长距离传输流体,4个方向皆可输入输出"
+      }
     }
     range = 10
     hasItems = false
@@ -178,8 +207,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.单晶硅,6, IItems.铜锭, 8, IItems.锌锭, 10, IItems.石英玻璃, 20)
   }
   val 动脉导管桥 = TransferNode("bridgeConduitArtery").apply {
-    bundle {
-      desc(zh_CN, "动脉导管桥", "消耗电力,向被连接的输出节点长距离传输流体,传输节点面向连接的一侧不可接收流体")
+    localization {
+      zh_CN {
+        name = "动脉导管桥"
+        description = "消耗电力,向被连接的输出节点长距离传输流体,传输节点面向连接的一侧不可接收流体"
+      }
     }
     healAmount = 60f
     allowDiagonal = false
@@ -194,8 +226,11 @@ object LiquidBlocks : Load {
   }
 
   val 基础流体路由器 = LiquidRouter("baseLiquidRouter").apply {
-    bundle {
-      desc(zh_CN, "基础流体路由器", "将一个方向的流体平均输出到其他3个方向,可以储存一定量的流体")
+    localization {
+      zh_CN {
+        name = "基础流体路由器"
+        description = "将一个方向的流体平均输出到其他3个方向,可以储存一定量的流体"
+      }
     }
     liquidCapacity=50f
     size = 1
@@ -203,8 +238,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.铜锭, 4, IItems.石英玻璃, 2)
   }
   val 装甲流体路由器 = LiquidRouter("armoredLiquidRouter").apply {
-    bundle {
-      desc(zh_CN, "装甲流体路由器", "将一个方向的流体平均输出到其他3个方向,可以储存一定量的流体.拥有更厚的装甲")
+    localization {
+      zh_CN {
+        name = "装甲流体路由器"
+        description = "将一个方向的流体平均输出到其他3个方向,可以储存一定量的流体.拥有更厚的装甲"
+      }
     }
     armor = 4f
     liquidCapacity = 80f
@@ -215,8 +253,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.石英玻璃, 2, IItems.陶钢, 1, IItems.铱板, 3)
   }
   val 基础流体交叉器 = LiquidJunction("baseLiquidJunction").apply {
-    bundle {
-      desc(zh_CN, "基础流体交叉器", "让两条流体管线交叉通过而互不干扰")
+    localization {
+      zh_CN {
+        name = "基础流体交叉器"
+        description = "让两条流体管线交叉通过而互不干扰"
+      }
     }
     size = 1
     health = 80
@@ -224,8 +265,11 @@ object LiquidBlocks : Load {
   }
 
   val 流体容器 = LiquidRouter("liquidContainer").apply {
-    bundle {
-      desc(zh_CN, "流体容器","可以储存少量单一流体")
+    localization {
+      zh_CN {
+        name = "流体容器"
+        description = "可以储存少量单一流体"
+      }
     }
     size = 2
     solid = true
@@ -236,8 +280,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.铜锭, 20, IItems.石英玻璃, 15)
   }
   val 流体仓库 = LiquidRouter("liquidStorage").apply {
-    bundle {
-      desc(zh_CN, "流体仓库","可以存储大量单一流体")
+    localization {
+      zh_CN {
+        name = "流体仓库"
+        description = "可以存储大量单一流体"
+      }
     }
     size = 3
     solid = true
@@ -248,8 +295,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.铜锭, 50, IItems.石英玻璃, 30)
   }
   val 装甲储液罐 = LiquidRouter("armorLiquidStorage").apply {
-    bundle {
-      desc(zh_CN, "装甲储液罐", "可以存储大量单一流体.拥有更厚的装甲")
+    localization {
+      zh_CN {
+        name = "装甲储液罐"
+        description = "可以存储大量单一流体.拥有更厚的装甲"
+      }
     }
     healAmount = 120f
     health = 3200
@@ -261,9 +311,12 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.铱板, 85, IItems.陶钢, 55, IItems.石英玻璃, 35)
   }
   val 流体枢纽 = MultipleLiquidBlock("fluidJunction").apply {
-    bundle {
-      desc(zh_CN,"流体枢纽","存储大量不同种类的流体.可以使用流体抽离器抽取","正规的的流体存储设施,能将多种流体独立存储于同一单元,有效解决了复杂流水线中的空间占用问题,是高级化生产的必备设施"
-      )
+    localization {
+      zh_CN {
+        name = "流体枢纽"
+        description = "存储大量不同种类的流体.可以使用流体抽离器抽取"
+        details = "正规的的流体存储设施,能将多种流体独立存储于同一单元,有效解决了复杂流水线中的空间占用问题,是高级化生产的必备设施"
+      }
     }
     size = 3
     liquidCapacity = 1000f
@@ -271,8 +324,11 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, IItems.铜锭, 50, IItems.铬锭, 30, IItems.单晶硅, 20, IItems.石英玻璃, 50)
   }
   val 流体抽离器 = LiquidClassifier("liquidClassifier").apply {
-    bundle {
-      desc(zh_CN, "流体抽离器", "从流体枢纽中抽取流体")
+    localization {
+      zh_CN {
+        name = "流体抽离器"
+        description = "从流体枢纽中抽取流体"
+      }
     }
     size = 1
     requirements(Category.liquid, IItems.铜锭, 20, IItems.黄铜锭, 10, IItems.铬锭, 10, IItems.石英玻璃, 10)

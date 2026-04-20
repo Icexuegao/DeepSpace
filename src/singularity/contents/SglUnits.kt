@@ -19,8 +19,6 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.block.turret.TurretBullets
 import ice.library.struct.AttachedProperty
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import mindustry.Vars
 import mindustry.content.Items
 import mindustry.entities.Damage
@@ -91,9 +89,8 @@ class SglUnits : ContentList {
       var SglUnitEntity.bullTime by AttachedProperty(0f)
 
       init {
-        bundle {
-          desc(zh_CN, "不稳定能量体")
-        }
+
+
         Events.on(ClientLoadEvent::class.java) { e: ClientLoadEvent? ->
           immunities.addAll(Vars.content.statusEffects())
           Sgl.empHealth.setEmpDisabled(this)
@@ -293,17 +290,18 @@ class SglUnits : ContentList {
       override fun write(sglUnitEntity: SglUnitEntity, write: Writes) {
         write.f(Time.time - sglUnitEntity.controlTime)
       }
+    }.apply {
+
     }
 
     起源构造器 = object : SglUnitFactory("cstr_1") {
       init {
-        bundle {
-          desc(
-            zh_CN,
-            "起源构造器",
-            "高度集成的机械建造工厂,可以直接进行中小型单位的建造任务",
-            "比起繁杂冗长的重构工作,我们将所有工作都集成在了你看到的这坐机器当中,这可以节省出大量的空间与成本,为对抗敌人创造更多的优势"
-          )
+        localization {
+          zh_CN {
+            name = "起源构造器"
+            description = "高度集成的机械建造工厂,可以直接进行中小型单位的建造任务"
+            description = "比起繁杂冗长的重构工作,我们将所有工作都集成在了你看到的这坐机器当中,这可以节省出大量的空间与成本,为对抗敌人创造更多的优势"
+          }
         }
         requirements(Category.units, IItems.单晶硅, 120, IItems.锌锭, 160, IItems.钍锭, 90, IItems.铝锭, 120, IItems.强化合金, 135)
         size = 5

@@ -8,8 +8,7 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.library.struct.log
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Fx
 import mindustry.entities.part.HaloPart
 import mindustry.entities.part.RegionPart
@@ -36,8 +35,11 @@ import kotlin.math.min
 
 class Dew :ProjectileTurret("dew") {
   init {
-    bundle {
-      desc(zh_CN, "白露", "连续高速发射一连串穿甲弹,向敌人倾泻如同暴雨般的火力")
+    localization {
+      zh_CN {
+        name = "白露"
+        description = "连续高速发射一连串穿甲弹,向敌人倾泻如同暴雨般的火力"
+      }
     }
     requirements(
       Category.turret, IItems.强化合金, 150, IItems.铝锭, 110, IItems.气凝胶, 120,

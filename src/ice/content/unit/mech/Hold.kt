@@ -2,8 +2,6 @@ package ice.content.unit.mech
 
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.ArmorPlateAbility
 import mindustry.entities.abilities.ForceFieldAbility
@@ -13,12 +11,11 @@ import mindustry.gen.Sounds
 
 class Hold : IceUnitType("unit_hold", MechUnit::class.java) {
   init {
-    bundle {
-      desc(
-        zh_CN,
-        "固守",
-        "中型地面突击单位.连续发射穿透性激光束攻击敌人,并以自身为中心投射一片立场护盾.会缓慢恢复生命值,开火时减少所受伤害"
-      )
+    localization {
+      zh_CN {
+        name = "固守"
+        description = "中型地面突击单位.连续发射穿透性激光束攻击敌人,并以自身为中心投射一片立场护盾.会缓慢恢复生命值,开火时减少所受伤害"
+      }
     }
     health = 1270f
     hitSize = 14f

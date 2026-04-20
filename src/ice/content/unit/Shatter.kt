@@ -3,16 +3,18 @@ package ice.content.unit
 import arc.graphics.Color
 import arc.math.geom.Rect
 import ice.entities.bullet.LaserBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.gen.Sounds
 
 class Shatter : IceUnitType("shatter") {
   init {
-    bundle {
-      desc(zh_CN, "碎甲","轻型地面突击单位.发射高热激光攻击敌人")
+    localization {
+      zh_CN {
+        name = "碎甲"
+        description = "轻型地面突击单位.发射高热激光攻击敌人"
+      }
     }
     armor = 10f
     speed = 0.8f

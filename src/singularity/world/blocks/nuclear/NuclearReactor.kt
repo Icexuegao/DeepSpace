@@ -134,7 +134,7 @@ open class NuclearReactor(name: String) : NormalCrafter(name) {
     }
     addBar("heat") { e: NuclearReactorBuild ->
       Bar(
-        { IceStats.热量.getLocalizedName() + if (SettingValue.启用调试模式) ": ${e.heat.toStringi(1)}" else "" }, Pal::lightOrange
+        { IceStats.热量.localized() + if (SettingValue.启用调试模式) ": ${e.heat.toStringi(1)}" else "" }, Pal::lightOrange
       ) { e.heat / maxHeat }
     }
   }

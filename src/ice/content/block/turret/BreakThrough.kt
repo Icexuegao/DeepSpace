@@ -4,8 +4,8 @@ import ice.content.IItems
 import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.RailBulletType
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -49,8 +49,11 @@ class BreakThrough:ItemTurret("breakThrough"){
     consumePower(25f)
     consume(ConsumeCoolant(1.5f))
     coolantMultiplier = 0.333f
-    bundle {
-      desc(zh_CN, "冲穿", "以临界速度发射五道远程穿透磁轨炮摧毁敌人,比裂颅更强")
+    localization {
+      zh_CN {
+        name = "冲穿"
+        description = "以临界速度发射五道远程穿透磁轨炮摧毁敌人,比裂颅更强"
+      }
     }
     addAmmoType(IItems.钍锭) {
       RailBulletType().apply {

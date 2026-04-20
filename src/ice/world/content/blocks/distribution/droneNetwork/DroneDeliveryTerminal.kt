@@ -13,8 +13,6 @@ import ice.ai.CarryTaskAI
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IUnitTypes
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.blocks.abstractBlocks.RangeBlock
 import ice.world.content.blocks.distribution.droneNetwork.DroneReceivingRnd.DroneReceivingRndBuild
 import ice.world.meta.IceStats
@@ -53,8 +51,11 @@ class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
   val stacks: Array<ItemStack> = ItemStack.with(IItems.铬锭, 10, IItems.单晶硅, 10)
 
   init {
-    bundle {
-      desc(zh_CN, "无人机供货端", "简约的物品运输模块,用于将物品从无人机供货端运输到无人机需求端")
+    localization {
+      zh_CN {
+        localizedName = "无人机配送终端"
+        description = "无人机供货端,用于将物品从无人机供货端运输到无人机需求端"
+      }
     }
     size = 3
     health = 300

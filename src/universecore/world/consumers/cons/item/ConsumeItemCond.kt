@@ -108,7 +108,7 @@ class ConsumeItemCond<T> : ConsumeItemBase<T>() where T : Building, T : Consumer
       table.row()
       table.table { t ->
         t.defaults().left().padLeft(6f)
-        t.add("${IceStats.物品.getLocalizedName()}:")
+        t.add("${IceStats.物品.localized()}:")
         for ((count, stack) in this.cons.withIndex()) {
           if (count != 0) t.add("[gray]/[]")
           if (count != 0 && count % 6 == 0) t.row()

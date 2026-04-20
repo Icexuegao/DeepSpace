@@ -10,8 +10,6 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.EnergyFieldAbility
@@ -30,13 +28,12 @@ import mindustry.type.weapons.PointDefenseWeapon
 
 class Fearless : IceUnitType("fearless") {
   init {
-    bundle {
-      desc(
-        zh_CN,
-        "无畏",
-        "重型空中突击单位.发射荷电粒子高爆弹并辅以激光攻击敌人.装载脉冲发生器用以过载敌军引擎和武器系统.加装护盾辅助发生器以维持友军护盾持续作战,配备裂解炮抵御敌人的攻击",
-        "帝国舰队的中坚力量."
-      )
+    localization {
+      zh_CN {
+        name = "无畏"
+        description = "重型空中突击单位.发射荷电粒子高爆弹并辅以激光攻击敌人.装载脉冲发生器用以过载敌军引擎和武器系统.加装护盾辅助发生器以维持友军护盾持续作战,配备裂解炮抵御敌人的攻击"
+        details = "帝国舰队的中坚力量."
+      }
     }
 
     flying = true

@@ -1,15 +1,17 @@
 package ice.content.block.nuclear
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.TokamakOrbit
 
 class 超导约束轨道:TokamakOrbit("magnetic_confinement_orbit"){
   init {
-    bundle {
-      desc(zh_CN, "超导电磁约束导轨", "通过电磁场约束等离子体流的聚变约束导轨,需要消耗大量电力驱动")
+    localization {
+      zh_CN {
+        name = "超导电磁约束导轨"
+        description = "通过电磁场约束等离子体流的聚变约束导轨,需要消耗大量电力驱动"
+      }
     }
     requirements(
       SglCategory.nuclear,

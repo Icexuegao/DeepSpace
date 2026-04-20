@@ -5,6 +5,7 @@ import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import ice.graphics.IceColor
 import ice.library.util.toStringi
+import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.gen.Building
@@ -20,7 +21,18 @@ import mindustry.world.consumers.ConsumeLiquids
 import mindustry.world.meta.BuildVisibility
 import kotlin.math.roundToInt
 
-open class IceBlock(name: String) : Block(name) {
+open class IceBlock(name: String) : Block(name), Localizable {
+  override fun setLocalizedName(localizedName: String) {
+    this.localizedName = localizedName
+  }
+
+  override fun setDescription(description: String) {
+    this.description = description
+  }
+
+  override fun setDetails(details: String) {
+    this.details = details
+  }
   companion object {
     fun Block.requirementPairs(category: Category, vararg items: Pair<Item, Int>) {
       requirements(category, Array(items.size) {

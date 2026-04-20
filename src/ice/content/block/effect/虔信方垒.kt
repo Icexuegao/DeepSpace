@@ -2,16 +2,19 @@ package ice.content.block.effect
 
 import ice.content.IItems
 import ice.content.IUnitTypes
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.CoreBlock
 import mindustry.type.Category
 
 class 虔信方垒 :CoreBlock("pietasCornerCore") {
   init {
-    bundle {
-      desc(zh_CN, "虔信方垒","控制区块的基础.一旦被摧毁,所在区块将重归于敌人控制")
+    localization {
+      zh_CN {
+        name = "虔信方垒"
+        description = "控制区块的基础.一旦被摧毁,所在区块将重归于敌人控制"
+      }
     }
     size = 3
     armor=20f

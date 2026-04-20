@@ -2,8 +2,7 @@ package ice.content.unit
 
 import ice.entities.bullet.base.BulletType
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.content.Fx
@@ -42,10 +41,12 @@ class Footman : IceUnitType("footman") {init {
       hittable = false
     }
   }
-  bundle {
-    desc(
-      zh_CN, "仆从", "中型空中突击单位.喷射大范围高温等离子体攻击敌人.多用于打击密集小型敌人", "传教者的专属防空护卫\n确定是护卫不是火刑柱?"
-    )
+  localization {
+    zh_CN {
+      name = "仆从"
+      description = "中型空中突击单位.喷射大范围高温等离子体攻击敌人.多用于打击密集小型敌人"
+      details = "传教者的专属防空护卫\n确定是护卫不是火刑柱?"
+    }
   }
 }
 }

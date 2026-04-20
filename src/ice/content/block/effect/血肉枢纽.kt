@@ -1,16 +1,19 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+import ice.ui.bundle.localization
+
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.FleshAndBloodCoreBlock
 import mindustry.type.Category
 
 open class 血肉枢纽 :FleshAndBloodCoreBlock("fleshAndBloodhinge") {
   init {
-    bundle {
-      desc(zh_CN, "血肉枢纽","操控血肉生物的唯一途径...")
+    localization {
+      zh_CN {
+        name = "血肉枢纽"
+        description = "操控血肉生物的唯一途径..."
+      }
     }
     health = -1
     size = 4

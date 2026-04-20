@@ -3,8 +3,6 @@ package ice.content.unit
 import arc.graphics.Color
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -15,8 +13,12 @@ import mindustry.world.meta.BlockFlag
 
 class ExplosiveMosquito : IceUnitType("explosiveMosquito") {
   init {
-    bundle {
-      desc(zh_CN, "爆蚊", "轻型空中突击单位.向敌人发起自杀式攻击","因其酷似蚊虫的行为方式而得名.")
+    localization {
+      zh_CN {
+        name = "爆蚊"
+        description = "轻型空中突击单位.向敌人发起自杀式攻击"
+        details = "因其酷似蚊虫的行为方式而得名."
+      }
     }
     lowAltitude = true
     createWreck=false

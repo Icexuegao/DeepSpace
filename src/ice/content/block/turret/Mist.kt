@@ -7,8 +7,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.graphiteCloud
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.content.Items
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
@@ -21,8 +20,11 @@ import singularity.world.blocks.turrets.SglTurret
 
 class Mist: SglTurret("mist") {
   init{
-    bundle {
-      desc(zh_CN, "迷雾", "一门重型对地复合石墨大炮,发射4颗填充了松散石墨的炮弹,爆炸后会产生一片会带有电磁脉冲的石墨云")
+    localization {
+      zh_CN {
+        name = "迷雾"
+        description = "一门重型对地复合石墨大炮,发射4颗填充了松散石墨的炮弹,爆炸后会产生一片会带有电磁脉冲的石墨云"
+      }
     }
     requirements(Category.turret,IItems.强化合金, 100, IItems.气凝胶, 120, IItems.铬锭, 100, IItems.铜锭, 80, IItems.铅锭, 85)
     size = 3

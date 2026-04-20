@@ -4,8 +4,6 @@ import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.library.util.toColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -17,8 +15,11 @@ import mindustry.type.weapons.RepairBeamWeapon
 
 class Meteorite:IceUnitType("meteorite") {
   init{
-    bundle {
-      desc(zh_CN, "陨石", "轻型空中突击单位.以机炮持续扫射攻击敌人,以闪电场电击附近敌军并治疗友军.配备裂解炮抵御敌人的攻击")
+    localization {
+      zh_CN {
+        name = "陨石"
+        description = "轻型空中突击单位.以机炮持续扫射攻击敌人,以闪电场电击附近敌军并治疗友军.配备裂解炮抵御敌人的攻击"
+      }
     }
     flying = true
     lowAltitude = true

@@ -20,8 +20,7 @@ import ice.audio.ISounds
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.library.scene.ui.updateE
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
@@ -43,8 +42,11 @@ class 勘探雷达 :SglBlock("prospectingRadar") {
   var baseSpeed = 0.5f
 
   init {
-    bundle {
-      desc(zh_CN, "勘探雷达","定期使大范围内隐藏于地下的矿物显现")
+    localization {
+      zh_CN {
+        name = "勘探雷达"
+        description = "定期使大范围内隐藏于地下的矿物显现"
+      }
     }
     update = true
     configurable = true

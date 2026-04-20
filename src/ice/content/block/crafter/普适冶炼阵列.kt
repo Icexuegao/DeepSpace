@@ -2,8 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.graphics.IceColor
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
@@ -13,10 +12,12 @@ import singularity.world.blocks.product.NormalCrafter
 
 class 普适冶炼阵列 : NormalCrafter("universalSmelterArray") {
   init {
-    bundle {
-      desc(
-        zh_CN, "普适冶炼阵列","冶炼原矿石出铜锭,锌锭和铅锭,可配置","核心级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铜,锌,铅等多种金属原料,为后续生产提供稳定的金属供应"
-      )
+    localization {
+      zh_CN {
+        name = "普适冶炼阵列"
+        description = "冶炼原矿石出铜锭,锌锭和铅锭,可配置"
+        details = "核心级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铜,锌,铅等多种金属原料,为后续生产提供稳定的金属供应"
+      }
     }
     size = 3
     itemCapacity = 30

@@ -7,8 +7,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.graphiteCloud
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Items
@@ -18,8 +17,11 @@ import singularity.world.blocks.turrets.SglTurret
 
 class Curtain : SglTurret("curtain") {
   init {
-    bundle {
-      desc(zh_CN, "遮幕", "发射石墨炸弹,会制造一篇石墨云,一种朴素但有效的对空防御武器")
+    localization {
+      zh_CN {
+        name = "遮幕"
+        description = "发射石墨炸弹,会制造一篇石墨云,一种朴素但有效的对空防御武器"
+      }
     }
     requirements(Category.turret, IItems.铬锭, 20, IItems.锌锭, 20, IItems.铅锭, 12)
     itemCapacity = 20

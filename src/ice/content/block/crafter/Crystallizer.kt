@@ -4,8 +4,6 @@ import arc.Core
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.draw.DrawDefaultBottom
 import ice.world.draw.DrawMulti
 import mindustry.type.Category
@@ -17,8 +15,11 @@ import singularity.world.blocks.product.NormalCrafter
 
 class Crystallizer : NormalCrafter("crystallizer") {
   init {
-    bundle {
-      desc(zh_CN, "结晶器","使导能流体结晶于强化合金从而生产导能结晶", "最早的导能结晶技术,依赖电磁场波动,使导能流体在载体金属上逐步形成结晶")
+    localization {
+      zh_CN {
+        name = "结晶器"
+        description = "使导能流体结晶于强化合金从而生产导能结晶\n最早的导能结晶技术,依赖电磁场波动,使导能流体在载体金属上逐步形成结晶"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

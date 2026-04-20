@@ -14,7 +14,7 @@ import ice.library.IFiles
 import ice.library.Schematics
 import ice.ui.MenusDialog
 import ice.ui.UI
-import ice.ui.bundle.BaseBundle
+import ice.ui.bundle.LocalizationManager
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.Noise2dBlock
 import ice.world.meta.IAttribute
@@ -101,7 +101,7 @@ open class Ice :Mod() {
     IPlanets.load()
 
     singularity.loadContent()
-    BaseBundle.load()
+    LocalizationManager.load()
 
 
 

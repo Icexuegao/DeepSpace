@@ -2,8 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
+
 import ice.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.type.Category
@@ -18,8 +17,12 @@ import universecore.world.consumers.ConsumeType
 
 class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
   init {
-    bundle {
-      desc(zh_CN, "渗透分离槽","使材料渗透以分离出需求产物,可配置","内置加压可控粒径反渗透过滤器,用于进行一些需要分离颗粒的反应工艺")
+    localization {
+      zh_CN {
+        name = "渗透分离槽"
+        description = "使材料渗透以分离出需求产物,可配置"
+        details = "内置加压可控粒径反渗透过滤器,用于进行一些需要分离颗粒的反应工艺"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

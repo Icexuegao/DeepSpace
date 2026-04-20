@@ -195,5 +195,11 @@ class 奔袭 : IceUnitType("unit_garrison") {
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 1.5f
     })
+    localization {
+      zh_CN {
+        name = "奔袭"
+        description = "重型地面突击单位.装备多门等离子火焰喷射器,对建筑与重甲单位造成毁灭性伤害"
+      }
+    }
   }
 }

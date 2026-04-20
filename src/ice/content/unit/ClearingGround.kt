@@ -9,8 +9,6 @@ import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.library.IFiles.appendModName
-import ice.ui.bundle.bundle
-import ice.ui.bundle.desc
 import ice.world.content.unit.IceUnitType
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect
@@ -25,8 +23,11 @@ import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
 class ClearingGround : IceUnitType("unit_clearingGround") {
   init {
-    bundle {
-      desc(zh_CN, "涤罪", "涤罪是神殿[净罪计划]的产物")
+    localization {
+      zh_CN {
+        name = "涤罪"
+        description = "涤罪是神殿[净罪计划]的产物"
+      }
     }
     speed = 0.44f
     armor = 13f
