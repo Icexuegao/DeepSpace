@@ -16,7 +16,7 @@ class Michael :IceUnitType("unit_michael") {
   init {
     localization {
       zh_CN {
-        name = "米迦勒"
+        this.localizedName = "米迦勒"
       }
     }
     armor = 1f

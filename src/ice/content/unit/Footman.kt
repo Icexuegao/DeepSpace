@@ -43,7 +43,7 @@ class Footman : IceUnitType("footman") {init {
   }
   localization {
     zh_CN {
-      name = "仆从"
+      this.localizedName = "仆从"
       description = "中型空中突击单位.喷射大范围高温等离子体攻击敌人.多用于打击密集小型敌人"
       details = "传教者的专属防空护卫\n确定是护卫不是火刑柱?"
     }

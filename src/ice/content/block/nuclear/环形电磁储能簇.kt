@@ -38,7 +38,7 @@ class 环形电磁储能簇:EnergyContainer("magnetic_energy_container"){
   init {
       localization {
         zh_CN {
-          name = "环形电磁储能簇"
+          this.localizedName = "环形电磁储能簇"
           description = "约束式主动中子能存储设备,可以存储极大量的能量,但是需要消耗电力,若电力供应不足会发生泄漏"
         }
       }

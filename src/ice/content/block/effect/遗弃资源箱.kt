@@ -7,7 +7,7 @@ class 遗弃资源箱:ResBox("resBox"){
   init{
     localization {
       zh_CN {
-        name = "遗弃资源箱"
+        this.localizedName = "遗弃资源箱"
         description = "被废弃的存储箱,内部可能会存在少量资源"
       }
     }

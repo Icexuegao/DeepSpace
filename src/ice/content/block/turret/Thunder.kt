@@ -46,7 +46,7 @@ class Thunder : SglTurret("thunder") {
   init {
     localization {
       zh_CN {
-        name = "惊蛰"
+        this.localizedName = "惊蛰"
         description = "大功率电离轰击武器,它会用耀眼的闪电将敌人化为灰烬"
         details = "这座庞然大物凭借其如同雷鸣般的声响和能够与雷电平齐的杀伤力"
       }

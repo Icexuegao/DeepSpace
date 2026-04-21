@@ -11,7 +11,7 @@ class BarbProtrusion : IceUnitType("barbProtrusion") {
   init {
     localization {
       zh_CN {
-        name = "突刺"
+        this.localizedName = "突刺"
         description = "轻型地面突击单位.发射炮弹攻击敌人"
       }
     }

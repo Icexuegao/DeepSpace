@@ -24,7 +24,7 @@ class DivineArrow:PowerTurret("divineArrow") {
   init{
     localization {
       zh_CN {
-        name = "神矢"
+        this.localizedName = "神矢"
       }
     }
     size = 2

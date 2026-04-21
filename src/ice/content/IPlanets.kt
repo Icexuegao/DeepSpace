@@ -20,7 +20,7 @@ object IPlanets :Load {
   val 伊甸 = IcePlanet("eden", null, 6f).apply {
     localization {
       zh_CN {
-        name = "伊甸"
+        this.localizedName = "伊甸"
       }
     }
     bloom = true
@@ -50,7 +50,7 @@ object IPlanets :Load {
   var 阿德里 = IcePlanet("ardery", 伊甸, 1f, 4).apply {
     localization {
       zh_CN {
-        name = "阿德里"
+        this.localizedName = "阿德里"
       }
     }
     generator = ArderyPlanetGenerator()

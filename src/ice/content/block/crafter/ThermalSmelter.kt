@@ -26,7 +26,7 @@ class ThermalSmelter : NormalCrafter("thermal_smelter") {
   init {
     localization {
       zh_CN {
-        name = "热能冶炼炉"
+        this.localizedName = "热能冶炼炉"
         description = ""
         details = "用于冶炼金属的设备,可以制造气流进行金属化合物的高温煅烧"
       }

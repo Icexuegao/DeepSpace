@@ -298,7 +298,7 @@ class SglUnits : ContentList {
       init {
         localization {
           zh_CN {
-            name = "起源构造器"
+            this.localizedName = "起源构造器"
             description = "高度集成的机械建造工厂,可以直接进行中小型单位的建造任务"
             description = "比起繁杂冗长的重构工作,我们将所有工作都集成在了你看到的这坐机器当中,这可以节省出大量的空间与成本,为对抗敌人创造更多的优势"
           }

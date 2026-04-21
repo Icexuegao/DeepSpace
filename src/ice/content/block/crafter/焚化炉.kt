@@ -40,7 +40,7 @@ open class 焚化炉 : SglBlock("incinerator") {
   init {
     localization {
       zh_CN {
-        name = "焚化炉"
+        this.localizedName = "焚化炉"
         description = "智能销毁流体和物品,可进行二级面板配置,精准控制每一个输入源"
       }
     }

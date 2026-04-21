@@ -9,7 +9,7 @@ class 相位核能塔:NuclearNode("phase_pipe_node"){
   init{
     localization {
       zh_CN {
-        name = "相位能量塔"
+        this.localizedName = "相位能量塔"
         description = "大型中子能运输传输设备,可以承载更高的能量负载和更多的链接数量"
       }
     }

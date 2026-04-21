@@ -19,7 +19,7 @@ class Destructors : NormalCrafter("destructor") {
   init {
     localization {
       zh_CN {
-        name = "析构器"
+        this.localizedName = "析构器"
         description = "加速碰撞破坏物质的原子核结构,以分析物质的微观构成形态并建立原子空间构成的蓝图"
       }
     }

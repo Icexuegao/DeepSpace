@@ -10,7 +10,7 @@ class 基础实验室:Laboratory("laboratory"){
     consumePower(100f / 60)
     localization {
       zh_CN {
-        name = "基础实验室"
+        this.localizedName = "基础实验室"
         description = "提供资源后会缓慢研究选定科技.可配置"
       }
     }

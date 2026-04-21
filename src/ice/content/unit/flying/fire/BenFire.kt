@@ -16,7 +16,7 @@ class BenFire : IceUnitType("benFire") {
   init {
     localization {
       zh_CN {
-        name = "奔火"
+        this.localizedName = "奔火"
         description = "中型空中突击单位.投掷高爆航弹攻击敌人,并加装护盾辅助发生器以维持友军护盾持续作战.开火时减少所受伤害"
       }
     }

@@ -23,7 +23,7 @@ class OreWasher:NormalCrafter("ore_washer"){
   init {
   localization {
     zh_CN {
-      name = "洗矿机"
+      this.localizedName = "洗矿机"
       description = "使用水冲刷沥青粗矿以除去杂质,并析出稀有的导能流体"
     }
   }

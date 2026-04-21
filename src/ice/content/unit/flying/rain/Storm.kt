@@ -16,7 +16,7 @@ class Storm : IceUnitType("unit_storm") {
   init {
     localization {
       zh_CN {
-        name = "暴雨"
+        this.localizedName = "暴雨"
         description = "中型空中突击单位.发射双联球状闪电攻击敌人"
       }
     }

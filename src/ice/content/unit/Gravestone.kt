@@ -25,7 +25,7 @@ class Gravestone :IceUnitType("unit_gravestone") {
   init {
     localization {
       zh_CN {
-        name = "摧枯"
+        this.localizedName = "摧枯"
         description = "精英作战部队,具有凶猛的火力.以生物钢作为主要材料,辅以陶钢作为电磁屏蔽层,一般装备甚至无法留下划痕,同时在澎湃的能量输出下,其回复速度令人惊异\n控制中枢与动力炉紧密相连,在内部结构大规模受损导致动力炉失稳融毁后会一同损毁"
       }
     }

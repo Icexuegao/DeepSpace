@@ -22,7 +22,7 @@ open class 增压铈萃取器 : NormalCrafter("ceriumExtractorLarge") {
   init {
     localization {
       zh_CN {
-        name = "增压铈萃取器"
+        this.localizedName = "增压铈萃取器"
         description = "从铈硅石中萃取并锻压成铈锭,需要通入水,会产生废水.可配置"
         details = "在特制的超高压密封反应釜内,通过液相沉淀的方式萃取铈\n相较初代密封性更强,具有更高的压力,能够更迅速的萃取铈"
       }

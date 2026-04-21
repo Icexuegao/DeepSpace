@@ -14,7 +14,7 @@ import singularity.world.draw.DrawReactorHeat
 class 核反应堆 : NuclearReactor("nuclear_reactor") {init {
   localization {
     zh_CN {
-      name = "核反应堆"
+      this.localizedName = "核反应堆"
       description = "标准的核裂变反应堆,使用压缩核燃料以高效率产出核能,燃料越紧凑效率越高,需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发剧烈的[accent]爆炸[]"
     }
   }

@@ -38,7 +38,7 @@ class Winter : SglTurret("winter"){
   init {
     localization {
       zh_CN {
-        name = "冬至"
+        this.localizedName = "冬至"
         description = "它用力场,将周围的物质分子的移动牢牢的限制,在极寒领域展开的瞬间,有如时间也被冻结一般,一切都停了下来,并破碎成无数微小的碎片"
       }
     }

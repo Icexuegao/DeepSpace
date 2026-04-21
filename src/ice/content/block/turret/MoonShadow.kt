@@ -26,7 +26,7 @@ class MoonShadow : PowerTurret("moonShadow") {
   init {
     localization {
       zh_CN {
-        name = "月隐"
+        this.localizedName = "月隐"
         description = "中型能量炮塔,可以快速向敌人发射闪电能量团"
       }
     }

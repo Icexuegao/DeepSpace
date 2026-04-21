@@ -24,7 +24,7 @@ class SwordSpear : IceUnitType("unit_swordSpear") {
   init {
     localization {
       zh_CN {
-        name = "剑戟"
+        this.localizedName = "剑戟"
         description = "中型空中突击单位.在远处发射激光攻击敌人,尾迹灼烧途经的敌军.配备小型裂解炮抵御敌人的攻击,并对附近的友军提供屠戮效果,开火时减少所受伤害"
       }
     }

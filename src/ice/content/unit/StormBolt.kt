@@ -22,7 +22,7 @@ class StormBolt : IceUnitType("unit_storBolt") {
   init {
     localization {
       zh_CN {
-        name = "风暴"
+        this.localizedName = "风暴"
         description = "重型空中突击单位.对远距离敌人发射能量弹,对近距离的敌人则发射高热激光.加装护盾辅助发生器以维持友军护盾持续作战,开火时减少所受伤害.攻击时无法移动"
         details = "风雨欲来..."
       }

@@ -21,7 +21,7 @@ class Penetrate : ItemTurret("turret_penetrate") {
   init {
     localization {
       zh_CN {
-        name = "贯通"
+        this.localizedName = "贯通"
         description = "向指定方位发射一道强劲的定向爆破束"
       }
     }

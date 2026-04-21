@@ -14,7 +14,7 @@ class 铸铜厂 : NormalCrafter("copperFoundry") {
   init {
     localization {
       zh_CN {
-        name = "铸铜厂"
+        this.localizedName = "铸铜厂"
         description = "将铜锭和锌锭筑铸为黄铜锭"
       }
     }

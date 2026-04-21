@@ -24,7 +24,7 @@ class Wave : ItemTurret("turret_wave") {
   init {
     localization {
       zh_CN {
-        name = "浪潮"
+        this.localizedName = "浪潮"
         description = "大型抛射炮塔,能够快速交替发射散射炮弹\n使用聚能装药爆破弹,极大提升了炮弹毁伤力"
       }
     }

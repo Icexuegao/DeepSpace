@@ -16,7 +16,7 @@ class QualityGenerator : MediumCrafter("quality_generator") {
   init {
     localization {
       zh_CN {
-        name = "质量生成器"
+        this.localizedName = "质量生成器"
         description = "消耗中子能生成介质"
         details = "将能量无序逆向转换的设备,将大量中子能向物质质量进行转换,将产出除夸克类介质外的纯净无序介质"
       }

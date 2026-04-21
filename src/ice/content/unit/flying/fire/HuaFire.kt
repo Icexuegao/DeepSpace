@@ -24,7 +24,7 @@ class HuaFire : IceUnitType("huaFire") {
   init {
     localization {
       zh_CN {
-        name = "化火"
+        this.localizedName = "化火"
         description = "重型空中突击单位.部署导弹投掷高爆航弹并辅以机炮攻击敌人,特种装甲外壳使其足以应对绝大部分负面状况.开火时减少所受伤害"
       }
     }

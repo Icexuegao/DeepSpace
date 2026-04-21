@@ -21,7 +21,7 @@ class Hyun : IceUnitType("unit_hyun") {
   init {
     localization {
       zh_CN {
-        name = "玄"
+        this.localizedName = "玄"
       }
     }
     circleTarget = true

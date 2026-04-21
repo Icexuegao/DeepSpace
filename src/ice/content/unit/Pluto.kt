@@ -21,7 +21,7 @@ class Pluto : IceUnitType("unit_pluto") {
   init {
     localization {
       zh_CN {
-        name = "冥"
+        this.localizedName = "冥"
       }
     }
     circleTarget = true

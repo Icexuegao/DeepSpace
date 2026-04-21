@@ -15,7 +15,7 @@ class 盒子 :StorageBlock("box") {
     requirements(Category.effect, IItems.高碳钢, 30, IItems.低碳钢, 10, IItems.铜锭, 15)
     localization {
       zh_CN {
-        name = "盒子"
+        this.localizedName = "盒子"
         description = "微量存储各种类型的物品.可以用装卸器卸载物品"
         details = "经典回归之这个小盒就是你永远的家"
       }

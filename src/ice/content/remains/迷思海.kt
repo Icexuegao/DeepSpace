@@ -41,7 +41,7 @@ class 迷思海 :Remains("remains_mystic_sea") {
   init {
     localization {
       zh_CN {
-        name="迷思海"
+        this.localizedName ="迷思海"
         description="你可悲的一部分正期望着回到你的身上"
       }
     }

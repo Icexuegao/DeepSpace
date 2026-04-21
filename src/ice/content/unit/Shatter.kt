@@ -12,7 +12,7 @@ class Shatter : IceUnitType("shatter") {
   init {
     localization {
       zh_CN {
-        name = "碎甲"
+        this.localizedName = "碎甲"
         description = "轻型地面突击单位.发射高热激光攻击敌人"
       }
     }

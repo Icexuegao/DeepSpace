@@ -31,7 +31,7 @@ class Spring: SglTurret("spring") {
   init{
     localization {
       zh_CN {
-        name = "春分"
+        this.localizedName = "春分"
         description = "这座炮塔能够引导能量够修复我方单位和建筑,同时它会侵入敌方的机械结构中,阻止其行动"
         details = "成熟的能量引导技术赋予了这座巨物十分突出的能力"
       }

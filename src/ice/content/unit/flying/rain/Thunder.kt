@@ -16,7 +16,7 @@ class Thunder : IceUnitType("unit_thunder") {
   init {
     localization {
       zh_CN {
-        name = "惊雷"
+        this.localizedName = "惊雷"
         description = "重型空中突击单位.发射缓慢移动的球状闪电攻击敌人,同时以闪电场电击附近敌军并治疗友军"
       }
     }

@@ -19,7 +19,7 @@ class BreakArmy : IceUnitType("breakArmy") {
   init {
     localization {
       zh_CN {
-        name = "破军"
+        this.localizedName = "破军"
         description = "中型地面突击单位.发射高爆炮弹攻击敌人"
       }
     }

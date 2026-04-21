@@ -18,7 +18,7 @@ class 暮白高炉 : NormalCrafter("duskFactory") {
   init {
     localization {
       zh_CN {
-        name = "暮白高炉"
+        this.localizedName = "暮白高炉"
         description = "将低碳钢,铬锭,钴锭,铪锭和暮光液合成暮光合金"
         details = "金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金"
       }

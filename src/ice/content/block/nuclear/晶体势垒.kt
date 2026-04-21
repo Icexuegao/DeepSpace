@@ -9,7 +9,7 @@ class 晶体势垒: EnergyBuffer("crystal_buffer"){
   init{
     localization {
       zh_CN {
-        name = "晶体势垒"
+        this.localizedName = "晶体势垒"
         description = "中型能量缓冲设施,具有更大的能量缓冲空间,可进行中压区调压"
       }
     }

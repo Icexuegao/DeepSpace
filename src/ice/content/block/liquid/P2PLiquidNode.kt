@@ -39,7 +39,7 @@ class P2PLiquidNode : SglBlock("p2pLiquidNode") {
   init {
     localization {
       zh_CN {
-        name = "P2P流体节点"
+        this.localizedName = "P2P流体节点"
         description = "分散流体交换通信方式"
       }
     }

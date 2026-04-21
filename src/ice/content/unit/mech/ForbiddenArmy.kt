@@ -26,7 +26,7 @@ class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
   init {
     localization {
       zh_CN {
-        name = "禁军"
+        this.localizedName = "禁军"
         description = "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,并对附近的友军提供坚忍效果.会缓慢恢复生命值,开火时减少所受伤害"
       }
     }

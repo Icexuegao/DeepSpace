@@ -12,7 +12,7 @@ class 传颂核心 :CoreBlock("eulogyCore") {
   init {
     localization {
       zh_CN {
-        name = "传颂核心"
+        this.localizedName = "传颂核心"
         description = "控制区块的基础.有更大的容量与中型装甲.一旦被摧毁,所在区块将重归于敌人控制"
       }
     }

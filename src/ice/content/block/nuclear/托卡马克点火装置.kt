@@ -20,7 +20,7 @@ class 托卡马克点火装置:TokamakCore("tokamak_firer"){
     quickRotate = false
     localization {
       zh_CN {
-        name = "托卡马克点火装置"
+        this.localizedName = "托卡马克点火装置"
         description = "托卡马克核聚变装置的核心组件,是添加材料与输出能量的端口,在一个核聚变装置中必须有且只有一个此设备。将此设备使用聚变约束导轨链接成一个闭环(这个闭环有且只能有4个拐角)构成完整的托卡马克聚变反应堆,而此反应堆的功率取决于整个结构的规模大小"
       }
     }

@@ -35,7 +35,7 @@ object MatrixDistNet : Load {
   var 矩阵中枢伺服器 = DistNetCore("matrix_core").apply {
     localization {
       zh_CN {
-        name = "矩阵中枢伺服器"
+        this.localizedName = "矩阵中枢伺服器"
         description = "一个矩阵网络的核心设备,矩阵网络必须有且只有一个中枢伺服器,矩阵桥连接此方块时只能单向连接"
       }
     }
@@ -57,7 +57,7 @@ object MatrixDistNet : Load {
     matrixEnergyUse = 0.02f
     localization {
       zh_CN {
-        name = "矩阵桥"
+        this.localizedName = "矩阵桥"
         description = "矩阵建立的物质运输桥,可任意方向链接的物质运输桥,可运输物品和液体\n同时,这也是矩阵网络中用于连接设备的节点,只能呈树状结构建立矩阵网络"
       }
     }
@@ -79,7 +79,7 @@ object MatrixDistNet : Load {
     matrixEnergyUse = 0.05f
     localization {
       zh_CN {
-        name = "矩阵塔"
+        this.localizedName = "矩阵塔"
         description = "大型的矩阵连接柱,比矩阵桥有更远的连接距离,但是只能向四个方向进行连接"
       }
     }
@@ -98,7 +98,7 @@ object MatrixDistNet : Load {
     matrixEnergyUse = 1.2f
     localization {
       zh_CN {
-        name = "网格控制器"
+        this.localizedName = "网格控制器"
         description = "矩阵网格的控制中枢,与矩阵网格框架建立矩阵网格,在网格中通过此设备配置网格内io点的的输入输出和存储设备,是一个重要的物流管理模型"
       }
     }
@@ -106,7 +106,7 @@ object MatrixDistNet : Load {
   var 网格框架 = MatrixEdgeBlock("matrix_grid_node").apply {
     localization {
       zh_CN {
-        name = "网格框架"
+        this.localizedName = "网格框架"
         description = "矩阵网格的构建设备,彼此连接,与一个网络控制器构成闭环后建立其矩阵网格"
       }
     }
@@ -121,7 +121,7 @@ object MatrixDistNet : Load {
   var 通用IO端口 = GenericIOPoint("io_point").apply {
     localization {
       zh_CN {
-        name = "通用IO端口"
+        this.localizedName = "通用IO端口"
         description = "矩阵网格使用的IO设施,物品及液体的通用端口,通过网格控制器进行端口配置"
       }
     }
@@ -136,7 +136,7 @@ object MatrixDistNet : Load {
   var 能源管理器 = DistEnergyManager("matrix_energy_manager").apply {
     localization {
       zh_CN {
-        name = "能源管理器"
+        this.localizedName = "能源管理器"
         description = "对能源接受和管理的设备,与相邻的能源设备形成一个能源管理模块,用于接受和缓存能量以供应网络使用"
       }
     }
@@ -158,7 +158,7 @@ object MatrixDistNet : Load {
     size = 3
     localization {
       zh_CN {
-        name = "能源簇"
+        this.localizedName = "能源簇"
         description = "网络缓存能源能的设备,可以存储一定量的矩阵能源以避免停电等情况造成的致命问题"
       }
     }
@@ -174,7 +174,7 @@ object MatrixDistNet : Load {
     size = 2
     localization {
       zh_CN {
-        name = "能量接口"
+        this.localizedName = "能量接口"
         description = "接收能量供应网络消耗而设备,需要邻近能源管理器放置"
       }
     }
@@ -191,7 +191,7 @@ object MatrixDistNet : Load {
     size = 2
     localization {
       zh_CN {
-        name = "中子接口"
+        this.localizedName = "中子接口"
         description = "网络接受中子能输入的设备,需要邻近能源管理器放置"
       }
     }
@@ -215,7 +215,7 @@ object MatrixDistNet : Load {
     })
     localization {
       zh_CN {
-        name = "矩阵组件接口"
+        this.localizedName = "矩阵组件接口"
         description = "用于将矩阵功能组件接入网络中,需要彼此连接形成连续的接口结构,且与组件设备需要的连接方式匹配才可接入网络"
       }
     }
@@ -234,7 +234,7 @@ object MatrixDistNet : Load {
 
     localization {
       zh_CN {
-        name = "矩阵处理单元"
+        this.localizedName = "矩阵处理单元"
         description = "需要紧贴矩阵中枢伺服器放置,提供网络核心的运算力,使网络每次刷新可以处理更多的请求任务"
       }
     }
@@ -252,7 +252,7 @@ object MatrixDistNet : Load {
     matrixEnergyUse = 0.8f
     localization {
       zh_CN {
-        name = "矩阵拓扑容器"
+        this.localizedName = "矩阵拓扑容器"
         description = "需要紧贴矩阵中枢伺服器放置,提供整个网络的拓扑容量,使网络可以安装更多的设备"
       }
     }
@@ -271,7 +271,7 @@ object MatrixDistNet : Load {
     matrixEnergyUse = 0.6f
     localization {
       zh_CN {
-        name = "通用物质缓存器"
+        this.localizedName = "通用物质缓存器"
         description = "网络组件,提供网络的物品和流体缓存区容量"
       }
     }
@@ -288,7 +288,7 @@ object MatrixDistNet : Load {
     hasItems = true
     localization {
       zh_CN {
-        name = "自动回收组件"
+        this.localizedName = "自动回收组件"
         description = "可以配置缓存的溢出资源回收,在已安装该设备的网络中,若所有网络容器都已满,接收的在配置回收清单中的资源将被自动销毁,以避免网络堵死\n有两种配置模式：\n    [accent]黑名单模式[]: 销毁溢出的已选中资源\n    [accent]白名单模式[]: 配置选中的资源在溢出时被保留"
       }
     }

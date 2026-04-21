@@ -71,7 +71,7 @@ class Tear :PowerTurret("tear"){
     }
     localization {
       zh_CN {
-        name = "撕裂"
+        this.localizedName = "撕裂"
         description = "一座强大的电磁轨道炮,超长轨道,超大力度,可以快速地进行精准射击"
       }
     }

@@ -32,63 +32,63 @@ object EnvironmentBlocks :Load {
   val 多叶草 = Prop("leafyGrass").apply {
     localization {
       zh_CN {
-        name = "多叶草"
+        this.localizedName = "多叶草"
       }
     }
   }
   val 地笼草 = Prop("cageGrass").apply {
     localization {
       zh_CN {
-        name = "地笼草"
+        this.localizedName = "地笼草"
       }
     }
   }
   val 枯棕枝 = Prop("deadwoodGrass").apply {
     localization {
       zh_CN {
-        name = "枯棕枝"
+        this.localizedName = "枯棕枝"
       }
     }
   }
   val 绿羽 = Prop("featherGrass").apply {
     localization {
       zh_CN {
-        name = "绿羽"
+        this.localizedName = "绿羽"
       }
     }
   }
   val 草嫣红 = Prop("springGrassRed").apply {
     localization {
       zh_CN {
-        name = "草嫣红"
+        this.localizedName = "草嫣红"
       }
     }
   }
   val 绯叶绮 = Prop("scarletLeaf").apply {
     localization {
       zh_CN {
-        name = "绯叶绮"
+        this.localizedName = "绯叶绮"
       }
     }
   }
   val 叶嫣粉 = Prop("leafBlush").apply {
     localization {
       zh_CN {
-        name = "叶嫣粉"
+        this.localizedName = "叶嫣粉"
       }
     }
   }
   val 血孢子丛 = Prop("bloodNeoplasmSporophore", Sounds.plantBreak).apply {
     localization {
       zh_CN {
-        name = "血孢子丛"
+        this.localizedName = "血孢子丛"
       }
     }
   }
   val 血晶尖刺 = TallBlock("bloodCrystalSpikes").apply {
     localization {
       zh_CN {
-        name = "血晶尖刺"
+        this.localizedName = "血晶尖刺"
       }
     }
   }
@@ -107,7 +107,7 @@ object EnvironmentBlocks :Load {
     }
     localization {
       zh_CN {
-        name = "殷红树"
+        this.localizedName = "殷红树"
       }
     }
   }
@@ -115,14 +115,14 @@ object EnvironmentBlocks :Load {
     shadowOffset = -1f
     localization {
       zh_CN {
-        name = "利芽"
+        this.localizedName = "利芽"
       }
     }
   }
   val 红冰石 = Prop("redIceStone").apply {
     localization {
       zh_CN {
-        name = "红冰石"
+        this.localizedName = "红冰石"
       }
     }
   }
@@ -134,7 +134,7 @@ object EnvironmentBlocks :Load {
     isLiquid = true
     localization {
       zh_CN {
-        name = "灵液"
+        this.localizedName = "灵液"
       }
     }
   }
@@ -143,28 +143,28 @@ object EnvironmentBlocks :Load {
     speedMultiplier = 0.5f
     localization {
       zh_CN {
-        name = "软红冰"
+        this.localizedName = "软红冰"
       }
     }
   }
   val 绿羽地 = Floor("sod").apply {
     localization {
       zh_CN {
-        name = "绿羽地"
+        this.localizedName = "绿羽地"
       }
     }
   }
   val 绿羽墙 = StaticWall("sodWall").apply {
     localization {
       zh_CN {
-        name = "绿羽墙"
+        this.localizedName = "绿羽墙"
       }
     }
   }
   val 金珀沙 = Floor("goldPearlGrit").apply {
     localization {
       zh_CN {
-        name = "金珀沙"
+        this.localizedName = "金珀沙"
       }
     }
     itemDrop = IItems.金珀沙
@@ -172,7 +172,7 @@ object EnvironmentBlocks :Load {
   val 金珀沙水 = ShallowLiquid("goldPearlGritWater", 金珀沙).apply {
     localization {
       zh_CN {
-        name = "金珀沙水"
+        this.localizedName = "金珀沙水"
       }
     }
     itemDrop = IItems.金珀沙
@@ -180,49 +180,49 @@ object EnvironmentBlocks :Load {
   val 金珀沙墙 = StaticWall("goldPearlGritWall").apply {
     localization {
       zh_CN {
-        name = "金珀沙墙"
+        this.localizedName = "金珀沙墙"
       }
     }
   }
   val 皎月银沙石块 = Prop("silverSandStone").apply {
     localization {
       zh_CN {
-        name = "皎月银沙石块"
+        this.localizedName = "皎月银沙石块"
       }
     }
   }
   val 皎月银沙 = Floor("silverSand").apply {
     localization {
       zh_CN {
-        name = "皎月银沙"
+        this.localizedName = "皎月银沙"
       }
     }
   }
   val 皎月银沙水 = ShallowLiquid("silverSandWater", 皎月银沙).apply {
     localization {
       zh_CN {
-        name = "皎月银沙水"
+        this.localizedName = "皎月银沙水"
       }
     }
   }
   val 皎月银沙墙 = StaticWall("silverSandWall").apply {
     localization {
       zh_CN {
-        name = "皎月银沙墙"
+        this.localizedName = "皎月银沙墙"
       }
     }
   }
   val 风蚀沙柱 = TallBlock("windErodedSandPillar").apply {
     localization {
       zh_CN {
-        name = "风蚀沙柱"
+        this.localizedName = "风蚀沙柱"
       }
     }
   }
   val 风蚀砂地 = Floor("windErodedGrit").apply {
     localization {
       zh_CN {
-        name = "风蚀砂地"
+        this.localizedName = "风蚀砂地"
       }
     }
   }
@@ -230,28 +230,28 @@ object EnvironmentBlocks :Load {
     decoration = 风蚀沙柱
     localization {
       zh_CN {
-        name = "风蚀沙地"
+        this.localizedName = "风蚀沙地"
       }
     }
   }
   val 风蚀沙水 = ShallowLiquid("windErodedSandWater", 风蚀沙地).apply {
     localization {
       zh_CN {
-        name = "风蚀沙水"
+        this.localizedName = "风蚀沙水"
       }
     }
   }
   val 风蚀沙深水 = ShallowDeepLiquid("windErodedSandDeepWater", 风蚀沙地).apply {
     localization {
       zh_CN {
-        name = "风蚀沙深水"
+        this.localizedName = "风蚀沙深水"
       }
     }
   }
   val 风蚀沙墙 = StaticWall("windErodedSandWall").apply {
     localization {
       zh_CN {
-        name = "风蚀沙墙"
+        this.localizedName = "风蚀沙墙"
       }
     }
   }
@@ -260,126 +260,126 @@ object EnvironmentBlocks :Load {
     attributes.set(Attribute.steam, 1f)
     localization {
       zh_CN {
-        name = "风蚀喷口"
+        this.localizedName = "风蚀喷口"
       }
     }
   }
   val 光辉板岩 = Floor("brillianceSlate").apply {
     localization {
       zh_CN {
-        name = "光辉板岩"
+        this.localizedName = "光辉板岩"
       }
     }
   }
   val 光辉板岩水 = ShallowLiquid("brillianceSlateWater", 光辉板岩).apply {
     localization {
       zh_CN {
-        name = "光辉板岩水"
+        this.localizedName = "光辉板岩水"
       }
     }
   }
   val 光辉板岩墙 = StaticWall("brillianceSlateWall").apply {
     localization {
       zh_CN {
-        name = "光辉板岩墙"
+        this.localizedName = "光辉板岩墙"
       }
     }
   }
   val 云英石柱 = Prop("greisenPillar").apply {
     localization {
       zh_CN {
-        name = "云英石柱"
+        this.localizedName = "云英石柱"
       }
     }
   }
   val 云英岩 = Floor("greisen").apply {
     localization {
       zh_CN {
-        name = "云英岩"
+        this.localizedName = "云英岩"
       }
     }
   }
   val 云英岩水 = ShallowLiquid("greisenWater", 云英岩).apply {
     localization {
       zh_CN {
-        name = "云英岩水"
+        this.localizedName = "云英岩水"
       }
     }
   }
   val 云英岩深水 = ShallowDeepLiquid("greisenDeepWater", 云英岩).apply {
     localization {
       zh_CN {
-        name = "云英岩深水"
+        this.localizedName = "云英岩深水"
       }
     }
   }
   val 云英岩墙 = StaticWall("greisenWall").apply {
     localization {
       zh_CN {
-        name = "云英岩墙"
+        this.localizedName = "云英岩墙"
       }
     }
   }
   val 红土石块 = Prop("redDirStone").apply {
     localization {
       zh_CN {
-        name = "红土石块"
+        this.localizedName = "红土石块"
       }
     }
   }
   val 红土 = Floor("redDir").apply {
     localization {
       zh_CN {
-        name = "红土"
+        this.localizedName = "红土"
       }
     }
   }
   val 红土墙 = StaticWall("redDirWall").apply {
     localization {
       zh_CN {
-        name = "红土墙"
+        this.localizedName = "红土墙"
       }
     }
   }
   val 流纹岩 = Floor("liparite").apply {
     localization {
       zh_CN {
-        name = "流纹岩"
+        this.localizedName = "流纹岩"
       }
     }
   }
   val 流纹岩水 = ShallowLiquid("lipariteWater", 流纹岩).apply {
     localization {
       zh_CN {
-        name = "流纹岩水"
+        this.localizedName = "流纹岩水"
       }
     }
   }
   val 流纹岩墙 = StaticWall("lipariteWall").apply {
     localization {
       zh_CN {
-        name = "流纹岩墙"
+        this.localizedName = "流纹岩墙"
       }
     }
   }
   val 潮汐石 = Floor("nightTideStone").apply {
     localization {
       zh_CN {
-        name = "潮汐石"
+        this.localizedName = "潮汐石"
       }
     }
   }
   val 潮汐水石 = ShallowLiquid("nightTideStoneWater", 潮汐石).apply {
     localization {
       zh_CN {
-        name = "潮汐水石"
+        this.localizedName = "潮汐水石"
       }
     }
   }
   val 潮汐石墙 = StaticWall("nightTideStoneWall").apply {
     localization {
       zh_CN {
-        name = "潮汐石墙"
+        this.localizedName = "潮汐石墙"
       }
     }
   }
@@ -388,28 +388,28 @@ object EnvironmentBlocks :Load {
     attributes.set(Attribute.steam, 1f)
     localization {
       zh_CN {
-        name = "潮汐喷口"
+        this.localizedName = "潮汐喷口"
       }
     }
   }
   val 侵蚀层地 = Floor("erosionalSlate").apply {
     localization {
       zh_CN {
-        name = "侵蚀层地"
+        this.localizedName = "侵蚀层地"
       }
     }
   }
   val 侵蚀层地水 = ShallowLiquid("erosionalSlateWater", 侵蚀层地).apply {
     localization {
       zh_CN {
-        name = "侵蚀层地水"
+        this.localizedName = "侵蚀层地水"
       }
     }
   }
   val 侵蚀层地墙 = StaticWall("erosionalSlateWall").apply {
     localization {
       zh_CN {
-        name = "侵蚀层地墙"
+        this.localizedName = "侵蚀层地墙"
       }
     }
 
@@ -418,14 +418,14 @@ object EnvironmentBlocks :Load {
   val 火成岩 = Floor("igneousRocks").apply {
     localization {
       zh_CN {
-        name = "火成岩"
+        this.localizedName = "火成岩"
       }
     }
   }
   val 炎晶矿脉 = Floor("incandescent-crystal-vein").apply {
     localization {
       zh_CN {
-        name = "炎晶矿脉"
+        this.localizedName = "炎晶矿脉"
       }
     }
     blendGroup = 火成岩
@@ -434,7 +434,7 @@ object EnvironmentBlocks :Load {
   val 炎晶脉搏 = Floor("incandescent-crystal-vein-heat").apply {
     localization {
       zh_CN {
-        name = "炎晶脉搏"
+        this.localizedName = "炎晶脉搏"
       }
     }
     blendGroup = 火成岩
@@ -443,14 +443,14 @@ object EnvironmentBlocks :Load {
   val 燃素晶簇 = TallBlock("phlogistonCrystalCluster").apply {
     localization {
       zh_CN {
-        name = "燃素晶簇"
+        this.localizedName = "燃素晶簇"
       }
     }
   }
   val 晶石地 = Floor("crystalStone").apply {
     localization {
       zh_CN {
-        name = "晶石地"
+        this.localizedName = "晶石地"
       }
     }
     attributes.set(IAttribute.沥青, 0.1f)
@@ -458,182 +458,182 @@ object EnvironmentBlocks :Load {
   val 晶石地水 = ShallowLiquid("crystalStoneWater", 晶石地).apply {
     localization {
       zh_CN {
-        name = "晶石地水"
+        this.localizedName = "晶石地水"
       }
     }
   }
   val 晶石墙 = StaticWall("crystalStoneWall").apply {
     localization {
       zh_CN {
-        name = "晶石墙"
+        this.localizedName = "晶石墙"
       }
     }
   }
   val 幽灵簇 = Seaweed("clusterGhosts").apply {
     localization {
       zh_CN {
-        name = "幽灵簇"
+        this.localizedName = "幽灵簇"
       }
     }
   }
   val 幽冥蕨 = TallBlock("ghostGrassFern").apply {
     localization {
       zh_CN {
-        name = "幽冥蕨"
+        this.localizedName = "幽冥蕨"
       }
     }
   }
   val 缠怨花 = TreeBlock("ghostGrassFlower").apply {
     localization {
       zh_CN {
-        name = "缠怨花"
+        this.localizedName = "缠怨花"
       }
     }
   }
   val 幽灵草 = Floor("ghostGrass").apply {
     localization {
       zh_CN {
-        name = "幽灵草"
+        this.localizedName = "幽灵草"
       }
     }
   }
   val 幽灵草水 = ShallowLiquid("ghostGrassWater", 幽灵草).apply {
     localization {
       zh_CN {
-        name = "幽灵草水"
+        this.localizedName = "幽灵草水"
       }
     }
   }
   val 幽灵草深水 = ShallowDeepLiquid("ghostGrassDeepWater", 幽灵草).apply {
     localization {
       zh_CN {
-        name = "幽灵草深水"
+        this.localizedName = "幽灵草深水"
       }
     }
   }
   val 幽灵草墙 = StaticWall("ghostGrassWall").apply {
     localization {
       zh_CN {
-        name = "幽灵草墙"
+        this.localizedName = "幽灵草墙"
       }
     }
   }
   val 灰烬地 = Floor("ash").apply {
     localization {
       zh_CN {
-        name = "灰烬地"
+        this.localizedName = "灰烬地"
       }
     }
   }
   val 灰烬地水 = ShallowLiquid("ashWater", 灰烬地).apply {
     localization {
       zh_CN {
-        name = "灰烬地水"
+        this.localizedName = "灰烬地水"
       }
     }
   }
   val 灰烬墙 = StaticWall("ashWall").apply {
     localization {
       zh_CN {
-        name = "灰烬墙"
+        this.localizedName = "灰烬墙"
       }
     }
   }
   val 钢铁地板1 = Floor("steelFloor1").apply {
     localization {
       zh_CN {
-        name = "钢铁地板1"
+        this.localizedName = "钢铁地板1"
       }
     }
   }
   val 钢铁墙1 = StaticWall("steelFloorWall1").apply {
     localization {
       zh_CN {
-        name = "钢铁墙1"
+        this.localizedName = "钢铁墙1"
       }
     }
   }
   val 钢铁地板2 = Floor("steelFloor2").apply {
     localization {
       zh_CN {
-        name = "钢铁地板"
+        this.localizedName = "钢铁地板"
       }
     }
   }
   val 钢铁墙2 = StaticWall("steelFloorWall2").apply {
     localization {
       zh_CN {
-        name = "钢铁墙"
+        this.localizedName = "钢铁墙"
       }
     }
   }
   val 精钢甲板 = Floor("steelFloor3").apply {
     localization {
       zh_CN {
-        name = "精钢甲板"
+        this.localizedName = "精钢甲板"
       }
     }
   }
   val 跨界钢板 = TiledFloor("bridgeSteel", 9).apply {
     localization {
       zh_CN {
-        name = "跨界钢板"
+        this.localizedName = "跨界钢板"
       }
     }
   }
   val 跨界钢板墙 = StaticWall("bridgeSteelWall").apply {
     localization {
       zh_CN {
-        name = "跨界钢板墙"
+        this.localizedName = "跨界钢板墙"
       }
     }
   }
   val 供能板 = Floor("powerBoard").apply {
     localization {
       zh_CN {
-        name = "供能板"
+        this.localizedName = "供能板"
       }
     }
   }
   val 供能墙 = StaticWall("powerWall").apply {
     localization {
       zh_CN {
-        name = "供能墙"
+        this.localizedName = "供能墙"
       }
     }
   }
   val 诅咒之地 = Floor("curseLand").apply {
     localization {
       zh_CN {
-        name = "诅咒之地"
+        this.localizedName = "诅咒之地"
       }
     }
   }
   val 诅咒之墙 = StaticWall("curseWall").apply {
     localization {
       zh_CN {
-        name = "诅咒之墙"
+        this.localizedName = "诅咒之墙"
       }
     }
   }
   val 新月岩 = Floor("crescent").apply {
     localization {
       zh_CN {
-        name = "新月岩"
+        this.localizedName = "新月岩"
       }
     }
   }
   val 新月岩水 = ShallowLiquid("crescentWater", 新月岩).apply {
     localization {
       zh_CN {
-        name = "新月岩水"
+        this.localizedName = "新月岩水"
       }
     }
   }
   val 新月岩墙 = StaticWall("crescentWall").apply {
     localization {
       zh_CN {
-        name = "新月岩墙"
+        this.localizedName = "新月岩墙"
       }
     }
   }
@@ -653,35 +653,35 @@ object EnvironmentBlocks :Load {
     attributes.set(Attribute.steam, 1f)
     localization {
       zh_CN {
-        name = "新月喷口"
+        this.localizedName = "新月喷口"
       }
     }
   }
   val 凌冰尖刺 = TallBlock("tortureIceSpikes").apply {
     localization {
       zh_CN {
-        name = "凌冰尖刺"
+        this.localizedName = "凌冰尖刺"
       }
     }
   }
   val 凌冰石块 = Prop("tortureIceStone").apply {
     localization {
       zh_CN {
-        name = "凌冰石块"
+        this.localizedName = "凌冰石块"
       }
     }
   }
   val 霜寒草 = Prop("frostbiteGrass").apply {
     localization {
       zh_CN {
-        name = "霜寒草"
+        this.localizedName = "霜寒草"
       }
     }
   }
   val 凌冰 = Floor("tortureIce").apply {
     localization {
       zh_CN {
-        name = "凌冰"
+        this.localizedName = "凌冰"
       }
     }
     attributes.set(IAttribute.寒冷, 1f)
@@ -689,7 +689,7 @@ object EnvironmentBlocks :Load {
   val 凌冰水 = ShallowLiquid("tortureIceWater", 凌冰).apply {
     localization {
       zh_CN {
-        name = "凌冰水"
+        this.localizedName = "凌冰水"
       }
     }
     attributes.set(IAttribute.寒冷, 0.7f)
@@ -697,7 +697,7 @@ object EnvironmentBlocks :Load {
   val 凌冰深水 = ShallowDeepLiquid("tortureIceDeepWater", 凌冰).apply {
     localization {
       zh_CN {
-        name = "凌冰深水"
+        this.localizedName = "凌冰深水"
       }
     }
     attributes.set(IAttribute.寒冷, 0.8f)
@@ -705,7 +705,7 @@ object EnvironmentBlocks :Load {
   val 凌冰墙 = StaticWall("tortureIceWall").apply {
     localization {
       zh_CN {
-        name = "凌冰墙"
+        this.localizedName = "凌冰墙"
       }
     }
   }
@@ -725,7 +725,7 @@ object EnvironmentBlocks :Load {
     }
     localization {
       zh_CN {
-        name = "血浅滩"
+        this.localizedName = "血浅滩"
       }
     }
   }
@@ -750,7 +750,7 @@ object EnvironmentBlocks :Load {
     }
     localization {
       zh_CN {
-        name = "血池"
+        this.localizedName = "血池"
       }
     }
   }
@@ -770,7 +770,7 @@ object EnvironmentBlocks :Load {
     }
     localization {
       zh_CN {
-        name = "深血池"
+        this.localizedName = "深血池"
       }
     }
   }
@@ -789,7 +789,7 @@ object EnvironmentBlocks :Load {
     }
     localization {
       zh_CN {
-        name = "浓稠深血池"
+        this.localizedName = "浓稠深血池"
       }
     }
   }
@@ -797,49 +797,49 @@ object EnvironmentBlocks :Load {
     decoration = 血孢子丛
     localization {
       zh_CN {
-        name = "肿瘤地"
+        this.localizedName = "肿瘤地"
       }
     }
   }
   val 碎骨地 = Floor("brokenBone").apply {
     localization {
       zh_CN {
-        name = "碎骨地"
+        this.localizedName = "碎骨地"
       }
     }
   }
   val 碎骨墙 = StaticWall("brokenBoneWall").apply {
     localization {
       zh_CN {
-        name = "碎骨墙"
+        this.localizedName = "碎骨墙"
       }
     }
   }
   val 血沙石块 = Prop("bloodSandStone").apply {
     localization {
       zh_CN {
-        name = "血沙石块"
+        this.localizedName = "血沙石块"
       }
     }
   }
   val 殷血粗沙 = Floor("bloodSand").apply {
     localization {
       zh_CN {
-        name = "殷血粗沙"
+        this.localizedName = "殷血粗沙"
       }
     }
   }
   val 殷血粗沙墙 = StaticWall("bloodSandWall").apply {
     localization {
       zh_CN {
-        name = "殷血粗沙墙"
+        this.localizedName = "殷血粗沙墙"
       }
     }
   }
   val 骸骨地 = Floor("humanBones").apply {
     localization {
       zh_CN {
-        name = "骸骨地"
+        this.localizedName = "骸骨地"
       }
     }
   }
@@ -849,21 +849,21 @@ object EnvironmentBlocks :Load {
     }
     localization {
       zh_CN {
-        name = "血痂地"
+        this.localizedName = "血痂地"
       }
     }
   }
   val 血痂岩 = Floor("bloodScarsStone").apply {
     localization {
       zh_CN {
-        name = "血痂岩"
+        this.localizedName = "血痂岩"
       }
     }
   }
   val 血蚀岩石块 = Prop("bloodmoriteStone").apply {
     localization {
       zh_CN {
-        name = "血蚀岩石块"
+        this.localizedName = "血蚀岩石块"
       }
     }
   }
@@ -871,63 +871,63 @@ object EnvironmentBlocks :Load {
     decoration = 血蚀岩石块
     localization {
       zh_CN {
-        name = "血蚀岩"
+        this.localizedName = "血蚀岩"
       }
     }
   }
   val 血蚀墙 = StaticWall("bloodmoriteWall").apply {
     localization {
       zh_CN {
-        name = "血蚀墙"
+        this.localizedName = "血蚀墙"
       }
     }
   }
   val 肿瘤墙 = StaticWall("bloodNeoplasmaWall").apply {
     localization {
       zh_CN {
-        name = "肿瘤墙"
+        this.localizedName = "肿瘤墙"
       }
     }
   }
   val 红冰 = Floor("redIce").apply {
     localization {
       zh_CN {
-        name = "红冰"
+        this.localizedName = "红冰"
       }
     }
   }
   val 红冰墙 = StaticWall("redIceWall").apply {
     localization {
       zh_CN {
-        name = "红冰墙"
+        this.localizedName = "红冰墙"
       }
     }
   }
   val 赤雪 = Floor("bloodIceSnow").apply {
     localization {
       zh_CN {
-        name = "赤雪"
+        this.localizedName = "赤雪"
       }
     }
   }
   val 红霜石块 = Prop("bloodSnowStone").apply {
     localization {
       zh_CN {
-        name = "红霜石块"
+        this.localizedName = "红霜石块"
       }
     }
   }
   val 红霜 = Floor("bloodSnow").apply {
     localization {
       zh_CN {
-        name = "红霜"
+        this.localizedName = "红霜"
       }
     }
   }
   val 红霜墙 = StaticWall("bloodSnowWall").apply {
     localization {
       zh_CN {
-        name = "红霜墙"
+        this.localizedName = "红霜墙"
       }
     }
   }
@@ -937,7 +937,7 @@ object EnvironmentBlocks :Load {
     effect = Fx.none
     localization {
       zh_CN {
-        name = "肿瘤喷口"
+        this.localizedName = "肿瘤喷口"
       }
     }
   }
@@ -956,28 +956,28 @@ object EnvironmentBlocks :Load {
     unitMoveBreakable = false
     localization {
       zh_CN {
-        name = "肿瘤井"
+        this.localizedName = "肿瘤井"
       }
     }
   }
   val 肉瘤菇 = TallBlock("bloodBall").apply {
     localization {
       zh_CN {
-        name = "肉瘤菇"
+        this.localizedName = "肉瘤菇"
       }
     }
   }
   val 血蚀囊胚 = TallBlock("bloodBlastocyst").apply {
     localization {
       zh_CN {
-        name = "血蚀囊胚"
+        this.localizedName = "血蚀囊胚"
       }
     }
   }
   val 缚肉树 = TallBlock("bloodFleshTree").apply {
     localization {
       zh_CN {
-        name = "缚肉树"
+        this.localizedName = "缚肉树"
       }
     }
   }
@@ -986,7 +986,7 @@ object EnvironmentBlocks :Load {
     breakable = true
     localization {
       zh_CN {
-        name = "摄魂墙"
+        this.localizedName = "摄魂墙"
       }
     }
   }

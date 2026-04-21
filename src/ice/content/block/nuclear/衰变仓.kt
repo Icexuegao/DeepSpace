@@ -20,7 +20,7 @@ import universecore.world.consumers.cons.liquid.ConsumeLiquids
 class 衰变仓:NormalCrafter("decay_bin"){init {
   localization {
     zh_CN {
-      name = "衰变仓"
+      this.localizedName = "衰变仓"
       description = "放射性物质进行衰变产生少量的核能量,可能存在副产物"
     }
   }

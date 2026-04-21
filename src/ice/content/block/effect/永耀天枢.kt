@@ -12,7 +12,7 @@ import mindustry.type.Category
   init {
     localization {
       zh_CN {
-        name = "永耀天枢"
+        this.localizedName = "永耀天枢"
         description = "控制区块的基础.有最大的容量与重型装甲.一旦被摧毁,所在区块将重归于敌人控制"
       }
     }

@@ -13,7 +13,7 @@ class 玳渊缚能厂 : NormalCrafter("tortoiseshellFactory") {
   init {
     localization {
       zh_CN {
-        name = "玳渊缚能厂"
+        this.localizedName = "玳渊缚能厂"
         description = "将铪锭,暮光合金和铱锭构建为玳渊矩阵"
         details = "为了生产大型能量武器设施,由枢机批准的能量生产建筑,将狂暴的玳渊能量封印在稳定的矩阵结构中,每一块矩阵都蕴含着巨大的能量"
       }

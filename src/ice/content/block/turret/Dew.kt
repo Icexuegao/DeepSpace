@@ -37,7 +37,7 @@ class Dew :ProjectileTurret("dew") {
   init {
     localization {
       zh_CN {
-        name = "白露"
+        this.localizedName = "白露"
         description = "连续高速发射一连串穿甲弹,向敌人倾泻如同暴雨般的火力"
       }
     }

@@ -34,7 +34,7 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
   init {
     localization {
       zh_CN {
-        name = "物质逆化器"
+        this.localizedName = "物质逆化器"
         description = "消耗介质,将反物质引导入简并态中子聚合物容器中"
         details = "将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到容器中"
       }

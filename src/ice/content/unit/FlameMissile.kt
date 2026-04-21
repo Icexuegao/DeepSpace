@@ -18,7 +18,7 @@ class FlameMissile : MissileUnitType("unit_flameMissile") {
   init {
     localization {
       zh_CN {
-        name = "火苗"
+        this.localizedName = "火苗"
       }
     }
 

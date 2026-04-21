@@ -29,7 +29,7 @@ class Rainbow : PowerTurret("turret_rainbow") {
   init {
     localization {
       zh_CN {
-        name = "霓虹"
+        this.localizedName = "霓虹"
         description = "快速发射渐变霓虹攻击敌人\n其聚能速度会随持续射击而逐渐提升"
       }
     }

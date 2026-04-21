@@ -15,7 +15,7 @@ class Phantom : IceUnitType("unit_phantom") {
   init {
     localization {
       zh_CN {
-        name = "幻影"
+        this.localizedName = "幻影"
         description = "轻型空中工程单位.具备不俗的挖掘速度与物品容量,可在采集途中应对零星威胁"
       }
     }

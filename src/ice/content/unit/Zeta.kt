@@ -20,7 +20,7 @@ class Zeta : IceUnitType("unit_zeta") {
   init {
     localization {
       zh_CN {
-        name = "泽塔"
+        this.localizedName = "泽塔"
         description = "拥有快速建造能力与强劲的武器系统,\n向敌人喷射等离子火焰的同时发射电磁震爆弹"
       }
     }

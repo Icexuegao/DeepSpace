@@ -15,7 +15,7 @@ import singularity.world.draw.DrawBottom
 class DistillPurifier : NormalCrafter("distill_purifier") {init {
   localization {
     zh_CN {
-      name = "蒸馏净化器"
+      this.localizedName = "蒸馏净化器"
       description = "用原始的蒸馏方式分离水中的杂质"
     }
   }

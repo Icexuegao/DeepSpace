@@ -43,7 +43,7 @@ class Mirage : SglTurret("mirage") {
   init {
     localization {
       zh_CN {
-        name = "虚妄"
+        this.localizedName = "虚妄"
         description = "高能FEX结晶弹射器,将大块结晶态FEX发射向目标,不同的结晶状态会产生截然不同的效果,在互相作用下可以造成相当大的杀伤效果"
       }
     }

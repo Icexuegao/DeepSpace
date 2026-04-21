@@ -24,7 +24,7 @@ import singularity.world.draw.DrawRegionDynamic
 class LaserResolver : NormalCrafter("laser_resolver") {init {
   localization {
     zh_CN {
-      name = "激光解离机"
+      this.localizedName = "激光解离机"
       description = "将特定物品解离并回收为原材料,可配置"
       details = "使用不同频段的激光来定向分离物质以得到更加有用的东西"
     }

@@ -17,7 +17,7 @@ class Crystallizer : NormalCrafter("crystallizer") {
   init {
     localization {
       zh_CN {
-        name = "结晶器"
+        this.localizedName = "结晶器"
         description = "使导能流体结晶于强化合金从而生产导能结晶\n最早的导能结晶技术,依赖电磁场波动,使导能流体在载体金属上逐步形成结晶"
       }
     }

@@ -17,7 +17,7 @@ class 导能回路装配器 : NormalCrafter("conductiveCircuitAssembler") {
   init {
     localization {
       zh_CN {
-        name = "导能回路装配器"
+        this.localizedName = "导能回路装配器"
         description = "将单晶硅于铪锭装配为导能回路"
         details = "持续开启相位时间场,减缓局部时间以同时进行多种精密零件的制作\n[#9B929D]为什么总有人管她叫灵魂熔炉[]"
       }

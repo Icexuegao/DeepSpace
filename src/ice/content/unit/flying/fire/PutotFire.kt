@@ -14,7 +14,7 @@ class PutotFire : IceUnitType("putotFire") {
   init {
     localization {
       zh_CN {
-        name = "扑火"
+        this.localizedName = "扑火"
         description = "轻型空中突击单位.以极高的机动性持续骚扰敌军,开火时减少所受伤害"
       }
     }

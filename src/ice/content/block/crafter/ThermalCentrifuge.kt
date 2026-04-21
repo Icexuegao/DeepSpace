@@ -26,7 +26,7 @@ class ThermalCentrifuge : NormalCrafter("thermal_centrifuge") {
   init {
     localization {
       zh_CN {
-        name = "热能离心机"
+        this.localizedName = "热能离心机"
         description = "离心原矿石并分解出特定产物,可配置"
         details = "以极高的温度将物质熔化成液态,以差速离心分离其中不同质量的物质"
       }

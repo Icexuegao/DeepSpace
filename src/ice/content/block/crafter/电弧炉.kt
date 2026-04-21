@@ -13,7 +13,7 @@ class 电弧炉 : NormalCrafter("arcFurnace") {
   init {
     localization {
       zh_CN {
-        name = "电弧炉"
+        this.localizedName = "电弧炉"
         description = "将铅锭,石英和金珀沙熔炼为石英玻璃"
       }
     }

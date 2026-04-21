@@ -30,7 +30,7 @@ class Fearless : IceUnitType("fearless") {
   init {
     localization {
       zh_CN {
-        name = "无畏"
+        this.localizedName = "无畏"
         description = "重型空中突击单位.发射荷电粒子高爆弹并辅以激光攻击敌人.装载脉冲发生器用以过载敌军引擎和武器系统.加装护盾辅助发生器以维持友军护盾持续作战,配备裂解炮抵御敌人的攻击"
         details = "帝国舰队的中坚力量."
       }

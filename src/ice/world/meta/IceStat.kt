@@ -5,8 +5,8 @@ import mindustry.world.meta.Stat
 import mindustry.world.meta.StatCat
 
 class IceStat(name: String, category: StatCat = StatCat.general) :Stat(name, category), Localizable {
-  override fun localized() = localizedName
-  override fun toString() = localizedName
+  override fun localized() = this@IceStat.localizedName
+  override fun toString() = this@IceStat.localizedName
 
   override var localizedName: String = ""
 

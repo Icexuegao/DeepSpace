@@ -23,7 +23,7 @@ class DarkCarving:IceUnitType("darkCarving") {
   init {
     localization {
       zh_CN {
-        name = "冥刻"
+        this.localizedName = "冥刻"
         description = "中型空中突击单位.发射充能激光攻击敌人,对附近的友军提供坚忍效果"
       }
     }

@@ -21,7 +21,7 @@ class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
   init {
     localization {
       zh_CN {
-        name = "低温混合器"
+        this.localizedName = "低温混合器"
         description = "在极端低温环境中混合纯净水生产低温化合物,在特定地形上生效"
       }
     }

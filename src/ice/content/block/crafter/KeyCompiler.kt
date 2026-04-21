@@ -29,7 +29,7 @@ class KeyCompiler : NormalCrafter("keyCompiler") {
   init {
     localization {
       zh_CN {
-        name = "密匙编译器"
+        this.localizedName = "密匙编译器"
         description = "通过量子通信接收数据以编译密匙,需要大量冷却液以支持运行\n为确保量子通道稳定性及数据准确性,不会受到时空加速的影响\n为了保护内部精密结构及能量管路,配备了极为厚重的装甲"
         details = "[#FF5845]数据正常下行,密匙编译稳定进行中.是时候给那些异族一些颜色看看了!"
       }

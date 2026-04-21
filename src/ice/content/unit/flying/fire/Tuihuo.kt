@@ -14,7 +14,7 @@ class Tuihuo : IceUnitType("tuihuo") {
   init {
     localization {
       zh_CN {
-        name = "趋火"
+        this.localizedName = "趋火"
         description = "轻型空中突击单位.快速投掷航弹杀伤敌军,开火时减少所受伤害"
       }
     }

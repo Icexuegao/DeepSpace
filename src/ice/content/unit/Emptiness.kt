@@ -48,7 +48,7 @@ class Emptiness : IceUnitType("emptiness") {
   init {
     localization {
       zh_CN {
-        name = "虚宿"
+        this.localizedName = "虚宿"
         description = "巨型光棱战列舰,光束反应堆的最终产物,火力至上原则的最终答案,拥有强大的能量护盾"
       }
     }

@@ -9,7 +9,7 @@ class 潮汐约束轨道:TokamakOrbit("tidal_confinement_orbit"){
   init {
     localization {
       zh_CN {
-        name = "潮汐约束导轨"
+        this.localizedName = "潮汐约束导轨"
         description = "利用引力场强制约束等离子流的聚变导轨,体积巨大,但具有非常高的功率倍数"
       }
     }

@@ -16,7 +16,7 @@ class Ipsiglon : IceUnitType("unit_ipsiglon") {
   init {
     localization {
       zh_CN {
-        name = "伊普西龙"
+        this.localizedName = "伊普西龙"
       }
     }
     coreUnitDock = true

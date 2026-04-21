@@ -38,7 +38,7 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
   init {
     localization {
       zh_CN {
-        name = "炸蛛"
+        this.localizedName = "炸蛛"
         description = "中型地面突击单位.向敌人发起剧烈自杀式攻击.配备推进器以快速接近敌人.阵亡后会分裂出爆蚊"
       }
     }

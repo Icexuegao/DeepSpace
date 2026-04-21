@@ -34,7 +34,7 @@ class Fubuki : LaserTurret("fubuki") {
   init {
     localization {
       zh_CN {
-        name = "吹雪"
+        this.localizedName = "吹雪"
         description = "向前喷发凛冽的冰霜风暴,凛冽的风雪足以将敌人冻结成冰雕"
       }
     }

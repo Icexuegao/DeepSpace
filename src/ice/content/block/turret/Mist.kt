@@ -22,7 +22,7 @@ class Mist: SglTurret("mist") {
   init{
     localization {
       zh_CN {
-        name = "迷雾"
+        this.localizedName = "迷雾"
         description = "一门重型对地复合石墨大炮,发射4颗填充了松散石墨的炮弹,爆炸后会产生一片会带有电磁脉冲的石墨云"
       }
     }

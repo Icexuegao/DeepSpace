@@ -13,7 +13,7 @@ class 等离子蚀刻厂 : NormalCrafter("integratedFactory") {
   init {
     localization {
       zh_CN {
-        name = "等离子蚀刻厂"
+        this.localizedName = "等离子蚀刻厂"
         description = "将石墨烯通过石英玻璃蚀刻于单晶硅上,产出电子原件"
         details = "采用等离子蚀刻技术,在硅晶圆上雕刻出微米级电路,电子工业的基础设施"
       }

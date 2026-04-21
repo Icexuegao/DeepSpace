@@ -23,7 +23,7 @@ class Shatter : ItemTurret("turret_shatter") {
   init {
     localization {
       zh_CN {
-        name = "碎爆"
+        this.localizedName = "碎爆"
         description = "新式炮台,可兼容各种弹药"
       }
     }

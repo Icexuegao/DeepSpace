@@ -18,7 +18,7 @@ class 大型照明器:LightBlock("illuminatorLarge"){
     requirements(Category.effect, IItems.铜锭, 30f, IItems.高碳钢, 20f, IItems.黄铜锭, 10f)
     localization {
       zh_CN {
-        name = "大型照明器"
+        this.localizedName = "大型照明器"
         description = "为自身周围大片区域提供照明"
         details = "神说要有光,于是便有了光"
       }

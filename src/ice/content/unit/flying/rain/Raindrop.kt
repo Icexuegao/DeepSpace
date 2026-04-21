@@ -10,7 +10,7 @@ class Raindrop : IceUnitType("unit_raindrop") {
   init {
     localization {
       zh_CN {
-        name = "雨滴"
+        this.localizedName = "雨滴"
         description = "轻型空中突击单位.发射速射电弧攻击敌人"
         details = "从小小的雨滴开始"
       }

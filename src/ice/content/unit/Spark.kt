@@ -17,7 +17,7 @@ class Spark : MissileUnitType("unit_spark") {
   init {
     localization {
       zh_CN {
-        name = "火花"
+        this.localizedName = "火花"
       }
     }
     health = 385f

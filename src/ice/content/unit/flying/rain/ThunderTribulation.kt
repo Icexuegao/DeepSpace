@@ -25,7 +25,7 @@ class ThunderTribulation : IceUnitType("unit_thunderTribulation") {
   init {
     localization {
       zh_CN {
-        name = "雷劫"
+        this.localizedName = "雷劫"
         description = "重型空中突击单位.发射高能激光和双联球状闪电并辅等离子速射炮攻击敌人,正面投射弧形护盾抵御攻击.在场时抑制敌方建筑修复能力,同时以闪电场电击附近敌军并治疗友军"
       }
     }

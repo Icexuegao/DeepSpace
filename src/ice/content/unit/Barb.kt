@@ -8,7 +8,7 @@ class Barb: IceUnitType("unit_barb", CrawlUnit::class.java) {
   init {
     localization {
       zh_CN {
-        name = "绒刺"
+        this.localizedName = "绒刺"
         description = "请输入文本"
       }
     }

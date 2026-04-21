@@ -165,7 +165,7 @@ object IUnitTypes : Load {
     deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
     localization {
       zh_CN {
-        name = "蚀虻"
+        this.localizedName = "蚀虻"
         description = "小型陆行污染生物.拥有多段体节,尾部体节带有喷口,会喷射腐蚀胶体"
       }
     }

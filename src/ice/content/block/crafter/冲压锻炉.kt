@@ -18,7 +18,7 @@ class 冲压锻炉 : NormalCrafter("pressingForge") {
   init {
     localization {
       zh_CN {
-        name = "冲压锻炉"
+        this.localizedName = "冲压锻炉"
         description = "将铱锇矿熔炼锻压为铱板,需要通入水,会产生废水"
       }
     }

@@ -18,7 +18,7 @@ class Lightning :MissileUnitType("unit_lightning") {
   init {
     localization {
       zh_CN {
-        name = "雷精"
+        this.localizedName = "雷精"
       }
     }
 

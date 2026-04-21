@@ -23,7 +23,7 @@ class TrashIce:ItemTurret("trashIce") {
   init{
     localization {
       zh_CN {
-        name = "碎冰"
+        this.localizedName = "碎冰"
       }
     }
     size = 1

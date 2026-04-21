@@ -90,7 +90,7 @@ class Spectral:PowerTurret("spectral") {
     requirements(Category.turret, IItems.铜锭, 120, IItems.铬锭, 140, IItems.钍锭, 60, IItems.单晶硅, 120)
     localization {
       zh_CN {
-        name = "光谱"
+        this.localizedName = "光谱"
         description = "中型能量炮塔,可以快速向敌人发射高热激光"
       }
     }

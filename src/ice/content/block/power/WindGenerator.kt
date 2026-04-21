@@ -79,7 +79,7 @@ class WindGenerator(name: String) :SglBlock(name) {
     stats.add(IceStats.getStat("noBuildZone", StatCat.function) {
       localization {
         zh_CN {
-          name = "禁建范围"
+          this.localizedName = "禁建范围"
         }
       }
     }, "$range")

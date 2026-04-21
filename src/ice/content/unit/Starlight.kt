@@ -17,7 +17,7 @@ class Starlight : MissileUnitType("starlight") {
   init {
     localization {
       zh_CN {
-        name = "星光"
+        this.localizedName = "星光"
       }
     }
     health = 130f

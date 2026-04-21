@@ -20,7 +20,7 @@ class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
   init {
     localization {
       zh_CN {
-        name = "渗透净化器"
+        this.localizedName = "渗透净化器"
         description = "使用物质吸附及反渗透过滤技术制造的高效净化装置,能更有效的分离水中的杂质"
       }
     }

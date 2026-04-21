@@ -9,7 +9,7 @@ class ExplosiveMixer : NormalCrafter("explosiveMixer") {
   init {
     localization {
       zh_CN {
-        name = "爆炸物混合器"
+        this.localizedName = "爆炸物混合器"
         description = "将硫化合物与燃素水晶混合生成爆炸化合物"
       }
     }

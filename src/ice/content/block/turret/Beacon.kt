@@ -24,7 +24,7 @@ class Beacon : PowerTurret("beacon") {
   init {
     localization {
       zh_CN {
-        name = "信标"
+        this.localizedName = "信标"
         description = "持续引导聚爆能量弹坠向信标标记处,毁灭半径60格内所有敌方目标"
       }
     }

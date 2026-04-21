@@ -17,7 +17,7 @@ class 小型照明器:LightBlock("illuminatorSmall"){
     requirements(Category.effect, IItems.铜锭, 10f, IItems.高碳钢, 10f)
     localization {
       zh_CN {
-        name = "照明器"
+        this.localizedName = "照明器"
         description = "为自身周围区域提供照明"
         details = "高效的照明设备,功耗低照明范围广"
       }

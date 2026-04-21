@@ -20,7 +20,7 @@ class MonocrystallineSiliconFactory : NormalCrafter("monocrystallineSiliconFacto
   init {
     localization {
       zh_CN {
-        name = "单晶硅厂"
+        this.localizedName = "单晶硅厂"
         description = "使用硫化物冲击石英生产单晶硅"
       }
     }

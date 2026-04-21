@@ -102,7 +102,7 @@ class TunnelOpening:ItemTurret("tunnelOpening") {
     requirements(Category.turret, IItems.铜锭, 1120, IItems.钴锭, 470, IItems.钍锭, 390, IItems.铬锭, 280, IItems.铱板, 225, IItems.爆炸化合物, 65)
     localization {
       zh_CN {
-        name = "隧穿"
+        this.localizedName = "隧穿"
         description = "向指定方位发射三道强劲的定向爆破束,并在到达极限距离后原路返回"
       }
     }

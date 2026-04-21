@@ -44,7 +44,7 @@ class 勘探雷达 :SglBlock("prospectingRadar") {
   init {
     localization {
       zh_CN {
-        name = "勘探雷达"
+        this.localizedName = "勘探雷达"
         description = "定期使大范围内隐藏于地下的矿物显现"
       }
     }

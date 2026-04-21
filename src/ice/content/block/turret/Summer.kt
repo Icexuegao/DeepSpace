@@ -31,7 +31,7 @@ class Summer : SglTurret("summer") {
   init {
     localization {
       zh_CN {
-        name = "夏至"
+        this.localizedName = "夏至"
         description = "高速释放巨量的受控热能团,以太阳风暴摧毁一切敌人,它开火伴随着猛烈的热浪,将被击中的一切化为铁水灰烬"
       }
     }

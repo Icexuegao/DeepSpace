@@ -19,7 +19,7 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
   init {
     localization {
       zh_CN {
-        name = "渗透分离槽"
+        this.localizedName = "渗透分离槽"
         description = "使材料渗透以分离出需求产物,可配置"
         details = "内置加压可控粒径反渗透过滤器,用于进行一些需要分离颗粒的反应工艺"
       }

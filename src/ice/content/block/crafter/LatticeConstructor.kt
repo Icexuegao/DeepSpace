@@ -32,7 +32,7 @@ class LatticeConstructor:NormalCrafter("lattice_constructor"){
   init{
   localization {
     zh_CN {
-      name = "晶格构建器"
+      this.localizedName = "晶格构建器"
       description = "使充能流体结晶于强化合金从而高效生产导能结晶"
       details = "先进的导能结晶技术,以光束引导和力场聚合的方式人工构建晶格结构,更高效地生产导能结晶"
     }

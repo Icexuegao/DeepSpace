@@ -15,7 +15,7 @@ class FEXPhaseMixer:NormalCrafter("FEX_phase_mixer"){
   init{
   localization {
     zh_CN {
-      name = "相位混合器"
+      this.localizedName = "相位混合器"
       description = "重建FEX的液态物质结构,使其中的能量活性化"
     }
   }

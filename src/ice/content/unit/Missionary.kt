@@ -24,7 +24,7 @@ class Missionary : IceUnitType("missionary") {
   init {
     localization {
       zh_CN {
-        name = "传教者"
+        this.localizedName = "传教者"
         description = "重型空中突击单位.发射磁轨弹和等离子爆裂弹攻击,并投掷粒子冲击弹轰炸敌人,火力强悍"
         details = "枢机教廷[净化之翼]军团\n枢机的例行祷告"
       }

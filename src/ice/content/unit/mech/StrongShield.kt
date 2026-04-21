@@ -17,7 +17,7 @@ class StrongShield : IceUnitType("unit_strongShield", MechUnit::class.java) {
   init {
     localization {
       zh_CN {
-        name = "坚盾"
+        this.localizedName = "坚盾"
         description = "轻型地面突击单位.发射标准子弹攻击敌人,会超频在附近的友军.会缓慢恢复生命值,并在开火时减少所受伤害"
       }
     }

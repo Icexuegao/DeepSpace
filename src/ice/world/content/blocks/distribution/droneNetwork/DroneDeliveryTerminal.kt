@@ -53,7 +53,7 @@ class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
   init {
     localization {
       zh_CN {
-        localizedName = "无人机配送终端"
+        this@DroneDeliveryTerminal.localizedName = "无人机配送终端"
         description = "无人机供货端,用于将物品从无人机供货端运输到无人机需求端"
       }
     }

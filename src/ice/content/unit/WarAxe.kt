@@ -20,7 +20,7 @@ class WarAxe : MissileUnitType("unit_warAxe") {
   init {
     localization {
       zh_CN {
-        name = "战斧"
+        this.localizedName = "战斧"
       }
     }
     health = 360f

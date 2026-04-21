@@ -26,7 +26,7 @@ class Judgment : PowerTurret("judgment") {
   init {
     localization {
       zh_CN {
-        name = "决断"
+        this.localizedName = "决断"
         description = "一次性发射四道湍能弹精准攻击敌人"
       }
     }

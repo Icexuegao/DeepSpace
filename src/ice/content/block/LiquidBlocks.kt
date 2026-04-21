@@ -21,7 +21,7 @@ object LiquidBlocks : Load {
     requirements(Category.liquid, ItemStack.with(IItems.肌腱, 40, IItems.碎骨, 10, IItems.无名肉块, 60))
     localization {
       zh_CN {
-        name = "泵腔"
+        this.localizedName = "泵腔"
         description = "一边跳动...一边泵出流体..."
       }
     }
@@ -29,7 +29,7 @@ object LiquidBlocks : Load {
   val 动力泵 = Pump("kineticPump").apply {
     localization {
       zh_CN {
-        name = "动力泵"
+        this.localizedName = "动力泵"
         description = "泵送流体"
       }
     }
@@ -42,7 +42,7 @@ object LiquidBlocks : Load {
   val 谐振泵 = Pump("resonancePump").apply {
     localization {
       zh_CN {
-        name = "谐振泵"
+        this.localizedName = "谐振泵"
         description = "快速泵送流体"
       }
     }
@@ -55,7 +55,7 @@ object LiquidBlocks : Load {
   val 心肌泵 = Pump("myocardialPump").apply {
     localization {
       zh_CN {
-        name = "心肌泵"
+        this.localizedName = "心肌泵"
         description = "急速泵送流体,需要电力"
       }
     }
@@ -82,7 +82,7 @@ object LiquidBlocks : Load {
   val 谐振导管 = Conduit("resonanceConduit").apply {
     localization {
       zh_CN {
-        name = "谐振导管"
+        this.localizedName = "谐振导管"
         description = "向前传输流体"
       }
     }
@@ -96,7 +96,7 @@ object LiquidBlocks : Load {
   val 流金导管 = Conduit("fluxGoldConduit").apply {
     localization {
       zh_CN {
-        name = "流金导管"
+        this.localizedName = "流金导管"
         description = "向前快速传输流体"
       }
     }
@@ -111,7 +111,7 @@ object LiquidBlocks : Load {
   val 紊态导管 = ArmoredConduit("disorderedConduit").apply {
     localization {
       zh_CN {
-        name = "紊态导管"
+        this.localizedName = "紊态导管"
         description = "向前快速传输流体并且不接受侧面输出,同时阻止流体泄露"
       }
     }
@@ -127,7 +127,7 @@ object LiquidBlocks : Load {
   val 动脉导管 = Conduit("arteryConduit").apply {
     localization {
       zh_CN {
-        name = "动脉导管"
+        this.localizedName = "动脉导管"
         description = "向前急速传输流体并且不接受侧面输出,同时阻止流体泄露"
       }
     }
@@ -148,7 +148,7 @@ object LiquidBlocks : Load {
   val 基础导管桥 = TransferNode("baseBridgeConduit").apply {
     localization {
       zh_CN {
-        name = "基础导管桥"
+        this.localizedName = "基础导管桥"
         description = "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体"
       }
     }
@@ -163,7 +163,7 @@ object LiquidBlocks : Load {
   val 装甲导管桥 = TransferNode("bridgeConduitArmored").apply {
     localization {
       zh_CN {
-        name = "装甲导管桥"
+        this.localizedName = "装甲导管桥"
         description = "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体.拥有更厚的装甲"
       }
     }
@@ -183,7 +183,7 @@ object LiquidBlocks : Load {
   val 导管桥 = TransferNode("bridgeConduit").apply {
     localization {
       zh_CN {
-        name = "导管桥"
+        this.localizedName = "导管桥"
         description = "向任意方向传输流体,4个方向皆可输入输出"
       }
     }
@@ -196,7 +196,7 @@ object LiquidBlocks : Load {
   val 长距导管桥 = TransferNode("bridgeConduitLarge").apply {
     localization {
       zh_CN {
-        name = "长距导管桥"
+        this.localizedName = "长距导管桥"
         description = "消耗电力,向任意方向长距离传输流体,4个方向皆可输入输出"
       }
     }
@@ -209,7 +209,7 @@ object LiquidBlocks : Load {
   val 动脉导管桥 = TransferNode("bridgeConduitArtery").apply {
     localization {
       zh_CN {
-        name = "动脉导管桥"
+        this.localizedName = "动脉导管桥"
         description = "消耗电力,向被连接的输出节点长距离传输流体,传输节点面向连接的一侧不可接收流体"
       }
     }
@@ -228,7 +228,7 @@ object LiquidBlocks : Load {
   val 基础流体路由器 = LiquidRouter("baseLiquidRouter").apply {
     localization {
       zh_CN {
-        name = "基础流体路由器"
+        this.localizedName = "基础流体路由器"
         description = "将一个方向的流体平均输出到其他3个方向,可以储存一定量的流体"
       }
     }
@@ -240,7 +240,7 @@ object LiquidBlocks : Load {
   val 装甲流体路由器 = LiquidRouter("armoredLiquidRouter").apply {
     localization {
       zh_CN {
-        name = "装甲流体路由器"
+        this.localizedName = "装甲流体路由器"
         description = "将一个方向的流体平均输出到其他3个方向,可以储存一定量的流体.拥有更厚的装甲"
       }
     }
@@ -255,7 +255,7 @@ object LiquidBlocks : Load {
   val 基础流体交叉器 = LiquidJunction("baseLiquidJunction").apply {
     localization {
       zh_CN {
-        name = "基础流体交叉器"
+        this.localizedName = "基础流体交叉器"
         description = "让两条流体管线交叉通过而互不干扰"
       }
     }
@@ -267,7 +267,7 @@ object LiquidBlocks : Load {
   val 流体容器 = LiquidRouter("liquidContainer").apply {
     localization {
       zh_CN {
-        name = "流体容器"
+        this.localizedName = "流体容器"
         description = "可以储存少量单一流体"
       }
     }
@@ -282,7 +282,7 @@ object LiquidBlocks : Load {
   val 流体仓库 = LiquidRouter("liquidStorage").apply {
     localization {
       zh_CN {
-        name = "流体仓库"
+        this.localizedName = "流体仓库"
         description = "可以存储大量单一流体"
       }
     }
@@ -297,7 +297,7 @@ object LiquidBlocks : Load {
   val 装甲储液罐 = LiquidRouter("armorLiquidStorage").apply {
     localization {
       zh_CN {
-        name = "装甲储液罐"
+        this.localizedName = "装甲储液罐"
         description = "可以存储大量单一流体.拥有更厚的装甲"
       }
     }
@@ -313,7 +313,7 @@ object LiquidBlocks : Load {
   val 流体枢纽 = MultipleLiquidBlock("fluidJunction").apply {
     localization {
       zh_CN {
-        name = "流体枢纽"
+        this.localizedName = "流体枢纽"
         description = "存储大量不同种类的流体.可以使用流体抽离器抽取"
         details = "正规的的流体存储设施,能将多种流体独立存储于同一单元,有效解决了复杂流水线中的空间占用问题,是高级化生产的必备设施"
       }
@@ -326,7 +326,7 @@ object LiquidBlocks : Load {
   val 流体抽离器 = LiquidClassifier("liquidClassifier").apply {
     localization {
       zh_CN {
-        name = "流体抽离器"
+        this.localizedName = "流体抽离器"
         description = "从流体枢纽中抽取流体"
       }
     }

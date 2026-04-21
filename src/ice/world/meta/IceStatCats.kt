@@ -6,23 +6,23 @@ import universecore.util.handler.FieldHandler
 
 object IceStatCats {
   val 结构 = create("structure") {
-    localization { zh_CN { name = "结构" } }
+    localization { zh_CN { this.localizedName = "结构" } }
   }
   val 流体传输 = create("liquidTransport") {
-    localization { zh_CN { name = "流体传输" } }
+    localization { zh_CN { this.localizedName = "流体传输" } }
   }
   val 其他 = create("other") {
-    localization { zh_CN { name = "其他" } }
+    localization { zh_CN { this.localizedName = "其他" } }
   }
 
   val neutron = create("neutron", 3) {
-    localization { zh_CN { name = "中子能" } }
+    localization { zh_CN { this.localizedName = "中子能" } }
   }
   val matrix = create("matrix", 5) {
-    localization { zh_CN { name = "矩阵" } }
+    localization { zh_CN { this.localizedName = "矩阵" } }
   }
   val heat = create("heat", 6) {
-    localization { zh_CN { name = "热能" } }
+    localization { zh_CN { this.localizedName = "热能" } }
   }
   val reaction = create("reaction")
 
@@ -41,7 +41,7 @@ object IceStatCats {
   }
 
   class IceStatCat(name: String) :StatCat(name), Localizable {
-    override fun localized() = localizedName
+    override fun localized() = this@IceStatCat.localizedName
 
     override var localizedName: String = ""
 

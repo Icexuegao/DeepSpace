@@ -14,7 +14,7 @@ class 陶钢熔炼炉 : NormalCrafter("ceramicSteelFurnace") {
   init {
     localization {
       zh_CN {
-        name = "陶钢熔炼炉"
+        this.localizedName = "陶钢熔炼炉"
         description = "将石英玻璃,钴钢和铈锭熔炼为陶钢"
       }
     }

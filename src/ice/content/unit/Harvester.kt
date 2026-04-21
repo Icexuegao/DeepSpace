@@ -22,7 +22,7 @@ class Harvester : IceUnitType("harvester") {
     mineItems.add(Vars.content.items())
     localization {
       zh_CN {
-        name = "收割"
+        this.localizedName = "收割"
         description = "轻型空中工程单位.搭载高效激光共振钻头,专精于资源采集作业"
       }
     }

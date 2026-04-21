@@ -51,7 +51,7 @@ class BreakThrough:ItemTurret("breakThrough"){
     coolantMultiplier = 0.333f
     localization {
       zh_CN {
-        name = "冲穿"
+        this.localizedName = "冲穿"
         description = "以临界速度发射五道远程穿透磁轨炮摧毁敌人,比裂颅更强"
       }
     }

@@ -6,6 +6,7 @@ import arc.input.KeyCode
 import arc.math.Interp
 import arc.scene.Scene
 import arc.scene.actions.Actions
+import arc.scene.style.Drawable
 import arc.scene.ui.Dialog
 import arc.scene.ui.Image
 import arc.scene.ui.layout.Table
@@ -22,7 +23,7 @@ import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*
 import ice.world.meta.IceStats
 
-object MenusDialog : Dialog(), Load {
+object MenusDialog :Dialog(), Load {
   const val backMargin = 10f
   val back = IStyles.background12
   var button: BaseMenusDialog = PublicInfoDialog
@@ -44,6 +45,7 @@ object MenusDialog : Dialog(), Load {
     showUISoundCloseV(ISounds.进入模组界面)
     return super.show()
   }
+
   init {
     reset()
     setFillParent(true)
@@ -54,7 +56,7 @@ object MenusDialog : Dialog(), Load {
       }.margin(10f).height(60f).growX().row()
 
       table.table { it1 ->
-        val middle = object : Table(back) {
+        val middle = object :Table(back) {
           override fun drawBackground(x: Float, y: Float) {
             if (background == null) return
             val color = this.color
@@ -70,17 +72,21 @@ object MenusDialog : Dialog(), Load {
           it.margin(backMargin)
           it.iPaneG { pan ->
             pan.top()
+
+            fun Table.setbuttons(icon: Drawable,name: String,runnable: Runnable){
+              image(icon).size(50f).color(IceColor.b5).expand()
+              add(name).color(IceColor.b5).expand().padRight(10f)
+              changed(runnable)
+            }
             BaseMenusDialog.dalogs.forEach { mb ->
               pan.button({ b ->
-                b.image(mb.icon).size(50f).color(IceColor.b5).table.add(mb.name).color(IceColor.b5)
-                b.changed {
+               b.setbuttons(mb.icon,mb.name) {
                   if (button != mb) {
                     button.hide()
                     button = mb
                     mb.build(conts)
                   }
                   showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
-
                 }
               }, IStyles.rootButton) {
 
@@ -89,10 +95,11 @@ object MenusDialog : Dialog(), Load {
               }.pad(2f).margin(20f).growX().row()
             }
             pan.button({ b ->
-              b.image(IStyles.menusButton_exit).size(50f).color(IceColor.b5).table.add(IceStats.关闭.localized()).color(IceColor.b5)
+              b.setbuttons(IStyles.menusButton_exit,IceStats.关闭.localized()){
+                hide()
+                showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
+              }
             }, IStyles.rootCleanButton) {
-              hide()
-              showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
             }.pad(2f).margin(20f).growX().row()
           }
         }.width(200f).margin(10f).growY()

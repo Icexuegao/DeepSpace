@@ -18,7 +18,7 @@ class HadronReconstructor : AtomSchematicCrafter("hadron_reconstructor") {
   init {
     localization {
       zh_CN {
-        name = "强子重构仪"
+        this.localizedName = "强子重构仪"
         description = "消耗介质生成原材料,可配置"
         details = "微缩的定向大量强子对撞机,使得创造物质从理论成为现实"
       }

@@ -17,7 +17,7 @@ class ThinkEnd:ItemTurret("thinkEnd") {
   init{
     localization {
       zh_CN {
-        name = "绪终"
+        this.localizedName = "绪终"
       }
     }
     size = 5
@@ -69,7 +69,7 @@ class ThinkEnd:ItemTurret("thinkEnd") {
       })
       localization {
         zh_CN {
-          name = "绪终"
+          this.localizedName = "绪终"
         }
       }
     }

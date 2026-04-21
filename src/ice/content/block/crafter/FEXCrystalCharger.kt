@@ -19,7 +19,7 @@ class FEXCrystalCharger:NormalCrafter("FEX_crystal_charger"){
   init{
   localization {
     zh_CN {
-      name = "结晶活化器"
+      this.localizedName = "结晶活化器"
       description = "为导能结晶充能产出活化导能结晶"
       details="对导能结晶释放高能中子脉冲,合适的脉冲频率会令能量在晶格之内不断积累,叠加,使晶体结构变得不稳定,并带来一些特别的效果"
     }

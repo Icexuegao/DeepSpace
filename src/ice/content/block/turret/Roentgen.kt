@@ -24,7 +24,7 @@ class Roentgen : ProjectileTurret("roentgen") {
   init {
     localization {
       zh_CN {
-        name = "伦琴"
+        this.localizedName = "伦琴"
         description = "发射极具穿透力的高能激光束,杀伤力极强"
       }
     }

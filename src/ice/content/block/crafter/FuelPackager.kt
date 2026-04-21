@@ -16,7 +16,7 @@ class FuelPackager: NormalCrafter("fuel_packager"){
   init{
   localization {
     zh_CN {
-      name = "燃料封装机"
+      this.localizedName = "燃料封装机"
       description = "将核燃料封装进强化合金以生产核燃料,可配置\n利用力场固定低温技术制造亚绝对零度环境,将核燃料以极高的浓度和压力压缩封装起来"
     }
   }

@@ -20,7 +20,7 @@ class ArcLight : IceUnitType("unit_arcLight") {
   init {
     localization {
       zh_CN {
-        name = "弧光"
+        this.localizedName = "弧光"
         description = "中型空中支援单位.发射激光与湍能弹攻击附近敌人,会自动修复受损建筑,并对附近的友军提供迅疗效果"
       }
     }

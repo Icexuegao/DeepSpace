@@ -25,7 +25,7 @@ class Chord : IceUnitType("chord") {
     controller = Func { CarryTaskAI() }
     localization {
       zh_CN {
-        name = "和弦"
+        this.localizedName = "和弦"
         description = "轻型空中工程单位.配备大容量货舱与稳定悬挂系统,专精于物资运输任务.常三机编队协同作业"
       }
     }

@@ -25,7 +25,7 @@ class BloodyWind : PowerTurret("bloodyWind") {
   init {
     localization {
       zh_CN {
-        name = "腥风"
+        this.localizedName = "腥风"
         description = "改进型四联速射粒子炮,向敌人发射高热的粒子束\n为了更强的电热转换回路拆除了部分气冷系统,使用液体时冷却效果更佳"
       }
     }

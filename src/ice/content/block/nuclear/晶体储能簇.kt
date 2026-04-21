@@ -19,7 +19,7 @@ class 晶体储能簇:EnergyContainer("crystal_container"){
 
       localization {
         zh_CN {
-          name = "晶体储能簇"
+          this.localizedName = "晶体储能簇"
           description = "晶体式中子能存储器,用于存储中子能"
         }
       }

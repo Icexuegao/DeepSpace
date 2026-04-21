@@ -24,7 +24,7 @@ class ReactingPool : NormalCrafter("reacting_pool") {
   init {
     localization {
       zh_CN {
-        name = "反应仓"
+        this.localizedName = "反应仓"
         description = "将多种材料置入反应并生产特定产物,可配置"
         details = "一个精准控制进料的化学反应容器,是普遍使用的化工设备"
       }

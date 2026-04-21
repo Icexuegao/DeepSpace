@@ -21,7 +21,7 @@ class IronGuard : IceUnitType("unit_ironGuard", MechUnit::class.java) {
   init {
     localization {
       zh_CN {
-        name = "铁卫"
+        this.localizedName = "铁卫"
         description = "中型地面突击单位.快速交替发射炮弹攻击敌人,会缓慢恢复生命值,开火时减少所受伤害"
       }
     }

@@ -25,7 +25,7 @@ object Remainss {
   val 娜雅的手串 = Remains("remains_naya_bracelet").apply {
     localization {
       zh_CN {
-        name = "娜雅的手串"
+        this.localizedName = "娜雅的手串"
         description = "一串温润的玉石手串,在帝国任职期间由娜雅赠予"
       }
     }
@@ -53,7 +53,7 @@ object Remainss {
   val 坚固的装甲板 = Remains("remains_armor_plates").apply {
     localization {
       zh_CN {
-        name = "坚固的装甲板"
+        this.localizedName = "坚固的装甲板"
         description = "多层淬火钢板铆接而成,表面布满划痕与凹坑"
       }
     }
@@ -73,7 +73,7 @@ object Remainss {
   val 不焚者的余烬 = Remains("remains_unburnt_ashes").apply {
     localization {
       zh_CN {
-        name = "不焚者的余烬"
+        this.localizedName = "不焚者的余烬"
         description = "温热的结晶体,烈焰中被焚尽却未曾死去之人的最后残留"
       }
     }
@@ -97,7 +97,7 @@ object Remainss {
   val 纯净水晶坠饰 = Remains("remains_pure_crystal_pendant").apply {
     localization {
       zh_CN {
-        name = "纯净水晶坠饰"
+        this.localizedName = "纯净水晶坠饰"
         description = "一块天然形成,毫无杂质的透明白水晶"
       }
     }
@@ -122,7 +122,7 @@ object Remainss {
   val 玄岩板 = Remains("remains_basalt_plate").apply {
     localization {
       zh_CN {
-        name = "玄岩板"
+        this.localizedName = "玄岩板"
         description = "由奇异,沉重的玄武岩打磨而成"
       }
     }
@@ -150,7 +150,7 @@ object Remainss {
   val 谐振探针 = Remains("remains_resonance_probe").apply {
     localization {
       zh_CN {
-        name = "谐振探针"
+        this.localizedName = "谐振探针"
         description = "一种用于探测矿物谐振频率的装置"
       }
     }
@@ -179,7 +179,7 @@ object Remainss {
   val 流光罗盘 = Remains("remains_flowing_compass").apply {
     localization {
       zh_CN {
-        name = "流光罗盘"
+        this.localizedName = "流光罗盘"
         description = "表面刻有古老的符文,会发出淡淡的光芒"
       }
     }
@@ -204,7 +204,7 @@ object Remainss {
   val 不朽者胚胎 = Remains("remains_immortal_embryo").apply {
     localization {
       zh_CN {
-        name = "不朽者胚胎"
+        this.localizedName = "不朽者胚胎"
       }
     }
 
@@ -242,7 +242,7 @@ object Remainss {
   val 脊骨寄生虫 = Remains("remains_spine_parasite").apply {
     localization {
       zh_CN {
-        name = "脊骨寄生虫"
+        this.localizedName = "脊骨寄生虫"
         description = "一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合"
       }
     }
@@ -286,7 +286,7 @@ object Remainss {
     remainsColor = IceColor.r2
     localization {
       zh_CN {
-        name = "心跳鼓"
+        this.localizedName = "心跳鼓"
         description = "弹性心肌隔膜,回响着怀念之音"
       }
     }
@@ -311,7 +311,7 @@ object Remainss {
     remainsColor = IceColor.r2
     localization {
       zh_CN {
-        name = "多余的视线"
+        localizedName = "多余的视线"
         description = "同一片神经系统的两个节点,我们相认的媒介"
       }
     }
@@ -335,7 +335,7 @@ object Remainss {
     remainsColor = IceColor.r2
     localization {
       zh_CN {
-        name = "血腥玛丽"
+        localizedName = "血腥玛丽"
         description = "血与酒液在杯中摇匀,辛辣之后,只余缓慢扩散的猩红"
       }
     }
@@ -372,7 +372,7 @@ object Remainss {
   val 现彼岸 = Remains("remains_higanbana").apply {
     localization {
       zh_CN {
-        name = "现彼岸"
+        localizedName = "现彼岸"
       }
     }
     remainsColor = IceColor.r2

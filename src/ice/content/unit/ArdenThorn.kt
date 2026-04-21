@@ -33,7 +33,7 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
   init {
     localization {
       zh_CN {
-        name = "焚棘"
+        this.localizedName = "焚棘"
         description = "重型空中突击单位.发射渐速机枪弹和导弹攻击敌人"
         details = "虽定位为侦察单位,但其出色的滞空能力与双重火力配置,使其能在探查敌情的同時实施骚扰性攻击,成为战场上空难以驱离的刺眼存在"
       }

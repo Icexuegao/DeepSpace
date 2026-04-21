@@ -15,7 +15,7 @@ class 压缩存储器 :StorageBlock("compressorMemory") {
     requirements(Category.effect, IItems.钴锭, 250, IItems.铱板, 150, IItems.钴钢, 100)
     localization {
       zh_CN {
-        name = "压缩存储器"
+        this.localizedName = "压缩存储器"
         description = "存储各种类型的物品.可以用装卸器卸载物品"
       }
     }

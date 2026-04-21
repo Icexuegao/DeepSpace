@@ -19,7 +19,7 @@ class Curtain : SglTurret("curtain") {
   init {
     localization {
       zh_CN {
-        name = "遮幕"
+        this.localizedName = "遮幕"
         description = "发射石墨炸弹,会制造一篇石墨云,一种朴素但有效的对空防御武器"
       }
     }

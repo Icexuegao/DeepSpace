@@ -16,7 +16,7 @@ class FlowingFire :ContinuousTurret("flowingFire") {
   init {
     localization {
       zh_CN {
-        name = "流火"
+        this.localizedName = "流火"
         description = "小型等离子炮塔\n持续消耗燃料以喷射高热的等离子火焰,近距离内十分有效"
       }
     }

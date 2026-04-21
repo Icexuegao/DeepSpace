@@ -14,7 +14,7 @@ class 高速粉碎机 : NormalCrafter("highSpeedCrusher") {
   init {
     localization {
       zh_CN {
-        name = "高速粉碎机"
+        this.localizedName = "高速粉碎机"
         description = "将黄玉髓粉碎为金珀沙"
       }
     }

@@ -21,7 +21,7 @@ class Quicksand :LiquidTurret("turret_quicksand") {
   init {
     localization {
       zh_CN {
-        name = "泉涌"
+        this.localizedName = "泉涌"
         description = "使用增压器高速喷射液体攻击敌人,使用水作为弹药时可以灭火"
       }
     }

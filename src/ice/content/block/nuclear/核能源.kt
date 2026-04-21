@@ -10,7 +10,7 @@ class 核能源:EnergySource("nuclear_energy_source"){
  init {
     localization {
       zh_CN {
-        name = "核能源"
+        this.localizedName = "核能源"
         description = "释放中子能量"
       }
     }

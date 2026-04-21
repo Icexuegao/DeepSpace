@@ -36,6 +36,6 @@ interface Localizable {
   var details: String
 
   fun localization(block: LocalizationMap.() -> Unit) {
-    LocalizationManager.register(this, LocalizationMap().apply(block))
+    LocalizationManager.registerTarget(this, LocalizationMap().apply(block))
   }
 }

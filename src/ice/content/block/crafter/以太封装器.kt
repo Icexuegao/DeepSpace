@@ -19,7 +19,7 @@ class 以太封装器 : NormalCrafter("etherEncapsulator") {
   init {
     localization {
       zh_CN {
-        name = "以太封装器"
+        this.localizedName = "以太封装器"
         description = "将游离的以太封装为便于运输的容器"
       }
     }

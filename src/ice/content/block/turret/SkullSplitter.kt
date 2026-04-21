@@ -24,7 +24,7 @@ class SkullSplitter : ItemTurret("turret_skullSplitter") {
   init {
     localization {
       zh_CN {
-        name = "裂颅"
+        this.localizedName = "裂颅"
         description = "以临界速度发射三道远程穿透磁轨炮摧毁敌人,能够扫除一切障碍"
       }
     }

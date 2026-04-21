@@ -19,7 +19,7 @@ class MeteoricIron : IceUnitType("meteoricIron") {
   init {
     localization {
       zh_CN {
-        name = "陨铁"
+        this.localizedName = "陨铁"
         description = "中型空中突击单位.发射高热激光并辅以机炮攻击敌人,以闪电场电击附近敌军并治疗友军.配备裂解炮抵御敌人的攻击"
       }
     }

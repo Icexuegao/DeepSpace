@@ -9,7 +9,7 @@ class 中子能量节点:NuclearNode("nuclear_pipe_node"){
   init{
     localization {
       zh_CN {
-        name = "中子能量节点"
+        this.localizedName = "中子能量节点"
         description = "中子能传输节点,用于传输核能量,以链接多个节点的方式构建核能运输网络"
       }
     }

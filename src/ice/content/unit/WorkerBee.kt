@@ -9,11 +9,11 @@ class WorkerBee :IceUnitType("unit_workerBee", BuildingTetherPayloadUnit::class.
   init {
     localization {
       zh_CN {
-        name = "工蜂"
+        this.localizedName = "工蜂"
         description = "轻型空中工程单位.配备精密的模块化建造系统,负责大型单位的建造与装配任务"
       }
       en {
-        name = "Worker Bee"
+        this.localizedName = "Worker Bee"
         description = "Light aerial engineering unit with modular construction system"
       }
     }

@@ -18,7 +18,7 @@ class HeavyDamageMissile : MissileUnitType("unit_heavyDamageMissile") {
   init {
     localization {
       zh_CN {
-        name = "重创"
+        this.localizedName = "重创"
       }
     }
 

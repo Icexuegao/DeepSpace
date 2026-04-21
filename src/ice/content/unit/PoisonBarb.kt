@@ -13,7 +13,7 @@ class PoisonBarb : IceUnitType("poisonBarb") {
   init {
     localization {
       zh_CN {
-        name = "毒刺"
+        this.localizedName = "毒刺"
         description = "轻型空中突击单位.发射穿透性激光攻击敌人,每隔一段时间会克隆自身"
         details = "帝国科技的终极产物,几乎可以无限制地自我增殖"
       }

@@ -14,7 +14,7 @@ class Meditation : IceUnitType("unit_meditation", UnitWaterMove::class.java) {
   init {
     localization {
       zh_CN {
-        name = "苦修"
+        this.localizedName = "苦修"
         description = "中型海栖突击单位.发射炮弹与导弹攻击敌人,并加装护盾辅助发生器以维持友军护盾持续作战"
       }
     }

@@ -17,7 +17,7 @@ class RetortColumn : NormalCrafter("retort_column") {
   init {
     localization {
       zh_CN {
-        name = "干馏塔"
+        this.localizedName = "干馏塔"
         description = "将生煤干馏为硫化合物和焦炭"
         details = "通过隔绝空气的高温分离煤炭中的物质,以制造焦炭"
       }

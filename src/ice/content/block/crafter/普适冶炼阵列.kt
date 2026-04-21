@@ -14,7 +14,7 @@ class 普适冶炼阵列 : NormalCrafter("universalSmelterArray") {
   init {
     localization {
       zh_CN {
-        name = "普适冶炼阵列"
+        this.localizedName = "普适冶炼阵列"
         description = "冶炼原矿石出铜锭,锌锭和铅锭,可配置"
         details = "核心级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铜,锌,铅等多种金属原料,为后续生产提供稳定的金属供应"
       }

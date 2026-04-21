@@ -9,7 +9,7 @@ class 遗弃匣:LostBox("lostBox"){
   init{
     localization {
       zh_CN {
-        name = "遗弃匣"
+        this.localizedName = "遗弃匣"
       }
     }
     size = 2

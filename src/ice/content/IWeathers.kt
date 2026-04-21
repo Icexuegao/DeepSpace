@@ -44,7 +44,7 @@ object IWeathers :Load {
     soundVolMin = 0.02f
     localization {
       zh_CN {
-        name = "凌雪"
+        this.localizedName = "凌雪"
       }
     }
   }
@@ -74,7 +74,7 @@ object IWeathers :Load {
     soundVol = 0.25f
     localization {
       zh_CN {
-        name = "血雨"
+        this.localizedName = "血雨"
       }
     }
   }

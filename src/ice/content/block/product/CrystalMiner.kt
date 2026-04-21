@@ -29,7 +29,7 @@ class CrystalMiner : NormalCrafter("crystal_miner") {
   init {
     localization {
       zh_CN {
-        name = "晶簇粉碎器"
+        this.localizedName = "晶簇粉碎器"
       }
     }
     hasItems = true

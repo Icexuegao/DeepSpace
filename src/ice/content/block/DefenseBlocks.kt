@@ -60,7 +60,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.高碳钢, 3, IItems.低碳钢, 3)
     localization {
       zh_CN {
-        name = "碳钢墙"
+        this.localizedName = "碳钢墙"
         description = "保护己方建筑,挡下敌方炮弹"
       }
     }
@@ -73,7 +73,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.高碳钢, 3 * size * size, IItems.低碳钢, 3 * size * size)
     localization {
       zh_CN {
-        name = "大型碳钢墙"
+        this.localizedName = "大型碳钢墙"
         description = "保护己方建筑,挡下敌方炮弹"
       }
     }
@@ -86,7 +86,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.金锭, 10)
     localization {
       zh_CN {
-        name = "流金墙"
+        this.localizedName = "流金墙"
         description = "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈"
         details = "熔融金锭构筑的壁垒\n财富值+"
       }
@@ -100,7 +100,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.金锭, 10)
     localization {
       zh_CN {
-        name = "大型流金墙"
+        this.localizedName = "大型流金墙"
         description = "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈"
         details = "熔融金锭构筑的壁垒\n财富值++"
       }
@@ -109,7 +109,7 @@ object DefenseBlocks : Load {
   val 铬墙 = AutoWall("chromeWall").apply {
     localization {
       zh_CN {
-        name = "铬墙"
+        this.localizedName = "铬墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -123,7 +123,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.铬锭, 6 * 4)
     localization {
       zh_CN {
-        name = "大型铬墙"
+        this.localizedName = "大型铬墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -134,7 +134,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.钴钢, 8)
     localization {
       zh_CN {
-        name = "钴钢墙"
+        this.localizedName = "钴钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -145,7 +145,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.钴钢, 32)
     localization {
       zh_CN {
-        name = "大型钴钢墙"
+        this.localizedName = "大型钴钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -158,7 +158,7 @@ object DefenseBlocks : Load {
     absorbLasers = true
     localization {
       zh_CN {
-        name = "陶钢墙"
+        this.localizedName = "陶钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用.能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
       }
     }
@@ -173,7 +173,7 @@ object DefenseBlocks : Load {
     absorbLasers = true
     localization {
       zh_CN {
-        name = "大型陶钢墙"
+        this.localizedName = "大型陶钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用.能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
       }
     }
@@ -185,7 +185,7 @@ object DefenseBlocks : Load {
     crushDamageMultiplier = 2.5f
     localization {
       zh_CN {
-        name = "铱墙"
+        this.localizedName = "铱墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -198,7 +198,7 @@ object DefenseBlocks : Load {
     crushDamageMultiplier = 2.5f
     localization {
       zh_CN {
-        name = "大型铱墙"
+        this.localizedName = "大型铱墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -207,7 +207,7 @@ object DefenseBlocks : Load {
   val 强化合金墙 = Wall("strengthening_alloy_wall").apply {
     localization {
       zh_CN {
-        name = "强化合金墙"
+        this.localizedName = "强化合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用"
       }
     }
@@ -217,7 +217,7 @@ object DefenseBlocks : Load {
   val 大型强化合金墙 = Wall("strengthening_alloy_wall_large").apply {
     localization {
       zh_CN {
-        name = "大型强化合金墙"
+        this.localizedName = "大型强化合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用"
       }
     }
@@ -237,7 +237,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.生物钢, 8, IItems.铱板, 4, IItems.陶钢, 4)
     localization {
       zh_CN {
-        name = "生物钢墙"
+        this.localizedName = "生物钢墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
       }
     }
@@ -255,7 +255,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.生物钢, 32, IItems.铱板, 16, IItems.陶钢, 16)
     localization {
       zh_CN {
-        name = "大型生物钢墙"
+        this.localizedName = "大型生物钢墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
       }
     }
@@ -263,7 +263,7 @@ object DefenseBlocks : Load {
   val 相位合金墙 = ShieldWall("phaseAlloyWall").apply {
     localization {
       zh_CN {
-        name = "相位合金墙"
+        this.localizedName = "相位合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.会以自身为中心投射一片小型立场护盾"
       }
     }
@@ -296,7 +296,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.导能回路, 8, IItems.金锭, 8, IItems.铪锭, 8)
     localization {
       zh_CN {
-        name = "大型相位合金墙"
+        this.localizedName = "大型相位合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.会以自身为中心投射一片小型立场护盾"
       }
     }
@@ -304,7 +304,7 @@ object DefenseBlocks : Load {
   val 装甲闸门 = AutoDoor("armorGate").apply {
     localization {
       zh_CN {
-        name = "装甲闸门"
+        this.localizedName = "装甲闸门"
         description = "允许单位通过的装甲门,自动开关"
       }
     }
@@ -319,7 +319,7 @@ object DefenseBlocks : Load {
   val 相控雷达 = PhasedRadar("phased_radar").apply {
     localization {
       zh_CN {
-        name = "相控雷达"
+        this.localizedName = "相控雷达"
         description = "锁定范围内的敌方空中单位,攻击被锁定的目标有概率造成额外大量伤害,杀伤倍率和概率都取决于阵列大小"
       }
     }
@@ -345,7 +345,7 @@ object DefenseBlocks : Load {
   val 简并态中子聚合物墙 = SglWall("neutron_polymer_wall").apply {
     localization {
       zh_CN {
-        name = "简并态中子墙"
+        this.localizedName = "简并态中子墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身"
       }
     }
@@ -358,7 +358,7 @@ object DefenseBlocks : Load {
   val 大型简并态中子墙 = SglWall("neutron_polymer_wall_large").apply {
     localization {
       zh_CN {
-        name = "大型简并态中子墙"
+        this.localizedName = "大型简并态中子墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身"
       }
     }
@@ -373,7 +373,7 @@ object DefenseBlocks : Load {
   val 混沌矩阵 = GameOfLife("attack_matrix").apply {
     localization {
       zh_CN {
-        name = "混沌矩阵"
+        this.localizedName = "混沌矩阵"
         description = "集成防御系统,反物质在力场的引导下,会按照生命游戏的规则在网格中不断演化\n具体来说,生命游戏所在的网格上,每一个单元格都是一个细胞,细胞只有两种状态,生与死,每一个细胞在一次刷新后的状态由它周围8个细胞决定,会遵循如下规则进行演化:\n[accent]当这个细胞处于死亡状态时[]\n[green]1.若周围的存活细胞数量为3则在下一刻转变为存活状态[]\n[gray]2.任何其他情况,细胞状态不变[]\n[accent]当这个细胞处于存活状态时[]\n[red]  1.若周围的存活细胞数量多于4(含4)则下一刻细胞死亡[]\n[red]2.若周围存活细胞数量少于2(不含2)则下一刻细胞死亡[] \n[gray]3.任何其他情况,细胞状态不变[]\n每一次刷新,所有存活的细胞寿命会增加1,在细胞死亡时,根据细胞的年龄会触发相应的效果,随细胞寿命的增加,强度会大幅度增强"
         details = "生命游戏这一概念原本是由数学家康威设计的一个计算机程序,早期,人们仅仅研究与探索了生命游戏在计算机程序程序级别的规律,其与自然科学的重叠几乎完全被忽视了,直到二十一世纪60年代,科学家发现在真空仓内的粒子涨落规律与生命游戏在形式上高度重合,生命游戏规则成为了一项科学规律\n在这一规则下进行受控的反物质湮灭可以得到最接近理论数据的能量利用效率,因此这一规则广泛被应用于能源与武装,不过,像混沌矩阵这样彻底的巨型网格本身还是一个过于大胆的尝试,所幸在巨大的学术压力下中止数次数次后该项目还是收获了非常突出的成果"
       }

@@ -14,7 +14,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
   init {
     localization {
       zh_CN {
-        name = "真空坩埚"
+        this.localizedName = "真空坩埚"
         description = "将多种材料进行低压处理并生产特定产物,可配置"
         details = "在低压高温环境下进行特殊工序时使用的设备"
       }

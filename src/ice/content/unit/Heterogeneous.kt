@@ -17,7 +17,7 @@ class Heterogeneous : IceUnitType("unit_heterogeneous") {
   init {
     localization {
       zh_CN {
-        name = "异种"
+        this.localizedName = "异种"
         description = "重型地面突击单位.对远距离敌人发射不稳定的聚变能量弹,对近距离敌人则发射密集弱化激光"
       }
     }

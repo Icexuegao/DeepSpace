@@ -47,7 +47,7 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
   init {
     localization {
       zh_CN {
-        name = "裂片集群"
+        this.localizedName = "裂片集群"
         description = "超重型空中毁灭单位."
         details = "阴影宣告到来,\n灰白落定尘埃."
       }

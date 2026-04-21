@@ -38,7 +38,7 @@ class Soflame : SglTurret("soflame") {
   init {
     localization {
       zh_CN {
-        name = "阳炎"
+        this.localizedName = "阳炎"
         description = "将能量聚集到“太阳分子”上,直到能量足够高时发射出去,极热的物质云会留下灼热的轨迹,并在碰撞时爆炸,将目标化为灰烬"
       }
     }

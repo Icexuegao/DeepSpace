@@ -21,7 +21,7 @@ class Siege : IceUnitType("siege") {
   init {
     localization {
       zh_CN {
-        name = "攻城"
+        this.localizedName = "攻城"
         description = "中型地面突击单位.使用冲击炮越过防御工事轰击敌方建筑.开火时无法移动"
         details = "炮平四海!!!"
       }

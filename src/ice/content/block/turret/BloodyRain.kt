@@ -28,7 +28,7 @@ class BloodyRain : ItemTurret("bloodyRain") {
   init {
     localization {
       zh_CN {
-        name = "血雨"
+        this.localizedName = "血雨"
         description = " 改进型双联速射炮,向敌人发射大型穿甲弹,兼容各种弹药\n其恐怖的穿透力足以击穿建筑装甲"
       }
     }

@@ -60,7 +60,7 @@ object ProductBlocks : Load {
     drillTime = 400f
     localization {
       zh_CN {
-        name = "纤汲钻井"
+        this.localizedName = "纤汲钻井"
         description = "基础钻井,配备了最基础的钻芯,可用于开采基础资源"
       }
     }
@@ -71,7 +71,7 @@ object ProductBlocks : Load {
   val 蛮荒钻井: Block = BaseDrill("uncivilizedDrill").apply {
     localization {
       zh_CN {
-        name = "蛮荒钻井"
+        this.localizedName = "蛮荒钻井"
         description = "次级钻井,在纤汲钻井的基础上进行了迭代,钻芯材料改进,可用于开采更高级资源"
       }
     }
@@ -97,7 +97,7 @@ object ProductBlocks : Load {
     requirements(Category.production, IItems.钴钢, 30, IItems.铪锭, 20, IItems.单晶硅, 25, IItems.电子元件, 10)
     localization {
       zh_CN {
-        name = "曼哈德钻井"
+        this.localizedName = "曼哈德钻井"
         description = "高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效的资源开采"
       }
     }
@@ -105,7 +105,7 @@ object ProductBlocks : Load {
   val 热熔钻井: Block = BaseDrill("hotMeltDrill").apply {
     localization {
       zh_CN {
-        name = "热熔钻井"
+        this.localizedName = "热熔钻井"
         description = "高级钻井,通过加热多种合金制成的钻头融毁地层以实现高效的资源开采"
       }
     }
@@ -156,7 +156,7 @@ object ProductBlocks : Load {
     requirements(Category.production, IItems.铱板, 450, IItems.导能回路, 225, IItems.钴锭, 32, IItems.生物钢, 75, IItems.肃正协议, 1)
     localization {
       zh_CN {
-        name = "血肉钻井"
+        this.localizedName = "血肉钻井"
         description = "高级钻井,能够自主驱动钻探.需要持续供给血肉赘生物,可以安置在水上"
       }
     }
@@ -165,7 +165,7 @@ object ProductBlocks : Load {
   val 抽水机 = SolidPump("waterPump").apply {
     localization {
       zh_CN {
-        name = "抽水机"
+        this.localizedName = "抽水机"
         description = "抽取地下水资源,但无法抽取地表水资源"
       }
     }
@@ -181,7 +181,7 @@ object ProductBlocks : Load {
   val 大型抽水机 = SolidPump("largeWaterPump").apply {
     localization {
       zh_CN {
-        name = "大型抽水机"
+        this.localizedName = "大型抽水机"
         description = "高效抽取地下水资源,但无法抽取地表水资源"
       }
     }
@@ -201,7 +201,7 @@ object ProductBlocks : Load {
   var 岩层钻井机 = FloorCrafter("rock_drill").apply {
     localization {
       zh_CN {
-        name = "岩层钻井机"
+        this.localizedName = "岩层钻井机"
         description = "特种钻井,钻探深层的地壳,将深埋在地壳深处的较高质量的矿物送至地表"
       }
     }
@@ -255,7 +255,7 @@ object ProductBlocks : Load {
   var 潮汐钻头 = ExtendableDrill("tidal_drill").apply {
     localization {
       zh_CN {
-        name = "潮汐钻井"
+        this.localizedName = "潮汐钻井"
         description = "高级钻井,使用最前沿力场控制技术制造的高级钻头,以粒子束冲击破坏挖掘物的物质结构后通过控制引力场震荡完成矿石解体和采集的过程"
       }
     }
@@ -311,7 +311,7 @@ object ProductBlocks : Load {
     squareSprite = false
     localization {
       zh_CN {
-        name = "引力延展室"
+        this.localizedName = "引力延展室"
         description = "用于延伸潮汐钻头的设备,贴近潮汐钻井,并与其他延展室彼此正对连接可扩大钻头覆盖的范围"
       }
     }
@@ -352,7 +352,7 @@ object ProductBlocks : Load {
   var 矩阵矿床 = MatrixMiner("matrix_miner").apply {
     localization {
       zh_CN {
-        name = "矩阵矿床"
+        this.localizedName = "矩阵矿床"
         description = "矩阵矿床的控制中心,四面可安装矿床的工作组件以进行开采工作"
       }
     }
@@ -365,7 +365,7 @@ object ProductBlocks : Load {
   var 采掘扇区 = MatrixMinerSector("matrix_miner_node").apply {
     localization {
       zh_CN {
-        name = "采掘扇区"
+        this.localizedName = "采掘扇区"
         description = "矩阵矿床的采掘工作组件,提供一个基础开采角度区间"
       }
     }
@@ -383,7 +383,7 @@ object ProductBlocks : Load {
   var 谐振增压组件 = MatrixMinerComponent("matrix_miner_extend").apply {
     localization {
       zh_CN {
-        name = "谐振增压组件"
+        this.localizedName = "谐振增压组件"
         description = "矩阵矿床的增幅组件,使矩阵矿床的采集范围增大,可以大幅提高钻头的采掘效率"
       }
     }
@@ -423,7 +423,7 @@ object ProductBlocks : Load {
 
     localization {
       zh_CN {
-        name = "量子隧穿仪"
+        this.localizedName = "量子隧穿仪"
         description = "矩阵矿床的增幅组件,安装此组件后,矩阵矿床将能够透过建筑挖掘被建筑覆盖的矿石"
       }
     }
@@ -514,7 +514,7 @@ object ProductBlocks : Load {
 
     localization {
       zh_CN {
-        name = "矩阵增幅器"
+        this.localizedName = "矩阵增幅器"
         description = "矩阵矿床的增幅组件,提高矩阵矿床的最大范围,并消耗液体增加矩阵矿床的工作效率"
       }
     }

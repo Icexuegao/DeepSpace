@@ -17,7 +17,7 @@ class PlasmaFilter : NormalCrafter("plasmaFilter") {
   init {
     localization {
       zh_CN {
-        name = "血浆过滤器"
+        this.localizedName = "血浆过滤器"
         description = "冷却血肉赘生物并从中提取生物钢"
       }
     }

@@ -11,7 +11,7 @@ class 萃取固化器 : NormalCrafter("concentrateSolidifier") {
   init {
     localization {
       zh_CN {
-        name = "萃取固化器"
+        this.localizedName = "萃取固化器"
         description = "从锆英石中萃取并熔炼为铪锭"
       }
     }

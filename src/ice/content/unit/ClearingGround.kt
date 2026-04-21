@@ -25,7 +25,7 @@ class ClearingGround : IceUnitType("unit_clearingGround") {
   init {
     localization {
       zh_CN {
-        name = "涤罪"
+        this.localizedName = "涤罪"
         description = "涤罪是神殿[净罪计划]的产物"
       }
     }

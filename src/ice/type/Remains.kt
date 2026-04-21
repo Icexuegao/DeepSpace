@@ -33,6 +33,12 @@ open class Remains(val name: String) :Localizable {
     }
   }
 
+  override var localizedName: String = ""
+
+  override var description: String = ""
+
+  override var details: String = ""
+
   var level = 0
   var effect = ""
   var icon = TextureRegionDrawable(IFiles.findModPng(name))
@@ -72,25 +78,22 @@ open class Remains(val name: String) :Localizable {
       it.table { table ->
         table.add("效果: $effect").color(remainsColor).pad(5f).fontScale(1.3f).wrap().grow()
       }.marginLeft(9f).grow().row()
+      customTable.clearChildren()
       customTable.add(description).grow().wrap().pad(5f).color(remainsColor).row()
       it.add(customTable).grow().row()
     }
   }
 
-  override var localizedName: String = ""
-
-  override var description: String = ""
-
-  override var details: String = ""
-
   fun rebuildEnableRemains(table: Table) {
-    table.button(icon, buttonStyle) {
+    val button = table.button(icon, buttonStyle) {
       setEnabled(false)
       ISounds.remainUninstall.play(UI.sfxVolume + 1)
       RemainsDialog.flunRemains()
     }.disabled {
       disabled()
-    }.size(60f).pad(10f).itooltip(localizedName).get().hovered {
+    }.size(60f).pad(10f).itooltip(localizedName).get()
+    button.resizeImage(32f)
+    button.hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this
         RemainsDialog.flunRemains()
@@ -113,7 +116,7 @@ open class Remains(val name: String) :Localizable {
 
     table.add(button).disabled {
       disabled()
-    }.size(60f).pad(10f).itooltip(localizedName).get()
+    }.size(60f).pad(10f).itooltip(this@Remains.localizedName).get()
     button.hovered {
       if (RemainsDialog.tempRemain != this) {
         RemainsDialog.tempRemain = this

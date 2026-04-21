@@ -9,7 +9,7 @@ class 中子缓冲器:EnergyBuffer("energy_buffer"){
   init{
     localization {
       zh_CN {
-        name = "中子缓冲器"
+        this.localizedName = "中子缓冲器"
         description = "小型能量缓冲设施,用于稳定能量水平和能量升降压,可进行低能区调压"
       }
     }

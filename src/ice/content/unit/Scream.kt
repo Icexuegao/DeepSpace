@@ -29,7 +29,7 @@ class Scream : IceUnitType("scream") {
   init {
     localization {
       zh_CN {
-        name = "悲鸣"
+        this.localizedName = "悲鸣"
         description = "重型地面突击单位.对远距离敌人发射集束弹轰击,对近距离敌人则切换为速射粒子炮与弧光冲击炮.对附近的友军提供庇护和突袭效果.配备单位构筑器,会随时间向战场投放\"重压\""
         details = "战场沉默的天灾,\n可怜蝼蚁的悲鸣."
       }

@@ -12,7 +12,7 @@ class Witness : IceUnitType("unit_witness", UnitWaterMove::class.java) {
   init {
     localization {
       zh_CN {
-        name = "见证"
+        this.localizedName = "见证"
         description = "轻型海栖突击单位.发射机炮与小型鱼雷攻击敌人,机动性能优异,擅长清理落单的敌方舰只"
       }
     }

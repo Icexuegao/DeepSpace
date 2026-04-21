@@ -15,7 +15,7 @@ class 晶格反应堆 : NuclearReactor("lattice_reactor") {
   init {
     localization {
       zh_CN {
-        name = "晶格反应堆"
+        this.localizedName = "晶格反应堆"
         description = "特制的缓速反应堆,不使用压缩燃料,直接对燃料晶格结构排列化进行可控裂变,产能较低,但利用率极高\n需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发小范围[accent]爆炸[]"
       }
     }

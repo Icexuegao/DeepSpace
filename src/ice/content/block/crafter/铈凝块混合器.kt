@@ -13,7 +13,7 @@ class 铈凝块混合器 : NormalCrafter("ceriumBlockMixer") {
   init {
     localization {
       zh_CN {
-        name = "铈凝块混合器"
+        this.localizedName = "铈凝块混合器"
         description = "将铈锭与爆炸混合物压制成铈凝块"
         details = "在特制的防静电车间内,研磨铈并与爆炸混合物混合后压制成型"
       }

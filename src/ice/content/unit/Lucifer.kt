@@ -16,7 +16,7 @@ class Lucifer : IceUnitType("lucifer") {
   init {
     localization {
       zh_CN {
-        name = "路西法"
+        this.localizedName = "路西法"
         description = " "
       }
     }

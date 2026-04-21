@@ -33,7 +33,7 @@ class 超核临界反应堆 : NuclearReactor("overrun_reactor") {
 
     localization {
       zh_CN {
-        name = "超核临界反应堆"
+        this.localizedName = "超核临界反应堆"
         description = "先进的特大型反应堆,内部力场进一步压缩燃料使反应更加剧烈,具有极高的产能效率,且不会产生核废料\n需要特殊的冷却手段控制堆温,反应堆温度超过限制温度时会造成堆芯熔毁,引发大范围毁灭性[red]核爆[]"
       }
     }

@@ -36,7 +36,7 @@ class CulturingBarn :SpliceCrafter("culturing_barn") {
   init {
     localization {
       zh_CN {
-        name = "绿藻池"
+        this.localizedName = "绿藻池"
         description = "使用光水培养低等的藻类生物,除氧气外,还能收获不少藻泥"
       }
     }

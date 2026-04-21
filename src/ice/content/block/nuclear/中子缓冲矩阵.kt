@@ -9,7 +9,7 @@ class 中子缓冲矩阵:EnergyBuffer("neutron_matrix_buffer"){
   init {
     localization {
       zh_CN {
-        name = "中子缓冲矩阵"
+        this.localizedName = "中子缓冲矩阵"
         description = "超大型能量缓冲阵列,复合缓冲具备最大的缓冲容量,其具备从低压到超高压的全域调压范围"
       }
     }

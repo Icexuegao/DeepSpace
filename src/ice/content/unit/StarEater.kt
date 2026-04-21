@@ -29,7 +29,7 @@ class StarEater :IceUnitType("unit_starEater") {
   init {
     localization {
       zh_CN {
-        name = "噬星"
+        this.localizedName = "噬星"
         description = "由黑棘二次蛹化蜕变而成的生物战舰\n可以向敌人发射离散电浆炮和远距离穿透激光,且可以发射火花导弹摧毁敌军工事,对于近距离的敌人则快速发射穿透激光"
         details = "[#D75B6E]她多美啊!"
       }

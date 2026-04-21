@@ -34,7 +34,7 @@ class Shock : ItemTurret("turret_shock") {
   init {
     localization {
       zh_CN {
-        name = "震击"
+        this.localizedName = "震击"
         description = "以相位技术传送炮弹,使其瞬间到达目标点"
       }
     }

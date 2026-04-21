@@ -22,7 +22,7 @@ class 洛华 :ContinuousTurret("mendTower") {
   init {
     localization {
       zh_CN {
-        name = "洛华"
+        this.localizedName = "洛华"
         description = "折射投射出扇形修复光束覆盖建筑进行修复"
       }
     }

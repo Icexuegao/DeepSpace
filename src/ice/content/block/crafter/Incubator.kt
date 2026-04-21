@@ -20,7 +20,7 @@ class Incubator : FloorCrafter("incubator") {
   init {
     localization {
       zh_CN {
-        name = "沼气池"
+        this.localizedName = "沼气池"
         description = "厌氧消化产甲烷耦合活化能供器\n人话:厕所"
       }
     }

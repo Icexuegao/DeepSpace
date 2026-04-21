@@ -12,7 +12,7 @@ class Execution : IceUnitType("unit_execution", UnitWaterMove::class.java) {
   init {
     localization {
       zh_CN {
-        name = "履行"
+        this.localizedName = "履行"
         description = "轻型海栖突击单位.发射炮弹与导弹攻击敌人,在见证的火力上进行了增强"
       }
     }

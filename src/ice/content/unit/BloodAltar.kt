@@ -33,7 +33,7 @@ class BloodAltar : IceUnitType("unit_bloodAltar", TimedKillUnit::class.java) {
     itemCapacity = 0
     localization {
       zh_CN {
-        name = "血俎"
+        this.localizedName = "血俎"
         description = "中型空中突击单位.由疟蚊改进而成,体表覆盖坚韧的几丁质甲壳.阵亡后会分裂出飞蠓并洒下一滩血肉赘生物"
       }
     }

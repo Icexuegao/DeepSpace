@@ -14,7 +14,7 @@ class BiomassReformer: NormalCrafter("biomassReformer") {
   init {
     localization {
       zh_CN {
-        name = "生物钢重组器"
+        this.localizedName = "生物钢重组器"
         description = "将多种原料培育为生物钢"
       }
     }

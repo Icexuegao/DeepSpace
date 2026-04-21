@@ -14,7 +14,7 @@ class BloodExtractor : NormalCrafter("bloodExtractor") {
   init {
     localization {
       zh_CN {
-        name = "血肉分离机"
+        this.localizedName = "血肉分离机"
         description="将生物钢加热为血肉赘生物"
         details="血肉赘生物同时具有高温和易燃两种特性的高危流体"
       }

@@ -29,7 +29,7 @@ class Frost : LaserTurret("frost") {
 
     localization {
       zh_CN {
-        name = "霜降"
+        this.localizedName = "霜降"
         description = "从激光冷却发展而来的巨型冷冻光束炮,用巨大的冰冻光束给敌人沉痛而寒冷的重击"
       }
     }

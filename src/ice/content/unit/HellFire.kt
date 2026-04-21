@@ -22,7 +22,7 @@ class HellFire : MissileUnitType("unit_hellFire") {
   init {
     localization {
       zh_CN {
-        name = "火狱"
+        this.localizedName = "火狱"
       }
     }
 

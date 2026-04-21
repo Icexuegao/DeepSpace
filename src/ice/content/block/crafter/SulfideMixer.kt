@@ -10,7 +10,7 @@ class SulfideMixer :NormalCrafter("sulfideMixer") {
   init {
     localization {
       zh_CN {
-        name = "硫化物混合器"
+        this.localizedName = "硫化物混合器"
         description = "将煤,铅,沙混合成硫化合物"
       }
     }

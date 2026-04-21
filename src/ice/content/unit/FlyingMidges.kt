@@ -29,7 +29,7 @@ class FlyingMidges : IceUnitType("unit_flyingMidges", TimedKillUnit::class.java)
 
     localization {
       zh_CN {
-        name = "飞蠓"
+        this.localizedName = "飞蠓"
         description = "轻型空中突击单位.体型轻盈,行动敏捷,以其机动性在进攻中占据主导地位,集群作战中有显著优势"
       }
     }

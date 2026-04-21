@@ -16,7 +16,7 @@ class 钴钢压缩机 : NormalCrafter("cobaltSteelCompressor") {
   init {
     localization {
       zh_CN {
-        name = "钴钢压缩机"
+        this.localizedName = "钴钢压缩机"
         description = "将钴锭于铬锭压缩为钴钢,需通入水"
       }
     }

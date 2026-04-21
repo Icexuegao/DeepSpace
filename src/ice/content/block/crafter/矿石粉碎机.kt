@@ -13,7 +13,7 @@ class 矿石粉碎机 : NormalCrafter("mineralCrusher") {
   init {
     localization {
       zh_CN {
-        name = "矿石粉碎机"
+        this.localizedName = "矿石粉碎机"
         description = "将复杂矿石质粉碎并筛选分类为更易处理的矿石,可配置"
       }
     }

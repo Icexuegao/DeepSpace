@@ -28,7 +28,7 @@ class Omega : IceUnitType("unit_omega") {
   init {
     localization {
       zh_CN {
-        name = "欧米茄"
+        this.localizedName = "欧米茄"
         description = "舍弃了建造及挖掘能力换取了更大的载弹量和更强劲的武器系统\n向敌人喷射等离子火焰的同时发射电磁震爆弹"
       }
     }

@@ -24,7 +24,7 @@ class Grab : PowerTurret("grab") {
     shootSound = Sounds.shootSpectre
     localization {
       zh_CN {
-        name = "攫取"
+        this.localizedName = "攫取"
         description = "快速发射汲取光束,攻击敌人的同时修复自身"
       }
     }

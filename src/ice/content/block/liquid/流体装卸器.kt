@@ -11,7 +11,7 @@ class 流体装卸器 :LiquidUnloader("liquid_unloader") {
   init {
     localization {
       zh_CN {
-        name = "流体装卸器"
+        this.localizedName = "流体装卸器"
         description = "从建筑中抽取流体,就像装卸器提取物品一样"
       }
     }

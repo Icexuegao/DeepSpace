@@ -21,7 +21,7 @@ class Electrolytor:NormalCrafter("electrolytor"){
   init{
   localization {
     zh_CN {
-      name = "电解机"
+      this.localizedName = "电解机"
       description = "将材料电解以分离出需求产物,可配置"
       details="内置了几组电极以进行一系列电化学反应"
     }

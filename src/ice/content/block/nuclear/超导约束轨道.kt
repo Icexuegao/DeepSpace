@@ -9,7 +9,7 @@ class 超导约束轨道:TokamakOrbit("magnetic_confinement_orbit"){
   init {
     localization {
       zh_CN {
-        name = "超导电磁约束导轨"
+        this.localizedName = "超导电磁约束导轨"
         description = "通过电磁场约束等离子体流的聚变约束导轨,需要消耗大量电力驱动"
       }
     }

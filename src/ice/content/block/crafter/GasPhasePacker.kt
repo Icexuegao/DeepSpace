@@ -22,7 +22,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
   init{
   localization {
     zh_CN {
-      name = "气体相位封装机"
+      this.localizedName = "气体相位封装机"
       description = "将气体封装进由絮凝剂和气凝胶构成的容器中,可配置\n用于将一份流体用相位物封装成中子靶丸,以进一步转变为核聚变所使用的燃料"
     }
   }
