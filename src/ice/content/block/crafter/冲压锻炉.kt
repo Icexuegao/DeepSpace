@@ -14,7 +14,7 @@ import mindustry.world.draw.DrawPistons
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class 冲压锻炉 : NormalCrafter("pressingForge") {
+class 冲压锻炉 :NormalCrafter("pressingForge") {
   init {
     localization {
       zh_CN {
@@ -48,7 +48,7 @@ class 冲压锻炉 : NormalCrafter("pressingForge") {
     }
     newProduce().apply {
       items(IItems.铱板, 10)
-      liquid(ILiquids.废水, 25f/60f)
+      liquid(ILiquids.废水, 25f / 60f)
     }
 
     newConsume().apply {
@@ -59,7 +59,7 @@ class 冲压锻炉 : NormalCrafter("pressingForge") {
     }
     newProduce().apply {
       items(IItems.铱板, 30)
-      liquid(ILiquids.废水, 60f/60f)
+      liquid(ILiquids.废水, 60f / 60f)
     }
   }
 }

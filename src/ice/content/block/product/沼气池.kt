@@ -1,4 +1,4 @@
-package ice.content.block.crafter
+package ice.content.block.product
 
 import arc.Core
 import arc.graphics.Color
@@ -16,11 +16,11 @@ import singularity.world.blocks.product.FloorCrafter
 import singularity.world.draw.DrawBottom
 import universecore.world.consumers.cons.ConsumeFloor
 
-class Incubator : FloorCrafter("incubator") {
+class 沼气池 :FloorCrafter("incubator") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "沼气池"
+        localizedName = "沼气池"
         description = "厌氧消化产甲烷耦合活化能供器\n人话:厕所"
       }
     }
@@ -45,7 +45,7 @@ class Incubator : FloorCrafter("incubator") {
         power(2.2f)
         liquids(ILiquids.纯净水, 0.3f, ILiquids.藻泥, 0.1f)
       }
-      producers!!.liquids(ILiquids.沼气,  30f / 60f)
+      producers!!.liquids(ILiquids.沼气, 30f / 60f)
     }
 
 
@@ -60,7 +60,7 @@ class Incubator : FloorCrafter("incubator") {
     )
 
     drawers = DrawMulti(
-      DrawBottom(), DrawDefault(), object : DrawCultivator() {
+      DrawBottom(), DrawDefault(), object :DrawCultivator() {
         init {
           plantColor = Color.valueOf("bb2912")
           plantColorLight = plantColor.cpy().mul(1.1f)

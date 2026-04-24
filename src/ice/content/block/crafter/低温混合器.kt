@@ -17,7 +17,7 @@ import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.FloorCrafter
 import universecore.world.consumers.cons.ConsumeFloor
 
-class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
+class 低温混合器 :FloorCrafter("lowTemperatureMixer") {
   init {
     localization {
       zh_CN {
@@ -27,16 +27,16 @@ class 低温混合器 : FloorCrafter("lowTemperatureMixer") {
     }
     size = 2
     health = 150
-    liquidCapacity=60f
+    liquidCapacity = 60f
     itemCapacity = 20
-    craftEffect = Effect(60f){e->
-      Angles.randLenVectors(e.id.toLong(), 6, e.fin()*24f){x,y->
+    craftEffect = Effect(60f) { e ->
+      Angles.randLenVectors(e.id.toLong(), 6, e.fin() * 24f) { x, y ->
         Draw.color(IItems.低温化合物.color)
         Draw.alpha(e.fout())
-        Fill.rect(e.x+x,e.y+y,4f,4f,e.fin())
+        Fill.rect(e.x + x, e.y + y, 4f, 4f, e.fin())
       }
     }
-    drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(),DrawDefault())
+    drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawDefault())
     requirements(Category.crafting, IItems.铜锭, 50, IItems.铬锭, 60, IItems.单晶硅, 30)
     newConsume().apply {
       time(120f)

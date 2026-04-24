@@ -9,7 +9,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class 矿石粉碎机 : NormalCrafter("mineralCrusher") {
+class 矿石粉碎机 :NormalCrafter("mineralCrusher") {
   init {
     localization {
       zh_CN {
@@ -17,8 +17,8 @@ class 矿石粉碎机 : NormalCrafter("mineralCrusher") {
         description = "将复杂矿石质粉碎并筛选分类为更易处理的矿石,可配置"
       }
     }
-    health=240
-    size=4
+    health = 240
+    size = 4
     squareSprite = false
     hasLiquids = true
     drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawDefault(), DrawRegion("-runner", 6f, true).apply {
@@ -40,7 +40,7 @@ class 矿石粉碎机 : NormalCrafter("mineralCrusher") {
       time(30f)
     }
     newProduce().apply {
-      items(IItems.铬铁矿,4, IItems.方铅矿,2, IItems.铝土矿,3).random()
+      items(IItems.铬铁矿, 4, IItems.方铅矿, 2, IItems.铝土矿, 3).random()
     }
 
     newConsume().apply {
@@ -49,17 +49,17 @@ class 矿石粉碎机 : NormalCrafter("mineralCrusher") {
       time(30f)
     }
     newProduce().apply {
-      items(IItems.黄铜矿,3, IItems.方铅矿,2, IItems.闪锌矿,2).random()
+      items(IItems.黄铜矿, 3, IItems.方铅矿, 2, IItems.闪锌矿, 2).random()
     }
 
     newFormula { consumers, producers ->
       consumers.apply {
-        items(IItems.铱锇矿,2)
+        items(IItems.铱锇矿, 2)
         time(60f)
         power(2f)
       }
       producers.apply {
-        items(IItems.铱金混合物,1)
+        items(IItems.铱金混合物, 1)
       }
     }
 

@@ -10,7 +10,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
 
-class 铸铜厂 : NormalCrafter("copperFoundry") {
+class 铸铜厂 :NormalCrafter("copperFoundry") {
   init {
     localization {
       zh_CN {

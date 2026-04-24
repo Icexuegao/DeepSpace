@@ -9,7 +9,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
 
-class 玳渊缚能厂 : NormalCrafter("tortoiseshellFactory") {
+class 玳渊缚能厂 :NormalCrafter("tortoiseshellFactory") {
   init {
     localization {
       zh_CN {

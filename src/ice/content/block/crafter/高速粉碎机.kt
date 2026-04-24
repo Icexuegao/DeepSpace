@@ -10,7 +10,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class 高速粉碎机 : NormalCrafter("highSpeedCrusher") {
+class 高速粉碎机 :NormalCrafter("highSpeedCrusher") {
   init {
     localization {
       zh_CN {

@@ -12,7 +12,7 @@ import mindustry.type.Category
 import mindustry.world.draw.*
 import singularity.world.blocks.product.NormalCrafter
 
-class 钴钢压缩机 : NormalCrafter("cobaltSteelCompressor") {
+class 钴钢压缩机 :NormalCrafter("cobaltSteelCompressor") {
   init {
     localization {
       zh_CN {

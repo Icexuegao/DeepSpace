@@ -10,7 +10,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
 
-class 陶钢熔炼炉 : NormalCrafter("ceramicSteelFurnace") {
+class 陶钢熔炼炉 :NormalCrafter("ceramicSteelFurnace") {
   init {
     localization {
       zh_CN {

@@ -1,4 +1,4 @@
-package ice.content.block.crafter
+package ice.content.block.product
 
 import arc.Core
 import arc.func.*
@@ -30,13 +30,13 @@ import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
 import kotlin.math.max
 
-class CulturingBarn :SpliceCrafter("culturing_barn") {
+class 绿藻池 :SpliceCrafter("culturing_barn") {
   var SpliceCrafterBuild.highlight: Boolean by AttachedProperty(false)
 
   init {
     localization {
       zh_CN {
-        this.localizedName = "绿藻池"
+        localizedName = "绿藻池"
         description = "使用光水培养低等的藻类生物,除氧气外,还能收获不少藻泥"
       }
     }

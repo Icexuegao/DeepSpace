@@ -14,7 +14,7 @@ import mindustry.type.Category
 import mindustry.world.draw.*
 import singularity.world.blocks.product.NormalCrafter
 
-class 以太封装器 : NormalCrafter("etherEncapsulator") {
+class 以太封装器 :NormalCrafter("etherEncapsulator") {
 
   init {
     localization {
@@ -26,10 +26,10 @@ class 以太封装器 : NormalCrafter("etherEncapsulator") {
     size = 5
     itemCapacity = 120
     liquidCapacity = 60f
-    craftTrigger= Cons{
-      it!!.applyBoost(5f,240f)
+    craftTrigger = Cons {
+      it!!.applyBoost(5f, 240f)
     }
-    newFormula {consumers, producers ->
+    newFormula { consumers, producers ->
       consumers.apply {
         time(1440f)
         power(25.7f)

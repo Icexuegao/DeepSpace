@@ -14,7 +14,7 @@ import mindustry.world.draw.DrawFlame
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class 暮白高炉 : NormalCrafter("duskFactory") {
+class 暮白高炉 :NormalCrafter("duskFactory") {
   init {
     localization {
       zh_CN {

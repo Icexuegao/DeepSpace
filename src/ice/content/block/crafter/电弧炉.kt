@@ -9,7 +9,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
 
-class 电弧炉 : NormalCrafter("arcFurnace") {
+class 电弧炉 :NormalCrafter("arcFurnace") {
   init {
     localization {
       zh_CN {
@@ -21,7 +21,7 @@ class 电弧炉 : NormalCrafter("arcFurnace") {
     itemCapacity = 36
     requirements(Category.crafting, IItems.高碳钢, 80, IItems.铅锭, 50, IItems.铜锭, 50, IItems.锌锭, 30)
     craftEffect = Fx.smeltsmoke
-    drawers= DrawMulti(DrawDefault(), DrawFlame())
+    drawers = DrawMulti(DrawDefault(), DrawFlame())
     newConsume().apply {
       time(4f * 60f)
       items(IItems.铅锭, 3, IItems.石英, 2, IItems.金珀沙, 2)

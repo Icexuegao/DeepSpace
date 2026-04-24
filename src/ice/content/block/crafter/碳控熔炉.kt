@@ -11,7 +11,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
 
-class 碳控熔炉 : NormalCrafter("carbonSteelFactory") {
+class 碳控熔炉 :NormalCrafter("carbonSteelFactory") {
   init {
     localization {
       zh_CN {

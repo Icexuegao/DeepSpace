@@ -18,7 +18,7 @@ import mindustry.world.draw.*
 import singularity.world.blocks.product.NormalCrafter
 import kotlin.math.min
 
-open class 增压铈萃取器 : NormalCrafter("ceriumExtractorLarge") {
+open class 增压铈萃取器 :NormalCrafter("ceriumExtractorLarge") {
   init {
     localization {
       zh_CN {
@@ -92,11 +92,12 @@ open class 增压铈萃取器 : NormalCrafter("ceriumExtractorLarge") {
       liquid(ILiquids.废水, 30f / 60f)
     }
   }
+
   init {
     buildType = Prov(::CeriumExtractorBuild)
   }
 
-  inner class CeriumExtractorBuild : NormalCrafterBuild() {
+  inner class CeriumExtractorBuild :NormalCrafterBuild() {
     var size = 0f
     fun range(): Float {
       return block.size * 8 * 1.5f

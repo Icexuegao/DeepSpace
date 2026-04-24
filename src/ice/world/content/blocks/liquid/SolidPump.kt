@@ -25,7 +25,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-class SolidPump(name: String) : SglBlock(name) {
+open class SolidPump(name: String) : SglBlock(name) {
   var result: Liquid = Liquids.water
   var updateEffect: Effect = Fx.none
   var updateEffectChance: Float = 0.02f

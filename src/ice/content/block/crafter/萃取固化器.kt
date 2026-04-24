@@ -7,7 +7,7 @@ import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import singularity.world.blocks.product.NormalCrafter
 
-class 萃取固化器 : NormalCrafter("concentrateSolidifier") {
+class 萃取固化器 :NormalCrafter("concentrateSolidifier") {
   init {
     localization {
       zh_CN {

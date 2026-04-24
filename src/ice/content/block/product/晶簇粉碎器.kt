@@ -21,7 +21,7 @@ import mindustry.world.draw.DrawSideRegion
 import mindustry.world.meta.BlockStatus
 import singularity.world.blocks.product.NormalCrafter
 
-class CrystalMiner : NormalCrafter("crystal_miner") {
+class 晶簇粉碎器 :NormalCrafter("crystal_miner") {
   val rotatorBottomRegion: TextureRegion by LazyTextureSingleDelegate("$name-rotator-bottom")
   val rotatorRegion: TextureRegion by LazyTextureSingleDelegate("$name-rotator")
   val rotatorRegionHeat: TextureRegion by LazyTextureSingleDelegate("$name-rotator-heat")
@@ -29,20 +29,20 @@ class CrystalMiner : NormalCrafter("crystal_miner") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "晶簇粉碎器"
+        localizedName = "晶簇粉碎器"
       }
     }
     hasItems = true
     size = 2
     rotate = true
-    drawers = DrawMulti(DrawDefault(), object :DrawSideRegion(){
+    drawers = DrawMulti(DrawDefault(), object :DrawSideRegion() {
       override fun icons(block: Block?): Array<out TextureRegion?> {
         return arrayOf()
       }
     })
     buildType = Prov(::CrystalMinerBuild)
     rotateDraw = false
-    updateEffect =Fx.mine
+    updateEffect = Fx.mine
     updateEffectColor = IItems.燃素水晶.color
     newConsume().apply {
       power(120f / 60f)
@@ -56,7 +56,7 @@ class CrystalMiner : NormalCrafter("crystal_miner") {
     requirements(Category.production, IItems.铬锭, 50, IItems.单晶硅, 20, IItems.高碳钢, 50, IItems.锌锭, 30)
   }
 
-  inner class CrystalMinerBuild : NormalCrafterBuild() {
+  inner class CrystalMinerBuild :NormalCrafterBuild() {
 
     var k = false
     override fun consEfficiency(): Float {
