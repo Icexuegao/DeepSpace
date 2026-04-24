@@ -28,16 +28,6 @@ import universecore.util.mods.ModInfo;
 public class Sgl {
   public static final String NL = System.lineSeparator();
 
-
-/** 通知标签历史 *//*
-
-  public static final Fi notificationHistory = dataDirectory.child("notifyHistory.bin");
-  */
-/** 通知标签历史备份 *//*
-
-  public static final Fi notificationHistoryBackup = dataDirectory.child("notifyHistory.bin");
-*/
-
   //URIs
   public static final String modDevelopGroup = "https://jq.qq.com/?_wv=1027&k=vjybgqDG";
   public static final String githubUserAvatars = "https://github.com/";
@@ -46,8 +36,6 @@ public class Sgl {
   public static final String githubRawMaster = "https://raw.githubusercontent.com/EB-wilson/Singularity/master/";
   public static final String githubProjReleaseApi = "https://api.github.com/repos/EB-wilson/Singularity/releases/latest";
   public static final String publicInfo = githubRawMaster + "publicInfo/";
-
-  public static final Team none = Team.get(255);
 
   /** 模组配置存储器 */
   public static ModConfig config = new ModConfig();
@@ -102,45 +90,8 @@ public class Sgl {
 
     Events.on(EventType.ClientLoadEvent.class, e -> interopAPI.updateModels());
 
-    /*for (Block block : Vars.content.blocks()) {
-      if (block.minfo.mod != null && block.minfo.mod.name.equals(modName) && !(block instanceof SglTurret)){
-        PixmapRegion image = Core.atlas.getPixmap(block.region);
-        block.squareSprite = image.getA(0, 0) > 0.5f;
-      }
-    }*/
   }
 
-  private static boolean saving;
 
-/*  private static void configNotificationIO() {
-    if (notificationHistory.exists() || notificationHistoryBackup.exists()) {
-      try (Reads reads = notificationHistory.reads()) {
-        ui.notificationFrag.loadHistory(reads);
-      } catch (RuntimeException ignored) {
-        if (notificationHistory.exists() && notificationHistoryBackup.exists())
-          Log.err("[Singularity] history notification load failed, trying load backup");
-
-        try (Reads reads = notificationHistoryBackup.reads()) {
-          ui.notificationFrag.loadHistory(reads);
-        } catch (RuntimeException e) {
-          Log.err("[Singularity] history notification load failed!", e);
-        }
-      }
-    }
-
-    UpdatePool.receive("notificationAutoSave", () -> {
-      if (ui.notificationFrag.shouldSave() && notificationHistory.exists() && !saving) {
-        executor.submit(() -> {
-          saving = true;
-          notificationHistory.copyTo(notificationHistoryBackup);
-
-          try (Writes writes = notificationHistory.writes(false)) {
-            ui.notificationFrag.saveHistory(writes);
-          }
-          saving = false;
-        });
-      }
-    });
-  }*/
 
 }

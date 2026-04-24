@@ -6,9 +6,9 @@ import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Nullable
+import ice.library.struct.texture.LazyTextureSingleDelegate
 import ice.ui.bundle.Localizable
 import mindustry.ctype.UnlockableContent
-import singularity.Singularity
 import singularity.contents.SglTechThree
 import singularity.core.SglEventTypes.ResearchCompletedEvent
 
@@ -27,7 +27,7 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
   }
 
   var slogan: String = "slogan"
-  var icon: TextureRegion? = Singularity.getModAtlas("research_$name", null)
+  var icon: TextureRegion? by LazyTextureSingleDelegate("research_$name", null)
 
   @Nullable
   var inspire: Inspire? = null

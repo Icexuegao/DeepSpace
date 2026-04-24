@@ -47,7 +47,11 @@ object IPlanets :Load {
     }
 
   }
-  var 阿德里 = IcePlanet("ardery", 伊甸, 1f, 4).apply {
+ var 阿德里 =object : IcePlanet("ardery", 伊甸, 1f, 4){
+   override fun postInit() {
+     super.postInit()
+   }
+ }.apply {
     localization {
       zh_CN {
         this.localizedName = "阿德里"

@@ -17,6 +17,9 @@ import arc.util.Eachable
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.content.IUnitTypes
+import ice.content.IUnitTypes.controlTime
+import ice.game.IceTeam
 import ice.ui.Documents
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.meta.IceStats
@@ -40,8 +43,6 @@ import mindustry.world.draw.DrawBlock
 import mindustry.world.draw.DrawDefault
 import mindustry.world.meta.*
 import singularity.Sgl
-import singularity.contents.SglUnits
-import singularity.contents.SglUnits.Companion.controlTime
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
@@ -580,7 +581,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
       super.onDestroyed()
 
       if (hasEnergy && getEnergy() >= BASE_EXBLOSIVE_ENERGY) {
-        val u = SglUnits.unstable_energy_body!!.create(Sgl.none) as SglUnitEntity
+        val u = IUnitTypes.unstable_energy_body.create(IceTeam.none) as SglUnitEntity
         u.health = 10 * getEnergy()
 
         u.x = x

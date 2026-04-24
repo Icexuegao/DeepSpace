@@ -336,13 +336,13 @@ object ILiquids :Load {
     val taskID: Int = SglDraw.nextTaskID()
 
     override fun drawPuddle(puddle: Puddle) {
-      SglDraw.drawTask(taskID, puddle, SglShaders.wave, { s: SglShaders.WaveShader? ->
-        s!!.waveMix = Pal.lightishGray
+      SglDraw.drawTask(taskID, puddle, SglShaders.wave, { s: SglShaders.WaveShader ->
+        s.waveMix = Pal.lightishGray
         s.mixAlpha = 0.2f + Mathf.absin(5f, 0.2f)
         s.waveScl = 0.2f
         s.maxThreshold = 1f
         s.minThreshold = 0.4f
-      }, { puddle: Puddle? -> super.drawPuddle(puddle) })
+      }, { puddle -> super.drawPuddle(puddle) })
     }
   }
   var 相位态FEX流体 = object :IceLiquid("liquid_phase_FEX_liquid", Color.valueOf("#E34248")) {

@@ -381,4 +381,16 @@ object Remainss {
       it.frameDuration = 60f / 3f
     }
   }
+  val 胎生百合 = Remains("remains_tumor_bush").apply {
+    localization {
+      zh_CN {
+        localizedName = "胎生百合"
+      }
+    }
+    remainsColor = IceColor.r2
+    icon = DynamicTextureDrawable(name.appendModName()) {
+      it.frameCount = 8
+      it.frameDuration = 60f / 3f
+    }
+  }
 }

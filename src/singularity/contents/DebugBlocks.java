@@ -2,10 +2,10 @@ package singularity.contents;
 
 import mindustry.world.Block;
 
-public class DebugBlocks implements ContentList{
+public class DebugBlocks{
   public static Block drawTest, voidDrawTest, drawShadowTest, volTest, empDamageTester;
 
-  @Override
+
   public void load(){
   /*  drawTest = new TestBlock("draw_test"){{
       requirements(SglCategory.debugging, ItemStack.with());

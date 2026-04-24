@@ -17,4 +17,6 @@ object IceTeam : Load {
     name = "empire"
     color.set(IceColor.r5)
   }
+
+  val none: Team = Team.get(255)
 }

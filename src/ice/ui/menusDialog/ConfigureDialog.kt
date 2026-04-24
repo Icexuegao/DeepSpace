@@ -317,14 +317,14 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
           str = Prov { if (Sgl.config.modReciprocal) "" else Core.bundle.get("infos.reciprocalWarn") }
         }
       },
-      object : ConfigCheck("modReciprocalContent", Boolc { b: Boolean ->
+      /*object : ConfigCheck("modReciprocalContent", Boolc { b: Boolean ->
         Sgl.config.modReciprocalContent = b
         config.requireRelaunch()
       }, Boolp { Sgl.config.modReciprocalContent }) {
         init {
           str = Prov { if (Sgl.config.modReciprocalContent) "" else Core.bundle.get("infos.reciprocalWarn") }
         }
-      },
+      },*/
       ConfigSepLine("debugs", Core.bundle.get("infos.debug")),
 
       ConfigCheck("启用调试模式", { b: Boolean -> SettingValue.启用调试模式 = b }, { SettingValue.启用调试模式 }),

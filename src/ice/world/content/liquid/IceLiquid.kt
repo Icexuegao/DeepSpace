@@ -9,7 +9,7 @@ import mindustry.gen.Puddle
 import mindustry.type.Liquid
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
-open class IceLiquid(name: String, color: Color, app: IceLiquid.() -> Unit = {}) :Liquid(name, color), Localizable {
+open class IceLiquid(name: String, color: Color, configured: IceLiquid.() -> Unit = { }) :Liquid(name, color), Localizable {
 
   constructor(name: String, color: String, app: IceLiquid.() -> Unit = {}) :this(name, Color.valueOf(color), app)
 
@@ -17,12 +17,9 @@ open class IceLiquid(name: String, color: Color, app: IceLiquid.() -> Unit = {})
   override var description: String by UnlockableContent::description
   override var details: String by UnlockableContent::details
 
+  val c = configured(this)
   var updateFun: (Puddle) -> Unit = {}
   var nutrientConcentration = 0f
-
-  init {
-    app(this)
-  }
 
   override fun postInit() {
     shownPlanets.add(IPlanets.阿德里)

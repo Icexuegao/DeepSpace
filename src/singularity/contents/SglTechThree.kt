@@ -9,9 +9,9 @@ import singularity.game.researchs.ResearchManager.ResearchSDL
 import singularity.game.researchs.RevealGroup.ResearchReveal
 
 @Suppress("unused", "LocalVariableName")
-object SglTechThree : ResearchSDL(), ContentList {
+object SglTechThree : ResearchSDL() {
 
-  override fun load() {
+   fun load() {
     CrafterBlocks.apply {
       Distributions.apply {
         EffectBlocks.apply {

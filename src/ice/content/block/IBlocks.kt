@@ -12,6 +12,7 @@ object IBlocks {
     LiquidBlocks.load()
     CrafterBlocks.load()
     EffectBlocks.load()
+    UnitBlocks.load()
     TurretBlocks.load()
   }
 }

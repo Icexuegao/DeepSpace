@@ -20,7 +20,6 @@ import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Stat
 import singularity.world.blocks.SglBlock
-import kotlin.math.min
 
 open class LiquidClassifier(name: String) : SglBlock(name) {
   val top2: TextureRegion by LazyTextureSingleDelegate("${this.name}-top2")

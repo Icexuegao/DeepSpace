@@ -5,76 +5,52 @@ import arc.Events;
 import arc.files.Fi;
 import arc.graphics.g2d.TextureRegion;
 import arc.scene.style.Drawable;
-import arc.struct.ObjectMap;
 import arc.util.Log;
 import ice.DeepSpace;
 import ice.core.SettingValue;
 import mindustry.mod.Mod;
-import singularity.contents.*;
-import singularity.contents.override.OverrideTechThree;
+import singularity.contents.LiquidBlocks;
+import singularity.contents.SglTechThree;
 import universecore.util.OverrideContentList;
-
-import java.util.Locale;
 
 import static mindustry.game.EventType.ClientLoadEvent;
 
 public class Singularity extends Mod {
-  private static final ContentList[] modContents = new ContentList[]{
-          new LiquidBlocks(),//物流方块
-          new SglUnits(),//单位相关内容（单位、工厂）
-  };
 
-  private static final OverrideContentList[] overrideContents = new OverrideContentList[]{new OverrideTechThree(),};
-
-  public Singularity() {
+  public Singularity(){
     Log.info("[Singularity] Singularity mod is loading,Thanks for your play");
     //加载模组配置数据
     Sgl.config.load();
 
     Events.on(ClientLoadEvent.class, e -> {
-      if (SettingValue.INSTANCE.get启用调试模式()) Sgl.ui.mainMenu.show();
-       //new TestDialog().show();
+      if(SettingValue.INSTANCE.get启用调试模式()) Sgl.ui.mainMenu.show();
+      //new TestDialog().show();
     });
 
   }
 
   @Override
-  public void init() {
+  public void init(){
     //加载全局变量
     Sgl.init();
 
-    //Sgl.classes.finishGenerate();
   }
 
   @Override
-  public void loadContent() {
-
-    for (ContentList list : Singularity.modContents) {
-      list.load();
-    }
+  public void loadContent(){
+    new LiquidBlocks().load();
     SglTechThree.INSTANCE.load();
-
-    if (Sgl.config.modReciprocalContent) {
-      for (OverrideContentList override : Singularity.overrideContents) {
-        override.load();
-      }
-    }
-
   }
 
-  public static TextureRegion getModAtlas(String name) {
+  public static TextureRegion getModAtlas(String name){
     return Core.atlas.find(DeepSpace.INSTANCE.getModName() + "-" + name);
   }
 
-  public static TextureRegion getModAtlas(String name, TextureRegion def) {
-    return Core.atlas.find(DeepSpace.INSTANCE.getModName() + "-" + name, def);
-  }
-
-  public static <T extends Drawable> T getModDrawable(String name) {
+  public static <T extends Drawable> T getModDrawable(String name){
     return Core.atlas.getDrawable(DeepSpace.INSTANCE.getModName() + "-" + name);
   }
 
-  public static Fi getInternalFile(String path) {
+  public static Fi getInternalFile(String path){
     return DeepSpace.INSTANCE.getModFile().child(path);
   }
 

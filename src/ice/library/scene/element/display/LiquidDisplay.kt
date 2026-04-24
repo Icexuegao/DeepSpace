@@ -13,10 +13,10 @@ import mindustry.ui.Styles
 import mindustry.world.meta.StatUnit
 
 class LiquidDisplay(
-  val liquid: Liquid, val amount: Float = 0f, val perSecond: Boolean = false, val showName: Boolean = true
-) : Table() {
+  val liquid: Liquid, val amount: Float = 0f, val perSecond: Boolean = false, showName: Boolean = true
+) :Table() {
   init {
-    add(object : Stack() {
+    add(object :Stack() {
       init {
         add(Image(liquid.uiIcon).setScaling(Scaling.fit))
 
@@ -26,14 +26,7 @@ class LiquidDisplay(
           add(t)
         }
       }
-    }).size(iconMed).apply {
-
-      if (perSecond || showName) {
-        var length: Int = (amount * 60).toStringi(1).length - 1 - 2
-        padRight(if (length == 0) 7.5f else 18f * length)
-      }
-    }
-
+    }).height(iconMed)
 
     if (perSecond && amount != 0f) {
       add(StatUnit.perSecond.localized()).padLeft(2f).padRight(5f).color(Color.lightGray).style(Styles.outlineLabel)

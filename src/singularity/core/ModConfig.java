@@ -65,8 +65,7 @@ public class ModConfig {
   public boolean interopAssignEmpModels;
   @Order(28f)
   public boolean modReciprocal;
-  @Order(29f)
-  public boolean modReciprocalContent;
+
 
   //debug/调试设置
   @Order(30f)

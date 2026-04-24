@@ -12,8 +12,8 @@ import singularity.world.blocks.liquid.ClusterConduit
 import singularity.world.blocks.liquid.ClusterValve
 import singularity.world.blocks.liquid.ConduitRiveting
 
-class LiquidBlocks : ContentList {
-  override fun load() {
+class LiquidBlocks {
+   fun load() {
     cluster_conduit = object : ClusterConduit("cluster_conduit") {
       init {
         requirements(Category.liquid, ItemStack.with(Items.titanium, 8, IItems.气凝胶, 10, IItems.铝锭, 10))
