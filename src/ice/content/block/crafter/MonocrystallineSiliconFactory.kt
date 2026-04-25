@@ -34,7 +34,7 @@ class MonocrystallineSiliconFactory : NormalCrafter("monocrystallineSiliconFacto
       power(1.8f)
     }
     newProduce().apply {
-      items(IItems.单晶硅, 1)
+      items(IItems.单晶硅, 2)
     }
 
     val color = Color.valueOf("ffef99")
