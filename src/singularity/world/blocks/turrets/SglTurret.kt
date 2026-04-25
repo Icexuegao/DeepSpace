@@ -90,7 +90,7 @@ open class SglTurret(name: String) :SglBlock(name) {
   /**能否由玩家控制 */
   var playerControllable: Boolean = true
 
-  var loopSound = Sounds.none
+  var loopSound: Sound = Sounds.none
   var loopSoundVolume =0.5f
   /**索敌时间间隔，以刻为单位 */
   var targetInterval: Float = 20f

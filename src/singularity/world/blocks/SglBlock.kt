@@ -42,7 +42,6 @@ import mindustry.world.Tile
 import mindustry.world.draw.DrawBlock
 import mindustry.world.draw.DrawDefault
 import mindustry.world.meta.*
-import singularity.Sgl
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
@@ -274,7 +273,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
   }
 
   public override fun icons(): Array<TextureRegion> {
-    return if (Core.atlas.has("$name-preview")) arrayOf(Core.atlas.find("$name-preview")) else drawers.finalIcons(this)
+    return  drawers.finalIcons(this)
   }
 
 

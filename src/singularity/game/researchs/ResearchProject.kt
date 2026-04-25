@@ -27,7 +27,7 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
   }
 
   var slogan: String = "slogan"
-  var icon: TextureRegion? by LazyTextureSingleDelegate("research_$name", null)
+  var icon: TextureRegion by LazyTextureSingleDelegate("research_$name")
 
   @Nullable
   var inspire: Inspire? = null

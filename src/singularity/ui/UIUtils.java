@@ -70,7 +70,7 @@ public class UIUtils {
             SglDraw.dashCircle(x + width/2f, y + height/2f, width/2f - Scl.scl(5f),
                 8, 180, Time.time);
           }
-        }, img -> img.image(project.getIcon() == null? project.getContents().first().uiIcon: project.getIcon()).size(80f)).margin(30f)
+        }, img -> img.image(!project.getIcon().found()? project.getContents().first().uiIcon: project.getIcon()).size(80f)).margin(30f)
     ).pad(40f).padTop(30f).padBottom(30f);
     table.row();
     table.stack(
@@ -137,7 +137,7 @@ public class UIUtils {
                   SglDrawConst.matrixNet, SglDrawConst.matrixNet
               );
             }
-          }, i -> i.image(project.getIcon() != null ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit))
+          }, i -> i.image(!project.getIcon().found() ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit))
       ).grow().pad(4f)).width(64f).growY();
       card.table(new BaseDrawable(){
         @Override

@@ -42,7 +42,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-open class MatrixMiner(name: String) : DistNetBlock(name) {
+open class MatrixMiner(name: String) :DistNetBlock(name) {
   var baseRange: Int = 0
 
   init {
@@ -54,9 +54,9 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
   }
 
   override fun appliedConfig() {
-    config(Int::class.javaObjectType) { b: MatrixMinerBuild?, i: Int? ->
+    config(Int::class.javaObjectType) { b: MatrixMinerBuild, i: Int? ->
       val item = Vars.content.item(i!!)
-      if (!b!!.drillItem.remove(item)) b.drillItem.add(item)
+      if (!b.drillItem.remove(item)) b.drillItem.add(item)
     }
 
     config(Float::class.javaObjectType) { b: MatrixMinerBuild?, f: Float? -> b!!.drillRange = f!!.toInt() }
@@ -64,15 +64,15 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
 
   override fun setBars() {
     super.setBars()
-    addBar<MatrixMinerBuild?>("efficiency") { m: MatrixMinerBuild? ->
-      Bar({ Core.bundle.format("bar.efficiency", Mathf.round(m!!.consEfficiency() * 100)) }, { Pal.lighterOrange }, { m!!.consEfficiency() })
+    addBar("efficiency") { m: MatrixMinerBuild ->
+      Bar({ Core.bundle.format("bar.efficiency", Mathf.round(m.consEfficiency() * 100)) }, { Pal.lighterOrange }, { m.consEfficiency() })
     }
-    addBar<MatrixMinerBuild?>("energyUse") { m: MatrixMinerBuild? ->
+    addBar("energyUse") { m: MatrixMinerBuild ->
       Bar({
         Core.bundle.format(
-          "bar.energyCons", Strings.autoFixed(m!!.matrixEnergyConsume() * 60, 1), Strings.autoFixed(m.energyConsMultiplier, 1)
+          "bar.energyCons", Strings.autoFixed(m.matrixEnergyConsume() * 60, 1), Strings.autoFixed(m.energyConsMultiplier, 1)
         )
-      }, { SglDrawConst.matrixNet }, { if (m!!.matrixEnergyConsume() > 0.01f) 1f else 0f })
+      }, { SglDrawConst.matrixNet }, { if (m.matrixEnergyConsume() > 0.01f) 1f else 0f })
     }
   }
 
@@ -92,7 +92,7 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
     Drawf.dashLine(Pal.accent, x + l, y + l, x + l, y - l)
   }
 
-  inner class MatrixMinerBuild : DistNetBuild() {
+  inner class MatrixMinerBuild :DistNetBuild() {
     var plugins: OrderedSet<MatrixMinerPluginBuild> = OrderedSet<MatrixMinerPluginBuild>()
     var drillItem: ObjectSet<Item> = ObjectSet<Item>()
     var allOre: OrderedSet<Item> = OrderedSet<Item>()
@@ -118,15 +118,15 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
     override fun buildConfiguration(table: Table) {
       super.buildConfiguration(table)
 
-      table.table(Tex.pane) { t: Table? ->
-        t!!.defaults().left()
+      table.table(Tex.pane) { t ->
+        t.defaults().left()
         t.add(Core.bundle.get("fragment.buttons.selectMine"))
         t.row()
-        t.table { items: Table? ->
+        t.table { items ->
           var counter = 0
-          for (item in allOre) {
+          for(item in allOre) {
             if (item.unlockedNow()) {
-              val button = items!!.button(Tex.whiteui, Styles.selecti, 30f) {
+              val button = items.button(Tex.whiteui, Styles.selecti, 30f) {
                 configure(item.id.toInt())
               }.size(40f).get()
               button.style.imageUp = TextureRegionDrawable(item.uiIcon)
@@ -137,7 +137,7 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
           }
         }
         t.row()
-        t.add("").update { l: Label? -> l!!.setText(Core.bundle.format("infos.drillRange", drillRange)) }
+        t.add("").update { l: Label -> l.setText(Core.bundle.format("infos.drillRange", drillRange)) }
         t.row()
         t.slider(0f, maxRange.toFloat(), 1f, drillRange.toFloat()) { value: Float -> this.configure(value) }.growX().height(45f)
       }
@@ -151,7 +151,7 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
       Drawf.dashLine(Pal.accent, x + l, y + l, x - l, y + l)
       Drawf.dashLine(Pal.accent, x + l, y + l, x + l, y - l)
 
-      for (plugin in plugins) {
+      for(plugin in plugins) {
         plugin.drawConfigure()
       }
     }
@@ -168,7 +168,7 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
 
       itemBuffer.update()
 
-      for (plugin in plugins) {
+      for(plugin in plugins) {
         if (!plugin.enabled) continue
 
         energyConsMultiplier *= plugin.energyMultiplier()
@@ -187,8 +187,8 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
         val ox = tileX() - maxRange / 2 + off
         val oy = tileY() - maxRange / 2 + off
 
-        for (rx in 0..<maxRange) {
-          for (ry in 0..<maxRange) {
+        for(rx in 0..<maxRange) {
+          for(ry in 0..<maxRange) {
             val t = Vars.world.tile(ox + rx, oy + ry) ?: continue
 
             if (t.drop() != null) {
@@ -200,10 +200,10 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
 
         orePosArr = ores.keys().toList().toTypedArray()
 
-        Sort.instance().sort<Int?>(orePosArr, Comparator { a: Int?, b: Int? ->
-          val x1 = Point2.x(a!!) - tileX()
+        Sort.instance().sort(orePosArr, Comparator { a: Int, b: Int ->
+          val x1 = Point2.x(a) - tileX()
           val y1 = Point2.y(a) - tileY()
-          val x2 = Point2.x(b!!) - tileX()
+          val x2 = Point2.x(b) - tileX()
           val y2 = Point2.y(b) - tileY()
           val r1 = max(abs(x1), abs(y1)).toFloat()
           val rot1 = Angles.angle(x1.toFloat(), y1.toFloat())
@@ -228,7 +228,7 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
       super.onProximityUpdate()
       plugins.clear()
 
-      for (building in proximity) {
+      for(building in proximity) {
         if (building is MatrixMinerPluginBuild && building.interactable(team) && (building.tileX() == tileX() || building.tileY() == tileY())) {
           plugins.add(building)
           building.owner = this
@@ -241,7 +241,7 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
     }
 
     fun angleValid(angle: Float): Boolean {
-      for (plugin in plugins) {
+      for(plugin in plugins) {
         if (plugin.angleValid(angle)) return true
       }
       return false
@@ -274,7 +274,7 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
       super.write(write)
       write.i(drillRange)
       write.i(drillItem.size)
-      for (item in drillItem) {
+      for(item in drillItem) {
         write.i(item.id.toInt())
       }
     }
@@ -283,7 +283,7 @@ open class MatrixMiner(name: String) : DistNetBlock(name) {
       super.read(read, revision)
       drillRange = read.i()
       val l = read.i()
-      for (i in 0..<l) {
+      for(i in 0..<l) {
         drillItem.add(Vars.content.item(read.i()))
       }
     }

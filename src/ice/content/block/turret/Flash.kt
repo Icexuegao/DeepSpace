@@ -20,7 +20,7 @@ class Flash : SglTurret("flash") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "闪光"
+        localizedName = "闪光"
         description = "发射带电巨浪子弹贯穿敌人,释放的大量闪电能够对集群造成十分可观的打击"
       }
     }

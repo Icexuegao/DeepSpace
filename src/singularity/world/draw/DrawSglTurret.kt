@@ -9,6 +9,7 @@ import arc.util.Eachable
 import arc.util.Nullable
 import arc.util.Tmp
 import ice.library.IFiles.appendModName
+import ice.library.struct.log
 import mindustry.entities.part.DrawPart
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
@@ -17,7 +18,6 @@ import mindustry.graphics.Layer
 import mindustry.type.Liquid
 import mindustry.world.Block
 import mindustry.world.draw.DrawBlock
-import singularity.Singularity
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.blocks.turrets.SglTurret.SglTurretBuild
 
@@ -59,15 +59,7 @@ open class DrawSglTurret : DrawBlock {
     Draw.rect(preview, plan.drawx(), plan.drawy())
   }
 
-  override fun getRegionsToOutline(block: Block, out: Seq<TextureRegion?>) {
-    for (part in parts) {
-      part.getOutlines(out)
-    }
 
-    if (block.region.found() && !(block.outlinedIcon > 0 && block.getGeneratedIcons()[block.outlinedIcon] == block.region)) {
-      out.add(block.region)
-    }
-  }
 
   override fun draw(build: Building) {
     val turret = build.block as SglTurret
@@ -121,7 +113,25 @@ open class DrawSglTurret : DrawBlock {
 
     Drawf.additive(heat, block.heatColor!!.write(Tmp.c1).a(build.heat), build.x + build.recoilOffset.x, build.y + build.recoilOffset.y, build.drawrot(), Layer.turretHeat)
   }
+  /** @return the generated icons to be used for this block.
+   */
+  override fun icons(block: Block): Array<TextureRegion> {
 
+    val regions = if (top.found()) arrayOf(base, preview, top) else arrayOf(base, preview)
+    log { regions.contentToString() }
+    return regions
+  }
+  override fun getRegionsToOutline(block: Block, out: Seq<TextureRegion>) {
+    for (part in parts) {
+      part.getOutlines(out)
+    }
+
+    val generatedIcons = block.getGeneratedIcons()
+
+    if (block.region.found() && !(block.outlinedIcon > 0 && generatedIcons[block.outlinedIcon] == block.region)) {
+      out.add(block.region)
+    }
+  }
   /** Load any relevant texture regions.  */
   override fun load(block: Block) {
     if (block !is SglTurret) throw ClassCastException("This drawer can only be used on turret(Sgl)s.")
@@ -137,14 +147,9 @@ open class DrawSglTurret : DrawBlock {
       part.turretShading = true
       part.load(block.name)
     }
-
     if (!base.found()) base = Core.atlas.find((basePrefix + "block_" + block.size).appendModName())
-    if (!base.found()) base = Singularity.getModAtlas(basePrefix + "block-" + block.size)
+    if (!base.found()) base =  Core.atlas.find((basePrefix + "block-" + block.size).appendModName())
   }
 
-  /** @return the generated icons to be used for this block.
-   */
-  override fun icons(block: Block): Array<TextureRegion> {
-    return if (top.found()) arrayOf(base, preview, top) else arrayOf(base, preview)
-  }
+
 }

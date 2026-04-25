@@ -2,10 +2,8 @@ package singularity.world.blocks.drills
 
 import arc.Core
 import arc.func.Boolf
-import arc.func.Cons
 import arc.func.Floatf
 import arc.func.Prov
-import arc.scene.ui.layout.Table
 import arc.util.Strings
 import arc.util.io.Reads
 import arc.util.io.Writes
@@ -18,36 +16,41 @@ import mindustry.world.meta.Stats
 import singularity.world.blocks.drills.MatrixMiner.MatrixMinerBuild
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsumers
-import universecore.world.consumers.cons.liquid.ConsumeLiquidCond
 import universecore.world.consumers.ConsumeType
+import universecore.world.consumers.cons.liquid.ConsumeLiquidCond
 import kotlin.math.max
 
 open class MatrixMinerComponent(name: String) : MatrixMinerPlugin(name) {
-    fun newBoost(baseBoostScl: Float, attributeMultiplier: Float, filter: Boolf<Liquid?>, usageBase: Float) {
+    fun newBoost(baseBoostScl: Float, attributeMultiplier: Float, filter: Boolf<Liquid>, usageBase: Float) {
         newBoost(
-            { liquid: Liquid? -> baseBoostScl + (liquid!!.heatCapacity * 1.2f - (liquid.temperature - 0.35f) * 0.6f) * attributeMultiplier },
-            { liquid: Liquid? -> !liquid!!.gas && liquid.coolant && filter.get(liquid) },
+            { liquid: Liquid -> baseBoostScl + (liquid.heatCapacity * 1.2f - (liquid.temperature - 0.35f) * 0.6f) * attributeMultiplier },
+            { liquid: Liquid -> !liquid.gas && liquid.coolant && filter.get(liquid) },
             usageBase,
-            { liquid: Liquid? -> usageBase / (liquid!!.heatCapacity * 0.7f) }
+            { liquid: Liquid -> usageBase / (liquid.heatCapacity * 0.7f) }
         )
     }
 init {
   buildType= Prov(::MatrixMinerComponentBuild)
 }
     fun newBoost(boostEff: Floatf<Liquid>, filters: Boolf<Liquid>, usageBase: Float, usageMult: Floatf<Liquid>) {
-        newOptionalConsume({ e: MatrixMinerComponentBuild, c: BaseConsumers -> }, { s: Stats?, c: BaseConsumers? ->
-            s!!.add(Stat.booster, StatValue { t: Table? ->
-                t!!.row()
-                if (c!!.get(ConsumeType.liquid) is ConsumeLiquidCond<*>) {
-                    var cons= c!!.get(ConsumeType.liquid) as ConsumeLiquidCond<ConsumerBuildComp>
+        newOptionalConsume({ e: MatrixMinerComponentBuild, c: BaseConsumers -> }, { s: Stats, c: BaseConsumers ->
+            s.add(Stat.booster, StatValue { t ->
+                t.row()
+                if (c.get(ConsumeType.liquid) is ConsumeLiquidCond<*>) {
+                    var cons= c.get(ConsumeType.liquid) as ConsumeLiquidCond<ConsumerBuildComp>
                     for (stack in cons.cons) {
                         val liquid: Liquid = stack.liquid
 
-                        t.add<Table?>(StatValues.displayLiquid(liquid, usageBase * usageMult.get(liquid) * 60, true)).padRight(10f).left().top()
-                        t.table(Tex.underline, Cons { bt: Table? ->
-                            bt!!.left().defaults().padRight(3f).left()
-                            bt.add("[lightgray]" + Core.bundle.get("misc.efficiency") + "[accent]" + Strings.autoFixed(boostEff.get(liquid) * 100, 2) + "%[]")
-                        }).left().padTop(-9f)
+                        t.add(StatValues.displayLiquid(liquid, usageBase * usageMult.get(liquid) * 60, true)).padRight(10f).left().top()
+                        t.table(Tex.underline) { bt ->
+                          bt.left().defaults().padRight(3f).left()
+                          bt.add(
+                            "[lightgray]" + Core.bundle.get("misc.efficiency") + "[accent]" + Strings.autoFixed(
+                              boostEff.get(liquid) * 100,
+                              2
+                            ) + "%[]"
+                          )
+                        }.left().padTop(-9f)
                         t.row()
                     }
                 }

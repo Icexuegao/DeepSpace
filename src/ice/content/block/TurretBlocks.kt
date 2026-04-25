@@ -5,7 +5,7 @@ import ice.library.world.Load
 
 @Suppress("unused")
 object TurretBlocks : Load {
-  val 碎冰 = TrashIce()
+  val 碎冰 = 碎冰()
   val 神矢 = DivineArrow()
   val 泉涌 = Quicksand()
   val 攫取 = Grab()
