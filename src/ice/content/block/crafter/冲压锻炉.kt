@@ -24,7 +24,7 @@ class 冲压锻炉 :NormalCrafter("pressingForge") {
     }
     size = 5
     armor = 4f
-    itemCapacity = 100
+    itemCapacity = 120
     liquidCapacity = 100f
     updateEffect = Fx.fuelburn
     craftEffect = Fx.pulverizeMedium
