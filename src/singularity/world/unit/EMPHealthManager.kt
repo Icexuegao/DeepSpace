@@ -111,11 +111,24 @@ class EMPHealthManager {
           if (!healthMap.containsKey(u)) healthMap.put(u, getInst(u))
         }
       })
-      healthMap.each { unit: Unit?, health: EMPHealth ->
-        if (Vars.state.isGame)health.update()
-        if (unit != null && !unit.isAdded) {
-          val h = healthMap.remove(unit)
-          if (h != null) Pools.free(h)
+      
+      val iterator = healthMap.entries().iterator()
+      while (iterator.hasNext()) {
+        val entry = iterator.next()
+        val unit = entry.key
+        val health = entry.value
+        
+        if (unit == null || health == null) {
+          if (health == null) {
+            Log.err("EMPHealth is null for unit: ${unit?.type?.name}")
+          }
+          iterator.remove()
+          continue
+        }
+        if (Vars.state.isGame) health.update()
+        if (!unit.isAdded) {
+          iterator.remove()
+          Pools.free(health)
         }
       }
     }
@@ -123,16 +136,14 @@ class EMPHealthManager {
     SaveVersion.addCustomChunk("empHealth", object : CustomChunk {
       override fun shouldWrite() = true
 
-      override fun read(stream: DataInput, length: Int) = read(stream)
-
       override fun write(stream: DataOutput?) {
         val write = Writes(stream)
         write.i(healthMap.size)
         for (entry in healthMap) {
-          write.f(entry.key!!.x)
-          write.f(entry.key!!.y)
-          write.i(entry.key!!.type.id.toInt())
-          write.f(entry.value!!.empHealth)
+          write.f(entry.key.x)
+          write.f(entry.key.y)
+          write.i(entry.key.type.id.toInt())
+          write.f(entry.value.empHealth)
         }
       }
 
@@ -157,7 +168,6 @@ class EMPHealthManager {
               Log.err("emp index unit not found in ($x, $y)")
               continue
             }
-
 
             val heal = getInst(unit)
             heal.empHealth = health
@@ -218,7 +228,6 @@ class EMPHealthManager {
     ZERO.empHealth = 0f
     return ZERO
   }
-
 
   fun get(unit: Unit): EMPHealth {
     if (!unit.isAdded) return zeroInst(unit)
