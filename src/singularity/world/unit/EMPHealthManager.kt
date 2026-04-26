@@ -67,11 +67,11 @@ class EMPHealthManager {
      * ...
      * */
     if (Sgl.config.interopAssignEmpModels) {
-      Sgl.interopAPI.addModel(object : ConfigModel("empHealthModels") {
+      Sgl.interopAPI.addModel(object :ConfigModel("empHealthModels") {
         override fun parse(mod: LoadedMod, declaring: Jval) {
           val declares = declaring.asObject()
 
-          for (entry in declares) {
+          for(entry in declares) {
             val unit = ModsInteropAPI.selectContent<UnitType>(ContentType.unit, entry.key, mod, true)
 
             val model = EMPModel()
@@ -93,7 +93,7 @@ class EMPHealthManager {
         }
 
         override fun disable(mod: LoadedMod) {
-          for (unit in Vars.content.units()) {
+          for(unit in Vars.content.units()) {
             if (unit.minfo.mod === mod) {
               val model = EMPModel()
               model.disabled = true
@@ -112,7 +112,7 @@ class EMPHealthManager {
         }
       })
       healthMap.each { unit: Unit?, health: EMPHealth ->
-        if (Vars.state.isGame)health.update()
+        if (Vars.state.isGame) health.update()
         if (unit != null && !unit.isAdded) {
           val h = healthMap.remove(unit)
           if (h != null) Pools.free(h)
@@ -120,7 +120,7 @@ class EMPHealthManager {
       }
     }
 
-    SaveVersion.addCustomChunk("empHealth", object : CustomChunk {
+    SaveVersion.addCustomChunk("empHealth", object :CustomChunk {
       override fun shouldWrite() = true
 
       override fun read(stream: DataInput, length: Int) = read(stream)
@@ -128,7 +128,7 @@ class EMPHealthManager {
       override fun write(stream: DataOutput?) {
         val write = Writes(stream)
         write.i(healthMap.size)
-        for (entry in healthMap) {
+        for(entry in healthMap) {
           write.f(entry.key!!.x)
           write.f(entry.key!!.y)
           write.i(entry.key!!.type.id.toInt())
@@ -139,7 +139,8 @@ class EMPHealthManager {
       override fun read(stream: DataInput?) {
         Reads(stream).use { read ->
           val len = read.i()
-          for (i in 0..<len) {
+          healthMap.clear()
+          for(i in 0..<len) {
             val x = read.f()
             val y = read.f()
             val id = read.i().toFloat()
@@ -147,7 +148,7 @@ class EMPHealthManager {
             val health = read.f()
 
             var unit: Unit? = null
-            for (u in Groups.unit) {
+            for(u in Groups.unit) {
               if (u.type.id.toFloat() != id || !Mathf.equal(u.x, x) || !Mathf.equal(u.y, y)) continue
               unit = u
               break
@@ -158,7 +159,6 @@ class EMPHealthManager {
               continue
             }
 
-
             val heal = getInst(unit)
             heal.empHealth = health
             healthMap.put(heal.unit, heal)
@@ -167,14 +167,14 @@ class EMPHealthManager {
       }
     })
 
-    for (unit in Vars.content.units()) {
+    for(unit in Vars.content.units()) {
       getModel(unit)
     }
   }
 
   fun setEmpModel(type: UnitType, maxHealth: Float, armor: Float, repair: Float, empContDam: Float) {
     type.immunities.remove(电磁损毁)
-    unitDefaultHealthMap.put(type, object : EMPModel() {
+    unitDefaultHealthMap.put(type, object :EMPModel() {
       init {
         this.maxEmpHealth = maxHealth
         this.empArmor = armor
@@ -185,7 +185,7 @@ class EMPHealthManager {
   }
 
   fun setEmpDisabled(type: UnitType?) {
-    unitDefaultHealthMap.put(type, object : EMPModel() {
+    unitDefaultHealthMap.put(type, object :EMPModel() {
       init {
         disabled = true
       }
@@ -218,7 +218,6 @@ class EMPHealthManager {
     ZERO.empHealth = 0f
     return ZERO
   }
-
 
   fun get(unit: Unit): EMPHealth {
     if (!unit.isAdded) return zeroInst(unit)

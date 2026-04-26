@@ -59,7 +59,7 @@ class Lucifer : IceUnitType("lucifer") {
         trailLength = 4
         shootY += 1
         lifetime = 60f
-        despawnEffect = IceEffects.基础子弹击中特效
+        despawnEffect = IceEffects.基础子弹击中特效()
         hitEffect = despawnEffect
         homingPower = 0.05f
         homingRange = 50f
@@ -82,7 +82,7 @@ class Lucifer : IceUnitType("lucifer") {
         lifetime = 60f
         homingPower = 0.05f
         homingRange = 50f
-        despawnEffect = IceEffects.基础子弹击中特效
+        despawnEffect = IceEffects.基础子弹击中特效()
         hitEffect = despawnEffect
         shootEffect = IceEffects.squareAngle(color1 = IceColor.b4, color2 = IceColor.b5)
       }

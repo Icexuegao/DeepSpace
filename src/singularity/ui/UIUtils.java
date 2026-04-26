@@ -213,6 +213,11 @@ public class UIUtils {
       sep(table, Core.bundle.format("bullet.splashdamage", (int) bullet.splashDamage, Strings.fixed(bullet.splashDamageRadius/tilesize, 1)));
     }
 
+    if(!Mathf.equal(bullet.reloadMultiplier, 1f)){
+      int val = (int)(bullet.reloadMultiplier * 100 - 100);
+      sep(table, Core.bundle.format("bullet.reload", ammoStat(val)));
+    }
+
     if(bullet.knockback > 0){
       sep(table, Core.bundle.format("bullet.knockback", Strings.autoFixed(bullet.knockback, 2)));
     }
@@ -288,7 +293,9 @@ public class UIUtils {
 
     table.row();
   }
-
+  private static String ammoStat(float val){
+    return (val > 0 ? "[stat]+" : "[negstat]") + Strings.autoFixed(val, 1);
+  }
   private static void sep(Table table, String text){
     table.row();
     table.add(text);

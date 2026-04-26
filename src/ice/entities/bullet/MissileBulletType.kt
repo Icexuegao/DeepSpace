@@ -4,7 +4,8 @@ import ice.entities.bullet.base.BasicBulletType
 import mindustry.gen.Sounds
 import mindustry.graphics.Pal
 
-class MissileBulletType(speed: Float = 1f, damage: Float = 1f, bulletSprite: String = "missile") : BasicBulletType(speed, damage, bulletSprite) {
+class MissileBulletType(speed: Float = 1f, damage: Float = 1f, bulletSprite: String = "missile") :
+  BasicBulletType(speed, damage, bulletSprite) {
   init {
     backColor = Pal.missileYellowBack
     frontColor = Pal.missileYellow

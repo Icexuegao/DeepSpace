@@ -114,7 +114,7 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
           Draw.blend()
           Draw.z(Layer.effect)
           Drawf.light(e.x, e.y, rad * e.fout(Interp.circleOut) * 4f, e.color, 0.7f)
-        }, IceEffects.基础子弹击中特效)
+        }, IceEffects.基础子弹击中特效())
         despawnEffect = hitEffect
         shootEffect = IceEffects.squareAngle(color1 = IceColor.b5, color2 = IceColor.b4)
       }
@@ -148,7 +148,7 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
           Drawf.tri(e.x, e.y, w, 8 * e.fout(), e.rotation - 15f)
           Drawf.tri(e.x, e.y, w, 8 * e.fout(), e.rotation - 30f)
         }
-        hitEffect = IceEffects.基础子弹击中特效
+        hitEffect = IceEffects.基础子弹击中特效()
         despawnEffect = hitEffect
       }
     }
