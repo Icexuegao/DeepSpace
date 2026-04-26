@@ -17,7 +17,7 @@ class 大型抽水机 :SolidPump("largeWaterPump") {
     pumpAmount = 0.6f
     liquidCapacity = 120f
     newConsume().apply {
-      power(6f)
+      power(3f)
     }
     requirements(Category.production, IItems.石英玻璃, 75, IItems.高碳钢, 40, IItems.铬锭, 70, IItems.单晶硅, 60)
   }

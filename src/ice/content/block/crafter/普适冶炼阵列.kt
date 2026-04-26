@@ -23,8 +23,8 @@ class 普适冶炼阵列 : NormalCrafter("universalSmelterArray") {
     itemCapacity = 30
     craftEffect = IceEffects.square(IceColor.b4)
     newConsume().apply {
-      time(80f)
-      item(IItems.黄铜矿, 3)
+      time(60f)
+      item(IItems.黄铜矿, 2)
       power(60 / 60f)
     }
     newProduce().apply {
