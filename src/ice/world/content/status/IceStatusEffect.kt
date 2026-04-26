@@ -1,14 +1,11 @@
 package ice.world.content.status
 
 import arc.func.Cons2
-import arc.struct.ObjectMap
-import ice.library.util.accessField
 import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.entities.units.StatusEntry
 import mindustry.gen.Unit
 import mindustry.type.StatusEffect
-import mindustry.ui.Fonts
 import kotlin.Unit as kUnit
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
@@ -19,16 +16,8 @@ open class IceStatusEffect(name: String, apply: IceStatusEffect.() -> kUnit = {}
   private var update = Cons2<Unit, StatusEntry> { _, _ -> }
   private var drawFun: (Unit) -> kUnit = {}
 
-
   init {
     apply(this)
-  }
-companion object{
-  var iconId : ObjectMap<String, String> by Fonts::class.accessField("stringIcons")
-}
-  override fun init() {
-    super.init()
-    Fonts.registerIcon(name, "status-"+name, iconId.size, fullIcon)
   }
 
   override fun setStats() {

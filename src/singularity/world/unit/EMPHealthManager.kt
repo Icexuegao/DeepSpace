@@ -123,8 +123,6 @@ class EMPHealthManager {
     SaveVersion.addCustomChunk("empHealth", object :CustomChunk {
       override fun shouldWrite() = true
 
-      override fun read(stream: DataInput, length: Int) = read(stream)
-
       override fun write(stream: DataOutput?) {
         val write = Writes(stream)
         write.i(healthMap.size)
