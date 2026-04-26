@@ -17,7 +17,7 @@ class 抽水机 :SolidPump("waterPump") {
     pumpAmount = 0.2f
     liquidCapacity = 60f
     newConsume().apply {
-      power(3f)
+      power(1.5f)
     }
     requirements(Category.production, IItems.石英玻璃, 25, IItems.高碳钢, 20, IItems.单晶硅, 10)
   }
