@@ -70,7 +70,7 @@ object UnitBlocks :Load {
       }
     }
     requirements(
-      Category.units, ItemStack.with(
+      Category.units,
         Items.silicon,
         180,
         Items.surgeAlloy,
@@ -89,7 +89,6 @@ object UnitBlocks :Load {
         140,
         IItems.铱锭,
         100
-      )
     )
     size = 7
     liquidCapacity = 280f

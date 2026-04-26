@@ -28,7 +28,7 @@ class 碎冰 :SglTurret("trashIce") {
     health = 250
     recoil = 0.5f
     shootY = 3f
-    range = 160f
+    range = 20*8f
     inaccuracy = 10f
     squareSprite = false
     shoot = ShootSummon().apply {
@@ -116,7 +116,6 @@ class 碎冰 :SglTurret("trashIce") {
     return BasicBulletType(5f, 14f).apply {
       width = 2f
       height = 9f
-      lifetime = 30f
       despawnEffect = IceEffects.基础子弹击中特效(color)
       hitEffect = despawnEffect
       trailColor = color

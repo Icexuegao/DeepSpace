@@ -730,6 +730,7 @@ public class SglDraw{
   }
 
   public static void arc(float x, float y, float radius, float scaleFactor, float innerAngel, float rotate){
+    if (!Float.isFinite(radius) || radius < 0 || !Float.isFinite(scaleFactor) || scaleFactor < 0) return;
     int sides = 40 + (int)(radius * scaleFactor);
 
     float step = 360f/sides;

@@ -458,7 +458,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
     }
 
     fun drawActivation() {
-      if (activation <= 0.001f) return
+      if (!activation.isFinite() || activation <= 0.001f) return
       val lerp = Interp.pow2.apply(activation)
       Draw.color(SglDrawConst.fexCrystal)
       Draw.alpha(0.6f * lerp)

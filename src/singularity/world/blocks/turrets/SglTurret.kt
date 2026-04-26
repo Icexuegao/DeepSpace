@@ -167,11 +167,17 @@ open class SglTurret(name: String) :SglBlock(name) {
     buildType = Prov(::SglTurretBuild)
     setAmmo()
   }
+  fun limitRange(margin: Float = 0f) {
+    for(entry in ammoTypes) {
+      val value = entry.value.bulletType
+      val realRange = value.rangeChange + value.extraRangeMargin + margin + 10f + range
+      value.lifetime = realRange / value.speed
+    }
+  }
 
   open fun setAmmo() {}
   override fun init() {
     oneOfOptionCons = false
-
     if (shootY == Float.NEGATIVE_INFINITY) shootY = size * Vars.tilesize / 2f
     if (elevation < 0) elevation = size / 2f
 
@@ -191,6 +197,7 @@ open class SglTurret(name: String) :SglBlock(name) {
     }
 
     super.init()
+    limitRange()
   }
 
   fun newAmmo(ammoType: ice.entities.bullet.base.BulletType, value: Cons2<Table, BulletType>): AmmoDataEntry {
@@ -541,9 +548,11 @@ open class SglTurret(name: String) :SglBlock(name) {
         coolantScl = 1f
       }
     }
-     fun ammoReloadMultiplier(): Float {
-      return currentAmmo?.bulletType?.reloadMultiplier?: 1f
+
+    fun ammoReloadMultiplier(): Float {
+      return currentAmmo?.bulletType?.reloadMultiplier ?: 1f
     }
+
     open fun updateReloadCoolant() {
       if (canShoot() && shootValid() && !charging() && reloadCounter < consumer.current!!.craftTime) {
         reloadCounter += consEfficiency() * delta() * coolantScl * ammoReloadMultiplier()
