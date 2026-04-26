@@ -31,29 +31,24 @@ import mindustry.type.ItemStack
 import mindustry.ui.Bar
 import universecore.world.consumers.cons.item.ConsumeItemBase
 
-/**
- * 无人机配送终端 - 用于生成和管理无人机，并将物品配送到接收站
- */
+/** 无人机配送终端 - 用于生成和管理无人机，并将物品配送到接收站 */
 class DroneDeliveryTerminal(name: String) :RangeBlock(name) {
-  // 无人机相关配置
   var unitBuildTime = 60f * 8f  // 生成单个无人机所需时间
   var unitMaxSize = 3              // 最大无人机数量
 
-  // 多边形装饰配置
   var polyStroke = 1.8f         // 多边形线条宽度
   var polyRadius = 8f           // 多边形半径
   var polySides = 6             // 多边形边数
   var polyRotateSpeed = 1f      // 多边形旋转速度
   var polyColor: Color = Pal.accent // 多边形颜色
 
-  // 无人机类型
   val unit = IUnitTypes.和弦
   val stacks: Array<ItemStack> = ItemStack.with(IItems.铬锭, 10, IItems.单晶硅, 10)
 
   init {
     localization {
       zh_CN {
-        this@DroneDeliveryTerminal.localizedName = "无人机配送终端"
+        localizedName = "无人机配送终端"
         description = "无人机供货端,用于将物品从无人机供货端运输到无人机需求端"
       }
     }

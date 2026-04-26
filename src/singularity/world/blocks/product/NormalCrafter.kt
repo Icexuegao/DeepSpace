@@ -59,11 +59,11 @@ import java.util.concurrent.atomic.AtomicReference
 
 @Suppress("UNCHECKED_CAST")
 /**常规的工厂类方块,具有强大的consume-produce制造系统的近乎全能的制造类方块*/
-open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
+open class NormalCrafter(name: String) :SglBlock(name), FactoryBlockComp {
   companion object {
     private fun buildRecipeSimple(cons: BaseConsumers, prod: BaseProducers, ta: Table) {
       var first = true
-      for (consume in cons.all()) {
+      for(consume in cons.all()) {
         if (!consume.hasIcons()) continue
 
         if (!first) ta.add("+").fillX().pad(4f)
@@ -78,7 +78,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       ta.image(Icon.right).padLeft(8f).padRight(8f).size(30f)
 
       first = true
-      for (produce in prod.all()) {
+      for(produce in prod.all()) {
         if (!produce.hasIcons()) continue
 
         if (!first) ta.add("+").fillX().pad(4f)
@@ -102,7 +102,6 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
   var craftedSound: Sound = Sounds.none
   var craftedSoundVolume: Float = 0.5f
 
-
   var shouldConfig: Boolean = false
 
   /**同样的，这也是一个指针，指向当前编辑的produce */
@@ -117,8 +116,8 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
   override var producers = Seq<BaseProducers>()
 
   init {
-    conductivePower=true
-    saveConfig=true
+    conductivePower = true
+    saveConfig = true
     update = true
     solid = true
     sync = true
@@ -133,15 +132,15 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
     return produce!!
   }
 
-  fun newFormula(np: Cons2<BaseConsumers, BaseProducers>){
-    np[newConsume(),newProduce()]
+  fun newFormula(np: Cons2<BaseConsumers, BaseProducers>) {
+    np[newConsume(), newProduce()]
   }
 
   fun newOptionalProduct() {
     produce = BaseProducers()
     val prod: BaseProducers = produce!!
     newOptionalConsume({ e: NormalCrafterBuild, c: BaseConsumers ->
-      for (baseProduce in prod.all()) {
+      for(baseProduce in prod.all()) {
         val baseProduce1 = baseProduce as BaseProduce<ProducerBuildComp>
         if (baseProduce1.valid(e)) baseProduce.update(e)
         baseProduce.dump(e)
@@ -151,7 +150,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
     })
     prod.cons = consume
     consume!!.setConsTrigger { e: NormalCrafterBuild ->
-      for (baseProduce in prod.all()) {
+      for(baseProduce in prod.all()) {
         val baseProduce1 = baseProduce as BaseProduce<ProducerBuildComp>
         if (baseProduce1.valid(e)) baseProduce.produce(e)
       }
@@ -183,7 +182,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
     consume!!.addSelfAccess(ConsumeType.item, item)
     consume!!.setConsTrigger { e: NormalCrafterBuild ->
       var chanceV = chance + base
-      while (chanceV >= 1) {
+      while(chanceV >= 1) {
         if (e.acceptItem(e, item)) e.offload(item)
         chanceV--
       }
@@ -215,7 +214,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
           cons!!.table { req: Table? ->
             req!!.left().defaults().left().padLeft(3f)
             val stats = Stats()
-            for (co in c.all()) {
+            for(co in c.all()) {
               co.display(stats)
             }
             FactoryBlockComp.buildStatTable(req, stats)
@@ -228,7 +227,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
 
     ada[0] = Floatf { e: NormalCrafterBuild ->
       var mul = 1f
-      for (cons in res.all()) {
+      for(cons in res.all()) {
         mul *= (cons as BaseConsume<ConsumerBuildComp>).efficiency(e)
       }
       boost * mul * Mathf.clamp(e.consumer.consEfficiency) //* e.consumer.getOptionalEff(res)
@@ -243,14 +242,17 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
   override fun setBars() {
     super.setBars()
     addBar("efficiency") { e: NormalCrafterBuild ->
-      Bar({ Core.bundle.get("misc.efficiency") + ": " + Mathf.round(e.workEfficiency() * 100) + "%" }, { Pal.accent }, { e.workEfficiency() })
+      Bar(
+        { Core.bundle.get("misc.efficiency") + ": " + Mathf.round(e.workEfficiency() * 100) + "%" },
+        { Pal.accent },
+        { e.workEfficiency() })
     }
   }
 
   override fun init() {
     if (effectRange == -1f) effectRange = size.toFloat()
 
-    if (producers.size > 0) for (prod in producers) {
+    if (producers.size > 0) for(prod in producers) {
       outputItems = outputItems or (prod.get(ProduceType.item) != null)
       hasItems = hasItems or outputItems
       outputsLiquid = outputsLiquid or (prod.get(ProduceType.liquid) != null)
@@ -261,12 +263,12 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       hasEnergy = hasEnergy or outputEnergy
     }
 
-    for (producer in producers) {
+    for(producer in producers) {
       outputsPayload = outputsPayload or (producer.get(ProduceType.payload) != null)
     }
 
-    for (product in optionalProducts) {
-      for (baseProduce in product.value!!.all()) {
+    for(product in optionalProducts) {
+      for(baseProduce in product.value!!.all()) {
         baseProduce.parent!!.cons = product.key
       }
     }
@@ -289,7 +291,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       t!!.left().row()
       t.add(Core.bundle.get("infos.touchShowDetails")).color(Color.gray).left()
       t.row()
-      for (i in 0..<consumers.size) {
+      for(i in 0..<consumers.size) {
         val cons = consumers.get(i)
         val prod = producers.get(i)
         val details = Table()
@@ -321,7 +323,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
     }
   }
 
-  open inner class NormalCrafterBuild : SglBuilding(), FactoryBuildComp {
+  open inner class NormalCrafterBuild :SglBuilding(), FactoryBuildComp {
     override var progress: Float = 0f
     override var totalProgress = 0f
     override var warmup: Float = 0f
@@ -340,30 +342,36 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
 
     override fun draw() {
       super.draw()
-      if (SettingValue.启用多合成角标常显&& !Vars.state.isEditor) {
-        drawcornerMark()
-      }
+      drawcornerMark()
     }
+
     override fun shouldAmbientSound(): Boolean {
       return consumeValid()
     }
+
     override fun drawSelect() {
       super.drawSelect()
-      if (!SettingValue.启用多合成角标常显&& !Vars.state.isEditor) {
-        drawcornerMark()
-      }
+      drawcornerMark(true)
     }
-    fun drawcornerMark(){
-      Draw.z(Layer.overlayUI)
-      producer?.current?.get(ProduceType.item)?.items[0]?.let {
-        drawItemSelection(it.item)
+
+    open fun drawcornerMark(select: Boolean =false) {
+      fun draw() {
+        Draw.z(Layer.blockOver)
+        producer?.current?.get(ProduceType.item)?.items[0]?.let {
+          drawItemSelection(it.item)
+          Draw.reset()
+          return
+        }
+        producer?.current?.get(ProduceType.liquid)?.liquids[0]?.let {
+          drawItemSelection(it.liquid)
+        }
         Draw.reset()
-        return
       }
-      producer?.current?.get(ProduceType.liquid)?.liquids[0]?.let {
-        drawItemSelection(it.liquid)
-      }
-      Draw.reset()
+      if (SettingValue.启用多合成角标常显 && Vars.state.isGame && !select) {
+        draw()
+      }else if (
+        (select && !SettingValue.启用多合成角标常显) && Vars.state.isGame
+      )  draw()
     }
 
     override fun create(block: Block, team: Team): Building {
@@ -386,14 +394,14 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
       tempLiquid.clear()
       if (recipeCurrent >= 0 && consumer.current != null) {
         if (consumer.current!!.get(ConsumeType.liquid) != null) {
-          for (stack in consumer.current!!.get(ConsumeType.liquid)!!.consLiquids!!) {
+          for(stack in consumer.current!!.get(ConsumeType.liquid)!!.consLiquids!!) {
             tempLiquid.add(stack.liquid)
           }
         }
       }
       if (recipeCurrent >= 0 && producer!!.current != null) {
         if (producer!!.current!!.get(ProduceType.liquid) != null) {
-          for (stack in producer!!.current!!.get(ProduceType.liquid)!!.liquids) {
+          for(stack in producer!!.current!!.get(ProduceType.liquid)!!.liquids) {
             tempLiquid.add(stack.liquid)
           }
         }
@@ -417,7 +425,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
         val items = el.begin()
         var i = 0
         val b = el.size
-        while (i < b) {
+        while(i < b) {
           bars.row()
           bars.add(items[i])
           i++
@@ -466,7 +474,10 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
 
     override fun getPowerProduction(): Float {
       if (!block!!.outputsPower || producer!!.current == null || producer!!.current!!.get(ProduceType.power) == null) return 0f
-      powerProdEfficiency = Mathf.num(shouldConsume() && consumeValid()) * consEfficiency() * ((producer!!.current!!.get(ProduceType.power)) as ProducePower<ProducerBuildComp>).multiple(this)
+      powerProdEfficiency =
+        Mathf.num(shouldConsume() && consumeValid()) * consEfficiency() * ((producer!!.current!!.get(ProduceType.power)) as ProducePower<ProducerBuildComp>).multiple(
+          this
+        )
       return producer!!.powerProduct * powerProdEfficiency
     }
 
@@ -488,10 +499,10 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
         val items1 = producer!!.current!!.get(ProduceType.item)
         if (items1 != null) outputItems = Seq(items1.items).map { it.item }
         val liquids1 = producer!!.current!!.get(ProduceType.liquid)
-        if (liquids1 != null) outputLiquids = Seq(liquids1.liquids).map {it.liquid }
+        if (liquids1 != null) outputLiquids = Seq(liquids1.liquids).map { it.liquid }
       }
 
-      for (byproduct in byproducts.values()) {
+      for(byproduct in byproducts.values()) {
         dump(byproduct.item)
       }
     }
@@ -503,7 +514,7 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
           prescripts.add(recipeIndfo).padLeft(5f).padTop(5f).padBottom(5f)
           prescripts.row()
           prescripts.pane { buttons ->
-            for (i in 0..<producers.size) {
+            for(i in 0..<producers.size) {
               val p = producers.get(i)
               val c = consumers.get(i)
 
@@ -512,7 +523,17 @@ open class NormalCrafter(name: String) : SglBlock(name), FactoryBlockComp {
               buttons!!.left().button({ t ->
                 t!!.left().defaults().left()
                 buildRecipeSimple(c, p, t)
-              }, Styles.underlineb, { configure(i) }).touchable { c.selectable.get()!!.buttonValid }.update { b: Button? -> b!!.setChecked(recipeCurrent == i) }.fillY().growX().left().margin(5f).marginTop(8f).marginBottom(8f).pad(4f).get().addListener(Tooltip { t: Table? -> t!!.table(IStyles.paneLeft) { detail: Table? -> FactoryBlockComp.buildRecipe(detail!!, c, p) } })
+              }, Styles.underlineb, { configure(i) }).touchable { c.selectable.get()!!.buttonValid }
+                .update { b: Button? -> b!!.setChecked(recipeCurrent == i) }.fillY().growX().left().margin(5f).marginTop(8f)
+                .marginBottom(8f).pad(4f).get().addListener(Tooltip { t: Table? ->
+                t!!.table(IStyles.paneLeft) { detail: Table? ->
+                  FactoryBlockComp.buildRecipe(
+                    detail!!,
+                    c,
+                    p
+                  )
+                }
+              })
 
               buttons.row()
             }

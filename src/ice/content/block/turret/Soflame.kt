@@ -38,15 +38,11 @@ class Soflame : SglTurret("soflame") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "阳炎"
+        localizedName = "阳炎"
         description = "将能量聚集到“太阳分子”上,直到能量足够高时发射出去,极热的物质云会留下灼热的轨迹,并在碰撞时爆炸,将目标化为灰烬"
       }
     }
-    requirements(
-      Category.turret,
-        IItems.强化合金, 150, IItems.铝锭, 180, IItems.FEX水晶, 140, IItems.充能FEX水晶,
-      120, IItems.气凝胶, 180, IItems.铱锭, 60, IItems.暮光合金, 120,  IItems.絮凝剂, 100
-    )
+
     size = 5
     recoil = 4f
     recoilTime = 120f
@@ -67,6 +63,12 @@ class Soflame : SglTurret("soflame") {
     smokeEffect = Fx.shootSmokeSmite
 
     unitSort = SglUnitSorts.denser
+    requirements(
+      Category.turret,
+      IItems.强化合金, 150, IItems.铝锭, 180, IItems.FEX水晶, 140, IItems.充能FEX水晶,
+      120, IItems.气凝胶, 180, IItems.铱锭, 60, IItems.暮光合金, 120,  IItems.絮凝剂, 100
+    )
+
     val subBullet: mindustry.entities.bullet.BulletType = object : HeatBulletType() {
       init {
         speed = 4f
