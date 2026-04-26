@@ -8,13 +8,11 @@ import arc.math.Angles
 import arc.math.geom.Vec2
 import arc.struct.ObjectSet
 import arc.struct.Seq
-import arc.util.Interval
 import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pool
 import arc.util.pooling.Pools
 import ice.library.util.accessBoolean
-import mindustry.gen.Bullet
 import mindustry.gen.Decal
 import mindustry.gen.Groups
 import kotlin.math.max
@@ -43,9 +41,7 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
     }
   }
 
-  var timer: Interval = Interval(6)
-  var owner: Bullet? = null
-  var bullet: Bullet? = null
+
 
   var strength: Float = 1f
   var deflectAngle: Float = 45f

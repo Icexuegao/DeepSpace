@@ -10,7 +10,6 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
 import ice.entities.effect.MultiEffect
-
 import mindustry.content.Fx
 import mindustry.entities.Mover
 import mindustry.entities.effect.WaveEffect
@@ -33,6 +32,8 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 import singularity.world.particles.SglParticleModels
+import universecore.world.particles.models.HeatBulletParticleModel.Companion.bullet
+import universecore.world.particles.models.HeatBulletParticleModel.Companion.owner
 
 class Soflame : SglTurret("soflame") {
   init {
@@ -164,12 +165,12 @@ class Soflame : SglTurret("soflame") {
           val y = b.y
           Time.run((i * 5).toFloat()) {
             for (sign in Mathf.signs) {
-              subBullet.create(b, x, y, b.rotation()).mover = Mover { e: Bullet? -> e!!.moveRelative(0f, Mathf.sin(e.time + off, scl, ((1 + i) * sign).toFloat())) }
+              subBullet.create(b, x, y, b.rotation()).mover = Mover { e -> e.moveRelative(0f, Mathf.sin(e.time + off, scl, ((1 + i) * sign).toFloat())) }
             }
           }
         }
       }
-    }) { t, b: mindustry.entities.bullet.BulletType? ->
+    }) { t, b: mindustry.entities.bullet.BulletType ->
       t!!.table { child ->
         child!!.left().add(Core.bundle.format("infos.shots", 6)).color(Color.lightGray).left()
         UIUtils.buildAmmo(child, subBullet)
