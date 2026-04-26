@@ -12,7 +12,6 @@ object Strings {
     var decimal: Int = 2
     var fixDecimals: Boolean = false
     val regex = Regex("^[-+]?\\d*\\.?\\d+$")
-
 }
 
 fun String.isNumericWithSign() = matches(regex)
