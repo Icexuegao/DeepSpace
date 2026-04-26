@@ -30,7 +30,6 @@ class TwinStar :SglTurret("turret_twinStar") {
     health = 1000
     recoils = 2
     range = 30 * 8f
-    squareSprite = false
     shootSound = Sounds.shootMissile
     shootY = 6f
     shoot = object :ShootAlternate() {

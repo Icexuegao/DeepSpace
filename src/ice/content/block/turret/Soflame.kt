@@ -170,7 +170,7 @@ class Soflame : SglTurret("soflame") {
           }
         }
       }
-    }) { t, b: mindustry.entities.bullet.BulletType ->
+    }) { t, _: mindustry.entities.bullet.BulletType ->
       t!!.table { child ->
         child!!.left().add(Core.bundle.format("infos.shots", 6)).color(Color.lightGray).left()
         UIUtils.buildAmmo(child, subBullet)
@@ -209,7 +209,7 @@ class Soflame : SglTurret("soflame") {
         progress = PartProgress.warmup
         y = shootY
         layer = Layer.effect
-        draw = Drawer { x: Float, y: Float, r: Float, p: Float ->
+        draw = Drawer { x: Float, y: Float, _: Float, p: Float ->
           Lines.stroke(0.8f * p, Pal.lighterOrange)
           SglDraw.dashCircle(x, y, 6 * p, Time.time * 1.7f)
         }

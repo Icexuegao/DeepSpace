@@ -151,6 +151,7 @@ open class SglTurret(name: String) :SglBlock(name) {
   var recoils: Int = -1
 
   init {
+    squareSprite=false
     canOverdrive = false
     update = true
     solid = true
@@ -167,9 +168,10 @@ open class SglTurret(name: String) :SglBlock(name) {
     buildType = Prov(::SglTurretBuild)
     setAmmo()
   }
-  fun limitRange(margin: Float = 0f) {
+ open fun limitRange(margin: Float = 0f) {
     for(entry in ammoTypes) {
       val value = entry.value.bulletType
+      if (Mathf.equal(value.speed,0f))continue
       val realRange = value.rangeChange + value.extraRangeMargin + margin + 10f + range
       value.lifetime = realRange / value.speed
     }
@@ -255,12 +257,12 @@ open class SglTurret(name: String) :SglBlock(name) {
   }
 
   /**使用默认的冷却模式，与原版的冷却稍有不同，液体的温度和热容共同确定冷却力，热容同时影响液体消耗倍率 */
-  fun newCoolant(baseCoolantScl: Float, attributeMultiplier: Float, filter: Boolf<Liquid?>, usageBase: Float, duration: Float) {
+  fun newCoolant(baseCoolantScl: Float, attributeMultiplier: Float, filter: Boolf<Liquid>, usageBase: Float, duration: Float) {
     newCoolant(
-      { liquid: Liquid? -> baseCoolantScl + (liquid!!.heatCapacity * 1.2f - (liquid.temperature - 0.35f) * 0.6f) * attributeMultiplier },
-      { liquid: Liquid? -> !liquid!!.gas && liquid.coolant && filter.get(liquid) },
+      { liquid: Liquid -> baseCoolantScl + (liquid.heatCapacity * 1.2f - (liquid.temperature - 0.35f) * 0.6f) * attributeMultiplier },
+      { liquid: Liquid -> !liquid.gas && liquid.coolant && filter.get(liquid) },
       usageBase,
-      { liquid: Liquid? -> usageBase / (liquid!!.heatCapacity * 0.7f) },
+      { liquid: Liquid -> usageBase / (liquid.heatCapacity * 0.7f) },
       duration
     )
     val c: BaseConsumers? = consume
@@ -268,7 +270,7 @@ open class SglTurret(name: String) :SglBlock(name) {
     consume!!.consValidCondition { t: SglTurretBuild? -> (t!!.currCoolant == null || t.currCoolant === c) }
   }
 
-  fun newCoolant(coolEff: Floatf<Liquid?>, filters: Boolf<Liquid>, usageBase: Float, usageMult: Floatf<Liquid>, duration: Float) {
+  fun newCoolant(coolEff: Floatf<Liquid>, filters: Boolf<Liquid>, usageBase: Float, usageMult: Floatf<Liquid>, duration: Float) {
     newOptionalConsume({ e: SglTurretBuild?, c: BaseConsumers? ->
       var cl: ConsumeLiquidCond<SglTurretBuild>? = null
       if (((c!!.get(ConsumeType.liquid) as ConsumeLiquidCond<SglTurretBuild>).also { cl = it }) != null) {
@@ -557,7 +559,7 @@ open class SglTurret(name: String) :SglBlock(name) {
       if (canShoot() && shootValid() && !charging() && reloadCounter < consumer.current!!.craftTime) {
         reloadCounter += consEfficiency() * delta() * coolantScl * ammoReloadMultiplier()
         if (coolantSclTimer > 0) {
-          val c = consumer.optionalCurr?.get(ConsumeType.liquid) as ConsumeLiquidBase<SglTurretBuild>
+          val c = consumer.optionalCurr?.get(ConsumeType.liquid) as ConsumeLiquidBase<SglTurretBuild>?
           var usage = 0f
           if (c is ConsumeLiquidCond<*>) {
             val l = (c as ConsumeLiquidCond<*>).getCurrCons(this)
@@ -727,7 +729,7 @@ open class SglTurret(name: String) :SglBlock(name) {
       return if (consumer.current == null) 0f else Mathf.clamp(reloadCounter / consumer.current!!.craftTime)
     }
 
-    protected open fun handleBullet(bullet: Bullet?, offsetX: Float, offsetY: Float, angleOffset: Float) {}
+    protected open fun handleBullet(bullet: Bullet, offsetX: Float, offsetY: Float, angleOffset: Float) {}
 
     fun charging(): Boolean {
       return queuedBullets > 0 && shoot.firstShotDelay > 0

@@ -30,7 +30,6 @@ class 碎冰 :SglTurret("turret_trashIce") {
     shootY = 3f
     range = 20*8f
     inaccuracy = 10f
-    squareSprite = false
     shoot = ShootSummon().apply {
       x = 0f
       y = 0f

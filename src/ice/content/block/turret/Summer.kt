@@ -120,7 +120,7 @@ class Summer : SglTurret("summer") {
         val fout = b.fout(Interp.pow4Out)
         val z = Draw.z()
         Draw.z(z - 0.0001f)
-        b.trail.draw(trailColor, trailWidth * fout)
+        b.trail?.draw(trailColor, trailWidth * fout)
         Draw.z(z)
 
         SglDraw.drawLightEdge(b.x, b.y, 35 * fout + Mathf.absin(0.5f, 3.5f), 2f, 14 * fout + Mathf.absin(0.4f, 2.5f), 2f, 30f, Pal.lightishOrange)

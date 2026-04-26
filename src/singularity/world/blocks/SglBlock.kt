@@ -667,6 +667,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
       activation = read.f()
 
       recipeCurrent = read.i()
+
       consumer.read(read)
       energyModule.read(read)
     }

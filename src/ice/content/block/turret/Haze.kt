@@ -47,10 +47,11 @@ import universecore.graphics.lightnings.generator.RandomGenerator
 import kotlin.math.min
 
 class Haze : SglTurret("haze") {
+  override fun limitRange(margin: Float)= kotlin.Unit
   init {
     localization {
       zh_CN {
-        this.localizedName = "阴霾"
+        localizedName = "阴霾"
         description = "大型石墨导弹发射器,发射一枚电磁脉冲核弹,包裹的巨量石墨会产生一片巨大的石墨云传导电磁脉冲,造成严重的电子损伤"
       }
     }

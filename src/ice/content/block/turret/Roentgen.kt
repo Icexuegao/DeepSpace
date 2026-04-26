@@ -21,10 +21,11 @@ import singularity.world.draw.DrawSglTurret
 import singularity.world.meta.SglStat
 
 class Roentgen : ProjectileTurret("roentgen") {
+  override fun limitRange(margin: Float)= Unit
   init {
     localization {
       zh_CN {
-        this.localizedName = "伦琴"
+        localizedName = "伦琴"
         description = "发射极具穿透力的高能激光束,杀伤力极强"
       }
     }
@@ -66,7 +67,7 @@ class Roentgen : ProjectileTurret("roentgen") {
     consume!!.time(30f)
     consume!!.power(12.4f)
 
-    newAmmoCoating(Core.bundle.get("coating.crystal_fex"), SglDrawConst.fexCrystal, { b: mindustry.entities.bullet.BulletType? ->
+    newAmmoCoating("FEX_结晶壳", SglDrawConst.fexCrystal, { b: mindustry.entities.bullet.BulletType? ->
       val res = b!!.copy() as LightLaserBulletType
       res.damage *= 1.25f
       res.colors = arrayOf<Color?>(

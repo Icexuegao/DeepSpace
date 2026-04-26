@@ -1,6 +1,5 @@
 package singularity.world.blocks.turrets
 
-import arc.func.Boolf
 import arc.func.Prov
 import arc.math.Angles
 import arc.struct.Seq
@@ -18,8 +17,9 @@ open class LaserTurret(name: String) : SglTurret(name) {
     buildType = Prov(::LaserTurretBuild)
   }
 
+  override fun limitRange(margin: Float){}
   inner class LaserTurretBuild : SglTurretBuild() {
-    var allLaser: Seq<BulletEntry> = Seq<BulletEntry>()
+    var allLaser = Seq<BulletEntry>()
 
     override fun turnToTarget(targetRot: Float) {
       rotationu = Angles.moveToward(rotationu, targetRot, rotateSpeed * delta() * (if (allLaser.isEmpty) 1f else shootingRotateSpeedScl))
@@ -48,12 +48,12 @@ open class LaserTurret(name: String) : SglTurret(name) {
       }
     }
 
-    override fun handleBullet(bullet: Bullet?, offsetX: Float, offsetY: Float, angleOffset: Float) {
-      allLaser.add(BulletEntry(bullet, offsetX, offsetY, angleOffset, bullet!!.lifetime))
+    override fun handleBullet(bullet: Bullet, offsetX: Float, offsetY: Float, angleOffset: Float) {
+      allLaser.add(BulletEntry(bullet, offsetX, offsetY, angleOffset, bullet.lifetime))
     }
 
     override fun shouldConsume(): Boolean {
-      return super.shouldConsume() && (shootingConsume || allLaser.isEmpty) && !(heat > 0 && needCooldown)
+      return    super.shouldConsume()  && (shootingConsume || allLaser.isEmpty) && !(heat > 0 && needCooldown && allLaser.isEmpty)
     }
 
     override fun canShoot(): Boolean {

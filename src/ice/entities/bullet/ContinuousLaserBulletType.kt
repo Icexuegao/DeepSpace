@@ -16,7 +16,7 @@ open class ContinuousLaserBulletType :ContinuousBulletType {
   var fadeTime: Float = 16f
   var lightStroke: Float = 40f
   var divisions: Int = 13
-  var colors: Array<Color?> = arrayOf<Color?>(Color.valueOf("ec745855"), Color.valueOf("ec7458aa"), Color.valueOf("ff9c5a"), Color.white)
+  var colors = arrayOf(Color.valueOf("ec745855"), Color.valueOf("ec7458aa"), Color.valueOf("ff9c5a"), Color.white)
   var strokeFrom: Float = 2f
   var strokeTo: Float = 0.5f
   var pointyScaling: Float = 0.75f

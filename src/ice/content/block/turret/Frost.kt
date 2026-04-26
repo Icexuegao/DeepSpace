@@ -24,12 +24,11 @@ import singularity.world.blocks.turrets.LaserTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 
-class Frost : LaserTurret("frost") {
+class Frost :LaserTurret("frost") {
   init {
-
     localization {
       zh_CN {
-        this.localizedName = "霜降"
+        localizedName = "霜降"
         description = "从激光冷却发展而来的巨型冷冻光束炮,用巨大的冰冻光束给敌人沉痛而寒冷的重击"
       }
     }
@@ -38,7 +37,9 @@ class Frost : LaserTurret("frost") {
 
       IItems.矩阵合金, 120, IItems.充能FEX水晶, 100, IItems.铱锭, 100
     )
+    shootingConsume=true
     size = 5
+    liquidCapacity=30f
     scaledHealth = 420f
     recoil = 2.8f
     rotateSpeed = 2f
@@ -49,24 +50,28 @@ class Frost : LaserTurret("frost") {
     targetGround = true
     targetAir = true
     shootEffect = SglFx.railShootRecoil
-
     energyCapacity = 4096f
     basicPotentialEnergy = 1024f
 
     shootSound = Sounds.shootLaser
 
-
     updating = Cons { e: SglBuilding ->
       val t = e as SglTurretBuild
       if (Mathf.chanceDelta((0.08f * e.warmup()).toDouble())) SglFx.iceParticle.at(
-        t.x + Angles.trnsx(t.rotationu, -12f), t.y + Angles.trnsy(t.rotationu, -12f), t.rotationu + 90 * Mathf.randomSign(), SglDrawConst.frost
+        t.x + Angles.trnsx(t.rotationu, -12f),
+        t.y + Angles.trnsy(t.rotationu, -12f),
+        t.rotationu + 90 * Mathf.randomSign(),
+        SglDrawConst.frost
       )
       if (Mathf.chanceDelta((0.05f * e.warmup()).toDouble())) SglFx.iceParticle.at(
-        t.x + Angles.trnsx(t.rotationu, 22f), t.y + Angles.trnsy(t.rotationu, 22f), t.rotationu + 15 * Mathf.randomSign(), SglDrawConst.frost
+        t.x + Angles.trnsx(t.rotationu, 22f),
+        t.y + Angles.trnsy(t.rotationu, 22f),
+        t.rotationu + 15 * Mathf.randomSign(),
+        SglDrawConst.frost
       )
     }
 
-    newAmmo(object : ContinuousLaserBulletType() {
+    newAmmo(object :ContinuousLaserBulletType() {
       init {
         pierceCap = 5
         damage = 115f
@@ -90,7 +95,7 @@ class Frost : LaserTurret("frost") {
         oscScl = 1.2f
         frontLength = 220f
         lightColor = SglDrawConst.frost
-        colors = arrayOf<Color?>(
+        colors = arrayOf(
           Color.valueOf("6CA5FF").a(0.6f), Color.valueOf("6CA5FF").a(0.85f), Color.valueOf("ACE7FF"), Color.valueOf("DBFAFF")
         )
       }
@@ -119,7 +124,7 @@ class Frost : LaserTurret("frost") {
     consume!!.energy(2.4f)
     consume!!.time(210f)
 
-    drawers = DrawSglTurret(object : RegionPart("_side") {
+    drawers = DrawSglTurret(object :RegionPart("_side") {
       init {
         mirror = true
         moveX = 8f
@@ -130,7 +135,7 @@ class Frost : LaserTurret("frost") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2f, -8f))
       }
-    }, object : RegionPart("_blade") {
+    }, object :RegionPart("_blade") {
       init {
         mirror = true
         moveY = 2f
@@ -142,7 +147,7 @@ class Frost : LaserTurret("frost") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -1f, -6f))
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         y = 4f
         progress = PartProgress.warmup
@@ -151,12 +156,12 @@ class Frost : LaserTurret("frost") {
           SglDraw.gradientTri(x, y, 40 * p, 60 * p, r + 180, SglDrawConst.frost, 0f)
         }
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         heatColor = SglDrawConst.frost
         heatProgress = PartProgress.warmup.delay(0.5f)
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         mirror = true
         x = 16f
@@ -172,7 +177,7 @@ class Frost : LaserTurret("frost") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -1f, -8f))
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         mirror = true
         x = 30f
@@ -188,7 +193,7 @@ class Frost : LaserTurret("frost") {
 
         moves.add(PartMove(PartProgress.recoil, 2f, -1.5f, -9f))
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         color = SglDrawConst.frost
         tri = true
@@ -202,7 +207,7 @@ class Frost : LaserTurret("frost") {
         layer = Layer.effect
         progress = PartProgress.warmup
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         circle = true
         color = Color.white
@@ -212,7 +217,7 @@ class Frost : LaserTurret("frost") {
         layer = Layer.effect
         progress = PartProgress.warmup
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         circle = true
         color = SglDrawConst.frost
@@ -225,7 +230,7 @@ class Frost : LaserTurret("frost") {
         layer = Layer.effect
         progress = PartProgress.warmup
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         y = -12f
         layer = Layer.effect
@@ -238,4 +243,5 @@ class Frost : LaserTurret("frost") {
       }
     })
   }
+
 }

@@ -71,7 +71,7 @@ open class ContinuousTurret(name: String):SglTurret(name) {
         curRecoil = recoil
       }
     }
-    override fun handleBullet(@Nullable bullet: Bullet?, offsetX: Float, offsetY: Float, angleOffset: Float) {
+    override fun handleBullet(@Nullable bullet: Bullet, offsetX: Float, offsetY: Float, angleOffset: Float) {
       if (bullet != null) {
         bullets.add(BulletEntry(bullet, offsetX, offsetY, angleOffset))
         //make sure the length updates to the last set value

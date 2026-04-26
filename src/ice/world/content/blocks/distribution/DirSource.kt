@@ -43,8 +43,7 @@ import java.util.*
 
 class DirSource(name: String?) :Block(name) {
   var drawer: DrawBlock = DrawMulti(
-    DrawDefault(),
-    DrawHeatOutput()
+    DrawDefault(), DrawHeatOutput()
   )
 
   init {
@@ -150,8 +149,7 @@ class DirSource(name: String?) :Block(name) {
         for(i in 0..<container.size) {
           val v = container.get(i).get(0)
           val button =
-            t.button(Tex.whiteui, Styles.clearNoneTogglei, 32f) {}.tooltip(v.localizedName, true).group<ImageButton?>(group)
-              .get()
+            t.button(Tex.whiteui, Styles.clearNoneTogglei, 32f) {}.tooltip(v.localizedName, true).group<ImageButton?>(group).get()
           button.changed {
             consumer.get(if (button.isChecked()) i else -1)
             configure(index)
@@ -171,13 +169,17 @@ class DirSource(name: String?) :Block(name) {
         baseConsumersUnpack(consumes, sglBlock.consumers)
         if (target is SglTurretBuild) {
           val baseConsumers = sglBlock.optionalCons
-          if (baseConsumers.size > 0) for(v in Objects.requireNonNull<Array<LiquidStack>>(
-            Objects.requireNonNull(
-              baseConsumers.get(0).get(
-                liquid
-              )
-            )!!.consLiquids
-          )) optionalCons.add(Seq.with(v.liquid))
+          if (baseConsumers.size > 0){
+            for(v in Objects.requireNonNull<Array<LiquidStack>>(
+              Objects.requireNonNull(
+                baseConsumers.get(0).get(
+                  liquid
+                )
+              )!!.consLiquids
+            )) {
+              optionalCons.add(Seq.with(v.liquid))
+            }
+          }
         } else baseConsumersUnpack(optionalCons, sglBlock.optionalCons)
       } else if (target != null) {
         for(v in Vars.content.items()) if (target!!.block.consumesItem(v)) consumes.add(Seq.with(v))
@@ -190,14 +192,11 @@ class DirSource(name: String?) :Block(name) {
 
     private fun consUpdate(container: Seq<Seq<UnlockableContent>>, holder: Prov<Int?>) {
       if (holder.get()!! >= 0 && holder.get()!! < container.size) for(v in container.get(holder.get()!!)) if (v is Item && target!!.acceptItem(
-          this,
-          v
+          this, v
         )
       ) target!!.handleItem(this, v)
       else if (v is Liquid && target!!.acceptLiquid(this, v)) target!!.handleLiquid(
-        this,
-        v,
-        target!!.block.liquidCapacity - target!!.liquids.get(v)
+        this, v, target!!.block.liquidCapacity - target!!.liquids.get(v)
       )
     }
 
@@ -210,15 +209,11 @@ class DirSource(name: String?) :Block(name) {
         // 两个大类共用容器还分别采用不同的方法, 这是极难维护的...有机会我会回来优化的, 至少需要一个新的思路.
         for(row in consumes) for(v in row) if (v is Item && target!!.acceptItem(this, v)) target!!.handleItem(this, v)
         else if (v is Liquid && target!!.acceptLiquid(this, v)) target!!.handleLiquid(
-          this,
-          v,
-          target!!.block.liquidCapacity - target!!.liquids.get(v)
+          this, v, target!!.block.liquidCapacity - target!!.liquids.get(v)
         )
         for(row in optionalCons) for(v in row) if (v is Item && target!!.acceptItem(this, v)) target!!.handleItem(this, v)
         else if (v is Liquid && target!!.acceptLiquid(this, v)) target!!.handleLiquid(
-          this,
-          v,
-          target!!.block.liquidCapacity - target!!.liquids.get(v)
+          this, v, target!!.block.liquidCapacity - target!!.liquids.get(v)
         )
       }
       if (target != null) {
@@ -228,8 +223,7 @@ class DirSource(name: String?) :Block(name) {
     }
 
     override fun buildConfiguration(table: Table) {
-      table.table { t -> t!!.background(Tex.paneLeft).image(Icon.download).size(uiSize).tooltip("tip", true).center() }
-        .size(uiSize).top()
+      table.table { t -> t!!.background(Tex.paneLeft).image(Icon.download).size(uiSize).tooltip("tip", true).center() }.size(uiSize).top()
       table.table { frame ->
         frame.background(paneLeft)
         if (consumes.any() || optionalCons.any()) {
@@ -261,8 +255,7 @@ class DirSource(name: String?) :Block(name) {
             configTable(frame, optionalCons, { this.opCons }, { v: Int? -> this.opCons = v!! })
           } else if (target != null) {
             if (consumes.any()) for(row in consumes) for(v in row) frame.image(v.uiIcon).maxSize(32f).tooltip(v.localizedName, true)
-            if (optionalCons.any()) for(row in optionalCons) for(v in row) frame.image(v.uiIcon).maxSize(32f)
-              .tooltip(v.localizedName, true)
+            if (optionalCons.any()) for(row in optionalCons) for(v in row) frame.image(v.uiIcon).maxSize(32f).tooltip(v.localizedName, true)
           }
         } else frame.image(Icon.cancel).size(uiSize).center().row()
       }.left().row()

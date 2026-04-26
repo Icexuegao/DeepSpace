@@ -14,7 +14,6 @@ import ice.content.block.turret.TurretBullets.branch
 import ice.content.block.turret.TurretBullets.lightning
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-
 import mindustry.content.Fx
 import mindustry.entities.Damage
 import mindustry.entities.Effect
@@ -29,7 +28,6 @@ import mindustry.gen.Sounds
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
-import mindustry.type.ItemStack
 import mindustry.world.draw.DrawBlock
 import mindustry.world.draw.DrawMulti
 import singularity.graphic.SglDraw
@@ -42,19 +40,33 @@ import universecore.graphics.lightnings.generator.CircleGenerator
 import universecore.graphics.lightnings.generator.RandomGenerator
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
-class Thunder : SglTurret("thunder") {
+class Thunder :SglTurret("thunder") {
+  override fun limitRange(margin: Float) = Unit
+
   init {
     localization {
       zh_CN {
-        this.localizedName = "惊蛰"
+        localizedName = "惊蛰"
         description = "大功率电离轰击武器,它会用耀眼的闪电将敌人化为灰烬"
         details = "这座庞然大物凭借其如同雷鸣般的声响和能够与雷电平齐的杀伤力"
       }
     }
     requirements(
-      Category.turret, ItemStack.with(
-        IItems.强化合金, 180, IItems.气凝胶, 150, IItems.暮光合金, 120, IItems.矩阵合金, 100, IItems.FEX水晶, 100, IItems.充能FEX水晶, 80, IItems.铱锭, 80
-      )
+      Category.turret,
+      IItems.强化合金,
+      180,
+      IItems.气凝胶,
+      150,
+      IItems.暮光合金,
+      120,
+      IItems.矩阵合金,
+      100,
+      IItems.FEX水晶,
+      100,
+      IItems.充能FEX水晶,
+      80,
+      IItems.铱锭,
+      80
     )
     size = 5
     scaledHealth = 320f
@@ -75,7 +87,7 @@ class Thunder : SglTurret("thunder") {
     shake = 4f
     shootSound = Sounds.shootCollaris
 
-    newAmmo(object : BulletType() {
+    newAmmo(object :BulletType() {
       init {
         speed = 0f
         lifetime = 60f
@@ -88,7 +100,7 @@ class Thunder : SglTurret("thunder") {
         drawSize = shootRan
 
         hitColor = Pal.reactorPurple
-        shootEffect = MultiEffect(SglFx.impactBubble, SglFx.shootRecoilWave, object : WaveEffect() {
+        shootEffect = MultiEffect(SglFx.impactBubble, SglFx.shootRecoilWave, object :WaveEffect() {
           init {
             colorTo = Pal.reactorPurple
             colorFrom = colorTo
@@ -168,7 +180,7 @@ class Thunder : SglTurret("thunder") {
           shX - b.originX, shY - b.originY
         )
         val amount = Mathf.random(5, 7)
-        for (i in 0..<amount) {
+        for(i in 0..<amount) {
           container.create(generator)
         }
 
@@ -216,7 +228,7 @@ class Thunder : SglTurret("thunder") {
     }
 
     initialed = Cons { e: SglBuilding ->
-      e.CONTAINER = object : LightningContainer() {
+      e.CONTAINER = object :LightningContainer() {
         init {
           lifeTime = 45f
           maxWidth = 2f
@@ -241,7 +253,7 @@ class Thunder : SglTurret("thunder") {
     newCoolant(1.45f, 20f)
     consume!!.liquid(ILiquids.相位态FEX流体, 0.25f)
 
-    drawers = DrawMulti(DrawSglTurret(object : RegionPart("_center") {
+    drawers = DrawMulti(DrawSglTurret(object :RegionPart("_center") {
       init {
         moveY = 8f
         progress = PartProgress.warmup
@@ -250,12 +262,12 @@ class Thunder : SglTurret("thunder") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -4f, 0f))
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         heatColor = Pal.reactorPurple
         heatProgress = PartProgress.warmup.delay(0.25f)
       }
-    }, object : RegionPart("_side") {
+    }, object :RegionPart("_side") {
       init {
         mirror = true
         moveX = 5f
@@ -264,7 +276,7 @@ class Thunder : SglTurret("thunder") {
         heatColor = Pal.reactorPurple
         heatProgress = PartProgress.warmup.delay(0.25f)
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         color = Pal.reactorPurple
         circle = true
@@ -277,7 +289,7 @@ class Thunder : SglTurret("thunder") {
         progress = PartProgress.warmup
         layer = Layer.effect
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         circle = true
         y = -16f
@@ -287,7 +299,7 @@ class Thunder : SglTurret("thunder") {
         layer = Layer.effect
         progress = PartProgress.warmup
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.reactorPurple
@@ -301,7 +313,7 @@ class Thunder : SglTurret("thunder") {
         tri = true
         radius = 4f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.reactorPurple
@@ -316,7 +328,7 @@ class Thunder : SglTurret("thunder") {
         radius = 4f
         shapeRotation = 180f
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         circle = true
         y = 22f
@@ -326,7 +338,7 @@ class Thunder : SglTurret("thunder") {
         layer = Layer.effect
         progress = PartProgress.warmup
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         color = Pal.reactorPurple
         circle = true
@@ -339,7 +351,7 @@ class Thunder : SglTurret("thunder") {
         progress = PartProgress.warmup
         layer = Layer.effect
       }
-    }), object : DrawBlock() {
+    }), object :DrawBlock() {
       override fun draw(build: Building) {
         rand.setSeed(build.id.toLong())
         val turret = build as SglTurretBuild
@@ -351,11 +363,21 @@ class Thunder : SglTurret("thunder") {
         turret.CONTAINER?.draw(turret.x + sclX * 22, turret.y + sclY * 22)
         val step = 45 / 16f
         if (turret.warmup < 0.001f) return
-        for (i in 0..15) {
+        for(i in 0..15) {
           val x = turret.x + (step * i) * sclX * turret.warmup + 14 * sclX
           val y = turret.y + (step * i) * sclY * turret.warmup + 14 * sclY
           SglDraw.drawRectAsCylindrical(
-            x, y, rand.random(2, 18) * turret.warmup, rand.random(1.5f, 10f), (10 + i * 0.75f + rand.random(8)) * turret.warmup, (Time.time * rand.random(0.8f, 2f) + rand.random(360)) * (if (rand.random(1f) < 0.5) -1 else 1), turret.drawrot(), Pal.reactorPurple, Pal.reactorPurple2, Layer.bullet - 0.5f, Layer.effect
+            x,
+            y,
+            rand.random(2, 18) * turret.warmup,
+            rand.random(1.5f, 10f),
+            (10 + i * 0.75f + rand.random(8)) * turret.warmup,
+            (Time.time * rand.random(0.8f, 2f) + rand.random(360)) * (if (rand.random(1f) < 0.5) -1 else 1),
+            turret.drawrot(),
+            Pal.reactorPurple,
+            Pal.reactorPurple2,
+            Layer.bullet - 0.5f,
+            Layer.effect
           )
         }
       }

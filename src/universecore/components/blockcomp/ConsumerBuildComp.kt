@@ -49,7 +49,7 @@ interface ConsumerBuildComp : BuildCompBase {
 
   /**这个方块当前是否应该对消耗列表执行消耗 */
   fun shouldConsume(): Boolean {
-    return consumer != null && consumeCurrent != -1
+    return consumeCurrent != -1
   }
 
   /**这个方块当前是否应该对可选消耗列表执行消耗 */
