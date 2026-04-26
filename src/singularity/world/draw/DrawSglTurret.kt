@@ -9,7 +9,6 @@ import arc.util.Eachable
 import arc.util.Nullable
 import arc.util.Tmp
 import ice.library.IFiles.appendModName
-import ice.library.struct.log
 import mindustry.entities.part.DrawPart
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
@@ -21,7 +20,7 @@ import mindustry.world.draw.DrawBlock
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.blocks.turrets.SglTurret.SglTurretBuild
 
-open class DrawSglTurret : DrawBlock {
+open class DrawSglTurret :DrawBlock {
   companion object {
     @JvmStatic
     val rand: Rand = Rand()
@@ -59,8 +58,6 @@ open class DrawSglTurret : DrawBlock {
     Draw.rect(preview, plan.drawx(), plan.drawy())
   }
 
-
-
   override fun draw(build: Building) {
     val turret = build.block as SglTurret
     val tb = build as SglTurretBuild
@@ -84,10 +81,26 @@ open class DrawSglTurret : DrawBlock {
         Draw.rect(outline, build.x + tb.recoilOffset.x, build.y + tb.recoilOffset.y, tb.drawrot())
         Draw.z(Layer.turret)
       }
+      //            var params = DrawPart.params.set(build.warmup(), 1f - progress, 1f - progress, tb.heat, tb.curRecoil, tb.charge, tb.x + tb.recoilOffset.x, tb.y + tb.recoilOffset.y, tb.rotation);
+      //            for(var part : parts){
+      //                params.setRecoil(part.recoilIndex >= 0 && tb.curRecoils != null ? tb.curRecoils[part.recoilIndex] : tb.curRecoil);
+      //                part.draw(params);
+      //            }
       val progress = tb.progress()
-      val params = DrawPart.params.set(build.warmup(), 1f - progress, 1f - progress, tb.heat, tb.curRecoil, tb.charge, tb.x + tb.recoilOffset.x, tb.y + tb.recoilOffset.y, tb.rotationu)
+      val params = DrawPart.params.set(
+        build.warmup(),
+        1f - progress,
+        1f - progress,
+        tb.heat,
+        tb.curRecoil,
+        tb.charge,
+        tb.x + tb.recoilOffset.x,
+        tb.y + tb.recoilOffset.y,
+        tb.rotationu
+      )
 
-      for (part in parts) {
+      for(part in parts) {
+        params.setRecoil(if (part.recoilIndex >= 0) tb.curRecoils[part.recoilIndex] else tb.curRecoil)
         part.draw(params)
       }
     }
@@ -100,7 +113,14 @@ open class DrawSglTurret : DrawBlock {
 
     if (liquid!!.found()) {
       val toDraw: Liquid = (if (liquidDraw == null) build.liquids.current() else liquidDraw)!!
-      Drawf.liquid(liquid, build.x + build.recoilOffset.x, build.y + build.recoilOffset.y, build.liquids.get(toDraw) / block.liquidCapacity, toDraw.color.write(Tmp.c1).a(1f), build.drawrot())
+      Drawf.liquid(
+        liquid,
+        build.x + build.recoilOffset.x,
+        build.y + build.recoilOffset.y,
+        build.liquids.get(toDraw) / block.liquidCapacity,
+        toDraw.color.write(Tmp.c1).a(1f),
+        build.drawrot()
+      )
     }
 
     if (top.found()) {
@@ -111,18 +131,23 @@ open class DrawSglTurret : DrawBlock {
   fun drawHeat(block: SglTurret, build: SglTurretBuild) {
     if (build.heat <= 0.00001f || !heat!!.found()) return
 
-    Drawf.additive(heat, block.heatColor!!.write(Tmp.c1).a(build.heat), build.x + build.recoilOffset.x, build.y + build.recoilOffset.y, build.drawrot(), Layer.turretHeat)
+    Drawf.additive(
+      heat,
+      block.heatColor!!.write(Tmp.c1).a(build.heat),
+      build.x + build.recoilOffset.x,
+      build.y + build.recoilOffset.y,
+      build.drawrot(),
+      Layer.turretHeat
+    )
   }
-  /** @return the generated icons to be used for this block.
-   */
+  /** @return the generated icons to be used for this block. */
   override fun icons(block: Block): Array<TextureRegion> {
-
     val regions = if (top.found()) arrayOf(base, preview, top) else arrayOf(base, preview)
-    log { regions.contentToString() }
     return regions
   }
+
   override fun getRegionsToOutline(block: Block, out: Seq<TextureRegion>) {
-    for (part in parts) {
+    for(part in parts) {
       part.getOutlines(out)
     }
 
@@ -143,13 +168,12 @@ open class DrawSglTurret : DrawBlock {
     heat = Core.atlas.find(block.name + "_heat")
     base = Core.atlas.find(block.name + "_base")
 
-    for (part in parts) {
+    for(part in parts) {
       part.turretShading = true
       part.load(block.name)
     }
     if (!base.found()) base = Core.atlas.find((basePrefix + "block_" + block.size).appendModName())
-    if (!base.found()) base =  Core.atlas.find((basePrefix + "block-" + block.size).appendModName())
+    if (!base.found()) base = Core.atlas.find((basePrefix + "block-" + block.size).appendModName())
   }
-
 
 }

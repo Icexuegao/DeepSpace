@@ -50,8 +50,6 @@ class Gravestone :IceUnitType("unit_gravestone") {
     legSplashRange = 16f
     legSplashDamage = 150f
     hovering = true
-    lockLegBase = true
-    allowLegStep = true
     outlineColor = "1F1F1F".toColor()
     legContinuousMove = true
     abilities.add(RegenAbility().apply {

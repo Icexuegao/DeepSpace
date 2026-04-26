@@ -16,11 +16,9 @@ open class IceStatusEffect(name: String, apply: IceStatusEffect.() -> kUnit = {}
   private var update = Cons2<Unit, StatusEntry> { _, _ -> }
   private var drawFun: (Unit) -> kUnit = {}
 
-
   init {
     apply(this)
   }
-
   override fun setStats() {
     super.setStats()
     if (armorBreakPercent > 0f) stats.addPercent(IceStats.破甲, armorBreakPercent)

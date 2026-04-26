@@ -47,8 +47,6 @@ class Constrict : IceUnitType("unit_constrict", LegsUnit::class.java) {
     legSplashDamage = 100f
     hovering = true
     singleTarget = true
-    lockLegBase = true
-    allowLegStep = true
     outlineColor = "1F1F1F".toColor()
     legContinuousMove = true
 

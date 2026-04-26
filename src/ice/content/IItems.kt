@@ -1167,7 +1167,7 @@ object IItems :Load {
         if (i != 0 && i != 9) regions[regions.size - i] = regions[i]
       }
 
-      fullIcon = TextureRegion(fullIcon)
+      fullIcon =  TextureRegion(fullIcon)
       uiIcon = TextureRegion(uiIcon)
 
       UpdatePool.receive("dynamicIcon-$name") {

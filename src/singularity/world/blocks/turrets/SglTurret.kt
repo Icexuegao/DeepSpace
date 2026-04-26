@@ -9,7 +9,7 @@ import arc.math.Mathf
 import arc.math.geom.Vec2
 import arc.scene.ui.layout.Table
 import arc.struct.EnumSet
-import arc.struct.ObjectMap
+import arc.struct.OrderedMap
 import arc.struct.Seq
 import arc.util.Strings
 import arc.util.Time
@@ -59,133 +59,96 @@ open class SglTurret(name: String) :SglBlock(name) {
 
   /**炮塔的索敌范围 */
   var range: Float = 80f
-
   /**是否根据敌人的移动提前修正弹道 */
   var accurateDelay: Boolean = true
-
   /**是否根据敌人的移动提前修正弹道 */
   var accurateSpeed: Boolean = true
-
   /**是否攻击空中目标 */
   var targetAir: Boolean = true
-
   /**是否攻击地面目标 */
   var targetGround: Boolean = true
-
   /**是否瞄准生命值未满的友方 */
   var targetHealing: Boolean = false
-
   /**瞄准右方时是否瞄准单位 */
   var targetHealUnit: Boolean = true
-
   /**单位目标选择过滤器 */
   var unitFilter: Boolf<Unit?> = Boolf { _ -> true }
-
   /**建筑目标选择过滤器 */
-  var buildingFilter: Boolf2<SglTurretBuild,Building> = Boolf2{ s,b -> !b.block.underBullets }
-
+  var buildingFilter: Boolf2<SglTurretBuild, Building> = Boolf2 { s, b -> !b.block.underBullets }
   /**单位索敌排序准则，默认为最近目标 */
   var unitSort: Sortf? = UnitSorts.closest
-
   /**能否由玩家控制 */
   var playerControllable: Boolean = true
-
   var loopSound: Sound = Sounds.none
-  var loopSoundVolume =0.5f
+  var loopSoundVolume = 0.5f
   /**索敌时间间隔，以刻为单位 */
   var targetInterval: Float = 20f
-
   /**预热速度 */
   var warmupSpeed: Float = 0.1f
-
   /**是否为线性预热过程 */
   var linearWarmup: Boolean = true
-
   /**开火预热阈值，需要达到阈值才能开火 */
   var fireWarmupThreshold: Float = 0f
-
   /**开火音效 */
   var shootSound: Sound = Sounds.shoot
-
   /**开火音效音调 */
   var shootSoundPitch: Float = 1f
   var shootSoundVolume: Float = 1f
   var chargeSound: Sound = Sounds.none
-
   /**充能音效音调 */
   var chargeSoundPitch: Float = 1f
   var chargeSoundVolume: Float = 1f
-
   /**音效音量范围 */
   var soundPitchRange: Float = 0.05f
-
   /**开火特效 */
   var shootEffect: Effect? = null
-
   /**烟雾特效 */
   var smokeEffect: Effect? = null
-
   /**弹药使用特效（例如抛壳） */
   var ammoUseEffect: Effect = Fx.none
-
   /**在炮塔冷却过程中显示的特效 */
   var coolEffect: Effect = Fx.fuelburn
-
   /**炮管红热时的光效遮罩层颜色 */
   var heatColor: Color? = Pal.turretHeat
-
   /**弹药出膛的偏移位置 */
   var shootX: Float = 0f
   var shootY: Float = Float.NEGATIVE_INFINITY
-
   /**子弹消耗特效产生的偏移位置 */
   var ammoEjectBack: Float = 1f
-
   /**开火抖动 */
   var shake: Float = 0f
-
   /**子弹最小开火范围，用于跨射武器 */
   var minRange: Float = 0f
-
   /**弹药出膛位置的横向平移范围 */
   var xRand: Float = 0f
-
   /**子弹弹道的散布角度范围 */
   var inaccuracy: Float = 0f
-
   /**子弹速度的随机偏差量 */
   var velocityRnd: Float = 0f
-
   /**炮塔的高光角度 */
   var elevation: Float = -1f
-
   /**射击模式 */
   var shoot: ShootPattern = ShootPattern()
-
   /**炮管冷却时间，这仅用于绘制热量 */
   var cooldownTime: Float = 20f
-
   /**后座力复位时间，默认使用当前弹药的装载时长 */
   var recoilTime: Float = -1f
-
   /**后座偏移插值的幂，参考[arc.math.Interp] */
   var recoilPow: Float = 1.8f
-
   /**炮塔尝试对目标开火的最小直线偏差角度 */
   var shootCone: Float = 8f
-
   /**每次射击后座力最大平移距离 */
   var recoil: Float = 1f
-
   /**转向速度 */
   var rotateSpeed: Float = 5f
-
   /**炮台在充能时能否转向 */
   var moveWhileCharging: Boolean = true
-
   /**炮塔充能时是否保持预热状态 */
   var chargingWarm: Boolean = true
-  var ammoTypes = ObjectMap<BaseConsumers, AmmoDataEntry>()
+  /** 子弹消耗映射表 */
+  var ammoTypes = OrderedMap<BaseConsumers, AmmoDataEntry>()
+  /** recoi 的额外计数器数量 */
+  var recoils: Int = -1
 
   init {
     canOverdrive = false
@@ -202,8 +165,10 @@ open class SglTurret(name: String) :SglBlock(name) {
     flags = EnumSet.of(BlockFlag.turret)
     drawers = DrawSglTurret()
     buildType = Prov(::SglTurretBuild)
+    setAmmo()
   }
 
+  open fun setAmmo() {}
   override fun init() {
     oneOfOptionCons = false
 
@@ -339,12 +304,13 @@ open class SglTurret(name: String) :SglBlock(name) {
 
   override fun setBars() {
     super.setBars()
-    addBar("warmup"){e:SglTurretBuild->
-      Bar("warmup", Pal.accent){
+    addBar("warmup") { e: SglTurretBuild ->
+      Bar("warmup", Pal.accent) {
         e.warmup()
       }
     }
   }
+
   override fun setStats() {
     super.setStats()
 
@@ -442,6 +408,7 @@ open class SglTurret(name: String) :SglBlock(name) {
 
     var soundLoop: SoundLoop? = (if (loopSound === Sounds.none) null else SoundLoop(loopSound, loopSoundVolume))
 
+    var curRecoils: FloatArray = FloatArray(if (recoils == -1) 1 else recoils)
     override fun shouldAutoTarget(): Boolean {
       return true
     }
@@ -465,7 +432,6 @@ open class SglTurret(name: String) :SglBlock(name) {
     fun logicControlled(): Boolean {
       return logicControlTime > 0
     }
-
 
     open fun updateReload() {
 
@@ -494,6 +460,7 @@ open class SglTurret(name: String) :SglBlock(name) {
       }
 
     }
+
     override fun remove() {
       super.remove()
       if (soundLoop != null) {
@@ -504,18 +471,21 @@ open class SglTurret(name: String) :SglBlock(name) {
     open fun shouldActiveSound(): Boolean {
       return warmup > 0.01f && loopSound !== Sounds.none
     }
+
     override fun onDestroyed() {
       super.onDestroyed()
       if (soundLoop != null) {
         soundLoop!!.stop()
       }
     }
+
     open fun activeSoundVolume(): Float {
       return warmup
     }
+
     override fun updateTile() {
 
-        soundLoop?.update(x, y, shouldActiveSound(), activeSoundVolume())
+      soundLoop?.update(x, y, shouldActiveSound(), activeSoundVolume())
 
       wasShooting = false
       if (consumer.current == null) return
@@ -525,6 +495,14 @@ open class SglTurret(name: String) :SglBlock(name) {
       currentAmmo = ammoTypes.get(consumer.current)
 
       curRecoil = Mathf.approachDelta(curRecoil, 0f, 1 / (if (recoilTime > 0) recoilTime else consumer.current!!.craftTime))
+
+      if (recoils > 0) {
+        for(i in 0..<recoils) {
+          curRecoils[i] = Mathf.approachDelta(curRecoils[i], 0f, 1 / (if (recoilTime > 0) recoilTime else consumer.current!!.craftTime))
+        }
+      }
+
+
       heat = Mathf.approachDelta(heat, 0f, 1 / cooldownTime * coolantScl)
       charge = if (charging()) Mathf.approachDelta(charge, 1f, 1 / shoot.firstShotDelay) else 0f
 
@@ -563,12 +541,14 @@ open class SglTurret(name: String) :SglBlock(name) {
         coolantScl = 1f
       }
     }
-
+     fun ammoReloadMultiplier(): Float {
+      return currentAmmo?.bulletType?.reloadMultiplier?: 1f
+    }
     open fun updateReloadCoolant() {
       if (canShoot() && shootValid() && !charging() && reloadCounter < consumer.current!!.craftTime) {
-        reloadCounter += consEfficiency() * delta() * coolantScl
+        reloadCounter += consEfficiency() * delta() * coolantScl * ammoReloadMultiplier()
         if (coolantSclTimer > 0) {
-          val c = consumer.optionalCurr?.get(ConsumeType.liquid) as ConsumeLiquidBase<SglTurretBuild?>?
+          val c = consumer.optionalCurr?.get(ConsumeType.liquid) as ConsumeLiquidBase<SglTurretBuild>
           var usage = 0f
           if (c is ConsumeLiquidCond<*>) {
             val l = (c as ConsumeLiquidCond<*>).getCurrCons(this)
@@ -617,13 +597,19 @@ open class SglTurret(name: String) :SglBlock(name) {
       val handler = IceBulletHandler { xOffset: Float, yOffset: Float, angle: Float, delay: Float, mover: Mover? ->
         queuedBullets++
         if (delay > 0f) {
-          Time.run(delay) { bullet(type, xOffset, yOffset, angle, mover) }
+          var barrel = totalShots
+          Time.run(delay) {
+            var prev = totalShots
+            totalShots = barrel
+            bullet(type, xOffset, yOffset, angle, mover)
+            totalShots = prev
+          }
         } else {
           bullet(type, xOffset, yOffset, angle, mover)
         }
-        totalShots++
+
       }
-      shoot.shoot(totalShots, handler)
+      shoot.shoot(totalShots, handler) { totalShots++ }
 
       reloadCounter %= consumer.current!!.craftTime
 
@@ -680,6 +666,10 @@ open class SglTurret(name: String) :SglBlock(name) {
       }
 
       curRecoil = 1f
+
+      if (recoils > 0) {
+        curRecoils[totalShots % recoils] = 1f
+      }
 
       heat = 1f
     }
@@ -741,6 +731,7 @@ open class SglTurret(name: String) :SglBlock(name) {
     override fun shouldAmbientSound(): Boolean {
       return warmup() > 0.01f && loopSound !== Sounds.none
     }
+
     fun updateTarget() {
       if (timer(timerTarget, targetInterval)) {
         findTarget()
@@ -799,7 +790,7 @@ open class SglTurret(name: String) :SglBlock(name) {
           y,
           range,
           Boolf { e: Unit? -> (e!!.team !== team || (heal && targetHealUnit && e.damaged())) && !e.dead() && unitFilter.get(e) && (e.isGrounded || targetAir) && (!e.isGrounded || targetGround) },
-          Boolf { b: Building? -> (b!!.team !== team || (heal && b.damaged())) && targetGround && buildingFilter.get(this,b) },
+          Boolf { b: Building? -> (b!!.team !== team || (heal && b.damaged())) && targetGround && buildingFilter.get(this, b) },
           unitSort
         )
       }
@@ -852,6 +843,7 @@ open class SglTurret(name: String) :SglBlock(name) {
     }
 
     fun setReloadAmount(amount: Int): AmmoDataEntry {
+      bulletType.ammoMultiplier = amount.toFloat()
       reloadAmount = amount
       return this
     }

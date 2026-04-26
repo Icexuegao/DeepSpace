@@ -263,7 +263,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
     drawers.drawPlan(this, plan, list)
   }
 
-  override fun getRegionsToOutline(out: Seq<TextureRegion?>?) {
+  override fun getRegionsToOutline(out: Seq<TextureRegion>) {
     drawers.getRegionsToOutline(this, out)
   }
 

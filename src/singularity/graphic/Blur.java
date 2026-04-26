@@ -210,7 +210,7 @@ public class Blur {
     blurShader.setUniformf("dir", blurSpace, 0f);
     blurShader.setUniformi("def_alpha", 1);
     buffer.getTexture().bind(0);
-    ScreenSampler.INSTANCE.blit(blurShader, 1);
+   // ScreenSampler.INSTANCE.blit(blurShader, 1);
     pingpong.end();
 
     blurShader.bind();

@@ -37,8 +37,8 @@ import kotlin.math.min
 
 object IceEffects {
   val rand = Rand()
-  val 基础子弹击中特效 = Effect(14f) { e ->
-    Draw.color(Color.white, IceColor.b4, e.fin())
+  fun 基础子弹击中特效(color: Color = IceColor.b4) = Effect(14f) { e ->
+    Draw.color(Color.white, color, e.fin())
     e.scaled(7f) { s ->
       Lines.stroke(0.5f + s.fout())
       Lines.circle(e.x, e.y, s.fin() * 5f)
@@ -48,8 +48,9 @@ object IceEffects {
       val ang = Mathf.angle(x, y)
       lineAngle(e.x + x, e.y + y, ang, e.fout() * 3 + 1f)
     }
-    Drawf.light(e.x, e.y, 20f, IceColor.b4, 0.6f * e.fout())
+    Drawf.light(e.x, e.y, 20f, color, 0.6f * e.fout())
   }
+
   val prismaticSpikes = Effect(45f, 100f) { e ->
     Lines.stroke(e.fout() * 2, e.color)
     val rad = 4 + e.finpow() * e.rotation
@@ -76,7 +77,7 @@ object IceEffects {
   }
   val lancerLaserShoot: Effect = Effect(21f) { e: EffectContainer ->
     Draw.color(IceColor.b4)
-    for (i in Mathf.signs) {
+    for(i in Mathf.signs) {
       Drawf.tri(e.x, e.y, 8f * e.fout(), 35f, e.rotation + 90f * i)
     }
   }
@@ -128,7 +129,7 @@ object IceEffects {
     if (type.engineLayer > 0) Draw.z(type.engineLayer)
     else Draw.z((if (type.lowAltitude) Layer.flyingUnitLow else Layer.flyingUnit) - 0.001f)
     Draw.alpha(e.fin())
-    for (index in 0 until type.engines.size) {
+    for(index in 0 until type.engines.size) {
       val engine = type.engines[index]
 
       if (angleDist(engine.rotation, -90f) > 75) return@Cons
@@ -138,7 +139,11 @@ object IceEffects {
 
       e.scaled(80f) { i: EffectContainer ->
         drawFunc(
-          i.x + Tmp.v1.x, i.y + Tmp.v1.y, engine.radius * 1.5f * i.fout(Interp.slowFast), 3000 * engine.radius / (type.engineSize + 4), i.rotation + ang - 90
+          i.x + Tmp.v1.x,
+          i.y + Tmp.v1.y,
+          engine.radius * 1.5f * i.fout(Interp.slowFast),
+          3000 * engine.radius / (type.engineSize + 4),
+          i.rotation + ang - 90
         )
         Fill.circle(i.x + Tmp.v1.x, i.y + Tmp.v1.y, engine.radius * 1.5f * i.fout(Interp.slowFast))
       }
@@ -156,7 +161,12 @@ object IceEffects {
     Draw.mixcol(e.color, 1f)
     Draw.alpha(e.fin() + 0.3f)
     Draw.rect(
-      type.fullIcon, e.x, e.y, type.fullIcon.width * e.fout(Interp.pow2Out) * Draw.scl * 1.2f, type.fullIcon.height * e.fout(Interp.pow2Out) * Draw.scl * 1.5f, e.rotation - 90f
+      type.fullIcon,
+      e.x,
+      e.y,
+      type.fullIcon.width * e.fout(Interp.pow2Out) * Draw.scl * 1.2f,
+      type.fullIcon.height * e.fout(Interp.pow2Out) * Draw.scl * 1.5f,
+      e.rotation - 90f
     )
     Draw.reset()
   })
@@ -290,14 +300,14 @@ object IceEffects {
           val random = rand.random(80f, 100f)
           Tmp.v2.set(random, random).scl(e.fout())
           Tmp.v2.setAngle(rand.random(360f, 720f) * e.fin())
-          val x = (when (index) {
+          val x = (when(index) {
             1 -> 1
             2 -> -1
             3 -> 1
             4 -> -1
             else -> 0
           })
-          val y = (when (index) {
+          val y = (when(index) {
             1 -> 1
             2 -> 1
             3 -> -1
@@ -352,14 +362,14 @@ object IceEffects {
         val random = rand.random(80f, 100f)
         Tmp.v2.set(random, random).scl(e.fout())
         Tmp.v2.setAngle(rand.random(360f, 720f) * e.fin())
-        val x = (when (index) {
+        val x = (when(index) {
           1 -> 1
           2 -> -1
           3 -> 1
           4 -> -1
           else -> 0
         })
-        val y = (when (index) {
+        val y = (when(index) {
           1 -> 1
           2 -> 1
           3 -> -1

@@ -21,6 +21,7 @@ class 碎冰 :SglTurret("trashIce") {
     localization {
       zh_CN {
         localizedName = "碎冰"
+        description = "小型速射散射炮塔,散布较大,不适合对付高速单体或重甲目标"
       }
     }
     size = 1
@@ -28,7 +29,7 @@ class 碎冰 :SglTurret("trashIce") {
     recoil = 0.5f
     shootY = 3f
     range = 160f
-    inaccuracy = 20f
+    inaccuracy = 10f
     squareSprite = false
     shoot = ShootSummon().apply {
       x = 0f
@@ -43,55 +44,6 @@ class 碎冰 :SglTurret("trashIce") {
       val w = 1.0f + 5.0f * e.fout()
       Drawf.tri(e.x, e.y, w, 15.0f * e.fout(), e.rotation)
       Drawf.tri(e.x, e.y, w, 3.0f * e.fout(), e.rotation + 180.0f)
-    }
-    newAmmo(getAmmoType().apply {
-      damage=20f
-      rangeChange=6f
-    }).setReloadAmount(6)
-    consume!!.apply {
-      time(45f)
-      items(IItems.高碳钢, 1)
-    }
-    newAmmo(getAmmoType().apply {
-      damage=18f
-      rangeChange=8f
-    }).setReloadAmount(6)
-    consume!!.apply {
-      time(45f)
-      items(IItems.黄铜锭, 1)
-    }
-    newAmmo(getAmmoType().apply {
-      damage=24f
-      rangeChange=6f
-    }).setReloadAmount(4)
-    consume!!.apply {
-      time(45f)
-      items(IItems.钴锭, 1)
-    }
-    newAmmo(getAmmoType().apply {
-      damage=24f
-      rangeChange=6f
-    }).setReloadAmount(4)
-    consume!!.apply {
-      time(45f)
-      items(IItems.铬锭, 1)
-    }
-    newAmmo(getAmmoType()).setReloadAmount(2)
-    consume!!.apply {
-      time(45f)
-      items(IItems.硫钴矿, 1)
-    }
-    newAmmo(getAmmoType()).setReloadAmount(2)
-    consume!!.apply {
-      time(45f)
-      items(IItems.铬铁矿, 1)
-    }
-    newAmmo(getAmmoType().apply {
-      damage=10f
-    }).setReloadAmount(3)
-    consume!!.apply {
-      time(45f)
-      items(IItems.黄铜矿, 1)
     }
     requirements(Category.turret, IItems.铬铁矿, 10, IItems.低碳钢, 20)
     drawers = DrawSglTurret().apply {
@@ -108,18 +60,69 @@ class 碎冰 :SglTurret("trashIce") {
     }
   }
 
-  fun getAmmoType(): BasicBulletType {
+  override fun setAmmo() {
+    newAmmo(getAmmoType(IItems.高碳钢.color).apply {
+      damage = 20f
+      rangeChange = 6f * 8f
+    }).setReloadAmount(6)
+    consume!!.apply {
+      time(45f)
+      items(IItems.高碳钢, 1)
+    }
+    newAmmo(getAmmoType(IItems.黄铜锭.color).apply {
+      damage = 18f
+      rangeChange = 8f * 8f
+    }).setReloadAmount(6)
+    consume!!.apply {
+      time(45f)
+      items(IItems.黄铜锭, 1)
+    }
+    newAmmo(getAmmoType(IItems.钴锭.color).apply {
+      damage = 24f
+      rangeChange = 6f * 8f
+    }).setReloadAmount(4)
+    consume!!.apply {
+      time(45f)
+      items(IItems.钴锭, 1)
+    }
+    newAmmo(getAmmoType(IItems.铬锭.color).apply {
+      damage = 24f
+      rangeChange = 6f * 8f
+    }).setReloadAmount(4)
+    consume!!.apply {
+      time(45f)
+      items(IItems.铬锭, 1)
+    }
+    newAmmo(getAmmoType(IItems.硫钴矿.color)).setReloadAmount(2)
+    consume!!.apply {
+      time(45f)
+      items(IItems.硫钴矿, 1)
+    }
+    newAmmo(getAmmoType(IItems.铬铁矿.color)).setReloadAmount(2)
+    consume!!.apply {
+      time(45f)
+      items(IItems.铬铁矿, 1)
+    }
+    newAmmo(getAmmoType(IItems.黄铜矿.color).apply {
+      damage = 10f
+    }).setReloadAmount(3)
+    consume!!.apply {
+      time(45f)
+      items(IItems.黄铜矿, 1)
+    }
+  }
+
+  fun getAmmoType(color: Color = IceColor.b4): BasicBulletType {
     return BasicBulletType(5f, 14f).apply {
       width = 2f
       height = 9f
       lifetime = 30f
-      ammoMultiplier = 2f
-      despawnEffect = IceEffects.基础子弹击中特效
+      despawnEffect = IceEffects.基础子弹击中特效(color)
       hitEffect = despawnEffect
-      trailColor = IceColor.b4
-      backColor = IceColor.b4
-      hitColor = IceColor.b4
-      frontColor = IceColor.b4
+      trailColor = color
+      backColor = color
+      hitColor = color
+      frontColor = color
     }
   }
 }

@@ -56,7 +56,7 @@ class Michael :IceUnitType("unit_michael") {
         trailLength = 4
         shootY += 1
         lifetime = 60f
-        despawnEffect = IceEffects.基础子弹击中特效
+        despawnEffect = IceEffects.基础子弹击中特效()
         hitEffect = despawnEffect
         homingPower = 0.05f
         homingRange = 50f

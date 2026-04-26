@@ -51,8 +51,6 @@ class Ganlin : IceUnitType("ganlin") {
     legSplashRange = 16f
     legSplashDamage = 150f
     hovering = true
-    lockLegBase = true
-    allowLegStep = true
     outlineColor = Color.valueOf("1F1F1F")
     legContinuousMove = true
     abilities.add(RegenAbility().apply {
