@@ -111,9 +111,9 @@ class EMPHealthManager {
           if (!healthMap.containsKey(u)) healthMap.put(u, getInst(u))
         }
       })
-      healthMap.each { unit: Unit?, health: EMPHealth ->
+      healthMap.each { unit: Unit, health: EMPHealth ->
         if (Vars.state.isGame) health.update()
-        if (unit != null && !unit.isAdded) {
+        if (!unit.isAdded) {
           val h = healthMap.remove(unit)
           if (h != null) Pools.free(h)
         }
@@ -123,18 +123,18 @@ class EMPHealthManager {
     SaveVersion.addCustomChunk("empHealth", object :CustomChunk {
       override fun shouldWrite() = true
 
-      override fun write(stream: DataOutput?) {
+      override fun write(stream: DataOutput) {
         val write = Writes(stream)
         write.i(healthMap.size)
         for(entry in healthMap) {
-          write.f(entry.key!!.x)
-          write.f(entry.key!!.y)
-          write.i(entry.key!!.type.id.toInt())
-          write.f(entry.value!!.empHealth)
+          write.f(entry.key.x)
+          write.f(entry.key.y)
+          write.i(entry.key.type.id.toInt())
+          write.f(entry.value.empHealth)
         }
       }
 
-      override fun read(stream: DataInput?) {
+      override fun read(stream: DataInput) {
         Reads(stream).use { read ->
           val len = read.i()
           healthMap.clear()
