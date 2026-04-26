@@ -67,6 +67,10 @@ public class DirSource extends Block {
         config(int[].class, (DirSourceBuild tile, int[] index) -> {
             tile.index[0] = index[0];
             tile.index[1] = index[1];
+            if (tile.target != null) {
+                tile.target.items.clear();
+                tile.target.liquids.clear();
+            }
         });
     }
 
