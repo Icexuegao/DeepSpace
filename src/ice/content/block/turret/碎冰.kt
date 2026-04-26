@@ -16,7 +16,7 @@ import mindustry.type.Category
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 
-class 碎冰 :SglTurret("trashIce") {
+class 碎冰 :SglTurret("turret_trashIce") {
   init {
     localization {
       zh_CN {

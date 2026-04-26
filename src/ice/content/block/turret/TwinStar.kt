@@ -18,11 +18,11 @@ import mindustry.type.Category
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 
-class DivineArrow :SglTurret("divineArrow") {
+class TwinStar :SglTurret("turret_twinStar") {
   init {
     localization {
       zh_CN {
-        localizedName = "神矢"
+        localizedName = "双星"
         description = "双管交替发射小型制导导弹,弹体沿正弦轨迹蛇行前进,命中后造成范围伤害"
       }
     }

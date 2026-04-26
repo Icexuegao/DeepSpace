@@ -46,7 +46,7 @@ class TransferNode(name: String) : IceBlock(name) {
   companion object {
     var currentFindX = 0
     var currentFindY = 0
-    var currentPlan: BuildPlan? = null;
+    var currentPlan: BuildPlan? = null
     var planFinder = Boolf<BuildPlan> { other ->
       other.block == currentPlan!!.block && currentPlan != other && currentFindX == other.x && currentFindY == other.y
     }
@@ -459,8 +459,7 @@ class TransferNode(name: String) : IceBlock(name) {
 
     override fun draw() {
       Draw.rect(bottomRegion, x, y)
-      val z = Draw.z()
-      Draw.z(Layer.power)
+      Draw.z(Layer.power-2f)
       val other: Tile? = Vars.world.tile(link)
       if (!(!linkValid(tile, other) || Mathf.zero(Renderer.bridgeOpacity))) {
         if (pulse) {
@@ -498,7 +497,7 @@ class TransferNode(name: String) : IceBlock(name) {
         }
       }
       Draw.alpha(1f)
-      Draw.z(Layer.power + 0.1f)
+      Draw.z(Layer.power - 1f)
       Draw.rect(topRegion, x, y)
       Draw.reset()
     }
