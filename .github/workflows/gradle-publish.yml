@@ -71,5 +71,5 @@ jobs:
           allowUpdates: true
           removeArtifacts: true
           prerelease: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.RELEASE_TOKEN }}
 
