@@ -42,7 +42,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.sqrt
 
-class TransferNode(name: String) : IceBlock(name) {
+open class TransferNode(name: String) : IceBlock(name) {
   companion object {
     var currentFindX = 0
     var currentFindY = 0

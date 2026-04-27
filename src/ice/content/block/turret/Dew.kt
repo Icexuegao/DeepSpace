@@ -7,7 +7,6 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.library.struct.log
 import mindustry.content.Fx
 import mindustry.entities.part.DrawPart
 import mindustry.entities.part.DrawPart.PartProgress
@@ -119,7 +118,6 @@ class Dew :ProjectileTurret("dew") {
         }
 
         override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
-          log { 1 }
           if (entity is Unit) {
             if (entity.shield > 0) {
               val damageShield = min(max(entity.shield, 0f), damage * 0.85f)

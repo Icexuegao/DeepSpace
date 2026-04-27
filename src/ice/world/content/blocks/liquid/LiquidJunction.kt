@@ -7,7 +7,7 @@ import mindustry.type.Liquid
 import mindustry.world.draw.DrawDefault
 import mindustry.world.meta.Stat
 
-class LiquidJunction(name: String) : LiquidBlock(name) {
+open class LiquidJunction(name: String) : LiquidBlock(name) {
   init {
     floating = true
     drawers = DrawDefault()

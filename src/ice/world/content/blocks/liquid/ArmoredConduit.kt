@@ -9,7 +9,7 @@ import mindustry.world.Tile
 import mindustry.world.blocks.distribution.DirectionLiquidBridge
 import mindustry.world.blocks.liquid.LiquidJunction
 
-class ArmoredConduit(name: String) : Conduit(name) {
+open class ArmoredConduit(name: String) : Conduit(name) {
   init {
     buildType = Prov(::ArmoredConduitBuild)
     botColor = Pal.darkestMetal
