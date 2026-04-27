@@ -70,6 +70,7 @@ jobs:
           artifacts: build/libs/version/DeepSpace-Alpha-*.jar
           allowUpdates: true
           removeArtifacts: true
-          prerelease: true
+          prerelease: false
+          makeLatest: true
           token: ${{ secrets.RELEASE_TOKEN }}
 
