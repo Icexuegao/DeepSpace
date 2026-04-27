@@ -21,6 +21,7 @@ object LiquidBlocks :Load {
   }
   val 动力泵 = 动力泵()
   val 谐振泵 = 谐振泵()
+  val 涡流泵 = 涡流泵()
   val 心肌泵 = 心肌泵()
 
   val 谐振导管 = 谐振导管()

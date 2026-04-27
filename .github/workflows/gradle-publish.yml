@@ -39,14 +39,37 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+
+
+
       - name: Build JAR
         run: ./gradlew deployVersion
         env:
           ANDROID_HOME: ${{ env.ANDROID_HOME }}
 
+      - name: Extract Version
+        id: version
+        run: |
+          VERSION=$(grep -oP '"version"\s*:\s*"\K[^"]+' mod.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Upload build artifacts
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: DeepSpace-Build
+          name: DeepSpace-${{ steps.version.outputs.version }}
           path: build/libs/version/DeepSpace-Alpha-*.jar
+
+      - name: Release Nightly
+        uses: ncipollo/release-action@v1
+        with:
+          tag: nightly
+          name: Nightly (${{ steps.version.outputs.version }})
+          body: |
+            自动构建：**${{ steps.version.outputs.version }}**
+            提交：${{ github.sha }}
+          artifacts: build/libs/version/DeepSpace-Alpha-*.jar
+          allowUpdates: true
+          removeArtifacts: true
+          prerelease: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
