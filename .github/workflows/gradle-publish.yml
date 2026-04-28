@@ -59,7 +59,17 @@ jobs:
           name: DeepSpace-${{ steps.version.outputs.version }}
           path: build/libs/version/DeepSpace-Alpha-*.jar
 
+      - name: Check Release Token
+        id: check_token
+        run: |
+          if [ -n "${{ secrets.RELEASE_TOKEN }}" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Release Nightly
+        if: steps.check_token.outputs.exists == 'true'
         uses: ncipollo/release-action@v1
         with:
           tag: nightly
