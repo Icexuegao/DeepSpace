@@ -42,7 +42,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.sqrt
 
-open class TransferNode(name: String) : IceBlock(name) {
+open class TransferNode(name: String) :IceBlock(name) {
   companion object {
     var currentFindX = 0
     var currentFindY = 0
@@ -109,16 +109,17 @@ open class TransferNode(name: String) : IceBlock(name) {
 
             (other !== this || (rotate && quickRotate)) &&
 
-            ((((hasItems&&other.group == BlockGroup.transportation)||(hasLiquids&&other.group== BlockGroup.liquids))) || other === this) &&
+            ((((hasItems && other.group == BlockGroup.transportation) || (hasLiquids && other.group == BlockGroup.liquids))) || other === this) &&
 
             (size == other.size || (size >= other.size && ((subclass != null && subclass == other.subclass) ||
 
                     group.anyReplace)))
   }
+
   override fun setStats() {
     super.setStats()
     stats.add(Stat.range, range.toFloat(), StatUnit.blocks)
-   if (hasItems) stats.add(Stat.speed, 60 / transportTime, StatUnit.itemsSecond)
+    if (hasItems) stats.add(Stat.speed, 60 / transportTime, StatUnit.itemsSecond)
   }
 
   override fun icons(): Array<out TextureRegion> = arrayOf(bottomRegion, topRegion)
@@ -272,7 +273,7 @@ open class TransferNode(name: String) : IceBlock(name) {
   }
 
   override fun handlePlacementLine(plans: Seq<BuildPlan>) {
-    for (i in 0 until plans.size - 1) {
+    for(i in 0 until plans.size - 1) {
       val cur: BuildPlan = plans.get(i)
       val next: BuildPlan = plans.get(i + 1)
       if (positionsValid(cur.x, cur.y, next.x, next.y)) {
@@ -287,7 +288,7 @@ open class TransferNode(name: String) : IceBlock(name) {
     }
   }
 
-  open inner class TransferNodeBuild : IceBuild() {
+  open inner class TransferNodeBuild :IceBuild() {
     var link = -1
     private var incoming = IntSeq(false, 4)
     private var warmup = 0f
@@ -354,8 +355,8 @@ open class TransferNode(name: String) : IceBlock(name) {
 
     override fun drawConfigure() {
       Drawf.select(x, y, tile.block().size * Vars.tilesize / 2f + 2f, Pal.accent)
-      for (i in 0..(range * 2)) {
-        for (j in 0..(range * 2)) {
+      for(i in 0..(range * 2)) {
+        for(j in 0..(range * 2)) {
           val other: Tile? = Vars.world.tile(tile.x + i - range, tile.y + j - range)
           if (linkValid(tile, other)) {
             val linked: Boolean = other!!.pos() == link
@@ -393,7 +394,7 @@ open class TransferNode(name: String) : IceBlock(name) {
 
     private fun checkIncoming() {
       var idx = 0
-      while (idx < incoming.size) {
+      while(idx < incoming.size) {
         val i: Int = incoming.items[idx]
         val other: Tile = Vars.world.tile(i)
         if (!linkValid(tile, other, false) || (other.build as TransferNodeBuild).link != tile.pos()) {
@@ -440,7 +441,7 @@ open class TransferNode(name: String) : IceBlock(name) {
 
     private fun updateTransport(other: Building) {
       transportCounter += edelta()
-      while (hasItems&&transportCounter >= transportTime ) {
+      while(hasItems && transportCounter >= transportTime) {
         val item = items.take()
         if (item != null && other.acceptItem(this, item)) {
           other.handleItem(this, item)
@@ -453,13 +454,13 @@ open class TransferNode(name: String) : IceBlock(name) {
       }
 
       if (hasLiquids && warmup >= 0.25f) {
-        if (moveLiquid(other, liquids.current())>0.001f) moved = true
+        if (moveLiquid(other, liquids.current()) > 0.001f) moved = true
       }
     }
 
     override fun draw() {
       Draw.rect(bottomRegion, x, y)
-      Draw.z(Layer.power-2f)
+      Draw.z(Layer.power - 2f)
       val other: Tile? = Vars.world.tile(link)
       if (!(!linkValid(tile, other) || Mathf.zero(Renderer.bridgeOpacity))) {
         if (pulse) {
@@ -470,8 +471,10 @@ open class TransferNode(name: String) : IceBlock(name) {
         Draw.alpha((if (fadeIn) max(warmup, 0.25f) else 1f) * Renderer.bridgeOpacity)
         val angle: Float = Vec2(x, y).sub(other!!.drawx(), other.drawy()).angle() + 180f
 
-        Draw.rect(endRegion, x, y, angle + 90)
-        Draw.rect(endRegion, other.drawx(), other.drawy(), angle - 90)
+        if (endRegion.found()) {
+          Draw.rect(endRegion, x, y, angle + 90)
+          Draw.rect(endRegion, other.drawx(), other.drawy(), angle - 90)
+        }
         Lines.stroke(bridgeWidth)
         Tmp.v1.set(x, y).sub(other.worldx(), other.worldy()).setLength(1f).scl(-1f)
 
@@ -485,7 +488,7 @@ open class TransferNode(name: String) : IceBlock(name) {
         val dx: Float = (other.worldx() - x) / arrows / arrowSpacing
         val dy: Float = (other.worldy() - y) / arrows / arrowSpacing
         var a = 0
-        while (a < arrows - 2) {
+        while(a < arrows - 2) {
           Draw.alpha(Mathf.absin(a - time / arrowTimeScl, arrowPeriod, 1f) * warmup * Renderer.bridgeOpacity)
           Draw.rect(
             arrowRegion,
@@ -556,7 +559,7 @@ open class TransferNode(name: String) : IceBlock(name) {
       write.i(link)
       write.f(warmup)
       write.b(incoming.size)
-      for (i in 0 until incoming.size) {
+      for(i in 0 until incoming.size) {
         write.i(incoming.items[i])
       }
       write.bool(wasMoved || moved)

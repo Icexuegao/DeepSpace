@@ -165,6 +165,13 @@ tasks {
       if (!targetDir.exists()) {
         targetDir.mkdirs()
       }
+      targetDir.walkTopDown().filter { it.isFile && it.name.endsWith(".png_") }.forEach { encryptedFile ->
+        val relativePath = encryptedFile.relativeTo(targetDir).path
+        val sourceFile = File(sourceDir, relativePath.replace(".png_", ".png"))
+        if (!sourceFile.exists()) {
+          encryptedFile.delete()
+        }
+      }
 
       sourceDir.walkTopDown().filter { it.isFile && it.name.endsWith(".png") }.forEach { sourceFile ->
         val relativePath = sourceFile.relativeTo(sourceDir).path

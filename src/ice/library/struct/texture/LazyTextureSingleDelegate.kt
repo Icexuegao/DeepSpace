@@ -25,7 +25,7 @@ class LazyTextureSingleDelegate(var initialValue: String, var def: String = "") 
   }
 
   operator fun getValue(thisRef: Any?, property: KProperty<*>): TextureRegion {
-    value = Core.atlas.find(initialValue, def)
+    value = value ?: Core.atlas.find(initialValue, def)
     return value!!
   }
 

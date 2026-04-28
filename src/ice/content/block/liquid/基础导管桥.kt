@@ -4,8 +4,8 @@ import ice.content.IItems
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import mindustry.type.Category
 
-class 基础导管桥:TransferNode("baseBridgeConduit") {
-  init  {
+class 基础导管桥 :TransferNode("baseBridgeConduit") {
+  init {
     localization {
       zh_CN {
         localizedName = "基础导管桥"

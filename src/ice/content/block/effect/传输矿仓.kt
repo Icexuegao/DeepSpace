@@ -24,4 +24,6 @@ class 传输矿仓:ItemExtractor("conveyOreWar"){
     }
     requirements(Category.effect, ItemStack.with(IItems.低碳钢, 30))
   }
+
+  override fun outputsItems()=true
 }
