@@ -49,7 +49,7 @@ class PutotFire : IceUnitType("putotFire") {
       ignoreRotation = true
       minShootVelocity = 0.04f
       shootSound = Sounds.none
-      bullet = BombBulletType(35f, 30f).apply {
+      bullet = BombBulletType(20f, 30f).apply {
         lifetime = 30f
         width = 9f
         height = 15f
