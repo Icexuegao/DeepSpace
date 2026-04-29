@@ -53,6 +53,7 @@ object SoundControl : SoundControl(), Load {
   }
 
   override fun update() {
+    return
     val paused = Vars.state.isGame && Core.scene.hasDialog()
     val playing = Vars.state.isGame
 

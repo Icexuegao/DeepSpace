@@ -38,8 +38,9 @@ class CubeCalculator {
     angleY += delta * 45f
     angleX += delta * 30f
     angleZ += delta * 30f
-    if (angleY > 360f) angleY -= 360f
-    if (angleX > 360f) angleX -= 360f
+    angleY %= 360f
+    angleX %= 360f
+    angleZ %= 360f
 
     matrix.idt()
     matrix.rotate(Vec3.Y, angleY)

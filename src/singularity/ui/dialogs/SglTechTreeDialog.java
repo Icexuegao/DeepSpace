@@ -431,7 +431,7 @@ public class SglTechTreeDialog extends Table {
             }
           }, img -> {
             if (isReveal) {
-              img.image(!project.getIcon().found() ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit);
+              img.image(project.getIcon().found() ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit);
             } else {
               Font.Glyph g = Fonts.outline.getData().getGlyph('?');
               img.image(new TextureRegion(Fonts.outline.getRegion().texture, g.u, g.v2, g.u2, g.v)).size(32).scaling(Scaling.fit).color(SglDrawConst.fexCrystal);

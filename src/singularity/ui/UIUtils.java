@@ -137,7 +137,7 @@ public class UIUtils {
                   SglDrawConst.matrixNet, SglDrawConst.matrixNet
               );
             }
-          }, i -> i.image(!project.getIcon().found() ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit))
+          }, i -> i.image(project.getIcon().found() ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit))
       ).grow().pad(4f)).width(64f).growY();
       card.table(new BaseDrawable(){
         @Override
