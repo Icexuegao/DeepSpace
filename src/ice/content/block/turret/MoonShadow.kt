@@ -22,11 +22,11 @@ import mindustry.world.blocks.defense.turrets.PowerTurret
 import mindustry.world.draw.DrawParticles
 import mindustry.world.draw.DrawTurret
 
-class MoonShadow : PowerTurret("moonShadow") {
+class MoonShadow :PowerTurret("moonShadow") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "月隐"
+        localizedName = "月隐"
         description = "中型能量炮塔,可以快速向敌人发射闪电能量团"
       }
     }
