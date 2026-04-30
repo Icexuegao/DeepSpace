@@ -29,7 +29,7 @@ open class 增压铈萃取器 :NormalCrafter("ceriumExtractorLarge") {
     }
     size = 4
     itemCapacity = 48
-    liquidCapacity = 48f
+    liquidCapacity = 210f
 
     requirementPairs(
       Category.crafting, IItems.铬锭 to 150,
