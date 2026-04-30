@@ -26,7 +26,7 @@ class BenFire : IceUnitType("benFire") {
     flying = true
     health = 1150f
     hitSize = 21f
-    armor = 7f
+    armor = 15f
     range = 40f
     accel = 0.07f
     drag = 0.016f
@@ -50,7 +50,7 @@ class BenFire : IceUnitType("benFire") {
       ignoreRotation = true
       minShootVelocity = 0.04f
       shootSound = Sounds.drillImpact
-      bullet = BombBulletType(60f, 40f).apply {
+      bullet = BombBulletType(70f, 40f).apply {
         sprite = "large-bomb"
         spin = 3f
         width = 16f
