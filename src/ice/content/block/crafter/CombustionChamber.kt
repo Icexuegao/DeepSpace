@@ -26,7 +26,7 @@ class CombustionChamber : NormalCrafter("combustion_chamber") {
       )
     )
     size = 3
-    liquidCapacity = 40f
+    liquidCapacity = 120f
     itemCapacity = 25
 
 

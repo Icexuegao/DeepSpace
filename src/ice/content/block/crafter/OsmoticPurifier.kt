@@ -26,7 +26,7 @@ class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
     }
     size = 3
     hasLiquids = true
-    liquidCapacity = 30f
+    liquidCapacity = 120f
     squareSprite = false
     requirements(Category.crafting, IItems.铝锭, 50, IItems.钴锭, 60, IItems.单晶硅, 45, IItems.铬锭, 45, IItems.气凝胶, 50)
     newConsume().apply {

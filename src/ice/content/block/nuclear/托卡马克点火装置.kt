@@ -46,7 +46,7 @@ class 托卡马克点火装置:TokamakCore("tokamak_firer"){
     size = 5
 
     itemCapacity = 60
-    liquidCapacity = 65f
+    liquidCapacity = 600f
     energyCapacity = 65536f
 
     warmupSpeed = 0.0005f

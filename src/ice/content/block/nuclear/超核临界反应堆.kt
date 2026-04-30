@@ -58,7 +58,7 @@ class 超核临界反应堆 : NuclearReactor("overrun_reactor") {
     size = 6
     hasLiquids = true
     itemCapacity = 50
-    liquidCapacity = 50f
+    liquidCapacity = 400f
     energyCapacity = 16384f
 
     explosionDamageBase = 580

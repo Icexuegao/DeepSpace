@@ -25,7 +25,7 @@ class 岩层钻井机 :FloorCrafter("rock_drill") {
     }
     requirements(Category.production, IItems.铬锭, 45, IItems.铅锭, 30, IItems.铜锭, 30)
     size = 2
-    liquidCapacity = 24f
+    liquidCapacity = 60f
     oneOfOptionCons = true
     health = 180
 

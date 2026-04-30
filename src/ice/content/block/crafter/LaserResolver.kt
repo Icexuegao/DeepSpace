@@ -36,6 +36,7 @@ class LaserResolver : NormalCrafter("laser_resolver") {init {
   )
   size = 3
   itemCapacity = 20
+  liquidCapacity = 120f
   warmupSpeed = 0.01f
 
 

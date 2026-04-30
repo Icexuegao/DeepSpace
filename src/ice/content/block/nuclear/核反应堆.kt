@@ -35,7 +35,7 @@ class 核反应堆 : NuclearReactor("nuclear_reactor") {init {
   )
   size = 4
   itemCapacity = 35
-  liquidCapacity = 25f
+  liquidCapacity = 90f
   energyCapacity = 4096f
 
   hasLiquids = true

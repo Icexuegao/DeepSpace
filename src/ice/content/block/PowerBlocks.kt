@@ -311,6 +311,7 @@ object PowerBlocks : Load {
     size = 3
     fogRadius = 3
     hasLiquids = true
+    liquidCapacity = 20f
     attribute = Attribute.steam
     group = BlockGroup.liquids
     displayEfficiencyScale = 1f / 9f
@@ -336,6 +337,7 @@ object PowerBlocks : Load {
       }
     }
     size = 2
+    liquidCapacity = 60f
     health = 100
     updateEffect = IceEffects.square(ILiquids.沼气.color)
     newFormula { consumers, producers ->
@@ -366,7 +368,7 @@ object PowerBlocks : Load {
     coolantPower = 1f
     heating = 0.00166f
     itemCapacity = 20
-    liquidCapacity = 36f
+    liquidCapacity = 50f
     itemDuration = 600f
     powerProduction = 42f
     explosionRadius = 21
@@ -386,7 +388,7 @@ object PowerBlocks : Load {
     warmupSpeed = 0.0006f
     powerProduction = 800f
     itemCapacity = 20
-    liquidCapacity = 60f
+    liquidCapacity = 400f
     canOverdrive = false
     consumeItems(IItems.生物钢, 1)
     consumePower(100f)
@@ -425,7 +427,7 @@ object PowerBlocks : Load {
     warmupSpeed = 0.0004f
     powerProduction = 10550f
     itemCapacity = 32
-    liquidCapacity = 72f
+    liquidCapacity = 600f
     squareSprite = false
     canOverdrive = false
     consumeItems(IItems.以太能, 8)
@@ -790,7 +792,7 @@ object PowerBlocks : Load {
     )
     size = 5
     itemCapacity = 30
-    liquidCapacity = 35f
+    liquidCapacity = 120f
 
     craftEffect = SglFx.explodeImpWaveBig
     craftEffectColor = Pal.reactorPurple

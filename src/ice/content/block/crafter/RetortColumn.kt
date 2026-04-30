@@ -25,7 +25,7 @@ class RetortColumn : NormalCrafter("retort_column") {
     requirements(Category.crafting, IItems.铬锭, 70, IItems.钴锭, 75, IItems.铜锭, 90, IItems.石英玻璃, 90, IItems.钴钢, 50)
     size = 3
     itemCapacity = 12
-    liquidCapacity = 20f
+    liquidCapacity = 90f
     craftEffect = Fx.smeltsmoke
     drawers = DrawMulti(
       DrawDefault(), object : DrawFlame() {

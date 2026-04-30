@@ -26,7 +26,7 @@ class FEXPhaseMixer:NormalCrafter("FEX_phase_mixer"){
   )
   size = 2
   hasLiquids = true
-  liquidCapacity = 12f
+  liquidCapacity = 60f
 
 
   newConsume()

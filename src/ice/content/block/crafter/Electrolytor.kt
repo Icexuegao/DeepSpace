@@ -27,7 +27,7 @@ class Electrolytor :NormalCrafter("electrolytor") {
     }
     size = 3
     itemCapacity = 25
-    liquidCapacity = 40f
+    liquidCapacity = 120f
     squareSprite = false
     requirements(
       Category.crafting, IItems.铬锭, 80, IItems.铜锭, 100, IItems.铅锭, 80, IItems.单晶硅, 50, IItems.石英玻璃, 60, IItems.钴钢, 35

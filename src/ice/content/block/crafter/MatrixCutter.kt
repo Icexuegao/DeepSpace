@@ -34,7 +34,7 @@ class MatrixCutter:NormalCrafter("matrix_cutter"){
     Category.crafting, IItems.强化合金, 80, IItems.充能FEX水晶, 75, IItems.石英玻璃, 80, IItems.絮凝剂, 90, IItems.暮光合金, 120
   )
   size = 4
-
+  liquidCapacity = 210f
   itemCapacity = 20
   basicPotentialEnergy = 256f
 
