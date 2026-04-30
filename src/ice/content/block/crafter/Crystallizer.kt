@@ -27,7 +27,7 @@ class Crystallizer : NormalCrafter("crystallizer") {
       )
     )
     size = 2
-    liquidCapacity = 16f
+    liquidCapacity = 60f
 
     newConsume()
     consume!!.time(240f)
