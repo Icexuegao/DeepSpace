@@ -42,6 +42,7 @@ class 绿藻池 :SpliceCrafter("culturing_barn") {
     }
     requirements(Category.production, IItems.铜锭, 10, IItems.石英玻璃, 12, IItems.钴锭, 8)
     hasLiquids = true
+    liquidCapacity = 15f
     negativeSplice = true
     allowRectanglePlacement = true
     buildType = Prov(::CulturingBarnBuild)
