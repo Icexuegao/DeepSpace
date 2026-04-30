@@ -39,7 +39,7 @@ object Distributions : Load {
   val 基础传送带 = Conveyor("baseConveyor").apply {
     localization {
       zh_CN {
-        this.localizedName = "基础传送带"
+        localizedName = "基础传送带"
         description = "运输设施,造价低廉"
       }
     }
@@ -55,7 +55,7 @@ object Distributions : Load {
   val 强化传送带 = Conveyor("reinforcedConveyor").apply {
     localization {
       zh_CN {
-        this.localizedName = "强化传送带"
+        localizedName = "强化传送带"
         description = "运输设施,造价低廉,比基础传送带更快"
       }
     }
@@ -73,7 +73,7 @@ object Distributions : Load {
   val 特种传送带 = ArmoredConveyor("specialConveyor").apply {
     localization {
       zh_CN {
-        this.localizedName = "特种传送带"
+        localizedName = "特种传送带"
         description = "运输设施,比强化传送带更快,不接收侧面输入"
       }
     }
@@ -91,7 +91,7 @@ object Distributions : Load {
   val 血肉装甲传送带 = Conveyor("fleshArmorConveyor").apply {
     localization {
       zh_CN {
-        this.localizedName = "血肉装甲传送带"
+        localizedName = "血肉装甲传送带"
         description = "运输设施,比特种传送带更快,会缓慢回复生命值"
       }
     }
@@ -111,7 +111,7 @@ object Distributions : Load {
   val 钴熠传送带 = StackConveyor("cobaltBrightConveyor").apply {
     localization {
       zh_CN {
-        this.localizedName = "钴熠传送带"
+        localizedName = "钴熠传送带"
       }
     }
     speed = 50f / 600f
@@ -131,7 +131,7 @@ object Distributions : Load {
   val 生物钢传送带 = StackConveyor("biologicalSteelConveyor").apply {
     localization {
       zh_CN {
-        this.localizedName = "生物钢传送带"
+        localizedName = "生物钢传送带"
         description = "运输设施,打包物品进行运输,通电后加快运输速度"
       }
     }
@@ -175,7 +175,7 @@ object Distributions : Load {
   val 梯度传送带 = StackConveyor("gradedConveyor").apply {
     localization {
       zh_CN {
-        this.localizedName = "梯度传送带"
+        localizedName = "梯度传送带"
         description = "运输设施,打包多种物品进行运输"
       }
     }
@@ -205,7 +205,7 @@ object Distributions : Load {
   val 基础交叉器 = Junction("baseJunction").apply {
     localization {
       zh_CN {
-        this.localizedName = "基础交叉器"
+        localizedName = "基础交叉器"
         description = "两条交叉传送带的桥梁"
       }
     }
@@ -216,7 +216,7 @@ object Distributions : Load {
   val 交叉神经链路 = Junction("junctionNeuralChain").apply {
     localization {
       zh_CN {
-        this.localizedName = "交叉神经链路"
+        localizedName = "交叉神经链路"
         description = "两条交叉传送带的桥梁,比交叉器更快"
       }
     }
@@ -231,7 +231,7 @@ object Distributions : Load {
   val 转换分类器 = Sorter("transformSorter").apply {
     localization {
       zh_CN {
-        this.localizedName = "转换分类器"
+        localizedName = "转换分类器"
         description = "如果物品与所选种类 相同/不同 ,则允许其通过.否则,物品将向两侧输出.可配置"
       }
     }
@@ -243,7 +243,7 @@ object Distributions : Load {
   val 基础路由器 = Router("baseRouter").apply {
     localization {
       zh_CN {
-        this.localizedName = "基础路由器"
+        localizedName = "基础路由器"
         description = "将物品平均分配至其他三个方向"
       }
     }
@@ -255,7 +255,7 @@ object Distributions : Load {
   val 转换溢流门 = TransformOverflowGate("transformOverflowGate").apply {
     localization {
       zh_CN {
-        this.localizedName = "转换溢流门"
+        localizedName = "转换溢流门"
         description = "当 前方/两侧 被阻塞时才会向 两侧/前方 输出,用于处理多余的物品.可配置"
       }
     }
@@ -268,7 +268,7 @@ object Distributions : Load {
   val 基础传送带桥 = TransferNode("baseBridge").apply {
     localization {
       zh_CN {
-        this.localizedName = "基础传送带桥"
+        localizedName = "基础传送带桥"
         description = "跨越地形货建筑传输物品"
       }
     }
@@ -287,7 +287,7 @@ object Distributions : Load {
   val 装甲传送带桥 = TransferNode("armorBridge").apply {
     localization {
       zh_CN {
-        this.localizedName = "装甲传送带桥"
+        localizedName = "装甲传送带桥"
         description = "跨越任何地形货建筑传输物品,比普通桥更快,更远"
       }
     }
@@ -321,7 +321,7 @@ object Distributions : Load {
     requirements(Category.distribution, IItems.导能回路, 10, IItems.生物钢, 5)
     localization {
       zh_CN {
-        this.localizedName = "增生传送带桥"
+        localizedName = "增生传送带桥"
         description = "跨越任何地形货建筑传输物品,比装甲传送带桥更快,更远.会缓慢回复生命"
       }
     }
@@ -329,7 +329,7 @@ object Distributions : Load {
   val 传输节点 = TransferNode("transferNode").apply {
     localization {
       zh_CN {
-        this.localizedName = "传输节点"
+        localizedName = "传输节点"
         description = "能同时运输液体和物品,拥有较远的范围"
       }
     }
@@ -344,7 +344,7 @@ object Distributions : Load {
   val 运输节点 = ItemNode("transport_node").apply {
     localization {
       zh_CN {
-        this.localizedName = "运输节点"
+        localizedName = "运输节点"
         description = "高级的传送带桥,可以对节点的任意侧面配置指定物品的输入与输出"
       }
     }
@@ -356,7 +356,7 @@ object Distributions : Load {
   val 相位运输节点 = ItemNode("phase_transport_node").apply {
     localization {
       zh_CN {
-        this.localizedName = "相位运输节点"
+        localizedName = "相位运输节点"
         description = "高级的传送带桥,具有更快的运输速度和更远的连接距离"
       }
     }
@@ -377,7 +377,7 @@ object Distributions : Load {
   val 铱制高效运输节点 = ItemNode("iridium_transport_node").apply {
     localization {
       zh_CN {
-        this.localizedName = "高效运输节点"
+        localizedName = "高效运输节点"
         description = "高级的传送带桥,具有更快的运输速度和更远的连接距离,节点还具备卸载器的功能,可以直接从指定方向的方块中抽取被选中的物品"
       }
     }
@@ -403,7 +403,7 @@ object Distributions : Load {
   val 基础卸载器 = Unloader("baseUninstalle").apply {
     localization {
       zh_CN {
-        this.localizedName = "基础卸载器"
+        localizedName = "基础卸载器"
         description = "从容器中卸载物品"
       }
     }
@@ -414,7 +414,7 @@ object Distributions : Load {
   val 极速卸载器 = Unloader("speedUninstalle").apply {
     localization {
       zh_CN {
-        this.localizedName = "极速卸载器"
+        localizedName = "极速卸载器"
         description = "从容器中高速卸载物品"
       }
     }
@@ -425,7 +425,7 @@ object Distributions : Load {
   val 量子卸载器 = Unloader("electronicUninstaller").apply {
     localization {
       zh_CN {
-        this.localizedName = "量子卸载器"
+        localizedName = "量子卸载器"
         description = "从容器中超高速卸载物品"
       }
     }
@@ -443,7 +443,7 @@ object Distributions : Load {
   val 质量驱动器 = MassDriver("massDrives").apply {
     localization {
       zh_CN {
-        this.localizedName = "质量驱动器"
+        localizedName = "质量驱动器"
         description = "远距离传输物品,收集若干物品后将其发射到另一个质量驱动器中"
       }
     }
@@ -468,7 +468,7 @@ object Distributions : Load {
   val 重型质量驱动器 = MassDriver("heavyDutyMassDrives").apply {
     localization {
       zh_CN {
-        this.localizedName = "重型质量驱动器"
+        localizedName = "重型质量驱动器"
         description = "超远距离传输物品,收集若干物品后将其发射到另一个重型质量驱动器中,容量巨大但转速和发射速度缓慢"
       }
     }
@@ -495,7 +495,7 @@ object Distributions : Load {
   val 物流枢纽核心 = LogisticsHub("logisticsHub").apply {
     localization {
       zh_CN {
-        this.localizedName = "物流枢纽核心"
+        localizedName = "物流枢纽核心"
         description = "简易的物品管理模块,通过管道统一分发物品"
       }
     }
@@ -506,7 +506,7 @@ object Distributions : Load {
   val 枢纽管道 = HubConduit("hubConduit").apply {
     localization {
       zh_CN {
-        this.localizedName = "枢纽管道"
+        localizedName = "枢纽管道"
         description = "物流枢纽通过此管道分发物品,必须临近放置"
       }
     }
@@ -515,7 +515,7 @@ object Distributions : Load {
   val 物流输入器 = LogisticsInput("logisticsInput").apply {
     localization {
       zh_CN {
-        this.localizedName = "物流输入器"
+        localizedName = "物流输入器"
         description = "通过枢纽管道向当前核心输入物品"
       }
     }
@@ -524,7 +524,7 @@ object Distributions : Load {
   val 物流输出器 = LogisticsOutput("logisticsOutput").apply {
     localization {
       zh_CN {
-        this.localizedName = "物流输出器"
+        localizedName = "物流输出器"
         description = "通过枢纽管道从当前核心抽出物品"
       }
     }
@@ -535,7 +535,7 @@ object Distributions : Load {
     requirements(Category.distribution, IItems.铜锭, 20, IItems.单晶硅, 10)
     localization {
       zh_CN {
-        this.localizedName = "无人机需求端"
+        localizedName = "无人机需求端"
         description = "用于从供货端接受物品"
       }
     }
@@ -543,7 +543,7 @@ object Distributions : Load {
   val 随机源 = Randomer("randomSource").apply {
     localization {
       zh_CN {
-        this.localizedName = "随机源"
+        localizedName = "随机源"
         description = "随机输出所有资源"
       }
     }
@@ -552,7 +552,7 @@ object Distributions : Load {
   val 定向源 = DirSource("dirSource").apply {
     localization {
       zh_CN {
-        this.localizedName = "定向源"
+        localizedName = "定向源"
         description = "定向输出所有资源"
       }
     }
