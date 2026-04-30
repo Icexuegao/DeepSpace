@@ -25,6 +25,7 @@ class 暮白高炉 :NormalCrafter("duskFactory") {
     }
     size = 3
     itemCapacity = 20
+    liquidCapacity = 120f
     craftEffect = IceEffects.square(IceColor.b4, length = 6f)
     drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidRegion(), DrawArcSmelt().apply {
       y = 2f

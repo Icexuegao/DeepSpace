@@ -25,7 +25,7 @@ class 以太封装器 :NormalCrafter("etherEncapsulator") {
     }
     size = 5
     itemCapacity = 120
-    liquidCapacity = 60f
+    liquidCapacity = 300f
     craftTrigger = Cons {
       it!!.applyBoost(5f, 240f)
     }

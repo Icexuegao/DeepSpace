@@ -24,7 +24,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
     )
     size = 3
     squareSprite = false
-    liquidCapacity = 45f
+    liquidCapacity = 120f
     itemCapacity = 30
 
     newFormula { consumers, producers ->

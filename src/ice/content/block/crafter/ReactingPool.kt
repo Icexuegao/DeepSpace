@@ -35,7 +35,7 @@ class ReactingPool : NormalCrafter("reacting_pool") {
     size = 3
     squareSprite = false
     itemCapacity = 35
-    liquidCapacity = 45f
+    liquidCapacity = 120f
 
     newFormula {consumers, producers ->
       consumers.apply {

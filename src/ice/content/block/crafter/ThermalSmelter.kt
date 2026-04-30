@@ -37,7 +37,7 @@ class ThermalSmelter : NormalCrafter("thermal_smelter") {
       )
     )
     size = 3
-
+    liquidCapacity = 120f
     itemCapacity = 20
 
 

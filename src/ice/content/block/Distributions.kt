@@ -463,6 +463,10 @@ object Distributions : Load {
     smokeEffect = Fx.shootSmokeTitan
     receiveEffect = Fx.hitSquaresColor
     requirements(Category.distribution, IItems.铬锭, 135, IItems.铱板, 25, IItems.导能回路, 55, IItems.钴锭, 35)
+
+    newConsume().apply {
+      power(150f/60f)
+    }
   }
 
   val 重型质量驱动器 = MassDriver("heavyDutyMassDrives").apply {
@@ -490,6 +494,10 @@ object Distributions : Load {
     smokeEffect = Fx.shootSmokeTitan
     receiveEffect = Fx.hitSquaresColor
     requirements(Category.distribution, IItems.钴锭, 335, IItems.铱板, 285, IItems.导能回路, 225, IItems.钴钢, 175)
+
+    newConsume().apply {
+      power(960f/60f)
+    }
   }
 
   val 物流枢纽核心 = LogisticsHub("logisticsHub").apply {

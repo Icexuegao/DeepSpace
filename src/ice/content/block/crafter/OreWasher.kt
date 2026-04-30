@@ -35,7 +35,7 @@ class OreWasher:NormalCrafter("ore_washer"){
   size = 2
   hasLiquids = true
   itemCapacity = 20
-  liquidCapacity = 24f
+  liquidCapacity = 60f
 
 
   newConsume()

@@ -32,7 +32,7 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
     size = 3
     squareSprite = false
     itemCapacity = 20
-    liquidCapacity = 40f
+    liquidCapacity = 120f
 
     newConsume()
     consume!!.time(60f)

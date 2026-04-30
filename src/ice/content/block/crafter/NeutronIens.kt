@@ -43,6 +43,7 @@ class NeutronIens:NormalCrafter("neutron_lens"){
   )
   size = 4
   itemCapacity = 20
+  liquidCapacity = 210f
   energyCapacity = 1024f
   basicPotentialEnergy = 256f
   squareSprite = false

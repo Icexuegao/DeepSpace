@@ -26,7 +26,7 @@ class 高能陶钢聚合炉 : NormalCrafter("highEnergyCeramicSteelFurnace") {
     size = 5
     dumpTime = 2
     itemCapacity = 120
-    liquidCapacity = 60f
+    liquidCapacity = 300f
     newConsume().apply {
       power(23.8f)
       time(4*60f)

@@ -26,7 +26,7 @@ class DistillPurifier : NormalCrafter("distill_purifier") {init {
   )
   size = 2
   hasLiquids = true
-  liquidCapacity = 30f
+  liquidCapacity = 90f
   squareSprite = false
   updateEffect = Fx.steam
   updateEffectChance = 0.035f

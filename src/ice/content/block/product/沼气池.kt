@@ -26,7 +26,7 @@ class 沼气池 :FloorCrafter("incubator") {
     }
     requirements(Category.production, IItems.钴钢, 85, IItems.铬锭, 90, IItems.气凝胶, 40, IItems.铜锭, 90)
     size = 3
-    liquidCapacity = 20f
+    liquidCapacity = 180f
 
 
     newFormula { consumers, producers ->

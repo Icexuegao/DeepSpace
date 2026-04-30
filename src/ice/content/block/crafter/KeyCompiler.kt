@@ -36,7 +36,7 @@ class KeyCompiler : NormalCrafter("keyCompiler") {
     }
     size = 10
     armor = 48f
-    liquidCapacity = 120f
+    liquidCapacity = 960f
     squareSprite = false
     canOverdrive = false
     updateEffectChance = 0.4f

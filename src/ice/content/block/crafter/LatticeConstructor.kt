@@ -43,7 +43,7 @@ class LatticeConstructor:NormalCrafter("lattice_constructor"){
     )
   )
   size = 3
-
+  liquidCapacity = 120f
   itemCapacity = 20
   basicPotentialEnergy = 128f
 

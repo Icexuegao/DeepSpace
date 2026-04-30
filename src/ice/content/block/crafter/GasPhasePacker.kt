@@ -30,7 +30,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
   size = 3
 
   hasLiquids = true
-  liquidCapacity = 32f
+  liquidCapacity = 120f
   itemCapacity = 24
 
   warmupSpeed = 0.01f
