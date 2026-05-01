@@ -22,6 +22,7 @@ import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
 import mindustry.gen.Tex
+import mindustry.logic.LAccess
 import mindustry.type.Item
 import mindustry.ui.Styles
 import mindustry.world.draw.DrawDefault
@@ -50,7 +51,7 @@ class Sorter(name: String) :SglBlock(name) {
       }
     }, top, DrawBuild<IceSorterBuild> {
       Draw.color()
-      if (invert||!enabled) {
+      if (invert || !enabled) {
         Draw.rect(this@Sorter.invert, x, y)
       }
     })
@@ -90,6 +91,23 @@ class Sorter(name: String) :SglBlock(name) {
   inner class IceSorterBuild :SglBuilding() {
     var invert: Boolean = false
     var sortItem: Item? = null
+    override fun senseObject(sensor: LAccess): Any? {
+      return when(sensor) {
+        LAccess.config -> sortItem
+        else -> super.senseObject(sensor)
+      }
+
+    }
+
+    override fun config(): String {
+      var s = ""
+      s += if (sortItem == null) {
+        "null"
+      } else {
+        sortItem!!.name
+      }
+      return "$s|$invert"
+    }
     override fun drawSelect() {
       super.drawSelect()
       drawItemSelection(sortItem)
@@ -123,10 +141,8 @@ class Sorter(name: String) :SglBlock(name) {
       } else {
         val a = nearby(Mathf.mod(dir - 1, 4))
         val b = nearby(Mathf.mod(dir + 1, 4))
-        val ac = a != null && !(a.block.instantTransfer && source.block.instantTransfer) &&
-                a.acceptItem(this, item)
-        val bc = b != null && !(b.block.instantTransfer && source.block.instantTransfer) &&
-                b.acceptItem(this, item)
+        val ac = a != null && !(a.block.instantTransfer && source.block.instantTransfer) && a.acceptItem(this, item)
+        val bc = b != null && !(b.block.instantTransfer && source.block.instantTransfer) && b.acceptItem(this, item)
 
         if (ac && !bc) {
           to = a
@@ -145,9 +161,7 @@ class Sorter(name: String) :SglBlock(name) {
 
     override fun buildConfiguration(table: Table) {
       ItemSelection.buildTable(
-        this@Sorter, table, Vars.content.items(),
-        ::sortItem,
-        ::configure, true
+        this@Sorter, table, Vars.content.items(), ::sortItem, ::configure, true
       ) {
         it.button({ button ->
           button.image(IStyles.buttonSorter0).update { image ->
@@ -175,15 +189,7 @@ class Sorter(name: String) :SglBlock(name) {
       }
     }
 
-    override fun config(): String {
-      var s = ""
-      s += if (sortItem == null) {
-        "null"
-      } else {
-        sortItem!!.name
-      }
-      return "$s|$invert"
-    }
+
 
     override fun write(write: Writes) {
       super.write(write)

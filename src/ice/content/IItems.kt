@@ -1,12 +1,8 @@
 package ice.content
 
-import arc.Core
-import arc.graphics.g2d.TextureRegion
-import arc.util.Time
 import ice.library.world.Load
 import ice.world.content.item.IceItem
 import ice.world.content.item.OreItem
-import singularity.core.UpdatePool
 
 @Suppress("unused")
 object IItems :Load {
@@ -1233,25 +1229,8 @@ object IItems :Load {
       radioactivity = 3f
       cost = 1.35f
       frameTime = 9f
-    }
-
-    override fun loadIcon() {
-      super.loadIcon()
-      val regions = arrayOfNulls<TextureRegion>(18)
-
-      for(i in 0..9) {
-        regions[i] = Core.atlas.find(name + "_" + i)
-        if (i != 0 && i != 9) regions[regions.size - i] = regions[i]
-      }
-
-      fullIcon = TextureRegion(fullIcon)
-      uiIcon = TextureRegion(uiIcon)
-
-      UpdatePool.receive("dynamicIcon-$name") {
-        val frame = (Time.globalTime / frameTime).toInt() % regions.size
-        fullIcon.set(regions[frame])
-        uiIcon.set(regions[frame])
-      }
+      transitionFrames = 6
+      frames=9
     }
   }
 
