@@ -52,7 +52,7 @@ class Veto : IceUnitType("units_veto") {
     }
     flying = true
     lowAltitude = true
-    health = 173000f
+    health = 93000f
     armor = 8f
     hitSize = 87f
     speed = 0.8f
@@ -214,7 +214,7 @@ class Veto : IceUnitType("units_veto") {
           })
 
           fragBullets = 3
-          fragBullet = BasicBulletType(5f, 225f, "arrows").apply {
+          fragBullet = BasicBulletType(5f, 125f, "arrows").apply {
             lifetime = 96f
             width = 8f
             height = 18f
@@ -354,7 +354,7 @@ class Veto : IceUnitType("units_veto") {
       alternate = false
       cooldownTime = 60f
       shootSound = Sounds.shootLaser
-      bullet = LaserBulletType(550f).apply {
+      bullet = LaserBulletType(350f).apply {
         length = 320f
         shootEffect = Effect(24f) { e ->
           Draw.color(Pal.redLight, e.color, e.fin())
