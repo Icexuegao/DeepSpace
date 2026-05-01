@@ -36,7 +36,7 @@ class 蜂巢陶瓷合成巢 : NormalCrafter("ceramicKiln") {
         time(120f)
         items(IItems.金珀沙, 8)
         liquid(Liquids.water, 32f / 60f)
-        power(1f)
+        power(2f)
       }
       producers.apply {
         items(IItems.复合陶瓷, 4)
