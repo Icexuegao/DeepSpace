@@ -61,7 +61,7 @@ class ArcLight : IceUnitType("unit_arcLight") {
         width = 4f
         height = 4f
         shrinkY = 0f
-        healPercent = 4f
+        healPercent = 5f
         homingRange = 16f
         homingPower = 0.5f
         collidesTeam = true
@@ -123,7 +123,7 @@ class ArcLight : IceUnitType("unit_arcLight") {
     }
 
     abilities.add(
-      StatusFieldAbility(IStatus.迅疗, 60f, 480f, 80f).apply {
+      StatusFieldAbility(IStatus.迅疗, 120f, 600f, 80f).apply {
         activeEffect = WaveEffect().apply {
           lifetime = 30f
           sizeFrom = 0f
