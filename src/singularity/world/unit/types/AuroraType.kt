@@ -62,7 +62,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
     riseSpeed = 0.02f
     boostMultiplier = 1.2f
     faceTarget = true
-    health = 52500f
+    health = 92500f
     lowAltitude = true
     hitSize = 75f
     targetFlags = BlockFlag.allLogic
@@ -183,7 +183,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
             hitSize = 8f
             speed = 12f
             lifetime = 40f
-            damage = 620f
+            damage = 720f
             range = 480f
 
             empDamage = 26f
@@ -317,7 +317,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
 
         bullet = object : LightLaserBulletType() {
           init {
-            damage = 425f
+            damage = 625f
             empDamage = 96f
             lifetime = 24f
             width = 16f
@@ -442,7 +442,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
         val s: Weapon = this
         bullet = object : ContinuousLaserBulletType() {
           init {
-            damage = 210f
+            damage = 290f
             lifetime = 180f
             fadeTime = 30f
             length = 720f
