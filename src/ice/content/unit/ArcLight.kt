@@ -123,7 +123,7 @@ class ArcLight : IceUnitType("unit_arcLight") {
     }
 
     abilities.add(
-      StatusFieldAbility(IStatus.迅疗, 60f, 480f, 80f).apply {
+      StatusFieldAbility(IStatus.迅疗, 120f, 600f, 80f).apply {
         activeEffect = WaveEffect().apply {
           lifetime = 30f
           sizeFrom = 0f
