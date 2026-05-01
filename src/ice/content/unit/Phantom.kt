@@ -22,8 +22,8 @@ class Phantom : IceUnitType("unit_phantom") {
     aiController = Prov(::MinerAI)
     isEnemy = false
     health = 160f
-    hitSize =0.75f*8f
-    speed = 2f
+    hitSize = 7.5f
+    speed = 4f
     range = 200f
     itemCapacity = 80
     engineOffset = 6f
