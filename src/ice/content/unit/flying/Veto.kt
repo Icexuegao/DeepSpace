@@ -74,7 +74,7 @@ class Veto : IceUnitType("units_veto") {
       shoot = ShootPattern().apply {
         firstShotDelay = 120f
       }
-      bullet = homingMainBulletType(13f, 210f, 40f, 6f, true, floatArrayOf(33f, 48f, 52f)).apply {
+      bullet = homingMainBulletType(13f, 110f, 40f, 6f, true, floatArrayOf(33f, 48f, 52f)).apply {
         width = 16f
         height = 32f
         hitColor = byb
@@ -144,7 +144,7 @@ class Veto : IceUnitType("units_veto") {
         }
         shootSound = Sounds.shootBeamPlasma
 
-        bullet = homingMainBulletType(2f, 195f, 96f, 6f, false, floatArrayOf(33f * -i, 48f * -i, 52f * -i)).apply {
+        bullet = homingMainBulletType(2f, 110f, 96f, 6f, false, floatArrayOf(33f * -i, 48f * -i, 52f * -i)).apply {
           width = 12f
           height = 18f
           drag = -0.02f
