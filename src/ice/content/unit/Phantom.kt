@@ -27,7 +27,7 @@ class Phantom : IceUnitType("unit_phantom") {
     isEnemy = false
     health = 160f
     hitSize = 7.5f
-    speed = 2f
+    speed = 4f
     range = 200f
     itemCapacity = 80
     engineOffset = 6f
