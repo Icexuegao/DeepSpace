@@ -61,7 +61,7 @@ class ArcLight : IceUnitType("unit_arcLight") {
         width = 4f
         height = 4f
         shrinkY = 0f
-        healPercent = 4f
+        healPercent = 5f
         homingRange = 16f
         homingPower = 0.5f
         collidesTeam = true
