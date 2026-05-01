@@ -1,10 +1,7 @@
 package ice.world.content.unit
 
-import arc.Core
 import arc.func.Cons
 import arc.graphics.Color
-import arc.graphics.Pixmap
-import arc.graphics.Pixmaps
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
@@ -50,10 +47,8 @@ import mindustry.type.Weapon
 import mindustry.world.meta.Env
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
-import kotlin.getValue
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.setValue
 import kotlin.Unit as KUnit
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
@@ -119,7 +114,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
 
   override fun createIcons(packer: MultiPacker) {
 
-    if (!Core.atlas.has("$name-full") && Core.atlas.has("$name-treads")) {
+    /*if (!Core.atlas.has("$name-full") && Core.atlas.has("$name-treads")) {
       val treadRegion = Pixmaps.outline(Core.atlas.getPixmap(treadRegion), outlineColor, outlineRadius)
       val region = Pixmaps.outline(Core.atlas.getPixmap(region), outlineColor, outlineRadius)
       val pixmap = Pixmap(region.width, region.height)
@@ -145,7 +140,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
       }
       packer.add(MultiPacker.PageType.main, "$name-full", pixmap)
       pixmap.dispose()
-    }
+    }*/
     super.createIcons(packer)
   }
 

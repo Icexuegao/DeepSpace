@@ -1,6 +1,5 @@
 package ice.content.unit
 
-import arc.func.Func
 import arc.graphics.Color
 import arc.math.Interp
 import ice.audio.ISounds
@@ -8,7 +7,6 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.world.content.unit.IceUnitType
-import mindustry.ai.types.DefenderAI
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.abilities.EnergyFieldAbility
@@ -27,12 +25,11 @@ class QueenBee : IceUnitType("unit_queenBee", PayloadUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "蜂后"
+        localizedName = "蜂后"
         description = "重型空中支援单位.发射追踪湍能弹攻击敌人,加装护盾辅助发生器以维持友军护盾持续作战.会以闪电场电击附近敌军并治疗友军,并对附近的友军提供迅疗效果.可携带大型单位或建筑进行部署"
         details = "当它那庞大的堡垒碾碎星空的寂静时,敌人心中升起的将不再是恐惧,而是某种顿悟;这是一场早已写定的终局,是他们世间账上最后一笔清算."
       }
     }
-    controller = Func { DefenderAI() }
     researchCostMultiplier = 40f
     lowAltitude = true
     faceTarget = false
