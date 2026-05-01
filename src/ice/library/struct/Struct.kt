@@ -19,14 +19,14 @@ fun <K, V> HashMap<K, V>.addP(key: K, prov: Prov<V>) {
   put(key, prov.get())
 }
 
-
-fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T)->Unit = {_, _, _ ->}) = Delegates.observable(initialValue) {property, old, new ->
-  if (old != new) {
-    onChange(property, old, new)
+fun <T> observable(initialValue: T, onChange: (property: KProperty<*>, old: T, new: T) -> Unit = { _, _, _ -> }) =
+  Delegates.observable(initialValue) { property, old, new ->
+    if (old != new) {
+      onChange(property, old, new)
+    }
   }
-}
 
-fun <E> log(e: ()->E) = Log.info(e())
+fun <E> log(e: () -> E) = Log.info(e())
 fun TextureRegion.asDrawable(scal: Float = 1f): TextureRegionDrawable = TextureRegionDrawable(this, scal)
 
 

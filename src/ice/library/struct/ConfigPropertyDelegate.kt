@@ -9,7 +9,8 @@ import kotlin.reflect.KProperty
  *
  * @param T 属性值的类型 一般来说只支持settings的那几种基元类型
  * @property value 属性的默认值,同时作为内存中的当前值
- * @property saveName 在全局配置存储中用于标识该属性的键名 */
+ * @property saveName 在全局配置存储中用于标识该属性的键名
+ * @author Alon */
 class ConfigPropertyDelegate<T>(
   var value: T, val saveName: String, var change: (old: T, new: T) -> Unit = { _, _ -> }
 ) {
