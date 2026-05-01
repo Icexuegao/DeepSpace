@@ -1207,31 +1207,29 @@ object IItems :Load {
 
     }
   }
-  val 充能FEX水晶 = object :IceItem("item_crystal_FEX_power", "#E34248") {
-    init {
-      localization {
-        zh_CN {
-          localizedName = "活化导能结晶"
-          description = "一种经大量能量激发的高纯度低能阻晶体,性质极其不稳定,危险且难以储存,但在需要释放中子能的地方不可或缺"
-          details =
-            "严禁用任何致密介质接触激发态的导能结晶.在《中子工业操作管理条例》中,此类条目均以醒目字体特别标注.每一行警示背后,都是无法挽回的事故与代价"
-        }
-        en {
-          localizedName = "Activated Energy-Conducting Crystal"
-          description =
-            "A high-purity low-energy-resistance crystal excited by substantial energy, extremely unstable in nature, dangerous and difficult to store, yet indispensable where neutron energy release is required"
-          details =
-            "Strictly prohibited from contact with any dense medium when in excited state. In the 'Neutron Industry Operation Management Regulations', such entries are specially marked with prominent fonts. Behind every warning line lies irreparable accidents and costs"
-        }
+  val 充能FEX水晶 = IceItem("item_crystal_FEX_power", "#E34248") {
+    localization {
+      zh_CN {
+        localizedName = "活化导能结晶"
+        description = "一种经大量能量激发的高纯度低能阻晶体,性质极其不稳定,危险且难以储存,但在需要释放中子能的地方不可或缺"
+        details =
+          "严禁用任何致密介质接触激发态的导能结晶.在《中子工业操作管理条例》中,此类条目均以醒目字体特别标注.每一行警示背后,都是无法挽回的事故与代价"
       }
-      hardness = 3
-      explosiveness = 3.6f
-      radioactivity = 3f
-      cost = 1.35f
-      frameTime = 9f
-      transitionFrames = 6
-      frames=9
+      en {
+        localizedName = "Activated Energy-Conducting Crystal"
+        description =
+          "A high-purity low-energy-resistance crystal excited by substantial energy, extremely unstable in nature, dangerous and difficult to store, yet indispensable where neutron energy release is required"
+        details =
+          "Strictly prohibited from contact with any dense medium when in excited state. In the 'Neutron Industry Operation Management Regulations', such entries are specially marked with prominent fonts. Behind every warning line lies irreparable accidents and costs"
+      }
     }
+    hardness = 3
+    explosiveness = 3.6f
+    radioactivity = 3f
+    cost = 1.35f
+    frameTime = 9f
+    transitionFrames = 6
+    frames = 9
   }
 
   val 简并态中子聚合物 = IceItem("item_degenerate_neutron_polymer", "#FF7FE0") {
