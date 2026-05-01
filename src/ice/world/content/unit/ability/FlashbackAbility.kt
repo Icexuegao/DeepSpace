@@ -3,7 +3,7 @@ package ice.world.content.unit.ability
 import arc.math.Angles
 import arc.math.Mathf
 import ice.entities.bullet.jumpIn
-import ice.library.util.MultipleAny
+import ice.library.struct.MultipleAny
 import mindustry.Vars
 import mindustry.entities.abilities.Ability
 import mindustry.gen.Sounds

@@ -1,4 +1,4 @@
-package ice.library.util
+package ice.library.struct
 
 /** 一个用于存储多个任意类型值的容器类,支持解构声明,用于方法返回多个值
  * 使用示例:

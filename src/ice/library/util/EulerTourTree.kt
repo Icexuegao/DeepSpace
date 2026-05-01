@@ -1,4 +1,4 @@
-package ice.library.struct
+package ice.library.util
 
 import kotlin.random.Random
 
@@ -151,4 +151,3 @@ object EulerTourTree {
     open fun maintain(left: D?, right: D?) {}
   }
 }
-
