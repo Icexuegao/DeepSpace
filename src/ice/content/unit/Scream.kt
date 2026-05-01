@@ -36,8 +36,8 @@ class Scream : IceUnitType("scream") {
     }
     squareShape = true
     omniMovement = false
-    health = 131050f
-    armor = 150f
+    health = 101050f
+    armor = 40f
     hitSize = 96f
     speed = 0.48f
     accel = 0.1f
@@ -469,7 +469,7 @@ class Scream : IceUnitType("scream") {
         color = Color.valueOf("FF0000")
         blending = Blending.additive
       })
-      bullet = BasicBulletType(20f, 1357f).apply {
+      bullet = BasicBulletType(20f, 1007f).apply {
         lifetime = 33.6f
         shrinkY = 0f
         width = 32f
