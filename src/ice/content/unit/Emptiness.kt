@@ -44,44 +44,44 @@ import universecore.graphics.lightnings.generator.RandomGenerator
 import kotlin.math.abs
 import kotlin.math.max
 
-class Emptiness : IceUnitType("emptiness") {
+class Emptiness :IceUnitType("emptiness") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "虚宿"
+        localizedName = "虚宿"
         description = "巨型光棱战列舰,光束反应堆的最终产物,火力至上原则的最终答案,拥有强大的能量护盾"
       }
     }
-    armor = 9f
+    armor = 20f
     speed = 0.8f
     accel = 0.065f
     drag = 0.05f
     rotateSpeed = 0.8f
     faceTarget = true
-    health = 102500f
+    health = 132500f
     lowAltitude = true
     flying = true
     hitSize = 85f
-    targetFlags = BlockFlag.allLogic
+    targetFlags = arrayOf(BlockFlag.turret)
     drawShields = false
     engineSize = 0f
-    setEnginesMirror(object : UnitEngine(-15f, -60f, 8f, -90f) {
+    setEnginesMirror(object :UnitEngine(-15f, -60f, 8f, -90f) {
       override fun draw(unit: Unit) = kotlin.Unit
-    }, object : UnitEngine(-40f, -50f, 8f, -90f) {
+    }, object :UnitEngine(-40f, -50f, 8f, -90f) {
       override fun draw(unit: Unit) = kotlin.Unit
     })
     abilities.addAll(MirrorArmorAbility().apply {
       strength = 240f
-      maxShield = 8200f
+      maxShield = 9200f
       recoverSpeed = 3f
       cooldown = 5500f
       minAlbedo = 0.5f
       maxAlbedo = 0.8f
       shieldArmor = 10f
     })
-    val turretBullet = object : EmpBulletType() {
+    val turretBullet = object :EmpBulletType() {
       init {
-        damage = 420f
+        damage = 520f
         empDamage = 37f
         pierceCap = 4
         pierceBuilding = true
@@ -176,9 +176,9 @@ class Emptiness : IceUnitType("emptiness") {
       shootSound = Sounds.shootBeamPlasma
       shake = 5f
       reload = 60f
-      bullet = object : MultiTrailBulletType() {
+      bullet = object :MultiTrailBulletType() {
         init {
-          damage = 60f
+          damage = 160f
           splashDamage = 560f
           splashDamageRadius = 18f
 
@@ -234,7 +234,7 @@ class Emptiness : IceUnitType("emptiness") {
       baseRotation = -135f
       delay = 40f
     }
-    weapons.add(object : Weapon("ice-lightedge") {
+    weapons.add(object :Weapon("ice-lightedge") {
       init {
         x = 0f
         y = -28f
@@ -249,14 +249,14 @@ class Emptiness : IceUnitType("emptiness") {
         shootWarmupSpeed = 0.014f
 
 
-        bullet = object : BlastLaser() {
+        bullet = object :BlastLaser() {
           init {
             damage = 160f
             damageInterval = 5f
 
             blastDelay = 38f
             rangeOverride = 600f
-            splashDamage = 3280f
+            splashDamage = 4280f
             splashDamageRadius = 120f
             empDamage = 530f
             empRange = 120f
@@ -286,7 +286,7 @@ class Emptiness : IceUnitType("emptiness") {
             fragBullets = 3
             fragSpread = 120f
             fragRandomSpread = 72f
-            fragBullet = object : BlastLaser() {
+            fragBullet = object :BlastLaser() {
               init {
                 damage = 120f
                 damageInterval = 5f
@@ -308,7 +308,7 @@ class Emptiness : IceUnitType("emptiness") {
                 laserEffect = SglFx.explodeImpWaveLaserBlase
 
                 val branch = RandomGenerator()
-                val g: RandomGenerator = object : RandomGenerator() {
+                val g: RandomGenerator = object :RandomGenerator() {
 
                   init {
                     maxLength = 140f
@@ -350,13 +350,18 @@ class Emptiness : IceUnitType("emptiness") {
           val dx = Angles.trnsx(r, 1f, 0f)
           val dy = Angles.trnsy(r, 1f, 0f)
 
-          for (i in 0..3) {
+          for(i in 0..3) {
             val len = 20 + i * 25 - (i % 2) * 6
             val rx = x + dx * len
             val ry = y + dy * len
 
             SglDraw.gapTri(
-              rx, ry, Mathf.absin(Time.time / 4 - i * Mathf.pi, 1f, (10 - 2 * i) * p), (10 + (6 + (i % 2) * 6) * p) - i, (if (i % 2 == 0) -1 else 1) * (5 + 4 * p - i), r
+              rx,
+              ry,
+              Mathf.absin(Time.time / 4 - i * Mathf.pi, 1f, (10 - 2 * i) * p),
+              (10 + (6 + (i % 2) * 6) * p) - i,
+              (if (i % 2 == 0) -1 else 1) * (5 + 4 * p - i),
+              r
             )
           }
           SglDraw.drawDiamond(x, y, 44 + 20 * p, 8 + 4 * p, Time.time)
@@ -374,9 +379,16 @@ class Emptiness : IceUnitType("emptiness") {
       }
 
       override fun findTarget(unit: Unit, x: Float, y: Float, range: Float, air: Boolean, ground: Boolean): Teamc? {
-        return Units.bestTarget(unit.team, x, y, range, { _: Unit -> unit.checkTarget(air, ground) }, { _: Teamc? -> ground }, { _: Unit, _: Float, _: Float ->
-          1f
-        })
+        return Units.bestTarget(
+          unit.team,
+          x,
+          y,
+          range,
+          { _: Unit -> unit.checkTarget(air, ground) },
+          { _: Teamc? -> ground },
+          { _: Unit, _: Float, _: Float ->
+            1f
+          })
       }
 
       override fun draw(unit: Unit, mount: WeaponMount) {
@@ -406,7 +418,7 @@ class Emptiness : IceUnitType("emptiness") {
         )
 
         Draw.z(Draw.z() + 0.01f)
-        for (i in 0..2) {
+        for(i in 0..2) {
           SglDraw.drawTransform(
             mount.aimX, mount.aimY, 54f, 0f, -1.4f * Time.time + i * 120
           ) { rx: Float, ry: Float, r: Float ->

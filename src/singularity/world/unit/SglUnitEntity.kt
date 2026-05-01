@@ -43,7 +43,6 @@ class SglUnitEntity : UnitEntity() {
   override fun write(write: Writes) {
     super.write(write)
     if (type is SglUnitType<*>) {
-      write.i((type as SglUnitType<*>).version())
       (type as SglUnitType<SglUnitEntity>).write(this, write)
     } else throw RuntimeException("Unit type must be SglUnitType")
   }

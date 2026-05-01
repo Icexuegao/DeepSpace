@@ -6,8 +6,8 @@ import arc.graphics.g2d.TextureRegion
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.block.EnvironmentBlocks
+import ice.graphics.IceColor
 import ice.library.struct.texture.LazyTextureSingleDelegate
-
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds
@@ -30,6 +30,7 @@ class 晶簇粉碎器 :NormalCrafter("crystal_miner") {
     localization {
       zh_CN {
         localizedName = "晶簇粉碎器"
+        description = "破坏燃素晶簇以获取燃素水晶"
       }
     }
     hasItems = true
@@ -99,11 +100,13 @@ class 晶簇粉碎器 :NormalCrafter("crystal_miner") {
       }
     }
 
+    override fun drawSelect() {
+      super.drawSelect()
+      Drawf.dashLine(IceColor.b4,x+size*8f,y+size*8f,2*8f,2*8f)
+    }
+
     override fun draw() {
       super.draw()
-
-      //    Fill.rect(.drawx(), tile.nearby(rotation).nearby( rotation).drawy(), 8f, 8f)
-
       Tmp.v1.set(0f, size / 2f * 8f).rotate(rotation * 90f - 90f)
 
       val vx = x + Tmp.v1.x
