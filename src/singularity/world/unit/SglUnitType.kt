@@ -37,10 +37,6 @@ open class SglUnitType<T :Unit>(name: String, clazz: Class<T>) :UnitType(name) {
     return requirements
   }
 
-  open fun version(): Int {
-    return 0
-  }
-
   open fun init(unit: T) {}
 
   open fun read(sglUnitEntity: T, read: Reads, revision: Int) {

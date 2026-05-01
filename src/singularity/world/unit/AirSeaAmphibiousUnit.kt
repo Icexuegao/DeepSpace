@@ -179,7 +179,6 @@ open class AirSeaAmphibiousUnit(name: String) : SglUnitType<AirSeaAmphibiousUnit
       super.write(write)
       if (type is SglUnitType<*>) {
         val type1 = type as SglUnitType<AirSeaUnit>
-        write.i(type1.version())
         type1.write(this, write)
       } else throw RuntimeException("Unit type must be SglUnitType")
     }
