@@ -50,7 +50,7 @@ class AuroraType : AirSeaAmphibiousUnit("aurora") {
   init {
     localization {
       zh_CN {
-        this@AuroraType.localizedName ="极光"
+        localizedName ="极光"
         description="搭载光束引擎的战列旗舰,将引擎功率最大程度内化,其装载的两门'光锥'主炮能够贯穿任何强互作用材料之外的装甲,给敌人以毁灭性的打击"
       }
     }
