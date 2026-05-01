@@ -52,13 +52,13 @@ class Emptiness : IceUnitType("emptiness") {
         description = "巨型光棱战列舰,光束反应堆的最终产物,火力至上原则的最终答案,拥有强大的能量护盾"
       }
     }
-    armor = 9f
+    armor = 20f
     speed = 0.8f
     accel = 0.065f
     drag = 0.05f
     rotateSpeed = 0.8f
     faceTarget = true
-    health = 102500f
+    health = 132500f
     lowAltitude = true
     flying = true
     hitSize = 85f
@@ -72,7 +72,7 @@ class Emptiness : IceUnitType("emptiness") {
     })
     abilities.addAll(MirrorArmorAbility().apply {
       strength = 240f
-      maxShield = 8200f
+      maxShield = 9200f
       recoverSpeed = 3f
       cooldown = 5500f
       minAlbedo = 0.5f
@@ -81,7 +81,7 @@ class Emptiness : IceUnitType("emptiness") {
     })
     val turretBullet = object : EmpBulletType() {
       init {
-        damage = 420f
+        damage = 520f
         empDamage = 37f
         pierceCap = 4
         pierceBuilding = true
@@ -178,7 +178,7 @@ class Emptiness : IceUnitType("emptiness") {
       reload = 60f
       bullet = object : MultiTrailBulletType() {
         init {
-          damage = 60f
+          damage = 160f
           splashDamage = 560f
           splashDamageRadius = 18f
 
@@ -256,7 +256,7 @@ class Emptiness : IceUnitType("emptiness") {
 
             blastDelay = 38f
             rangeOverride = 600f
-            splashDamage = 3280f
+            splashDamage = 4280f
             splashDamageRadius = 120f
             empDamage = 530f
             empRange = 120f
