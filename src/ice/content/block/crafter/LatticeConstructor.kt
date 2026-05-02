@@ -39,9 +39,10 @@ class LatticeConstructor:NormalCrafter("lattice_constructor"){
   }
   requirements(
     Category.crafting, ItemStack.with(
-      IItems.强化合金, 80, IItems.充能FEX水晶, 60, IItems.FEX水晶, 75, IItems.絮凝剂, 80
+      IItems.强化合金, 80, IItems.充能FEX水晶, 60, IItems.FEX水晶, 75, IItems.絮凝剂, 80, IItems.气凝胶, 80
     )
   )
+  health = 1250
   size = 3
   liquidCapacity = 120f
   itemCapacity = 20
