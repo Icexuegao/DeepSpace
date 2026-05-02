@@ -4,7 +4,7 @@ import arc.files.Fi
 import arc.graphics.Pixmap
 import ice.DeepSpace
 import ice.library.IFiles.replaceModName
-import ice.library.struct.log
+import ice.library.util.log
 import mindustry.Vars
 import mindustry.world.Block
 import mindustry.world.blocks.defense.turrets.Turret

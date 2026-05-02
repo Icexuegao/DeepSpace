@@ -11,8 +11,8 @@ import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Env
 import singularity.world.blocks.SglBlock
 
-open class LiquidBlock(name: String) : SglBlock(name) {
-  val liquidRegion: TextureRegion by lazy {Core.atlas.find("${this.name}-liquid")}
+open class LiquidBlock(name: String) :SglBlock(name) {
+  val liquidRegion: TextureRegion by lazy { Core.atlas.find("${this.name}-liquid") }
 
   init {
     update = true
@@ -23,12 +23,11 @@ open class LiquidBlock(name: String) : SglBlock(name) {
     envEnabled = envEnabled or (Env.space or Env.underwater)
     buildType = Prov(::LiquidBuild)
     drawers = DrawMulti(DrawRegion("-bottom"), DrawBuild<LiquidBuild> {
-
       if (liquids.currentAmount() > 0.001f) {
         Drawf.liquid(liquidRegion, x, y, liquids.currentAmount() / liquidCapacity, liquids.current().color)
       }
     }, DrawRegion("-top"))
   }
 
-  open inner class LiquidBuild : SglBuilding()
+  open inner class LiquidBuild :SglBuilding()
 }

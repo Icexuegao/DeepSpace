@@ -18,7 +18,7 @@ class 高能陶钢聚合炉 : NormalCrafter("highEnergyCeramicSteelFurnace") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "高能陶钢聚合炉"
+        localizedName = "高能陶钢聚合炉"
         description = "将石英玻璃,钴钢和铈锭高效地熔炼为陶钢,需通入水"
         details = "依靠高能激光持续熔融原料以快速熔炼陶钢\n相比普通熔炼炉,熔炼效率及产物质量都有显著提升"
       }

@@ -1,7 +1,6 @@
 package ice.ui
 
 import arc.Core
-import arc.Events
 import arc.graphics.Color
 import arc.math.Interp
 import arc.scene.actions.Actions
@@ -13,12 +12,9 @@ import ice.DeepSpace
 import ice.Ice
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.IFiles
 import ice.library.struct.ConfigPropertyDelegate
-import ice.library.struct.asDrawable
-import ice.library.world.Load
+import ice.library.struct.texture.asDrawable
 import mindustry.Vars
-import mindustry.game.EventType.WorldLoadEndEvent
 import mindustry.ui.dialogs.BaseDialog
 import singularity.Sgl
 import singularity.ui.fragments.notification.Notification

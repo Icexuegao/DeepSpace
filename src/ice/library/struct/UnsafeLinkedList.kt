@@ -1,6 +1,6 @@
 package ice.library.struct
 
-import ice.library.func.Traversable
+import universecore.util.funcs.Traversable
 
 class UnsafeLinkedList<E> :Iterable<E>, Traversable<E> {
   var size: Int = 0

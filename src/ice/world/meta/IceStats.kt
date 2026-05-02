@@ -237,7 +237,13 @@ object IceStats :Load {
       }
     }
   }
-
+  val 能否超速 = getStat("canOverSpeed") {
+    localization {
+      zh_CN {
+        localizedName = "能否超速"
+      }
+    }
+  }
   val 发射数量 = getStat("shots") {
     localization {
       zh_CN {

@@ -18,7 +18,7 @@ import ice.entities.IceRegister
 import ice.entities.bullet.BombBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.graphics.IceColor
-import ice.library.util.IMathf
+import universecore.math.IMathf
 import ice.library.util.toStringi
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.BarAbility

@@ -5,15 +5,14 @@ import arc.struct.ObjectMap
 import arc.struct.Seq
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.struct.isNotEmpty
 import mindustry.world.meta.BlockStatus
 import mindustry.world.modules.BlockModule
 import singularity.world.blocks.SglBlock
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsume
 import universecore.world.consumers.BaseConsumers
-import universecore.world.consumers.cons.ConsumePower
 import universecore.world.consumers.ConsumeType
+import universecore.world.consumers.cons.ConsumePower
 
 /**生产者的消耗器模块，用于集中处理方块的材料需求等，提供了可选需求以及其特殊的触发器
  * @author EBwilson
@@ -30,7 +29,7 @@ open class BaseConsumeModule(val entity: ConsumerBuildComp) : BlockModule() {
   private var powerCons = 0f
 
   init {
-    val bool = entity.consumerBlock.consumers.isNotEmpty() && entity.consumeCurrent != -1
+    val bool = (!entity.consumerBlock.consumers.isEmpty) && entity.consumeCurrent != -1
     current = if (bool) entity.consumerBlock.consumers.get(entity.consumeCurrent) else null
   }
 
@@ -118,7 +117,7 @@ open class BaseConsumeModule(val entity: ConsumerBuildComp) : BlockModule() {
     updateOptional()
   }
   fun updateOptional() {
-    if (optional.isNotEmpty()) {
+    if (!optional.isEmpty) {
       var cons: BaseConsumers
       val onlyOne = entity.consumerBlock.oneOfOptionCons
       for (id in 0..<optional.size) {

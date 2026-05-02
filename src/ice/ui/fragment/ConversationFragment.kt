@@ -15,7 +15,7 @@ import ice.library.IFiles
 import ice.library.IFiles.appendModName
 import ice.library.scene.action.IceActions
 import ice.library.scene.element.typinglabel.TLabel
-import ice.library.struct.asDrawable
+import ice.library.struct.texture.asDrawable
 import ice.ui.UI
 import mindustry.Vars
 import mindustry.gen.Tex

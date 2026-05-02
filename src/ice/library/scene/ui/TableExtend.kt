@@ -28,10 +28,7 @@ import ice.library.scene.element.IceScrollPane
 import ice.library.scene.element.ProgressBar
 import ice.library.scene.layout.ProgressAttribute
 import ice.library.scene.ui.layout.ITable
-import ice.library.struct.asDrawable
-import ice.library.struct.getT
-import ice.library.struct.isNotEmpty
-import ice.library.util.accessField
+import ice.library.struct.texture.asDrawable
 import ice.library.util.accessFloat
 import ice.library.util.toStringi
 import mindustry.Vars
@@ -48,7 +45,10 @@ var Cell<Table>.padTop: Float by accessFloat("padTop")
 var Cell<Table>.padLeft: Float by accessFloat("padLeft")
 var Cell<Table>.padBottom: Float by accessFloat("padBottom")
 var Cell<Table>.padRight: Float by accessFloat("padRight")
-
+fun <T> Cons<T>.getT(t: T): T {
+  get(t)
+  return t
+}
 fun Table.iTable(back: Drawable? = null, cons: Cons<ITable>): Cell<ITable> {
   return add(cons.getT(ITable(back)))
 }
@@ -307,7 +307,7 @@ object ItemSelection {
       this.search = search.field(null) {_: String -> rebuild()}.padBottom(4f).left().growX().get()
       this.search.messageText = "@players.search"
       button.get(bottons)
-     if (bottons.children.isNotEmpty()) search.add(bottons).right()
+     if (!bottons.children.isEmpty) search.add(bottons).right()
     }.fillX().margin(13f).row()
 
     /* main.icePane(Styles.noBarPane, cont) {

@@ -13,7 +13,7 @@ import arc.scene.ui.layout.Scl
 import ice.game.IceTeam
 import ice.library.IFiles
 import ice.library.scene.layout.ProgressAttribute
-import ice.library.struct.asDrawable
+import ice.library.struct.texture.asDrawable
 import mindustry.gen.Tex
 import mindustry.ui.Fonts
 import mindustry.ui.Styles

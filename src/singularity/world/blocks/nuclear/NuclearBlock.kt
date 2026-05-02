@@ -6,12 +6,8 @@ import arc.math.Mathf
 import arc.scene.ui.Label
 import arc.scene.ui.Slider
 import arc.scene.ui.layout.Table
-import ice.library.struct.log
-import ice.ui.Documents
 import mindustry.gen.Icon
 import mindustry.ui.Styles
-import mindustry.world.Block
-import mindustry.world.Tile
 import singularity.world.blocks.SglBlock
 import singularity.world.meta.SglBlockGroup
 

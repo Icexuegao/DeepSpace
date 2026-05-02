@@ -11,7 +11,6 @@ import arc.util.Align
 import arc.util.pooling.Pools
 import ice.graphics.IceColor
 import ice.library.scene.ui.getIceBaseDialog
-import ice.library.struct.addP
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
 import mindustry.graphics.Pal
@@ -78,6 +77,9 @@ open class LostBox(name: String) : IceBlock(name) {
   }
 
   companion object {
+    fun <K, V> HashMap<K, V>.addP(key: K, prov: Prov<V>) {
+      put(key, prov.get())
+    }
     val lostBoxStringMap = HashMap<String, String>().apply {
       addP("《猩红教章》 · 其一") {
         """

@@ -18,7 +18,7 @@ import ice.library.EventType
 import ice.library.scene.action.IceActions
 import ice.library.scene.ui.*
 import ice.library.struct.ConfigPropertyDelegate
-import ice.library.struct.asDrawable
+import ice.library.struct.texture.asDrawable
 import ice.ui.MenusDialog
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats

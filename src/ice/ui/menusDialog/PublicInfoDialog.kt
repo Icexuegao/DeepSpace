@@ -6,7 +6,7 @@ import arc.util.Scaling
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.library.scene.ui.iPane
-import ice.library.struct.asDrawable
+import ice.library.struct.texture.asDrawable
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
 

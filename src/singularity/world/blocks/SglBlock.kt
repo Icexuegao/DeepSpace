@@ -157,8 +157,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
 
   @Suppress("UNCHECKED_CAST")
   override fun <T :ConsumerBuildComp> newOptionalConsume(
-    validDef: Cons2<T, BaseConsumers>,
-    displayDef: Cons2<Stats, BaseConsumers>
+    validDef: Cons2<T, BaseConsumers>, displayDef: Cons2<Stats, BaseConsumers>
   ): BaseConsumers {
     consume = object :BaseConsumers(true) {
       init {
@@ -210,7 +209,13 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
 
   override fun setStats() {
     stats.add(Stat.size, "@x@", size, size)
-    stats.add(Stat.health, health.toFloat(), StatUnit.none)
+    if (synthetic()) {
+      stats.add(Stat.health, health.toFloat(), StatUnit.none)
+      if (armor > 0) {
+        stats.add(Stat.armor, armor, StatUnit.none)
+      }
+    }
+    stats.add(IceStats.能否超速, canOverdrive)
     if (canBeBuilt()) {
       stats.add(Stat.buildTime, buildTime / 60, StatUnit.seconds)
       stats.add(Stat.buildCost, StatValues.items(false, *requirements))
@@ -273,9 +278,8 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
   }
 
   public override fun icons(): Array<TextureRegion> {
-    return  drawers.finalIcons(this)
+    return drawers.finalIcons(this)
   }
-
 
   companion object {
     const val BASE_EXBLOSIVE_ENERGY: Int = 128
@@ -483,13 +487,7 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
       )
 
       Fonts.outline.draw(
-        Core.bundle.get("infos.overloadWarn"),
-        x,
-        y + size * Vars.tilesize / 2f + h,
-        Color.crimson,
-        0.185f,
-        false,
-        Align.center
+        Core.bundle.get("infos.overloadWarn"), x, y + size * Vars.tilesize / 2f + h, Color.crimson, 0.185f, false, Align.center
       )
 
       Draw.z(Layer.effect)
@@ -610,32 +608,23 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
 
     override fun acceptItem(source: Building, item: Item): Boolean {
       return source.interactable(this.team) && hasItems && ((source === this && consumer.current != null && consumer.current!!.selfAccess(
-        ConsumeType.item,
-        item
+        ConsumeType.item, item
       )) || !(consumer.hasConsume() || consumer.hasOptional()) || consFilter.filter(
-        this,
-        ConsumeType.item,
-        item,
-        acceptAll(ConsumeType.item)
+        this, ConsumeType.item, item, acceptAll(ConsumeType.item)
       )) && (if (independenceInventory) items.get(item) else items.total()) < getMaximumAccepted(item)
     }
 
     override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       return source.interactable(this.team) && hasLiquids && acceptConsumeLiquid(
-        source,
-        liquid
+        source, liquid
       ) && (if (independenceLiquidTank) liquids.get(liquid) else (liquids as SglLiquidModule).total()) <= getMaximumAccepted(liquid) - 0.0001f
     }
 
     open fun acceptConsumeLiquid(source: Building, liquid: Liquid): Boolean {
       return ((source === this && consumer.current != null && consumer.current!!.selfAccess(
-        ConsumeType.liquid,
-        liquid
+        ConsumeType.liquid, liquid
       )) || !(consumer.hasConsume() || consumer.hasOptional()) || consFilter.filter(
-        this,
-        ConsumeType.liquid,
-        liquid,
-        acceptAll(ConsumeType.liquid)
+        this, ConsumeType.liquid, liquid, acceptAll(ConsumeType.liquid)
       ))
     }
 

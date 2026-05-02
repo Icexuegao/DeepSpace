@@ -4,7 +4,6 @@ import arc.func.Boolf
 import arc.math.Mathf
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
-import ice.library.struct.log
 import singularity.world.modules.NuclearEnergyModule
 import universecore.components.blockcomp.BuildCompBase
 import universecore.components.blockcomp.Takeable

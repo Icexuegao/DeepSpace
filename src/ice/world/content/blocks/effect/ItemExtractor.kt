@@ -5,7 +5,6 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import arc.util.Time
 import arc.util.Timer
-import ice.library.struct.isNotEmpty
 import ice.world.content.blocks.IceBlockComponents.timesex
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
@@ -36,7 +35,7 @@ open class ItemExtractor(name: String) : LinksBlock(name) {
         }
 
         override fun updateTile() {
-            if (timesex(0, 300f) && builds.isNotEmpty()) {
+            if (timesex(0, 300f) && !builds.isEmpty) {
                 Timer.schedule({
                     IceEffects.wave.at(this)
                 }, 0f, 0.5f, 2)
