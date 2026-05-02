@@ -21,7 +21,7 @@ class 蜂巢陶瓷合成巢 : NormalCrafter("ceramicKiln") {
       }
     }
     size = 4
-    health = 300
+    health = 520
     squareSprite = false
     itemCapacity = 30
     liquidCapacity = 210f
