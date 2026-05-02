@@ -34,15 +34,16 @@ class ThermalCentrifuge : NormalCrafter("thermal_centrifuge") {
     requirements(
       Category.crafting, IItems.强化合金, 100, IItems.气凝胶, 80, IItems.铜锭, 120, IItems.单晶硅, 70, IItems.钴钢, 75
     )
+    health = 1150
     size = 3
-    itemCapacity = 28
+    itemCapacity = 30
     warmupSpeed = 0.006f
 
     newFormula {consumers, producers ->
       consumers.apply {
         time(120f)
         item(IItems.铀原料, 4)
-        power(3.8f)
+        power(4f)
       }
       producers.apply {
         color = IItems.铀原料.color
@@ -62,7 +63,7 @@ class ThermalCentrifuge : NormalCrafter("thermal_centrifuge") {
     newConsume()
     consume!!.time(120f)
     consume!!.item(IItems.黑晶石, 5)
-    consume!!.power(2.8f)
+    consume!!.power(2.5f)
     setByProduct(0.3f, IItems.钍锭)
     newProduce().color = IItems.黑晶石.color
     produce!!.items(
