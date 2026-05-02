@@ -11,8 +11,6 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import arc.util.pooling.Pool.Poolable
 import arc.util.pooling.Pools
-import universecore.scene.ui.ItemSelection
-import universecore.struct.texture.LazyTextureSingleDelegate
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
@@ -22,9 +20,11 @@ import mindustry.world.blocks.storage.StorageBlock.StorageBuild
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
 import singularity.world.blocks.SglBlock
+import universecore.scene.ui.ItemSelection
+import universecore.struct.texture.LazyTextureSingleDelegate
 import kotlin.math.min
 
-class Unloader(name: String) : SglBlock(name) {
+class Unloader(name: String) :SglBlock(name) {
   companion object {
     /** Cached result of content.items()  */
     lateinit var allItems: Array<Item>
@@ -60,9 +60,12 @@ class Unloader(name: String) : SglBlock(name) {
   override fun setStats() {
     super.setStats()
     stats.add(Stat.speed, 60f / speed, StatUnit.itemsSecond)
+    for(baseConsumers in consumers) {
+      baseConsumers.display(stats)
+    }
   }
 
-  override fun outputsItems()=true
+  override fun outputsItems() = true
 
   override fun drawPlanConfig(plan: BuildPlan, list: Eachable<BuildPlan?>?) {
     drawPlanConfigCenter(plan, plan.config, "unloader-center")
@@ -73,7 +76,7 @@ class Unloader(name: String) : SglBlock(name) {
     removeBar("items")
   }
 
-  class ContainerStat : Poolable {
+  class ContainerStat :Poolable {
     var building: Building? = null
     var loadFactor: Float = 0f
     var canLoad: Boolean = false
@@ -87,7 +90,7 @@ class Unloader(name: String) : SglBlock(name) {
     }
   }
 
-  open inner class UnloaderBuild : SglBuilding() {
+  open inner class UnloaderBuild :SglBuilding() {
     var unloadTimer: Float = 0f
     var rotations: Int = 0
     var sortItem: Item? = null
@@ -119,7 +122,7 @@ class Unloader(name: String) : SglBlock(name) {
       val pbi = possibleBlocks.items
       var i = 0
       val l = possibleBlocks.size
-      while (i < l) {
+      while(i < l) {
         val pb: ContainerStat = pbi[i]!!
         val other = pb.building
 
@@ -143,7 +146,7 @@ class Unloader(name: String) : SglBlock(name) {
       Pools.freeAll(possibleBlocks, true)
       possibleBlocks.clear()
 
-      for (i in 0..<proximity.size) {
+      for(i in 0..<proximity.size) {
         val other = proximity.get(i)
         if (!other.interactable(team)) continue  //avoid blocks of the wrong team
 
@@ -164,7 +167,7 @@ class Unloader(name: String) : SglBlock(name) {
     override fun updateTile() {
       super.updateTile()
 
-      unloadTimer +=if (consumer.hasConsume()) consumer.consDelta() else delta()
+      unloadTimer += if (consumer.hasConsume()) consumer.consDelta() else delta()
       if ((unloadTimer < speed) || (possibleBlocks.size < 2)) return
       var item: Item? = null
       var any = false
@@ -176,7 +179,7 @@ class Unloader(name: String) : SglBlock(name) {
         //inspired of nextIndex() but for all "proximity" (possibleBlocks) at once, and also way more powerful
         var i = 0
         val l: Int = allItems.size
-        while (i < l) {
+        while(i < l) {
           val id = (rotations + i + 1) % l
           val possibleItem: Item = allItems[id]
 
@@ -193,7 +196,7 @@ class Unloader(name: String) : SglBlock(name) {
         val pbi = possibleBlocks.items
         val pbs = possibleBlocks.size
 
-        for (i in 0..<pbs) {
+        for(i in 0..<pbs) {
           val pb: ContainerStat = pbi[i]!!
           val other = pb.building
           val maxAccepted = other!!.getMaximumAccepted(item)
@@ -207,7 +210,7 @@ class Unloader(name: String) : SglBlock(name) {
         dumpingFrom = null
 
         //choose the building to accept the item
-        for (i in 0..<pbs) {
+        for(i in 0..<pbs) {
           if (pbi[i]!!.canLoad) {
             dumpingTo = pbi[i]
             break
@@ -215,7 +218,7 @@ class Unloader(name: String) : SglBlock(name) {
         }
 
         //choose the building to take the item from
-        for (i in pbs - 1 downTo 0) {
+        for(i in pbs - 1 downTo 0) {
           if (pbi[i]!!.canUnload) {
             dumpingFrom = pbi[i]
             break

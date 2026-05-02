@@ -1,7 +1,3 @@
-package universecore.util;
+package universecore.util
 
-public class IllegalModHandleException extends Exception{
-  public IllegalModHandleException(String information){
-    super(information);
-  }
-}
+class IllegalModHandleException(information: String) :Exception(information)
