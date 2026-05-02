@@ -4,7 +4,7 @@ import arc.Core
 import arc.graphics.g2d.TextureRegion
 import kotlin.reflect.KProperty
 
-class LazyTextureArrayDelegate(private var initialValue: String, private var size: Int) : LazyTextureDelegate() {
+class LazyTextureArrayDelegate(private var initialValue: String, private var size: Int) :LazyTextureDelegate() {
   private var value: Array<TextureRegion>? = null
 
   init {

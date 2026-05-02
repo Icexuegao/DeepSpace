@@ -1,6 +1,6 @@
 package ice.library.struct.graph
 
-import ice.library.struct.EulerTourTree
+import ice.library.util.EulerTourTree
 
 /**
  * ## Fully-dynamic Algorithms for Connectivity

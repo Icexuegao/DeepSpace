@@ -4,7 +4,7 @@ import arc.graphics.g2d.TextureRegion
 import ice.library.IFiles
 import kotlin.reflect.KProperty
 
-class LazyTextureAutoSequenceDelegate(private var basePath: String) : LazyTextureDelegate() {
+class LazyTextureAutoSequenceDelegate(private var basePath: String) :LazyTextureDelegate() {
   private var cachedRegions: Array<TextureRegion>? = null
 
   init {
@@ -16,7 +16,7 @@ class LazyTextureAutoSequenceDelegate(private var basePath: String) : LazyTextur
   private fun loadTextureRegions(): Array<TextureRegion> {
     var count = 0
 
-    while (IFiles.hasPng(basePath + (count + 1))) {
+    while(IFiles.hasPng(basePath + (count + 1))) {
       count++
     }
 

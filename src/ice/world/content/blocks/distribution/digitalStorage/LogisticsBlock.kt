@@ -3,11 +3,11 @@ package ice.world.content.blocks.distribution.digitalStorage
 import ice.library.struct.graph.Vertex
 import singularity.world.blocks.SglBlock
 
-abstract class LogisticsBlock(name: String) : SglBlock(name) {
-    abstract val blockType: Type
+abstract class LogisticsBlock(name: String) :SglBlock(name) {
+  abstract val blockType: Type
 
-    abstract inner class LogisticsBuild : SglBuilding() {
-        val graphVertex = Vertex(LogisticsGraph.graphRandom) { LogisticsData(this) }
+  abstract inner class LogisticsBuild :SglBuilding() {
+    val graphVertex = Vertex(LogisticsGraph.graphRandom) { LogisticsData(this) }
 
 //        override fun drawSelect() {
 //            super.drawSelect()
@@ -20,10 +20,10 @@ abstract class LogisticsBlock(name: String) : SglBlock(name) {
 //            Draw.reset()
 //        }
 
-        fun block() = block as LogisticsBlock
-    }
+    fun block() = block as LogisticsBlock
+  }
 
-    enum class Type {
-        CONDUIT, HUB, INPUT, OUTPUT
-    }
+  enum class Type {
+    CONDUIT, HUB, INPUT, OUTPUT
+  }
 }

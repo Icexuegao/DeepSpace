@@ -8,6 +8,7 @@ object IBlocks {
     NuclearBlocks.load()
     Distributions.load()
     MatrixDistNet.load()
+    LogicBLocks.load()
     PowerBlocks.load()
     LiquidBlocks.load()
     CrafterBlocks.load()
