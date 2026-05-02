@@ -211,13 +211,13 @@ class Mirage : SglTurret("mirage") {
             return damage * 20
           }
 
-          override fun init(b: Bullet, container: LightningContainer) {
-            super.init(b, container)
-            container.lifeTime = 16f
-            container.minWidth = 2.5f
-            container.maxWidth = 4.5f
-            container.lerp = Interp.pow2Out
-            container.time = 0f
+          override fun init(b: Bullet, cont: LightningContainer) {
+            super.init(b, cont)
+            cont.lifeTime = 16f
+            cont.minWidth = 2.5f
+            cont.maxWidth = 4.5f
+            cont.lerp = Interp.pow2Out
+            cont.time = 0f
           }
 
           override fun update(bullet: Bullet, container: LightningContainer) {

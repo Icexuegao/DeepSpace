@@ -8,7 +8,7 @@ import arc.math.Angles
 import arc.math.Mathf
 import arc.util.Time
 import ice.content.IItems
-import ice.library.util.toStringi
+import universecore.util.toStringi
 import ice.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements

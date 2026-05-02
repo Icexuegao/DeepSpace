@@ -7,7 +7,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.content.block.EnvironmentBlocks
 import ice.graphics.IceColor
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import universecore.struct.texture.LazyTextureSingleDelegate
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds

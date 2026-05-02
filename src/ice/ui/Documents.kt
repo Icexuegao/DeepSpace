@@ -12,8 +12,8 @@ import ice.DeepSpace
 import ice.Ice
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.struct.ConfigPropertyDelegate
-import ice.library.struct.texture.asDrawable
+import universecore.struct.ConfigPropertyDelegate
+import universecore.struct.texture.asDrawable
 import mindustry.Vars
 import mindustry.ui.dialogs.BaseDialog
 import singularity.Sgl

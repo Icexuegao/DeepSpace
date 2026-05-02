@@ -14,9 +14,9 @@ import arc.struct.ObjectFloatMap
 import arc.struct.ObjectMap
 import arc.util.Scaling
 import arc.util.Strings
-import ice.library.scene.element.display.ItemDisplay
-import ice.library.scene.element.display.LiquidDisplay
-import ice.library.scene.ui.itooltip
+import universecore.scene.element.display.ItemDisplay
+import universecore.scene.element.display.LiquidDisplay
+import universecore.scene.ui.itooltip
 import mindustry.Vars
 import mindustry.content.StatusEffects
 import mindustry.ctype.UnlockableContent

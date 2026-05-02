@@ -2,9 +2,9 @@ package ice.world.content.blocks.environment
 
 import arc.Core
 import arc.struct.Seq
-import ice.library.EventType
-import ice.library.EventType.addContentInitEvent
-import ice.library.util.accessField
+import ice.game.EventType
+import ice.game.EventType.addContentInitEvent
+import universecore.util.accessField
 import ice.world.content.blocks.abstractBlocks.Variants
 import mindustry.Vars
 import mindustry.graphics.BlockRenderer

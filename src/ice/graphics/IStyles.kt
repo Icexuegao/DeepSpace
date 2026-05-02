@@ -11,9 +11,9 @@ import arc.scene.ui.Slider.SliderStyle
 import arc.scene.ui.TextButton.TextButtonStyle
 import arc.scene.ui.layout.Scl
 import ice.game.IceTeam
-import ice.library.IFiles
-import ice.library.scene.layout.ProgressAttribute
-import ice.library.struct.texture.asDrawable
+import ice.core.IFiles
+import universecore.scene.layout.ProgressAttribute
+import universecore.struct.texture.asDrawable
 import mindustry.gen.Tex
 import mindustry.ui.Fonts
 import mindustry.ui.Styles

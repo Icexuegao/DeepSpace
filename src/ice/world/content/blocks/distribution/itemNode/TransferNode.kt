@@ -18,7 +18,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import universecore.struct.texture.LazyTextureSingleDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
 import mindustry.core.Renderer

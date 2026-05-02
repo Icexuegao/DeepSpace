@@ -6,8 +6,8 @@ import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.scene.ui.ItemSelection
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import universecore.scene.ui.ItemSelection
+import universecore.struct.texture.LazyTextureSingleDelegate
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import mindustry.Vars

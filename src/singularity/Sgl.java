@@ -2,15 +2,8 @@ package singularity;
 
 import arc.Core;
 import arc.Events;
-import arc.Settings;
-import arc.files.Fi;
-import arc.util.Log;
-import ice.DeepSpace;
-import ice.library.IFiles;
 import singularity.graphic.ScreenSampler;
-import mindustry.Vars;
 import mindustry.game.EventType;
-import mindustry.game.Team;
 import singularity.core.ModConfig;
 import singularity.core.ModsInteropAPI;
 import singularity.game.researchs.ResearchManager;
@@ -22,8 +15,6 @@ import singularity.ui.SglUI;
 import singularity.world.blocks.BytePackAssign;
 import singularity.world.distribution.DistSupportContainerTable;
 import singularity.world.unit.EMPHealthManager;
-import universecore.util.mods.ModGetter;
-import universecore.util.mods.ModInfo;
 
 public class Sgl {
   public static final String NL = System.lineSeparator();

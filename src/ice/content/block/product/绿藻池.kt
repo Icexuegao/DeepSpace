@@ -10,7 +10,7 @@ import arc.math.Rand
 import arc.util.Time
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.library.struct.AttachedProperty
+import universecore.struct.AttachedProperty
 import ice.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks

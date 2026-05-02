@@ -1,7 +1,7 @@
 package singularity.type
 
 import ice.DeepSpace.modName
-import ice.library.world.Load
+import universecore.world.Load
 import mindustry.type.Category
 import universecore.UncCore.categories
 

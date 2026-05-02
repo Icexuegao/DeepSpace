@@ -11,8 +11,8 @@ import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
 import ice.DeepSpace
 import ice.graphics.IceColor
-import ice.library.IFiles
-import ice.library.IFiles.appendModName
+import ice.core.IFiles
+import ice.core.IFiles.appendModName
 import mindustry.Vars
 import mindustry.core.Version
 import mindustry.game.EventType.ResizeEvent

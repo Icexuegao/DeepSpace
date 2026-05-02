@@ -2,7 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.library.util.toColor
+import universecore.util.toColor
 
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti

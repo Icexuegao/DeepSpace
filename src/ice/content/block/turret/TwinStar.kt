@@ -6,7 +6,6 @@ import arc.util.Time
 import ice.content.IItems
 import ice.entities.bullet.MissileBulletType
 import ice.graphics.IceColor
-import ice.world.draw.part.IcePartProgress
 import ice.world.meta.IceEffects
 import mindustry.content.StatusEffects
 import mindustry.entities.part.DrawPart
@@ -86,7 +85,7 @@ class TwinStar :SglTurret("turret_twinStar") {
         rotateSpeed = 2f
         y = -4f
         color = IceColor.b4
-        progress = IcePartProgress { p: DrawPart.PartParams ->
+        progress = DrawPart.PartProgress { p: DrawPart.PartParams ->
           DrawPart.PartProgress.warmup.get(p) * ((Time.time / 15) % 1)
         }
       })

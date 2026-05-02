@@ -15,10 +15,7 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.IVars
 import ice.graphics.IceColor
-import ice.library.struct.texture.LazyTextureSingleDelegate
-import ice.library.util.toStringi
 import ice.world.draw.DrawBuild
-import ice.world.draw.DrawFull
 import ice.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -31,13 +28,17 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.input.Placement
 import mindustry.ui.Bar
+import mindustry.world.Block
 import mindustry.world.Tile
+import mindustry.world.draw.DrawBlock
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatCat
 import mindustry.world.meta.StatUnit
 import singularity.world.blocks.SglBlock
+import universecore.struct.texture.LazyTextureSingleDelegate
+import universecore.util.toStringi
 
 class WindGenerator(name: String) :SglBlock(name) {
   companion object {
@@ -70,7 +71,9 @@ class WindGenerator(name: String) :SglBlock(name) {
     drawers = DrawMulti(DrawDefault(), DrawBuild<WindGeneratorBuild> {
       Draw.z(Layer.turret)
       Draw.rect(rotator, x, y, totalProgress)
-    }, DrawRegion("-top"), DrawFull("full"))
+    }, DrawRegion("-top"), object :DrawBlock(){
+      override fun icons(block: Block)=arrayOf(Core.atlas.find(block.name+"-icon"))
+    })
   }
 
   override fun setStats() {

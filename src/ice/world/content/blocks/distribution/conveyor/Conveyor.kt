@@ -16,7 +16,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.core.Placement
-import ice.library.struct.texture.LazyTextureMatrixDelegate
+import universecore.struct.texture.LazyTextureMatrixDelegate
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import ice.world.content.blocks.distribution.Junction
 import ice.world.content.blocks.distribution.conveyor.Autotiler.SliceMode

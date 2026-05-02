@@ -4,7 +4,7 @@ import arc.Core
 import arc.func.Prov
 import arc.math.Mathf
 import arc.util.Time
-import ice.library.scene.ui.iTable
+import universecore.scene.ui.iTable
 import ice.world.draw.DrawLiquidRegion
 import ice.world.draw.DrawMulti
 import ice.world.draw.DrawRegionNull

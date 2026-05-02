@@ -14,8 +14,8 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IItems
-import ice.library.scene.ui.itooltip
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import universecore.scene.ui.itooltip
+import universecore.struct.texture.LazyTextureSingleDelegate
 import ice.world.content.blocks.abstractBlocks.RangeBlock
 import ice.world.meta.IceStats
 import mindustry.Vars

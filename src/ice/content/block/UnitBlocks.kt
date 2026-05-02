@@ -9,7 +9,7 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.library.world.Load
+import universecore.world.Load
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.Vars
 import mindustry.content.Items

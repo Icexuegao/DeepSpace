@@ -3,7 +3,7 @@ package ice.content.unit
 import arc.graphics.Color
 import arc.math.geom.Rect
 import ice.content.IStatus
-import ice.library.IFiles.appendModName
+import ice.core.IFiles.appendModName
 
 import ice.world.content.unit.IceUnitType
 import mindustry.entities.abilities.Ability

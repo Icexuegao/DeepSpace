@@ -6,7 +6,7 @@ import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.Image
 import arc.struct.Seq
 import arc.util.Interval
-import ice.library.IFiles
+import ice.core.IFiles
 import ice.world.meta.IceEffects
 
 object Characters {

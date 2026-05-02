@@ -9,9 +9,9 @@ import ice.core.SaveIO
 import ice.core.SettingValue
 import ice.entities.bullet.base.IceBullet
 import ice.game.IceTeam
-import ice.library.EventType
-import ice.library.IFiles
-import ice.library.Schematics
+import ice.game.EventType
+import ice.core.IFiles
+import ice.game.Schematics
 import ice.ui.MenusDialog
 import ice.ui.UI
 import ice.ui.bundle.LocalizationManager

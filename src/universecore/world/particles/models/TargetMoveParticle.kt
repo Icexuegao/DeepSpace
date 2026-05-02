@@ -6,7 +6,7 @@ import arc.math.Mathf
 import arc.math.geom.Vec2
 import arc.util.Time
 import arc.util.Tmp
-import ice.library.struct.AttachedProperty
+import universecore.struct.AttachedProperty
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
 

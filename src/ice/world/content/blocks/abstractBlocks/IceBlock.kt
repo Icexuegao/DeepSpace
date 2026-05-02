@@ -4,7 +4,7 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import ice.graphics.IceColor
-import ice.library.util.toStringi
+import universecore.util.toStringi
 import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.Vars

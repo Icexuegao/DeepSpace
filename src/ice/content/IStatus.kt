@@ -19,7 +19,7 @@ import arc.util.pooling.Pools
 import ice.content.ILiquids.相位态FEX流体
 import ice.content.block.turret.TurretBullets.破碎FEX结晶
 import ice.entities.effect.MultiEffect
-import ice.library.world.Load
+import universecore.world.Load
 import ice.world.content.status.IceStatusEffect
 import ice.world.content.status.PercentStatus
 import ice.world.meta.IceEffects

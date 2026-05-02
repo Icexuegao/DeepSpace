@@ -3,13 +3,13 @@ package ice.world.draw
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.util.Eachable
-import ice.library.IFiles
+import ice.core.IFiles
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
 import mindustry.world.Block
 import mindustry.world.draw.DrawBlock
 
-class DrawDefaultBottom : DrawBlock() {
+class DrawDefaultBottom :DrawBlock() {
   lateinit var bottom: TextureRegion
   override fun draw(build: Building) {
     Draw.rect(bottom, build.x, build.y, build.rotation * 90f)
@@ -23,7 +23,5 @@ class DrawDefaultBottom : DrawBlock() {
     Draw.rect(bottom, plan.drawx(), plan.drawy())
   }
 
-  override fun icons(block: Block): Array<out TextureRegion> {
-    return arrayOf(bottom)
-  }
+  override fun icons(block: Block) = arrayOf(bottom)
 }

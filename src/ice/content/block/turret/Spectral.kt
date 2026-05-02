@@ -3,7 +3,7 @@ package ice.content.block.turret
 import arc.math.Interp
 import ice.content.IItems
 import ice.entities.bullet.LaserBulletType
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements

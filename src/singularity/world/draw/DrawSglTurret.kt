@@ -8,7 +8,7 @@ import arc.struct.Seq
 import arc.util.Eachable
 import arc.util.Nullable
 import arc.util.Tmp
-import ice.library.IFiles.appendModName
+import ice.core.IFiles.appendModName
 import mindustry.entities.part.DrawPart
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building

@@ -5,10 +5,10 @@ import ice.content.block.CrafterBlocks
 import ice.content.block.DefenseBlocks
 import ice.content.remains.迷思海
 import ice.graphics.IceColor
-import ice.library.IFiles.appendModName
-import ice.library.scene.element.typinglabel.TLabel
-import ice.library.scene.style.DynamicTextureDrawable
-import ice.library.scene.ui.itooltip
+import ice.core.IFiles.appendModName
+import universecore.scene.element.typinglabel.TLabel
+import universecore.scene.style.DynamicTextureDrawable
+import universecore.scene.ui.itooltip
 import ice.type.Remains
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import ice.world.content.blocks.environment.IceOreBlock

@@ -1,6 +1,6 @@
 package ice.world.meta
 
-import ice.library.world.Load
+import universecore.world.Load
 import mindustry.world.meta.StatCat
 
 object IceStats :Load {

@@ -5,7 +5,7 @@ import ice.content.IStatus
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.ui.bundle.localization
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.effect.ParticleEffect

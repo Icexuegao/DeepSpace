@@ -4,7 +4,7 @@ import arc.Events
 import arc.struct.Seq
 import arc.util.Log
 import arc.util.io.Reads
-import ice.library.world.Load
+import universecore.world.Load
 import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.ctype.ContentType

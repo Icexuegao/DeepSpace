@@ -11,8 +11,8 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import arc.util.pooling.Pool.Poolable
 import arc.util.pooling.Pools
-import ice.library.scene.ui.ItemSelection
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import universecore.scene.ui.ItemSelection
+import universecore.struct.texture.LazyTextureSingleDelegate
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building

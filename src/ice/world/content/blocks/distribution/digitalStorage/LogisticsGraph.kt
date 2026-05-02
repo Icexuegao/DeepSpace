@@ -2,8 +2,8 @@ package ice.world.content.blocks.distribution.digitalStorage
 
 import arc.Events
 import arc.math.Rand
-import ice.library.struct.graph.Graph
-import ice.library.struct.graph.Vertex
+import universecore.struct.graph.Graph
+import universecore.struct.graph.Vertex
 import mindustry.game.EventType
 import mindustry.world.blocks.production.GenericCrafter
 

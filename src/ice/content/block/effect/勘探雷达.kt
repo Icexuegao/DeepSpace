@@ -19,7 +19,7 @@ import arc.util.io.Writes
 import ice.audio.ISounds
 import ice.content.IItems
 import ice.graphics.IceColor
-import ice.library.scene.ui.updateE
+import universecore.scene.ui.updateE
 
 import ice.world.draw.DrawMulti
 import mindustry.Vars

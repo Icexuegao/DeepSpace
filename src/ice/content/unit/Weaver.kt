@@ -3,8 +3,8 @@ package ice.content.unit
 import arc.scene.ui.layout.Table
 import ice.content.IStatus
 import ice.content.unit.flying.Veto.ArmorBrokenBulletType
-import ice.library.IFiles.appendModName
-import ice.library.util.toColor
+import ice.core.IFiles.appendModName
+import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.DeathGiftAbility
 import mindustry.content.Fx

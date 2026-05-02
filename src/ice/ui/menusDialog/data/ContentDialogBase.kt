@@ -14,8 +14,8 @@ import ice.audio.ISounds
 import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.scene.ui.*
-import ice.library.scene.ui.layout.ITable
+import universecore.scene.ui.*
+import universecore.scene.ui.layout.ITable
 import ice.ui.UI
 import ice.world.content.blocks.abstractBlocks.EnvironmentBlock
 import ice.world.content.blocks.environment.Floor

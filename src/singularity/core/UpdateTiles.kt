@@ -2,7 +2,7 @@ package singularity.core
 
 import arc.Events
 import arc.struct.ObjectMap
-import ice.library.world.Load
+import universecore.world.Load
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.world.Tile

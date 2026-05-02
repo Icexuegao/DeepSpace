@@ -2,7 +2,7 @@ package universecore.world.consumers.cons.item
 
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
-import ice.library.scene.element.display.ItemDisplay
+import universecore.scene.element.display.ItemDisplay
 import mindustry.type.ItemStack
 import universecore.components.blockcomp.ConsumerBuildComp
 import universecore.world.consumers.BaseConsume

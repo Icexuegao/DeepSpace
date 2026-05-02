@@ -8,7 +8,7 @@ import arc.math.Rand
 import arc.math.geom.Vec2
 import arc.util.Tmp
 import ice.entities.bullet.base.BasicBulletType
-import ice.library.struct.Vec2Seq
+import universecore.struct.Vec2Seq
 import mindustry.gen.Bullet
 
 @Suppress("UNCHECKED_CAST")

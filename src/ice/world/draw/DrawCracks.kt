@@ -5,10 +5,10 @@ import mindustry.gen.Building
 import mindustry.graphics.Layer
 import mindustry.world.draw.DrawBlock
 
-class DrawCracks : DrawBlock() {
-    override fun draw(build: Building) {
-        Draw.z(Layer.blockCracks)
-        build.drawCracks()
-        Draw.z(Layer.blockAfterCracks)
-    }
+class DrawCracks :DrawBlock() {
+  override fun draw(build: Building) {
+    Draw.z(Layer.blockCracks)
+    build.drawCracks()
+    Draw.z(Layer.blockAfterCracks)
+  }
 }

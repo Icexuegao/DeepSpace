@@ -30,8 +30,8 @@ import ice.entities.IcePuddle
 import ice.entities.bullet.MultiBasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.library.struct.AttachedProperty
-import ice.library.world.Load
+import universecore.struct.AttachedProperty
+import universecore.world.Load
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.CorrodflyEnd
 import ice.world.content.unit.entity.CorrodflyHead

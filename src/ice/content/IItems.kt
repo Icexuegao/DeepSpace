@@ -1,6 +1,6 @@
 package ice.content
 
-import ice.library.world.Load
+import universecore.world.Load
 import ice.world.content.item.IceItem
 import ice.world.content.item.OreItem
 

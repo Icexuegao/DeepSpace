@@ -16,9 +16,9 @@ import ice.DeepSpace
 import ice.graphics.Characters
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.IFiles
-import ice.library.scene.ui.*
-import ice.library.struct.texture.asDrawable
+import ice.core.IFiles
+import universecore.scene.ui.*
+import universecore.struct.texture.asDrawable
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.ModInfoDialog.getQQImage
 import ice.world.meta.IceStats

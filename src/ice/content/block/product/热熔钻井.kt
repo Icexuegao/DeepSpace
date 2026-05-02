@@ -1,7 +1,7 @@
 package ice.content.block.product
 
 import ice.content.IItems
-import ice.library.util.toColor
+import universecore.util.toColor
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.type.Category

@@ -7,10 +7,9 @@ import arc.graphics.Texture
 import arc.util.OS
 import ice.DeepSpace
 import ice.core.SettingValue
-import ice.library.DeBugFragment
-import ice.library.EventType.addClientLoadEvent
-import ice.library.IFiles
-import ice.library.world.Load
+import ice.game.EventType.addClientLoadEvent
+import ice.core.IFiles
+import universecore.world.Load
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.ConversationFragment
 import ice.ui.menusDialog.DataDialog

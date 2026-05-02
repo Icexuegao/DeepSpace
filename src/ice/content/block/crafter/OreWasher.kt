@@ -51,11 +51,7 @@ class OreWasher:NormalCrafter("ore_washer"){
 
   craftEffect = Fx.pulverizeMedium
 
-  drawers = DrawMulti(DrawDefault(), object : DrawLiquidRegion(Liquids.water) {
-    init {
-      suffix = "_liquid"
-    }
-  }, object : DrawRegion("_rotator") {
+  drawers = DrawMulti(DrawDefault(),DrawLiquidRegion(Liquids.water,"_liquid"), object : DrawRegion("_rotator") {
     init {
       rotateSpeed = 4.5f
       spinSprite = true

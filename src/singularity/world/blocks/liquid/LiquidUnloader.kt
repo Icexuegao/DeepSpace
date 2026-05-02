@@ -9,7 +9,7 @@ import arc.util.Nullable
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.IceColor
-import ice.library.scene.ui.ItemSelection
+import universecore.scene.ui.ItemSelection
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building

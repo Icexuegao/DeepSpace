@@ -1,7 +1,7 @@
 package ice.world.content.blocks.distribution.digitalStorage
 
-import ice.library.struct.UnsafeLinkedList
-import ice.library.struct.graph.UserData
+import universecore.struct.UnsafeLinkedList
+import universecore.struct.graph.UserData
 import mindustry.world.blocks.production.GenericCrafter
 
 class LogisticsData(

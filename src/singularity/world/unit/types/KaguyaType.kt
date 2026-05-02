@@ -17,7 +17,7 @@ import arc.util.Interval
 import arc.util.Time
 import arc.util.Tmp
 import ice.DeepSpace
-import ice.library.struct.AttachedProperty
+import universecore.struct.AttachedProperty
 import ice.ui.bundle.localization
 import mindustry.content.Fx
 import mindustry.entities.Units

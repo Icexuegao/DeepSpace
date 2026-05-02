@@ -1,7 +1,7 @@
 package ice.content.unit
 
 import ice.entities.bullet.RailBulletType
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.UnitSpawnAbility
 import mindustry.content.Fx

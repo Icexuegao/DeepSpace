@@ -8,10 +8,10 @@ import arc.util.Scaling
 import ice.content.Remainss
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.IFiles
-import ice.library.scene.ui.iTable
-import ice.library.scene.ui.iTableG
-import ice.library.scene.ui.icePane
+import ice.core.IFiles
+import universecore.scene.ui.iTable
+import universecore.scene.ui.iTableG
+import universecore.scene.ui.icePane
 import ice.type.Remains
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats

@@ -5,7 +5,7 @@ import arc.func.Intf
 import arc.func.Prov
 import arc.struct.ObjectMap
 import ice.content.IItems
-import ice.library.world.Load
+import universecore.world.Load
 import ice.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.gen.Building

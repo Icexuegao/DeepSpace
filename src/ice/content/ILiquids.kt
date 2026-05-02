@@ -4,8 +4,8 @@ import arc.graphics.Color
 import arc.math.Mathf
 import arc.struct.ObjectSet
 import ice.entities.IcePuddle
-import ice.library.EventType
-import ice.library.world.Load
+import ice.game.EventType
+import universecore.world.Load
 import ice.world.content.liquid.IceLiquid
 import mindustry.content.Fx
 import mindustry.content.Fx.flakExplosionBig

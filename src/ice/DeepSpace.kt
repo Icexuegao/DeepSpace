@@ -8,7 +8,7 @@ import arc.struct.ObjectMap
 import arc.util.Log
 import arc.util.Strings
 import arc.util.serialization.JsonReader
-import ice.library.IFiles
+import ice.core.IFiles
 import mindustry.Vars
 import mindustry.mod.Mods
 import singularity.Singularity

@@ -9,8 +9,8 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.graphics.IceColor
-import ice.library.EventType.addContentInitEvent
-import ice.library.world.Load
+import ice.game.EventType.addContentInitEvent
+import universecore.world.Load
 import ice.shader.IceShader
 import ice.type.Dup
 import ice.ui.bundle.localization

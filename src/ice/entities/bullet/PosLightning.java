@@ -14,7 +14,7 @@ import arc.math.geom.Vec2;
 import arc.struct.FloatSeq;
 import arc.struct.Seq;
 import arc.util.Tmp;
-import ice.library.struct.Vec2Seq;
+import universecore.struct.Vec2Seq;
 import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;

@@ -2,9 +2,8 @@ package ice.content
 
 import arc.func.Prov
 import ice.DeepSpace
-import ice.library.world.Load
+import universecore.world.Load
 import mindustry.type.Item
-import singularity.Sgl
 import universecore.world.consumers.BaseConsumers
 
 object AtomSchematics : Load {

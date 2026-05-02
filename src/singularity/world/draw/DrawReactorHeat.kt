@@ -8,7 +8,7 @@ import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
-import ice.library.struct.AttachedProperty
+import universecore.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Drawf

@@ -1,7 +1,7 @@
 package ice.world.content.unit.ability
 
 import arc.scene.ui.layout.Table
-import ice.library.util.toStringi
+import universecore.util.toStringi
 import ice.world.meta.IceStats
 import mindustry.entities.Units
 import mindustry.entities.abilities.Ability

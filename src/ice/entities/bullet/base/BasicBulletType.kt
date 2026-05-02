@@ -7,7 +7,7 @@ import arc.math.Interp
 import arc.math.Mathf
 import arc.util.Nullable
 import arc.util.Tmp
-import ice.library.IFiles
+import ice.core.IFiles
 import mindustry.gen.Bullet
 import mindustry.graphics.Pal
 

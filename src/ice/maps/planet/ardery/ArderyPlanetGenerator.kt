@@ -19,7 +19,7 @@ import arc.util.noise.Simplex
 import ice.content.IItems
 import ice.content.IPlanets
 import ice.content.block.EnvironmentBlocks
-import ice.library.util.log
+import universecore.util.log
 import ice.world.content.blocks.environment.IceOreBlock
 import mindustry.Vars
 import mindustry.ai.Astar

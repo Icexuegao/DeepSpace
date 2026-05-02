@@ -3,7 +3,7 @@ package ice.content.unit
 import ice.content.IStatus
 import ice.content.IUnitTypes
 import ice.entities.bullet.spawnBulletType
-import ice.library.util.toColor
+import universecore.util.toColor
 
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.DeathGiftAbility

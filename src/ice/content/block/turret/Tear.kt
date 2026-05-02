@@ -6,8 +6,8 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.library.IFiles.appendModName
-import ice.library.util.toColor
+import ice.core.IFiles.appendModName
+import universecore.util.toColor
 import ice.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems

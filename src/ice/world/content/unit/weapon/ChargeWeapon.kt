@@ -4,7 +4,7 @@ import arc.math.Angles
 import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
-import ice.library.struct.AttachedProperty
+import universecore.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.audio.SoundLoop
 import mindustry.entities.Predict

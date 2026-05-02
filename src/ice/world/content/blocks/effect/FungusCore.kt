@@ -5,7 +5,7 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.math.Rand
 import arc.struct.Seq
-import ice.library.IFiles
+import ice.core.IFiles
 import mindustry.content.Blocks
 import mindustry.game.Team
 import mindustry.gen.Building

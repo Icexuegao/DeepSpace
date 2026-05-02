@@ -6,7 +6,7 @@ import ice.content.IStatus
 import ice.entities.bullet.ArtilleryBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects

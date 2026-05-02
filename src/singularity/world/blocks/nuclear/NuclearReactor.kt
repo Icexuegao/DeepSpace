@@ -16,7 +16,7 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IItems
 import ice.core.SettingValue
-import ice.library.util.toStringi
+import universecore.util.toStringi
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.Fx

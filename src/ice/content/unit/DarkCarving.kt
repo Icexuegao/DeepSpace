@@ -6,7 +6,7 @@ import arc.math.Interp
 import ice.audio.ISounds
 import ice.content.IStatus
 import ice.entities.effect.MultiEffect
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.StatusFieldAbility

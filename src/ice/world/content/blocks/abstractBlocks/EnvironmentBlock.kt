@@ -1,8 +1,8 @@
 package ice.world.content.blocks.abstractBlocks
 
 import arc.graphics.g2d.TextureRegion
-import ice.library.EventType
-import ice.library.IFiles
+import ice.game.EventType
+import ice.core.IFiles
 import mindustry.world.Block
 
 open class EnvironmentBlock(name: String) : Block(name) {

@@ -1,7 +1,7 @@
 package ice.content.block
 
 import ice.content.block.turret.*
-import ice.library.world.Load
+import universecore.world.Load
 
 @Suppress("unused")
 object TurretBlocks : Load {

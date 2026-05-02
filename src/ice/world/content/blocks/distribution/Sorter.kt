@@ -14,8 +14,8 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.scene.ui.ItemSelection
-import ice.library.scene.ui.itooltip
+import universecore.scene.ui.ItemSelection
+import universecore.scene.ui.itooltip
 import ice.world.draw.DrawBuild
 import ice.world.draw.DrawMulti
 import mindustry.Vars

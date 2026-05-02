@@ -5,8 +5,8 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import ice.content.IItems
 import ice.graphics.IceColor
-import ice.library.EventType.addContentInitEvent
-import ice.library.world.Load
+import ice.game.EventType.addContentInitEvent
+import universecore.world.Load
 import ice.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements

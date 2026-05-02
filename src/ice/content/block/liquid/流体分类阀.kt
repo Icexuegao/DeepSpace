@@ -5,7 +5,7 @@ import arc.graphics.g2d.Draw
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import ice.content.IItems
-import ice.library.scene.ui.ItemSelection
+import universecore.scene.ui.ItemSelection
 import ice.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements

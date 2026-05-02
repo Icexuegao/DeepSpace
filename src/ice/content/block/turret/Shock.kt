@@ -12,7 +12,7 @@ import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.PointBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.library.IFiles.appendModName
+import ice.core.IFiles.appendModName
 import ice.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements

@@ -6,9 +6,9 @@ import arc.scene.Group
 import arc.scene.event.Touchable
 import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
-import ice.library.scene.element.ProgressBar
+import universecore.scene.element.ProgressBar
 import ice.graphics.IStyles
-import ice.library.scene.ui.layout.CrosswiseCollapser
+import universecore.scene.ui.layout.CrosswiseCollapser
 
 object BossHealthFragment {
     val table = Table()

@@ -1,7 +1,7 @@
 package ice.ui.bundle
 
 import arc.Core
-import ice.library.world.Load
+import universecore.world.Load
 import mindustry.ctype.UnlockableContent
 
 /**本地化管理器 - 统一管理所有本地化 */

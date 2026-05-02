@@ -2,7 +2,7 @@ package ice.content.block
 
 import ice.content.IItems
 import ice.content.block.liquid.*
-import ice.library.world.Load
+import universecore.world.Load
 import ice.ui.bundle.localization
 import ice.world.content.blocks.liquid.PumpChamber
 import mindustry.type.Category

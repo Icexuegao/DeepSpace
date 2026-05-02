@@ -2,7 +2,7 @@ package ice.content.block.liquid
 
 import ice.content.IItems
 import ice.content.block.LiquidBlocks
-import ice.library.EventType.addContentInitEvent
+import ice.game.EventType.addContentInitEvent
 import ice.world.content.blocks.liquid.ArmoredConduit
 import mindustry.type.Category
 

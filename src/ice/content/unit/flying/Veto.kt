@@ -15,8 +15,8 @@ import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.library.IFiles.appendModName
-import ice.library.util.toColor
+import ice.core.IFiles.appendModName
+import universecore.util.toColor
 
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx

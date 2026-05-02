@@ -8,23 +8,18 @@ import mindustry.type.Liquid
 import mindustry.world.Block
 import mindustry.world.draw.DrawBlock
 
-open class DrawLiquidRegion(drawLiquid: Liquid? = null) : DrawBlock() {
-    var drawLiquid: Liquid? = null
-    var liquid: TextureRegion? = null
-    var suffix: String = "-liquid"
-    var alpha: Float = 1f
+open class DrawLiquidRegion(var drawLiquid: Liquid? = null, var suffix: String = "-liquid") :DrawBlock() {
+  var liquid: TextureRegion? = null
+  var alpha: Float = 1f
 
-    init {
-        this.drawLiquid = drawLiquid
-    }
+  override fun draw(build: Building) {
+    val drawn: Liquid = drawLiquid ?: build.liquids?.current() ?: return
+    Drawf.liquid(
+      liquid, build.x, build.y, build.liquids.get(drawn) / build.block.liquidCapacity * alpha, drawn.color
+    )
+  }
 
-    override fun draw(build: Building) {
-        val drawn: Liquid = drawLiquid ?: build.liquids.current()
-        Drawf.liquid(liquid, build.x, build.y, build.liquids.get(drawn) / build.block.liquidCapacity * alpha,
-            drawn.color)
-    }
-
-    override fun load(block: Block) {
-        liquid = Core.atlas.find(block.name + suffix)
-    }
+  override fun load(block: Block) {
+    liquid = Core.atlas.find(block.name + suffix)
+  }
 }

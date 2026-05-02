@@ -16,7 +16,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IStatus
-import ice.library.struct.AttachedProperty
+import universecore.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.game.Team
 import mindustry.gen.Building

@@ -11,7 +11,7 @@ import arc.struct.Seq
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import universecore.struct.texture.LazyTextureSingleDelegate
 import mindustry.entities.units.BuildPlan
 import mindustry.game.Team
 import mindustry.gen.Building

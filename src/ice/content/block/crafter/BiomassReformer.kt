@@ -1,7 +1,7 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds

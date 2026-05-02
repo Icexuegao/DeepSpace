@@ -4,7 +4,7 @@ import arc.scene.ui.layout.Table
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.LiquidExplodeAbility

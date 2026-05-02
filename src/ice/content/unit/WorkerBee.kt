@@ -1,6 +1,6 @@
 package ice.content.unit
 
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.ai.UnitCommand
 import mindustry.gen.BuildingTetherPayloadUnit

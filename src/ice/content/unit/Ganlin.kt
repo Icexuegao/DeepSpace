@@ -6,7 +6,7 @@ import arc.scene.ui.layout.Table
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
-import ice.library.IFiles.appendModName
+import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.DeathGiftAbility
 import ice.world.content.unit.ability.RepairFieldAbility

@@ -19,7 +19,7 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.graphics.IceColor.s1
 import ice.graphics.IceDraw
-import ice.library.DeBugFragment
+import ice.ui.DeBugFragment
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Effect

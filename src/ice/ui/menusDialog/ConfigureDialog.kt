@@ -20,9 +20,9 @@ import ice.core.SettingValue
 import ice.entities.ModeDifficulty
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.scene.element.ProgressBar
-import ice.library.scene.element.typinglabel.TLabel
-import ice.library.util.toStringi
+import universecore.scene.element.ProgressBar
+import universecore.scene.element.typinglabel.TLabel
+import universecore.util.toStringi
 import ice.ui.Documents
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats

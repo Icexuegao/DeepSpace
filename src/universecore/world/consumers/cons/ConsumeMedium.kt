@@ -8,7 +8,7 @@ import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
 import arc.util.Strings
-import ice.library.util.toStringi
+import universecore.util.toStringi
 import mindustry.Vars
 import mindustry.core.UI
 import mindustry.gen.Building

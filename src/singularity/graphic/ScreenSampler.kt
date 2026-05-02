@@ -11,7 +11,7 @@ import arc.graphics.gl.FrameBuffer
 import arc.graphics.gl.GLFrameBuffer
 import arc.graphics.gl.Shader
 import arc.util.serialization.Jval
-import ice.library.util.accessField
+import universecore.util.accessField
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.graphics.Layer

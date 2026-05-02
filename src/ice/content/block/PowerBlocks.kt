@@ -14,19 +14,17 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.content.block.power.WindGenerator
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.library.IFiles.appendModName
-import ice.library.util.toColor
-import ice.library.world.Load
 import ice.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.power.PowerNode
-import ice.world.draw.DrawAnyLiquidTile
+import ice.world.draw.DrawFloorLiquid
 import ice.world.meta.IceEffects
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -49,6 +47,8 @@ import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawExpandPlasma
 import singularity.world.particles.SglParticleModels
+import universecore.util.toColor
+import universecore.world.Load
 import universecore.world.particles.MultiParticleModel
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
@@ -256,7 +256,7 @@ object PowerBlocks : Load {
     requirements(Category.power, IItems.石英玻璃, 90, IItems.铱板, 105, IItems.单晶硅, 35)
     effectChance = 0.1f
     generateEffect = Fx.redgeneratespark
-    drawer = DrawMulti(DrawRegion("-bottom"), DrawAnyLiquidTile(), DrawDefault(), DrawGlowRegion())
+    drawer = DrawMulti(DrawRegion("-bottom"), DrawFloorLiquid(), DrawDefault(), DrawGlowRegion())
   }
   val 燃烧发电机 = ConsumeGenerator("combustionGenerator").apply {
     localization {
@@ -277,7 +277,7 @@ object PowerBlocks : Load {
   val 风力发电机 = WindGenerator("windGenerator").apply {
     localization {
       zh_CN {
-        this.localizedName = "风力发电机"
+        localizedName = "风力发电机"
         description = "依靠风场发电,无需维护即可持续运作,但无法稳定提供电力来源.工作区域内不能放置大型建筑,否则无法工作"
       }
     }
@@ -290,7 +290,7 @@ object PowerBlocks : Load {
   val 大型风力发电机 = WindGenerator("windGeneratorLarge").apply {
     localization {
       zh_CN {
-        this.localizedName = "大型风力发电机"
+        localizedName = "大型风力发电机"
         description = "高效依靠风场发电,无需维护即可持续运作,但无法稳定提供电力来源.工作区域内不能放置大型建筑,否则无法工作"
       }
     }

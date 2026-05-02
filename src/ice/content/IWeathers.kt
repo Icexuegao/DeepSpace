@@ -1,8 +1,8 @@
 package ice.content
 
 import ice.graphics.IceColor
-import ice.library.IFiles.appendModName
-import ice.library.world.Load
+import ice.core.IFiles.appendModName
+import universecore.world.Load
 import ice.ui.bundle.Localizable
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds

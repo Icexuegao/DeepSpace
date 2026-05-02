@@ -8,7 +8,7 @@ import arc.math.Interp
 import ice.content.IStatus
 import ice.content.unit.flying.Veto
 import ice.entities.bullet.sizeBulletType
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.DeathGiftAbility
 import mindustry.content.Fx

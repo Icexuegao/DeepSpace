@@ -9,7 +9,7 @@ import arc.scene.ui.layout.Table
 import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.scene.ui.iTableGX
+import universecore.scene.ui.iTableGX
 import ice.ui.MenusDialog
 import ice.ui.UI
 import ice.ui.dialog.BaseMenusDialog

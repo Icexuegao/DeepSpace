@@ -14,11 +14,11 @@ import ice.DeepSpace
 import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.EventType
-import ice.library.scene.action.IceActions
-import ice.library.scene.ui.*
-import ice.library.struct.ConfigPropertyDelegate
-import ice.library.struct.texture.asDrawable
+import ice.game.EventType
+import universecore.scene.action.IceActions
+import universecore.scene.ui.*
+import universecore.struct.ConfigPropertyDelegate
+import universecore.struct.texture.asDrawable
 import ice.ui.MenusDialog
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats

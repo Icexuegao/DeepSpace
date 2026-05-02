@@ -15,9 +15,9 @@ import arc.util.Scaling
 import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.scene.ui.iPaneG
-import ice.library.struct.texture.asDrawable
-import ice.library.world.Load
+import universecore.scene.ui.iPaneG
+import universecore.struct.texture.asDrawable
+import universecore.world.Load
 import ice.ui.UI.showUISoundCloseV
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*

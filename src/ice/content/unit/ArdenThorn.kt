@@ -16,8 +16,8 @@ import ice.entities.bullet.BombBulletType
 import ice.entities.bullet.RandomDamageBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.library.IFiles.appendModName
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import ice.core.IFiles.appendModName
+import universecore.struct.texture.LazyTextureSingleDelegate
 
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.Entity

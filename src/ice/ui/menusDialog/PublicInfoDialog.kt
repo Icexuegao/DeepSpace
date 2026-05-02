@@ -5,8 +5,8 @@ import arc.scene.ui.layout.Table
 import arc.util.Scaling
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.scene.ui.iPane
-import ice.library.struct.texture.asDrawable
+import universecore.scene.ui.iPane
+import universecore.struct.texture.asDrawable
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
 

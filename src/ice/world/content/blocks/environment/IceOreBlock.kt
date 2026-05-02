@@ -4,7 +4,7 @@ import arc.graphics.g2d.Draw
 import arc.math.Mathf
 import arc.struct.Seq
 import ice.core.SettingValue
-import ice.library.EventType
+import ice.game.EventType
 import ice.world.content.blocks.abstractBlocks.Variants
 import mindustry.Vars
 import mindustry.type.Item

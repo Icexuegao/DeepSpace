@@ -5,8 +5,8 @@ import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.util.Tmp
 import ice.entities.bullet.base.BasicBulletType
-import ice.library.IFiles.appendModName
-import ice.library.struct.texture.LazyTextureAutoSequenceDelegate
+import ice.core.IFiles.appendModName
+import universecore.struct.texture.LazyTextureAutoSequenceDelegate
 import mindustry.gen.Bullet
 
 open class MultiBasicBulletType(sprite: String) : BasicBulletType() {

@@ -20,7 +20,7 @@ import arc.util.Tmp
 import arc.util.pooling.Pool.Poolable
 import arc.util.pooling.Pools
 import ice.DeepSpace
-import ice.library.struct.AttachedProperty
+import universecore.struct.AttachedProperty
 import ice.ui.bundle.localization
 
 import mindustry.Vars

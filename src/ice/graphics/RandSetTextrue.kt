@@ -4,8 +4,7 @@ import arc.Events
 import arc.scene.style.ScaledNinePatchDrawable
 import arc.struct.Seq
 import arc.util.Interval
-import ice.library.IFiles
-import ice.world.meta.IceEffects
+import ice.core.IFiles
 
 class RandSetTextrue(def: String, size: Int){
   val def = IFiles.createNinePatch(def) as ScaledNinePatchDrawable

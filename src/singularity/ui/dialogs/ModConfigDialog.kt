@@ -21,7 +21,7 @@ import ice.graphics.IStyles
 import ice.graphics.IStyles.checkCheckBoxStyle
 import ice.graphics.IStyles.defaultSlider
 import ice.graphics.IceColor.b4
-import ice.library.scene.ui.icePane
+import universecore.scene.ui.icePane
 import ice.ui.UI
 import mindustry.gen.Icon
 import mindustry.gen.Tex

@@ -16,7 +16,7 @@ import arc.util.Strings
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.core.SettingValue
-import ice.library.struct.AttachedProperty
+import universecore.struct.AttachedProperty
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.game.Team

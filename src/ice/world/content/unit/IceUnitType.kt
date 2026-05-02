@@ -17,9 +17,9 @@ import ice.content.IItems
 import ice.content.IPlanets
 import ice.entities.IceRegister
 import ice.graphics.IceColor
-import ice.library.IFiles
-import ice.library.IFiles.appendModName
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import ice.core.IFiles
+import ice.core.IFiles.appendModName
+import universecore.struct.texture.LazyTextureSingleDelegate
 import ice.ui.bundle.Localizable
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars

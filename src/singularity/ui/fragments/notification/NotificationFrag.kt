@@ -31,7 +31,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.IceColor.b4
-import ice.library.scene.action.IceActions
+import universecore.scene.action.IceActions
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.gen.Icon

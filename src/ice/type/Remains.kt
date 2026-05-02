@@ -10,10 +10,10 @@ import ice.DeepSpace
 import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.library.IFiles
-import ice.library.scene.ui.addLine
-import ice.library.scene.ui.itooltip
-import ice.library.struct.ConfigPropertyDelegate
+import ice.core.IFiles
+import universecore.scene.ui.addLine
+import universecore.scene.ui.itooltip
+import universecore.struct.ConfigPropertyDelegate
 import ice.ui.UI
 import ice.ui.bundle.Localizable
 import ice.ui.menusDialog.DataDialog

@@ -7,7 +7,7 @@ import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Time
 import ice.core.SettingValue
-import ice.library.world.Load
+import universecore.world.Load
 import ice.ui.MenusDialog
 import mindustry.Vars
 import mindustry.audio.SoundControl

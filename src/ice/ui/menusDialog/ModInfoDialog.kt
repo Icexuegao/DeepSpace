@@ -28,8 +28,8 @@ import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.graphics.RandSetTextrue
-import ice.library.IFiles
-import ice.library.scene.ui.*
+import ice.core.IFiles
+import universecore.scene.ui.*
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceEffects
 import ice.world.meta.IceStats

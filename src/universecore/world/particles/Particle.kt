@@ -12,7 +12,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pool
 import arc.util.pooling.Pools
-import ice.library.util.accessBoolean
+import universecore.util.accessBoolean
 import mindustry.gen.Decal
 import mindustry.gen.Groups
 import kotlin.math.max

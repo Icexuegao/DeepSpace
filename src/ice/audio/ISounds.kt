@@ -2,7 +2,7 @@ package ice.audio
 
 import arc.Core
 import arc.audio.Sound
-import ice.library.IFiles
+import ice.core.IFiles
 
 object ISounds {
   val radar= getSound("radar")

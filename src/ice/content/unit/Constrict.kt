@@ -4,8 +4,8 @@ import arc.math.Interp
 import ice.content.IStatus
 import ice.entities.bullet.MissileBulletType
 import ice.entities.effect.MultiEffect
-import ice.library.IFiles.appendModName
-import ice.library.util.toColor
+import ice.core.IFiles.appendModName
+import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.DeathGiftAbility
 import mindustry.content.Fx

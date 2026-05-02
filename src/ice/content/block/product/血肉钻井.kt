@@ -2,7 +2,7 @@ package ice.content.block.product
 
 import ice.audio.ISounds
 import ice.content.IItems
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements

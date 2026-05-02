@@ -4,7 +4,7 @@ import arc.Core
 import arc.graphics.Color
 import arc.graphics.Pixmap
 import arc.graphics.g2d.PixmapRegion
-import ice.library.IFiles.appendModName
+import ice.core.IFiles.appendModName
 import mindustry.content.Liquids
 import mindustry.graphics.CacheLayer
 import mindustry.graphics.MultiPacker

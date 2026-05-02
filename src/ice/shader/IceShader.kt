@@ -1,6 +1,6 @@
 package ice.shader
 
-import ice.library.IFiles
+import ice.core.IFiles
 import mindustry.graphics.CacheLayer
 import mindustry.graphics.Shaders
 

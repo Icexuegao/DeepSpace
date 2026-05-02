@@ -4,7 +4,7 @@ import arc.func.Prov
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import ice.content.IItems
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import universecore.struct.texture.LazyTextureSingleDelegate
 
 import ice.world.content.item.IceItem
 import ice.world.draw.DrawBuild

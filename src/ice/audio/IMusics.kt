@@ -2,9 +2,7 @@ package ice.audio
 
 import arc.Core
 import arc.audio.Music
-import arc.func.Cons
-import ice.library.IFiles
-import mindustry.gen.Musics
+import ice.core.IFiles
 
 object IMusics {
   val title: Music = Core.audio.newMusic(IFiles.findMusic("title.ogg"))

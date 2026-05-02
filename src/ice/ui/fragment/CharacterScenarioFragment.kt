@@ -20,9 +20,9 @@ import ice.graphics.IStyles
 import ice.graphics.IStyles.background61
 import ice.graphics.IStyles.background62
 import ice.graphics.IceColor
-import ice.library.scene.action.IceActions
-import ice.library.scene.element.typinglabel.TLabel
-import ice.library.scene.ui.icePane
+import universecore.scene.action.IceActions
+import universecore.scene.element.typinglabel.TLabel
+import universecore.scene.ui.icePane
 import ice.ui.UI
 import mindustry.game.EventType
 import mindustry.ui.Fonts

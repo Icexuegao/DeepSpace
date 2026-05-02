@@ -12,7 +12,7 @@ import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
 import ice.entities.bullet.ContinuousBulletType
-import ice.library.math.slope
+import universecore.math.slope
 import mindustry.Vars
 import mindustry.entities.Damage
 import mindustry.entities.Units

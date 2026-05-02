@@ -1,6 +1,6 @@
 package ice.world.content.blocks.distribution.digitalStorage
 
-import ice.library.struct.graph.Vertex
+import universecore.struct.graph.Vertex
 import singularity.world.blocks.SglBlock
 
 abstract class LogisticsBlock(name: String) :SglBlock(name) {

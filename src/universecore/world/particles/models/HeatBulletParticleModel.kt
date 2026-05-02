@@ -9,7 +9,7 @@ import arc.math.Mathf
 import arc.math.geom.Geometry
 import arc.util.Interval
 import arc.util.Time
-import ice.library.struct.AttachedProperty
+import universecore.struct.AttachedProperty
 import mindustry.entities.Units
 import mindustry.gen.Bullet
 import mindustry.gen.Unit

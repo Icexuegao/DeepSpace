@@ -1,6 +1,6 @@
 package ice.world.content.blocks.abstractBlocks
 
-import ice.library.IFiles
+import ice.core.IFiles
 import mindustry.world.Block
 
 object Variants {

@@ -5,7 +5,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.RailBulletType
-import ice.library.util.toColor
+import universecore.util.toColor
 import ice.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements

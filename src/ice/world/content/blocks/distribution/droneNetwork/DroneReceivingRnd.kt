@@ -6,7 +6,7 @@ import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IItems
-import ice.library.scene.ui.ItemSelection
+import universecore.scene.ui.ItemSelection
 import ice.world.draw.DrawMulti
 import ice.world.draw.DrawRegionColor
 import mindustry.Vars

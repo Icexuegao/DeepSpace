@@ -5,7 +5,7 @@ import arc.graphics.g2d.Draw
 import arc.struct.Seq
 import arc.util.Interval
 import arc.util.Time
-import ice.library.IFiles
+import ice.core.IFiles
 import ice.world.meta.IceEffects
 import mindustry.game.EventType
 import mindustry.world.Tile

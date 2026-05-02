@@ -4,9 +4,9 @@ import arc.scene.actions.Actions
 import arc.scene.style.Drawable
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
-import ice.library.scene.ui.actionsR
-import ice.library.scene.ui.clearR
-import ice.library.world.Load
+import universecore.scene.ui.actionsR
+import universecore.scene.ui.clearR
+import universecore.world.Load
 import ice.ui.MenusDialog
 
 abstract class BaseMenusDialog(val name: String, val icon: Drawable): Load{

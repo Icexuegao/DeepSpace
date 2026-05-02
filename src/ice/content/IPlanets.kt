@@ -5,8 +5,9 @@ import arc.func.Prov
 import arc.graphics.Color
 import ice.content.block.EffectBlocks
 import ice.game.IceTeam
+import ice.game.Schematics
 import ice.graphics.IceColor
-import ice.library.world.Load
+import universecore.world.Load
 import ice.maps.planet.ardery.ArderyPlanetGenerator
 import mindustry.game.Team
 import mindustry.graphics.g3d.HexMesh
@@ -58,7 +59,7 @@ object IPlanets :Load {
       }
     }
     generator = ArderyPlanetGenerator()
-    generator.defaultLoadout = ice.library.Schematics.虔信方垒
+    generator.defaultLoadout = Schematics.虔信方垒
     meshLoader = Prov { HexMesh(this, 6) }
     cloudMeshLoader = Prov {
       MultiMesh(

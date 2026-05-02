@@ -6,7 +6,7 @@ import arc.graphics.g2d.TextureRegion
 import arc.util.Interval
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.library.IFiles.appendModName
+import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.FleshEntity
 import ice.world.meta.IceEffects

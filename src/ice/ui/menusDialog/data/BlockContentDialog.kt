@@ -3,10 +3,10 @@ package ice.ui.menusDialog.data
 import arc.scene.style.TextureRegionDrawable
 import ice.audio.ISounds
 import ice.graphics.IStyles
-import ice.library.scene.ui.addLine
-import ice.library.scene.ui.iTableG
-import ice.library.scene.ui.itooltip
-import ice.library.scene.ui.layout.ITable
+import universecore.scene.ui.addLine
+import universecore.scene.ui.iTableG
+import universecore.scene.ui.itooltip
+import universecore.scene.ui.layout.ITable
 import ice.ui.UI
 import ice.world.content.BaseContentSeq
 import mindustry.type.Category

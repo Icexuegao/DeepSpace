@@ -5,7 +5,7 @@ import arc.math.Interp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.entities.effect.MultiEffect
-import ice.library.util.toColor
+import universecore.util.toColor
 
 import ice.world.draw.DrawMulti
 import mindustry.content.Fx

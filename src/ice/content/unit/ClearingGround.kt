@@ -8,7 +8,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.library.IFiles.appendModName
+import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect

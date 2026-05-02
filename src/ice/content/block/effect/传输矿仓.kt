@@ -2,7 +2,7 @@ package ice.content.block.effect
 
 import ice.content.IItems
 import ice.content.block.ProductBlocks
-import ice.library.EventType.addContentInitEvent
+import ice.game.EventType.addContentInitEvent
 
 import ice.world.content.blocks.effect.ItemExtractor
 import mindustry.type.Category

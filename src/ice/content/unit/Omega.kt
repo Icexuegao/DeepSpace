@@ -10,7 +10,7 @@ import ice.audio.ISounds
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.library.IFiles.appendModName
+import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.ArmorPlateAbility

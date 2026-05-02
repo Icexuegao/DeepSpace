@@ -10,7 +10,7 @@ import arc.math.Mathf
 import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.library.struct.texture.LazyTextureSingleDelegate
+import universecore.struct.texture.LazyTextureSingleDelegate
 import ice.world.content.blocks.defense.Wall
 import mindustry.Vars
 import mindustry.graphics.Drawf

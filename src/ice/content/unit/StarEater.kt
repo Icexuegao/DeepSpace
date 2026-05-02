@@ -9,7 +9,7 @@ import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.library.IFiles.appendModName
+import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.HealthRequireAbility
 import mindustry.content.Fx
