@@ -14,6 +14,7 @@ class 流金导管:Conduit("fluxGoldConduit")  {
         description = "向前快速传输流体"
       }
     }
+    health = 100
     liquidCapacity = 40f
     liquidPressure = 1.025f
     requirements(Category.liquid, IItems.金锭, 2, IItems.锌锭, 1, IItems.石英玻璃, 1)
