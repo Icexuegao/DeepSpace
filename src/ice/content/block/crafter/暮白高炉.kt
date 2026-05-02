@@ -23,6 +23,7 @@ class 暮白高炉 :NormalCrafter("duskFactory") {
         details = "金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金"
       }
     }
+    health = 490
     size = 3
     itemCapacity = 20
     liquidCapacity = 120f
@@ -58,7 +59,7 @@ class 暮白高炉 :NormalCrafter("duskFactory") {
       liquid(ILiquids.暮光液, 0.3f)
     }
     newProduce().apply {
-      items(IItems.暮光合金, 3)
+      items(IItems.暮光合金, 4)
     }
   }
 }
