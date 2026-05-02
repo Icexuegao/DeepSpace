@@ -22,6 +22,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
     requirements(
       Category.crafting, IItems.铬锭, 90, IItems.单晶硅, 80, IItems.钴钢, 60, IItems.石英玻璃, 75, IItems.钴锭, 80
     )
+    health = 550
     size = 3
     squareSprite = false
     liquidCapacity = 120f

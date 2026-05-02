@@ -21,7 +21,7 @@ class 蜂巢陶瓷合成巢 : NormalCrafter("ceramicKiln") {
       }
     }
     size = 4
-    health = 300
+    health = 520
     squareSprite = false
     itemCapacity = 30
     liquidCapacity = 210f
@@ -34,12 +34,12 @@ class 蜂巢陶瓷合成巢 : NormalCrafter("ceramicKiln") {
     newFormula {consumers, producers ->
       consumers.apply {
         time(120f)
-        items(IItems.金珀沙, 10)
+        items(IItems.金珀沙, 8)
         liquid(Liquids.water, 32f / 60f)
-        power(1f)
+        power(2f)
       }
       producers.apply {
-        items(IItems.复合陶瓷, 3)
+        items(IItems.复合陶瓷, 4)
       }
     }
   }

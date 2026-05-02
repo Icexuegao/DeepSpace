@@ -22,6 +22,7 @@ class 导能回路装配器 : NormalCrafter("conductiveCircuitAssembler") {
         details = "持续开启相位时间场,减缓局部时间以同时进行多种精密零件的制作\n[#9B929D]为什么总有人管她叫灵魂熔炉[]"
       }
     }
+    health = 1250
     size = 5
     armor = 4f
     itemCapacity = 60
@@ -49,13 +50,13 @@ class 导能回路装配器 : NormalCrafter("conductiveCircuitAssembler") {
     })
     ambientSound = Sounds.explosion
     ambientSoundVolume = 0.08f
-    requirements(Category.crafting, IItems.铱板, 140, IItems.单晶硅, 50, IItems.铪锭, 30, IItems.铬锭, 100)
+    requirements(Category.crafting, IItems.铱板, 140, IItems.单晶硅, 50, IItems.铪锭, 30, IItems.铬锭, 100, IItems.钴钢, 50)
 
     newFormula { consumers, producers ->
       consumers.apply {
         time(120f)
         items(IItems.单晶硅, 9, IItems.铪锭, 3)
-        power(15.25f)
+        power(14f)
       }
       producers.items(IItems.导能回路, 6)
     }

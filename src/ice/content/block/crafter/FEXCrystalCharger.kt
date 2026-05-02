@@ -24,14 +24,15 @@ class FEXCrystalCharger:NormalCrafter("FEX_crystal_charger"){
       details="对导能结晶释放高能中子脉冲,合适的脉冲频率会令能量在晶格之内不断积累,叠加,使晶体结构变得不稳定,并带来一些特别的效果"
     }
   }
-  requirements(Category.crafting, IItems.强化合金, 70, IItems.FEX水晶, 60, IItems.石英玻璃, 65, IItems.絮凝剂, 70, IItems.钴钢, 85)
+  requirements(Category.crafting, IItems.强化合金, 70, IItems.FEX水晶, 60, IItems.石英玻璃, 65, IItems.絮凝剂, 70, IItems.钴钢, 85, IItems.铪锭, 50)
   size = 3
+  health = 1150
 
-  itemCapacity = 15
+  itemCapacity = 30
   basicPotentialEnergy = 128f
 
   newConsume()
-  consume!!.time(90f)
+  consume!!.time(60f)
   consume!!.item(IItems.FEX水晶, 1)
   consume!!.energy(2f)
   newProduce()

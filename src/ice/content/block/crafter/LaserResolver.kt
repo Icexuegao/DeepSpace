@@ -34,6 +34,7 @@ class LaserResolver : NormalCrafter("laser_resolver") {init {
       IItems.FEX水晶, 45, IItems.强化合金, 70, IItems.单晶硅, 90, IItems.絮凝剂, 65, IItems.石英玻璃, 120
     )
   )
+  health = 1150
   size = 3
   itemCapacity = 20
   liquidCapacity = 120f
@@ -42,7 +43,7 @@ class LaserResolver : NormalCrafter("laser_resolver") {init {
 
   newConsume()
   consume!!.time(60f)
-  consume!!.power(3.2f)
+  consume!!.power(3f)
   consume!!.item(IItems.核废料, 1)
   newProduce().color = IItems.核废料.color
   produce!!.items(
@@ -62,7 +63,7 @@ class LaserResolver : NormalCrafter("laser_resolver") {init {
   newConsume()
   consume!!.time(60f)
   consume!!.item(IItems.黑晶石, 1)
-  consume!!.power(2.8f)
+  consume!!.power(190f/60f)
   newProduce().color = IItems.黑晶石.color
   produce!!.items(
     *ItemStack.with(

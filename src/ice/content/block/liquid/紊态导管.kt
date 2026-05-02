@@ -16,7 +16,8 @@ class 紊态导管:ArmoredConduit("disorderedConduit")  {
     }
     leaks = false
     liquidCapacity = 40f
-    liquidPressure = 1.025f
+    liquidPressure = 1.25f
+    health = 280
     requirements(Category.liquid, IItems.钴钢, 1, IItems.铅锭, 2, IItems.石英玻璃, 1)
     addContentInitEvent {
       bridgeReplacement = LiquidBlocks.导管桥

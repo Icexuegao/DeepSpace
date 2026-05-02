@@ -23,17 +23,19 @@ class Crystallizer : NormalCrafter("crystallizer") {
     }
     requirements(
       Category.crafting, ItemStack.with(
-        IItems.强化合金, 35, IItems.单晶硅, 45, IItems.铜锭, 40, IItems.石英玻璃, 50
+        IItems.强化合金, 35, IItems.单晶硅, 45, IItems.铜锭, 40, IItems.石英玻璃, 50, IItems.导能回路, 50
       )
     )
+    health = 650
     size = 2
     liquidCapacity = 60f
+    itemCapacity = 20
 
     newConsume()
     consume!!.time(240f)
     consume!!.item(IItems.强化合金, 1)
     consume!!.liquid(ILiquids.FEX流体, 0.2f)
-    consume!!.power(2.8f)
+    consume!!.power(5f)
     newProduce()
     produce!!.item(IItems.FEX水晶, 2)
 

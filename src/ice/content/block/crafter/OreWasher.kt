@@ -42,7 +42,7 @@ class OreWasher:NormalCrafter("ore_washer"){
   consume!!.time(120f)
   consume!!.liquid(Liquids.water, 0.2f)
   consume!!.item(IItems.岩层沥青, 1)
-  consume!!.power(1.8f)
+  consume!!.power(100f/60f)
   newProduce()
   produce!!.liquid(ILiquids.FEX流体, 0.2f)
   produce!!.items(

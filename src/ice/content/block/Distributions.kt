@@ -45,7 +45,7 @@ object Distributions : Load {
     }
     size = 1
     speed = 6f
-    health = 30
+    health = 50
     addContentInitEvent {
       junctionReplacement = 基础交叉器
       bridgeReplacement = 基础传送带桥
@@ -61,7 +61,7 @@ object Distributions : Load {
     }
     size = 1
     speed = 13f
-    health = 45
+    health = 65
     addContentInitEvent {
       junctionReplacement = 基础交叉器
       bridgeReplacement = 基础传送带桥
@@ -79,7 +79,7 @@ object Distributions : Load {
     }
     size = 1
     speed = 15f
-    health = 55
+    health = 300
     addContentInitEvent {
       junctionReplacement = 基础交叉器
       bridgeReplacement = 装甲传送带桥
@@ -114,6 +114,7 @@ object Distributions : Load {
         localizedName = "钴熠传送带"
       }
     }
+    health = 120
     speed = 50f / 600f
     requirements(Category.distribution, IItems.高碳钢, 2, IItems.钴钢, 1, IItems.铬锭, 1)
 
@@ -179,6 +180,7 @@ object Distributions : Load {
         description = "运输设施,打包多种物品进行运输"
       }
     }
+    health = 120
     speed = 60f / 600f
     drawLastItems = false
     differentItem = true
@@ -199,7 +201,7 @@ object Distributions : Load {
         )
       }
     }
-    requirements(Category.distribution, IItems.铪锭, 20)
+    requirements(Category.distribution, IItems.铪锭, 5, IItems.钴钢, 2, IItems.单晶硅, 1)
   }
 
   val 基础交叉器 = Junction("baseJunction").apply {
@@ -211,7 +213,7 @@ object Distributions : Load {
     }
     size = 1
     health = 100
-    requirements(Category.distribution, IItems.低碳钢, 5, IItems.高碳钢, 5)
+    requirements(Category.distribution, IItems.低碳钢, 3, IItems.高碳钢, 1)
   }
   val 交叉神经链路 = Junction("junctionNeuralChain").apply {
     localization {
@@ -274,7 +276,7 @@ object Distributions : Load {
     }
     allowDiagonal = false
     directionAny = false
-    health = 30
+    health = 50
     range = 5
     hasLiquids = false
     fadeIn = true
@@ -293,7 +295,7 @@ object Distributions : Load {
     }
     allowDiagonal = false
     directionAny = false
-    health = 40
+    health = 120
     armor = 4f
     range = 10
     hasLiquids = false
@@ -348,6 +350,7 @@ object Distributions : Load {
         description = "高级的传送带桥,可以对节点的任意侧面配置指定物品的输入与输出"
       }
     }
+    health = 80
     requirements(Category.distribution, IItems.电子元件, 8, IItems.气凝胶, 8, IItems.铝锭, 10)
     range = 4
     arrowTimeScl = 6f
@@ -360,6 +363,7 @@ object Distributions : Load {
         description = "高级的传送带桥,具有更快的运输速度和更远的连接距离"
       }
     }
+    health = 150
     requirements(Category.distribution, IItems.絮凝剂, 6, IItems.气凝胶, 10, IItems.强化合金, 8, IItems.铝锭, 12)
     researchCostMultiplier = 1.5f
     itemCapacity = 15
@@ -384,6 +388,7 @@ object Distributions : Load {
     requirements(
       Category.distribution, IItems.絮凝剂, 4, IItems.铱锭, 4, IItems.FEX水晶, 6, IItems.气凝胶, 12, IItems.铝锭, 12
     )
+    health = 300
     researchCostMultiplier = 2f
     itemCapacity = 60
     maxItemCapacity = 180
@@ -419,7 +424,8 @@ object Distributions : Load {
       }
     }
     speed = 60f / 30f
-    health = 80
+    health = 100
+    armor = 4f
     requirementPairs(Category.distribution, IItems.铬锭 to 30, IItems.铱板 to 25, IItems.导能回路 to 15)
   }
   val 量子卸载器 = Unloader("electronicUninstaller").apply {

@@ -25,7 +25,7 @@ class MonocrystallineSiliconFactory : NormalCrafter("monocrystallineSiliconFacto
       }
     }
     size = 4
-    health = 460
+    health = 600
     hasPower = true
     craftEffect = IceEffects.square(IItems.单晶硅.color)
     newConsume().apply {

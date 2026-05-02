@@ -17,7 +17,8 @@ class 矿石粉碎机 :NormalCrafter("mineralCrusher") {
         description = "将复杂矿石质粉碎并筛选分类为更易处理的矿石,可配置"
       }
     }
-    health = 240
+    health = 810
+    itemCapacity = 30
     size = 4
     squareSprite = false
     hasLiquids = true
@@ -36,7 +37,7 @@ class 矿石粉碎机 :NormalCrafter("mineralCrusher") {
     })
     newConsume().apply {
       items(IItems.黑晶石, 1)
-      power(2f)
+      power(1.5f)
       time(30f)
     }
     newProduce().apply {
@@ -45,7 +46,7 @@ class 矿石粉碎机 :NormalCrafter("mineralCrusher") {
 
     newConsume().apply {
       items(IItems.黄玉髓, 1)
-      power(2f)
+      power(1.5f)
       time(30f)
     }
     newProduce().apply {
@@ -56,7 +57,7 @@ class 矿石粉碎机 :NormalCrafter("mineralCrusher") {
       consumers.apply {
         items(IItems.铱锇矿, 2)
         time(60f)
-        power(2f)
+        power(1.5f)
       }
       producers.apply {
         items(IItems.铱金混合物, 1)

@@ -27,21 +27,12 @@ open class 增压铈萃取器 :NormalCrafter("ceriumExtractorLarge") {
         details = "在特制的超高压密封反应釜内,通过液相沉淀的方式萃取铈\n相较初代密封性更强,具有更高的压力,能够更迅速的萃取铈"
       }
     }
+    health = 950
     size = 4
     itemCapacity = 48
     liquidCapacity = 210f
 
-    requirementPairs(
-      Category.crafting, IItems.铬锭 to 150,
-
-      IItems.石英玻璃 to 45,
-
-      IItems.铱板 to 120,
-
-      IItems.导能回路 to 80,
-
-      IItems.钴锭 to 55
-    )
+    requirements(Category.crafting, IItems.铬锭, 150, IItems.石英玻璃, 45, IItems.铱板, 120, IItems.导能回路, 80, IItems.钴锭, 55)
     drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidTile(Liquids.water), DrawCultivator().apply {
       plantColor = Color.valueOf("A24FAA")
       plantColorLight = Color.valueOf("F9A3C7")
@@ -74,7 +65,7 @@ open class 增压铈萃取器 :NormalCrafter("ceriumExtractorLarge") {
       time(80f)
       items(IItems.铈硅石, 5)
       liquid(Liquids.water, 15f / 60f)
-      power(7.6f)
+      power(5f)
     }
     newProduce().apply {
       items(IItems.铈锭, 2)
@@ -85,7 +76,7 @@ open class 增压铈萃取器 :NormalCrafter("ceriumExtractorLarge") {
       time(35f)
       items(IItems.铈硅石, 7)
       liquid(Liquids.water, 36f / 60f)
-      power(13.85f)
+      power(7.5f)
     }
     newProduce().apply {
       items(IItems.铈锭, 3)

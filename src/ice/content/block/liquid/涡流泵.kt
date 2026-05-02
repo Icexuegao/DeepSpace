@@ -18,11 +18,12 @@ class 涡流泵:Pump("vortexPump") {
         description = "急速泵送流体"
       }
     }
+    health = 450
     size = 3
     squareSprite = false
     pumpAmount = 0.5f
     liquidCapacity = 210f
     drawer = DrawMulti(DrawRegion("-bottom"), DrawPumpLiquid(), DrawDefault())
-    requirements(Category.liquid, IItems.铬锭, 50, IItems.锌锭, 40, IItems.黄铜锭, 25, IItems.石英玻璃, 30, IItems.钴锭, 30)
+    requirements(Category.liquid, IItems.铬锭, 50, IItems.锌锭, 40, IItems.黄铜锭, 25, IItems.石英玻璃, 30, IItems.钴锭, 30, IItems.单晶硅 ,20)
   }
 }
