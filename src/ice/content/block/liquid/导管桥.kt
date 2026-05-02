@@ -12,6 +12,7 @@ class 导管桥:TransferNode("bridgeConduit")  {
         description = "向任意方向传输流体,4个方向皆可输入输出"
       }
     }
+    health = 30
     range = 6
     hasItems = false
     hasPower = false
