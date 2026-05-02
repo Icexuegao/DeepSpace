@@ -21,11 +21,13 @@ class FEXPhaseMixer:NormalCrafter("FEX_phase_mixer"){
   }
   requirements(
     Category.crafting, ItemStack.with(
-      IItems.强化合金, 40, IItems.钴钢, 90, IItems.絮凝剂, 85, IItems.单晶硅, 80
+      IItems.强化合金, 40, IItems.钴钢, 90, IItems.絮凝剂, 85, IItems.单晶硅, 80, IItems.铪锭, 30
     )
   )
+  health = 800
   size = 2
   hasLiquids = true
+    itemCapacity = 20
   liquidCapacity = 60f
 
 
@@ -33,7 +35,7 @@ class FEXPhaseMixer:NormalCrafter("FEX_phase_mixer"){
   consume!!.time(120f)
   consume!!.item(IItems.钍锭, 2)
   consume!!.liquid(ILiquids.FEX流体, 0.2f)
-  consume!!.power(1.9f)
+  consume!!.power(2f)
   newProduce()
   produce!!.liquid(ILiquids.相位态FEX流体, 0.2f)
 
