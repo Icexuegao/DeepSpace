@@ -41,8 +41,9 @@ class NeutronIens:NormalCrafter("neutron_lens"){
       IItems.强化合金, 120, IItems.FEX水晶, 80, IItems.充能FEX水晶, 100, IItems.铱锭, 60, IItems.气凝胶, 120, IItems.絮凝剂, 90
     )
   )
+  health = 1250
   size = 4
-  itemCapacity = 20
+  itemCapacity = 30
   liquidCapacity = 210f
   energyCapacity = 1024f
   basicPotentialEnergy = 256f

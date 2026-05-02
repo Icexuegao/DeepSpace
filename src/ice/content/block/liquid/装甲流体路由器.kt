@@ -12,8 +12,9 @@ class 装甲流体路由器:LiquidRouter("armoredLiquidRouter")  {
         description = "将一个方向的流体平均输出到其他3个方向,可以储存一定量的流体.拥有更厚的装甲"
       }
     }
+    health = 220
     armor = 4f
-    liquidCapacity = 80f
+    liquidCapacity = 150f
     liquidPressure = 1.1f
     solid = false
     underBullets = true

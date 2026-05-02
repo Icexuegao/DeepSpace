@@ -27,7 +27,7 @@ class ThermalSmelter : NormalCrafter("thermal_smelter") {
     localization {
       zh_CN {
         this.localizedName = "热能冶炼炉"
-        description = ""
+        description = "以焦炭和氢气为双热源的高温冶炼炉，用于生产强化合金与铱锭。"
         details = "用于冶炼金属的设备,可以制造气流进行金属化合物的高温煅烧"
       }
     }
@@ -36,9 +36,10 @@ class ThermalSmelter : NormalCrafter("thermal_smelter") {
         IItems.铬锭, 65, IItems.单晶硅, 70, IItems.铜锭, 60, IItems.钴锭, 60, IItems.钴钢, 70
       )
     )
+    health = 550
     size = 3
     liquidCapacity = 120f
-    itemCapacity = 20
+    itemCapacity = 30
 
 
     newConsume()
@@ -49,7 +50,7 @@ class ThermalSmelter : NormalCrafter("thermal_smelter") {
       )
     )
     consume!!.liquid(ILiquids.氯化硅溶胶, 0.2f)
-    consume!!.power(2.6f)
+    consume!!.power(6f)
     newProduce()
     produce!!.item(IItems.强化合金, 4)
 

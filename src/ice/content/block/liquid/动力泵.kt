@@ -14,6 +14,7 @@ class 动力泵 :Pump("kineticPump") {
         description = "泵送流体"
       }
     }
+    health = 50
     size = 1
     squareSprite = false
     pumpAmount = 0.2f

@@ -20,6 +20,7 @@ class 钴钢压缩机 :NormalCrafter("cobaltSteelCompressor") {
         description = "将钴锭于铬锭压缩为钴钢,需通入水"
       }
     }
+    health = 480
     size = 3
     hasLiquids = true
     squareSprite = false
@@ -37,13 +38,13 @@ class 钴钢压缩机 :NormalCrafter("cobaltSteelCompressor") {
       glowScale = 5.652f
       color = Color.valueOf("F0511D")
     })
-    requirements(Category.crafting, IItems.高碳钢, 150, IItems.铬锭, 100, IItems.锌锭, 50)
+    requirements(Category.crafting, IItems.高碳钢, 150, IItems.铬锭, 100, IItems.锌锭, 50, IItems.钴锭, 50)
 
     newConsume().apply {
       time(36f)
       items(IItems.钴锭, 1, IItems.铬锭, 2)
       liquid(Liquids.water, 20f / 60f)
-      power(7.5f)
+      power(6f)
     }
     newProduce().apply {
       items(IItems.钴钢, 3)

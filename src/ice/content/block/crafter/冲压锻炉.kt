@@ -22,6 +22,7 @@ class 冲压锻炉 :NormalCrafter("pressingForge") {
         description = "将铱锇矿熔炼锻压为铱板,需要通入水,会产生废水"
       }
     }
+    health = 1800
     size = 5
     armor = 4f
     itemCapacity = 120
@@ -38,7 +39,7 @@ class 冲压锻炉 :NormalCrafter("pressingForge") {
       glowScale = 3.53429f
       color = Color.valueOf("F0511D")
     })
-    requirements(Category.crafting, IItems.高碳钢, 350, IItems.锌锭, 180, IItems.钴锭, 135)
+    requirements(Category.crafting, IItems.高碳钢, 250, IItems.锌锭, 180, IItems.钴锭, 120, IItems.铬锭, 80)
 
     newConsume().apply {
       time(60f)

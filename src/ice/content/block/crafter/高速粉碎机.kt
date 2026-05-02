@@ -18,6 +18,7 @@ class 高速粉碎机 :NormalCrafter("highSpeedCrusher") {
         description = "将黄玉髓粉碎为金珀沙"
       }
     }
+    health = 320
     size = 2
     itemCapacity = 24
     squareSprite = false

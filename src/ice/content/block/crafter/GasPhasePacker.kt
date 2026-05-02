@@ -28,6 +28,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
   }
   requirements(Category.crafting, IItems.强化合金, 80, IItems.气凝胶, 80, IItems.絮凝剂, 60, IItems.单晶硅, 60, IItems.钴锭, 45)
   size = 3
+  health = 1150
 
   hasLiquids = true
   liquidCapacity = 120f
@@ -37,7 +38,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
 
   newConsume()
   consume!!.time(240f)
-  consume!!.power(1.4f)
+  consume!!.power(3f)
   consume!!.items(IItems.絮凝剂, 2, IItems.气凝胶, 2)
   consume!!.liquid(ILiquids.氢气, 0.4f)
   newProduce()
@@ -45,7 +46,7 @@ class GasPhasePacker:NormalCrafter("gas_phase_packer"){
 
   newConsume()
   consume!!.time(240f)
-  consume!!.power(1.4f)
+  consume!!.power(3f)
   consume!!.items(IItems.絮凝剂, 2, IItems.气凝胶, 2)
   consume!!.liquid(ILiquids.氦气, 0.4f)
   newProduce()

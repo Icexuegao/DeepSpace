@@ -25,6 +25,7 @@ class CombustionChamber : NormalCrafter("combustion_chamber") {
         IItems.铬锭, 90, IItems.钴锭, 80, IItems.石英玻璃, 80, IItems.单晶硅, 75
       )
     )
+    health = 420
     size = 3
     liquidCapacity = 120f
     itemCapacity = 25

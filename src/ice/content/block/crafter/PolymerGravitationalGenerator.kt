@@ -42,6 +42,7 @@ class PolymerGravitationalGenerator : NormalCrafter("polymer_gravitational_gener
     requirements(
       Category.crafting, IItems.强化合金, 180, IItems.矩阵合金, 900, IItems.充能FEX水晶, 100, IItems.FEX水晶, 120, IItems.铱锭, 80, IItems.气凝胶, 100, IItems.暮光合金, 80
     )
+    health = 4500
     size = 5
     itemCapacity = 20
 

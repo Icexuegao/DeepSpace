@@ -24,6 +24,7 @@ class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
         description = "使用物质吸附及反渗透过滤技术制造的高效净化装置,能更有效的分离水中的杂质"
       }
     }
+    health = 450
     size = 3
     hasLiquids = true
     liquidCapacity = 120f
@@ -33,7 +34,7 @@ class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
       time(60f)
       liquid(Liquids.water, 2f)
       item(IItems.铝锭, 1)
-      power(1f)
+      power(1.5f)
     }
     newProduce().apply {
       liquid(ILiquids.纯净水, 2f)

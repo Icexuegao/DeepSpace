@@ -14,7 +14,7 @@ class 基础流体路由器:LiquidRouter("baseLiquidRouter")  {
     }
     liquidCapacity = 50f
     size = 1
-    health = 100
+    health = 150
     requirements(Category.liquid, IItems.铜锭, 4, IItems.石英玻璃, 2)
   }
 }

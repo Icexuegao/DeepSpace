@@ -25,19 +25,21 @@ class FuelPackager: NormalCrafter("fuel_packager"){
       IItems.强化合金, 45, IItems.絮凝剂, 40, IItems.单晶硅, 45, IItems.钴锭, 30
     )
   )
+  health = 800
   size = 2
+  itemCapacity = 20
   autoSelect = true
 
   newConsume()
   consume!!.time(120f)
   consume!!.items(*ItemStack.with(IItems.铀235, 2, IItems.强化合金, 1))
-  consume!!.power(1.5f)
+  consume!!.power(3.5f)
   newProduce()
   produce!!.item(IItems.浓缩铀235核燃料, 1)
   newConsume()
   consume!!.time(120f)
   consume!!.items(*ItemStack.with(IItems.钚239, 2, IItems.强化合金, 1))
-  consume!!.power(1.5f)
+  consume!!.power(3.5f)
   newProduce()
   produce!!.item(IItems.浓缩钚239核燃料, 1)
 

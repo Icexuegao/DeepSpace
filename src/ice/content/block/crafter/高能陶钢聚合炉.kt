@@ -23,12 +23,13 @@ class 高能陶钢聚合炉 : NormalCrafter("highEnergyCeramicSteelFurnace") {
         details = "依靠高能激光持续熔融原料以快速熔炼陶钢\n相比普通熔炼炉,熔炼效率及产物质量都有显著提升"
       }
     }
+    health = 2000
     size = 5
     dumpTime = 2
     itemCapacity = 120
     liquidCapacity = 300f
     newConsume().apply {
-      power(23.8f)
+      power(17f)
       time(4*60f)
       items(IItems.钴钢, 12, IItems.铈锭, 12, IItems.石英玻璃, 12)
       liquid(Liquids.water, 30f / 60f)
