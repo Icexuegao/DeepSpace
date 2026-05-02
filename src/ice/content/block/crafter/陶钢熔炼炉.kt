@@ -18,6 +18,7 @@ class 陶钢熔炼炉 :NormalCrafter("ceramicSteelFurnace") {
         description = "将石英玻璃,钴钢和铈锭熔炼为陶钢"
       }
     }
+    health = 600
     size = 3
     itemCapacity = 36
     canOverdrive = false
@@ -29,7 +30,7 @@ class 陶钢熔炼炉 :NormalCrafter("ceramicSteelFurnace") {
 
     newConsume().apply {
       time(60f)
-      power(7.75f)
+      power(5f)
       items(IItems.石英玻璃, 1, IItems.钴钢, 1, IItems.铈锭, 1)
 
     }
