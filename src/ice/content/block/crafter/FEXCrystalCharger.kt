@@ -32,7 +32,7 @@ class FEXCrystalCharger:NormalCrafter("FEX_crystal_charger"){
   basicPotentialEnergy = 128f
 
   newConsume()
-  consume!!.time(90f)
+  consume!!.time(60f)
   consume!!.item(IItems.FEX水晶, 1)
   consume!!.energy(2f)
   newProduce()
