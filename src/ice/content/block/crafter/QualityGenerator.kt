@@ -21,7 +21,8 @@ class QualityGenerator : MediumCrafter("quality_generator") {
         details = "将能量无序逆向转换的设备,将大量中子能向物质质量进行转换,将产出除夸克类介质外的纯净无序介质"
       }
     }
-    requirements(Category.crafting, IItems.铱锭, 50, IItems.充能FEX水晶, 80, IItems.絮凝剂, 50, IItems.暮光合金, 20)
+    requirements(Category.crafting, IItems.铱锭, 50, IItems.充能FEX水晶, 80, IItems.絮凝剂, 50, IItems.暮光合金, 20, IItems.矩阵合金, 20)
+    health = 2250
     size = 4
 
 
