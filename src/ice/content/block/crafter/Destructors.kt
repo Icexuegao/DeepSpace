@@ -3,7 +3,7 @@ package ice.content.block.crafter
 import arc.Core
 import ice.content.AtomSchematics
 import ice.content.IItems
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.graphics.Pal
 import mindustry.type.Category

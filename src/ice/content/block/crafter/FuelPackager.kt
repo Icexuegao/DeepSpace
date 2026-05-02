@@ -3,7 +3,7 @@ package ice.content.block.crafter
 import arc.func.Floatf
 import arc.func.Func
 import ice.content.IItems
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
 import mindustry.type.ItemStack

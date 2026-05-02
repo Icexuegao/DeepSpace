@@ -10,11 +10,9 @@ import java.util.Arrays;
 
 import static mindustry.Vars.maxBlockSize;
 
-/**
- * 在进行有方向的边缘坐标遍历时使用的工具集
+/** 在进行有方向的边缘坐标遍历时使用的工具集
  * @author EBwilson
- * @since 1.5
- */
+ * @since 1.5 */
 public class DirEdges {
   private static final Point2[][][] edges = new Point2[Vars.maxBlockSize + 1][4][0];
   private static final Point2[][][] angle = new Point2[Vars.maxBlockSize + 1][4][1];

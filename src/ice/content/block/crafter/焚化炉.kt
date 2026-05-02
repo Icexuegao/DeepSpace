@@ -16,8 +16,8 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 
 import ice.world.content.blocks.liquid.LiquidJunction
-import ice.world.draw.DrawBuild
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.ctype.ContentType
 import mindustry.entities.Effect

@@ -3,7 +3,7 @@ package ice.content.block.crafter
 import arc.graphics.Color
 import ice.content.IItems
 
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame

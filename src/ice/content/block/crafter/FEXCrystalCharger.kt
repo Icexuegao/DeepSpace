@@ -4,7 +4,7 @@ import arc.func.Cons
 import arc.func.Floatf
 import arc.math.Mathf
 import ice.content.IItems
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.graphics.Layer
 import mindustry.type.Category
 import mindustry.world.Block

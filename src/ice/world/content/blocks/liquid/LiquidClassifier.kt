@@ -8,8 +8,8 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import universecore.scene.ui.ItemSelection
 import universecore.struct.texture.LazyTextureSingleDelegate
-import ice.world.draw.DrawBuild
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building

@@ -16,7 +16,7 @@ import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.weapon.MayflyWeapon
-import ice.world.draw.part.CustomPart
+import universecore.world.draw.part.CustomPart
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Units

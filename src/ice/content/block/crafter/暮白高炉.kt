@@ -4,9 +4,9 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.graphics.IceColor
 
-import ice.world.draw.DrawArcSmelt
-import ice.world.draw.DrawLiquidRegion
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawArcSmelt
+import universecore.world.draw.DrawLiquidRegion
+import universecore.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault

@@ -21,7 +21,7 @@ import ice.content.IItems
 import ice.graphics.IceColor
 import universecore.scene.ui.updateE
 
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.gen.Icon

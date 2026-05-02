@@ -9,7 +9,7 @@ import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
 
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.entities.Damage
 import mindustry.graphics.Layer

@@ -6,8 +6,8 @@ import arc.graphics.g2d.Lines
 import arc.math.Mathf
 import ice.content.IItems
 
-import ice.world.draw.DrawBuild
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.Vars
 import mindustry.type.Category

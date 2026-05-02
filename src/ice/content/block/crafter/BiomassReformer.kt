@@ -2,7 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import universecore.util.toColor
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 import mindustry.type.Category

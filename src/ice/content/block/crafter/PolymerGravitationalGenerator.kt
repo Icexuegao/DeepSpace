@@ -11,7 +11,7 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
 
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Drawf

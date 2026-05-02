@@ -5,7 +5,7 @@ import arc.graphics.g2d.Draw
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Liquids
 import mindustry.gen.Building

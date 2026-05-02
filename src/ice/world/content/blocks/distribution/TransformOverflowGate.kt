@@ -13,8 +13,8 @@ import ice.graphics.IceColor
 
 import universecore.scene.ui.itooltip
 import universecore.struct.texture.LazyTextureSingleDelegate
-import ice.world.draw.DrawBuild
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.type.Item
 import mindustry.ui.Styles

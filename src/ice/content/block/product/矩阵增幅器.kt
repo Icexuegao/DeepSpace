@@ -5,7 +5,7 @@ import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import arc.util.Time
 import ice.content.IItems
-import ice.world.draw.DrawBuild
+import universecore.world.draw.DrawBuild
 import mindustry.Vars
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal

@@ -2,8 +2,8 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 
-import ice.world.draw.DrawArcSmelt
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawArcSmelt
+import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.RadialEffect
 import mindustry.type.Category

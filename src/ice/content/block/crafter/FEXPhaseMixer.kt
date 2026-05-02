@@ -2,7 +2,7 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.draw.DrawDefault

@@ -1,4 +1,4 @@
-package ice.world.draw.part
+package universecore.world.draw.part
 
 import arc.graphics.g2d.Draw
 import arc.math.Mathf

@@ -7,7 +7,7 @@ import ice.content.ILiquids
 import ice.entities.effect.MultiEffect
 import universecore.util.toColor
 
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.WrapEffect
 import mindustry.type.Category

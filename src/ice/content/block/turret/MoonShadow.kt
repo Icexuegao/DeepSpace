@@ -10,7 +10,7 @@ import ice.entities.effect.MultiEffect
 import ice.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.bullet.ShrapnelBulletType
 import mindustry.entities.effect.ExplosionEffect

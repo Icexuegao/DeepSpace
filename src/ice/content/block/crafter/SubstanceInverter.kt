@@ -9,7 +9,7 @@ import arc.util.Time
 import arc.util.noise.Noise
 import ice.content.IItems
 
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.Effect
 import mindustry.gen.Building

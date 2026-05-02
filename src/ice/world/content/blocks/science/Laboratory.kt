@@ -8,7 +8,7 @@ import arc.util.Time
 import ice.content.IItems
 import ice.graphics.IceColor
 import ice.world.content.blocks.IceBlockComponents.calwavetimeremain
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.gen.Iconc
 import mindustry.graphics.Pal
 import mindustry.type.Category
@@ -17,7 +17,6 @@ import mindustry.ui.Bar
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawGlowRegion
 import mindustry.world.draw.DrawRegion
-import singularity.contents.SglTechThree
 import singularity.world.blocks.SglBlock
 
 open class Laboratory(name: String) : SglBlock(name) {

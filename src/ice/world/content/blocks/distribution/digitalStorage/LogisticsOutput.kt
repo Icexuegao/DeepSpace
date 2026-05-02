@@ -6,8 +6,8 @@ import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
 import universecore.scene.ui.ItemSelection
-import ice.world.draw.DrawMulti
-import ice.world.draw.DrawRegionColor
+import universecore.world.draw.DrawMulti
+import universecore.world.draw.DrawRegionColor
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.type.Item

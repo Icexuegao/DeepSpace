@@ -4,7 +4,7 @@ import arc.Core
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.type.Category
 import mindustry.world.Block

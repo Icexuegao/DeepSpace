@@ -7,8 +7,8 @@ import ice.content.IItems
 import universecore.struct.texture.LazyTextureSingleDelegate
 
 import ice.world.content.item.IceItem
-import ice.world.draw.DrawBuild
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.Vars
 import mindustry.game.Team

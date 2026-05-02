@@ -11,7 +11,7 @@ import arc.util.Time
 import ice.content.IItems
 import ice.content.ILiquids
 import universecore.struct.AttachedProperty
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.content.Liquids

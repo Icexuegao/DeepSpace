@@ -15,8 +15,8 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.IVars
 import ice.graphics.IceColor
-import ice.world.draw.DrawBuild
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.Blocks

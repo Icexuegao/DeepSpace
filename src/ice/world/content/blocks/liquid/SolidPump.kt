@@ -5,9 +5,9 @@ import arc.func.Prov
 import arc.math.Mathf
 import arc.util.Time
 import universecore.scene.ui.iTable
-import ice.world.draw.DrawLiquidRegion
-import ice.world.draw.DrawMulti
-import ice.world.draw.DrawRegionNull
+import universecore.world.draw.DrawLiquidRegion
+import universecore.world.draw.DrawMulti
+import universecore.world.draw.DrawRegionNull
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Liquids

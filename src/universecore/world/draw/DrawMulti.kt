@@ -1,4 +1,4 @@
-package ice.world.draw
+package universecore.world.draw
 
 import arc.graphics.g2d.TextureRegion
 import arc.struct.Seq

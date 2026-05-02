@@ -3,8 +3,8 @@ package ice.world.content.blocks.liquid.base
 import arc.Core
 import arc.func.Prov
 import arc.graphics.g2d.TextureRegion
-import ice.world.draw.DrawBuild
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 import mindustry.graphics.Drawf
 import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.BlockGroup

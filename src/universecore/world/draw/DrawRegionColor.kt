@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package ice.world.draw
+package universecore.world.draw
 
 import arc.func.Func
 import arc.graphics.Color

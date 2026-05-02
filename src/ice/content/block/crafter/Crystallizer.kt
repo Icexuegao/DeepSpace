@@ -4,8 +4,8 @@ import arc.Core
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.world.draw.DrawDefaultBottom
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawDefaultBottom
+import universecore.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.Block

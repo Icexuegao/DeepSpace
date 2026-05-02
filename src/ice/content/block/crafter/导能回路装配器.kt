@@ -4,7 +4,7 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
 
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds

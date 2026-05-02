@@ -17,14 +17,12 @@ import mindustry.graphics.Drawf
 import universecore.graphics.lightnings.generator.LightningGenerator
 import kotlin.math.min
 
-/**
- * 单条闪电的存储容器，保存了闪电的起始时间还有闪电的顶点信息
+/** 单条闪电的存储容器，保存了闪电的起始时间还有闪电的顶点信息
  * 此类实例大量，应当复用
  *
  * @since 2.3
- * @author EBwilson
- */
-class Lightning private constructor() : Pool.Poolable {
+ * @author EBwilson */
+class Lightning private constructor() :Pool.Poolable {
   val vertices: Seq<LightningVertex> = Seq<LightningVertex>()
 
   /**闪电的持续时间 */
@@ -72,7 +70,7 @@ class Lightning private constructor() : Pool.Poolable {
   fun update() {
     if (time == 0f && cursor < vertices.size) {
       var per: LightningVertex? = null
-      for (vertex in vertices) {
+      for(vertex in vertices) {
         if (per != null) {
           per.progress = 1f
           vertex.valid = true
@@ -84,7 +82,7 @@ class Lightning private constructor() : Pool.Poolable {
     } else {
       var increase = vertices.size / time * Time.delta
 
-      while (increase > 0) {
+      while(increase > 0) {
         if (cursor == 0) {
           cursor++
         }
@@ -105,7 +103,7 @@ class Lightning private constructor() : Pool.Poolable {
       }
     }
 
-    for (vertex in vertices) {
+    for(vertex in vertices) {
       if (!vertex.isEnd && !vertex.isStart && vertex.valid) vertex.update()
     }
   }
@@ -121,13 +119,11 @@ class Lightning private constructor() : Pool.Poolable {
 
     if (!fade) lerp = 1f
 
-    for (i in 2..vertices.size) {
-      val v1 =
-        if (i - 3 >= 0) vertices.get(i - 3) else if (enclosed) vertices.get(Mathf.mod(i - 3, vertices.size)) else null
+    for(i in 2..vertices.size) {
+      val v1 = if (i - 3 >= 0) vertices.get(i - 3) else if (enclosed) vertices.get(Mathf.mod(i - 3, vertices.size)) else null
       val v2 = vertices.get(i - 2)
       val v3 = vertices.get(i - 1)
-      val v4 =
-        if (i < vertices.size) vertices.get(i) else if (enclosed) vertices.get(Mathf.mod(i, vertices.size)) else null
+      val v4 = if (i < vertices.size) vertices.get(i) else if (enclosed) vertices.get(Mathf.mod(i, vertices.size)) else null
 
       var lastOffX: Float
       var lastOffY: Float
@@ -205,11 +201,7 @@ class Lightning private constructor() : Pool.Poolable {
       }
 
       Drawf.light(
-        orgX, orgY,
-        orgX + Tmp.v1.x, orgY + Tmp.v1.y,
-        width * 32,
-        Draw.getColor(),
-        Draw.getColor().a
+        orgX, orgY, orgX + Tmp.v1.x, orgY + Tmp.v1.y, width * 32, Draw.getColor(), Draw.getColor().a
       )
 
       v2.draw(x, y)
@@ -217,7 +209,7 @@ class Lightning private constructor() : Pool.Poolable {
   }
 
   override fun reset() {
-    for (vertex in vertices) {
+    for(vertex in vertices) {
       Pools.free(vertex)
     }
     vertices.clear()
@@ -275,7 +267,7 @@ class Lightning private constructor() : Pool.Poolable {
       generator.setCurrentGen(result)
 
       var last: LightningVertex? = null
-      for (vertex in generator) {
+      for(vertex in generator) {
         result.vertices.add(vertex)
         if (last != null) {
           result.totalLength += Mathf.len(vertex.x - last.x, vertex.y - last.y)

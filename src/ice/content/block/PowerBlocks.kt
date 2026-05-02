@@ -24,7 +24,7 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.power.PowerNode
-import ice.world.draw.DrawFloorLiquid
+import universecore.world.draw.DrawFloorLiquid
 import ice.world.meta.IceEffects
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -225,7 +225,7 @@ object PowerBlocks : Load {
     size=2
     health=300
     craftEffect= Fx.flakExplosion
-    drawers= ice.world.draw.DrawMulti(DrawBottom(), DrawPistons().also{
+    drawers= universecore.world.draw.DrawMulti(DrawBottom(), DrawPistons().also{
       it.sinMag = 1.5f
       it.lenOffset=3.5f
     }, DrawDefault())

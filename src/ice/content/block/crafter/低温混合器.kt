@@ -6,8 +6,8 @@ import arc.math.Angles
 import ice.content.IItems
 import ice.content.ILiquids
 
-import ice.world.draw.DrawLiquidRegion
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawLiquidRegion
+import universecore.world.draw.DrawMulti
 import ice.world.meta.IAttribute
 import mindustry.content.Liquids
 import mindustry.entities.Effect

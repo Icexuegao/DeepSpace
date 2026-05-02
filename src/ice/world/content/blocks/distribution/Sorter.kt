@@ -16,8 +16,8 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import universecore.scene.ui.ItemSelection
 import universecore.scene.ui.itooltip
-import ice.world.draw.DrawBuild
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building

@@ -14,10 +14,10 @@ import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.graphics.IceColor
-import ice.world.draw.DrawCracks
-import ice.world.draw.DrawMulti
-import ice.world.draw.DrawRegionColor
-import ice.world.draw.DrawRim
+import universecore.world.draw.DrawCracks
+import universecore.world.draw.DrawMulti
+import universecore.world.draw.DrawRegionColor
+import universecore.world.draw.DrawRim
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Effect

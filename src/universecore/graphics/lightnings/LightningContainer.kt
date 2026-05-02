@@ -12,12 +12,11 @@ import arc.util.pooling.Pools
 import universecore.graphics.lightnings.generator.LightningGenerator
 import kotlin.math.max
 
-/**闪电容器，使用一个闪电生成器产生闪电，由容器进行处理和绘制，通常用于一类闪电用同一个容器存储
+/** 闪电容器，使用一个闪电生成器产生闪电，由容器进行处理和绘制，通常用于一类闪电用同一个容器存储
  *
  * @since 2.3
- * @author EBwilson
- */
-open class LightningContainer : Iterable<Lightning?> {
+ * @author EBwilson */
+open class LightningContainer :Iterable<Lightning?> {
   /**闪电从产生到完全出现需要的时间，这会平摊给每一段闪电，fps为当前帧率
    * 但如果这个值为0,那么闪电会立即出现 */
   var time: Float = 0f
@@ -57,15 +56,7 @@ open class LightningContainer : Iterable<Lightning?> {
   fun create(generator: LightningGenerator) {
     generator.branched(branchCreated)
     val lightning = Lightning.create(
-      generator,
-      Mathf.random(minWidth, maxWidth),
-      lifeTime,
-      if (fadeTime > 0) fadeTime else lifeTime,
-      lerp,
-      time,
-      fade,
-      backFade,
-      trigger
+      generator, Mathf.random(minWidth, maxWidth), lifeTime, if (fadeTime > 0) fadeTime else lifeTime, lerp, time, fade, backFade, trigger
     )
     lightning.headClose = headClose
     lightning.endClose = endClose
@@ -79,7 +70,7 @@ open class LightningContainer : Iterable<Lightning?> {
   /**更新一次当前容器中所有子闪电的状态 */
   fun update() {
     val itr = lightnings.iterator()
-    while (itr.hasNext()) {
+    while(itr.hasNext()) {
       val lightning = itr.next()
       clipSize = max(clipSize, lightning.clipSize)
 
@@ -101,7 +92,7 @@ open class LightningContainer : Iterable<Lightning?> {
    * @param y 绘制闪电的原点y坐标
    */
   fun draw(x: Float, y: Float) {
-    for (lightning in lightnings) {
+    for(lightning in lightnings) {
       lightning.draw(x, y)
     }
   }
@@ -111,7 +102,7 @@ open class LightningContainer : Iterable<Lightning?> {
   }
 
   /**闪电分支容器，用于绘制分支闪电，会递归绘制所有的子分支 */
-  class PoolLightningContainer : LightningContainer(), Pool.Poolable {
+  class PoolLightningContainer :LightningContainer(), Pool.Poolable {
     override fun reset() {
       time = 0f
       lifeTime = 0f
@@ -122,7 +113,7 @@ open class LightningContainer : Iterable<Lightning?> {
       branchCreated = null
       trigger = null
 
-      for (lightning in lightnings) {
+      for(lightning in lightnings) {
         Pools.free(lightning)
       }
       lightnings.clear()
@@ -130,8 +121,7 @@ open class LightningContainer : Iterable<Lightning?> {
 
     companion object {
       fun create(lifeTime: Float, minWidth: Float, maxWidth: Float): PoolLightningContainer {
-        val result =
-          Pools.obtain<PoolLightningContainer?>(PoolLightningContainer::class.java, Prov { PoolLightningContainer() })
+        val result = Pools.obtain<PoolLightningContainer?>(PoolLightningContainer::class.java, Prov { PoolLightningContainer() })
         result.lifeTime = lifeTime
         result.minWidth = minWidth
         result.maxWidth = maxWidth

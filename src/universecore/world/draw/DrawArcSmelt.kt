@@ -1,4 +1,4 @@
-package ice.world.draw
+package universecore.world.draw
 
 import arc.graphics.Blending
 import arc.graphics.Color

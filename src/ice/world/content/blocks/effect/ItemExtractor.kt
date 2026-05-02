@@ -6,8 +6,8 @@ import arc.graphics.g2d.Lines
 import arc.util.Time
 import arc.util.Timer
 import ice.world.content.blocks.IceBlockComponents.timesex
-import ice.world.draw.DrawBuild
-import ice.world.draw.DrawMulti
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.Vars
 import mindustry.gen.Building
