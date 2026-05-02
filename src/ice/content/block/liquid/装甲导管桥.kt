@@ -12,6 +12,7 @@ class 装甲导管桥:TransferNode("bridgeConduitArmored")  {
         description = "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体.拥有更厚的装甲"
       }
     }
+    health = 220
     directionAny = false
     armor = 4f
     allowDiagonal = false
@@ -21,7 +22,7 @@ class 装甲导管桥:TransferNode("bridgeConduitArmored")  {
     bridgeWidth = 8f
     hasPower = false
     arrowSpacing = 6f
-    liquidCapacity = 80f
+    liquidCapacity = 120f
     placeableLiquid = true
     requirements(Category.liquid, IItems.石英玻璃, 8, IItems.陶钢, 3, IItems.铱板, 5)
   }
