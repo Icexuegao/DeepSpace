@@ -14,7 +14,7 @@ import mindustry.type.Category
 import mindustry.world.draw.DrawBlock
 import mindustry.world.draw.DrawDefault
 import singularity.graphic.SglDrawConst
-import singularity.util.MathTransform
+import universecore.util.MathTransform
 import singularity.world.blocks.drills.MatrixMinerComponent
 import singularity.world.blocks.drills.MatrixMinerSector.MatrixMinerSectorBuild
 

@@ -1,4 +1,4 @@
-package singularity.util;
+package universecore.util;
 
 import arc.func.Floatc2;
 import arc.math.Angles;

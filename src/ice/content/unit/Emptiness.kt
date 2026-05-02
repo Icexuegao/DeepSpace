@@ -32,7 +32,7 @@ import mindustry.type.Weapon
 import mindustry.world.meta.BlockFlag
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
-import singularity.util.MathTransform
+import universecore.util.MathTransform
 import singularity.world.SglFx
 import singularity.world.blocks.turrets.EmpBulletType
 import singularity.world.blocks.turrets.MultiTrailBulletType

@@ -35,12 +35,7 @@ import mindustry.type.UnitType
 import mindustry.ui.Styles
 import mindustry.world.meta.BuildVisibility
 import universecore.scene.listener.DragInputListener
-import universecore.scene.ui.addCaptureListeners
-import universecore.scene.ui.addLine
-import universecore.scene.ui.iTableG
-import universecore.scene.ui.icePane
-import universecore.scene.ui.imageButton
-import universecore.scene.ui.setPositions
+import universecore.scene.ui.*
 import universecore.util.isNumericWithSign
 
 object DeBugFragment {
@@ -113,9 +108,6 @@ object DeBugFragment {
       button("科技", Icon.treeSmall, ::unlock)
       button("物品", Icon.pasteSmall, ::items)
       button("清除日志", Icon.fileTextSmall, Vars.ui.consolefrag::clearMessages)
-      button("传教", Icon.bookOpenSmall) {
-        Incident.announce("[red]<<传教>> 你的信仰疑似有点动摇[]", 9f)
-      }
       button("折跃", Icon.bookOpenSmall) {
       }
       button("剧情", Icon.bookOpenSmall) {

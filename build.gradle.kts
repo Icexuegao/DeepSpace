@@ -66,7 +66,8 @@ repositories {
 }
 dependencies {
   implementation("com.github.EB-wilson.UniverseKit:reflection:1.1")
-
+  implementation("com.github.EB-wilson.UniverseKit:markdown:1.1")
+  implementation("com.github.EB-wilson.UniverseKit:graphic:1.1")
   compileOnly(mdtVersion)
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")

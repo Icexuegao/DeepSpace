@@ -20,7 +20,7 @@ import mindustry.ui.fragments.MenuFragment
 import singularity.Sgl
 import singularity.Singularity
 import universecore.UncCore
-import universecore.ui.elements.BloomGroup
+import universecore.scene.ui.BloomGroup
 import universecore.util.handler.FieldHandler
 import universecore.util.handler.MethodHandler
 import kotlin.math.min

@@ -1,4 +1,4 @@
-package singularity.util.func;
+package universecore.util.funcs;
 
 @FunctionalInterface
 public interface Floatc3 {

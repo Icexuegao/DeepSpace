@@ -31,7 +31,7 @@ import singularity.graphic.SglDraw;
 import singularity.graphic.SglDrawConst;
 import singularity.world.blocks.turrets.EmpBulletType;
 import singularity.world.blocks.turrets.HeatBulletType;
-import universecore.ui.elements.BloomGroup;
+import universecore.scene.ui.BloomGroup;
 
 import static mindustry.Vars.tilesize;
 

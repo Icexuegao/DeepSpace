@@ -24,7 +24,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawMulti
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
-import singularity.util.MathTransform
+import universecore.util.MathTransform
 import singularity.world.blocks.product.HoveringUnitFactory
 import singularity.world.blocks.product.SglUnitFactory
 import universecore.world.consumers.BaseConsumers

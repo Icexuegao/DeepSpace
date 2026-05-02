@@ -22,7 +22,7 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
-import singularity.util.MathTransform
+import universecore.util.MathTransform
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic

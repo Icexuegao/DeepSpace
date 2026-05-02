@@ -24,7 +24,7 @@ import mindustry.graphics.Pal
 import mindustry.type.Category
 import singularity.graphic.SglDraw
 import singularity.ui.UIUtils
-import singularity.util.MathTransform
+import universecore.util.MathTransform
 import singularity.world.SglFx
 import singularity.world.SglUnitSorts
 import singularity.world.blocks.turrets.HeatBulletType

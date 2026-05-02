@@ -12,14 +12,14 @@ import ice.DeepSpace
 import ice.Ice
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import universecore.struct.ConfigPropertyDelegate
-import universecore.struct.texture.asDrawable
 import mindustry.Vars
 import mindustry.ui.dialogs.BaseDialog
 import singularity.Sgl
 import singularity.ui.fragments.notification.Notification
-import universecore.ui.elements.markdown.Markdown
-import universecore.ui.elements.markdown.MarkdownStyles
+import universe.ui.markdown.Markdown
+import universe.ui.markdown.MarkdownStyles
+import universecore.struct.ConfigPropertyDelegate
+import universecore.struct.texture.asDrawable
 import universecore.util.DataPackable
 
 object Documents {

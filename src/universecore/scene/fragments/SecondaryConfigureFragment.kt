@@ -1,8 +1,7 @@
-package universecore.ui.fragments
+package universecore.scene.fragments
 
 import arc.Core
 import arc.Events
-import arc.func.Cons
 import arc.math.Interp
 import arc.scene.Element
 import arc.scene.Group

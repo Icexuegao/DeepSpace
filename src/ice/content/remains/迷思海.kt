@@ -16,13 +16,8 @@ import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
 import arc.struct.Seq
 import arc.util.Time
-import ice.graphics.IceColor
 import ice.core.IFiles.appendModName
-import universecore.math.slope
-import universecore.scene.style.DynamicTextureDrawable
-import universecore.scene.ui.colorR
-import universecore.struct.ConfigPropertyDelegate
-import universecore.util.accessFloat
+import ice.graphics.IceColor
 import ice.type.Remains
 import ice.world.meta.IceEffects
 import mindustry.Vars
@@ -30,7 +25,12 @@ import mindustry.entities.Effect
 import mindustry.gen.Tex
 import mindustry.ui.Fonts
 import singularity.core.UpdatePool
-import universecore.ui.elements.SceneEffect
+import universecore.math.slope
+import universecore.scene.style.DynamicTextureDrawable
+import universecore.scene.ui.colorR
+import universecore.struct.ConfigPropertyDelegate
+import universecore.scene.ui.SceneEffect
+import universecore.util.accessFloat
 import kotlin.math.max
 import kotlin.math.sin
 
@@ -60,7 +60,6 @@ class 迷思海 :Remains("remains_mystic_sea") {
         Draw.alpha(e.fin().slope)
         Fill.rect(e.x, e.y, 8f, 8f, Time.time % 360f * e.fin())
       }
-
 
       UpdatePool.receive("remains_mystic_sea") {
         if (!Vars.state.isGame || Core.scene.hasDialog() || Vars.state.isPaused) return@receive

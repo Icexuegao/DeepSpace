@@ -6,24 +6,20 @@ import arc.math.Interp
 import arc.math.Mathf
 import kotlin.math.min
 
-
 operator fun Interp.invoke(x: Float) = this.apply(x)
 
 /** @return 从接收者到 [target] 的插值数 */
-fun Float.lerp(target: Float, progress: Progress) =
-  Mathf.lerp(this, target, progress)
+fun Float.lerp(target: Float, progress: Progress) = Mathf.lerp(this, target, progress)
 /** @return 自身 */
 fun FloatArray.lerp(target: FloatArray, progress: Progress) = this.apply {
-  for (i in 0 until min(target.size, target.size)) {
+  for(i in 0 until min(target.size, target.size)) {
     this[i] = this[i].lerp(target[i], progress)
   }
 }
 
-fun Float.approach(to: Float, speed: Float) =
-  Mathf.approach(this, to, speed)
+fun Float.approach(to: Float, speed: Float) = Mathf.approach(this, to, speed)
 
-fun Float.approachDelta(to: Float, speed: Float) =
-  Mathf.approachDelta(this, to, speed)
+fun Float.approachDelta(to: Float, speed: Float) = Mathf.approachDelta(this, to, speed)
 /**返回平滑插值。
  * @receiver 任意数字，最终被限制在 [0f,1f]
  * @return [0f,1f]*/
@@ -72,8 +68,7 @@ val Progress.pow3InIntrp: Progress
 /** @param growingTime 递增的数值
  * @param maxTime 最大边界
  * @return [0f,1f]，递增 */
-fun progressTime(growingTime: Float, maxTime: Float): Progress =
-  (growingTime / maxTime).coerceIn(0f, 1f)
+fun progressTime(growingTime: Float, maxTime: Float): Progress = (growingTime / maxTime).coerceIn(0f, 1f)
 
 fun dweep(time: Float) {
   progressTime(1f, 2f).smooth

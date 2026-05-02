@@ -17,7 +17,7 @@ import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
-import singularity.util.MathTransform;
+import universecore.util.MathTransform;
 import singularity.world.SglFx;
 import singularity.world.meta.SglStat;
 

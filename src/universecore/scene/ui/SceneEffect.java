@@ -1,4 +1,4 @@
-package universecore.ui.elements;
+package universecore.scene.ui;
 
 import arc.Core;
 import arc.func.Cons;

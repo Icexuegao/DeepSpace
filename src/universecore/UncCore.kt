@@ -20,7 +20,7 @@ import universecore.desktopcore.desktop.ClassHelper
 import universecore.desktopcore.desktop.DesktopImpl
 import universecore.desktopcore.desktop.FieldAccessHelper
 import universecore.desktopcore.desktop.MethodInvokeHelper
-import universecore.ui.fragments.SecondaryConfigureFragment
+import universecore.scene.fragments.SecondaryConfigureFragment
 import universecore.util.handler.CategoryHandler
 import universecore.util.handler.FieldHandler
 

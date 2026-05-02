@@ -21,7 +21,7 @@ import mindustry.game.EventType;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import singularity.Sgl;
-import singularity.util.func.Floatc3;
+import universecore.util.funcs.Floatc3;
 
 import java.util.Arrays;
 

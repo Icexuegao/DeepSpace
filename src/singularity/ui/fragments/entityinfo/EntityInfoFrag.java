@@ -32,7 +32,7 @@ import singularity.Sgl;
 import singularity.core.UpdatePool;
 import singularity.graphic.SglDraw;
 import singularity.graphic.SglDrawConst;
-import singularity.util.MathTransform;
+import universecore.util.MathTransform;
 
 import java.util.Iterator;
 import java.util.Objects;
