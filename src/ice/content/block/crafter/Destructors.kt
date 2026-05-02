@@ -24,6 +24,7 @@ class Destructors : NormalCrafter("destructor") {
       }
     }
     requirements(Category.crafting, IItems.简并态中子聚合物, 100, IItems.矩阵合金, 50, IItems.絮凝剂, 40, IItems.强化合金, 50, IItems.铱锭, 60)
+    health = 4500
     size = 5
 
     recipeIndfo = "析构物品"
