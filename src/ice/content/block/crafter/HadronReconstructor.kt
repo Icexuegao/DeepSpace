@@ -23,20 +23,8 @@ class HadronReconstructor : AtomSchematicCrafter("hadron_reconstructor") {
         details = "微缩的定向大量强子对撞机,使得创造物质从理论成为现实"
       }
     }
-    requirementPairs(
-      Category.crafting,
-      IItems.简并态中子聚合物 to 80,
-
-      IItems.铱锭 to 120,
-
-      IItems.充能FEX水晶 to 120,
-
-      IItems.矩阵合金 to 90,
-
-      IItems.气凝胶 to 120,
-
-      IItems.暮光合金 to 90
-    )
+    requirements(Category.crafting, IItems.简并态中子聚合物, 80, IItems.矩阵合金, 90, IItems.铱锭, 120, IItems.气凝胶, 120, IItems.暮光合金, 90, IItems.充能FEX水晶, 120)
+    health = 4500
     size = 4
     itemCapacity = 24
 
