@@ -16,7 +16,7 @@ class Michael :IceUnitType("unit_michael") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "米迦勒"
+        localizedName = "米迦勒"
       }
     }
     armor = 1f
@@ -38,7 +38,7 @@ class Michael :IceUnitType("unit_michael") {
     drag = 0.05f
     accel = 0.11f
     outlines = false
-    engineLayer= Layer.flyingUnitLow-1f
+    engineLayer = Layer.flyingUnitLow - 1f
     setWeapon("weapon") {
       x = 5.875f
       y = 1.625f
@@ -71,8 +71,6 @@ class Michael :IceUnitType("unit_michael") {
     Draw.color(outlineColor)
     Draw.rect("$name-outline", unit.x, unit.y, unit.rotation - 90)
   }
-
-
 
   override fun createIcons(packer: MultiPacker) {
     super.createIcons(packer)

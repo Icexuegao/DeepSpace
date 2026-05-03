@@ -37,19 +37,7 @@ open class Noise2dBlock(name: String) : SglBlock(name) {
 
   inner class Noise2dBuild : SglBuilding() {
     val branch: RandomGenerator = RandomGenerator()
-    var lig = RandomGenerator().apply {
-      maxLength = 100f
-      maxDeflect = 55f
 
-      branchChance = 0.2f
-      minBranchStrength = 0.8f
-      maxBranchStrength = 1f
-      branchMaker = Func2 { vert: LightningVertex?, strength: Float? ->
-        branch.maxLength = 60 * strength!!
-        branch.originAngle = vert!!.angle + Mathf.random(-90, 90)
-        branch
-      }
-    }
     var con = LightningContainer()
 
     override fun draw() {

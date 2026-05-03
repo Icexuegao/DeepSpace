@@ -221,11 +221,11 @@ object TurretBullets {
     }
   }
   val branch = RandomGenerator()
-  fun lightning(lifeTime: Float, damage: Float, size: Float, color: Color?, gradient: Boolean, generator: Func<Bullet, LightningGenerator>): singularity.world.blocks.turrets. LightningBulletType {
+  fun lightning(lifeTime: Float, damage: Float, size: Float, color: Color, gradient: Boolean, generator: Func<Bullet, LightningGenerator>): singularity.world.blocks.turrets. LightningBulletType {
     return lightning(lifeTime, if (gradient) lifeTime / 2 else 0f, damage, size, color, generator)
   }
 
-  fun lightning(lifeTime: Float, time: Float, damage: Float, size: Float, color: Color?, generator: Func<Bullet, LightningGenerator>): singularity.world.blocks.turrets. LightningBulletType {
+  fun lightning(lifeTime: Float, time: Float, damage: Float, size: Float, color: Color, generator: Func<Bullet, LightningGenerator>): singularity.world.blocks.turrets. LightningBulletType {
     return object : singularity.world.blocks.turrets. LightningBulletType(0f,damage) {
       init {
         lifetime = lifeTime
@@ -233,6 +233,7 @@ object TurretBullets {
         hittable = false
         absorbable = false
         reflectable = false
+        keepVelocity = false
 
         hitColor = color
         hitEffect = Fx.hitLancer

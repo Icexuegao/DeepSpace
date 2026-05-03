@@ -12,16 +12,16 @@ class 传颂核心 :CoreBlock("eulogyCore") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "传颂核心"
+        localizedName = "传颂核心"
         description = "控制区块的基础.有更大的容量与中型装甲.一旦被摧毁,所在区块将重归于敌人控制"
       }
     }
     size = 4
-    armor=30f
+    armor = 30f
     health = 5000
     powerProduct = 600 / 60f
-    unitType = IUnitTypes.路西法
-     thrusterLength = 34/4f
+    unitType = IUnitTypes.米迦勒
+    thrusterLength = 34 / 4f
     squareSprite = false
     itemCapacity = 10000
     unitCapModifier = 10

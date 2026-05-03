@@ -6,10 +6,8 @@ import universecore.graphics.lightnings.LightningVertex
 import kotlin.math.max
 
 /**随机路径的闪电生成器，给出起点路径总长度生成随机闪电路径
- *
  * @since 2.3
- * @author EBwilson
- */
+ * @author EBwilson */
 open class RandomGenerator : LightningGenerator() {
   var maxLength: Float = 80f
   var maxDeflect: Float = 70f

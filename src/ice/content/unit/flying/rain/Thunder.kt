@@ -1,22 +1,28 @@
 package ice.content.unit.flying.rain
 
+import arc.func.Func2
 import arc.graphics.Color
+import ice.content.block.turret.TurretBullets
+import ice.content.block.turret.TurretBullets.lightning
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.abilities.EnergyFieldAbility
-import mindustry.entities.bullet.LightningBulletType
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
+import universecore.graphics.lightnings.generator.RandomGenerator
+import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
-class Thunder : IceUnitType("unit_thunder") {
+class Thunder :IceUnitType("unit_thunder") {
+  val colorValue1: Color = Color.valueOf("F3E979")
+
   init {
     localization {
       zh_CN {
-        this.localizedName = "惊雷"
+        localizedName = "惊雷"
         description = "重型空中突击单位.发射缓慢移动的球状闪电攻击敌人,同时以闪电场电击附近敌军并治疗友军"
       }
     }
@@ -42,6 +48,7 @@ class Thunder : IceUnitType("unit_thunder") {
       radius = 4f
       rotation = -90f
     })
+
 
     setWeapon("weapon") {
       x = 0f
@@ -71,7 +78,7 @@ class Thunder : IceUnitType("unit_thunder") {
           length = 65f
           baseLength = 16f
           lifetime = 46f
-          colorFrom = Color.valueOf("F3E979")
+          colorFrom = colorValue1
           colorTo = Color.valueOf("FEEBB3")
           cone = 60f
         }
@@ -79,20 +86,28 @@ class Thunder : IceUnitType("unit_thunder") {
         sprite = "circle-bullet"
         trailLength = 32
         trailWidth = 4f
-        trailColor = Color.valueOf("F3E979")
+        trailColor = colorValue1
         frontColor = Color.valueOf("FEEBB3")
-        backColor = Color.valueOf("F3E979")
+        backColor = colorValue1
         pierce = true
         absorbable = false
         bulletInterval = 2.5f
         intervalBullets = 3
-        intervalBullet = LightningBulletType().apply {
-          damage = 31f
-          lightningColor = Color.valueOf("FEEBB3FA0")
-          hitColor = Color.valueOf("FEEBB3A0")
-          lightningLength = 5
-          lightningLengthRand = 3
+        val cv=RandomGenerator()
+        var lig = RandomGenerator().apply {
+          maxDeflect = 55f
+          branchChance = 0.2f
+          minBranchStrength = 0.8f
+          maxBranchStrength = 3f
+          maxLength = 5 * 8f
+          branchMaker= Func2{ a,b->
+           cv
+          }
         }
+        intervalBullet = lightning(20f, 31f, 3f, colorValue1, true) {
+          lig
+        }
+
         hitEffect = Fx.none
         despawnEffect = MultiEffect(ParticleEffect().apply {
           particles = 26
@@ -101,7 +116,7 @@ class Thunder : IceUnitType("unit_thunder") {
           length = 85f
           baseLength = 16f
           lifetime = 35f
-          colorFrom = Color.valueOf("F3E979")
+          colorFrom = colorValue1
           colorTo = Color.valueOf("FEEBB3")
           cone = 40f
         }, WaveEffect().apply {
@@ -110,7 +125,7 @@ class Thunder : IceUnitType("unit_thunder") {
           sizeTo = 90f
           strokeFrom = 6f
           strokeTo = 0f
-          colorFrom = Color.valueOf("F3E979")
+          colorFrom = colorValue1
           colorTo = Color.valueOf("FEEBB3")
         })
         fragBullets = 4
@@ -132,7 +147,7 @@ class Thunder : IceUnitType("unit_thunder") {
             length = 42.5f
             baseLength = 8f
             lifetime = 25f
-            colorFrom = Color.valueOf("F3E979")
+            colorFrom = colorValue1
             colorTo = Color.valueOf("FEEBB3")
             cone = 40f
           }, WaveEffect().apply {
@@ -141,26 +156,30 @@ class Thunder : IceUnitType("unit_thunder") {
             sizeTo = 45f
             strokeFrom = 3f
             strokeTo = 0f
-            colorFrom = Color.valueOf("F3E979")
+            colorFrom = colorValue1
             colorTo = Color.valueOf("FEEBB3")
           })
           hitSound = Sounds.shootBeamPlasma
           sprite = "circle-bullet"
           trailLength = 11
           trailWidth = 3f
-          trailColor = Color.valueOf("F3E979")
+          trailColor = colorValue1
           frontColor = Color.valueOf("FEEBB3")
-          backColor = Color.valueOf("F3E979")
+          backColor = colorValue1
           pierce = true
           absorbable = false
           bulletInterval = 2.5f
           intervalBullets = 1
-          intervalBullet = LightningBulletType().apply {
-            damage = 8f
-            lightningColor = Color.valueOf("FEEBB3FA0")
-            hitColor = Color.valueOf("FEEBB3A0")
-            lightningLength = 5
-            lightningLengthRand = 2
+
+          val cv1= VectorLightningGenerator()
+          var lig1 = RandomGenerator().apply {
+            maxLength=18f
+            branchMaker= Func2{ a,b->
+              cv1
+            }
+          }
+          intervalBullet = TurretBullets.lightning(20f, 8f, 3f, colorValue1, true) {
+            lig1
           }
         }
       }
@@ -168,7 +187,7 @@ class Thunder : IceUnitType("unit_thunder") {
 
     abilities.add(
       EnergyFieldAbility(165f, 300f, 320f).apply {
-        maxTargets = 25
+        maxTargets = 5
         healPercent = 1f
         x = 0f
         y = 10.25f
@@ -176,7 +195,7 @@ class Thunder : IceUnitType("unit_thunder") {
         sectorRad = 0.2f
         rotateSpeed = 2f
         effectRadius = 3f
-        color = Color.valueOf("F3E979")
+        color = colorValue1
         status = StatusEffects.shocked
         hitEffect = ParticleEffect().apply {
           particles = 15
@@ -188,7 +207,7 @@ class Thunder : IceUnitType("unit_thunder") {
           length = 35f
           baseLength = 0f
           lifetime = 10f
-          colorFrom = Color.valueOf("F3E979")
+          colorFrom = colorValue1
           colorTo = Color.valueOf("FEEBB3")
           cone = 360f
         }
