@@ -16,6 +16,8 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.world.meta.IStatValues
+import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.audio.SoundLoop
 import mindustry.content.Fx
@@ -74,7 +76,7 @@ open class SglTurret(name: String) :SglBlock(name) {
   /**单位目标选择过滤器 */
   var unitFilter: Boolf<Unit?> = Boolf { _ -> true }
   /**建筑目标选择过滤器 */
-  var buildingFilter: Boolf2<SglTurretBuild, Building> = Boolf2 { s, b -> !b.block.underBullets }
+  var buildingFilter: Boolf2<SglTurretBuild, Building> = Boolf2 { _, b -> !b.block.underBullets }
   /**单位索敌排序准则，默认为最近目标 */
   var unitSort: Sortf? = UnitSorts.closest
   /**能否由玩家控制 */
@@ -151,7 +153,7 @@ open class SglTurret(name: String) :SglBlock(name) {
   var recoils: Int = -1
 
   init {
-    squareSprite=false
+    squareSprite = false
     canOverdrive = false
     update = true
     solid = true
@@ -168,10 +170,11 @@ open class SglTurret(name: String) :SglBlock(name) {
     buildType = Prov(::SglTurretBuild)
     setAmmo()
   }
- open fun limitRange(margin: Float = 0f) {
+
+  open fun limitRange(margin: Float = 0f) {
     for(entry in ammoTypes) {
       val value = entry.value.bulletType
-      if (Mathf.equal(value.speed,0f))continue
+      if (Mathf.equal(value.speed, 0f)) continue
       val realRange = value.rangeChange + value.extraRangeMargin + margin + 10f + range
       value.lifetime = realRange / value.speed
     }
@@ -207,9 +210,7 @@ open class SglTurret(name: String) :SglBlock(name) {
   }
 
   open fun newAmmo(
-    ammoType: ice.entities.bullet.base.BulletType,
-    override: Boolean = false,
-    value: Cons2<Table, BulletType> = Cons2 { _, _ -> }
+    ammoType: ice.entities.bullet.base.BulletType, override: Boolean = false, value: Cons2<Table, BulletType> = Cons2 { _, _ -> }
   ): AmmoDataEntry {
     consume = object :BaseConsumers(false) {
       init {
@@ -273,7 +274,7 @@ open class SglTurret(name: String) :SglBlock(name) {
   fun newCoolant(coolEff: Floatf<Liquid>, filters: Boolf<Liquid>, usageBase: Float, usageMult: Floatf<Liquid>, duration: Float) {
     newOptionalConsume({ e: SglTurretBuild?, c: BaseConsumers? ->
       var cl: ConsumeLiquidCond<SglTurretBuild>? = null
-      if (((c!!.get(ConsumeType.liquid) as ConsumeLiquidCond<SglTurretBuild>).also { cl = it }) != null) {
+      if (((c!!.get(ConsumeType.liquid) as ConsumeLiquidCond<SglTurretBuild>?).also { cl = it }) != null) {
         val curr = cl!!.getCurrCons(e)
         if (curr != null) e!!.applyCoolant(c, coolEff.get(curr), duration)
       }
@@ -286,7 +287,8 @@ open class SglTurret(name: String) :SglBlock(name) {
           for(stack in get.cons) {
             val liquid: Liquid = stack.liquid
 
-            t.add(StatValues.displayLiquid(liquid, usageBase * usageMult.get(liquid) * 60, true)).padRight(40f).left().top().height(50f)
+            t.add(IStatValues.displayLiquid(liquid, usageBase * usageMult.get(liquid), perSecond = true, showName = true)).padRight(40f)
+              .left().top().height(50f)
             t.table(Tex.underline) { tb ->
               tb.right().add(Core.bundle.format("bullet.reload", Strings.autoFixed(coolEff.get(liquid) * 100, 1))).growX().right()
             }.height(50f).growX().right()
@@ -314,7 +316,7 @@ open class SglTurret(name: String) :SglBlock(name) {
   override fun setBars() {
     super.setBars()
     addBar("warmup") { e: SglTurretBuild ->
-      Bar("warmup", Pal.accent) {
+      Bar(IceStats.预热.localizedName, Pal.accent) {
         e.warmup()
       }
     }
@@ -349,8 +351,7 @@ open class SglTurret(name: String) :SglBlock(name) {
             st.row()
             st.add(
               Stat.reload.localized() + ":" + Strings.autoFixed(
-                60f / entry.key!!.craftTime * shoot.shots,
-                3
+                60f / entry.key!!.craftTime * shoot.shots, 3
               ) + StatUnit.perSecond.localized()
             )
             if (entry.value!!.reloadAmount > 1) {
@@ -450,9 +451,7 @@ open class SglTurret(name: String) :SglBlock(name) {
       if (wasShooting() && shootValid()) {
         if (canShoot() && tarValid) {
           warmup = if (linearWarmup) Mathf.approachDelta(warmup, 1f, warmupSpeed * consEfficiency()) else Mathf.lerpDelta(
-            warmup,
-            1f,
-            warmupSpeed * consEfficiency()
+            warmup, 1f, warmupSpeed * consEfficiency()
           )
           wasShooting = true
 
@@ -608,9 +607,9 @@ open class SglTurret(name: String) :SglBlock(name) {
       val handler = IceBulletHandler { xOffset: Float, yOffset: Float, angle: Float, delay: Float, mover: Mover? ->
         queuedBullets++
         if (delay > 0f) {
-          var barrel = totalShots
+          val barrel = totalShots
           Time.run(delay) {
-            var prev = totalShots
+            val prev = totalShots
             totalShots = barrel
             bullet(type, xOffset, yOffset, angle, mover)
             totalShots = prev
@@ -642,9 +641,7 @@ open class SglTurret(name: String) :SglBlock(name) {
       val bulletY = y + Angles.trnsy(rotationu - 90, shootX + xOffset + xSpread, shootY + yOffset)
       val shootAngle = rotationu + angleOffset + Mathf.range(inaccuracy)
       val lifeScl = if (type.scaleLife) Mathf.clamp(
-        Mathf.dst(bulletX, bulletY, targetPos.x, targetPos.y) / type.range,
-        minRange / type.range,
-        range() / type.range
+        Mathf.dst(bulletX, bulletY, targetPos.x, targetPos.y) / type.range, minRange / type.range, range() / type.range
       ) else 1f
 
       handleBullet(
@@ -766,11 +763,7 @@ open class SglTurret(name: String) :SglBlock(name) {
       if (accurateSpeed) {
         targetPos.set(
           Predict.intercept(
-            this,
-            pos,
-            offset.x,
-            offset.y,
-            if (currentAmmo!!.bulletType.speed <= 0.01f) 1.0E8f else currentAmmo!!.bulletType.speed
+            this, pos, offset.x, offset.y, if (currentAmmo!!.bulletType.speed <= 0.01f) 1.0E8f else currentAmmo!!.bulletType.speed
           )
         )
       } else targetPos.set(pos)

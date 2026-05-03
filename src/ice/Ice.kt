@@ -4,13 +4,13 @@ import arc.Events
 import ice.audio.SoundControl
 import ice.content.*
 import ice.content.block.IBlocks
+import ice.core.IFiles
 import ice.core.IcePackSprites
 import ice.core.SaveIO
 import ice.core.SettingValue
 import ice.entities.bullet.base.IceBullet
-import ice.game.IceTeam
 import ice.game.EventType
-import ice.core.IFiles
+import ice.game.IceTeam
 import ice.game.Schematics
 import ice.ui.MenusDialog
 import ice.ui.UI
@@ -33,10 +33,10 @@ import universecore.UncCore
 
 @RecipeEntryPoint(Recipes::class)
 open class Ice :Mod() {
-
   companion object {
     val singularity = Singularity()
   }
+
   init {
     DeepSpace.globals.load()
     Events.on(mindustry.game.EventType.MusicRegisterEvent::class.java) {
@@ -62,15 +62,12 @@ open class Ice :Mod() {
     MenusDialog.init()
     SaveIO.init()
 
-
     Vars.content.each {
       if (it.minfo.mod == DeepSpace.mod && it is UnlockableContent) it.unlock()
     }
-
   }
 
   override fun loadContent() {
-    //载入所有新内容类型
     SglContentType.load()
 
     Noise2dBlock("noise2d").apply {

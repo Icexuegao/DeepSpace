@@ -81,11 +81,7 @@ open class DrawSglTurret :DrawBlock {
         Draw.rect(outline, build.x + tb.recoilOffset.x, build.y + tb.recoilOffset.y, tb.drawrot())
         Draw.z(Layer.turret)
       }
-      //            var params = DrawPart.params.set(build.warmup(), 1f - progress, 1f - progress, tb.heat, tb.curRecoil, tb.charge, tb.x + tb.recoilOffset.x, tb.y + tb.recoilOffset.y, tb.rotation);
-      //            for(var part : parts){
-      //                params.setRecoil(part.recoilIndex >= 0 && tb.curRecoils != null ? tb.curRecoils[part.recoilIndex] : tb.curRecoil);
-      //                part.draw(params);
-      //            }
+
       val progress = tb.progress()
       val params = DrawPart.params.set(
         build.warmup(),

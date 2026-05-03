@@ -1,28 +1,35 @@
 package ice.content.block.turret
 
+import arc.func.Func
 import arc.graphics.Blending
 import arc.graphics.Color
+import arc.graphics.g2d.Draw
+import arc.graphics.g2d.Fill
+import arc.math.Angles
+import arc.math.Interp
+import arc.math.Interp.PowIn
+import arc.math.Mathf
+import arc.math.geom.Vec2
+import arc.util.Time
 import ice.audio.ISounds
 import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.bullet.ShrapnelBulletType
 import mindustry.entities.effect.ExplosionEffect
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.part.DrawPart
 import mindustry.entities.part.RegionPart
+import mindustry.gen.Building
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.PowerTurret
-import mindustry.world.draw.DrawParticles
-import mindustry.world.draw.DrawTurret
+import mindustry.world.draw.DrawBlock
+import singularity.world.blocks.turrets.SglTurret
+import singularity.world.draw.DrawSglTurret
+import universecore.world.draw.DrawMulti
 
-class MoonShadow :PowerTurret("moonShadow") {
+class MoonShadow :SglTurret("moonShadow") {
   init {
     localization {
       zh_CN {
@@ -33,31 +40,27 @@ class MoonShadow :PowerTurret("moonShadow") {
     requirements(
       Category.turret, IItems.铬锭, 200, IItems.钍锭, 125, IItems.单晶硅, 160, IItems.钴钢, 85
     )
-    health = 1470
     size = 3
     range = 275f
-    reload = 120f
+    recoil = 2f
+    shootY = 4f
+    health = 1470
+    shootCone = 0.3f
     cooldownTime = 210f
     heatColor = Color.valueOf("517D9D")
-    recoil = 2f
-    recoilTime = 210f
-    shootY = 4f
-    shootCone = 0.3f
+
     rotateSpeed = 5f
-    minWarmup = 0.9f
-    shootWarmupSpeed = 0.08f
+    warmupSpeed = 0.08f
     shoot.apply {
       firstShotDelay = 55f
     }
-    consumePower(17f)
-    consumeCoolant(0.3f)
     shake = 5f
     liquidCapacity = 40f
-    coolantMultiplier = 5f
     moveWhileCharging = false
     chargeSound = ISounds.月隐蓄力
     shootSound = ISounds.月隐发射
-    drawer = DrawMulti(DrawTurret().apply {
+    drawers = DrawMulti(DrawSglTurret().apply {
+      parts.add(RegionPart())
       parts.add(RegionPart().apply {
         suffix = "-side"
         mirror = true
@@ -78,6 +81,10 @@ class MoonShadow :PowerTurret("moonShadow") {
         heatColor = Color.valueOf("517D9D")
       })
     }, DrawParticles().apply {
+      val vec2 = Vec2(5f,0f)
+      vecl= Func { build ->
+        vec2.setAngle(build.rotationu)
+      }
       color = Color.valueOf("517D9D")
       alpha = 0.6f
       particles = 30
@@ -88,8 +95,10 @@ class MoonShadow :PowerTurret("moonShadow") {
       rotateScl = 0.5f
       blending = Blending.additive
     })
-    shootType = BasicBulletType().apply {
-      sprite = "circle-bullet"
+  }
+
+  override fun setAmmo() {
+    newAmmo(BasicBulletType(sprite = "circle-bullet").apply {
       damage = 240f
       lifetime = 30f
       speed = 9f
@@ -97,7 +106,6 @@ class MoonShadow :PowerTurret("moonShadow") {
       width = 13f
       shrinkX = 0f
       shrinkY = 0f
-      ammoMultiplier = 1f
       shootEffect = Fx.lancerLaserShoot
       frontColor = Color.valueOf("83C1ED")
       backColor = Color.valueOf("517D9D")
@@ -118,7 +126,7 @@ class MoonShadow :PowerTurret("moonShadow") {
       chargeEffect = MultiEffect(
         Fx.lancerLaserCharge, Fx.lancerLaserChargeBegin
       )
-      hitEffect = ExplosionEffect().apply {
+      val effect = ExplosionEffect().apply {
         sparkColor = Color.valueOf("83C1ED")
         smokeColor = Color.valueOf("83C1ED")
         waveColor = Color.valueOf("83C1ED")
@@ -130,18 +138,8 @@ class MoonShadow :PowerTurret("moonShadow") {
         sparkLen = 5f
         sparkStroke = 4f
       }
-      despawnEffect = ExplosionEffect().apply {
-        sparkColor = Color.valueOf("83C1ED")
-        smokeColor = Color.valueOf("83C1ED")
-        waveColor = Color.valueOf("83C1ED")
-        waveStroke = 4f
-        waveRad = 16f
-        waveLife = 15f
-        sparks = 5
-        sparkRad = 16f
-        sparkLen = 5f
-        sparkStroke = 4f
-      }
+      hitEffect = effect
+      despawnEffect = effect
       fragBullet = ShrapnelBulletType().apply {
         damage = 45f
         status = IStatus.电链
@@ -151,7 +149,7 @@ class MoonShadow :PowerTurret("moonShadow") {
         length = 32f
         fromColor = Color.valueOf("83C1ED")
         toColor = Color.valueOf("517D9D")
-        shootEffect = ParticleEffect().apply {
+        val particleEffect = ParticleEffect().apply {
           line = true
           particles = 10
           lifetime = 20f
@@ -165,20 +163,74 @@ class MoonShadow :PowerTurret("moonShadow") {
           colorFrom = Color.valueOf("83C1ED")
           colorTo = Color.valueOf("517D9D")
         }
-        hitEffect = ParticleEffect().apply {
-          line = true
-          particles = 10
-          lifetime = 20f
-          length = 75f
-          cone = -360f
-          lenFrom = 6f
-          lenTo = 6f
-          lightColor = Color.valueOf("517D9D")
-          strokeFrom = 3f
-          strokeTo = 0f
-          colorFrom = Color.valueOf("83C1ED")
-          colorTo = Color.valueOf("517D9D")
+        shootEffect = particleEffect
+        hitEffect = particleEffect
+      }
+    })
+    consume?.apply {
+      time(120f)
+      power(17f)
+    }
+  }
+
+  class DrawParticles :DrawBlock() {
+    var color: Color = Color.valueOf("f2d585")
+
+    var sides: Int = 12
+    var x: Float = 0f
+    var y: Float = 0f
+    var alpha: Float = 0.5f
+    var particles: Int = 30
+    var particleRotation: Float = 0f
+    var particleLife: Float = 70f
+    var particleRad: Float = 7f
+    var particleSize: Float = 3f
+    var fadeMargin: Float = 0.4f
+    var rotateScl: Float = 3f
+    var reverse: Boolean = false
+    var poly: Boolean = false
+    var particleInterp: Interp = PowIn(1.5f)
+    var particleSizeInterp: Interp = Interp.slope
+    var blending: Blending = Blending.normal
+    var vecl: Func<SglTurretBuild, Vec2>?=null
+
+    override fun draw(build: Building) {
+      build as SglTurretBuild
+      if (build.charging()) {
+        val a = alpha * build.warmup()
+
+        Draw.blend(blending)
+        Draw.color(color)
+
+        val base = Time.time / particleLife
+        rand.setSeed(build.id.toLong())
+        for(i in 0..<particles) {
+          var fin = (rand.random(2f) + base) % 1f
+          if (reverse) fin = 1f - fin
+          val fout = 1f - fin
+          val angle = rand.random(360f) + (Time.time / rotateScl) % 360f
+          val len = particleRad * particleInterp.apply(fout)
+
+          Draw.alpha(a * (1f - Mathf.curve(fin, 1f - fadeMargin)))
+          if (poly) {
+            Fill.poly(
+              build.x + vecl!!.get(build).x + Angles.trnsx(angle, len),
+              build.y + vecl!!.get(build).y + Angles.trnsy(angle, len),
+              sides,
+              particleSize * particleSizeInterp.apply(fin) * build.warmup(),
+              particleRotation
+            )
+          } else {
+            Fill.circle(
+              build.x + vecl!!.get(build).x + Angles.trnsx(angle, len),
+              build.y + vecl!!.get(build).y + Angles.trnsy(angle, len),
+              particleSize * particleSizeInterp.apply(fin) * build.warmup()
+            )
+          }
         }
+
+        Draw.blend()
+        Draw.reset()
       }
     }
   }

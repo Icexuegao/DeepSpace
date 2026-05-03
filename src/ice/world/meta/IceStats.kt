@@ -1,7 +1,7 @@
 package ice.world.meta
 
-import universecore.world.Load
 import mindustry.world.meta.StatCat
+import universecore.world.Load
 
 object IceStats :Load {
   val 最大能量势 = getStat("maxEnergyPotential", IceStatCats.neutron) {
@@ -248,6 +248,13 @@ object IceStats :Load {
     localization {
       zh_CN {
         localizedName = "发射数量"
+      }
+    }
+  }
+  val 预热 = getStat("warmup") {
+    localization {
+      zh_CN {
+        localizedName = "预热"
       }
     }
   }

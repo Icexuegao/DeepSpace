@@ -1,5 +1,4 @@
-
-package ice
+package ice.graphics
 
 import arc.math.geom.Mat3D
 import arc.math.geom.Vec2

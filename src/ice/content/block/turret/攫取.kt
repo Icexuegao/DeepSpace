@@ -3,35 +3,33 @@ package ice.content.block.turret
 import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.entities.bullet.SapBulletType
 import mindustry.content.StatusEffects
-import mindustry.entities.bullet.SapBulletType
 import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.PowerTurret
+import mindustry.type.Liquid
+import singularity.world.blocks.turrets.SglTurret
 
-class Grab : PowerTurret("grab") {
+class 攫取 :SglTurret("turret_grab") {
   init {
+    localization {
+      zh_CN {
+        localizedName = "攫取"
+        description = "快速发射汲取光束,攻击敌人的同时修复自身"
+      }
+    }
     health = 600
     recoil = 1f
-    reload = 10f
     range = 120f
     rotateSpeed = 5f
     outlineRadius = 3
     shootSound = Sounds.shootSpectre
-    localization {
-      zh_CN {
-        this.localizedName = "攫取"
-        description = "快速发射汲取光束,攻击敌人的同时修复自身"
-      }
-    }
     requirements(Category.turret, IItems.钍锭, 40, IItems.铬锭, 30, IItems.单晶硅, 20)
-    consumePower(1.5f)
-    consumeCoolant(0.1f)
-    shootType = SapBulletType().apply {
+  }
+
+  override fun setAmmo() {
+    newAmmo(SapBulletType().apply {
       damage = 20f
       length = 128f
       shootEffect = ParticleEffect().apply {
@@ -57,6 +55,11 @@ class Grab : PowerTurret("grab") {
       ammoMultiplier = 1f
       status = StatusEffects.sapped
       statusDuration = 30f
+    })
+    consume?.apply {
+      time(10f)
+      power(1.5f)
     }
+    newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
   }
 }

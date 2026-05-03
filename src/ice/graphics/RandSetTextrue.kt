@@ -6,7 +6,7 @@ import arc.struct.Seq
 import arc.util.Interval
 import ice.core.IFiles
 
-class RandSetTextrue(def: String, size: Int){
+open class RandSetTextrue(def: String, size: Int) {
   val def = IFiles.createNinePatch(def) as ScaledNinePatchDrawable
   val textrue = Array(size) { "$def-$it" }
 
@@ -23,17 +23,15 @@ class RandSetTextrue(def: String, size: Int){
   val interval = Interval(1)
   var iterator = seq.iterator()
 
-
   open fun upfate() {
     if (!blink) return
     if (interval[blinktime]) {
       if (iterator.hasNext()) {
         blinkTempTex = iterator.next()
-        def.patch= (IFiles.createNinePatch(blinkTempTex) as ScaledNinePatchDrawable).patch
+        def.patch = (IFiles.createNinePatch(blinkTempTex) as ScaledNinePatchDrawable).patch
       } else endBlink()
     }
   }
-
 
   open fun endBlink() {
     blink = false

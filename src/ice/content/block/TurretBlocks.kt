@@ -4,11 +4,11 @@ import ice.content.block.turret.*
 import universecore.world.Load
 
 @Suppress("unused")
-object TurretBlocks : Load {
+object TurretBlocks :Load {
   val 碎冰 = 碎冰()
   val 双星 = TwinStar()
   val 泉涌 = Quicksand()
-  val 攫取 = Grab()
+  val 攫取 = 攫取()
   val 流火 = FlowingFire()
   val 碎爆 = Shatter()
   val 贯通 = Penetrate()
@@ -27,7 +27,6 @@ object TurretBlocks : Load {
   val 月隐 = MoonShadow()
   val 信标 = Beacon()
   val 闪光 = Flash()
-
 
   val 遮幕 = Curtain()
   val 迷雾 = Mist()
