@@ -138,12 +138,12 @@ public abstract class MirrorShieldBase extends Ability implements ICollideBlocke
     float diffAngel = MathTransform.innerAngle(bullet.rotation(), baseAngel);
 
     float reflectAngel = baseAngel + 180 + diffAngel;
-    if (albedo >= 0.99f && !bullet.type.killShooter){
+    if (albedo >= 0.99f){
       bullet.team = unit.team;
       bullet.rotation(reflectAngel);
       bullet.collided.add(unit.id);
     }
-    else {
+    else if(!bullet.type.killShooter){
       bullet.type.create(
           unit, unit.team,
           bullet.x, bullet.y, reflectAngel,
