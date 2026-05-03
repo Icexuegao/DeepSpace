@@ -12,11 +12,9 @@ object EventType :Load {
 
   private val contentInitEvent = Seq<() -> Unit>()
   private val clientLoadEvent = Seq<() -> Unit>()
-  private val atlasPackEvent = Seq<() -> Unit>()
+
   override fun setup() {
-    Events.on(EventType.AtlasPackEvent::class.java) {
-      atlasPackEvent.forEach { it() }
-    }
+
     Events.on(EventType.ContentInitEvent::class.java) {
       contentInitEvent.forEach { it() }
     }
@@ -32,9 +30,5 @@ object EventType :Load {
   /** 客户端游戏首次加载时调用,update第一次运行 */
   fun addClientLoadEvent(run: () -> Unit) {
     clientLoadEvent.add(run)
-  }
-
-  fun addAtlasPackEvent(run: () -> Unit) {
-    atlasPackEvent.add(run)
   }
 }
