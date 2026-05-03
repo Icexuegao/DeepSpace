@@ -52,8 +52,7 @@ public class Distortion implements Disposable {
     buffer.end();
 
     tmpBuffer.resize(buffer.getWidth(), buffer.getHeight());
-    /*ScreenSampler.INSTANCE.getToBuffer(tmpBuffer, false);*/
-    universecore.graphics.ScreenSampler.toBuffer(tmpBuffer);
+    ScreenSampler.INSTANCE.getToBuffer(tmpBuffer, false);
     tmpBuffer.getTexture().bind(1);
 
 

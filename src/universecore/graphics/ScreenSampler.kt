@@ -47,11 +47,11 @@ object ScreenSampler {
   }
 
   @JvmStatic
-  fun toBuffer(target: FrameBuffer) {
+  fun toBuffer(target: FrameBuffer,clear: Boolean =false) {
     val buffer = currentBoundBuffer.get(null) as? GLFrameBuffer<*>
 
     buffer?.run {
-      blitBuffer(buffer, target)
+      blitBuffer(buffer, target,clear)
     }?: run {
       if (screenSwapBuffer.width == target.width && screenSwapBuffer.height == target.height) {
         Draw.flush()
@@ -63,7 +63,7 @@ object ScreenSampler {
 
         copyPixels(screenSwapBuffer)
 
-        blitBuffer(screenSwapBuffer, target)
+        blitBuffer(screenSwapBuffer, target,clear)
       }
     }
   }
@@ -93,7 +93,7 @@ object ScreenSampler {
     }
   }
 
-  private fun blitBuffer(source: GLFrameBuffer<*>, target: GLFrameBuffer<*>) {
+  private fun blitBuffer(source: GLFrameBuffer<*>, target: GLFrameBuffer<*>, clear: Boolean) {
     Core.gl30?.run {
       Gl.bindFramebuffer(GL30.GL_READ_FRAMEBUFFER, source.framebufferHandle)
       Gl.bindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, target.framebufferHandle)
@@ -106,7 +106,7 @@ object ScreenSampler {
       Gl.bindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, 0)
     } ?:
     Core.gl20.run {
-      target.begin(Color.clear)
+      if (clear)target.begin(Color.clear) else target.begin()
       source.texture.bind(0)
       Draw.blit(baseScreen)
       Gl.bindTexture(Gl.texture2d, 0)
