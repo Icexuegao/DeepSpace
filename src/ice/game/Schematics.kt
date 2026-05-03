@@ -1,0 +1,57 @@
+package ice.game
+
+import arc.struct.Seq
+import arc.struct.StringMap
+import ice.DeepSpace
+import ice.content.block.EffectBlocks
+import mindustry.Vars
+import mindustry.game.Schematic
+import mindustry.world.blocks.storage.CoreBlock
+import mindustry.world.meta.BuildVisibility
+import universecore.world.Load
+
+object Schematics :Load {
+  val allSch = Seq<Schematic>()
+  var 虔信方垒 = createSchematic(3, 3) { tiles, strings ->
+    strings.put("name", "虔信方垒")
+    tiles.add(Schematic.Stile(EffectBlocks.虔信方垒, 1, 1, EffectBlocks.虔信方垒.lastConfig, 0))
+  }
+  var 传颂核心 = createSchematic(4, 4) { tiles, strings ->
+    strings.put("name", "传颂核心")
+    tiles.add(Schematic.Stile(EffectBlocks.传颂核心, 1, 1, EffectBlocks.传颂核心.lastConfig, 0))
+  }
+  var 永耀天枢 = createSchematic(5, 5) { tiles, strings ->
+    strings.put("name", "永耀天枢")
+    tiles.add(Schematic.Stile(EffectBlocks.永耀天枢, 2, 2, EffectBlocks.永耀天枢.lastConfig, 0))
+  }
+
+  override fun init() {
+    allSch.forEach { schematic ->
+      schematic.mod = DeepSpace.mod
+      Vars.schematics.all().add(schematic)
+      checkLoadout(schematic)
+    }
+  }
+
+  fun createSchematic(w: Int, h: Int, sc: (Seq<Schematic.Stile>, StringMap) -> Unit): Schematic {
+    val ssq = Seq<Schematic.Stile>()
+    val stm = StringMap()
+    sc.invoke(ssq, stm)
+    val schematic = Schematic(ssq, stm, w, h)
+    allSch.add(schematic)
+    return schematic
+  }
+
+  private fun checkLoadout(s: Schematic) {
+    val core = s.tiles.find { t -> t.block is CoreBlock }
+    if (core == null) return
+    val cores = s.tiles.count { t: Schematic.Stile? -> t!!.block is CoreBlock }
+    val maxSize: Int = Vars.schematics.getMaxLaunchSize(core.block)
+    //确保存在核心，并且原理图足够小。
+    if ((s.width > maxSize || s.height > maxSize || s.tiles.contains { t -> t.block.buildVisibility === BuildVisibility.sandboxOnly || !t.block.unlocked() } || cores > 1)) return
+    //放入缓存中
+    Vars.schematics.loadouts.get(core.block as CoreBlock, ::Seq).add(s)
+    //保存非自定义装载
+
+  }
+}
