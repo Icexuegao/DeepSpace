@@ -1,9 +1,9 @@
 {
 "name": "ice",
 "displayName": "DeepSpace",
-"description": "降临新行星[阿德里],收集遗物获得全局增益,构建矩阵网络重构物流体系,在血肉与钢铁交织的异星上,体验截然不同的工厂与战斗———最后,选择你的道路",
+"description": "降临新行星[阿德里],收集遗物获得全局增益,构建矩阵网络重构物流体系,在血肉与钢铁交织的异星上,体验截然不同的工厂与战斗———最后,选择你的道路\n\nLand on the planet Ardery, collect Remains for global bonuses, build Matrix Networks to restructure your logistics, and experience a completely different kind of factory and combat on an alien world where flesh and steel intertwine———In the end, choose your path.",
 "author": "Alon",
-"version": "Alpha-6687",
+"version": "Alpha-6718",
 "java": true,
 "main": "ice.Ice",
 "minGameVersion": 157.4,

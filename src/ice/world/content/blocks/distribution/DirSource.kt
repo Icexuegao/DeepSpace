@@ -169,16 +169,12 @@ class DirSource(name: String?) :Block(name) {
         baseConsumersUnpack(consumes, sglBlock.consumers)
         if (target is SglTurretBuild) {
           val baseConsumers = sglBlock.optionalCons
-          if (baseConsumers.size > 0){
-            for(v in Objects.requireNonNull<Array<LiquidStack>>(
-              Objects.requireNonNull(
-                baseConsumers.get(0).get(
-                  liquid
-                )
-              )!!.consLiquids
-            )) {
-              optionalCons.add(Seq.with(v.liquid))
+          if (baseConsumers.size > 0) {
+
+            baseConsumers.get(0).get(liquid)?.consLiquids?.forEach {
+              optionalCons.add(Seq.with(it.liquid))
             }
+
           }
         } else baseConsumersUnpack(optionalCons, sglBlock.optionalCons)
       } else if (target != null) {

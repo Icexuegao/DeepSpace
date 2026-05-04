@@ -90,6 +90,7 @@ class TwinStar :SglTurret("turret_twinStar") {
         }
       })
     }
+    setAmmo()
   }
 
   override fun setAmmo() {

@@ -80,6 +80,7 @@ open class WarpedBulletType<Type :BulletType>(inst: Type) :BulletType() {
       bullet.hitSize = this.hitSize
       bullet.mover = mover
       bullet.damage = (if (damage < 0.0f) this.damage else damage) * bullet.damageMultiplier()
+      bullet.buildingDamageMultiplier = buildingDamageMultiplier
       if (bullet.trail != null) {
         bullet.trail.clear()
       }

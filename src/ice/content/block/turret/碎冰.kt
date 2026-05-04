@@ -57,6 +57,7 @@ class 碎冰 :SglTurret("turret_trashIce") {
         moveY = -1.5f
       })
     }
+    setAmmo()
   }
 
   override fun setAmmo() {

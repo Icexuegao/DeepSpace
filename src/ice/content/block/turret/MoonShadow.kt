@@ -95,6 +95,7 @@ class MoonShadow :SglTurret("moonShadow") {
       rotateScl = 0.5f
       blending = Blending.additive
     })
+    setAmmo()
   }
 
   override fun setAmmo() {

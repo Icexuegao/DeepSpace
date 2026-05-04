@@ -80,7 +80,6 @@ open class Wall(name: String) : IceBlock(name) {
 
     override fun collision(bullet: Bullet): Boolean {
       super.collision(bullet)
-
       hit = 1f
       //create lightning if necessary
       if (lightningChance > 0f) {

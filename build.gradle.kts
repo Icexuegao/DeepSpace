@@ -12,6 +12,7 @@ buildscript {
   extra["kotlinCompatibility"] = "2.3.20"
   extra["java"] = 25
   extra["mdtVersion"] = "com.github.Anuken.Mindustry:core:v157.4"
+  extra["modFileName"] ="mod.json"
   var mdtVersion: String by extra
 
   repositories {
@@ -39,6 +40,7 @@ val proUser: String by extra
 val sdkRoot: String by extra
 val java: Int by extra
 var mdtVersion: String by extra
+var modFileName: String by extra
 plugins {
   var kotlinCompatibility: String by extra
   java
@@ -125,6 +127,7 @@ fun execute(string: String, path: File? = null, vararg args: Any?) {
 tasks.processResources {
   dependsOn("encryptSprites")
 }
+
 tasks {
   withType<JavaCompile>().configureEach {
     sourceCompatibility = java.toString()
@@ -149,7 +152,7 @@ tasks {
     dependsOn("updateVersion", "sourcesJar", "encryptSprites")
     group = "alon"
     archiveFileName.set("${project.name}Desktop.jar")
-    from(files("README.md", "LICENSE", "mod.json"))
+    from(files("README.md", "LICENSE", modFileName))
     manifest.attributes("Main-Class" to "ice.Ice")
     exclude("spritese/**")
   }
@@ -208,7 +211,7 @@ tasks {
   }
   register("updateVersion") {
     group = "alon"
-    val file = Fi("mod.json")
+    val file = Fi(modFileName)
     val parse = JsonReader().parse(file)
     val message = parse.get("version").asString().split("-")[1].toInt() + 1
     parse.get("version").set("Alpha-$message")
@@ -216,7 +219,7 @@ tasks {
     val formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日")
     val formattedDate = currentDate.format(formatter)
     parse.get("updateDate").set(formattedDate)
-    file.writeString(parse.prettyPrint(JsonWriter.OutputType.json, 0))
+    file.writeString(parse.prettyPrint(JsonWriter.OutputType.json, 4))
   }
 
   register<JavaExec>("d8Compile") {
@@ -265,7 +268,7 @@ tasks {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     val versionInfo = provider {
-      val file = Fi("mod.json")
+      val file = Fi(modFileName)
       val parse = JsonReader().parse(file)
       val message = parse.get("version")
       val split: List<String> = message.asString().split("-")

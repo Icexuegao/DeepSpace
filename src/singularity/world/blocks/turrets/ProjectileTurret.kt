@@ -18,7 +18,7 @@ import universecore.util.Empties
 import universecore.world.consumers.BaseConsumers
 
 open class ProjectileTurret(name: String) : SglTurret(name) {
-  var coatings: ObjectMap<BaseConsumers, CoatingModel> = ObjectMap<BaseConsumers, CoatingModel>()
+  var coatings = ObjectMap<BaseConsumers, CoatingModel>()
   private val realAmmos = ObjectMap<BulletType, ObjectMap<BaseConsumers, BulletType>>()
   var maxBufferCoatings: Int = 10
 

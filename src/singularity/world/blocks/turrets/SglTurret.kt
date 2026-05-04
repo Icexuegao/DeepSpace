@@ -168,7 +168,6 @@ open class SglTurret(name: String) :SglBlock(name) {
     flags = EnumSet.of(BlockFlag.turret)
     drawers = DrawSglTurret()
     buildType = Prov(::SglTurretBuild)
-    setAmmo()
   }
 
   open fun limitRange(margin: Float = 0f) {
@@ -726,7 +725,8 @@ open class SglTurret(name: String) :SglBlock(name) {
       return if (consumer.current == null) 0f else Mathf.clamp(reloadCounter / consumer.current!!.craftTime)
     }
 
-    protected open fun handleBullet(bullet: Bullet, offsetX: Float, offsetY: Float, angleOffset: Float) {}
+    protected open fun handleBullet(bullet: Bullet, offsetX: Float, offsetY: Float, angleOffset: Float) {
+    }
 
     fun charging(): Boolean {
       return queuedBullets > 0 && shoot.firstShotDelay > 0

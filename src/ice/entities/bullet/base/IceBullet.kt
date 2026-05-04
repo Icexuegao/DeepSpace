@@ -1,40 +1,27 @@
 package ice.entities.bullet.base
 
-import arc.math.Mathf
-import arc.util.Tmp
+import arc.Events
 import arc.util.pooling.Pools
-import ice.content.IStatus
-import universecore.world.Load
+import ice.game.EventType
 import mindustry.gen.Bullet
-import mindustry.gen.Unit
+import mindustry.gen.Groups
+import universecore.world.Load
 
-class IceBullet : Bullet() {
-  companion object : Load {
+class IceBullet :Bullet() {
+  companion object :Load {
     override fun setup() {
       Pools.get(Bullet::class.java, ::IceBullet)
     }
   }
 
   override fun add() {
-    super.add()
-    if (owner is Unit) {
-      val u = owner as Unit
-      if (u.hasEffect(IStatus.电子干扰)) {
-        val deflect = 16.4f * Mathf.clamp(u.getDuration(IStatus.电子干扰) / 120)
-        val rot = Mathf.random(-deflect, deflect)
-        rotation(rotation() + rot)
-        Tmp.v1.set(aimX - x, aimY - y).rotate(rot)
-        aimX = Tmp.v1.x
-        aimY = Tmp.v1.y
-      }
-
-      if (u.hasEffect(IStatus.电磁损毁)) {
-        val rot = Mathf.random(-45, 45).toFloat()
-        rotation(rotation() + rot)
-        Tmp.v1.set(aimX - x, aimY - y).rotate(rot)
-        aimX = Tmp.v1.x
-        aimY = Tmp.v1.y
-      }
-    }
+    if (added) return
+    index__all = Groups.all.addIndex(this)
+    index__bullet = Groups.bullet.addIndex(this)
+    index__draw = Groups.draw.addIndex(this)
+    type.init(this)
+    Events.fire(EventType.BulletInitEvent(this))
+    added = true
+    updateLastPosition()
   }
 }

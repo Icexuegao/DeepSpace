@@ -2,6 +2,7 @@ package ice.game
 
 import arc.Events
 import arc.struct.Seq
+import ice.entities.bullet.base.IceBullet
 import ice.ui.menusDialog.AchievementDialog
 import mindustry.game.EventType
 import singularity.core.UpdateTiles
@@ -9,7 +10,7 @@ import universecore.world.Load
 
 object EventType :Load {
   class AchievementUnlockEvent(var achievement: AchievementDialog.Achievement)
-
+  class BulletInitEvent(var bullet: IceBullet)
   private val contentInitEvent = Seq<() -> Unit>()
   private val clientLoadEvent = Seq<() -> Unit>()
 
