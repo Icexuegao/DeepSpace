@@ -1,4 +1,4 @@
-package ice.world.content.unit.ability
+package universecore.world.ability
 
 import arc.util.Time
 import mindustry.entities.Units

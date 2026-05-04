@@ -40,6 +40,9 @@ fun String.replaceNumericMatches(transform: (String) -> String): String {
 fun String.applyColor(color: String): String {
   return "$color$this$color"
 }
+fun String.applyColor(color: Color): String {
+  return "[#$color]$this[#$color]"
+}
 
 fun String.toColor(): Color = Color.valueOf(this)
 /**将Float格式化为指定精度，并自动去除末尾无意义的0。

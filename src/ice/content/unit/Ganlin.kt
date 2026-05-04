@@ -8,9 +8,9 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.DeathGiftAbility
-import ice.world.content.unit.ability.RepairFieldAbility
-import ice.world.content.unit.ability.ShieldAbility
+import universecore.world.ability.DeathGiftAbility
+import universecore.world.ability.RepairFieldAbility
+import universecore.world.ability.ShieldAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.RegenAbility
 import mindustry.entities.pattern.ShootPattern

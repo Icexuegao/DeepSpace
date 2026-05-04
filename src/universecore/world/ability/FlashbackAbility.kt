@@ -1,4 +1,4 @@
-package ice.world.content.unit.ability
+package universecore.world.ability
 
 import arc.math.Angles
 import arc.math.Mathf

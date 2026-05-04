@@ -3,7 +3,7 @@ package ice.content.unit.mech
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.ArmorPlateAbility
+import universecore.world.ability.ArmorPlateAbility
 import mindustry.entities.abilities.ForceFieldAbility
 import mindustry.entities.abilities.RegenAbility
 import mindustry.gen.MechUnit

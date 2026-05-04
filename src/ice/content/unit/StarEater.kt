@@ -11,7 +11,7 @@ import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.HealthRequireAbility
+import universecore.world.ability.HealthRequireAbility
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.effect.ParticleEffect

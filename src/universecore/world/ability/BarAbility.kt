@@ -1,4 +1,4 @@
-package ice.world.content.unit.ability
+package universecore.world.ability
 
 import arc.func.Cons2
 import arc.scene.ui.layout.Table

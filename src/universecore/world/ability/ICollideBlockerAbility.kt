@@ -1,4 +1,4 @@
-package ice.world.content.unit.ability
+package universecore.world.ability
 
 import mindustry.gen.Hitboxc
 import mindustry.gen.Unit

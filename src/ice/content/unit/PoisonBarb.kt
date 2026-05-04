@@ -3,7 +3,7 @@ package ice.content.unit
 import ice.entities.bullet.RailBulletType
 import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.UnitSpawnAbility
+import universecore.world.ability.UnitSpawnAbility
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 import mindustry.graphics.Pal

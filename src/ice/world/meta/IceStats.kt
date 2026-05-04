@@ -387,13 +387,6 @@ object IceStats :Load {
       }
     }
   }
-  val 拦截护盾 = getStat("interceptShield") {
-    localization {
-      zh_CN {
-        localizedName = "拦截护盾"
-      }
-    }
-  }
   val 拦截伤害 = getStat("interceptDamage") {
     localization {
       zh_CN {

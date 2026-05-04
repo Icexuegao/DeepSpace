@@ -6,8 +6,8 @@ import ice.entities.bullet.spawnBulletType
 import universecore.util.toColor
 
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.DeathGiftAbility
-import ice.world.content.unit.ability.FlashbackAbility
+import universecore.world.ability.DeathGiftAbility
+import universecore.world.ability.FlashbackAbility
 import mindustry.entities.abilities.RegenAbility
 
 class Wripple {

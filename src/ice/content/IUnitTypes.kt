@@ -527,6 +527,6 @@ object IUnitTypes : Load {
 
   }
   fun getCoreUnits(): Seq<IceUnitType> {
-    return Seq.with(加百列, 路西法)
+    return Seq.with(加百列,米迦勒, 路西法)
   }
 }

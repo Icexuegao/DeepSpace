@@ -7,7 +7,7 @@ import ice.entities.effect.MultiEffect
 import ice.core.IFiles.appendModName
 import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.DeathGiftAbility
+import universecore.world.ability.DeathGiftAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.RegenAbility
 import mindustry.entities.effect.ParticleEffect

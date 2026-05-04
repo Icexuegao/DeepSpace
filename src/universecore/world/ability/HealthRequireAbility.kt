@@ -1,4 +1,4 @@
-package ice.world.content.unit.ability
+package universecore.world.ability
 
 import mindustry.entities.abilities.Ability
 import mindustry.type.StatusEffect

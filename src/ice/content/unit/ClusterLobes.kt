@@ -21,7 +21,7 @@ import ice.graphics.IceColor
 import universecore.math.IMathf
 import universecore.util.toTrimmedString
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.BarAbility
+import universecore.world.ability.BarAbility
 import ice.world.content.unit.entity.base.Entity
 import ice.world.meta.IceEffects
 import ice.world.meta.IceStats

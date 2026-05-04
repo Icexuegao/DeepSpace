@@ -1,4 +1,4 @@
-package ice.world.content.unit.ability
+package universecore.world.ability
 
 import arc.graphics.Color
 import arc.graphics.g2d.Draw

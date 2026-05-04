@@ -12,7 +12,7 @@ import arc.util.Tmp
 import ice.entities.IceRegister
 import ice.graphics.IceColor
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.ICollideBlockerAbility
+import universecore.world.ability.ICollideBlockerAbility
 import mindustry.Vars
 import mindustry.async.PhysicsProcess
 import mindustry.content.Fx

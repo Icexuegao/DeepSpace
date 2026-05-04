@@ -11,7 +11,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.UnitSpawnAbility
+import universecore.world.ability.UnitSpawnAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.StatusFieldAbility
 import mindustry.entities.effect.ExplosionEffect

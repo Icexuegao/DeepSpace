@@ -8,7 +8,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.ability.ArmorPlateAbility
+import universecore.world.ability.ArmorPlateAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.ShieldRegenFieldAbility
 import mindustry.entities.effect.ParticleEffect
