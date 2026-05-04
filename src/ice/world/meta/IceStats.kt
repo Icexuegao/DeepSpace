@@ -33,6 +33,13 @@ object IceStats :Load {
       }
     }
   }
+  val 注能 = getStat("speedUp", StatCat.function) {
+    localization {
+      zh_CN {
+        localizedName = "注能"
+      }
+    }
+  }
   val 修复量 = getStat("repairAmount", StatCat.function) {
     localization {
       zh_CN {

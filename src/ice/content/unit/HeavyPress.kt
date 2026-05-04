@@ -16,7 +16,7 @@ class HeavyPress : IceUnitType("heavyPress") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "重压"
+        localizedName = "重压"
         description = "中型地面突击单位.持续以履带碾压对敌方建筑.正面投射弧形护盾抵御攻击,碾压时减少所受伤害"
         details = "钢铁的履带滚滚向前"
       }

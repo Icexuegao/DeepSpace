@@ -7,38 +7,52 @@ import arc.graphics.g2d.Lines
 import arc.math.Angles
 import arc.math.Mathf
 import arc.util.Time
+import arc.util.io.Reads
+import arc.util.io.Writes
 import ice.content.IItems
-import universecore.util.toTrimmedString
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.entities.bullet.PointBulletType
+import ice.world.meta.IceStat
+import ice.world.meta.IceStats
 import mindustry.content.Fx
 import mindustry.entities.Effect
-import mindustry.entities.bullet.PointBulletType
 import mindustry.gen.Sounds
 import mindustry.graphics.Pal
 import mindustry.type.Category
 import mindustry.ui.Bar
-import mindustry.world.blocks.defense.turrets.PowerTurret
-import mindustry.world.meta.Stat
+import mindustry.world.meta.StatUnit
+import singularity.world.blocks.turrets.SglTurret
+import kotlin.math.max
 
-class Rainbow : PowerTurret("turret_rainbow") {
+class Rainbow :SglTurret("turret_rainbow") {
   var min = 6f
-  var change = 120f
+  var change = 5 * 60f
 
   init {
     localization {
       zh_CN {
-        this.localizedName = "霓虹"
+        localizedName = "霓虹"
         description = "快速发射渐变霓虹攻击敌人\n其聚能速度会随持续射击而逐渐提升"
       }
     }
     health = 820
     size = 2
     range = 160f
-    reload = 30f
-    shootY+=2f
-    shootType = PointBulletType().apply {
+    shootY += 2f
+    recoil = 2f
+    shootY = 2f
+    shootCone = 15f
+    rotateSpeed = 6f
+    recoilTime = 30f
+    cooldownTime = 30f
+    canOverdrive = false
+    shootSound = Sounds.shootLaser
+    requirements(Category.turret, IItems.铜锭, 130, IItems.铅锭, 85, IItems.单晶硅, 45)
+    buildType = Prov(::RainbowBuild)
+    setAmmo()
+  }
+
+  override fun setAmmo() {
+    newAmmo(PointBulletType().apply {
       damage = 35f
       lifetime = 8f
       speed = 20f
@@ -64,42 +78,51 @@ class Rainbow : PowerTurret("turret_rainbow") {
 
       hitEffect = Fx.dynamicSpikes.wrap(Pal.redLight, 8f)
       despawnEffect = Fx.dynamicSpikes.wrap(Pal.redLight, 8f)
+    })
+    consume?.apply {
+      power(7f)
+      time(30f)
     }
-    recoil = 2f
-    shootY = 2f
-    shootCone = 15f
-    rotateSpeed = 6f
-    recoilTime = 30f
-    cooldownTime = 30f
-    canOverdrive = false
-    shootSound = Sounds.shootLaser
-    consumePower(7f)
-    requirements(Category.turret, IItems.铜锭, 130, IItems.铅锭, 85, IItems.单晶硅, 45)
-    buildType = Prov(::RainbowBuild)
   }
 
   override fun setStats() {
     super.setStats()
-    stats.add(Stat("完全充能"), "${change / 60}秒")
+    val stat = IceStat("fullyCharged").apply {
+      localization {
+        zh_CN {
+          description = "完全充能"
+        }
+      }
+    }
+    stats.add(stat, "${change / 60}", StatUnit.seconds)
   }
 
   override fun setBars() {
     super.setBars()
-    addBar("speedUp") { e: RainbowBuild -> Bar({ "注能: ${(e.speed * 100).toTrimmedString(0)}%" }, { Color.valueOf("FF5845") }, { e.speed }) }
+    addBar("speedUp") { e: RainbowBuild ->
+      Bar({ "${IceStats.注能}: ${(e.speed * 100).toInt()}%" }, { Color.valueOf("FF5845") }, { e.speed })
+    }
   }
 
-  inner class RainbowBuild : PowerTurretBuild() {
+  inner class RainbowBuild :SglTurretBuild() {
     var speed = 0f
-    var speedup = 0f
+    override fun read(read: Reads, revision: Byte) {
+      super.read(read, revision)
+      speed = read.f()
+    }
 
-    override fun baseReloadSpeed(): Float {
-      return if (efficiency * speedup > 1f) speedup else super.baseReloadSpeed()
+    override fun write(write: Writes) {
+      super.write(write)
+      write.f(speed)
+    }
+
+    override fun ammoReloadMultiplier(): Float {
+      return super.ammoReloadMultiplier() * max(1f, speed * min)
     }
 
     override fun updateTile() {
       super.updateTile()
-      speedup = reload / min * speed
-      val target = if ( isShooting) 1f else 0f
+      val target = if (wasShooting) 1f else 0f
       speed = Mathf.approachDelta(speed, target, 1f / change * (if (target > 0) efficiency else 1f))
     }
   }

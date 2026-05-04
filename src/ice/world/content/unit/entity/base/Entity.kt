@@ -12,7 +12,6 @@ import arc.util.Tmp
 import ice.entities.IceRegister
 import ice.graphics.IceColor
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.ICollideBlockerAbility
 import mindustry.Vars
 import mindustry.async.PhysicsProcess
 import mindustry.content.Fx
@@ -29,6 +28,7 @@ import mindustry.type.UnitType
 import mindustry.world.blocks.ConstructBlock
 import mindustry.world.blocks.ConstructBlock.ConstructBuild
 import mindustry.world.blocks.environment.Floor
+import universecore.world.ability.ICollideBlockerAbility
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -132,8 +132,8 @@ open class Entity : UnitEntity(), Legsc, Tankc {
   }
 
   override fun collisionLayer(): Int {
-    if (isFlying) return PhysicsProcess.layerFlying
-    if (type.allowLegStep && type.legPhysicsLayer) PhysicsProcess.layerLegs
+   // if (isFlying) return PhysicsProcess.layerFlying
+  //  if (type.allowLegStep && type.legPhysicsLayer) PhysicsProcess.layerLegs
     return PhysicsProcess.layerGround
   }
 

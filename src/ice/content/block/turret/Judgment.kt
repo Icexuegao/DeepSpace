@@ -5,9 +5,6 @@ import arc.math.Interp
 import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.entities.effect.MultiEffect
 import mindustry.entities.effect.ParticleEffect
@@ -19,14 +16,15 @@ import mindustry.entities.pattern.ShootHelix
 import mindustry.entities.pattern.ShootMulti
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.PowerTurret
-import mindustry.world.draw.DrawTurret
+import mindustry.type.Liquid
+import singularity.world.blocks.turrets.SglTurret
+import singularity.world.draw.DrawSglTurret
 
-class Judgment : PowerTurret("judgment") {
+class Judgment :SglTurret("turret_judgment") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "决断"
+        localizedName = "决断"
         description = "一次性发射四道湍能弹精准攻击敌人"
       }
     }
@@ -36,19 +34,12 @@ class Judgment : PowerTurret("judgment") {
     shake = 5f
     recoil = 6f
     range = 672f
-    reload = 90f
     shootY = 8f
     recoilTime = 75f
     rotateSpeed = 1.6f
     cooldownTime = 120f
     canOverdrive = false
-    coolantMultiplier = 0.2f
-    minWarmup = 0.99f
-    shootWarmupSpeed = 0.08f
     shootSound = Sounds.shootBeamPlasma
-
-    consumePower(45f)
-    consumeCoolant(2.5f)
 
     shoot = ShootMulti().apply {
       source = ShootHelix().apply {
@@ -61,7 +52,32 @@ class Judgment : PowerTurret("judgment") {
       })
     }
 
-    shootType = BasicBulletType().apply {
+    requirements(
+      Category.turret, IItems.铬锭, 1080, IItems.铱板, 840, IItems.石英玻璃, 210, IItems.导能回路, 480, IItems.陶钢, 320
+    )
+
+    drawers = DrawSglTurret().apply {
+      parts.add(RegionPart().apply {
+        suffix = "-glow"
+        heatProgress = DrawPart.PartProgress.warmup
+        drawRegion = false
+        heatColor = Color.valueOf("F03B0E")
+      })
+      parts.add(HoverPart().apply {
+        color = Color.valueOf("FEB380")
+        phase = 120f
+        circles = 3
+        stroke = 1f
+        y = -5.75f
+        layer = 110f
+      })
+    }
+    setAmmo()
+    newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
+  }
+
+  override fun setAmmo() {
+    newAmmo(BasicBulletType().apply {
       damage = 0f
       lifetime = 42f
       speed = 16f
@@ -158,27 +174,10 @@ class Judgment : PowerTurret("judgment") {
         hitEffect = Fx.hitSquaresColor
         despawnEffect = Fx.hitSquaresColor
       }
-    }
-
-    requirements(
-      Category.turret, IItems.铬锭, 1080, IItems.铱板, 840, IItems.石英玻璃, 210, IItems.导能回路, 480, IItems.陶钢, 320
-    )
-
-    drawer = DrawTurret().apply {
-      parts.add(RegionPart().apply {
-        suffix = "-glow"
-        heatProgress = DrawPart.PartProgress.warmup
-        drawRegion = false
-        heatColor = Color.valueOf("F03B0E")
-      })
-      parts.add(HoverPart().apply {
-        color = Color.valueOf("FEB380")
-        phase = 120f
-        circles = 3
-        stroke = 1f
-        y = -5.75f
-        layer = 110f
-      })
+    })
+    consume?.apply {
+      time(90f)
+      power(45f)
     }
   }
 }

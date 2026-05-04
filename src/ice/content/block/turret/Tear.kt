@@ -4,15 +4,9 @@ import arc.math.Interp
 import ice.audio.ISounds
 import ice.content.IItems
 import ice.content.ILiquids
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.core.IFiles.appendModName
-import universecore.util.toColor
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.StatusEffects
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
@@ -21,16 +15,22 @@ import mindustry.entities.part.RegionPart
 import mindustry.entities.pattern.ShootHelix
 import mindustry.entities.pattern.ShootMulti
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.PowerTurret
-import mindustry.world.draw.DrawTurret
+import singularity.world.blocks.turrets.SglTurret
+import singularity.world.draw.DrawSglTurret
+import universecore.util.toColor
 
-class Tear :PowerTurret("tear"){
-  init{
+class Tear :SglTurret("turret_tear") {
+  init {
+    localization {
+      zh_CN {
+        localizedName = "撕裂"
+        description = "一座强大的电磁轨道炮,超长轨道,超大力度,可以快速地进行精准射击"
+      }
+    }
     squareSprite = false
     health = 19200
     size = 8
     range = 768f
-    reload = 60f
     cooldownTime = 45f
     shake = 4f
     shootY = 0f
@@ -38,12 +38,6 @@ class Tear :PowerTurret("tear"){
     recoilTime = 45f
     shootCone = 5f
     rotateSpeed = 0.8f
-    minWarmup = 0.97f
-    shootWarmupSpeed = 0.08f
-    warmupMaintainTime = 300f
-    consumePower(272f)
-    consumeItems(IItems.肃正协议, 4)
-    consumeLiquids(ILiquids.急冻液, 4f)
     itemCapacity = 4
     liquidCapacity = 120f
     canOverdrive = false
@@ -55,7 +49,7 @@ class Tear :PowerTurret("tear"){
       scl = 0.75f
     })
     shootSound = ISounds.聚爆
-    drawer = DrawTurret().apply {
+    drawers = DrawSglTurret().apply {
       parts.addAll(RegionPart("-side").apply {
         heatProgress = DrawPart.PartProgress.warmup
         under = true
@@ -69,14 +63,29 @@ class Tear :PowerTurret("tear"){
         heatColor = "F03B0E".toColor()
       })
     }
-    localization {
-      zh_CN {
-        this.localizedName = "撕裂"
-        description = "一座强大的电磁轨道炮,超长轨道,超大力度,可以快速地进行精准射击"
-      }
-    }
-    requirements(Category.turret, IItems.铜锭, 9600, IItems.铬锭, 6400, IItems.铱板, 3600, IItems.导能回路, 2400, IItems.陶钢, 1920, IItems.生物钢, 1200)
-    shootType = BasicBulletType(16f, 840f, "gauss-bullet").apply {
+
+    requirements(
+      Category.turret,
+      IItems.肃正协议,
+      4,
+      IItems.铜锭,
+      9600,
+      IItems.铬锭,
+      6400,
+      IItems.铱板,
+      3600,
+      IItems.导能回路,
+      2400,
+      IItems.陶钢,
+      1920,
+      IItems.生物钢,
+      1200
+    )
+    setAmmo()
+  }
+
+  override fun setAmmo() {
+    newAmmo(BasicBulletType(16f, 840f, "gauss-bullet").apply {
       lifetime = 48f
       shrinkY = 0f
       height = 32f
@@ -183,6 +192,11 @@ class Tear :PowerTurret("tear"){
         colorFrom = "FF5845".toColor()
         colorTo = "FF8663".toColor()
       })
+    })
+    consume?.apply {
+      power(272f)
+      time(60f)
+      liquid(ILiquids.急冻液, 4f)
     }
   }
 }

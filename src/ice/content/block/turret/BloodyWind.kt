@@ -5,10 +5,6 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
@@ -17,15 +13,16 @@ import mindustry.entities.part.HoverPart
 import mindustry.entities.part.RegionPart
 import mindustry.entities.pattern.ShootBarrel
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.PowerTurret
-import mindustry.world.consumers.ConsumeCoolant
-import mindustry.world.draw.DrawTurret
+import mindustry.type.Liquid
+import singularity.world.blocks.turrets.SglTurret
+import singularity.world.draw.DrawSglTurret
+import universecore.util.toColor
 
-class BloodyWind : PowerTurret("bloodyWind") {
+class BloodyWind :SglTurret("turret_bloodyWind") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "腥风"
+        localizedName = "腥风"
         description = "改进型四联速射粒子炮,向敌人发射高热的粒子束\n为了更强的电热转换回路拆除了部分气冷系统,使用液体时冷却效果更佳"
       }
     }
@@ -34,7 +31,6 @@ class BloodyWind : PowerTurret("bloodyWind") {
     size = 6
     armor = 8f
     range = 672f
-    reload = 1.5f
     shake = 3f
     recoil = 4f
     recoils = 4
@@ -47,15 +43,11 @@ class BloodyWind : PowerTurret("bloodyWind") {
     cooldownTime = 20f
     shootSound = ISounds.速射
     liquidCapacity = 30f
-    coolantMultiplier = 0.75f
-    consumePower(53f)
-    consume(ConsumeCoolant(3f))
     shoot = ShootBarrel().apply {
       barrels = floatArrayOf(-5.5f, 0f, 0f, 5.5f, 0f, 0f, -16f, 0f, 0f, 16f, 0f, 0f)
     }
     requirements(Category.turret, IItems.铬锭, 2200, IItems.石英玻璃, 570, IItems.铱板, 1200, IItems.导能回路, 625, IItems.钴钢, 825)
-
-    drawer = DrawTurret().apply {
+    drawers = DrawSglTurret().apply {
       parts.addAll(RegionPart("-l").apply {
         under = true
         recoilIndex = 0
@@ -100,8 +92,12 @@ class BloodyWind : PowerTurret("bloodyWind") {
         layer = 100f
       })
     }
+    newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
+    setAmmo()
+  }
 
-    shootType = BasicBulletType().apply {
+  override fun setAmmo() {
+    newAmmo(BasicBulletType().apply {
       damage = 121f
       lifetime = 33.6f
       speed = 20f
@@ -156,6 +152,10 @@ class BloodyWind : PowerTurret("bloodyWind") {
         colorFrom = "FF5845".toColor()
         colorTo = "FF8663".toColor()
       }
+    })
+    consume?.apply {
+      time(1.5f)
+      power(53f)
     }
   }
 }

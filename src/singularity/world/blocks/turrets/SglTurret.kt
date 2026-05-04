@@ -90,7 +90,7 @@ open class SglTurret(name: String) :SglBlock(name) {
   /**是否为线性预热过程 */
   var linearWarmup: Boolean = true
   /**开火预热阈值，需要达到阈值才能开火 */
-  var fireWarmupThreshold: Float = 0f
+  var fireWarmupThreshold: Float = 1f
   /**开火音效 */
   var shootSound: Sound = Sounds.shoot
   /**开火音效音调 */
@@ -549,7 +549,7 @@ open class SglTurret(name: String) :SglBlock(name) {
       }
     }
 
-    fun ammoReloadMultiplier(): Float {
+   open fun ammoReloadMultiplier(): Float {
       return currentAmmo?.bulletType?.reloadMultiplier ?: 1f
     }
 

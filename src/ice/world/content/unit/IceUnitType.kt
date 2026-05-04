@@ -1,9 +1,7 @@
 package ice.world.content.unit
 
-import arc.func.Cons
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
-import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
@@ -14,25 +12,15 @@ import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
-import ice.content.IPlanets
-import ice.entities.IceRegister
-import ice.graphics.IceColor
 import ice.core.IFiles
 import ice.core.IFiles.appendModName
-import universecore.struct.texture.LazyTextureSingleDelegate
+import ice.entities.IceRegister
+import ice.graphics.IceColor
 import ice.ui.bundle.Localizable
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars
-import mindustry.ai.ControlPathfinder
-import mindustry.ai.Pathfinder
-import mindustry.ai.UnitCommand
-import mindustry.ai.UnitStance
-import mindustry.content.Fx
-import mindustry.content.StatusEffects
 import mindustry.core.Renderer
 import mindustry.ctype.UnlockableContent
-import mindustry.entities.Effect
-import mindustry.entities.Effect.EffectContainer
 import mindustry.entities.abilities.Ability
 import mindustry.entities.part.DrawPart
 import mindustry.gen.*
@@ -44,10 +32,9 @@ import mindustry.graphics.Pal
 import mindustry.type.ItemStack
 import mindustry.type.UnitType
 import mindustry.type.Weapon
-import mindustry.world.meta.Env
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
-import kotlin.math.max
+import universecore.struct.texture.LazyTextureSingleDelegate
 import kotlin.math.min
 import kotlin.Unit as KUnit
 
@@ -70,6 +57,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
   init {
     constructor = IceRegister.getPutUnits(clazz)
     applys(this)
+
   }
 
   fun requirements(vararg req: Any) {
@@ -150,11 +138,11 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     shadowRegion = region
   }
 
-  override fun init() {
+ /* override fun init() {
     val example: Unit = constructor.get()
 
     checkEntityMapping(example)
-    //  allowLegStep = example is Legsc || example is Crawlc
+      allowLegStep = example is Legsc || example is Crawlc
     //water preset
     databaseTabs.add(IPlanets.阿德里)
     stats.useCategories = true
@@ -363,7 +351,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     estimateDps()
     //only do this after everything else was initialized
     sample = constructor.get()
-  }
+  }*/
 
   open fun setWeapon(weaponName: String = "", configurator: Weapon.() -> KUnit): Weapon {
     return Weapon(

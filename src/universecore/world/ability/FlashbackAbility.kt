@@ -3,15 +3,15 @@ package universecore.world.ability
 import arc.math.Angles
 import arc.math.Mathf
 import ice.entities.bullet.jumpIn
-import universecore.struct.MultipleAny
 import mindustry.Vars
 import mindustry.entities.abilities.Ability
 import mindustry.gen.Sounds
 import mindustry.gen.Unit
 import mindustry.type.UnitType
+import universecore.struct.MultipleAny
 
 class FlashbackAbility(var percent: Float,var amount: Int,var offset: Float,var spawnUnit: UnitType,var clone: UnitType) :Ability () {
-  override fun localized(): String? {
+  override fun localized(): String {
     return "闪回"
   }
 

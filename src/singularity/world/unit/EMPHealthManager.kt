@@ -30,7 +30,7 @@ import java.io.DataOutput
 import kotlin.math.min
 
 class EMPHealthManager {
-  private val healthMap = ObjectMap<Unit, EMPHealth>()
+  private val healthMap = ObjectMap<Unit?, EMPHealth>()
   private val unitDefaultHealthMap = ObjectMap<UnitType, EMPModel>()
 
   private var lastGetter: Unit? = null
@@ -127,10 +127,12 @@ class EMPHealthManager {
         val write = Writes(stream)
         write.i(healthMap.size)
         for(entry in healthMap) {
-          write.f(entry.key.x)
-          write.f(entry.key.y)
-          write.i(entry.key.type.id.toInt())
-          write.f(entry.value.empHealth)
+          entry.key?.let {
+            write.f(it.x)
+            write.f(it.y)
+            write.i(it.type.id.toInt())
+            write.f(entry.value.empHealth)
+          }
         }
       }
 

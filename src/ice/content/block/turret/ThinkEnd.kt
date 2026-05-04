@@ -13,11 +13,11 @@ import mindustry.type.ItemStack
 import mindustry.world.blocks.defense.turrets.ItemTurret
 import mindustry.world.draw.DrawTurret
 
-class ThinkEnd:ItemTurret("thinkEnd") {
-  init{
+class ThinkEnd :ItemTurret("thinkEnd") {
+  init {
     localization {
       zh_CN {
-        this.localizedName = "绪终"
+        localizedName = "绪终"
       }
     }
     size = 5

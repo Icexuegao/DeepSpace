@@ -5,22 +5,20 @@ import arc.math.Interp
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.entity.base.Entity
-import mindustry.async.PhysicsProcess
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
-import mindustry.entities.EntityCollisions
 import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.bullet.SapBulletType
 import mindustry.entities.bullet.ShrapnelBulletType
 import mindustry.entities.effect.ParticleEffect
+import mindustry.gen.LegsUnit
 import mindustry.gen.Sounds
 
-class Heterogeneous : IceUnitType("unit_heterogeneous",Ef::class.java) {
+class Heterogeneous : IceUnitType("unit_heterogeneous", LegsUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "异种"
+        localizedName = "异种"
         description = "重型地面突击单位.对远距离敌人发射不稳定的聚变能量弹,对近距离敌人则发射密集弱化激光"
       }
     }
@@ -322,14 +320,6 @@ class Heterogeneous : IceUnitType("unit_heterogeneous",Ef::class.java) {
           colorFrom = Color.valueOf("BF92F9")
           colorTo = Color.valueOf("BF92F9")
         }
-      }
-    }
-  }
-  class Ef:Entity(){
-    override fun collisionLayer()=PhysicsProcess.layerLegs
-    override fun solidity(): EntityCollisions.SolidPred {
-      return EntityCollisions.SolidPred { x: Int, y: Int ->
-        EntityCollisions.legsSolid(x, y)
       }
     }
   }
