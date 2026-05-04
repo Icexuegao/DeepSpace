@@ -5,6 +5,7 @@ import arc.func.Floatf
 import arc.func.Func
 import arc.graphics.Blending
 import arc.graphics.Color
+import arc.graphics.g2d.Draw
 import arc.math.Angles
 import arc.math.Interp
 import arc.math.Mathf
@@ -24,14 +25,15 @@ import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.power.PowerNode
-import universecore.world.draw.DrawFloorLiquid
 import ice.world.meta.IceEffects
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.entities.Effect
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
+import mindustry.gen.Building
 import mindustry.gen.Sounds
+import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Category
 import mindustry.type.LiquidStack
@@ -49,6 +51,7 @@ import singularity.world.draw.DrawExpandPlasma
 import singularity.world.particles.SglParticleModels
 import universecore.util.toColor
 import universecore.world.Load
+import universecore.world.draw.DrawFloorLiquid
 import universecore.world.particles.MultiParticleModel
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
@@ -439,7 +442,7 @@ object PowerBlocks : Load {
     explodeSound = Sounds.shootCollaris
     localization {
       zh_CN {
-        this.localizedName = "终归反应堆"
+        localizedName = "终归反应堆"
         description = "约束以太能的剧烈反应产生巨量电力,需要持续输入能量维持力场稳定,否则将引发灾难性爆炸"
       }
     }
@@ -722,7 +725,12 @@ object PowerBlocks : Load {
       particleStroke = 1.1f
       drawCenter = false
       blending = Blending.additive
-    }, DrawRegion("-mid"), DrawSoftParticles().apply {
+    }, DrawRegion("-mid"), object :DrawSoftParticles(){
+      override fun draw(build: Building) {
+        Draw.z(Layer.power)
+        super.draw(build)
+      }
+    }.apply {
       particles = 27
       particleLife = 120f
       particleSize = 9f

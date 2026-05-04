@@ -5,7 +5,7 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.block.EnvironmentBlocks
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.entity.base.Entity
+import ice.world.content.unit.entity.base.FleshEntity
 import ice.world.meta.IceEffects
 import mindustry.Vars
 import mindustry.content.Fx
@@ -37,7 +37,7 @@ class RichTumor : IceUnitType("richTumor", RichTumorUnit::class.java) {
     }
   }
 
-  class RichTumorUnit : Entity() {
+  class RichTumorUnit : FleshEntity() {
     var time = run {
       Fx.rand.setSeed(id.toLong())
       Fx.rand.random(6f, 10f) * 60

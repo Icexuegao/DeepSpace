@@ -5,15 +5,18 @@ import arc.math.Interp
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.world.content.unit.IceUnitType
+import ice.world.content.unit.entity.base.Entity
+import mindustry.async.PhysicsProcess
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
+import mindustry.entities.EntityCollisions
 import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.bullet.SapBulletType
 import mindustry.entities.bullet.ShrapnelBulletType
 import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.Sounds
 
-class Heterogeneous : IceUnitType("unit_heterogeneous") {
+class Heterogeneous : IceUnitType("unit_heterogeneous",Ef::class.java) {
   init {
     localization {
       zh_CN {
@@ -46,7 +49,7 @@ class Heterogeneous : IceUnitType("unit_heterogeneous") {
     legSplashRange = 40f
     drownTimeMultiplier = 60f
     legContinuousMove = true
-    allowLegStep = true
+
     lockLegBase = true
     hovering = true
     abilities.add(ArmorPlateAbility().apply {
@@ -319,6 +322,14 @@ class Heterogeneous : IceUnitType("unit_heterogeneous") {
           colorFrom = Color.valueOf("BF92F9")
           colorTo = Color.valueOf("BF92F9")
         }
+      }
+    }
+  }
+  class Ef:Entity(){
+    override fun collisionLayer()=PhysicsProcess.layerLegs
+    override fun solidity(): EntityCollisions.SolidPred {
+      return EntityCollisions.SolidPred { x: Int, y: Int ->
+        EntityCollisions.legsSolid(x, y)
       }
     }
   }
