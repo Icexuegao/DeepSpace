@@ -338,12 +338,9 @@ class Dew :ProjectileTurret("dew") {
         }
       }
     }, { t ->
-      t!!.add(SglStat.exDamageMultiplier.localized() + 115 + "%")
-      t.row()
-      t.add(SglStat.exShieldDamage.localized() + 85 + "%")
-      t.row()
-      t.add(SglStat.exPierce.localized() + ": 1")
-      t.row()
+      t.add(SglStat.exDamageMultiplier.localized() + 115 + "%").row()
+      t.add(SglStat.exShieldDamage.localized() + 85 + "%").row()
+      t.add(SglStat.exPierce.localized() + ": 1").row()
       t.add("@bullet.armorpierce")
     })
     consume!!.time(10f)
