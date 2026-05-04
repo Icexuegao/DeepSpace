@@ -22,7 +22,7 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import universecore.scene.element.ProgressBar
 import universecore.scene.element.typinglabel.TLabel
-import universecore.util.toStringi
+import universecore.util.toTrimmedString
 import ice.ui.Documents
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
@@ -107,7 +107,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       ConfigCheck("显示实体信息", { SettingValue.显示实体信息 = it }, SettingValue::显示实体信息),
       ConfigSlider(
         "状态指示器不透明度",
-        { (it * 100).toStringi(1) + "%" },
+        { (it * 100).toTrimmedString(1) + "%" },
         { SettingValue.状态指示器不透明度 = it },
         SettingValue::状态指示器不透明度,
         0.3f,

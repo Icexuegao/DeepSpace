@@ -19,7 +19,7 @@ import ice.entities.bullet.BombBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.graphics.IceColor
 import universecore.math.IMathf
-import universecore.util.toStringi
+import universecore.util.toTrimmedString
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.ability.BarAbility
 import ice.world.content.unit.entity.base.Entity
@@ -154,7 +154,7 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
     abilities.add(BarAbility<ClusterLobesUnit> { unit, bars ->
       bars.add(Bar({ "${IceStats.格挡数量.localized()} ${unit.resistCont}" }, { IceColor.b4 }) { 1f }).row()
       bars.add(Bar({ "${Stat.armor.localized()}" }, { IceColor.b4 }) { unit.armor() / 100 }).row()
-      bars.add(Bar({ "${IceStats.伤害减免.localized()} ${(unit.immunity() * 100).toStringi(2)}%" }, { IceColor.b4 }) {
+      bars.add(Bar({ "${IceStats.伤害减免.localized()} ${(unit.immunity() * 100).toTrimmedString(2)}%" }, { IceColor.b4 }) {
         unit.immunity()
       }).row()
     })

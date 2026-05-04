@@ -8,7 +8,7 @@ import arc.math.Angles
 import arc.math.Mathf
 import arc.util.Time
 import ice.content.IItems
-import universecore.util.toStringi
+import universecore.util.toTrimmedString
 import ice.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
@@ -85,7 +85,7 @@ class Rainbow : PowerTurret("turret_rainbow") {
 
   override fun setBars() {
     super.setBars()
-    addBar("speedUp") { e: RainbowBuild -> Bar({ "注能: ${(e.speed * 100).toStringi(0)}%" }, { Color.valueOf("FF5845") }, { e.speed }) }
+    addBar("speedUp") { e: RainbowBuild -> Bar({ "注能: ${(e.speed * 100).toTrimmedString(0)}%" }, { Color.valueOf("FF5845") }, { e.speed }) }
   }
 
   inner class RainbowBuild : PowerTurretBuild() {

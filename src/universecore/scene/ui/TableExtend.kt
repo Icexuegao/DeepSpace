@@ -30,7 +30,7 @@ import universecore.scene.layout.ProgressAttribute
 import universecore.scene.ui.layout.ITable
 import universecore.struct.texture.asDrawable
 import universecore.util.accessFloat
-import universecore.util.toStringi
+import universecore.util.toTrimmedString
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.gen.Icon
@@ -249,7 +249,7 @@ fun Table.addIceSlider(name: String, min: Float, max: Float, setpSize: Float, va
   val t2 = Table()
   val fLabel = FLabel(name)
   slider.changed {
-    fLabel.restart("$name:${slider.value.toStringi(2)}")
+    fLabel.restart("$name:${slider.value.toTrimmedString(2)}")
   }
   fLabel.setColor(IceColor.b4)
   t2.add(fLabel)

@@ -4,7 +4,7 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import ice.graphics.IceColor
-import universecore.util.toStringi
+import universecore.util.toTrimmedString
 import ice.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.Vars
@@ -58,7 +58,7 @@ open class IceBlock(name: String) : Block(name), Localizable {
   override fun setStats() {
     super.setStats()
     if (damageReduction > 0f) stats.add(IceStats.伤害减免, "${ (damageReduction * 100).roundToInt()}%")
-    if (healAmount > 0f) stats.add(IceStats.生命值恢复, "${healAmount.toStringi(1)}/秒")
+    if (healAmount > 0f) stats.add(IceStats.生命值恢复, "${healAmount.toTrimmedString(1)}/秒")
   }
 
   open inner class IceBuild : Building() {

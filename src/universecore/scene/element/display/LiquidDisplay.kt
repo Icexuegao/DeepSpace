@@ -5,7 +5,7 @@ import arc.scene.ui.Image
 import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
-import universecore.util.toStringi
+import universecore.util.toTrimmedString
 import ice.world.meta.IStatValues.withTooltip
 import mindustry.Vars.iconMed
 import mindustry.type.Liquid
@@ -22,7 +22,7 @@ class LiquidDisplay(
 
         if (amount != 0f) {
           val t: Table = Table().left().bottom()
-          t.add((amount * 60f).toStringi(1)).style(Styles.outlineLabel)
+          t.add((amount * 60f).toTrimmedString(1)).style(Styles.outlineLabel)
           add(t)
         }
       }

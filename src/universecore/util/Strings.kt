@@ -1,23 +1,54 @@
 package universecore.util
 
 import arc.graphics.Color
-import arc.math.Mathf
-import arc.util.Strings
-import universecore.util.Strings.decimal
-import universecore.util.Strings.fixDecimals
-import universecore.util.Strings.regex
-import kotlin.math.abs
 
 object Strings {
-    var decimal: Int = 2
-    var fixDecimals: Boolean = false
-    val regex = Regex("^[-+]?\\d*\\.?\\d+$")
+  val regex = Regex("^[-+]?\\d*\\.?\\d+$")
 }
 
-fun String.isNumericWithSign() = matches(regex)
+fun String.isNumericWithSign() = matches(Strings.regex)
+/**扫描字符串中所有数字及百分比格式的子串，并对每个匹配项应用转换函数，将结果替换回原位置。
+ *
+ * <p>匹配规则：使用正则表达式 {@code \d+(?:\.\d+)?%?}，可识别以下格式：
+ * <ul>
+ *   <li>整数，如 {@code 234}、{@code 0}、{@code 812}</li>
+ *   <li>小数，如 {@code 1.2}、{@code 0.4343}</li>
+ *   <li>百分比，如 {@code 123%}、{@code 5.45%}</li>
+ *   <li>嵌入文本中的数字，如 {@code abc123def} 中的 {@code 123}</li>
+ * </ul>
+ *
+ * ```kotlin
+ * val desc = "伤害 123% 速度 1.2 等级 234 暴击 5.45%"
+ * val colored = desc.replaceNumericMatches { match ->
+ *     when {
+ *         match.endsWith("%") -> "[accent]$match[]"
+ *         match.contains(".") -> "[sky]$match[]"
+ *         else -> "[stat]$match[]"
+ *     }
+ * }
+ * // colored: "伤害 [accent]123%[] 速度 [sky]1.2[] 等级 [stat]234[] 暴击 [accent]5.45%[]"
+ * }
+ * ```
+ * @receiver 待处理的原始字符串
+ * @param transform 转换函数，接收匹配到的子串，返回用于替换的新字符串
+ * @return 经过全部替换处理后的新字符串
+ * @author Alon */
+fun String.replaceNumericMatches(transform: (String) -> String): String {
+  return """\d+(?:\.\d+)?%?""".toRegex().replace(this) { transform(it.value) }
+}
 
-/**返回float保存x位数的字符串*/
-fun Float.toStringi(precision: Int): String {
+fun String.applyColor(color: String): String {
+  return "$color$this$color"
+}
+
+fun String.toColor(): Color = Color.valueOf(this)
+/**将Float格式化为指定精度，并自动去除末尾无意义的0。
+ *
+ * @param precision 小数保留位数
+ * @return 格式化后的字符串
+ *
+ * @author Alon */
+fun Float.toTrimmedString(precision: Int): String {
   val formatted = "%.${precision}f".format(this)
   return formatted.removeTrailingZeros()
 }
@@ -28,51 +59,5 @@ private fun String.removeTrailingZeros(): String {
   return trimmed.trimEnd('.')
 }
 
-fun String.toColor(): Color = Color.valueOf(this)
-fun percent(cur: Float, max: Float, percent: Float = cur / max, showPercent: Boolean = percent < 0.95f): String {
-    return buildString {
-        append(format(cur))
-        if (percent < 0.99f) {
-            append('/')
-            append(format(max))
-        }
-        if (showPercent) {
-            append(" [lightgray]| ")
-            append((percent * 100).toInt())
-            append('%')
-        }
-    }
-}
 
-fun format(number: Float): String {
-    if (java.lang.Float.isNaN(number)) return "NaN"
-    if (number == Float.POSITIVE_INFINITY) return "Inf"
-    if (number == Float.NEGATIVE_INFINITY) return "-Inf"
-    val abs = abs(number)
-    return when {
-        abs <= java.lang.Float.MIN_NORMAL -> format0(0f)
-        abs < Mathf.pow(10f, -decimal.toFloat()) -> scienceFormat(number)
-        abs < 1e3f || abs < Mathf.pow(10f, 1f + decimal) -> format0(number) //直接渲染
-        abs < 1e6f -> "${format0(number / 1e3f)}[gray]K[]"
-        abs < 1e9f -> "${format0(number / 1e6f)}[gray]M[]"
-        abs < 1e12f -> "${format0(number / 1e9f)}[gray]B[]"
-        else -> scienceFormat(number)
-    }
-}
 
-private fun format0(number: Float): String {
-    if (fixDecimals) return Strings.fixed(number, decimal)
-    return fixedPrecision(number)
-}
-
-fun fixedPrecision(v: Float): String {
-    val exponent = Mathf.floor(Mathf.log(10f, abs(v))).coerceAtLeast(0)
-    if (exponent >= decimal) return v.toInt().toString()
-    return Strings.fixed(v, decimal - exponent)
-}
-
-fun scienceFormat(number: Float): String {
-    val exponent = Mathf.floor(Mathf.log(10f, abs(number)))
-    val mantissa = number / Mathf.pow(10f, exponent.toFloat())
-    return "${Strings.fixed(mantissa, decimal)}[gray]E$exponent[]"
-}

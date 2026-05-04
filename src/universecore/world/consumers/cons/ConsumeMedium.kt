@@ -8,7 +8,7 @@ import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
 import arc.util.Strings
-import universecore.util.toStringi
+import universecore.util.toTrimmedString
 import mindustry.Vars
 import mindustry.core.UI
 import mindustry.gen.Building
@@ -40,7 +40,7 @@ class ConsumeMedium<T>(var request: Float) : BaseConsume<T>() where T : Building
     if (product > 0) {
       stack.add(Table { t ->
         t.left().bottom()
-        t.add(if (product >= 1000) UI.formatAmount(product.toLong()) else product.toStringi(1) + "").style(Styles.outlineLabel)
+        t.add(if (product >= 1000) UI.formatAmount(product.toLong()) else product.toTrimmedString(1) + "").style(Styles.outlineLabel)
         t.pack()
       })
     }

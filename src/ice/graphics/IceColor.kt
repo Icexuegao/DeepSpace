@@ -4,6 +4,8 @@ import arc.graphics.Color
 import arc.graphics.Color.valueOf
 
 object IceColor {
+  const val lightgray = "[lightgray]"
+  const val stat ="[stat]"
   val g2: Color = valueOf("578c80")
   val c5: Color = valueOf("c6a699")
   val c4: Color = valueOf("efcdcb")

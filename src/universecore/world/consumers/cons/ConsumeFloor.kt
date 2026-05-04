@@ -9,7 +9,7 @@ import arc.struct.ObjectIntMap
 import arc.struct.Seq
 import arc.util.Scaling
 import arc.util.Strings
-import universecore.util.toStringi
+import universecore.util.toTrimmedString
 import mindustry.Vars
 import mindustry.ctype.Content
 import mindustry.gen.Building
@@ -114,7 +114,7 @@ class ConsumeFloor<T> : BaseConsume<T> where T : Building, T : ConsumerBuildComp
         for (entry in floorEff) {
           t.stack(
             Image(entry.key!!.uiIcon).setScaling(Scaling.fit), Table {table: Table? ->
-              table!!.top().right().add((if (entry.value < 0) "[scarlet]" else if (baseEfficiency == 0f) "[accent]" else "[accent]+") + (entry.value * 100).toStringi(1) + "%").style(Styles.outlineLabel)
+              table!!.top().right().add((if (entry.value < 0) "[scarlet]" else if (baseEfficiency == 0f) "[accent]" else "[accent]+") + (entry.value * 100).toTrimmedString(1) + "%").style(Styles.outlineLabel)
               table.top().left().add("/" + StatUnit.blocks.localized()).color(Pal.gray)
             }).fill().padRight(4f)
           t.add(entry.key!!.localizedName).left().padLeft(0f)

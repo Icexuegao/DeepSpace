@@ -7,6 +7,7 @@ import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
+import ice.graphics.IceColor
 import mindustry.content.Fx
 import mindustry.entities.part.DrawPart
 import mindustry.entities.part.DrawPart.PartProgress
@@ -29,6 +30,8 @@ import singularity.world.blocks.turrets.ProjectileTurret
 import singularity.world.blocks.turrets.WarpedBulletType
 import singularity.world.draw.DrawSglTurret
 import singularity.world.meta.SglStat
+import universecore.util.applyColor
+import universecore.util.replaceNumericMatches
 import kotlin.math.max
 import kotlin.math.min
 
@@ -338,9 +341,9 @@ class Dew :ProjectileTurret("dew") {
         }
       }
     }, { t ->
-      t.add(SglStat.exDamageMultiplier.localized() + 115 + "%").row()
-      t.add(SglStat.exShieldDamage.localized() + 85 + "%").row()
-      t.add(SglStat.exPierce.localized() + ": 1").row()
+      t.add("${SglStat.exDamageMultiplier.localized()}: 115%".replaceNumericMatches { it.applyColor(IceColor.stat) }).row()
+      t.add("${SglStat.exShieldDamage.localized()}: 85%".replaceNumericMatches { it.applyColor(IceColor.stat) }).row()
+      t.add(SglStat.exPierce.localized() + ": 1".replaceNumericMatches { it.applyColor(IceColor.stat) }).row()
       t.add("@bullet.armorpierce")
     })
     consume!!.time(10f)
@@ -368,8 +371,7 @@ class Dew :ProjectileTurret("dew") {
         }
       }
     }, { t ->
-      t.add(SglStat.exDamageMultiplier.localized() + 125 + "%")
-      t.row()
+      t.add("${SglStat.exDamageMultiplier.localized()}: 125%".replaceNumericMatches { it.applyColor(IceColor.stat) }).row()
       t.add(IStatus.结晶化.localizedName + "[lightgray] ~ [stat]0.25[lightgray] " + Core.bundle.get("unit.seconds"))
     }, 2)
     consume!!.time(20f)

@@ -38,7 +38,7 @@ import mindustry.world.meta.StatCat
 import mindustry.world.meta.StatUnit
 import singularity.world.blocks.SglBlock
 import universecore.struct.texture.LazyTextureSingleDelegate
-import universecore.util.toStringi
+import universecore.util.toTrimmedString
 
 class WindGenerator(name: String) :SglBlock(name) {
   companion object {
@@ -93,7 +93,7 @@ class WindGenerator(name: String) :SglBlock(name) {
     if (hasPower && outputsPower) {
       addBar("powerEffecct") { entity: WindGeneratorBuild ->
         Bar({
-          "发电效率: ${(entity.powerEffecct() * 100).toStringi(0)}%"
+          "发电效率: ${(entity.powerEffecct() * 100).toTrimmedString(0)}%"
         }, { Pal.powerBar }, entity::powerEffecct)
       }
       addBar("powerProduction") { entity: WindGeneratorBuild ->
