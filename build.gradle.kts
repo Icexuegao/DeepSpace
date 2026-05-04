@@ -209,6 +209,12 @@ tasks {
     from("build/libs/${project.name}Desktop.jar")
     into("C:/Users/$proUser/AppData/Roaming/Mindustry/mods")
   }
+  register<Copy>("myCopyJarSteam") {
+    group = "alon"
+    dependsOn(shadowJar)
+    from("build/libs/${project.name}Desktop.jar")
+    into("B:\\game\\steam\\steamapps\\common\\Mindustry\\saves\\mods")
+  }
   register("updateVersion") {
     group = "alon"
     val file = Fi(modFileName)

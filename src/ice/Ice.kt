@@ -56,7 +56,6 @@ open class Ice :Mod() {
   override fun init() {
     UncCore.init()
     singularity.init()
-    //  SglTechTreeDialog().show()
     UI.init()
     Schematics.init()
     MenusDialog.init()

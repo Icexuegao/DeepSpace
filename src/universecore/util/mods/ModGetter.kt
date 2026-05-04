@@ -50,7 +50,7 @@ object ModGetter {
 
       try {
         if (filter.get(file, info)) {
-          result.add(ModInfo(ZipFi(file)))
+         if (file.isDirectory)result.add(ModInfo(file)) else result.add(ModInfo(ZipFi(file)))
         }
       } catch (ignored: IllegalModHandleException) {
         throw Exception("ModGetter: json解析错误 $info", ignored)
