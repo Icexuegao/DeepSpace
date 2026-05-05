@@ -8,6 +8,7 @@ object TurretBlocks :Load {
   val 碎冰 = 碎冰()
   val 双星 = TwinStar()
   val 泉涌 = Quicksand()
+  val 热泉 = 热泉()
   val 攫取 = 攫取()
   val 流火 = FlowingFire()
   val 碎爆 = Shatter()

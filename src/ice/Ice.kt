@@ -38,6 +38,10 @@ open class Ice :Mod() {
   }
 
   init {
+   // val appendEnumInstance = LAccess::class.accessEnum1<LAccess, Array<String>>().appendEnumInstance("dwx", arrayOf("to"))
+
+
+
     DeepSpace.globals.load()
     Events.on(mindustry.game.EventType.MusicRegisterEvent::class.java) {
       SoundControl.init()

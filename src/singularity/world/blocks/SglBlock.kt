@@ -636,10 +636,6 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
       drawers.drawLight(this)
     }
 
-    override fun version(): Byte {
-      return 3
-    }
-
     override fun write(write: Writes) {
       super.write(write)
       write.i(select)

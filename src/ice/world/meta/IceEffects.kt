@@ -208,9 +208,9 @@ object IceEffects {
   }
 
   /*** @param lengthSize 该值决定火焰最终长度 子弹的话一般是速度*时间 */
-  fun changeFlame(lengthSize: Float): Effect {
+  fun changeFlame(lengthSize: Float,lightFlame: Color =Pal.lightFlame,darkFlame: Color =Pal.darkFlame): Effect {
     return Effect(32f, 80f) { e ->
-      Draw.color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin())
+      Draw.color(lightFlame, darkFlame, Color.gray, e.fin())
       randLenVectors(e.id.toLong(), 8, e.finpow() * lengthSize, e.rotation, 10f) { x: Float, y: Float ->
         Fill.circle(e.x + x, e.y + y, 0.65f + e.fout() * 1.5f)
       }

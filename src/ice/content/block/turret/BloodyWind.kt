@@ -48,6 +48,7 @@ class BloodyWind :SglTurret("turret_bloodyWind") {
     }
     requirements(Category.turret, IItems.铬锭, 2200, IItems.石英玻璃, 570, IItems.铱板, 1200, IItems.导能回路, 625, IItems.钴钢, 825)
     drawers = DrawSglTurret().apply {
+      parts.add(RegionPart())
       parts.addAll(RegionPart("-l").apply {
         under = true
         recoilIndex = 0

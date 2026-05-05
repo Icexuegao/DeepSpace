@@ -28,7 +28,7 @@ class 碎冰 :SglTurret("turret_trashIce") {
     health = 250
     recoil = 0.5f
     shootY = 3f
-    range = 20*8f
+    range = 20 * 8f
     inaccuracy = 10f
     shoot = ShootSummon().apply {
       x = 0f
@@ -64,7 +64,7 @@ class 碎冰 :SglTurret("turret_trashIce") {
     newAmmo(getAmmoType(IItems.高碳钢.color).apply {
       damage = 20f
       rangeChange = 6f * 8f
-    }).setReloadAmount(6)
+    }).setReloadAmount(2)
     consume!!.apply {
       time(45f)
       items(IItems.高碳钢, 1)
@@ -72,7 +72,7 @@ class 碎冰 :SglTurret("turret_trashIce") {
     newAmmo(getAmmoType(IItems.黄铜锭.color).apply {
       damage = 18f
       rangeChange = 8f * 8f
-    }).setReloadAmount(6)
+    }).setReloadAmount(2)
     consume!!.apply {
       time(45f)
       items(IItems.黄铜锭, 1)
@@ -80,7 +80,7 @@ class 碎冰 :SglTurret("turret_trashIce") {
     newAmmo(getAmmoType(IItems.钴锭.color).apply {
       damage = 24f
       rangeChange = 6f * 8f
-    }).setReloadAmount(4)
+    }).setReloadAmount(2)
     consume!!.apply {
       time(45f)
       items(IItems.钴锭, 1)
@@ -88,7 +88,7 @@ class 碎冰 :SglTurret("turret_trashIce") {
     newAmmo(getAmmoType(IItems.铬锭.color).apply {
       damage = 24f
       rangeChange = 6f * 8f
-    }).setReloadAmount(4)
+    }).setReloadAmount(2)
     consume!!.apply {
       time(45f)
       items(IItems.铬锭, 1)
@@ -105,7 +105,7 @@ class 碎冰 :SglTurret("turret_trashIce") {
     }
     newAmmo(getAmmoType(IItems.黄铜矿.color).apply {
       damage = 10f
-    }).setReloadAmount(3)
+    }).setReloadAmount(1)
     consume!!.apply {
       time(45f)
       items(IItems.黄铜矿, 1)

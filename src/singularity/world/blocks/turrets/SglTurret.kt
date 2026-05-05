@@ -319,6 +319,11 @@ open class SglTurret(name: String) :SglBlock(name) {
         e.warmup()
       }
     }
+    addBar("shotStack"){ e: SglTurretBuild ->
+      Bar({"弹药栈: ${e.shotStack}"}, {Pal.ammo}) {
+        (e.currentAmmo?.reloadAmount?.let { e.shotStack.toFloat() /it } ?:0f)
+      }
+    }
   }
 
   override fun setStats() {
@@ -448,6 +453,12 @@ open class SglTurret(name: String) :SglBlock(name) {
       val targetRot = angleTo(targetPos)
 
       if (wasShooting() && shootValid()) {
+
+        if (shotStack <= 0) {
+          consumer.trigger()
+          shotStack = currentAmmo!!.reloadAmount
+        }
+
         if (canShoot() && tarValid) {
           warmup = if (linearWarmup) Mathf.approachDelta(warmup, 1f, warmupSpeed * consEfficiency()) else Mathf.lerpDelta(
             warmup, 1f, warmupSpeed * consEfficiency()
@@ -531,6 +542,8 @@ open class SglTurret(name: String) :SglBlock(name) {
       }
       val tarValid = validateTarget()
       val targetRot = angleTo(targetPos)
+
+
 
       updateReload()
 
@@ -622,10 +635,6 @@ open class SglTurret(name: String) :SglBlock(name) {
 
       reloadCounter %= consumer.current!!.craftTime
 
-      if (shotStack <= 0) {
-        consumer.trigger()
-        shotStack = currentAmmo!!.reloadAmount
-      }
       if (shotStack > 0) {
         shotStack--
       }
