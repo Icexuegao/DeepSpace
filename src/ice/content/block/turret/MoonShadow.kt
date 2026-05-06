@@ -98,7 +98,7 @@ class MoonShadow :SglTurret("moonShadow") {
     setAmmo()
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(BasicBulletType(sprite = "circle-bullet").apply {
       damage = 240f
       lifetime = 30f

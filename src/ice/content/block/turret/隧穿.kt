@@ -2,13 +2,8 @@ package ice.content.block.turret
 
 import ice.content.IItems
 import ice.content.IStatus
-import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
-import universecore.util.toColor
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.UnitSorts
@@ -19,12 +14,20 @@ import mindustry.entities.part.RegionPart
 import mindustry.entities.pattern.ShootSpread
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.ItemTurret
-import mindustry.world.consumers.ConsumeCoolant
-import mindustry.world.draw.DrawTurret
+import mindustry.type.Item
+import mindustry.type.Liquid
+import singularity.world.blocks.turrets.SglTurret
+import singularity.world.draw.DrawSglTurret
+import universecore.util.toColor
 
-class TunnelOpening:ItemTurret("tunnelOpening") {
-  init{
+class 隧穿 :SglTurret("turret_tunnelOpening") {
+  init {
+    localization {
+      zh_CN {
+        localizedName = "隧穿"
+        description = "向指定方位发射三道强劲的定向爆破束,并在到达极限距离后原路返回"
+      }
+    }
     squareSprite = false
     health = 3450
     size = 5
@@ -32,25 +35,19 @@ class TunnelOpening:ItemTurret("tunnelOpening") {
     shootY = 10f
     shake = 3.5f
     range = 264f
-    reload = 378f
     shootCone = 15f
-    maxAmmo = 40
     recoilTime = 192f
     cooldownTime = 270f
     rotateSpeed = 2f
-    ammoPerShot = 10
     liquidCapacity = 40f
-    coolantMultiplier = 0.4f
-    minWarmup = 0.96f
-    shootWarmupSpeed = 0.08f
-    warmupMaintainTime = 300f
     shootSound = Sounds.shootScathe
     unitSort = UnitSorts.farthest
     shootEffect = Fx.bigShockwave
     ammoUseEffect = Fx.casing3Double
-    consumePower(17f)
-    consume(ConsumeCoolant(1.5f))
-    drawer = DrawTurret().apply {
+
+    newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
+    drawers = DrawSglTurret().apply {
+      parts.add(RegionPart())
       parts.addAll(RegionPart("-shot").apply {
         progress = DrawPart.PartProgress.recoil
         moveY = -4.5f
@@ -99,17 +96,18 @@ class TunnelOpening:ItemTurret("tunnelOpening") {
         layer = 110f
       })
     }
-    requirements(Category.turret, IItems.铜锭, 1120, IItems.钴锭, 470, IItems.钍锭, 390, IItems.铬锭, 280, IItems.铱板, 225, IItems.爆炸化合物, 65)
-    localization {
-      zh_CN {
-        this.localizedName = "隧穿"
-        description = "向指定方位发射三道强劲的定向爆破束,并在到达极限距离后原路返回"
-      }
-    }
+    requirements(
+      Category.turret, IItems.铜锭, 1120, IItems.钴锭, 470, IItems.钍锭, 390, IItems.铬锭, 280, IItems.铱板, 225, IItems.爆炸化合物, 65
+    )
     shoot = ShootSpread().apply {
       shots = 3
       spread = 15f
     }
+    setAmmo()
+    limitRange()
+  }
+
+  fun setAmmo() {
     addAmmoType(IItems.铬锭) {
       BasicBulletType().apply {
         damage = 135f
@@ -487,6 +485,16 @@ class TunnelOpening:ItemTurret("tunnelOpening") {
           }
         }
       }
+    }
+  }
+
+  fun addAmmoType(item: Item, bulletType: () -> BasicBulletType) {
+    val ammoTypes = bulletType.invoke()
+    newAmmo(ammoTypes).setReloadAmount(ammoTypes.ammoMultiplier.toInt())
+    consume?.apply {
+      time(378f)
+      item(item, 1)
+      power(17f)
     }
   }
 }

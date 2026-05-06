@@ -84,7 +84,7 @@ class Tear :SglTurret("turret_tear") {
     setAmmo()
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(BasicBulletType(16f, 840f, "gauss-bullet").apply {
       lifetime = 48f
       shrinkY = 0f

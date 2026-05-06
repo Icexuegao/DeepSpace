@@ -51,7 +51,7 @@ class Rainbow :SglTurret("turret_rainbow") {
     setAmmo()
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(PointBulletType().apply {
       damage = 35f
       lifetime = 8f

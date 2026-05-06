@@ -4,7 +4,7 @@ import java.io.File
 
 fun main() {
   // repName(File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\remains\\spine_parasite"))
-   val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\spritese\\blocks\\turret\\bloodyWind")
+   val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\spritese\\blocks\\turret\\breakThrough")
    req(file)
   //removeLeadingZeros("B:\\inCommonUse\\Videos\\bilibili\\37331271901\\37331271901-1-30280.m4s")
 
@@ -14,7 +14,7 @@ fun main() {
 fun req(file: File) {
   file.listFiles()?.forEach {
 
-      val replace1 =it.name.replace("bloodyWind","turret_bloodyWind")
+      val replace1 =it.name.replace("breakThrough","turret_breakThrough")
       it.renameTo(File("${file.absolutePath}\\$replace1"))
   }
 }

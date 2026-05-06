@@ -38,11 +38,18 @@ open class Ice :Mod() {
   }
 
   init {
-   // val appendEnumInstance = LAccess::class.accessEnum1<LAccess, Array<String>>().appendEnumInstance("dwx", arrayOf("to"))
-
+    // val appendEnumInstance = LAccess::class.accessEnum1<LAccess, Array<String>>().appendEnumInstance("dwx", arrayOf("to"))
     DeepSpace.globals.load()
     Events.on(mindustry.game.EventType.MusicRegisterEvent::class.java) {
       SoundControl.init()
+    }
+    Events.on(mindustry.game.EventType.ModContentLoadEvent::class.java) {
+      Vars.content.blocks().forEach {
+        if (!it.hasBuilding() && it.category == Category.distribution) {
+          it.category = SglCategory.environment
+          it.buildVisibility = BuildVisibility.sandboxOnly
+        }
+      }
     }
     IFiles.setup()
     IAttribute.setup()
@@ -82,18 +89,8 @@ open class Ice :Mod() {
     IBlocks.load()
     IWeathers.load()
     IPlanets.load()
-
     singularity.loadContent()
     LocalizationManager.load()
-
-
-
-    Vars.content.blocks().forEach {
-      if (!it.hasBuilding() && it.category == Category.distribution) {
-        it.category = SglCategory.environment
-        it.buildVisibility = BuildVisibility.sandboxOnly
-      }
-    }
   }
 
   override fun packSprites(packer: MultiPacker) = IcePackSprites.packSprites(packer)

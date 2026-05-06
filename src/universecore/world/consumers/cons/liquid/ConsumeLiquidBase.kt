@@ -5,6 +5,7 @@ import arc.scene.ui.Image
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
+import ice.world.meta.IStatValues
 import mindustry.core.UI
 import mindustry.gen.Building
 import mindustry.type.LiquidStack
@@ -18,8 +19,11 @@ import kotlin.math.min
 abstract class ConsumeLiquidBase<T> : BaseConsume<T>() where T : Building, T : ConsumerBuildComp {
   companion object {
     fun buildLiquidIcons(table: Table, liquids: Array<out LiquidStack>, or: Boolean, limit: Int) {
+
       var count = 0
       for (stack in liquids) {
+       // table.add(IStatValues.displayLiquid(stack.liquid, stack.amount, perSecond = true,false))
+      //  return
         count++
         if (count > 0 && or) {
           table.add("/").set(Cell.defaults()).fillX()
@@ -29,14 +33,16 @@ abstract class ConsumeLiquidBase<T> : BaseConsume<T>() where T : Building, T : C
           break
         }
 
-        table.stack(Table {o: Table ->
+        val get = table.stack(Table { o: Table ->
           o.left()
-          o.add(Image(stack.liquid.fullIcon)).size(32f).scaling(Scaling.fit)
-        }, Table {t: Table ->
+          o.add(Image(stack.liquid.fullIcon)).size(32f).scaling(Scaling.fit).get()
+        }, Table { t: Table ->
           t.left().bottom()
-          t.add(if (stack.amount * 60 >= 1000) UI.formatAmount((stack.amount * 60).toLong()) + "/s" else (Mathf.round(stack.amount * 600) / 10f).toString() + "/s").style(Styles.outlineLabel)
+          t.add(if (stack.amount * 60 >= 1000) UI.formatAmount((stack.amount * 60).toLong()) + "/s" else (Mathf.round(stack.amount * 600) / 10f).toString() + "/s")
+            .style(Styles.outlineLabel)
           t.pack()
-        })
+        }).get()
+        IStatValues.withTooltip(get, stack.liquid, true)
       }
     }
   }

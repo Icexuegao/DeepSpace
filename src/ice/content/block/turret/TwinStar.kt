@@ -93,7 +93,7 @@ class TwinStar :SglTurret("turret_twinStar") {
     setAmmo()
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(getBulletType(15f, 60f, 2.5f * 8f, IItems.硫化合物.color).apply {
       status = StatusEffects.burning
       statusDuration = 10 * 60f

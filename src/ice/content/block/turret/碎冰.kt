@@ -60,7 +60,7 @@ class 碎冰 :SglTurret("turret_trashIce") {
     setAmmo()
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(getAmmoType(IItems.高碳钢.color).apply {
       damage = 20f
       rangeChange = 6f * 8f

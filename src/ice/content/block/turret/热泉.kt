@@ -61,7 +61,7 @@ class 热泉 :SglTurret("turret_hotSprings") {
     status = StatusEffects.burning
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     val size1 = 16
     newAmmo(getBuller().apply {
       damage = 60f

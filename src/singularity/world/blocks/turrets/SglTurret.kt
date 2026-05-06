@@ -175,11 +175,11 @@ open class SglTurret(name: String) :SglBlock(name) {
       val value = entry.value.bulletType
       if (Mathf.equal(value.speed, 0f)) continue
       val realRange = value.rangeChange + value.extraRangeMargin + margin + 10f + range
-      value.lifetime = realRange / value.speed
+
+      value.lifetime = if (Mathf.zero(value.drag)) realRange / value.speed else Mathf.log(1f - value.drag, 1f - realRange * value.drag / value.speed)
     }
   }
 
-  open fun setAmmo() {}
   override fun init() {
     oneOfOptionCons = false
     if (shootY == Float.NEGATIVE_INFINITY) shootY = size * Vars.tilesize / 2f
@@ -319,10 +319,14 @@ open class SglTurret(name: String) :SglBlock(name) {
         e.warmup()
       }
     }
-    addBar("shotStack"){ e: SglTurretBuild ->
-      Bar({"弹药栈: ${e.shotStack}"}, {Pal.ammo}) {
-        (e.currentAmmo?.reloadAmount?.let { e.shotStack.toFloat() /it } ?:0f)
+    addBar("shotStack") { e: SglTurretBuild ->
+      Bar({ "弹药栈: ${e.shotStack}" }, { Pal.ammo }) {
+        (e.currentAmmo?.reloadAmount?.let { e.shotStack.toFloat() / it } ?: 0f)
       }
+    }
+    addBar("reloadCounter") { e: SglTurretBuild ->
+      val f = { e.consumer.current?.craftTime?.let { e.reloadCounter / it } ?: 0f }
+      Bar({ "装填: ${(f.invoke() * 100f).toInt()}%" }, { Pal.ammo }, { f.invoke() })
     }
   }
 
@@ -562,7 +566,7 @@ open class SglTurret(name: String) :SglBlock(name) {
       }
     }
 
-   open fun ammoReloadMultiplier(): Float {
+    open fun ammoReloadMultiplier(): Float {
       return currentAmmo?.bulletType?.reloadMultiplier ?: 1f
     }
 

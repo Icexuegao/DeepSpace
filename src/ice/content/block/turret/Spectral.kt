@@ -55,7 +55,7 @@ class Spectral :SglTurret("turret_spectral") {
     newCoolant(1f, 0.3f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(LaserBulletType(135f).apply {
       length = 256f
       shootEffect = ParticleEffect().apply {

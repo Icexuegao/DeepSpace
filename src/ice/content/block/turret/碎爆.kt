@@ -4,26 +4,24 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
 import ice.content.IStatus
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.core.IFiles.appendModName
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.entities.effect.ExplosionEffect
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.pattern.ShootAlternate
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.ItemTurret
-import mindustry.world.consumers.ConsumeCoolant
+import mindustry.type.Item
+import mindustry.type.Liquid
+import singularity.world.blocks.turrets.SglTurret
 
-class Shatter : ItemTurret("turret_shatter") {
+class 碎爆 :SglTurret("turret_shatter") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "碎爆"
+        localizedName = "碎爆"
         description = "新式炮台,可兼容各种弹药"
       }
     }
@@ -31,24 +29,30 @@ class Shatter : ItemTurret("turret_shatter") {
     health = 1280
     size = 3
     shake = 1f
-    reload = 15f
     range = 288f
     inaccuracy = 5f
     shootCone = 20f
     rotateSpeed = 8f
-    maxAmmo = 60
     liquidCapacity = 30f
-    coolantMultiplier = 4f
     shootSound = Sounds.shootSpectre
     shoot = ShootAlternate().apply {
       shots = 4
       spread = 8f
       shotDelay = 5f
     }
-    consume(ConsumeCoolant(0.3f))
 
-    ammo(
-      IItems.铬锭, BasicBulletType(6f, 9f).apply {
+    newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
+
+    requirements(
+      Category.turret, IItems.铜锭, 225, IItems.钍锭, 155, IItems.钴钢, 55,
+    )
+    setAmmo()
+    limitRange()
+  }
+
+  fun setAmmo() {
+    addAmmoType(IItems.铬锭) {
+      BasicBulletType(6f, 9f).apply {
         lifetime = 50f
         width = 6f
         height = 8f
@@ -69,9 +73,10 @@ class Shatter : ItemTurret("turret_shatter") {
           splashDamageRadius = 4f
           hitEffect = Fx.flakExplosion
         }
-      },
-
-      IItems.钍锭, BasicBulletType(5f, 11f).apply {
+      }
+    }
+    addAmmoType(IItems.钍锭) {
+      BasicBulletType(5f, 11f).apply {
         lifetime = 58f
         width = 6f
         height = 8f
@@ -95,9 +100,10 @@ class Shatter : ItemTurret("turret_shatter") {
           splashDamageRadius = 4f
           hitEffect = Fx.flakExplosion
         }
-      },
-
-      IItems.单晶硅, BasicBulletType(4.5f, 7f).apply {
+      }
+    }
+    addAmmoType(IItems.单晶硅) {
+      BasicBulletType(4.5f, 7f).apply {
         lifetime = 66f
         width = 6f
         height = 8f
@@ -109,9 +115,10 @@ class Shatter : ItemTurret("turret_shatter") {
         splashDamageRadius = 24f
         shootEffect = Fx.shootSmall
         hitEffect = Fx.flakExplosion
-      },
-
-      IItems.铱板, BasicBulletType(4f, 8f).apply {
+      }
+    }
+    addAmmoType(IItems.铱板) {
+      BasicBulletType(4f, 8f).apply {
         lifetime = 74f
         width = 6f
         height = 8f
@@ -138,9 +145,10 @@ class Shatter : ItemTurret("turret_shatter") {
           splashDamageRadius = 20f
           hitEffect = Fx.flakExplosion
         }
-      },
-
-      IItems.低温化合物, BasicBulletType(4f, 6f).apply {
+      }
+    }
+    addAmmoType(IItems.低温化合物) {
+      BasicBulletType(4f, 6f).apply {
         lifetime = 74f
         width = 6f
         height = 8f
@@ -176,9 +184,10 @@ class Shatter : ItemTurret("turret_shatter") {
           sparkLen = 5f
           sparkStroke = 4f
         }
-      },
-
-      IItems.铈凝块, BasicBulletType(4.3f, 5f).apply {
+      }
+    }
+    addAmmoType(IItems.铈凝块) {
+      BasicBulletType(4.3f, 5f).apply {
         lifetime = 70f
         width = 6f
         height = 8f
@@ -208,10 +217,16 @@ class Shatter : ItemTurret("turret_shatter") {
             Fx.burning, Fx.lava, Fx.fire
           )
         }
-      })
+      }
+    }
+  }
 
-    requirements(
-      Category.turret, IItems.铜锭, 225, IItems.钍锭, 155, IItems.钴钢, 55,
-    )
+  fun addAmmoType(item: Item, bulletType: () -> BasicBulletType) {
+    val ammoTypes = bulletType.invoke()
+    newAmmo(ammoTypes).setReloadAmount(ammoTypes.ammoMultiplier.toInt())
+    consume?.apply {
+      item(item, 1)
+      time(15f)
+    }
   }
 }

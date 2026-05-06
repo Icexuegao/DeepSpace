@@ -1,12 +1,9 @@
 package ice.content.block.turret
 
 import ice.content.IItems
-import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.RailBulletType
-import universecore.util.toColor
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.entities.bullet.base.BulletType
+import ice.game.EventType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.UnitSorts
@@ -18,105 +15,45 @@ import mindustry.entities.part.ShapePart
 import mindustry.entities.pattern.ShootSpread
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.ItemTurret
-import mindustry.world.consumers.ConsumeCoolant
-import mindustry.world.draw.DrawTurret
+import mindustry.type.Item
+import mindustry.type.Liquid
+import singularity.world.blocks.turrets.SglTurret
+import singularity.world.draw.DrawSglTurret
+import universecore.util.toColor
 
-class BreakThrough:ItemTurret("breakThrough"){
-  init{
+class 冲穿 :SglTurret("turret_breakThrough") {
+  init {
+    localization {
+      zh_CN {
+        localizedName = "冲穿"
+        description = "以临界速度发射五道远程穿透磁轨炮摧毁敌人,比裂颅更强"
+      }
+    }
     health = 5600
     size = 5
     range = 720f
-    reload = 300f
     shake = 5f
     recoil = 4f
-    maxAmmo = 60
+    EventType.addContentInitEvent {
+      shootY -= 4f
+    }
     recoilTime = 300f
-    ammoPerShot = 15
     cooldownTime = 300f
+    warmupSpeed = 0.05f
     shootSound = Sounds.shootToxopidShotgun
     unitSort = UnitSorts.strongest
     shootCone = 2f
     rotateSpeed = 1.4f
-    minWarmup = 0.96f
-    shootWarmupSpeed = 0.08f
-    warmupMaintainTime = 300f
     shoot = ShootSpread().apply {
       shots = 5
       spread = 1f
     }
     liquidCapacity = 30f
-    consumePower(25f)
-    consume(ConsumeCoolant(1.5f))
-    coolantMultiplier = 0.333f
-    localization {
-      zh_CN {
-        this.localizedName = "冲穿"
-        description = "以临界速度发射五道远程穿透磁轨炮摧毁敌人,比裂颅更强"
-      }
-    }
-    addAmmoType(IItems.钍锭) {
-      RailBulletType().apply {
-        damage = 720f
-        knockback = 10f
-        lifetime = 30f
-        length = 720f
-        ammoMultiplier = 1f
-        pierce = true
-        pierceDamageFactor = 0.4f
-        status = StatusEffects.unmoving
-        statusDuration = 900f
-        shootEffect = Fx.instShoot
-        pointEffect = Fx.railTrail
-        hitEffect = Fx.railHit
-      }
-    }
-    addAmmoType(IItems.金锭) {
-      RailBulletType().apply {
-        damage = 1200f
-        knockback = 20f
-        lifetime = 30f
-        length = 720f
-        ammoMultiplier = 1f
-        pierce = true
-        pierceDamageFactor = 0.2f
-        status = StatusEffects.melting
-        statusDuration = 900f
-        shootEffect = Fx.instShoot
-        pointEffect = Fx.railTrail
-        hitEffect = Fx.railHit
-      }
-    }
-    addAmmoType(IItems.铱板) {
-      RailBulletType().apply {
-        damage = 960f
-        knockback = 15f
-        lifetime = 30f
-        length = 720f
-        ammoMultiplier = 1f
-        pierce = true
-        pierceDamageFactor = 0.3f
-        status = StatusEffects.burning
-        statusDuration = 900f
-        shootEffect = Fx.instShoot
-        pointEffect = Fx.railTrail
-        hitEffect = Fx.railHit
-        pierceEffect = ParticleEffect().apply {
-          line = true
-          particles = 60
-          offset = 0f
-          lifetime = 15f
-          length = 40f
-          cone = -7.5f
-          lenFrom = 6f
-          lenTo = 0f
-          colorFrom = "D86E56".toColor()
-          colorTo = "FFFFFF".toColor()
-        }
-      }
-    }
+
+
     requirements(Category.turret, IItems.铜锭, 1800, IItems.钴锭, 840, IItems.铱板, 630, IItems.导能回路, 435, IItems.陶钢, 225)
-    drawer = DrawTurret().apply {
+    newCoolant(1f, 0.4f, { l: Liquid -> l.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
+    drawers = DrawSglTurret().apply {
       parts.addAll(RegionPart("-barrel").apply {
         moveY = -1.5f
         moves.add(DrawPart.PartMove(DrawPart.PartProgress.recoil, 0f, -3f, 0f))
@@ -225,6 +162,81 @@ class BreakThrough:ItemTurret("breakThrough"){
         color = "FF5845".toColor()
         layer = 110f
       })
+    }
+    setAmmo()
+    limitRange()
+  }
+
+  fun setAmmo() {
+    addAmmoType(IItems.钍锭) {
+      RailBulletType().apply {
+        damage = 720f
+        knockback = 10f
+        lifetime = 30f
+        length = 720f
+        ammoMultiplier = 1f
+        pierce = true
+        pierceDamageFactor = 0.4f
+        status = StatusEffects.unmoving
+        statusDuration = 900f
+        shootEffect = Fx.instShoot
+        pointEffect = Fx.railTrail
+        hitEffect = Fx.railHit
+      }
+    }
+    addAmmoType(IItems.金锭) {
+      RailBulletType().apply {
+        damage = 1200f
+        knockback = 20f
+        lifetime = 30f
+        length = 720f
+        ammoMultiplier = 1f
+        pierce = true
+        pierceDamageFactor = 0.2f
+        status = StatusEffects.melting
+        statusDuration = 900f
+        shootEffect = Fx.instShoot
+        pointEffect = Fx.railTrail
+        hitEffect = Fx.railHit
+      }
+    }
+    addAmmoType(IItems.铱板) {
+      RailBulletType().apply {
+        damage = 960f
+        knockback = 15f
+        lifetime = 30f
+        length = 720f
+        ammoMultiplier = 1f
+        pierce = true
+        pierceDamageFactor = 0.3f
+        status = StatusEffects.burning
+        statusDuration = 900f
+        shootEffect = Fx.instShoot
+        pointEffect = Fx.railTrail
+        hitEffect = Fx.railHit
+        pierceEffect = ParticleEffect().apply {
+          line = true
+          particles = 60
+          offset = 0f
+          lifetime = 15f
+          length = 40f
+          cone = -7.5f
+          lenFrom = 6f
+          lenTo = 0f
+          colorFrom = "D86E56".toColor()
+          colorTo = "FFFFFF".toColor()
+        }
+      }
+    }
+  }
+
+  fun addAmmoType(item: Item, bulletType: () -> BulletType) {
+    val ammoTypes = bulletType.invoke()
+    newAmmo(ammoTypes).setReloadAmount(ammoTypes.ammoMultiplier.toInt())
+    consume?.apply {
+      item(item, 1)
+      time(300f)
+      power(25f)
     }
   }
 }

@@ -14,9 +14,6 @@ import arc.struct.ObjectFloatMap
 import arc.struct.ObjectMap
 import arc.util.Scaling
 import arc.util.Strings
-import universecore.scene.element.display.ItemDisplay
-import universecore.scene.element.display.LiquidDisplay
-import universecore.scene.ui.itooltip
 import mindustry.Vars
 import mindustry.content.StatusEffects
 import mindustry.ctype.UnlockableContent
@@ -31,6 +28,9 @@ import mindustry.world.blocks.defense.turrets.Turret
 import mindustry.world.meta.StatUnit
 import mindustry.world.meta.StatValue
 import mindustry.world.meta.StatValues
+import universecore.scene.element.display.ItemDisplay
+import universecore.scene.element.display.LiquidDisplay
+import universecore.scene.ui.itooltip
 import kotlin.math.max
 
 object IStatValues {
@@ -291,20 +291,20 @@ object IStatValues {
     return (if (amout > 0) "[stat]+" else "[negstat]") + Strings.autoFixed(amout, 1)
   }
 
-  fun <T : Element?> withTooltip(element: T?, content: UnlockableContent?, tooltip: Boolean): T? {
+  fun <T : Element> withTooltip(element: T, content: UnlockableContent?, tooltip: Boolean): T {
     if (content != null) {
       if (!Vars.mobile) {
         if (tooltip) {
-          element!!.itooltip(content.localizedName)
+          element.itooltip(content.localizedName)
         }
-        element!!.addListener(HandCursorListener({!content.isHidden}, true))
+        element.addListener(HandCursorListener({!content.isHidden}, true))
       }
     }
     return element
   }
 
-  fun <T : Element?> withTooltip(element: T?, content: UnlockableContent?): T? {
-    return withTooltip<T?>(element, content, false)
+  fun <T : Element> withTooltip(element: T, content: UnlockableContent?): T {
+    return withTooltip(element, content, false)
   }
 
   fun displayItem(item: Item, amount: Int, showName: Boolean): Table {

@@ -19,12 +19,12 @@ import kotlin.math.min
 /** 基于纹理区域的绘制部件，支持热效、光影、子部件及镜像绘制。
  * 拥有 liquid top 部件
  * @author Alon */
-open class UncRegionPart :DrawPart {
+open class UncRegionPart() : DrawPart() {
   protected var childParam = PartParams()
 
-  /** Appended to unit/weapon/block name and drawn.  */
+  /** Appended to unit/weapon/block name and drawn. */
   var suffix = ""
-  /** Overrides suffix if set.  */
+  /** Overrides suffix if set. */
   @Nullable var name: String? = null
   lateinit var heat: TextureRegion
   lateinit var light: TextureRegion
@@ -34,21 +34,21 @@ open class UncRegionPart :DrawPart {
   var regions = arrayOf<TextureRegion>()
   var outlines = arrayOf<TextureRegion>()
 
-  /** If true, parts are mirrored across the turret. Requires -1 and -2 regions.  */
+  /** If true, parts are mirrored across the turret. Requires -1 and -2 regions. */
   var mirror = false
-  /** If true, an outline is drawn under the part.  */
+  /** If true, an outline is drawn under the part. */
   var outline = true
-  /** If true, the base + outline regions are drawn. Set to false for heat-only regions.  */
+  /** If true, the base + outline regions are drawn. Set to false for heat-only regions. */
   var drawRegion = true
-  /** If true, the heat region produces light.  */
+  /** If true, the heat region produces light. */
   var heatLight = false
-  /** Whether to clamp progress to (0-1). If false, allows usage of interps that go past the range, but may have unwanted visual bugs depending on values.  */
+  /** Whether to clamp progress to (0-1). If false, allows usage of interps that go past the range, but may have unwanted visual bugs depending on values. */
   var clampProgress = true
-  /** Progress function for determining position/rotation.  */
+  /** Progress function for determining position/rotation. */
   var progress: PartProgress = PartProgress.warmup
-  /** Progress function for scaling.  */
+  /** Progress function for scaling. */
   var growProgress: PartProgress = PartProgress.warmup
-  /** Progress function for heat alpha.  */
+  /** Progress function for heat alpha. */
   var heatProgress: PartProgress = PartProgress.heat
   var blending: Blending = Blending.normal
   var layer = -1f
@@ -56,19 +56,26 @@ open class UncRegionPart :DrawPart {
   var heatLayerOffset: Float = 1f
   var turretHeatLayer: Float = Layer.turretHeat
   var outlineLayerOffset = -0.001f
-  //note that origin DOES NOT AFFECT child parts
-  var x = 0f //note that origin DOES NOT AFFECT child parts
-  var y = 0f  //note that origin DOES NOT AFFECT child parts
-  var xScl = 1f  //note that origin DOES NOT AFFECT child parts
-  var yScl = 1f  //note that origin DOES NOT AFFECT child parts
-  var rotation = 0f  //note that origin DOES NOT AFFECT child parts
-  var originX = 0f  //note that origin DOES NOT AFFECT child parts
+
+  /** note that origin DOES NOT AFFECT child parts */
+  var x = 0f
+  /** note that origin DOES NOT AFFECT child parts */
+  var y = 0f
+  /** note that origin DOES NOT AFFECT child parts */
+  var xScl = 1f
+  /** note that origin DOES NOT AFFECT child parts */
+  var yScl = 1f
+  /** note that origin DOES NOT AFFECT child parts */
+  var rotation = 0f
+  /** note that origin DOES NOT AFFECT child parts */
+  var originX = 0f
+
   var originY = 0f
   var moveX = 0f
-  var moveY: Float = 0f
-  var growX: Float = 0f
-  var growY: Float = 0f
-  var moveRot: Float = 0f
+  var moveY = 0f
+  var growX = 0f
+  var growY = 0f
+  var moveRot = 0f
   var heatLightOpacity = 0.3f
 
   var color: Color? = null
@@ -78,20 +85,18 @@ open class UncRegionPart :DrawPart {
   var heatColor: Color = Pal.turretHeat.cpy()
   var children = Seq<DrawPart>()
   var moves = Seq<PartMove>()
-  constructor() :super()
-  constructor(region: String) :super() {
+
+  constructor(region: String) :this() {
     this.suffix = region
   }
 
-  constructor(region: String, blending: Blending, color: Color) :this(region) {
-    this.suffix = region
+  constructor(region: String, blending: Blending, color: Color) : this(region) {
     this.blending = blending
     this.color = color
     outline = false
   }
 
   fun draw(params: PartParams, turret: SglTurretBuild) {
-
     val z = Draw.z()
     if (layer > 0) Draw.z(layer)
     //TODO 'under' should not be special cased like this...
@@ -102,14 +107,13 @@ open class UncRegionPart :DrawPart {
     val prog = progress.getClamp(params, clampProgress)
     val sclProg = growProgress.getClamp(params, clampProgress)
     var mx = moveX * prog
-    var my: Float = moveY * prog
-    var mr: Float = moveRot * prog + rotation
-    var gx: Float = growX * sclProg
-    var gy: Float = growY * sclProg
+    var my = moveY * prog
+    var mr = moveRot * prog + rotation
+    var gx = growX * sclProg
+    var gy = growY * sclProg
 
-    if (moves.size > 0) {
-      for(i in 0..<moves.size) {
-        val move = moves.get(i)
+    if (!moves.isEmpty) {
+      for (move in moves) {
         val p = move.progress.getClamp(params, clampProgress)
         mx += move.x * p
         my += move.y * p
@@ -125,13 +129,13 @@ open class UncRegionPart :DrawPart {
     Draw.xscl *= xScl + gx
     Draw.yscl *= yScl + gy
 
-    for(s in 0..<len) {
+    for (s in 0..<len) {
       //use specific side if necessary
       val i = if (params.sideOverride == -1) s else params.sideOverride
 
       //can be null
-      val region: TextureRegion = (if (drawRegion && regions.isNotEmpty()) regions[min(i, regions.size - 1)] else null)!!
-      val sign = ((if (i == 0) 1 else -1) * params.sideMultiplier).toFloat()
+      val region = if (drawRegion && regions.isNotEmpty()) regions[min(i, regions.size - 1)] else null
+      val sign = (if (i == 0) 1 else -1) * params.sideMultiplier
       Tmp.v1.set((x + mx) * sign, y + my).rotateRadExact((params.rotation - 90) * Mathf.degRad)
 
       Draw.xscl *= sign
@@ -153,7 +157,7 @@ open class UncRegionPart :DrawPart {
         Draw.z(prevZ)
       }
 
-      if (drawRegion && region.found()) {
+      if (drawRegion && region != null && region.found()) {
         if (color != null && colorTo != null) {
           Draw.color(color, colorTo, prog)
         } else if (color != null) {
@@ -186,12 +190,10 @@ open class UncRegionPart :DrawPart {
         }
       }
 
-      if (top.found()){
+      if (top.found()) {
         Draw.color()
         rect(top, rx, ry, rot)
       }
-
-
 
       Draw.xscl *= sign
     }
@@ -203,10 +205,10 @@ open class UncRegionPart :DrawPart {
 
     //draw child, if applicable - only at the end
     //TODO lots of copy-paste here
-    if (children.size > 0) {
-      for(s in 0..<len) {
-        val i = (if (params.sideOverride == -1) s else params.sideOverride)
-        val sign = ((if (i == 1) -1 else 1) * params.sideMultiplier).toFloat()
+    if (!children.isEmpty) {
+      for (s in 0..<len) {
+        val i = if (params.sideOverride == -1) s else params.sideOverride
+        val sign = (if (i == 1) -1 else 1) * params.sideMultiplier
         Tmp.v1.set((x + mx) * sign, y + my).rotateRadExact((params.rotation - 90) * Mathf.degRad)
 
         childParam.set(
@@ -223,7 +225,7 @@ open class UncRegionPart :DrawPart {
         childParam.sideMultiplier = params.sideMultiplier
         childParam.life = params.life
         childParam.sideOverride = i
-        for(child in children) {
+        for (child in children) {
           child.draw(childParam)
         }
       }
@@ -258,7 +260,7 @@ open class UncRegionPart :DrawPart {
     light = Core.atlas.find("$realName-light")
     liquid = Core.atlas.find("$realName-liquid")
     top = Core.atlas.find("$realName-top")
-    for(child in children) {
+    for (child in children) {
       child.turretShading = turretShading
       child.load(name)
     }
@@ -268,7 +270,7 @@ open class UncRegionPart :DrawPart {
     if (outline && drawRegion) {
       out.addAll(*regions)
     }
-    for(child in children) {
+    for (child in children) {
       child.getOutlines(out)
     }
   }

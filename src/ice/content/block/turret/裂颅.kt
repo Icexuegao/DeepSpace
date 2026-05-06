@@ -3,12 +3,8 @@ package ice.content.block.turret
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.IStatus
-import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.RailBulletType
-import universecore.util.toColor
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.entities.bullet.base.BulletType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.UnitSorts
@@ -17,21 +13,23 @@ import mindustry.entities.part.*
 import mindustry.entities.pattern.ShootSpread
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.ItemTurret
-import mindustry.world.draw.DrawTurret
+import mindustry.type.Item
+import mindustry.type.Liquid
+import singularity.world.blocks.turrets.SglTurret
+import singularity.world.draw.DrawSglTurret
+import universecore.util.toColor
 
-class SkullSplitter : ItemTurret("turret_skullSplitter") {
+class 裂颅 :SglTurret("turret_skullSplitter") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "裂颅"
+        localizedName = "裂颅"
         description = "以临界速度发射三道远程穿透磁轨炮摧毁敌人,能够扫除一切障碍"
       }
     }
     health = 3600
     size = 4
     range = 600f
-    reload = 300f
     recoil = 6f
     recoilTime = 330f
     cooldownTime = 420f
@@ -41,86 +39,17 @@ class SkullSplitter : ItemTurret("turret_skullSplitter") {
       spread = 1f
     }
     shake = 3f
+    warmupSpeed=0.03f
     rotateSpeed = 1.4f
     liquidCapacity = 30f
-    consumePower(16f)
-    consumeCoolant(1f)
-    coolantMultiplier = 0.5f
-    ammoPerShot = 15
     unitSort = UnitSorts.strongest
     shootSound = Sounds.shootReign
-    minWarmup = 0.95f
-    shootWarmupSpeed = 0.08f
-    warmupMaintainTime = 300f
-
-    addAmmoType(IItems.石墨烯) {
-      RailBulletType().apply {
-        damage = 480f
-        knockback = 10f
-        lifetime = 30f
-        length = 600f
-        ammoMultiplier = 1f
-        pierce = true
-        pierceDamageFactor = 0.6f
-        status = StatusEffects.unmoving
-        statusDuration = 600f
-        shootEffect = Fx.instShoot
-        pointEffect = Fx.railTrail
-        hitEffect = Fx.railHit
-      }
-    }
-
-    addAmmoType(IItems.暮光合金) {
-      RailBulletType().apply {
-        damage = 840f
-        knockback = 20f
-        lifetime = 30f
-        length = 600f
-        ammoMultiplier = 1f
-        pierce = true
-        pierceDamageFactor = 0.4f
-        status = IStatus.熔融
-        statusDuration = 600f
-        shootEffect = Fx.instShoot
-        pointEffect = Fx.railTrail
-        hitEffect = Fx.railHit
-      }
-    }
-
-    addAmmoType(IItems.铱板) {
-      RailBulletType().apply {
-        damage = 630f
-        knockback = 15f
-        lifetime = 30f
-        length = 600f
-        ammoMultiplier = 1f
-        pierce = true
-        pierceDamageFactor = 0.5f
-        status = IStatus.破甲I
-        statusDuration = 600f
-        shootEffect = Fx.instShoot
-        pointEffect = Fx.railTrail
-        hitEffect = Fx.railHit
-        pierceEffect = ParticleEffect().apply {
-          line = true
-          particles = 120
-          offset = 0f
-          lifetime = 15f
-          length = 40f
-          cone = -7.5f
-          lenFrom = 6f
-          lenTo = 0f
-          colorFrom = "D86E56".toColor()
-          colorTo = Color.white
-        }
-      }
-    }
-
     requirements(
       Category.turret, IItems.铜锭, 1080, IItems.钍锭, 750, IItems.铱板, 625, IItems.单晶硅, 425, IItems.钴钢, 225
     )
-
-    drawer = DrawTurret().apply {
+    newCoolant(1f, 0.4f, { l: Liquid -> l.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
+    drawers = DrawSglTurret().apply {
+      parts.add(RegionPart())
       parts.add(RegionPart().apply {
         suffix = "-side"
         heatProgress = DrawPart.PartProgress.warmup
@@ -265,6 +194,83 @@ class SkullSplitter : ItemTurret("turret_skullSplitter") {
         colorTo = "FEB380".toColor()
         layer = 110f
       })
+    }
+    setAmmo()
+    limitRange()
+  }
+
+  fun setAmmo() {
+    addAmmoType(IItems.石墨烯) {
+      RailBulletType().apply {
+        damage = 480f
+        knockback = 10f
+        lifetime = 30f
+        length = 600f
+        ammoMultiplier = 1f
+        pierce = true
+        pierceDamageFactor = 0.6f
+        status = StatusEffects.unmoving
+        statusDuration = 600f
+        shootEffect = Fx.instShoot
+        pointEffect = Fx.railTrail
+        hitEffect = Fx.railHit
+      }
+    }
+
+    addAmmoType(IItems.暮光合金) {
+      RailBulletType().apply {
+        damage = 840f
+        knockback = 20f
+        lifetime = 30f
+        length = 600f
+        ammoMultiplier = 1f
+        pierce = true
+        pierceDamageFactor = 0.4f
+        status = IStatus.熔融
+        statusDuration = 600f
+        shootEffect = Fx.instShoot
+        pointEffect = Fx.railTrail
+        hitEffect = Fx.railHit
+      }
+    }
+
+    addAmmoType(IItems.铱板) {
+      RailBulletType().apply {
+        damage = 630f
+        knockback = 15f
+        lifetime = 30f
+        length = 600f
+        ammoMultiplier = 1f
+        pierce = true
+        pierceDamageFactor = 0.5f
+        status = IStatus.破甲I
+        statusDuration = 600f
+        shootEffect = Fx.instShoot
+        pointEffect = Fx.railTrail
+        hitEffect = Fx.railHit
+        pierceEffect = ParticleEffect().apply {
+          line = true
+          particles = 120
+          offset = 0f
+          lifetime = 15f
+          length = 40f
+          cone = -7.5f
+          lenFrom = 6f
+          lenTo = 0f
+          colorFrom = "D86E56".toColor()
+          colorTo = Color.white
+        }
+      }
+    }
+  }
+
+  fun addAmmoType(item: Item, bulletType: () -> BulletType) {
+    val ammoTypes = bulletType.invoke()
+    newAmmo(ammoTypes).setReloadAmount(ammoTypes.ammoMultiplier.toInt())
+    consume?.apply {
+      item(item, 1)
+      time(300f)
+      power(16f)
     }
   }
 }

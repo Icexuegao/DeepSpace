@@ -3,25 +3,22 @@ package ice.content.block.turret
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.IStatus
-import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.bullet.BulletType
 import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.ItemTurret
-import mindustry.world.consumers.ConsumeCoolant
+import mindustry.type.Item
+import mindustry.type.Liquid
+import singularity.world.blocks.turrets.SglTurret
 
-class Penetrate : ItemTurret("turret_penetrate") {
+class 贯通 :SglTurret("turret_penetrate") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "贯通"
+        localizedName = "贯通"
         description = "向指定方位发射一道强劲的定向爆破束"
       }
     }
@@ -32,19 +29,20 @@ class Penetrate : ItemTurret("turret_penetrate") {
     shootY = 3f
     shake = 3.5f
     range = 200f
-    reload = 120f
     shootCone = 5f
-    maxAmmo = 24
     recoilTime = 40f
     cooldownTime = 90f
-    consume(ConsumeCoolant(0.3f))
     rotateSpeed = 5f
-    ammoPerShot = 6
-    coolantMultiplier = 2.5f
     shootSound = Sounds.shootArtillery
     shootEffect = Fx.bigShockwave
     ammoUseEffect = Fx.casing3Double
+    newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
+    requirements(Category.turret, IItems.铜锭, 135, IItems.钴锭, 95, IItems.钍锭, 65, IItems.爆炸化合物, 10)
+    setAmmo()
+    limitRange()
+  }
 
+  fun setAmmo() {
     // Graphite ammo
     addAmmoType(IItems.铬锭) {
       BasicBulletType().apply {
@@ -249,6 +247,15 @@ class Penetrate : ItemTurret("turret_penetrate") {
       }
     }
 
-    requirements(Category.turret, IItems.铜锭, 135, IItems.钴锭, 95, IItems.钍锭, 65, IItems.爆炸化合物, 10)
   }
+
+  fun addAmmoType(item: Item, bulletType: () -> BasicBulletType) {
+    val ammoTypes = bulletType.invoke()
+    newAmmo(ammoTypes).setReloadAmount(ammoTypes.ammoMultiplier.toInt())
+    consume?.apply {
+      item(item, 1)
+      time(120f)
+    }
+  }
+
 }

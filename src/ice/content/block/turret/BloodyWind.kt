@@ -97,7 +97,7 @@ class BloodyWind :SglTurret("turret_bloodyWind") {
     setAmmo()
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(BasicBulletType().apply {
       damage = 121f
       lifetime = 33.6f

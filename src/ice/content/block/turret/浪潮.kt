@@ -3,11 +3,8 @@ package ice.content.block.turret
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.IStatus
-import ice.content.block.turret.TurretBullets.addAmmoType
 import ice.entities.bullet.ArtilleryBulletType
-import ice.ui.bundle.localization
-
-import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
+import ice.entities.bullet.base.BasicBulletType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.part.DrawPart
@@ -17,38 +14,66 @@ import mindustry.entities.pattern.ShootMulti
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 import mindustry.type.Category
-import mindustry.world.blocks.defense.turrets.ItemTurret
-import mindustry.world.draw.DrawTurret
+import mindustry.type.Item
+import mindustry.type.Liquid
+import singularity.world.blocks.turrets.SglTurret
+import singularity.world.draw.DrawSglTurret
 
-class Wave : ItemTurret("turret_wave") {
+class 浪潮 :SglTurret("turret_wave") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "浪潮"
+        localizedName = "浪潮"
         description = "大型抛射炮塔,能够快速交替发射散射炮弹\n使用聚能装药爆破弹,极大提升了炮弹毁伤力"
       }
     }
     health = 2080
     size = 4
     shake = 2f
-    recoils=2
+    recoils = 2
     recoil = 3f
-    reload = 55f
     range = 408f
     minRange = 80f
     inaccuracy = 8f
-    maxAmmo = 60
     targetAir = false
     velocityRnd = 0.2f
-    ammoPerShot = 3
     shoot = ShootMulti(ShootAlternate().apply { spread = 8f }, ShootPattern().apply { shots = 5 })
-    consumeCoolant(1f)
     ammoEjectBack = 5f
     liquidCapacity = 20f
-    coolantMultiplier = 1f
     shootSound = Sounds.shootArtillery
     ammoUseEffect = Fx.casing4
 
+
+    newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
+    requirements(Category.turret, IItems.铜锭, 1360, IItems.铬锭, 300, IItems.钍锭, 325, IItems.铱板, 225, IItems.钴钢, 180)
+    drawers = DrawSglTurret().apply {
+      parts.add(RegionPart())
+      parts.add(RegionPart("-l").apply {
+        under = true
+        recoilIndex = 0
+        heatColor = Color.valueOf("F03B0E")
+        heatProgress = DrawPart.PartProgress.recoil
+        moves.add(DrawPart.PartMove().apply {
+          progress = DrawPart.PartProgress.recoil
+          y = -2f
+        })
+      })
+      parts.add(RegionPart("-r").apply {
+        under = true
+        recoilIndex = 1
+        heatColor = Color.valueOf("F03B0E")
+        heatProgress = DrawPart.PartProgress.recoil
+        moves.add(DrawPart.PartMove().apply {
+          progress = DrawPart.PartProgress.recoil
+          y = -2f
+        })
+      })
+    }
+    setAmmo()
+    limitRange()
+  }
+
+  fun setAmmo() {
     addAmmoType(IItems.铬锭) {
       ArtilleryBulletType().apply {
         damage = 35f
@@ -191,30 +216,14 @@ class Wave : ItemTurret("turret_wave") {
         hitEffect = Fx.blastExplosion
       }
     }
+  }
 
-    requirements(Category.turret, IItems.铜锭, 1360, IItems.铬锭, 300, IItems.钍锭, 325, IItems.铱板, 225, IItems.钴钢, 180)
-
-    drawer = DrawTurret().apply {
-      parts.add(RegionPart("-l").apply {
-        under = true
-        recoilIndex = 0
-        heatColor = Color.valueOf("F03B0E")
-        heatProgress = DrawPart.PartProgress.recoil
-        moves.add(DrawPart.PartMove().apply {
-          progress = DrawPart.PartProgress.recoil
-          y = -2f
-        })
-      })
-      parts.add(RegionPart("-r").apply {
-        under = true
-        recoilIndex = 1
-        heatColor = Color.valueOf("F03B0E")
-        heatProgress = DrawPart.PartProgress.recoil
-        moves.add(DrawPart.PartMove().apply {
-          progress = DrawPart.PartProgress.recoil
-          y = -2f
-        })
-      })
+  fun addAmmoType(item: Item, bulletType: () -> BasicBulletType) {
+    val ammoTypes = bulletType.invoke()
+    newAmmo(ammoTypes).setReloadAmount(ammoTypes.ammoMultiplier.toInt())
+    consume?.apply {
+      item(item, 1)
+      time(55f)
     }
   }
 }

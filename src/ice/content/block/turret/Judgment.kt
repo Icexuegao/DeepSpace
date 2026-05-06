@@ -76,7 +76,7 @@ class Judgment :SglTurret("turret_judgment") {
     newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(BasicBulletType().apply {
       damage = 0f
       lifetime = 42f

@@ -29,7 +29,7 @@ class 攫取 :SglTurret("turret_grab") {
     setAmmo()
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(SapBulletType().apply {
       damage = 20f
       length = 128f

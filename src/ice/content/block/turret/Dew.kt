@@ -274,7 +274,7 @@ class Dew :ProjectileTurret("dew") {
     setAmmo()
   }
 
-  override fun setAmmo() {
+   fun setAmmo() {
     newAmmo(object :BulletType() {
       init {
         damage = 80f
