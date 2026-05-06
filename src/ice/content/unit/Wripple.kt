@@ -3,20 +3,18 @@ package ice.content.unit
 import ice.content.IStatus
 import ice.content.IUnitTypes
 import ice.entities.bullet.spawnBulletType
-import universecore.util.toColor
-
 import ice.world.content.unit.IceUnitType
+import mindustry.entities.abilities.RegenAbility
+import universecore.util.toColor
 import universecore.world.ability.DeathGiftAbility
 import universecore.world.ability.FlashbackAbility
-import mindustry.entities.abilities.RegenAbility
 
 class Wripple {
   init {
     val wycu = getUnit("unit_wrippleCopy").apply {
       localization {
         zh_CN {
-          this.localizedName = "文漪副本"
-          description = "描述文本"
+          localizedName = "文漪副本"
         }
       }
       hidden = true
@@ -25,8 +23,9 @@ class Wripple {
     getUnit("unit_wripple").apply {
       localization {
         zh_CN {
-          this.localizedName = "文漪"
-          description = "精英作战部队,能够呼叫增援,以生物钢作为主要材料,辅以陶钢作为电磁屏蔽层,一般装备甚至无法留下划痕,同时在澎湃的能量输出下,其回复速度令人惊异"
+          localizedName = "文漪"
+          description =
+            "精英作战部队,能够呼叫增援,以生物钢作为主要材料,辅以陶钢作为电磁屏蔽层,一般装备甚至无法留下划痕,同时在澎湃的能量输出下,其回复速度令人惊异"
           details = "控制中枢与动力炉紧密相连,在内部结构大规模受损导致动力炉失稳融毁后会一同损毁"
         }
       }

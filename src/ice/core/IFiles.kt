@@ -21,7 +21,7 @@ object IFiles :Load {
   private val sounds = HashMap<String, Fi>()
   private val shaders = HashMap<String, Fi>()
   private var initializer = false
-  val modWithClass: ModInfo = ModGetter.getModWithClass(Ice::class.java)!!
+  val modWithClass: ModInfo by lazy { ModGetter.getModWithClass(Ice::class.java)!! }
   override fun setup() {
     if (initializer) return
     initializer = true
@@ -29,17 +29,19 @@ object IFiles :Load {
       rootDirectory[it.name()] = it
     }
     rootDirectory.forEach { entry ->
-      when (entry.key) {
+      when(entry.key) {
         "music" -> {
           entry.value.walk {
             if (it.extension().equals("ogg")) musics[it.name()] = it
           }
         }
+
         "sounds" -> {
           entry.value.walk {
             if (it.extension().equals("ogg")) sounds[it.name()] = it
           }
         }
+
         "shaders" -> {
           entry.value.walk {
             if (!shaders.contains(it.name())) {

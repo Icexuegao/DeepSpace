@@ -6,6 +6,7 @@ import arc.files.ZipFi
 import arc.func.Boolf2
 import arc.struct.Seq
 import arc.util.serialization.Jval
+import mindustry.Vars
 import mindustry.mod.Mod
 import universecore.util.IllegalModHandleException
 
@@ -21,11 +22,12 @@ object ModGetter {
     var modFile = modFile
     try {
       if (modFile !is ZipFi && !modFile.isDirectory()) modFile = ZipFi(modFile)
-    } catch (_: Throwable) {
+    } catch(_: Throwable) {
       throw IllegalModHandleException("文件不是有效的压缩文件")
     }
 
-    val modJson = listOf("mod.json", "mod.hjson", "plugin.json", "plugin.hjson").find { fileName -> modFile.child(fileName).exists() } ?: throw IllegalModHandleException("模组格式错误: 未找到模组元内容")
+    val modJson = listOf("mod.json", "mod.hjson", "plugin.json", "plugin.hjson").find { fileName -> modFile.child(fileName).exists() }
+      ?: throw IllegalModHandleException("模组格式错误: 未找到模组元内容")
     return modFile.child(modJson)
   }
 
@@ -36,7 +38,7 @@ object ModGetter {
     try {
       checkModFormat(modFile)
       return true
-    } catch (_: IllegalModHandleException) {
+    } catch(_: IllegalModHandleException) {
       return false
     }
   }
@@ -44,15 +46,22 @@ object ModGetter {
   fun getModsWithFilter(filter: Boolf2<Fi, Jval>): Seq<ModInfo> {
     val result = Seq<ModInfo>()
 
-    for (file in modDirectory.list()) {
+    //合并本地模组与SteamWorkshop模组
+    val candidates = Seq<Fi>()
+    //添加本地 mods 文件夹内容
+    modDirectory.list().forEach(candidates::add)
+    //添加 Steam Workshop 模组路径（不在 mods 文件夹内）
+    Vars.platform.getWorkshopContent(mindustry.mod.Mods.LoadedMod::class.java).forEach(candidates::add)
+
+    for(file in candidates) {
       if (!isMod(file)) continue
       val info = Jval.read(checkModFormat(file).reader())
 
       try {
         if (filter.get(file, info)) {
-         if (file.isDirectory)result.add(ModInfo(file)) else result.add(ModInfo(ZipFi(file)))
+          if (file.isDirectory) result.add(ModInfo(file)) else result.add(ModInfo(ZipFi(file)))
         }
-      } catch (ignored: IllegalModHandleException) {
+      } catch(ignored: IllegalModHandleException) {
         throw Exception("ModGetter: json解析错误 $info", ignored)
       }
     }

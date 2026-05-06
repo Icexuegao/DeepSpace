@@ -19,18 +19,17 @@ import mindustry.world.Block
 import mindustry.world.draw.DrawBlock
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.blocks.turrets.SglTurret.SglTurretBuild
+import universecore.world.draw.part.UncRegionPart
 
 open class DrawSglTurret :DrawBlock {
   companion object {
-    @JvmStatic
-    val rand: Rand = Rand()
+    @JvmStatic val rand: Rand = Rand()
   }
 
   var parts: Seq<DrawPart> = Seq<DrawPart>()
   var basePrefix: String? = ""
 
-  @Nullable
-  var liquidDraw: Liquid? = null
+  @Nullable var liquidDraw: Liquid? = null
   lateinit var base: TextureRegion
   var liquid: TextureRegion? = null
   lateinit var top: TextureRegion
@@ -97,7 +96,7 @@ open class DrawSglTurret :DrawBlock {
 
       for(part in parts) {
         params.setRecoil(if (part.recoilIndex >= 0) tb.curRecoils[part.recoilIndex] else tb.curRecoil)
-        part.draw(params)
+        if (part is UncRegionPart) part.draw(params, build) else part.draw(params)
       }
     }
   }
