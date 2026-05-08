@@ -186,6 +186,7 @@ open class UncRegionPart() : DrawPart() {
       if (liquid.found()) {
         turret.liquids?.current()?.let {
           Draw.color(it.color)
+          Draw.alpha(turret.liquids.get(it)/turret.block.liquidCapacity)
           rect(liquid, rx, ry, rot)
         }
       }

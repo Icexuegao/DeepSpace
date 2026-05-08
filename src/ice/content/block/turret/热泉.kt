@@ -26,30 +26,30 @@ class 热泉 :SglTurret("turret_hotSprings") {
         localizedName = "热泉"
       }
     }
-    liquidCapacity=40f
-    itemCapacity=20
-    recoilTime=45f
+    liquidCapacity = 40f
+    itemCapacity = 20
+    recoilTime = 45f
     inaccuracy = 30f
     health = 1500
     armor = 4f
-    size =3
+    size = 3
     range = 18 * 8f
-    shoot= ShootBarrel().apply {
+    shoot = ShootBarrel().apply {
       val f = 3.5f
       val elements = -2f
-      barrels=floatArrayOf(-f, elements, 0f,
-        0f, elements, 0f,
-        f, elements, 0f)
+      barrels = floatArrayOf(
+        -f, elements, 0f, 0f, elements, 0f, f, elements, 0f
+      )
     }
     requirements(Category.turret, IItems.铅锭, 120, IItems.铜锭, 60, IItems.钴锭, 60, IItems.石英玻璃, 40)
-    drawers= DrawSglTurret().apply {
+    drawers = DrawSglTurret().apply {
       parts.add(UncRegionPart())
       parts.add(RegionPart("-weapon").apply {
-        moveY=-2f
-        progress= DrawPart.PartProgress.warmup
+        moveY = -2f
+        progress = DrawPart.PartProgress.warmup
       })
     }
-    shootSound= Sounds.shootFlame
+    shootSound = Sounds.shootFlame
     setAmmo()
     limitRange()
   }
@@ -61,7 +61,7 @@ class 热泉 :SglTurret("turret_hotSprings") {
     status = StatusEffects.burning
   }
 
-   fun setAmmo() {
+  fun setAmmo() {
     val size1 = 16
     newAmmo(getBuller().apply {
       damage = 60f
@@ -95,7 +95,7 @@ class 热泉 :SglTurret("turret_hotSprings") {
       status = StatusEffects.burning
       statusDuration = 0.5f * 60f
       EventType.addContentInitEvent {
-        shootEffect = IceEffects.changeFlame(speed * lifetime,size= size1)
+        shootEffect = IceEffects.changeFlame(speed * lifetime, size = size1)
       }
     })
     consume?.apply {

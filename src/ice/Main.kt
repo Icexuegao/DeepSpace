@@ -4,17 +4,17 @@ import java.io.File
 
 fun main() {
   // repName(File("B:\\Programming\\MDT\\DeepSpace\\assets\\sprites\\remains\\spine_parasite"))
-   val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\spritese\\blocks\\turret\\breakThrough")
+   val file = File("B:\\Programming\\MDT\\DeepSpace\\assets\\spritese\\blocks\\turret\\thinkEnd")
    req(file)
   //removeLeadingZeros("B:\\inCommonUse\\Videos\\bilibili\\37331271901\\37331271901-1-30280.m4s")
 
 }
-
+class A
 
 fun req(file: File) {
   file.listFiles()?.forEach {
 
-      val replace1 =it.name.replace("breakThrough","turret_breakThrough")
+      val replace1 =it.name.replace("thinkEnd","turret_thinkEnd")
       it.renameTo(File("${file.absolutePath}\\$replace1"))
   }
 }

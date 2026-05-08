@@ -1,19 +1,18 @@
 package ice.content.block.turret
 
+import arc.func.Prov
 import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
 import ice.entities.bullet.base.BasicBulletType
-import ice.ui.bundle.localization
-
 import mindustry.entities.part.DrawPart
 import mindustry.entities.part.RegionPart
+import mindustry.gen.Bullet
 import mindustry.type.Category
-import mindustry.type.ItemStack
-import mindustry.world.blocks.defense.turrets.ItemTurret
-import mindustry.world.draw.DrawTurret
+import singularity.world.blocks.turrets.SglTurret
+import singularity.world.draw.DrawSglTurret
 
-class ThinkEnd :ItemTurret("thinkEnd") {
+class 绪终 :SglTurret("turret_thinkEnd") {
   init {
     localization {
       zh_CN {
@@ -21,15 +20,15 @@ class ThinkEnd :ItemTurret("thinkEnd") {
       }
     }
     size = 5
+    health = 2000
+    armor = 10f
+    warmupSpeed = 0.04f
     shoot.apply {
-      firstShotDelay = 120f
       recoils = 1
-      reload = 120f
-      shootWarmupSpeed = 0.05f
     }
-    ammo(IItems.暮光合金, BasicBulletType(4f, 4f))
-    requirements(Category.turret, ItemStack.with(IItems.铜锭, 10, IItems.单晶硅, 5))
-    drawer = DrawTurret().apply {
+    buildType = Prov(::ThinkEndBuild)
+    requirements(Category.turret, IItems.铜锭, 10, IItems.单晶硅, 5)
+    drawers = DrawSglTurret().apply {
       parts.add(RegionPart("4-l").apply {
         moveY = -4f
         moveX = -8f
@@ -62,15 +61,28 @@ class ThinkEnd :ItemTurret("thinkEnd") {
         heatColor = Color.valueOf("c3baff").a(0.5f)
         heatProgress = DrawPart.PartProgress.warmup.curve(Interp.pow5In)
       })
-
       parts.add(RegionPart("3").apply {
         heatColor = Color.valueOf("c3baff").a(0.5f)
         heatProgress = DrawPart.PartProgress.warmup
       })
-      localization {
-        zh_CN {
-          this.localizedName = "绪终"
-        }
+    }
+    setAmmo()
+    limitRange()
+  }
+
+  fun setAmmo() {
+    newAmmo(BasicBulletType(4f, 4f))
+    consume?.apply {
+      time(120f)
+      item(IItems.玳渊矩阵, 1)
+    }
+  }
+
+  private inner class ThinkEndBuild :SglTurretBuild() {
+    override fun handleBullet(bullet: Bullet, offsetX: Float, offsetY: Float, angleOffset: Float) {
+      super.handleBullet(bullet, offsetX, offsetY, angleOffset)
+      bullet.mover {
+        it.vel
       }
     }
   }

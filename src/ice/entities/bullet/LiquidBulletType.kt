@@ -5,7 +5,6 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.math.Mathf
 import arc.math.geom.Geometry
-import arc.util.Nullable
 import arc.util.Tmp
 import ice.entities.bullet.base.BulletType
 import mindustry.Vars
@@ -15,7 +14,7 @@ import mindustry.entities.Puddles
 import mindustry.gen.Bullet
 import mindustry.type.Liquid
 
-class LiquidBulletType @JvmOverloads constructor(@Nullable liquid: Liquid? = null) :BulletType(3.5f, 0f) {
+class LiquidBulletType @JvmOverloads constructor(liquid: Liquid? = null) :BulletType(3.5f, 0f) {
   var liquid: Liquid? = null
   var puddleSize: Float = 6f
   var orbSize: Float = 3f

@@ -39,7 +39,7 @@ class 裂颅 :SglTurret("turret_skullSplitter") {
       spread = 1f
     }
     shake = 3f
-    warmupSpeed=0.03f
+    warmupSpeed = 0.03f
     rotateSpeed = 1.4f
     liquidCapacity = 30f
     unitSort = UnitSorts.strongest

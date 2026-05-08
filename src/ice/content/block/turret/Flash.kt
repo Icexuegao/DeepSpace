@@ -16,7 +16,7 @@ import mindustry.type.Category
 import mindustry.type.Liquid
 import singularity.world.blocks.turrets.SglTurret
 
-class Flash : SglTurret("flash") {
+class Flash :SglTurret("flash") {
   init {
     localization {
       zh_CN {
@@ -31,7 +31,7 @@ class Flash : SglTurret("flash") {
     liquidCapacity = 30f
     shootSound = Sounds.shootSmite
     requirements(Category.turret, IItems.强化合金, 35, IItems.暮光合金, 40, IItems.钴锭, 45)
-    newAmmo(object : BasicBulletType(6f, 72f) {
+    newAmmo(object :BasicBulletType(6f, 72f) {
       init {
         sprite = "large-orb"
         width = 17f
@@ -40,7 +40,7 @@ class Flash : SglTurret("flash") {
 
         recoilTime = 120f
 
-        shootEffect = MultiEffect(Fx.shootTitan, Fx.colorSparkBig, object : WaveEffect() {
+        shootEffect = MultiEffect(Fx.shootTitan, Fx.colorSparkBig, object :WaveEffect() {
           init {
             colorTo = Pal.accent
             colorFrom = colorTo
@@ -64,7 +64,7 @@ class Flash : SglTurret("flash") {
         hitEffect = Fx.hitBulletColor
         buildingDamageMultiplier = 0.3f
 
-        despawnEffect = MultiEffect(Fx.hitBulletColor, object : WaveEffect() {
+        despawnEffect = MultiEffect(Fx.hitBulletColor, object :WaveEffect() {
           init {
             sizeTo = 30f
             colorTo = Pal.accent
@@ -77,7 +77,7 @@ class Flash : SglTurret("flash") {
         trailEffect = Fx.disperseTrail
         trailInterval = 3f
 
-        intervalBullet = object : LightningBulletType() {
+        intervalBullet = object :LightningBulletType() {
           init {
             damage = 18f
             collidesAir = false
@@ -86,7 +86,7 @@ class Flash : SglTurret("flash") {
             lightningLength = 5
             lightningLengthRand = 10
             buildingDamageMultiplier = 0.25f
-            lightningType = object : BulletType(0.0001f, 0f) {
+            lightningType = object :BulletType(0.0001f, 0f) {
               init {
                 lifetime = Fx.lightning.lifetime
                 hitEffect = Fx.hitLancer

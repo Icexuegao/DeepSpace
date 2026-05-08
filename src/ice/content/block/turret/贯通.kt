@@ -11,7 +11,6 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.type.Item
-import mindustry.type.Liquid
 import singularity.world.blocks.turrets.SglTurret
 
 class 贯通 :SglTurret("turret_penetrate") {
@@ -36,14 +35,13 @@ class 贯通 :SglTurret("turret_penetrate") {
     shootSound = Sounds.shootArtillery
     shootEffect = Fx.bigShockwave
     ammoUseEffect = Fx.casing3Double
-    newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
+    newCoolant(1f, 0.4f, { l -> l.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
     requirements(Category.turret, IItems.铜锭, 135, IItems.钴锭, 95, IItems.钍锭, 65, IItems.爆炸化合物, 10)
     setAmmo()
     limitRange()
   }
 
   fun setAmmo() {
-    // Graphite ammo
     addAmmoType(IItems.铬锭) {
       BasicBulletType().apply {
         damage = 135f
@@ -80,8 +78,6 @@ class 贯通 :SglTurret("turret_penetrate") {
         }
       }
     }
-
-    // Titanium ammo
     addAmmoType(IItems.钴锭) {
       BasicBulletType().apply {
         damage = 185f
@@ -120,8 +116,6 @@ class 贯通 :SglTurret("turret_penetrate") {
         }
       }
     }
-
-    // Thorium ammo
     addAmmoType(IItems.钍锭) {
       BasicBulletType().apply {
         damage = 235f
@@ -162,8 +156,6 @@ class 贯通 :SglTurret("turret_penetrate") {
         }
       }
     }
-
-    // Surge-alloy ammo
     addAmmoType(IItems.暮光合金) {
       BasicBulletType().apply {
         damage = 480f
@@ -204,8 +196,6 @@ class 贯通 :SglTurret("turret_penetrate") {
         }
       }
     }
-
-    // 铱板 ammo
     addAmmoType(IItems.铱板) {
       BasicBulletType().apply {
         damage = 420f
@@ -246,7 +236,6 @@ class 贯通 :SglTurret("turret_penetrate") {
         }
       }
     }
-
   }
 
   fun addAmmoType(item: Item, bulletType: () -> BasicBulletType) {
