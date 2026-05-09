@@ -12,13 +12,11 @@ import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
 import ice.audio.ISounds
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.BombBulletType
 import ice.entities.bullet.RandomDamageBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.core.IFiles.appendModName
-import universecore.struct.texture.LazyTextureSingleDelegate
-
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.Entity
 import ice.world.content.unit.weapon.ChargeWeapon
@@ -28,6 +26,7 @@ import mindustry.entities.pattern.ShootHelix
 import mindustry.gen.Sounds
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
+import universecore.struct.texture.LazyTextureSingleDelegate
 
 class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
   init {
@@ -164,18 +163,19 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
       drawRotorWing(13f, 10f, rotation)
     }
 
-    override fun drawShadowRegion(x: Float, y: Float, rotation: Float) {
-      super.drawShadowRegion(x, y, rotation)
+    override fun drawShadowRegion(shadowX: Float, shadowY: Float, rotation: Float) {
+      super.drawShadowRegion(shadowX, shadowY, rotation)
+
       val rot = rotation
       val trnsx1 = Angles.trnsx(rot, 13f, 10f)
       val trnsy1 = Angles.trnsy(rot, 13f, 10f)
       val trnsx2 = Angles.trnsx(rot, -13f, 10f)
       val trnsy2 = Angles.trnsy(rot, -13f, 10f)
       val speed = Time.time * 5f * 6
-      val ux = x + trnsx1
-      val uy = y + trnsy1
-      val nx = x + trnsx2
-      val ny = y + trnsy2
+      val ux =x+ shadowX + trnsx1
+      val uy =y+ shadowY + trnsy1
+      val nx = x+shadowX + trnsx2
+      val ny =y+ shadowY + trnsy2
       Draw.rect(regions, ux, uy, speed)
       Draw.rect(regions, nx, ny, -speed)
     }

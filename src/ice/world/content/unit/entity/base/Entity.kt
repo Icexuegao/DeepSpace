@@ -47,19 +47,19 @@ open class Entity : UnitEntity(), Legsc, Tankc {
 
   open fun drawShadow() {
     val e: Float = Mathf.clamp(elevation, type.shadowElevation, 1f) * type.shadowElevationScl * (1f - drownTime)
-    val x: Float = x + UnitType.shadowTX * e
-    val y: Float = y + UnitType.shadowTY * e
-    val floor = Vars.world.floorWorld(x, y)
+    val shadowX: Float =  UnitType.shadowTX * e
+    val shadowY: Float =  UnitType.shadowTY * e
+    val floor = Vars.world.floorWorld(x +shadowX, y +shadowY)
     val dest = if (floor.canShadow) 1f else 0f
     //yes, this updates state in draw()... which isn't a problem, because I don't want it to be obvious anyway
     shadowAlpha = if (shadowAlpha < 0) dest else Mathf.approachDelta(shadowAlpha, dest, 0.11f)
     Draw.color(Pal.shadow, Pal.shadow.a * shadowAlpha)
-    drawShadowRegion(x, y, rotation - 90f)
+    drawShadowRegion(shadowX, shadowY, rotation - 90f)
     Draw.color()
   }
 
-  open fun drawShadowRegion(x: Float, y: Float, rotation: Float) {
-    Draw.rect(type.shadowRegion, x, y, rotation)
+  open fun drawShadowRegion(shadowX: Float, shadowY: Float, rotation: Float) {
+    Draw.rect(type.shadowRegion, x+shadowX, y+shadowY, rotation)
   }
 
   open fun drawBody() {

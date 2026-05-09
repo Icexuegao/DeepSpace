@@ -14,10 +14,9 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.ai.AIController
-import ice.audio.ISounds
 import ice.content.block.turret.TurretBullets
 import ice.content.unit.*
+import ice.content.unit.flying.RainFly
 import ice.content.unit.flying.Veto
 import ice.content.unit.flying.fire.*
 import ice.content.unit.flying.rain.*
@@ -26,27 +25,16 @@ import ice.content.unit.naval.Abyss
 import ice.content.unit.naval.Execution
 import ice.content.unit.naval.Meditation
 import ice.content.unit.naval.Witness
-import ice.entities.IcePuddle
-import ice.entities.bullet.MultiBasicBulletType
-import ice.entities.effect.MultiEffect
-import ice.graphics.IceColor
 import ice.world.content.unit.IceUnitType
-import ice.world.content.unit.entity.CorrodflyEnd
-import ice.world.content.unit.entity.CorrodflyHead
-import ice.world.content.unit.entity.CorrodflyMiddle
-import ice.world.meta.IceEffects
 import mindustry.Vars
-import mindustry.content.Fx
 import mindustry.entities.Damage
 import mindustry.entities.Effect
-import mindustry.entities.Puddles
 import mindustry.entities.units.UnitController
 import mindustry.game.EventType.ClientLoadEvent
 import mindustry.game.Team
 import mindustry.gen.Bullet
 import mindustry.gen.Sounds
 import mindustry.gen.Unit
-import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.UnitType
@@ -78,6 +66,10 @@ object IUnitTypes : Load {
   val 重创 = HeavyDamageMissile()
   val 雷精 = Lightning()
 
+  val 飞蠓 = FlyingMidges()
+  val 疟蚊 = Mosquito()
+  val 血俎 = BloodAltar()
+
   val 工蜂 = WorkerBee()
   val 绒刺 = Barb()
   val 和弦 = Chord()
@@ -89,10 +81,6 @@ object IUnitTypes : Load {
   val 铁卫 = IronGuard()
   val 死誓 = DeathOath()
   val 禁军 = ForbiddenArmy()
-
-  val 飞蠓 = FlyingMidges()
-  val 疟蚊 = Mosquito()
-  val 血俎 = BloodAltar()
 
   val 扑火 = PutotFire()
   val 趋火 = Tuihuo()
@@ -129,6 +117,7 @@ object IUnitTypes : Load {
   val 弧光 = ArcLight()
   val 蜂后 = QueenBee()
   val 剑戟 = SwordSpear()
+  val 雨燕 = RainFly()
   val 否决 = Veto()
   val 风暴 = StormBolt()
 
@@ -166,150 +155,14 @@ object IUnitTypes : Load {
   val 焚棘 = ArdenThorn()
   val 青壤 = Schizovegeta()
   val 丰穰之瘤 = RichTumor()
-  val 蚀虻 = IceUnitType("corrodfly-head", CorrodflyHead::class.java) {
-    rotateMoveFirst = true
-    allowedInPayloads = false
-    legStraightness = 0.3f
-    stepShake = 0f
-    legCount = 2
-    legLength = 18f
-    legGroupSize = 4
-    lockLegBase = true
-    legBaseUnder = true
-    legContinuousMove = true
-    legExtension = -2f
-    legBaseOffset = 3f
-    legMaxLength = 1.1f
-    legMinLength = 0.2f
-    legLengthScl = 0.96f
-    legForwardScl = 1.1f
-    rippleScale = 0.2f
-    legMoveSpace = 1f
-
-    hitSize = 8f
-    rotateSpeed = 2.5f
-    speed = 0.8f
-    createScorch = false
-    drawCell = false
-    outlineRadius = 3
-    outlineColor = IceColor.r2
-    deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
-    localization {
-      zh_CN {
-        this.localizedName = "蚀虻"
-        description = "小型陆行污染生物.拥有多段体节,尾部体节带有喷口,会喷射腐蚀胶体"
-      }
-    }
-  }
-  val 蚀虻Middle = IceUnitType("corrodfly-middle", CorrodflyMiddle::class.java) {
-    hitSize = 5f
-    drawCell = false
-    outlineRadius = 3
-    allowedInPayloads = false
-    outlineColor = IceColor.r2
-    hidden = true
-    playerControllable = false
-    createScorch = false
-    deathSound = ISounds.chizovegeta
-    aiController = Prov(::AIController)
-    deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
-  }
-  val 蚀虻End = IceUnitType("corrodfly-end", CorrodflyEnd::class.java) {
-    legStraightness = 0.3f
-    stepShake = 0f
-    legCount = 2
-    allowedInPayloads = false
-    legLength = 18f
-    legGroupSize = 4
-    lockLegBase = true
-    legBaseUnder = true
-    legContinuousMove = true
-    legExtension = -2f
-    legBaseOffset = 3f
-    legMaxLength = 1.1f
-    legMinLength = 0.2f
-    legLengthScl = 0.96f
-    legForwardScl = 1.1f
-    rippleScale = 0.2f
-    legMoveSpace = 1f
-    hitSize = 8f
-    outlineRadius = 3
-    outlineColor = IceColor.r2
-    drawCell = false
-    createScorch = false
-    hidden = true
-    faceTarget = false
-    playerControllable = false
-    deathSound = ISounds.chizovegeta
-    aiController = Prov(::AIController)
-    deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
-    setWeapon("weapon") {
-      x = 0f
-      y = -4f
-      shootX += 1
-      recoil = 1f
-      mirror = false
-      rotate = true
-      reload = 50f
-      shootY += 2f
-      shoot.shots = 2
-      shoot.shotDelay = 15f
-      shootSound = ISounds.flblSquirt
-      bullet = object : MultiBasicBulletType("flesh") {
-        override fun removed(b: Bullet) {
-          super.removed(b)
-          val puddle = IcePuddle.create()
-          puddle.team = b.team
-          puddle.tile = b.tileOn()
-          puddle.liquid = ILiquids.浓稠血浆
-          puddle.amount = IceEffects.rand.random((height + width) / 2, height * width / 2)
-          puddle.set(b.x, b.y)
-          Puddles.register(puddle)
-          puddle.add()
-        }
-      }.apply {
-        speed = 3f
-
-        width = 7f
-        height = width
-        shrinkInterp = Interp.one
-        status = IStatus.流血
-        statusDuration = 2 * 60f
-        lightColor = IceColor.r3
-        backColor = IceColor.r3
-        frontColor = IceColor.r3
-        lightOpacity = 0.2f
-        shootEffect = Fx.none
-        hitEffect = Effect(14f) {e ->
-          Draw.color(IceColor.r3, IceColor.r1, e.fin())
-          e.scaled(7f) {s ->
-            Lines.stroke(0.5f + s.fout())
-            Lines.circle(e.x, e.y, s.fin() * 5f)
-          }
-          Lines.stroke(0.5f + e.fout())
-          Angles.randLenVectors(e.id.toLong(), 5, e.fin() * 15f) {x: Float, y: Float ->
-            val ang = Mathf.angle(x, y)
-            Lines.lineAngle(e.x + x, e.y + y, ang, e.fout() * 3 + 1f)
-          }
-          Drawf.light(e.x, e.y, 20f, IceColor.r3, 0.6f * e.fout())
-        }
-        despawnEffect = hitEffect
-        smokeEffect = Effect(20f) {e ->
-          Draw.color(IceColor.r1, IceColor.r2, e.fin())
-          Angles.randLenVectors(e.id.toLong(), 5, e.finpow() * 6f, e.rotation, 20f) {x: Float, y: Float ->
-            Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f)
-          }
-        }
-
-      }
-    }
-  }
+  val 蚀虻 = 蚀虻()
+  val 蚀虻Middle = 蚀虻Middle()
+  val 蚀虻End = 蚀虻End()
   val 糜蝇 = Flies()
   val 晨星 = MornstarType()
   val 辉夜 = KaguyaType()
   val 极光 = AuroraType()
   val 虚宿 = Emptiness()
-
   val 无畏 = Fearless()
   val 冥刻 = DarkCarving()
   var SglUnitEntity.controlTime by AttachedProperty(0f)

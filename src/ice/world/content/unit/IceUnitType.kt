@@ -469,6 +469,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
         unit.drawBody()
       } else drawBody(unit)
     }
+
     if (drawCell && unit !is Crawlc) drawCell(unit)
     Draw.scl(scl) //TODO this is a hack for neoplasm turrets
     drawWeapons(unit)

@@ -4,9 +4,9 @@ import arc.Core
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.util.Interval
+import ice.core.IFiles.appendModName
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.FleshEntity
 import ice.world.meta.IceEffects
@@ -75,8 +75,8 @@ class Flies : IceUnitType("flies", FliesUnit::class.java) {
       Draw.rect(flies[index % 3], x, y, rotation)
     }
 
-    override fun drawShadowRegion(x: Float, y: Float, rotation: Float) {
-      Draw.rect(flies[index % 3], x, y, rotation)
+    override fun drawShadowRegion(shadowX: Float, shadowY: Float, rotation: Float) {
+      Draw.rect(flies[index % 3],x+ shadowX, y+shadowY, rotation)
     }
 
     override fun update() {
