@@ -82,7 +82,7 @@ class 绪终 :SglTurret("turret_thinkEnd") {
     override fun handleBullet(bullet: Bullet, offsetX: Float, offsetY: Float, angleOffset: Float) {
       super.handleBullet(bullet, offsetX, offsetY, angleOffset)
       bullet.mover {
-        it.vel
+
       }
     }
   }

@@ -30,8 +30,6 @@ import ice.entities.IcePuddle
 import ice.entities.bullet.MultiBasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import universecore.struct.AttachedProperty
-import universecore.world.Load
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.CorrodflyEnd
 import ice.world.content.unit.entity.CorrodflyHead
@@ -65,6 +63,8 @@ import singularity.world.unit.types.MornstarType
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.CircleGenerator
 import universecore.graphics.lightnings.generator.ShrinkGenerator
+import universecore.struct.AttachedProperty
+import universecore.world.Load
 import kotlin.math.max
 import kotlin.math.min
 
@@ -134,6 +134,7 @@ object IUnitTypes : Load {
 
   val 黑棘 = BlackThorns()
   val 噬星 = StarEater()
+  val 渊狱 = AbyssPrison()
 
   val 毒刺 = PoisonBarb()
   val 爆蚊 = ExplosiveMosquito()
