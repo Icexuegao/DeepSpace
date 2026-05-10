@@ -142,9 +142,10 @@ class RainFly :IceUnitType("unit_rainFly", EntityC::class.java) {
   }
 
   private class EntityC :Entity() {
+
     override fun drawBodyRegion(rotation: Float) {
       super.drawBodyRegion(rotation)
-      Draw.alpha(0.6f)
+      Draw.alpha(0.7f)
       drawRotator(this, this.type.name + "-mainPropeller", 0f, 12f, 2f, 64f)
       drawRotator(this, this.type.name + "-vicePropeller", 32f, -5f, 2f, 30f, true)
       Draw.alpha(1f)

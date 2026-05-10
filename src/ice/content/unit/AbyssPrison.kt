@@ -7,6 +7,7 @@ import arc.math.Interp
 import ice.content.IStatus
 import ice.core.IFiles.appendModName
 import ice.entities.bullet.ContinuousLaserBulletType
+import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.world.content.unit.IceUnitType
@@ -14,8 +15,12 @@ import ice.world.meta.IceEffects
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect
+import mindustry.entities.bullet.ShrapnelBulletType
+import mindustry.entities.effect.ExplosionEffect
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
+import mindustry.entities.pattern.ShootBarrel
+import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 import mindustry.world.meta.BlockFlag
 import universecore.math.pow3OutIntrp
@@ -143,7 +148,7 @@ class AbyssPrison :IceUnitType("unit_abyssPrison") {
         statusDuration = 30f
       }
     }
-   /* setWeapon("rapidFire") {
+    setWeapon("rapidFire") {
       x = 19f
       y = 38f
       recoil = 1f
@@ -290,7 +295,7 @@ class AbyssPrison :IceUnitType("unit_abyssPrison") {
 
         despawnEffect = Fx.none
       }
-    } */
+    }
     setWeapon("energyGatheringCannon") {
       x = 27f
       y = -2f
@@ -316,25 +321,25 @@ class AbyssPrison :IceUnitType("unit_abyssPrison") {
         statusDuration = 60f
         incendChance = 1f
         incendAmount = 5
-        colors = arrayOf("D75B6E".toColor(),"BF3E47".toColor(),"FF8663".toColor())
+        colors = arrayOf("D75B6E".toColor(), "BF3E47".toColor(), "FF8663".toColor())
         val spin = 9f
-        val tex : TextureRegion by LazyTextureSingleDelegate("wide".appendModName())
-        val circle : TextureRegion by LazyTextureSingleDelegate("circle")
+        val tex: TextureRegion by LazyTextureSingleDelegate("wide".appendModName())
+        val circle: TextureRegion by LazyTextureSingleDelegate("circle")
         val colorFrom1 = Color.valueOf("FF5845")
         val colorTo1 = Color.valueOf("FF5845")
-        shootEffect =Effect(240f){e->
+        shootEffect = Effect(240f) { e ->
           IceEffects.unitMountSXY(e.data, this@setWeapon, offsetY = -8.5f) { bulletX, bulletY ->
-           val rad =40f *e.fout().pow3OutIntrp
-            Draw.color(colorFrom1,colorTo1,e.fin())
+            val rad = 40f * e.fout().pow3OutIntrp
+            Draw.color(colorFrom1, colorTo1, e.fin())
             Draw.z(109f)
             Draw.rect(tex, bulletX, bulletY, rad, rad / tex.ratio(), e.rotation + e.time * spin)
             Draw.rect(tex, bulletX, bulletY, rad, rad / tex.ratio(), e.rotation + e.time * -spin)
 
-            val rad2 =13f*e.fout()
-            Draw.rect(circle,bulletX,bulletY,rad2, rad2 / circle.ratio())
+            val rad2 = 13f * e.fout()
+            Draw.rect(circle, bulletX, bulletY, rad2, rad2 / circle.ratio())
             Draw.color(Color.white)
-            val rad1 =5.5f*e.fout()
-            Draw.rect(circle,bulletX,bulletY,rad1, rad1 / circle.ratio())
+            val rad1 = 5.5f * e.fout()
+            Draw.rect(circle, bulletX, bulletY, rad1, rad1 / circle.ratio())
           }
         }
 
@@ -356,7 +361,7 @@ class AbyssPrison :IceUnitType("unit_abyssPrison") {
         despawnEffect = Fx.smokeCloud
       }
     }
-   /* setWeapon("missiles") {
+    setWeapon("missiles") {
       x = 21f
       y = -29f
       rotate = true
@@ -975,6 +980,6 @@ class AbyssPrison :IceUnitType("unit_abyssPrison") {
           colorTo = Color.valueOf("FF5845")
         })
       }
-    }*/
+    }
   }
 }
