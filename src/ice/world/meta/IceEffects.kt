@@ -192,17 +192,17 @@ object IceEffects {
     Fill.tri(x + wx, y + wy, x - wx, y - wy, trnsx(angle, length) + x, trnsy(angle, length) + y)
   }
 
-  fun unitMountSXY(unit: Any, weapon: Weapon, cons: Cons2<Float, Float>) {
+  fun unitMountSXY(unit: Any, weapon: Weapon, offsetX: Float=0f, offsetY: Float=0f, cons: Cons2<Float, Float>) {
     if (unit is Unit) {
       val mount = unit.mounts.find {
-        it.weapon.name.equals(weapon.name)
+        it.weapon.name.equals(weapon.name) &&  it.bullet?.let { bullet -> weapon.bullet ==bullet.type } ?: false
       } ?: return
       val weapon = mount.weapon
       val mountX = unit.x + trnsx(unit.rotation - 90, weapon.x, weapon.y)
       val mountY = unit.y + trnsy(unit.rotation - 90, weapon.x, weapon.y)
       val weaponRotation = unit.rotation - 90 + (if (weapon.rotate) mount.rotation else weapon.baseRotation)
-      val bulletX = mountX + trnsx(weaponRotation, weapon.shootX, weapon.shootY)
-      val bulletY = mountY + trnsy(weaponRotation, weapon.shootX, weapon.shootY)
+      val bulletX = mountX + trnsx(weaponRotation, weapon.shootX+offsetX, weapon.shootY+offsetY)
+      val bulletY = mountY + trnsy(weaponRotation, weapon.shootX+offsetX, weapon.shootY+offsetY)
       cons.get(bulletX, bulletY)
     }
   }
