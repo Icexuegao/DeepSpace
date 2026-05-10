@@ -30,10 +30,10 @@ class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
         description = "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,并对附近的友军提供坚忍效果.会缓慢恢复生命值,开火时减少所受伤害"
       }
     }
-    health = 119000f
-    armor = 29f
+    health = 109000f
+    armor = 20f
     speed = 0.32f
-    hitSize = 46f
+    hitSize = 40f
     rotateSpeed = 1.6f
     hovering = true
     canBoost = true

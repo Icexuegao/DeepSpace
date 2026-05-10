@@ -34,8 +34,8 @@ class QueenBee : IceUnitType("unit_queenBee", PayloadUnit::class.java) {
     lowAltitude = true
     faceTarget = false
     flying = true
-    health = 138000f
-    armor = 32f
+    health = 148000f
+    armor = 40f
     hitSize = 91f
     speed = 0.6f
     drag = 0.18f
