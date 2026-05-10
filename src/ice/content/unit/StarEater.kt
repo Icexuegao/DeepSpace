@@ -37,7 +37,7 @@ class StarEater :IceUnitType("unit_starEater") {
     lowAltitude = true
     flying = true
     health = 261000f
-    armor = 103f
+    armor = 13f
     hitSize = 96f
     speed = 0.6f
     rotateSpeed = 1f
@@ -241,7 +241,7 @@ class StarEater :IceUnitType("unit_starEater") {
       cooldownTime = 60f
       shootSound = Sounds.shootLaser
 
-      bullet = LaserBulletType(225f).apply {
+      bullet = LaserBulletType(200f).apply {
         lifetime = 15f
         length = 320f
         width = 24f
@@ -267,7 +267,7 @@ class StarEater :IceUnitType("unit_starEater") {
       cooldownTime = 60f
       shootSound = Sounds.shootLaser
 
-      bullet = LaserBulletType(225f).apply {
+      bullet = LaserBulletType(200f).apply {
         lifetime = 15f
         length = 320f
         width = 24f
@@ -293,7 +293,7 @@ class StarEater :IceUnitType("unit_starEater") {
       cooldownTime = 60f
       shootSound = Sounds.shootLaser
 
-      bullet = LaserBulletType(225f).apply {
+      bullet = LaserBulletType(200f).apply {
         lifetime = 15f
         length = 320f
         width = 24f
@@ -355,7 +355,7 @@ class StarEater :IceUnitType("unit_starEater") {
         firstShotDelay = 120f
       }
 
-      bullet = LaserBulletType( 8400f).apply {
+      bullet = LaserBulletType( 9400f).apply {
         lifetime = 30f
         length = 600f
         width = 75f
