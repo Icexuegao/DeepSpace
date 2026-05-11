@@ -41,6 +41,7 @@ open class Remains(val name: String) :Localizable {
 
   override var details: String = ""
 
+
   var level = 0
 
   var icon = TextureRegionDrawable(IFiles.findModPng(name))

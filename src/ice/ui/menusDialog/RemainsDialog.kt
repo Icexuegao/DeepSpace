@@ -6,19 +6,19 @@ import arc.scene.ui.Label
 import arc.scene.ui.layout.Table
 import arc.util.Scaling
 import ice.content.Remainss
+import ice.core.IFiles
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.core.IFiles
-import universecore.scene.ui.iTable
-import universecore.scene.ui.iTableG
-import universecore.scene.ui.icePane
 import ice.type.Remains
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
+import universecore.scene.ui.iTable
+import universecore.scene.ui.iTableG
+import universecore.scene.ui.icePane
 
 object RemainsDialog :BaseMenusDialog(IceStats.遗物.localized(), IStyles.menusButton_remains) {
 
-  var tempRemain = Remainss.娜雅的手串
+  var tempRemain:Remains = Remainss.娜雅的手串
   lateinit var tiTleTable: Table
   lateinit var enableTable: Table
   lateinit var remainsTable: Table
