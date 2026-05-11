@@ -143,7 +143,7 @@ class 迷思海 :Remains("remains_mystic_sea") {
   fun build(parent: Group) {
     group.setFillParent(true)
     group.touchable = Touchable.childrenOnly
-    group.visibility = Boolp(::unlock)
+    group.visibility = Boolp(::enabled)
     parent.addChild(group)
 
     group.fill { f, f1, f2, f3 ->

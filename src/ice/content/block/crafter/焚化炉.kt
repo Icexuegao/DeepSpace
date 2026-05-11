@@ -14,10 +14,7 @@ import arc.util.io.Writes
 import ice.content.IItems
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-
 import ice.world.content.blocks.liquid.LiquidJunction
-import universecore.world.draw.DrawBuild
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.ctype.ContentType
 import mindustry.entities.Effect
@@ -32,6 +29,8 @@ import singularity.world.blocks.SglBlock
 import singularity.world.blocks.distribute.TargetConfigure
 import singularity.world.distribution.GridChildType
 import universecore.util.DataPackable
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 
 open class 焚化炉 :SglBlock("incinerator") {
   var effect: Effect = Fx.fuelburn
@@ -115,9 +114,8 @@ open class 焚化炉 :SglBlock("incinerator") {
       table.background = IStyles.paneLeft
     }
 
-    override fun config(): Any {
-      return config.pack()
-    }
+    override fun config(): ByteArray = config.pack()
+
 
     override fun updateTile() {
       heat = Mathf.approachDelta(heat, if (consumer.valid && enabled) 1f else 0f, 0.04f)

@@ -1,99 +1,25 @@
 package ice.content
 
-import arc.util.Scaling
 import ice.content.block.CrafterBlocks
 import ice.content.block.DefenseBlocks
-import ice.content.remains.迷思海
+import ice.content.remains.*
 import ice.core.IFiles.appendModName
 import ice.graphics.IceColor
 import ice.type.Remains
-import ice.ui.menusDialog.RemainsDialog.slotPos
+import ice.type.Remains.Companion.effect
 import ice.world.content.blocks.environment.IceOreBlock
 import mindustry.Vars
 import mindustry.content.StatusEffects
 import mindustry.type.ItemStack
-import mindustry.type.UnitType
 import mindustry.world.meta.Stats
-import universecore.scene.element.typinglabel.TLabel
 import universecore.scene.style.DynamicTextureDrawable
-import universecore.scene.ui.itooltip
-import universecore.world.ability.InterceptAbilty
 import universecore.world.consumers.ConsumeType
 
 @Suppress("unused")
 object Remainss {
-  val 娜雅的手串 = Remains("remains_naya_bracelet").apply {
-    localization {
-      zh_CN {
-        this.localizedName = "娜雅的手串"
-        description = "一串温润的玉石手串,在帝国任职期间由娜雅赠予"
-      }
-    }
-    effect = "核心机增加拦截护盾"
-    val units = IUnitTypes.getCoreUnits()
-    var map = HashMap<UnitType, InterceptAbilty>()
-    units.forEach {
-      map[it] = InterceptAbilty(40f, it.hitSize + 5)
-    }
-    install = {
-      units.forEach {
-        it.abilities.addUnique(map[it])
-        it.stats = Stats()
-        it.checkStats()
-      }
-    }
-    uninstall = {
-      units.forEach {
-        it.abilities.remove(map[it])
-        it.stats = Stats()
-        it.checkStats()
-      }
-    }
-  }
-  val 坚固的装甲板 = Remains("remains_armor_plates").apply {
-    localization {
-      zh_CN {
-        this.localizedName = "坚固的装甲板"
-        description = "多层淬火钢板铆接而成,表面布满划痕与凹坑"
-      }
-    }
-    val hea = 500
-    effect = "单位[${IUnitTypes.断业.localizedName}]的生命值提升[$hea]"
-    install = {
-      IUnitTypes.断业.health += hea
-      IUnitTypes.断业.stats = Stats()
-      IUnitTypes.断业.checkStats()
-    }
-    uninstall = {
-      IUnitTypes.断业.health -= hea
-      IUnitTypes.断业.stats = Stats()
-      IUnitTypes.断业.checkStats()
-    }
-  }
-  val 不焚者的余烬 = Remains("remains_unburnt_ashes").apply {
-    localization {
-      zh_CN {
-        this.localizedName = "不焚者的余烬"
-        description = "温热的结晶体,烈焰中被焚尽却未曾死去之人的最后残留"
-      }
-    }
-    val f = 5
-    effect = "单位[${IUnitTypes.仆从.localizedName}]的武器伤害提升[$f]"
-    install = {
-      IUnitTypes.仆从.weapons.forEach {
-        it.bullet.damage += if (it.mirror) f / 2 else f
-      }
-      IUnitTypes.仆从.stats = Stats()
-      IUnitTypes.仆从.checkStats()
-    }
-    uninstall = {
-      IUnitTypes.仆从.weapons.forEach {
-        it.bullet.damage -= if (it.mirror) f / 2 else f
-      }
-      IUnitTypes.仆从.stats = Stats()
-      IUnitTypes.仆从.checkStats()
-    }
-  }
+  val 娜雅的手串 = 娜雅的手串()
+  val 坚固的装甲板 = 坚固的装甲板()
+  val 不焚者的余烬 = 不焚者的余烬()
   val 纯净水晶坠饰 = Remains("remains_pure_crystal_pendant").apply {
     localization {
       zh_CN {
@@ -201,87 +127,8 @@ object Remainss {
     }
   }
 
-  val 不朽者胚胎 = Remains("remains_immortal_embryo").apply {
-    localization {
-      zh_CN {
-        this.localizedName = "不朽者胚胎"
-      }
-    }
-
-    icon = DynamicTextureDrawable(name.appendModName()) {
-      it.frameCount = 16
-      it.frameDuration = 60f / 4f
-    }
-    val pos = 2
-    level = 1
-    remainsColor = IceColor.r2
-    install = {
-      slotPos += pos
-    }
-    uninstall = {
-      slotPos -= pos
-    }
-    val text = """
-      一个被囚禁的血肉胚胎
-      拥抱我,我将赐你永恒
-      不必畏惧刀剑与瘟疫,不必屈服于时光与死亡
-      用你的过去,换取未来
-      用你的灵魂,换取存在
-      直至你我合而为一
-    """.trimIndent()
-    setDescriptionTable {
-      for(string in text.split("\n")) {
-        it.add(TLabel(string)).pad(5f).color(remainsColor).row()
-      }
-    }
-    effect = "遗物槽位+[$pos]"
-    disabled = {
-      Vars.state.isGame || (Remains.getEnableds().contains(this) && Remains.getEnableds().size > slotPos - pos)
-    }
-  }
-  val 脊骨寄生虫 = Remains("remains_spine_parasite").apply {
-    localization {
-      zh_CN {
-        this.localizedName = "脊骨寄生虫"
-        description = "一种具有高度神经亲和性的节状生物,渴望与血肉生物的中枢神经系统结合"
-      }
-    }
-    remainsColor = IceColor.r2
-    setDescriptionTable {
-      it.table { table ->
-        table.add("影响单位: ").pad(5f).color(remainsColor)
-        table.image(IUnitTypes.蚀虻.uiIcon).size(45f).scaling(Scaling.fit).itooltip("${IUnitTypes.蚀虻.localizedName}")
-      }
-    }
-    icon = DynamicTextureDrawable(name.appendModName()) {
-      it.frameCount = 10
-      it.frameDuration = 60f / 4f
-    }
-    val fg = 1.2f
-    effect = "[爬行类]血肉畸变体速度提升[${((fg - 1) * 100).toInt()}%]"
-    install = {
-      IUnitTypes.蚀虻.speed *= fg
-      IUnitTypes.蚀虻.stats = Stats()
-      IUnitTypes.蚀虻.checkStats()
-      IUnitTypes.蚀虻Middle.speed *= fg
-      IUnitTypes.蚀虻Middle.stats = Stats()
-      IUnitTypes.蚀虻Middle.checkStats()
-      IUnitTypes.蚀虻End.speed *= fg
-      IUnitTypes.蚀虻End.stats = Stats()
-      IUnitTypes.蚀虻End.checkStats()
-    }
-    uninstall = {
-      IUnitTypes.蚀虻.speed /= fg
-      IUnitTypes.蚀虻.stats = Stats()
-      IUnitTypes.蚀虻.checkStats()
-      IUnitTypes.蚀虻Middle.speed /= fg
-      IUnitTypes.蚀虻Middle.stats = Stats()
-      IUnitTypes.蚀虻Middle.checkStats()
-      IUnitTypes.蚀虻End.speed /= fg
-      IUnitTypes.蚀虻End.stats = Stats()
-      IUnitTypes.蚀虻End.checkStats()
-    }
-  }
+  val 不朽者胚胎 = 不朽者胚胎()
+  val 脊骨寄生虫 = 脊骨寄生虫()
   val 心跳鼓 = Remains("remains_heartbeat_drum").apply {
     remainsColor = IceColor.r2
     localization {
@@ -381,16 +228,5 @@ object Remainss {
       it.frameDuration = 60f / 3f
     }
   }
-  val 胎生百合 = Remains("remains_tumor_bush").apply {
-    localization {
-      zh_CN {
-        localizedName = "胎生百合"
-      }
-    }
-    remainsColor = IceColor.r2
-    icon = DynamicTextureDrawable(name.appendModName()) {
-      it.frameCount = 8
-      it.frameDuration = 60f / 3f
-    }
-  }
+  val 胎生百合 = 胎生百合()
 }

@@ -12,9 +12,9 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pool
 import arc.util.pooling.Pools
-import universecore.util.accessBoolean
 import mindustry.gen.Decal
 import mindustry.gen.Groups
+import universecore.util.accessBoolean
 import kotlin.math.max
 
 class Particle :Decal(), Iterable<Particle.Cloud> {
@@ -83,10 +83,14 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
     counter++
 
     currentCloud = Pools.get(Cloud::class.java, ::Cloud, 65536).obtain()
+
     currentCloud!!.x = x
     currentCloud!!.y = y
     currentCloud!!.size = 0f
-    currentCloud!!.color.set(model!!.trailColor(this))
+    model!!.trailColor(this)?.let {
+      currentCloud!!.color.set(it)
+    }
+
 
     firstCloud = currentCloud
 

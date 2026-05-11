@@ -25,8 +25,8 @@ object RemainsDialog :BaseMenusDialog(IceStats.遗物.localized(), IStyles.menus
   var slotPos: Int = 8
   override fun init() {
     Remains.remainsSeq.sort { it.level.toFloat() }.reversed().forEach {
-      if (it.unlock) {
-        it.setEnabled(true)
+      if (it.enabled) {
+        it.enabled(true)
       }
     }
   }

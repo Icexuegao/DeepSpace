@@ -9,10 +9,8 @@ import arc.scene.ui.Dialog
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import ice.DeepSpace
-import ice.Ice
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import mindustry.Vars
 import mindustry.ui.dialogs.BaseDialog
 import singularity.Sgl
 import singularity.ui.fragments.notification.Notification
@@ -35,25 +33,25 @@ object Documents {
     }
   }
 
-  // val text = getDialog("<<text>>", "test.md")
-
   class DocumentNotificationData(name: String, val noti: () -> DocumentNotification) {
-    companion object{
-      val setKey= Seq<String>(false)
-      fun reset(){
+    companion object {
+      val setKey = Seq<String>(false)
+      fun reset() {
         setKey.forEach {
           DeepSpace.globals.put(it, false)
         }
       }
     }
+
     var showed: Boolean by ConfigPropertyDelegate(false, "DocumentNotification_${name}")
+
     init {
       setKey.add("DocumentNotification_${name}")
     }
     /** 只展示一次 */
     fun shouldShowOne() {
       if (!showed) {
-        showed=true
+        showed = true
         Sgl.ui.notificationFrag.notify(noti())
       }
     }
@@ -61,8 +59,7 @@ object Documents {
 
   fun getDialog(title: String, md: String): BaseDialog {
     return BaseDialog(title).apply {
-      val element =
-        Markdown(Vars.mods.getMod(Ice::class.java).root.child("documents").child("zh_CN").child(md).readString(), MarkdownStyles.defaultMD)
+      val element = Markdown(DeepSpace.getDocument(Core.bundle.locale, md), MarkdownStyles.defaultMD)
       cont.pane {
         it.add(element).grow()
       }.grow()
@@ -70,7 +67,7 @@ object Documents {
     }
   }
 
-  class DocumentNotification(name: String, description: String, var dialog: Dialog) : Notification("操作指南: $name", description) {
+  class DocumentNotification(name: String, description: String, var dialog: Dialog) :Notification("操作指南: $name", description) {
     lateinit var icons: Drawable
 
     companion object {

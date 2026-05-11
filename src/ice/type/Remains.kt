@@ -8,29 +8,31 @@ import arc.struct.Seq
 import arc.util.Scaling
 import ice.DeepSpace
 import ice.audio.ISounds
+import ice.core.IFiles
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.core.IFiles
-import universecore.scene.ui.addLine
-import universecore.scene.ui.itooltip
-import universecore.struct.ConfigPropertyDelegate
 import ice.ui.UI
 import ice.ui.bundle.Localizable
 import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
+import universecore.scene.ui.addLine
+import universecore.scene.ui.itooltip
+import universecore.struct.AttachedProperty
+import universecore.struct.ConfigPropertyDelegate
 
 open class Remains(val name: String) :Localizable {
   companion object {
     val remainsSeq = Seq<Remains>()
 
     fun getEnableds(): Seq<Remains> {
-      return remainsSeq.select { it.unlock }
+      return remainsSeq.select { it.enabled }
     }
 
     fun getNoEnableds(): Seq<Remains> {
-      return remainsSeq.select { !it.unlock }
+      return remainsSeq.select { !it.enabled }
     }
+    var Localizable.effect by AttachedProperty("")
   }
 
   override var localizedName: String = ""
@@ -40,7 +42,7 @@ open class Remains(val name: String) :Localizable {
   override var details: String = ""
 
   var level = 0
-  var effect = ""
+
   var icon = TextureRegionDrawable(IFiles.findModPng(name))
   var remainsColor = IceColor.b4
   var install = {}
@@ -49,7 +51,7 @@ open class Remains(val name: String) :Localizable {
   var customTable = Table()
   var buttonStyle = IStyles.button5
 
-  var unlock: Boolean by ConfigPropertyDelegate(false, "${DeepSpace.modName}-remains-$name-enabled")
+  var enabled: Boolean by ConfigPropertyDelegate(false, "${DeepSpace.modName}-remains-$name-enabled")
 
   init {
     remainsSeq.add(this)
@@ -59,9 +61,9 @@ open class Remains(val name: String) :Localizable {
     table.get(customTable)
   }
 
-  fun setEnabled(enabled: Boolean) {
+  fun enabled(enabled: Boolean) {
     if (enabled) install() else uninstall()
-    unlock = enabled
+    this@Remains.enabled = enabled
     DataDialog.contentDialog.flunAll()
   }
 
@@ -86,7 +88,7 @@ open class Remains(val name: String) :Localizable {
 
   fun rebuildEnableRemains(table: Table) {
     val button = table.button(icon, buttonStyle) {
-      setEnabled(false)
+      enabled(false)
       ISounds.remainUninstall.play(UI.sfxVolume + 1)
       RemainsDialog.flunRemains()
     }.disabled {
@@ -105,7 +107,7 @@ open class Remains(val name: String) :Localizable {
     val button = ImageButton(icon, IStyles.button)
     button.clicked {
       if (getEnableds().size < RemainsDialog.slotPos) {
-        setEnabled(true)
+        enabled(true)
         ISounds.remainInstall.play()
         RemainsDialog.flunRemains()
       }

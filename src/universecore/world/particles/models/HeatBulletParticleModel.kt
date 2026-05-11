@@ -9,7 +9,6 @@ import arc.math.Mathf
 import arc.math.geom.Geometry
 import arc.util.Interval
 import arc.util.Time
-import universecore.struct.AttachedProperty
 import mindustry.entities.Units
 import mindustry.gen.Bullet
 import mindustry.gen.Unit
@@ -17,6 +16,7 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import singularity.world.particles.SglParticleModels.hitrect
 import singularity.world.particles.SglParticleModels.rect
+import universecore.struct.AttachedProperty
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
 
@@ -115,7 +115,7 @@ class HeatBulletParticleModel :ParticleModel() {
     return cloud.size <= 0.03f
   }
 
-  override fun trailColor(particle: Particle): Color? {
+  override fun trailColor(particle: Particle): Color {
     return particle.color
   }
 

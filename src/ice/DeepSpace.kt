@@ -3,7 +3,6 @@ package ice
 import arc.Core
 import arc.Settings
 import arc.files.Fi
-import arc.func.Prov
 import arc.struct.ObjectMap
 import arc.util.Log
 import arc.util.Strings
@@ -38,9 +37,7 @@ object DeepSpace {
   /** 此mod的QQ群组 */
   const val qqGropsUrl = "https://qm.qq.com/q/3CR3cn2Wc8"
   /** 模组数据文件夹 */
-  val modDirectory: Fi = Core.settings.getDataDirectory().child(modName).apply {
-    if (!exists()) mkdirs()
-  }
+  val modDirectory: Fi = Core.settings.getDataDirectory().child(modName).apply { if (!exists()) mkdirs() }
   /** 模组持久全局变量存储文件  */
   val globalVars: Fi = modDirectory.child("global_vars.bin")
   /** 模组持久全局变量备份文件  */
@@ -108,12 +105,12 @@ object DeepSpace {
     return if (docs.exists()) docs.child(name) else Singularity.getInternalFile("documents").child("zh_CN")
   }
 
-  fun getDocument(name: String?, cache: Boolean): String? {
+  fun getDocument(name: String, cache: Boolean): String? {
     val fi = getDocumentFile(name)
-    return if (cache) docCache.get(fi, Prov { fi.readString() }) else fi.readString()
+    return if (cache) docCache.get(fi) { fi.readString() } else fi.readString()
   }
 
-  fun getDocument(locale: Locale, name: String?): String? {
+  fun getDocument(locale: Locale, name: String?): String {
     return getDocumentFile(locale, name)!!.readString()
   }
 }
