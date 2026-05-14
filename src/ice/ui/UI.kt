@@ -1,37 +1,48 @@
 package ice.ui
 
 import arc.Core
+import arc.Events
 import arc.Graphics
 import arc.audio.Sound
 import arc.graphics.Texture
 import arc.util.OS
 import ice.DeepSpace
-import ice.core.SettingValue
-import ice.game.EventType.addClientLoadEvent
 import ice.core.IFiles
-import universecore.world.Load
+import ice.core.SettingValue
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.ConversationFragment
 import ice.ui.menusDialog.DataDialog
 import mindustry.Vars
+import mindustry.game.EventType
 import mindustry.gen.Icon
 import mindustry.gen.Sounds
 import singularity.Sgl
 import singularity.ui.fragments.ToolBarFrag
+import universecore.world.Load
 
-object UI : Load {
+object UI :Load {
   val cgwidth = Core.graphics.width.toFloat()
   val cgheight = Core.graphics.height.toFloat()
   val sfxVolume: Float get() = Core.settings.getInt("sfxvol") / 100f
   var toolBarFrag: ToolBarFrag = ToolBarFrag()
 
+  init {
+    //字体缩放模糊问题
+    Events.on(EventType.ClientLoadEvent::class.java) {
+      Core.atlas.textures.forEach {
+        val fid = Texture.TextureFilter.nearest
+        it.setFilter(fid, fid)
+      }
+    }
+  }
+
   override fun init() {
-    toolBarFrag.addTool("deepSpaceMenu", {"模组菜单"}, {Icon.menu}, {
+    toolBarFrag.addTool("deepSpaceMenu", { "模组菜单" }, { Icon.menu }, {
       MenusDialog.show()
-    }) {false}
+    }) { false }
 
 
-    toolBarFrag.addTool("data", {"打开当前内容数据"}, {Icon.book}, {
+    toolBarFrag.addTool("data", { "打开当前内容数据" }, { Icon.book }, {
       Vars.control.input.block?.let {
         DataDialog.showUnlockableContent(it)
       } ?: run {
@@ -39,11 +50,11 @@ object UI : Load {
           DataDialog.showUnlockableContent(it.type)
         }
       }
-    }) {false}
+    }) { false }
 
-    toolBarFrag.addTool("debugMonitor", {"调试监视器"}, {Icon.wrench}, {
+    toolBarFrag.addTool("debugMonitor", { "调试监视器" }, { Icon.wrench }, {
       Sgl.ui.debugInfos.hidden = !Sgl.ui.debugInfos.hidden
-    }, {!Sgl.ui.debugInfos.hidden})
+    }, { !Sgl.ui.debugInfos.hidden })
     //上一次保存的调试配置 调试常开真的很sb
     if (!SettingValue.启用调试模式) toolBarFrag.hideTool("debugMonitor")
     SettingValue.addDeBugRun {
@@ -66,18 +77,12 @@ object UI : Load {
     if (OS.isWindows) {
       loadSystemCursors()
     }
-    //字体缩放模糊问题
-    addClientLoadEvent {
-      Core.atlas.textures.forEach {
-        val fid = Texture.TextureFilter.nearest
-        it.setFilter(fid, fid)
-      }
-    }
+
 
     Vars.ui.menufrag.addButton("[#${SettingValue.difficulty.color}]${DeepSpace.modDisplayName}[]", Icon.menu) {
       MenusDialog.show()
     }
-    if (SettingValue.进入游戏自动弹出mod主菜单)MenusDialog.show()
+    if (SettingValue.进入游戏自动弹出mod主菜单) MenusDialog.show()
   }
 
   fun showUISoundCloseV(sound: Sound) {

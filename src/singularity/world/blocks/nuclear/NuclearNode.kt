@@ -225,7 +225,8 @@ open class NuclearNode(name: String) : NuclearBlock(name) {
     }
   }
 
-  fun inRange(origin: Tile, other: Tile, range: Float): Boolean {
+  fun inRange(origin: Tile?, other: Tile, range: Float): Boolean {
+    origin?:return false
     return Intersector.overlaps(Tmp.cr1.set(origin.drawx(), origin.drawy(), range), other.getHitbox(Tmp.r1))
   }
 

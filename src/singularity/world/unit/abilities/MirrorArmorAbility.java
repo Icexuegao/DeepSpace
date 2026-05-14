@@ -27,7 +27,7 @@ public class MirrorArmorAbility extends MirrorShieldBase{
 
   @Override
   public String localized() {
-    return Core.bundle.get("ability.mirror_armor");
+    return "镜面装甲";
   }
 
   @Override

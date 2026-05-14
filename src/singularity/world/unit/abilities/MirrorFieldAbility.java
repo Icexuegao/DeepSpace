@@ -30,7 +30,7 @@ public class MirrorFieldAbility extends MirrorShieldBase{
 
   @Override
   public String localized() {
-    return Core.bundle.get("ability.mirror_shield");
+    return "镜面力场";
   }
 
   @Override

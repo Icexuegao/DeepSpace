@@ -28,11 +28,11 @@ import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import universecore.struct.texture.LazyTextureSingleDelegate
 
-class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
+class ArdenThorn :IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "焚棘"
+        localizedName = "焚棘"
         description = "重型空中突击单位.发射渐速机枪弹和导弹攻击敌人"
         details = "虽定位为侦察单位,但其出色的滞空能力与双重火力配置,使其能在探查敌情的同時实施骚扰性攻击,成为战场上空难以驱离的刺眼存在"
       }
@@ -56,10 +56,10 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
       layerOffset = -1f
       rotateSpeed = 4f
       shootSound = Sounds.shootMissile
-      shoot = object : ShootHelix() {
+      shoot = object :ShootHelix() {
         var bl = true
         override fun shoot(totalShots: Int, handler: BulletHandler, barrelIncrementer: Runnable?) {
-          for (i in 0..<shots) {
+          for(i in 0..<shots) {
             bl = !bl
             handler.shoot(0f, 0f, 0f, firstShotDelay + shotDelay * i) { b ->
               b.moveRelative(0f, Mathf.sin(b.time + offset, scl, mag * if (bl) 1 else -1))
@@ -101,7 +101,11 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
           (0..3).forEach { i ->
             Tmp.v1.set(1f, 0f).setToRandomDirection(IceEffects.rand).scl(circleRad)
             IceEffects.drawFunc(
-              e.x + Tmp.v1.x, e.y + Tmp.v1.y, IceEffects.rand.random(circleRad / 16, circleRad / 12) * e.fout(), IceEffects.rand.random(circleRad / 4, circleRad / 1.5f) * (1 + e.fin()) / 2, Tmp.v1.angle() - 180
+              e.x + Tmp.v1.x,
+              e.y + Tmp.v1.y,
+              IceEffects.rand.random(circleRad / 16, circleRad / 12) * e.fout(),
+              IceEffects.rand.random(circleRad / 4, circleRad / 1.5f) * (1 + e.fin()) / 2,
+              Tmp.v1.angle() - 180
             )
           }
 
@@ -153,7 +157,7 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
     }
   }
 
-  class ArdenThornUnit : Entity() {
+  class ArdenThornUnit :Entity() {
     companion object {
       val regions: TextureRegion by LazyTextureSingleDelegate("ardenThorn-propeller".appendModName())
     }
@@ -171,11 +175,11 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
       val trnsy1 = Angles.trnsy(rot, 13f, 10f)
       val trnsx2 = Angles.trnsx(rot, -13f, 10f)
       val trnsy2 = Angles.trnsy(rot, -13f, 10f)
-      val speed = Time.time * 5f * 6
-      val ux =x+ shadowX + trnsx1
-      val uy =y+ shadowY + trnsy1
-      val nx = x+shadowX + trnsx2
-      val ny =y+ shadowY + trnsy2
+      val speed = Time.time * 5f * 3
+      val ux = x + shadowX + trnsx1
+      val uy = y + shadowY + trnsy1
+      val nx = x + shadowX + trnsx2
+      val ny = y + shadowY + trnsy2
       Draw.rect(regions, ux, uy, speed)
       Draw.rect(regions, nx, ny, -speed)
     }
@@ -186,7 +190,7 @@ class ArdenThorn : IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
       val trnsy1 = Angles.trnsy(rot, rx, ry)
       val trnsx2 = Angles.trnsx(rot, -rx, ry)
       val trnsy2 = Angles.trnsy(rot, -rx, ry)
-      val speed = Time.time * 5f * 6
+      val speed = Time.time * 5f * 3
       val ux = x + trnsx1
       val uy = y + trnsy1
       val nx = x + trnsx2

@@ -1,6 +1,6 @@
 package ice.ui.bundle
 
-/** 多语言映射表*/
+/** 多语言映射表 */
 class LocalizationMap {
   private val locales = mutableMapOf<String, LocalizationData>()
 
