@@ -1,7 +1,7 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category

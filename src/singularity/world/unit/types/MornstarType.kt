@@ -21,7 +21,7 @@ import arc.util.pooling.Pool.Poolable
 import arc.util.pooling.Pools
 import ice.DeepSpace
 import universecore.struct.AttachedProperty
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 
 import mindustry.Vars
 import mindustry.content.Fx

@@ -13,7 +13,7 @@ import ice.game.EventType.addContentInitEvent
 import universecore.world.Load
 import ice.shader.IceShader
 import ice.type.Dup
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import ice.world.content.blocks.environment.*
 import ice.world.meta.IAttribute
 import mindustry.Vars

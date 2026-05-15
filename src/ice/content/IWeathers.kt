@@ -3,7 +3,7 @@ package ice.content
 import ice.graphics.IceColor
 import ice.core.IFiles.appendModName
 import universecore.world.Load
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds
 import mindustry.type.Weather

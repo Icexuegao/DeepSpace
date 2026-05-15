@@ -1,6 +1,6 @@
 package ice.world.meta
 
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatCat
 

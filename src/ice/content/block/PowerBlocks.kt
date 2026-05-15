@@ -20,7 +20,7 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements

@@ -6,7 +6,7 @@ import arc.func.Prov
 import arc.struct.ObjectMap
 import ice.content.IItems
 import universecore.world.Load
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.gen.Building
 import mindustry.gen.Teamc

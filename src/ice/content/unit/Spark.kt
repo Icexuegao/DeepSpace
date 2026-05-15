@@ -2,7 +2,7 @@ package ice.content.unit
 
 import arc.graphics.Color
 import arc.math.Interp
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.bullet.ExplosionBulletType

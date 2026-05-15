@@ -1,10 +1,11 @@
-package ice.ui.bundle
+package universecore.ui.bundle
 
 import arc.Core
-import universecore.world.Load
 import mindustry.ctype.UnlockableContent
+import universecore.world.Load
 
-/**本地化管理器 - 统一管理所有本地化 */
+/**本地化管理器 - 统一管理所有本地化 应当在 ModContentLoadEvent之后 init之前加载
+ * @see mindustry.game.EventType.ModContentLoadEvent */
 object LocalizationManager :Load {
   private val registry = mutableMapOf<Any, LocalizationMap>()
   private var loaded = false

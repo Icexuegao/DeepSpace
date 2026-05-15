@@ -3,7 +3,7 @@ package ice.content.unit
 import arc.graphics.Color
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import mindustry.content.Fx
 import mindustry.entities.abilities.EnergyFieldAbility
 import mindustry.entities.effect.ParticleEffect

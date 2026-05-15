@@ -1,4 +1,4 @@
-package ice.ui.bundle
+package universecore.ui.bundle
 
 import mindustry.ctype.UnlockableContent
 

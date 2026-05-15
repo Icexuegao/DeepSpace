@@ -14,7 +14,6 @@ import ice.game.IceTeam
 import ice.game.Schematics
 import ice.ui.MenusDialog
 import ice.ui.UI
-import ice.ui.bundle.LocalizationManager
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.Noise2dBlock
 import ice.world.meta.IAttribute
@@ -29,7 +28,6 @@ import singularity.Singularity
 import singularity.type.SglCategory
 import singularity.type.SglContentType
 import tmi.RecipeEntryPoint
-import universecore.UncCore
 
 @RecipeEntryPoint(Recipes::class)
 open class Ice :Mod() {
@@ -55,7 +53,6 @@ open class Ice :Mod() {
     IFiles.setup()
     IAttribute.setup()
     SglCategory.setup()
-    UncCore.setup()
     SettingValue.setup()
     IceBullet.setup()
     EventType.setup()
@@ -64,7 +61,6 @@ open class Ice :Mod() {
   }
 
   override fun init() {
-    UncCore.init()
     singularity.init()
     UI.init()
     Schematics.init()
@@ -91,7 +87,7 @@ open class Ice :Mod() {
     IWeathers.load()
     IPlanets.load()
     singularity.loadContent()
-    LocalizationManager.load()
+
   }
 
   override fun packSprites(packer: MultiPacker) = IcePackSprites.packSprites(packer)

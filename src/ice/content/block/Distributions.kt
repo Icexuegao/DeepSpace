@@ -7,7 +7,7 @@ import ice.content.IItems
 import ice.graphics.IceColor
 import ice.game.EventType.addContentInitEvent
 import universecore.world.Load
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.*

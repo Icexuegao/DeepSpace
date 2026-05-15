@@ -5,7 +5,6 @@ import arc.Events
 import arc.scene.Group
 import arc.scene.ui.layout.Table
 import arc.util.OS
-import arc.util.Time
 import ice.ui.UI
 import mindustry.Vars
 import mindustry.game.EventType
@@ -15,13 +14,13 @@ import mindustry.world.Block
 import universecore.android.AndroidImpl
 import universecore.desktopcore.desktop.*
 import universecore.scene.fragments.SecondaryConfigureFragment
+import universecore.ui.bundle.LocalizationManager
 import universecore.util.handler.CategoryHandler
 import universecore.util.handler.FieldHandler
-import universecore.world.Load
 
 /** UniverseCore主类,同时也是调用核心类,这里会保存各种可能会用到的默认实例以及许多必要实例
  * @author EBwilson */
-object UncCore : Load {
+object UncCore {
   const val version = "2.0.0"
 
   lateinit var fieldAccessHelper: FieldAccessHelper
@@ -35,20 +34,23 @@ object UncCore : Load {
   var categories = CategoryHandler()
   lateinit var secConfig: SecondaryConfigureFragment
 
-  override fun setup() {
-    Time.run(0f) {
-      Events.on(UnlockEvent::class.java) { event ->
-        if (event.content is Block) {
-          categories.handleBlockFrag()
-        }
-      }
-      Events.on(WorldLoadEvent::class.java) { _ ->
-        Core.app.post { categories.handleBlockFrag() }
+  init {
+    Events.on(UnlockEvent::class.java) { event ->
+      if (event.content is Block) {
+        categories.handleBlockFrag()
       }
     }
+    Events.on(WorldLoadEvent::class.java) { _ ->
+      Core.app.post { categories.handleBlockFrag() }
+    }
+    Events.on(EventType.ModContentLoadEvent::class.java) {
+      LocalizationManager.load()
+    }
+    Events.on(EventType.ClientLoadEvent::class.java){
+      init()
+    }
   }
-
-  override fun init() {
+  fun init() {
     var toggler = FieldHandler.getValueDefault<Table>(Vars.ui.hudfrag.blockfrag, "toggler")
 
     Events.run(EventType.Trigger.update) {

@@ -7,7 +7,7 @@ import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Nullable
 import universecore.struct.texture.LazyTextureSingleDelegate
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 import mindustry.ctype.UnlockableContent
 import singularity.contents.SglTechThree
 import singularity.core.SglEventTypes.ResearchCompletedEvent

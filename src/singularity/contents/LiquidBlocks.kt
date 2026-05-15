@@ -2,7 +2,7 @@ package singularity.contents
 
 import arc.func.Boolf3
 import ice.content.IItems
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import mindustry.content.Items
 import mindustry.game.Team
 import mindustry.type.Category

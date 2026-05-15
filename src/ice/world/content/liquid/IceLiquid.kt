@@ -2,7 +2,7 @@ package ice.world.content.liquid
 
 import arc.graphics.Color
 import ice.content.IPlanets
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
 import mindustry.gen.Puddle

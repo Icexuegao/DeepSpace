@@ -1,4 +1,4 @@
-package ice.ui.bundle
+package universecore.ui.bundle
 
 /** 多语言映射表 */
 class LocalizationMap {

@@ -1,7 +1,7 @@
 package ice.world.content.status
 
 import arc.func.Cons2
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.entities.units.StatusEntry
 import mindustry.gen.Unit

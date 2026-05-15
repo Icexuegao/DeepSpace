@@ -6,7 +6,7 @@ import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import ice.content.IItems
 import universecore.scene.ui.ItemSelection
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.gen.Building

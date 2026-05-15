@@ -5,7 +5,7 @@ import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import ice.graphics.IceColor
 import universecore.util.toTrimmedString
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent

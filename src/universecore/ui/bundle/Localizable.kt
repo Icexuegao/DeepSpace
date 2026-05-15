@@ -1,4 +1,4 @@
-package ice.ui.bundle
+package universecore.ui.bundle
 
 /** 支持本地化的对象接口。
  *

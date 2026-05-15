@@ -6,7 +6,7 @@ import ice.entities.bullet.ArtilleryBulletType
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.effect.MultiEffect
 import universecore.util.toColor
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import mindustry.content.Fx
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.effect.WaveEffect

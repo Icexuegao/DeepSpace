@@ -16,7 +16,7 @@ import ice.core.IFiles
 import ice.core.IFiles.appendModName
 import ice.entities.IceRegister
 import ice.graphics.IceColor
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars
 import mindustry.core.Renderer

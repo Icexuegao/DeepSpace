@@ -1,6 +1,6 @@
 package singularity.type
 
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 import mindustry.ctype.UnlockableContent
 import mindustry.type.Planet
 

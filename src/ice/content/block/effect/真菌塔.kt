@@ -1,7 +1,7 @@
 package ice.content.block.effect
 
 
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import ice.world.content.blocks.effect.FungusCore
 import mindustry.type.Category
 

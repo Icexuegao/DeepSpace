@@ -18,7 +18,7 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.DeepSpace
 import universecore.struct.AttachedProperty
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import mindustry.content.Fx
 import mindustry.entities.Units
 import mindustry.entities.bullet.BulletType

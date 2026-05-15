@@ -12,7 +12,7 @@ import ice.core.IFiles
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.ui.UI
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars

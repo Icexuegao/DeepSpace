@@ -3,7 +3,7 @@ package ice.content.block
 import ice.content.IItems
 import ice.content.ILiquids
 import universecore.world.Load
-import ice.ui.bundle.localization
+import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.logic.LogicBlock

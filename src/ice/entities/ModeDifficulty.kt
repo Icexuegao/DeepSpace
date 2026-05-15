@@ -2,7 +2,7 @@ package ice.entities
 
 import arc.graphics.Color
 import ice.graphics.IceColor
-import ice.ui.bundle.Localizable
+import universecore.ui.bundle.Localizable
 
 enum class ModeDifficulty(var color: Color) :Localizable {
 
