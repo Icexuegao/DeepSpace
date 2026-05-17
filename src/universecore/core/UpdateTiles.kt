@@ -2,11 +2,11 @@ package singularity.core
 
 import arc.Events
 import arc.struct.ObjectMap
-import universecore.world.Load
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.world.Tile
 import mindustry.world.Tiles
+import universecore.world.Load
 
 object UpdateTiles: Load {
   val updaters = ObjectMap<Tile, Updatable>()

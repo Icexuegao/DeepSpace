@@ -1,6 +1,5 @@
-package universecore.util.funcs;
+package universecore.util.funcs
 
-@FunctionalInterface
-public interface Doublep {
-  double get();
+fun interface Doublep {
+  fun get(): Double
 }

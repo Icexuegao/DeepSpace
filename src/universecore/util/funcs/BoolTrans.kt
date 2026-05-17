@@ -1,6 +1,5 @@
-package universecore.util.funcs;
+package universecore.util.funcs
 
-@FunctionalInterface
-public interface BoolTrans {
-  boolean get(boolean value);
+fun interface BoolTrans {
+  fun get(value: Boolean): Boolean
 }

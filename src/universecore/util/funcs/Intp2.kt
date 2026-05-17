@@ -1,6 +1,5 @@
-package universecore.util.funcs;
+package universecore.util.funcs
 
-@FunctionalInterface
-public interface Intp2<P1, P2>{
-  int get(P1 a, P2 b);
+fun interface Intp2<P1, P2> {
+  fun get(a: P1, b: P2): Int
 }

@@ -20,6 +20,7 @@ import ice.world.meta.IAttribute
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
 import mindustry.graphics.MultiPacker
+import mindustry.logic.LAccess
 import mindustry.mod.Mod
 import mindustry.type.Category
 import mindustry.world.meta.BuildVisibility
@@ -28,16 +29,24 @@ import singularity.Singularity
 import singularity.type.SglCategory
 import singularity.type.SglContentType
 import tmi.RecipeEntryPoint
+import universe.util.reflect.accessEnum2
+import universecore.util.accessField
 
 @RecipeEntryPoint(Recipes::class)
 open class Ice :Mod() {
   companion object {
     val singularity = Singularity()
+    val config2 = LAccess::class.accessEnum2<LAccess, Boolean, Array<String>>().appendEnumInstance("config2", true, arrayOf("to"))
+    var senseable: Array<LAccess> by LAccess::class.accessField("senseable")
+    var controls: Array<LAccess> by LAccess::class.accessField("controls")
+
+    init {
+    //  senseable = Seq.select(LAccess.entries.toTypedArray()) { it.params.size <= 1 }.toArray(LAccess::class.java)
+    //  controls = Seq.select(LAccess.entries.toTypedArray()) { it.params.size > 0 }.toArray(LAccess::class.java)
+    }
   }
 
   init {
-   // val appendEnumInstance = LAccess::class.accessEnum1<LAccess, Array<String>>().appendEnumInstance("dwx", arrayOf("to"))
-
     DeepSpace.globals.load()
     Events.on(mindustry.game.EventType.MusicRegisterEvent::class.java) {
       SoundControl.init()

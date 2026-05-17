@@ -6,7 +6,7 @@ import java.util.*;
 
 /**一些空的集合的存储类，一般用于对空集合有需要引用的时候，例如map的各自getDefault和默认初始化用法等
  * <p><strong>不要对这当中的任何集合进行手动操作，这是很愚蠢的，非常愚蠢</strong>*/
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({"unchecked", "rawtypes","unused"})
 public class Empties{
   private static final ArrayList NIL_ARRAY_LIST = new ArrayList();
   private static final LinkedList NIL_LINKED_LIST = new LinkedList();

@@ -1,6 +1,5 @@
-package universecore.util.funcs;
+package universecore.util.funcs
 
-@FunctionalInterface
-public interface DoubleTrans {
-  double get(double value);
+fun interface DoubleTrans {
+  fun get(value: Double): Double
 }

@@ -12,12 +12,9 @@ import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
+import ice.Ice
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import universecore.scene.ui.ItemSelection
-import universecore.scene.ui.itooltip
-import universecore.world.draw.DrawBuild
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
@@ -29,6 +26,10 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.BlockGroup
 import singularity.world.blocks.SglBlock
+import universecore.scene.ui.ItemSelection
+import universecore.scene.ui.itooltip
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 
 class Sorter(name: String) :SglBlock(name) {
   val top = DrawRegion("-top")
@@ -96,7 +97,11 @@ class Sorter(name: String) :SglBlock(name) {
         LAccess.config -> sortItem
         else -> super.senseObject(sensor)
       }
+    }
 
+    override fun sense(sensor: LAccess): Double {
+      if (sensor== Ice.config2)return if (invert) 1.0 else 0.0
+      return super.sense(sensor)
     }
 
     override fun config(): String {

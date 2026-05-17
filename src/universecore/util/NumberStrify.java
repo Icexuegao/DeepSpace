@@ -3,7 +3,7 @@ package universecore.util;
 /**将数字按一定准则转化为字符串的实用工具集
  *
  * @since 1.5
- * @author EBwilson*/
+ * @author EBwilson */
 public class NumberStrify{
   private static final String[] byteUnit = {
       "B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB", "BB"

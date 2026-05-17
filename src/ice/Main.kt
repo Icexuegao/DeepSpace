@@ -9,8 +9,6 @@ fun main() {
   //removeLeadingZeros("B:\\inCommonUse\\Videos\\bilibili\\37331271901\\37331271901-1-30280.m4s")
 
 }
-class A
-
 fun req(file: File) {
   file.listFiles()?.forEach {
 
