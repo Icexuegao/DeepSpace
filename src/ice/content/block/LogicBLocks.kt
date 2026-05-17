@@ -7,6 +7,7 @@ import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.logic.LogicBlock
+import mindustry.world.blocks.logic.LogicDisplay
 import mindustry.world.blocks.logic.MemoryBlock
 import mindustry.world.blocks.logic.MessageBlock
 import mindustry.world.blocks.logic.SwitchBlock
@@ -129,6 +130,34 @@ object LogicBLocks :Load {
       requirements(Category.logic, IItems.钴钢, 90, IItems.陶钢, 30, IItems.导能回路, 40, IItems.铪锭, 30)
       memoryCapacity = 512
       size = 2
+    }
+  }
+  val 逻辑显示屏 = object : LogicDisplay("logic-display") {
+    init {
+      localization {
+        zh_CN {
+          localizedName = "逻辑显示屏"
+          description = "显示处理器中绘制的各种图像"
+        }
+      }
+      health
+      requirements(Category.logic, IItems.钴钢, 90)
+      size = 3
+      displaySize = 80
+    }
+  }
+  val 大型逻辑显示屏 = object :LogicDisplay("large-logic-display") {
+    init {
+      localization {
+        zh_CN {
+          localizedName = "大型逻辑显示屏"
+          description = "显示处理器中绘制的各种图像"
+        }
+      }
+      health
+      requirements(Category.logic, IItems.钴钢, 90)
+      size = 6
+      displaySize = 176
     }
   }
 }
