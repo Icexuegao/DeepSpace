@@ -141,7 +141,7 @@ object LogicBLocks :Load {
         }
       }
       health
-      requirements(Category.logic, IItems.钴钢, 90)
+      requirements(Category.logic, IItems.石英玻璃, 30, IItems.单晶硅, 30, IItems.金锭, 20, IItems.铬锭, 15, IItems.电子元件, 15)
       size = 3
       displaySize = 80
     }
@@ -155,7 +155,7 @@ object LogicBLocks :Load {
         }
       }
       health
-      requirements(Category.logic, IItems.钴钢, 90)
+      requirements(Category.logic, IItems.石英玻璃, 60, IItems.单晶硅, 60, IItems.金锭, 40, IItems.铬锭, 30, IItems.电子元件, 30)
       size = 6
       displaySize = 176
     }
