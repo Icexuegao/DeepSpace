@@ -12,7 +12,6 @@ import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.Ice
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import mindustry.Vars
@@ -30,6 +29,7 @@ import universecore.scene.ui.ItemSelection
 import universecore.scene.ui.itooltip
 import universecore.world.draw.DrawBuild
 import universecore.world.draw.DrawMulti
+import universecore.world.logic.UncLAccess
 
 class Sorter(name: String) :SglBlock(name) {
   val top = DrawRegion("-top")
@@ -56,31 +56,25 @@ class Sorter(name: String) :SglBlock(name) {
         Draw.rect(this@Sorter.invert, x, y)
       }
     })
-    config(
-      Item::class.java
-    ) { tile: IceSorterBuild, item: Item? -> tile.sortItem = item }
-    config(
-      String::class.java
-    ) { tile: IceSorterBuild, s: String ->
-      val split = s.split("|")
-      tile.invert = split[1].toBoolean()
-      if (split[0] == "null") {
-        tile.configure(null)
-      }
-      tile.sortItem = Vars.content.item(split[0])
+    config(Item::class.java) { tile: IceSorterBuild, item -> tile.sortItem = item }
+    config(SorterData::class.java) { tile: IceSorterBuild, s ->
+      tile.invert = s.invert
+      tile.sortItem = s.sortItem
     }
-    configClear { tile: IceSorterBuild -> tile.sortItem = null }
+    configClear { tile: IceSorterBuild ->
+      tile.sortItem = null
+      tile.invert = false
+    }
   }
 
   override fun drawPlanConfig(plan: BuildPlan, list: Eachable<BuildPlan?>?) {
     val config = plan.config
-    if (config is String) {
-      val split = config.split("|")
-      if (split[0] != "null") {
-        Draw.color(Vars.content.item(split[0]).color)
-      }
-    } else if (config is Item) {
-      Draw.color(config.color)
+    if (config is SorterData && config.invert) {
+      Draw.rect(this@Sorter.invert, plan.drawx(), plan.drawy())
+    }
+
+    if (config is SorterData) {
+      Draw.color(config.sortItem?.color ?: Color.white)
     }
     Draw.rect(top.region, plan.drawx(), plan.drawy())
   }
@@ -89,6 +83,7 @@ class Sorter(name: String) :SglBlock(name) {
     return true
   }
 
+  data class SorterData(val sortItem: Item?, val invert: Boolean)
   inner class IceSorterBuild :SglBuilding() {
     var invert: Boolean = false
     var sortItem: Item? = null
@@ -100,19 +95,11 @@ class Sorter(name: String) :SglBlock(name) {
     }
 
     override fun sense(sensor: LAccess): Double {
-      if (sensor== Ice.config2)return if (invert) 1.0 else 0.0
+      if (sensor == UncLAccess.config2) return if (invert) 1.0 else 0.0
       return super.sense(sensor)
     }
 
-    override fun config(): String {
-      var s = ""
-      s += if (sortItem == null) {
-        "null"
-      } else {
-        sortItem!!.name
-      }
-      return "$s|$invert"
-    }
+    override fun config() = SorterData(sortItem, invert)
     override fun drawSelect() {
       super.drawSelect()
       drawItemSelection(sortItem)
@@ -193,8 +180,6 @@ class Sorter(name: String) :SglBlock(name) {
         }.padRight(4f)
       }
     }
-
-
 
     override fun write(write: Writes) {
       super.write(write)

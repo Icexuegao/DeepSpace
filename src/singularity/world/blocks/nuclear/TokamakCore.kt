@@ -16,7 +16,6 @@ import arc.util.Strings
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import universecore.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.game.Team
 import mindustry.gen.Building
@@ -37,6 +36,7 @@ import universecore.components.blockcomp.ChainsBlockComp
 import universecore.components.blockcomp.ChainsBuildComp
 import universecore.components.blockcomp.SpliceBlockComp
 import universecore.components.blockcomp.SpliceBuildComp
+import universecore.struct.AttachedProperty
 import universecore.world.blocks.chains.ChainsContainer
 import universecore.world.blocks.modules.ChainsModule
 import universecore.world.particles.MultiParticleModel
@@ -57,7 +57,7 @@ open class TokamakCore(name: String) :NormalCrafter(name), SpliceBlockComp {
     var Particle.inCorner: Vec2? by AttachedProperty(null)
     const val INV: Float = 0.01f
 
-    private val model: ParticleModel = MultiParticleModel(object :TrailFadeParticle() {
+    private val model: ParticleModel = object :MultiParticleModel(object :TrailFadeParticle() {
       init {
         linear = true
         trailFade = 0.01f
@@ -94,11 +94,14 @@ open class TokamakCore(name: String) :NormalCrafter(name), SpliceBlockComp {
           if (p.inCorner == null) {
             val angle = p.speed.angle()
             val dir = Mathf.round(angle / 90) % 4
+
+            val cornerOffset = b.block.size * Vars.tilesize / 2f
+
             when(dir) {
-              0 -> p.x = b.x - b.block.size * Vars.tilesize / 2f
-              1 -> p.y = b.y - b.block.size * Vars.tilesize / 2f
-              2 -> p.x = b.x + b.block.size * Vars.tilesize / 2f
-              3 -> p.y = b.y + b.block.size * Vars.tilesize / 2f
+              0 -> p.x = b.x - cornerOffset
+              1 -> p.y = b.y - cornerOffset
+              2 -> p.x = b.x + cornerOffset
+              3 -> p.y = b.y + cornerOffset
             }
             val out: Vec2 = (if (cursor < 0) Vec2() else cacheVecs.get(cursor--))!!
             out.set(p.x - b.x, p.y - b.y)
@@ -187,7 +190,13 @@ open class TokamakCore(name: String) :NormalCrafter(name), SpliceBlockComp {
       override fun drawTrail(particle: Particle) {
         SglDraw.drawBloomUnderBlock(particle) { particle -> super.drawTrail(particle) }
       }
-    })
+    }){
+      override fun reset(particle: Particle) {
+        super.reset(particle)
+        particle.OWNER = null
+        particle.inCorner = null
+      }
+    }
   }
 
   override val maxChainsWidth = 0
@@ -232,17 +241,17 @@ open class TokamakCore(name: String) :NormalCrafter(name), SpliceBlockComp {
 
   override fun setBars() {
     super.setBars()
-    addBar<TokamakCoreBuild?>("efficiency") { e: TokamakCoreBuild? ->
+    addBar("efficiency") { e: TokamakCoreBuild ->
       Bar(
-        { Core.bundle.format("bar.efficiency", Strings.autoFixed(Mathf.round(Mathf.pow(e!!.warmup(), 3f) * 100).toFloat(), 1)) },
+        { Core.bundle.format("bar.efficiency", Strings.autoFixed(Mathf.round(Mathf.pow(e.warmup(), 3f) * 100).toFloat(), 1)) },
         { Pal.powerBar },
-        { Mathf.pow(e!!.warmup(), 3f) })
+        { Mathf.pow(e.warmup(), 3f) })
     }
-    addBar<TokamakCoreBuild?>("scale") { e: TokamakCoreBuild? ->
+    addBar("scale") { e: TokamakCoreBuild ->
       Bar(
-        { Core.bundle.format("bar.scale", Strings.autoFixed(e!!.fuelConsMulti, 1), Strings.autoFixed(e.energyOutMulti, 1)) },
+        { Core.bundle.format("bar.scale", Strings.autoFixed(e.fuelConsMulti, 1), Strings.autoFixed(e.energyOutMulti, 1)) },
         { Pal.powerBar },
-        { if (e!!.scale > 0f) 1f else 0f })
+        { if (e.scale > 0f) 1f else 0f })
     }
   }
 
@@ -473,12 +482,14 @@ open class TokamakCore(name: String) :NormalCrafter(name), SpliceBlockComp {
 
       if (structValid() && Mathf.chanceDelta((warmup() * warmup() * warmup() * particleDensity).toDouble())) {
         val blockSize = outLinked!!.block.size * Vars.tilesize
+        val f = blockSize / 2f
         when(relativeTo(outLinked).toInt()) {
-          0 -> Tmp.v1.set(outLinked!!.x - blockSize / 2f, outLinked!!.y + Mathf.range(blockSize / 4f))
-          1 -> Tmp.v1.set(outLinked!!.x + Mathf.range(blockSize / 4f), outLinked!!.y - blockSize / 2f)
-          2 -> Tmp.v1.set(outLinked!!.x + blockSize / 2f, outLinked!!.y + Mathf.range(blockSize / 4f))
-          3 -> Tmp.v1.set(outLinked!!.x + Mathf.range(blockSize / 4f), outLinked!!.y + blockSize / 2f)
+          0 -> Tmp.v1.set(outLinked!!.x - f, outLinked!!.y + Mathf.range(blockSize / 4f))
+          1 -> Tmp.v1.set(outLinked!!.x + Mathf.range(blockSize / 4f), outLinked!!.y - f)
+          2 -> Tmp.v1.set(outLinked!!.x + f, outLinked!!.y + Mathf.range(blockSize / 4f))
+          3 -> Tmp.v1.set(outLinked!!.x + Mathf.range(blockSize / 4f), outLinked!!.y + f)
         }
+
         Tmp.v2.set(Mathf.random(4f, 8f), 0f).setAngle((relativeTo(outLinked) * 90).toFloat())
         val p = model.create(
           Tmp.v1.x, Tmp.v1.y, SglDrawConst.matrixNet, Tmp.v2.x, Tmp.v2.y, Mathf.random(0.2f, 0.5f), Layer.block

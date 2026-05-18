@@ -1,7 +1,5 @@
-package universecore.util.funcs;
+package universecore.util.funcs
 
-@FunctionalInterface
-public interface VariableFunc<T, R>{
-  @SuppressWarnings("unchecked")
-  R apply(T... args);
+fun interface VariableFunc<T, R> {
+  fun apply(vararg args: T): R
 }

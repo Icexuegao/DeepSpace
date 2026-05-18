@@ -4,10 +4,8 @@ import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import ice.content.IItems
-import ice.graphics.IceColor
 import ice.game.EventType.addContentInitEvent
-import universecore.world.Load
-import universecore.ui.bundle.localization
+import ice.graphics.IceColor
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirementPairs
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.distribution.*
@@ -33,6 +31,8 @@ import mindustry.world.blocks.distribution.MassDriver
 import mindustry.world.meta.BuildVisibility
 import mindustry.world.meta.Env
 import singularity.world.blocks.distribute.ItemNode
+import universecore.ui.bundle.localization
+import universecore.world.Load
 
 @Suppress("unused")
 object Distributions : Load {
@@ -234,13 +234,12 @@ object Distributions : Load {
     localization {
       zh_CN {
         localizedName = "转换分类器"
-        description = "如果物品与所选种类 相同/不同 ,则允许其通过.否则,物品将向两侧输出.可配置"
+        description = "根据设定的物品类型进行智能分拣,匹配的物品将直行通过,不匹配的物品则向两侧分流输出.支持正/反两种分类模式切换"
       }
     }
     size = 1
     health = 100
     requirements(Category.distribution, IItems.高碳钢, 8, IItems.低碳钢, 6)
-
   }
   val 基础路由器 = Router("baseRouter").apply {
     localization {

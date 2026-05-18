@@ -6,7 +6,7 @@ import arc.util.Tmp
 import universecore.world.particles.Particle.Cloud
 import kotlin.math.min
 
-class MultiParticleModel(vararg var models: ParticleModel) : ParticleModel() {
+open class MultiParticleModel(vararg var models: ParticleModel) : ParticleModel() {
 
     override fun draw(particle: Particle) {
         for (model in models) {

@@ -14,6 +14,9 @@ class IceBullet :Bullet() {
     }
   }
 
+  override fun reset() {
+    super.reset()
+  }
   override fun add() {
     if (added) return
     index__all = Groups.all.addIndex(this)

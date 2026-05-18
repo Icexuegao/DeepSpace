@@ -15,13 +15,13 @@ import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.TokamakCore
 import singularity.world.draw.DrawBottom
 
-class 托卡马克点火装置:TokamakCore("tokamak_firer"){
-  init  {
-    quickRotate = false
+class 托卡马克点火装置 :TokamakCore("tokamak_firer") {
+  init {
     localization {
       zh_CN {
-        this.localizedName = "托卡马克点火装置"
-        description = "托卡马克核聚变装置的核心组件,是添加材料与输出能量的端口,在一个核聚变装置中必须有且只有一个此设备。将此设备使用聚变约束导轨链接成一个闭环(这个闭环有且只能有4个拐角)构成完整的托卡马克聚变反应堆,而此反应堆的功率取决于整个结构的规模大小"
+        localizedName = "托卡马克点火装置"
+        description =
+          "托卡马克核聚变装置的核心组件,是添加材料与输出能量的端口,在一个核聚变装置中必须有且只有一个此设备。将此设备使用聚变约束导轨链接成一个闭环(这个闭环有且只能有4个拐角)构成完整的托卡马克聚变反应堆,而此反应堆的功率取决于整个结构的规模大小"
       }
     }
     requirements(
@@ -44,7 +44,7 @@ class 托卡马克点火装置:TokamakCore("tokamak_firer"){
       100
     )
     size = 5
-
+    quickRotate = false
     itemCapacity = 60
     liquidCapacity = 600f
     energyCapacity = 65536f
@@ -54,13 +54,13 @@ class 托卡马克点火装置:TokamakCore("tokamak_firer"){
 
     conductivePower = true
 
-    drawers = DrawMulti(DrawBottom(), object : DrawPlasma() {
+    drawers = DrawMulti(DrawBottom(), object :DrawPlasma() {
       init {
         suffix = "_plasma_"
         plasma1 = SglDrawConst.matrixNet
         plasma2 = Pal.reactorPurple
       }
-    }, object : DrawDefault() {
+    }, object :DrawDefault() {
       override fun draw(build: Building?) {
         Draw.z(Layer.blockOver)
         super.draw(build)

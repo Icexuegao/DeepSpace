@@ -23,7 +23,6 @@ public class Sgl {
   public static final String modDevelopGroup = "https://jq.qq.com/?_wv=1027&k=vjybgqDG";
   public static final String githubUserAvatars = "https://github.com/";
   public static final String githubProject = "https://github.com/EB-wilson/Singularity";
-  public static final String discord = "";
   public static final String githubRawMaster = "https://raw.githubusercontent.com/EB-wilson/Singularity/master/";
   public static final String githubProjReleaseApi = "https://api.github.com/repos/EB-wilson/Singularity/releases/latest";
   public static final String publicInfo = githubRawMaster + "publicInfo/";

@@ -1,8 +1,8 @@
-package singularity.type
+package universecore.world.planet
 
-import universecore.ui.bundle.Localizable
 import mindustry.ctype.UnlockableContent
 import mindustry.type.Planet
+import universecore.ui.bundle.Localizable
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
 open class IcePlanet :Planet, Localizable {

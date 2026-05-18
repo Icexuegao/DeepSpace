@@ -7,7 +7,6 @@ import ice.content.block.EffectBlocks
 import ice.game.IceTeam
 import ice.game.Schematics
 import ice.graphics.IceColor
-import universecore.world.Load
 import ice.maps.planet.ardery.ArderyPlanetGenerator
 import mindustry.game.Team
 import mindustry.graphics.g3d.HexMesh
@@ -15,7 +14,8 @@ import mindustry.graphics.g3d.HexSkyMesh
 import mindustry.graphics.g3d.MultiMesh
 import mindustry.graphics.g3d.SunMesh
 import mindustry.type.ItemStack
-import singularity.type.IcePlanet
+import universecore.world.Load
+import universecore.world.planet.IcePlanet
 
 object IPlanets :Load {
   val 伊甸 = IcePlanet("eden", null, 6f).apply {

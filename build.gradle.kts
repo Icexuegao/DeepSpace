@@ -19,15 +19,6 @@ buildscript {
     mavenLocal()
     mavenCentral()
     maven { url = uri("https://jitpack.io") }
-    ivy {
-      url = uri("https://github.com/")
-      patternLayout {
-        artifact("/[organisation]/[module]/releases/download/[revision]/dependencies.jar")
-      }
-      metadataSources {
-        artifact()
-      }
-    }
   }
   dependencies {
     classpath(mdtVersion)
@@ -47,29 +38,16 @@ plugins {
   kotlin("jvm") version kotlinCompatibility
   id("com.gradleup.shadow") version "9.3.0"
 }
-
-
 repositories {
-
   mavenCentral()
   mavenLocal()
   maven { url = uri("https://jitpack.io") }
   maven { url = uri("https://www.jitpack.io") }
-  ivy {
-    url = uri("https://github.com/")
-    patternLayout {
-      artifact("/[organisation]/[module]/releases/download/[revision]/dependencies.jar")
-    }
-    metadataSources {
-      artifact()
-    }
-  }
-
 }
 dependencies {
-  implementation("com.github.EB-wilson.UniverseKit:reflection:1.2")
-  implementation("com.github.EB-wilson.UniverseKit:markdown:1.2")
-  implementation("com.github.EB-wilson.UniverseKit:graphic:1.2")
+  implementation("com.github.EB-wilson.UniverseKit:reflection:1.3a")
+  implementation("com.github.EB-wilson.UniverseKit:markdown:1.3a")
+  implementation("com.github.EB-wilson.UniverseKit:graphic:1.3a")
   compileOnly(mdtVersion)
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")

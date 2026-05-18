@@ -1,7 +1,5 @@
-package universecore.util.funcs;
+package universecore.util.funcs
 
-@FunctionalInterface
-public interface VariableCons<T>{
-  @SuppressWarnings("unchecked")
-  void apply(T... args);
+fun interface VariableCons<T> {
+  fun apply(vararg args: T)
 }

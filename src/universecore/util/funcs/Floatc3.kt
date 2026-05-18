@@ -1,6 +1,5 @@
-package universecore.util.funcs;
+package universecore.util.funcs
 
-@FunctionalInterface
-public interface Floatc3 {
-  void get(float p1, float p2, float p3);
+fun interface Floatc3 {
+  fun get(p1: Float, p2: Float, p3: Float)
 }

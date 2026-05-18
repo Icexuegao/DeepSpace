@@ -17,6 +17,7 @@ import universecore.scene.fragments.SecondaryConfigureFragment
 import universecore.ui.bundle.LocalizationManager
 import universecore.util.handler.CategoryHandler
 import universecore.util.handler.FieldHandler
+import universecore.world.logic.UncLAccess
 
 /** UniverseCore主类,同时也是调用核心类,这里会保存各种可能会用到的默认实例以及许多必要实例
  * @author EBwilson */
@@ -35,6 +36,7 @@ object UncCore {
   lateinit var secConfig: SecondaryConfigureFragment
 
   init {
+    UncLAccess.setup()
     Events.on(UnlockEvent::class.java) { event ->
       if (event.content is Block) {
         categories.handleBlockFrag()
@@ -46,10 +48,11 @@ object UncCore {
     Events.on(EventType.ModContentLoadEvent::class.java) {
       LocalizationManager.load()
     }
-    Events.on(EventType.ClientLoadEvent::class.java){
+    Events.on(EventType.ClientLoadEvent::class.java) {
       init()
     }
   }
+
   fun init() {
     var toggler = FieldHandler.getValueDefault<Table>(Vars.ui.hudfrag.blockfrag, "toggler")
 
