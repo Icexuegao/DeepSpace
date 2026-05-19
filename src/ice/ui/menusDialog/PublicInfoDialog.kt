@@ -25,7 +25,6 @@ object PublicInfoDialog :BaseMenusDialog(IceStats.公告.localized(), IStyles.me
       conts = it
     }.grow()
     addLabel("因科技树未完善,所以模组科技默认全解锁")
-    addLabel("矩阵未修复")
-    addLabel("矩阵未修复")
+    addLabel("矩阵待修复")
   }
 }
