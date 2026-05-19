@@ -39,7 +39,7 @@ import universecore.components.blockcomp.SpliceBuildComp
 import universecore.struct.AttachedProperty
 import universecore.world.blocks.chains.ChainsContainer
 import universecore.world.blocks.modules.ChainsModule
-import universecore.world.particles.MultiParticleModel
+import universecore.world.particles.models.MultiParticleModel
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
 import universecore.world.particles.models.DrawDefaultTrailParticle
@@ -57,7 +57,7 @@ open class TokamakCore(name: String) :NormalCrafter(name), SpliceBlockComp {
     var Particle.inCorner: Vec2? by AttachedProperty(null)
     const val INV: Float = 0.01f
 
-    private val model: ParticleModel = object :MultiParticleModel(object :TrailFadeParticle() {
+    private val model: ParticleModel = MultiParticleModel(object :TrailFadeParticle() {
       init {
         linear = true
         trailFade = 0.01f
@@ -190,13 +190,13 @@ open class TokamakCore(name: String) :NormalCrafter(name), SpliceBlockComp {
       override fun drawTrail(particle: Particle) {
         SglDraw.drawBloomUnderBlock(particle) { particle -> super.drawTrail(particle) }
       }
-    }){
+
       override fun reset(particle: Particle) {
         super.reset(particle)
         particle.OWNER = null
         particle.inCorner = null
       }
-    }
+    })
   }
 
   override val maxChainsWidth = 0

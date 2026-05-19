@@ -17,9 +17,8 @@ object PublicInfoDialog :BaseMenusDialog(IceStats.公告.localized(), IStyles.me
   }
 
   override fun build(cont: Table) {
-
     cont.top()
-    val element = Image(IStyles.publicInfoIcon.asDrawable(0.75f), Scaling.fit)
+    val element = Image(IStyles.publicInfoIcon.asDrawable(0.5f), Scaling.fit)
     cont.add(element).row()
     cont.iPane {
       conts = it

@@ -41,8 +41,6 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
     }
   }
 
-
-
   var strength: Float = 1f
   var deflectAngle: Float = 45f
 
@@ -66,8 +64,8 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
   var defSpeed: Float = 0f
   var defSize: Float = 0f
 
-  /**粒子模型,决定了该粒子的行为 */
-  var model: ParticleModel? = null
+  /**粒子模型,决定了该粒子的行为 粒子运行时模型应该永不为null 初始化时赋值null仅仅为reset */
+   var model: ParticleModel?=null
   var layer: Float = 0f
 
   fun cloudCount(): Float {
@@ -176,6 +174,7 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
 
   override fun remove() {
     if (this@Particle.added) {
+      model!!.remove(this)
       Groups.all.removeIndex(this, this.index__all)
       index__all = -1
       Groups.draw.removeIndex(this, this.index__draw)

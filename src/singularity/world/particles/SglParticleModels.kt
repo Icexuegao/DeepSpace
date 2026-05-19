@@ -5,7 +5,7 @@ import mindustry.content.Fx
 import mindustry.gen.Bullet
 import mindustry.graphics.Pal
 import singularity.world.blocks.turrets.HeatBulletType
-import universecore.world.particles.MultiParticleModel
+import universecore.world.particles.models.MultiParticleModel
 import universecore.world.particles.models.*
 
 object SglParticleModels {

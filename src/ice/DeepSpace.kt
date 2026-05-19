@@ -1,6 +1,7 @@
 package ice
 
 import arc.Core
+import arc.Events
 import arc.Settings
 import arc.files.Fi
 import arc.struct.ObjectMap
@@ -8,7 +9,9 @@ import arc.util.Log
 import arc.util.Strings
 import arc.util.serialization.JsonReader
 import ice.core.IFiles
+import ice.graphics.windField.WindField
 import mindustry.Vars
+import mindustry.game.EventType
 import mindustry.mod.Mods
 import singularity.Singularity
 import singularity.core.UpdatePool
@@ -112,5 +115,13 @@ object DeepSpace {
 
   fun getDocument(locale: Locale, name: String?): String {
     return getDocumentFile(locale, name)!!.readString()
+  }
+
+  lateinit var windField: WindField
+
+  init {
+    Events.on(EventType.WorldLoadEndEvent::class.java) {
+      windField = WindField()
+    }
   }
 }

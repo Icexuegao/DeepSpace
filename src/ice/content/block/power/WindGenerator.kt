@@ -13,10 +13,8 @@ import arc.util.Strings
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.IVars
+import ice.DeepSpace
 import ice.graphics.IceColor
-import universecore.world.draw.DrawBuild
-import universecore.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.content.Blocks
@@ -39,6 +37,8 @@ import mindustry.world.meta.StatUnit
 import singularity.world.blocks.SglBlock
 import universecore.struct.texture.LazyTextureSingleDelegate
 import universecore.util.toTrimmedString
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 
 class WindGenerator(name: String) :SglBlock(name) {
   companion object {
@@ -213,7 +213,7 @@ class WindGenerator(name: String) :SglBlock(name) {
     fun powerEffecct() = powerProduction * 60 / basePowerProduction * warmup
 
     override fun getPowerProduction(): Float {
-      return (basePowerProduction / 3f * 2f + IVars.windField.getMovingNoiseValue(tileX(), tileY()) * basePowerProduction) / 60f * warmup
+      return (basePowerProduction / 3f * 2f + DeepSpace.windField.getMovingNoiseValue(tileX(), tileY()) * basePowerProduction) / 60f * warmup
     }
   }
 }

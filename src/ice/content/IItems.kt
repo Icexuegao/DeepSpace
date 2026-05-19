@@ -1,8 +1,9 @@
 package ice.content
 
-import universecore.world.Load
 import ice.world.content.item.IceItem
 import ice.world.content.item.OreItem
+import universecore.ui.bundle.localization
+import universecore.world.Load
 
 @Suppress("unused")
 object IItems :Load {

@@ -1,26 +1,19 @@
 package ice.content.block
 
-import arc.func.Cons
-import arc.func.Floatf
-import arc.func.Func
 import arc.graphics.Blending
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
-import arc.math.Angles
 import arc.math.Interp
-import arc.math.Mathf
-import arc.math.geom.Vec2
-import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.content.block.power.WindGenerator
+import ice.content.block.power.核子冲击反应堆
 import ice.core.IFiles.appendModName
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
@@ -28,7 +21,6 @@ import ice.world.content.blocks.power.PowerNode
 import ice.world.meta.IceEffects
 import mindustry.content.Fx
 import mindustry.content.Liquids
-import mindustry.entities.Effect
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Building
@@ -43,21 +35,12 @@ import mindustry.world.consumers.ConsumeItemFlammable
 import mindustry.world.draw.*
 import mindustry.world.meta.Attribute
 import mindustry.world.meta.BlockGroup
-import singularity.world.SglFx
 import singularity.world.blocks.product.NormalCrafter
-import singularity.world.blocks.product.NormalCrafter.NormalCrafterBuild
 import singularity.world.draw.DrawBottom
-import singularity.world.draw.DrawExpandPlasma
-import singularity.world.particles.SglParticleModels
+import universecore.ui.bundle.localization
 import universecore.util.toColor
 import universecore.world.Load
 import universecore.world.draw.DrawFloorLiquid
-import universecore.world.particles.MultiParticleModel
-import universecore.world.particles.Particle
-import universecore.world.particles.ParticleModel
-import universecore.world.particles.models.*
-import universecore.world.particles.models.TargetMoveParticle.Companion.dest
-import universecore.world.particles.models.TargetMoveParticle.Companion.eff
 
 @Suppress("unused")
 object PowerBlocks : Load {
@@ -215,8 +198,8 @@ object PowerBlocks : Load {
       }
     }
     size = 2
-    powerProduction = 58f/60f
-    requirements(Category.power, IItems.低碳钢, 35, IItems.锌锭,20, IItems.单晶硅, 10)
+    powerProduction = 58f / 60f
+    requirements(Category.power, IItems.低碳钢, 35, IItems.锌锭, 20, IItems.单晶硅, 10)
   }
   val 铈基热电机组 = NormalCrafter("ceriumBasedThermal").apply {
     localization {
@@ -225,23 +208,23 @@ object PowerBlocks : Load {
         description = "裂解铈进行热能转换,可以产生大量电力"
       }
     }
-    size=2
-    health=300
-    craftEffect= Fx.flakExplosion
-    drawers= universecore.world.draw.DrawMulti(DrawBottom(), DrawPistons().also{
+    size = 2
+    health = 300
+    craftEffect = Fx.flakExplosion
+    drawers = universecore.world.draw.DrawMulti(DrawBottom(), DrawPistons().also {
       it.sinMag = 1.5f
-      it.lenOffset=3.5f
+      it.lenOffset = 3.5f
     }, DrawDefault())
     requirements(Category.power, IItems.高碳钢, 50, IItems.锌锭, 20, IItems.黄铜锭, 15)
     newFormula { consumers, producers ->
-      consumers.items(IItems.铈锭,1)
+      consumers.items(IItems.铈锭, 1)
       consumers.time(120f)
-      producers.power(400f/60f)
+      producers.power(400f / 60f)
     }
     newFormula { consumers, producers ->
-      consumers.items(IItems.铈凝块,1)
+      consumers.items(IItems.铈凝块, 1)
       consumers.time(120f)
-      producers.power(1000f/60f)
+      producers.power(1000f / 60f)
     }
   }
   val 地热发电机 = ThermalGenerator("geothermalGenerator").apply {
@@ -400,7 +383,23 @@ object PowerBlocks : Load {
     explosionRadius = 40
     explosionDamage = 4800
     explodeSound = Sounds.explosion
-    requirements(Category.power, IItems.导能回路, 475, IItems.石英玻璃, 325, IItems.生物钢, 255, IItems.陶钢, 375, IItems.铱板, 645, IItems.铪锭, 125, IItems.铬锭, 815)
+    requirements(
+      Category.power,
+      IItems.导能回路,
+      475,
+      IItems.石英玻璃,
+      325,
+      IItems.生物钢,
+      255,
+      IItems.陶钢,
+      375,
+      IItems.铱板,
+      645,
+      IItems.铪锭,
+      125,
+      IItems.铬锭,
+      815
+    )
     drawer = DrawMulti(DrawRegion("-bottom"), DrawSoftParticles().apply {
       particles = 27
       particleLife = 120f
@@ -715,7 +714,21 @@ object PowerBlocks : Load {
         colorTo = "FF8663".toColor()
       })
     }
-    requirements(Category.power, IItems.铬锭, 4500, IItems.石英玻璃, 1150, IItems.铱板, 3300, IItems.生物钢, 1200, IItems.陶钢, 1800, IItems.导能回路, 2400)
+    requirements(
+      Category.power,
+      IItems.铬锭,
+      4500,
+      IItems.石英玻璃,
+      1150,
+      IItems.铱板,
+      3300,
+      IItems.生物钢,
+      1200,
+      IItems.陶钢,
+      1800,
+      IItems.导能回路,
+      2400
+    )
     drawer = DrawMulti(DrawRegion("-bottom"), DrawArcSmelt().apply {
       alpha = 0.6f
       particles = 240
@@ -725,7 +738,7 @@ object PowerBlocks : Load {
       particleStroke = 1.1f
       drawCenter = false
       blending = Blending.additive
-    }, DrawRegion("-mid"), object :DrawSoftParticles(){
+    }, DrawRegion("-mid"), object :DrawSoftParticles() {
       override fun draw(build: Building) {
         Draw.z(Layer.power)
         super.draw(build)
@@ -778,7 +791,7 @@ object PowerBlocks : Load {
     produce!!.power(50f)
 
     drawers = DrawMulti(
-      DrawBottom(), DrawDefault(), object : DrawPlasma() {
+      DrawBottom(), DrawDefault(), object :DrawPlasma() {
         init {
           suffix = "_plasma_"
           plasma1 = Pal.reactorPurple
@@ -787,89 +800,5 @@ object PowerBlocks : Load {
       }, DrawRegion("_top")
     )
   }
-  val 核子冲击反应堆 = NormalCrafter("nuclear_impact_reactor").apply {
-    localization {
-      zh_CN {
-        this.localizedName = "核子冲击反应堆"
-        description = "定向约束核爆炸并推动压电转子发电"
-      }
-    }
-    requirements(
-      Category.power, IItems.强化合金, 260, IItems.气凝胶, 240, IItems.铀238, 300, IItems.钴钢, 220, IItems.单晶硅, 280, IItems.絮凝剂, 160, IItems.暮光合金, 200
-
-    )
-    size = 5
-    itemCapacity = 30
-    liquidCapacity = 120f
-
-    craftEffect = SglFx.explodeImpWaveBig
-    craftEffectColor = Pal.reactorPurple
-
-    updateEffect = SglFx.impWave
-    effectRange = 2f
-    updateEffectChance = 0.025f
-    ambientSound = Sounds.loopMachineSpin
-    ambientSoundVolume = 0.55f
-    craftedSound = Sounds.explosionPlasmaSmall
-    craftedSoundVolume = 1f
-    val model: ParticleModel = MultiParticleModel(
-      SizeVelRelatedParticle(), TargetMoveParticle().apply {
-      dest = Func {p: Particle -> p.dest}
-      deflection = Floatf {p: Particle -> p.eff}
-    }, RandDeflectParticle().apply {
-      deflectAngle = 0f
-      strength = 0.125f
-    }, TrailFadeParticle().apply {
-      trailFade = 0.04f
-      fadeColor = Pal.lightishGray
-      colorLerpSpeed = 0.03f
-    }, ShapeParticle(), DrawDefaultTrailParticle()
-    )
-
-    craftTrigger = Cons {e: NormalCrafterBuild ->
-      for (particle in Particle.get {p -> p.x < e.x + 20 && p.x > e.x - 20 && p.y < e.y + 20 && p.y > e.y - 20}) {
-        particle!!.remove()
-      }
-      Effect.shake(4f, 18f, e.x, e.y)
-      Angles.randLenVectors(System.nanoTime(), Mathf.random(5, 9), 4.75f, 6.25f) {x: Float, y: Float ->
-        Tmp.v1.set(x, y).setLength(4f)
-        val p: Particle = model.create(e.x + Tmp.v1.x, e.y + Tmp.v1.y, Pal.reactorPurple, x, y, Mathf.random(5f, 7f))
-        p.dest = Vec2(e.x, e.y)
-        p.eff = e.workEfficiency() * 0.15f
-      }
-    }
-    crafting = Cons {e: NormalCrafterBuild? ->
-      if (Mathf.chanceDelta(0.02)) Angles.randLenVectors(
-        System.nanoTime(), 1, 2f, 3.5f
-      ) {x: Float, y: Float ->
-        SglParticleModels.floatParticle.create(e!!.x, e.y, Pal.reactorPurple, x, y, Mathf.random(3.25f, 4f))
-      }
-    }
-
-    warmupSpeed = 0.0008f
-
-    newConsume().consValidCondition {e: NormalCrafterBuild? -> e!!.power.status >= 0.99f}
-    consume!!.item(IItems.浓缩铀235核燃料, 1)
-    consume!!.power(80f)
-    consume!!.liquid(ILiquids.急冻液, 0.6f)
-    consume!!.time(180f)
-    newProduce()
-    produce!!.power(400f)
-
-    newConsume().consValidCondition {e: NormalCrafterBuild? -> e!!.power.status >= 0.99f}
-    consume!!.item(IItems.浓缩钚239核燃料, 1)
-    consume!!.power(80f)
-    consume!!.liquid(ILiquids.急冻液, 0.6f)
-    consume!!.time(150f)
-    newProduce()
-    produce!!.power(425f)
-
-    drawers = DrawMulti(
-      DrawBottom(), object : DrawExpandPlasma() {
-        init {
-          plasmas = 2
-        }
-      }, DrawDefault()
-    )
-  }
+  val 核子冲击反应堆 = 核子冲击反应堆()
 }

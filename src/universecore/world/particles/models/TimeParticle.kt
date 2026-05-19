@@ -6,6 +6,10 @@ import universecore.struct.AttachedProperty
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
 
+/** 时间粒子模型
+ *
+ * 基于存活时间控制粒子状态,支持进度驱动的尺寸缩放和速度衰减,
+ * 时间耗尽时判定为终态 */
 open class TimeParticle :ParticleModel() {
   var defLifeMin: Float = 180f
   var defLifeMax: Float = 180f

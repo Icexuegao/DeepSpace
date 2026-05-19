@@ -7,7 +7,11 @@ import arc.util.noise.Noise
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
 
-open class RandDeflectParticle : ParticleModel() {
+/** 随机偏转粒子模型
+ *
+ * 使用柏林噪声为粒子添加随机方向的速度偏转
+ * 产生自然的漂移效果 */
+open class RandDeflectParticle :ParticleModel() {
   var strength: Float = 1f
   var deflectAngle: Float = 45f
 

@@ -2,19 +2,12 @@ package ice.world.content.item
 
 import arc.graphics.Color
 import ice.content.IPlanets
-import universecore.ui.bundle.Localizable
 import ice.world.meta.IceStats
-import mindustry.ctype.UnlockableContent
 import mindustry.type.Item
 import mindustry.world.meta.Stat
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
-open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Unit = {}) :Item(name, Color.valueOf(color)), Localizable {
-
-  override var localizedName: String by UnlockableContent::localizedName
-  override var description: String by UnlockableContent::description
-  override var details: String by UnlockableContent::details
-
+open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Unit = {}) :Item(name, Color.valueOf(color)){
   var nutrientConcentration = 0f
 
   init {

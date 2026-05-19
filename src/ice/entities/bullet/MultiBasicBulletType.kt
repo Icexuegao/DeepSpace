@@ -4,12 +4,12 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.util.Tmp
-import ice.entities.bullet.base.BasicBulletType
 import ice.core.IFiles.appendModName
-import universecore.struct.texture.LazyTextureAutoSequenceDelegate
+import ice.entities.bullet.base.BasicBulletType
 import mindustry.gen.Bullet
+import universecore.struct.texture.LazyTextureAutoSequenceDelegate
 
-open class MultiBasicBulletType(sprite: String) : BasicBulletType() {
+open class MultiBasicBulletType(sprite: String) :BasicBulletType() {
   var sprites: Array<TextureRegion> by LazyTextureAutoSequenceDelegate(sprite.appendModName())
   var spriteBacks: Array<TextureRegion> by LazyTextureAutoSequenceDelegate("$sprite-back".appendModName())
 
