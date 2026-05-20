@@ -24,7 +24,7 @@ import singularity.world.blocks.turrets.LaserTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 
-class Frost :LaserTurret("frost") {
+class 霜降 :LaserTurret("frost") {
   init {
     localization {
       zh_CN {

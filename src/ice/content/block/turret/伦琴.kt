@@ -20,7 +20,7 @@ import singularity.world.blocks.turrets.ProjectileTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.meta.SglStat
 
-class Roentgen :ProjectileTurret("roentgen") {
+class 伦琴 :ProjectileTurret("roentgen") {
   override fun limitRange(margin: Float) = Unit
 
   init {

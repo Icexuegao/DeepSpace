@@ -17,7 +17,7 @@ import mindustry.type.Category
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 
-class TwinStar :SglTurret("turret_twinStar") {
+class 双星 :SglTurret("turret_twinStar") {
   init {
     localization {
       zh_CN {

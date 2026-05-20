@@ -30,7 +30,7 @@ import singularity.world.SglFx
 import singularity.world.blocks.turrets.LaserTurret
 import singularity.world.draw.DrawSglTurret
 
-class Fubuki :LaserTurret("fubuki") {
+class 吹雪 :LaserTurret("fubuki") {
   init {
     localization {
       zh_CN {

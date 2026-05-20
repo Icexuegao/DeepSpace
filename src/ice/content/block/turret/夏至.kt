@@ -27,7 +27,7 @@ import singularity.world.blocks.turrets.HeatBulletType
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 
-class Summer :SglTurret("summer") {
+class 夏至 :SglTurret("summer") {
   init {
     localization {
       zh_CN {

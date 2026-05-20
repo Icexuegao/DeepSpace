@@ -20,7 +20,7 @@ import mindustry.type.Liquid
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 
-class Judgment :SglTurret("turret_judgment") {
+class 决断 :SglTurret("turret_judgment") {
   init {
     localization {
       zh_CN {

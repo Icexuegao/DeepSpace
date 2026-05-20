@@ -14,7 +14,7 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import universecore.util.toColor
 
-class Spectral :SglTurret("turret_spectral") {
+class 光谱 :SglTurret("turret_spectral") {
   init {
     localization {
       zh_CN {

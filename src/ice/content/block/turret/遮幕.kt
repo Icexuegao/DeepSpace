@@ -15,7 +15,7 @@ import mindustry.gen.Sounds
 import mindustry.type.Category
 import singularity.world.blocks.turrets.SglTurret
 
-class Curtain :SglTurret("curtain") {
+class 遮幕 :SglTurret("curtain") {
   init {
     localization {
       zh_CN {

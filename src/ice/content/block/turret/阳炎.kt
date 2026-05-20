@@ -35,7 +35,7 @@ import universecore.util.MathTransform
 import universecore.world.particles.models.HeatBulletParticleModel.Companion.bullet
 import universecore.world.particles.models.HeatBulletParticleModel.Companion.owner
 
-class Soflame :SglTurret("soflame") {
+class 阳炎 :SglTurret("soflame") {
   init {
     localization {
       zh_CN {

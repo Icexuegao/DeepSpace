@@ -29,7 +29,7 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import universecore.world.draw.DrawMulti
 
-class MoonShadow :SglTurret("moonShadow") {
+class 月隐 :SglTurret("moonShadow") {
   init {
     localization {
       zh_CN {

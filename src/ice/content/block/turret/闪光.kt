@@ -16,7 +16,7 @@ import mindustry.type.Category
 import mindustry.type.Liquid
 import singularity.world.blocks.turrets.SglTurret
 
-class Flash :SglTurret("flash") {
+class 闪光 :SglTurret("flash") {
   init {
     localization {
       zh_CN {

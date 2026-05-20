@@ -23,7 +23,7 @@ import mindustry.world.meta.StatUnit
 import singularity.world.blocks.turrets.SglTurret
 import kotlin.math.max
 
-class Rainbow :SglTurret("turret_rainbow") {
+class 霓虹 :SglTurret("turret_rainbow") {
   var min = 6f
   var change = 5 * 60f
 

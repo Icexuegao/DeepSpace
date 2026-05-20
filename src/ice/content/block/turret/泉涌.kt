@@ -16,7 +16,7 @@ import mindustry.type.Category
 import mindustry.type.Liquid
 import singularity.world.blocks.turrets.SglTurret
 
-class Quicksand :SglTurret("turret_quicksand") {
+class 泉涌 :SglTurret("turret_quicksand") {
   init {
     localization {
       zh_CN {

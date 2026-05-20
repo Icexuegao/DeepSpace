@@ -34,7 +34,7 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 
-class Winter :SglTurret("winter") {
+class 冬至 :SglTurret("winter") {
   init {
     localization {
       zh_CN {

@@ -39,7 +39,7 @@ import singularity.world.draw.DrawSglTurret
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
-class Mirage :SglTurret("mirage") {
+class 虚妄 :SglTurret("mirage") {
   init {
     localization {
       zh_CN {

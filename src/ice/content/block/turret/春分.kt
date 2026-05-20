@@ -27,7 +27,7 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 
-class Spring :SglTurret("spring") {
+class 春分 :SglTurret("spring") {
   init {
     localization {
       zh_CN {

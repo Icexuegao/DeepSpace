@@ -25,7 +25,7 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import kotlin.math.sin
 
-class Beacon :SglTurret("turret_beacon") {
+class 信标 :SglTurret("turret_beacon") {
   val randPosBullet = BombBulletType().apply {
     sprite = "star"
     damage = 0f

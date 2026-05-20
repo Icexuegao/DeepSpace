@@ -35,7 +35,7 @@ import universecore.util.replaceNumericMatches
 import kotlin.math.max
 import kotlin.math.min
 
-class Dew :ProjectileTurret("dew") {
+class 白露 :ProjectileTurret("dew") {
   init {
     localization {
       zh_CN {

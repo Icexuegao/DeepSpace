@@ -18,7 +18,7 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import universecore.util.toColor
 
-class BloodyWind :SglTurret("turret_bloodyWind") {
+class 腥风 :SglTurret("turret_bloodyWind") {
   init {
     localization {
       zh_CN {

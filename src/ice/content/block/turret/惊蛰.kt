@@ -40,7 +40,7 @@ import universecore.graphics.lightnings.generator.CircleGenerator
 import universecore.graphics.lightnings.generator.RandomGenerator
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
-class Thunder :SglTurret("thunder") {
+class 惊蛰 :SglTurret("thunder") {
   override fun limitRange(margin: Float) = Unit
 
   init {

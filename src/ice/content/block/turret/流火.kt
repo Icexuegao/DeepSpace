@@ -11,7 +11,7 @@ import mindustry.gen.Sounds
 import mindustry.type.Category
 import singularity.world.blocks.turrets.ContinuousTurret
 
-class FlowingFire :ContinuousTurret("flowingFire") {
+class 流火 :ContinuousTurret("flowingFire") {
 
   init {
     localization {
