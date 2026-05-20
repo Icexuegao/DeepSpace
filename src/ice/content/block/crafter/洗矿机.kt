@@ -1,0 +1,77 @@
+package ice.content.block.crafter
+
+import arc.func.Floatf
+import arc.func.Func
+import arc.graphics.Color
+import ice.content.IItems
+import ice.content.ILiquids
+import mindustry.content.Fx
+import mindustry.content.Liquids
+import mindustry.type.Category
+import mindustry.type.ItemStack
+import mindustry.world.draw.DrawDefault
+import mindustry.world.draw.DrawRegion
+import singularity.world.blocks.product.NormalCrafter
+import singularity.world.draw.DrawRegionDynamic
+import universecore.world.consumers.BaseConsumers
+import universecore.world.consumers.cons.item.ConsumeItems
+import universecore.world.draw.DrawLiquidRegion
+import universecore.world.draw.DrawMulti
+
+class 洗矿机 :NormalCrafter("ore_washer") {
+  init {
+    localization {
+      zh_CN {
+        this.localizedName = "洗矿机"
+        description = "使用水冲刷沥青粗矿以除去杂质,并析出稀有的导能流体"
+      }
+    }
+    requirements(
+      Category.crafting, ItemStack.with(
+        IItems.铬锭, 60, IItems.钴锭, 40, IItems.铅锭, 45, IItems.石英玻璃, 60
+      )
+    )
+    size = 2
+    hasLiquids = true
+    itemCapacity = 20
+    liquidCapacity = 60f
+
+
+    newConsume()
+    consume!!.time(120f)
+    consume!!.liquid(Liquids.water, 0.2f)
+    consume!!.item(IItems.岩层沥青, 1)
+    consume!!.power(100f / 60f)
+    newProduce()
+    produce!!.liquid(ILiquids.FEX流体, 0.2f)
+    produce!!.items(
+      IItems.黄玉髓, 5, IItems.黑晶石, 3, IItems.铀原矿, 2
+    ).random()
+
+    craftEffect = Fx.pulverizeMedium
+
+    drawers = DrawMulti(DrawDefault(), DrawLiquidRegion(Liquids.water, "_liquid"), object :DrawRegion("_rotator") {
+      init {
+        rotateSpeed = 4.5f
+        spinSprite = true
+      }
+    }, DrawRegion("_top"), object :DrawRegionDynamic<NormalCrafterBuild?>("_point") {
+      init {
+        color = Func { e: NormalCrafterBuild? ->
+          val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as BaseConsumers).first()
+          if (cons is ConsumeItems<*>) {
+            val item = cons.consItems!![0].item
+            return@Func item.color
+          } else return@Func Color.white
+        }
+        alpha = Floatf { e: NormalCrafterBuild? ->
+          val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as BaseConsumers).first()
+          if (cons is ConsumeItems<*>) {
+            val item = cons.consItems!![0].item
+            return@Floatf e.items.get(item).toFloat() / e.block.itemCapacity
+          } else return@Floatf 0f
+        }
+      }
+    })
+  }
+}
