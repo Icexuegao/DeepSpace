@@ -11,6 +11,10 @@ class 基础流体路由器 :LiquidRouter("baseLiquidRouter") {
         localizedName = "基础流体路由器"
         description = "将一个方向的流体平均输出到其他3个方向,可以储存一定量的流体"
       }
+      en {
+        localizedName = "Base Liquid Router"
+        description = "Evenly distributes fluids from one direction to the other 3 directions. Can store a certain amount of fluid."
+      }
     }
     liquidCapacity = 50f
     size = 1

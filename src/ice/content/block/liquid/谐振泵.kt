@@ -13,6 +13,10 @@ class 谐振泵 :Pump("resonancePump") {
         localizedName = "谐振泵"
         description = "快速泵送流体"
       }
+      en {
+        localizedName = "Resonance Pump"
+        description = "Rapidly pumps fluids."
+      }
     }
     size = 2
     squareSprite = false

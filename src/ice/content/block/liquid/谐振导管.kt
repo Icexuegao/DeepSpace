@@ -13,6 +13,10 @@ class 谐振导管 :Conduit("resonanceConduit") {
         localizedName = "谐振导管"
         description = "向前传输流体"
       }
+      en {
+        localizedName = "Resonance Conduit"
+        description = "Forwards fluids."
+      }
     }
     liquidCapacity = 20f
     requirements(Category.liquid, IItems.高碳钢, 1, IItems.锌锭, 1, IItems.石英玻璃, 1)

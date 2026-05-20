@@ -11,6 +11,11 @@ class 基础导管桥 :TransferNode("baseBridgeConduit") {
         localizedName = "基础导管桥"
         description = "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体"
       }
+      en {
+        localizedName = "Base Bridge Conduit"
+        description =
+          "Transports fluids to connected output nodes. The side of the transmission node facing the connection cannot receive fluids."
+      }
     }
     directionAny = false
     range = 5

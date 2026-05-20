@@ -12,6 +12,12 @@ class 流体枢纽 :MultipleLiquidBlock("fluidJunction") {
         description = "存储大量不同种类的流体.可以使用流体抽离器抽取"
         details = "正规的的流体存储设施,能将多种流体独立存储于同一单元,有效解决了复杂流水线中的空间占用问题,是高级化生产的必备设施"
       }
+      en {
+        localizedName = "Fluid Junction"
+        description = "Stores large amounts of different types of fluids. Can be extracted using a liquid extractor."
+        details =
+          "A formal fluid storage facility that can independently store multiple fluids in a single unit, effectively solving space occupancy issues in complex pipelines. An essential facility for advanced production."
+      }
     }
     size = 3
     liquidCapacity = 1000f

@@ -11,6 +11,10 @@ class 装甲储液罐 :LiquidRouter("armorLiquidStorage") {
         localizedName = "装甲储液罐"
         description = "可以存储大量单一流体.拥有更厚的装甲"
       }
+      en {
+        localizedName = "Armored Liquid Storage"
+        description = "Can store a large amount of a single fluid. Has thicker armor."
+      }
     }
     healAmount = 120f
     health = 3200

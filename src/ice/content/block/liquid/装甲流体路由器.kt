@@ -11,6 +11,11 @@ class 装甲流体路由器 :LiquidRouter("armoredLiquidRouter") {
         localizedName = "装甲流体路由器"
         description = "将一个方向的流体平均输出到其他3个方向,可以储存一定量的流体.拥有更厚的装甲"
       }
+      en {
+        localizedName = "Armored Liquid Router"
+        description =
+          "Evenly distributes fluids from one direction to the other 3 directions. Can store a certain amount of fluid. Has thicker armor."
+      }
     }
     health = 220
     armor = 4f

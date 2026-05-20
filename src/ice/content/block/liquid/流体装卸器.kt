@@ -10,8 +10,12 @@ class 流体装卸器 :LiquidUnloader("liquid_unloader") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "流体装卸器"
+        localizedName = "流体装卸器"
         description = "从建筑中抽取流体,就像装卸器提取物品一样"
+      }
+      en {
+        localizedName = "Liquid Unloader"
+        description = "Extracts fluids from buildings, just like an unloader extracts items."
       }
     }
     requirements(Category.liquid, IItems.单晶硅, 20, IItems.铝锭, 15, IItems.铬锭, 15)

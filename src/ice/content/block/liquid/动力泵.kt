@@ -13,6 +13,10 @@ class 动力泵 :Pump("kineticPump") {
         localizedName = "动力泵"
         description = "泵送流体"
       }
+      en {
+        localizedName = "Kinetic Pump"
+        description = "Pumps fluids."
+      }
     }
     health = 50
     size = 1

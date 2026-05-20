@@ -11,6 +11,11 @@ class 动脉导管桥 :TransferNode("bridgeConduitArtery") {
         localizedName = "动脉导管桥"
         description = "消耗电力,向被连接的输出节点长距离传输流体,传输节点面向连接的一侧不可接收流体"
       }
+      en {
+        localizedName = "Artery Bridge Conduit"
+        description =
+          "Consumes power to transport fluids over long distances to connected output nodes. The side facing the connection cannot receive fluids."
+      }
     }
     healAmount = 60f
     allowDiagonal = false

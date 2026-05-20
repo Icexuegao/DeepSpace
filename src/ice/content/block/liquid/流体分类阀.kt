@@ -23,8 +23,12 @@ class 流体分类阀 :LiquidUnloader("liquid_classifier") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "流体分类阀"
+        localizedName = "流体分类阀"
         description = "允许卸载临近工厂配方的可输出流体"
+      }
+      en {
+        localizedName = "Liquid Classifier Valve"
+        description = "Allows unloading output fluids from nearby factory recipes."
       }
     }
     size = 1

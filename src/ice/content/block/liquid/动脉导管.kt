@@ -13,6 +13,10 @@ class 动脉导管 :Conduit("arteryConduit") {
         localizedName = "动脉导管"
         description = "向前急速传输流体并且不接受侧面输出,同时阻止流体泄露"
       }
+      en {
+        localizedName = "Artery Conduit"
+        description = "Quickly forwards fluids without accepting side outputs, while preventing fluid leaks."
+      }
     }
     healAmount = 30f
     health = 600

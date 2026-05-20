@@ -11,6 +11,10 @@ class 流体抽离器 :LiquidClassifier("liquidClassifier") {
         localizedName = "流体抽离器"
         description = "从流体枢纽中抽取流体"
       }
+      en {
+        localizedName = "Liquid Extractor"
+        description = "Extracts fluids from fluid junctions."
+      }
     }
     size = 1
     requirements(Category.liquid, IItems.铜锭, 20, IItems.黄铜锭, 10, IItems.铬锭, 10, IItems.石英玻璃, 10)

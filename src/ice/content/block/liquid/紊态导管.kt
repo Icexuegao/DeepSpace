@@ -13,6 +13,10 @@ class 紊态导管 :ArmoredConduit("disorderedConduit") {
         localizedName = "紊态导管"
         description = "向前快速传输流体并且不接受侧面输出,同时阻止流体泄露"
       }
+      en {
+        localizedName = "Disordered Conduit"
+        description = "Rapidly forwards fluids without accepting side outputs, while preventing fluid leaks."
+      }
     }
     leaks = false
     liquidCapacity = 40f

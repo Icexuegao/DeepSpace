@@ -13,6 +13,10 @@ class 心肌泵 :Pump("myocardialPump") {
         localizedName = "心肌泵"
         description = "急速泵送流体,需要电力"
       }
+      en {
+        localizedName = "Myocardial Pump"
+        description = "Quickly pumps fluids. Requires power."
+      }
     }
     size = 4
     squareSprite = false

@@ -11,6 +11,10 @@ class 长距导管桥 :TransferNode("bridgeConduitLarge") {
         localizedName = "长距导管桥"
         description = "消耗电力,向任意方向长距离传输流体,4个方向皆可输入输出"
       }
+      en {
+        localizedName = "Long-Range Bridge Conduit"
+        description = "Consumes power to transport fluids over long distances in any direction. All 4 directions can input and output."
+      }
     }
     range = 10
     hasItems = false

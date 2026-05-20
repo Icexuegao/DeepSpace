@@ -11,6 +11,10 @@ class 基础流体交叉器 :LiquidJunction("baseLiquidJunction") {
         localizedName = "基础流体交叉器"
         description = "让两条流体管线交叉通过而互不干扰"
       }
+      en {
+        localizedName = "Base Liquid Junction"
+        description = "Allows two fluid pipelines to cross without interfering with each other."
+      }
     }
     size = 1
     health = 80

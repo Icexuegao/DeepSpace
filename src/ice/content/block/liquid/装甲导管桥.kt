@@ -11,6 +11,11 @@ class 装甲导管桥 :TransferNode("bridgeConduitArmored") {
         localizedName = "装甲导管桥"
         description = "向被连接的输出节点传输流体,传输节点面向连接的一侧不可接收流体.拥有更厚的装甲"
       }
+      en {
+        localizedName = "Armored Bridge Conduit"
+        description =
+          "Transports fluids to connected output nodes. The side facing the connection cannot receive fluids. Has thicker armor."
+      }
     }
     health = 220
     directionAny = false

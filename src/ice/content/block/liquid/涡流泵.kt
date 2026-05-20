@@ -17,6 +17,10 @@ class 涡流泵 :Pump("vortexPump") {
         localizedName = "涡流泵"
         description = "急速泵送流体"
       }
+      en {
+        localizedName = "Vortex Pump"
+        description = "Quickly pumps fluids."
+      }
     }
     health = 450
     size = 3

@@ -11,6 +11,10 @@ class 导管桥 :TransferNode("bridgeConduit") {
         localizedName = "导管桥"
         description = "向任意方向传输流体,4个方向皆可输入输出"
       }
+      en {
+        localizedName = "Bridge Conduit"
+        description = "Transports fluids in any direction. All 4 directions can input and output."
+      }
     }
     health = 30
     range = 6
