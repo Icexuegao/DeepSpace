@@ -1,4 +1,4 @@
-package ice.content.block.power
+package ice.world.content.blocks.power
 
 import arc.Core
 import arc.Events
@@ -40,7 +40,7 @@ import universecore.util.toTrimmedString
 import universecore.world.draw.DrawBuild
 import universecore.world.draw.DrawMulti
 
-class WindGenerator(name: String) :SglBlock(name) {
+open class WindGenerator(name: String) :SglBlock(name) {
   companion object {
     val builds = Seq<WindGeneratorBuild>(false)
 
@@ -71,8 +71,8 @@ class WindGenerator(name: String) :SglBlock(name) {
     drawers = DrawMulti(DrawDefault(), DrawBuild<WindGeneratorBuild> {
       Draw.z(Layer.turret)
       Draw.rect(rotator, x, y, totalProgress)
-    }, DrawRegion("-top"), object :DrawBlock(){
-      override fun icons(block: Block)=arrayOf(Core.atlas.find(block.name+"-icon"))
+    }, DrawRegion("-top"), object :DrawBlock() {
+      override fun icons(block: Block) = arrayOf(Core.atlas.find(block.name + "-icon"))
     })
   }
 
@@ -82,7 +82,7 @@ class WindGenerator(name: String) :SglBlock(name) {
     stats.add(IceStats.getStat("noBuildZone", StatCat.function) {
       localization {
         zh_CN {
-          this.localizedName = "禁建范围"
+          localizedName = "禁建范围"
         }
       }
     }, "$range")
@@ -99,10 +99,10 @@ class WindGenerator(name: String) :SglBlock(name) {
       addBar("powerProduction") { entity: WindGeneratorBuild ->
         Bar(
           {
-          Core.bundle.format(
-            "bar.poweroutput", Strings.fixed(entity.powerProduction * 60 * entity.timeScale(), 1)
-          )
-        }, { Pal.powerBar }, entity::powerEffecct
+            Core.bundle.format(
+              "bar.poweroutput", Strings.fixed(entity.powerProduction * 60 * entity.timeScale(), 1)
+            )
+          }, { Pal.powerBar }, entity::powerEffecct
         )
       }
     }
@@ -213,7 +213,9 @@ class WindGenerator(name: String) :SglBlock(name) {
     fun powerEffecct() = powerProduction * 60 / basePowerProduction * warmup
 
     override fun getPowerProduction(): Float {
-      return (basePowerProduction / 3f * 2f + DeepSpace.windField.getMovingNoiseValue(tileX(), tileY()) * basePowerProduction) / 60f * warmup
+      return (basePowerProduction / 3f * 2f + DeepSpace.windField.getMovingNoiseValue(
+        tileX(), tileY()
+      ) * basePowerProduction) / 60f * warmup
     }
   }
 }
