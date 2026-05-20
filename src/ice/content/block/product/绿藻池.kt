@@ -10,8 +10,6 @@ import arc.math.Rand
 import arc.util.Time
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.struct.AttachedProperty
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.content.Liquids
@@ -28,10 +26,12 @@ import singularity.world.blocks.product.SpliceCrafter
 import singularity.world.draw.DrawAntiSpliceBlock
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
+import universecore.struct.AttachedProperty
+import universecore.world.draw.DrawMulti
 import kotlin.math.max
 
 class 绿藻池 :SpliceCrafter("culturing_barn") {
-  var SpliceCrafterBuild.highlight: Boolean by AttachedProperty(false)
+  var SpliceCrafterBuild.highlight: Boolean by AttachedProperty{false}
 
   init {
     localization {

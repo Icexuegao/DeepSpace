@@ -16,8 +16,8 @@ import universecore.world.particles.ParticleModel
  * 到达目标附近时判定为终态 */
 open class TargetMoveParticle :ParticleModel() {
   companion object {
-    var Particle.dest: Vec2 by AttachedProperty(Vec2())
-    var Particle.eff: Float by AttachedProperty(0f)
+    var Particle.dest: Vec2 by AttachedProperty { Vec2() }
+    var Particle.eff: Float by AttachedProperty { 0f }
   }
 
   var deflection: Floatf<Particle> = Floatf { _ -> 0.2f }

@@ -16,7 +16,6 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IStatus
-import universecore.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.game.Team
 import mindustry.gen.Building
@@ -34,13 +33,14 @@ import singularity.world.meta.SglStat
 import universecore.components.blockcomp.ChainsBlockComp
 import universecore.components.blockcomp.SpliceBlockComp
 import universecore.components.blockcomp.SpliceBuildComp
+import universecore.struct.AttachedProperty
 import universecore.world.blocks.chains.ChainsContainer
 import universecore.world.blocks.modules.ChainsModule
 import kotlin.math.min
 
 open class PhasedRadar(name: String) : SglBlock(name), SpliceBlockComp {
   companion object {
-    var ChainsContainer.BUILD: PhasedRadarBuild? by AttachedProperty(null)
+    var ChainsContainer.BUILD: PhasedRadarBuild? by AttachedProperty{null}
   }
 
   override var maxChainsWidth: Int = 16

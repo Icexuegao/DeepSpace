@@ -14,9 +14,9 @@ open class TimeParticle :ParticleModel() {
   var defLifeMin: Float = 180f
   var defLifeMax: Float = 180f
   var speedRelated: Boolean = false
-  var Particle.begion: Float by AttachedProperty(0f)
-  var Particle.lifeTime: Float by AttachedProperty(Mathf.random(defLifeMin, defLifeMax))
-  var Particle.progress: Float by AttachedProperty(0f)
+  var Particle.begion: Float by AttachedProperty { 0f }
+  var Particle.lifeTime: Float by AttachedProperty { Mathf.random(defLifeMin, defLifeMax) }
+  var Particle.progress: Float by AttachedProperty { 0f }
   override fun reset(particle: Particle) {
     super.reset(particle)
     particle.begion = 0f

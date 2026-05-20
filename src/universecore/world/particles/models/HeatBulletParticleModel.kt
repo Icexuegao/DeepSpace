@@ -22,9 +22,9 @@ import universecore.world.particles.ParticleModel
 
 class HeatBulletParticleModel :ParticleModel() {
   companion object {
-    var Particle.owner: Bullet? by AttachedProperty(null)
-    var Particle.bullet: Bullet? by AttachedProperty(null)
-    var Particle.timer: Interval by AttachedProperty(Interval(6))
+    var Particle.owner: Bullet? by AttachedProperty{null}
+    var Particle.bullet: Bullet? by AttachedProperty{null}
+    var Particle.timer: Interval by AttachedProperty{Interval(6)}
   }
 
   val tmp1: Particle.Cloud = Particle.Cloud()

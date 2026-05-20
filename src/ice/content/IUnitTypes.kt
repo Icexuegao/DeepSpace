@@ -165,7 +165,7 @@ object IUnitTypes : Load {
   val 虚宿 = Emptiness()
   val 无畏 = Fearless()
   val 冥刻 = DarkCarving()
-  var SglUnitEntity.controlTime by AttachedProperty(0f)
+  var SglUnitEntity.controlTime by AttachedProperty{0f}
 
   /**棱镜 */
   var prism: UnitType? = null
@@ -177,10 +177,10 @@ object IUnitTypes : Load {
   val unstable_energy_body = object : SglUnitType<SglUnitEntity>("unstable_energy_body", SglUnitEntity::class.java) {
     val FULL_SIZE_ENERGY: Float = 3680f
 
-    var SglUnitEntity.lightnings: LightningContainer? by AttachedProperty(null)
-    var SglUnitEntity.lin: LightningContainer? by AttachedProperty(null)
-    var SglUnitEntity.timer by AttachedProperty(15f)
-    var SglUnitEntity.bullTime by AttachedProperty(0f)
+    var SglUnitEntity.lightnings: LightningContainer? by AttachedProperty{null}
+    var SglUnitEntity.lin: LightningContainer? by AttachedProperty{null}
+    var SglUnitEntity.timer by AttachedProperty{15f}
+    var SglUnitEntity.bullTime by AttachedProperty{0f}
 
     init {
 

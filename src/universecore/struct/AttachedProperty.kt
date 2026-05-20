@@ -30,10 +30,11 @@ import kotlin.reflect.KProperty
  * - 由于使用WeakHashMap,属性值会在宿主对象被回收后自动清除
  * - 不建议用于存储与宿主对象生命周期无关的重要数据
  * @author Alon */
-class AttachedProperty<in T : Any, V>(private val defaultValue: V) : ReadWriteProperty<T, V> {
+class AttachedProperty<in T :Any, V>(private val defaultValue: () -> V) :ReadWriteProperty<T, V> {
   private val valuesMap = WeakHashMap<T, V>()
+
   override fun getValue(thisRef: T, property: KProperty<*>): V {
-    return valuesMap.getOrPut(thisRef) { defaultValue }
+    return valuesMap.getOrPut(thisRef, defaultValue)
   }
 
   override fun setValue(thisRef: T, property: KProperty<*>, value: V) {

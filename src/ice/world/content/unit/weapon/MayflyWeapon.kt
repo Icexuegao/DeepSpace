@@ -12,7 +12,6 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.entities.bullet.base.BulletType
 import ice.graphics.IceColor
-import universecore.struct.AttachedProperty
 import ice.world.content.unit.type.MayflyStatus
 import ice.world.meta.IceStats
 import mindustry.content.Fx
@@ -28,11 +27,12 @@ import singularity.world.SglFx
 import singularity.world.blocks.turrets.LightLaserBulletType
 import singularity.world.unit.DataWeapon
 import universecore.graphics.lightnings.LightningContainer
+import universecore.struct.AttachedProperty
 
 open class MayflyWeapon(name: String) : DataWeapon(name) {
   companion object {
-    var DataWeaponMount.status: MayflyStatus? by AttachedProperty(null)
-    var DataWeaponMount.phase: Float by AttachedProperty(0f)
+    var DataWeaponMount.status: MayflyStatus? by AttachedProperty{null}
+    var DataWeaponMount.phase: Float by AttachedProperty{0f}
   }
 
   var delay: Float = 0f

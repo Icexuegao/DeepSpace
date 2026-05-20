@@ -12,7 +12,6 @@ import ice.core.IFiles
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.ui.UI
-import universecore.ui.bundle.Localizable
 import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
@@ -20,6 +19,7 @@ import universecore.scene.ui.addLine
 import universecore.scene.ui.itooltip
 import universecore.struct.AttachedProperty
 import universecore.struct.ConfigPropertyDelegate
+import universecore.ui.bundle.Localizable
 
 open class Remains(val name: String) :Localizable {
   companion object {
@@ -32,7 +32,7 @@ open class Remains(val name: String) :Localizable {
     fun getNoEnableds(): Seq<Remains> {
       return remainsSeq.select { !it.enabled }
     }
-    var Localizable.effect by AttachedProperty("")
+    var Localizable.effect by AttachedProperty{""}
   }
 
   override var localizedName: String = ""

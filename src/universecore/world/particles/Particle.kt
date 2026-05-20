@@ -64,8 +64,10 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
   var defSpeed: Float = 0f
   var defSize: Float = 0f
 
-  /**粒子模型,决定了该粒子的行为 粒子运行时模型应该永不为null 初始化时赋值null仅仅为reset */
-   var model: ParticleModel?=null
+  /**粒子模型,决定了该粒子的行为
+   * 粒子运行时模型应该永不为null
+   * 而且该属性进入Pools进行重置时 model也不会进行重置 需要手动赋值 */
+  lateinit var model: ParticleModel
   var layer: Float = 0f
 
   fun cloudCount(): Float {
@@ -81,20 +83,19 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
     counter++
 
     currentCloud = Pools.get(Cloud::class.java, ::Cloud, 65536).obtain()
+    currentCloud!!.let {
+      it.x = x
+      it.y = y
+      it.size = 0f
+    }
 
-    currentCloud!!.x = x
-    currentCloud!!.y = y
-    currentCloud!!.size = 0f
-    model!!.trailColor(this)?.let {
+    model.trailColor(this)?.let {
       currentCloud!!.color.set(it)
     }
 
-
     firstCloud = currentCloud
-
-    this@Particle.added = true
-
-    model!!.init(this)
+    added = true
+    model.init(this)
 
     if (counter >= maxAmount) {
       remove()
@@ -110,10 +111,10 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
       y += parent!!.y
     }
 
-    model!!.draw(this)
+    model.draw(this)
 
     if (currentCloud != null) {
-      model!!.drawTrail(this)
+      model.drawTrail(this)
     }
 
     if (parent != null) {
@@ -126,16 +127,16 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
   }
 
   override fun update() {
-    model!!.deflect(this)
+    model.deflect(this)
     x += speed.x * Time.delta
     y += speed.y * Time.delta
-    size = model!!.currSize(this)
-    model!!.update(this)
+    size = model.currSize(this)
+    model.update(this)
     val c = Pools.get(Cloud::class.java, ::Cloud, 65536).obtain()
     c.x = if (parent == null) x else x + parent!!.x
     c.y = if (parent == null) y else y + parent!!.y
     c.size = size
-    c.color.set(model!!.trailColor(this))
+    c.color.set(model.trailColor(this))
 
     c.perCloud = currentCloud
     currentCloud!!.nextCloud = c
@@ -145,23 +146,23 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
     cloudCount++
 
     for(cloud in currentCloud!!) {
-      model!!.updateTrail(this, cloud)
+      model.updateTrail(this, cloud)
     }
 
     var mark = false
     while(firstCloud!!.nextCloud != null) {
-      if (maxCloudCounts in 1..<cloudCount || model!!.isFaded(this, firstCloud!!)) {
+      if (maxCloudCounts in 1..<cloudCount || model.isFaded(this, firstCloud!!)) {
         mark = maxCloudCounts !in 1..<cloudCount
         popFirst()
       } else break
     }
 
-    if (!mark && (parent != null && !parent!!.isAdded || model!!.isFinal(this))) {
+    if (!mark && (parent != null && !parent!!.isAdded || model.isFinal(this))) {
       popFirst()
       if (cloudCount > 4) popFirst()
     }
 
-    if (cloudCount <= 4 && model!!.isFinal(this)) remove()
+    if (cloudCount <= 4 && model.isFinal(this)) remove()
   }
 
   fun popFirst() {
@@ -174,7 +175,7 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
 
   override fun remove() {
     if (this@Particle.added) {
-      model!!.remove(this)
+      model.remove(this)
       Groups.all.removeIndex(this, this.index__all)
       index__all = -1
       Groups.draw.removeIndex(this, this.index__draw)
@@ -196,8 +197,7 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
   }
 
   override fun reset() {
-    model!!.reset(this)
-    model = null
+    model.reset(this)
   }
 
   override fun iterator(): Iterator<Cloud> {
@@ -215,7 +215,6 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
 
     var itr = Itr()
 
-    @JvmOverloads
     fun draw(modulate: Float = 1f, modulateNext: Float = 1f) {
       Draw.color(color)
 
@@ -244,7 +243,6 @@ class Particle :Decal(), Iterable<Particle.Cloud> {
       y = 0f
       size = 0f
       color.set(Color.clear)
-
       perCloud = null
       nextCloud = null
     }

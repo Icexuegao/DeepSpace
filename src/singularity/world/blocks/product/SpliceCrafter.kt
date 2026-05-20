@@ -43,12 +43,12 @@ import kotlin.math.min
 
 open class SpliceCrafter(name: String) :NormalCrafter(name), SpliceBlockComp {
   companion object {
-    var ChainsContainer.items: SpliceItemModule? by AttachedProperty(null)
-    var ChainsContainer.liquids: SpliceLiquidModule? by AttachedProperty(null)
-    var ChainsContainer.consumer: SpliceConsumeModule? by AttachedProperty(null)
-    var ChainsContainer.producer: SpliceProduceModule? by AttachedProperty(null)
-    var ChainsContainer.curr: SpliceCrafterBuild? by AttachedProperty(null)
-    var ChainsContainer.build: SpliceCrafterBuild? by AttachedProperty(null)
+    var ChainsContainer.items: SpliceItemModule? by AttachedProperty{null}
+    var ChainsContainer.liquids: SpliceLiquidModule? by AttachedProperty{null}
+    var ChainsContainer.consumer: SpliceConsumeModule? by AttachedProperty{null}
+    var ChainsContainer.producer: SpliceProduceModule? by AttachedProperty{null}
+    var ChainsContainer.curr: SpliceCrafterBuild? by AttachedProperty{null}
+    var ChainsContainer.build: SpliceCrafterBuild? by AttachedProperty{null}
   }
 
   override var maxChainsWidth: Int = 10

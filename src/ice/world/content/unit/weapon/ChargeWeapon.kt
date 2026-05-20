@@ -4,7 +4,6 @@ import arc.math.Angles
 import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
-import universecore.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.audio.SoundLoop
 import mindustry.entities.Predict
@@ -13,13 +12,14 @@ import mindustry.entities.units.WeaponMount
 import mindustry.gen.Sounds
 import mindustry.gen.Unit
 import mindustry.type.Weapon
+import universecore.struct.AttachedProperty
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
 class ChargeWeapon(name: String = "") : Weapon(name) {
   companion object {
-    var WeaponMount.reloadMultiplier: Float by AttachedProperty(0f)
+    var WeaponMount.reloadMultiplier: Float by AttachedProperty{0f}
   }
 
   var reloadMultiplierSpeed = 0.005f

@@ -8,7 +8,6 @@ import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.util.Time
 import arc.util.Tmp
-import universecore.struct.AttachedProperty
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Drawf
@@ -16,10 +15,11 @@ import mindustry.world.Block
 import mindustry.world.draw.DrawBlock
 import singularity.graphic.SglDrawConst
 import singularity.world.blocks.nuclear.NuclearReactor
+import universecore.struct.AttachedProperty
 
 class DrawReactorHeat : DrawBlock() {
   companion object {
-    var NuclearReactor.NuclearReactorBuild.flash: Float by AttachedProperty(0f)
+    var NuclearReactor.NuclearReactorBuild.flash: Float by AttachedProperty{0f}
   }
     var lightColor: Color? = Color.valueOf("7f19ea")
     var coolColor: Color = Color(1f, 1f, 1f, 0f)

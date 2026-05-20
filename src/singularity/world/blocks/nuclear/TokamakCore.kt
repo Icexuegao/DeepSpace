@@ -39,22 +39,18 @@ import universecore.components.blockcomp.SpliceBuildComp
 import universecore.struct.AttachedProperty
 import universecore.world.blocks.chains.ChainsContainer
 import universecore.world.blocks.modules.ChainsModule
-import universecore.world.particles.models.MultiParticleModel
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
-import universecore.world.particles.models.DrawDefaultTrailParticle
-import universecore.world.particles.models.ShapeParticle
-import universecore.world.particles.models.TimeParticle
-import universecore.world.particles.models.TrailFadeParticle
+import universecore.world.particles.models.*
 import kotlin.math.max
 
 open class TokamakCore(name: String) :NormalCrafter(name), SpliceBlockComp {
   companion object {
-    var ChainsContainer.totalItemCapacity by AttachedProperty(0)
-    var ChainsContainer.totalLiquidCapacity by AttachedProperty(0f)
-    var ChainsContainer.valid by AttachedProperty(false)
-    var Particle.OWNER: TokamakCoreBuild? by AttachedProperty(null)
-    var Particle.inCorner: Vec2? by AttachedProperty(null)
+    var ChainsContainer.totalItemCapacity by AttachedProperty{0}
+    var ChainsContainer.totalLiquidCapacity by AttachedProperty{0f}
+    var ChainsContainer.valid by AttachedProperty{false}
+    var Particle.OWNER: TokamakCoreBuild? by AttachedProperty{null}
+    var Particle.inCorner: Vec2? by AttachedProperty{null}
     const val INV: Float = 0.01f
 
     private val model: ParticleModel = MultiParticleModel(object :TrailFadeParticle() {

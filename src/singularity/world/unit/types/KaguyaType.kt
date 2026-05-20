@@ -436,8 +436,8 @@ class KaguyaType : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.jav
           }
         }
       }
-      var DataWeaponMount.SHOOTERS: Array<Shooter?> by AttachedProperty(arrayOfNulls(3))
-      var DataWeaponMount.TIMER: Interval by AttachedProperty(Interval())
+      var DataWeaponMount.SHOOTERS: Array<Shooter?> by AttachedProperty{arrayOfNulls(3)}
+      var DataWeaponMount.TIMER: Interval by AttachedProperty{Interval()}
       override fun init(unit: Unit?, mount: DataWeaponMount) {
         val shooters: Array<Shooter?> = arrayOfNulls(3)
         for (i in shooters.indices) {

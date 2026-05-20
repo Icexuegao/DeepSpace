@@ -20,9 +20,6 @@ import arc.util.Tmp
 import arc.util.pooling.Pool.Poolable
 import arc.util.pooling.Pools
 import ice.DeepSpace
-import universecore.struct.AttachedProperty
-import universecore.ui.bundle.localization
-
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -51,6 +48,8 @@ import singularity.world.unit.RelatedWeapon
 import singularity.world.unit.SglWeapon
 import singularity.world.unit.abilities.MirrorFieldAbility
 import universecore.graphics.lightnings.LightningContainer
+import universecore.struct.AttachedProperty
+import universecore.ui.bundle.localization
 
 class MornstarType : AirSeaAmphibiousUnit("mornstar") {
   init {
@@ -629,8 +628,8 @@ class MornstarType : AirSeaAmphibiousUnit("mornstar") {
         }
       }
 
-      var DataWeaponMount.EPHEMERAS: Seq<Ephemera> by AttachedProperty(Seq())
-      var DataWeaponMount.TIMER: Interval by AttachedProperty(Interval(3))
+      var DataWeaponMount.EPHEMERAS: Seq<Ephemera> by AttachedProperty{Seq()}
+      var DataWeaponMount.TIMER: Interval by AttachedProperty{Interval(3)}
 
       override fun shoot(unit: Unit?, mount: WeaponMount?, shootX: Float, shootY: Float, rotation: Float) {
         val m = mount as DataWeaponMount

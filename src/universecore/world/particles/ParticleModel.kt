@@ -97,10 +97,10 @@ open class ParticleModel {
       startPos.setZero()
       layer = 0f
       clipSize = 0f
-      while(firstCloud!!.nextCloud != null) {
+      while(firstCloud?.nextCloud != null) {
         popFirst()
       }
-      Pools.free(firstCloud)
+      firstCloud?.let(Pools::free)
       currentCloud = null
       firstCloud = null
       cloudCount = 0
