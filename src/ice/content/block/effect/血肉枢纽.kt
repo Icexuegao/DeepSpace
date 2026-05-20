@@ -10,8 +10,12 @@ open class 血肉枢纽 :FleshAndBloodCoreBlock("fleshAndBloodhinge") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "血肉枢纽"
+        localizedName = "血肉枢纽"
         description = "操控血肉生物的唯一途径..."
+      }
+      en {
+        localizedName = "Flesh and Blood Hinge"
+        description = "The only way to control flesh creatures..."
       }
     }
     health = -1

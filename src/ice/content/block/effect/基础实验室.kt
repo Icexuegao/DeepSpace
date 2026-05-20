@@ -7,13 +7,17 @@ import mindustry.type.Category
 
 class 基础实验室 :Laboratory("laboratory") {
   init {
-    consumePower(100f / 60)
     localization {
       zh_CN {
-        this.localizedName = "基础实验室"
+        localizedName = "基础实验室"
         description = "提供资源后会缓慢研究选定科技.可配置"
       }
+      en {
+        localizedName = "Basic Laboratory"
+        description = "Slowly researches selected technologies when supplied with resources. Configurable."
+      }
     }
+    consumePower(100f / 60)
     itemCapacity = 100
     alwaysUnlocked = true
     requirements(Category.effect, IItems.高碳钢, 50, IItems.低碳钢, 50, IItems.铜锭, 50)

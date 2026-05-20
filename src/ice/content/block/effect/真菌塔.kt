@@ -8,9 +8,15 @@ class 真菌塔 :FungusCore("fungusTower") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "真菌塔"
+        localizedName = "真菌塔"
         description = "真菌占据此区域的标志,一旦被摧毁,此区块所有真菌将失去营养供应而死"
         details = "失控的生物武器已经成为了本土生物的噩梦..."
+      }
+      en {
+        localizedName = "Fungus Tower"
+        description =
+          "A symbol of fungal occupation in this area. Once destroyed, all fungi in the sector will lose their nutrient supply and die."
+        details = "The out-of-control biological weapon has become a nightmare for native creatures..."
       }
     }
     size = 2

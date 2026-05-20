@@ -11,8 +11,12 @@ class 虔信方垒 :CoreBlock("pietasCornerCore") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "虔信方垒"
+        localizedName = "虔信方垒"
         description = "控制区块的基础.一旦被摧毁,所在区块将重归于敌人控制"
+      }
+      en {
+        localizedName = "Pietas Corner Core"
+        description = "The foundation of sector control. Once destroyed, the sector will revert to enemy control."
       }
     }
     size = 3

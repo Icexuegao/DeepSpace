@@ -10,8 +10,13 @@ class 晶格数据矩阵 :StorageBlock("effect_latticeDataMatrix") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "晶格数据矩阵"
+        localizedName = "晶格数据矩阵"
         description = "巨量存储各种类型的物品,物品将被解构为数据进行存储.可以用装卸器卸载物品"
+      }
+      en {
+        localizedName = "Lattice Data Matrix"
+        description =
+          "Stores massive amounts of various items. Items are deconstructed into data for storage. Can be unloaded with unloaders."
       }
     }
     size = 4

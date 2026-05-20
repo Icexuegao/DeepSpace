@@ -8,6 +8,18 @@ import universecore.ui.bundle.localization
 
 class 大型照明器 :LightBlock("illuminatorLarge") {
   init {
+    localization {
+      zh_CN {
+        localizedName = "大型照明器"
+        description = "为自身周围大片区域提供照明"
+        details = "神说要有光,于是便有了光"
+      }
+      en {
+        localizedName = "Large Illuminator"
+        description = "Provides lighting to a large surrounding area."
+        details = "And God said, 'Let there be light,' and there was light."
+      }
+    }
     size = 2
     armor = 4f
     radius = 270f
@@ -15,12 +27,5 @@ class 大型照明器 :LightBlock("illuminatorLarge") {
     squareSprite = false
     consumePower(0.5f)
     requirements(Category.effect, IItems.铜锭, 30f, IItems.高碳钢, 20f, IItems.黄铜锭, 10f)
-    localization {
-      zh_CN {
-        this.localizedName = "大型照明器"
-        description = "为自身周围大片区域提供照明"
-        details = "神说要有光,于是便有了光"
-      }
-    }
   }
 }

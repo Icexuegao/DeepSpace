@@ -11,8 +11,13 @@ class 永耀天枢 :CoreBlock("foreverShineCore") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "永耀天枢"
+        localizedName = "永耀天枢"
         description = "控制区块的基础.有最大的容量与重型装甲.一旦被摧毁,所在区块将重归于敌人控制"
+      }
+      en {
+        localizedName = "Forever Shine Core"
+        description =
+          "The foundation of sector control. Features the largest capacity and heavy armor. Once destroyed, the sector will revert to enemy control."
       }
     }
     armor = 25f

@@ -12,8 +12,12 @@ class 传输矿仓 :ItemExtractor("conveyOreWar") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "传输矿仓"
+        localizedName = "传输矿仓"
         description = "自动链接范围内的钻井,并远程从中提取产物输出.链接数量有限"
+      }
+      en {
+        localizedName = "Convey Ore War"
+        description = "Automatically links to drills within range and remotely extracts products from them. Link count is limited."
       }
     }
     size = 2

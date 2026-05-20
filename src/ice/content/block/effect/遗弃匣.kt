@@ -8,7 +8,10 @@ class 遗弃匣 :LostBox("lostBox") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "遗弃匣"
+        localizedName = "遗弃匣"
+      }
+      en {
+        localizedName = "Lost Box"
       }
     }
     size = 2

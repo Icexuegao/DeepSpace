@@ -9,6 +9,10 @@ class 定向超速器 :OrientationProjector("orientationProjector") {
         localizedName = "定向超速器"
         description = "提升范围内选定链接的建筑的工作效率,链接数量有限"
       }
+      en {
+        localizedName = "Orientation Overdrive Projector"
+        description = "Boosts the working efficiency of selected linked buildings within range. Link count is limited."
+      }
     }
     size = 2
     buildSize = 5

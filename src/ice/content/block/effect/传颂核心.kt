@@ -14,6 +14,11 @@ class 传颂核心 :CoreBlock("eulogyCore") {
         localizedName = "传颂核心"
         description = "控制区块的基础.有更大的容量与中型装甲.一旦被摧毁,所在区块将重归于敌人控制"
       }
+      en {
+        localizedName = "Eulogy Core"
+        description =
+          "The foundation of sector control. Features larger capacity and medium armor. Once destroyed, the sector will revert to enemy control."
+      }
     }
     size = 4
     armor = 30f

@@ -25,6 +25,10 @@ class 洛华 :ContinuousTurret("mendTower") {
         localizedName = "洛华"
         description = "折射投射出扇形修复光束覆盖建筑进行修复"
       }
+      en {
+        localizedName = "Luo Hua"
+        description = "Refracts and projects a fan-shaped repair beam to cover and repair buildings."
+      }
     }
 
     buildType = Prov {
