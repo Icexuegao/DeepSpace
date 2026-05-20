@@ -173,9 +173,9 @@ open class P2PLiquidNode :SglBlock("p2pLiquidNode") {
     get() = Mathf.zero(this)
 
   fun Color.darken(percentage: Float): Color {
-    Color.r *= 1f - percentage
-    Color.g *= 1f - percentage
-    Color.b *= 1f - percentage
+    r *= 1f - percentage
+    g *= 1f - percentage
+    b *= 1f - percentage
     return this
   }
 
@@ -344,8 +344,8 @@ open class P2PLiquidNode :SglBlock("p2pLiquidNode") {
   }
 
   fun Vec2.div(b: Float) = apply {
-    Vec2.x /= b
-    Vec2.y /= b
+    x /= b
+    y /= b
   }
 
   operator fun Vec2.plusAssign(b: Float) {
@@ -359,13 +359,13 @@ open class P2PLiquidNode :SglBlock("p2pLiquidNode") {
   }
 
   operator fun Vec2.plusAssign(b: Vec2) {
-    Vec2.x += b.x
-    Vec2.y += b.y
+    x += b.x
+    y += b.y
   }
 
   operator fun Vec2.minusAssign(b: Vec2) {
-    Vec2.x -= b.x
-    Vec2.y -= b.y
+    x -= b.x
+    y -= b.y
   }
 
   operator fun Vec2.plusAssign(b: Position) {

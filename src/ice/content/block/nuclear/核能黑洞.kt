@@ -9,7 +9,7 @@ class 核能黑洞 :EnergyVoid("nuclear_energy_void") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "核能黑洞"
+        localizedName = "核能黑洞"
         description = "吸收中子能量"
       }
     }

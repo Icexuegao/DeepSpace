@@ -16,10 +16,9 @@ import singularity.world.draw.DrawRegionDynamic
 
 class 晶体储能簇 :EnergyContainer("crystal_container") {
   init {
-
     localization {
       zh_CN {
-        this.localizedName = "晶体储能簇"
+        localizedName = "晶体储能簇"
         description = "晶体式中子能存储器,用于存储中子能"
       }
     }
