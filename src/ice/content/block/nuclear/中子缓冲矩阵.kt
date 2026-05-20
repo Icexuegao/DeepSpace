@@ -5,7 +5,7 @@ import ice.content.IItems
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.EnergyBuffer
 
-class 中子缓冲矩阵:EnergyBuffer("neutron_matrix_buffer"){
+class 中子缓冲矩阵 :EnergyBuffer("neutron_matrix_buffer") {
   init {
     localization {
       zh_CN {

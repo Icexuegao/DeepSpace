@@ -5,7 +5,7 @@ import ice.content.IItems
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.EnergyBuffer
 
-class 高压缓冲器:EnergyBuffer("high_voltage_buffer"){
+class 高压缓冲器 :EnergyBuffer("high_voltage_buffer") {
   init {
     localization {
       zh_CN {

@@ -1,12 +1,11 @@
 package ice.content.block.nuclear
 
-
 import mindustry.type.ItemStack
 import mindustry.world.meta.BuildVisibility
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.EnergyVoid
 
-class 核能黑洞: EnergyVoid("nuclear_energy_void"){
+class 核能黑洞 :EnergyVoid("nuclear_energy_void") {
   init {
     localization {
       zh_CN {

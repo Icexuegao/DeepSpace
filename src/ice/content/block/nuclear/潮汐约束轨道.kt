@@ -5,7 +5,7 @@ import ice.content.IItems
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.TokamakOrbit
 
-class 潮汐约束轨道:TokamakOrbit("tidal_confinement_orbit"){
+class 潮汐约束轨道 :TokamakOrbit("tidal_confinement_orbit") {
   init {
     localization {
       zh_CN {

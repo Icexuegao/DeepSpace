@@ -17,7 +17,7 @@ import universecore.world.consumers.BaseConsumers
 import universecore.world.consumers.cons.item.ConsumeItems
 import universecore.world.consumers.cons.liquid.ConsumeLiquids
 
-class 衰变仓:NormalCrafter("decay_bin"){init {
+class 衰变仓 :NormalCrafter("decay_bin") {init {
   localization {
     zh_CN {
       this.localizedName = "衰变仓"
@@ -75,11 +75,11 @@ class 衰变仓:NormalCrafter("decay_bin"){init {
   updateEffectChance = 0.01f
 
   drawers = DrawMulti(
-    DrawBottom(), DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild?>("_top") {
+    DrawBottom(), DrawDefault(), object :DrawRegionDynamic<NormalCrafterBuild?>("_top") {
       init {
         color = Func { e: NormalCrafterBuild? ->
           val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as BaseConsumers).first()
-          when (cons) {
+          when(cons) {
             is ConsumeLiquids<*> -> {
               var liquid = cons.consLiquids!![0].liquid
               if (liquid === Liquids.water) liquid = cons.consLiquids!![1].liquid
@@ -96,7 +96,7 @@ class 衰变仓:NormalCrafter("decay_bin"){init {
         }
         alpha = Floatf { e: NormalCrafterBuild? ->
           val cons = if (e!!.consumer.current == null) null else ((e.consumer.current) as BaseConsumers).first()
-          when (cons) {
+          when(cons) {
             is ConsumeLiquids<*> -> {
               var liquid = cons.consLiquids!![0].liquid
               if (liquid === Liquids.water) liquid = cons.consLiquids!![1].liquid
@@ -113,4 +113,5 @@ class 衰变仓:NormalCrafter("decay_bin"){init {
         }
       }
     })
-}}
+}
+}

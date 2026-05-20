@@ -5,8 +5,8 @@ import ice.content.IItems
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.NuclearNode
 
-class 中子能量节点:NuclearNode("nuclear_pipe_node"){
-  init{
+class 中子能量节点 :NuclearNode("nuclear_pipe_node") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "中子能量节点"

@@ -28,13 +28,14 @@ import singularity.world.draw.DrawRegionDynamic
 import singularity.world.particles.SglParticleModels
 import kotlin.math.max
 
-class 超核临界反应堆 : NuclearReactor("overrun_reactor") {
+class 超核临界反应堆 :NuclearReactor("overrun_reactor") {
   init {
 
     localization {
       zh_CN {
         this.localizedName = "超核临界反应堆"
-        description = "先进的特大型反应堆,内部力场进一步压缩燃料使反应更加剧烈,具有极高的产能效率,且不会产生核废料\n需要特殊的冷却手段控制堆温,反应堆温度超过限制温度时会造成堆芯熔毁,引发大范围毁灭性[red]核爆[]"
+        description =
+          "先进的特大型反应堆,内部力场进一步压缩燃料使反应更加剧烈,具有极高的产能效率,且不会产生核废料\n需要特殊的冷却手段控制堆温,反应堆温度超过限制温度时会造成堆芯熔毁,引发大范围毁灭性[red]核爆[]"
       }
     }
     requirements(
@@ -99,13 +100,13 @@ class 超核临界反应堆 : NuclearReactor("overrun_reactor") {
       }
     }
 
-    drawers = DrawMulti(DrawBottom(), object : DrawPlasma() {
+    drawers = DrawMulti(DrawBottom(), object :DrawPlasma() {
       init {
         suffix = "_plasma_"
         plasma1 = Pal.reactorPurple
         plasma2 = Pal.reactorPurple2
       }
-    }, object : DrawRegionDynamic<NormalCrafterBuild>("_liquid") {
+    }, object :DrawRegionDynamic<NormalCrafterBuild>("_liquid") {
       init {
         alpha = Floatf { e: NormalCrafterBuild -> e.liquids.currentAmount() / e.block.liquidCapacity }
         color = Func { _: NormalCrafterBuild -> Tmp.c1.set(ILiquids.相位态FEX流体.color).lerp(Color.white, 0.3f) }
@@ -117,17 +118,17 @@ class 超核临界反应堆 : NuclearReactor("overrun_reactor") {
         }
         Draw.z(35f)
       }
-    }, object : DrawRegion("_rotator_0") {
+    }, object :DrawRegion("_rotator_0") {
       init {
         rotateSpeed = 5f
       }
-    }, object : DrawRegion("_rotator_1") {
+    }, object :DrawRegion("_rotator_1") {
       init {
         rotateSpeed = -5f
       }
-    }, DrawDefault(), DrawReactorHeat(), object : DrawBlock() {
+    }, DrawDefault(), DrawReactorHeat(), object :DrawBlock() {
       override fun draw(build: Building) {
-        val e = build as NuclearReactor.NuclearReactorBuild
+        val e = build as NuclearReactorBuild
         Draw.z(Layer.effect)
         Draw.color(Pal.reactorPurple)
         val shake = Mathf.random(-0.3f, 0.3f) * e.workEfficiency()

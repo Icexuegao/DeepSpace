@@ -5,8 +5,8 @@ import ice.content.IItems
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.EnergyBuffer
 
-class 晶体势垒: EnergyBuffer("crystal_buffer"){
-  init{
+class 晶体势垒 :EnergyBuffer("crystal_buffer") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "晶体势垒"

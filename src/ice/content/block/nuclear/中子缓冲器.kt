@@ -5,8 +5,8 @@ import ice.content.IItems
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.EnergyBuffer
 
-class 中子缓冲器:EnergyBuffer("energy_buffer"){
-  init{
+class 中子缓冲器 :EnergyBuffer("energy_buffer") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "中子缓冲器"

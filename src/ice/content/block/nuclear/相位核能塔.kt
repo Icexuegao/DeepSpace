@@ -5,8 +5,8 @@ import ice.content.IItems
 import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.NuclearNode
 
-class 相位核能塔:NuclearNode("phase_pipe_node"){
-  init{
+class 相位核能塔 :NuclearNode("phase_pipe_node") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "相位能量塔"

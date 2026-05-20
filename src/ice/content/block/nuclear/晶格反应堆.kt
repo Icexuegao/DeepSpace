@@ -11,12 +11,13 @@ import singularity.type.SglCategory
 import singularity.world.blocks.nuclear.NuclearReactor
 import singularity.world.draw.DrawReactorHeat
 
-class 晶格反应堆 : NuclearReactor("lattice_reactor") {
+class 晶格反应堆 :NuclearReactor("lattice_reactor") {
   init {
     localization {
       zh_CN {
         this.localizedName = "晶格反应堆"
-        description = "特制的缓速反应堆,不使用压缩燃料,直接对燃料晶格结构排列化进行可控裂变,产能较低,但利用率极高\n需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发小范围[accent]爆炸[]"
+        description =
+          "特制的缓速反应堆,不使用压缩燃料,直接对燃料晶格结构排列化进行可控裂变,产能较低,但利用率极高\n需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发小范围[accent]爆炸[]"
       }
     }
     requirements(
@@ -62,7 +63,7 @@ class 晶格反应堆 : NuclearReactor("lattice_reactor") {
     consume!!.item(IItems.相位封装氦单元, 1)
 
     drawers = DrawMulti(
-      DrawDefault(), object : DrawLiquidRegion(ILiquids.急冻液) {
+      DrawDefault(), object :DrawLiquidRegion(ILiquids.急冻液) {
         init {
           suffix = "_top"
         }
