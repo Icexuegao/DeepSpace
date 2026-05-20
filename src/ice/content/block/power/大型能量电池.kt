@@ -7,7 +7,7 @@ import mindustry.type.Category
 import mindustry.world.blocks.power.Battery
 import universecore.ui.bundle.localization
 
-class 大型能量电池:Battery("largePowerBattery"){
+class 大型能量电池 :Battery("largePowerBattery") {
   init {
     size = 4
     armor = 4f
@@ -19,8 +19,12 @@ class 大型能量电池:Battery("largePowerBattery"){
     requirements(Category.power, IItems.铅锭, 150, IItems.铱板, 145, IItems.导能回路, 85, IItems.陶钢, 30)
     localization {
       zh_CN {
-        this.localizedName = "大型能量电池"
+        localizedName = "大型能量电池"
         description = "存储巨量电力,受损会发生爆炸"
+      }
+      en {
+        localizedName = "Large Power Battery"
+        description = "Stores a massive amount of power. Will explode when damaged."
       }
     }
   }

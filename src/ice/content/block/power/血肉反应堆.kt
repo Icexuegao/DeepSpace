@@ -12,7 +12,7 @@ import mindustry.world.draw.*
 import universecore.ui.bundle.localization
 import universecore.util.toColor
 
-class 血肉反应堆:ImpactReactor("bloodImpactReactor"){
+class 血肉反应堆 :ImpactReactor("bloodImpactReactor") {
   init {
     size = 5
     armor = 8f
@@ -63,8 +63,12 @@ class 血肉反应堆:ImpactReactor("bloodImpactReactor"){
     ambientSoundVolume = 0.08f
     localization {
       zh_CN {
-        this.localizedName = "血肉反应堆"
+        localizedName = "血肉反应堆"
         description = "刺激生物钢产生大量电力,运行时会产生强烈波动"
+      }
+      en {
+        localizedName = "Flesh Reactor"
+        description = "Stimulates biological steel to generate massive amounts of power. Produces intense fluctuations during operation."
       }
     }
   }

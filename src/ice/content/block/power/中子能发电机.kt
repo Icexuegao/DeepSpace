@@ -14,8 +14,12 @@ class 中子能发电机 :NormalCrafter("neutron_generator") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "中子能发电机"
+        localizedName = "中子能发电机"
         description = "分解中子生产大量电力"
+      }
+      en {
+        localizedName = "Neutron Generator"
+        description = "Decomposes neutrons to produce large amounts of power."
       }
     }
     requirements(

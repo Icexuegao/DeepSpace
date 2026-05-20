@@ -15,12 +15,16 @@ import mindustry.world.meta.Attribute
 import mindustry.world.meta.BlockGroup
 import universecore.ui.bundle.localization
 
-class 蒸汽冷凝机: ThermalGenerator("steamCondenser"){
+class 蒸汽冷凝机 :ThermalGenerator("steamCondenser") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "蒸汽冷凝机"
+        localizedName = "蒸汽冷凝机"
         description = "建造在喷气口上时生产少量电力与水"
+      }
+      en {
+        localizedName = "Steam Condenser"
+        description = "Produces a small amount of power and water when built on steam vents."
       }
     }
     squareSprite = false

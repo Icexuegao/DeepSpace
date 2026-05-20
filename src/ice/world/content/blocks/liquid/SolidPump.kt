@@ -4,10 +4,6 @@ import arc.Core
 import arc.func.Prov
 import arc.math.Mathf
 import arc.util.Time
-import universecore.scene.ui.iTable
-import universecore.world.draw.DrawLiquidRegion
-import universecore.world.draw.DrawMulti
-import universecore.world.draw.DrawRegionNull
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -21,11 +17,15 @@ import mindustry.world.blocks.environment.Floor
 import mindustry.world.draw.DrawDefault
 import mindustry.world.meta.*
 import singularity.world.blocks.SglBlock
+import universecore.scene.ui.iTable
+import universecore.world.draw.DrawLiquidRegion
+import universecore.world.draw.DrawMulti
+import universecore.world.draw.DrawRegionNull
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-open class SolidPump(name: String) : SglBlock(name) {
+open class SolidPump(name: String) :SglBlock(name) {
   var result: Liquid = Liquids.water
   var updateEffect: Effect = Fx.none
   var updateEffectChance: Float = 0.02f
@@ -57,10 +57,10 @@ open class SolidPump(name: String) : SglBlock(name) {
 
   override fun setBars() {
     super.setBars()
-    addBar("efficiency") {entity: SolidPumpBuild ->
+    addBar("efficiency") { entity: SolidPumpBuild ->
       Bar({
         Core.bundle.formatFloat("bar.pumpspeed", entity.lastPump * 60, 1)
-      }, {Pal.ammo}, {entity.warmup * entity.efficiency()})
+      }, { Pal.ammo }, { entity.warmup * entity.efficiency() })
     }
   }
 
@@ -76,20 +76,20 @@ open class SolidPump(name: String) : SglBlock(name) {
   }
 
   fun blocks(attr: Attribute?, floating: Boolean, scale: Float, startZero: Boolean, checkFloors: Boolean = true): StatValue {
-    return StatValue {table ->
-      table.iTable {c ->
+    return StatValue { table ->
+      table.iTable { c ->
         c.left()
         c.setRowsize(5)
-        val blocks = Vars.content.blocks().select {block ->
+        val blocks = Vars.content.blocks().select { block ->
           (!checkFloors || block is Floor) && block.attributes.get(attr) != 0f && !((block is Floor && block.isDeep) && !floating)
-        }.with {s ->
+        }.with { s ->
           s.sort {
             it.attributes.get(attr)
           }
         }
 
         if (blocks.any()) {
-          for (block in blocks) {
+          for(block in blocks) {
             StatValues.blockEfficiency(block, block.attributes.get(attr) * scale, startZero).display(c)
           }
         } else {
@@ -100,7 +100,7 @@ open class SolidPump(name: String) : SglBlock(name) {
   }
 
   override fun canPlaceOn(tile: Tile, team: Team?, rotation: Int): Boolean {
-    val sum = tile.getLinkedTilesAs(this, tempTiles).sumf {t: Tile ->
+    val sum = tile.getLinkedTilesAs(this, tempTiles).sumf { t: Tile ->
       if (canPump(t)) baseEfficiency + (if (attribute != null) t.floor().attributes.get(attribute) else 0f) else 0f
     }
     return sum > 0.00001f
@@ -114,7 +114,7 @@ open class SolidPump(name: String) : SglBlock(name) {
     return tile != null && !tile.floor().isLiquid
   }
 
-  inner class SolidPumpBuild : SglBuilding() {
+  inner class SolidPumpBuild :SglBuilding() {
     var warmup: Float = 0f
     var pumpTime: Float = 0f
     var boost: Float = 0f
@@ -155,7 +155,7 @@ open class SolidPump(name: String) : SglBlock(name) {
 
       boost = sumAttribute(attribute, tile.x.toInt(), tile.y.toInt()) / size / size
       validTiles = 0f
-      for (other in tile.getLinkedTiles(tempTiles)) {
+      for(other in tile.getLinkedTiles(tempTiles)) {
         if (canPump(other)) {
           validTiles += baseEfficiency / (size * size)
         }

@@ -11,6 +11,11 @@ class 风力发电机 :WindGenerator("windGenerator") {
         localizedName = "风力发电机"
         description = "依靠风场发电,无需维护即可持续运作,但无法稳定提供电力来源.工作区域内不能放置大型建筑,否则无法工作"
       }
+      en {
+        localizedName = "Wind Generator"
+        description =
+          "Generates power using wind fields. Operates continuously without maintenance, but cannot provide a stable power source. Large buildings cannot be placed within its working area, or it will stop functioning."
+      }
     }
     basePowerProduction = 70f
     size = 2

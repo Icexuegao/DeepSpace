@@ -1,14 +1,14 @@
 package ice.world.content.blocks.liquid.base
 
 import arc.func.Prov
-import universecore.world.draw.DrawBuild
-import universecore.world.draw.DrawMulti
-import universecore.world.draw.DrawRegionNull
 import mindustry.gen.Building
 import mindustry.type.Liquid
 import mindustry.world.draw.DrawDefault
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
+import universecore.world.draw.DrawRegionNull
 
-open class LiquidRouter(name: String) : LiquidBlock(name) {
+open class LiquidRouter(name: String) :LiquidBlock(name) {
   var liquidPadding: Float = 0f
 
   init {
@@ -26,7 +26,7 @@ open class LiquidRouter(name: String) : LiquidBlock(name) {
     }, DrawDefault(), DrawRegionNull("-top"))
   }
 
-  open inner class LiquidRouterBuild : LiquidBuild() {
+  open inner class LiquidRouterBuild :LiquidBuild() {
     override fun updateTile() {
       dumpLiquid(liquids.current())
     }

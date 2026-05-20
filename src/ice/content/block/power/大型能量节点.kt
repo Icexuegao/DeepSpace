@@ -8,12 +8,16 @@ import mindustry.type.Category
 import mindustry.world.blocks.power.BeamNode
 import universecore.ui.bundle.localization
 
-class 大型能量节点: BeamNode("powerNodeLarge"){
-  init  {
+class 大型能量节点 :BeamNode("powerNodeLarge") {
+  init {
     localization {
       zh_CN {
-        this.localizedName = "大型能量节点"
+        localizedName = "大型能量节点"
         description = "通过激光束传输电力,可连接多个节点扩展电网范围"
+      }
+      en {
+        localizedName = "Large Power Node"
+        description = "Transmits power via laser beam. Can connect multiple nodes to expand the grid range."
       }
     }
     size = 3

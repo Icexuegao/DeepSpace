@@ -1,4 +1,4 @@
-package ice.content.block.liquid
+package ice.world.content.blocks.liquid
 
 import arc.Events
 import arc.func.Prov
@@ -14,10 +14,7 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.content.IItems
 import ice.graphics.IceColor
-
-import universecore.world.draw.DrawMulti
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.game.EventType
@@ -25,36 +22,25 @@ import mindustry.gen.Building
 import mindustry.gen.Buildingc
 import mindustry.gen.Icon
 import mindustry.graphics.Pal
-import mindustry.type.Category
 import mindustry.type.Liquid
 import mindustry.ui.Bar
 import mindustry.world.Block
 import mindustry.world.draw.DrawLiquidTile
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.SglBlock
+import universecore.world.draw.DrawMulti
 import kotlin.math.min
 
-class P2PLiquidNode : SglBlock("p2pLiquidNode") {
+open class P2PLiquidNode :SglBlock("p2pLiquidNode") {
 
   init {
-    localization {
-      zh_CN {
-        this.localizedName = "P2P流体节点"
-        description = "分散流体交换通信方式"
-      }
-    }
-    size = 2
-    health = 500
+
     hasLiquids = true
     outputsLiquid = true
     configurable = true
     liquidCapacity = 800f
     buildType = Prov(::P2PLiquidNodeBuild)
     drawers = DrawMulti(DrawRegion("-bottom"), DrawLiquidTile(), DrawRegion("-top"))
-    requirementPairs(Category.liquid, IItems.铬锭 to 30, IItems.电子元件 to 20, IItems.石英玻璃 to 10, IItems.铝锭 to 20)
-    newConsume().apply {
-      power(90f / 60f)
-    }
   }
 
   override fun setStats() {
@@ -68,12 +54,12 @@ class P2PLiquidNode : SglBlock("p2pLiquidNode") {
 
   override fun setBars() {
     super.setBars()
-    addBar("liked") {ent: P2PLiquidNodeBuild ->
-      Bar({if (ent.connected == null) "未连接" else "已连接"}, {IceColor.b4}, {if (ent.connected == null) 0f else 1f})
+    addBar("liked") { ent: P2PLiquidNodeBuild ->
+      Bar({ if (ent.connected == null) "未连接" else "已连接" }, { IceColor.b4 }, { if (ent.connected == null) 0f else 1f })
     }
   }
 
-  inner class P2PLiquidNodeBuild : SglBuilding() {
+  inner class P2PLiquidNodeBuild :SglBuilding() {
     var connected: Int? = null
     var cs = false
 
@@ -104,7 +90,7 @@ class P2PLiquidNode : SglBlock("p2pLiquidNode") {
         val bu: P2PLiquidNodeBuild = Vars.world.build(it) as? P2PLiquidNodeBuild ?: return
         transferArrowLineBreath(if (!cs) bu else this, if (!cs) this else bu)
 
-        for (build in arrayOf(bu, this)) {
+        for(build in arrayOf(bu, this)) {
           dashCircleBreath(build, size * Vars.tilesize + size / 2f * 1.5f, IceColor.b4)
         }
       }
@@ -159,7 +145,7 @@ class P2PLiquidNode : SglBlock("p2pLiquidNode") {
       }
       build?.let {
         if (cs && consumeValid() && it.consumeValid()) {
-          liquids().each {liquid, _ ->
+          liquids().each { liquid, _ ->
             transferLiquid(it, 1 * delta(), liquid)
           }
         }
@@ -187,9 +173,9 @@ class P2PLiquidNode : SglBlock("p2pLiquidNode") {
     get() = Mathf.zero(this)
 
   fun Color.darken(percentage: Float): Color {
-    r *= 1f - percentage
-    g *= 1f - percentage
-    b *= 1f - percentage
+    Color.r *= 1f - percentage
+    Color.g *= 1f - percentage
+    Color.b *= 1f - percentage
     return this
   }
 
@@ -224,7 +210,7 @@ class P2PLiquidNode : SglBlock("p2pLiquidNode") {
       startDrawX + moving.x, startDrawY + moving.y
     )
     val per = t.scl(1f / count)
-    for (i in 0 until count) {
+    for(i in 0 until count) {
       val line = Tmp.v5.set(cur).sub(startDrawX, startDrawY)
       val lineLength = (line.len() % length / length).smooth * length
       line.setLength(lineLength)
@@ -358,8 +344,8 @@ class P2PLiquidNode : SglBlock("p2pLiquidNode") {
   }
 
   fun Vec2.div(b: Float) = apply {
-    x /= b
-    y /= b
+    Vec2.x /= b
+    Vec2.y /= b
   }
 
   operator fun Vec2.plusAssign(b: Float) {
@@ -373,13 +359,13 @@ class P2PLiquidNode : SglBlock("p2pLiquidNode") {
   }
 
   operator fun Vec2.plusAssign(b: Vec2) {
-    x += b.x
-    y += b.y
+    Vec2.x += b.x
+    Vec2.y += b.y
   }
 
   operator fun Vec2.minusAssign(b: Vec2) {
-    x -= b.x
-    y -= b.y
+    Vec2.x -= b.x
+    Vec2.y -= b.y
   }
 
   operator fun Vec2.plusAssign(b: Position) {

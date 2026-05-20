@@ -13,12 +13,17 @@ import mindustry.world.meta.Attribute
 import universecore.ui.bundle.localization
 import universecore.world.draw.DrawFloorLiquid
 
-class 地热发电机:ThermalGenerator("geothermalGenerator"){
+class 地热发电机 :ThermalGenerator("geothermalGenerator") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "地热发电机"
+        localizedName = "地热发电机"
         description = "利用地热能持续产生电力,需要建造在高热量区域以发挥最大效率,稳定供能"
+      }
+      en {
+        localizedName = "Geothermal Generator"
+        description =
+          "Continuously generates power using geothermal energy. Must be built in high-heat areas for maximum efficiency, providing stable energy output."
       }
     }
     size = 3

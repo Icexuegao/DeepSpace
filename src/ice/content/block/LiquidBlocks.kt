@@ -2,11 +2,11 @@ package ice.content.block
 
 import ice.content.IItems
 import ice.content.block.liquid.*
-import universecore.world.Load
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.liquid.PumpChamber
 import mindustry.type.Category
 import mindustry.type.ItemStack
+import universecore.ui.bundle.localization
+import universecore.world.Load
 
 @Suppress("unused")
 object LiquidBlocks :Load {
@@ -46,5 +46,5 @@ object LiquidBlocks :Load {
   val 流体抽离器 = 流体抽离器()
   val 流体分类阀 = 流体分类阀()
   val 流体装卸器 = 流体装卸器()
-  val p2p流体节点 = P2PLiquidNode()
+  val p2p流体节点 = P2P流体节点()
 }

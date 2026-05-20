@@ -28,7 +28,7 @@ import mindustry.world.Block
 import mindustry.world.Tile
 import mindustry.world.blocks.distribution.ChainedBuilding
 
-open class Conduit(name: String) : LiquidBlock(name), Autotiler {
+open class Conduit(name: String) :LiquidBlock(name), Autotiler {
   companion object {
     const val rotatePad: Float = 6f
     const val hpad: Float = rotatePad / 2f / 4f
@@ -50,7 +50,7 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
       }
     }
   }
-  val capRegion: TextureRegion by lazy {Core.atlas.find(this.name + "-cap")}
+  val capRegion: TextureRegion by lazy { Core.atlas.find(this.name + "-cap") }
 
   /** indices: [rotation] [fluid type] [frame]  */
   lateinit var rotateRegions: Array<Array<Array<TextureRegion?>>>
@@ -79,20 +79,20 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
     topRegions = Array(5) {
       Core.atlas.find(this.name + "-top-$it")
     }
-    rotateRegions = Array(4) {Array(2) {arrayOfNulls(Liquid.animationFrames)}}
+    rotateRegions = Array(4) { Array(2) { arrayOfNulls(Liquid.animationFrames) } }
 
     if (Vars.renderer != null) {
       val pad: Float = rotatePad
       val frames = Vars.renderer.getFluidFrames()
 
-      for (rot in 0..3) {
-        for (fluid in 0..1) {
-          for (frame in 0..<Liquid.animationFrames) {
+      for(rot in 0..3) {
+        for(fluid in 0..1) {
+          for(frame in 0..<Liquid.animationFrames) {
             val base = frames[fluid]!![frame]
             val result = TextureRegion()
             result.set(base)
 
-            when (rot) {
+            when(rot) {
               0 -> {
                 result.setX(result.x + pad)
                 result.setHeight(result.height - pad)
@@ -134,23 +134,32 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
   }
 
   override fun getReplacement(req: BuildPlan, plans: Seq<BuildPlan?>): Block? {
-    val cont = Boolf {p: Point2? -> plans.contains {o: BuildPlan? -> o!!.x == req.x + p!!.x && o.y == req.y + p.y && (req.block is Conduit || req.block is LiquidJunction)}}
-    return if (cont.get(Geometry.d4(req.rotation)) && cont.get(Geometry.d4(req.rotation - 2)) && req.tile() != null && req.tile().block() is Conduit && Mathf.mod(req.build().rotation - req.rotation, 2) == 1) junctionReplacement else this
+    val cont =
+      Boolf { p: Point2? -> plans.contains { o: BuildPlan? -> o!!.x == req.x + p!!.x && o.y == req.y + p.y && (req.block is Conduit || req.block is LiquidJunction) } }
+    return if (cont.get(Geometry.d4(req.rotation)) && cont.get(Geometry.d4(req.rotation - 2)) && req.tile() != null && req.tile()
+        .block() is Conduit && Mathf.mod(req.build().rotation - req.rotation, 2) == 1
+    ) junctionReplacement else this
   }
 
   override fun blends(tile: Tile, rotation: Int, otherx: Int, othery: Int, otherrot: Int, otherblock: Block): Boolean {
-    return otherblock.hasLiquids && (otherblock.outputsLiquid || (lookingAt(tile, rotation, otherx, othery, otherblock))) && lookingAtEither(tile, rotation, otherx, othery, otherrot, otherblock)
+    return otherblock.hasLiquids && (otherblock.outputsLiquid || (lookingAt(
+      tile,
+      rotation,
+      otherx,
+      othery,
+      otherblock
+    ))) && lookingAtEither(tile, rotation, otherx, othery, otherrot, otherblock)
   }
 
   override fun handlePlacementLine(plans: Seq<BuildPlan>) {
-    Placement.calculateBridges(plans, bridgeReplacement, true) {b -> b is Conduit}
+    Placement.calculateBridges(plans, bridgeReplacement, true) { b -> b is Conduit }
   }
 
   override fun icons(): Array<TextureRegion> {
     return arrayOf(Core.atlas.find("conduit-bottom"), topRegions[0])
   }
 
-  open inner class ConduitBuild : LiquidBuild(), ChainedBuilding {
+  open inner class ConduitBuild :LiquidBuild(), ChainedBuilding {
     var smoothLiquid: Float = 0f
     var blendbits: Int = 0
     var xscl: Int = 1
@@ -163,10 +172,16 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
       val r = this.rotation
       //draw extra conduits facing this one for tiling purposes
       Draw.z(Layer.blockUnder)
-      for (i in 0..3) {
+      for(i in 0..3) {
         if ((blending and (1 shl i)) != 0) {
           val dir = r - i
-          drawAt(x + Geometry.d4x(dir) * Vars.tilesize * 0.75f, y + Geometry.d4y(dir) * Vars.tilesize * 0.75f, 0, if (i == 0) r else dir, if (i != 0) SliceMode.bottom else SliceMode.top)
+          drawAt(
+            x + Geometry.d4x(dir) * Vars.tilesize * 0.75f,
+            y + Geometry.d4y(dir) * Vars.tilesize * 0.75f,
+            0,
+            if (i == 0) r else dir,
+            if (i != 0) SliceMode.bottom else SliceMode.top
+          )
         }
       }
 
@@ -221,7 +236,10 @@ open class Conduit(name: String) : LiquidBlock(name), Autotiler {
 
     override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
       noSleep()
-      return (liquids.current() === liquid || liquids.currentAmount() < 0.2f) && (tile == null || source === this || (source.relativeTo(tile.x.toInt(), tile.y.toInt()) + 2) % 4 != rotation)
+      return (liquids.current() === liquid || liquids.currentAmount() < 0.2f) && (tile == null || source === this || (source.relativeTo(
+        tile.x.toInt(),
+        tile.y.toInt()
+      ) + 2) % 4 != rotation)
     }
 
     override fun updateTile() {

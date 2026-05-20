@@ -8,12 +8,16 @@ import mindustry.world.draw.DrawPistons
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 
-class 铈基热电机组:NormalCrafter("ceriumBasedThermal"){
+class 铈基热电机组 :NormalCrafter("ceriumBasedThermal") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "铈基热电机组"
+        localizedName = "铈基热电机组"
         description = "裂解铈进行热能转换,可以产生大量电力"
+      }
+      en {
+        localizedName = "Cerium-Based Thermal Generator"
+        description = "Cracks cerium for thermal conversion, capable of producing large amounts of power."
       }
     }
     size = 2

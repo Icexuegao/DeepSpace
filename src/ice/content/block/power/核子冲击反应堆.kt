@@ -21,7 +21,6 @@ import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawExpandPlasma
 import singularity.world.particles.SglParticleModels
-import universecore.world.particles.models.MultiParticleModel
 import universecore.world.particles.Particle
 import universecore.world.particles.ParticleModel
 import universecore.world.particles.models.*
@@ -48,6 +47,10 @@ class 核子冲击反应堆 :NormalCrafter("nuclear_impact_reactor") {
       zh_CN {
         localizedName = "核子冲击反应堆"
         description = "定向约束核爆炸并推动压电转子发电"
+      }
+      en {
+        localizedName = "Nuclear Impact Reactor"
+        description = "Directionally constrains nuclear explosions and drives piezoelectric rotors to generate power."
       }
     }
     requirementPairs(

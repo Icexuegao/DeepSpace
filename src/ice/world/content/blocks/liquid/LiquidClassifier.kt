@@ -6,10 +6,6 @@ import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import universecore.scene.ui.ItemSelection
-import universecore.struct.texture.LazyTextureSingleDelegate
-import universecore.world.draw.DrawBuild
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.units.BuildPlan
 import mindustry.gen.Building
@@ -20,8 +16,12 @@ import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Stat
 import singularity.world.blocks.SglBlock
+import universecore.scene.ui.ItemSelection
+import universecore.struct.texture.LazyTextureSingleDelegate
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 
-open class LiquidClassifier(name: String) : SglBlock(name) {
+open class LiquidClassifier(name: String) :SglBlock(name) {
   val top2: TextureRegion by LazyTextureSingleDelegate("${this.name}-top2")
 
   init {
@@ -57,14 +57,14 @@ open class LiquidClassifier(name: String) : SglBlock(name) {
     stats.remove(Stat.liquidCapacity)
   }
 
-  inner class LiquidClassifierBuild : SglBuilding() {
+  inner class LiquidClassifierBuild :SglBuilding() {
 
     var sortLiquid: Liquid? = null
     override fun config(): Liquid? {
       return sortLiquid
     }
 
-    override fun acceptLiquid(source: Building, liquid: Liquid)=false
+    override fun acceptLiquid(source: Building, liquid: Liquid) = false
 
     override fun buildConfiguration(table: Table) {
       ItemSelection.buildTable(block, table, Vars.content.liquids(), ::sortLiquid, this::configure, true)

@@ -21,8 +21,12 @@ class 神经束节点 :PowerNode("neuralBeamNode") {
     requirements(Category.power, IItems.铱板, 10, IItems.导能回路, 5, IItems.生物钢, 1)
     localization {
       zh_CN {
-        this.localizedName = "神经束节点"
+        localizedName = "神经束节点"
         description = "向更大范围连接的建筑传输电力"
+      }
+      en {
+        localizedName = "Neural Beam Node"
+        description = "Transmits power to buildings within a larger connected range."
       }
     }
   }

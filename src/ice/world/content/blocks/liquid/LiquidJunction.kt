@@ -7,7 +7,7 @@ import mindustry.type.Liquid
 import mindustry.world.draw.DrawDefault
 import mindustry.world.meta.Stat
 
-open class LiquidJunction(name: String) : LiquidBlock(name) {
+open class LiquidJunction(name: String) :LiquidBlock(name) {
   init {
     floating = true
     drawers = DrawDefault()
@@ -20,7 +20,7 @@ open class LiquidJunction(name: String) : LiquidBlock(name) {
     stats.remove(Stat.liquidCapacity)
   }
 
-  inner class LiquidJunctionBuild : LiquidBuild() {
+  inner class LiquidJunctionBuild :LiquidBuild() {
 
     override fun getLiquidDestination(source: Building, liquid: Liquid?): Building? {
       if (!enabled) return this

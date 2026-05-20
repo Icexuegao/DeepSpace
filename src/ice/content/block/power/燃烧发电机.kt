@@ -12,12 +12,16 @@ import mindustry.world.draw.DrawMulti
 import mindustry.world.draw.DrawWarmupRegion
 import universecore.ui.bundle.localization
 
-class 燃烧发电机:ConsumeGenerator("combustionGenerator"){
-  init  {
+class 燃烧发电机 :ConsumeGenerator("combustionGenerator") {
+  init {
     localization {
       zh_CN {
-        this.localizedName = "燃烧发电机"
+        localizedName = "燃烧发电机"
         description = "燃烧可燃物缓慢生产电力"
+      }
+      en {
+        localizedName = "Combustion Generator"
+        description = "Slowly generates power by burning flammable materials."
       }
     }
     powerProduction = 1f

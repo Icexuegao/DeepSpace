@@ -9,12 +9,16 @@ import mindustry.world.draw.DrawGlowRegion
 import mindustry.world.draw.DrawMulti
 import singularity.world.blocks.product.NormalCrafter
 
-class 沼气发电机:NormalCrafter("biogaGenerator"){
-  init  {
+class 沼气发电机 :NormalCrafter("biogaGenerator") {
+  init {
     localization {
       zh_CN {
-        this.localizedName = "沼气发电机"
+        localizedName = "沼气发电机"
         description = "燃烧沼气缓慢生产电力"
+      }
+      en {
+        localizedName = "Biogas Generator"
+        description = "Slowly generates power by burning biogas."
       }
     }
     size = 2

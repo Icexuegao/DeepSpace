@@ -5,7 +5,7 @@ import ice.content.IItems
 import ice.world.content.blocks.power.PowerNode
 import mindustry.type.Category
 
-class 神经索节点:PowerNode("neuralNode"){
+class 神经索节点 :PowerNode("neuralNode") {
   init {
     squareSprite = false
     healAmount = 5f
@@ -21,8 +21,12 @@ class 神经索节点:PowerNode("neuralNode"){
     requirements(Category.power, IItems.铱板, 5, IItems.导能回路, 2, IItems.生物钢, 1)
     localization {
       zh_CN {
-        this.localizedName = "神经索节点"
+        localizedName = "神经索节点"
         description = "向连接的建筑传输电力"
+      }
+      en {
+        localizedName = "Neural Node"
+        description = "Transmits power to connected buildings."
       }
     }
   }

@@ -10,12 +10,17 @@ import mindustry.type.Category
 import mindustry.world.blocks.power.NuclearReactor
 import universecore.ui.bundle.localization
 
-class 热核裂变反应堆:NuclearReactor("heatNuclearReactor"){
+class 热核裂变反应堆 :NuclearReactor("heatNuclearReactor") {
   init {
     localization {
       zh_CN {
         localizedName = "热核裂变反应堆"
         description = "利用钍燃料进行核裂变反应产生大量电力,需要大量急冻液冷却以防止过热,否则将发生剧烈爆炸"
+      }
+      en {
+        localizedName = "Thermal Nuclear Fission Reactor"
+        description =
+          "Uses thorium fuel for nuclear fission reactions to generate massive amounts of power. Requires large quantities of cryofluid for cooling to prevent overheating, or a violent explosion will occur."
       }
     }
     fuelItem = IItems.钍锭
