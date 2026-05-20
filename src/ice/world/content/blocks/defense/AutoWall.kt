@@ -5,11 +5,11 @@ import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.TextureRegion
 import ice.core.StaticTile
-import universecore.struct.texture.LazyTextureSingleDelegate
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
+import universecore.struct.texture.LazyTextureSingleDelegate
 
 class AutoWall(name: String) : Wall(name) {
   var regions: Array<TextureRegion?> = arrayOfNulls(48)
@@ -41,6 +41,10 @@ class AutoWall(name: String) : Wall(name) {
       }
       arrY += 32
     }
+  }
+
+  override fun getGeneratedIcons(): Array<out TextureRegion?> {
+      return generatedIcons ?: arrayOf(uiIcon).also { generatedIcons = it }
   }
 
   override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
