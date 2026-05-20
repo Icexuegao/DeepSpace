@@ -12,7 +12,7 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 
-class Ipsiglon : IceUnitType("unit_ipsiglon") {
+class Ipsiglon :IceUnitType("unit_ipsiglon") {
   init {
     localization {
       zh_CN {

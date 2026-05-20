@@ -4,7 +4,7 @@ import ice.content.IItems
 import ice.world.content.blocks.liquid.base.LiquidRouter
 import mindustry.type.Category
 
-class 基础流体路由器:LiquidRouter("baseLiquidRouter")  {
+class 基础流体路由器 :LiquidRouter("baseLiquidRouter") {
   init {
     localization {
       zh_CN {

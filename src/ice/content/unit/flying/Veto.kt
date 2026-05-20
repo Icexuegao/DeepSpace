@@ -12,12 +12,10 @@ import arc.scene.ui.layout.Table
 import arc.util.Time
 import arc.util.Tmp
 import ice.content.IStatus
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.core.IFiles.appendModName
-import universecore.util.toColor
-
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.Effect
@@ -36,9 +34,10 @@ import mindustry.graphics.Drawf
 import mindustry.graphics.Pal
 import mindustry.type.UnitType
 import mindustry.type.Weapon
+import universecore.util.toColor
 import java.lang.Float.max
 
-class Veto : IceUnitType("units_veto") {
+class Veto :IceUnitType("units_veto") {
   val byb: Color = Pal.bulletYellowBack
   val by: Color = Pal.bulletYellow
 
@@ -46,7 +45,8 @@ class Veto : IceUnitType("units_veto") {
     localization {
       zh_CN {
         this.localizedName = "否决"
-        description = "重型空中突击单位.舰首舰尾发射导弹,四门近程激光与两门远程磁轨炮交替射击,中央主炮投送高爆弹.加装护盾辅助发生器以维持友军护盾持续作战"
+        description =
+          "重型空中突击单位.舰首舰尾发射导弹,四门近程激光与两门远程磁轨炮交替射击,中央主炮投送高爆弹.加装护盾辅助发生器以维持友军护盾持续作战"
         details = "否决,人类?"
       }
     }
@@ -125,7 +125,7 @@ class Veto : IceUnitType("units_veto") {
       }
     })
 
-    for (i in Mathf.signs) {
+    for(i in Mathf.signs) {
       weapons.add(Weapon("否决副炮").apply {
         x = 22f * i
         y = 60f
@@ -276,7 +276,7 @@ class Veto : IceUnitType("units_veto") {
       shootEffect = Fx.shootSmokeSquareBig
 
     }
-    weapons.add(object : Weapon("units_veto-cannon".appendModName()) {
+    weapons.add(object :Weapon("units_veto-cannon".appendModName()) {
       override fun addStats(u: UnitType, t: Table) {
         super.addStats(u, t)
         t.row()
@@ -312,7 +312,8 @@ class Veto : IceUnitType("units_veto") {
       alwaysContinuous = true
       shootSound = Sounds.none
       bullet = ContinuousFlameBulletType(75f).apply {
-        colors = arrayOf(("FF58458C").toColor(), ("FF5845B2").toColor(), ("FF8663CC").toColor(), ("FF8663").toColor(), ("FEB380CC").toColor())
+        colors =
+          arrayOf(("FF58458C").toColor(), ("FF5845B2").toColor(), ("FF8663CC").toColor(), ("FF8663").toColor(), ("FEB380CC").toColor())
         lifetime = 30f
         width = 4f
         length = 45f
@@ -358,7 +359,7 @@ class Veto : IceUnitType("units_veto") {
         length = 320f
         shootEffect = Effect(24f) { e ->
           Draw.color(Pal.redLight, e.color, e.fin())
-          for (i in Mathf.signs) {
+          for(i in Mathf.signs) {
             Drawf.tri(e.x, e.y, 9f * e.fout(), 72f, e.rotation + 90f * i)
           }
           Drawf.light(e.x, e.y, 180f, e.color, 0.9f * e.fout())
@@ -373,8 +374,15 @@ class Veto : IceUnitType("units_veto") {
     }
   }
 
-  fun homingMainBulletType(speed: Float, damage: Float, lifetime: Float, power: Float, mirror: Boolean, angle: FloatArray?): BasicBulletType {
-    return object : BasicBulletType(speed, damage) {
+  fun homingMainBulletType(
+    speed: Float,
+    damage: Float,
+    lifetime: Float,
+    power: Float,
+    mirror: Boolean,
+    angle: FloatArray?
+  ): BasicBulletType {
+    return object :BasicBulletType(speed, damage) {
       init {
         shrinkY = 0f
         this.lifetime = lifetime
@@ -383,10 +391,11 @@ class Veto : IceUnitType("units_veto") {
 
       override fun createFrags(b: Bullet, x: Float, y: Float) {
         val e = b.owner as Unit
-        for (i in 0 until fragBullets) {
+        for(i in 0 until fragBullets) {
           if (mirror) {
-            for (j in Mathf.signs) {
-              val ang = e.rotation() + 180 + fragAngle * j + ((i - fragBullets / 2f + 0.5f) * fragSpread) + (angle?.getOrNull(i)?.times(j) ?: 0f)
+            for(j in Mathf.signs) {
+              val ang =
+                e.rotation() + 180 + fragAngle * j + ((i - fragBullets / 2f + 0.5f) * fragSpread) + (angle?.getOrNull(i)?.times(j) ?: 0f)
               fragBullet.create(b, b.team, e.x, e.y, ang, 1f, 1f) { frag ->
                 if (frag.time < 40 / frag.type.speed) return@create
                 frag.vel.setAngle(Angles.moveToward(frag.rotation(), frag.angleTo(x, y), Time.delta * power))
@@ -410,7 +419,7 @@ class Veto : IceUnitType("units_veto") {
     var s = false
     var t = 0f
 
-    return object : BasicBulletType(speed, damage) {
+    return object :BasicBulletType(speed, damage) {
       init {
         this.lifetime = lifetime
         reflectable = false
@@ -424,7 +433,13 @@ class Veto : IceUnitType("units_veto") {
           s = e.isShooting
           t = b.angleTo(e.aimX, e.aimY)
         }
-        if (b.dst(e as Unit) > r * 1.2f) b.time = b.lifetime + 1 else if (s) b.vel.setAngle(Angles.moveToward(b.rotation(), t, Time.delta * power))
+        if (b.dst(e as Unit) > r * 1.2f) b.time = b.lifetime + 1 else if (s) b.vel.setAngle(
+          Angles.moveToward(
+            b.rotation(),
+            t,
+            Time.delta * power
+          )
+        )
       }
 
       override fun draw(b: Bullet) {
@@ -432,7 +447,7 @@ class Veto : IceUnitType("units_veto") {
         val type = b.type as BasicBulletType
         Tmp.v1.trns(b.rotation(), type.height / 2)
 
-        for (i in Mathf.signs) {
+        for(i in Mathf.signs) {
 
           Tmp.v2.trns(b.rotation() - 90, type.width * i, -type.height)
           Draw.color(type.backColor)
@@ -444,7 +459,8 @@ class Veto : IceUnitType("units_veto") {
     }
   }
 
-  class ArmorBrokenBulletType(speed: Float, damage: Float, lifetime: Float, private val percent: Float, private val num: Float) : BasicBulletType(speed, damage) {
+  class ArmorBrokenBulletType(speed: Float, damage: Float, lifetime: Float, private val percent: Float, private val num: Float) :
+    BasicBulletType(speed, damage) {
     init {
       shrinkY = 0f
       this.lifetime = lifetime

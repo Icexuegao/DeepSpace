@@ -8,9 +8,9 @@ import arc.math.Mathf
 import arc.util.Time
 import ice.audio.ISounds
 import ice.content.IStatus
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.ArmorPlateAbility
@@ -24,7 +24,7 @@ import mindustry.gen.Unit
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 
-class Omega : IceUnitType("unit_omega") {
+class Omega :IceUnitType("unit_omega") {
   init {
     localization {
       zh_CN {
@@ -85,7 +85,11 @@ class Omega : IceUnitType("unit_omega") {
       alwaysContinuous = true
       bullet = ContinuousFlameBulletType().apply {
         colors = arrayOf(
-          Color.valueOf("FF58458C"), Color.valueOf("FF5845B2"), Color.valueOf("FF5845CC"), Color.valueOf("FF8663"), Color.valueOf("FFDCD8CC")
+          Color.valueOf("FF58458C"),
+          Color.valueOf("FF5845B2"),
+          Color.valueOf("FF5845CC"),
+          Color.valueOf("FF8663"),
+          Color.valueOf("FFDCD8CC")
         )
         damage = 100f
         lifetime = 60f
@@ -400,7 +404,7 @@ class Omega : IceUnitType("unit_omega") {
     Draw.color(color)
     Draw.z(Layer.effect)
 
-    for (i in 0 until tris) {
+    for(i in 0 until tris) {
       val ang = i * 360f / tris + Time.time
       val xy = angleTrns(ang, (24f + Mathf.absin(speed, 4f)) * size)
       doubleTri(x + xy.first, y + xy.second, size * 4f, size * 16f, ang + 180f)

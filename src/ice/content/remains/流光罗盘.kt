@@ -6,8 +6,8 @@ import ice.type.Remains
 import mindustry.world.meta.Stats
 import universecore.scene.style.DynamicTextureDrawable
 
-class 流光罗盘:Remains("remains_flowing_compass"){
-  init  {
+class 流光罗盘 :Remains("remains_flowing_compass") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "流光罗盘"

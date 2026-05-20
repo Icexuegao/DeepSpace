@@ -30,7 +30,7 @@ import singularity.world.SglFx
 import singularity.world.blocks.turrets.LaserTurret
 import singularity.world.draw.DrawSglTurret
 
-class Fubuki : LaserTurret("fubuki") {
+class Fubuki :LaserTurret("fubuki") {
   init {
     localization {
       zh_CN {
@@ -75,9 +75,9 @@ class Fubuki : LaserTurret("fubuki") {
 
 
 
-    newAmmo(object : BulletType() {
+    newAmmo(object :BulletType() {
       val ice: mindustry.entities.bullet.BulletType = crushedIce.copy()
-      val shootBullets = arrayOf(ice, object : BulletType() {
+      val shootBullets = arrayOf(ice, object :BulletType() {
         init {
           damage = 26f
           speed = 8f
@@ -102,7 +102,7 @@ class Fubuki : LaserTurret("fubuki") {
 
           Draw.z(Layer.flyingUnit + 1)
           SglDraw.gradientCircle(b.x, b.y, 14f, 0.6f)
-          SglDraw.drawBloomUponFlyUnit(b) {e: Bullet ->
+          SglDraw.drawBloomUponFlyUnit(b) { e: Bullet ->
             Draw.color(hitColor)
             SglDraw.drawDiamond(e.x, e.y, 14f, 6 + Mathf.absin(1f, 2f), e.rotation())
           }
@@ -114,7 +114,7 @@ class Fubuki : LaserTurret("fubuki") {
             entity.apply(IStatus.冻结, entity.getDuration(IStatus.冻结) + 10f)
           }
         }
-      }, object : BulletType() {
+      }, object :BulletType() {
         init {
           damage = 36f
           speed = 6f
@@ -139,14 +139,14 @@ class Fubuki : LaserTurret("fubuki") {
           Draw.z(Layer.flyingUnit + 1)
           SglDraw.gradientCircle(b.x, b.y, 14f, 0.6f)
 
-          SglDraw.drawBloomUponFlyUnit(b) {e: Bullet ->
+          SglDraw.drawBloomUponFlyUnit(b) { e: Bullet ->
             Draw.color(Color.white)
             Fill.circle(e.x, e.y, 2f)
             Lines.stroke(1f, hitColor)
             Lines.circle(e.x, e.y, 4f)
             val step = 360f / 6
-            for (i in 0..5) {
-              SglDraw.drawTransform(e.x, e.y, 6f, 0f, step * i + Time.time * 2) {x: Float, y: Float, r: Float ->
+            for(i in 0..5) {
+              SglDraw.drawTransform(e.x, e.y, 6f, 0f, step * i + Time.time * 2) { x: Float, y: Float, r: Float ->
                 Drawf.tri(x, y, 2.5f, 2.5f, r)
                 Drawf.tri(x, y, 2.5f, 6f, r + 180)
               }
@@ -184,7 +184,7 @@ class Fubuki : LaserTurret("fubuki") {
 
       override fun continuousDamage(): Float {
         var res = 0f
-        for (i in shootBullets.indices) {
+        for(i in shootBullets.indices) {
           res += shootBullets[i].damage * (1f / (i + 1))
         }
         return res * 4
@@ -200,7 +200,7 @@ class Fubuki : LaserTurret("fubuki") {
           owner.reloadCounter = 0f
 
           if (b.timer(5, if (owner.warmup <= 0.01) Float.MAX_VALUE else 3 / owner.warmup)) {
-            for (i in shootBullets.indices) {
+            for(i in shootBullets.indices) {
               val bu = shootBullets[i]
 
               if (Mathf.chance((1f / (i + 1)).toDouble())) {
@@ -247,7 +247,7 @@ class Fubuki : LaserTurret("fubuki") {
     consume!!.energy(3.2f)
     consume!!.liquid(ILiquids.急冻液, 0.2f)
 
-    drawers = DrawSglTurret(object : RegionPart("_blade") {
+    drawers = DrawSglTurret(object :RegionPart("_blade") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup
@@ -259,7 +259,7 @@ class Fubuki : LaserTurret("fubuki") {
 
         mirror = true
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup

@@ -35,7 +35,7 @@ import universecore.ui.bundle.localization
 import universecore.world.Load
 
 @Suppress("unused")
-object Distributions : Load {
+object Distributions :Load {
   val 基础传送带 = Conveyor("baseConveyor").apply {
     localization {
       zh_CN {
@@ -190,7 +190,7 @@ object Distributions : Load {
       val spread = 4f
       Fx.rand.setSeed(e.id.toLong())
       Draw.alpha(e.fout())
-      for (i in 0..7) {
+      for(i in 0..7) {
         val ang = e.rotation + Fx.rand.range(8f) + i
         Fx.v.trns(ang, Fx.rand.random(e.fin() * 10f))
         Lines.lineAngle(
@@ -282,7 +282,7 @@ object Distributions : Load {
     bridgeWidth = 8f
     hasPower = false
     arrowSpacing = 6f
-    transportTime = 60f/17f
+    transportTime = 60f / 17f
     requirements(Category.distribution, IItems.高碳钢, 6, IItems.锌锭, 4)
   }
   val 装甲传送带桥 = TransferNode("armorBridge").apply {
@@ -334,13 +334,13 @@ object Distributions : Load {
         description = "能同时运输液体和物品,拥有较远的范围"
       }
     }
-    hasPower=false
+    hasPower = false
     fadeIn = true
     size = 1
     health = 100
-    itemCapacity=20
-    transportTime = 60f/22f
-    requirements(Category.distribution, IItems.锌锭,4, IItems.铜锭, 4, IItems.钴锭, 8, IItems.石英玻璃, 10)
+    itemCapacity = 20
+    transportTime = 60f / 22f
+    requirements(Category.distribution, IItems.锌锭, 4, IItems.铜锭, 4, IItems.钴锭, 8, IItems.石英玻璃, 10)
   }
   val 运输节点 = ItemNode("transport_node").apply {
     localization {
@@ -434,14 +434,14 @@ object Distributions : Load {
         description = "从容器中超高速卸载物品"
       }
     }
-    squareSprite=false
+    squareSprite = false
     speed = 60f / 60f
     health = 200
     squareSprite = false
     requirementPairs(Category.distribution, IItems.电子元件 to 25, IItems.钴锭 to 25, IItems.导能回路 to 5)
 
     newConsume().apply {
-      power(20f/60f)
+      power(20f / 60f)
     }
   }
 
@@ -453,9 +453,9 @@ object Distributions : Load {
       }
     }
     size = 2
-    reload =120f
-    range = 40*8f
-    consumePower(150f/60f)
+    reload = 120f
+    range = 40 * 8f
+    consumePower(150f / 60f)
     dumpTime = 1
     knockback = 4f
     translation = 2f
@@ -480,7 +480,7 @@ object Distributions : Load {
     size = 5
     reload = 600f
     range = 1280f
-    consumePower(960f/60f)
+    consumePower(960f / 60f)
     squareSprite = false
     dumpTime = 1
     knockback = 4f

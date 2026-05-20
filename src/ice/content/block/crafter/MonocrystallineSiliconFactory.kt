@@ -5,9 +5,6 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import arc.math.Mathf
 import ice.content.IItems
-
-import universecore.world.draw.DrawBuild
-import universecore.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.Vars
 import mindustry.type.Category
@@ -15,8 +12,10 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 
-class MonocrystallineSiliconFactory : NormalCrafter("monocrystallineSiliconFactory") {
+class MonocrystallineSiliconFactory :NormalCrafter("monocrystallineSiliconFactory") {
   init {
     localization {
       zh_CN {

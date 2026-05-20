@@ -15,7 +15,7 @@ import mindustry.gen.Sounds
 import mindustry.graphics.Drawf
 import mindustry.graphics.Pal
 
-class BreakArmy : IceUnitType("breakArmy") {
+class BreakArmy :IceUnitType("breakArmy") {
   init {
     localization {
       zh_CN {
@@ -43,7 +43,7 @@ class BreakArmy : IceUnitType("breakArmy") {
       rotateSpeed = 3f
       shootSound = Sounds.explosionDull
       shootCone = 2f
-      bullet = BombBulletType(50f, 8 * 5f,"missile-large").apply {
+      bullet = BombBulletType(50f, 8 * 5f, "missile-large").apply {
         makeFire = true
         collidesTiles = true
         collides = true

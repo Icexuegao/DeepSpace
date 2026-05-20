@@ -8,8 +8,8 @@ import ice.world.content.blocks.effect.ItemExtractor
 import mindustry.type.Category
 import mindustry.type.ItemStack
 
-class 传输矿仓:ItemExtractor("conveyOreWar"){
-  init{
+class 传输矿仓 :ItemExtractor("conveyOreWar") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "传输矿仓"
@@ -25,5 +25,5 @@ class 传输矿仓:ItemExtractor("conveyOreWar"){
     requirements(Category.effect, ItemStack.with(IItems.低碳钢, 30))
   }
 
-  override fun outputsItems()=true
+  override fun outputsItems() = true
 }

@@ -2,16 +2,15 @@ package ice.content.block.crafter
 
 import arc.graphics.Color
 import ice.content.IItems
-
-import universecore.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.type.Category
 import mindustry.world.draw.DrawCultivator
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
-class 蜂巢陶瓷合成巢 : NormalCrafter("ceramicKiln") {
+class 蜂巢陶瓷合成巢 :NormalCrafter("ceramicKiln") {
   init {
     localization {
       zh_CN {
@@ -31,7 +30,7 @@ class 蜂巢陶瓷合成巢 : NormalCrafter("ceramicKiln") {
       spread = 2 * 8f - 6f
     }, DrawDefault())
     requirements(Category.crafting, IItems.铬锭, 50, IItems.铜锭, 20, IItems.锌锭, 30, IItems.黄铜锭, 10)
-    newFormula {consumers, producers ->
+    newFormula { consumers, producers ->
       consumers.apply {
         time(120f)
         items(IItems.金珀沙, 8)

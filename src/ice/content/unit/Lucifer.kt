@@ -12,7 +12,7 @@ import mindustry.graphics.Layer
 import mindustry.graphics.MultiPacker
 import mindustry.graphics.MultiPacker.PageType
 
-class Lucifer : IceUnitType("lucifer") {
+class Lucifer :IceUnitType("lucifer") {
   init {
     localization {
       zh_CN {
@@ -35,7 +35,7 @@ class Lucifer : IceUnitType("lucifer") {
     rotateSpeed = 7f
     itemCapacity = 40
     engineOffset = 8f
-    engineLayer= Layer.flyingUnitLow-1f
+    engineLayer = Layer.flyingUnitLow - 1f
     circleTarget = true
     engineColor = IceColor.b4
     itemCapacity = 120
@@ -97,9 +97,19 @@ class Lucifer : IceUnitType("lucifer") {
 
   override fun createIcons(packer: MultiPacker) {
     super.createIcons(packer)
-    for (weapon in weapons) {
-      if (!weapon.name.isEmpty() && (minfo.mod == null || weapon.name.startsWith(minfo.mod.name)) && (weapon.top || !packer.isOutlined(weapon.name) || weapon.parts.contains { p: DrawPart? -> p!!.under })) {
-        makeOutline(PageType.main, packer, weapon.region, !weapon.top || weapon.parts.contains { p: DrawPart? -> p!!.under }, outlineColor, outlineRadius)
+    for(weapon in weapons) {
+      if (!weapon.name.isEmpty() && (minfo.mod == null || weapon.name.startsWith(minfo.mod.name)) && (weapon.top || !packer.isOutlined(
+          weapon.name
+        ) || weapon.parts.contains { p: DrawPart? -> p!!.under })
+      ) {
+        makeOutline(
+          PageType.main,
+          packer,
+          weapon.region,
+          !weapon.top || weapon.parts.contains { p: DrawPart? -> p!!.under },
+          outlineColor,
+          outlineRadius
+        )
       }
     }
   }

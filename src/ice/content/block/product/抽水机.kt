@@ -11,6 +11,10 @@ class 抽水机 :SolidPump("waterPump") {
         localizedName = "抽水机"
         description = "抽取地下水资源,但无法抽取地表水资源"
       }
+      en {
+        localizedName = "Water Pump"
+        description = "Extracts underground water resources, but cannot extract surface water."
+      }
     }
     size = 2
     baseEfficiency = 1f

@@ -13,6 +13,10 @@ class 采掘扇区 :MatrixMinerSector("matrix_miner_node") {
         localizedName = "采掘扇区"
         description = "矩阵矿床的采掘工作组件,提供一个基础开采角度区间"
       }
+      en {
+        localizedName = "Mining Sector"
+        description = "A mining working component for the Matrix Miner, providing a basic mining angle interval."
+      }
     }
     requirements(
       Category.production, ItemStack.with(

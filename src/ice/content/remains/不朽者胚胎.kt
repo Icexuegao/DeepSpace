@@ -8,7 +8,7 @@ import mindustry.Vars
 import universecore.scene.element.typinglabel.TLabel
 import universecore.scene.style.DynamicTextureDrawable
 
-class 不朽者胚胎: Remains("remains_immortal_embryo"){
+class 不朽者胚胎 :Remains("remains_immortal_embryo") {
   init {
     localization {
       zh_CN {
@@ -44,7 +44,7 @@ class 不朽者胚胎: Remains("remains_immortal_embryo"){
     }
     effect = "遗物槽位+[$pos]"
     disabled = {
-      Vars.state.isGame || (Remains.getEnableds().contains(this) && Remains.getEnableds().size > slotPos - pos)
+      Vars.state.isGame || (getEnableds().contains(this) && getEnableds().size > slotPos - pos)
     }
   }
 }

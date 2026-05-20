@@ -6,7 +6,6 @@ import arc.math.Interp
 import ice.audio.ISounds
 import ice.content.IStatus
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.StatusFieldAbility
@@ -18,8 +17,9 @@ import mindustry.entities.part.RegionPart
 import mindustry.entities.part.ShapePart
 import mindustry.gen.Sounds
 import mindustry.type.UnitType
+import universecore.util.toColor
 
-class DarkCarving:IceUnitType("darkCarving") {
+class DarkCarving :IceUnitType("darkCarving") {
   init {
     localization {
       zh_CN {
@@ -40,7 +40,7 @@ class DarkCarving:IceUnitType("darkCarving") {
     lowAltitude = true
     ammoCapacity = 10
     outlineColor = "1F1F1F".toColor()
-    engines.add(UnitType.UnitEngine(7.5f, -11f, 2f, -45f), UnitType.UnitEngine(-7.5f, -11f, 2f, -135f))
+    engines.add(UnitEngine(7.5f, -11f, 2f, -45f), UnitEngine(-7.5f, -11f, 2f, -135f))
     abilities.add(StatusFieldAbility(IStatus.坚忍, 240f, 600f, 160f))
     parts.add(RegionPart().apply {
       suffix = "-glow"

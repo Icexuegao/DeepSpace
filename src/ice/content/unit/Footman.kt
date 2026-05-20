@@ -10,7 +10,7 @@ import mindustry.content.StatusEffects
 import mindustry.content.UnitTypes
 import mindustry.gen.Sounds
 
-class Footman : IceUnitType("footman") {init {
+class Footman :IceUnitType("footman") {init {
   speed = 3.2f
   flying = true
   health = 2000f

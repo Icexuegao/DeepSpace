@@ -1,13 +1,13 @@
 package ice.content.block.liquid
 
 import ice.content.IItems
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.production.Pump
+import universecore.ui.bundle.localization
 
-class 谐振泵:Pump("resonancePump") {
-  init  {
+class 谐振泵 :Pump("resonancePump") {
+  init {
     localization {
       zh_CN {
         localizedName = "谐振泵"

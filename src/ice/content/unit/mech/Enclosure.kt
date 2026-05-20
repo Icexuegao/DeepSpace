@@ -2,15 +2,15 @@ package ice.content.unit.mech
 
 import arc.graphics.Color
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.ArmorPlateAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.RegenAbility
 import mindustry.entities.bullet.ShrapnelBulletType
 import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.MechUnit
 import mindustry.gen.Sounds
+import universecore.world.ability.ArmorPlateAbility
 
-class Enclosure:IceUnitType("unit_enclosure", MechUnit::class.java) {
+class Enclosure :IceUnitType("unit_enclosure", MechUnit::class.java) {
   init {
     localization {
       zh_CN {
@@ -39,7 +39,7 @@ class Enclosure:IceUnitType("unit_enclosure", MechUnit::class.java) {
     setWeapon("weapon1") {
       x = 7.75f
       y = 1f
-      shootY+=2
+      shootY += 2
       shake = 1f
       top = false
       shoot.apply {

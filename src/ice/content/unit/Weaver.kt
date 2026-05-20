@@ -4,9 +4,7 @@ import arc.scene.ui.layout.Table
 import ice.content.IStatus
 import ice.content.unit.flying.Veto.ArmorBrokenBulletType
 import ice.core.IFiles.appendModName
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.DeathGiftAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.RegenAbility
 import mindustry.gen.LegsUnit
@@ -14,8 +12,10 @@ import mindustry.gen.Sounds
 import mindustry.graphics.Pal
 import mindustry.type.UnitType
 import mindustry.type.Weapon
+import universecore.util.toColor
+import universecore.world.ability.DeathGiftAbility
 
-class Weaver : IceUnitType("unit_weaver", LegsUnit::class.java) {
+class Weaver :IceUnitType("unit_weaver", LegsUnit::class.java) {
   init {
     localization {
       zh_CN {
@@ -69,7 +69,7 @@ class Weaver : IceUnitType("unit_weaver", LegsUnit::class.java) {
       shootEffect = Fx.shootSmokeSquareSparse
     }
 
-    return object : Weapon("unit_weaver-machineGun".appendModName()) {
+    return object :Weapon("unit_weaver-machineGun".appendModName()) {
       override fun addStats(u: UnitType, t: Table) {
         super.addStats(u, t)
         t.row()

@@ -4,7 +4,7 @@ import ice.content.block.nuclear.*
 import universecore.world.Load
 
 @Suppress("unused")
-object NuclearBlocks : Load {
+object NuclearBlocks :Load {
   var 中子能量节点 = 中子能量节点()
   var 相位核能塔 = 相位核能塔()
 

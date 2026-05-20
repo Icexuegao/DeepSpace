@@ -2,8 +2,6 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-
-import universecore.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.type.Category
 import mindustry.type.ItemStack
@@ -14,8 +12,9 @@ import mindustry.world.draw.DrawDefault
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import universecore.world.consumers.ConsumeType
+import universecore.world.draw.DrawMulti
 
-class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
+class OsmoticSeparationTank :NormalCrafter("osmotic_separation_tank") {
   init {
     localization {
       zh_CN {
@@ -65,27 +64,27 @@ class OsmoticSeparationTank : NormalCrafter("osmotic_separation_tank") {
     newConsume().apply {
       time(60f)
       power(1f)
-      item(IItems.低温化合物,1)
-      liquid(ILiquids.氢气,24f/60f)
+      item(IItems.低温化合物, 1)
+      liquid(ILiquids.氢气, 24f / 60f)
     }
 
     newProduce().apply {
-      liquid(ILiquids.急冻液, 20f/60f)
+      liquid(ILiquids.急冻液, 20f / 60f)
     }
 
 
     newConsume().apply {
       time(60f)
       power(1.2f)
-      items(IItems.低温化合物 , 1, IItems.钴锭,1)
-      liquid(ILiquids.碱液,32f/60f)
+      items(IItems.低温化合物, 1, IItems.钴锭, 1)
+      liquid(ILiquids.碱液, 32f / 60f)
     }
     newProduce().apply {
-      liquid(ILiquids.暮光液, 32f/60f)
+      liquid(ILiquids.暮光液, 32f / 60f)
     }
 
     drawers = DrawMulti(
-      DrawBottom(), object : DrawBlock() {
+      DrawBottom(), object :DrawBlock() {
         override fun draw(build: Building?) {
           val e = build as NormalCrafterBuild
           if (e.consumer.current == null) return

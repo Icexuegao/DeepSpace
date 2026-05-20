@@ -5,7 +5,7 @@ import ice.ai.CarryTaskAI
 
 import ice.world.content.unit.IceUnitType
 
-class Chord : IceUnitType("chord") {
+class Chord :IceUnitType("chord") {
   init {
     drag = 0.017f
     accel = 0.05f

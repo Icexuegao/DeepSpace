@@ -7,7 +7,7 @@ import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.graphics.Pal
 
-class BarbProtrusion : IceUnitType("barbProtrusion") {
+class BarbProtrusion :IceUnitType("barbProtrusion") {
   init {
     localization {
       zh_CN {

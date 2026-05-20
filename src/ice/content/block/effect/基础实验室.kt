@@ -5,8 +5,8 @@ import ice.content.IItems
 import ice.world.content.blocks.science.Laboratory
 import mindustry.type.Category
 
-class 基础实验室:Laboratory("laboratory"){
-  init  {
+class 基础实验室 :Laboratory("laboratory") {
+  init {
     consumePower(100f / 60)
     localization {
       zh_CN {

@@ -5,8 +5,6 @@ import arc.graphics.Color
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Drawf
@@ -18,9 +16,10 @@ import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawDyColorCultivator
 import universecore.world.consumers.ConsumeType
+import universecore.world.draw.DrawMulti
 import kotlin.math.max
 
-class ReactingPool : NormalCrafter("reacting_pool") {
+class ReactingPool :NormalCrafter("reacting_pool") {
   init {
     localization {
       zh_CN {
@@ -37,7 +36,7 @@ class ReactingPool : NormalCrafter("reacting_pool") {
     itemCapacity = 35
     liquidCapacity = 120f
 
-    newFormula {consumers, producers ->
+    newFormula { consumers, producers ->
       consumers.apply {
         time(60f)
         item(IItems.黑晶石, 3)
@@ -57,7 +56,7 @@ class ReactingPool : NormalCrafter("reacting_pool") {
       power(0.8f)
     }
     newProduce().apply {
-      liquids(ILiquids.铀盐溶液, 0.2f, ILiquids.氦气,48f/60f)
+      liquids(ILiquids.铀盐溶液, 0.2f, ILiquids.氦气, 48f / 60f)
     }
 
     newConsume().apply {
@@ -110,7 +109,7 @@ class ReactingPool : NormalCrafter("reacting_pool") {
 
 
     drawers = DrawMulti(
-      DrawBottom(), object : DrawBlock() {
+      DrawBottom(), object :DrawBlock() {
         override fun draw(build: Building?) {
           val e = build as NormalCrafterBuild
           if (e.consumer.current == null || e.producer!!.current == null) return
@@ -120,8 +119,8 @@ class ReactingPool : NormalCrafter("reacting_pool") {
           val bounds = size / 2f * Vars.tilesize - 3
           val color = Tmp.c1.set(l.color).a(1f).lerp(e.producer!!.current!!.color, e.warmup())
 
-          for (sx in 0..<size) {
-            for (sy in 0..<size) {
+          for(sx in 0..<size) {
+            for(sy in 0..<size) {
               val relx = sx - (size - 1) / 2f
               val rely = sy - (size - 1) / 2f
 
@@ -150,12 +149,12 @@ class ReactingPool : NormalCrafter("reacting_pool") {
             }
           }
         }
-      }, object : DrawDyColorCultivator<NormalCrafterBuild>() {
+      }, object :DrawDyColorCultivator<NormalCrafterBuild>() {
         init {
           spread = 4f
-          plantColor = Func {e: NormalCrafterBuild? -> SglDrawConst.transColor}
-          bottomColor = Func {e: NormalCrafterBuild? -> SglDrawConst.transColor}
-          plantColorLight = Func {e: NormalCrafterBuild? -> Color.white}
+          plantColor = Func { e: NormalCrafterBuild? -> SglDrawConst.transColor }
+          bottomColor = Func { e: NormalCrafterBuild? -> SglDrawConst.transColor }
+          plantColorLight = Func { e: NormalCrafterBuild? -> Color.white }
         }
       }, DrawDefault()
     )

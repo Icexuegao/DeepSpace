@@ -5,8 +5,6 @@ import ice.content.IUnitTypes
 import ice.entities.bullet.ArtilleryBulletType
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
-import universecore.ui.bundle.localization
 import mindustry.content.Fx
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.effect.WaveEffect
@@ -15,8 +13,10 @@ import mindustry.entities.part.RegionPart
 import mindustry.gen.Sounds
 import mindustry.type.Weapon
 import mindustry.type.unit.MissileUnitType
+import universecore.ui.bundle.localization
+import universecore.util.toColor
 
-class WarAxe : MissileUnitType("unit_warAxe") {
+class WarAxe :MissileUnitType("unit_warAxe") {
   init {
     localization {
       zh_CN {

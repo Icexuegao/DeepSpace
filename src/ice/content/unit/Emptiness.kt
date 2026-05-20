@@ -16,7 +16,6 @@ import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.weapon.MayflyWeapon
-import universecore.world.draw.part.CustomPart
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Units
@@ -32,7 +31,6 @@ import mindustry.type.Weapon
 import mindustry.world.meta.BlockFlag
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
-import universecore.util.MathTransform
 import singularity.world.SglFx
 import singularity.world.blocks.turrets.EmpBulletType
 import singularity.world.blocks.turrets.MultiTrailBulletType
@@ -41,6 +39,8 @@ import singularity.world.unit.abilities.MirrorArmorAbility
 import singularity.world.unit.types.TrailMoveLightning
 import universecore.graphics.lightnings.LightningVertex
 import universecore.graphics.lightnings.generator.RandomGenerator
+import universecore.util.MathTransform
+import universecore.world.draw.part.CustomPart
 import kotlin.math.abs
 import kotlin.math.max
 

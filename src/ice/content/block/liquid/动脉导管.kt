@@ -6,8 +6,8 @@ import ice.game.EventType.addContentInitEvent
 import ice.world.content.blocks.liquid.Conduit
 import mindustry.type.Category
 
-class 动脉导管: Conduit("arteryConduit") {
-  init  {
+class 动脉导管 :Conduit("arteryConduit") {
+  init {
     localization {
       zh_CN {
         localizedName = "动脉导管"

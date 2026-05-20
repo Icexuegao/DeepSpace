@@ -2,15 +2,11 @@ package ice.content.block
 
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.world.Load
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
-import mindustry.world.blocks.logic.LogicBlock
-import mindustry.world.blocks.logic.LogicDisplay
-import mindustry.world.blocks.logic.MemoryBlock
-import mindustry.world.blocks.logic.MessageBlock
-import mindustry.world.blocks.logic.SwitchBlock
+import mindustry.world.blocks.logic.*
+import universecore.ui.bundle.localization
+import universecore.world.Load
 
 @Suppress("unused")
 object LogicBLocks :Load {
@@ -132,7 +128,7 @@ object LogicBLocks :Load {
       size = 2
     }
   }
-  val 逻辑显示屏 = object : LogicDisplay("logic-display") {
+  val 逻辑显示屏 = object :LogicDisplay("logic-display") {
     init {
       localization {
         zh_CN {

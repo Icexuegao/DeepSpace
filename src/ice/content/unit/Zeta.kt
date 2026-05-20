@@ -16,7 +16,7 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.type.weapons.RepairBeamWeapon
 
-class Zeta : IceUnitType("unit_zeta") {
+class Zeta :IceUnitType("unit_zeta") {
   init {
     localization {
       zh_CN {
@@ -32,7 +32,7 @@ class Zeta : IceUnitType("unit_zeta") {
     hitSize = 46f
     armor = 16f
     speed = 2.8f
-    rotateSpeed=2f
+    rotateSpeed = 2f
     engineSize = 0f
     range = 360f
     mineTier = 9
@@ -72,7 +72,11 @@ class Zeta : IceUnitType("unit_zeta") {
       alwaysContinuous = true
       bullet = ContinuousFlameBulletType().apply {
         colors = arrayOf(
-          Color.valueOf("FAAF878C"), Color.valueOf("FAAF87B2"), Color.valueOf("FAAF87CC"), Color.valueOf("FAAF87"), Color.valueOf("FFFFFFCC")
+          Color.valueOf("FAAF878C"),
+          Color.valueOf("FAAF87B2"),
+          Color.valueOf("FAAF87CC"),
+          Color.valueOf("FAAF87"),
+          Color.valueOf("FFFFFFCC")
         )
         damage = 50f
         lifetime = 60f

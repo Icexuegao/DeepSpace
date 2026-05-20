@@ -11,6 +11,10 @@ class 大型抽水机 :SolidPump("largeWaterPump") {
         localizedName = "大型抽水机"
         description = "高效抽取地下水资源,但无法抽取地表水资源"
       }
+      en {
+        localizedName = "Large Water Pump"
+        description = "Efficiently extracts underground water resources, but cannot extract surface water."
+      }
     }
     size = 3
     baseEfficiency = 1f

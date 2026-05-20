@@ -11,7 +11,6 @@ import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.UnitSpawnAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.StatusFieldAbility
 import mindustry.entities.effect.ExplosionEffect
@@ -24,13 +23,15 @@ import mindustry.entities.part.ShapePart
 import mindustry.entities.pattern.ShootAlternate
 import mindustry.gen.Sounds
 import mindustry.graphics.Pal
+import universecore.world.ability.UnitSpawnAbility
 
-class Scream : IceUnitType("scream") {
+class Scream :IceUnitType("scream") {
   init {
     localization {
       zh_CN {
         this.localizedName = "悲鸣"
-        description = "重型地面突击单位.对远距离敌人发射集束弹轰击,对近距离敌人则切换为速射粒子炮与弧光冲击炮.对附近的友军提供庇护和突袭效果.配备单位构筑器,会随时间向战场投放\"重压\""
+        description =
+          "重型地面突击单位.对远距离敌人发射集束弹轰击,对近距离敌人则切换为速射粒子炮与弧光冲击炮.对附近的友军提供庇护和突袭效果.配备单位构筑器,会随时间向战场投放\"重压\""
         details = "战场沉默的天灾,\n可怜蝼蚁的悲鸣."
       }
     }
@@ -443,7 +444,7 @@ class Scream : IceUnitType("scream") {
       recoil = 8f
       shake = 20f
       shootY = 73f
-      reload =(1f/0.07f)*60f
+      reload = (1f / 0.07f) * 60f
       shootCone = 1f
       mirror = false
       rotate = true

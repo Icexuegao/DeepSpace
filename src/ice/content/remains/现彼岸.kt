@@ -5,7 +5,7 @@ import ice.graphics.IceColor
 import ice.type.Remains
 import universecore.scene.style.DynamicTextureDrawable
 
-class 现彼岸:Remains("remains_higanbana"){
+class 现彼岸 :Remains("remains_higanbana") {
   init {
     localization {
       zh_CN {

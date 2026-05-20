@@ -8,15 +8,15 @@ import arc.math.Interp
 import ice.content.IStatus
 import ice.content.unit.flying.Veto
 import ice.entities.bullet.sizeBulletType
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.DeathGiftAbility
 import mindustry.content.Fx
 import mindustry.entities.Effect
 import mindustry.entities.abilities.RegenAbility
 import mindustry.entities.part.RegionPart
 import mindustry.gen.Sounds
 import mindustry.graphics.Pal
+import universecore.util.toColor
+import universecore.world.ability.DeathGiftAbility
 import mindustry.entities.part.DrawPart.PartProgress as pro
 
 class Gravestone :IceUnitType("unit_gravestone") {
@@ -26,7 +26,8 @@ class Gravestone :IceUnitType("unit_gravestone") {
     localization {
       zh_CN {
         this.localizedName = "摧枯"
-        description = "精英作战部队,具有凶猛的火力.以生物钢作为主要材料,辅以陶钢作为电磁屏蔽层,一般装备甚至无法留下划痕,同时在澎湃的能量输出下,其回复速度令人惊异\n控制中枢与动力炉紧密相连,在内部结构大规模受损导致动力炉失稳融毁后会一同损毁"
+        description =
+          "精英作战部队,具有凶猛的火力.以生物钢作为主要材料,辅以陶钢作为电磁屏蔽层,一般装备甚至无法留下划痕,同时在澎湃的能量输出下,其回复速度令人惊异\n控制中枢与动力炉紧密相连,在内部结构大规模受损导致动力炉失稳融毁后会一同损毁"
       }
     }
     health = 68700f

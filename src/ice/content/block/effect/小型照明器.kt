@@ -1,13 +1,12 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import universecore.ui.bundle.localization
-
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.power.LightBlock
+import universecore.ui.bundle.localization
 
-class 小型照明器:LightBlock("illuminatorSmall"){
+class 小型照明器 :LightBlock("illuminatorSmall") {
   init {
     size = 1
     armor = 1f

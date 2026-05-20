@@ -6,7 +6,7 @@ import ice.game.EventType.addContentInitEvent
 import ice.world.content.blocks.liquid.Conduit
 import mindustry.type.Category
 
-class 谐振导管:Conduit("resonanceConduit")  {
+class 谐振导管 :Conduit("resonanceConduit") {
   init {
     localization {
       zh_CN {

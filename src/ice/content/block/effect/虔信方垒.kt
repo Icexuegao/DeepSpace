@@ -2,11 +2,10 @@ package ice.content.block.effect
 
 import ice.content.IItems
 import ice.content.IUnitTypes
-import universecore.ui.bundle.localization
-
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.CoreBlock
 import mindustry.type.Category
+import universecore.ui.bundle.localization
 
 class 虔信方垒 :CoreBlock("pietasCornerCore") {
   init {
@@ -17,7 +16,7 @@ class 虔信方垒 :CoreBlock("pietasCornerCore") {
       }
     }
     size = 3
-    armor=20f
+    armor = 20f
     health = 1000
     squareSprite = false
     unitType = IUnitTypes.加百列

@@ -1,15 +1,15 @@
 package ice.content.unit
 
 import ice.entities.bullet.RailBulletType
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.UnitSpawnAbility
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 import mindustry.graphics.Pal
 import mindustry.world.meta.BlockFlag
+import universecore.util.toColor
+import universecore.world.ability.UnitSpawnAbility
 
-class PoisonBarb : IceUnitType("poisonBarb") {
+class PoisonBarb :IceUnitType("poisonBarb") {
   init {
     localization {
       zh_CN {

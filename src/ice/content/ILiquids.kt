@@ -5,7 +5,6 @@ import arc.math.Mathf
 import arc.struct.ObjectSet
 import ice.entities.IcePuddle
 import ice.game.EventType
-import universecore.world.Load
 import ice.world.content.liquid.IceLiquid
 import mindustry.content.Fx
 import mindustry.content.Fx.flakExplosionBig
@@ -21,6 +20,7 @@ import singularity.type.CellLiquid
 import singularity.type.ReactLiquid
 import singularity.type.ReactLiquid.Companion.effectWith
 import singularity.world.SglFx
+import universecore.world.Load
 
 @Suppress("unused")
 object ILiquids :Load {

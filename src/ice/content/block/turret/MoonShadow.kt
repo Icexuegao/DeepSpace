@@ -81,8 +81,8 @@ class MoonShadow :SglTurret("moonShadow") {
         heatColor = Color.valueOf("517D9D")
       })
     }, DrawParticles().apply {
-      val vec2 = Vec2(5f,0f)
-      vecl= Func { build ->
+      val vec2 = Vec2(5f, 0f)
+      vecl = Func { build ->
         vec2.setAngle(build.rotationu)
       }
       color = Color.valueOf("517D9D")
@@ -98,7 +98,7 @@ class MoonShadow :SglTurret("moonShadow") {
     setAmmo()
   }
 
-   fun setAmmo() {
+  fun setAmmo() {
     newAmmo(BasicBulletType(sprite = "circle-bullet").apply {
       damage = 240f
       lifetime = 30f
@@ -193,7 +193,7 @@ class MoonShadow :SglTurret("moonShadow") {
     var particleInterp: Interp = PowIn(1.5f)
     var particleSizeInterp: Interp = Interp.slope
     var blending: Blending = Blending.normal
-    var vecl: Func<SglTurretBuild, Vec2>?=null
+    var vecl: Func<SglTurretBuild, Vec2>? = null
 
     override fun draw(build: Building) {
       build as SglTurretBuild

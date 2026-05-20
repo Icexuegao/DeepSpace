@@ -7,7 +7,7 @@ import ice.type.Remains
 import mindustry.world.meta.Stats
 import universecore.scene.style.DynamicTextureDrawable
 
-class 多余的视线:Remains("remains_extra_gaze"){
+class 多余的视线 :Remains("remains_extra_gaze") {
   init {
     remainsColor = IceColor.r2
     localization {

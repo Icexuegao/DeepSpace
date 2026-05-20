@@ -11,6 +11,11 @@ class 矩阵矿床 :MatrixMiner("matrix_miner") {
         localizedName = "矩阵矿床"
         description = "矩阵矿床的控制中心,四面可安装矿床的工作组件以进行开采工作"
       }
+      en {
+        localizedName = "Matrix Miner"
+        description =
+          "The control center of the matrix miner. Working components can be installed on all four sides to perform mining operations."
+      }
     }
     size = 5
     matrixEnergyUse = 0.6f

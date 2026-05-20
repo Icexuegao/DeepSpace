@@ -57,7 +57,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("unused")
-object IUnitTypes : Load {
+object IUnitTypes :Load {
   val 星光 = Starlight()
   val 火花 = Spark()
   val 战斧 = WarAxe()
@@ -165,7 +165,7 @@ object IUnitTypes : Load {
   val 虚宿 = Emptiness()
   val 无畏 = Fearless()
   val 冥刻 = DarkCarving()
-  var SglUnitEntity.controlTime by AttachedProperty{0f}
+  var SglUnitEntity.controlTime by AttachedProperty { 0f }
 
   /**棱镜 */
   var prism: UnitType? = null
@@ -173,17 +173,15 @@ object IUnitTypes : Load {
   /**流形 */
   var manifold: UnitType? = null
 
-
-  val unstable_energy_body = object : SglUnitType<SglUnitEntity>("unstable_energy_body", SglUnitEntity::class.java) {
+  val unstable_energy_body = object :SglUnitType<SglUnitEntity>("unstable_energy_body", SglUnitEntity::class.java) {
     val FULL_SIZE_ENERGY: Float = 3680f
 
-    var SglUnitEntity.lightnings: LightningContainer? by AttachedProperty{null}
-    var SglUnitEntity.lin: LightningContainer? by AttachedProperty{null}
-    var SglUnitEntity.timer by AttachedProperty{15f}
-    var SglUnitEntity.bullTime by AttachedProperty{0f}
+    var SglUnitEntity.lightnings: LightningContainer? by AttachedProperty { null }
+    var SglUnitEntity.lin: LightningContainer? by AttachedProperty { null }
+    var SglUnitEntity.timer by AttachedProperty { 15f }
+    var SglUnitEntity.bullTime by AttachedProperty { 0f }
 
     init {
-
 
       Events.on(ClientLoadEvent::class.java) { e: ClientLoadEvent? ->
         immunities.addAll(Vars.content.statusEffects())
@@ -202,7 +200,7 @@ object IUnitTypes : Load {
       useUnitCap = false
 
       aiController = Prov {
-        object : UnitController {
+        object :UnitController {
           override fun unit(unit: Unit) {
           }
 
@@ -217,7 +215,9 @@ object IUnitTypes : Load {
             return true
           }
 
-          override fun isLogicControllable(): Boolean { return false }
+          override fun isLogicControllable(): Boolean {
+            return false
+          }
 
           override fun updateUnit() {}
 
@@ -285,7 +285,7 @@ object IUnitTypes : Load {
         linGen.maxRange = hitSize * min(unit.health / FULL_SIZE_ENERGY, 2f)
         linGen.minRange = linGen.maxRange
         val n = Mathf.random(1, 3)
-        for (i in 0..<n) {
+        for(i in 0..<n) {
           lin.create(linGen)
         }
       }
@@ -353,10 +353,24 @@ object IUnitTypes : Load {
         MathRenderer.setThreshold(0.4f, 0.7f)
         MathRenderer.setDispersion(lerpStart * 1.2f)
         Draw.color(Pal.reactorPurple)
-        MathRenderer.drawCurveCircle(u.x, u.y, radius * 0.7f + radius * Interp.pow2In.apply(1 - lerpStart), 3, radius * 0.6f, Time.time * 1.2f)
+        MathRenderer.drawCurveCircle(
+          u.x,
+          u.y,
+          radius * 0.7f + radius * Interp.pow2In.apply(1 - lerpStart),
+          3,
+          radius * 0.6f,
+          Time.time * 1.2f
+        )
         MathRenderer.setDispersion(lerpStart)
         Draw.color(SglDrawConst.matrixNet)
-        MathRenderer.drawCurveCircle(u.x, u.y, radius * 0.72f + radius * Interp.pow2In.apply(1 - lerpStart), 4, radius * 0.67f, Time.time * 1.6f)
+        MathRenderer.drawCurveCircle(
+          u.x,
+          u.y,
+          radius * 0.72f + radius * Interp.pow2In.apply(1 - lerpStart),
+          4,
+          radius * 0.67f,
+          Time.time * 1.6f
+        )
       }
 
       Draw.color(SglDrawConst.matrixNet)
@@ -380,7 +394,8 @@ object IUnitTypes : Load {
   }.apply {
 
   }
+
   fun getCoreUnits(): Seq<IceUnitType> {
-    return Seq.with(加百列,米迦勒, 路西法)
+    return Seq.with(加百列, 米迦勒, 路西法)
   }
 }

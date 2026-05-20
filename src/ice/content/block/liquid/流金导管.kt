@@ -6,7 +6,7 @@ import ice.game.EventType.addContentInitEvent
 import ice.world.content.blocks.liquid.Conduit
 import mindustry.type.Category
 
-class 流金导管:Conduit("fluxGoldConduit")  {
+class 流金导管 :Conduit("fluxGoldConduit") {
   init {
     localization {
       zh_CN {

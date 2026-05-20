@@ -9,7 +9,7 @@ import mindustry.content.StatusEffects
 import mindustry.world.meta.Stats
 import universecore.scene.style.DynamicTextureDrawable
 
-class 血腥玛丽:Remains("remains_bloody_mary"){
+class 血腥玛丽 :Remains("remains_bloody_mary") {
   init {
     remainsColor = IceColor.r2
     localization {

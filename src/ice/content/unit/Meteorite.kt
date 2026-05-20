@@ -3,7 +3,6 @@ package ice.content.unit
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -12,9 +11,10 @@ import mindustry.gen.Sounds
 import mindustry.graphics.Pal
 import mindustry.type.weapons.PointDefenseWeapon
 import mindustry.type.weapons.RepairBeamWeapon
+import universecore.util.toColor
 
-class Meteorite:IceUnitType("meteorite") {
-  init{
+class Meteorite :IceUnitType("meteorite") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "陨石"
@@ -68,7 +68,7 @@ class Meteorite:IceUnitType("meteorite") {
       mirror = false
       laserColor = "FFA665".toColor()
       repairSpeed = 5f
-      bullet = object : BulletType() {
+      bullet = object :BulletType() {
         init {
           maxRange = 120f
         }

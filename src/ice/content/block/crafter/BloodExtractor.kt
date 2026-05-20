@@ -2,21 +2,21 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawLiquidTile
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
-class BloodExtractor : NormalCrafter("bloodExtractor") {
+class BloodExtractor :NormalCrafter("bloodExtractor") {
   init {
     localization {
       zh_CN {
         this.localizedName = "血肉分离机"
-        description="将生物钢加热为血肉赘生物"
-        details="血肉赘生物同时具有高温和易燃两种特性的高危流体"
+        description = "将生物钢加热为血肉赘生物"
+        details = "血肉赘生物同时具有高温和易燃两种特性的高危流体"
       }
     }
     size = 2
@@ -25,7 +25,7 @@ class BloodExtractor : NormalCrafter("bloodExtractor") {
 
     updateEffect = Fx.melting
 
-    newFormula {consumers, producers ->
+    newFormula { consumers, producers ->
       consumers.apply {
         time(120f)
         power(6f)

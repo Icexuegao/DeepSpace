@@ -1,14 +1,13 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import universecore.ui.bundle.localization
-
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.storage.StorageBlock
+import universecore.ui.bundle.localization
 
-class 仓库:StorageBlock("warehouse"){
-  init{
+class 仓库 :StorageBlock("warehouse") {
+  init {
     size = 3
     health = 1280
     itemCapacity = 5560

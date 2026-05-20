@@ -8,12 +8,10 @@ import arc.math.geom.Geometry
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
-import ice.graphics.IceColor
 import ice.game.EventType.addContentInitEvent
-import universecore.world.Load
+import ice.graphics.IceColor
 import ice.shader.IceShader
 import ice.type.Dup
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.environment.*
 import ice.world.meta.IAttribute
 import mindustry.Vars
@@ -26,6 +24,8 @@ import mindustry.graphics.Layer
 import mindustry.world.Block
 import mindustry.world.Tile
 import mindustry.world.meta.Attribute
+import universecore.ui.bundle.localization
+import universecore.world.Load
 
 @Suppress("unused")
 object EnvironmentBlocks :Load {

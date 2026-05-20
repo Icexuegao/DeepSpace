@@ -7,8 +7,8 @@ import mindustry.type.ItemStack
 import mindustry.world.meta.Stats
 import universecore.world.consumers.ConsumeType
 
-class 玄岩板:Remains("remains_basalt_plate"){
-  init  {
+class 玄岩板 :Remains("remains_basalt_plate") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "玄岩板"

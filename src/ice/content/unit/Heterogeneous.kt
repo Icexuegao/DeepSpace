@@ -14,7 +14,7 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.LegsUnit
 import mindustry.gen.Sounds
 
-class Heterogeneous : IceUnitType("unit_heterogeneous", LegsUnit::class.java) {
+class Heterogeneous :IceUnitType("unit_heterogeneous", LegsUnit::class.java) {
   init {
     localization {
       zh_CN {

@@ -3,8 +3,6 @@ package ice.content.block.crafter
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Liquids
 import mindustry.gen.Building
@@ -15,8 +13,9 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawLiquidTile
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
+import universecore.world.draw.DrawMulti
 
-class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
+class OsmoticPurifier :NormalCrafter("osmotic_purifier") {
   init {
     localization {
       zh_CN {
@@ -43,7 +42,7 @@ class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
 
 
     drawers = DrawMulti(
-      DrawBottom(), DrawLiquidTile(Liquids.water, 3f), object : DrawBlock() {
+      DrawBottom(), DrawLiquidTile(Liquids.water, 3f), object :DrawBlock() {
         override fun draw(build: Building?) {
           val e = build as NormalCrafterBuild
           val region = Vars.renderer.fluidFrames[0][Liquids.water.animationFrame]
@@ -51,8 +50,8 @@ class OsmoticPurifier : NormalCrafter("osmotic_purifier") {
           val bounds = size / 2f * Vars.tilesize - 8
           val color = ILiquids.纯净水.color
 
-          for (sx in 0..<size) {
-            for (sy in 0..<size) {
+          for(sx in 0..<size) {
+            for(sy in 0..<size) {
               val relx = sx - (size - 1) / 2f
               val rely = sy - (size - 1) / 2f
 

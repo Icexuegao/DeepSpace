@@ -1,14 +1,13 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import universecore.ui.bundle.localization
-
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.storage.StorageBlock
+import universecore.ui.bundle.localization
 
-class 晶格数据矩阵 :StorageBlock("effect_latticeDataMatrix"){
-  init{
+class 晶格数据矩阵 :StorageBlock("effect_latticeDataMatrix") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "晶格数据矩阵"

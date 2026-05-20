@@ -25,6 +25,11 @@ class 谐振增压组件 :MatrixMinerComponent("matrix_miner_extend") {
         localizedName = "谐振增压组件"
         description = "矩阵矿床的增幅组件,使矩阵矿床的采集范围增大,可以大幅提高钻头的采掘效率"
       }
+      en {
+        localizedName = "Resonance Boost Component"
+        description =
+          "An amplification component for the Matrix Miner that increases its collection range and can significantly improve the drill's mining efficiency."
+      }
     }
     requirements(
       Category.production,

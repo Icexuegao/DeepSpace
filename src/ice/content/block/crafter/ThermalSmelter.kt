@@ -9,8 +9,6 @@ import arc.math.Mathf
 import arc.util.Time
 import ice.content.IItems
 import ice.content.ILiquids
-
-import universecore.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.type.Category
 import mindustry.type.ItemStack
@@ -20,9 +18,10 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
+import universecore.world.draw.DrawMulti
 import kotlin.math.max
 
-class ThermalSmelter : NormalCrafter("thermal_smelter") {
+class ThermalSmelter :NormalCrafter("thermal_smelter") {
   init {
     localization {
       zh_CN {
@@ -66,14 +65,14 @@ class ThermalSmelter : NormalCrafter("thermal_smelter") {
     newProduce()
     produce!!.item(IItems.铱锭, 2)
 
-    drawers = DrawMulti(DrawBottom(), object : DrawBlock() {
+    drawers = DrawMulti(DrawBottom(), object :DrawBlock() {
       val flameColor: Color = Color.valueOf("f58349")
 
       override fun draw(build: Building) {
         val base = (Time.time / 70)
         Draw.color(flameColor, 0.5f)
         rand.setSeed(build.id.toLong())
-        for (i in 0..34) {
+        for(i in 0..34) {
           val fin = (rand.random(1f) + base) % 1f
           val angle = rand.random(360f) + (Time.time / 1.5f) % 360f
           val len = 10 * Mathf.pow(fin, 1.5f)
@@ -86,7 +85,7 @@ class ThermalSmelter : NormalCrafter("thermal_smelter") {
         Draw.blend()
         Draw.reset()
       }
-    }, DrawDefault(), object : DrawFlame() {
+    }, DrawDefault(), object :DrawFlame() {
       init {
         flameRadius = 2f
         flameRadiusScl = 4f

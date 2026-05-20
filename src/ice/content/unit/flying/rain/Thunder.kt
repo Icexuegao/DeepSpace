@@ -93,15 +93,15 @@ class Thunder :IceUnitType("unit_thunder") {
         absorbable = false
         bulletInterval = 2.5f
         intervalBullets = 3
-        val cv=RandomGenerator()
+        val cv = RandomGenerator()
         var lig = RandomGenerator().apply {
           maxDeflect = 55f
           branchChance = 0.2f
           minBranchStrength = 0.8f
           maxBranchStrength = 3f
           maxLength = 5 * 8f
-          branchMaker= Func2{ a,b->
-           cv
+          branchMaker = Func2 { a, b ->
+            cv
           }
         }
         intervalBullet = lightning(20f, 31f, 3f, colorValue1, true) {
@@ -171,14 +171,14 @@ class Thunder :IceUnitType("unit_thunder") {
           bulletInterval = 2.5f
           intervalBullets = 1
 
-          val cv1= VectorLightningGenerator()
+          val cv1 = VectorLightningGenerator()
           var lig1 = RandomGenerator().apply {
-            maxLength=18f
-            branchMaker= Func2{ a,b->
+            maxLength = 18f
+            branchMaker = Func2 { a, b ->
               cv1
             }
           }
-          intervalBullet = TurretBullets.lightning(20f, 8f, 3f, colorValue1, true) {
+          intervalBullet = lightning(20f, 8f, 3f, colorValue1, true) {
             lig1
           }
         }

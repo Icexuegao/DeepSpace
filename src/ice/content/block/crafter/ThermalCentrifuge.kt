@@ -4,8 +4,6 @@ import arc.func.Floatf
 import arc.func.Func
 import arc.util.Tmp
 import ice.content.IItems
-
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.Liquids
@@ -21,8 +19,9 @@ import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
 import universecore.world.consumers.ConsumeType
+import universecore.world.draw.DrawMulti
 
-class ThermalCentrifuge : NormalCrafter("thermal_centrifuge") {
+class ThermalCentrifuge :NormalCrafter("thermal_centrifuge") {
   init {
     localization {
       zh_CN {
@@ -39,7 +38,7 @@ class ThermalCentrifuge : NormalCrafter("thermal_centrifuge") {
     itemCapacity = 30
     warmupSpeed = 0.006f
 
-    newFormula {consumers, producers ->
+    newFormula { consumers, producers ->
       consumers.apply {
         time(120f)
         item(IItems.铀原料, 4)
@@ -75,55 +74,63 @@ class ThermalCentrifuge : NormalCrafter("thermal_centrifuge") {
     craftEffect = Fx.smeltsmoke
     updateEffect = Fx.plasticburn
 
-    drawers = DrawMulti(DrawBottom(), object : DrawBlock() {
-      override fun draw(build: Building) {
-        val e = build as NormalCrafterBuild
-        if (e.producer!!.current == null) return
+    drawers = DrawMulti(
+      DrawBottom(),
+      object :DrawBlock() {
+        override fun draw(build: Building) {
+          val e = build as NormalCrafterBuild
+          if (e.producer!!.current == null) return
 
-        val region = Vars.renderer.fluidFrames[0][Liquids.slag.animationFrame]
-        val toDraw = Tmp.tr1
-        val bounds = size / 2f * Vars.tilesize
-        val color = Liquids.slag.color
+          val region = Vars.renderer.fluidFrames[0][Liquids.slag.animationFrame]
+          val toDraw = Tmp.tr1
+          val bounds = size / 2f * Vars.tilesize
+          val color = Liquids.slag.color
 
-        for (sx in 0..<size) {
-          for (sy in 0..<size) {
-            val relx = sx - (size - 1) / 2f
-            val rely = sy - (size - 1) / 2f
+          for(sx in 0..<size) {
+            for(sy in 0..<size) {
+              val relx = sx - (size - 1) / 2f
+              val rely = sy - (size - 1) / 2f
 
-            toDraw.set(region)
-            val rightBorder = relx * Vars.tilesize
-            val topBorder = rely * Vars.tilesize
-            val squishX = rightBorder + Vars.tilesize / 2f - bounds
-            val squishY = topBorder + Vars.tilesize / 2f - bounds
-            var ox = 0f
-            var oy = 0f
+              toDraw.set(region)
+              val rightBorder = relx * Vars.tilesize
+              val topBorder = rely * Vars.tilesize
+              val squishX = rightBorder + Vars.tilesize / 2f - bounds
+              val squishY = topBorder + Vars.tilesize / 2f - bounds
+              var ox = 0f
+              var oy = 0f
 
-            if (squishX >= 8 || squishY >= 8) continue
+              if (squishX >= 8 || squishY >= 8) continue
 
-            if (squishX > 0) {
-              toDraw.setWidth(toDraw.width - squishX * 4f)
-              ox = -squishX / 2f
+              if (squishX > 0) {
+                toDraw.setWidth(toDraw.width - squishX * 4f)
+                ox = -squishX / 2f
+              }
+
+              if (squishY > 0) {
+                toDraw.setY(toDraw.y + squishY * 4f)
+                oy = -squishY / 2f
+              }
+
+              Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, e.warmup(), color)
             }
-
-            if (squishY > 0) {
-              toDraw.setY(toDraw.y + squishY * 4f)
-              oy = -squishY / 2f
-            }
-
-            Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, e.warmup(), color)
           }
         }
-      }
-    }, DrawRegion("_rim", 0.8f, true), DrawDefault(), DrawRegion("_rotator", 1.8f, true), DrawRegion("_toprotator", -1.2f, true), object : DrawRegionDynamic<NormalCrafterBuild?>("_top") {
-      init {
-        rotation = Floatf {e: NormalCrafterBuild? -> -e!!.totalProgress() * 1.2f}
-        color = Func {e: NormalCrafterBuild? -> if (e!!.producer!!.current != null) e.producer!!.current!!.color else SglDrawConst.transColor}
-        alpha = Floatf {e: NormalCrafterBuild? ->
-          val cons = if (e!!.consumer.current == null) null else e.consumer.current!!.get(ConsumeType.item)
-          val i = if (cons == null) null else cons.consItems!![0].item
-          if (cons == null) 0f else (e.items.get(i).toFloat()) / itemCapacity
+      },
+      DrawRegion("_rim", 0.8f, true),
+      DrawDefault(),
+      DrawRegion("_rotator", 1.8f, true),
+      DrawRegion("_toprotator", -1.2f, true),
+      object :DrawRegionDynamic<NormalCrafterBuild?>("_top") {
+        init {
+          rotation = Floatf { e: NormalCrafterBuild? -> -e!!.totalProgress() * 1.2f }
+          color =
+            Func { e: NormalCrafterBuild? -> if (e!!.producer!!.current != null) e.producer!!.current!!.color else SglDrawConst.transColor }
+          alpha = Floatf { e: NormalCrafterBuild? ->
+            val cons = if (e!!.consumer.current == null) null else e.consumer.current!!.get(ConsumeType.item)
+            val i = if (cons == null) null else cons.consItems!![0].item
+            if (cons == null) 0f else (e.items.get(i).toFloat()) / itemCapacity
+          }
         }
-      }
-    })
+      })
   }
 }

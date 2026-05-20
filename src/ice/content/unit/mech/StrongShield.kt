@@ -3,7 +3,6 @@ package ice.content.unit.mech
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.ArmorPlateAbility
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.abilities.RegenAbility
@@ -11,8 +10,9 @@ import mindustry.entities.abilities.StatusFieldAbility
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.MechUnit
 import mindustry.gen.Sounds
+import universecore.world.ability.ArmorPlateAbility
 
-class StrongShield : IceUnitType("unit_strongShield", MechUnit::class.java) {
+class StrongShield :IceUnitType("unit_strongShield", MechUnit::class.java) {
 
   init {
     localization {

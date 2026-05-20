@@ -2,11 +2,10 @@ package ice.content.block.effect
 
 import ice.content.IItems
 import ice.content.IUnitTypes
-import universecore.ui.bundle.localization
-
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.CoreBlock
 import mindustry.type.Category
+import universecore.ui.bundle.localization
 
 class 传颂核心 :CoreBlock("eulogyCore") {
   init {

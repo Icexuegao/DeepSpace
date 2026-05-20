@@ -24,7 +24,6 @@ import mindustry.graphics.Pal
 import mindustry.type.Category
 import singularity.graphic.SglDraw
 import singularity.ui.UIUtils
-import universecore.util.MathTransform
 import singularity.world.SglFx
 import singularity.world.SglUnitSorts
 import singularity.world.blocks.turrets.HeatBulletType
@@ -32,10 +31,11 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 import singularity.world.particles.SglParticleModels
+import universecore.util.MathTransform
 import universecore.world.particles.models.HeatBulletParticleModel.Companion.bullet
 import universecore.world.particles.models.HeatBulletParticleModel.Companion.owner
 
-class Soflame : SglTurret("soflame") {
+class Soflame :SglTurret("soflame") {
   init {
     localization {
       zh_CN {
@@ -67,10 +67,10 @@ class Soflame : SglTurret("soflame") {
     requirements(
       Category.turret,
       IItems.强化合金, 150, IItems.铝锭, 180, IItems.FEX水晶, 140, IItems.充能FEX水晶,
-      120, IItems.气凝胶, 180, IItems.铱锭, 60, IItems.暮光合金, 120,  IItems.絮凝剂, 100
+      120, IItems.气凝胶, 180, IItems.铱锭, 60, IItems.暮光合金, 120, IItems.絮凝剂, 100
     )
 
-    val subBullet: mindustry.entities.bullet.BulletType = object : HeatBulletType() {
+    val subBullet: mindustry.entities.bullet.BulletType = object :HeatBulletType() {
       init {
         speed = 4f
         lifetime = 90f
@@ -90,7 +90,7 @@ class Soflame : SglTurret("soflame") {
         trailRotation = true
 
         hitEffect = MultiEffect(
-          object : WaveEffect() {
+          object :WaveEffect() {
             init {
               colorFrom = Pal.lighterOrange
               colorTo = Color.white
@@ -114,7 +114,7 @@ class Soflame : SglTurret("soflame") {
         Fill.circle(b.x, b.y, 3f)
       }
     }
-    newAmmo(object : HeatBulletType() {
+    newAmmo(object :HeatBulletType() {
       init {
         damage = 260f
         splashDamage = 540f
@@ -135,7 +135,7 @@ class Soflame : SglTurret("soflame") {
         trailChance = 0.1f
 
         hitEffect = MultiEffect(
-          object : WaveEffect() {
+          object :WaveEffect() {
             init {
               colorTo = Pal.lighterOrange
               colorFrom = colorTo
@@ -158,14 +158,15 @@ class Soflame : SglTurret("soflame") {
         p.bullet = SglParticleModels.defHeatTrailHitter.create(b, b.x, b.y, b.rotation())
 
         Tmp.v1.set(1f, 0f).setAngle(b.rotation())
-        for (i in 0..3) {
+        for(i in 0..3) {
           val off = Mathf.random(0f, Mathf.PI2)
           val scl = Mathf.random(3f, 6f)
           val x = b.x
           val y = b.y
           Time.run((i * 5).toFloat()) {
-            for (sign in Mathf.signs) {
-              subBullet.create(b, x, y, b.rotation()).mover = Mover { e -> e.moveRelative(0f, Mathf.sin(e.time + off, scl, ((1 + i) * sign).toFloat())) }
+            for(sign in Mathf.signs) {
+              subBullet.create(b, x, y, b.rotation()).mover =
+                Mover { e -> e.moveRelative(0f, Mathf.sin(e.time + off, scl, ((1 + i) * sign).toFloat())) }
             }
           }
         }
@@ -179,7 +180,7 @@ class Soflame : SglTurret("soflame") {
     consume!!.time(180f)
     consume!!.energy(5f)
 
-    drawers = object : DrawSglTurret(object : RegionPart("_blade") {
+    drawers = object :DrawSglTurret(object :RegionPart("_blade") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup
@@ -189,13 +190,13 @@ class Soflame : SglTurret("soflame") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2f, 0f))
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         mirror = false
         heatProgress = PartProgress.warmup
         heatColor = Pal.lightishOrange
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         progress = PartProgress.warmup
         y = shootY
@@ -204,7 +205,7 @@ class Soflame : SglTurret("soflame") {
         radiusTo = 4f
         layer = Layer.effect
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         progress = PartProgress.warmup
         y = shootY
@@ -214,7 +215,7 @@ class Soflame : SglTurret("soflame") {
           SglDraw.dashCircle(x, y, 6 * p, Time.time * 1.7f)
         }
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -224,7 +225,7 @@ class Soflame : SglTurret("soflame") {
         radius = 0f
         radiusTo = 4f
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -237,7 +238,7 @@ class Soflame : SglTurret("soflame") {
         radius = 0f
         radiusTo = 10f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -251,7 +252,7 @@ class Soflame : SglTurret("soflame") {
         triLength = 0f
         triLengthTo = 8f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -266,7 +267,7 @@ class Soflame : SglTurret("soflame") {
         triLengthTo = 4f
         shapeRotation = 180f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -281,7 +282,7 @@ class Soflame : SglTurret("soflame") {
         triLengthTo = 30f
         shapeRotation = 0f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -296,7 +297,7 @@ class Soflame : SglTurret("soflame") {
         triLengthTo = 5f
         shapeRotation = 180f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup.delay(0.2f)
         color = Pal.lighterOrange
@@ -311,7 +312,7 @@ class Soflame : SglTurret("soflame") {
         triLengthTo = 20f
         shapeRotation = 0f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup.delay(0.2f)
         color = Pal.lighterOrange
@@ -326,7 +327,7 @@ class Soflame : SglTurret("soflame") {
         triLengthTo = 4f
         shapeRotation = 180f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup.delay(0.4f)
         color = Pal.lighterOrange
@@ -341,7 +342,7 @@ class Soflame : SglTurret("soflame") {
         triLengthTo = 16f
         shapeRotation = 0f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup.delay(0.4f)
         color = Pal.lighterOrange
@@ -356,7 +357,7 @@ class Soflame : SglTurret("soflame") {
         triLengthTo = 4f
         shapeRotation = 180f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup.delay(0.6f)
         color = Pal.lighterOrange
@@ -371,7 +372,7 @@ class Soflame : SglTurret("soflame") {
         triLengthTo = 12f
         shapeRotation = 0f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup.delay(0.6f)
         color = Pal.lighterOrange
@@ -395,9 +396,9 @@ class Soflame : SglTurret("soflame") {
         Draw.z(Layer.effect)
         rand.setSeed(build.id.toLong())
         SglDraw.drawTransform(build.x, build.y, shootX, shootY, build.drawrot()) { ox: Float, oy: Float, _: Float ->
-          for (i in 0..2) {
+          for(i in 0..2) {
             val bool = rand.random(1f) > 0.5f
-            for (d in 0..2) {
+            for(d in 0..2) {
               param[d * 3] = rand.random(4f) / (d + 1) * (if (bool != (d % 2 == 0)) -1 else 1)
               param[d * 3 + 1] = rand.random(360f)
               param[d * 3 + 2] = rand.random(6f) / ((d + 1) * (d + 1))

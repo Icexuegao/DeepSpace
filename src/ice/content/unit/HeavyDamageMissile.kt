@@ -4,8 +4,6 @@ import arc.math.Interp
 import ice.content.IStatus
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
-import universecore.ui.bundle.localization
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.bullet.ContinuousFlameBulletType
 import mindustry.entities.effect.ParticleEffect
@@ -13,8 +11,10 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.type.Weapon
 import mindustry.type.unit.MissileUnitType
+import universecore.ui.bundle.localization
+import universecore.util.toColor
 
-class HeavyDamageMissile : MissileUnitType("unit_heavyDamageMissile") {
+class HeavyDamageMissile :MissileUnitType("unit_heavyDamageMissile") {
   init {
     localization {
       zh_CN {

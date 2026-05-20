@@ -4,8 +4,6 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.audio.ISounds
 import ice.content.IItems
-
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.entities.effect.MultiEffect
@@ -13,8 +11,9 @@ import mindustry.entities.effect.RadialEffect
 import mindustry.type.Category
 import mindustry.world.draw.*
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
-class 高能陶钢聚合炉 : NormalCrafter("highEnergyCeramicSteelFurnace") {
+class 高能陶钢聚合炉 :NormalCrafter("highEnergyCeramicSteelFurnace") {
   init {
     localization {
       zh_CN {
@@ -30,7 +29,7 @@ class 高能陶钢聚合炉 : NormalCrafter("highEnergyCeramicSteelFurnace") {
     liquidCapacity = 300f
     newConsume().apply {
       power(17f)
-      time(4*60f)
+      time(4 * 60f)
       items(IItems.钴钢, 12, IItems.铈锭, 12, IItems.石英玻璃, 12)
       liquid(Liquids.water, 30f / 60f)
     }
@@ -79,5 +78,5 @@ class 高能陶钢聚合炉 : NormalCrafter("highEnergyCeramicSteelFurnace") {
     })
     ambientSound = ISounds.beamLoop
     ambientSoundVolume = 0.03f
-    }
+  }
 }

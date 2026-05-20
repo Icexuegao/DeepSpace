@@ -4,7 +4,6 @@ import arc.func.Cons
 import arc.func.Floatf
 import arc.math.Mathf
 import ice.content.IItems
-import universecore.world.draw.DrawMulti
 import mindustry.graphics.Layer
 import mindustry.type.Category
 import mindustry.world.Block
@@ -14,61 +13,76 @@ import singularity.graphic.SglDrawConst
 import singularity.world.SglFx
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawRegionDynamic
+import universecore.world.draw.DrawMulti
 
-class FEXCrystalCharger:NormalCrafter("FEX_crystal_charger"){
-  init{
-  localization {
-    zh_CN {
-      this.localizedName = "结晶活化器"
-      description = "为导能结晶充能产出活化导能结晶"
-      details="对导能结晶释放高能中子脉冲,合适的脉冲频率会令能量在晶格之内不断积累,叠加,使晶体结构变得不稳定,并带来一些特别的效果"
+class FEXCrystalCharger :NormalCrafter("FEX_crystal_charger") {
+  init {
+    localization {
+      zh_CN {
+        this.localizedName = "结晶活化器"
+        description = "为导能结晶充能产出活化导能结晶"
+        details = "对导能结晶释放高能中子脉冲,合适的脉冲频率会令能量在晶格之内不断积累,叠加,使晶体结构变得不稳定,并带来一些特别的效果"
+      }
     }
+    requirements(
+      Category.crafting,
+      IItems.强化合金,
+      70,
+      IItems.FEX水晶,
+      60,
+      IItems.石英玻璃,
+      65,
+      IItems.絮凝剂,
+      70,
+      IItems.钴钢,
+      85,
+      IItems.铪锭,
+      50
+    )
+    size = 3
+    health = 1150
+
+    itemCapacity = 30
+    basicPotentialEnergy = 128f
+
+    newConsume()
+    consume!!.time(60f)
+    consume!!.item(IItems.FEX水晶, 1)
+    consume!!.energy(2f)
+    newProduce()
+    produce!!.item(IItems.充能FEX水晶, 1)
+
+    updateEffect = SglFx.neutronWeaveMicro
+    updateEffectChance = 0.04f
+    updateEffectColor = SglDrawConst.fexCrystal
+    craftEffect = SglFx.crystalConstructed
+    craftEffectColor = SglDrawConst.fexCrystal
+
+
+
+    crafting = Cons { e: NormalCrafterBuild? ->
+      if (Mathf.chanceDelta((0.03f * e!!.workEfficiency()).toDouble())) {
+        SglFx.shrinkParticleSmall.at(e.x, e.y, SglDrawConst.fexCrystal)
+      }
+    }
+
+    drawers = DrawMulti(DrawDefault(), object :DrawRegionDynamic<NormalCrafterBuild?>() {
+      init {
+        alpha = Floatf { e: NormalCrafterBuild? -> if (e!!.items.has(IItems.FEX水晶) || e.progress() > 0.4f) 1f else 0f }
+      }
+
+      override fun load(block: Block?) {
+        region = Singularity.getModAtlas("FEX_crystal")
+      }
+    }, object :DrawRegionDynamic<NormalCrafterBuild?>() {
+      init {
+        layer = Layer.effect
+        alpha = Floatf { e: NormalCrafterBuild? -> if (e!!.items.has(IItems.FEX水晶) || e.progress() > 0.4f) e.progress() else 0f }
+      }
+
+      override fun load(block: Block?) {
+        region = Singularity.getModAtlas("FEX_crystal_power")
+      }
+    })
   }
-  requirements(Category.crafting, IItems.强化合金, 70, IItems.FEX水晶, 60, IItems.石英玻璃, 65, IItems.絮凝剂, 70, IItems.钴钢, 85, IItems.铪锭, 50)
-  size = 3
-  health = 1150
-
-  itemCapacity = 30
-  basicPotentialEnergy = 128f
-
-  newConsume()
-  consume!!.time(60f)
-  consume!!.item(IItems.FEX水晶, 1)
-  consume!!.energy(2f)
-  newProduce()
-  produce!!.item(IItems.充能FEX水晶, 1)
-
-  updateEffect = SglFx.neutronWeaveMicro
-  updateEffectChance = 0.04f
-  updateEffectColor = SglDrawConst.fexCrystal
-  craftEffect = SglFx.crystalConstructed
-  craftEffectColor = SglDrawConst.fexCrystal
-
-
-
-  crafting = Cons { e: NormalCrafterBuild? ->
-    if (Mathf.chanceDelta((0.03f * e!!.workEfficiency()).toDouble())) {
-      SglFx.shrinkParticleSmall.at(e.x, e.y, SglDrawConst.fexCrystal)
-    }
-  }
-
-  drawers = DrawMulti(DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild?>() {
-    init {
-      alpha = Floatf { e: NormalCrafterBuild? -> if (e!!.items.has(IItems.FEX水晶) || e.progress() > 0.4f) 1f else 0f }
-    }
-
-    override fun load(block: Block?) {
-      region = Singularity.getModAtlas("FEX_crystal")
-    }
-  }, object : DrawRegionDynamic<NormalCrafterBuild?>() {
-    init {
-      layer = Layer.effect
-      alpha = Floatf { e: NormalCrafterBuild? -> if (e!!.items.has(IItems.FEX水晶) || e.progress() > 0.4f) e.progress() else 0f }
-    }
-
-    override fun load(block: Block?) {
-      region = Singularity.getModAtlas("FEX_crystal_power")
-    }
-  })
-}
 }

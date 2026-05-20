@@ -8,7 +8,7 @@ import mindustry.entities.bullet.MissileBulletType
 import mindustry.gen.Sounds
 import mindustry.gen.UnitWaterMove
 
-class Execution : IceUnitType("unit_execution", UnitWaterMove::class.java) {
+class Execution :IceUnitType("unit_execution", UnitWaterMove::class.java) {
   init {
     localization {
       zh_CN {

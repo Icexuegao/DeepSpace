@@ -29,7 +29,7 @@ import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
 import universecore.world.draw.DrawMulti
 
-class PolymerGravitationalGenerator : NormalCrafter("polymer_gravitational_generator") {
+class PolymerGravitationalGenerator :NormalCrafter("polymer_gravitational_generator") {
   init {
     localization {
       zh_CN {
@@ -39,7 +39,21 @@ class PolymerGravitationalGenerator : NormalCrafter("polymer_gravitational_gener
       }
     }
     requirements(
-      Category.crafting, IItems.强化合金, 180, IItems.矩阵合金, 900, IItems.充能FEX水晶, 100, IItems.FEX水晶, 120, IItems.铱锭, 80, IItems.气凝胶, 100, IItems.暮光合金, 80
+      Category.crafting,
+      IItems.强化合金,
+      180,
+      IItems.矩阵合金,
+      900,
+      IItems.充能FEX水晶,
+      100,
+      IItems.FEX水晶,
+      120,
+      IItems.铱锭,
+      80,
+      IItems.气凝胶,
+      100,
+      IItems.暮光合金,
+      80
     )
     health = 4500
     size = 5
@@ -65,21 +79,21 @@ class PolymerGravitationalGenerator : NormalCrafter("polymer_gravitational_gener
     craftEffect = SglFx.polymerConstructed
     val timeId = timers++
 
-    drawers = DrawMulti(DrawBottom(), object : DrawRegionDynamic<NormalCrafterBuild?>("_liquid") {
+    drawers = DrawMulti(DrawBottom(), object :DrawRegionDynamic<NormalCrafterBuild?>("_liquid") {
       init {
         color = Func { e: NormalCrafterBuild? -> SglDrawConst.ion }
         alpha = Floatf { obj: NormalCrafterBuild? -> obj!!.workEfficiency() }
       }
-    }, object : DrawRegion("_rotator") {
+    }, object :DrawRegion("_rotator") {
       init {
         rotateSpeed = 1.75f
         rotation = 45f
       }
-    }, object : DrawRegion("_rotator") {
+    }, object :DrawRegion("_rotator") {
       init {
         rotateSpeed = -1.75f
       }
-    }, DrawDefault(), object : DrawBlock() {
+    }, DrawDefault(), object :DrawBlock() {
       val dist: Distortion = Distortion()
       val taskID: Int = SglDraw.nextTaskID()
 
@@ -103,10 +117,15 @@ class PolymerGravitationalGenerator : NormalCrafter("polymer_gravitational_gener
           Lines.stroke(3 * b.workEfficiency())
           Lines.circle(b.x, b.y, 24 + Mathf.absin(6f, 4f))
 
-          for (p in Geometry.d4) {
+          for(p in Geometry.d4) {
             Tmp.v1.set(p.x.toFloat(), p.y.toFloat()).scl(28 + Mathf.absin(6f, 4f)).rotate(Time.time * 0.6f)
             Draw.rect(
-              (SglDrawConst.matrixArrow as TextureRegionDrawable).getRegion(), b.x + Tmp.v1.x, b.y + Tmp.v1.y, 8 * b.workEfficiency(), 8 * b.workEfficiency(), Tmp.v1.angle() + 90
+              (SglDrawConst.matrixArrow as TextureRegionDrawable).getRegion(),
+              b.x + Tmp.v1.x,
+              b.y + Tmp.v1.y,
+              8 * b.workEfficiency(),
+              8 * b.workEfficiency(),
+              Tmp.v1.angle() + 90
             )
 
             Tmp.v2.set(p.x.toFloat(), p.y.toFloat()).scl(24 + Mathf.absin(6f, 4f)).rotate(Time.time * 0.6f + 45)

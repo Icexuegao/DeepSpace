@@ -19,7 +19,8 @@ import singularity.world.blocks.turrets.EmpArtilleryBulletType
 import singularity.world.blocks.turrets.SglTurret
 
 class Mist :SglTurret("mist") {
-  override fun limitRange(margin: Float)= Unit
+  override fun limitRange(margin: Float) = Unit
+
   init {
     localization {
       zh_CN {

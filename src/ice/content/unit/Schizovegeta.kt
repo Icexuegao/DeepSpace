@@ -9,9 +9,9 @@ import arc.util.io.Writes
 import ice.audio.ISounds
 import ice.content.ILiquids
 import ice.content.IUnitTypes
+import ice.core.IFiles.appendModName
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import ice.world.content.unit.entity.base.FleshEntity
 import ice.world.meta.IceEffects
@@ -20,7 +20,7 @@ import mindustry.entities.Puddles
 import mindustry.gen.Puddle
 import kotlin.math.min
 
-class Schizovegeta : IceUnitType("schizovegeta", SchizovegetaUnit::class.java) {
+class Schizovegeta :IceUnitType("schizovegeta", SchizovegetaUnit::class.java) {
   init {
     localization {
       zh_CN {
@@ -60,7 +60,7 @@ class Schizovegeta : IceUnitType("schizovegeta", SchizovegetaUnit::class.java) {
     deathExplosionEffect = MultiEffect(IceEffects.bloodNeoplasma, 3)
   }
 
-  class SchizovegetaUnit : FleshEntity() {
+  class SchizovegetaUnit :FleshEntity() {
     companion object {
       val bags: Array<TextureRegion> by lazy {
         Array(3) {

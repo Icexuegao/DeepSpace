@@ -1,11 +1,10 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import universecore.ui.bundle.localization
-
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.effect.FleshAndBloodCoreBlock
 import mindustry.type.Category
+import universecore.ui.bundle.localization
 
 open class 血肉枢纽 :FleshAndBloodCoreBlock("fleshAndBloodhinge") {
   init {

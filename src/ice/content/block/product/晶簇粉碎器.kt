@@ -7,8 +7,6 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.content.block.EnvironmentBlocks
 import ice.graphics.IceColor
-import universecore.struct.texture.LazyTextureSingleDelegate
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 import mindustry.graphics.Drawf
@@ -20,6 +18,8 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawSideRegion
 import mindustry.world.meta.BlockStatus
 import singularity.world.blocks.product.NormalCrafter
+import universecore.struct.texture.LazyTextureSingleDelegate
+import universecore.world.draw.DrawMulti
 
 class 晶簇粉碎器 :NormalCrafter("crystal_miner") {
   val rotatorBottomRegion: TextureRegion by LazyTextureSingleDelegate("$name-rotator-bottom")
@@ -31,6 +31,10 @@ class 晶簇粉碎器 :NormalCrafter("crystal_miner") {
       zh_CN {
         localizedName = "晶簇粉碎器"
         description = "破坏燃素晶簇以获取燃素水晶"
+      }
+      en {
+        localizedName = "Crystal Cluster Crusher"
+        description = "Destroys phlogiston crystal clusters to obtain phlogiston crystals."
       }
     }
     hasItems = true
@@ -102,7 +106,7 @@ class 晶簇粉碎器 :NormalCrafter("crystal_miner") {
 
     override fun drawSelect() {
       super.drawSelect()
-      Drawf.dashLine(IceColor.b4,x+size*8f,y+size*8f,2*8f,2*8f)
+      Drawf.dashLine(IceColor.b4, x + size * 8f, y + size * 8f, 2 * 8f, 2 * 8f)
     }
 
     override fun draw() {

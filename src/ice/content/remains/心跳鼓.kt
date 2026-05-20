@@ -7,8 +7,8 @@ import ice.type.Remains
 import mindustry.world.meta.Stats
 import universecore.scene.style.DynamicTextureDrawable
 
-class 心跳鼓:Remains("remains_heartbeat_drum"){
-  init  {
+class 心跳鼓 :Remains("remains_heartbeat_drum") {
+  init {
     remainsColor = IceColor.r2
     localization {
       zh_CN {

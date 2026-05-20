@@ -9,8 +9,8 @@ import mindustry.world.meta.Stats
 import universecore.scene.style.DynamicTextureDrawable
 import universecore.scene.ui.itooltip
 
-class 脊骨寄生虫:Remains("remains_spine_parasite"){
-  init  {
+class 脊骨寄生虫 :Remains("remains_spine_parasite") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "脊骨寄生虫"

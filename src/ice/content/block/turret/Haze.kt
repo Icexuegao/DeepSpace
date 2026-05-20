@@ -46,8 +46,9 @@ import universecore.graphics.lightnings.LightningVertex
 import universecore.graphics.lightnings.generator.RandomGenerator
 import kotlin.math.min
 
-class Haze : SglTurret("haze") {
-  override fun limitRange(margin: Float)= kotlin.Unit
+class Haze :SglTurret("haze") {
+  override fun limitRange(margin: Float) = kotlin.Unit
+
   init {
     localization {
       zh_CN {
@@ -84,7 +85,7 @@ class Haze : SglTurret("haze") {
 
     scaledHealth = 200f
     val type: Func3<Float, Float, Float, EmpBulletType> = Func3 { dam: Float?, empD: Float?, r: Float? ->
-      object : EmpBulletType() {
+      object :EmpBulletType() {
         init {
           lifetime = 180f
           splashDamage = dam!!
@@ -126,7 +127,7 @@ class Haze : SglTurret("haze") {
           fragBullets = 1
           fragVelocityMin = 0f
           fragVelocityMax = 0f
-          fragBullet = object : BulletType(0f, 0f) {
+          fragBullet = object :BulletType(0f, 0f) {
             init {
               lifetime = 450f
               collides = false
@@ -268,7 +269,11 @@ class Haze : SglTurret("haze") {
       t.table { table ->
         table!!.add(Core.bundle.format("bullet.empDamage", Strings.autoFixed(0.8f * 60, 1) + "/" + StatUnit.seconds.localized(), ""))
         table.row()
-        table.add(IStatus.电子干扰.emoji() + "[stat]" + IStatus.电子干扰.localizedName + "[lightgray] ~ [stat]7.5[lightgray] " + Core.bundle.get("unit.seconds"))
+        table.add(
+          IStatus.电子干扰.emoji() + "[stat]" + IStatus.电子干扰.localizedName + "[lightgray] ~ [stat]7.5[lightgray] " + Core.bundle.get(
+            "unit.seconds"
+          )
+        )
       }.padLeft(15f)
     }
     consume!!.items(
@@ -284,7 +289,11 @@ class Haze : SglTurret("haze") {
       t.table { table ->
         table!!.add(Core.bundle.format("bullet.empDamage", Strings.autoFixed(0.5f * 60, 1) + "/" + StatUnit.seconds.localized(), ""))
         table.row()
-        table.add(IStatus.电子干扰.emoji() + "[stat]" + IStatus.电子干扰.localizedName + "[lightgray] ~ [stat]7.5[lightgray] " + Core.bundle.get("unit.seconds"))
+        table.add(
+          IStatus.电子干扰.emoji() + "[stat]" + IStatus.电子干扰.localizedName + "[lightgray] ~ [stat]7.5[lightgray] " + Core.bundle.get(
+            "unit.seconds"
+          )
+        )
       }.padLeft(15f)
     }
     consume!!.items(
@@ -294,14 +303,14 @@ class Haze : SglTurret("haze") {
     )
     consume!!.time(510f)
 
-    drawers = DrawSglTurret(object : RegionPart("_missile") {
+    drawers = DrawSglTurret(object :RegionPart("_missile") {
       init {
         progress = PartProgress.warmup.mul(PartProgress.reload.inv())
         x = 0f
         y = -4f
         moveY = 8f
       }
-    }, object : RegionPart("_side") {
+    }, object :RegionPart("_side") {
       init {
         progress = PartProgress.warmup
         mirror = true
@@ -315,7 +324,7 @@ class Haze : SglTurret("haze") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2f, -10f))
       }
-    }, object : RegionPart("_spine") {
+    }, object :RegionPart("_spine") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup
@@ -340,7 +349,7 @@ class Haze : SglTurret("haze") {
 
         moves.add(PartMove(PartProgress.recoil.delay(0.8f), -1.33f, 0f, 16f))
       }
-    }, object : RegionPart("_spine") {
+    }, object :RegionPart("_spine") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup
@@ -365,7 +374,7 @@ class Haze : SglTurret("haze") {
 
         moves.add(PartMove(PartProgress.recoil.delay(0.4f), -1.33f, 0f, 24f))
       }
-    }, object : RegionPart("_spine") {
+    }, object :RegionPart("_spine") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup
@@ -390,7 +399,7 @@ class Haze : SglTurret("haze") {
 
         moves.add(PartMove(PartProgress.recoil, -1.33f, 0f, 30f))
       }
-    }, object : RegionPart("_blade") {
+    }, object :RegionPart("_blade") {
       init {
         progress = PartProgress.warmup
         mirror = true
@@ -401,7 +410,7 @@ class Haze : SglTurret("haze") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2f, 0f))
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         mirror = false
         heatProgress = PartProgress.warmup

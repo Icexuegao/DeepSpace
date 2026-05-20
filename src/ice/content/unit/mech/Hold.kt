@@ -3,13 +3,13 @@ package ice.content.unit.mech
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.ArmorPlateAbility
 import mindustry.entities.abilities.ForceFieldAbility
 import mindustry.entities.abilities.RegenAbility
 import mindustry.gen.MechUnit
 import mindustry.gen.Sounds
+import universecore.world.ability.ArmorPlateAbility
 
-class Hold : IceUnitType("unit_hold", MechUnit::class.java) {
+class Hold :IceUnitType("unit_hold", MechUnit::class.java) {
   init {
     localization {
       zh_CN {

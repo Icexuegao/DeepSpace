@@ -4,8 +4,8 @@ import ice.content.IItems
 import ice.world.content.blocks.liquid.LiquidJunction
 import mindustry.type.Category
 
-class 基础流体交叉器:LiquidJunction("baseLiquidJunction") {
-  init  {
+class 基础流体交叉器 :LiquidJunction("baseLiquidJunction") {
+  init {
     localization {
       zh_CN {
         localizedName = "基础流体交叉器"

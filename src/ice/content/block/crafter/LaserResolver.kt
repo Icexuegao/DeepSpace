@@ -5,7 +5,6 @@ import arc.graphics.g2d.Draw
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Liquids
 import mindustry.gen.Building
@@ -20,8 +19,9 @@ import singularity.graphic.SglDraw
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
+import universecore.world.draw.DrawMulti
 
-class LaserResolver : NormalCrafter("laser_resolver") {init {
+class LaserResolver :NormalCrafter("laser_resolver") {init {
   localization {
     zh_CN {
       this.localizedName = "激光解离机"
@@ -63,7 +63,7 @@ class LaserResolver : NormalCrafter("laser_resolver") {init {
   newConsume()
   consume!!.time(60f)
   consume!!.item(IItems.黑晶石, 1)
-  consume!!.power(190f/60f)
+  consume!!.power(190f / 60f)
   newProduce().color = IItems.黑晶石.color
   produce!!.items(
     *ItemStack.with(
@@ -73,62 +73,62 @@ class LaserResolver : NormalCrafter("laser_resolver") {init {
 
 
   drawers = DrawMulti(
-    DrawBottom(), object : DrawBlock() {
-    override fun draw(build: Building) {
-      val e = build as NormalCrafterBuild
-      if (e.producer!!.current == null) return
+    DrawBottom(), object :DrawBlock() {
+      override fun draw(build: Building) {
+        val e = build as NormalCrafterBuild
+        if (e.producer!!.current == null) return
 
-      val region = Vars.renderer.fluidFrames[0][Liquids.water.animationFrame]
-      val toDraw = Tmp.tr1
+        val region = Vars.renderer.fluidFrames[0][Liquids.water.animationFrame]
+        val toDraw = Tmp.tr1
 
-      val bounds = size / 2f * Vars.tilesize - 3
-      val color = e.producer!!.current!!.color
+        val bounds = size / 2f * Vars.tilesize - 3
+        val color = e.producer!!.current!!.color
 
-      for (sx in 0..<size) {
-        for (sy in 0..<size) {
-          val relx = sx - (size - 1) / 2f
-          val rely = sy - (size - 1) / 2f
+        for(sx in 0..<size) {
+          for(sy in 0..<size) {
+            val relx = sx - (size - 1) / 2f
+            val rely = sy - (size - 1) / 2f
 
-          toDraw.set(region)
-          val rightBorder = relx * Vars.tilesize + 3
-          val topBorder = rely * Vars.tilesize + 3
-          val squishX = rightBorder + Vars.tilesize / 2f - bounds
-          val squishY = topBorder + Vars.tilesize / 2f - bounds
-          var ox = 0f
-          var oy = 0f
+            toDraw.set(region)
+            val rightBorder = relx * Vars.tilesize + 3
+            val topBorder = rely * Vars.tilesize + 3
+            val squishX = rightBorder + Vars.tilesize / 2f - bounds
+            val squishY = topBorder + Vars.tilesize / 2f - bounds
+            var ox = 0f
+            var oy = 0f
 
-          if (squishX >= 8 || squishY >= 8) continue
+            if (squishX >= 8 || squishY >= 8) continue
 
-          if (squishX > 0) {
-            toDraw.setWidth(toDraw.width - squishX * 4f)
-            ox = -squishX / 2f
+            if (squishX > 0) {
+              toDraw.setWidth(toDraw.width - squishX * 4f)
+              ox = -squishX / 2f
+            }
+
+            if (squishY > 0) {
+              toDraw.setY(toDraw.y + squishY * 4f)
+              oy = -squishY / 2f
+            }
+
+            Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, e.warmup(), color)
           }
-
-          if (squishY > 0) {
-            toDraw.setY(toDraw.y + squishY * 4f)
-            oy = -squishY / 2f
-          }
-
-          Drawf.liquid(toDraw, e.x + rightBorder + ox, e.y + topBorder + oy, e.warmup(), color)
         }
       }
-    }
-  }, DrawDefault(), object : DrawRegionDynamic<NormalCrafterBuild>("_laser") {
-    init {
-      rotation = Floatf { e: NormalCrafterBuild? -> e!!.totalProgress * 1.5f }
-      alpha = Floatf { obj: NormalCrafterBuild? -> obj!!.workEfficiency() }
-    }
+    }, DrawDefault(), object :DrawRegionDynamic<NormalCrafterBuild>("_laser") {
+      init {
+        rotation = Floatf { e: NormalCrafterBuild? -> e!!.totalProgress * 1.5f }
+        alpha = Floatf { obj: NormalCrafterBuild? -> obj!!.workEfficiency() }
+      }
 
-    override fun draw(build: Building?) {
-      SglDraw.drawBloomUnderBlock(build) { build: Building -> super.draw(build) }
-      Draw.z(Layer.block + 5)
-    }
-  }, object : DrawRegion("_rotator") {
-    init {
-      rotateSpeed = 1.5f
-      spinSprite = true
-    }
-  }, DrawRegion("_top")
+      override fun draw(build: Building?) {
+        SglDraw.drawBloomUnderBlock(build) { build: Building -> super.draw(build) }
+        Draw.z(Layer.block + 5)
+      }
+    }, object :DrawRegion("_rotator") {
+      init {
+        rotateSpeed = 1.5f
+        spinSprite = true
+      }
+    }, DrawRegion("_top")
   )
 }
 }

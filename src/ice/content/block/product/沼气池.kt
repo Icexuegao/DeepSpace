@@ -4,7 +4,6 @@ import arc.Core
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.type.Category
 import mindustry.world.Block
@@ -15,6 +14,7 @@ import mindustry.world.meta.Attribute
 import singularity.world.blocks.product.FloorCrafter
 import singularity.world.draw.DrawBottom
 import universecore.world.consumers.cons.ConsumeFloor
+import universecore.world.draw.DrawMulti
 
 class 沼气池 :FloorCrafter("incubator") {
   init {
@@ -22,6 +22,11 @@ class 沼气池 :FloorCrafter("incubator") {
       zh_CN {
         localizedName = "沼气池"
         description = "厌氧消化产甲烷耦合活化能供器\n人话:厕所"
+      }
+      en {
+        localizedName = "Biogas Pool"
+        description =
+          "An anaerobic digestion methane production coupled with activation energy supply device.\nIn plain words: an outhouse."
       }
     }
     requirements(Category.production, IItems.钴钢, 85, IItems.铬锭, 90, IItems.气凝胶, 40, IItems.铜锭, 90)

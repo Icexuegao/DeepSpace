@@ -5,14 +5,13 @@ import arc.math.Interp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
-
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.WrapEffect
 import mindustry.type.Category
 import mindustry.world.draw.*
 import singularity.world.blocks.product.NormalCrafter
+import universecore.util.toColor
+import universecore.world.draw.DrawMulti
 
 class 以太封装器 :NormalCrafter("etherEncapsulator") {
 

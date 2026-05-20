@@ -4,8 +4,8 @@ import ice.content.IUnitTypes
 import ice.type.Remains
 import mindustry.world.meta.Stats
 
-class 坚固的装甲板:Remains("remains_armor_plates"){
-  init  {
+class 坚固的装甲板 :Remains("remains_armor_plates") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "坚固的装甲板"

@@ -15,7 +15,7 @@ import mindustry.gen.Sounds
 import mindustry.type.Category
 import singularity.world.blocks.turrets.SglTurret
 
-class Curtain : SglTurret("curtain") {
+class Curtain :SglTurret("curtain") {
   init {
     localization {
       zh_CN {
@@ -28,7 +28,7 @@ class Curtain : SglTurret("curtain") {
     range = 144f
     targetGround = false
 
-    newAmmo(object : BasicBulletType(1.6f, 30f, "missile-large") {
+    newAmmo(object :BasicBulletType(1.6f, 30f, "missile-large") {
       init {
         frontColor = Items.graphite.color.cpy().lerp(Color.white, 0.7f)
         backColor = Items.graphite.color
@@ -58,7 +58,13 @@ class Curtain : SglTurret("curtain") {
     }, true) { bt, ammo: mindustry.entities.bullet.BulletType? ->
       bt!!.add(Core.bundle.format("bullet.damage", ammo!!.damage))
       bt.row()
-      bt.add(Core.bundle.format("bullet.splashdamage", ammo.splashDamage.toInt(), Strings.fixed(ammo.splashDamageRadius / Vars.tilesize, 1)))
+      bt.add(
+        Core.bundle.format(
+          "bullet.splashdamage",
+          ammo.splashDamage.toInt(),
+          Strings.fixed(ammo.splashDamageRadius / Vars.tilesize, 1)
+        )
+      )
       bt.row()
       bt.add(Core.bundle.get("infos.curtainAmmo"))
       bt.row()
@@ -67,7 +73,7 @@ class Curtain : SglTurret("curtain") {
     consume!!.item(IItems.生煤, 1)
     consume!!.time(90f)
 
-    newAmmo(object : BasicBulletType(1.6f, 30f, "missile-large") {
+    newAmmo(object :BasicBulletType(1.6f, 30f, "missile-large") {
       init {
         frontColor = Items.graphite.color.cpy().lerp(Color.white, 0.7f)
         backColor = Items.graphite.color
@@ -97,7 +103,13 @@ class Curtain : SglTurret("curtain") {
     }, true) { bt, ammo: mindustry.entities.bullet.BulletType? ->
       bt!!.add(Core.bundle.format("bullet.damage", ammo!!.damage))
       bt.row()
-      bt.add(Core.bundle.format("bullet.splashdamage", ammo.splashDamage.toInt(), Strings.fixed(ammo.splashDamageRadius / Vars.tilesize, 1)))
+      bt.add(
+        Core.bundle.format(
+          "bullet.splashdamage",
+          ammo.splashDamage.toInt(),
+          Strings.fixed(ammo.splashDamageRadius / Vars.tilesize, 1)
+        )
+      )
       bt.row()
       bt.add(Core.bundle.get("infos.curtainAmmo"))
       bt.row()

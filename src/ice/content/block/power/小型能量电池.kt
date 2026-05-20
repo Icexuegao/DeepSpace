@@ -9,13 +9,6 @@ import universecore.ui.bundle.localization
 
 class 小型能量电池 :Battery("smallPowerBattery") {
   init {
-    size = 1
-    health = 50
-    baseExplosiveness = 1f
-    emptyLightColor = IceColor.df
-    fullLightColor = IceColor.b4
-    consumePowerBuffered(3500f)
-    requirements(Category.power, IItems.低碳钢, 5, IItems.高碳钢, 20, IItems.铅锭, 20)
     localization {
       zh_CN {
         localizedName = "小型能量电池"
@@ -26,5 +19,12 @@ class 小型能量电池 :Battery("smallPowerBattery") {
         description = "Stores a small amount of power. Will explode when damaged."
       }
     }
+    size = 1
+    health = 50
+    baseExplosiveness = 1f
+    emptyLightColor = IceColor.df
+    fullLightColor = IceColor.b4
+    consumePowerBuffered(3500f)
+    requirements(Category.power, IItems.低碳钢, 5, IItems.高碳钢, 20, IItems.铅锭, 20)
   }
 }

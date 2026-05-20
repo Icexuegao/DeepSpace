@@ -27,9 +27,9 @@ import mindustry.ui.Fonts
 import singularity.core.UpdatePool
 import universecore.math.slope
 import universecore.scene.style.DynamicTextureDrawable
+import universecore.scene.ui.SceneEffect
 import universecore.scene.ui.colorR
 import universecore.struct.ConfigPropertyDelegate
-import universecore.scene.ui.SceneEffect
 import universecore.util.accessFloat
 import kotlin.math.max
 import kotlin.math.sin
@@ -41,8 +41,8 @@ class 迷思海 :Remains("remains_mystic_sea") {
   init {
     localization {
       zh_CN {
-        this.localizedName ="迷思海"
-        description="你可悲的一部分正期望着回到你的身上"
+        this.localizedName = "迷思海"
+        description = "你可悲的一部分正期望着回到你的身上"
       }
     }
     remainsColor = IceColor.r2

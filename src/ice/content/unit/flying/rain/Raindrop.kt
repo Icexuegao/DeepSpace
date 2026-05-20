@@ -6,7 +6,7 @@ import ice.world.content.unit.IceUnitType
 import mindustry.entities.bullet.LightningBulletType
 import mindustry.gen.Sounds
 
-class Raindrop : IceUnitType("unit_raindrop") {
+class Raindrop :IceUnitType("unit_raindrop") {
   init {
     localization {
       zh_CN {

@@ -9,7 +9,6 @@ import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.ArmorPlateAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.RegenAbility
 import mindustry.entities.effect.ExplosionEffect
@@ -18,8 +17,9 @@ import mindustry.entities.part.RegionPart
 import mindustry.gen.MechUnit
 import mindustry.gen.Sounds
 import mindustry.type.ammo.ItemAmmoType
+import universecore.world.ability.ArmorPlateAbility
 
-class DeathOath : IceUnitType("unit_deathOath", MechUnit::class.java) {
+class DeathOath :IceUnitType("unit_deathOath", MechUnit::class.java) {
   init {
     localization {
       zh_CN {

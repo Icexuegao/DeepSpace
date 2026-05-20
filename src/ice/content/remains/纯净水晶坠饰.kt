@@ -5,8 +5,8 @@ import ice.type.Remains
 import mindustry.Vars
 import mindustry.world.meta.Stats
 
-class 纯净水晶坠饰:Remains("remains_pure_crystal_pendant"){
-  init  {
+class 纯净水晶坠饰 :Remains("remains_pure_crystal_pendant") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "纯净水晶坠饰"

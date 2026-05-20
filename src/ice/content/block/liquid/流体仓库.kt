@@ -4,7 +4,7 @@ import ice.content.IItems
 import ice.world.content.blocks.liquid.base.LiquidRouter
 import mindustry.type.Category
 
-class 流体仓库:LiquidRouter("liquidStorage")  {
+class 流体仓库 :LiquidRouter("liquidStorage") {
   init {
     localization {
       zh_CN {

@@ -4,7 +4,7 @@ import ice.content.IItems
 import ice.world.content.blocks.distribution.itemNode.TransferNode
 import mindustry.type.Category
 
-class 动脉导管桥:TransferNode("bridgeConduitArtery")  {
+class 动脉导管桥 :TransferNode("bridgeConduitArtery") {
   init {
     localization {
       zh_CN {

@@ -2,11 +2,11 @@ package ice.content
 
 import arc.func.Prov
 import ice.DeepSpace
-import universecore.world.Load
 import mindustry.type.Item
+import universecore.world.Load
 import universecore.world.consumers.BaseConsumers
 
-object AtomSchematics : Load {
+object AtomSchematics :Load {
   var copper_schematic = AtomSchematic(IItems.铜锭, 14000).apply {
     request.medium(0.23f)
     request.time(30f)
@@ -33,7 +33,7 @@ object AtomSchematics : Load {
     }
 
     var request = BaseConsumers(false).apply {
-      selectable = Prov {if (getunlock()) BaseConsumers.Visibility.usable else BaseConsumers.Visibility.hidden}
+      selectable = Prov { if (getunlock()) BaseConsumers.Visibility.usable else BaseConsumers.Visibility.hidden }
     }
     var d = 0
 

@@ -7,6 +7,16 @@ import mindustry.type.Category
 
 class 神经索节点 :PowerNode("neuralNode") {
   init {
+    localization {
+      zh_CN {
+        localizedName = "神经索节点"
+        description = "向连接的建筑传输电力"
+      }
+      en {
+        localizedName = "Neural Node"
+        description = "Transmits power to connected buildings."
+      }
+    }
     squareSprite = false
     healAmount = 5f
     size = 1
@@ -19,15 +29,5 @@ class 神经索节点 :PowerNode("neuralNode") {
     laserColor1 = Color.valueOf("E78F92")
     laserColor2 = Color.valueOf("D75B6E")
     requirements(Category.power, IItems.铱板, 5, IItems.导能回路, 2, IItems.生物钢, 1)
-    localization {
-      zh_CN {
-        localizedName = "神经索节点"
-        description = "向连接的建筑传输电力"
-      }
-      en {
-        localizedName = "Neural Node"
-        description = "Transmits power to connected buildings."
-      }
-    }
   }
 }

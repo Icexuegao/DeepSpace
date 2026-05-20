@@ -8,7 +8,7 @@ import mindustry.Vars
 import mindustry.ai.UnitCommand
 import mindustry.ai.types.MinerAI
 
-class Harvester : IceUnitType("harvester") {
+class Harvester :IceUnitType("harvester") {
   init {
     localization {
       zh_CN {
@@ -18,7 +18,7 @@ class Harvester : IceUnitType("harvester") {
     }
     speed = 2f
     flying = true
-    hitSize = 0.75f*8f
+    hitSize = 0.75f * 8f
     isEnemy = false
     mineTier = 2
     mineSpeed = 3f

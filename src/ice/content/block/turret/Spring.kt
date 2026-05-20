@@ -27,8 +27,8 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 
-class Spring: SglTurret("spring") {
-  init{
+class Spring :SglTurret("spring") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "春分"
@@ -62,10 +62,10 @@ class Spring: SglTurret("spring") {
 
     shootSound = Sounds.shootMalign
 
-    shoot = object : ShootPattern() {
+    shoot = object :ShootPattern() {
       override fun shoot(totalShots: Int, handler: BulletHandler) {
-        for (i in intArrayOf(-1, 1)) {
-          for (a in 1..2) {
+        for(i in intArrayOf(-1, 1)) {
+          for(a in 1..2) {
             handler.shoot(0f, 0f, 4.57f * i, 0f) { b: Bullet? ->
               val len = b!!.time * 5f
               b.moveRelative(0f, i * (4 * a - 0.01f * a * len) * Mathf.sin(0.04f * len + 4))
@@ -76,7 +76,7 @@ class Spring: SglTurret("spring") {
     }
     shoot.shots = 2
 
-    newAmmo(object : BulletType() {
+    newAmmo(object :BulletType() {
       init {
         damage = 42f
         lifetime = 80f
@@ -124,13 +124,17 @@ class Spring: SglTurret("spring") {
       }
     }) { s, b: mindustry.entities.bullet.BulletType? ->
       s!!.add(
-        (Core.bundle.get("misc.toTeam") + " " + IStatus.临春.emoji() + "[stat]" + IStatus.临春.localizedName + "[lightgray] ~ [stat]0.5[lightgray] " + Core.bundle.get("unit.seconds") + "[]" + Sgl.NL + Core.bundle.get("misc.toEnemy") + " " + IStatus.暮春.emoji() + "[stat]" + IStatus.暮春.localizedName + "[lightgray] ~ [stat]0.2[lightgray] " + Core.bundle.get("unit.seconds") + "[]")
+        (Core.bundle.get("misc.toTeam") + " " + IStatus.临春.emoji() + "[stat]" + IStatus.临春.localizedName + "[lightgray] ~ [stat]0.5[lightgray] " + Core.bundle.get(
+          "unit.seconds"
+        ) + "[]" + Sgl.NL + Core.bundle.get("misc.toEnemy") + " " + IStatus.暮春.emoji() + "[stat]" + IStatus.暮春.localizedName + "[lightgray] ~ [stat]0.2[lightgray] " + Core.bundle.get(
+          "unit.seconds"
+        ) + "[]")
       )
     }
     consume!!.energy(2.6f)
     consume!!.time(60f)
 
-    drawers = DrawSglTurret(object : RegionPart("_side") {
+    drawers = DrawSglTurret(object :RegionPart("_side") {
       init {
         mirror = true
         moveX = 2f
@@ -140,7 +144,7 @@ class Spring: SglTurret("spring") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2f, -6f))
       }
-    }, object : RegionPart("_blade") {
+    }, object :RegionPart("_blade") {
       init {
         mirror = true
         moveY = 4f
@@ -151,12 +155,12 @@ class Spring: SglTurret("spring") {
 
         moves.add(PartMove(PartProgress.recoil, -2f, -2f, 0f))
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         heatColor = Pal.heal
         heatProgress = PartProgress.warmup.delay(0.25f)
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         mirror = true
         x = 10f
@@ -178,7 +182,7 @@ class Spring: SglTurret("spring") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -1f, -3f))
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         mirror = true
         x = 10f
@@ -200,7 +204,7 @@ class Spring: SglTurret("spring") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -1f, -5f))
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         mirror = true
         x = 8f

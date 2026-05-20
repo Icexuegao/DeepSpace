@@ -26,6 +26,11 @@ class 潮汐钻头 :ExtendableDrill("tidal_drill") {
         description =
           "高级钻井,使用最前沿力场控制技术制造的高级钻头,以粒子束冲击破坏挖掘物的物质结构后通过控制引力场震荡完成矿石解体和采集的过程"
       }
+      en {
+        localizedName = "Tidal Drill"
+        description =
+          "An advanced drill manufactured using cutting-edge force field control technology. It uses particle beam impacts to destroy the material structure of the target, then completes ore disintegration and collection through controlled gravitational field oscillation."
+      }
     }
     requirements(
       Category.production, IItems.简并态中子聚合物, 50, IItems.强化合金, 120,

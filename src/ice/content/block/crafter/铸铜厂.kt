@@ -1,14 +1,13 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-
-import universecore.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
 class 铸铜厂 :NormalCrafter("copperFoundry") {
   init {

@@ -5,8 +5,6 @@ import ice.content.IStatus
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
-import universecore.ui.bundle.localization
 import mindustry.content.Fx
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.bullet.ShrapnelBulletType
@@ -17,8 +15,10 @@ import mindustry.entities.part.RegionPart
 import mindustry.gen.Sounds
 import mindustry.type.Weapon
 import mindustry.type.unit.MissileUnitType
+import universecore.ui.bundle.localization
+import universecore.util.toColor
 
-class HellFire : MissileUnitType("unit_hellFire") {
+class HellFire :MissileUnitType("unit_hellFire") {
   init {
     localization {
       zh_CN {

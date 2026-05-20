@@ -3,8 +3,6 @@ package ice.content.block.crafter
 import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IItems
-
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
@@ -12,8 +10,9 @@ import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
-class 导能回路装配器 : NormalCrafter("conductiveCircuitAssembler") {
+class 导能回路装配器 :NormalCrafter("conductiveCircuitAssembler") {
   init {
     localization {
       zh_CN {

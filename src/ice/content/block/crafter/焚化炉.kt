@@ -116,7 +116,6 @@ open class 焚化炉 :SglBlock("incinerator") {
 
     override fun config(): ByteArray = config.pack()
 
-
     override fun updateTile() {
       heat = Mathf.approachDelta(heat, if (consumer.valid && enabled) 1f else 0f, 0.04f)
     }

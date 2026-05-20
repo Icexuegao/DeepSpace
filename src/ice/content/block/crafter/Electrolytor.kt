@@ -4,8 +4,6 @@ import arc.func.Func
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.world.draw.DrawBuild
-import universecore.world.draw.DrawMulti
 import mindustry.content.Liquids
 import mindustry.type.Category
 import mindustry.world.blocks.liquid.LiquidBlock
@@ -15,6 +13,8 @@ import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawDyColorCultivator
 import universecore.world.consumers.ConsumeType
+import universecore.world.draw.DrawBuild
+import universecore.world.draw.DrawMulti
 
 class Electrolytor :NormalCrafter("electrolytor") {
   init {
@@ -99,7 +99,6 @@ class Electrolytor :NormalCrafter("electrolytor") {
         item(IItems.绿藻素, 1)
       }
     }
-
 
   }
 }

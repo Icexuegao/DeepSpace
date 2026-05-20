@@ -7,7 +7,7 @@ import mindustry.entities.bullet.MissileBulletType
 import mindustry.gen.Sounds
 import mindustry.gen.UnitWaterMove
 
-class Witness : IceUnitType("unit_witness", UnitWaterMove::class.java) {
+class Witness :IceUnitType("unit_witness", UnitWaterMove::class.java) {
 
   init {
     localization {

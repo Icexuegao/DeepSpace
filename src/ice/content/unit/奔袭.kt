@@ -10,7 +10,7 @@ import mindustry.entities.abilities.StatusFieldAbility
 import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.Sounds
 
-class 奔袭 : IceUnitType("unit_garrison") {
+class 奔袭 :IceUnitType("unit_garrison") {
   init {
     health = 192000f
     speed = 0.65f
@@ -42,8 +42,8 @@ class 奔袭 : IceUnitType("unit_garrison") {
     outlineColor = Color.valueOf("1F1F1F")
 
     setWeapon {
-      x=44f
-      y=-20f
+      x = 44f
+      y = -20f
       shootY = 0f
       reload = 300f
       rotate = true
@@ -55,7 +55,7 @@ class 奔袭 : IceUnitType("unit_garrison") {
       useAmmo = false
       alwaysShooting = true
       alwaysContinuous = true
-      shootSound =Sounds.shootBeamPlasma
+      shootSound = Sounds.shootBeamPlasma
 
       bullet = ContinuousFlameBulletType().apply {
         colors = arrayOf(
@@ -91,8 +91,8 @@ class 奔袭 : IceUnitType("unit_garrison") {
     }
 
     setWeapon {
-      x=34f
-      y=-31f
+      x = 34f
+      y = -31f
       shootY = 0f
       reload = 300f
       rotate = true
@@ -140,8 +140,8 @@ class 奔袭 : IceUnitType("unit_garrison") {
     }
 
     setWeapon {
-      x=0f
-      y=-38.5f
+      x = 0f
+      y = -38.5f
       shootY = 0f
       reload = 300f
       mirror = false
@@ -152,7 +152,7 @@ class 奔袭 : IceUnitType("unit_garrison") {
       useAmmo = false
       alwaysShooting = true
       alwaysContinuous = true
-      shootSound =Sounds.shootBeamPlasma
+      shootSound = Sounds.shootBeamPlasma
 
       bullet = ContinuousFlameBulletType().apply {
         colors = arrayOf(
@@ -187,7 +187,7 @@ class 奔袭 : IceUnitType("unit_garrison") {
       }
     }
 
-    abilities.add(StatusFieldAbility(IStatus.反扑,90f,60f, 160f).apply {
+    abilities.add(StatusFieldAbility(IStatus.反扑, 90f, 60f, 160f).apply {
       applyEffect = Fx.none
       activeEffect = Fx.none
     })

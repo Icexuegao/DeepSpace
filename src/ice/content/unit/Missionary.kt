@@ -20,7 +20,7 @@ import mindustry.gen.Sounds
 import mindustry.graphics.Pal
 import singularity.world.blocks.turrets.LightningBulletType
 
-class Missionary : IceUnitType("missionary") {
+class Missionary :IceUnitType("missionary") {
   init {
     localization {
       zh_CN {
@@ -61,7 +61,7 @@ class Missionary : IceUnitType("missionary") {
         width = 17f
         height = 21f
         hitSize = 8f
-        shootEffect = MultiEffect(Fx.shootTitan, Fx.colorSparkBig, object : WaveEffect() {
+        shootEffect = MultiEffect(Fx.shootTitan, Fx.colorSparkBig, object :WaveEffect() {
           init {
             colorTo = Pal.accent
             colorFrom = colorTo
@@ -84,7 +84,7 @@ class Missionary : IceUnitType("missionary") {
         trailLength = 9
         hitEffect = Fx.hitBulletColor
         buildingDamageMultiplier = 0.3f
-        despawnEffect = MultiEffect(Fx.hitBulletColor, object : WaveEffect() {
+        despawnEffect = MultiEffect(Fx.hitBulletColor, object :WaveEffect() {
           init {
             sizeTo = 30f
             colorTo = Pal.accent
@@ -96,7 +96,7 @@ class Missionary : IceUnitType("missionary") {
         trailEffect = Fx.disperseTrail
         trailInterval = 3f
         bulletInterval = 3f
-        intervalBullet = object : LightningBulletType() {
+        intervalBullet = object :LightningBulletType() {
           init {
             damage = 30f
             collidesAir = false
@@ -104,7 +104,7 @@ class Missionary : IceUnitType("missionary") {
             lightningLength = 5
             lightningLengthRand = 10
             buildingDamageMultiplier = 0.5f
-            lightningType = object : BulletType(0.0001f, 0f) {
+            lightningType = object :BulletType(0.0001f, 0f) {
               init {
                 lifetime = Fx.lightning.lifetime
                 hitEffect = Fx.hitLancer
@@ -126,7 +126,7 @@ class Missionary : IceUnitType("missionary") {
       rotate = true
       reload = 60f
       shootSound = Sounds.shootMalign
-      bullet = object : BombBulletType(500f, 64f) {
+      bullet = object :BombBulletType(500f, 64f) {
         var i = 0f
         override fun update(b: Bullet) {
           super.update(b)

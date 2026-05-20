@@ -6,7 +6,7 @@ import mindustry.type.UnitType
 import mindustry.world.meta.Stats
 import universecore.world.ability.InterceptAbilty
 
-class 娜雅的手串: Remains("remains_naya_bracelet"){
+class 娜雅的手串 :Remains("remains_naya_bracelet") {
   init {
     localization {
       zh_CN {

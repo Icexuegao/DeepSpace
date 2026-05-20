@@ -5,16 +5,16 @@ import ice.content.IStatus
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
-import universecore.ui.bundle.localization
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.type.Weapon
 import mindustry.type.unit.MissileUnitType
+import universecore.ui.bundle.localization
+import universecore.util.toColor
 
-class FlameMissile : MissileUnitType("unit_flameMissile") {
+class FlameMissile :MissileUnitType("unit_flameMissile") {
   init {
     localization {
       zh_CN {
@@ -87,7 +87,7 @@ class FlameMissile : MissileUnitType("unit_flameMissile") {
         )
         fragBullets = 5
         fragVelocityMin = 0.5f
-        fragBullet = BasicBulletType(4f,0f,"crystal").apply {
+        fragBullet = BasicBulletType(4f, 0f, "crystal").apply {
           lifetime = 60f
           drag = 0.025f
           width = 8f

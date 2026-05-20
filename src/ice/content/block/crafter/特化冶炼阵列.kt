@@ -2,13 +2,12 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.graphics.IceColor
-
-import universecore.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
 class 特化冶炼阵列 :NormalCrafter("specializedSmelterArray") {
   init {

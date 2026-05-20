@@ -4,7 +4,7 @@ import ice.content.IItems
 import ice.world.content.blocks.liquid.LiquidClassifier
 import mindustry.type.Category
 
-class 流体抽离器:LiquidClassifier("liquidClassifier")  {
+class 流体抽离器 :LiquidClassifier("liquidClassifier") {
   init {
     localization {
       zh_CN {

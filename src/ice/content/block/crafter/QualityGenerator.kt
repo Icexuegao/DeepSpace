@@ -2,8 +2,6 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-
-import universecore.world.draw.DrawMulti
 import mindustry.gen.Building
 import mindustry.type.Category
 import mindustry.world.blocks.liquid.LiquidBlock
@@ -11,8 +9,9 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawLiquidTile
 import singularity.world.blocks.product.MediumCrafter
 import singularity.world.draw.DrawBottom
+import universecore.world.draw.DrawMulti
 
-class QualityGenerator : MediumCrafter("quality_generator") {
+class QualityGenerator :MediumCrafter("quality_generator") {
   init {
     localization {
       zh_CN {
@@ -33,10 +32,20 @@ class QualityGenerator : MediumCrafter("quality_generator") {
     consume!!.energy(32f)
     newProduce()
     produce!!.medium(0.6f)
-    drawers = DrawMulti(DrawBottom(), object : DrawLiquidTile(ILiquids.孢子云) {
+    drawers = DrawMulti(DrawBottom(), object :DrawLiquidTile(ILiquids.孢子云) {
       override fun draw(build: Building) {
         val drawn = drawLiquid ?: build.liquids.current()
-        LiquidBlock.drawTiledFrames(build.block.size, build.x, build.y, padLeft, padRight, padTop, padBottom, drawn, (build as MediumCrafterBuild).mediumContains / mediumCapacity * alpha)
+        LiquidBlock.drawTiledFrames(
+          build.block.size,
+          build.x,
+          build.y,
+          padLeft,
+          padRight,
+          padTop,
+          padBottom,
+          drawn,
+          (build as MediumCrafterBuild).mediumContains / mediumCapacity * alpha
+        )
       }
     }, DrawDefault())
   }

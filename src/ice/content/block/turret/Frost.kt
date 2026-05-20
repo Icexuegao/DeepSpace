@@ -37,9 +37,9 @@ class Frost :LaserTurret("frost") {
 
       IItems.矩阵合金, 120, IItems.充能FEX水晶, 100, IItems.铱锭, 100
     )
-    shootingConsume=true
+    shootingConsume = true
     size = 5
-    liquidCapacity=30f
+    liquidCapacity = 30f
     scaledHealth = 420f
     recoil = 2.8f
     rotateSpeed = 2f

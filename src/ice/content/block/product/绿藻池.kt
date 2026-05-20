@@ -31,13 +31,18 @@ import universecore.world.draw.DrawMulti
 import kotlin.math.max
 
 class 绿藻池 :SpliceCrafter("culturing_barn") {
-  var SpliceCrafterBuild.highlight: Boolean by AttachedProperty{false}
+  var SpliceCrafterBuild.highlight: Boolean by AttachedProperty { false }
 
   init {
     localization {
       zh_CN {
         localizedName = "绿藻池"
         description = "使用光水培养低等的藻类生物,除氧气外,还能收获不少藻泥"
+      }
+      en {
+        localizedName = "Chlorella Pool"
+        description =
+          "Uses light and water to cultivate low-grade algae. Besides oxygen, a considerable amount of algae mud can also be harvested."
       }
     }
     requirements(Category.production, IItems.铜锭, 10, IItems.石英玻璃, 12, IItems.钴锭, 8)

@@ -6,7 +6,7 @@ import ice.game.EventType.addContentInitEvent
 import ice.world.content.blocks.liquid.ArmoredConduit
 import mindustry.type.Category
 
-class 紊态导管:ArmoredConduit("disorderedConduit")  {
+class 紊态导管 :ArmoredConduit("disorderedConduit") {
   init {
     localization {
       zh_CN {

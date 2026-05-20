@@ -1,13 +1,12 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
 class 电弧炉 :NormalCrafter("arcFurnace") {
   init {

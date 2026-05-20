@@ -27,7 +27,7 @@ import singularity.world.blocks.turrets.HeatBulletType
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 
-class Summer : SglTurret("summer") {
+class Summer :SglTurret("summer") {
   init {
     localization {
       zh_CN {
@@ -36,7 +36,23 @@ class Summer : SglTurret("summer") {
       }
     }
     requirements(
-      Category.turret, IItems.强化合金, 210, IItems.简并态中子聚合物, 80, IItems.絮凝剂, 180, IItems.铱锭, 120, IItems.气凝胶, 240, IItems.矩阵合金, 140, IItems.充能FEX水晶, 150, IItems.FEX水晶, 100
+      Category.turret,
+      IItems.强化合金,
+      210,
+      IItems.简并态中子聚合物,
+      80,
+      IItems.絮凝剂,
+      180,
+      IItems.铱锭,
+      120,
+      IItems.气凝胶,
+      240,
+      IItems.矩阵合金,
+      140,
+      IItems.充能FEX水晶,
+      150,
+      IItems.FEX水晶,
+      100
     )
     size = 6
     accurateDelay = false
@@ -63,15 +79,26 @@ class Summer : SglTurret("summer") {
     shootSound = Sounds.shootReign
     shootSoundPitch = 2f
 
-    shoot = object : ShootPattern() {
+    shoot = object :ShootPattern() {
       override fun shoot(totalShots: Int, handler: BulletHandler) {
         var i = 0
-        while (i < shots) {
-          for (sign in Mathf.signs) {
+        while(i < shots) {
+          for(sign in Mathf.signs) {
             Tmp.v1.set(sign.toFloat(), 1f).setLength(Mathf.random(2.5f)).scl(Mathf.randomSign().toFloat())
-            handler.shoot(12 * sign + Tmp.v1.x, Tmp.v1.y, (-45 * sign + Mathf.random(-20, 20)).toFloat(), i / 2f * shotDelay) { b: Bullet? ->
+            handler.shoot(
+              12 * sign + Tmp.v1.x,
+              Tmp.v1.y,
+              (-45 * sign + Mathf.random(-20, 20)).toFloat(),
+              i / 2f * shotDelay
+            ) { b: Bullet? ->
               if (b!!.owner is SglTurretBuild && (b.owner as SglTurretBuild).wasShooting()) {
-                b.vel.setAngle(Angles.moveToward(b.rotation(), b.angleTo((b.owner as SglTurretBuild).targetPos), b.type.homingPower * Time.delta * 50f))
+                b.vel.setAngle(
+                  Angles.moveToward(
+                    b.rotation(),
+                    b.angleTo((b.owner as SglTurretBuild).targetPos),
+                    b.type.homingPower * Time.delta * 50f
+                  )
+                )
               }
             }
           }
@@ -82,7 +109,7 @@ class Summer : SglTurret("summer") {
     shoot.shots = 12
     shoot.shotDelay = 5f
 
-    newAmmo(object : HeatBulletType() {
+    newAmmo(object :HeatBulletType() {
       init {
         speed = 4.5f
         lifetime = 180f
@@ -123,7 +150,16 @@ class Summer : SglTurret("summer") {
         b.trail?.draw(trailColor, trailWidth * fout)
         Draw.z(z)
 
-        SglDraw.drawLightEdge(b.x, b.y, 35 * fout + Mathf.absin(0.5f, 3.5f), 2f, 14 * fout + Mathf.absin(0.4f, 2.5f), 2f, 30f, Pal.lightishOrange)
+        SglDraw.drawLightEdge(
+          b.x,
+          b.y,
+          35 * fout + Mathf.absin(0.5f, 3.5f),
+          2f,
+          14 * fout + Mathf.absin(0.4f, 2.5f),
+          2f,
+          30f,
+          Pal.lightishOrange
+        )
         SglDraw.drawDiamond(b.x, b.y, 16 * fout + Mathf.absin(0.6f, 2f), 2f, 90f, Pal.lightishOrange)
         Fill.circle(b.x, b.y, 2.2f * fout)
       }
@@ -135,7 +171,7 @@ class Summer : SglTurret("summer") {
     consume!!.energy(5f)
     consume!!.time(60f)
 
-    drawers = DrawSglTurret(object : RegionPart("_side") {
+    drawers = DrawSglTurret(object :RegionPart("_side") {
       init {
         mirror = true
         moveX = 4f
@@ -143,7 +179,7 @@ class Summer : SglTurret("summer") {
         heatColor = Pal.lightishOrange
         heatProgress = PartProgress.warmup.delay(0.25f)
       }
-    }, object : RegionPart("_bot") {
+    }, object :RegionPart("_bot") {
       init {
         mirror = true
         moveY = -4f
@@ -152,14 +188,14 @@ class Summer : SglTurret("summer") {
         heatColor = Pal.lightishOrange
         heatProgress = PartProgress.warmup.delay(0.25f)
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         progress = PartProgress.recoil
         heatProgress = PartProgress.warmup.delay(0.25f)
         heatColor = Pal.lightishOrange
         moveY = -4f
       }
-    }, object : RegionPart("_blade") {
+    }, object :RegionPart("_blade") {
       init {
         mirror = true
         moveX = 2f
@@ -169,7 +205,7 @@ class Summer : SglTurret("summer") {
         heatColor = Pal.lightishOrange
         heatProgress = PartProgress.warmup.delay(0.25f)
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         color = Pal.lighterOrange
         circle = true
@@ -182,7 +218,7 @@ class Summer : SglTurret("summer") {
         progress = PartProgress.warmup
         layer = Layer.effect
       }
-    }, object : ShapePart() {
+    }, object :ShapePart() {
       init {
         circle = true
         y = -18f
@@ -192,7 +228,7 @@ class Summer : SglTurret("summer") {
         layer = Layer.effect
         progress = PartProgress.warmup
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -208,7 +244,7 @@ class Summer : SglTurret("summer") {
         radius = 2f
         radiusTo = 5f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -225,7 +261,7 @@ class Summer : SglTurret("summer") {
         radiusTo = 5f
         shapeRotation = 180f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -240,7 +276,7 @@ class Summer : SglTurret("summer") {
         tri = true
         radius = 6f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -256,7 +292,7 @@ class Summer : SglTurret("summer") {
         radius = 6f
         shapeRotation = 180f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange
@@ -271,7 +307,7 @@ class Summer : SglTurret("summer") {
         tri = true
         radius = 5f
       }
-    }, object : HaloPart() {
+    }, object :HaloPart() {
       init {
         progress = PartProgress.warmup
         color = Pal.lighterOrange

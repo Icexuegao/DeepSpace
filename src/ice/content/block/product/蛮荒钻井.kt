@@ -12,6 +12,11 @@ class 蛮荒钻井 :BaseDrill("uncivilizedDrill") {
         localizedName = "蛮荒钻井"
         description = "次级钻井,在纤汲钻井的基础上进行了迭代,钻芯材料改进,可用于开采更高级资源"
       }
+      en {
+        localizedName = "Uncivilized Drill"
+        description =
+          "A secondary drill iterated from the Derive Drill with improved drill core materials, usable for mining more advanced resources."
+      }
     }
     newBooster(3.6f).apply {
       liquid(Liquids.water, 12f / 60f)

@@ -4,16 +4,16 @@ import arc.Core
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.world.draw.DrawDefaultBottom
-import universecore.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.Block
 import mindustry.world.draw.DrawCultivator
 import mindustry.world.draw.DrawDefault
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawDefaultBottom
+import universecore.world.draw.DrawMulti
 
-class Crystallizer : NormalCrafter("crystallizer") {
+class Crystallizer :NormalCrafter("crystallizer") {
   init {
     localization {
       zh_CN {
@@ -40,7 +40,7 @@ class Crystallizer : NormalCrafter("crystallizer") {
     produce!!.item(IItems.FEX水晶, 2)
 
     drawers = DrawMulti(
-      DrawDefaultBottom(), object : DrawCultivator() {
+      DrawDefaultBottom(), object :DrawCultivator() {
         init {
           plantColor = Color.valueOf("#C73A3A")
           plantColorLight = Color.valueOf("#E57D7D")

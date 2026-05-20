@@ -39,7 +39,7 @@ import singularity.world.draw.DrawSglTurret
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
-class Mirage : SglTurret("mirage") {
+class Mirage :SglTurret("mirage") {
   init {
     localization {
       zh_CN {
@@ -49,7 +49,7 @@ class Mirage : SglTurret("mirage") {
     }
     requirements(
       Category.turret,
-        IItems.强化合金, 260, IItems.矩阵合金, 120, IItems.气凝胶, 200,
+      IItems.强化合金, 260, IItems.矩阵合金, 120, IItems.气凝胶, 200,
 
       IItems.铀238, 160, IItems.铱锭, 80, IItems.FEX水晶, 120
     )
@@ -76,7 +76,7 @@ class Mirage : SglTurret("mirage") {
     shootSound = Sounds.blockExplode1Alt
     shootSoundVolume = 1.4f
 
-    newAmmo(object : MultiTrailBulletType() {
+    newAmmo(object :MultiTrailBulletType() {
       init {
         damage = 380f
         speed = 8f
@@ -147,7 +147,20 @@ class Mirage : SglTurret("mirage") {
         val rot = b.fin() * 1800
 
         SglDraw.drawCrystal(
-          b.x, b.y, 30f, 14f, 8f, 0f, 0f, 0.8f, Layer.effect, Layer.bullet, rot, b.rotation(), Tmp.c1.set(SglDrawConst.fexCrystal).a(0.6f), SglDrawConst.fexCrystal
+          b.x,
+          b.y,
+          30f,
+          14f,
+          8f,
+          0f,
+          0f,
+          0.8f,
+          Layer.effect,
+          Layer.bullet,
+          rot,
+          b.rotation(),
+          Tmp.c1.set(SglDrawConst.fexCrystal).a(0.6f),
+          SglDrawConst.fexCrystal
         )
       }
     }) { t, b: mindustry.entities.bullet.BulletType? ->
@@ -156,7 +169,7 @@ class Mirage : SglTurret("mirage") {
     consume!!.item(IItems.FEX水晶, 1)
     consume!!.time(60f)
 
-    newAmmo(object : MultiTrailBulletType() {
+    newAmmo(object :MultiTrailBulletType() {
       init {
         damage = 520f
         speed = 6f
@@ -180,7 +193,7 @@ class Mirage : SglTurret("mirage") {
         )
 
         fragBullets = 1
-        fragBullet = object : LightningBulletType() {
+        fragBullet = object :LightningBulletType() {
           init {
             damage = 42f
             lifetime = 105f
@@ -229,7 +242,7 @@ class Mirage : SglTurret("mirage") {
             if (bullet.timer(4, 3f)) {
               var tar: Hitboxc? = null
               var dst = 0f
-              for (unit in Groups.unit.intersect(bullet.x - 180, bullet.y - 180, 360f, 360f)) {
+              for(unit in Groups.unit.intersect(bullet.x - 180, bullet.y - 180, 360f, 360f)) {
                 if (unit.team === bullet.team || !unit.hasEffect(IStatus.结晶化)) continue
                 val d = unit.dst(bullet)
                 if (d > 180) continue
@@ -242,7 +255,7 @@ class Mirage : SglTurret("mirage") {
 
               if (tar == null) {
                 dst = 0f
-                for (b1 in Groups.bullet.intersect(bullet.x - 180, bullet.y - 180, 360f, 360f)) {
+                for(b1 in Groups.bullet.intersect(bullet.x - 180, bullet.y - 180, 360f, 360f)) {
 
                   if (b1.team !== bullet.team || b1.type !== this) continue
                   val d = b1.dst(bullet)
@@ -269,7 +282,20 @@ class Mirage : SglTurret("mirage") {
             super.draw(b, c)
             val rot = b.fin(Interp.pow2Out) * 1800
             SglDraw.drawCrystal(
-              b.x, b.y, 30f, 14f, 9f, 0f, 0f, 0.6f, Layer.effect, Layer.bullet, rot, b.rotation(), Tmp.c1.set(SglDrawConst.fexCrystal).a(0.6f), SglDrawConst.fexCrystal
+              b.x,
+              b.y,
+              30f,
+              14f,
+              9f,
+              0f,
+              0f,
+              0.6f,
+              Layer.effect,
+              Layer.bullet,
+              rot,
+              b.rotation(),
+              Tmp.c1.set(SglDrawConst.fexCrystal).a(0.6f),
+              SglDrawConst.fexCrystal
             )
 
             Lines.stroke(0.6f * b.fout(), SglDrawConst.fexCrystal)
@@ -321,7 +347,20 @@ class Mirage : SglTurret("mirage") {
         val rot = b.fin() * 1800
 
         SglDraw.drawCrystal(
-          b.x, b.y, 30f, 14f, 8f, 0f, 0f, 0.8f, Layer.effect, Layer.bullet, rot, b.rotation(), Tmp.c1.set(SglDrawConst.fexCrystal).a(0.6f), SglDrawConst.fexCrystal
+          b.x,
+          b.y,
+          30f,
+          14f,
+          8f,
+          0f,
+          0f,
+          0.8f,
+          Layer.effect,
+          Layer.bullet,
+          rot,
+          b.rotation(),
+          Tmp.c1.set(SglDrawConst.fexCrystal).a(0.6f),
+          SglDrawConst.fexCrystal
         )
       }
 
@@ -334,11 +373,16 @@ class Mirage : SglTurret("mirage") {
         b.vel.scl(0.6f)
 
         if (entity is Unit && entity.hasEffect(IStatus.结晶化)) {
-          for (i in 0..4) {
+          for(i in 0..4) {
             val len = Mathf.random(1f, 7f)
             val a = b.rotation() + Mathf.range(fragRandomSpread / 2) + fragAngle + ((i - 2) * fragSpread)
             破碎FEX结晶.create(
-              b, entity.x + Angles.trnsx(a, len), entity.y + Angles.trnsy(a, len), a, Mathf.random(fragVelocityMin, fragVelocityMax), Mathf.random(fragLifeMin, fragLifeMax)
+              b,
+              entity.x + Angles.trnsx(a, len),
+              entity.y + Angles.trnsy(a, len),
+              a,
+              Mathf.random(fragVelocityMin, fragVelocityMax),
+              Mathf.random(fragLifeMin, fragLifeMax)
             )
           }
         }
@@ -353,7 +397,10 @@ class Mirage : SglTurret("mirage") {
       table.table { t ->
         t!!.add(
           Core.bundle.format(
-            "infos.mirageLightningDamage", Strings.autoFixed(180f / Vars.tilesize, 1), (b.fragBullet.damage * 20).toString() + StatUnit.perSecond.localized(), IStatus.结晶化.emoji() + IStatus.结晶化.localizedName
+            "infos.mirageLightningDamage",
+            Strings.autoFixed(180f / Vars.tilesize, 1),
+            (b.fragBullet.damage * 20).toString() + StatUnit.perSecond.localized(),
+            IStatus.结晶化.emoji() + IStatus.结晶化.localizedName
           )
         )
       }.left().padLeft(15f)
@@ -363,7 +410,7 @@ class Mirage : SglTurret("mirage") {
     consume!!.item(IItems.充能FEX水晶, 2)
     consume!!.time(120f)
 
-    drawers = DrawSglTurret(object : RegionPart("_shooter") {
+    drawers = DrawSglTurret(object :RegionPart("_shooter") {
       init {
         mirror = false
         heatProgress = PartProgress.warmup
@@ -373,7 +420,7 @@ class Mirage : SglTurret("mirage") {
 
         moveY = -4f
       }
-    }, object : RegionPart("_side") {
+    }, object :RegionPart("_side") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup
@@ -386,7 +433,7 @@ class Mirage : SglTurret("mirage") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, 0f, -10f))
       }
-    }, object : RegionPart("_blade") {
+    }, object :RegionPart("_blade") {
       init {
         progress = PartProgress.warmup
         heatProgress = PartProgress.warmup
@@ -400,7 +447,7 @@ class Mirage : SglTurret("mirage") {
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2f, 5f))
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         heatProgress = PartProgress.warmup
         heatColor = SglDrawConst.fexCrystal

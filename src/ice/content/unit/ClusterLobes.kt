@@ -18,10 +18,7 @@ import ice.entities.IceRegister
 import ice.entities.bullet.BombBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.graphics.IceColor
-import universecore.math.IMathf
-import universecore.util.toTrimmedString
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.BarAbility
 import ice.world.content.unit.entity.base.Entity
 import ice.world.meta.IceEffects
 import ice.world.meta.IceStats
@@ -39,11 +36,14 @@ import mindustry.graphics.Layer
 import mindustry.graphics.Trail
 import mindustry.ui.Bar
 import mindustry.world.meta.Stat
+import universecore.math.IMathf
+import universecore.util.toTrimmedString
+import universecore.world.ability.BarAbility
 import kotlin.math.min
 import kotlin.math.sin
 import kotlin.random.Random
 
-class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
+class ClusterLobes :IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
   init {
     localization {
       zh_CN {
@@ -65,7 +65,7 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
       rotateSpeed = 0f
       reload = 60 * 3f
       inaccuracy = 60f
-      bullet = object : BasicBulletType(8f, 40f) {
+      bullet = object :BasicBulletType(8f, 40f) {
         init {
           smokeEffect = Fx.none
           shootSound = Sounds.shootMalign
@@ -87,7 +87,7 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
         }
 
         override fun removed(b: Bullet) {
-          val bc = object : BombBulletType(15f, 40f) {
+          val bc = object :BombBulletType(15f, 40f) {
             init {
               collidesGround = true
               collides = true
@@ -188,7 +188,7 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
     })
   }
 
-  class ClusterLobesUnit : Entity() {
+  class ClusterLobesUnit :Entity() {
     var timer = 0
     var target: Teamc? = null
     var resistCont = 0
@@ -203,7 +203,7 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
       val ang = 360f / vec2Size
       Vec2(0f, 80f).rotate(ang * i)
     }
-    val laserBulletType = object : LaserBulletType(100f) {
+    val laserBulletType = object :LaserBulletType(100f) {
       init {
         status = StatusEffects.shocked
         width = 19f
@@ -245,7 +245,7 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
       Draw.color(IceColor.b4)
       Lines.stroke(3f)
       Fill.circle(xx, yy, IMathf.sint(0.5f, 0.1f, 0f, 5f))
-      for (i in outsideRing.indices) {
+      for(i in outsideRing.indices) {
         if (i + 1 >= outsideRing.size) continue
         val cur: Vec2 = outsideRing[i]
         val next: Vec2 = outsideRing[i + 1]
@@ -307,7 +307,7 @@ class ClusterLobes : IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
 
 
       if (!Vars.headless && trailLength > 0) {
-        for (value in trails.withIndex()) {
+        for(value in trails.withIndex()) {
           val angle0 = Time.time
           val angle1 = -1.1f * angle0
           val xy = angleTrns(angle0, rs)

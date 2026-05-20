@@ -1,15 +1,14 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-
-import universecore.world.draw.DrawMulti
 import ice.world.meta.IceEffects
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
-class 铈凝块混合器 : NormalCrafter("ceriumBlockMixer") {
+class 铈凝块混合器 :NormalCrafter("ceriumBlockMixer") {
   init {
     localization {
       zh_CN {

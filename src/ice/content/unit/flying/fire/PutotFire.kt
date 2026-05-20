@@ -10,7 +10,7 @@ import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 
-class PutotFire : IceUnitType("putotFire") {
+class PutotFire :IceUnitType("putotFire") {
   init {
     localization {
       zh_CN {
@@ -18,7 +18,7 @@ class PutotFire : IceUnitType("putotFire") {
         description = "轻型空中突击单位.以极高的机动性持续骚扰敌军,开火时减少所受伤害"
       }
     }
-    requirements(IItems.低碳钢,30, IItems.单晶硅,10)
+    requirements(IItems.低碳钢, 30, IItems.单晶硅, 10)
     circleTarget = true
     faceTarget = false
     targetAir = false

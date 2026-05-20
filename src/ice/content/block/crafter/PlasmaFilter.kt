@@ -2,18 +2,17 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.util.toColor
-
-import universecore.world.draw.DrawLiquidRegion
-import universecore.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.world.draw.DrawCultivator
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawParticles
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
+import universecore.util.toColor
+import universecore.world.draw.DrawLiquidRegion
+import universecore.world.draw.DrawMulti
 
-class PlasmaFilter : NormalCrafter("plasmaFilter") {
+class PlasmaFilter :NormalCrafter("plasmaFilter") {
   init {
     localization {
       zh_CN {
@@ -26,7 +25,7 @@ class PlasmaFilter : NormalCrafter("plasmaFilter") {
     squareSprite = false
     itemCapacity = 60
     liquidCapacity = 60f
-    newFormula {consumers, producers ->
+    newFormula { consumers, producers ->
       consumers.apply {
         time(600f)
         power(28.6f)
@@ -35,7 +34,21 @@ class PlasmaFilter : NormalCrafter("plasmaFilter") {
       producers.items(IItems.生物钢, 1)
     }
 
-    requirements(Category.crafting, IItems.钴锭, 60, IItems.铱板, 155, IItems.石英玻璃, 40, IItems.铈锭, 85, IItems.导能回路, 30, IItems.生物钢, 15)
+    requirements(
+      Category.crafting,
+      IItems.钴锭,
+      60,
+      IItems.铱板,
+      155,
+      IItems.石英玻璃,
+      40,
+      IItems.铈锭,
+      85,
+      IItems.导能回路,
+      30,
+      IItems.生物钢,
+      15
+    )
 
     drawers = DrawMulti(
       DrawRegion("-bottom"), DrawLiquidRegion(ILiquids.血肉赘生物), DrawLiquidRegion(ILiquids.纯净水),

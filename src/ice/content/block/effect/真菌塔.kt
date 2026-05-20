@@ -1,9 +1,8 @@
 package ice.content.block.effect
 
-
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.effect.FungusCore
 import mindustry.type.Category
+import universecore.ui.bundle.localization
 
 class 真菌塔 :FungusCore("fungusTower") {
   init {

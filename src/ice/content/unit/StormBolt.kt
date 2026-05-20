@@ -6,9 +6,7 @@ import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.ArmorPlateAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.ShieldRegenFieldAbility
 import mindustry.entities.effect.ParticleEffect
@@ -17,13 +15,16 @@ import mindustry.entities.part.DrawPart.PartProgress
 import mindustry.entities.part.ShapePart
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
+import universecore.util.toColor
+import universecore.world.ability.ArmorPlateAbility
 
-class StormBolt : IceUnitType("unit_storBolt") {
+class StormBolt :IceUnitType("unit_storBolt") {
   init {
     localization {
       zh_CN {
         this.localizedName = "风暴"
-        description = "重型空中突击单位.对远距离敌人发射能量弹,对近距离的敌人则发射高热激光.加装护盾辅助发生器以维持友军护盾持续作战,开火时减少所受伤害.攻击时无法移动"
+        description =
+          "重型空中突击单位.对远距离敌人发射能量弹,对近距离的敌人则发射高热激光.加装护盾辅助发生器以维持友军护盾持续作战,开火时减少所受伤害.攻击时无法移动"
         details = "风雨欲来..."
       }
     }
@@ -70,7 +71,7 @@ class StormBolt : IceUnitType("unit_storBolt") {
       chargeSound = Sounds.chargeLancer
       shootSound = Sounds.shootBreach
       bullet = BasicBulletType(8f, 2400f, "circle-bullet").apply {
-        lifetime = (78f/(speed*8))*60f
+        lifetime = (78f / (speed * 8)) * 60f
         height = 32f
         width = 32f
         shrinkY = 0f

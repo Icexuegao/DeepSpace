@@ -4,7 +4,6 @@ import arc.scene.ui.layout.Table
 import ice.content.ILiquids
 import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.LiquidExplodeAbility
@@ -15,8 +14,9 @@ import mindustry.graphics.Pal
 import mindustry.type.Weapon
 import mindustry.ui.Bar
 import mindustry.world.meta.BlockFlag
+import universecore.util.toColor
 
-class FlyingMidges : IceUnitType("unit_flyingMidges", TimedKillUnit::class.java) {
+class FlyingMidges :IceUnitType("unit_flyingMidges", TimedKillUnit::class.java) {
   init {
     lifetime = 1800f
     flying = true

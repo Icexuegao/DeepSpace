@@ -1,14 +1,13 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import universecore.ui.bundle.localization
-
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.power.LightBlock
+import universecore.ui.bundle.localization
 
-class 大型照明器:LightBlock("illuminatorLarge"){
-  init{
+class 大型照明器 :LightBlock("illuminatorLarge") {
+  init {
     size = 2
     armor = 4f
     radius = 270f

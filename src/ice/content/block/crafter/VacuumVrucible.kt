@@ -2,15 +2,14 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-
-import universecore.world.draw.DrawMulti
 import mindustry.type.Category
 import mindustry.world.draw.DrawCrucibleFlame
 import mindustry.world.draw.DrawDefault
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
+import universecore.world.draw.DrawMulti
 
-class VacuumVrucible : NormalCrafter("vacuum_crucible") {
+class VacuumVrucible :NormalCrafter("vacuum_crucible") {
   init {
     localization {
       zh_CN {
@@ -33,7 +32,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
         time(60f)
         liquids(ILiquids.氯化硅溶胶, 0.2f, ILiquids.氢气, 0.4f)
         item(IItems.金珀沙, 5)
-        power(70f/60f)
+        power(70f / 60f)
       }
       producers.apply {
         item(IItems.单晶硅, 8)
@@ -67,7 +66,7 @@ class VacuumVrucible : NormalCrafter("vacuum_crucible") {
       consumers.apply {
         time(120f)
         item(IItems.生煤, 3)
-        power(140f/60f)
+        power(140f / 60f)
       }
       producers.apply {
         item(IItems.焦炭, 2)

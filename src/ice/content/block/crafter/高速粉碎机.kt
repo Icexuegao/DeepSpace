@@ -1,14 +1,13 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
 class 高速粉碎机 :NormalCrafter("highSpeedCrusher") {
   init {

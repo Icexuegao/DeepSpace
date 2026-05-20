@@ -5,7 +5,6 @@ import ice.content.ILiquids
 import ice.content.IStatus
 import ice.content.IUnitTypes
 import ice.entities.bullet.LaserBulletType
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.LiquidExplodeAbility
@@ -18,8 +17,9 @@ import mindustry.graphics.Pal
 import mindustry.type.Weapon
 import mindustry.ui.Bar
 import mindustry.world.meta.BlockFlag
+import universecore.util.toColor
 
-class Mosquito : IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
+class Mosquito :IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
   init {
     lifetime = 1800f
     flying = true
@@ -32,7 +32,8 @@ class Mosquito : IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
     localization {
       zh_CN {
         this.localizedName = "疟蚊"
-        description = "轻型空中突击单位.由飞蠓改进而成,体型略有增长,体表覆盖轻便的几丁质甲壳,在保持机动性的同时获得了一定的防护能力.阵亡后会洒下一滩血肉赘生物."
+        description =
+          "轻型空中突击单位.由飞蠓改进而成,体型略有增长,体表覆盖轻便的几丁质甲壳,在保持机动性的同时获得了一定的防护能力.阵亡后会洒下一滩血肉赘生物."
       }
     }
     targetFlags = arrayOf(

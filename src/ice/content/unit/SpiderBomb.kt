@@ -13,8 +13,6 @@ import ice.content.IUnitTypes
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.DeathGiftAbility
-import universecore.world.ability.HealthRequireAbility
 import mindustry.Vars
 import mindustry.audio.SoundLoop
 import mindustry.content.Fx
@@ -29,11 +27,13 @@ import mindustry.entities.units.WeaponMount
 import mindustry.gen.Sounds
 import mindustry.gen.Unit
 import mindustry.type.Weapon
+import universecore.world.ability.DeathGiftAbility
+import universecore.world.ability.HealthRequireAbility
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-class SpiderBomb : IceUnitType("unit_spiderBomb") {
+class SpiderBomb :IceUnitType("unit_spiderBomb") {
 
   init {
     localization {
@@ -172,7 +172,7 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
       }
     }
 
-    weapons.add(object : Weapon() {
+    weapons.add(object :Weapon() {
       override fun update(unit: Unit, mount: WeaponMount) {
         val can = unit.canShoot()
         val lastReload = mount.reload
@@ -180,12 +180,13 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
         mount.recoil = Mathf.approachDelta(mount.recoil, 0f, unit.reloadMultiplier / recoilTime)
         if (recoils > 0) {
           if (mount.recoils == null) mount.recoils = FloatArray(recoils)
-          for (i in 0..<recoils) {
+          for(i in 0..<recoils) {
             mount.recoils[i] = Mathf.approachDelta(mount.recoils[i], 0f, unit.reloadMultiplier / recoilTime)
           }
         }
         mount.smoothReload = Mathf.lerpDelta(mount.smoothReload, mount.reload / reload, smoothReloadSpeed)
-        mount.charge = if (mount.charging && shoot.firstShotDelay > 0) Mathf.approachDelta(mount.charge, 1f, 1 / shoot.firstShotDelay) else 0f
+        mount.charge =
+          if (mount.charging && shoot.firstShotDelay > 0) Mathf.approachDelta(mount.charge, 1f, 1 / shoot.firstShotDelay) else 0f
 
         val warmupTarget = if ((can && mount.shoot) || (continuous && mount.bullet != null) || mount.charging) 1f else 0f
         if (linearWarmup) {
@@ -199,7 +200,7 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
 
         //find a new target
         if (!controllable && autoTarget) {
-          if ((Time.delta.let {mount.retarget -= it; mount.retarget}) <= 0f) {
+          if ((Time.delta.let { mount.retarget -= it; mount.retarget }) <= 0f) {
             mount.target = findTarget(unit, mountX, mountY, bullet.range, bullet.collidesAir, bullet.collidesGround)
             mount.retarget = if (mount.target == null) targetInterval else targetSwitchInterval
           }
@@ -211,7 +212,11 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
           var shoot = false
 
           if (mount.target != null) {
-            shoot = mount.target.within(mountX, mountY, bullet.range + abs(shootY) + (if (mount.target is Sized) (mount.target as Sized).hitSize() / 2f else 0f)) && can
+            shoot = mount.target.within(
+              mountX,
+              mountY,
+              bullet.range + abs(shootY) + (if (mount.target is Sized) (mount.target as Sized).hitSize() / 2f else 0f)
+            ) && can
 
             if (predictTarget) {
               val to = Predict.intercept(unit, mount.target, bullet)
@@ -277,7 +282,7 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
             //resulting length of the bullet (smoothed)
             val resultLength = Mathf.approachDelta(curLength, shootLength, aimChangeSpeed)
             //actual aim end point based on length
-            Tmp.v1.trns(shootAngle, resultLength.also {mount.lastLength = it}).add(bulletX, bulletY)
+            Tmp.v1.trns(shootAngle, resultLength.also { mount.lastLength = it }).add(bulletX, bulletY)
 
             mount.bullet.aimX = Tmp.v1.x
             mount.bullet.aimY = Tmp.v1.y
@@ -319,7 +324,11 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
                   (!alternate || wasFlipped == flipSprite) && mount.warmup >= minWarmup &&  //must be warmed up
                   velLen >= minShootVelocity &&  //check velocity requirements
                   (mount.reload <= 0.0001f || (alwaysContinuous && mount.bullet == null)) &&  //reload has to be 0, or it has to be an always-continuous weapon
-                  (alwaysShooting || Angles.within(if (rotate) mount.rotation else unit.rotation + baseRotation, mount.targetRotation, shootCone))) //has to be within the cone
+                  (alwaysShooting || Angles.within(
+                    if (rotate) mount.rotation else unit.rotation + baseRotation,
+                    mount.targetRotation,
+                    shootCone
+                  ))) //has to be within the cone
         ) {
           shoot(unit, mount, bulletX, bulletY, shootAngle)
 
@@ -347,7 +356,11 @@ class SpiderBomb : IceUnitType("unit_spiderBomb") {
       shootSound = Sounds.loopFire
       bullet = ContinuousFlameBulletType().apply {
         colors = arrayOf(
-          Color.valueOf("FF58458C"), Color.valueOf("FF5845B2"), Color.valueOf("FF5845CC"), Color.valueOf("FF8663"), Color.valueOf("FFDCD8CC")
+          Color.valueOf("FF58458C"),
+          Color.valueOf("FF5845B2"),
+          Color.valueOf("FF5845CC"),
+          Color.valueOf("FF8663"),
+          Color.valueOf("FFDCD8CC")
         )
         damage = 2f
         lifetime = 60f

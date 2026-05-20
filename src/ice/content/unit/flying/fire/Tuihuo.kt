@@ -10,7 +10,7 @@ import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 
-class Tuihuo : IceUnitType("tuihuo") {
+class Tuihuo :IceUnitType("tuihuo") {
   init {
     localization {
       zh_CN {
@@ -18,7 +18,7 @@ class Tuihuo : IceUnitType("tuihuo") {
         description = "轻型空中突击单位.快速投掷航弹杀伤敌军,开火时减少所受伤害"
       }
     }
-    requirements(IItems.低碳钢,35, IItems.高碳钢,15, IItems.单晶硅,10, IItems.铬锭,10)
+    requirements(IItems.低碳钢, 35, IItems.高碳钢, 15, IItems.单晶硅, 10, IItems.铬锭, 10)
     immunities.add(StatusEffects.wet)
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 0.2f

@@ -12,13 +12,14 @@ import mindustry.graphics.Layer
 import mindustry.graphics.MultiPacker
 import mindustry.graphics.MultiPacker.PageType
 
-class Gabriel : IceUnitType("gabriel") {
+class Gabriel :IceUnitType("gabriel") {
   init {
     localization {
       zh_CN {
         this.localizedName = "加百列"
         description = "轻型空中工程单位.建造与开采效率较低,武装程度有限"
-        details = "在教廷尚处襁褓的年代,信徒们在星系间流亡.没有家园,没有工业,没有武装.\n初代加百列诞生于这段最黑暗的岁月.\n它最初只是一具简陋的原型机,由废船上拆下的零件拼凑而成.\n这具粗劣的躯壳,被信徒们赋予了一个名字\"加百列\",传达神旨意的天使.\n教廷的所有胜利,皆由此开始.\n如今,从废船零件到合金躯壳,型号迭代了无数次,加百列却从未离开过前线."
+        details =
+          "在教廷尚处襁褓的年代,信徒们在星系间流亡.没有家园,没有工业,没有武装.\n初代加百列诞生于这段最黑暗的岁月.\n它最初只是一具简陋的原型机,由废船上拆下的零件拼凑而成.\n这具粗劣的躯壳,被信徒们赋予了一个名字\"加百列\",传达神旨意的天使.\n教廷的所有胜利,皆由此开始.\n如今,从废船零件到合金躯壳,型号迭代了无数次,加百列却从未离开过前线."
       }
     }
     armor = 1f
@@ -29,7 +30,7 @@ class Gabriel : IceUnitType("gabriel") {
     mineTier = 2
     mineSpeed = 4f
     engineSize = 2.5f
-    engineLayer= Layer.flyingUnitLow-1f
+    engineLayer = Layer.flyingUnitLow - 1f
     rotateSpeed = 7f
     itemCapacity = 30
     engineOffset = 6f
@@ -73,9 +74,19 @@ class Gabriel : IceUnitType("gabriel") {
 
   override fun createIcons(packer: MultiPacker) {
     super.createIcons(packer)
-    for (weapon in weapons) {
-      if (!weapon.name.isEmpty() && (minfo.mod == null || weapon.name.startsWith(minfo.mod.name)) && (weapon.top || !packer.isOutlined(weapon.name) || weapon.parts.contains { p: DrawPart? -> p!!.under })) {
-        makeOutline(PageType.main, packer, weapon.region, !weapon.top || weapon.parts.contains { p: DrawPart? -> p!!.under }, outlineColor, outlineRadius)
+    for(weapon in weapons) {
+      if (!weapon.name.isEmpty() && (minfo.mod == null || weapon.name.startsWith(minfo.mod.name)) && (weapon.top || !packer.isOutlined(
+          weapon.name
+        ) || weapon.parts.contains { p: DrawPart? -> p!!.under })
+      ) {
+        makeOutline(
+          PageType.main,
+          packer,
+          weapon.region,
+          !weapon.top || weapon.parts.contains { p: DrawPart? -> p!!.under },
+          outlineColor,
+          outlineRadius
+        )
       }
     }
   }

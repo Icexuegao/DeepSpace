@@ -15,7 +15,7 @@ import mindustry.entities.effect.WrapEffect
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 
-class FuFire : IceUnitType("fuFire") {
+class FuFire :IceUnitType("fuFire") {
   init {
     localization {
       zh_CN {
@@ -37,7 +37,14 @@ class FuFire : IceUnitType("fuFire") {
     trailLength = 16
     engineLayer = 110f
     immunities.addAll(
-      StatusEffects.wet, StatusEffects.burning, StatusEffects.freezing, StatusEffects.sporeSlowed, StatusEffects.tarred, StatusEffects.muddy, StatusEffects.electrified, IStatus.辐射
+      StatusEffects.wet,
+      StatusEffects.burning,
+      StatusEffects.freezing,
+      StatusEffects.sporeSlowed,
+      StatusEffects.tarred,
+      StatusEffects.muddy,
+      StatusEffects.electrified,
+      IStatus.辐射
     )
     abilities.addAll(ArmorPlateAbility().apply {
       healthMultiplier = 0.5f

@@ -5,7 +5,6 @@ import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -14,8 +13,9 @@ import mindustry.gen.Sounds
 import mindustry.graphics.Pal
 import mindustry.type.weapons.PointDefenseWeapon
 import mindustry.type.weapons.RepairBeamWeapon
+import universecore.util.toColor
 
-class MeteoricIron : IceUnitType("meteoricIron") {
+class MeteoricIron :IceUnitType("meteoricIron") {
   init {
     localization {
       zh_CN {

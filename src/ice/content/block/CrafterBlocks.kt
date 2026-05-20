@@ -4,7 +4,7 @@ import ice.content.block.crafter.*
 import universecore.world.Load
 
 @Suppress("unused")
-object CrafterBlocks : Load {
+object CrafterBlocks :Load {
   val 焚烧炉 = 焚化炉()
   val 碳控熔炉 = 碳控熔炉()
   val 普适冶炼阵列 = 普适冶炼阵列()
@@ -18,7 +18,6 @@ object CrafterBlocks : Load {
 
   val 单晶硅厂 = MonocrystallineSiliconFactory()
   val 等离子蚀刻厂 = 等离子蚀刻厂()
-
 
   val 矿石粉碎机 = 矿石粉碎机()
   val 蜂巢陶瓷合成巢 = 蜂巢陶瓷合成巢()
@@ -51,7 +50,6 @@ object CrafterBlocks : Load {
 
   val 洗矿机 = OreWasher()
   val 结晶器 = Crystallizer()
-
 
   val 热能冶炼炉 = ThermalSmelter()
   val 蒸馏净化器 = DistillPurifier()

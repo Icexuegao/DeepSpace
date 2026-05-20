@@ -12,7 +12,7 @@ import mindustry.entities.abilities.ShieldArcAbility
 import mindustry.gen.Unit
 import mindustry.world.meta.BlockFlag
 
-class HeavyPress : IceUnitType("heavyPress") {
+class HeavyPress :IceUnitType("heavyPress") {
   init {
     localization {
       zh_CN {
@@ -55,11 +55,12 @@ class HeavyPress : IceUnitType("heavyPress") {
     })
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 1f
-    },DWDFAbility())
+    }, DWDFAbility())
   }
-  class DWDFAbility :Ability(){
+
+  class DWDFAbility :Ability() {
     override fun update(unit: Unit) {
-      if (unit.isShooting){
+      if (unit.isShooting) {
         unit.apply(IStatus.突袭, 60f)
       }
     }

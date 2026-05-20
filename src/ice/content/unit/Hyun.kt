@@ -3,9 +3,9 @@ package ice.content.unit
 import arc.graphics.Color
 import arc.math.Interp
 import ice.content.IStatus
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.ArmorPlateAbility
@@ -17,7 +17,7 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 
-class Hyun : IceUnitType("unit_hyun") {
+class Hyun :IceUnitType("unit_hyun") {
   init {
     localization {
       zh_CN {
@@ -79,7 +79,11 @@ class Hyun : IceUnitType("unit_hyun") {
       alwaysContinuous = true
       bullet = ContinuousFlameBulletType().apply {
         colors = arrayOf(
-          Color.valueOf("FF58458C"), Color.valueOf("FF5845B2"), Color.valueOf("FF5845CC"), Color.valueOf("FF6666"), Color.valueOf("FFDCD8CC")
+          Color.valueOf("FF58458C"),
+          Color.valueOf("FF5845B2"),
+          Color.valueOf("FF5845CC"),
+          Color.valueOf("FF6666"),
+          Color.valueOf("FFDCD8CC")
         )
         damage = 100f
         lifetime = 60f

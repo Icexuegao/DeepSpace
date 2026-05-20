@@ -2,12 +2,10 @@ package ice.content.unit
 
 import arc.math.Interp
 import ice.content.IStatus
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.MissileBulletType
 import ice.entities.effect.MultiEffect
-import ice.core.IFiles.appendModName
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.DeathGiftAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.RegenAbility
 import mindustry.entities.effect.ParticleEffect
@@ -15,8 +13,10 @@ import mindustry.entities.pattern.ShootSpread
 import mindustry.gen.LegsUnit
 import mindustry.gen.Sounds
 import mindustry.type.Weapon
+import universecore.util.toColor
+import universecore.world.ability.DeathGiftAbility
 
-class Constrict : IceUnitType("unit_constrict", LegsUnit::class.java) {
+class Constrict :IceUnitType("unit_constrict", LegsUnit::class.java) {
   init {
     localization {
       zh_CN {

@@ -5,8 +5,6 @@ import arc.func.Intf
 import arc.func.Prov
 import arc.struct.ObjectMap
 import ice.content.IItems
-import universecore.world.Load
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.gen.Building
 import mindustry.gen.Teamc
@@ -28,9 +26,11 @@ import singularity.world.blocks.distribute.netcomponents.NetPluginComp
 import singularity.world.distribution.DistBufferType
 import singularity.world.draw.DrawDirSpliceBlock
 import singularity.world.draw.DrawEdgeLinkBits
+import universecore.ui.bundle.localization
+import universecore.world.Load
 
 @Suppress("unused")
-object MatrixDistNet : Load {
+object MatrixDistNet :Load {
 
   var 矩阵中枢伺服器 = DistNetCore("matrix_core").apply {
     localization {
@@ -40,7 +40,23 @@ object MatrixDistNet : Load {
       }
     }
     requirements(
-      SglCategory.matrix, IItems.矩阵合金, 200, IItems.强化合金, 240, IItems.FEX水晶, 220, IItems.气凝胶, 200, IItems.铱锭, 90, IItems.单晶硅, 260, IItems.铬锭, 220, IItems.絮凝剂, 180
+      SglCategory.matrix,
+      IItems.矩阵合金,
+      200,
+      IItems.强化合金,
+      240,
+      IItems.FEX水晶,
+      220,
+      IItems.气凝胶,
+      200,
+      IItems.铱锭,
+      90,
+      IItems.单晶硅,
+      260,
+      IItems.铬锭,
+      220,
+      IItems.絮凝剂,
+      180
     )
     size = 6
     squareSprite = false
@@ -58,7 +74,8 @@ object MatrixDistNet : Load {
     localization {
       zh_CN {
         this.localizedName = "矩阵桥"
-        description = "矩阵建立的物质运输桥,可任意方向链接的物质运输桥,可运输物品和液体\n同时,这也是矩阵网络中用于连接设备的节点,只能呈树状结构建立矩阵网络"
+        description =
+          "矩阵建立的物质运输桥,可任意方向链接的物质运输桥,可运输物品和液体\n同时,这也是矩阵网络中用于连接设备的节点,只能呈树状结构建立矩阵网络"
       }
     }
   }
@@ -99,7 +116,8 @@ object MatrixDistNet : Load {
     localization {
       zh_CN {
         this.localizedName = "网格控制器"
-        description = "矩阵网格的控制中枢,与矩阵网格框架建立矩阵网格,在网格中通过此设备配置网格内io点的的输入输出和存储设备,是一个重要的物流管理模型"
+        description =
+          "矩阵网格的控制中枢,与矩阵网格框架建立矩阵网格,在网格中通过此设备配置网格内io点的的输入输出和存储设备,是一个重要的物流管理模型"
       }
     }
   }
@@ -289,7 +307,8 @@ object MatrixDistNet : Load {
     localization {
       zh_CN {
         this.localizedName = "自动回收组件"
-        description = "可以配置缓存的溢出资源回收,在已安装该设备的网络中,若所有网络容器都已满,接收的在配置回收清单中的资源将被自动销毁,以避免网络堵死\n有两种配置模式：\n    [accent]黑名单模式[]: 销毁溢出的已选中资源\n    [accent]白名单模式[]: 配置选中的资源在溢出时被保留"
+        description =
+          "可以配置缓存的溢出资源回收,在已安装该设备的网络中,若所有网络容器都已满,接收的在配置回收清单中的资源将被自动销毁,以避免网络堵死\n有两种配置模式：\n    [accent]黑名单模式[]: 销毁溢出的已选中资源\n    [accent]白名单模式[]: 配置选中的资源在溢出时被保留"
       }
     }
     setRecycle(DistBufferType.itemBuffer) { e: Building? -> e!!.items.clear() }
@@ -297,7 +316,7 @@ object MatrixDistNet : Load {
     size = 3
     matrixEnergyUse = 0.4f
     buildType = Prov {
-      object : AutoRecyclerComp.AutoRecyclerCompBuild() {
+      object :AutoRecyclerComp.AutoRecyclerCompBuild() {
         override fun acceptStack(item: Item?, amount: Int, source: Teamc?): Int {
           return if (distributor.network.core === source) amount else 0
         }

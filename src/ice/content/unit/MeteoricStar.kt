@@ -5,7 +5,6 @@ import arc.struct.Seq
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Blocks
 import mindustry.content.Fx
@@ -17,13 +16,15 @@ import mindustry.type.Weapon
 import mindustry.type.weapons.PointDefenseWeapon
 import mindustry.type.weapons.RepairBeamWeapon
 import mindustry.world.blocks.defense.turrets.PowerTurret
+import universecore.util.toColor
 
-class MeteoricStar : IceUnitType("meteoricStar") {
+class MeteoricStar :IceUnitType("meteoricStar") {
   init {
     localization {
       zh_CN {
         this.localizedName = "陨星"
-        description = "重型空中突击单位.投送湍能弹并辅以四门机炮交替攻击敌人,侧翼分别投射弧形护盾抵御攻击.以闪电场电击附近敌军并治疗友军,配备裂解炮抵御敌人的攻击"
+        description =
+          "重型空中突击单位.投送湍能弹并辅以四门机炮交替攻击敌人,侧翼分别投射弧形护盾抵御攻击.以闪电场电击附近敌军并治疗友军,配备裂解炮抵御敌人的攻击"
       }
     }
     flying = true

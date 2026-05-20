@@ -27,6 +27,17 @@ import universecore.util.toColor
 
 class 终归反应堆 :ImpactReactor("endImpactReactor") {
   init {
+    localization {
+      zh_CN {
+        localizedName = "终归反应堆"
+        description = "约束以太能的剧烈反应产生巨量电力,需要持续输入能量维持力场稳定,否则将引发灾难性爆炸"
+      }
+      en {
+        localizedName = "End Impact Reactor"
+        description =
+          "Constrains the violent reaction of ethereal energy to produce enormous amounts of power. Requires continuous energy input to maintain field stability, or a catastrophic explosion will be triggered."
+      }
+    }
     size = 6
     armor = 12f
     lightColor = "EBFFFE".toColor()
@@ -44,17 +55,6 @@ class 终归反应堆 :ImpactReactor("endImpactReactor") {
     explosionRadius = 84
     explosionDamage = 12000
     explodeSound = Sounds.shootCollaris
-    localization {
-      zh_CN {
-        localizedName = "终归反应堆"
-        description = "约束以太能的剧烈反应产生巨量电力,需要持续输入能量维持力场稳定,否则将引发灾难性爆炸"
-      }
-      en {
-        localizedName = "End Impact Reactor"
-        description =
-          "Constrains the violent reaction of ethereal energy to produce enormous amounts of power. Requires continuous energy input to maintain field stability, or a catastrophic explosion will be triggered."
-      }
-    }
     destroyEffect = MultiEffect(ParticleEffect().apply {
       particles = 1
       sizeFrom = 80f

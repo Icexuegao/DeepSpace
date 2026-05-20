@@ -1,15 +1,15 @@
 package ice.content
 
-import ice.graphics.IceColor
 import ice.core.IFiles.appendModName
-import universecore.world.Load
-import universecore.ui.bundle.Localizable
+import ice.graphics.IceColor
 import mindustry.content.StatusEffects
 import mindustry.gen.Sounds
 import mindustry.type.Weather
 import mindustry.type.weather.ParticleWeather
 import mindustry.type.weather.RainWeather
 import mindustry.world.meta.Attribute
+import universecore.ui.bundle.Localizable
+import universecore.world.Load
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
 object IWeathers :Load {

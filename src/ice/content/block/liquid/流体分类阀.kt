@@ -5,9 +5,6 @@ import arc.graphics.g2d.Draw
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import ice.content.IItems
-import universecore.scene.ui.ItemSelection
-import universecore.ui.bundle.localization
-
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.gen.Building
 import mindustry.type.Category
@@ -16,6 +13,8 @@ import mindustry.world.blocks.liquid.LiquidBlock
 import mindustry.world.modules.LiquidModule
 import singularity.world.blocks.liquid.LiquidUnloader
 import singularity.world.blocks.product.NormalCrafter
+import universecore.scene.ui.ItemSelection
+import universecore.ui.bundle.localization
 import universecore.world.producers.ProduceType
 import kotlin.math.min
 
@@ -45,7 +44,7 @@ class 流体分类阀 :LiquidUnloader("liquid_classifier") {
     }
 
     override fun updateTile() {
-      val next = getNext("liquidsPeek") {e: Building? -> e!!.block.hasLiquids && e.canUnload()}
+      val next = getNext("liquidsPeek") { e: Building? -> e!!.block.hasLiquids && e.canUnload() }
       if (next == null) return
 
       if (next.liquids != null) {
@@ -70,6 +69,7 @@ class 流体分类阀 :LiquidUnloader("liquid_classifier") {
         }
       }
     }
+
     override fun buildConfiguration(table: Table) {
       cliquids.clear()
       proximity.forEach {

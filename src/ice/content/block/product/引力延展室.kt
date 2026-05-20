@@ -28,6 +28,11 @@ class 引力延展室 :ExtendMiner("force_field_extender") {
         localizedName = "引力延展室"
         description = "用于延伸潮汐钻头的设备,贴近潮汐钻井,并与其他延展室彼此正对连接可扩大钻头覆盖的范围"
       }
+      en {
+        localizedName = "Gravitational Extender"
+        description =
+          "A device used to extend the Tidal Drill. Place it close to the drill and connect it face-to-face with other extenders to expand the drill's coverage range."
+      }
     }
     requirements(
       Category.production, ItemStack.with(

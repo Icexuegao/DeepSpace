@@ -1,11 +1,10 @@
 package ice.content.block.effect
 
 import ice.content.IItems
-import universecore.ui.bundle.localization
-
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.storage.StorageBlock
+import universecore.ui.bundle.localization
 
 class 压缩存储器 :StorageBlock("compressorMemory") {
   init {

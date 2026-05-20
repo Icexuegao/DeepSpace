@@ -4,7 +4,7 @@ import ice.content.IUnitTypes
 import ice.type.Remains
 import mindustry.world.meta.Stats
 
-class 不焚者的余烬:Remains("remains_unburnt_ashes"){
+class 不焚者的余烬 :Remains("remains_unburnt_ashes") {
   init {
     localization {
       zh_CN {

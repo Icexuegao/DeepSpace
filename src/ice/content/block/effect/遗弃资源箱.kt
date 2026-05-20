@@ -1,10 +1,9 @@
 package ice.content.block.effect
 
-
 import ice.world.content.blocks.effect.ResBox
 
-class 遗弃资源箱:ResBox("resBox"){
-  init{
+class 遗弃资源箱 :ResBox("resBox") {
+  init {
     localization {
       zh_CN {
         this.localizedName = "遗弃资源箱"

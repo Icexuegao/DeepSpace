@@ -17,7 +17,7 @@ import mindustry.entities.part.RegionPart
 import mindustry.gen.Sounds
 import mindustry.world.meta.BlockFlag
 
-class Siege : IceUnitType("siege") {
+class Siege :IceUnitType("siege") {
   init {
     localization {
       zh_CN {

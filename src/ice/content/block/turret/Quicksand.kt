@@ -133,7 +133,7 @@ class Quicksand :SglTurret("turret_quicksand") {
     val ammoTypes = bulletType.invoke()
     newAmmo(ammoTypes).setReloadAmount(ammoTypes.ammoMultiplier.toInt())
     consume?.apply {
-      liquids(liquid, 47f/60f)
+      liquids(liquid, 47f / 60f)
       time(35f)
     }
   }

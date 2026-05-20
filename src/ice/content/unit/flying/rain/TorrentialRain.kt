@@ -6,7 +6,7 @@ import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 
-class TorrentialRain : IceUnitType("unit_torrentialRain") {
+class TorrentialRain :IceUnitType("unit_torrentialRain") {
   init {
     localization {
       zh_CN {

@@ -33,6 +33,13 @@ class 岩石粉碎机 :FloorCrafter("rock_crusher") {
         details =
           "事实上这台机器的效率并不算高,或者说它浪费掉的材料太多了,为了产出能够供应工业使用的富硅沙砾,几乎每生产一吨石英沙就要消耗掉几十吨原石,更别提硅纯度更低的一些岩石了"
       }
+      en {
+        localizedName = "Rock Crusher"
+        description =
+          "Crushes rocks into fine particles. Very useful in areas without sand. Some rocks have high salt content, so useful byproducts can also be obtained from them."
+        details =
+          "In fact, this machine is not very efficient, or rather, it wastes too much material. To produce silicon-rich gravel for industrial use, almost dozens of tons of raw stone are consumed for every ton of quartz sand produced, not to mention rocks with even lower silicon purity."
+      }
     }
     requirements(
       Category.production, IItems.强化合金, 40, IItems.气凝胶, 55, IItems.单晶硅, 60, IItems.铬锭, 50, IItems.黄铜锭, 60

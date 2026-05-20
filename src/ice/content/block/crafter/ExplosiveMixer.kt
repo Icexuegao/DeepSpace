@@ -5,7 +5,7 @@ import ice.world.meta.IceEffects
 import mindustry.type.Category
 import singularity.world.blocks.product.NormalCrafter
 
-class ExplosiveMixer : NormalCrafter("explosiveMixer") {
+class ExplosiveMixer :NormalCrafter("explosiveMixer") {
   init {
     localization {
       zh_CN {

@@ -2,7 +2,6 @@ package ice.content.block.crafter
 
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.type.Category
@@ -11,8 +10,9 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawLiquidTile
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
+import universecore.world.draw.DrawMulti
 
-class DistillPurifier : NormalCrafter("distill_purifier") {init {
+class DistillPurifier :NormalCrafter("distill_purifier") {init {
   localization {
     zh_CN {
       this.localizedName = "蒸馏净化器"

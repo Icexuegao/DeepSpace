@@ -22,6 +22,10 @@ class 岩层钻井机 :FloorCrafter("rock_drill") {
         localizedName = "岩层钻井机"
         description = "特种钻井,钻探深层的地壳,将深埋在地壳深处的较高质量的矿物送至地表"
       }
+      en {
+        localizedName = "Rock Drill"
+        description = "A special drill that probes deep into the crust, delivering higher-quality minerals buried deep beneath the surface."
+      }
     }
     requirements(Category.production, IItems.铬锭, 45, IItems.铅锭, 30, IItems.铜锭, 30)
     size = 2

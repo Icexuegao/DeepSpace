@@ -3,8 +3,6 @@ package ice.content.block.crafter
 import arc.graphics.Color
 import ice.content.IItems
 import ice.content.ILiquids
-
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.type.Category
@@ -13,6 +11,7 @@ import mindustry.world.draw.DrawGlowRegion
 import mindustry.world.draw.DrawPistons
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 
 class 冲压锻炉 :NormalCrafter("pressingForge") {
   init {

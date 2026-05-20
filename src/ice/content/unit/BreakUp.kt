@@ -39,13 +39,15 @@ import mindustry.graphics.Layer
 import singularity.world.SglFx
 import kotlin.math.min
 
-class BreakUp : IceUnitType("breakUp") {
+class BreakUp :IceUnitType("breakUp") {
   init {
     localization {
       zh_CN {
         localizedName = "断业"
-        description = "断业是神殿[净罪计划]的产物,其装甲内层熔铸了经神祝圣的暮光合金,主炮能对建筑与重甲单位造成毁灭性伤害,能撕裂红雾中的畸变体集群"
-        details = "帝国腐朽的装甲部队节节败退,唯有枢机的神术能短暂驱散腐化,帝国残部讥讽其为伪神的铁棺材,但无人能否认——当它的履带碾过焦土时,连红雾都会为之退散"
+        description =
+          "断业是神殿[净罪计划]的产物,其装甲内层熔铸了经神祝圣的暮光合金,主炮能对建筑与重甲单位造成毁灭性伤害,能撕裂红雾中的畸变体集群"
+        details =
+          "帝国腐朽的装甲部队节节败退,唯有枢机的神术能短暂驱散腐化,帝国残部讥讽其为伪神的铁棺材,但无人能否认——当它的履带碾过焦土时,连红雾都会为之退散"
       }
     }
     speed = 0.48f
@@ -76,7 +78,7 @@ class BreakUp : IceUnitType("breakUp") {
       shootSound = ISounds.laser2
       parentizeEffects = true
       val laserBulletTypelength = 400f
-      val bullet2 = object : ChainBulletType(12f) {
+      val bullet2 = object :ChainBulletType(12f) {
         override fun init(b: Bullet) {
           (1..3).forEach { _ ->
             super.init(b)
@@ -87,8 +89,23 @@ class BreakUp : IceUnitType("breakUp") {
         length = laserBulletTypelength
         hitColor = IceColor.b4.cpy().a(0.4f).also { lightningColor = it }.also { lightColor = it }
       }
-      val bullet1 = object : LaserBulletType(1200f) {
-        override fun create(owner: Entityc?, shooter: Entityc?, team: Team?, x: Float, y: Float, angle: Float, damage: Float, velocityScl: Float, lifetimeScl: Float, data: Any?, mover: Mover?, aimX: Float, aimY: Float, target: Teamc?): Bullet? {
+      val bullet1 = object :LaserBulletType(1200f) {
+        override fun create(
+          owner: Entityc?,
+          shooter: Entityc?,
+          team: Team?,
+          x: Float,
+          y: Float,
+          angle: Float,
+          damage: Float,
+          velocityScl: Float,
+          lifetimeScl: Float,
+          data: Any?,
+          mover: Mover?,
+          aimX: Float,
+          aimY: Float,
+          target: Teamc?
+        ): Bullet? {
           bullet2.create(
             owner, shooter, team, x, y, angle, damage, velocityScl, lifetimeScl, data, mover, aimX, aimY, target
           )
@@ -189,7 +206,11 @@ class BreakUp : IceUnitType("breakUp") {
           (0..23).forEach { i ->
             Tmp.v1.set(1f, 0f).setToRandomDirection(rand).scl(circleRad)
             IceEffects.drawFunc(
-              e.x + Tmp.v1.x, e.y + Tmp.v1.y, rand.random(circleRad / 16, circleRad / 12) * e.fout(), rand.random(circleRad / 4, circleRad / 1.5f) * (1 + e.fin()) / 2, Tmp.v1.angle() - 180
+              e.x + Tmp.v1.x,
+              e.y + Tmp.v1.y,
+              rand.random(circleRad / 16, circleRad / 12) * e.fout(),
+              rand.random(circleRad / 4, circleRad / 1.5f) * (1 + e.fin()) / 2,
+              Tmp.v1.angle() - 180
             )
           }
 

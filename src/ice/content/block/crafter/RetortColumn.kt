@@ -3,17 +3,16 @@ package ice.content.block.crafter
 import arc.Core
 import ice.content.IItems
 import ice.content.ILiquids
-
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.type.Category
 import mindustry.world.Block
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawFlame
 import singularity.world.blocks.product.NormalCrafter
+import universecore.world.draw.DrawMulti
 import kotlin.math.max
 
-class RetortColumn : NormalCrafter("retort_column") {
+class RetortColumn :NormalCrafter("retort_column") {
   init {
     localization {
       zh_CN {
@@ -28,13 +27,13 @@ class RetortColumn : NormalCrafter("retort_column") {
     liquidCapacity = 90f
     craftEffect = Fx.smeltsmoke
     drawers = DrawMulti(
-      DrawDefault(), object : DrawFlame() {
+      DrawDefault(), object :DrawFlame() {
         override fun load(block: Block) {
           top = Core.atlas.find(block.name + "_top")
           block.clipSize = max(block.clipSize, (lightRadius + lightSinMag) * 2f * block.size)
         }
       })
-    newFormula {consumers, producers ->
+    newFormula { consumers, producers ->
       consumers.apply {
         time(90f)
         power(3f)
@@ -45,7 +44,7 @@ class RetortColumn : NormalCrafter("retort_column") {
       }
     }
 
-    newFormula {consumers, producers ->
+    newFormula { consumers, producers ->
       consumers.apply {
         time(120f)
         power(1f)
@@ -55,14 +54,14 @@ class RetortColumn : NormalCrafter("retort_column") {
         items(IItems.生煤, 3, IItems.碱石, 1)
       }
     }
-    newFormula {consumers, producers ->
+    newFormula { consumers, producers ->
       consumers.apply {
         time(120f)
-        power(70f/60f)
-        item(IItems.绿藻块,1)
+        power(70f / 60f)
+        item(IItems.绿藻块, 1)
       }
       producers.apply {
-        items(IItems.焦炭,1)
+        items(IItems.焦炭, 1)
       }
     }
   }

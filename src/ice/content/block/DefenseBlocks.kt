@@ -15,8 +15,6 @@ import arc.util.Tmp
 import arc.util.pooling.Pool
 import arc.util.pooling.Pools
 import ice.content.IItems
-import universecore.world.Load
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import ice.world.content.blocks.defense.AutoWall
 import ice.world.content.blocks.defense.Wall
@@ -48,10 +46,12 @@ import singularity.world.draw.DrawDirSpliceBlock
 import singularity.world.meta.SglStat
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
+import universecore.ui.bundle.localization
+import universecore.world.Load
 import universecore.world.consumers.BaseConsumers
 
 @Suppress("unused")
-object DefenseBlocks : Load {
+object DefenseBlocks :Load {
   val 碳钢墙 = Wall("carbonSteelWall").apply {
     size = 1
     armor = 5f
@@ -60,7 +60,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.高碳钢, 3, IItems.低碳钢, 3)
     localization {
       zh_CN {
-        this.localizedName = "碳钢墙"
+        localizedName = "碳钢墙"
         description = "保护己方建筑,挡下敌方炮弹"
       }
     }
@@ -73,7 +73,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.高碳钢, 3 * size * size, IItems.低碳钢, 3 * size * size)
     localization {
       zh_CN {
-        this.localizedName = "大型碳钢墙"
+        localizedName = "大型碳钢墙"
         description = "保护己方建筑,挡下敌方炮弹"
       }
     }
@@ -82,11 +82,11 @@ object DefenseBlocks : Load {
     size = 1
     armor = 5f
     health = 360
-    healAmount=10f
+    healAmount = 10f
     requirements(Category.defense, IItems.金锭, 10)
     localization {
       zh_CN {
-        this.localizedName = "流金墙"
+        localizedName = "流金墙"
         description = "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈"
         details = "熔融金锭构筑的壁垒\n财富值+"
       }
@@ -96,11 +96,11 @@ object DefenseBlocks : Load {
     size = 2
     armor = 5f
     health = 流金墙.health * 4
-    healAmount=流金墙.healAmount*4
+    healAmount = 流金墙.healAmount * 4
     requirements(Category.defense, IItems.金锭, 10)
     localization {
       zh_CN {
-        this.localizedName = "大型流金墙"
+        localizedName = "大型流金墙"
         description = "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈"
         details = "熔融金锭构筑的壁垒\n财富值++"
       }
@@ -109,7 +109,7 @@ object DefenseBlocks : Load {
   val 铬墙 = AutoWall("chromeWall").apply {
     localization {
       zh_CN {
-        this.localizedName = "铬墙"
+        localizedName = "铬墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -123,7 +123,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.铬锭, 6 * 4)
     localization {
       zh_CN {
-        this.localizedName = "大型铬墙"
+        localizedName = "大型铬墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -134,7 +134,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.钴钢, 8)
     localization {
       zh_CN {
-        this.localizedName = "钴钢墙"
+        localizedName = "钴钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -145,7 +145,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.钴钢, 32)
     localization {
       zh_CN {
-        this.localizedName = "大型钴钢墙"
+        localizedName = "大型钴钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -158,7 +158,7 @@ object DefenseBlocks : Load {
     absorbLasers = true
     localization {
       zh_CN {
-        this.localizedName = "陶钢墙"
+        localizedName = "陶钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用.能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
       }
     }
@@ -173,7 +173,7 @@ object DefenseBlocks : Load {
     absorbLasers = true
     localization {
       zh_CN {
-        this.localizedName = "大型陶钢墙"
+        localizedName = "大型陶钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用.能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
       }
     }
@@ -185,7 +185,7 @@ object DefenseBlocks : Load {
     crushDamageMultiplier = 2.5f
     localization {
       zh_CN {
-        this.localizedName = "铱墙"
+        localizedName = "铱墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -198,7 +198,7 @@ object DefenseBlocks : Load {
     crushDamageMultiplier = 2.5f
     localization {
       zh_CN {
-        this.localizedName = "大型铱墙"
+        localizedName = "大型铱墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
     }
@@ -207,7 +207,7 @@ object DefenseBlocks : Load {
   val 强化合金墙 = Wall("strengthening_alloy_wall").apply {
     localization {
       zh_CN {
-        this.localizedName = "强化合金墙"
+        localizedName = "强化合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用"
       }
     }
@@ -217,7 +217,7 @@ object DefenseBlocks : Load {
   val 大型强化合金墙 = Wall("strengthening_alloy_wall_large").apply {
     localization {
       zh_CN {
-        this.localizedName = "大型强化合金墙"
+        localizedName = "大型强化合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用"
       }
     }
@@ -237,8 +237,9 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.生物钢, 8, IItems.铱板, 4, IItems.陶钢, 4)
     localization {
       zh_CN {
-        this.localizedName = "生物钢墙"
-        description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
+        localizedName = "生物钢墙"
+        description =
+          "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
       }
     }
   }
@@ -255,15 +256,16 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.生物钢, 32, IItems.铱板, 16, IItems.陶钢, 16)
     localization {
       zh_CN {
-        this.localizedName = "大型生物钢墙"
-        description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
+        localizedName = "大型生物钢墙"
+        description =
+          "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
       }
     }
   }
   val 相位合金墙 = ShieldWall("phaseAlloyWall").apply {
     localization {
       zh_CN {
-        this.localizedName = "相位合金墙"
+        localizedName = "相位合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.会以自身为中心投射一片小型立场护盾"
       }
     }
@@ -296,7 +298,7 @@ object DefenseBlocks : Load {
     requirements(Category.defense, IItems.导能回路, 8, IItems.金锭, 8, IItems.铪锭, 8)
     localization {
       zh_CN {
-        this.localizedName = "大型相位合金墙"
+        localizedName = "大型相位合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.会以自身为中心投射一片小型立场护盾"
       }
     }
@@ -304,7 +306,7 @@ object DefenseBlocks : Load {
   val 装甲闸门 = AutoDoor("armorGate").apply {
     localization {
       zh_CN {
-        this.localizedName = "装甲闸门"
+        localizedName = "装甲闸门"
         description = "允许单位通过的装甲门,自动开关"
       }
     }
@@ -319,7 +321,7 @@ object DefenseBlocks : Load {
   val 相控雷达 = PhasedRadar("phased_radar").apply {
     localization {
       zh_CN {
-        this.localizedName = "相控雷达"
+        localizedName = "相控雷达"
         description = "锁定范围内的敌方空中单位,攻击被锁定的目标有概率造成额外大量伤害,杀伤倍率和概率都取决于阵列大小"
       }
     }
@@ -327,13 +329,13 @@ object DefenseBlocks : Load {
     newConsume().apply {
       power(1f)
     }
-    drawers = DrawMulti(DrawDefault(), object : DrawDirSpliceBlock<PhasedRadar.PhasedRadarBuild?>() {
+    drawers = DrawMulti(DrawDefault(), object :DrawDirSpliceBlock<PhasedRadar.PhasedRadarBuild?>() {
       init {
         simpleSpliceRegion = true
         spliceBits = Intf { e: PhasedRadar.PhasedRadarBuild? -> e!!.spliceDirBit }
         layerRec = false
       }
-    }, object : DrawRegion("_rotator") {
+    }, object :DrawRegion("_rotator") {
       init {
         layer = Layer.blockOver
         rotateSpeed = 0.4f
@@ -345,7 +347,7 @@ object DefenseBlocks : Load {
   val 简并态中子聚合物墙 = SglWall("neutron_polymer_wall").apply {
     localization {
       zh_CN {
-        this.localizedName = "简并态中子墙"
+        localizedName = "简并态中子墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身"
       }
     }
@@ -358,7 +360,7 @@ object DefenseBlocks : Load {
   val 大型简并态中子墙 = SglWall("neutron_polymer_wall_large").apply {
     localization {
       zh_CN {
-        this.localizedName = "大型简并态中子墙"
+        localizedName = "大型简并态中子墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身"
       }
     }
@@ -373,12 +375,28 @@ object DefenseBlocks : Load {
   val 混沌矩阵 = GameOfLife("attack_matrix").apply {
     localization {
       zh_CN {
-        this.localizedName = "混沌矩阵"
-        description = "集成防御系统,反物质在力场的引导下,会按照生命游戏的规则在网格中不断演化\n具体来说,生命游戏所在的网格上,每一个单元格都是一个细胞,细胞只有两种状态,生与死,每一个细胞在一次刷新后的状态由它周围8个细胞决定,会遵循如下规则进行演化:\n[accent]当这个细胞处于死亡状态时[]\n[green]1.若周围的存活细胞数量为3则在下一刻转变为存活状态[]\n[gray]2.任何其他情况,细胞状态不变[]\n[accent]当这个细胞处于存活状态时[]\n[red]  1.若周围的存活细胞数量多于4(含4)则下一刻细胞死亡[]\n[red]2.若周围存活细胞数量少于2(不含2)则下一刻细胞死亡[] \n[gray]3.任何其他情况,细胞状态不变[]\n每一次刷新,所有存活的细胞寿命会增加1,在细胞死亡时,根据细胞的年龄会触发相应的效果,随细胞寿命的增加,强度会大幅度增强"
-        details = "生命游戏这一概念原本是由数学家康威设计的一个计算机程序,早期,人们仅仅研究与探索了生命游戏在计算机程序程序级别的规律,其与自然科学的重叠几乎完全被忽视了,直到二十一世纪60年代,科学家发现在真空仓内的粒子涨落规律与生命游戏在形式上高度重合,生命游戏规则成为了一项科学规律\n在这一规则下进行受控的反物质湮灭可以得到最接近理论数据的能量利用效率,因此这一规则广泛被应用于能源与武装,不过,像混沌矩阵这样彻底的巨型网格本身还是一个过于大胆的尝试,所幸在巨大的学术压力下中止数次数次后该项目还是收获了非常突出的成果"
+        localizedName = "混沌矩阵"
+        description =
+          "集成防御系统,反物质在力场的引导下,会按照生命游戏的规则在网格中不断演化\n具体来说,生命游戏所在的网格上,每一个单元格都是一个细胞,细胞只有两种状态,生与死,每一个细胞在一次刷新后的状态由它周围8个细胞决定,会遵循如下规则进行演化:\n[accent]当这个细胞处于死亡状态时[]\n[green]1.若周围的存活细胞数量为3则在下一刻转变为存活状态[]\n[gray]2.任何其他情况,细胞状态不变[]\n[accent]当这个细胞处于存活状态时[]\n[red]  1.若周围的存活细胞数量多于4(含4)则下一刻细胞死亡[]\n[red]2.若周围存活细胞数量少于2(不含2)则下一刻细胞死亡[] \n[gray]3.任何其他情况,细胞状态不变[]\n每一次刷新,所有存活的细胞寿命会增加1,在细胞死亡时,根据细胞的年龄会触发相应的效果,随细胞寿命的增加,强度会大幅度增强"
+        details =
+          "生命游戏这一概念原本是由数学家康威设计的一个计算机程序,早期,人们仅仅研究与探索了生命游戏在计算机程序程序级别的规律,其与自然科学的重叠几乎完全被忽视了,直到二十一世纪60年代,科学家发现在真空仓内的粒子涨落规律与生命游戏在形式上高度重合,生命游戏规则成为了一项科学规律\n在这一规则下进行受控的反物质湮灭可以得到最接近理论数据的能量利用效率,因此这一规则广泛被应用于能源与武装,不过,像混沌矩阵这样彻底的巨型网格本身还是一个过于大胆的尝试,所幸在巨大的学术压力下中止数次数次后该项目还是收获了非常突出的成果"
       }
     }
-    requirements(Category.defense, IItems.钴钢,300, IItems.电子元件,100, IItems.简并态中子聚合物,100, IItems.絮凝剂,80, IItems.暮光合金,60, IItems.充能FEX水晶,60)
+    requirements(
+      Category.defense,
+      IItems.钴钢,
+      300,
+      IItems.电子元件,
+      100,
+      IItems.简并态中子聚合物,
+      100,
+      IItems.絮凝剂,
+      80,
+      IItems.暮光合金,
+      60,
+      IItems.充能FEX水晶,
+      60
+    )
     size = 8
     health = 5200
     hasItems = true
@@ -398,7 +416,7 @@ object DefenseBlocks : Load {
     }
 
     drawers = DrawMulti(
-      DrawDefault(), object : DrawBlock() {
+      DrawDefault(), object :DrawBlock() {
         override fun draw(build: Building?) {
           if (build is GameOfLife.GameOfLifeBuild) {
 
@@ -419,9 +437,16 @@ object DefenseBlocks : Load {
               Fill.square(build.x, build.y, 30 * build.warmup, 45f)
             }
 
-            for (p in Geometry.d4) {
+            for(p in Geometry.d4) {
               Tmp.v1.set(p.x.toFloat(), p.y.toFloat()).scl(50 + Mathf.absin(6f, 4f)).rotate(Time.time * 0.6f)
-              Draw.rect((SglDrawConst.matrixArrow as TextureRegionDrawable).getRegion(), build.x + Tmp.v1.x, build.y + Tmp.v1.y, 16 * build.warmup, 16 * build.warmup, Tmp.v1.angle() + 90)
+              Draw.rect(
+                (SglDrawConst.matrixArrow as TextureRegionDrawable).getRegion(),
+                build.x + Tmp.v1.x,
+                build.y + Tmp.v1.y,
+                16 * build.warmup,
+                16 * build.warmup,
+                Tmp.v1.angle() + 90
+              )
             }
           }
         }
@@ -431,7 +456,7 @@ object DefenseBlocks : Load {
     addDeathTrigger(1, 2, GameOfLife.damage(260f, cellSize / 2 * 3.2f, 2f))
     addDeathTrigger(1, 2, GameOfLife.effectEnemy(StatusEffects.sapped, cellSize / 2 * 3.2f, 60f))
 
-    addDeathTrigger(3, GameOfLife.shootBullet(object : BulletType() {
+    addDeathTrigger(3, GameOfLife.shootBullet(object :BulletType() {
       init {
         damage = 420f
         speed = 6f
@@ -465,20 +490,20 @@ object DefenseBlocks : Load {
         Lines.stroke(2f)
         Lines.square(b.x, b.y, 10f, -Time.time * 5)
       }
-    }, object : ShootPattern() {
+    }, object :ShootPattern() {
       init {
         shots = 4
       }
 
       override fun shoot(totalShots: Int, handler: BulletHandler) {
-        for (i in 0..<shots) {
+        for(i in 0..<shots) {
           handler.shoot(0f, 0f, (45 + i * 90).toFloat(), 0f)
         }
       }
     }))
 
     addDeathTrigger(4, 5, GameOfLife.fx(SglFx.crossLight))
-    addDeathTrigger(4, GameOfLife.shootBullet(object : BulletType() {
+    addDeathTrigger(4, GameOfLife.shootBullet(object :BulletType() {
       init {
         damage = 285f
         speed = 4.5f
@@ -502,7 +527,7 @@ object DefenseBlocks : Load {
         fragAngle = 0f
         fragSpread = 0f
         fragRandomSpread = 0f
-        fragBullet = object : LaserBulletType() {
+        fragBullet = object :LaserBulletType() {
           init {
             length = 280f
             damage = 280f
@@ -524,19 +549,19 @@ object DefenseBlocks : Load {
         Lines.stroke(2.5f)
         Lines.square(b.x, b.y, 14f, Time.time * 5)
       }
-    }, object : ShootPattern() {
+    }, object :ShootPattern() {
       init {
         shots = 4
       }
 
       override fun shoot(totalShots: Int, handler: BulletHandler) {
-        for (i in 0..<shots) {
+        for(i in 0..<shots) {
           handler.shoot(0f, 0f, (i * 90).toFloat(), 0f)
         }
       }
     }))
 
-    addDeathTrigger(5, GameOfLife.shootBullet(object : BulletType() {
+    addDeathTrigger(5, GameOfLife.shootBullet(object :BulletType() {
       init {
         damage = 180f
         clipSize = 200f
@@ -601,7 +626,7 @@ object DefenseBlocks : Load {
             data.related.clear()
             data.aim = null
 
-            for (unit in SglUnitSorts.findEnemies(3, b, 320f, UnitSorts.farthest)) {
+            for(unit in SglUnitSorts.findEnemies(3, b, 320f, UnitSorts.farthest)) {
               if (unit == null) continue
 
               if (data.aim == null) data.aim = unit
@@ -642,7 +667,7 @@ object DefenseBlocks : Load {
         val data = b.data
         if (data is Data) {
           data.container.draw(b.x, b.y)
-          for (other in data.related) {
+          for(other in data.related) {
             Draw.z(Layer.bullet - 1)
             Lines.stroke(5f, Color.black)
             Lines.line(b.x, b.y, other.x, other.y)
@@ -656,7 +681,7 @@ object DefenseBlocks : Load {
       override fun continuousDamage(): Float {
         return damage * 10
       }
-    }, object : ShootPattern() {
+    }, object :ShootPattern() {
       init {
         shots = 3
       }
@@ -667,8 +692,8 @@ object DefenseBlocks : Load {
     }))
   }
 
-  class Data : Pool.Poolable {
-    val container: LightningContainer = object : LightningContainer() {
+  class Data :Pool.Poolable {
+    val container: LightningContainer = object :LightningContainer() {
       init {
         maxWidth = 6f
         minWidth = 4f

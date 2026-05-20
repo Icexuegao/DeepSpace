@@ -16,7 +16,7 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.entities.pattern.ShootHelix
 import mindustry.gen.Sounds
 
-class ArcLight : IceUnitType("unit_arcLight") {
+class ArcLight :IceUnitType("unit_arcLight") {
   init {
     localization {
       zh_CN {

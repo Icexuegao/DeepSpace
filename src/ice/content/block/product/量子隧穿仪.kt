@@ -5,7 +5,6 @@ import arc.graphics.g2d.Fill
 import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.gen.Building
 import mindustry.graphics.Layer
@@ -14,9 +13,10 @@ import mindustry.type.Category
 import mindustry.world.draw.DrawBlock
 import mindustry.world.draw.DrawDefault
 import singularity.graphic.SglDrawConst
-import universecore.util.MathTransform
 import singularity.world.blocks.drills.MatrixMinerComponent
 import singularity.world.blocks.drills.MatrixMinerSector.MatrixMinerSectorBuild
+import universecore.util.MathTransform
+import universecore.world.draw.DrawMulti
 
 class 量子隧穿仪 :MatrixMinerComponent("matrix_miner_pierce") {
   init {
@@ -25,6 +25,11 @@ class 量子隧穿仪 :MatrixMinerComponent("matrix_miner_pierce") {
       zh_CN {
         localizedName = "量子隧穿仪"
         description = "矩阵矿床的增幅组件,安装此组件后,矩阵矿床将能够透过建筑挖掘被建筑覆盖的矿石"
+      }
+      en {
+        localizedName = "Quantum Tunneling Instrument"
+        description =
+          "An amplification component for the Matrix Miner. After installing this component, the Matrix Miner will be able to mine ore covered by buildings by penetrating through them."
       }
     }
     requirements(

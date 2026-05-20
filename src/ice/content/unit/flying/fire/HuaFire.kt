@@ -20,7 +20,7 @@ import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 import singularity.world.blocks.turrets.EmpBulletType
 
-class HuaFire : IceUnitType("huaFire") {
+class HuaFire :IceUnitType("huaFire") {
   init {
     localization {
       zh_CN {
@@ -59,7 +59,21 @@ class HuaFire : IceUnitType("huaFire") {
       rotation = -135f
     })
     immunities.addAll(
-      StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, StatusEffects.wet, StatusEffects.freezing, StatusEffects.sporeSlowed, StatusEffects.slow, StatusEffects.tarred, StatusEffects.muddy, StatusEffects.sapped, StatusEffects.electrified, StatusEffects.unmoving, IStatus.熔融, IStatus.辐射, IStatus.衰变
+      StatusEffects.burning,
+      StatusEffects.melting,
+      StatusEffects.blasted,
+      StatusEffects.wet,
+      StatusEffects.freezing,
+      StatusEffects.sporeSlowed,
+      StatusEffects.slow,
+      StatusEffects.tarred,
+      StatusEffects.muddy,
+      StatusEffects.sapped,
+      StatusEffects.electrified,
+      StatusEffects.unmoving,
+      IStatus.熔融,
+      IStatus.辐射,
+      IStatus.衰变
     )
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 0.8f

@@ -11,7 +11,7 @@ import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 
-class RichTumor : IceUnitType("richTumor", RichTumorUnit::class.java) {
+class RichTumor :IceUnitType("richTumor", RichTumorUnit::class.java) {
   init {
     speed = 0f
     accel = -3f
@@ -37,7 +37,7 @@ class RichTumor : IceUnitType("richTumor", RichTumorUnit::class.java) {
     }
   }
 
-  class RichTumorUnit : FleshEntity() {
+  class RichTumorUnit :FleshEntity() {
     var time = run {
       Fx.rand.setSeed(id.toLong())
       Fx.rand.random(6f, 10f) * 60

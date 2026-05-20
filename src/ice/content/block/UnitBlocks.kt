@@ -9,7 +9,6 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import universecore.world.Load
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.Vars
 import mindustry.content.Items
@@ -24,9 +23,10 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawMulti
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
-import universecore.util.MathTransform
 import singularity.world.blocks.product.HoveringUnitFactory
 import singularity.world.blocks.product.SglUnitFactory
+import universecore.util.MathTransform
+import universecore.world.Load
 import universecore.world.consumers.BaseConsumers
 import universecore.world.producers.ProducePayload
 import universecore.world.producers.ProduceType
@@ -71,24 +71,24 @@ object UnitBlocks :Load {
     }
     requirements(
       Category.units,
-        Items.silicon,
-        180,
-        Items.surgeAlloy,
-        160,
-        Items.phaseFabric,
-        190,
-        IItems.铝锭,
-        200,
-        IItems.气凝胶,
-        120,
-        IItems.强化合金,
-        215,
-        IItems.矩阵合金,
-        180,
-        IItems.FEX水晶,
-        140,
-        IItems.铱锭,
-        100
+      Items.silicon,
+      180,
+      Items.surgeAlloy,
+      160,
+      Items.phaseFabric,
+      190,
+      IItems.铝锭,
+      200,
+      IItems.气凝胶,
+      120,
+      IItems.强化合金,
+      215,
+      IItems.矩阵合金,
+      180,
+      IItems.FEX水晶,
+      140,
+      IItems.铱锭,
+      100
     )
     size = 7
     liquidCapacity = 280f

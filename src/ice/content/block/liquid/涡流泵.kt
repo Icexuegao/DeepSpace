@@ -1,7 +1,6 @@
 package ice.content.block.liquid
 
 import ice.content.IItems
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.type.Category
 import mindustry.world.blocks.production.Pump
@@ -9,9 +8,10 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawMulti
 import mindustry.world.draw.DrawPumpLiquid
 import mindustry.world.draw.DrawRegion
+import universecore.ui.bundle.localization
 
-class 涡流泵:Pump("vortexPump") {
-  init  {
+class 涡流泵 :Pump("vortexPump") {
+  init {
     localization {
       zh_CN {
         localizedName = "涡流泵"
@@ -24,6 +24,20 @@ class 涡流泵:Pump("vortexPump") {
     pumpAmount = 0.5f
     liquidCapacity = 210f
     drawer = DrawMulti(DrawRegion("-bottom"), DrawPumpLiquid(), DrawDefault())
-    requirements(Category.liquid, IItems.铬锭, 50, IItems.锌锭, 40, IItems.黄铜锭, 25, IItems.石英玻璃, 30, IItems.钴锭, 30, IItems.单晶硅 ,20)
+    requirements(
+      Category.liquid,
+      IItems.铬锭,
+      50,
+      IItems.锌锭,
+      40,
+      IItems.黄铜锭,
+      25,
+      IItems.石英玻璃,
+      30,
+      IItems.钴锭,
+      30,
+      IItems.单晶硅,
+      20
+    )
   }
 }

@@ -12,6 +12,11 @@ class 曼哈德钻井 :BaseDrill("manhardDrill") {
         localizedName = "曼哈德钻井"
         description = "高级钻井,不同于其他钻井,其完全舍弃了传统的钻探方案,选择应用曼哈德效应以实现较为高效的资源开采"
       }
+      en {
+        localizedName = "Manhard Drill"
+        description =
+          "An advanced drill that completely abandons traditional drilling methods, instead applying the Manhard effect to achieve relatively efficient resource extraction."
+      }
     }
     bitHardness = 5
     size = 3

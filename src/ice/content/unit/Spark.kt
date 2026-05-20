@@ -2,8 +2,6 @@ package ice.content.unit
 
 import arc.graphics.Color
 import arc.math.Interp
-import universecore.ui.bundle.localization
-
 import mindustry.entities.abilities.MoveEffectAbility
 import mindustry.entities.bullet.ExplosionBulletType
 import mindustry.entities.effect.MultiEffect
@@ -12,8 +10,9 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 import mindustry.type.Weapon
 import mindustry.type.unit.MissileUnitType
+import universecore.ui.bundle.localization
 
-class Spark : MissileUnitType("unit_spark") {
+class Spark :MissileUnitType("unit_spark") {
   init {
     localization {
       zh_CN {

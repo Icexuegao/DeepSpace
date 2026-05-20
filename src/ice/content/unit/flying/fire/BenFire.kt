@@ -12,7 +12,7 @@ import mindustry.entities.effect.WrapEffect
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 
-class BenFire : IceUnitType("benFire") {
+class BenFire :IceUnitType("benFire") {
   init {
     localization {
       zh_CN {

@@ -12,7 +12,7 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.entities.pattern.ShootHelix
 import mindustry.gen.Sounds
 
-class Storm : IceUnitType("unit_storm") {
+class Storm :IceUnitType("unit_storm") {
   init {
     localization {
       zh_CN {

@@ -2,14 +2,14 @@ package ice.content.block.product
 
 import ice.audio.ISounds
 import ice.content.IItems
-import universecore.util.toColor
-import universecore.ui.bundle.localization
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.consumeLiquids
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Liquids
 import mindustry.entities.effect.ParticleEffect
 import mindustry.type.Category
 import mindustry.world.blocks.production.BurstDrill
+import universecore.ui.bundle.localization
+import universecore.util.toColor
 
 class 血肉钻井 :BurstDrill("fleshBloodDrill") {
   init {
@@ -17,6 +17,11 @@ class 血肉钻井 :BurstDrill("fleshBloodDrill") {
       zh_CN {
         localizedName = "血肉钻井"
         description = "高级钻井,能够自主驱动钻探.需要持续供给血肉赘生物,可以安置在水上"
+      }
+      en {
+        localizedName = "Flesh Blood Drill"
+        description =
+          "An advanced drill capable of self-driven drilling. Requires a continuous supply of flesh parasites. Can be placed on water."
       }
     }
     size = 5

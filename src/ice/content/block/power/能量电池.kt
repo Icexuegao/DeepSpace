@@ -9,14 +9,6 @@ import universecore.ui.bundle.localization
 
 class 能量电池 :Battery("powerBattery") {
   init {
-    size = 2
-    health = 300
-    squareSprite = false
-    baseExplosiveness = 1f
-    emptyLightColor = IceColor.df
-    fullLightColor = IceColor.b4
-    consumePowerBuffered(15000f)
-    requirements(Category.power, IItems.低碳钢, 10, IItems.高碳钢, 20, IItems.黄铜锭, 30, IItems.铅锭, 50)
     localization {
       zh_CN {
         localizedName = "能量电池"
@@ -27,5 +19,13 @@ class 能量电池 :Battery("powerBattery") {
         description = "Stores a large amount of power. Will explode when damaged."
       }
     }
+    size = 2
+    health = 300
+    squareSprite = false
+    baseExplosiveness = 1f
+    emptyLightColor = IceColor.df
+    fullLightColor = IceColor.b4
+    consumePowerBuffered(15000f)
+    requirements(Category.power, IItems.低碳钢, 10, IItems.高碳钢, 20, IItems.黄铜锭, 30, IItems.铅锭, 50)
   }
 }

@@ -14,7 +14,7 @@ import mindustry.content.Fx
 import mindustry.entities.effect.WaveEffect
 import mindustry.gen.Sounds
 
-class Flies : IceUnitType("flies", FliesUnit::class.java) {
+class Flies :IceUnitType("flies", FliesUnit::class.java) {
   init {
     localization {
       zh_CN {
@@ -59,7 +59,7 @@ class Flies : IceUnitType("flies", FliesUnit::class.java) {
     }
   }
 
-  class FliesUnit : FleshEntity() {
+  class FliesUnit :FleshEntity() {
     companion object {
       val flies: Array<TextureRegion> by lazy {
         Array(4) {
@@ -76,7 +76,7 @@ class Flies : IceUnitType("flies", FliesUnit::class.java) {
     }
 
     override fun drawShadowRegion(shadowX: Float, shadowY: Float, rotation: Float) {
-      Draw.rect(flies[index % 3],x+ shadowX, y+shadowY, rotation)
+      Draw.rect(flies[index % 3], x + shadowX, y + shadowY, rotation)
     }
 
     override fun update() {

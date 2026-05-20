@@ -4,7 +4,6 @@ import arc.graphics.Color
 import arc.math.Interp
 import ice.entities.bullet.ExplosionBulletType
 import ice.entities.effect.MultiEffect
-import universecore.ui.bundle.localization
 import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.entities.part.DrawPart
@@ -12,8 +11,9 @@ import mindustry.entities.part.FlarePart
 import mindustry.gen.Sounds
 import mindustry.type.Weapon
 import mindustry.type.unit.MissileUnitType
+import universecore.ui.bundle.localization
 
-class Starlight : MissileUnitType("starlight") {
+class Starlight :MissileUnitType("starlight") {
   init {
     localization {
       zh_CN {

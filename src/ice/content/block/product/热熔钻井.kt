@@ -1,11 +1,11 @@
 package ice.content.block.product
 
 import ice.content.IItems
-import universecore.util.toColor
 import mindustry.content.Fx
 import mindustry.content.Liquids
 import mindustry.type.Category
 import singularity.world.blocks.drills.BaseDrill
+import universecore.util.toColor
 
 class 热熔钻井 :BaseDrill("hotMeltDrill") {
   init {
@@ -13,6 +13,11 @@ class 热熔钻井 :BaseDrill("hotMeltDrill") {
       zh_CN {
         localizedName = "热熔钻井"
         description = "高级钻井,通过加热多种合金制成的钻头融毁地层以实现高效的资源开采"
+      }
+      en {
+        localizedName = "Hot Melt Drill"
+        description =
+          "An advanced drill that melts through rock formations using a multi-alloy bit heated to high temperatures, enabling efficient resource extraction."
       }
     }
     size = 5

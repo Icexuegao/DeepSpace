@@ -4,11 +4,11 @@ import arc.Events
 import arc.graphics.Color
 import arc.math.Interp
 import arc.math.geom.Rect
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 import ice.graphics.IceColor
-import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
 import mindustry.content.StatusEffects
 import mindustry.entities.Effect
@@ -21,7 +21,7 @@ import singularity.core.UpdatePool
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
-class ClearingGround : IceUnitType("unit_clearingGround") {
+class ClearingGround :IceUnitType("unit_clearingGround") {
   init {
     localization {
       zh_CN {
@@ -171,7 +171,7 @@ class ClearingGround : IceUnitType("unit_clearingGround") {
           con.draw(1f, 2f)
         }
 
-        intervalBullet = object : BulletType(0f, 0f) {
+        intervalBullet = object :BulletType(0f, 0f) {
           override fun init(b: Bullet) {
             super.init(b)
             con.create(vertex)

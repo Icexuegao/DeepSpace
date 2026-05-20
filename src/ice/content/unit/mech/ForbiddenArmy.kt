@@ -8,7 +8,6 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.ArmorPlateAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.RegenAbility
 import mindustry.entities.abilities.StatusFieldAbility
@@ -21,13 +20,15 @@ import mindustry.entities.pattern.ShootPattern
 import mindustry.entities.pattern.ShootSpread
 import mindustry.gen.MechUnit
 import mindustry.gen.Sounds
+import universecore.world.ability.ArmorPlateAbility
 
-class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
+class ForbiddenArmy :IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
   init {
     localization {
       zh_CN {
         this.localizedName = "禁军"
-        description = "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,并对附近的友军提供坚忍效果.会缓慢恢复生命值,开火时减少所受伤害"
+        description =
+          "重型地面突击单位.对远距离敌人发射穿透能量弹,对近距离敌人则切换为高热激光,并对附近的友军提供坚忍效果.会缓慢恢复生命值,开火时减少所受伤害"
       }
     }
     health = 109000f
@@ -189,34 +190,34 @@ class ForbiddenArmy : IceUnitType("unit_forbiddenArmy", MechUnit::class.java) {
           splashDamageRadius = 20f
           hitEffect = MultiEffect(
             ParticleEffect().apply {
-            particles = 3
-            lifetime = 36f
-            sizeFrom = 5f
-            sizeTo = 0f
-            cone = 360f
-            length = 40f
-            interp = Interp.circleOut
-            colorFrom = Color.valueOf("FF5845")
-            colorTo = Color.valueOf("FF8663")
-          }, ParticleEffect().apply {
-            particles = 7
-            lifetime = 20f
-            line = true
-            lenFrom = 13f
-            lenTo = 3f
-            cone = 360f
-            length = 75f
-            colorFrom = Color.valueOf("FF5845")
-            colorTo = Color.valueOf("FF8663")
-          }, WaveEffect().apply {
-            lifetime = 30f
-            sizeFrom = 0f
-            sizeTo = 40f
-            strokeFrom = 4f
-            strokeTo = 0f
-            colorFrom = Color.valueOf("FF5845")
-            colorTo = Color.valueOf("FF8663")
-          }, Fx.hitSquaresColor
+              particles = 3
+              lifetime = 36f
+              sizeFrom = 5f
+              sizeTo = 0f
+              cone = 360f
+              length = 40f
+              interp = Interp.circleOut
+              colorFrom = Color.valueOf("FF5845")
+              colorTo = Color.valueOf("FF8663")
+            }, ParticleEffect().apply {
+              particles = 7
+              lifetime = 20f
+              line = true
+              lenFrom = 13f
+              lenTo = 3f
+              cone = 360f
+              length = 75f
+              colorFrom = Color.valueOf("FF5845")
+              colorTo = Color.valueOf("FF8663")
+            }, WaveEffect().apply {
+              lifetime = 30f
+              sizeFrom = 0f
+              sizeTo = 40f
+              strokeFrom = 4f
+              strokeTo = 0f
+              colorFrom = Color.valueOf("FF5845")
+              colorTo = Color.valueOf("FF8663")
+            }, Fx.hitSquaresColor
           )
           despawnEffect = Fx.none
         }

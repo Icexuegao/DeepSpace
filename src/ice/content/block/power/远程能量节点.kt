@@ -6,15 +6,6 @@ import mindustry.type.Category
 
 class 远程能量节点 :PowerNode("remotePowerNode") {
   init {
-    size = 3
-    armor = 3f
-    maxNodes = 4
-    laserRange = 100f
-    squareSprite = false
-    consumesPower = true
-    outputsPower = true
-    consumePowerBuffered(50000f)
-    requirements(Category.power, IItems.铅锭, 15, IItems.铱板, 15, IItems.导能回路, 10, IItems.暮光合金, 5)
     localization {
       zh_CN {
         localizedName = "远程能量节点"
@@ -25,5 +16,14 @@ class 远程能量节点 :PowerNode("remotePowerNode") {
         description = "Transmits power to buildings within an extremely large range."
       }
     }
+    size = 3
+    armor = 3f
+    maxNodes = 4
+    laserRange = 100f
+    squareSprite = false
+    consumesPower = true
+    outputsPower = true
+    consumePowerBuffered(50000f)
+    requirements(Category.power, IItems.铅锭, 15, IItems.铱板, 15, IItems.导能回路, 10, IItems.暮光合金, 5)
   }
 }

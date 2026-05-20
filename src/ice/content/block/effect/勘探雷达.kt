@@ -19,9 +19,6 @@ import arc.util.io.Writes
 import ice.audio.ISounds
 import ice.content.IItems
 import ice.graphics.IceColor
-import universecore.scene.ui.updateE
-
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.gen.Icon
@@ -34,6 +31,8 @@ import mindustry.world.blocks.environment.OreBlock
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.SglBlock
+import universecore.scene.ui.updateE
+import universecore.world.draw.DrawMulti
 import kotlin.math.absoluteValue
 import kotlin.math.max
 
@@ -100,6 +99,7 @@ class 勘探雷达 :SglBlock("prospectingRadar") {
     override fun warmup(): Float {
       return warmup
     }
+
     override fun write(write: Writes) {
       super.write(write)
       write.f(warmup)
@@ -161,6 +161,7 @@ class 勘探雷达 :SglBlock("prospectingRadar") {
         }
       }
     }
+
     fun drawRadar() {
       if (!(shouldConsume() && consumeValid())) return
       Draw.z(70f)
@@ -178,7 +179,7 @@ class 勘探雷达 :SglBlock("prospectingRadar") {
       Draw.alpha(0.4f * Interp.pow2In.apply(1 - rad / (range * Vars.tilesize)))
       Lines.circle(drawX, drawY, rad)
 
-      Tmp.v1.set(0f, (Vars.tilesize * range).toFloat()).setAngle(-totalProgress+ 90f)
+      Tmp.v1.set(0f, (Vars.tilesize * range).toFloat()).setAngle(-totalProgress + 90f)
       val dx = Tmp.v1.x
       val dy = Tmp.v1.y
       Lines.stroke(1f, IceColor.b4)
@@ -186,11 +187,12 @@ class 勘探雷达 :SglBlock("prospectingRadar") {
 
 
       Draw.color()
-      test(x, y, (Vars.tilesize * range).toFloat(), 0.07f, -totalProgress+ 90f , IceColor.b4)
+      test(x, y, (Vars.tilesize * range).toFloat(), 0.07f, -totalProgress + 90f, IceColor.b4)
 
       Drawf.square(x, y, 1f, totalProgress - 90f, IceColor.b4)
       Draw.reset()
     }
+
     override fun remove() {
       ISounds.radar.stop()
       super.remove()
@@ -213,8 +215,6 @@ class 勘探雷达 :SglBlock("prospectingRadar") {
       }
       lastRad = rad
     }
-
-
 
     override fun drawSelect() {
       super.drawSelect()

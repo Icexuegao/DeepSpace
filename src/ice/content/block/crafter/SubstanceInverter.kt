@@ -8,8 +8,6 @@ import arc.math.Mathf
 import arc.util.Time
 import arc.util.noise.Noise
 import ice.content.IItems
-
-import universecore.world.draw.DrawMulti
 import mindustry.Vars
 import mindustry.entities.Effect
 import mindustry.gen.Building
@@ -29,8 +27,9 @@ import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.CircleGenerator
 import universecore.graphics.lightnings.generator.LightningGenerator
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
+import universecore.world.draw.DrawMulti
 
-class SubstanceInverter : MediumCrafter("substance_inverter") {
+class SubstanceInverter :MediumCrafter("substance_inverter") {
   init {
     localization {
       zh_CN {
@@ -39,8 +38,22 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
         details = "将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到容器中"
       }
     }
-    requirements(Category.crafting, IItems.简并态中子聚合物, 20, IItems.强化合金, 50, IItems.铪锭, 50, IItems.电子元件, 40, IItems.充能FEX水晶, 50, IItems.絮凝剂, 50)
-    health = 4800 
+    requirements(
+      Category.crafting,
+      IItems.简并态中子聚合物,
+      20,
+      IItems.强化合金,
+      50,
+      IItems.铪锭,
+      50,
+      IItems.电子元件,
+      40,
+      IItems.充能FEX水晶,
+      50,
+      IItems.絮凝剂,
+      50
+    )
+    health = 4800
     size = 5
 
 
@@ -70,15 +83,15 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
       maxSpread = 2.25f
 
     }
-    initialed = Cons {e: SglBuilding ->
-      e.lightningDrawer = object : LightningContainer() {
+    initialed = Cons { e: SglBuilding ->
+      e.lightningDrawer = object :LightningContainer() {
         init {
           minWidth = 0.8f
           maxWidth = minWidth
           lifeTime = 24f
         }
       }
-      e.lightnings = object : LightningContainer() {
+      e.lightnings = object :LightningContainer() {
         init {
           lerp = Interp.pow2Out
         }
@@ -90,21 +103,26 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
       }
     }
 
-    crafting = Cons {e: NormalCrafterBuild? ->
+    crafting = Cons { e: NormalCrafterBuild? ->
 
-      if (SglDraw.clipDrawable(e!!.x, e.y, clipSize) && Mathf.chanceDelta((e.workEfficiency() * 0.1f).toDouble())) e.lightningDrawer!!.create(generator)
+      if (SglDraw.clipDrawable(
+          e!!.x,
+          e.y,
+          clipSize
+        ) && Mathf.chanceDelta((e.workEfficiency() * 0.1f).toDouble())
+      ) e.lightningDrawer!!.create(generator)
       if (Mathf.chanceDelta((e.workEfficiency() * 0.04f).toDouble())) SglFx.randomLightning.at(e.x, e.y, 0f, Pal.reactorPurple)
     }
 
-    craftTrigger = Cons {e: NormalCrafterBuild? ->
+    craftTrigger = Cons { e: NormalCrafterBuild? ->
       if (!SglDraw.clipDrawable(e!!.x, e.y, clipSize)) return@Cons
       val a = Mathf.random(1, 3)
 
-      for (i in 0..<a) {
+      for(i in 0..<a) {
         val gen: VectorLightningGenerator = e.lightningGenerator!!
         gen.vector.rnd(Mathf.random(65, 100).toFloat())
         val amount = Mathf.random(3, 5)
-        for (i1 in 0..<amount) {
+        for(i1 in 0..<amount) {
           e.lightnings!!.create(gen)
         }
 
@@ -112,7 +130,16 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
           SglFx.explodeImpWave.at(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple)
           Angles.randLenVectors(
             System.nanoTime(), Mathf.random(4, 7), 2f, 3.5f
-          ) {x: Float, y: Float -> SglParticleModels.floatParticle.create(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple, x, y, Mathf.random(3.25f, 4f))}
+          ) { x: Float, y: Float ->
+            SglParticleModels.floatParticle.create(
+              e.x + gen.vector.x,
+              e.y + gen.vector.y,
+              Pal.reactorPurple,
+              x,
+              y,
+              Mathf.random(3.25f, 4f)
+            )
+          }
         } else {
           SglFx.spreadLightning.at(e.x + gen.vector.x, e.y + gen.vector.y, Pal.reactorPurple)
         }
@@ -121,12 +148,12 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
       Effect.shake(5.5f, 20f, e.x, e.y)
     }
 
-    drawers = DrawMulti(DrawBottom(), object : DrawBlock() {
+    drawers = DrawMulti(DrawBottom(), object :DrawBlock() {
       override fun draw(build: Building?) {
 
         val e = build as NormalCrafterBuild
 
-        SglDraw.drawBloomUnderBlock(e) {b: NormalCrafterBuild ->
+        SglDraw.drawBloomUnderBlock(e) { b: NormalCrafterBuild ->
           val c: LightningContainer = b.lightningDrawer!!
           if (!Vars.state.isPaused) c.update()
 
@@ -137,7 +164,7 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
         Draw.z(35f)
         Draw.color()
       }
-    }, DrawDefault(), object : DrawBlock() {
+    }, DrawDefault(), object :DrawBlock() {
       override fun draw(build: Building?) {
 
         val e = build as NormalCrafterBuild
@@ -151,7 +178,12 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
         val offsetW = 14 * lerp
 
         SglDraw.drawLightEdge(
-          e.x, e.y, (35 + offsetH) * e.workEfficiency(), 2.25f * e.workEfficiency(), (145 + offsetW) * e.workEfficiency(), 4 * e.workEfficiency()
+          e.x,
+          e.y,
+          (35 + offsetH) * e.workEfficiency(),
+          2.25f * e.workEfficiency(),
+          (145 + offsetW) * e.workEfficiency(),
+          4 * e.workEfficiency()
         )
 
         Draw.z(Layer.bullet - 10)
@@ -163,7 +195,16 @@ class SubstanceInverter : MediumCrafter("substance_inverter") {
         SglDraw.gradientCircle(e.x, e.y, 18 * e.workEfficiency(), -3 * e.workEfficiency() - lerp, SglDrawConst.transColor)
         Draw.alpha(1f)
         SglDraw.drawLightEdge(
-          e.x, e.y, (60 + offsetH) * e.workEfficiency(), 2.25f * e.workEfficiency(), 0f, 0.55f, (180 + offsetW) * e.workEfficiency(), 4 * e.workEfficiency(), 0f, 0.55f
+          e.x,
+          e.y,
+          (60 + offsetH) * e.workEfficiency(),
+          2.25f * e.workEfficiency(),
+          0f,
+          0.55f,
+          (180 + offsetW) * e.workEfficiency(),
+          4 * e.workEfficiency(),
+          0f,
+          0.55f
         )
       }
     })

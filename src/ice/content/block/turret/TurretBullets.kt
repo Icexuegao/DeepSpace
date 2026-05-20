@@ -42,7 +42,7 @@ import kotlin.math.min
 
 object TurretBullets {
   val rand = Rand()
-  var crushedIce = object : BulletType() {
+  var crushedIce = object :BulletType() {
     init {
       lifetime = 45f
       hitColor = SglDrawConst.frost
@@ -74,7 +74,7 @@ object TurretBullets {
   }
 
   /**极寒领域 */
-  var freezingField = object : BulletType() {
+  var freezingField = object :BulletType() {
     init {
       lifetime = 600f
       hittable = false
@@ -129,7 +129,7 @@ object TurretBullets {
   }
 
   @JvmField
-  var 破碎FEX结晶 = object : BulletType() {
+  var 破碎FEX结晶 = object :BulletType() {
     init {
       lifetime = 60f
       hitColor = SglDrawConst.fexCrystal
@@ -165,7 +165,7 @@ object TurretBullets {
   }
 
   @JvmField
-  var 溢出能量 = object : BulletType() {
+  var 溢出能量 = object :BulletType() {
     init {
       collides = false
       absorbable = false
@@ -189,7 +189,7 @@ object TurretBullets {
       trailRotation = true
       trailInterval = 4f
 
-      fragBullet = object : LightningBulletType() {
+      fragBullet = object :LightningBulletType() {
         init {
           lightningLength = 14
           lightningLengthRand = 4
@@ -208,7 +208,8 @@ object TurretBullets {
         Angles.randLenVectors(
           System.nanoTime(), 2, 2.2f
         ) { x: Float, y: Float ->
-          SglParticleModels.floatParticle.create(b.x, b.y, SglDrawConst.matrixNet, x, y, 2.2f).strength = 0.3f }
+          SglParticleModels.floatParticle.create(b.x, b.y, SglDrawConst.matrixNet, x, y, 2.2f).strength = 0.3f
+        }
       }
     }
 
@@ -221,12 +222,26 @@ object TurretBullets {
     }
   }
   val branch = RandomGenerator()
-  fun lightning(lifeTime: Float, damage: Float, size: Float, color: Color, gradient: Boolean, generator: Func<Bullet, LightningGenerator>): singularity.world.blocks.turrets. LightningBulletType {
+  fun lightning(
+    lifeTime: Float,
+    damage: Float,
+    size: Float,
+    color: Color,
+    gradient: Boolean,
+    generator: Func<Bullet, LightningGenerator>
+  ): singularity.world.blocks.turrets.LightningBulletType {
     return lightning(lifeTime, if (gradient) lifeTime / 2 else 0f, damage, size, color, generator)
   }
 
-  fun lightning(lifeTime: Float, time: Float, damage: Float, size: Float, color: Color, generator: Func<Bullet, LightningGenerator>): singularity.world.blocks.turrets. LightningBulletType {
-    return object : singularity.world.blocks.turrets. LightningBulletType(0f,damage) {
+  fun lightning(
+    lifeTime: Float,
+    time: Float,
+    damage: Float,
+    size: Float,
+    color: Color,
+    generator: Func<Bullet, LightningGenerator>
+  ): singularity.world.blocks.turrets.LightningBulletType {
+    return object :singularity.world.blocks.turrets.LightningBulletType(0f, damage) {
       init {
         lifetime = lifeTime
         collides = false
@@ -275,7 +290,7 @@ object TurretBullets {
   }
 
   fun graphiteCloud(lifeTime: Float, size: Float, air: Boolean, ground: Boolean, empDamage: Float): BulletType {
-    return object : BulletType(0f, 0f) {
+    return object :BulletType(0f, 0f) {
       init {
         lifetime = lifeTime
         collides = false

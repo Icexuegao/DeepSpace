@@ -5,13 +5,12 @@ import arc.math.Interp
 import ice.audio.ISounds
 import ice.content.IStatus
 import ice.content.IUnitTypes
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.HealthRequireAbility
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.effect.ParticleEffect
@@ -24,13 +23,15 @@ import mindustry.entities.part.ShapePart
 import mindustry.entities.pattern.ShootBarrel
 import mindustry.gen.Sounds
 import mindustry.graphics.Layer
+import universecore.world.ability.HealthRequireAbility
 
 class StarEater :IceUnitType("unit_starEater") {
   init {
     localization {
       zh_CN {
         localizedName = "噬星"
-        description = "由黑棘二次蛹化蜕变而成的生物战舰\n可以向敌人发射离散电浆炮和远距离穿透激光,且可以发射火花导弹摧毁敌军工事,对于近距离的敌人则快速发射穿透激光"
+        description =
+          "由黑棘二次蛹化蜕变而成的生物战舰\n可以向敌人发射离散电浆炮和远距离穿透激光,且可以发射火花导弹摧毁敌军工事,对于近距离的敌人则快速发射穿透激光"
         details = "[#D75B6E]她多美啊!"
       }
     }
@@ -140,7 +141,7 @@ class StarEater :IceUnitType("unit_starEater") {
         haloRotation = 90f
         color = Color.valueOf("FF5845")
         colorTo = Color.valueOf("FF8663")
-        layer= Layer.effect
+        layer = Layer.effect
       },
       HaloPart().apply {
         progress = PartProgress.smoothReload
@@ -155,7 +156,7 @@ class StarEater :IceUnitType("unit_starEater") {
         haloRotation = 90f
         color = Color.valueOf("FF5845")
         colorTo = Color.valueOf("FF8663")
-        layer= Layer.effect
+        layer = Layer.effect
       },
       HaloPart().apply {
         progress = PartProgress.smoothReload
@@ -170,7 +171,7 @@ class StarEater :IceUnitType("unit_starEater") {
         haloRotation = 60f
         color = Color.valueOf("FF5845")
         colorTo = Color.valueOf("FF8663")
-        layer= Layer.effect
+        layer = Layer.effect
       },
       HaloPart().apply {
         progress = PartProgress.smoothReload
@@ -186,7 +187,7 @@ class StarEater :IceUnitType("unit_starEater") {
         haloRotation = 60f
         color = Color.valueOf("FF5845")
         colorTo = Color.valueOf("FF8663")
-        layer= Layer.effect
+        layer = Layer.effect
       },
       ShapePart().apply {
         progress = PartProgress.smoothReload
@@ -195,7 +196,7 @@ class StarEater :IceUnitType("unit_starEater") {
         radius = 4f
         radiusTo = 0f
         color = Color.valueOf("FF5845")
-        layer= Layer.effect
+        layer = Layer.effect
       },
       HaloPart().apply {
         progress = PartProgress.smoothReload
@@ -210,7 +211,7 @@ class StarEater :IceUnitType("unit_starEater") {
         haloRotateSpeed = -0.5f
         color = Color.valueOf("FF5845")
         colorTo = Color.valueOf("FF8663")
-        layer= Layer.effect
+        layer = Layer.effect
       },
       HaloPart().apply {
         progress = PartProgress.smoothReload
@@ -226,7 +227,7 @@ class StarEater :IceUnitType("unit_starEater") {
         haloRotateSpeed = -0.5f
         color = Color.valueOf("FF5845")
         colorTo = Color.valueOf("FF8663")
-        layer= Layer.effect
+        layer = Layer.effect
       }
     )
 
@@ -315,7 +316,7 @@ class StarEater :IceUnitType("unit_starEater") {
       shootY = 0f
       alternate = false
       shootSound = Sounds.shootMissile
-      shoot .apply {
+      shoot.apply {
         shots = 4
         shotDelay = 5f
       }
@@ -355,7 +356,7 @@ class StarEater :IceUnitType("unit_starEater") {
         firstShotDelay = 120f
       }
 
-      bullet = LaserBulletType( 9400f).apply {
+      bullet = LaserBulletType(9400f).apply {
         lifetime = 30f
         length = 600f
         width = 75f
@@ -440,7 +441,7 @@ class StarEater :IceUnitType("unit_starEater") {
             colorTo = Color.valueOf("FF8663")
           },
           ParticleEffect().apply {
-            region ="star".appendModName()
+            region = "star".appendModName()
             particles = 1
             lifetime = 25f
             sizeFrom = 12f
@@ -490,7 +491,7 @@ class StarEater :IceUnitType("unit_starEater") {
         firstShotDelay = 120f
       }
 
-      bullet = BasicBulletType(6f,880f,"arrows").apply {
+      bullet = BasicBulletType(6f, 880f, "arrows").apply {
         lifetime = 160f
         height = 36f
         width = 16f
@@ -820,13 +821,6 @@ class StarEater :IceUnitType("unit_starEater") {
         layerOffset = -0.01f
       })
     }
-
-
-
-
-
-
-
 
   }
 }

@@ -3,7 +3,6 @@ package ice.content.unit
 import arc.graphics.Color
 import ice.content.IStatus
 import ice.entities.bullet.base.BulletType
-import universecore.ui.bundle.localization
 import mindustry.content.Fx
 import mindustry.entities.abilities.EnergyFieldAbility
 import mindustry.entities.effect.ParticleEffect
@@ -13,6 +12,7 @@ import mindustry.graphics.Layer
 import mindustry.type.unit.MissileUnitType
 import mindustry.type.weapons.PointDefenseWeapon
 import mindustry.type.weapons.RepairBeamWeapon
+import universecore.ui.bundle.localization
 
 class Lightning :MissileUnitType("unit_lightning") {
   init {

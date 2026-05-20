@@ -10,7 +10,7 @@ import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 import mindustry.gen.UnitWaterMove
 
-class Meditation : IceUnitType("unit_meditation", UnitWaterMove::class.java) {
+class Meditation :IceUnitType("unit_meditation", UnitWaterMove::class.java) {
   init {
     localization {
       zh_CN {

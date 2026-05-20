@@ -1,9 +1,9 @@
 package ice.content.unit
 
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.ai.UnitCommand
 import mindustry.gen.BuildingTetherPayloadUnit
+import universecore.util.toColor
 
 class WorkerBee :IceUnitType("unit_workerBee", BuildingTetherPayloadUnit::class.java) {
   init {

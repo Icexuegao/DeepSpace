@@ -7,7 +7,6 @@ import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.ArmorPlateAbility
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.entities.abilities.RegenAbility
@@ -16,8 +15,9 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.MechUnit
 import mindustry.gen.Sounds
 import mindustry.type.ammo.ItemAmmoType
+import universecore.world.ability.ArmorPlateAbility
 
-class IronGuard : IceUnitType("unit_ironGuard", MechUnit::class.java) {
+class IronGuard :IceUnitType("unit_ironGuard", MechUnit::class.java) {
   init {
     localization {
       zh_CN {
@@ -68,7 +68,7 @@ class IronGuard : IceUnitType("unit_ironGuard", MechUnit::class.java) {
         shots = 2
         shotDelay = 5f
       }
-      shootY+=3
+      shootY += 3
       recoil = 1f
       shake = 0.5f
       reload = 25f

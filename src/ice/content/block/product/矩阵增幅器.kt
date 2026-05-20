@@ -5,7 +5,6 @@ import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import arc.util.Time
 import ice.content.IItems
-import universecore.world.draw.DrawBuild
 import mindustry.Vars
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
@@ -15,6 +14,7 @@ import mindustry.world.draw.DrawMulti
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.blocks.drills.MatrixMinerComponent
+import universecore.world.draw.DrawBuild
 
 class 矩阵增幅器 :MatrixMinerComponent("matrix_miner_overdrive") {
   init {
@@ -22,6 +22,11 @@ class 矩阵增幅器 :MatrixMinerComponent("matrix_miner_overdrive") {
       zh_CN {
         localizedName = "矩阵增幅器"
         description = "矩阵矿床的增幅组件,提高矩阵矿床的最大范围,并消耗液体增加矩阵矿床的工作效率"
+      }
+      en {
+        localizedName = "Matrix Overdrive"
+        description =
+          "An amplification component for the Matrix Miner that increases its maximum range and consumes liquid to boost the Matrix Miner's working efficiency."
       }
     }
     requirementPairs(

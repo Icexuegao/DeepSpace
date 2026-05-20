@@ -8,7 +8,7 @@ import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
 import mindustry.gen.Sounds
 
-class Shatter : IceUnitType("shatter") {
+class Shatter :IceUnitType("shatter") {
   init {
     localization {
       zh_CN {

@@ -5,9 +5,6 @@ import arc.graphics.g2d.Fill
 import arc.math.Angles
 import ice.content.IItems
 import ice.content.ILiquids
-
-import universecore.world.draw.DrawLiquidRegion
-import universecore.world.draw.DrawMulti
 import ice.world.meta.IAttribute
 import mindustry.content.Liquids
 import mindustry.entities.Effect
@@ -16,6 +13,8 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.FloorCrafter
 import universecore.world.consumers.cons.ConsumeFloor
+import universecore.world.draw.DrawLiquidRegion
+import universecore.world.draw.DrawMulti
 
 class 低温混合器 :FloorCrafter("lowTemperatureMixer") {
   init {

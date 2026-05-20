@@ -5,12 +5,11 @@ import arc.math.Interp
 import ice.audio.ISounds
 import ice.content.IStatus
 import ice.content.IUnitTypes
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.core.IFiles.appendModName
-
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -23,7 +22,7 @@ import mindustry.entities.pattern.ShootBarrel
 import mindustry.entities.pattern.ShootPattern
 import mindustry.gen.Sounds
 
-class BlackThorns : IceUnitType("unit_blackThorns") {
+class BlackThorns :IceUnitType("unit_blackThorns") {
   init {
     localization {
       zh_CN {

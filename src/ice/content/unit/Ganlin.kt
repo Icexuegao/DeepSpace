@@ -4,13 +4,10 @@ import arc.graphics.Color
 import arc.math.Interp
 import arc.scene.ui.layout.Table
 import ice.content.IStatus
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
-import ice.core.IFiles.appendModName
 import ice.world.content.unit.IceUnitType
-import universecore.world.ability.DeathGiftAbility
-import universecore.world.ability.RepairFieldAbility
-import universecore.world.ability.ShieldAbility
 import mindustry.content.Fx
 import mindustry.entities.abilities.RegenAbility
 import mindustry.entities.pattern.ShootPattern
@@ -22,9 +19,12 @@ import mindustry.graphics.Pal
 import mindustry.type.UnitType
 import mindustry.type.Weapon
 import mindustry.type.weapons.RepairBeamWeapon
+import universecore.world.ability.DeathGiftAbility
+import universecore.world.ability.RepairFieldAbility
+import universecore.world.ability.ShieldAbility
 import kotlin.math.max
 
-class Ganlin : IceUnitType("ganlin") {
+class Ganlin :IceUnitType("ganlin") {
   init {
     localization {
       zh_CN {
@@ -84,7 +84,7 @@ class Ganlin : IceUnitType("ganlin") {
         maxRange = 240f
       }
     })
-    var b = object : BasicBulletType() {
+    var b = object :BasicBulletType() {
       init {
         speed = 8f
         damage = 213f
@@ -107,12 +107,12 @@ class Ganlin : IceUnitType("ganlin") {
       override fun hitEntity(b: Bullet, entity: Hitboxc?, health: Float) {
         var size = (entity as Unit).hitSize
         val shooter = b.owner as Unit
-        var scale = shooter.hitSize / max(size,1f)
+        var scale = shooter.hitSize / max(size, 1f)
         b.damage = damage * scale
         super.hitEntity(b, entity, health)
       }
     }
-    weapons.add(object : Weapon("ganlin-weapon".appendModName()) {
+    weapons.add(object :Weapon("ganlin-weapon".appendModName()) {
       override fun addStats(u: UnitType, t: Table) {
         super.addStats(u, t)
         t.row()

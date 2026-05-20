@@ -1,10 +1,9 @@
 package ice.content.unit
 
-
 import ice.world.content.unit.IceUnitType
 import mindustry.gen.CrawlUnit
 
-class Barb: IceUnitType("unit_barb", CrawlUnit::class.java) {
+class Barb :IceUnitType("unit_barb", CrawlUnit::class.java) {
   init {
     localization {
       zh_CN {

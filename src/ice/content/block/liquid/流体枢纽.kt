@@ -4,7 +4,7 @@ import ice.content.IItems
 import ice.world.content.blocks.liquid.MultipleLiquidBlock
 import mindustry.type.Category
 
-class 流体枢纽:MultipleLiquidBlock("fluidJunction"){
+class 流体枢纽 :MultipleLiquidBlock("fluidJunction") {
   init {
     localization {
       zh_CN {

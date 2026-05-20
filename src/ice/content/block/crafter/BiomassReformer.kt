@@ -1,16 +1,16 @@
 package ice.content.block.crafter
 
 import ice.content.IItems
-import universecore.util.toColor
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawParticles
 import singularity.world.blocks.product.NormalCrafter
+import universecore.util.toColor
+import universecore.world.draw.DrawMulti
 
-class BiomassReformer: NormalCrafter("biomassReformer") {
+class BiomassReformer :NormalCrafter("biomassReformer") {
   init {
     localization {
       zh_CN {
@@ -18,14 +18,14 @@ class BiomassReformer: NormalCrafter("biomassReformer") {
         description = "将多种原料培育为生物钢"
       }
     }
-    size=3
-    itemCapacity=36
+    size = 3
+    itemCapacity = 36
 
     requirements(Category.crafting, IItems.铱板, 235, IItems.电子元件, 85, IItems.钴钢, 75, IItems.强化合金, 35)
-    updateEffect= Fx.burning
-    updateEffectChance=0.1f
-    ambientSound= Sounds.loopCutter
-    ambientSoundVolume=0.06f
+    updateEffect = Fx.burning
+    updateEffectChance = 0.1f
+    ambientSound = Sounds.loopCutter
+    ambientSoundVolume = 0.06f
     drawers = DrawMulti(DrawDefault(), DrawParticles().apply {
       color = "D86E56FF".toColor()
       alpha = 0.6f

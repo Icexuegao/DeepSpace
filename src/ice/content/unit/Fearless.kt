@@ -9,7 +9,6 @@ import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.abilities.EnergyFieldAbility
@@ -25,13 +24,15 @@ import mindustry.entities.part.ShapePart
 import mindustry.entities.pattern.ShootAlternate
 import mindustry.gen.Sounds
 import mindustry.type.weapons.PointDefenseWeapon
+import universecore.util.toColor
 
-class Fearless : IceUnitType("fearless") {
+class Fearless :IceUnitType("fearless") {
   init {
     localization {
       zh_CN {
         this.localizedName = "无畏"
-        description = "重型空中突击单位.发射荷电粒子高爆弹并辅以激光攻击敌人.装载脉冲发生器用以过载敌军引擎和武器系统.加装护盾辅助发生器以维持友军护盾持续作战,配备裂解炮抵御敌人的攻击"
+        description =
+          "重型空中突击单位.发射荷电粒子高爆弹并辅以激光攻击敌人.装载脉冲发生器用以过载敌军引擎和武器系统.加装护盾辅助发生器以维持友军护盾持续作战,配备裂解炮抵御敌人的攻击"
         details = "帝国舰队的中坚力量."
       }
     }
@@ -574,7 +575,11 @@ class Fearless : IceUnitType("fearless") {
       alwaysContinuous = true
       bullet = ContinuousFlameBulletType().apply {
         colors = arrayOf(
-          Color.valueOf("FF58458C"), Color.valueOf("FF5845B2"), Color.valueOf("FF5845CC"), Color.valueOf("FF8663"), Color.valueOf("FF8663CC")
+          Color.valueOf("FF58458C"),
+          Color.valueOf("FF5845B2"),
+          Color.valueOf("FF5845CC"),
+          Color.valueOf("FF8663"),
+          Color.valueOf("FF8663CC")
         )
         damage = 20f
         lifetime = 30f

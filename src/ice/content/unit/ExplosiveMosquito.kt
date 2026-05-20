@@ -11,7 +11,7 @@ import mindustry.entities.effect.ExplosionEffect
 import mindustry.gen.Sounds
 import mindustry.world.meta.BlockFlag
 
-class ExplosiveMosquito : IceUnitType("explosiveMosquito") {
+class ExplosiveMosquito :IceUnitType("explosiveMosquito") {
   init {
     localization {
       zh_CN {
@@ -21,7 +21,7 @@ class ExplosiveMosquito : IceUnitType("explosiveMosquito") {
       }
     }
     lowAltitude = true
-    createWreck=false
+    createWreck = false
     createScorch = false
     flying = true
     health = 270f

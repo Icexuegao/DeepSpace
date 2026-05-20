@@ -5,13 +5,10 @@ import arc.math.Interp
 import ice.content.IItems
 import ice.content.ILiquids
 import ice.content.IStatus
+import ice.core.IFiles.appendModName
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
-import ice.core.IFiles.appendModName
-import universecore.util.toColor
-import universecore.world.draw.DrawArcSmelt
-import universecore.world.draw.DrawMulti
 import mindustry.content.Fx
 import mindustry.entities.effect.ExplosionEffect
 import mindustry.entities.effect.ParticleEffect
@@ -24,13 +21,17 @@ import mindustry.world.draw.DrawGlowRegion
 import mindustry.world.draw.DrawParticles
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.product.NormalCrafter
+import universecore.util.toColor
+import universecore.world.draw.DrawArcSmelt
+import universecore.world.draw.DrawMulti
 
-class KeyCompiler : NormalCrafter("keyCompiler") {
+class KeyCompiler :NormalCrafter("keyCompiler") {
   init {
     localization {
       zh_CN {
         this.localizedName = "密匙编译器"
-        description = "通过量子通信接收数据以编译密匙,需要大量冷却液以支持运行\n为确保量子通道稳定性及数据准确性,不会受到时空加速的影响\n为了保护内部精密结构及能量管路,配备了极为厚重的装甲"
+        description =
+          "通过量子通信接收数据以编译密匙,需要大量冷却液以支持运行\n为确保量子通道稳定性及数据准确性,不会受到时空加速的影响\n为了保护内部精密结构及能量管路,配备了极为厚重的装甲"
         details = "[#FF5845]数据正常下行,密匙编译稳定进行中.是时候给那些异族一些颜色看看了!"
       }
     }
@@ -354,8 +355,8 @@ class KeyCompiler : NormalCrafter("keyCompiler") {
       color = "F0511D".toColor()
     })
 
-    ambientSound= Sounds.loopElectricHum
-    ambientSoundVolume=0.2f
+    ambientSound = Sounds.loopElectricHum
+    ambientSoundVolume = 0.2f
 
     newConsume().apply {
       time(10800f)

@@ -20,8 +20,9 @@ import singularity.world.blocks.turrets.ProjectileTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.meta.SglStat
 
-class Roentgen : ProjectileTurret("roentgen") {
-  override fun limitRange(margin: Float)= Unit
+class Roentgen :ProjectileTurret("roentgen") {
+  override fun limitRange(margin: Float) = Unit
+
   init {
     localization {
       zh_CN {
@@ -43,7 +44,7 @@ class Roentgen : ProjectileTurret("roentgen") {
     shoot.firstShotDelay = 40f
     shootSound = Sounds.shootLaser
 
-    newAmmo(object : LightLaserBulletType() {
+    newAmmo(object :LightLaserBulletType() {
       init {
         length = 240f
         damage = 225f
@@ -91,6 +92,6 @@ class Roentgen : ProjectileTurret("roentgen") {
     newCoolant(1.5f, 20f)
     consume!!.liquid(ILiquids.相位态FEX流体, 0.1f)
 
-    drawers = object : DrawSglTurret() {}
+    drawers = object :DrawSglTurret() {}
   }
 }

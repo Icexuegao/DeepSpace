@@ -6,7 +6,6 @@ import ice.content.IStatus
 import ice.entities.bullet.ArtilleryBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
-import universecore.util.toColor
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
@@ -19,16 +18,21 @@ import mindustry.gen.UnitWaterMove
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.Weapon
+import universecore.util.toColor
 import kotlin.math.min
 
-class Abyss : IceUnitType("unit_abyss", UnitWaterMove::class.java) {
+class Abyss :IceUnitType("unit_abyss", UnitWaterMove::class.java) {
   var wave = Effect(50f) { e ->
     Draw.color(e.color.cpy().mul(1.5f))
     Fx.rand.setSeed(e.id.toLong())
     Draw.z(Layer.scorch - 0.01f)
     repeat(3) {
       Fx.v.trns(e.rotation + Fx.rand.range(40), Fx.rand.random(6 * e.finpow()))
-      Fill.circle(e.x + Fx.v.x + Fx.rand.range(4), e.y + Fx.v.y + Fx.rand.range(4), min(e.fout(), e.fin() * e.lifetime / 8) * 4 * Fx.rand.random(0.8f, 1.1f) + 0.3f)
+      Fill.circle(
+        e.x + Fx.v.x + Fx.rand.range(4),
+        e.y + Fx.v.y + Fx.rand.range(4),
+        min(e.fout(), e.fin() * e.lifetime / 8) * 4 * Fx.rand.random(0.8f, 1.1f) + 0.3f
+      )
     }
   }
 
@@ -44,7 +48,7 @@ class Abyss : IceUnitType("unit_abyss", UnitWaterMove::class.java) {
     rotationLimit = 20f
     baseRotation = -30f
     shootSound = Sounds.shootMissileLarge
-    bullet = object : BasicBulletType() {
+    bullet = object :BasicBulletType() {
       init {
         damage = 850f
         lifetime = 300f
@@ -89,7 +93,8 @@ class Abyss : IceUnitType("unit_abyss", UnitWaterMove::class.java) {
     localization {
       zh_CN {
         this.localizedName = "沧溟"
-        description = "重型海栖突击单位.发射炮弹和大型鱼雷并辅以机炮攻击敌人,加装护盾辅助发生器维持友军护盾,同时为附近友军提供反扑效果,对舰攻击能力极强"
+        description =
+          "重型海栖突击单位.发射炮弹和大型鱼雷并辅以机炮攻击敌人,加装护盾辅助发生器维持友军护盾,同时为附近友军提供反扑效果,对舰攻击能力极强"
       }
     }
     health = 8800f

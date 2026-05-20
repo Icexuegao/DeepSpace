@@ -34,17 +34,18 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 
-class Winter : SglTurret("winter"){
+class Winter :SglTurret("winter") {
   init {
     localization {
       zh_CN {
         this.localizedName = "冬至"
-        description = "它用力场,将周围的物质分子的移动牢牢的限制,在极寒领域展开的瞬间,有如时间也被冻结一般,一切都停了下来,并破碎成无数微小的碎片"
+        description =
+          "它用力场,将周围的物质分子的移动牢牢的限制,在极寒领域展开的瞬间,有如时间也被冻结一般,一切都停了下来,并破碎成无数微小的碎片"
       }
     }
     requirements(
       Category.turret,
-        IItems.强化合金, 210, IItems.简并态中子聚合物, 80,  IItems.絮凝剂, 180,
+      IItems.强化合金, 210, IItems.简并态中子聚合物, 80, IItems.絮凝剂, 180,
 
       IItems.铱锭, 100, IItems.气凝胶, 200, IItems.铝锭, 220, IItems.矩阵合金, 160, IItems.充能FEX水晶, 180
 
@@ -61,7 +62,7 @@ class Winter : SglTurret("winter"){
     targetGround = true
     targetAir = true
     shootEffect = MultiEffect(
-      SglFx.winterShooting, SglFx.shootRecoilWave, object : WaveEffect() {
+      SglFx.winterShooting, SglFx.shootRecoilWave, object :WaveEffect() {
         init {
           colorTo = Pal.reactorPurple
           colorFrom = colorTo
@@ -89,7 +90,7 @@ class Winter : SglTurret("winter"){
 
     soundPitchRange = 0.05f
 
-    newAmmo(object : BulletType() {
+    newAmmo(object :BulletType() {
       init {
         lifetime = 20f
         speed = 28f
@@ -97,7 +98,7 @@ class Winter : SglTurret("winter"){
         absorbable = false
         scaleLife = true
         drawSize = 80f
-        fragBullet = object : BulletType() {
+        fragBullet = object :BulletType() {
           init {
             lifetime = 120f
             speed = 0.6f
@@ -183,7 +184,13 @@ class Winter : SglTurret("winter"){
         )
       }
     }, true) { bt, ammo: mindustry.entities.bullet.BulletType? ->
-      bt!!.add(Core.bundle.format("bullet.splashdamage", ammo!!.fragBullet.splashDamage.toInt(), Strings.fixed(ammo.fragBullet.splashDamageRadius / Vars.tilesize, 1)))
+      bt!!.add(
+        Core.bundle.format(
+          "bullet.splashdamage",
+          ammo!!.fragBullet.splashDamage.toInt(),
+          Strings.fixed(ammo.fragBullet.splashDamageRadius / Vars.tilesize, 1)
+        )
+      )
       bt.row()
       bt.add(Core.bundle.get("infos.winterAmmo"))
     }
@@ -199,7 +206,7 @@ class Winter : SglTurret("winter"){
       }
     }
 
-    drawers = DrawSglTurret(object : CustomPart() {
+    drawers = DrawSglTurret(object :CustomPart() {
       init {
         progress = PartProgress.warmup
         draw = Drawer { x: Float, y: Float, r: Float, p: Float ->
@@ -209,7 +216,7 @@ class Winter : SglTurret("winter"){
           Draw.color()
         }
       }
-    }, object : RegionPart("_blade") {
+    }, object :RegionPart("_blade") {
       init {
         mirror = true
         heatColor = SglDrawConst.winter
@@ -221,7 +228,7 @@ class Winter : SglTurret("winter"){
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2f, 0f))
       }
-    }, object : RegionPart("_side") {
+    }, object :RegionPart("_side") {
       init {
         mirror = true
         heatColor = SglDrawConst.winter
@@ -232,7 +239,7 @@ class Winter : SglTurret("winter"){
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2f, -5f))
       }
-    }, object : RegionPart("_bot") {
+    }, object :RegionPart("_bot") {
       init {
         mirror = true
         heatColor = SglDrawConst.winter
@@ -244,12 +251,12 @@ class Winter : SglTurret("winter"){
 
         moves.add(PartMove(PartProgress.recoil, 0f, -2f, 0f))
       }
-    }, object : RegionPart("_body") {
+    }, object :RegionPart("_body") {
       init {
         heatColor = SglDrawConst.winter
         heatProgress = PartProgress.warmup.delay(0.3f)
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         mirror = true
         x = 20f
@@ -260,11 +267,24 @@ class Winter : SglTurret("winter"){
         progress = PartProgress.warmup
         draw = Drawer { x: Float, y: Float, r: Float, p: Float ->
           SglDraw.drawCrystal(
-            x, y, 8 + 8 * p, 6 * p, 4 * p, 0f, 0f, 0.4f * p, Layer.effect, Layer.bullet - 1, Time.time * 1.24f, r, Tmp.c1.set(SglDrawConst.frost).a(0.65f), SglDrawConst.winter
+            x,
+            y,
+            8 + 8 * p,
+            6 * p,
+            4 * p,
+            0f,
+            0f,
+            0.4f * p,
+            Layer.effect,
+            Layer.bullet - 1,
+            Time.time * 1.24f,
+            r,
+            Tmp.c1.set(SglDrawConst.frost).a(0.65f),
+            SglDrawConst.winter
           )
         }
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         mirror = true
         x = 20f
@@ -275,11 +295,24 @@ class Winter : SglTurret("winter"){
         progress = PartProgress.warmup.delay(0.15f)
         draw = Drawer { x: Float, y: Float, r: Float, p: Float ->
           SglDraw.drawCrystal(
-            x, y, 16 + 21 * p, 12 * p, 8 * p, 0f, 0f, 0.7f * p, Layer.effect, Layer.bullet - 1, Time.time * 1.24f + 45, r, Tmp.c1.set(SglDrawConst.frost).a(0.65f), SglDrawConst.winter
+            x,
+            y,
+            16 + 21 * p,
+            12 * p,
+            8 * p,
+            0f,
+            0f,
+            0.7f * p,
+            Layer.effect,
+            Layer.bullet - 1,
+            Time.time * 1.24f + 45,
+            r,
+            Tmp.c1.set(SglDrawConst.frost).a(0.65f),
+            SglDrawConst.winter
           )
         }
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         mirror = true
         x = 20f
@@ -290,11 +323,24 @@ class Winter : SglTurret("winter"){
         progress = PartProgress.warmup.delay(0.3f)
         draw = Drawer { x: Float, y: Float, r: Float, p: Float ->
           SglDraw.drawCrystal(
-            x, y, 12 + 14 * p, 10 * p, 6 * p, 0f, 0f, 0.6f * p, Layer.effect, Layer.bullet - 1, Time.time * 1.24f + 90, r, Tmp.c1.set(SglDrawConst.frost).a(0.65f), SglDrawConst.winter
+            x,
+            y,
+            12 + 14 * p,
+            10 * p,
+            6 * p,
+            0f,
+            0f,
+            0.6f * p,
+            Layer.effect,
+            Layer.bullet - 1,
+            Time.time * 1.24f + 90,
+            r,
+            Tmp.c1.set(SglDrawConst.frost).a(0.65f),
+            SglDrawConst.winter
           )
         }
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         mirror = true
         x = 20f
@@ -305,11 +351,24 @@ class Winter : SglTurret("winter"){
         progress = PartProgress.warmup.delay(0.45f)
         draw = Drawer { x: Float, y: Float, r: Float, p: Float ->
           SglDraw.drawCrystal(
-            x, y, 9 + 12 * p, 8 * p, 5 * p, 0f, 0f, 0.65f * p, Layer.effect, Layer.bullet - 1, Time.time * 1.24f + 135, r, Tmp.c1.set(SglDrawConst.frost).a(0.65f), SglDrawConst.winter
+            x,
+            y,
+            9 + 12 * p,
+            8 * p,
+            5 * p,
+            0f,
+            0f,
+            0.65f * p,
+            Layer.effect,
+            Layer.bullet - 1,
+            Time.time * 1.24f + 135,
+            r,
+            Tmp.c1.set(SglDrawConst.frost).a(0.65f),
+            SglDrawConst.winter
           )
         }
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         progress = PartProgress.charge
         y = 4f
@@ -322,7 +381,7 @@ class Winter : SglTurret("winter"){
           SglDraw.gradientCircle(x, y, 4 + 12 * p, -7 * p, 0f)
         }
       }
-    }, object : CustomPart() {
+    }, object :CustomPart() {
       init {
         progress = PartProgress.warmup
         y = -18f
@@ -333,7 +392,7 @@ class Winter : SglTurret("winter"){
           Lines.circle(x, y, 3.5f)
           Draw.alpha(0.7f)
 
-          for (i in 0..5) {
+          for(i in 0..5) {
             SglDraw.drawTransform(x, y, 14 * p, 0f, r + Time.time * 1.5f + i * 60) { dx: Float, dy: Float, dr: Float ->
               Drawf.tri(dx, dy, 4 * p, 4f, dr)
               Drawf.tri(dx, dy, 4 * p, 14f, dr + 180f)
@@ -342,10 +401,23 @@ class Winter : SglTurret("winter"){
 
           Draw.color(SglDrawConst.winter)
           val pl = Mathf.clamp((p - 0.3f) / 0.7f)
-          for (i in 0..3) {
+          for(i in 0..3) {
             SglDraw.drawTransform(x, y, 16 * pl, 0f, r - Time.time + i * 90) { dx: Float, dy: Float, dr: Float ->
               SglDraw.drawCrystal(
-                dx, dy, 12f, 8 * pl, 8 * pl, 0f, 0f, 0.5f * pl, Layer.effect, Layer.bullet - 1, Time.time, dr, Tmp.c1.set(SglDrawConst.frost).a(0.65f), SglDrawConst.winter
+                dx,
+                dy,
+                12f,
+                8 * pl,
+                8 * pl,
+                0f,
+                0f,
+                0.5f * pl,
+                Layer.effect,
+                Layer.bullet - 1,
+                Time.time,
+                dr,
+                Tmp.c1.set(SglDrawConst.frost).a(0.65f),
+                SglDrawConst.winter
               )
             }
           }

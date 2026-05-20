@@ -151,7 +151,7 @@ class Beacon :SglTurret("turret_beacon") {
     range = 1600f
     shake = 8f
     recoil = 5f
-    warmupSpeed= 0.01f
+    warmupSpeed = 0.01f
     rotateSpeed = 0.5f
     recoilTime = 2400f
     cooldownTime = 2400f
@@ -205,7 +205,7 @@ class Beacon :SglTurret("turret_beacon") {
     setAmmo()
   }
 
-   fun setAmmo() {
+  fun setAmmo() {
     newAmmo(PointBulletType().apply {
       damage = 0f
       lifetime = 16f

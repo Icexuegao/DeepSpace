@@ -14,6 +14,16 @@ import universecore.util.toColor
 
 class 血肉反应堆 :ImpactReactor("bloodImpactReactor") {
   init {
+    localization {
+      zh_CN {
+        localizedName = "血肉反应堆"
+        description = "刺激生物钢产生大量电力,运行时会产生强烈波动"
+      }
+      en {
+        localizedName = "Flesh Reactor"
+        description = "Stimulates biological steel to generate massive amounts of power. Produces intense fluctuations during operation."
+      }
+    }
     size = 5
     armor = 8f
     lightColor = "EBFFFE".toColor()
@@ -61,15 +71,5 @@ class 血肉反应堆 :ImpactReactor("bloodImpactReactor") {
     }, DrawGlowRegion(), DrawDefault(), DrawGlowRegion("-glow"))
     ambientSound = Sounds.loopPulse
     ambientSoundVolume = 0.08f
-    localization {
-      zh_CN {
-        localizedName = "血肉反应堆"
-        description = "刺激生物钢产生大量电力,运行时会产生强烈波动"
-      }
-      en {
-        localizedName = "Flesh Reactor"
-        description = "Stimulates biological steel to generate massive amounts of power. Produces intense fluctuations during operation."
-      }
-    }
   }
 }
