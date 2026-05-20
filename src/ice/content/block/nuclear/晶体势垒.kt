@@ -12,6 +12,10 @@ class 晶体势垒 :EnergyBuffer("crystal_buffer") {
         localizedName = "晶体势垒"
         description = "中型能量缓冲设施,具有更大的能量缓冲空间,可进行中压区调压"
       }
+      en {
+        localizedName = "Crystal Barrier"
+        description = "A medium energy buffering facility with larger energy buffer space, capable of medium-voltage zone regulation."
+      }
     }
     squareSprite = false
     requirements(

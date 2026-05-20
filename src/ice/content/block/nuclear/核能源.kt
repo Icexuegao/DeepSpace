@@ -12,6 +12,10 @@ class 核能源 :EnergySource("nuclear_energy_source") {
         localizedName = "核能源"
         description = "释放中子能量"
       }
+      en {
+        localizedName = "Nuclear Energy Source"
+        description = "Releases neutron energy."
+      }
     }
     squareSprite = false
     requirements(SglCategory.nuclear, BuildVisibility.sandboxOnly, ItemStack.empty)

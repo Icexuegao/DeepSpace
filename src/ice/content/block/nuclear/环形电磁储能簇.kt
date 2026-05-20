@@ -40,6 +40,11 @@ class 环形电磁储能簇 :EnergyContainer("magnetic_energy_container") {
         localizedName = "环形电磁储能簇"
         description = "约束式主动中子能存储设备,可以存储极大量的能量,但是需要消耗电力,若电力供应不足会发生泄漏"
       }
+      en {
+        localizedName = "Annular Electromagnetic Energy Storage Cluster"
+        description =
+          "A confinement-type active neutron energy storage device capable of storing extremely large amounts of energy, but requires power consumption. Leakage will occur if power supply is insufficient."
+      }
     }
     requirements(
       SglCategory.nuclear,

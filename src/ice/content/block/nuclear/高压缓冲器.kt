@@ -12,6 +12,11 @@ class 高压缓冲器 :EnergyBuffer("high_voltage_buffer") {
         localizedName = "高压缓冲器"
         description = "大型能量缓冲设施,更大的缓冲空间基本可以满足任何情况的能量缓冲,可用于进行高压区调压"
       }
+      en {
+        localizedName = "High Voltage Buffer"
+        description =
+          "A large energy buffering facility with ample buffer space to meet almost any energy buffering need. Can be used for high-voltage zone regulation."
+      }
     }
     squareSprite = false
     requirements(

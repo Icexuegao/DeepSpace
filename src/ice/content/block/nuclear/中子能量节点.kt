@@ -12,6 +12,11 @@ class 中子能量节点 :NuclearNode("nuclear_pipe_node") {
         localizedName = "中子能量节点"
         description = "中子能传输节点,用于传输核能量,以链接多个节点的方式构建核能运输网络"
       }
+      en {
+        localizedName = "Neutron Energy Node"
+        description =
+          "A neutron energy transmission node used to transport nuclear energy. Connect multiple nodes to build a nuclear energy transport network."
+      }
     }
     requirements(SglCategory.nuclear, IItems.强化合金, 8, IItems.FEX水晶, 4)
     size = 2

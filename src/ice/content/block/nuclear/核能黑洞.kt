@@ -12,6 +12,10 @@ class 核能黑洞 :EnergyVoid("nuclear_energy_void") {
         localizedName = "核能黑洞"
         description = "吸收中子能量"
       }
+      en {
+        localizedName = "Nuclear Energy Void"
+        description = "Absorbs neutron energy."
+      }
     }
     squareSprite = false
     requirements(SglCategory.nuclear, BuildVisibility.sandboxOnly, ItemStack.empty)

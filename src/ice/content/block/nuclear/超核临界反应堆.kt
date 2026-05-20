@@ -36,6 +36,11 @@ class 超核临界反应堆 :NuclearReactor("overrun_reactor") {
         description =
           "先进的特大型反应堆,内部力场进一步压缩燃料使反应更加剧烈,具有极高的产能效率,且不会产生核废料\n需要特殊的冷却手段控制堆温,反应堆温度超过限制温度时会造成堆芯熔毁,引发大范围毁灭性[red]核爆[]"
       }
+      en {
+        localizedName = "Supercritical Nuclear Reactor"
+        description =
+          "An advanced extra-large reactor where internal force fields further compress fuel to intensify reactions, boasting extremely high power generation efficiency without producing nuclear waste.\nRequires special cooling methods to control core temperature. If the reactor temperature exceeds the limit, core meltdown will occur, triggering a large-scale devastating [red]nuclear explosion[]."
+      }
     }
     requirements(
       SglCategory.nuclear,

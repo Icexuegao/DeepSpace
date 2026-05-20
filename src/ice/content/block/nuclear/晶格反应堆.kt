@@ -19,6 +19,11 @@ class 晶格反应堆 :NuclearReactor("lattice_reactor") {
         description =
           "特制的缓速反应堆,不使用压缩燃料,直接对燃料晶格结构排列化进行可控裂变,产能较低,但利用率极高\n需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发小范围[accent]爆炸[]"
       }
+      en {
+        localizedName = "Lattice Reactor"
+        description =
+          "A specially designed slow-speed reactor that does not use compressed fuel. Instead, it performs controlled fission on fuel lattice structures, yielding lower output but extremely high utilization.\nRequires cooling. If the reactor temperature exceeds the limit, core meltdown will occur, triggering a small-range [accent]explosion[]."
+      }
     }
     requirements(
       SglCategory.nuclear,

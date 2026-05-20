@@ -21,6 +21,10 @@ class 晶体储能簇 :EnergyContainer("crystal_container") {
         localizedName = "晶体储能簇"
         description = "晶体式中子能存储器,用于存储中子能"
       }
+      en {
+        localizedName = "Crystal Energy Storage Cluster"
+        description = "A crystal-style neutron energy storage device used for storing neutron energy."
+      }
     }
     squareSprite = false
     requirements(

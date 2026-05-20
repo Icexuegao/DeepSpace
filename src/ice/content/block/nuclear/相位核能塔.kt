@@ -12,6 +12,11 @@ class 相位核能塔 :NuclearNode("phase_pipe_node") {
         localizedName = "相位能量塔"
         description = "大型中子能运输传输设备,可以承载更高的能量负载和更多的链接数量"
       }
+      en {
+        localizedName = "Phase Energy Tower"
+        description =
+          "A large-scale neutron energy transport device capable of carrying higher energy loads and supporting more connections."
+      }
     }
     requirements(SglCategory.nuclear, IItems.强化合金, 24, IItems.FEX水晶, 16, IItems.絮凝剂, 15)
     size = 3

@@ -12,6 +12,11 @@ class 超导约束轨道 :TokamakOrbit("magnetic_confinement_orbit") {
         localizedName = "超导电磁约束导轨"
         description = "通过电磁场约束等离子体流的聚变约束导轨,需要消耗大量电力驱动"
       }
+      en {
+        localizedName = "Superconducting Electromagnetic Confinement Rail"
+        description =
+          "A fusion confinement rail that constrains plasma flow through electromagnetic fields, requiring large amounts of power to operate."
+      }
     }
     requirements(
       SglCategory.nuclear,

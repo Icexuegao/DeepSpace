@@ -18,6 +18,11 @@ class 核反应堆 :NuclearReactor("nuclear_reactor") {init {
       description =
         "标准的核裂变反应堆,使用压缩核燃料以高效率产出核能,燃料越紧凑效率越高,需要冷却,反应堆温度超过限制温度时会造成堆芯熔毁,引发剧烈的[accent]爆炸[]"
     }
+    en {
+      localizedName = "Nuclear Reactor"
+      description =
+        "A standard nuclear fission reactor that uses compressed nuclear fuel to produce nuclear energy with high efficiency. The more compact the fuel, the higher the efficiency. Requires cooling. If the reactor temperature exceeds the limit, core meltdown will occur, triggering a violent [accent]explosion[]."
+    }
   }
   requirements(
     SglCategory.nuclear,

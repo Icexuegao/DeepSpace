@@ -23,6 +23,11 @@ class 托卡马克点火装置 :TokamakCore("tokamak_firer") {
         description =
           "托卡马克核聚变装置的核心组件,是添加材料与输出能量的端口,在一个核聚变装置中必须有且只有一个此设备。将此设备使用聚变约束导轨链接成一个闭环(这个闭环有且只能有4个拐角)构成完整的托卡马克聚变反应堆,而此反应堆的功率取决于整个结构的规模大小"
       }
+      en {
+        localizedName = "Tokamak Ignition Device"
+        description =
+          "The core component of a tokamak nuclear fusion device, serving as the port for feeding materials and outputting energy. A fusion device must have one and only one such unit. Link this device with fusion confinement rails to form a closed loop (which must have exactly 4 corners) to constitute a complete tokamak fusion reactor. The reactor's power output depends on the scale of the entire structure."
+      }
     }
     requirements(
       SglCategory.nuclear,

@@ -12,6 +12,11 @@ class 潮汐约束轨道 :TokamakOrbit("tidal_confinement_orbit") {
         localizedName = "潮汐约束导轨"
         description = "利用引力场强制约束等离子流的聚变导轨,体积巨大,但具有非常高的功率倍数"
       }
+      en {
+        localizedName = "Tidal Confinement Rail"
+        description =
+          "A fusion confinement rail that forcibly constrains plasma flow using gravitational fields. Massive in size, but offers a very high power multiplier."
+      }
     }
     quickRotate = false
     requirements(

@@ -23,6 +23,10 @@ class 衰变仓 :NormalCrafter("decay_bin") {init {
       localizedName = "衰变仓"
       description = "放射性物质进行衰变产生少量的核能量,可能存在副产物"
     }
+    en {
+      localizedName = "Decay Bin"
+      description = "Radioactive materials undergo decay to produce small amounts of nuclear energy. Byproducts may be generated."
+    }
   }
   requirements(
     SglCategory.nuclear, IItems.强化合金, 60, IItems.FEX水晶, 40, IItems.单晶硅, 50, IItems.铅锭, 80, IItems.石英玻璃, 40
