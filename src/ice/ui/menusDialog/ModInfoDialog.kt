@@ -24,12 +24,11 @@ import arc.util.Time
 import arc.util.io.Streams
 import arc.util.serialization.Jval
 import ice.DeepSpace
+import ice.core.IFiles
 import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.graphics.RandSetTextrue
-import ice.core.IFiles
-import universecore.scene.ui.*
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceEffects
 import ice.world.meta.IceStats
@@ -40,10 +39,11 @@ import mindustry.graphics.Pal
 import mindustry.ui.Styles
 import singularity.Singularity
 import singularity.graphic.SglDrawConst
+import universecore.scene.ui.*
 import universecore.util.UrlDownloader
 import java.util.regex.Pattern
 
-object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menusButton_infos) {
+object ModInfoDialog :BaseMenusDialog(IceStats.模组.localized(), IStyles.menusButton_infos) {
 
   private val UNC_RELEASE_FILE: Pattern = Pattern.compile("^${DeepSpace.modDisplayName}.+\\.(jar|zip)$")
 
@@ -98,13 +98,13 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             t.row()
             t.add(IceStats.作者.localized()).color(Pal.accent)
             t.add(DeepSpace.modAuthor).color(IceColor.b4)
-            t.button(IceStats.亲爱的贡献者.localized(), SglDrawConst.contributeIcon, Styles.nonet, 28f) {
-            }.update { b: TextButton -> b.setChecked(false) }.width(230f)
+            t.button(IceStats.亲爱的贡献者.localized(), SglDrawConst.contributeIcon, Styles.nonet, 28f) {}
+              .update { b: TextButton -> b.setChecked(false) }.width(230f)
             t.row()
             t.add(IceStats.版本.localized()).color(Pal.accent)
             t.add(DeepSpace.modVersion).color(IceColor.b4)
             t.table { update ->
-              update.add(object : Element() {
+              update.add(object :Element() {
                 override fun draw() {
                   if (checking) {
                     Draw.color(Pal.accent)
@@ -134,8 +134,8 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             t.add(DeepSpace.modUpdateDate).color(IceColor.b4)
             t.button("", Icon.upload, Styles.nonet, 28f) {
               checkOrDoUpdate()
-            }.update { b: TextButton? ->
-              b!!.setText(
+            }.update { b: TextButton ->
+              b.setText(
                 if (newVersion != null) Core.bundle.get("misc.update")
                 else Core.bundle.get("infos.checkUpdate")
               )
@@ -294,7 +294,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
 
         if (isNewVersion(response.getString("tag_name"))) {
           newVersion = response.getString("tag_name")
-          for (asset in response.get("assets").asArray()) {
+          for(asset in response.get("assets").asArray()) {
             if (asset.has("name") && UNC_RELEASE_FILE.matcher(asset.getString("name")).matches()) {
               updateUrl = asset.getString("browser_download_url")
             }
@@ -342,7 +342,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
             Core.app.exit()
           }
         }
-      } catch (e: Throwable) {
+      } catch(e: Throwable) {
         Vars.ui.showException(e)
         Log.err(e)
       }
@@ -358,7 +358,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
       val newVersion = version.filter { it.isDigit() }
       val currVersion = DeepSpace.modVersion.filter { it.isDigit() }
       newestVersion = newVersion.toInt() > currVersion.toInt()
-    } catch (_: Throwable) {
+    } catch(_: Throwable) {
     }
     return newestVersion
   }
@@ -375,7 +375,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     return UrlDownloader.downloadImg("https://q.qlogo.cn/headimg_dl?dst_uin=$number&spec=640&img_type=jpg", Core.atlas.find("nomap"))
   }
 
-  private class ContributorTable(name: String, number: String, val work: Work) : Table() {
+  private class ContributorTable(name: String, number: String, val work: Work) :Table() {
     companion object {
       val contributors = Seq<ContributorTable>()
     }
@@ -388,7 +388,7 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
     }
   }
 
-  private class AssistedTable(name: String, number: String) : Table() {
+  private class AssistedTable(name: String, number: String) :Table() {
     companion object {
       val assisteds = Seq<AssistedTable>()
     }
@@ -402,11 +402,9 @@ object ModInfoDialog : BaseMenusDialog(IceStats.模组.localized(), IStyles.menu
   }
 
   private enum class Work(val des: String) {
-    artist_icon_work("贴图/美术"),
-    translate_icon_work("翻译/本地化"),
-    sounds_icon_work("音乐/音效"),
-    copywriting_icon_work("文案/策划"),
-    program_icon_work("程序/调试");
+    artist_icon_work("贴图/美术"), translate_icon_work("翻译/本地化"), sounds_icon_work("音乐/音效"), copywriting_icon_work("文案/策划"), program_icon_work(
+      "程序/调试"
+    );
 
     fun icon(): Drawable = Singularity.getModDrawable(name)
   }

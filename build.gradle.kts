@@ -200,7 +200,7 @@ tasks {
     val message = parse.get("version").asString().split("-")[1].toInt() + 1
     parse.get("version").set("Alpha-$message")
     val currentDate = LocalDate.now()
-    val formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日")
+    val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
     val formattedDate = currentDate.format(formatter)
     parse.get("updateDate").set(formattedDate)
     file.writeString(parse.prettyPrint(JsonWriter.OutputType.json, 4))

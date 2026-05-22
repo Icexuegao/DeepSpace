@@ -10,9 +10,9 @@ import arc.scene.ui.layout.Scl
 import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
 import ice.DeepSpace
-import ice.graphics.IceColor
 import ice.core.IFiles
 import ice.core.IFiles.appendModName
+import ice.graphics.IceColor
 import mindustry.Vars
 import mindustry.core.Version
 import mindustry.game.EventType.ResizeEvent
@@ -25,7 +25,7 @@ import universecore.util.handler.FieldHandler
 import universecore.util.handler.MethodHandler
 import kotlin.math.min
 
-class SglMenuFrag : MenuFragment() {
+class SglMenuFrag :MenuFragment() {
   val spacea = IFiles.findPng("spacea".appendModName())
 
   var shown: Boolean = true
@@ -36,7 +36,7 @@ class SglMenuFrag : MenuFragment() {
     group.touchable = Touchable.childrenOnly
     group.visible { !Vars.ui.editor.isShown }
     parent.addChild(group)
-    //
+    Core.graphics.width
     group.fill {
       it.image(spacea).grow()
     }
@@ -66,30 +66,30 @@ class SglMenuFrag : MenuFragment() {
     val versionText = (if (Version.build == -1) "[#fc8140aa]" else "[#ffffffba]") + Version.combined()
     val modVersionText = "[#${IceColor.b4}]UniverseCore:${UncCore.version} ${DeepSpace.modDisplayName}:${DeepSpace.modVersion}"
 
-   /* group.fill { t: Table? ->
-      t!!.defaults().top()
-      t.visibility = Boolp { shown }
-      val button = Image(Singularity.getModAtlas("logo"))
-      button.clicked { Sgl.ui.mainMenu.show() }
-      val i = t.top().add(button).size(940f, 270f)
-      t.row()
-      t.add(versionText).padTop(4f)
-      t.row()
-      t.add(modVersionText).padTop(2f)
+    /* group.fill { t: Table? ->
+       t!!.defaults().top()
+       t.visibility = Boolp { shown }
+       val button = Image(Singularity.getModAtlas("logo"))
+       button.clicked { Sgl.ui.mainMenu.show() }
+       val i = t.top().add(button).size(940f, 270f)
+       t.row()
+       t.add(versionText).padTop(4f)
+       t.row()
+       t.add(modVersionText).padTop(2f)
 
-      val r = Runnable {
-        var scl = min(Core.graphics.height / 3.4f / Scl.scl(270f), 1f)
-        scl = min(scl, min(Core.graphics.width / Scl.scl(940f), 1f))
-        i.size(940 * scl, 270 * scl)
-        t.invalidateHierarchy()
-      }
-      r.run()
-      Events.on(ResizeEvent::class.java) { e: ResizeEvent? ->
-        r.run()
-      }
-    }*/
+       val r = Runnable {
+         var scl = min(Core.graphics.height / 3.4f / Scl.scl(270f), 1f)
+         scl = min(scl, min(Core.graphics.width / Scl.scl(940f), 1f))
+         i.size(940 * scl, 270 * scl)
+         t.invalidateHierarchy()
+       }
+       r.run()
+       Events.on(ResizeEvent::class.java) { e: ResizeEvent? ->
+         r.run()
+       }
+     }*/
     val bloomGroup = BloomGroup().apply {
-      bloomIntensity=0.7f
+      bloomIntensity = 0.7f
     }
     bloomGroup.setFillParent(true)
 
@@ -97,29 +97,28 @@ class SglMenuFrag : MenuFragment() {
 
       df.add(bloomGroup).grow()
 
-      bloomGroup.fill {t->
+      bloomGroup.fill { t ->
 
+        t.defaults().top()
+        t.visibility = Boolp { shown }
+        val button = Image(Singularity.getModAtlas("logo"))
+        button.clicked { Sgl.ui.mainMenu.show() }
+        val i = t.top().add(button).size(940f, 270f)
+        t.row()
+        t.add(versionText).padTop(4f)
+        t.row()
+        t.add(modVersionText).padTop(2f)
 
-      t.defaults().top()
-      t.visibility = Boolp { shown }
-      val button = Image(Singularity.getModAtlas("logo"))
-      button.clicked { Sgl.ui.mainMenu.show() }
-      val i = t.top().add(button).size(940f, 270f)
-      t.row()
-      t.add(versionText).padTop(4f)
-      t.row()
-      t.add(modVersionText).padTop(2f)
-
-      val r = Runnable {
-        var scl = min(Core.graphics.height / 3.4f / Scl.scl(270f), 1f)
-        scl = min(scl, min(Core.graphics.width / Scl.scl(940f), 1f))
-        i.size(940 * scl, 270 * scl)
-        t.invalidateHierarchy()
-      }
-      r.run()
-      Events.on(ResizeEvent::class.java) { e: ResizeEvent? ->
+        val r = Runnable {
+          var scl = min(Core.graphics.height / 3.4f / Scl.scl(270f), 1f)
+          scl = min(scl, min(Core.graphics.width / Scl.scl(940f), 1f))
+          i.size(940 * scl, 270 * scl)
+          t.invalidateHierarchy()
+        }
         r.run()
-      }
+        Events.on(ResizeEvent::class.java) { e: ResizeEvent? ->
+          r.run()
+        }
       }
     }
 
@@ -129,7 +128,11 @@ class SglMenuFrag : MenuFragment() {
       FieldHandler.decache(Vars.ui.menufrag.javaClass)
       c.name = "menu container"
       MethodHandler.invokeTemp<SglMenuFrag?, Any?>(this, if (Vars.mobile) "buildMobile" else "buildDesktop")
-      Events.on(ResizeEvent::class.java) { event: ResizeEvent? -> MethodHandler.invokeTemp<SglMenuFrag?, Any?>(this, if (Vars.mobile) "buildMobile" else "buildDesktop") }
+      Events.on(ResizeEvent::class.java) { event: ResizeEvent? ->
+        MethodHandler.invokeTemp<SglMenuFrag?, Any?>(
+          this, if (Vars.mobile) "buildMobile" else "buildDesktop"
+        )
+      }
     }
   }
 }
