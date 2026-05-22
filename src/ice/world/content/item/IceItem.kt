@@ -7,7 +7,7 @@ import mindustry.type.Item
 import mindustry.world.meta.Stat
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
-open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Unit = {}) :Item(name, Color.valueOf(color)){
+open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Unit = {}) :Item(name, Color.valueOf(color)) {
   var nutrientConcentration = 0f
 
   init {
@@ -30,5 +30,4 @@ open class IceItem(name: String, color: String, applys: IceItem.(IceItem) -> Uni
     stats.add(IceStats.硬度, "$hardness")
     stats.add(IceStats.是否用于建造, buildable)
   }
-
 }

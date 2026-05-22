@@ -29,7 +29,6 @@ import universecore.scene.ui.ItemSelection
 import universecore.scene.ui.itooltip
 import universecore.world.draw.DrawBuild
 import universecore.world.draw.DrawMulti
-import universecore.world.logic.UncLAccess
 
 class Sorter(name: String) :SglBlock(name) {
   val top = DrawRegion("-top")
@@ -94,10 +93,6 @@ class Sorter(name: String) :SglBlock(name) {
       }
     }
 
-    override fun sense(sensor: LAccess): Double {
-      if (sensor == UncLAccess.config2) return if (invert) 1.0 else 0.0
-      return super.sense(sensor)
-    }
 
     override fun config() = SorterData(sortItem, invert)
     override fun drawSelect() {

@@ -9,7 +9,7 @@ import arc.util.Log
 import arc.util.Strings
 import arc.util.serialization.JsonReader
 import ice.core.IFiles
-import ice.graphics.windField.WindField
+import universecore.graphic.WindField
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.mod.Mods
