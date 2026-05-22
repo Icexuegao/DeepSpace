@@ -63,6 +63,10 @@ object DefenseBlocks :Load {
         localizedName = "碳钢墙"
         description = "保护己方建筑,挡下敌方炮弹"
       }
+      en {
+        localizedName = "Carbon Steel Wall"
+        description = "Protects allied structures and blocks enemy projectiles"
+      }
     }
   }
   val 大型碳钢墙 = Wall("carbonSteelWallLarge").apply {
@@ -75,6 +79,10 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "大型碳钢墙"
         description = "保护己方建筑,挡下敌方炮弹"
+      }
+      en {
+        localizedName = "Large Carbon Steel Wall"
+        description = "Protects allied structures and blocks enemy projectiles"
       }
     }
   }
@@ -90,6 +98,12 @@ object DefenseBlocks :Load {
         description = "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈"
         details = "熔融金锭构筑的壁垒\n财富值+"
       }
+      en {
+        localizedName = "Flux Gold Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and slowly repairs itself over time"
+        details =
+        "A barrier built from molten gold ingots\nWealth +"
+      }
     }
   }
   val 大型流金墙 = Wall("fluxGoldWallLarge").apply {
@@ -104,6 +118,12 @@ object DefenseBlocks :Load {
         description = "保护己方建筑,挡下敌方炮弹,随时间缓慢自愈"
         details = "熔融金锭构筑的壁垒\n财富值++"
       }
+      en {
+        localizedName = "Large Flux Gold Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and slowly repairs itself over time"
+        details =
+        "A barrier built from molten gold ingots\nWealth ++"
+      }
     }
   }
   val 铬墙 = AutoWall("chromeWall").apply {
@@ -111,6 +131,10 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "铬墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
+      }
+      en {
+        localizedName = "Chrome Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable"
       }
     }
     health = 450
@@ -126,6 +150,10 @@ object DefenseBlocks :Load {
         localizedName = "大型铬墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
+      en {
+        localizedName = "Large Chrome Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable"
+      }
     }
   }
   val 钴钢墙 = Wall("cobaltSteelWall").apply {
@@ -137,6 +165,10 @@ object DefenseBlocks :Load {
         localizedName = "钴钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
+      en {
+        localizedName = "Cobalt Steel Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable"
+      }
     }
   }
   val 大型钴钢墙 = Wall("cobaltSteelWallLarge").apply {
@@ -147,6 +179,10 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "大型钴钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
+      }
+      en {
+        localizedName = "Large Cobalt Steel Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable"
       }
     }
   }
@@ -160,6 +196,11 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "陶钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用.能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
+      }
+      en {
+        localizedName = "Ceramic Steel Wall"
+        description =
+        "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable. Absorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed on shorelines"
       }
     }
     requirements(Category.defense, IItems.陶钢, 6)
@@ -176,6 +217,11 @@ object DefenseBlocks :Load {
         localizedName = "大型陶钢墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用.能吸收激光和电弧,会阻止电力节点自动连接,可以放置在岸边"
       }
+      en {
+        localizedName = "Large Ceramic Steel Wall"
+        description =
+        "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable. Absorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed on shorelines"
+      }
     }
     requirements(Category.defense, IItems.陶钢, 24)
   }
@@ -187,6 +233,10 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "铱墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
+      }
+      en {
+        localizedName = "Iridium Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable"
       }
     }
     requirements(Category.defense, IItems.铱板, 6)
@@ -201,6 +251,10 @@ object DefenseBlocks :Load {
         localizedName = "大型铱墙"
         description = "保护己方建筑,挡下敌方炮弹,更坚固耐用"
       }
+      en {
+        localizedName = "Large Iridium Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable"
+      }
     }
     requirements(Category.defense, IItems.铱板, 24)
   }
@@ -209,6 +263,10 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "强化合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用"
+      }
+      en {
+        localizedName = "Reinforced Alloy Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable"
       }
     }
     health = 900
@@ -219,6 +277,10 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "大型强化合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用"
+      }
+      en {
+        localizedName = "Large Reinforced Alloy Wall"
+        description = "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable"
       }
     }
     size = 2
@@ -241,6 +303,11 @@ object DefenseBlocks :Load {
         description =
           "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
       }
+      en {
+        localizedName = "Biological Steel Wall"
+        description =
+        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Reduces part of incoming damage and slowly repairs itself over time.\nAbsorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed in deep water"
+      }
     }
   }
   val 大型生物钢墙 = Wall("biologicalSteelWallLarge").apply {
@@ -260,6 +327,11 @@ object DefenseBlocks :Load {
         description =
           "保护己方建筑,挡下敌方炮弹,极其坚固耐用.可以减免部分伤害,随时间缓慢自愈.\n能吸收激光和电弧,会阻止电力节点自动连接,可以放置在深水中"
       }
+      en {
+        localizedName = "Large Biological Steel Wall"
+        description =
+        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Reduces part of incoming damage and slowly repairs itself over time.\nAbsorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed in deep water"
+      }
     }
   }
   val 相位合金墙 = ShieldWall("phaseAlloyWall").apply {
@@ -267,6 +339,11 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "相位合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.会以自身为中心投射一片小型立场护盾"
+      }
+      en {
+        localizedName = "Phase Alloy Wall"
+        description =
+        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Projects a small force shield centered on itself"
       }
     }
     health = 1000
@@ -301,6 +378,11 @@ object DefenseBlocks :Load {
         localizedName = "大型相位合金墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.会以自身为中心投射一片小型立场护盾"
       }
+      en {
+        localizedName = "Large Phase Alloy Wall"
+        description =
+        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Projects a small force shield centered on itself"
+      }
     }
   }
   val 装甲闸门 = AutoDoor("armorGate").apply {
@@ -308,6 +390,10 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "装甲闸门"
         description = "允许单位通过的装甲门,自动开关"
+      }
+      en {
+        localizedName = "Armored Gate"
+        description = "An armored door that allows units to pass through and opens or closes automatically"
       }
     }
     size = 2
@@ -323,6 +409,11 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "相控雷达"
         description = "锁定范围内的敌方空中单位,攻击被锁定的目标有概率造成额外大量伤害,杀伤倍率和概率都取决于阵列大小"
+      }
+      en {
+        localizedName = "Phased Radar"
+        description =
+        "Locks onto enemy air units within range. Attacks against locked targets have a chance to deal massive bonus damage. Both the damage multiplier and chance depend on array size"
       }
     }
     squareSprite = false
@@ -350,6 +441,11 @@ object DefenseBlocks :Load {
         localizedName = "简并态中子墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身"
       }
+      en {
+        localizedName = "Degenerate Neutron Wall"
+        description =
+        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Generates immense gravity to attract bullets and absorbs weaker bullets to repair itself"
+      }
     }
     health = 2400
     density = 1024f
@@ -362,6 +458,11 @@ object DefenseBlocks :Load {
       zh_CN {
         localizedName = "大型简并态中子墙"
         description = "保护己方建筑,挡下敌方炮弹,极其坚固耐用.产生巨大的引力吸引子弹,并吸收不太强的子弹以修补自身"
+      }
+      en {
+        localizedName = "Large Degenerate Neutron Wall"
+        description =
+        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Generates immense gravity to attract bullets and absorbs weaker bullets to repair itself"
       }
     }
     size = 2
@@ -380,6 +481,13 @@ object DefenseBlocks :Load {
           "集成防御系统,反物质在力场的引导下,会按照生命游戏的规则在网格中不断演化\n具体来说,生命游戏所在的网格上,每一个单元格都是一个细胞,细胞只有两种状态,生与死,每一个细胞在一次刷新后的状态由它周围8个细胞决定,会遵循如下规则进行演化:\n[accent]当这个细胞处于死亡状态时[]\n[green]1.若周围的存活细胞数量为3则在下一刻转变为存活状态[]\n[gray]2.任何其他情况,细胞状态不变[]\n[accent]当这个细胞处于存活状态时[]\n[red]  1.若周围的存活细胞数量多于4(含4)则下一刻细胞死亡[]\n[red]2.若周围存活细胞数量少于2(不含2)则下一刻细胞死亡[] \n[gray]3.任何其他情况,细胞状态不变[]\n每一次刷新,所有存活的细胞寿命会增加1,在细胞死亡时,根据细胞的年龄会触发相应的效果,随细胞寿命的增加,强度会大幅度增强"
         details =
           "生命游戏这一概念原本是由数学家康威设计的一个计算机程序,早期,人们仅仅研究与探索了生命游戏在计算机程序程序级别的规律,其与自然科学的重叠几乎完全被忽视了,直到二十一世纪60年代,科学家发现在真空仓内的粒子涨落规律与生命游戏在形式上高度重合,生命游戏规则成为了一项科学规律\n在这一规则下进行受控的反物质湮灭可以得到最接近理论数据的能量利用效率,因此这一规则广泛被应用于能源与武装,不过,像混沌矩阵这样彻底的巨型网格本身还是一个过于大胆的尝试,所幸在巨大的学术压力下中止数次数次后该项目还是收获了非常突出的成果"
+      }
+      en {
+        localizedName = "Chaos Matrix"
+        description =
+        "An integrated defense system. Guided by a force field, antimatter continuously evolves across a grid according to the rules of Conway's Game of Life\nSpecifically, on the Game of Life grid, each cell has only two states: alive or dead. After each refresh, the state of every cell is determined by its eight surrounding cells and follows these rules:\n[accent]When a cell is dead[]\n[green]1. If exactly 3 surrounding cells are alive, it becomes alive in the next step[]\n[gray]2. In any other case, its state remains unchanged[]\n[accent]When a cell is alive[]\n[red]  1. If 4 or more surrounding cells are alive, it dies in the next step[]\n[red]2. If fewer than 2 surrounding cells are alive, it dies in the next step[] \n[gray]3. In any other case, its state remains unchanged[]\nAt each refresh, all living cells increase their age by 1. When a cell dies, effects are triggered based on its age; as cell age increases, their strength rises dramatically"
+        details =
+        "The concept of the Game of Life was originally designed by mathematician Conway as a computer program. In the early days, people only studied and explored its patterns at the level of computer programs, while its overlap with natural science was almost completely ignored. It was not until the 2060s that scientists discovered that particle fluctuation patterns inside vacuum chambers were highly consistent in form with the Game of Life, turning its rules into a scientific law\nControlled antimatter annihilation under these rules can achieve energy utilization efficiency closest to theoretical data, so the rule has been widely applied in energy systems and weaponry. However, a full giant grid such as the Chaos Matrix remains an excessively bold attempt. Fortunately, despite being paused several times under enormous academic pressure, the project ultimately produced outstanding results"
       }
     }
     requirements(
