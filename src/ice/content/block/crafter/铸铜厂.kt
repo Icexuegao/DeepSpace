@@ -16,6 +16,10 @@ class 铸铜厂 :NormalCrafter("copperFoundry") {
         this.localizedName = "铸铜厂"
         description = "将铜锭和锌锭筑铸为黄铜锭"
       }
+      en {
+        this.localizedName = "Copper Foundry"
+        description = "Casts copper ingots and zinc ingots into brass ingots"
+      }
     }
     size = 4
     health = 550

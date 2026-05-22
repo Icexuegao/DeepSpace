@@ -18,6 +18,11 @@ class 碳控熔炉 :NormalCrafter("carbonSteelFactory") {
         description = "将赤铁矿冶炼为高碳钢或低碳钢,可配置"
         details = "通过精确控制碳元素配比,在同一生产线灵活产出高碳钢和低碳钢."
       }
+      en {
+        this.localizedName = "Carbon Control Furnace"
+        description = "Smelts hematite into high carbon steel or low carbon steel, configurable"
+        details = "By precisely controlling carbon ratio, flexibly produces high carbon steel and low carbon steel on the same production line."
+      }
     }
     size = 3
     itemCapacity = 20

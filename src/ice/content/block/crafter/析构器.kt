@@ -22,6 +22,10 @@ class 析构器 :NormalCrafter("destructor") {
         this.localizedName = "析构器"
         description = "加速碰撞破坏物质的原子核结构,以分析物质的微观构成形态并建立原子空间构成的蓝图"
       }
+      en {
+        this.localizedName = "Destructor"
+        description = "Accelerates collisions to destroy atomic nuclear structures of matter, analyzing microscopic composition and establishing blueprints of atomic spatial structure"
+      }
     }
     requirements(
       Category.crafting,

@@ -20,6 +20,12 @@ class 燃料封装机 :NormalCrafter("fuel_packager") {
         description =
           "将核燃料封装进强化合金以生产核燃料,可配置\n利用力场固定低温技术制造亚绝对零度环境,将核燃料以极高的浓度和压力压缩封装起来"
       }
+
+      en {
+        this.localizedName = "Fuel Packager"
+        description = "Encapsulate nuclear fuel into reinforced alloy to produce nuclear fuel, Configurable\n
+        Utilize force-field-stabilized cryogenic technology to create a sub-absolute-zero environment, compressing and encapsulating nuclear fuel at extremely high concentration and pressure"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

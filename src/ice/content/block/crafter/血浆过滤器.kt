@@ -19,6 +19,10 @@ class 血浆过滤器 :NormalCrafter("plasmaFilter") {
         this.localizedName = "血浆过滤器"
         description = "冷却血肉赘生物并从中提取生物钢"
       }
+      en {
+        this.localizedName = "Plasma Filter"
+        description = "Cools Blood Flesh Slime and extracts biological steel from it"
+      }
     }
     size = 5
     hasLiquids = true

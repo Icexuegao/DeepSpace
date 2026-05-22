@@ -19,6 +19,11 @@ class 燃烧室 :NormalCrafter("combustion_chamber") {
         description =
           "将多种材料置入燃烧,生产特定产物并输出电力,可配置\n密闭耐高温的舱室,用于执行化学燃烧过程,为最大化利用燃烧释放的能量,燃烧会将在活塞室内进行以推动线圈产生电力"
       }
+      en {
+        this.localizedName = "Combustion Chamber"
+        description =
+          "Burns multiple materials to produce specific products and output power, configurable\nSealed high-temperature chamber for executing chemical combustion processes, to maximize utilization of energy released by combustion, combustion occurs in piston chambers to drive coils for power generation"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

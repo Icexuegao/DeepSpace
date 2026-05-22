@@ -21,6 +21,11 @@ class 高能陶钢聚合炉 :NormalCrafter("highEnergyCeramicSteelFurnace") {
         description = "将石英玻璃,钴钢和铈锭高效地熔炼为陶钢,需通入水"
         details = "依靠高能激光持续熔融原料以快速熔炼陶钢\n相比普通熔炼炉,熔炼效率及产物质量都有显著提升"
       }
+      en {
+        localizedName = "High Energy Ceramic Steel Furnace"
+        description = "Efficiently smelts quartz glass, cobalt steel and cerium ingot into ceramic steel, requires water input"
+        details = "Relies on high-energy lasers to continuously melt raw materials for rapid ceramic steel smelting\nCompared to ordinary furnaces, both smelting efficiency and product quality are significantly improved"
+      }
     }
     health = 2000
     size = 5

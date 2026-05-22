@@ -24,6 +24,11 @@ class 电解机 :NormalCrafter("electrolytor") {
         description = "将材料电解以分离出需求产物,可配置"
         details = "内置了几组电极以进行一系列电化学反应"
       }
+      en {
+        localizedName = "Electrolyzer"
+        description = "Electrolyzes materials to separate desired products, configurable"
+        details = "Built with several sets of electrodes to perform a series of electrochemical reactions"
+      }
     }
     size = 3
     itemCapacity = 25

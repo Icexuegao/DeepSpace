@@ -22,6 +22,11 @@ class 渗透分离槽 :NormalCrafter("osmotic_separation_tank") {
         description = "使材料渗透以分离出需求产物,可配置"
         details = "内置加压可控粒径反渗透过滤器,用于进行一些需要分离颗粒的反应工艺"
       }
+      en {
+        this.localizedName = "Osmotic Separation Tank"
+        description = "Separates desired products through material permeation, configurable"
+        details = "Built with pressurized controllable particle size reverse osmosis filters, used for reaction processes requiring particle separation"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

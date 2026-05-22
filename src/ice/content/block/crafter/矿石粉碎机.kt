@@ -15,6 +15,10 @@ class 矿石粉碎机 :NormalCrafter("mineralCrusher") {
         this.localizedName = "矿石粉碎机"
         description = "将复杂矿石质粉碎并筛选分类为更易处理的矿石,可配置"
       }
+      en {
+        this.localizedName = "Mineral Crusher"
+        description = "Crushes complex ores and screens them into more easily processable ores, configurable"
+      }
     }
     health = 810
     itemCapacity = 30

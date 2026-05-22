@@ -20,6 +20,12 @@ class 结晶器 :NormalCrafter("crystallizer") {
         this.localizedName = "结晶器"
         description = "使导能流体结晶于强化合金从而生产导能结晶\n最早的导能结晶技术,依赖电磁场波动,使导能流体在载体金属上逐步形成结晶"
       }
+      
+      en {
+        this.localizedName = "Crystallizer"
+        description = "Crystallizes a fluid into a solid form, producing a solid form of the fluid"
+        details = "Uses electromagnetic fields to compress the fluid together to a solid form, and then encapsulates it with a negative gravity field shell to produce a solid form of the fluid"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

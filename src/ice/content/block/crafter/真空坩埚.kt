@@ -17,6 +17,11 @@ class 真空坩埚 :NormalCrafter("vacuum_crucible") {
         description = "将多种材料进行低压处理并生产特定产物,可配置"
         details = "在低压高温环境下进行特殊工序时使用的设备"
       }
+      en {
+        this.localizedName = "Vacuum Crucible"
+        description = "Processes multiple materials under low pressure to produce specific products, configurable"
+        details = "Equipment used for special processes in low-pressure high-temperature environments"
+      }
     }
     requirements(
       Category.crafting, IItems.铬锭, 90, IItems.单晶硅, 80, IItems.钴钢, 60, IItems.石英玻璃, 75, IItems.钴锭, 80

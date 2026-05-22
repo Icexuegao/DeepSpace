@@ -37,6 +37,11 @@ class 物质逆化器 :MediumCrafter("substance_inverter") {
         description = "消耗介质,将反物质引导入简并态中子聚合物容器中"
         details = "将介质反向建立物质的设备,主动分离正粒子以制造反物质,并盛装到容器中"
       }
+      en {
+        this.localizedName = "Substance Inverter"
+        description = "Consumes medium, guides antimatter into degenerate neutron polymer containers"
+        details = "Equipment that reversely establishes matter from medium, actively separates positive particles to create antimatter and stores it in containers"
+      }
     }
     requirements(
       Category.crafting,

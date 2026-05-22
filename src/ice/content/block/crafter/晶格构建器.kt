@@ -35,6 +35,12 @@ class 晶格构建器 :NormalCrafter("lattice_constructor") {
         description = "使充能流体结晶于强化合金从而高效生产导能结晶"
         details = "先进的导能结晶技术,以光束引导和力场聚合的方式人工构建晶格结构,更高效地生产导能结晶"
       }
+
+      en {
+        this.localizedName = "Lattice Constructor"
+        description = "Crystallizes energized fluid onto reinforced alloy to efficiently produce conductive crystals"
+        details = "Advanced conductive crystal technology. Artificially constructs lattice structures using beam guidance and force-field aggregation, producing conductive crystals more efficiently"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

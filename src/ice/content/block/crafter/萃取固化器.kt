@@ -14,6 +14,10 @@ class 萃取固化器 :NormalCrafter("concentrateSolidifier") {
         this.localizedName = "萃取固化器"
         description = "从锆英石中萃取并熔炼为铪锭"
       }
+      en {
+        this.localizedName = "Extraction Solidifier"
+        description = "Extracts and smelts hafnium ingot from zircon"
+      }
     }
     size = 3
     health = 400

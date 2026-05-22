@@ -18,6 +18,11 @@ class FEX相位混合器 :NormalCrafter("FEX_phase_mixer") {
         this.localizedName = "相位混合器"
         description = "重建FEX的液态物质结构,使其中的能量活性化"
       }
+
+      en {
+        this.localizedName = "FEX Phase Mixer"
+        description = "Rebuilds the phase of FEX, making it active"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

@@ -20,6 +20,11 @@ class 导能回路装配器 :NormalCrafter("conductiveCircuitAssembler") {
         description = "将单晶硅于铪锭装配为导能回路"
         details = "持续开启相位时间场,减缓局部时间以同时进行多种精密零件的制作\n[#9B929D]为什么总有人管她叫灵魂熔炉[]"
       }
+      en {
+        this.localizedName = "Conductive Circuit Assembler"
+        description = "Assembles conductive circuits from monocrystalline silicon and hafnium ingot"
+        details = "Continuously maintains phase time field, slowing local time to simultaneously manufacture multiple precision components\n[#9B929D]Why do some people call her the Soul Furnace[]"
+      }
     }
     health = 1250
     size = 5

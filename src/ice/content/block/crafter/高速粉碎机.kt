@@ -16,6 +16,10 @@ class 高速粉碎机 :NormalCrafter("highSpeedCrusher") {
         this.localizedName = "高速粉碎机"
         description = "将黄玉髓粉碎为金珀沙"
       }
+      en {
+        this.localizedName = "High Speed Crusher"
+        description = "Crushes Canary Chalcedony into Amber Gold Sand"
+      }
     }
     health = 320
     size = 2

@@ -27,6 +27,11 @@ class 反应仓 :NormalCrafter("reacting_pool") {
         description = "将多种材料置入反应并生产特定产物,可配置"
         details = "一个精准控制进料的化学反应容器,是普遍使用的化工设备"
       }
+      en {
+        this.localizedName = "Reaction Chamber"
+        description = "Places multiple materials into reaction to produce specific products, configurable"
+        details = "A chemical reaction container with precisely controlled feed, commonly used chemical processing equipment"
+      }
     }
     requirements(
       Category.crafting, IItems.铬锭, 100, IItems.石英玻璃, 100, IItems.铅锭, 80, IItems.钴锭, 85, IItems.单晶硅, 80, IItems.钴钢, 70

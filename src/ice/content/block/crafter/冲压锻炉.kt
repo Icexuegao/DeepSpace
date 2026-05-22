@@ -20,6 +20,10 @@ class 冲压锻炉 :NormalCrafter("pressingForge") {
         this.localizedName = "冲压锻炉"
         description = "将铱锇矿熔炼锻压为铱板,需要通入水,会产生废水"
       }
+      en {
+        this.localizedName = "Pressing Forge"
+        description = "Smelts and forges iridium-osmium ore into iridium plates, requires water input, produces wastewater"
+      }
     }
     health = 1800
     size = 5

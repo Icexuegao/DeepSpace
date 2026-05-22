@@ -18,6 +18,10 @@ class 钴钢压缩机 :NormalCrafter("cobaltSteelCompressor") {
         this.localizedName = "钴钢压缩机"
         description = "将钴锭于铬锭压缩为钴钢,需通入水"
       }
+      en {
+        this.localizedName = "Cobalt Steel Compressor"
+        description = "Compresses cobalt ingot and chromium ingot into cobalt steel, requires water input"
+      }
     }
     health = 480
     size = 3

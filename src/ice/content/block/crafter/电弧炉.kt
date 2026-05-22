@@ -15,6 +15,10 @@ class 电弧炉 :NormalCrafter("arcFurnace") {
         this.localizedName = "电弧炉"
         description = "将铅锭,石英和金珀沙熔炼为石英玻璃"
       }
+      en {
+        this.localizedName = "Arc Furnace"
+        description = "Smelts lead ingot, quartz and Amber Gold Sand into quartz glass"
+      }
     }
     size = 3
     itemCapacity = 36

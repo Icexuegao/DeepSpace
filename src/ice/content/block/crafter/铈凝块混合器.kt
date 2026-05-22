@@ -16,6 +16,11 @@ class 铈凝块混合器 :NormalCrafter("ceriumBlockMixer") {
         description = "将铈锭与爆炸混合物压制成铈凝块"
         details = "在特制的防静电车间内,研磨铈并与爆炸混合物混合后压制成型"
       }
+      en {
+        this.localizedName = "Cerium Block Mixer"
+        description = "Presses cerium ingot and explosive mixture into cerium blocks"
+        details = "In specially designed anti-static workshops, grinds cerium and mixes with explosive mixture before pressing into shape"
+      }
     }
     size = 2
     itemCapacity = 36

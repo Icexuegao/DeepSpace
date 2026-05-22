@@ -23,6 +23,11 @@ class FEX充能座 :NormalCrafter("FEX_crystal_charger") {
         description = "为导能结晶充能产出活化导能结晶"
         details = "对导能结晶释放高能中子脉冲,合适的脉冲频率会令能量在晶格之内不断积累,叠加,使晶体结构变得不稳定,并带来一些特别的效果"
       }
+      en {
+        this.localizedName = "FEX Charging Base"
+        description = "Charges FEX crystals into charged FEX crystals"
+        details = "Uses high-energy lasers to charge FEX crystals, giving them more powerful energy"
+      }
     }
     requirements(
       Category.crafting,

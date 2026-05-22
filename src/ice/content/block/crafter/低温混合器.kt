@@ -23,6 +23,10 @@ class 低温混合器 :FloorCrafter("lowTemperatureMixer") {
         this.localizedName = "低温混合器"
         description = "在极端低温环境中混合纯净水生产低温化合物,在特定地形上生效"
       }
+      en {
+        this.localizedName = "Low Temperature Mixer"
+        description = "Mixes purified water in extremely low temperature environments to produce cryo compounds, effective on specific terrain"
+      }
     }
     size = 2
     health = 150
