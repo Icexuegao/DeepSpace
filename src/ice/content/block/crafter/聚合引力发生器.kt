@@ -37,6 +37,12 @@ class 聚合引力发生器 :NormalCrafter("polymer_gravitational_generator") {
         description = "将活化导能结晶,矩阵合金,气凝胶和铱锭聚合产出简并态中子聚合物"
         details = "在真空仓内利用大量的能量制造一个引力漏斗,将物质紧密的挤压在一起至中子简并态,用负引力场外壳包裹为一份简并态中子聚合物"
       }
+
+      en {
+        localizedName = "Polymer Gravitational Generator"
+        description = "Produces degenerate neutron polymer by polymerizing charged FEX crystals, matrix alloy, aerogel and iridium ingots"
+        details = "Creates a gravitational funnel using a large amount of energy in a vacuum chamber to compress matter together to the neutron degenerate state, and then encapsulates it with a negative gravity field shell to produce a degenerate neutron polymer"
+      }
     }
     requirements(
       Category.crafting,

@@ -17,6 +17,11 @@ class 普适冶炼阵列 :NormalCrafter("universalSmelterArray") {
         description = "冶炼原矿石出铜锭,锌锭和铅锭,可配置"
         details = "核心级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铜,锌,铅等多种金属原料,为后续生产提供稳定的金属供应"
       }
+      en {
+        this.localizedName = "Universal Smelter Array"
+        description = "Smelts raw ores into copper ingots, zinc ingots and lead ingots, configurable"
+        details = "Core-level metal processing facility, specialized in converting raw ores into high-purity metal ingots, efficiently processing copper, zinc, lead and other metal raw materials, providing stable metal supply for subsequent production"
+      }
     }
     size = 3
     itemCapacity = 30

@@ -22,6 +22,11 @@ class 渗透净化器 :NormalCrafter("osmotic_purifier") {
         this.localizedName = "渗透净化器"
         description = "使用物质吸附及反渗透过滤技术制造的高效净化装置,能更有效的分离水中的杂质"
       }
+
+      en {
+        this.localizedName = "Osmotic Purifier"
+        description = "Uses adsorption and reverse osmosis filters to purify water, more effectively separating impurities"
+      }
     }
     health = 450
     size = 3

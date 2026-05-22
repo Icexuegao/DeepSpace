@@ -16,6 +16,10 @@ class 陶钢熔炼炉 :NormalCrafter("ceramicSteelFurnace") {
         this.localizedName = "陶钢熔炼炉"
         description = "将石英玻璃,钴钢和铈锭熔炼为陶钢"
       }
+      en {
+        this.localizedName = "Ceramic Steel Furnace"
+        description = "Smelts quartz glass, cobalt steel and cerium ingot into ceramic steel"
+      }
     }
     health = 600
     size = 3

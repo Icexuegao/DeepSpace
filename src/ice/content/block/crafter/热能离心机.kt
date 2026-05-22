@@ -29,6 +29,12 @@ class 热能离心机 :NormalCrafter("thermal_centrifuge") {
         description = "离心原矿石并分解出特定产物,可配置"
         details = "以极高的温度将物质熔化成液态,以差速离心分离其中不同质量的物质"
       }
+
+      en {
+        this.localizedName = "Thermal Centrifuge"
+        description = "Centrifuges raw ore and extracts specific products. Configurable"
+        details = "Melts substances into liquid at extremely high temperatures, then separates materials of different masses by differential centrifugation"
+      }
     }
     requirements(
       Category.crafting, IItems.强化合金, 100, IItems.气凝胶, 80, IItems.铜锭, 120, IItems.单晶硅, 70, IItems.钴钢, 75

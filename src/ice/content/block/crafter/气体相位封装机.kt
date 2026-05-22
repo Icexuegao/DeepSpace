@@ -26,6 +26,11 @@ class 气体相位封装机 :NormalCrafter("gas_phase_packer") {
         description =
           "将气体封装进由絮凝剂和气凝胶构成的容器中,可配置\n用于将一份流体用相位物封装成中子靶丸,以进一步转变为核聚变所使用的燃料"
       }
+
+      en {
+        this.localizedName = "Gas Phase Packer"
+        description = "Encapsulates gases in a container made of adsorbents and adsorbates, configurable\nUsed to encapsulate a fluid with phase objects, to be further transformed into nuclear fusion fuel"
+      }
     }
     requirements(Category.crafting, IItems.强化合金, 80, IItems.气凝胶, 80, IItems.絮凝剂, 60, IItems.单晶硅, 60, IItems.钴锭, 45)
     size = 3

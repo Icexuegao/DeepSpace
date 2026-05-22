@@ -22,6 +22,10 @@ class 单晶硅厂 :NormalCrafter("monocrystallineSiliconFactory") {
         this.localizedName = "单晶硅厂"
         description = "使用硫化物冲击石英生产单晶硅"
       }
+      en {
+        this.localizedName = "Monocrystalline Silicon Factory"
+        description = "Uses sulfur compounds to impact quartz and produce monocrystalline silicon"
+      }
     }
     size = 4
     health = 600

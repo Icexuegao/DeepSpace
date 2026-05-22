@@ -12,6 +12,11 @@ class 爆炸物混合器 :NormalCrafter("explosiveMixer") {
         this.localizedName = "爆炸物混合器"
         description = "将硫化合物与燃素水晶混合生成爆炸化合物"
       }
+
+      en {
+        this.localizedName = "Explosive Mixer"
+        description = "Mixes sulfur compounds with combustible crystals to generate explosive compounds"
+      }
     }
     size = 3
     itemCapacity = 36

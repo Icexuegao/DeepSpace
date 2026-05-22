@@ -29,6 +29,12 @@ class 矩阵切割机 :NormalCrafter("matrix_cutter") {
         description = "将活化导能结晶雕刻入强化合金产出矩阵合金"
         details = "以纳米尺度的高能激光将金属切割为纳米颗粒,并在上方雕刻微电路,以生产矩阵合金"
       }
+
+      en {
+        this.localizedName = "Matrix Cutter"
+        description = "Cuts a matrix crystal into a matrix alloy, producing a matrix alloy"
+        details = "Uses a high-energy laser to cut metal into nanocrystals, and then etches microcircuits on top of the nanocrystals, to produce a matrix alloy"
+      }
     }
     requirements(
       Category.crafting, IItems.强化合金, 80, IItems.充能FEX水晶, 75, IItems.石英玻璃, 80, IItems.絮凝剂, 90, IItems.暮光合金, 120

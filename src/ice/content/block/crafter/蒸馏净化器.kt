@@ -18,6 +18,11 @@ class 蒸馏净化器 :NormalCrafter("distill_purifier") {init {
       this.localizedName = "蒸馏净化器"
       description = "用原始的蒸馏方式分离水中的杂质"
     }
+    
+    en {
+      this.localizedName = "Distillation Purifier"
+      description = "Separates impurities from water using distillation"
+    }
   }
   requirements(
     Category.crafting, ItemStack.with(

@@ -34,6 +34,12 @@ class 密匙编译器 :NormalCrafter("keyCompiler") {
           "通过量子通信接收数据以编译密匙,需要大量冷却液以支持运行\n为确保量子通道稳定性及数据准确性,不会受到时空加速的影响\n为了保护内部精密结构及能量管路,配备了极为厚重的装甲"
         details = "[#FF5845]数据正常下行,密匙编译稳定进行中.是时候给那些异族一些颜色看看了!"
       }
+      en {
+        this.localizedName = "Key Compiler"
+        description =
+          "Receives data through quantum communication to compile keys, requires large amounts of coolant to support operation\nTo ensure quantum channel stability and data accuracy, not affected by space-time acceleration\nEquipped with extremely heavy armor to protect internal precision structures and energy pipelines"
+        details = "[#FF5845]Data downloading normally, key compilation proceeding stably. It's time to show those aliens some color!"
+      }
     }
     size = 10
     armor = 48f

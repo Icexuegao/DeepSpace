@@ -16,6 +16,11 @@ class 等离子蚀刻厂 :NormalCrafter("integratedFactory") {
         description = "将石墨烯通过石英玻璃蚀刻于单晶硅上,产出电子原件"
         details = "采用等离子蚀刻技术,在硅晶圆上雕刻出微米级电路,电子工业的基础设施"
       }
+      en {
+        this.localizedName = "Plasma Etching Factory"
+        description = "Etches graphene onto monocrystalline silicon through quartz glass to produce electronic components"
+        details = "Adopts plasma etching technology to carve micron-level circuits on silicon wafers, infrastructure of the electronics industry"
+      }
     }
     size = 3
     health = 200

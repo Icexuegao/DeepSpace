@@ -34,6 +34,11 @@ class 中子透镜 :NormalCrafter("neutron_lens") {
         description = "将特定材料由中子冲击为特定产物,可配置"
         details = "通过相位物折射及引力透镜偏转中子流进行对焦,使中子直接轰击靶材料,在舱内完成需要高能中子流轰击的过程"
       }
+      en {
+        this.localizedName = "Neutron Lens"
+        description = "Transforms specific materials into specific products through neutron impact, configurable"
+        details = "Focuses neutron streams by refraction through phase objects and deflection by gravitational lenses, allowing direct neutron bombardment of target materials to complete processes requiring high-energy neutron streams within the chamber"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

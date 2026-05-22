@@ -17,6 +17,11 @@ class 特化冶炼阵列 :NormalCrafter("specializedSmelterArray") {
         description = "冶炼原矿石出铬锭,金锭,钴锭和铝锭,可配置"
         details = "进阶级金属处理设施,专门用于将原始矿石转化为高纯度金属锭,高效处理铬,金,钴等多种金属原料,为后续生产提供稳定的金属供应"
       }
+      en {
+        this.localizedName = "Specialized Smelter Array"
+        description = "Smelts raw ores into chromium, gold, cobalt, and aluminum ingots, configurable"
+        details = "Advanced metal processing facility specialized in converting raw ores into high-purity metal ingots. Efficiently processes chromium, gold, cobalt, and other metal materials to provide stable metal supply for subsequent production."
+      }
     }
     size = 3
     itemCapacity = 35

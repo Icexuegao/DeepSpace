@@ -25,6 +25,10 @@ class 洗矿机 :NormalCrafter("ore_washer") {
         this.localizedName = "洗矿机"
         description = "使用水冲刷沥青粗矿以除去杂质,并析出稀有的导能流体"
       }
+      en {
+        this.localizedName = "Ore Washer"
+        description = "Uses water to wash asphalt crude ore to remove impurities and extract rare conductive fluids"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(

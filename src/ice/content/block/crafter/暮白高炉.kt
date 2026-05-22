@@ -21,6 +21,11 @@ class 暮白高炉 :NormalCrafter("duskFactory") {
         description = "将低碳钢,铬锭,钴锭,铪锭和暮光液合成暮光合金"
         details = "金属与信仰在苍白焰火中熔合,冶炼蕴含暮光之息的特殊合金"
       }
+      en {
+        this.localizedName = "Dusk Blast Furnace"
+        description = "Synthesizes Dusk Alloy from low carbon steel, chromium ingot, cobalt ingot, hafnium ingot and Dusk Liquid"
+        details = "Metal and faith fuse in pale flames, smelting special alloys imbued with the breath of dusk"
+      }
     }
     health = 490
     size = 3

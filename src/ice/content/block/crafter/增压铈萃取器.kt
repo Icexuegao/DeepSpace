@@ -25,6 +25,11 @@ open class 增压铈萃取器 :NormalCrafter("ceriumExtractorLarge") {
         description = "从铈硅石中萃取并锻压成铈锭,需要通入水,会产生废水.可配置"
         details = "在特制的超高压密封反应釜内,通过液相沉淀的方式萃取铈\n相较初代密封性更强,具有更高的压力,能够更迅速的萃取铈"
       }
+      en {
+        this.localizedName = "Pressurized Cerium Extractor"
+        description = "Extracts and forges cerium ingot from cerite, requires water input, produces wastewater. Configurable"
+        details = "Extracts cerium through liquid-phase precipitation in specially designed ultra-high pressure sealed reactors\nCompared to the first generation, it has stronger sealing and higher pressure, enabling faster cerium extraction"
+      }
     }
     health = 950
     size = 4

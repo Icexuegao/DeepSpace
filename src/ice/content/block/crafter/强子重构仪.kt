@@ -22,6 +22,11 @@ class 强子重构仪 :AtomSchematicCrafter("hadron_reconstructor") {
         description = "消耗介质生成原材料,可配置"
         details = "微缩的定向大量强子对撞机,使得创造物质从理论成为现实"
       }
+      en {
+        this.localizedName = "Hadron Reconstructor"
+        description = "Consumes medium to generate raw materials, configurable"
+        details = "Miniature directional large-scale hadron collider, making matter creation from theory a reality"
+      }
     }
     requirements(
       Category.crafting,

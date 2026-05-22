@@ -42,6 +42,10 @@ open class 焚化炉 :SglBlock("incinerator") {
         this.localizedName = "焚化炉"
         description = "智能销毁流体和物品,可进行二级面板配置,精准控制每一个输入源"
       }
+      en {
+        this.localizedName = "Incinerator"
+        description = "Intelligently destroys fluids and items, with secondary panel configuration for precise control of each input source"
+      }
     }
     size = 1
     flameColor = IceColor.b4

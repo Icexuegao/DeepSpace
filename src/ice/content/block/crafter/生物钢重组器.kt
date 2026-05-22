@@ -17,6 +17,10 @@ class 生物钢重组器 :NormalCrafter("biomassReformer") {
         this.localizedName = "生物钢重组器"
         description = "将多种原料培育为生物钢"
       }
+      en {
+        this.localizedName = "Biomass Reformer"
+        description = "Cultivates biological steel from various raw materials"
+      }
     }
     size = 3
     itemCapacity = 36

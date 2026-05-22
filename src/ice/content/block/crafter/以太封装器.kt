@@ -21,6 +21,10 @@ class 以太封装器 :NormalCrafter("etherEncapsulator") {
         this.localizedName = "以太封装器"
         description = "将游离的以太封装为便于运输的容器"
       }
+      en {
+        this.localizedName = "Ether Encapsulator"
+        description = "Encapsulates free ether into containers convenient for transportation"
+      }
     }
     size = 5
     itemCapacity = 120

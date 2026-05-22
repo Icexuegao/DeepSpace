@@ -13,6 +13,10 @@ class 硫化物混合器 :NormalCrafter("sulfideMixer") {
         this.localizedName = "硫化物混合器"
         description = "将煤,铅,沙混合成硫化合物"
       }
+      en {
+        this.localizedName = "Sulfide Mixer"
+        description = "Mixes coal, lead, and sand into sulfur compounds"
+      }
     }
     size = 3
     itemCapacity = 30

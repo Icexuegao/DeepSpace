@@ -19,6 +19,11 @@ class 质量生成器 :MediumCrafter("quality_generator") {
         description = "消耗中子能生成介质"
         details = "将能量无序逆向转换的设备,将大量中子能向物质质量进行转换,将产出除夸克类介质外的纯净无序介质"
       }
+      en {
+        this.localizedName = "Mass Generator"
+        description = "Consumes neutron energy to generate medium"
+        details = "Equipment for disordered reverse conversion of energy, converting large amounts of neutron energy into material mass, producing pure disordered medium except quark-type medium"
+      }
     }
     requirements(Category.crafting, IItems.铱锭, 50, IItems.充能FEX水晶, 80, IItems.絮凝剂, 50, IItems.暮光合金, 20, IItems.矩阵合金, 20)
     health = 2250

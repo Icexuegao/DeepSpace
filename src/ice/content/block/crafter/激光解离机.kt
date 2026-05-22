@@ -28,6 +28,11 @@ class 激光解离机 :NormalCrafter("laser_resolver") {init {
       description = "将特定物品解离并回收为原材料,可配置"
       details = "使用不同频段的激光来定向分离物质以得到更加有用的东西"
     }
+    en {
+      this.localizedName = "Laser Resolver"
+      description = "Dissociates specific items and recovers them as raw materials, configurable"
+      details = "Uses lasers of different frequency bands to directionally separate substances to obtain more useful materials"
+    }
   }
   requirements(
     Category.crafting, ItemStack.with(

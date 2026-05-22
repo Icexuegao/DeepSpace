@@ -29,6 +29,12 @@ class 热能冶炼炉 :NormalCrafter("thermal_smelter") {
         description = "以焦炭和氢气为双热源的高温冶炼炉，用于生产强化合金与铱锭。"
         details = "用于冶炼金属的设备,可以制造气流进行金属化合物的高温煅烧"
       }
+
+      en {
+        this.localizedName = "Thermal Smelter"
+        description = "A high temperature smelter that produces strong alloy and iridium ingots"
+        details = "Equipment used for smelting metals, capable of generating airflow for high-temperature calcination of metal compounds"
+      }
     }
     requirements(
       Category.crafting, ItemStack.with(
