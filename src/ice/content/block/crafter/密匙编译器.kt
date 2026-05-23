@@ -38,7 +38,7 @@ class 密匙编译器 :NormalCrafter("keyCompiler") {
         this.localizedName = "Key Compiler"
         description =
           "Receives data through quantum communication to compile keys, requires large amounts of coolant to support operation\nTo ensure quantum channel stability and data accuracy, not affected by space-time acceleration\nEquipped with extremely heavy armor to protect internal precision structures and energy pipelines"
-        details = "[#FF5845]Data downloading normally, key compilation proceeding stably. It's time to show those aliens some color!"
+        details = "[#FF5845]Data downloading normally, key compilation proceeding stably. “It's time to teach those aliens a lesson!"
       }
     }
     size = 10

@@ -32,7 +32,7 @@ class 矩阵切割机 :NormalCrafter("matrix_cutter") {
 
       en {
         this.localizedName = "Matrix Cutter"
-        description = "Cuts a matrix crystal into a matrix alloy, producing a matrix alloy"
+        description = "Carves activated conductive crystals into reinforced alloy to produce matrix alloy"
         details = "Uses a high-energy laser to cut metal into nanocrystals, and then etches microcircuits on top of the nanocrystals, to produce a matrix alloy"
       }
     }
