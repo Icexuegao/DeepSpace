@@ -7,7 +7,7 @@ import ice.DeepSpace
 import singularity.core.SglEventTypes.ResearchCompletedEvent
 import singularity.core.SglEventTypes.RevealedEvent
 
-abstract class RevealGroup(protected val name: String?) {
+abstract class RevealGroup(protected val name: String) {
   protected var revealed: Boolean = false
 
   @Nullable
@@ -42,7 +42,7 @@ abstract class RevealGroup(protected val name: String?) {
 
   abstract fun applyTrigger()
 
-  class ResearchReveal(name: String?, private val project: ResearchProject) : RevealGroup(name) {
+  class ResearchReveal(name: String, private val project: ResearchProject) : RevealGroup(name) {
     override fun localized(): String {
       return "研究 ${project.localizedName}"
     }
