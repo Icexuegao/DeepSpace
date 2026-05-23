@@ -73,8 +73,7 @@ object TurretBullets {
     }
   }
 
-  /**极寒领域 */
-  var freezingField = object :BulletType() {
+  var 极寒领域 = object :BulletType() {
     init {
       lifetime = 600f
       hittable = false

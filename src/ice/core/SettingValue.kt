@@ -6,9 +6,9 @@ import arc.util.serialization.Jval
 import ice.DeepSpace
 import ice.audio.IMusics
 import ice.entities.ModeDifficulty
-import universecore.world.Load
 import mindustry.Vars
 import mindustry.ui.dialogs.PlanetDialog
+import universecore.world.Load
 import kotlin.properties.Delegates
 import kotlin.reflect.*
 import kotlin.reflect.full.createType
@@ -42,7 +42,7 @@ object SettingValue : Load {
   }
 
   var 启用主菜单音乐 by observable(true) { _, _, new ->
-    if (!new) IMusics.title.stop()
+    if (!new)IMusics.title.stop()
   }
   var difficulty by observable(ModeDifficulty.洗礼)
   var menuMusicVolume by observable(1f)

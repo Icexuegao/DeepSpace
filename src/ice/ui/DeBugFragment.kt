@@ -166,7 +166,6 @@ object DeBugFragment {
         Groups.unit.find { it1 -> it1.type == IUnitTypes.青壤 }?.kill()
       }
       button("effect", Icon.effect) {
-        IceEffects.arc.at(Vars.player.x, Vars.player.y, 0f, IUnitTypes.虚宿)
       }
     }.width(130f).height(211f)
     table.add(pane).expandY().top()

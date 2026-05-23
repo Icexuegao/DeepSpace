@@ -88,7 +88,6 @@ object ModInfoDialog :BaseMenusDialog(IceStats.模组.localized(), IStyles.menus
     cont.iPaneG { ta ->
       ta.top()
       ta.image(IStyles.tanksui).height(200f).pad(10f).row()
-
       ta.addLine("模组信息").padBottom(20f)
 
       ta.table(SglDrawConst.grayUIAlpha) { t3 ->

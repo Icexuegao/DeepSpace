@@ -37,6 +37,7 @@ class Lightning :MissileUnitType("unit_lightning") {
     lightRadius = 240f
     lightColor = Color.valueOf("FF5845")
 
+    val f = Layer.effect
     parts.addAll(
       HaloPart().apply {
         tri = true
@@ -47,7 +48,7 @@ class Lightning :MissileUnitType("unit_lightning") {
         haloRadius = 18f
         haloRotateSpeed = 0.5f
         color = Color.valueOf("FF5845")
-        layer = Layer.bullet - 1f
+        layer = f
       },
       HaloPart().apply {
         tri = true
@@ -58,7 +59,7 @@ class Lightning :MissileUnitType("unit_lightning") {
         haloRadius = 18f
         haloRotateSpeed = 0.5f
         color = Color.valueOf("FF5845")
-        layer = Layer.bullet - 1f
+        layer = f
       },
       HaloPart().apply {
         tri = true
@@ -70,7 +71,7 @@ class Lightning :MissileUnitType("unit_lightning") {
         haloRotation = -7.2f
         haloRotateSpeed = -0.5f
         color = Color.valueOf("FF5845")
-        layer = Layer.bullet - 1f
+        layer = f
       },
       HaloPart().apply {
         tri = true
@@ -81,7 +82,7 @@ class Lightning :MissileUnitType("unit_lightning") {
         haloRotation = -7.2f
         haloRotateSpeed = -0.5f
         color = Color.valueOf("FF5845")
-        layer = Layer.bullet - 1f
+        layer = f
       }
     )
 

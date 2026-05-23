@@ -12,7 +12,7 @@ import arc.util.Time
 import arc.util.Tmp
 import ice.content.IItems
 import ice.content.ILiquids
-import ice.content.block.turret.TurretBullets.freezingField
+import ice.content.block.turret.TurretBullets.极寒领域
 import ice.entities.bullet.base.BulletType
 import ice.entities.effect.MultiEffect
 
@@ -121,7 +121,7 @@ class 冬至 :SglTurret("winter") {
             hitSoundPitch = 0.6f
             hitSoundVolume = 2.5f
 
-            fragBullet = freezingField
+            fragBullet = 极寒领域
             fragOnHit = false
             fragBullets = 1
             fragVelocityMin = 0f
