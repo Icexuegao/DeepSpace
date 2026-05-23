@@ -46,7 +46,7 @@ public class UIUtils {
             @Override
             public void draw() {
               super.draw();
-              Draw.color(SglDrawConst.matrixNet, Draw.getColor().a);
+              Draw.color(SglDrawConst.getMatrixNet(), Draw.getColor().a);
               Fill.circle(getX(Align.center), getY(Align.center), getWidth()/2 + Scl.scl(2f));
             }
           });
@@ -62,10 +62,10 @@ public class UIUtils {
             Lines.stroke(Scl.scl(14f));
             Lines.circle(x + width/2f, y + height/2f, width/2f - Scl.scl(7f));
 
-            Draw.color(SglDrawConst.matrixNet, 0.7f*parentAlpha);
+            Draw.color(SglDrawConst.getMatrixNet(), 0.7f*parentAlpha);
             Lines.circle(x + width/2f, y + height/2f, width/2f - Scl.scl(7f));
             Lines.stroke(Scl.scl(4f));
-            Draw.color(SglDrawConst.matrixNet, parentAlpha);
+            Draw.color(SglDrawConst.getMatrixNet(), parentAlpha);
             Lines.circle(x + width/2f, y + height/2f, width/2f - Scl.scl(9f));
             SglDraw.dashCircle(x + width/2f, y + height/2f, width/2f - Scl.scl(5f),
                 8, 180, Time.time);
@@ -75,9 +75,9 @@ public class UIUtils {
     table.row();
     table.stack(
         new Table(){{
-          image().color(SglDrawConst.matrixNet).grow();
+          image().color(SglDrawConst.getMatrixNet()).grow();
           row();
-          image().color(SglDrawConst.matrixNetDark).growX().height(4f);
+          image().color(SglDrawConst.getMatrixNetDark()).growX().height(4f);
         }},
         new Table(){{
           add(project.getLocalizedName(), Styles.outlineLabel).pad(6f).color(Pal.accent);
@@ -117,7 +117,7 @@ public class UIUtils {
               @Override
               public void draw() {
                 super.draw();
-                Draw.color(SglDrawConst.matrixNet, Draw.getColor().a);
+                Draw.color(SglDrawConst.getMatrixNet(), Draw.getColor().a);
                 Fill.circle(getX(Align.center), getY(Align.center), getWidth()/2);
               }
             });
@@ -134,7 +134,7 @@ public class UIUtils {
                   Scl.scl(6f), Scl.scl(3f),
                   project.progress() + prog[0],
                   project.getInspire().getProvProgress() - prog[0],
-                  SglDrawConst.matrixNet, SglDrawConst.matrixNet
+                  SglDrawConst.getMatrixNet(), SglDrawConst.getMatrixNet()
               );
             }
           }, i -> i.image(project.getIcon().found() ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit))

@@ -3,6 +3,7 @@ package singularity.ui.fragments.override
 import arc.Core
 import arc.Events
 import arc.func.Boolp
+import arc.graphics.g2d.Draw
 import arc.scene.Group
 import arc.scene.event.Touchable
 import arc.scene.ui.Image
@@ -11,7 +12,6 @@ import arc.scene.ui.layout.Table
 import arc.scene.ui.layout.WidgetGroup
 import ice.DeepSpace
 import ice.core.IFiles
-import ice.core.IFiles.appendModName
 import ice.graphics.IceColor
 import mindustry.Vars
 import mindustry.core.Version
@@ -26,75 +26,30 @@ import universecore.util.handler.MethodHandler
 import kotlin.math.min
 
 class SglMenuFrag :MenuFragment() {
-  val spacea = IFiles.findPng("spacea".appendModName())
+  val spacea = IFiles.findModPng("spacea")
 
   var shown: Boolean = true
   val group = WidgetGroup()
+
   override fun build(parent: Group) {
     parent.clear()
     group.setFillParent(true)
     group.touchable = Touchable.childrenOnly
     group.visible { !Vars.ui.editor.isShown }
     parent.addChild(group)
-    Core.graphics.width
-    group.fill {
-      it.image(spacea).grow()
+    group.fill { x, y, w, h ->
+      Draw.rect(spacea, w/2f,  h/2f, w, h)
     }
-    //info icon
-    /* if (mobile) {
-      group.fill(c -> c.bottom().left().button("", new TextButton.TextButtonStyle() {{
-        font = Fonts.def;
-        fontColor = Color.white;
-        up = infoBanner;
-      }}, ui.about::show).size(84, 45).name("info"));
-      group.fill(c -> c.bottom().right().button(Icon.discord, new ImageButton.ImageButtonStyle() {{
-        up = discordBanner;
-      }}, ui.discord::show).size(84, 45).name("discord"));
-    } else if (becontrol.active()) {
-      group.fill(c -> c.bottom().right().button("@be.check", Icon.refresh, () -> {
-        ui.loadfrag.show();
-        becontrol.checkUpdate(result -> {
-          ui.loadfrag.hide();
-          if (!result) {
-            ui.showInfo("@be.noupdates");
-          }
-        });
-      }).size(200, 60).name("becheck").update(t -> {
-        t.getLabel().setColor(becontrol.isUpdateAvailable() ? Tmp.c1.set(Color.white).lerp(Pal.accent, Mathf.absin(5f, 1f)) : Color.white);
-      }));
-    }*/
     val versionText = (if (Version.build == -1) "[#fc8140aa]" else "[#ffffffba]") + Version.combined()
     val modVersionText = "[#${IceColor.b4}]UniverseCore:${UncCore.version} ${DeepSpace.modDisplayName}:${DeepSpace.modVersion}"
 
-    /* group.fill { t: Table? ->
-       t!!.defaults().top()
-       t.visibility = Boolp { shown }
-       val button = Image(Singularity.getModAtlas("logo"))
-       button.clicked { Sgl.ui.mainMenu.show() }
-       val i = t.top().add(button).size(940f, 270f)
-       t.row()
-       t.add(versionText).padTop(4f)
-       t.row()
-       t.add(modVersionText).padTop(2f)
-
-       val r = Runnable {
-         var scl = min(Core.graphics.height / 3.4f / Scl.scl(270f), 1f)
-         scl = min(scl, min(Core.graphics.width / Scl.scl(940f), 1f))
-         i.size(940 * scl, 270 * scl)
-         t.invalidateHierarchy()
-       }
-       r.run()
-       Events.on(ResizeEvent::class.java) { e: ResizeEvent? ->
-         r.run()
-       }
-     }*/
     val bloomGroup = BloomGroup().apply {
       bloomIntensity = 0.7f
     }
     bloomGroup.setFillParent(true)
 
     group.fill { df: Table ->
-
+      df.touchable = Touchable.disabled
       df.add(bloomGroup).grow()
 
       bloomGroup.fill { t ->
@@ -122,17 +77,18 @@ class SglMenuFrag :MenuFragment() {
       }
     }
 
-    group.fill { c: Table? ->
-      c!!.visibility = Boolp { shown }
+    group.fill { c->
+      c.visibility = Boolp { shown }
       FieldHandler.setValueDefault(Vars.ui.menufrag, "container", c)
       FieldHandler.decache(Vars.ui.menufrag.javaClass)
       c.name = "menu container"
-      MethodHandler.invokeTemp<SglMenuFrag?, Any?>(this, if (Vars.mobile) "buildMobile" else "buildDesktop")
-      Events.on(ResizeEvent::class.java) { event: ResizeEvent? ->
-        MethodHandler.invokeTemp<SglMenuFrag?, Any?>(
+      MethodHandler.invokeTemp<SglMenuFrag, Any?>(this, if (Vars.mobile) "buildMobile" else "buildDesktop")
+      Events.on(ResizeEvent::class.java) {
+        MethodHandler.invokeTemp<SglMenuFrag, Any?>(
           this, if (Vars.mobile) "buildMobile" else "buildDesktop"
         )
       }
     }
+
   }
 }

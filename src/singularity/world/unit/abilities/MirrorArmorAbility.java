@@ -51,7 +51,7 @@ public class MirrorArmorAbility extends MirrorShieldBase{
 
       Draw.z(Layer.shields - 5f);
       SglDraw.drawToBuffer(drawID, drawBuffer, unit, b -> {
-        SglShaders.mirrorField.waveMix = Tmp.c1.set(SglDrawConst.matrixNet);
+        SglShaders.mirrorField.waveMix = Tmp.c1.set(SglDrawConst.getMatrixNet());
         SglShaders.mirrorField.stroke = 1.2f;
         SglShaders.mirrorField.sideLen = 5;
         SglShaders.mirrorField.waveScl = 0.03f;

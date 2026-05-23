@@ -1,92 +1,120 @@
-package singularity.graphic;
+package singularity.graphic
 
-import arc.graphics.Color;
-import arc.graphics.g2d.TextureRegion;
-import arc.scene.style.Drawable;
-import arc.scene.style.TextureRegionDrawable;
-import arc.util.Tmp;
-import mindustry.gen.Tex;
-import mindustry.graphics.Pal;
-import singularity.Singularity;
+import arc.graphics.Color
+import arc.graphics.g2d.TextureRegion
+import arc.scene.style.Drawable
+import arc.scene.style.TextureRegionDrawable
+import arc.util.Tmp
+import mindustry.gen.Tex
+import mindustry.graphics.Pal
+import singularity.Singularity
 
-public class SglDrawConst{
-  public static final TextureRegion[] EMP_REGIONS = new TextureRegion[0];
+object SglDrawConst {
+  @JvmField val EMP_REGIONS: Array<TextureRegion?> = arrayOfNulls<TextureRegion>(0)
 
   //Colors
-  public static final Color transColor = new Color(0, 0, 0, 0);
-  public static final Color fexCrystal = Color.valueOf("FF9584");
-  public static final Color matrixNet = Color.valueOf("D3FDFF");
-  public static final Color matrixNetDark = Color.valueOf("9ECBCD");
-  public static final Color ion = Color.valueOf("#D1D19F");
-  public static final Color dew = Color.valueOf("ff6214");
-  public static final Color frost = Color.valueOf("AFF7FF");
-  public static final Color winter = Color.valueOf("6CA5FF");
+  @JvmStatic val transColor: Color = Color(0f, 0f, 0f, 0f)
+  @JvmStatic val fexCrystal: Color = Color.valueOf("FF9584")
+  @JvmStatic val matrixNet: Color = Color.valueOf("D3FDFF")
+  @JvmStatic val matrixNetDark: Color = Color.valueOf("9ECBCD")
+  @JvmStatic val ion: Color = Color.valueOf("#D1D19F")
+  @JvmStatic val dew: Color = Color.valueOf("ff6214")
+  @JvmStatic val frost: Color = Color.valueOf("AFF7FF")
+  @JvmStatic val winter: Color = Color.valueOf("6CA5FF")
 
   //Text colors
-  public static final String COLOR_ACCENT = "[accent]";
+  const val COLOR_ACCENT: String = "[accent]"
 
   //Texture regions
-  public static Drawable transparent, sglLaunchLogo, squareMarker, matrixArrow, sglIcon, artistIcon, codeIcon, translateIcon,
-      soundsIcon, time, techPoint, inspire,
+  lateinit var transparent: Drawable
+  lateinit var sglLaunchLogo: Drawable
+  lateinit var squareMarker: Drawable
+  lateinit var matrixArrow: Drawable
+  lateinit var sglIcon: Drawable
+  lateinit var artistIcon: Drawable
+  lateinit var codeIcon: Drawable
+  lateinit var translateIcon: Drawable
+  lateinit var soundsIcon: Drawable
+  lateinit var time: Drawable
+  lateinit var techPoint: Drawable
+  lateinit var inspire: Drawable
 
-      startIcon, databaseIcon, publicInfoIcon, aboutIcon, configureIcon, contributeIcon, debuggingIcon, nuclearIcon, matrixIcon,
+  lateinit var startIcon: Drawable
+  lateinit var databaseIcon: Drawable
+  lateinit var publicInfoIcon: Drawable
+  lateinit var aboutIcon: Drawable
+  lateinit var configureIcon: Drawable
+  lateinit var contributeIcon: Drawable
+  lateinit var debuggingIcon: Drawable
+  lateinit var nuclearIcon: Drawable
+  lateinit var matrixIcon: Drawable
 
-      qqIcon, telegramIcon,
-      showInfos, unShowInfos, showRange, hold, defaultShow,
-      grayUI, padGrayUI, darkgrayUI,
-      grayUIAlpha, padGrayUIAlpha, darkgrayUIAlpha,
-      sgl2, a_z;
+  lateinit var qqIcon: Drawable
+  lateinit var telegramIcon: Drawable
+  lateinit var showInfos: Drawable
+  lateinit var unShowInfos: Drawable
+  lateinit var showRange: Drawable
+  lateinit var hold: Drawable
+  lateinit var defaultShow: Drawable
+  lateinit var grayUI: Drawable
+  lateinit var padGrayUI: Drawable
+  lateinit var darkgrayUI: Drawable
+  lateinit var grayUIAlpha: Drawable
+  lateinit var padGrayUIAlpha: Drawable
+  lateinit var darkgrayUIAlpha: Drawable
+  lateinit var sgl2: Drawable
+  lateinit var a_z: Drawable
 
-  public static TextureRegion cursor;
+  var cursor: TextureRegion? = null
 
-  public static void load(){
-    transparent = Singularity.getModDrawable("transparent");
-    sglLaunchLogo = Singularity.getModDrawable("launch_logo");
-    squareMarker = Singularity.getModDrawable("square_marker");
-    matrixArrow = Singularity.getModDrawable("matrix_arrow");
-    sglIcon = Singularity.getModDrawable("sgl_icon");
-    artistIcon = Singularity.getModDrawable("artist");
-    codeIcon = Singularity.getModDrawable("code");
-    translateIcon = Singularity.getModDrawable("translate");
-    soundsIcon = Singularity.getModDrawable("sound");
-    time = Singularity.getModDrawable("time");
-    techPoint = Singularity.getModDrawable("tech_point");
-    inspire = Singularity.getModDrawable("inspire");
-    startIcon = Singularity.getModDrawable("icon_start");
-    databaseIcon = Singularity.getModDrawable("icon_database");
-    publicInfoIcon = Singularity.getModDrawable("icon_publicInfo");
-    aboutIcon = Singularity.getModDrawable("icon_about");
-    configureIcon = Singularity.getModDrawable("icon_configure");
-    contributeIcon = Singularity.getModDrawable("icon_contribute");
-    debuggingIcon = Singularity.getModDrawable("debugging");
-    nuclearIcon = Singularity.getModDrawable("nuclear");
-    matrixIcon = Singularity.getModDrawable("matrix");
-    qqIcon = Singularity.getModDrawable("qq");
-    telegramIcon = Singularity.getModDrawable("telegram");
-    showInfos = Singularity.getModDrawable("show_infos");
-    unShowInfos = Singularity.getModDrawable("unshow_infos");
-    showRange = Singularity.getModDrawable("show_range");
-    hold = Singularity.getModDrawable("hold");
-    defaultShow = Singularity.getModDrawable("default_show");
-    sgl2 = Singularity.getModDrawable("sgl-2");
-    a_z = Singularity.getModDrawable("a_z");
+  fun load() {
+    transparent = Singularity.getModDrawable<Drawable?>("transparent")
+    sglLaunchLogo = Singularity.getModDrawable("launch_logo")
+    squareMarker = Singularity.getModDrawable<Drawable?>("square_marker")
+    matrixArrow = Singularity.getModDrawable<Drawable?>("matrix_arrow")
+    sglIcon = Singularity.getModDrawable<Drawable?>("sgl_icon")
+    artistIcon = Singularity.getModDrawable<Drawable?>("artist")
+    codeIcon = Singularity.getModDrawable<Drawable?>("code")
+    translateIcon = Singularity.getModDrawable<Drawable?>("translate")
+    soundsIcon = Singularity.getModDrawable<Drawable?>("sound")
+    time = Singularity.getModDrawable<Drawable?>("time")
+    techPoint = Singularity.getModDrawable<Drawable?>("tech_point")
+    inspire = Singularity.getModDrawable<Drawable?>("inspire")
+    startIcon = Singularity.getModDrawable<Drawable?>("icon_start")
+    databaseIcon = Singularity.getModDrawable<Drawable?>("icon_database")
+    publicInfoIcon = Singularity.getModDrawable<Drawable?>("icon_publicInfo")
+    aboutIcon = Singularity.getModDrawable<Drawable?>("icon_about")
+    configureIcon = Singularity.getModDrawable<Drawable?>("icon_configure")
+    contributeIcon = Singularity.getModDrawable<Drawable?>("icon_contribute")
+    debuggingIcon = Singularity.getModDrawable<Drawable?>("debugging")
+    nuclearIcon = Singularity.getModDrawable<Drawable?>("nuclear")
+    matrixIcon = Singularity.getModDrawable<Drawable?>("matrix")
+    qqIcon = Singularity.getModDrawable<Drawable?>("qq")
+    telegramIcon = Singularity.getModDrawable<Drawable?>("telegram")
+    showInfos = Singularity.getModDrawable<Drawable?>("show_infos")
+    unShowInfos = Singularity.getModDrawable<Drawable?>("unshow_infos")
+    showRange = Singularity.getModDrawable<Drawable?>("show_range")
+    hold = Singularity.getModDrawable<Drawable?>("hold")
+    defaultShow = Singularity.getModDrawable<Drawable?>("default_show")
+    sgl2 = Singularity.getModDrawable<Drawable?>("sgl-2")
+    a_z = Singularity.getModDrawable<Drawable?>("a_z")
 
-    cursor = Singularity.getModAtlas("cursor");
+    cursor = Singularity.getModAtlas("cursor")
 
-    grayUI = ((TextureRegionDrawable) Tex.whiteui).tint(Pal.darkerGray);
-    padGrayUI = ((TextureRegionDrawable) Tex.whiteui).tint(Pal.darkerGray);
-    padGrayUI.setLeftWidth(8);
-    padGrayUI.setRightWidth(8);
-    padGrayUI.setTopHeight(8);
-    padGrayUI.setBottomHeight(8);
-    darkgrayUI = ((TextureRegionDrawable) Tex.whiteui).tint(Pal.darkestGray);
+    grayUI = (Tex.whiteui as TextureRegionDrawable).tint(Pal.darkerGray)
+    padGrayUI = (Tex.whiteui as TextureRegionDrawable).tint(Pal.darkerGray)
+    padGrayUI!!.setLeftWidth(8f)
+    padGrayUI!!.setRightWidth(8f)
+    padGrayUI!!.setTopHeight(8f)
+    padGrayUI!!.setBottomHeight(8f)
+    darkgrayUI = (Tex.whiteui as TextureRegionDrawable).tint(Pal.darkestGray)
 
-    grayUIAlpha = ((TextureRegionDrawable) Tex.whiteui).tint(Tmp.c1.set(Pal.darkerGray).a(0.7f));
-    padGrayUIAlpha = ((TextureRegionDrawable) Tex.whiteui).tint(Tmp.c1.set(Pal.darkerGray).a(0.7f));
-    padGrayUIAlpha.setLeftWidth(8);
-    padGrayUIAlpha.setRightWidth(8);
-    padGrayUIAlpha.setTopHeight(8);
-    padGrayUIAlpha.setBottomHeight(8);
-    darkgrayUIAlpha = ((TextureRegionDrawable) Tex.whiteui).tint(Tmp.c1.set(Pal.darkestGray).a(0.7f));
+    grayUIAlpha = (Tex.whiteui as TextureRegionDrawable).tint(Tmp.c1.set(Pal.darkerGray).a(0.7f))
+    padGrayUIAlpha = (Tex.whiteui as TextureRegionDrawable).tint(Tmp.c1.set(Pal.darkerGray).a(0.7f))
+    padGrayUIAlpha!!.setLeftWidth(8f)
+    padGrayUIAlpha!!.setRightWidth(8f)
+    padGrayUIAlpha!!.setTopHeight(8f)
+    padGrayUIAlpha!!.setBottomHeight(8f)
+    darkgrayUIAlpha = (Tex.whiteui as TextureRegionDrawable).tint(Tmp.c1.set(Pal.darkestGray).a(0.7f))
   }
 }

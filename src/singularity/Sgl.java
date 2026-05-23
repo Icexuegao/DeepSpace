@@ -65,7 +65,7 @@ public class Sgl {
       //载入数学着色器
       MathRenderer.load();
       //加载绘制资源
-      SglDrawConst.load();
+      SglDrawConst.INSTANCE.load();
       //载入风格
       SglStyles.load();
 

@@ -35,12 +35,18 @@ object UI :Load {
       }
     }
   }
-
+  val spacea = IFiles.findModPng("spacea")
   override fun init() {
+
+   // Vars.ui.menufrag = SglMenuFrag()
+
+    //if(!SettingValue.INSTANCE.get禁用mod主界面背景()){
+  // Vars.ui.menufrag.build(Vars.ui.menuGroup)
+
+
     toolBarFrag.addTool("deepSpaceMenu", { "模组菜单" }, { Icon.menu }, {
       MenusDialog.show()
     }) { false }
-
 
     toolBarFrag.addTool("data", { "打开当前内容数据" }, { Icon.book }, {
       Vars.control.input.block?.let {

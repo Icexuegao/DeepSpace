@@ -11,15 +11,6 @@ import singularity.contents.SglTechThree;
 
 public class Singularity extends Mod {
 
-
-
-  @Override
-  public void init(){
-    //加载全局变量
-    Sgl.init();
-
-  }
-
   @Override
   public void loadContent(){
     new LiquidBlocks().load();

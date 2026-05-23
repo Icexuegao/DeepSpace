@@ -24,6 +24,7 @@ import mindustry.mod.Mod
 import mindustry.type.Category
 import mindustry.world.meta.BuildVisibility
 import singularity.Recipes
+import singularity.Sgl
 import singularity.Singularity
 import singularity.type.SglCategory
 import singularity.type.SglContentType
@@ -58,7 +59,7 @@ open class Ice :Mod() {
   }
 
   override fun init() {
-    singularity.init()
+    Sgl.init()
     UI.init()
     Schematics.init()
     MenusDialog.init()

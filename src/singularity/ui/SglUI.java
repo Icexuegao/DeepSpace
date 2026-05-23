@@ -84,11 +84,6 @@ public class SglUI {
 
     debugInfos.build(Vars.ui.hudGroup);
 
-    if(!SettingValue.INSTANCE.get禁用mod主界面背景()){
-      Vars.ui.menufrag = new SglMenuFrag();
-      Vars.ui.menufrag.build(Vars.ui.menuGroup);
-    }
-
 
     configEventListeners();
   }

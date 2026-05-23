@@ -358,7 +358,7 @@ public class SglTechTreeDialog extends Table {
       clearChildren();
 
       if (!isMark) {
-        NinePatchDrawable drawable = ((NinePatchDrawable) Tex.buttonSideRightOver).tint(SglDrawConst.matrixNet);
+        NinePatchDrawable drawable = ((NinePatchDrawable) Tex.buttonSideRightOver).tint(SglDrawConst.getMatrixNet());
         Table tab = table(Tex.buttonSideRight, t -> {
           t.update(() -> t.setBackground(
               project.dependenciesCompleted()?
@@ -389,7 +389,7 @@ public class SglTechTreeDialog extends Table {
               Draw.color(Color.black, parentAlpha1);
               Lines.stroke(frameStroke);
               Lines.circle(x + width / 2, y + height / 2, rad);
-              Draw.color(SglDrawConst.matrixNet, 0.6f * parentAlpha1);
+              Draw.color(SglDrawConst.getMatrixNet(), 0.6f * parentAlpha1);
               Lines.circle(x + width / 2, y + height / 2, rad);
               Draw.color(Color.black, 0.6f * parentAlpha1);
               Lines.stroke(barStroke);
@@ -397,7 +397,7 @@ public class SglTechTreeDialog extends Table {
 
               if (project.isProcessing()) {
                 Lines.stroke(barStroke);
-                Draw.color(SglDrawConst.matrixNetDark, parentAlpha);
+                Draw.color(SglDrawConst.getMatrixNetDark(), parentAlpha);
                 SglDraw.dashCircle(
                         x + width / 2, y + height / 2, width / 2f - Scl.scl(3f), 10, 180, -Time.globalTime
                 );
@@ -405,7 +405,7 @@ public class SglTechTreeDialog extends Table {
 
               if (progress > 0) {
                 Lines.stroke(barStroke);
-                Draw.color(SglDrawConst.matrixNet, parentAlpha1);
+                Draw.color(SglDrawConst.getMatrixNet(), parentAlpha1);
                 SglDraw.arc(
                         x + width / 2, y + height / 2, rad,
                         -360f * progress, 90
@@ -414,7 +414,7 @@ public class SglTechTreeDialog extends Table {
 
               if (subProgress > 0) {
                 Lines.stroke(frameStroke);
-                Draw.color(SglDrawConst.matrixNet, 0.5f * parentAlpha1);
+                Draw.color(SglDrawConst.getMatrixNet(), 0.5f * parentAlpha1);
                 float angel = -360f * Math.min(subProgress, 1 - progress);
                 SglDraw.arc(
                         x + width / 2, y + height / 2, rad, angel,
@@ -434,7 +434,7 @@ public class SglTechTreeDialog extends Table {
               img.image(project.getIcon().found() ? project.getIcon() : project.getContents().first().uiIcon).size(32).scaling(Scaling.fit);
             } else {
               Font.Glyph g = Fonts.outline.getData().getGlyph('?');
-              img.image(new TextureRegion(Fonts.outline.getRegion().texture, g.u, g.v2, g.u2, g.v)).size(32).scaling(Scaling.fit).color(SglDrawConst.fexCrystal);
+              img.image(new TextureRegion(Fonts.outline.getRegion().texture, g.u, g.v2, g.u2, g.v)).size(32).scaling(Scaling.fit).color(SglDrawConst.getFexCrystal());
             }
           }).width(64f).growY().get();
 
@@ -538,13 +538,13 @@ public class SglTechTreeDialog extends Table {
                   }
                   else Draw.color(Pal.darkerGray, 0.7f*parentAlpha);
                 }
-                else Draw.color(SglDrawConst.fexCrystal, 0.3f*parentAlpha);
+                else Draw.color(SglDrawConst.getFexCrystal(), 0.3f*parentAlpha);
 
                 Fill.rect(x + width/2, y + height/2, width, height);
               }
             }, prog -> {
               if (isReveal) {
-                prog.image(SglDrawConst.techPoint).scaling(Scaling.fit).size(22f).color(SglDrawConst.matrixNet);
+                prog.image(SglDrawConst.techPoint).scaling(Scaling.fit).size(22f).color(SglDrawConst.getMatrixNet());
                 prog.add("").fontScale(0.75f).padLeft(4f).fill()
                     .update(l -> {
                       l.setColor(project.isCompleted() ? Pal.accent : Color.lightGray);
@@ -557,7 +557,7 @@ public class SglTechTreeDialog extends Table {
 
                 if (project.getInspire() != null) {
                   prog.add(project.getInspire().getLocalized()).color(Color.lightGray).fontScale(0.75f).fill();
-                  prog.image(SglDrawConst.inspire).scaling(Scaling.fit).size(22f).color(SglDrawConst.matrixNet);
+                  prog.image(SglDrawConst.inspire).scaling(Scaling.fit).size(22f).color(SglDrawConst.getMatrixNet());
                 }
               }
               else prog.add(Core.bundle.get("misc.reveal") + ": " + project.getReveal().localized()).growX().padLeft(4f).labelAlign(Align.left);
@@ -582,7 +582,7 @@ public class SglTechTreeDialog extends Table {
             t.image(new BaseDrawable(){
               @Override
               public void draw(float x, float y, float width, float height) {
-                Draw.color(SglDrawConst.matrixNet, parentAlpha);
+                Draw.color(SglDrawConst.getMatrixNet(), parentAlpha);
                 Lines.stroke(Scl.scl(2f));
                 Lines.square(x + width/2, y + height/2, width/6f, 45f);
                 Lines.stroke(Scl.scl(3f));

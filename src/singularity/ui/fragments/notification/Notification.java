@@ -82,7 +82,7 @@ public abstract class Notification implements DataPackable {
     @Override public Drawable getIcon() { return SglDrawConst.techPoint; }
     @Override public void activity() {}
     @Override public void buildWindow(Table table) {}
-    @Override public Color getIconColor() { return SglDrawConst.matrixNet; }
+    @Override public Color getIconColor() { return SglDrawConst.getMatrixNet(); }
     @Override public Color getTitleColor() { return Pal.accent; }
     @Override public Color getInformationColor() { return Color.white; }
 
@@ -108,7 +108,7 @@ public abstract class Notification implements DataPackable {
 
     @Override public Drawable getIcon() { return Icon.warning; }
     @Override public Color getIconColor() { return Tmp.c1.set(Color.crimson).lerp(Color.white, Mathf.absin(10, 1)); }
-    @Override public Color getTitleColor() { return SglDrawConst.fexCrystal; }
+    @Override public Color getTitleColor() { return SglDrawConst.getFexCrystal(); }
 
     @Override public long typeID() { return typeID; }
   }
@@ -136,7 +136,7 @@ public abstract class Notification implements DataPackable {
     @Override public Drawable getIcon() { return SglDrawConst.techPoint; }
     @Override public void activity() {}
     @Override public void buildWindow(Table table) { UIUtils.buildResearchComplete(table, project); }
-    @Override public Color getIconColor() { return SglDrawConst.matrixNet; }
+    @Override public Color getIconColor() { return SglDrawConst.getMatrixNet(); }
     @Override public Color getTitleColor() { return Pal.accent; }
     @Override public Color getInformationColor() { return Color.white; }
 
@@ -173,7 +173,7 @@ public abstract class Notification implements DataPackable {
 
     @Override public Drawable getIcon() { return SglDrawConst.inspire; }
     @Override public void buildWindow(Table table) { UIUtils.buildResearchInspired(table, inspire, project); }
-    @Override public Color getTitleColor() { return SglDrawConst.matrixNet; }
+    @Override public Color getTitleColor() { return SglDrawConst.getMatrixNet(); }
 
     @Override public long typeID() { return typeID; }
 

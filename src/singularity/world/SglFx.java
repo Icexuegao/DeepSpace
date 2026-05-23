@@ -228,7 +228,7 @@ public class SglFx{
 
     Draw.z(Layer.effect);
     randLenVectors(e.id, 6, 4f + (float) Functions.lerp(0, 9, 0.1f, move*40), (x, y) -> {
-      color(SglDrawConst.fexCrystal, Color.lightGray, clamp(e.fin() + random(-0.1f, 0.1f)));
+      color(SglDrawConst.getFexCrystal(), Color.lightGray, clamp(e.fin() + random(-0.1f, 0.1f)));
       Fill.square(e.x + x, e.y + y, 0.2f + size*2f + random(-0.15f, 0.15f), 45);
     });
   });
@@ -271,7 +271,7 @@ public class SglFx{
         Drawf.light(b.x, b.y, i.fin()*14f*2f*intensity, Color.white, 0.9f*b.fout());
       });
 
-      color(SglDrawConst.winter, SglDrawConst.frost, b.fin());
+      color(SglDrawConst.getWinter(), SglDrawConst.getFrost(), b.fin());
       stroke((2f*b.fout()));
 
       Draw.z(Layer.effect + 0.001f);
@@ -289,13 +289,13 @@ public class SglFx{
     float y = e.y;
     float fout = e.fout();
     float fin = e.fin();
-    Drawf.light(x, y, fout*size, SglDrawConst.winter, 0.7f);
+    Drawf.light(x, y, fout*size, SglDrawConst.getWinter(), 0.7f);
 
     float lerp = e.fin(Interp.pow3Out);
     int id = e.id;
 
     SglDraw.drawBloomUponFlyUnit(null, n -> {
-      Draw.color(SglDrawConst.winter);
+      Draw.color(SglDrawConst.getWinter());
       SglDraw.drawLightEdge(x, y, l, w, l, w);
       Lines.stroke(5f* fout);
       Lines.circle(x, y, 55* fout);
@@ -311,7 +311,7 @@ public class SglFx{
       float le = 1 - pow(fin, 4);
       SglDraw.drawCrystal(x + dx*lerp, y + dy*lerp, s, s*le*0.35f, s*le*0.24f, 0, 0, 0.8f*le,
           Layer.effect, Layer.bullet - 1, Time.time*Mathf.randomSeed(id, -3.5f, 3.35f) + randomSeed((long) (id + dx), 360),
-          Mathf.angle(dx, dy), Tmp.c1.set(SglDrawConst.frost).a(0.65f), SglDrawConst.winter);
+          Mathf.angle(dx, dy), Tmp.c1.set(SglDrawConst.getFrost()).a(0.65f), SglDrawConst.getWinter());
     });
   });
 
@@ -365,7 +365,7 @@ public class SglFx{
   });
 
   public final static Effect auroraCoreCharging = new Effect(80, 100, e -> {
-    Draw.color(SglDrawConst.matrixNet);
+    Draw.color(SglDrawConst.getMatrixNet());
     stroke(e.fin() * 2f);
     Lines.circle(e.x, e.y, 4f + e.fout() * 100f);
 
@@ -636,7 +636,7 @@ public class SglFx{
     float y = e.y;
     float fout = e.fout();
     float fin = e.fin();
-    Drawf.light(x, y, fout*192, SglDrawConst.winter, 0.7f);
+    Drawf.light(x, y, fout*192, SglDrawConst.getWinter(), 0.7f);
 
     Draw.z(Layer.flyingUnit + 1);
 
@@ -644,7 +644,7 @@ public class SglFx{
     int id = e.id;
 
     SglDraw.drawBloomUponFlyUnit(null, n -> {
-      Draw.color(SglDrawConst.winter);
+      Draw.color(SglDrawConst.getWinter());
       SglDraw.drawLightEdge(x, y, l, w, l, w);
       Lines.stroke(5f* fout);
       Lines.circle(x, y, 55* fout);
@@ -680,7 +680,7 @@ public class SglFx{
 
   public final static Effect crystalFragFex = new Effect(26, e -> {
     float size = randomSeed(e.id, 2, 4)*e.fout();
-    Draw.color(SglDrawConst.fexCrystal, 0.7f);
+    Draw.color(SglDrawConst.getFexCrystal(), 0.7f);
     SglDraw.drawDiamond(e.x, e.y, size*2.5f, size, Mathf.randomSeed(e.id, 0f, 360f));
   });
 
@@ -709,12 +709,12 @@ public class SglFx{
 
   public final static Effect winterShooting = new Effect(60, e -> {
     e.scaled(12f, b -> {
-      Lines.stroke(b.fout()*4f + 0.2f, SglDrawConst.winter);
+      Lines.stroke(b.fout()*4f + 0.2f, SglDrawConst.getWinter());
       Lines.circle(b.x, b.y, b.fin()*75f);
     });
 
     float lerp = e.fout(Interp.pow2Out);
-    Draw.color(SglDrawConst.winter);
+    Draw.color(SglDrawConst.getWinter());
     SglDraw.drawLightEdge(e.x, e.y, 64 + 64*lerp, 12*lerp, 60 + 80*lerp, 6*lerp, e.rotation + 90);
 
     float l = e.fin(Interp.pow2Out);
@@ -887,7 +887,7 @@ public class SglFx{
   };
 
   public final static Effect shrinkIceParticleSmall = new Effect(120, e -> {
-    Draw.color(SglDrawConst.winter);
+    Draw.color(SglDrawConst.getWinter());
 
     randLenVectors(e.id, randomSeed(e.id, 6, 12), 32, (x, y) -> {
       float size = randomSeed((int) (e.id + x), 8, 16);

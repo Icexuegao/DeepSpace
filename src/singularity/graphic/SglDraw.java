@@ -66,7 +66,7 @@ public class SglDraw{
       Draw.draw(mirrorField + 0.51f, () -> {
         effectBuffer.end();
 
-        SglShaders.mirrorField.waveMix = Tmp.c1.set(SglDrawConst.matrixNet);
+        SglShaders.mirrorField.waveMix = Tmp.c1.set(SglDrawConst.getMatrixNet());
         SglShaders.mirrorField.waveScl = 0.03f;
         SglShaders.mirrorField.gridStroke = 0.8f;
         SglShaders.mirrorField.maxThreshold = 1f;
