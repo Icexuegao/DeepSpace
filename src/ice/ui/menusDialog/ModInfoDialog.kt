@@ -69,6 +69,7 @@ object ModInfoDialog :BaseMenusDialog(IceStats.模组.localized(), IStyles.menus
     AssistedTable("Eipusino", "1428509711").itooltip("颉姐你带我走吧")
     AssistedTable("sowiearch", "68237730").itooltip("我喜欢你 莲莲我喜欢你")
     AssistedTable("松鼠", "501410836").itooltip("全部草飞")
+    AssistedTable("HIOPLE", "3163376638").itooltip("‘’感觉像是在玩gtnh‘’")
     AssistedTable("HOOHHOOH", "1876862665").itooltip("愚昧的活着不如清醒的死去")
     AssistedTable("MrT", "949707328").itooltip("某个憨批笑脸头套")
     AssistedTable("坠机的牢阔", "2863192836").itooltip("有机会也试试[#F6A34FFF]战锤[]这个模组吖")
@@ -80,7 +81,7 @@ object ModInfoDialog :BaseMenusDialog(IceStats.模组.localized(), IStyles.menus
     AssistedTable("种余明的玉米", "2923607476").itooltip("你要这样我可要宣传我模了")
     AssistedTable("维生素X", "2484910089").itooltip("[#A4A5F5FF]我爱[][#F5BAE9FF]玲纱![]")
     AssistedTable("GRACHA", "1292683953").itooltip("*大屠戮的最后一刀刺向了自己的心脏 污浊随之翻滚喷涌")
-    AssistedTable("zxs", "488254306").itooltip("JS异端")
+    AssistedTable("zxs", "488254306").itooltip("草飞松鼠")
   }
 
   override fun build(cont: Table) {

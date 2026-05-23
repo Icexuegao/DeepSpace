@@ -9,13 +9,13 @@ import arc.scene.ui.layout.Table
 import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import universecore.scene.ui.iTableGX
 import ice.ui.MenusDialog
 import ice.ui.UI
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.data.*
 import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
+import universecore.scene.ui.iTableGX
 
 object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusButton_database) {
   init {

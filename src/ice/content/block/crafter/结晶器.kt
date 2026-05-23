@@ -20,11 +20,11 @@ class 结晶器 :NormalCrafter("crystallizer") {
         this.localizedName = "结晶器"
         description = "使导能流体结晶于强化合金从而生产导能结晶\n最早的导能结晶技术,依赖电磁场波动,使导能流体在载体金属上逐步形成结晶"
       }
-      
+
       en {
         this.localizedName = "Crystallizer"
-        description = "Crystallizes conductive fluid onto reinforced alloy to produce conductive crystals\n
-        The earliest conductive crystal technology relied on electromagnetic field fluctuations to gradually form crystals of conductive fluid on a carrier metal"
+        description =
+          "Crystallizes conductive fluid onto reinforced alloy to produce conductive crystals\n" + "The earliest conductive crystal technology relied on electromagnetic field fluctuations to gradually form crystals of conductive fluid on a carrier metal"
       }
     }
     requirements(

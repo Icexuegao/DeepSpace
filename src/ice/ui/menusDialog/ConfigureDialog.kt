@@ -20,9 +20,6 @@ import ice.core.SettingValue
 import ice.entities.ModeDifficulty
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import universecore.scene.element.ProgressBar
-import universecore.scene.element.typinglabel.TLabel
-import universecore.util.toTrimmedString
 import ice.ui.Documents
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
@@ -37,8 +34,11 @@ import singularity.ui.dialogs.ModConfigDialog
 import singularity.ui.dialogs.ModConfigDialog.*
 import singularity.ui.fragments.entityinfo.EntityInfoFrag
 import singularity.ui.fragments.entityinfo.HealthBarStyle
+import universecore.scene.element.ProgressBar
+import universecore.scene.element.typinglabel.TLabel
+import universecore.util.toTrimmedString
 
-object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.menusButton_configure) {
+object ConfigureDialog :BaseMenusDialog(IceStats.设置.localized(), IStyles.menusButton_configure) {
   var config: ModConfigDialog = ModConfigDialog()
 
   init {
@@ -46,7 +46,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       "general",
       Icon.settings,
       ConfigSepLine("musicMenu", "音乐"),
-      object : ConfigTable("musicBar", {
+      object :ConfigTable("musicBar", {
         val padTop = it.add(ProgressBar(IStyles.pa1) { IMusics.title.position / 168f }).padTop(10f).padBottom(10f)
         padTop.row()
       }) {
@@ -72,7 +72,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       ConfigCheck("进入游戏自动弹出mod主菜单", { SettingValue.进入游戏自动弹出mod主菜单 = it }, SettingValue::进入游戏自动弹出mod主菜单),
 
       ConfigSepLine("mode", "游戏模式"),
-      object : ConfigTable("musicBar", {
+      object :ConfigTable("musicBar", {
         val fLabel = TLabel(SettingValue.difficulty.description).also { it1 ->
           it1.setColor(SettingValue.difficulty.color)
         }
@@ -86,9 +86,9 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
               { SettingValue.difficulty == mod },
               if (SettingValue.difficulty == mod) mod.color else IceColor.b4,
               { x, f ->
-                  f.update {
-                    f.setColor(if (SettingValue.difficulty == mod) mod.color else IceColor.b4)
-                  }
+                f.update {
+                  f.setColor(if (SettingValue.difficulty == mod) mod.color else IceColor.b4)
+                }
               }) {
               SettingValue.difficulty = mod
               fLabel.restart(mod.description)
@@ -114,7 +114,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         1f,
         0.001f
       ),
-      object : ConfigSlider(
+      object :ConfigSlider(
         "信息显示刷新间隔", { SettingValue.信息显示刷新间隔 = it }, SettingValue::信息显示刷新间隔, 0f, 60f, 1f
       ) {
         init {
@@ -136,7 +136,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       ),
       ConfigButton("生命指示器风格") {
 
-        object : TextButton("", IStyles.frameButtonStyle) {
+        object :TextButton("", IStyles.frameButtonStyle) {
           init {
             label.setColor(IceColor.b4)
             clicked {
@@ -151,7 +151,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
 
                 t.top().pane(Styles.noBarPane) { p ->
                   p.defaults().top().growX().height(45f)
-                  for (style in HealthBarStyle.entries) {
+                  for(style in HealthBarStyle.entries) {
                     p.button({ b -> b.add(style.name) }, Styles.underlineb, {
                       Sgl.config.healthBarStyle = style
                       t.clearActions()
@@ -181,23 +181,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
           add(Core.bundle.get("settings.reset")).color(IceColor.b4)
           clicked {
             Vars.ui.showConfirm(Core.bundle.get("settings.resetHintsConfirm")) {
-              //  SglHint.resetCompletedHints();
-              //  config.requireRelaunch()
-
               Documents.DocumentNotificationData.reset()
-            }
-          }
-        }
-      },
-      ConfigButton("重置所有已阅读的提示信息") {
-        object : TextButton(Core.bundle.get("settings.reset"), IStyles.frameButtonStyle) {
-          init {
-            label.setColor(IceColor.b4)
-            clicked {
-              Vars.ui.showConfirm(Core.bundle.get("settings.resetAllHintsConfirm")) {
-                //  SglHint.resetAllCompletedHints();
-                //  config.requireRelaunch()
-              }
             }
           }
         }
@@ -216,19 +200,19 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         "模糊采样强度", { f: Float -> Sgl.config.backBlurLen = f }, { Sgl.config.backBlurLen }, 0.5f, 8f, 0.25f
       ),
 
-      object : ConfigSlider(
+      object :ConfigSlider(
         "画质预设", Floatc { f: Float ->
-          if (f >= 0 && f < SglUI.grapPreset.size) {
-            val a = SglUI.grapPreset[f.toInt()]
-            Sgl.config.animateLevel = (a[0] as Number).toInt()
-            Sgl.config.enableShaders = (a[1] as Boolean?)!!
-            Sgl.config.mathShapePrecision = (a[2] as Number).toInt().toFloat()
-            Sgl.config.enableDistortion = (a[3] as Boolean?)!!
-            Sgl.config.enableParticle = (a[4] as Boolean?)!!
-            Sgl.config.maxParticleCount = (a[5] as Number).toInt()
-            Sgl.config.enableLightning = (a[6] as Boolean?)!!
-          }
-        }, Floatp { this.matchLevel() }, 0f, SglUI.grapPreset.size.toFloat(), 1f
+        if (f >= 0 && f < SglUI.grapPreset.size) {
+          val a = SglUI.grapPreset[f.toInt()]
+          Sgl.config.animateLevel = (a[0] as Number).toInt()
+          Sgl.config.enableShaders = (a[1] as Boolean?)!!
+          Sgl.config.mathShapePrecision = (a[2] as Number).toInt().toFloat()
+          Sgl.config.enableDistortion = (a[3] as Boolean?)!!
+          Sgl.config.enableParticle = (a[4] as Boolean?)!!
+          Sgl.config.maxParticleCount = (a[5] as Number).toInt()
+          Sgl.config.enableLightning = (a[6] as Boolean?)!!
+        }
+      }, Floatp { this.matchLevel() }, 0f, SglUI.grapPreset.size.toFloat(), 1f
       ) {
         init {
           str = Prov { Core.bundle.get("settings.graph_" + matchLevel()) }
@@ -268,13 +252,13 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
 
       ConfigSlider(
         "视野最大缩放限制", { f: Float ->
-          SettingValue.视野最大缩放限制 = f
-        }, { SettingValue.视野最大缩放限制 }, 0f, 40f, 0.1f
+        SettingValue.视野最大缩放限制 = f
+      }, { SettingValue.视野最大缩放限制 }, 0f, 40f, 0.1f
       ),
       ConfigSlider(
         "视野最小缩放限制", { f: Float ->
-          SettingValue.视野最小缩放限制 = f
-        }, { SettingValue.视野最小缩放限制 }, 0.1f, 1.5f, 0.1f
+        SettingValue.视野最小缩放限制 = f
+      }, { SettingValue.视野最小缩放限制 }, 0.1f, 1.5f, 0.1f
       ),
       ConfigCheck(
         "启用包裹物品绘制", { b: Boolean -> SettingValue.启用包裹物品绘制 = b }, SettingValue::启用包裹物品绘制
@@ -292,7 +276,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         Sgl.config.enableModsInterops = b
         config.requireRelaunch()
       }, { Sgl.config.enableModsInterops }),
-      object : ConfigCheck("interopAssignUnitCosts", Boolc { b: Boolean ->
+      object :ConfigCheck("interopAssignUnitCosts", Boolc { b: Boolean ->
         Sgl.config.interopAssignUnitCosts = b
         config.requireRelaunch()
       }, Boolp { Sgl.config.interopAssignUnitCosts }) {
@@ -300,7 +284,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
           disabled = Boolp { !Sgl.config.enableModsInterops }
         }
       },
-      object : ConfigCheck("interopAssignEmpModels", Boolc { b: Boolean ->
+      object :ConfigCheck("interopAssignEmpModels", Boolc { b: Boolean ->
         Sgl.config.interopAssignEmpModels = b
         config.requireRelaunch()
       }, Boolp { Sgl.config.interopAssignEmpModels }) {
@@ -309,15 +293,14 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         }
       },
       ConfigSepLine("reciprocal", Core.bundle.get("infos.override")),
-      object : ConfigCheck("modReciprocal", Boolc { b: Boolean ->
+      object :ConfigCheck("modReciprocal", Boolc { b: Boolean ->
         Sgl.config.modReciprocal = b
         config.requireRelaunch()
       }, Boolp { Sgl.config.modReciprocal }) {
         init {
           str = Prov { if (Sgl.config.modReciprocal) "" else Core.bundle.get("infos.reciprocalWarn") }
         }
-      },
-      /*object : ConfigCheck("modReciprocalContent", Boolc { b: Boolean ->
+      },/*object : ConfigCheck("modReciprocalContent", Boolc { b: Boolean ->
         Sgl.config.modReciprocalContent = b
         config.requireRelaunch()
       }, Boolp { Sgl.config.modReciprocalContent }) {
@@ -330,10 +313,10 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
       ConfigCheck("启用调试模式", { b: Boolean -> SettingValue.启用调试模式 = b }, { SettingValue.启用调试模式 }),
       ConfigCheck("星球区块调试", { b: Boolean -> SettingValue.星球区块调试 = b }, { SettingValue.星球区块调试 }),
       ConfigButton("删除所有物品原理图") {
-        object : TextButton("重置", Styles.flatt) {
+        object :TextButton("重置", Styles.flatt) {
           init {
             clicked {
-              for (schematic in AtomSchematics.AtomSchematic.all) {
+              for(schematic in AtomSchematics.AtomSchematic.all) {
                 schematic.cleanLock()
               }
             }
@@ -341,7 +324,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         }
       },
       ConfigButton("删除科技树所有缓存物品") {
-        object : TextButton("重置", Styles.flatt) {
+        object :TextButton("重置", Styles.flatt) {
           init {
             clicked {
               Sgl.researches.reset()
@@ -350,7 +333,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         }
       },
       ConfigButton("恢复默认配置") {
-        object : TextButton("重置", Styles.flatt) {
+        object :TextButton("重置", Styles.flatt) {
           init {
             clicked {
               SettingValue.clear()
@@ -362,7 +345,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
         }
       },
       ConfigCheck("loadInfo", { b: Boolean -> Sgl.config.loadInfo = b }, { Sgl.config.loadInfo }),
-      object : ConfigCheck("debugMode", Boolc { b: Boolean -> Sgl.config.debugMode = b }, Boolp { Sgl.config.debugMode }) {
+      object :ConfigCheck("debugMode", Boolc { b: Boolean -> Sgl.config.debugMode = b }, Boolp { Sgl.config.debugMode }) {
         init {
           str = Prov { Core.bundle.get("infos.unusableDebugButton") }
           disabled = Boolp { true }
@@ -371,7 +354,7 @@ object ConfigureDialog : BaseMenusDialog(IceStats.设置.localized(), IStyles.me
   }
 
   fun matchLevel(): Float {
-    for (i in SglUI.grapPreset.indices) {
+    for(i in SglUI.grapPreset.indices) {
       val a = SglUI.grapPreset[i]
 
       if (a[0] == Sgl.config.animateLevel && a[1] == Sgl.config.enableShaders && a[2] == Sgl.config.mathShapePrecision && a[3] == Sgl.config.enableDistortion && a[4] == Sgl.config.enableParticle && a[5] == Sgl.config.maxParticleCount && a[6] == Sgl.config.enableLightning) return i.toFloat()

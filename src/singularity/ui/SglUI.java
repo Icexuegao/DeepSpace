@@ -45,26 +45,20 @@ public class SglUI {
 
   public static Blur uiBlur = new Blur(Blur.DEf_B);
 
-  static {
+  static{
     UpdatePool.INSTANCE.receive("syncUIBlurCfg", () -> {
       uiBlur.blurScl = Sgl.config.blurLevel;
       uiBlur.blurSpace = Sgl.config.backBlurLen;
 
-      SglStyles.blurBack.stageBackground = Sgl.config.enableBlur ? SglStyles.BLUR_BACK : Styles.black9;
-      Styles.defaultDialog.stageBackground = Sgl.config.enableBlur ? SglStyles.BLUR_BACK : Styles.black9;
+      SglStyles.blurBack.stageBackground = Sgl.config.enableBlur? SglStyles.BLUR_BACK : Styles.black9;
+      Styles.defaultDialog.stageBackground = Sgl.config.enableBlur? SglStyles.BLUR_BACK : Styles.black9;
     });
   }
 
-  public static final Object[][] grapPreset = {
-          {1, false, 0.25f, false, false, 64, false},
-          {2, true, 0.5f, false, true, 256, false},
-          {2, true, 0.75f, false, true, 512, true},
-          {3, true, 1f, true, true, 1024, true},
-          {3, true, 1f, true, true, 4096, true},
-  };
+  public static final Object[][] grapPreset = {{1, false, 0.25f, false, false, 64, false}, {2, true, 0.5f, false, true, 256, false}, {2, true, 0.75f, false, true, 512, true}, {3, true, 1f, true, true, 1024, true}, {3, true, 1f, true, true, 4096, true},};
 
 
-  public void init() {
+  public void init(){
     entityInfoFrag = new EntityInfoFrag();
     entityInfoFrag.displayMatcher.put(new EntityHealthDisplay<>(), e -> e instanceof Teamc && e instanceof Healthc);
     entityInfoFrag.displayMatcher.put(new UnitStatusDisplay<>(), e -> e instanceof Unit);
@@ -90,38 +84,20 @@ public class SglUI {
 
     debugInfos.build(Vars.ui.hudGroup);
 
-    if (!SettingValue.INSTANCE.get禁用mod主界面背景()) {
+    if(!SettingValue.INSTANCE.get禁用mod主界面背景()){
       Vars.ui.menufrag = new SglMenuFrag();
       Vars.ui.menufrag.build(Vars.ui.menuGroup);
     }
 
 
     configEventListeners();
-
-    //添加设置项入口
-    /*Vars.ui.settings.shown(() -> {
-      Table table = FieldHandler.getValueDefault(Vars.ui.settings, "menu");
-      table.button(
-              Core.bundle.get("settings.singularity"),
-              SglDrawConst.sglIcon,
-              Styles.flatt,
-              32,
-              () -> Sgl.ui.config.show()
-      ).marginLeft(8).row();
-    });*/
-    //setConfigItems();
   }
 
-  void configEventListeners() {
+  void configEventListeners(){
     Events.on(EventType.WorldLoadEndEvent.class, e -> {
-      for (int i = 0; i < 1; i++) {
+      for(int i = 0; i < 1; i++){
         int fi = i;
-        Time.run(60 + 30*i, () -> notificationFrag.notify(
-            new Notification.Warning(
-                "notification test " + fi,
-                "notification message"
-            )
-        ));
+        Time.run(60 + 30*i, () -> notificationFrag.notify(new Notification.Warning("notification test " + fi, "notification message")));
       }
 
      /* Time.run(390, () -> {
@@ -136,24 +112,10 @@ public class SglUI {
       });*/
     });
 
-    Events.on(SglEventTypes.ResearchCompletedEvent.class, e -> notificationFrag.notify(
-            new Notification.ResearchCompleted(
-                    Core.bundle.get("infos.researchCompleted"),
-                    Core.bundle.format("infos.researched", e.getResearch().getLocalizedName()),
-                    e.getResearch()
-            )
-    ));
+    Events.on(SglEventTypes.ResearchCompletedEvent.class, e -> notificationFrag.notify(new Notification.ResearchCompleted(Core.bundle.get("infos.researchCompleted"), Core.bundle.format("infos.researched", e.getResearch().getLocalizedName()), e.getResearch())));
 
-    Events.on(SglEventTypes.ResearchInspiredEvent.class, e -> notificationFrag.notify(
-            new Notification.Inspired(
-                    Core.bundle.get("infos.inspired"),
-                    Core.bundle.format("infos.inspiredBy", e.getResearch().getLocalizedName()),
-                    e.getInspire(), e.getResearch()
-            )
-    ));
+    Events.on(SglEventTypes.ResearchInspiredEvent.class, e -> notificationFrag.notify(new Notification.Inspired(Core.bundle.get("infos.inspired"), Core.bundle.format("infos.inspiredBy", e.getResearch().getLocalizedName()), e.getInspire(), e.getResearch())));
   }
-
-
 
 
 }
