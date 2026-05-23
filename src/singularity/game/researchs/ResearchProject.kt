@@ -5,12 +5,11 @@ import arc.Events
 import arc.graphics.g2d.TextureRegion
 import arc.math.Mathf
 import arc.struct.Seq
-import arc.util.Nullable
-import universecore.struct.texture.LazyTextureSingleDelegate
-import universecore.ui.bundle.Localizable
 import mindustry.ctype.UnlockableContent
 import singularity.contents.SglTechThree
 import singularity.core.SglEventTypes.ResearchCompletedEvent
+import universecore.struct.texture.LazyTextureSingleDelegate
+import universecore.ui.bundle.Localizable
 
 class ResearchProject(val name: String, val techRequires: Int, val techRequiresRandom: Int = 0) :Localizable {
   val dependencies: Seq<ResearchProject> = Seq<ResearchProject>()
@@ -29,15 +28,14 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
   var slogan: String = "slogan"
   var icon: TextureRegion by LazyTextureSingleDelegate("research_$name")
 
-  @Nullable
   var inspire: Inspire? = null
 
-  @Nullable
   var reveal: RevealGroup? = null
 
   var showIfRevealess: Boolean = false
   var hideTechs: Boolean = false
-  var group: ResearchGroup? = null
+  /** 该项目所在的Group */
+  lateinit var group: ResearchGroup
 
   var isCompleted: Boolean = false
     private set
@@ -66,15 +64,6 @@ class ResearchProject(val name: String, val techRequires: Int, val techRequiresR
     this.dependencies.addAll(*dependencies)
 
     return this
-  }
-
-  // 依赖应当在所有项目生成后开始
-  fun dependencies(vararg dependencies: String) {
-    SglTechThree.dependencies.add {
-      for(dependency in dependencies) {
-        addDependency(group!!.getResearch(dependency)!!)
-      }
-    }
   }
 
   fun addContent(vararg contents: UnlockableContent): ResearchProject {

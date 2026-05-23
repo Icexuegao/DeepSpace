@@ -11,7 +11,6 @@ class ResearchManager {
   fun makeGroup(planet: Planet): ResearchGroup {
     val group = ResearchGroup(planet)
     allProjects.put(planet, group)
-
     return group
   }
 
@@ -24,53 +23,54 @@ class ResearchManager {
   }
 
   fun init() {
-    for (group in allProjects.values()) {
+    for(group in allProjects.values()) {
       group.init()
     }
   }
 
   fun reset() {
-    for (group in allProjects.values()) {
+    for(group in allProjects.values()) {
       group.reset()
     }
   }
 
   fun save() {
-    for (group in allProjects.values()) {
+    for(group in allProjects.values()) {
       group.save()
     }
   }
 
   fun load() {
-    for (group in allProjects.values()) {
+    for(group in allProjects.values()) {
       group.load()
     }
   }
 
   open class ResearchSDL {
-    private var context: ResearchGroup? = null
+    lateinit var context: ResearchGroup
     private var manager: ResearchManager = Sgl.researches
-     val dependencies= Seq<Runnable>()
-    private var addResearching= false
+    private var addResearching = false
 
     protected fun makePlanetContext(planet: Planet, runnable: Runnable) {
       context = manager.makeGroup(planet)
-      addResearching=true
+      addResearching = true
       runnable.run()
-      addResearching=false
-      dependencies.forEach { it.run() }
+      addResearching = false
     }
 
     protected fun byName(name: String): ResearchProject? {
-      return context!!.getResearch(name)
+      return context.getResearch(name)
     }
-    protected fun research(name: String, techRequires: Int, techRequiresRandom: Int, runnable: ResearchProject.()->Unit): ResearchProject {
+
+    protected fun research(
+      name: String, techRequires: Int, techRequiresRandom: Int, runnable: ResearchProject.() -> Unit
+    ): ResearchProject {
       val res = research(name, techRequires, techRequiresRandom)
       runnable.invoke(res)
       return res
     }
 
-    protected fun research(name: String, techRequires: Int, runnable: ResearchProject.()->Unit): ResearchProject {
+    protected fun research(name: String, techRequires: Int, runnable: ResearchProject.() -> Unit): ResearchProject {
       val res = research(name, techRequires)
       runnable.invoke(res)
       return res
@@ -78,13 +78,13 @@ class ResearchManager {
 
     protected fun research(name: String, techRequires: Int, techRequiresRandom: Int): ResearchProject {
       val project = ResearchProject(name, techRequires, techRequiresRandom)
-      context!!.addProject(project)
+      context.addProject(project)
       return project
     }
 
     protected fun research(name: String, techRequires: Int): ResearchProject {
       val project = ResearchProject(name, techRequires)
-      context!!.addProject(project)
+      context.addProject(project)
       return project
     }
   }

@@ -23,8 +23,7 @@ class 燃料封装机 :NormalCrafter("fuel_packager") {
 
       en {
         this.localizedName = "Fuel Packager"
-        description = "Encapsulate nuclear fuel into reinforced alloy to produce nuclear fuel, Configurable\n
-        Utilize force-field-stabilized cryogenic technology to create a sub-absolute-zero environment, compressing and encapsulating nuclear fuel at extremely high concentration and pressure"
+        description = "Encapsulate nuclear fuel into reinforced alloy to produce nuclear fuel, Configurable\nUtilize force-field-stabilized cryogenic technology to create a sub-absolute-zero environment, compressing and encapsulating nuclear fuel at extremely high concentration and pressure"
       }
     }
     requirements(

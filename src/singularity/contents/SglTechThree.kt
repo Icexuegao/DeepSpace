@@ -9,9 +9,9 @@ import singularity.game.researchs.ResearchManager.ResearchSDL
 import singularity.game.researchs.RevealGroup.ResearchReveal
 
 @Suppress("unused", "LocalVariableName")
-object SglTechThree : ResearchSDL() {
+object SglTechThree :ResearchSDL() {
 
-   fun load() {
+  fun load() {
     CrafterBlocks.apply {
       Distributions.apply {
         EffectBlocks.apply {
@@ -25,9 +25,8 @@ object SglTechThree : ResearchSDL() {
                   }
                   val 基础存储与物流 = research("基础存储与物流", 120) {
                     addDependency(初级科技)
-                    apply {
-                      addContent(强化传送带, 特种传送带, 基础卸载器, 转换分类器, 转换溢流门, 盒子)
-                    }
+                    addContent(强化传送带, 特种传送带, 基础卸载器, 转换分类器, 转换溢流门, 盒子)
+
                   }
 
                   val 进阶存储与物流 = research("进阶存储与物流", 120) {
@@ -52,25 +51,24 @@ object SglTechThree : ResearchSDL() {
 
                   val 初级能量设施 = research("初级能量设施", 120) {
                     addDependency(初级科技)
-                    addContent(能量节点, 大型能量节点, 小型能量电池, 能量电池,光伏板,地热发电机,风力发电机,蒸汽冷凝机,沼气发电机)
+                    addContent(能量节点, 大型能量节点, 小型能量电池, 能量电池, 光伏板, 地热发电机, 风力发电机, 蒸汽冷凝机, 沼气发电机)
                   }
                   val 增益装置 = research("增益装置", 120) {
                     addDependency(初级能量设施)
-                    addContent(小型照明器,大型照明器,定向超速器)
+                    addContent(小型照明器, 大型照明器, 定向超速器)
                   }
-
 
                   val 高级能量设施 = research("高级能量设施", 120) {
                     addDependency(初级能量设施)
-                    addContent(大型能量电池,远程能量节点,大型风力发电机,中子能发电机)
+                    addContent(大型能量电池, 远程能量节点, 大型风力发电机, 中子能发电机)
                   }
                   val 这是你的神经吗 = research("这是你的神经吗", 120) {
                     addDependency(高级能量设施)
-                    addContent(神经束节点,神经索节点)
+                    addContent(神经束节点, 神经索节点)
                   }
                   val 裂与聚 = research("裂与聚", 120) {
                     addDependency(高级能量设施)
-                    addContent(热核裂变反应堆,终归反应堆,核子冲击反应堆)
+                    addContent(热核裂变反应堆, 终归反应堆, 核子冲击反应堆)
                   }
 
                   val 基础防御 = research("基础防护", 120) {
@@ -89,9 +87,8 @@ object SglTechThree : ResearchSDL() {
 
                   research("皮肉之苦", 120) {
                     addDependency(中阶防护2)
-                    addContent(生物钢墙,大型生物钢墙)
+                    addContent(生物钢墙, 大型生物钢墙)
                   }
-
 
                   val 高阶防护1 = research("高阶防护1", 120) {
                     inspire = (PlaceBlockInspire(Blocks.daciteBoulder))
