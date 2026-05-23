@@ -23,8 +23,8 @@ class 结晶器 :NormalCrafter("crystallizer") {
       
       en {
         this.localizedName = "Crystallizer"
-        description = "Crystallizes a fluid into a solid form, producing a solid form of the fluid"
-        details = "Uses electromagnetic fields to compress the fluid together to a solid form, and then encapsulates it with a negative gravity field shell to produce a solid form of the fluid"
+        description = "Crystallizes conductive fluid onto reinforced alloy to produce conductive crystals\n
+        The earliest conductive crystal technology relied on electromagnetic field fluctuations to gradually form crystals of conductive fluid on a carrier metal"
       }
     }
     requirements(

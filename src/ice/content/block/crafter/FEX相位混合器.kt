@@ -21,7 +21,7 @@ class FEX相位混合器 :NormalCrafter("FEX_phase_mixer") {
 
       en {
         this.localizedName = "FEX Phase Mixer"
-        description = "Rebuilds the phase of FEX, making it active"
+        description = "Rebuilds the phase of FEX fluid, activating its internal energy"
       }
     }
     requirements(
