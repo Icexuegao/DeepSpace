@@ -7,11 +7,11 @@ import arc.math.Mathf
 import arc.struct.Seq
 import arc.util.Time
 import ice.core.SettingValue
-import universecore.world.Load
 import ice.ui.MenusDialog
 import mindustry.Vars
 import mindustry.audio.SoundControl
 import mindustry.gen.Musics
+import universecore.world.Load
 import kotlin.math.log10
 
 object SoundControl : SoundControl(), Load {
@@ -53,7 +53,6 @@ object SoundControl : SoundControl(), Load {
   }
 
   override fun update() {
-    return
     val paused = Vars.state.isGame && Core.scene.hasDialog()
     val playing = Vars.state.isGame
 
