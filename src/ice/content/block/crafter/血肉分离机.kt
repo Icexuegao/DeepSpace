@@ -19,9 +19,9 @@ class 血肉分离机 :NormalCrafter("bloodExtractor") {
         details = "血肉赘生物同时具有高温和易燃两种特性的高危流体"
       }
       en {
-        this.localizedName = "Blood Extractor"
-        description = "Heats biological steel into Blood Flesh Slime"
-        details = "Blood Flesh Slime is a high-risk fluid with both high temperature and flammability characteristics"
+        this.localizedName = "Blood Separator"
+        description = "Heats biological steel into Flesh Slime"
+        details = "Flesh Slime is a high-risk fluid with both high temperature and flammability characteristics"
       }
     }
     size = 2

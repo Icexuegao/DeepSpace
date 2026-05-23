@@ -26,7 +26,7 @@ class FEX充能座 :NormalCrafter("FEX_crystal_charger") {
       en {
         this.localizedName = "FEX Charging Base"
         description = "Charges FEX crystals into charged FEX crystals"
-        details = "Uses high-energy lasers to charge FEX crystals, giving them more powerful energy"
+        details = "Release high-energy neutron pulses onto conductive crystals. With the appropriate pulse frequency, energy continuously accumulates and amplifies within the lattice, destabilizing the crystal structure and producing some special effects"
       }
     }
     requirements(
