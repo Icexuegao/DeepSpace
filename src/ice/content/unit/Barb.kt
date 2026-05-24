@@ -12,7 +12,7 @@ class Barb :IceUnitType("unit_barb", CrawlUnit::class.java) {
       }
     }
     health = 120f
-    armor = 2f
+    armor = 1.5f
     hitSize = 8f
     speed = 1.3f
     rotateSpeed = 2.4f

@@ -23,9 +23,9 @@ class PutotFire :IceUnitType("putotFire") {
     faceTarget = false
     targetAir = false
     flying = true
-    health = 230f
+    health = 70f
     hitSize = 9f
-    armor = 2f
+    armor = 0.5f
     range = 40f
     accel = 0.08f
     drag = 0.04f

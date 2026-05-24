@@ -47,6 +47,8 @@ class 蚀虻 :IceUnitType("corrodfly-head", CorrodflyHead::class.java) {
     rippleScale = 0.2f
     legMoveSpace = 1f
 
+    health = 120f
+    armor = 1.5f
     hitSize = 8f
     rotateSpeed = 2.5f
     speed = 0.8f

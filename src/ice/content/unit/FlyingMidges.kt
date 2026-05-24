@@ -39,12 +39,13 @@ class FlyingMidges :IceUnitType("unit_flyingMidges", TimedKillUnit::class.java) 
       BlockFlag.battery,
       BlockFlag.factory
     )
-    health = 360f
-    armor = 1f
+    health = 70f
+    armor = 0.5f
     hitSize = 9f
     range = 240f
-    speed = 4f
-    drag = 0.1f
+    speed = 3f
+    drag = 0.04f
+    accel = 0.08f
     rotateSpeed = 20f
     engineOffset = 6f
     engineSize = 2.5f
