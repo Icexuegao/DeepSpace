@@ -2,10 +2,8 @@ package universecore.ui.reactive
 
 import kotlin.reflect.KProperty
 
-/**
- * 响应式状态管理类
- * 当值发生变化时,自动通知所有订阅者
- */
+/** 响应式状态管理类
+ * 当值发生变化时,自动通知所有订阅者 */
 class ReactiveState<T>(private var value: T) {
   private val listeners = mutableListOf<(T) -> Unit>()
 
@@ -37,9 +35,4 @@ class ReactiveState<T>(private var value: T) {
 
 }
 
-/**
- * 订阅对象，用于取消订阅
- */
-class Subscription(private val unsubscribe: () -> Unit) {
-  fun unsubscribe() = this.unsubscribe.invoke()
-}
+
