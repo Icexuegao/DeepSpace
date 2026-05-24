@@ -5,6 +5,7 @@ import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.Button
 import arc.scene.ui.Image
 import arc.scene.ui.Label
+import arc.scene.ui.TextField
 import arc.scene.ui.layout.Table
 import arc.struct.OrderedMap
 import arc.struct.Seq
@@ -41,14 +42,17 @@ abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val co
     table.table { ta ->
       ta.table {
         it.iTableGX { search ->
+          var d: TextField? = null
           search.image(IStyles.search).apply {
             get().tapped {
               field.update { "" }
+              d!!.text = ""
             }
           }.color(IceColor.b4).size(33f).padLeft(15f).padRight(8f)
-          search.field(field.get()) { search ->
+          d = search.field(field.get()) { search ->
             field.update { search }
-          }.update { it.text=field.get() }.growX().get()
+          }.growX().get()
+
           val button = Button(IStyles.button).apply {
             add("?")
             itooltip { it1 ->
@@ -63,7 +67,7 @@ abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val co
         }.minHeight(60f).row()
         it.iPaneG { p ->
           p.top()
-          p.react(arrayOf(field)) { list ->
+          p.react(field) { list ->
             list.top()
             list.add(listTable()).growX()
           }.grow()
@@ -71,7 +75,7 @@ abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val co
       }.minWidth(350f).growY()
       ta.add(Image(IStyles.whiteui)).color(IceColor.b1).width(3f).growY()
       ta.iTableG { t ->
-        t.react(arrayOf(currentContent)) { info ->
+        t.react(currentContent) { info ->
           info.iTableG {
             it.iTableG(IStyles.background31) { it1 ->
               it1.icePane { it2 ->

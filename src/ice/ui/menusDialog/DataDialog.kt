@@ -16,6 +16,8 @@ import ice.ui.menusDialog.data.*
 import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
 import universecore.scene.ui.iTableGX
+import universecore.ui.reactive.ReactiveState
+import universecore.ui.reactive.react
 
 object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusButton_database) {
   init {
@@ -26,16 +28,10 @@ object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBut
     UnitContentDialog()
   }
 
-  var contentDialog: ContentDialogBase<*> = ContentDialogBase.contentDialog.first()
-  lateinit var tmp: Table
-  fun toggleMenu(contentDialog: ContentDialogBase<*>) {
-    this.contentDialog = contentDialog
+  var contentDialog: ReactiveState<ContentDialogBase<*>> = ReactiveState(ContentDialogBase.contentDialog.first())
 
-    tmp.actions(Actions.alpha(0f, 0.15f), Actions.run {
-      tmp.clearChildren()
-      contentDialog.build(tmp)
-      tmp.actions(Actions.alpha(1f, 0.15f))
-    })
+  fun toggleMenu(contentDialog: ContentDialogBase<*>) {
+    this.contentDialog.update { contentDialog }
   }
 
   override fun build(cont: Table) {
@@ -43,19 +39,22 @@ object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBut
       ContentDialogBase.contentDialog.forEach {
         val textButton = TextButton(it.cName, IStyles.button1)
         textButton.changed {
-          if (contentDialog == it) return@changed
+          if (contentDialog.get() == it) return@changed
           toggleMenu(it)
           UI.showUISoundCloseV(ISounds.数据板块顶部选择按钮反馈)
         }
         textButton.update {
-          textButton.isChecked = contentDialog == it
+          textButton.isChecked = contentDialog.get() == it
         }
         ta.add(textButton).pad(1f).grow()
       }
     }.height(60f).row()
+
     cont.add(Image(IStyles.whiteui)).color(IceColor.b1).height(3f).growX().row()
-    tmp= cont.table{
-      contentDialog.build(it)
+
+    cont.react(contentDialog) {
+      it.actions(Actions.alpha(0f),Actions.alpha(1f, 0.15f))
+      contentDialog.get().build(it)
     }.grow().get()
   }
 
@@ -68,7 +67,7 @@ object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBut
     }
     if (ha != null) {
       toggleMenu(ha)
-      contentDialog.setCurrent(block)
+      contentDialog.get().setCurrent(block)
     } else return
 
     if (!MenusDialog.isShown) MenusDialog.show()

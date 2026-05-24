@@ -24,6 +24,7 @@ import singularity.ui.fragments.ToolBarFrag
 import singularity.ui.fragments.override.SglMenuFrag
 import universecore.ui.reactive.ReactiveState
 import universecore.ui.reactive.react
+import universecore.util.log
 import universecore.world.Load
 
 object UI :Load {
@@ -52,6 +53,9 @@ object UI :Load {
 
     baseDialog.cont.button("dw") {
       item = Vars.content.items().random()
+    }.row()
+    baseDialog.cont.field(""){
+      it.log()
     }.row()
 
     baseDialog.cont.react(arrayOf(reactiveState)) {
