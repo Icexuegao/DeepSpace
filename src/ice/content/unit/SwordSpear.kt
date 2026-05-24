@@ -152,7 +152,6 @@ class SwordSpear :IceUnitType("unit_swordSpear") {
       shootY = 0f
       reload = 300f
       mirror = false
-      useAmmo = false
       baseRotation = 180f
       shootSound = Sounds.none
       alwaysShooting = true

@@ -171,7 +171,6 @@ class ChargeWeapon(name: String = "") : Weapon(name) {
     if (mount.shoot &&  //must be shooting
       can &&  //must be able to shoot
       !(bullet.killShooter && mount.totalShots > 0) &&  //if the bullet kills the shooter, you should only ever be able to shoot once
-      (!useAmmo || unit.ammo > 0 || !Vars.state.rules.unitAmmo || unit.team.rules().infiniteAmmo) &&  //check ammo
       (!alternate || wasFlipped == flipSprite) && mount.warmup >= minWarmup &&  //must be warmed up
       unit.deltaLen() / Time.delta >= minShootVelocity &&  //check velocity requirements
       (mount.reload <= 0.0001f || (alwaysContinuous && mount.bullet == null)) &&  //reload has to be 0, or it has to be an always-continuous weapon
@@ -181,10 +180,6 @@ class ChargeWeapon(name: String = "") : Weapon(name) {
 
       mount.reload = reload
 
-      if (useAmmo) {
-        unit.ammo--
-        if (unit.ammo < 0) unit.ammo = 0f
-      }
     }
   }
 }

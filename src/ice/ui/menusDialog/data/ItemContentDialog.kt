@@ -6,6 +6,6 @@ import ice.world.content.item.IceItem
 
 class ItemContentDialog:ContentDialogBase<IceItem>("物品", BaseContentSeq.items) {
   override fun getColor(): Color {
-    return currentContent.color
+    return currentContent.get().color
   }
 }

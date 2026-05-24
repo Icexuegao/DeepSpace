@@ -1,5 +1,6 @@
 package ice
 
+import arc.Core
 import arc.Events
 import ice.audio.SoundControl
 import ice.content.*
@@ -37,6 +38,10 @@ open class Ice :Mod() {
   }
 
   init {
+    Events.on(mindustry.game.EventType.ResizeEvent::class.java){
+      Core.scene.marginTop=0f
+      Core.scene.marginBottom=0f
+    }
     DeepSpace.globals.load()
     Events.on(mindustry.game.EventType.MusicRegisterEvent::class.java) {
       SoundControl.init()
@@ -59,6 +64,7 @@ open class Ice :Mod() {
   }
 
   override fun init() {
+
     Sgl.init()
     UI.init()
     Schematics.init()

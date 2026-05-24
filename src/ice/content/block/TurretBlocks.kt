@@ -21,7 +21,7 @@ object TurretBlocks :Load {
   val 冲穿 = 冲穿()
   val 光谱 = 光谱()
   val 霓虹 = 霓虹()
-  val 撕裂 = Tear()
+  val 撕裂 = 撕裂()
   val 隧穿 = 隧穿()
   val 腥风 = 腥风()
   val 血雨 = 血雨()

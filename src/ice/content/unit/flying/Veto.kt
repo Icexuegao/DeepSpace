@@ -307,7 +307,6 @@ class Veto :IceUnitType("units_veto") {
       mirror = false
       shootY = 0f
       baseRotation = 180f
-      useAmmo = false
       alwaysShooting = true
       alwaysContinuous = true
       shootSound = Sounds.none

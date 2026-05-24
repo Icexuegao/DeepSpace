@@ -320,7 +320,6 @@ class SpiderBomb :IceUnitType("unit_spiderBomb") {
         if ((mount.shoot &&  //must be shooting
                   can &&  //must be able to shoot
                   !(bullet.killShooter && mount.totalShots > 0) &&  //if the bullet kills the shooter, you should only ever be able to shoot once
-                  (!useAmmo || unit.ammo > 0 || !Vars.state.rules.unitAmmo || unit.team.rules().infiniteAmmo) &&  //check ammo
                   (!alternate || wasFlipped == flipSprite) && mount.warmup >= minWarmup &&  //must be warmed up
                   velLen >= minShootVelocity &&  //check velocity requirements
                   (mount.reload <= 0.0001f || (alwaysContinuous && mount.bullet == null)) &&  //reload has to be 0, or it has to be an always-continuous weapon
@@ -333,11 +332,6 @@ class SpiderBomb :IceUnitType("unit_spiderBomb") {
           shoot(unit, mount, bulletX, bulletY, shootAngle)
 
           mount.reload = reload
-
-          if (useAmmo) {
-            unit.ammo--
-            if (unit.ammo < 0) unit.ammo = 0f
-          }
         }
       }
     }.apply {
@@ -349,7 +343,6 @@ class SpiderBomb :IceUnitType("unit_spiderBomb") {
       mirror = false
       rotateSpeed = 1f
       shootCone = 20f
-      useAmmo = false
       rotationLimit = 20f
       alwaysShooting = true
       alwaysContinuous = true
@@ -392,7 +385,6 @@ class SpiderBomb :IceUnitType("unit_spiderBomb") {
       reload = 30f
       mirror = false
       display = false
-      useAmmo = false
       shootCone = 360f
       shootSound = Sounds.none
       shootStatus = IStatus.突袭

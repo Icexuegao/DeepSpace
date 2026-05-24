@@ -6,6 +6,6 @@ import mindustry.type.StatusEffect
 
 class StatusContentDialog:ContentDialogBase<StatusEffect>("状态", BaseContentSeq.status) {
   override fun getColor(): Color {
-    return currentContent.color
+    return currentContent.get().color
   }
 }

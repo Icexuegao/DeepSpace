@@ -34,7 +34,7 @@ import kotlin.math.min
 open class P2PLiquidNode :SglBlock("p2pLiquidNode") {
 
   init {
-
+    solid=true
     hasLiquids = true
     outputsLiquid = true
     configurable = true

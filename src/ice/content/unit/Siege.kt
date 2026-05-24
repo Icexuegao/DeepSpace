@@ -70,7 +70,6 @@ class Siege :IceUnitType("siege") {
       mirror = false
       rotate = true
       display = false
-      useAmmo = false
       rotateSpeed = 20f
       targetInterval = 10f
       shootSound = Sounds.none

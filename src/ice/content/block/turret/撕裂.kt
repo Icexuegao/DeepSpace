@@ -19,7 +19,7 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import universecore.util.toColor
 
-class Tear :SglTurret("turret_tear") {
+class 撕裂 :SglTurret("turret_tear") {
   init {
     localization {
       zh_CN {
@@ -50,7 +50,7 @@ class Tear :SglTurret("turret_tear") {
     })
     shootSound = ISounds.聚爆
     drawers = DrawSglTurret().apply {
-      parts.addAll(RegionPart("-side").apply {
+      parts.addAll(RegionPart(), RegionPart("-side").apply {
         heatProgress = DrawPart.PartProgress.warmup
         under = true
         mirror = true

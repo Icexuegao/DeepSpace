@@ -12,7 +12,6 @@ import ice.core.IFiles
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.ui.UI
-import ice.ui.menusDialog.DataDialog
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
 import universecore.scene.ui.addLine
@@ -32,7 +31,8 @@ open class Remains(val name: String) :Localizable {
     fun getNoEnableds(): Seq<Remains> {
       return remainsSeq.select { !it.enabled }
     }
-    var Localizable.effect by AttachedProperty{""}
+
+    var Localizable.effect by AttachedProperty { "" }
   }
 
   override var localizedName: String = ""
@@ -40,7 +40,6 @@ open class Remains(val name: String) :Localizable {
   override var description: String = ""
 
   override var details: String = ""
-
 
   var level = 0
 
@@ -65,7 +64,6 @@ open class Remains(val name: String) :Localizable {
   fun enabled(enabled: Boolean) {
     if (enabled) install() else uninstall()
     this@Remains.enabled = enabled
-    DataDialog.contentDialog.flunAll()
   }
 
   open fun getTiTleTable(): Table {

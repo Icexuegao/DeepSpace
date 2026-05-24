@@ -4,17 +4,17 @@ import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.layout.Table
 import ice.audio.ISounds
 import ice.graphics.IStyles
+import ice.ui.UI
+import ice.world.content.BaseContentSeq
+import mindustry.type.UnitType
 import universecore.scene.ui.addLine
 import universecore.scene.ui.iTableG
 import universecore.scene.ui.itooltip
 import universecore.scene.ui.layout.ITable
-import ice.ui.UI
-import ice.world.content.BaseContentSeq
-import mindustry.type.UnitType
 
 class UnitContentDialog :ContentDialogBase<UnitType>("单位", BaseContentSeq.units) {
-  override fun flunList() {
-    list.clearChildren()
+  override fun listTable(): Table {
+    val list = Table()
     val types = arrayOf("ground", "air", "naval")
     val tables = Array(types.size) { ITable().apply { setRowsize(5) } }
 
@@ -23,8 +23,7 @@ class UnitContentDialog :ContentDialogBase<UnitType>("单位", BaseContentSeq.un
     }.forEach { content ->
       fun dfw(table: Table) {
         table.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
-          currentContent = content
-          flunInfo()
+          currentContent.update { content }
           UI.showUISoundCloseV(ISounds.数据板块内个体反馈)
         }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
       }
@@ -39,5 +38,6 @@ class UnitContentDialog :ContentDialogBase<UnitType>("单位", BaseContentSeq.un
         it1.add(child).grow().row()
       }.row()
     }
+    return list
   }
 }

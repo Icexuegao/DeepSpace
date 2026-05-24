@@ -3,7 +3,6 @@ package ice.content.unit.mech
 import arc.graphics.Blending
 import arc.graphics.Color
 import arc.math.Interp
-import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.LaserBulletType
 import ice.entities.bullet.base.BasicBulletType
@@ -16,7 +15,6 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.part.RegionPart
 import mindustry.gen.MechUnit
 import mindustry.gen.Sounds
-import mindustry.type.ammo.ItemAmmoType
 import universecore.world.ability.ArmorPlateAbility
 
 class DeathOath :IceUnitType("unit_deathOath", MechUnit::class.java) {
@@ -43,8 +41,7 @@ class DeathOath :IceUnitType("unit_deathOath", MechUnit::class.java) {
     mechFrontSway = 1.9f
     drownTimeMultiplier = 6f
     mechStepParticles = true
-    ammoType = ItemAmmoType(IItems.钍锭)
-    ammoCapacity = 240
+
     engineSize = 6f
     engineOffset = 15f
 

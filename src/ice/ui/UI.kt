@@ -13,11 +13,17 @@ import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.ConversationFragment
 import ice.ui.menusDialog.DataDialog
 import mindustry.Vars
+import mindustry.content.Items
 import mindustry.game.EventType
 import mindustry.gen.Icon
 import mindustry.gen.Sounds
+import mindustry.type.Item
+import mindustry.ui.dialogs.BaseDialog
 import singularity.Sgl
 import singularity.ui.fragments.ToolBarFrag
+import singularity.ui.fragments.override.SglMenuFrag
+import universecore.ui.reactive.ReactiveState
+import universecore.ui.reactive.react
 import universecore.world.Load
 
 object UI :Load {
@@ -35,13 +41,30 @@ object UI :Load {
       }
     }
   }
-  val spacea = IFiles.findModPng("spacea")
-  override fun init() {
 
-   // Vars.ui.menufrag = SglMenuFrag()
+  override fun init() {
+    val baseDialog = BaseDialog("xx")
+
+    val reactiveState = ReactiveState(Items.coal)
+    var item : Item by reactiveState
+
+
+
+    baseDialog.cont.button("dw") {
+      item = Vars.content.items().random()
+    }.row()
+
+    baseDialog.cont.react(arrayOf(reactiveState)) {
+      it.image(item.uiIcon).size(100f).row()
+    }.row()
+
+    baseDialog.addCloseButton()
+    baseDialog.show()
+
+    Vars.ui.menufrag = SglMenuFrag()
 
     //if(!SettingValue.INSTANCE.get禁用mod主界面背景()){
-  // Vars.ui.menufrag.build(Vars.ui.menuGroup)
+    Vars.ui.menufrag.build(Vars.ui.menuGroup)
 
 
     toolBarFrag.addTool("deepSpaceMenu", { "模组菜单" }, { Icon.menu }, {

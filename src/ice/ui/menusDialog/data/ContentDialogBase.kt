@@ -5,7 +5,6 @@ import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.Button
 import arc.scene.ui.Image
 import arc.scene.ui.Label
-import arc.scene.ui.TextField
 import arc.scene.ui.layout.Table
 import arc.struct.OrderedMap
 import arc.struct.Seq
@@ -14,43 +13,46 @@ import ice.audio.ISounds
 import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import universecore.scene.ui.*
-import universecore.scene.ui.layout.ITable
 import ice.ui.UI
 import ice.world.content.blocks.abstractBlocks.EnvironmentBlock
 import ice.world.content.blocks.environment.Floor
 import mindustry.ctype.UnlockableContent
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
+import universecore.scene.ui.*
+import universecore.scene.ui.layout.ITable
+import universecore.ui.reactive.ReactiveState
+import universecore.ui.reactive.react
 
-abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val contetnArray: Seq<T>) :Table() {
+abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val contetnArray: Seq<T>) {
   companion object {
     var contentDialog = Seq<ContentDialogBase<*>>()
   }
 
-  lateinit var field: TextField
-  var list = ITable()
-  var info = Table()
-
-  var currentContent: T = contetnArray.first { !it.isHidden }
+  var currentContent = ReactiveState<T>(contetnArray.first { !it.isHidden })
 
   init {
     contentDialog.add(this)
-    table { ta ->
-      ta.table {
+  }
 
+  var field = ReactiveState("")
+
+  open fun build(table: Table) {
+    table.table { ta ->
+      ta.table {
         it.iTableGX { search ->
           search.image(IStyles.search).apply {
             get().tapped {
-              field.clearText()
+              field.update { "" }
             }
           }.color(IceColor.b4).size(33f).padLeft(15f).padRight(8f)
-          field = search.field("") {
-            flunList()
-          }.growX().get()
+          search.field(field.get()) { search ->
+            field.update { search }
+          }.update { it.text=field.get() }.growX().get()
           val button = Button(IStyles.button).apply {
             add("?")
             itooltip { it1 ->
+              it1.addCR("点击放大镜清空搜索内容")
               it1.addCR("默认搜索name和localizedName")
               it1.addCR("加[#]搜索简介")
               it1.addCR("加[%]搜索吐槽")
@@ -61,44 +63,58 @@ abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val co
         }.minHeight(60f).row()
         it.iPaneG { p ->
           p.top()
-          p.add(list)
-          flunList()
+          p.react(arrayOf(field)) { list ->
+            list.top()
+            list.add(listTable()).growX()
+          }.grow()
         }
       }.minWidth(350f).growY()
       ta.add(Image(IStyles.whiteui)).color(IceColor.b1).width(3f).growY()
-      ta.iTableG { p ->
-        p.add(info).grow()
-        flunInfo()
+      ta.iTableG { t ->
+        t.react(arrayOf(currentContent)) { info ->
+          info.iTableG {
+            it.iTableG(IStyles.background31) { it1 ->
+              it1.icePane { it2 ->
+                showInfo(it2)
+              }.minWidth(200f).growX()
+            }.margin(22f)
+            it.iTableG(IStyles.background31) { it2 ->
+              it2.icePane { it1 ->
+                showProperties(it1)
+              }
+            }.margin(22f)
+          }.minHeight(300f).row()
+          info.iTableG(IStyles.background31) {}.margin(22f).minHeight(100f).grow()
+        }.grow()
       }
     }.grow()
   }
 
   fun setCurrent(content: UnlockableContent) {
-    currentContent = content as T
-    flunInfo()
-    flunInfo()
+    currentContent.update { content as T }
   }
-  fun flunAll(){
-    flunList()
-    flunInfo()
-  }
-  open fun flunList() {
-    list.clearChildren()
+
+  open fun listTable(): Table {
+    val list = ITable()
+
     list.setRowsize(5)
     contetnArray.select { content ->
       searchSelect(content)
     }.forEach { content ->
       list.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
-        currentContent = content
-        flunInfo()
+        currentContent.update { content }
+
         UI.showUISoundCloseV(ISounds.数据板块内个体反馈)
       }.size(60f).pad(2f).margin(5f).itooltip(content.localizedName)
     }
+
+    return list
   }
 
   open fun searchSelect(content: T): Boolean {
     if (content.isHidden && !SettingValue.启用调试模式) return false
-    val searchField = field.text
+    val searchField = field.get()
+
     if (searchField.isNotEmpty()) {
 
       val substring = searchField.substring(1)
@@ -124,44 +140,24 @@ abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val co
     return true
   }
 
-  fun flunInfo() {
-    info.clear()
-    info.iTableG {
-      it.iTableG(IStyles.background31) { it1 ->
-        it1.icePane { it2 ->
-          showInfo(it2)
-        }.minWidth(200f).growX()
-      }.margin(22f)
-      it.iTableG(IStyles.background31) { it2 ->
-        it2.icePane { it1 ->
-          showProperties(it1)
-        }
-      }.margin(22f)
-    }.minHeight(300f).row()
-    info.iTableG(IStyles.background31) {
-
-    }.margin(22f).minHeight(100f)
-  }
-
-  open fun getColor(): Color {
-    return IceColor.b4
-  }
+  open fun getColor() = IceColor.b4
 
   open fun showInfo(table: Table) {
-
     val color = getColor()
+    val currentContent1 = currentContent.get()
     table.iTableGX { it3 ->
-      it3.image(currentContent.uiIcon).size(112f).scaling(Scaling.fit).row()
-      it3.add(currentContent.localizedName).fontScale(1.5f).pad(2f).color(color)
+      it3.image(currentContent1.uiIcon).size(112f).scaling(Scaling.fit).row()
+      it3.add(currentContent1.localizedName).fontScale(1.5f).pad(2f).color(color)
     }.row()
-    table.add(currentContent.description).pad(2f).growX().color(color).wrap().row()
-    table.add(currentContent.details).pad(2f).growX().color(color.cpy().a(0.5f)).wrap().row()
+    table.add(currentContent1.description).pad(2f).growX().color(color).wrap().row()
+    table.add(currentContent1.details).pad(2f).growX().color(color.cpy().a(0.5f)).wrap().row()
   }
 
   open fun showProperties(table: Table) {
-    table.add(currentContent.name).color(Color.valueOf("b7e1fb")).padBottom(3f).row()
-    currentContent.checkStats()
-    val stats = currentContent.stats
+    val currentContent1 = currentContent.get()
+    table.add(currentContent1.name).color(Color.valueOf("b7e1fb")).padBottom(3f).row()
+    currentContent1.checkStats()
+    val stats = currentContent1.stats
     val toMap = stats.toMap()
     toMap.keys().forEach { cat ->
       val map: OrderedMap<Stat, Seq<StatValue>> = toMap.get(cat)

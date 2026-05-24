@@ -27,12 +27,19 @@ object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBut
   }
 
   var contentDialog: ContentDialogBase<*> = ContentDialogBase.contentDialog.first()
+  lateinit var tmp: Table
+  fun toggleMenu(contentDialog: ContentDialogBase<*>) {
+    this.contentDialog = contentDialog
 
-  private val gen = Table()
-  private val tmp = Table()
+    tmp.actions(Actions.alpha(0f, 0.15f), Actions.run {
+      tmp.clearChildren()
+      contentDialog.build(tmp)
+      tmp.actions(Actions.alpha(1f, 0.15f))
+    })
+  }
 
-  init {
-    gen.iTableGX { ta ->
+  override fun build(cont: Table) {
+    cont.iTableGX { ta ->
       ContentDialogBase.contentDialog.forEach {
         val textButton = TextButton(it.cName, IStyles.button1)
         textButton.changed {
@@ -46,24 +53,10 @@ object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBut
         ta.add(textButton).pad(1f).grow()
       }
     }.height(60f).row()
-    gen.add(Image(IStyles.whiteui)).color(IceColor.b1).height(3f).growX().row()
-    gen.add(tmp.also { it.add(contentDialog).grow() }).grow()
-
-  }
-
-  fun toggleMenu(contentDialog: ContentDialogBase<*>) {
-    this.contentDialog = contentDialog
-
-    tmp.actions(Actions.alpha(0f, 0.15f), Actions.run {
-      tmp.clearChildren()
-      contentDialog.flunAll()
-      tmp.add(contentDialog).grow()
-      tmp.actions(Actions.alpha(1f, 0.15f))
-    })
-  }
-
-  override fun build(cont: Table) {
-    cont.add(gen).grow()
+    cont.add(Image(IStyles.whiteui)).color(IceColor.b1).height(3f).growX().row()
+    tmp= cont.table{
+      contentDialog.build(it)
+    }.grow().get()
   }
 
   fun showUnlockableContent(block: UnlockableContent) {

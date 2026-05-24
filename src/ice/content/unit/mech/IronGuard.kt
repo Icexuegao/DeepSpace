@@ -2,7 +2,6 @@ package ice.content.unit.mech
 
 import arc.graphics.Color
 import arc.math.Interp
-import ice.content.IItems
 import ice.content.IStatus
 import ice.entities.bullet.base.BasicBulletType
 import ice.entities.effect.MultiEffect
@@ -14,7 +13,6 @@ import mindustry.entities.effect.ExplosionEffect
 import mindustry.entities.effect.ParticleEffect
 import mindustry.gen.MechUnit
 import mindustry.gen.Sounds
-import mindustry.type.ammo.ItemAmmoType
 import universecore.world.ability.ArmorPlateAbility
 
 class IronGuard :IceUnitType("unit_ironGuard", MechUnit::class.java) {
@@ -42,8 +40,6 @@ class IronGuard :IceUnitType("unit_ironGuard", MechUnit::class.java) {
     mechFrontSway = 1f
     drownTimeMultiplier = 4f
     mechStepParticles = true
-    ammoType = ItemAmmoType(IItems.钍锭)
-    ammoCapacity = 240
     abilities.add(ArmorPlateAbility().apply {
       healthMultiplier = 0.4f
     }, RegenAbility().apply {

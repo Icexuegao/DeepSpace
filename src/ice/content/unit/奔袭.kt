@@ -52,7 +52,6 @@ class 奔袭 :IceUnitType("unit_garrison") {
       rotationLimit = 45f
       baseRotation = 60f
       alternate = false
-      useAmmo = false
       alwaysShooting = true
       alwaysContinuous = true
       shootSound = Sounds.shootBeamPlasma
@@ -101,7 +100,6 @@ class 奔袭 :IceUnitType("unit_garrison") {
       rotationLimit = 45f
       baseRotation = 30f
       alternate = false
-      useAmmo = false
       alwaysShooting = true
       alwaysContinuous = true
       shootSound = Sounds.shootBeamPlasma
@@ -149,7 +147,6 @@ class 奔袭 :IceUnitType("unit_garrison") {
       rotateSpeed = 1f
       shootCone = 20f
       rotationLimit = 20f
-      useAmmo = false
       alwaysShooting = true
       alwaysContinuous = true
       shootSound = Sounds.shootBeamPlasma
