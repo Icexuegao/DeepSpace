@@ -72,7 +72,7 @@ open class Ice :Mod() {
     SaveIO.init()
 
     Vars.content.each {
-      if (it.minfo.mod == DeepSpace.mod && it is UnlockableContent) it.unlock()
+      if ( it is UnlockableContent) it.unlock()
     }
   }
 

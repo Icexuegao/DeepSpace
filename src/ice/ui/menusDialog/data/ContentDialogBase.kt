@@ -68,6 +68,7 @@ abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val co
         it.iPaneG { p ->
           p.top()
           p.react(field) { list ->
+            list.clearChildren()
             list.top()
             list.add(listTable()).growX()
           }.grow()
@@ -76,6 +77,7 @@ abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val co
       ta.add(Image(IStyles.whiteui)).color(IceColor.b1).width(3f).growY()
       ta.iTableG { t ->
         t.react(currentContent) { info ->
+          info.clearChildren()
           info.iTableG {
             it.iTableG(IStyles.background31) { it1 ->
               it1.icePane { it2 ->

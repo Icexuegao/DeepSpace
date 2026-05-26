@@ -23,7 +23,6 @@ fun Table.react(reactiveState: Array<ReactiveState<*>>, cons: Cons<ITable>): Cel
   for(state in reactiveState) {
     //理论上应该不需要取消订阅
     state.subscribe {
-      table.clearChildren()
       cons.get(table)
     }
   }

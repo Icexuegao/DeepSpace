@@ -3,7 +3,6 @@ package singularity.ui.fragments.override
 import arc.Core
 import arc.Events
 import arc.func.Boolp
-import arc.graphics.g2d.Draw
 import arc.scene.Group
 import arc.scene.event.Touchable
 import arc.scene.ui.Image
@@ -37,8 +36,8 @@ class SglMenuFrag :MenuFragment() {
     group.touchable = Touchable.childrenOnly
     group.visible { !Vars.ui.editor.isShown }
     parent.addChild(group)
-    group.fill { x, y, w, h ->
-      Draw.rect(spacea, w/2f,  h/2f, Core.graphics.width.toFloat(), Core.graphics.height.toFloat())
+    group.fill {
+      it.image(spacea).grow()
     }
     val versionText = (if (Version.build == -1) "[#fc8140aa]" else "[#ffffffba]") + Version.combined()
     val modVersionText = "[#${IceColor.b4}]UniverseCore:${UncCore.version} ${DeepSpace.modDisplayName}:${DeepSpace.modVersion}"

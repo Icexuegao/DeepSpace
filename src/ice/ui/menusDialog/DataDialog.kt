@@ -53,8 +53,10 @@ object DataDialog :BaseMenusDialog(IceStats.数据.localized(), IStyles.menusBut
     cont.add(Image(IStyles.whiteui)).color(IceColor.b1).height(3f).growX().row()
 
     cont.react(contentDialog) {
-      it.actions(Actions.alpha(0f),Actions.alpha(1f, 0.15f))
-      contentDialog.get().build(it)
+      it.actions(Actions.alpha(0f,0.15f), Actions.run {
+        it.clearChildren()
+        contentDialog.get().build(it)
+      },Actions.alpha(1f, 0.15f))
     }.grow().get()
   }
 
