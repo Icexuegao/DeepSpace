@@ -1,5 +1,6 @@
 package ice.content.block.effect
 
+import ice.content.IItems
 import ice.world.content.blocks.abstractBlocks.IceBlock.Companion.requirements
 import mindustry.content.Items
 import mindustry.type.Category
@@ -14,7 +15,7 @@ class 小型修理器 :MendProjector("mender") {
         description = "定期修复附近的建筑"
       }
     }
-    requirements(Category.effect, Items.lead, 30, Items.copper, 25)
+    requirements(Category.effect, IItems.铜锭, 30, IItems.低碳钢, 25)
     consumePower(0.3f)
     size = 1
     reload = 200f
