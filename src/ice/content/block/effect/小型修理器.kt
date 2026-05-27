@@ -15,7 +15,7 @@ class 小型修理器 :MendProjector("mender") {
         description = "定期修复附近的建筑"
       }
     }
-    requirements(Category.effect, IItems.铅锭, 30, IItems.铜锭, 25)
+    requirements(Category.effect, IItems.铜锭, 30, IItems.低碳钢, 25)
     consumePower(0.3f)
     size = 1
     reload = 200f
