@@ -102,17 +102,6 @@ object MatrixDistNet :Load {
     }
   }
   var 网格控制器 = MatrixGridCore("matrix_controller").apply {
-
-    requirements(
-      SglCategory.matrix, ItemStack.with(
-        IItems.矩阵合金, 120, IItems.强化合金, 100, IItems.FEX水晶, 80, IItems.铱锭, 45, IItems.絮凝剂, 60, IItems.单晶硅, 80
-      )
-    )
-    bufferCapacity = 512
-    linkOffset = 8f
-    size = 4
-    squareSprite = false
-    matrixEnergyUse = 1.2f
     localization {
       zh_CN {
         localizedName = "网格控制器"
@@ -120,6 +109,26 @@ object MatrixDistNet :Load {
           "矩阵网格的控制中枢,与矩阵网格框架建立矩阵网格,在网格中通过此设备配置网格内io点的的输入输出和存储设备,是一个重要的物流管理模型"
       }
     }
+    requirements(
+      SglCategory.matrix,
+      IItems.矩阵合金,
+      120,
+      IItems.强化合金,
+      100,
+      IItems.FEX水晶,
+      80,
+      IItems.铱锭,
+      45,
+      IItems.絮凝剂,
+      60,
+      IItems.单晶硅,
+      80
+    )
+    bufferCapacity = 512
+    linkOffset = 8f
+    size = 4
+    squareSprite = false
+    matrixEnergyUse = 1.2f
   }
   var 网格框架 = MatrixEdgeBlock("matrix_grid_node").apply {
     localization {

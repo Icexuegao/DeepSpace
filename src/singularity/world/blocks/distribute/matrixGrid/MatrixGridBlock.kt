@@ -53,7 +53,7 @@ open class MatrixGridBlock(name: String) : DistNetBlock(name), DistMatrixUnitCom
     this.outputsLiquid = false
     this.outputItems = false
     this.configurable = true
-    this.independenceInventory = false
+   // this.independenceInventory = false
     this.independenceLiquidTank = false
     this.displayLiquid = false
     buildType = Prov(::MatrixGridBuild)

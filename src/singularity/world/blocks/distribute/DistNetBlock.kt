@@ -16,27 +16,27 @@ import singularity.world.components.distnet.DistElementBlockComp
 import singularity.world.components.distnet.DistElementBuildComp
 import singularity.world.modules.DistributeModule
 
-open class DistNetBlock(name: String) : SglBlock(name), DistElementBlockComp {
+open class DistNetBlock(name: String) :SglBlock(name), DistElementBlockComp {
   override var isNetLinker: Boolean = false
   override var topologyUse: Int = 1
   override var matrixEnergyCapacity: Float = 0.0f
   override var matrixEnergyUse: Float = 0.0f
 
   init {
-    this.solid = true
-    this.update = true
-    this.unloadable = false
-    this.saveConfig = false
-    this.canOverdrive = false
+    solid = true
+    update = true
+    unloadable = false
+    saveConfig = false
+    canOverdrive = false
     buildType = Prov(::DistNetBuild)
   }
 
   override fun setStats() {
     super.setStats()
-    this.setDistNetStats(this.stats)
+    setDistNetStats(stats)
   }
 
-  open inner class DistNetBuild : SglBuilding(), DistElementBuildComp {
+  open inner class DistNetBuild :SglBuilding(), DistElementBuildComp {
     override var distributor = DistributeModule(this)
     override var netLinked = Seq<DistElementBuildComp>()
     override var priority: Int = 0

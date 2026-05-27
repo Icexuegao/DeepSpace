@@ -13,7 +13,7 @@ import mindustry.world.blocks.storage.CoreBlock
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
 
-open class CoreBlock(name: String) : CoreBlock(name) {
+open class CoreBlock(name: String) :CoreBlock(name) {
   var powerProduct = 0f
 
   init {
@@ -26,7 +26,7 @@ open class CoreBlock(name: String) : CoreBlock(name) {
   override fun setBars() {
     super.setBars()
     if (hasPower && outputsPower) {
-      addBar<CoreBuild>("power") { entity ->
+      addBar("power") { entity: CoreBuild ->
         Bar({
           Core.bundle.format(
             "bar.poweroutput", Strings.fixed(entity.powerProduction * 60 * entity.timeScale(), 1)
@@ -41,7 +41,7 @@ open class CoreBlock(name: String) : CoreBlock(name) {
     if (powerProduct != 0f) stats.add(Stat.basePowerGeneration, powerProduct * 60.0f, StatUnit.powerSecond)
   }
 
-  inner class CoreBuild : CoreBlock.CoreBuild() {
+  private inner class CoreBuild :CoreBlock.CoreBuild() {
 
     var add = false
     override fun updateTile() {
@@ -54,6 +54,7 @@ open class CoreBlock(name: String) : CoreBlock(name) {
         }
       }
     }
+
     override fun read(read: Reads, revision: Byte) {
       super.read(read, revision)
       add = read.bool()
@@ -63,7 +64,6 @@ open class CoreBlock(name: String) : CoreBlock(name) {
       super.write(write)
       write.bool(add)
     }
-
 
     override fun getPowerProduction(): Float {
       return if (enabled) powerProduct else 0f

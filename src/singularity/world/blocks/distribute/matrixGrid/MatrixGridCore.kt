@@ -50,7 +50,7 @@ open class MatrixGridCore(name: String) : MatrixGridBlock(name), EdgeLinkerComp 
   var linkColors = ObjectMap<GridChildType, Color>()
 
   init {
-    this.config(Int::class.javaObjectType) { building: Building, int: Int -> this.link((building as EdgeLinkerBuildComp?)!!, int!!) }
+    config(Int::class.javaObjectType) { building: Building, int: Int -> this.link((building as EdgeLinkerBuildComp?)!!, int!!) }
     buildType = Prov(::MatrixGridCoreBuild)
   }
 
@@ -120,15 +120,15 @@ open class MatrixGridCore(name: String) : MatrixGridBlock(name), EdgeLinkerComp 
 
   override fun init() {
     super.init()
-    this.clipSize = max(this.clipSize, (this.linkLength * 8 * 2).toFloat())
-    this.initColor()
+    clipSize = max(this.clipSize, (this.linkLength * 8 * 2).toFloat())
+    initColor()
   }
 
   fun initColor() {
-    this.linkColors.put(GridChildType.input, Pal.heal)
-    this.linkColors.put(GridChildType.output, Pal.accent)
-    this.linkColors.put(GridChildType.acceptor, SglDrawConst.matrixNet)
-    this.linkColors.put(GridChildType.container, SglDrawConst.matrixNet)
+    linkColors.put(GridChildType.input, Pal.heal)
+    linkColors.put(GridChildType.output, Pal.accent)
+    linkColors.put(GridChildType.acceptor, SglDrawConst.matrixNet)
+    linkColors.put(GridChildType.container, SglDrawConst.matrixNet)
   }
 
   fun linkLength(): Int {
