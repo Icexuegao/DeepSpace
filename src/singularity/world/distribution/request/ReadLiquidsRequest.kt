@@ -87,7 +87,7 @@ class ReadLiquidsRequest(sender: DistElementBuildComp, private val destination: 
     }
 
     companion object {
-        private val temp = Seq<BuildingEntry<Building?>?>()
+        private val temp = Seq<BuildingEntry<Building>>()
         private var tempLiquid: FloatArray? = null
     }
 }

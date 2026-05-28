@@ -1,320 +1,289 @@
-package singularity.world.distribution.buffers;
+package singularity.world.distribution.buffers
 
-import arc.Core;
-import arc.graphics.Color;
-import arc.graphics.g2d.TextureRegion;
-import arc.struct.OrderedSet;
-import arc.struct.Seq;
-import mindustry.ctype.UnlockableContent;
-import mindustry.graphics.Pal;
-import mindustry.type.PayloadStack;
-import mindustry.type.UnitType;
-import mindustry.world.blocks.payloads.Payload;
-import mindustry.world.blocks.payloads.UnitPayload;
-import singularity.world.distribution.DistBufferType;
-import singularity.world.distribution.DistributeNetwork;
-import singularity.world.modules.PayloadModule;
+import arc.Core
+import arc.graphics.Color
+import arc.graphics.g2d.TextureRegion
+import arc.struct.OrderedSet
+import arc.struct.Seq
+import mindustry.ctype.UnlockableContent
+import mindustry.graphics.Pal
+import mindustry.type.PayloadStack
+import mindustry.type.UnitType
+import mindustry.world.blocks.payloads.Payload
+import mindustry.world.blocks.payloads.UnitPayload
+import singularity.world.distribution.DistBufferType
+import singularity.world.distribution.DistributeNetwork
+import singularity.world.modules.PayloadModule
 
-public class UnitBuffer extends BaseBuffer<PayloadStack, UnitPayload, UnitBuffer.UnitPacket>{
-  private final UnitPacket tmp = new UnitPacket();
-
-  @Override
-  public DistBufferType<?> bufferType(){
-    return DistBufferType.unitBuffer;
+class UnitBuffer :BaseBuffer<PayloadStack, UnitPayload, UnitBuffer.UnitPacket>() {
+  companion object {
+    val temp: Seq<Payload> = Seq<Payload>()
   }
 
-  public void put(UnitPayload unit){
-    tmp.payloads.clear();
-    tmp.payloads.add(unit);
-    tmp.obj.item = unit.content();
-    tmp.obj.amount = 1;
-    put(tmp);
+  private val tmp: UnitPacket = UnitPacket()
+
+  override fun bufferType(): DistBufferType<*>? {
+    return DistBufferType.unitBuffer
   }
 
-  public void remove(UnitPayload unit){
-    tmp.payloads.clear();
-    tmp.payloads.add(unit);
-    tmp.obj.item = unit.content();
-    tmp.obj.amount = 1;
-    remove(tmp);
+  fun put(unit: UnitPayload) {
+    tmp.payloads.clear()
+    tmp.payloads.add(unit)
+    tmp.obj!!.item = unit.content()
+    tmp.obj!!.amount = 1
+    put(tmp)
   }
 
-  public int getAmount(UnitType type){
-    UnitPacket packet = get(type.id);
-    return packet == null? 0: packet.obj.amount;
+  fun remove(unit: UnitPayload) {
+    tmp.payloads.clear()
+    tmp.payloads.add(unit)
+    tmp.obj!!.item = unit.content()
+    tmp.obj!!.amount = 1
+    remove(tmp)
   }
 
-  @Override
-  public void deReadFlow(UnitPayload ct, Number amount){
-    tmp.payloads.clear();
-    tmp.payloads.add(ct);
-    tmp.obj.item = ct.content();
-    tmp.obj.amount = amount.intValue();
-
-    deReadFlow(tmp);
+  fun getAmount(type: UnitType): Int {
+    val packet = get<UnitPacket?>(type.id.toInt())
+    return if (packet == null) 0 else packet.obj!!.amount
   }
 
-  @Override
-  public void dePutFlow(UnitPayload ct, Number amount){
-    tmp.payloads.clear();
-    tmp.payloads.add(ct);
-    tmp.obj.item = ct.content();
-    tmp.obj.amount = amount.intValue();
+  override fun deReadFlow(ct: UnitPayload, amount: Number) {
+    tmp.payloads.clear()
+    tmp.payloads.add(ct)
+    tmp.obj!!.item = ct.content()
+    tmp.obj!!.amount = amount.toInt()
 
-    dePutFlow(tmp);
+    deReadFlow(tmp)
   }
 
-  public UnitPayload take(){
-    if(memory.values().hasNext()){
-      UnitPacket p = memory.values().next();
-      if(!p.isEmpty()){
-        return p.take();
+  override fun dePutFlow(ct: UnitPayload, amount: Number) {
+    tmp.payloads.clear()
+    tmp.payloads.add(ct)
+    tmp.obj!!.item = ct.content()
+    tmp.obj!!.amount = amount.toInt()
+
+    dePutFlow(tmp)
+  }
+
+  fun take(): UnitPayload? {
+    if (memory.values().hasNext()) {
+      val p = memory.values().next()
+      if (!p.isEmpty) {
+        return p.take()
       }
     }
-    return null;
+    return null
   }
 
-  public UnitPayload peek(){
-    if(memory.values().hasNext()){
-      UnitPacket p = memory.values().next();
-      if(!p.isEmpty()){
-        return p.get();
+  fun peek(): UnitPayload? {
+    if (memory.values().hasNext()) {
+      val p = memory.values().next()
+      if (!p.isEmpty) {
+        return p.get()
       }
     }
-    return null;
+    return null
   }
 
-  public UnitPacket peekPacket(){
-    if(memory.values().hasNext()){
-      return memory.values().next();
+  fun peekPacket(): UnitPacket? {
+    if (memory.values().hasNext()) {
+      return memory.values().next()
     }
-    return null;
+    return null
   }
 
-  @Override
-  public Integer remainingCapacity(){
-    return (Integer) super.remainingCapacity();
+  override fun remainingCapacity(): Int? {
+    return super.remainingCapacity() as Int?
   }
 
   //no container usable, only buffer
-  @Override
-  public void bufferContAssign(DistributeNetwork network){}
-  @Override
-  public void bufferContAssign(DistributeNetwork network, UnitPayload ct){}
-  @Override
-  public Integer bufferContAssign(DistributeNetwork network, UnitPayload ct, Number amount){
-    return 0;
-  }
-  @Override
-  public Integer bufferContAssign(DistributeNetwork network, UnitPayload ct, Number amount, boolean deFlow){
-    return 0;
+  override fun bufferContAssign(network: DistributeNetwork?) {}
+  override fun bufferContAssign(network: DistributeNetwork?, ct: UnitPayload?) {}
+  override fun bufferContAssign(network: DistributeNetwork?, ct: UnitPayload?, amount: Number?): Int {
+    return 0
   }
 
-  @Override
-  public PayloadModule generateBindModule(){
-    return new UnitBufferModule();
+  override fun bufferContAssign(network: DistributeNetwork?, ct: UnitPayload?, amount: Number?, deFlow: Boolean): Int {
+    return 0
   }
 
-  @Override
-  public String localization(){
-    return Core.bundle.get("misc.unit");
+  override fun generateBindModule(): PayloadModule {
+    return UnitBufferModule()
   }
 
-  @Override
-  public Color displayColor(){
-    return Pal.accent;
+  override fun localization(): String? {
+    return Core.bundle.get("misc.unit")
   }
 
-  @Override
-  public Integer usedCapacity(){
-    return (Integer) super.usedCapacity();
+  override fun displayColor(): Color? {
+    return Pal.accent
   }
 
-  public class UnitPacket extends Packet<PayloadStack, UnitPayload>{
-    OrderedSet<UnitPayload> payloads = new OrderedSet<>();
+  override fun usedCapacity(): Int? {
+    return super.usedCapacity() as Int?
+  }
 
-    private UnitPacket(){}
+  inner class UnitPacket :Packet<PayloadStack, UnitPayload> {
+    var payloads: OrderedSet<UnitPayload> = OrderedSet<UnitPayload>()
 
-    public UnitPacket(Seq<UnitPayload> units, int amount){
-      payloads.addAll(units);
-      UnitType t = null;
-      for(UnitPayload payload: units){
-        if(t == null) t = payload.unit.type();
-        else if(t != payload.unit.type())
-          throw new IllegalArgumentException("cannot put two type to a same packet");
+    constructor()
+
+    constructor(units: Seq<UnitPayload>, amount: Int) {
+      payloads.addAll(units)
+      var t: UnitType? = null
+      for(payload in units) {
+        if (t == null) t = payload.unit.type()
+        else require(t === payload.unit.type()) { "cannot put two type to a same packet" }
       }
-      obj = new PayloadStack(t, amount);
+      obj = PayloadStack(t, amount)
     }
 
-    @Override
-    public int id(){
-      return obj.item.id;
+    override fun id(): Int {
+      return obj!!.item.id.toInt()
     }
 
-    @Override
-    public UnitPayload get(){
-      return payloads.orderedItems().peek();
+    override fun get(): UnitPayload? {
+      return payloads.orderedItems().peek()
     }
 
-    public UnitPayload take(){
-      UnitPayload res = get();
-      remove(res);
+    fun take(): UnitPayload? {
+      val res = get()
+      remove(res)
 
-      return res;
+      return res
     }
 
-    @Override
-    public Color color(){
-      return Pal.accent;
+    override fun color(): Color? {
+      return Pal.accent
     }
 
-    @Override
-    public String localization(){
-      return obj.item.localizedName;
+    override fun localization(): String? {
+      return obj!!.item.localizedName
     }
 
-    @Override
-    public TextureRegion icon(){
-      return obj.item.fullIcon;
+    override fun icon(): TextureRegion? {
+      return obj!!.item.fullIcon
     }
 
-    @Override
-    public int occupation(){
-      return obj.amount*bufferType().unit();
+    override fun occupation(): Int {
+      return obj!!.amount * bufferType()!!.unit()
     }
 
-    @Override
-    public Integer amount(){
-      return obj.amount;
+    override fun amount(): Int {
+      return obj!!.amount
     }
 
-    @Override
-    protected void setZero(){
-      payloads.clear();
-      readCaching += obj.amount;
-      obj.amount = 0;
+    override fun setZero() {
+      payloads.clear()
+      readCaching += obj!!.amount
+      obj!!.amount = 0
     }
 
-    @Override
-    protected void merge(Packet<PayloadStack, UnitPayload> other){
-      if(other.id() == id()){
-        int i = payloads.size;
-        payloads.addAll(((UnitPacket) other).payloads);
-        int o = payloads.size - i;
-        obj.amount += o;
-        putCaching += o*bufferType().unit();
+    protected override fun merge(other: Packet<PayloadStack?, UnitPayload?>) {
+      if (other.id() == id()) {
+        val i = payloads.size
+        payloads.addAll((other as UnitPacket).payloads)
+        val o = payloads.size - i
+        obj!!.amount += o
+        putCaching += o * bufferType()!!.unit()
       }
     }
 
-    @Override
-    protected void remove(Packet<PayloadStack, UnitPayload> other){
-      if(other.id() == id()){
-        int i = payloads.size;
-        payloads.removeAll(((UnitPacket) other).payloads.orderedItems());
-        int o = i - payloads.size;
-        obj.amount -= o;
-        readCaching += o*bufferType().unit();
+    protected override fun remove(other: Packet<PayloadStack?, UnitPayload?>) {
+      if (other.id() == id()) {
+        val i = payloads.size
+        payloads.removeAll((other as UnitPacket).payloads.orderedItems())
+        val o = i - payloads.size
+        obj!!.amount -= o
+        readCaching += o * bufferType()!!.unit()
       }
     }
 
-    public void put(UnitPayload unit){
-      tmp.payloads.clear();
-      tmp.payloads.add(unit);
-      tmp.obj.item = obj.item;
-      tmp.obj.amount = 1;
-      UnitBuffer.this.put(tmp);
+    fun put(unit: UnitPayload?) {
+      tmp.payloads.clear()
+      tmp.payloads.add(unit)
+      tmp.obj!!.item = obj!!.item
+      tmp.obj!!.amount = 1
+      this@UnitBuffer.put(tmp)
     }
 
-    public void remove(UnitPayload unit){
-      tmp.payloads.clear();
-      tmp.payloads.add(unit);
-      tmp.obj.item = obj.item;
-      tmp.obj.amount = 1;
-      UnitBuffer.this.remove(tmp);
+    fun remove(unit: UnitPayload?) {
+      tmp.payloads.clear()
+      tmp.payloads.add(unit)
+      tmp.obj!!.item = obj!!.item
+      tmp.obj!!.amount = 1
+      this@UnitBuffer.remove(tmp)
     }
 
-    public void deRead(int amount){
-      tmp.payloads.clear();
-      tmp.obj.item = obj.item;
-      tmp.obj.amount = amount;
-      UnitBuffer.this.deReadFlow(tmp);
+    fun deRead(amount: Int) {
+      tmp.payloads.clear()
+      tmp.obj!!.item = obj!!.item
+      tmp.obj!!.amount = amount
+      this@UnitBuffer.deReadFlow(tmp)
     }
 
-    public void dePut(int amount){
-      tmp.payloads.clear();
-      tmp.obj.item = obj.item;
-      tmp.obj.amount = amount;
-      UnitBuffer.this.dePutFlow(tmp);
+    fun dePut(amount: Int) {
+      tmp.payloads.clear()
+      tmp.obj!!.item = obj!!.item
+      tmp.obj!!.amount = amount
+      this@UnitBuffer.dePutFlow(tmp)
     }
 
-    @Override
-    public Packet<PayloadStack, UnitPayload> copy(){
-      return new UnitPacket(payloads.orderedItems(), obj.amount);
+    override fun copy(): Packet<PayloadStack, UnitPayload> {
+      return UnitPacket(payloads.orderedItems(), obj!!.amount)
     }
   }
 
-  public class UnitBufferModule extends PayloadModule{
-    static final Seq<Payload> temp = new Seq<>();
-
-    @Override
-    public int total(){
-      return usedCapacity();
+  inner class UnitBufferModule :PayloadModule() {
+    override fun total(): Int {
+      return usedCapacity()!!
     }
 
-    @Override
-    public void add(Payload payload){
-      if(payload instanceof UnitPayload p){
-        put(p);
+    override fun add(payload: Payload?) {
+      if (payload is UnitPayload) {
+        put(payload)
       }
     }
 
-    @Override
-    public int amountOf(UnlockableContent type){
-      UnitPacket packet = UnitBuffer.this.get(type.id);
-      return packet == null? 0: packet.amount();
+    override fun amountOf(type: UnlockableContent): Int {
+      val packet = this@UnitBuffer.get<UnitPacket?>(type.id.toInt())
+      return packet?.amount() ?: 0
     }
 
-    @Override
-    public Payload take(){
-      return UnitBuffer.this.take();
+    override fun take(): Payload? {
+      return this@UnitBuffer.take()
     }
 
-    @Override
-    public Payload get(){
-      return UnitBuffer.this.peek();
+    override fun get(): Payload? {
+      return this@UnitBuffer.peek()
     }
 
-    @Override
-    public Payload get(UnlockableContent type){
-      UnitPacket packet = UnitBuffer.this.get(type.id);
-      return packet == null? null: packet.get();
+    override fun get(type: UnlockableContent): Payload? {
+      val packet = this@UnitBuffer.get<UnitPacket?>(type.id.toInt())
+      return if (packet == null) null else packet.get()
     }
 
-    @Override
-    public Payload remove(UnlockableContent type){
-      UnitPacket packet = UnitBuffer.this.get(type.id);
-      return packet == null? null: packet.take();
+    override fun remove(type: UnlockableContent): Payload? {
+      val packet = this@UnitBuffer.get<UnitPacket?>(type.id.toInt())
+      return if (packet == null) null else packet.take()
     }
 
-    @Override
-    public void removeAll(UnlockableContent type){
-      for(UnitPacket packet: UnitBuffer.this){
-        packet.setZero();
+    override fun removeAll(type: UnlockableContent) {
+      for(packet in this@UnitBuffer) {
+        packet.setZero()
       }
     }
 
-    @Override
-    public boolean isEmpty(){
-      return UnitBuffer.this.usedCapacity() <= 0;
+    override fun isEmpty(): Boolean {
+      return this@UnitBuffer.usedCapacity()!! <= 0
     }
 
-    @Override
-    public Iterable<Payload> iterate(){
-      temp.clear();
-      for(UnitPacket packet: UnitBuffer.this){
-        temp.addAll(packet.payloads);
+    override fun iterate(): Iterable<Payload?> {
+      temp.clear()
+      for(packet in this@UnitBuffer) {
+        temp.addAll(packet.payloads)
       }
-      return temp;
+      return temp
     }
   }
 }

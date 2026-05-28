@@ -176,13 +176,13 @@ public class DistNetMonitorDialog extends BaseDialog{
     }
 
 
-    button("关闭",()->{hide();});
+    button("关闭", this::hide);
   }
 
   public void show(DistributeNetwork distNetwork){
     this.distNetwork = distNetwork;
-
     rebuild();
+    show();
   }
 
   @SuppressWarnings("ClassCanBeRecord")

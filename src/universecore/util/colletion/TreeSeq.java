@@ -3,11 +3,13 @@ package universecore.util.colletion;
 import java.util.*;
 import java.util.function.Function;
 
-/**一个基于{@link TreeSet}实现的有序可重集，向这个集合中加入元素会将其插入到合适其大小的位置，根据比较器，这个集合中的元素一定是有序的
+/**
+ * 一个基于{@link TreeSet}实现的有序可重集，向这个集合中加入元素会将其插入到合适其大小的位置，根据比较器，这个集合中的元素一定是有序的
  * <p>区别于{@link TreeSet}，这个集合允许多个比较器认为是相等的对象。
- * <p>插入复杂度通常为o(logn)，但如果比较器比较的值很集中，这个集合可能会退化到o(n)，遍历这个集合时，遍历获得的元素时有序的*/
+ * <p>插入复杂度通常为o(logn)，但如果比较器比较的值很集中，这个集合可能会退化到o(n)，遍历这个集合时，遍历获得的元素时有序的
+ */
 @SuppressWarnings("SortedCollectionWithNonComparableKeys")
-public class TreeSeq<Type> implements Iterable<Type>{
+public class TreeSeq<Type> implements Iterable<Type> {
   private final LinkedList<Type> tmp = new LinkedList<>();
 
   Comparator<Type> comparator;
@@ -33,8 +35,7 @@ public class TreeSeq<Type> implements Iterable<Type>{
       t = new LinkedList<>();
       t.addFirst(item);
       set.add(t);
-    }
-    else{
+    } else {
       t.addFirst(item);
     }
     size++;
@@ -62,7 +63,7 @@ public class TreeSeq<Type> implements Iterable<Type>{
     boolean test = false;
     TreeItr itr = iterator();
     Type item;
-    while(itr.hasNext()){
+    while(itr.hasNext()) {
       item = itr.next();
       if(boolf.apply(item)){
         itr.remove();
@@ -86,7 +87,7 @@ public class TreeSeq<Type> implements Iterable<Type>{
   public Type[] toArray(Type[] arr){
     Type[] list = Arrays.copyOf(arr, size);
     int index = 0;
-    for(Type item: this){
+    for(Type item : this){
       list[index++] = item;
     }
     return list;
@@ -100,13 +101,13 @@ public class TreeSeq<Type> implements Iterable<Type>{
   @Override
   public String toString(){
     StringBuilder builder = new StringBuilder("{");
-    for(LinkedList<Type> list: set){
+    for(LinkedList<Type> list : set){
       builder.append(list).append(", ");
     }
     return builder.substring(0, builder.length() - 2) + "}";
   }
 
-  public class TreeItr implements Iterator<Type>{
+  public class TreeItr implements Iterator<Type> {
     Iterator<LinkedList<Type>> itr = set.iterator();
     Iterator<Type> listItr;
     LinkedList<Type> curr;

@@ -326,6 +326,6 @@ class LiquidsBuffer : BaseBuffer<LiquidsBuffer.LiquidIntegerStack, Liquid, Liqui
     }
 
     companion object {
-        private val temp = Seq<BuildingEntry<Building?>?>()
+        private val temp = Seq<BuildingEntry<Building>>()
     }
 }

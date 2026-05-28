@@ -19,7 +19,7 @@ import kotlin.math.min
 /** 基于纹理区域的绘制部件，支持热效、光影、子部件及镜像绘制。
  * 拥有 liquid top 部件
  * @author Alon */
-open class UncRegionPart() : DrawPart() {
+open class UncRegionPart() :DrawPart() {
   protected var childParam = PartParams()
 
   /** Appended to unit/weapon/block name and drawn. */
@@ -45,11 +45,11 @@ open class UncRegionPart() : DrawPart() {
   /** Whether to clamp progress to (0-1). If false, allows usage of interps that go past the range, but may have unwanted visual bugs depending on values. */
   var clampProgress = true
   /** Progress function for determining position/rotation. */
-  var progress: PartProgress = PartProgress.warmup
+  var progress: UncPartProgress = UncPartProgress.warmup
   /** Progress function for scaling. */
-  var growProgress: PartProgress = PartProgress.warmup
+  var growProgress: UncPartProgress = UncPartProgress.warmup
   /** Progress function for heat alpha. */
-  var heatProgress: PartProgress = PartProgress.heat
+  var heatProgress: UncPartProgress = UncPartProgress.heat
   var blending: Blending = Blending.normal
   var layer = -1f
   var layerOffset: Float = 0f
@@ -90,7 +90,7 @@ open class UncRegionPart() : DrawPart() {
     this.suffix = region
   }
 
-  constructor(region: String, blending: Blending, color: Color) : this(region) {
+  constructor(region: String, blending: Blending, color: Color) :this(region) {
     this.blending = blending
     this.color = color
     outline = false
@@ -113,7 +113,7 @@ open class UncRegionPart() : DrawPart() {
     var gy = growY * sclProg
 
     if (!moves.isEmpty) {
-      for (move in moves) {
+      for(move in moves) {
         val p = move.progress.getClamp(params, clampProgress)
         mx += move.x * p
         my += move.y * p
@@ -129,7 +129,7 @@ open class UncRegionPart() : DrawPart() {
     Draw.xscl *= xScl + gx
     Draw.yscl *= yScl + gy
 
-    for (s in 0..<len) {
+    for(s in 0..<len) {
       //use specific side if necessary
       val i = if (params.sideOverride == -1) s else params.sideOverride
 
@@ -186,7 +186,7 @@ open class UncRegionPart() : DrawPart() {
       if (liquid.found()) {
         turret.liquids?.current()?.let {
           Draw.color(it.color)
-          Draw.alpha(turret.liquids.get(it)/turret.block.liquidCapacity)
+          Draw.alpha(turret.liquids.get(it) / turret.block.liquidCapacity)
           rect(liquid, rx, ry, rot)
         }
       }
@@ -207,7 +207,7 @@ open class UncRegionPart() : DrawPart() {
     //draw child, if applicable - only at the end
     //TODO lots of copy-paste here
     if (!children.isEmpty) {
-      for (s in 0..<len) {
+      for(s in 0..<len) {
         val i = if (params.sideOverride == -1) s else params.sideOverride
         val sign = (if (i == 1) -1 else 1) * params.sideMultiplier
         Tmp.v1.set((x + mx) * sign, y + my).rotateRadExact((params.rotation - 90) * Mathf.degRad)
@@ -226,7 +226,7 @@ open class UncRegionPart() : DrawPart() {
         childParam.sideMultiplier = params.sideMultiplier
         childParam.life = params.life
         childParam.sideOverride = i
-        for (child in children) {
+        for(child in children) {
           child.draw(childParam)
         }
       }
@@ -261,7 +261,7 @@ open class UncRegionPart() : DrawPart() {
     light = Core.atlas.find("$realName-light")
     liquid = Core.atlas.find("$realName-liquid")
     top = Core.atlas.find("$realName-top")
-    for (child in children) {
+    for(child in children) {
       child.turretShading = turretShading
       child.load(name)
     }
@@ -271,7 +271,7 @@ open class UncRegionPart() : DrawPart() {
     if (outline && drawRegion) {
       out.addAll(*regions)
     }
-    for (child in children) {
+    for(child in children) {
       child.getOutlines(out)
     }
   }

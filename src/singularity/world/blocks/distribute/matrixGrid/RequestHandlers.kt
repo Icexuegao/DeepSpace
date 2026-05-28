@@ -95,7 +95,7 @@ class RequestHandlers {
       }
     }
 
-    protected fun addParseConfig(cfg: TargetConfigure, type: GridChildType?) {
+    protected fun addParseConfig(cfg: TargetConfigure, type: GridChildType) {
       for (liquid in cfg.get(type, ContentType.liquid)!!) {
         val stack = liquids.get(liquid.id.toInt())
         if (stack == null) {

@@ -13,7 +13,7 @@ interface IOPointBlockComp {
   var configTypes: OrderedSet<GridChildType>
   var supportContentType: OrderedSet<ContentType>
 
-  fun setFactory(type: GridChildType?, contType: ContentType?, factory: RequestHandlers.RequestHandler<*>?) {
+  fun setFactory(type: GridChildType, contType: ContentType, factory: RequestHandlers.RequestHandler<*>) {
     requestFactories.get(type) { ObjectMap() }.put(contType, factory)
     configTypes.add(type)
     supportContentType.add(contType)

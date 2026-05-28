@@ -21,7 +21,7 @@ import singularity.world.distribution.request.DistRequestBase
 import universecore.util.Empties
 import universecore.util.colletion.TreeSeq
 
-interface DistMatrixUnitBuildComp : DistElementBuildComp {
+interface DistMatrixUnitBuildComp :DistElementBuildComp {
   // @Annotations.BindField(value = "tempFactories", initialize = "new arc.struct.ObjectMap<>()")
   var tempFactories: ObjectMap<GridChildType, ObjectMap<ContentType, RequestHandlers.RequestHandler<*>>>
 
@@ -49,12 +49,12 @@ interface DistMatrixUnitBuildComp : DistElementBuildComp {
     if (gridValid()) matrixGrid.update()
   }
 
-  fun <T : BaseBuffer<*, *, *>> getBuffer(buff: DistBufferType<T>): T {
+  fun <T :BaseBuffer<*, *, *>> getBuffer(buff: DistBufferType<T>): T {
     return buffers.get(buff) as T
   }
 
   fun initBuffers() {
-    for (buffer in DistBufferType.all) {
+    for(buffer in DistBufferType.all) {
       buffers.put(buffer, buffer.get(this.matrixBlock.bufferCapacity))
     }
   }
@@ -71,24 +71,24 @@ interface DistMatrixUnitBuildComp : DistElementBuildComp {
     }
 
   fun releaseRequest() {
-    for (request in requests) {
+    for(request in requests) {
       request.kill()
     }
     requests.clear()
 
     resetFactories()
 
-    for (config in configs) {
+    for(config in configs) {
       config.eachChildType { type: GridChildType, map: ObjectMap<ContentType, ObjectSet<UnlockableContent>> ->
-        for (contType in map.keys()) {
+        for(contType in map.keys()) {
           addConfig(type, contType, config)
         }
       }
     }
 
     requestHandlerMap.clear()
-    for (entry in tempFactories) {
-      for (e in entry.value) {
+    for(entry in tempFactories) {
+      for(e in entry.value) {
         val request = createRequest(entry.key, e.key) ?: continue
         requests.add(request)
         distributor.assign(request, false)
@@ -97,7 +97,7 @@ interface DistMatrixUnitBuildComp : DistElementBuildComp {
       }
     }
 
-    for (request in requests) {
+    for(request in requests) {
       request.init(distributor.network)
     }
   }
@@ -108,8 +108,8 @@ interface DistMatrixUnitBuildComp : DistElementBuildComp {
   }
 
   fun resetFactories() {
-    for (fac in tempFactories) {
-      for (handler in fac.value.values()) {
+    for(fac in tempFactories) {
+      for(handler in fac.value.values()) {
         handler!!.reset(this)
       }
     }
@@ -118,7 +118,8 @@ interface DistMatrixUnitBuildComp : DistElementBuildComp {
 
   fun addConfig(type: GridChildType?, contType: ContentType?, cfg: TargetConfigure) {
     val build = Vars.world.build(tile!!.x + Point2.x(cfg.offsetPos), tile!!.y + Point2.y(cfg.offsetPos))
-    val factory = if (build is IOPointComp) (build as IOPointComp).iOBlock!!.requestFactories.get(type, Empties.nilMapO())!!.get(contType) else null
+    val factory =
+      if (build is IOPointComp) (build as IOPointComp).iOBlock!!.requestFactories.get(type, Empties.nilMapO())!!.get(contType) else null
 
     if (factory != null) {
       val map = tempFactories.get(type) { ObjectMap() }

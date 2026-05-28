@@ -111,6 +111,9 @@ class EMPHealthManager {
           if (!healthMap.containsKey(u)) healthMap.put(u, getInst(u))
         }
       })
+
+
+
       healthMap.each { unit: Unit?, health: EMPHealth ->
         if (Vars.state.isGame) health.update()
         if (! (unit?.isAdded?:false)) {

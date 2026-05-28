@@ -18,7 +18,6 @@ import mindustry.world.Tile
 import mindustry.world.meta.BlockStatus
 import mindustry.world.meta.StatUnit
 import singularity.Sgl
-import singularity.ui.SglUI
 import singularity.world.blocks.distribute.matrixGrid.RequestHandlers
 import singularity.world.blocks.distribute.netcomponents.CoreNeighbourComponent.CoreNeighbourComponentBuild
 import singularity.world.blocks.distribute.netcomponents.NetPluginComp
@@ -88,7 +87,6 @@ open class DistNetCore(name: String) : NetPluginComp(name), DistMatrixUnitComp {
 
     override fun buildConfiguration(table: Table?) {
       Sgl.ui.bufferStat.show(distributor.network)
-      Sgl.ui.bufferStat.show()
     }
     override fun onProximityUpdate() {
       super.onProximityUpdate()

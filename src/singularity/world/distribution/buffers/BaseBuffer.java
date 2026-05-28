@@ -226,7 +226,7 @@ public abstract class BaseBuffer<C, CType, T extends BaseBuffer.Packet<C, CType>
     
     public abstract Number amount();
 
-    protected abstract void setZero();
+    public abstract void setZero();
     
     protected abstract void merge(Packet<Obj, Type> other);
     

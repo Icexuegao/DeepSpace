@@ -30,7 +30,7 @@ class ItemsBuffer :BaseBuffer<ItemStack, Item, ItemsBuffer.ItemPacket>() {
     put(tmp)
   }
 
-  fun remove(item: Item?, amount: Int) {
+  fun remove(item: Item, amount: Int) {
     tmp.obj!!.item = item
     tmp.obj!!.amount = amount
     remove(tmp)
@@ -137,7 +137,7 @@ class ItemsBuffer :BaseBuffer<ItemStack, Item, ItemsBuffer.ItemPacket>() {
     return Pal.accent
   }
 
-  inner class ItemPacket(item: Item?, amount: Int) :Packet<ItemStack?, Item?>() {
+  inner class ItemPacket(item: Item?, amount: Int) :Packet<ItemStack, Item>() {
     init {
       obj = ItemStack(item, amount)
       putCaching += amount
@@ -214,7 +214,7 @@ class ItemsBuffer :BaseBuffer<ItemStack, Item, ItemsBuffer.ItemPacket>() {
       this@ItemsBuffer.dePutFlow(tmp)
     }
 
-    override fun copy(): Packet<ItemStack?, Item?> {
+    override fun copy(): Packet<ItemStack, Item> {
       return ItemPacket(obj!!.item, obj!!.amount)
     }
   }

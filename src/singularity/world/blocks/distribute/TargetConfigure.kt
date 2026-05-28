@@ -3,7 +3,6 @@ package singularity.world.blocks.distribute
 import arc.func.Cons
 import arc.func.Cons2
 import arc.func.Cons3
-import arc.func.Prov
 import arc.math.geom.Point2
 import arc.struct.ObjectMap
 import arc.struct.ObjectSet
@@ -25,22 +24,22 @@ open class TargetConfigure : DataPackable {
   protected var data = ObjectMap<GridChildType, ObjectMap<ContentType, ObjectSet<UnlockableContent>>>()
   protected var directBits = ObjectMap<GridChildType, ObjectMap<UnlockableContent, ByteArray>>()
 
-  fun set(type: GridChildType?, content: UnlockableContent, dirBit: ByteArray?) {
+  fun set(type: GridChildType, content: UnlockableContent, dirBit: ByteArray) {
     data.get(type) {ObjectMap()}.get(content.contentType) {ObjectSet()}.add(content)
     directBits.get(type) {ObjectMap()}.put(content, dirBit)
   }
 
-  fun remove(type: GridChildType?, content: UnlockableContent): Boolean {
+  fun remove(type: GridChildType, content: UnlockableContent): Boolean {
     val result = data.get(type, Empties.nilMapO()).get(content.contentType, Empties.nilSetO()).remove(content)
     directBits.get(type, Empties.nilMapO()).remove(content)
     return result
   }
 
-  fun get(type: GridChildType?, content: UnlockableContent): Boolean {
+  fun get(type: GridChildType, content: UnlockableContent): Boolean {
     return data.get(type, Empties.nilMapO()).get(content.contentType, Empties.nilSetO()).contains(content)
   }
 
-  fun each(cons: Cons3<GridChildType?, ContentType?, UnlockableContent?>) {
+  fun each(cons: Cons3<GridChildType, ContentType, UnlockableContent>) {
     for (entry in data) {
       for (contEntry in entry.value) {
         for (content in contEntry.value) {
@@ -71,7 +70,7 @@ open class TargetConfigure : DataPackable {
     return (bit.toInt() and match.toInt()) != 0
   }
 
-  fun get(type: GridChildType?, t: ContentType?): ObjectSet<UnlockableContent>? {
+  fun get(type: GridChildType, t: ContentType): ObjectSet<UnlockableContent>? {
     return data.get(type, Empties.nilMapO()).get(t, Empties.nilSetO())
   }
 

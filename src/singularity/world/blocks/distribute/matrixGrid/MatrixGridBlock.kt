@@ -302,7 +302,7 @@ open class MatrixGridBlock(name: String) : DistNetBlock(name), DistMatrixUnitCom
                   this.configs().remove(c)
                 }
 
-                this.matrixGrid().remove(entry.entity as Building?)
+                this.matrixGrid().remove(entry.entity as Building)
                 this.shouldUpdateTask = true
               }
             }

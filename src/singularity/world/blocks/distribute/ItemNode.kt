@@ -12,7 +12,6 @@ import arc.math.Interp
 import arc.math.Mathf
 import arc.math.geom.Geometry
 import arc.math.geom.Point2
-import arc.scene.Action
 import arc.scene.actions.Actions
 import arc.scene.ui.layout.Table
 import arc.struct.IntSeq
@@ -23,7 +22,6 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
-import universecore.struct.texture.LazyTextureSingleDelegate
 import ice.ui.Documents
 import mindustry.Vars
 import mindustry.core.Renderer
@@ -50,15 +48,17 @@ import singularity.world.blocks.SglBlock
 import singularity.world.distribution.GridChildType
 import universecore.components.blockcomp.Takeable
 import universecore.components.blockcomp.Takeable.Heaps
+import universecore.struct.texture.LazyTextureSingleDelegate
 import universecore.util.DataPackable
 import kotlin.math.abs
 import kotlin.math.max
 
-open class ItemNode(name: String) : SglBlock(name) {
+open class ItemNode(name: String) :SglBlock(name) {
   companion object {
     val EMP: ByteArray = ByteArray(0)
     private var otherReq: BuildPlan? = null
   }
+
   val timerCheckMoved: Int = this.timers++
   var range: Int = 0
   var transportTime: Float = 2.0f
@@ -92,7 +92,7 @@ open class ItemNode(name: String) : SglBlock(name) {
     noUpdateDisabled = true
     copyConfig = false
     priority = -1.0f
-    config(Int::class.javaObjectType) {tile: ItemNodeBuild, i: Int -> tile.link = i}
+    config(Int::class.javaObjectType) { tile: ItemNodeBuild, i: Int -> tile.link = i }
     buildType = Prov(::ItemNodeBuild)
   }
 
@@ -119,7 +119,7 @@ open class ItemNode(name: String) : SglBlock(name) {
 
   override fun drawPlanConfigTop(plan: BuildPlan, list: Eachable<BuildPlan?>) {
     otherReq = null
-    list.each(Cons {other: BuildPlan? ->
+    list.each(Cons { other: BuildPlan? ->
       if (other!!.block === this && plan !== other) {
         val any = plan.config
         if (any is Point2) {
@@ -138,13 +138,16 @@ open class ItemNode(name: String) : SglBlock(name) {
     super.setStats()
     this.stats.remove(Stat.itemCapacity)
     this.stats.add(Stat.linkRange, this.range.toFloat(), StatUnit.blocks)
-    this.stats.add(Stat.itemCapacity, Core.bundle.format("infos.mixedItemCapacity", *arrayOf<Any>(this.itemCapacity, this.maxItemCapacity)), *arrayOfNulls<Any>(0))
+    this.stats.add(
+      Stat.itemCapacity,
+      Core.bundle.format("infos.mixedItemCapacity", *arrayOf<Any>(this.itemCapacity, this.maxItemCapacity)),
+      *arrayOfNulls<Any>(0)
+    )
     this.stats.add(Stat.itemsMoved, 60.0f / this.transportTime, StatUnit.itemsSecond)
-    for (baseConsumers in consumers) {
+    for(baseConsumers in consumers) {
       baseConsumers.display(stats)
     }
   }
-
 
   fun drawBridge(req: BuildPlan, ox: Float, oy: Float, flip: Float) {
     if (!Mathf.zero(Renderer.bridgeOpacity)) {
@@ -152,7 +155,9 @@ open class ItemNode(name: String) : SglBlock(name) {
       Lines.stroke(8.0f)
       Tmp.v1.set(ox, oy).sub(req.drawx(), req.drawy()).setLength(4.0f)
       Lines.line(this.bridgeRegion, req.drawx() + Tmp.v1.x, req.drawy() + Tmp.v1.y, ox - Tmp.v1.x, oy - Tmp.v1.y, false)
-      Draw.rect(this.arrowRegion, (req.drawx() + ox) / 2.0f, (req.drawy() + oy) / 2.0f, Angles.angle(req.drawx(), req.drawy(), ox, oy) + flip)
+      Draw.rect(
+        this.arrowRegion, (req.drawx() + ox) / 2.0f, (req.drawy() + oy) / 2.0f, Angles.angle(req.drawx(), req.drawy(), ox, oy) + flip
+      )
       Draw.reset()
     }
   }
@@ -160,18 +165,31 @@ open class ItemNode(name: String) : SglBlock(name) {
   override fun setBars() {
     super.setBars()
     this.removeBar("items")
-    this.addBar("items") {entity: Building -> Bar({Core.bundle.format("bar.items", *arrayOf<Any>(entity.items.total()))}, {Pal.items}, {entity.items.total().toFloat() / this.maxItemCapacity.toFloat()})}
+    this.addBar("items") { entity: Building ->
+      Bar(
+        { Core.bundle.format("bar.items", *arrayOf<Any>(entity.items.total())) },
+        { Pal.items },
+        { entity.items.total().toFloat() / this.maxItemCapacity.toFloat() })
+    }
   }
+
   override fun drawPlan(plan: BuildPlan?, list: Eachable<BuildPlan?>?, valid: Boolean) {
-     Documents.节点配置.shouldShowOne()
+    Documents.节点配置.shouldShowOne()
     super.drawPlan(plan, list, valid)
   }
+
   override fun drawPlace(x: Int, y: Int, rotation: Int, valid: Boolean) {
     super.drawPlace(x, y, rotation, valid)
     val link = this.findLink(x, y)
 
-    for (i in 0..3) {
-      Drawf.dashLine(Pal.placing, (x * 8).toFloat() + Geometry.d4[i].x.toFloat() * 6.0f, (y * 8).toFloat() + Geometry.d4[i].y.toFloat() * 6.0f, (x * 8 + Geometry.d4[i].x * this.range * 8).toFloat(), (y * 8 + Geometry.d4[i].y * this.range * 8).toFloat())
+    for(i in 0..3) {
+      Drawf.dashLine(
+        Pal.placing,
+        (x * 8).toFloat() + Geometry.d4[i].x.toFloat() * 6.0f,
+        (y * 8).toFloat() + Geometry.d4[i].y.toFloat() * 6.0f,
+        (x * 8 + Geometry.d4[i].x * this.range * 8).toFloat(),
+        (y * 8 + Geometry.d4[i].y * this.range * 8).toFloat()
+      )
     }
 
     Draw.reset()
@@ -182,7 +200,12 @@ open class ItemNode(name: String) : SglBlock(name) {
       val w = (if (link.x.toInt() == x) 8 else abs(link.x - x) * 8 - 8).toFloat()
       val h = (if (link.y.toInt() == y) 8 else abs(link.y - y) * 8 - 8).toFloat()
       Lines.rect((x + link.x).toFloat() / 2.0f * 8.0f - w / 2.0f, (y + link.y).toFloat() / 2.0f * 8.0f - h / 2.0f, w, h)
-      Draw.rect("bridge-arrow", (link.x * 8 + Geometry.d4(rot).x * 8).toFloat(), (link.y * 8 + Geometry.d4(rot).y * 8).toFloat(), (link.absoluteRelativeTo(x, y) * 90).toFloat())
+      Draw.rect(
+        "bridge-arrow",
+        (link.x * 8 + Geometry.d4(rot).x * 8).toFloat(),
+        (link.y * 8 + Geometry.d4(rot).y * 8).toFloat(),
+        (link.absoluteRelativeTo(x, y) * 90).toFloat()
+      )
     }
 
     Draw.reset()
@@ -209,7 +232,10 @@ open class ItemNode(name: String) : SglBlock(name) {
 
   fun findLink(x: Int, y: Int): Tile? {
     val tile = Vars.world.tile(x, y)
-    return if (tile != null && this.lastBuild != null && this.linkValid(tile, this.lastBuild!!.tile) && this.lastBuild!!.tile !== tile && this.lastBuild!!.link == -1) this.lastBuild!!.tile else null
+    return if (tile != null && this.lastBuild != null && this.linkValid(
+        tile, this.lastBuild!!.tile
+      ) && this.lastBuild!!.tile !== tile && this.lastBuild!!.link == -1
+    ) this.lastBuild!!.tile else null
   }
 
   override fun init() {
@@ -218,7 +244,7 @@ open class ItemNode(name: String) : SglBlock(name) {
   }
 
   override fun handlePlacementLine(plans: Seq<BuildPlan?>) {
-    for (i in 0..<plans.size - 1) {
+    for(i in 0..<plans.size - 1) {
       val cur = plans.get(i) as BuildPlan
       val next = plans.get(i + 1) as BuildPlan
       if (this.positionsValid(cur.x, cur.y, next.x, next.y)) {
@@ -228,10 +254,14 @@ open class ItemNode(name: String) : SglBlock(name) {
   }
 
   override fun changePlacementPath(points: Seq<Point2?>, rotation: Int) {
-    Placement.calculateNodes(points, this, rotation) {point: Point2?, other: Point2? -> max(abs(point!!.x - other!!.x), abs(point.y - other.y)) <= this.range}
+    Placement.calculateNodes(points, this, rotation) { point: Point2?, other: Point2? ->
+      max(
+        abs(point!!.x - other!!.x), abs(point.y - other.y)
+      ) <= this.range
+    }
   }
 
-  open inner class ItemNodeBuild : SglBuilding(), Takeable {
+  open inner class ItemNodeBuild :SglBuilding(), Takeable {
     override var heaps: ObjectMap<String, Heaps<*>> = ObjectMap<String, Heaps<*>>()
     var config: TargetConfigure? = null
     var link: Int = -1
@@ -266,7 +296,7 @@ open class ItemNode(name: String) : SglBlock(name) {
         this.drawInput(Vars.world.tile(this.link))
       }
 
-      this.incoming.each {pos: Int -> this.drawInput(Vars.world.tile(pos))}
+      this.incoming.each { pos: Int -> this.drawInput(Vars.world.tile(pos)) }
       Draw.reset()
     }
 
@@ -302,12 +332,17 @@ open class ItemNode(name: String) : SglBlock(name) {
     override fun drawConfigure() {
       Drawf.select(this.x, this.y, (this.tile.block().size * 8).toFloat() / 2.0f + 2.0f, Pal.accent)
 
-      for (i in 1..this@ItemNode.range) {
-        for (j in 0..3) {
+      for(i in 1..this@ItemNode.range) {
+        for(j in 0..3) {
           val other = this.tile.nearby(Geometry.d4[j].x * i, Geometry.d4[j].y * i)
           if (this@ItemNode.linkValid(this.tile, other)) {
             val linked = other.pos() == this.link
-            Drawf.select(other.drawx(), other.drawy(), (other.block().size * 8).toFloat() / 2.0f + 2.0f + (if (linked) 0.0f else Mathf.absin(Time.time, 4.0f, 1.0f)), if (linked) Pal.place else Pal.breakInvalid)
+            Drawf.select(
+              other.drawx(),
+              other.drawy(),
+              (other.block().size * 8).toFloat() / 2.0f + 2.0f + (if (linked) 0.0f else Mathf.absin(Time.time, 4.0f, 1.0f)),
+              if (linked) Pal.place else Pal.breakInvalid
+            )
           }
         }
       }
@@ -349,7 +384,7 @@ open class ItemNode(name: String) : SglBlock(name) {
 
     fun checkIncoming() {
       var idx = 0
-      while (idx < this.incoming.size) {
+      while(idx < this.incoming.size) {
         val i = this.incoming.items[idx]
         val other = Vars.world.tile(i)
         if (!this@ItemNode.linkValid(this.tile, other, false) || (other.build as ItemNodeBuild).link != this.tile.pos()) {
@@ -363,11 +398,11 @@ open class ItemNode(name: String) : SglBlock(name) {
     fun updateTransport(other: Building) {
 
       transportCounter += consEfficiency() * delta()
-      while (transportCounter >= transportTime) {
+      while(transportCounter >= transportTime) {
         val items = Vars.content.items()
         var any = false
         var i = 0
-        while (transportCounter >= transportTime && i < items.size) {
+        while(transportCounter >= transportTime && i < items.size) {
           itemTakeCursor = (itemTakeCursor + 1) % items.size
           val id = itemTakeCursor
           if (this.items.get(id) <= 0) {
@@ -406,16 +441,27 @@ open class ItemNode(name: String) : SglBlock(name) {
           Draw.rect(this@ItemNode.endRegion, other.drawx(), other.drawy(), (i * 90 + 270).toFloat())
           Lines.stroke(8.0f)
           Tmp.v1.set(this.x, this.y).sub(other.worldx(), other.worldy()).setLength(4.0f).scl(-1.0f)
-          Lines.line(this@ItemNode.bridgeRegion, this.x + Tmp.v1.x, this.y + Tmp.v1.y, other.worldx() - Tmp.v1.x, other.worldy() - Tmp.v1.y, false)
+          Lines.line(
+            this@ItemNode.bridgeRegion, this.x + Tmp.v1.x, this.y + Tmp.v1.y, other.worldx() - Tmp.v1.x, other.worldy() - Tmp.v1.y, false
+          )
           val dist = max(abs(other.x - this.tile.x), abs(other.y - this.tile.y)) - 1
           Draw.color()
           val arrows = ((dist * 8).toFloat() / this@ItemNode.arrowSpacing).toInt()
           val dx = Geometry.d4x(i)
           val dy = Geometry.d4y(i)
 
-          for (a in 0..<arrows) {
-            Draw.alpha(Mathf.absin(a.toFloat() - this.time / this@ItemNode.arrowTimeScl, this@ItemNode.arrowPeriod, 1.0f) * warmup * Renderer.bridgeOpacity)
-            Draw.rect(this@ItemNode.arrowRegion, this.x + dx.toFloat() * (4.0f + a.toFloat() * this@ItemNode.arrowSpacing + this@ItemNode.arrowOffset), this.y + dy.toFloat() * (4.0f + a.toFloat() * this@ItemNode.arrowSpacing + this@ItemNode.arrowOffset), i.toFloat() * 90.0f)
+          for(a in 0..<arrows) {
+            Draw.alpha(
+              Mathf.absin(
+                a.toFloat() - this.time / this@ItemNode.arrowTimeScl, this@ItemNode.arrowPeriod, 1.0f
+              ) * warmup * Renderer.bridgeOpacity
+            )
+            Draw.rect(
+              this@ItemNode.arrowRegion,
+              this.x + dx.toFloat() * (4.0f + a.toFloat() * this@ItemNode.arrowSpacing + this@ItemNode.arrowOffset),
+              this.y + dy.toFloat() * (4.0f + a.toFloat() * this@ItemNode.arrowSpacing + this@ItemNode.arrowOffset),
+              i.toFloat() * 90.0f
+            )
           }
 
           Draw.reset()
@@ -428,7 +474,9 @@ open class ItemNode(name: String) : SglBlock(name) {
     }
 
     override fun acceptLiquid(source: Building, liquid: Liquid): Boolean {
-      return this@ItemNode.hasLiquids && this.team === source.team && (this.liquids.current() === liquid || this.liquids.get(this.liquids.current()) < 0.2f) && this.checkAccept(source, Vars.world.tile(this.link))
+      return this@ItemNode.hasLiquids && this.team === source.team && (this.liquids.current() === liquid || this.liquids.get(this.liquids.current()) < 0.2f) && this.checkAccept(
+        source, Vars.world.tile(this.link)
+      )
     }
 
     protected fun checkAccept(source: Building, other: Tile?): Boolean {
@@ -459,7 +507,7 @@ open class ItemNode(name: String) : SglBlock(name) {
         val edge = Edges.getFacingEdge(to.tile, this.tile)
         val i = this.relativeTo(edge.x.toInt(), edge.y.toInt()).toInt()
 
-        for (j in 0..<this.incoming.size) {
+        for(j in 0..<this.incoming.size) {
           val v = this.incoming.items[j]
           if (this.relativeTo(Point2.x(v).toInt(), Point2.y(v).toInt()).toInt() == i) {
             return false
@@ -480,14 +528,19 @@ open class ItemNode(name: String) : SglBlock(name) {
 
     override fun buildConfiguration(table: Table) {
       this.showing = false
-      table.table {t: Table? ->
+      table.table { t: Table? ->
         t!!.visible = false
         t.setOrigin(1)
         t.add().width(45.0f)
-        (t.center().table(Tex.pane).get() as Table).add(DistTargetConfigTable(0, this.config, if (this@ItemNode.siphon) arrayOf(GridChildType.output, GridChildType.acceptor, GridChildType.input) else arrayOf(GridChildType.output, GridChildType.acceptor), arrayOf(ContentType.item), true, {c: TargetConfigure ->
-          c.offsetPos = 0
-          this.configure(c.pack())
-        }, {Vars.control.input.config.hideConfig()})).fill().center()
+        (t.center().table(Tex.pane).get() as Table).add(
+          DistTargetConfigTable(
+            0, this.config, if (this@ItemNode.siphon) arrayOf(
+            GridChildType.output, GridChildType.acceptor, GridChildType.input
+          ) else arrayOf(GridChildType.output, GridChildType.acceptor), arrayOf(ContentType.item), true, { c: TargetConfigure ->
+            c.offsetPos = 0
+            this.configure(c.pack())
+          }, { Vars.control.input.config.hideConfig() })
+        ).fill().center()
         t.top().button(Icon.info, Styles.grayi, 32.0f) {
 
         }.size(45.0f).top()
@@ -497,7 +550,9 @@ open class ItemNode(name: String) : SglBlock(name) {
           t.isTransform = true
           t.actions(Actions.scaleTo(0.0f, 1.0f), Actions.visible(true), Actions.scaleTo(1.0f, 1.0f, 0.07f, Interp.pow3Out))
         }
-        this.close = Runnable {t.actions(*arrayOf<Action?>(Actions.scaleTo(1.0f, 1.0f), Actions.scaleTo(0.0f, 1.0f, 0.07f, Interp.pow3Out), Actions.visible(false)))}
+        close = Runnable {
+          t.actions(Actions.scaleTo(1.0f, 1.0f), Actions.scaleTo(0.0f, 1.0f, 0.07f, Interp.pow3Out), Actions.visible(false))
+        }
       }.fillY()
     }
 
@@ -544,10 +599,14 @@ open class ItemNode(name: String) : SglBlock(name) {
       if (this.config != null) {
         val var1 = this.config!!.get(GridChildType.input, ContentType.item)!!.iterator()
 
-        while (var1.hasNext()) {
+        while(var1.hasNext()) {
           val con = var1.next()
           val item = con as Item?
-          val other = this.getNext("siphonItem") {e: Building? -> e!!.interactable(this.team) && e.block.hasItems && e.items.has(item) && this.config!!.directValid(GridChildType.input, item, this.getDirectBit(e))}
+          val other = this.getNext("siphonItem") { e: Building? ->
+            e!!.interactable(this.team) && e.block.hasItems && e.items.has(item) && this.config!!.directValid(
+              GridChildType.input, item, this.getDirectBit(e)
+            )
+          }
           if (other == null || !this@ItemNode.hasItems || this.items.get(item) >= this@ItemNode.itemCapacity || this.items.total() >= this@ItemNode.maxItemCapacity) {
             return
           }
@@ -560,13 +619,17 @@ open class ItemNode(name: String) : SglBlock(name) {
 
     fun doDump() {
       if (this.config != null && !this.config!!.isClear) {
-        val var1 = this.config!!.get(GridChildType.output, ContentType.item)!!.iterator()
+        val var1 = this.config!!.get(GridChildType.output, ContentType.item)?.iterator()?:return
 
-        while (var1.hasNext()) {
+        while(var1.hasNext()) {
           val content = var1.next()
           val i = content as Item?
           if (this.items.get(i) > 0) {
-            val next = this.getNext("items") {e: Building? -> e!!.interactable(this.team) && this.config!!.directValid(GridChildType.output, i, this.getDirectBit(e)) && e.acceptItem(this, i)}
+            val next = this.getNext("items") { e: Building? ->
+              e!!.interactable(this.team) && this.config!!.directValid(
+                GridChildType.output, i, this.getDirectBit(e)
+              ) && e.acceptItem(this, i)
+            }
             if (next != null) {
               this.items.remove(i, 1)
               next.handleItem(this, i)
@@ -579,12 +642,16 @@ open class ItemNode(name: String) : SglBlock(name) {
     }
 
     override fun acceptItem(source: Building, item: Item): Boolean {
-      return this@ItemNode.hasItems && this.team === source.team && this.items.get(item) < this@ItemNode.itemCapacity && this.items.total() < this@ItemNode.maxItemCapacity && this.checkAccept(source, Vars.world.tile(this.link), item)
+      return this@ItemNode.hasItems && this.team === source.team && this.items.get(item) < this@ItemNode.itemCapacity && this.items.total() < this@ItemNode.maxItemCapacity && this.checkAccept(
+        source, Vars.world.tile(this.link), item
+      )
     }
 
     protected fun checkAccept(source: Building, other: Tile?, content: UnlockableContent?): Boolean {
       return if (this.tile != null && !this.linked(source) && this.config != null) {
-        if (this@ItemNode.linkValid(this.tile, other)) this.config!!.directValid(GridChildType.acceptor, content, this.getDirectBit(source)) else false
+        if (this@ItemNode.linkValid(this.tile, other)) this.config!!.directValid(
+          GridChildType.acceptor, content, this.getDirectBit(source)
+        ) else false
       } else {
         true
       }
@@ -608,7 +675,7 @@ open class ItemNode(name: String) : SglBlock(name) {
       write.i(this.itemTakeCursor)
       write.b(this.incoming.size)
 
-      for (i in 0..<this.incoming.size) {
+      for(i in 0..<this.incoming.size) {
         write.i(this.incoming.items[i])
       }
 
@@ -627,7 +694,7 @@ open class ItemNode(name: String) : SglBlock(name) {
       this.itemTakeCursor = read.i()
       val links = read.b()
 
-      for (i in 0..<links) {
+      for(i in 0..<links) {
         this.incoming.add(read.i())
       }
 
@@ -640,6 +707,5 @@ open class ItemNode(name: String) : SglBlock(name) {
       }
     }
   }
-
 
 }
