@@ -25,7 +25,7 @@ class 攫取 :SglTurret("turret_grab") {
     rotateSpeed = 5f
     outlineRadius = 3
     shootSound = Sounds.shootSpectre
-    requirements(Category.turret, IItems.钍锭, 40, IItems.铬锭, 30, IItems.单晶硅, 20)
+    requirements(Category.turret, IItems.铬锭, 30, IItems.单晶硅, 20)
     setAmmo()
   }
 
