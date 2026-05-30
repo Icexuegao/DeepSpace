@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: DeepSpace-${{ steps.version.outputs.version }}
-          path: build/libs/version/DeepSpace-private-Alpha-*.jar
+          path: build/libs/version/DeepSpace-Alpha-*.jar
 
       - name: Check Release Token
         id: check_token
@@ -60,8 +60,7 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
-      # ========== 在私有库创建 Release（原有功能） ==========
-      - name: Release Nightly (Private)
+      - name: Release Nightly
         if: steps.check_token.outputs.exists == 'true'
         uses: ncipollo/release-action@v1
         with:
@@ -70,29 +69,9 @@ jobs:
           body: |
             自动构建：**${{ steps.version.outputs.version }}**
             提交：${{ github.sha }}
-          artifacts: build/libs/version/DeepSpace-private-Alpha-*.jar
+          artifacts: build/libs/version/DeepSpace-Alpha-*.jar
           allowUpdates: true
           removeArtifacts: true
           prerelease: false
           makeLatest: true
           token: ${{ secrets.RELEASE_TOKEN }}
-
-      # ========== 同步到公开库的 Releases ==========
-      - name: Release Nightly (Public)
-        if: steps.check_token.outputs.exists == 'true'
-        uses: ncipollo/release-action@v1
-        with:
-          tag: nightly
-          name: Nightly (${{ steps.version.outputs.version }})
-          body: |
-            自动构建：**${{ steps.version.outputs.version }}**
-            来自私有库的同步构建
-            提交：${{ github.sha }}
-          artifacts: build/libs/version/DeepSpace-private-Alpha-*.jar
-          allowUpdates: true
-          removeArtifacts: true
-          prerelease: false
-          makeLatest: true
-          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
-          owner: Icexuegao
-          repo: DeepSpace
