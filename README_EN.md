@@ -6,7 +6,7 @@
 
 ---
 # ___DeepSpace___
-<img src="./assets/icon.png" alt = "icon" width = "200"/>
+<img src="./assets/preview.png" alt = "icon" width = "200"/>
 
 A ___multi-faceted content___ Mindustry __Kotlin/Java__ mod.
 
