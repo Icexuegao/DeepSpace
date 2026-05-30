@@ -114,8 +114,8 @@ class EMPHealthManager {
 
 
 
-      healthMap.each { unit: Unit?, health: EMPHealth ->
-        if (Vars.state.isGame) health.update()
+      healthMap.each { unit: Unit?, health: EMPHealth? ->
+        if (Vars.state.isGame) health?.update()
         if (! (unit?.isAdded?:false)) {
           val h = healthMap.remove(unit)
           if (h != null) Pools.free(h)

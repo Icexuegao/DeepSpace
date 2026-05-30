@@ -17,7 +17,6 @@ import kotlin.math.log10
 object SoundControl : SoundControl(), Load {
 
   init {
-    Vars.control.sound = this
     reload()
   }
 

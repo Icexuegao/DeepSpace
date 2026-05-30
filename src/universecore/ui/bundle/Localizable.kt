@@ -1,6 +1,6 @@
 package universecore.ui.bundle
 
-/** 支持本地化的对象接口。
+/** 支持本地化的对象接口
  *
  * 实现此接口的类可以通过 [localization] 方法注册多语言文本，
  * 包括名称、描述和详细信息。本地化文本通过 [LocalizationMap]

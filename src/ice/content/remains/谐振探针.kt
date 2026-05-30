@@ -8,11 +8,12 @@ class 谐振探针 :Remains("remains_resonance_probe") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "谐振探针"
+        localizedName = "谐振探针"
         description = "一种用于探测矿物谐振频率的装置"
+        effect = "矿物地板不再[隐藏]"
       }
     }
-    effect = "矿物地板不再[隐藏]"
+
     install = {
       Vars.content.blocks().forEach {
         if (it is IceOreBlock) {

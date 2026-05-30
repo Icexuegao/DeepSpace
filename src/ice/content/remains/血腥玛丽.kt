@@ -15,7 +15,8 @@ class 血腥玛丽 :Remains("remains_bloody_mary") {
     localization {
       zh_CN {
         localizedName = "血腥玛丽"
-        description = "血与酒液在杯中摇匀,辛辣之后,只余缓慢扩散的猩红"
+        description = "血液与酒在杯中摇匀,辛辣之后,只余缓慢扩散的猩红"
+        effect = "为核心机攻击附加[流血]效果"
       }
     }
     icon = DynamicTextureDrawable(name.appendModName()) {
@@ -23,7 +24,6 @@ class 血腥玛丽 :Remains("remains_bloody_mary") {
       it.frameDuration = 15f
     }
 
-    effect = "为核心机攻击附加流血效果"
     install = {
       for(type in IUnitTypes.getCoreUnits()) {
         for(weapon in type.weapons) {

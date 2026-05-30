@@ -28,6 +28,8 @@ object TurretBlocks :Load {
   val 血雨 = 血雨()
   val 月隐 = 月隐()
   val 信标 = 信标()
+  val 喧嚣 = 喧嚣()
+  val 灼烧 = 灼烧()
   val 闪光 = 闪光()
 
   val 遮幕 = 遮幕()

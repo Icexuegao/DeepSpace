@@ -92,7 +92,6 @@ class 胎生百合 :Remains("remains_tumor_bush") {
         }
       }
     }
-// ... existing code ...
 
     override fun remove(particle: Particle) {
       super.remove(particle)
@@ -111,7 +110,8 @@ class 胎生百合 :Remains("remains_tumor_bush") {
     localization {
       zh_CN {
         localizedName = "胎生百合"
-        effect = "当方块被破坏时,将方块的10%的资源返还核心"
+        description = "柔软的花瓣包裹着废墟的秘密,在寂静中轻轻摇曳"
+        effect = "当方块被破坏时,将方块的[10%]的资源返还核心"
       }
     }
     remainsColor = IceColor.r2
@@ -128,28 +128,6 @@ class 胎生百合 :Remains("remains_tumor_bush") {
         val block = it.tile.block()
         val build = it.tile.build
         if (build.team != player.team()) return@on
-
-        /*build.core()?.let { coreBuild ->
-          val requirements = block.requirements
-          if (requirements.isNotEmpty()) {
-            for(stack in requirements) {
-              val amount = (stack.amount / 10f).toInt()
-              if (amount > 0) {
-                val accepted = coreBuild.acceptStack(stack.item, amount, build)
-                if (accepted > 0) {
-                  coreBuild.items.add(stack.item, accepted)
-                  placeBlock.at(build.x, build.y, build.block.size.toFloat(), effectColor)
-                  repeat((block.size * 1.5f).toInt()) {
-                    val len = Mathf.random(1f, 1.15f)
-                    val offsetx = build.block.size * 4f * Mathf.random(-1f, 1f)
-                    val offsety = build.block.size * 4f * Mathf.random(-1f, 1f)
-                    val particle = particleMode.create(build.x + offsetx, build.y + offsety, effectColor, 0f, len, 1f)
-                  }
-                }
-              }
-            }
-          }
-        }*/
 
         val requirements = block.requirements
         if (requirements.isNotEmpty()) {

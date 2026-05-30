@@ -10,11 +10,12 @@ class 娜雅的手串 :Remains("remains_naya_bracelet") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "娜雅的手串"
+        localizedName = "娜雅的手串"
         description = "一串温润的玉石手串,在帝国任职期间由娜雅赠予"
+        effect = "核心机增加拦截护盾"
       }
     }
-    effect = "核心机增加拦截护盾"
+
     val units = IUnitTypes.getCoreUnits()
     var map = HashMap<UnitType, InterceptAbilty>()
     units.forEach {

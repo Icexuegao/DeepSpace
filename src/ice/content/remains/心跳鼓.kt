@@ -12,12 +12,12 @@ class 心跳鼓 :Remains("remains_heartbeat_drum") {
     remainsColor = IceColor.r2
     localization {
       zh_CN {
-        this.localizedName = "心跳鼓"
+        localizedName = "心跳鼓"
         description = "弹性心肌隔膜,回响着怀念之音"
+        effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
       }
     }
 
-    effect = "使状态[${IStatus.回响.localizedName}]的影响提升[20%]"
     icon = DynamicTextureDrawable(name.appendModName()) {
       it.frameCount = 9
       it.frameDuration = 60f / 6f

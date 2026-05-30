@@ -10,6 +10,7 @@ class 现彼岸 :Remains("remains_higanbana") {
     localization {
       zh_CN {
         localizedName = "现彼岸"
+        description = "随风飘散的种子编制着你想要的模板"
       }
     }
     remainsColor = IceColor.r2

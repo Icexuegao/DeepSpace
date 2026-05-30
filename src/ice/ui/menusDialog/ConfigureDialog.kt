@@ -31,7 +31,7 @@ import singularity.Sgl
 import singularity.graphic.SglDrawConst
 import singularity.ui.SglUI
 import singularity.ui.dialogs.ModConfigDialog
-import singularity.ui.dialogs.ModConfigDialog.*
+import singularity.ui.dialogs.layout.*
 import singularity.ui.fragments.entityinfo.EntityInfoFrag
 import singularity.ui.fragments.entityinfo.HealthBarStyle
 import universecore.scene.element.ProgressBar
@@ -59,7 +59,7 @@ object ConfigureDialog :BaseMenusDialog(IceStats.设置.localized(), IStyles.men
 
       ConfigSlider(
         "主菜单音乐音量",
-        { f: Float -> f.toString() },
+        { f: Float -> f.toTrimmedString(1) },
         { f: Float -> SettingValue.menuMusicVolume = f },
         { SettingValue.menuMusicVolume },
         0f,
@@ -114,13 +114,15 @@ object ConfigureDialog :BaseMenusDialog(IceStats.设置.localized(), IStyles.men
         1f,
         0.001f
       ),
-      object :ConfigSlider(
-        "信息显示刷新间隔", { SettingValue.信息显示刷新间隔 = it }, SettingValue::信息显示刷新间隔, 0f, 60f, 1f
-      ) {
-        init {
-          str = Prov { Strings.autoFixed(SettingValue.信息显示刷新间隔 / 60, 2) + StatUnit.seconds.localized() }
-        }
-      },
+      ConfigSlider(
+        "信息显示刷新间隔",
+        { f -> Strings.autoFixed(f / 60, 2) + StatUnit.seconds.localized() },
+        { SettingValue.信息显示刷新间隔 = it },
+        SettingValue::信息显示刷新间隔,
+        0f,
+        60f,
+        1f
+      ),
       ConfigSlider(
         "最多信息显示数目",
         { if (it <= 64) it.toInt().toString() else Core.bundle.get("misc.unlimited") },

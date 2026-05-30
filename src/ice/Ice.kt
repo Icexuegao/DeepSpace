@@ -43,9 +43,7 @@ open class Ice :Mod() {
       Core.scene.marginBottom=0f
     }
     DeepSpace.globals.load()
-    Events.on(mindustry.game.EventType.MusicRegisterEvent::class.java) {
-      SoundControl.init()
-    }
+
     Events.on(mindustry.game.EventType.ModContentLoadEvent::class.java) {
       Vars.content.blocks().forEach {
         if (!it.hasBuilding() && it.category == Category.distribution) {
@@ -61,10 +59,10 @@ open class Ice :Mod() {
     IceBullet.setup()
     EventType.setup()
     IceTeam.setup()
+    Vars.control.sound = SoundControl
   }
 
   override fun init() {
-
     Sgl.init()
     UI.init()
     Schematics.init()

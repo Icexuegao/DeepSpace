@@ -35,14 +35,15 @@ import kotlin.math.max
 import kotlin.math.sin
 
 class 迷思海 :Remains("remains_mystic_sea") {
-
-  var b: Float by ConfigPropertyDelegate(0.5f, "$name-fleshFragmentSeed")
+  var b: Float by ConfigPropertyDelegate(0.2f, "$name-fleshFragmentSeed")
+  var group: Group = WidgetGroup()
 
   init {
     localization {
       zh_CN {
-        this.localizedName = "迷思海"
+        localizedName = "迷思海"
         description = "你可悲的一部分正期望着回到你的身上"
+        effect = "未完成"
       }
     }
     remainsColor = IceColor.r2
@@ -52,7 +53,7 @@ class 迷思海 :Remains("remains_mystic_sea") {
       it.frameCount = 32
       it.frameDuration = 60f / 8f
     }
-    effect = "未完成"
+
     install = {
       var i = 0f
       val fx = Effect(2 * 60f) { e ->
@@ -89,9 +90,8 @@ class 迷思海 :Remains("remains_mystic_sea") {
     }
   }
 
-  override fun getTiTleTable(): Table {
-    val tiTleTable = super.getTiTleTable()
-    tiTleTable.table { table ->
+  override fun customTable(table: Table) {
+    table.table { table ->
       table.add("同化程度: ").color(remainsColor)
       table.field(b.toString()) { it1 ->
         it1.toFloatOrNull()?.let { it2 ->
@@ -110,28 +110,26 @@ class 迷思海 :Remains("remains_mystic_sea") {
         cursor = Tex.cursor
         messageFont = Fonts.def
         messageFontColor = Color.gray
-
       }
-    }.growX()
-    return tiTleTable
+    }.growX().touchable(Touchable.disabled)
   }
 
-  var group: Group = WidgetGroup()
   var rands =
     "ｿ關蜈逋蜈皮噪豢樒ｩ荵倶ｭ蜿謔ｲ逧諢夊逧蟆丞大ｨ倡鯵荳荳蝨ｨ荳榊庄諤晁荵句嵜貍ｫ豁逹迢よｰ秘先蝉ｾ陏迪ｫ蜆ｿ蜿大蝌ｲ隨譌莨第裏豁逧幻莨壻郤闌ｶ荵溷ｷｲ扈丞蜃蟆ｱ霑櫁ｿ呎ｨ讓邉顔ｳ顔噪諢剰ｹ豺蛹悶∵蜃豺ｷ蜷亥惠荳襍ｷ蜿譛我画律譛育噪譛亥ｱ譏ｭ遉逹邇ｰ蝨ｨ逧慮髣隨醍捩逧賢蜥螯よｭ､貂ｩ譟辷辷荵溷縲∝ｦ亥ｦ井ｹ溽縲∝驛荳埼怙隕∽譛臥擅鮠蜿莉蜿匁囑譛句暑荵溷ｷｲ扈丈榊ｿｦ∽蜈ｨ驛ｨ驛蝮乗脂蜷荵ｱ菴應蝗逧謨荳荳也阜蟆ｱ霑櫁ｿ咎復蟄宣㈹荵滓裏豕墓丐蜃譴ｦ諠ｳ荳主梧悍逵句賦閭悟鋤逧辷ｱ荳荳蟆ｱ霑樊ｷ鮴滓ｱ､蝠螯ゆｻ贋ｹ溯螟荳句朕莠操蛛夂捩莉取悄蠕ｭ騾ｰ逧ｦ逵句賦閭悟鋤逧辷ｱ荳荳螟ｱ譛帷噪逵ｼ逾樣㈹鬚､謚也捩縲∝ｳ諤慕捩縲∝働豕｣逹蟆ｱ霑櫁ｿ咎復蟄宣㈹荵滓裏豕墓丐蜃譴ｦ諠ｳ荳主梧悍蜻逵句操譏辷ｱ蜩ｭ鬯ｼ辷ｱ荳荳蜿譏蟄伜惠莠取ｭ､螟ｰｱ蜿莉莠逃蜿謔ｲ逧諢夊逧蟆丞大ｨ倡鯵荳荳"
   val texts = Seq<String>(String::class.java).apply {
     addAll(
       """
-        alon我对他的印象还在女装大佬
         我只是不理解他为什么当时那么排斥我
         我也没扣帽子阿
         中华文明五千年的历史跟说着玩一样
         但是和畜牲一样的脾气管理能力
         他在我眼里的人类含量＜0%
-        你赢了,赢得很彻底,非常彻底,赢了所有mindustry玩家,制作者,贡献者,请你继续你的道路,但我还有事要做,我为什么要和你死缠烂打
+        你赢了,赢得很彻底,非常彻底,赢了所有mindustry玩家,制作者,贡献者,请你继续你的道路
+        但我还有事要做,我为什么要和你死缠烂打
         我的错就是让你活着了[天使]你的三观应该是没有的,同理心也是没有的
         你和那些在癌症患者家属的诉苦视频评论区说“全家遇不到”“不接”的一桌
-        bro肯定觉得自己老帅了吧,实际上是阴暗哥布林一个,而且是被别人孤立的哥布林[委屈],呜呜呜你真的好可怜呢也就是说你也很可恨呢[温馨]
+        bro肯定觉得自己老帅了吧,实际上是阴暗哥布林一个,而且是被别人孤立的哥布林[委屈]
+        呜呜呜你真的好可怜呢也就是说你也很可恨呢[温馨]
     """.trimIndent().split("\n")
     )
   }
@@ -148,7 +146,7 @@ class 迷思海 :Remains("remains_mystic_sea") {
 
     group.fill { f, f1, f2, f3 ->
       Draw.color(IceColor.r1)
-      Draw.alpha(0.1f + 0.2f * sin(Time.time / 60f))
+      Draw.alpha(max(0.3f * sin(Time.time / 60f), 0.15f))
       Draw.rect("whiteui", f, f1, f2 * 2, f3 * 2)
     }
   }
@@ -192,8 +190,7 @@ class 迷思海 :Remains("remains_mystic_sea") {
     container.addChild(fLabel)
 
     val x = IceEffects.rand.nextFloat(max(Core.graphics.width.toFloat() - fLabel.width, 1f))
-    val y = IceEffects.rand.nextFloat((Core.graphics.height).toFloat())/* fLabel.setPosition(x, y)
-     group.addChild(fLabel)*/
+    val y = IceEffects.rand.nextFloat((Core.graphics.height).toFloat())
     container.setPosition(x, y)
     group.addChild(container)
   }

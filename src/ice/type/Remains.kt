@@ -1,6 +1,5 @@
 package ice.type
 
-import arc.func.Cons
 import arc.scene.style.TextureRegionDrawable
 import arc.scene.ui.ImageButton
 import arc.scene.ui.layout.Table
@@ -48,17 +47,12 @@ open class Remains(val name: String) :Localizable {
   var install = {}
   var uninstall = {}
   var disabled: () -> Boolean = { Vars.state.isGame }
-  var customTable = Table()
   var buttonStyle = IStyles.button5
 
   var enabled: Boolean by ConfigPropertyDelegate(false, "${DeepSpace.modName}-remains-$name-enabled")
 
   init {
     remainsSeq.add(this)
-  }
-
-  fun setDescriptionTable(table: Cons<Table>) {
-    table.get(customTable)
   }
 
   fun enabled(enabled: Boolean) {
@@ -79,10 +73,13 @@ open class Remains(val name: String) :Localizable {
       it.table { table ->
         table.add("效果: $effect").color(remainsColor).pad(5f).fontScale(1.3f).wrap().grow()
       }.marginLeft(9f).grow().row()
-      customTable.clearChildren()
-      customTable.add(description).grow().wrap().pad(5f).color(remainsColor).row()
-      it.add(customTable).grow().row()
+      if (description.isNotEmpty()) it.add(description).grow().wrap().pad(5f).color(remainsColor).row()
+      customTable(it)
     }
+  }
+
+  open fun customTable(table: Table) {
+
   }
 
   fun rebuildEnableRemains(table: Table) {

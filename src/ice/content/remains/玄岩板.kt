@@ -11,11 +11,12 @@ class 玄岩板 :Remains("remains_basalt_plate") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "玄岩板"
+        localizedName = "玄岩板"
         description = "由奇异,沉重的玄武岩打磨而成"
+        effect = "[${CrafterBlocks.碳控熔炉.localizedName}]所需燃料减少[1]"
       }
     }
-    effect = "[${CrafterBlocks.碳控熔炉.localizedName}]所需燃料减少[1]"
+
     var itemStack = ItemStack()
     CrafterBlocks.碳控熔炉.consumers.find {
       it.get(ConsumeType.item)!!.consItems!!.find { stack ->

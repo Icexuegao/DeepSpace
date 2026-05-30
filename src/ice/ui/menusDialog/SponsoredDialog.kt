@@ -13,12 +13,10 @@ import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import arc.util.Scaling
 import ice.DeepSpace
+import ice.core.IFiles
 import ice.graphics.Characters
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import ice.core.IFiles
-import universecore.scene.ui.*
-import universecore.struct.texture.asDrawable
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.ModInfoDialog.getQQImage
 import ice.world.meta.IceStats
@@ -27,26 +25,31 @@ import mindustry.gen.Tex
 import mindustry.graphics.Pal
 import singularity.graphic.SglDrawConst
 import singularity.ui.SglStyles
+import universecore.scene.ui.*
+import universecore.struct.texture.asDrawable
 
-object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.menusButton_contribute) {
+object SponsoredDialog :BaseMenusDialog(IceStats.捐赠.localized(), IStyles.menusButton_contribute) {
   private val hint = Seq<String>().apply {
-    add("你就快要成功了是吗?")
-    add("干嘛这么看着我?")
-    add("你又是为何来到这里?")
-    add("情况还真是急转直下啊")
-    add("你戳够了没?!")
-    add("你知道alon和Alon的区别吗")
-    add("有点受宠若惊了")
-    add("好烦,想说又觉得没必要,还是不听算了")
-    add("SoundControl是一坨大的")
-    add("学学学写写写")
-    add("我说unk牛逼,尼尔多龙马?")
-    add("难道你是衣钵继承者")
-    add("那cyber io也给你")
-    add("修了")
-    add("能跑起来吗?")
-    add("还有bug吗?")
-    add("你们倒是说话啊>:(")
+    """
+      你就快要成功了是吗?
+      干嘛这么看着我?
+      你又是为何来到这里?
+      情况还真是急转直下啊
+      你戳够了没?!
+      你知道alon和Alon的区别吗
+      有点受宠若惊了
+      好烦,想说又觉得没必要,还是不听算了
+      SoundControl是一坨大的
+      学学学写写写
+      我说unk牛逼,尼尔多龙马?
+      那cyber io也给你
+      难道你是衣钵继承者
+      能跑起来吗?
+      修了
+      你们倒是说话啊>:(
+      还有bug吗?
+      为什么不发日志
+    """.trimIndent().split("\n").forEach(::add)
   }
 
   init {
@@ -95,7 +98,13 @@ object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.me
       p.row()
       p.add(IceStats.支持github.localized()).color(IceColor.b4).growX().wrap()
       p.row()
-      buildButton(p, Icon.github, Pal.accent, "GitHub", IceStats.支持githubStar.localized()) { Core.app.openURI(DeepSpace.githubProjectUrl) }
+      buildButton(
+        p,
+        Icon.github,
+        Pal.accent,
+        "GitHub",
+        IceStats.支持githubStar.localized()
+      ) { Core.app.openURI(DeepSpace.githubProjectUrl) }
       p.row()
       p.add(IceStats.支持捐赠.localized()).color(IceColor.b4).padTop(20f).growX().wrap()
       p.row()
@@ -156,7 +165,7 @@ object SponsoredDialog : BaseMenusDialog(IceStats.捐赠.localized(), IStyles.me
     }, SglStyles.underline, listener)
   }
 
-  private class SponsoredTable(name: String, number: String, val amount: Float) : Table() {
+  private class SponsoredTable(name: String, number: String, val amount: Float) :Table() {
     companion object {
       val sponsoreds = Seq<SponsoredTable>()
     }
