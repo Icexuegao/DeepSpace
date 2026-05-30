@@ -14,6 +14,8 @@ object TurretBlocks :Load {
   val 碎爆 = 碎爆()
   val 贯通 = 贯通()
   val 浪潮 = 浪潮()
+  val 极光 = 极光()
+  val 暮光 = 暮光()
 
   val 震击 = 震击()
   val 绪终 = 绪终()
@@ -24,7 +26,7 @@ object TurretBlocks :Load {
   val 光谱 = 光谱()
   val 霓虹 = 霓虹()
   val 撕裂 = 撕裂()
-
+  val 聚焦 = 聚焦()
   val 隧穿 = 隧穿()
   val 脉冲 = 脉冲()
   val 腥风 = 腥风()
@@ -33,6 +35,7 @@ object TurretBlocks :Load {
   val 信标 = 信标()
   val 喧嚣 = 喧嚣()
   val 灼烧 = 灼烧()
+  val 罪碑 = 罪碑()
   val 闪光 = 闪光()
 
   val 遮幕 = 遮幕()
