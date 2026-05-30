@@ -39,17 +39,6 @@ jobs:
         env:
           ANDROID_HOME: ${{ env.ANDROID_HOME }}
 
-      # ========== 调试：查看生成的文件 ==========
-      - name: List generated files
-        run: |
-          echo "=== Checking build/libs/ ==="
-          ls -la build/libs/ || echo "build/libs not found"
-          echo "=== Checking build/libs/version/ ==="
-          ls -la build/libs/version/ || echo "version folder not found"
-          echo "=== Finding all JARs ==="
-          find . -name "*.jar" 2>/dev/null
-      # ========== 调试结束 ==========
-
       - name: Extract Version
         id: version
         run: |
@@ -60,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: DeepSpace-${{ steps.version.outputs.version }}
-          path: build/libs/version/DeepSpace-*.jar
+          path: build/libs/version/DeepSpace-private-Alpha-*.jar
 
       - name: Check Release Token
         id: check_token
@@ -80,7 +69,7 @@ jobs:
           body: |
             自动构建：**${{ steps.version.outputs.version }}**
             提交：${{ github.sha }}
-          artifacts: build/libs/version/DeepSpace-*.jar
+          artifacts: build/libs/version/DeepSpace-private-Alpha-*.jar
           allowUpdates: true
           removeArtifacts: true
           prerelease: false
@@ -94,9 +83,9 @@ jobs:
           git clone https://x-access-token:${{ secrets.PUBLIC_REPO_TOKEN }}@github.com/Icexuegao/DeepSpace.git public-repo
           cd public-repo
           mkdir -p releases
-          cp ${{ github.workspace }}/build/libs/version/DeepSpace-*.jar releases/
+          cp ${{ github.workspace }}/build/libs/version/DeepSpace-private-Alpha-*.jar releases/
           git config user.name "github-actions[bot]"
-          git config.user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add releases/
           git diff --quiet && git diff --staged --quiet || git commit -m "Sync v${{ steps.version.outputs.version }} from private repo [skip ci]"
           git push
