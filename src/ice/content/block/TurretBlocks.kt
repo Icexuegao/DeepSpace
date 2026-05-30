@@ -14,6 +14,7 @@ object TurretBlocks :Load {
   val 碎爆 = 碎爆()
   val 贯通 = 贯通()
   val 浪潮 = 浪潮()
+
   val 震击 = 震击()
   val 绪终 = 绪终()
   val 决断 = 决断()
