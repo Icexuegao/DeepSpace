@@ -18,6 +18,7 @@ object TurretBlocks :Load {
   val 绪终 = 绪终()
   val 决断 = 决断()
   val 裂颅 = 裂颅()
+
   val 冲穿 = 冲穿()
   val 光谱 = 光谱()
   val 霓虹 = 霓虹()
