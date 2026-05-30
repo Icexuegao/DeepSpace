@@ -24,11 +24,12 @@ class 喧嚣 :SglTurret("turret_clamor") {
     localization {
       zh_CN {
         localizedName = "喧嚣"
-        description = "扩散性等离子炮塔,向敌人发射逐渐消散的螺旋等离子体\\n等离子体在消散的过程中会分裂出许多小型能量裂片"
+        description = "扩散性等离子炮塔,向敌人发射逐渐消散的螺旋等离子体\n等离子体在消散的过程中会分裂出许多小型能量裂片"
       }
     }
 
     health = 4320
+    liquidCapacity = 120f
     size = 4
     shake = 5f
     recoil = 4f
