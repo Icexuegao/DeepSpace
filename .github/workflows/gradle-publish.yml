@@ -60,7 +60,8 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Release Nightly
+      # ========== 在私有库创建 Release（原有功能） ==========
+      - name: Release Nightly (Private)
         if: steps.check_token.outputs.exists == 'true'
         uses: ncipollo/release-action@v1
         with:
@@ -76,16 +77,22 @@ jobs:
           makeLatest: true
           token: ${{ secrets.RELEASE_TOKEN }}
 
-      # ========== 同步到公开库 ==========
-      - name: Sync to public repository
+      # ========== 同步到公开库的 Releases ==========
+      - name: Release Nightly (Public)
         if: steps.check_token.outputs.exists == 'true'
-        run: |
-          git clone https://x-access-token:${{ secrets.PUBLIC_REPO_TOKEN }}@github.com/Icexuegao/DeepSpace.git public-repo
-          cd public-repo
-          mkdir -p releases
-          cp ${{ github.workspace }}/build/libs/version/DeepSpace-private-Alpha-*.jar releases/
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add releases/
-          git diff --quiet && git diff --staged --quiet || git commit -m "Sync v${{ steps.version.outputs.version }} from private repo [skip ci]"
-          git push
+        uses: ncipollo/release-action@v1
+        with:
+          tag: nightly
+          name: Nightly (${{ steps.version.outputs.version }})
+          body: |
+            自动构建：**${{ steps.version.outputs.version }}**
+            来自私有库的同步构建
+            提交：${{ github.sha }}
+          artifacts: build/libs/version/DeepSpace-private-Alpha-*.jar
+          allowUpdates: true
+          removeArtifacts: true
+          prerelease: false
+          makeLatest: true
+          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
+          owner: Icexuegao
+          repo: DeepSpace
