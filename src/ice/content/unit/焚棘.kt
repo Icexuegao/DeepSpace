@@ -28,7 +28,7 @@ import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import universecore.struct.texture.LazyTextureSingleDelegate
 
-class 焚棘 :IceUnitType("ardenThorn", ArdenThornUnit::class.java) {
+class 焚棘 :IceUnitType("unit_ardenThorn", ArdenThornUnit::class.java) {
   init {
     localization {
       zh_CN {
