@@ -16,15 +16,15 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.block.turret.TurretBullets
 import ice.content.unit.*
-import ice.content.unit.flying.RainFly
-import ice.content.unit.flying.Veto
 import ice.content.unit.flying.fire.*
 import ice.content.unit.flying.rain.*
+import ice.content.unit.flying.否决
+import ice.content.unit.flying.雨燕
 import ice.content.unit.mech.*
-import ice.content.unit.naval.Abyss
-import ice.content.unit.naval.Execution
-import ice.content.unit.naval.Meditation
-import ice.content.unit.naval.Witness
+import ice.content.unit.naval.履行
+import ice.content.unit.naval.沧溟
+import ice.content.unit.naval.苦修
+import ice.content.unit.naval.见证
 import ice.world.content.unit.IceUnitType
 import mindustry.Vars
 import mindustry.entities.Damage
@@ -45,9 +45,9 @@ import singularity.world.SglFx
 import singularity.world.particles.SglParticleModels
 import singularity.world.unit.SglUnitEntity
 import singularity.world.unit.SglUnitType
-import singularity.world.unit.types.AuroraType
-import singularity.world.unit.types.KaguyaType
-import singularity.world.unit.types.MornstarType
+import singularity.world.unit.types.晨星
+import singularity.world.unit.types.极光
+import singularity.world.unit.types.辉夜
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.CircleGenerator
 import universecore.graphics.lightnings.generator.ShrinkGenerator
@@ -58,113 +58,113 @@ import kotlin.math.min
 
 @Suppress("unused")
 object IUnitTypes :Load {
-  val 星光 = Starlight()
-  val 火花 = Spark()
-  val 战斧 = WarAxe()
-  val 火狱 = HellFire()
-  val 火苗 = FlameMissile()
-  val 重创 = HeavyDamageMissile()
-  val 雷精 = Lightning()
+  val 星光 = 星光()
+  val 火花 = 火花()
+  val 战斧 = 战斧()
+  val 火狱 = 火狱()
+  val 火苗 = 火苗()
+  val 重创 = 重创()
+  val 雷精 = 雷精()
 
   val 飞蠓 = 飞蠓()
   val 疟蚊 = 疟蚊()
   val 血俎 = 血俎()
 
-  val 工蜂 = WorkerBee()
-  val 绒刺 = Barb()
-  val 和弦 = Chord()
-  val 收割 = Harvester()
+  val 工蜂 = 工蜂()
+  val 绒刺 = 绒刺()
+  val 和弦 = 和弦()
+  val 收割 = 收割()
 
-  val 坚盾 = StrongShield()
-  val 围护 = Enclosure()
-  val 固守 = Hold()
-  val 铁卫 = IronGuard()
-  val 死誓 = DeathOath()
-  val 禁军 = ForbiddenArmy()
+  val 坚盾 = 坚盾()
+  val 围护 = 围护()
+  val 固守 = 固守()
+  val 铁卫 = 铁卫()
+  val 死誓 = 死誓()
+  val 禁军 = 禁军()
 
-  val 扑火 = PutotFire()
-  val 趋火 = Tuihuo()
-  val 奔火 = BenFire()
-  val 逐火 = ZhuFire()
-  val 赴火 = FuFire()
-  val 化火 = HuaFire()
+  val 扑火 = 扑火()
+  val 趋火 = 趋火()
+  val 奔火 = 奔火()
+  val 逐火 = 逐火()
+  val 赴火 = 赴火()
+  val 化火 = 化火()
 
-  val 陨石 = Meteorite()
-  val 陨铁 = MeteoricIron()
-  val 陨星 = MeteoricStar()
+  val 陨石 = 陨石()
+  val 陨铁 = 陨铁()
+  val 陨星 = 陨星()
 
-  val 雨滴 = Raindrop()
-  val 骤雨 = TorrentialRain()
-  val 暴雨 = Storm()
-  val 惊雷 = Thunder()
-  val 雷劫 = ThunderTribulation()
+  val 雨滴 = 雨滴()
+  val 骤雨 = 骤雨()
+  val 暴雨 = 暴雨()
+  val 惊雷 = 惊雷()
+  val 雷劫 = 雷劫()
 
-  val 见证 = Witness()
-  val 履行 = Execution()
-  val 苦修 = Meditation()
-  val 沧溟 = Abyss()
+  val 见证 = 见证()
+  val 履行 = 履行()
+  val 苦修 = 苦修()
+  val 沧溟 = 沧溟()
 
-  val 突刺 = BarbProtrusion()
-  val 碎甲 = Shatter()
-  val 破军 = BreakArmy()
-  val 攻城 = Siege()
-  val 重压 = HeavyPress()
-  val 悲鸣 = Scream()
-  val 断业 = BreakUp()
-  val 涤罪 = ClearingGround()
+  val 突刺 = 突刺()
+  val 碎甲 = 碎甲()
+  val 破军 = 破军()
+  val 攻城 = 攻城()
+  val 重压 = 重压()
+  val 悲鸣 = 悲鸣()
+  val 断业 = 断业()
+  val 涤罪 = 涤罪()
 
-  val 幻影 = Phantom()
-  val 弧光 = ArcLight()
-  val 蜂后 = QueenBee()
-  val 剑戟 = SwordSpear()
-  val 雨燕 = RainFly()
-  val 否决 = Veto()
-  val 风暴 = StormBolt()
+  val 幻影 = 幻影()
+  val 弧光 = 弧光()
+  val 蜂后 = 蜂后()
+  val 剑戟 = 剑戟()
+  val 雨燕 = 雨燕()
+  val 否决 = 否决()
+  val 风暴 = 风暴()
 
-  val 黑棘 = BlackThorns()
-  val 噬星 = StarEater()
-  val 渊狱 = AbyssPrison()
+  val 黑棘 = 黑棘()
+  val 噬星 = 噬星()
+  val 渊狱 = 渊狱()
 
-  val 毒刺 = PoisonBarb()
-  val 爆蚊 = ExplosiveMosquito()
+  val 毒刺 = 毒刺()
+  val 爆蚊 = 爆蚊()
 
-  val 加百列 = Gabriel()
-  val 米迦勒 = Michael()
-  val 路西法 = Lucifer()
+  val 加百列 = 加百列()
+  val 米迦勒 = 米迦勒()
+  val 路西法 = 路西法()
 
-  val 伊普西龙 = Ipsiglon()
-  val 泽塔 = Zeta()
-  val 欧米茄 = Omega()
+  val 伊普西龙 = 伊普西龙()
+  val 泽塔 = 泽塔()
+  val 欧米茄 = 欧米茄()
 
-  val 炸蛛 = SpiderBomb()
-  val 罗织 = Weaver()
-  val 构陷 = Constrict()
-  val 甘霖 = Ganlin()
-  val 摧枯 = Gravestone()
-  val 异种 = Heterogeneous()
+  val 炸蛛 = 炸蛛()
+  val 罗织 = 罗织()
+  val 构陷 = 构陷()
+  val 甘霖 = 甘霖()
+  val 摧枯 = 摧枯()
+  val 异种 = 异种()
   val 奔袭 = 奔袭()
 
-  val 冥 = Pluto()
-  val 玄 = Hyun()
-  val 文漪 = Wripple()
+  val 冥 = 冥()
+  val 玄 = 玄()
+  val 文漪 = 文漪()
 
-  val 仆从 = Footman()
-  val 传教者 = Missionary()
-  val 裂片集群 = ClusterLobes()
+  val 仆从 = 仆从()
+  val 传教者 = 传教者()
+  val 裂片集群 = 裂片集群()
 
-  val 焚棘 = ArdenThorn()
-  val 青壤 = Schizovegeta()
-  val 丰穰之瘤 = RichTumor()
+  val 焚棘 = 焚棘()
+  val 青壤 = 青壤()
+  val 丰穰之瘤 = 丰穰之瘤()
   val 蚀虻 = 蚀虻()
   val 蚀虻Middle = 蚀虻Middle()
   val 蚀虻End = 蚀虻End()
   val 糜蝇 = Flies()
-  val 晨星 = MornstarType()
-  val 辉夜 = KaguyaType()
-  val 极光 = AuroraType()
-  val 虚宿 = Emptiness()
-  val 无畏 = Fearless()
-  val 冥刻 = DarkCarving()
+  val 晨星 = 晨星()
+  val 辉夜 = 辉夜()
+  val 极光 = 极光()
+  val 虚宿 = 虚宿()
+  val 无畏 = 无畏()
+  val 冥刻 = 冥刻()
   var SglUnitEntity.controlTime by AttachedProperty { 0f }
 
   /**棱镜 */
@@ -354,22 +354,12 @@ object IUnitTypes :Load {
         MathRenderer.setDispersion(lerpStart * 1.2f)
         Draw.color(Pal.reactorPurple)
         MathRenderer.drawCurveCircle(
-          u.x,
-          u.y,
-          radius * 0.7f + radius * Interp.pow2In.apply(1 - lerpStart),
-          3,
-          radius * 0.6f,
-          Time.time * 1.2f
+          u.x, u.y, radius * 0.7f + radius * Interp.pow2In.apply(1 - lerpStart), 3, radius * 0.6f, Time.time * 1.2f
         )
         MathRenderer.setDispersion(lerpStart)
         Draw.color(SglDrawConst.matrixNet)
         MathRenderer.drawCurveCircle(
-          u.x,
-          u.y,
-          radius * 0.72f + radius * Interp.pow2In.apply(1 - lerpStart),
-          4,
-          radius * 0.67f,
-          Time.time * 1.6f
+          u.x, u.y, radius * 0.72f + radius * Interp.pow2In.apply(1 - lerpStart), 4, radius * 0.67f, Time.time * 1.6f
         )
       }
 
