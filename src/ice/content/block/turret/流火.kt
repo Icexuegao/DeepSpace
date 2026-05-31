@@ -33,7 +33,7 @@ class 流火 :ContinuousTurret("flowingFire") {
     targetInterval = 5f
 
     requirements(
-      Category.turret, IItems.铜锭, 155, IItems.石英玻璃, 55, IItems.铬锭, 85, IItems.钍锭, 65
+      Category.turret, IItems.铜锭, 155, IItems.石英玻璃, 55, IItems.铬锭, 85, IItems.钴锭, 15
     )
     newAmmo(ContinuousFlameBulletType().apply {
       length = 120f
