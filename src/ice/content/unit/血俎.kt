@@ -7,6 +7,7 @@ import ice.content.IUnitTypes
 import ice.entities.bullet.LaserBulletType
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
+import mindustry.content.StatusEffects
 import mindustry.entities.abilities.LiquidExplodeAbility
 import mindustry.entities.abilities.SpawnDeathAbility
 import mindustry.entities.bullet.SapBulletType
@@ -19,15 +20,8 @@ import mindustry.ui.Bar
 import mindustry.world.meta.BlockFlag
 import universecore.util.toColor
 
-class Mosquito :IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
+class 血俎 :IceUnitType("unit_bloodAltar", TimedKillUnit::class.java) {
   init {
-    localization {
-      zh_CN {
-        localizedName = "疟蚊"
-        description =
-          "轻型空中突击单位.由飞蠓改进而成,体型略有增长,体表覆盖轻便的几丁质甲壳,在保持机动性的同时获得了一定的防护能力.阵亡后会洒下一滩血肉赘生物."
-      }
-    }
     lifetime = 1800f
     flying = true
     lowAltitude = true
@@ -36,33 +30,50 @@ class Mosquito :IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
     createScorch = false
     playerControllable = false
     itemCapacity = 0
-    targetFlags = arrayOf(
-      BlockFlag.reactor,
-      BlockFlag.generator,
-      BlockFlag.battery,
-      BlockFlag.factory
-    )
-    health = 1080f
+    localization {
+      zh_CN {
+        this.localizedName = "血俎"
+        description = "中型空中突击单位.由疟蚊改进而成,体表覆盖坚韧的几丁质甲壳.阵亡后会分裂出飞蠓并洒下一滩血肉赘生物"
+      }
+    }
+    health = 3240f
     armor = 3f
-    hitSize = 18f
+    hitSize = 24f
     range = 240f
     speed = 4f
     drag = 0.1f
     rotateSpeed = 20f
-    engineOffset = 6f
-    engineSize = 2.7f
-    trailLength = 4
+    engineOffset = 8f
+    engineSize = 3f
+    trailLength = 5
     outlineColor = "1F1F1F".toColor()
+    targetFlags = arrayOf(
+      BlockFlag.reactor, BlockFlag.generator, BlockFlag.battery, BlockFlag.factory
+    )
+    abilities.add(LiquidExplodeAbility().apply {
+      liquid = ILiquids.血肉赘生物
+      amount = 24f
+    })
+
+    abilities.add(SpawnDeathAbility().apply {
+      unit = IUnitTypes.疟蚊
+      amount = 1
+    })
+
+    abilities.add(SpawnDeathAbility().apply {
+      unit = IUnitTypes.飞蠓
+      randAmount = 1
+    })
 
     weapons.add(Weapon().apply {
       x = 0f
-      y = 10f
+      y = 3f
       reload = 15f
       shootY = 0f
       mirror = false
       autoTarget = true
       shootSound = Sounds.shootLaser
-      bullet = LaserBulletType(45f).apply {
+      bullet = LaserBulletType(60f).apply {
         lifetime = 21f
         length = 80f
         width = 8f
@@ -77,8 +88,8 @@ class Mosquito :IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
     })
 
     weapons.add(Weapon().apply {
-      x = 5f
-      y = 10f
+      x = 5.25f
+      y = 8f
       shootY = 0f
       reload = 6f
       rotate = true
@@ -86,7 +97,30 @@ class Mosquito :IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
       alternate = false
       shootSound = Sounds.shootSap
       bullet = SapBulletType().apply {
-        damage = 45f
+        damage = 60f
+        length = 120f
+        sapStrength = 1.5f
+        color = "E88EC9".toColor()
+        hitColor = "E88EC9".toColor()
+        status = StatusEffects.sapped
+        statusDuration = 30f
+        recoil = -1f
+        knockback = -5f
+        shootEffect = Fx.shootSmall
+      }
+    })
+
+    weapons.add(Weapon().apply {
+      x = 6.5f
+      y = 7f
+      shootY = 0f
+      reload = 6f
+      rotate = true
+      shootCone = 45f
+      alternate = false
+      shootSound = Sounds.shootSap
+      bullet = SapBulletType().apply {
+        damage = 60f
         length = 120f
         sapStrength = 1.5f
         color = "E88EC9".toColor()
@@ -97,17 +131,6 @@ class Mosquito :IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
         knockback = -5f
         shootEffect = Fx.shootSmall
       }
-    })
-
-    abilities.add(LiquidExplodeAbility().apply {
-      liquid = ILiquids.血肉赘生物
-      amount = 18f
-    })
-
-    abilities.add(SpawnDeathAbility().apply {
-      unit = IUnitTypes.飞蠓
-      amount = 2
-      randAmount = 1
     })
   }
 

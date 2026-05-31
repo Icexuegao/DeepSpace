@@ -66,9 +66,9 @@ object IUnitTypes :Load {
   val 重创 = HeavyDamageMissile()
   val 雷精 = Lightning()
 
-  val 飞蠓 = FlyingMidges()
-  val 疟蚊 = Mosquito()
-  val 血俎 = BloodAltar()
+  val 飞蠓 = 飞蠓()
+  val 疟蚊 = 疟蚊()
+  val 血俎 = 血俎()
 
   val 工蜂 = WorkerBee()
   val 绒刺 = Barb()

@@ -13,6 +13,7 @@ import arc.math.geom.Vec2
 import arc.struct.Seq
 import arc.util.Time
 import arc.util.Tmp
+import ice.audio.ISounds
 import ice.content.IItems
 import ice.core.IFiles.appendModName
 import ice.entities.bullet.BlockHoleBulletType
@@ -38,6 +39,7 @@ import mindustry.world.draw.DrawPulseShape
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import universecore.util.toColor
+import kotlin.math.abs
 
 class 罪碑 :SglTurret("turret_sin_monument") {
   fun AngleTrns(ang: Float, rad: Float, rad2: Float? = null): Vec2 {
@@ -59,11 +61,13 @@ class 罪碑 :SglTurret("turret_sin_monument") {
         description = "强大的超远程炮塔,通过投射不稳定的压缩黑洞持续杀伤敌人\n引力奇点坍缩器的极度不稳定性"
       }
     }
-    warmupSpeed=0.004f
+    warmupSpeed = 0.004f
     health = 256000
     armor = 24f
     size = 16
-    range = 3840f
+    chargeSound = ISounds.能量聚合
+    shootSound = ISounds.能量释放
+    range = 1840f
     shake = 12f
     shootY = 32f
     shootCone = 1f
@@ -80,7 +84,7 @@ class 罪碑 :SglTurret("turret_sin_monument") {
       Draw.alpha(e.fout(0.5f))
       Draw.z(Layer.bullet)
 
-      val rot = Math.abs(e.rotation) + 90f
+      val rot = abs(e.rotation) + 90f
 
       for(i in Mathf.signs) {
         val len = (8f + e.finpow() * 40f) * i
@@ -122,7 +126,7 @@ class 罪碑 :SglTurret("turret_sin_monument") {
       DrawSglTurret().apply {
         // 添加4层双光环
         for(i in 0 until 4) {
-          doubleHalo ({
+          doubleHalo({
             progress = DrawPart.PartProgress.warmup.sin(i * 10f, 20f, 0.6f)
             x = -100f + i * 15f
             y = -68f + i * 28f
@@ -133,7 +137,7 @@ class 罪碑 :SglTurret("turret_sin_monument") {
             triLength = 80f - i * 10f
             triLengthTo = 180f - i * 20f
             haloRotation = 20f
-          },4)
+          }, 4)
         }
 
         parts.addAll(
@@ -282,7 +286,14 @@ class 罪碑 :SglTurret("turret_sin_monument") {
         colorFrom = FF5845
         colorTo = FF8663
       },
-      ParticleEffect().apply {
+      object :ParticleEffect() {
+
+        override fun render(e: EffectContainer) {
+
+
+          super.render(e)
+        }
+      }.apply {
         particles = 1
         lifetime = 48f
         sizeFrom = 18f
@@ -377,18 +388,17 @@ class 罪碑 :SglTurret("turret_sin_monument") {
 
     // 黑洞主效果
     val blackhole = Effect(300f) { e ->
+
       Draw.color(black)
       Draw.z(111f)
-
       val f = e.fin(Interp.swingIn)
-
       fun s(to: Float): Float {
         return Interp.elasticOut.apply(0f, to, e.fin(Interp.slope)) * 2f
       }
 
       Draw.rect("plasma".appendModName(), e.x, e.y, s(160f), s(160f))
 
-      Draw.blend(Blending.additive)
+     Draw.blend(Blending.additive)
       Draw.color(FF5845, FF8663, e.fin())
       Draw.z(110f)
 
@@ -410,6 +420,7 @@ class 罪碑 :SglTurret("turret_sin_monument") {
       if (!Vars.state.isPaused) {
         graviton.at(e.x, e.y)
       }
+      Draw.blend(Blending.normal)
     }
 
     // 主子弹类型
@@ -421,6 +432,7 @@ class 罪碑 :SglTurret("turret_sin_monument") {
       num = 8,
       effect = hole
     ).apply {
+      drawSize = 300f
       damage = 14400f
       lifetime = 320f
       speed = 12f
@@ -502,7 +514,7 @@ class 罪碑 :SglTurret("turret_sin_monument") {
       trailSinMag = 0.5f
       trailInterp = Interp.pow10Out
 
-      hitShake = 480f
+      //hitShake = 480f
       hitEffect = blackhole
 
       fragBullets = 1

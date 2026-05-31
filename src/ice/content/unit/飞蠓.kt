@@ -16,8 +16,14 @@ import mindustry.ui.Bar
 import mindustry.world.meta.BlockFlag
 import universecore.util.toColor
 
-class FlyingMidges :IceUnitType("unit_flyingMidges", TimedKillUnit::class.java) {
+class 飞蠓 :IceUnitType("unit_flyingMidges", TimedKillUnit::class.java) {
   init {
+    localization {
+      zh_CN {
+        localizedName = "飞蠓"
+        description = "轻型空中突击单位.体型轻盈,行动敏捷,以其机动性在进攻中占据主导地位,集群作战中有显著优势"
+      }
+    }
     lifetime = 1800f
     flying = true
     lowAltitude = true
@@ -27,18 +33,8 @@ class FlyingMidges :IceUnitType("unit_flyingMidges", TimedKillUnit::class.java) 
     playerControllable = false
     itemCapacity = 0
 
-    localization {
-      zh_CN {
-        this.localizedName = "飞蠓"
-        description = "轻型空中突击单位.体型轻盈,行动敏捷,以其机动性在进攻中占据主导地位,集群作战中有显著优势"
-      }
-    }
-    targetFlags = arrayOf(
-      BlockFlag.reactor,
-      BlockFlag.generator,
-      BlockFlag.battery,
-      BlockFlag.factory
-    )
+
+    targetFlags = arrayOf(BlockFlag.reactor, BlockFlag.generator, BlockFlag.battery, BlockFlag.factory)
     health = 70f
     armor = 0.5f
     hitSize = 9f
