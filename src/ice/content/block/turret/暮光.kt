@@ -17,6 +17,8 @@ import mindustry.type.Category
 import mindustry.type.Liquid
 import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
+import universecore.world.draw.part.UncPartProgress
+import universecore.world.draw.part.UncRegionPart
 
 class 暮光 :SglTurret("turret_twilight") {
   init {
@@ -42,8 +44,8 @@ class 暮光 :SglTurret("turret_twilight") {
     shootSound = Sounds.shootMalign
     drawers = DrawSglTurret().apply {
       for(i in 0..4) {
-        parts.add(RegionPart("-aim").apply {
-          heatProgress = DrawPart.PartProgress{ partParams ->
+        parts.add(UncRegionPart("-aim").apply {
+          heatProgress = UncPartProgress{ partParams ->
             partParams.warmup * Mathf.sin(Time.time + (4 - i) * 10f, 20f, 1f)
           }
           heatLight = true

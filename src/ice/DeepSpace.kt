@@ -9,12 +9,12 @@ import arc.util.Log
 import arc.util.Strings
 import arc.util.serialization.JsonReader
 import ice.core.IFiles
-import universecore.graphic.WindField
 import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.mod.Mods
 import singularity.Singularity
 import singularity.core.UpdatePool
+import universecore.graphic.WindField
 import java.util.*
 
 object DeepSpace {
@@ -39,6 +39,7 @@ object DeepSpace {
   const val githubProjReleaseApi = "https://api.github.com/repos/Icexuegao/DeepSpace/releases/latest"
   /** 此mod的QQ群组 */
   const val qqGropsUrl = "https://qm.qq.com/q/3CR3cn2Wc8"
+  const val discord ="https://discord.com/channels/391020510269669376/1510276995181969579"
   /** 模组数据文件夹 */
   val modDirectory: Fi = Core.settings.getDataDirectory().child(modName).apply { if (!exists()) mkdirs() }
   /** 模组持久全局变量存储文件  */

@@ -97,7 +97,7 @@ class 洛华 :ContinuousTurret("mendTower") {
       collidesGround = true
       collidesTeam = true
     })
-    consume!!.liquid(ILiquids.氯气, 0.5f)
+    consume!!.liquid(ILiquids.氯气,7f/60f)
     val parts = (drawers as DrawSglTurret).parts
     parts.add(RegionPart("-mid"))
     parts.add(RegionPart("-blade-l").apply {

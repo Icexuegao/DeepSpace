@@ -21,6 +21,13 @@ import universecore.util.toColor
 
 class Mosquito :IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
   init {
+    localization {
+      zh_CN {
+        localizedName = "疟蚊"
+        description =
+          "轻型空中突击单位.由飞蠓改进而成,体型略有增长,体表覆盖轻便的几丁质甲壳,在保持机动性的同时获得了一定的防护能力.阵亡后会洒下一滩血肉赘生物."
+      }
+    }
     lifetime = 1800f
     flying = true
     lowAltitude = true
@@ -29,13 +36,6 @@ class Mosquito :IceUnitType("unit_mosquito", TimedKillUnit::class.java) {
     createScorch = false
     playerControllable = false
     itemCapacity = 0
-    localization {
-      zh_CN {
-        localizedName = "疟蚊"
-        description =
-          "轻型空中突击单位.由飞蠓改进而成,体型略有增长,体表覆盖轻便的几丁质甲壳,在保持机动性的同时获得了一定的防护能力.阵亡后会洒下一滩血肉赘生物."
-      }
-    }
     targetFlags = arrayOf(
       BlockFlag.reactor,
       BlockFlag.generator,

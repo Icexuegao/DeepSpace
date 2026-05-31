@@ -17,6 +17,7 @@ import arc.scene.ui.layout.WidgetGroup
 import arc.struct.Seq
 import arc.util.Time
 import ice.core.IFiles.appendModName
+import ice.core.SettingValue
 import ice.graphics.IceColor
 import ice.type.Remains
 import ice.world.meta.IceEffects
@@ -111,7 +112,7 @@ class 迷思海 :Remains("remains_mystic_sea") {
         messageFont = Fonts.def
         messageFontColor = Color.gray
       }
-    }.growX().touchable(Touchable.disabled)
+    }.growX().touchable { if (SettingValue.启用调试模式)Touchable.enabled else Touchable.disabled }
   }
 
   var rands =

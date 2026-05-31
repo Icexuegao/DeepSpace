@@ -1,6 +1,9 @@
 package ice.world.content.unit
 
+import arc.Core
 import arc.graphics.Color
+import arc.graphics.Pixmap
+import arc.graphics.Pixmaps
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import arc.graphics.g2d.TextureRegion
@@ -16,12 +19,12 @@ import ice.core.IFiles
 import ice.core.IFiles.appendModName
 import ice.entities.IceRegister
 import ice.graphics.IceColor
-import universecore.ui.bundle.Localizable
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars
 import mindustry.core.Renderer
 import mindustry.ctype.UnlockableContent
 import mindustry.entities.abilities.Ability
+import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.part.DrawPart
 import mindustry.gen.*
 import mindustry.gen.Unit
@@ -35,6 +38,7 @@ import mindustry.type.Weapon
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
 import universecore.struct.texture.LazyTextureSingleDelegate
+import universecore.ui.bundle.Localizable
 import kotlin.math.min
 import kotlin.Unit as KUnit
 
@@ -102,7 +106,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
 
   override fun createIcons(packer: MultiPacker) {
 
-    /*if (!Core.atlas.has("$name-full") && Core.atlas.has("$name-treads")) {
+    if (!Core.atlas.has("$name-full") && Core.atlas.has("$name-treads")) {
       val treadRegion = Pixmaps.outline(Core.atlas.getPixmap(treadRegion), outlineColor, outlineRadius)
       val region = Pixmaps.outline(Core.atlas.getPixmap(region), outlineColor, outlineRadius)
       val pixmap = Pixmap(region.width, region.height)
@@ -128,7 +132,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
       }
       packer.add(MultiPacker.PageType.main, "$name-full", pixmap)
       pixmap.dispose()
-    }*/
+    }
     super.createIcons(packer)
   }
 
@@ -472,6 +476,12 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
 
     if (drawCell && unit !is Crawlc) drawCell(unit)
     Draw.scl(scl) //TODO this is a hack for neoplasm turrets
+    if (unit.isAdded) {
+      for(a in unit.abilities) {
+        Draw.reset()
+        if (a is ArmorPlateAbility)a.draw(unit)
+      }
+    }
     drawWeapons(unit)
     if (drawItems) drawItems(unit)
     if (unit.isAdded) drawLight(unit)
@@ -512,7 +522,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     if (unit.isAdded) {
       for(a in unit.abilities) {
         Draw.reset()
-        a.draw(unit)
+        if (a !is ArmorPlateAbility)a.draw(unit)
       }
     }
 

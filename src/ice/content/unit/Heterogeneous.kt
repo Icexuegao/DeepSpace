@@ -66,8 +66,7 @@ class Heterogeneous :IceUnitType("unit_heterogeneous", LegsUnit::class.java) {
       rotationLimit = 90f
       cooldownTime = 500f
       shootSound = Sounds.shootBeamPlasma
-      bullet = BasicBulletType(6f, 0f).apply {
-        sprite = "circle-bullet"
+      bullet = BasicBulletType(6f, 0f,"circle-bullet").apply {
         lifetime = 96f
         height = 32f
         width = 32f
@@ -323,4 +322,5 @@ class Heterogeneous :IceUnitType("unit_heterogeneous", LegsUnit::class.java) {
       }
     }
   }
+
 }
