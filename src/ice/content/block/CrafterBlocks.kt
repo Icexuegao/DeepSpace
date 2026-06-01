@@ -1,10 +1,10 @@
 package ice.content.block
 
 import ice.content.block.crafter.*
-import universecore.world.Load
 
 @Suppress("unused")
-object CrafterBlocks :Load {
+object CrafterBlocks {
+  fun load() = Unit
   val 焚烧炉 = 焚化炉()
   val 碳控熔炉 = 碳控熔炉()
   val 普适冶炼阵列 = 普适冶炼阵列()

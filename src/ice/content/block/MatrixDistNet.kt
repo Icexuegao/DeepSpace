@@ -27,11 +27,10 @@ import singularity.world.distribution.DistBufferType
 import singularity.world.draw.DrawDirSpliceBlock
 import singularity.world.draw.DrawEdgeLinkBits
 import universecore.ui.bundle.localization
-import universecore.world.Load
 
 @Suppress("unused")
-object MatrixDistNet :Load {
-
+object MatrixDistNet {
+  fun load() = Unit
   var 矩阵中枢伺服器 = DistNetCore("matrix_core").apply {
     localization {
       zh_CN {

@@ -47,11 +47,11 @@ import singularity.world.meta.SglStat
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
 import universecore.ui.bundle.localization
-import universecore.world.Load
 import universecore.world.consumers.BaseConsumers
 
 @Suppress("unused")
-object DefenseBlocks :Load {
+object DefenseBlocks {
+  fun load() = Unit
   val 碳钢墙 = Wall("carbonSteelWall").apply {
     size = 1
     armor = 5f
@@ -101,8 +101,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Flux Gold Wall"
         description = "Protects allied structures, blocks enemy projectiles, and slowly repairs itself over time"
-        details =
-        "A barrier built from molten gold ingots\nWealth +"
+        details = "A barrier built from molten gold ingots\nWealth +"
       }
     }
   }
@@ -121,8 +120,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Large Flux Gold Wall"
         description = "Protects allied structures, blocks enemy projectiles, and slowly repairs itself over time"
-        details =
-        "A barrier built from molten gold ingots\nWealth ++"
+        details = "A barrier built from molten gold ingots\nWealth ++"
       }
     }
   }
@@ -200,7 +198,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Ceramic Steel Wall"
         description =
-        "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable. Absorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed on shorelines"
+          "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable. Absorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed on shorelines"
       }
     }
     requirements(Category.defense, IItems.陶钢, 6)
@@ -220,7 +218,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Large Ceramic Steel Wall"
         description =
-        "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable. Absorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed on shorelines"
+          "Protects allied structures, blocks enemy projectiles, and is sturdier and more durable. Absorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed on shorelines"
       }
     }
     requirements(Category.defense, IItems.陶钢, 24)
@@ -306,7 +304,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Biological Steel Wall"
         description =
-        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Reduces part of incoming damage and slowly repairs itself over time.\nAbsorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed in deep water"
+          "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Reduces part of incoming damage and slowly repairs itself over time.\nAbsorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed in deep water"
       }
     }
   }
@@ -330,7 +328,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Large Biological Steel Wall"
         description =
-        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Reduces part of incoming damage and slowly repairs itself over time.\nAbsorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed in deep water"
+          "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Reduces part of incoming damage and slowly repairs itself over time.\nAbsorbs lasers and electric arcs, prevents power nodes from connecting automatically, and can be placed in deep water"
       }
     }
   }
@@ -343,7 +341,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Phase Alloy Wall"
         description =
-        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Projects a small force shield centered on itself"
+          "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Projects a small force shield centered on itself"
       }
     }
     health = 1000
@@ -381,7 +379,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Large Phase Alloy Wall"
         description =
-        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Projects a small force shield centered on itself"
+          "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Projects a small force shield centered on itself"
       }
     }
   }
@@ -413,7 +411,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Phased Radar"
         description =
-        "Locks onto enemy air units within range. Attacks against locked targets have a chance to deal massive bonus damage. Both the damage multiplier and chance depend on array size"
+          "Locks onto enemy air units within range. Attacks against locked targets have a chance to deal massive bonus damage. Both the damage multiplier and chance depend on array size"
       }
     }
     squareSprite = false
@@ -444,7 +442,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Degenerate Neutron Wall"
         description =
-        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Generates immense gravity to attract bullets and absorbs weaker bullets to repair itself"
+          "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Generates immense gravity to attract bullets and absorbs weaker bullets to repair itself"
       }
     }
     health = 2400
@@ -462,7 +460,7 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Large Degenerate Neutron Wall"
         description =
-        "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Generates immense gravity to attract bullets and absorbs weaker bullets to repair itself"
+          "Protects allied structures, blocks enemy projectiles, and is extremely sturdy and durable. Generates immense gravity to attract bullets and absorbs weaker bullets to repair itself"
       }
     }
     size = 2
@@ -485,9 +483,9 @@ object DefenseBlocks :Load {
       en {
         localizedName = "Chaos Matrix"
         description =
-        "An integrated defense system. Guided by a force field, antimatter continuously evolves across a grid according to the rules of Conway's Game of Life\nSpecifically, on the Game of Life grid, each cell has only two states: alive or dead. After each refresh, the state of every cell is determined by its eight surrounding cells and follows these rules:\n[accent]When a cell is dead[]\n[green]1. If exactly 3 surrounding cells are alive, it becomes alive in the next step[]\n[gray]2. In any other case, its state remains unchanged[]\n[accent]When a cell is alive[]\n[red]  1. If 4 or more surrounding cells are alive, it dies in the next step[]\n[red]2. If fewer than 2 surrounding cells are alive, it dies in the next step[] \n[gray]3. In any other case, its state remains unchanged[]\nAt each refresh, all living cells increase their age by 1. When a cell dies, effects are triggered based on its age; as cell age increases, their strength rises dramatically"
+          "An integrated defense system. Guided by a force field, antimatter continuously evolves across a grid according to the rules of Conway's Game of Life\nSpecifically, on the Game of Life grid, each cell has only two states: alive or dead. After each refresh, the state of every cell is determined by its eight surrounding cells and follows these rules:\n[accent]When a cell is dead[]\n[green]1. If exactly 3 surrounding cells are alive, it becomes alive in the next step[]\n[gray]2. In any other case, its state remains unchanged[]\n[accent]When a cell is alive[]\n[red]  1. If 4 or more surrounding cells are alive, it dies in the next step[]\n[red]2. If fewer than 2 surrounding cells are alive, it dies in the next step[] \n[gray]3. In any other case, its state remains unchanged[]\nAt each refresh, all living cells increase their age by 1. When a cell dies, effects are triggered based on its age; as cell age increases, their strength rises dramatically"
         details =
-        "The concept of the Game of Life was originally designed by mathematician Conway as a computer program. In the early days, people only studied and explored its patterns at the level of computer programs, while its overlap with natural science was almost completely ignored. It was not until the 2060s that scientists discovered that particle fluctuation patterns inside vacuum chambers were highly consistent in form with the Game of Life, turning its rules into a scientific law\nControlled antimatter annihilation under these rules can achieve energy utilization efficiency closest to theoretical data, so the rule has been widely applied in energy systems and weaponry. However, a full giant grid such as the Chaos Matrix remains an excessively bold attempt. Fortunately, despite being paused several times under enormous academic pressure, the project ultimately produced outstanding results"
+          "The concept of the Game of Life was originally designed by mathematician Conway as a computer program. In the early days, people only studied and explored its patterns at the level of computer programs, while its overlap with natural science was almost completely ignored. It was not until the 2060s that scientists discovered that particle fluctuation patterns inside vacuum chambers were highly consistent in form with the Game of Life, turning its rules into a scientific law\nControlled antimatter annihilation under these rules can achieve energy utilization efficiency closest to theoretical data, so the rule has been widely applied in energy systems and weaponry. However, a full giant grid such as the Chaos Matrix remains an excessively bold attempt. Fortunately, despite being paused several times under enormous academic pressure, the project ultimately produced outstanding results"
       }
     }
     requirements(

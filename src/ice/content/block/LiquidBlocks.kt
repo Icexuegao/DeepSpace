@@ -6,10 +6,10 @@ import ice.world.content.blocks.liquid.PumpChamber
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import universecore.ui.bundle.localization
-import universecore.world.Load
 
 @Suppress("unused")
-object LiquidBlocks :Load {
+object LiquidBlocks {
+  fun load() = Unit
   val 泵腔 = PumpChamber("pumpChamber").apply {
     requirements(Category.liquid, ItemStack.with(IItems.肌腱, 40, IItems.碎骨, 10, IItems.无名肉块, 60))
     localization {

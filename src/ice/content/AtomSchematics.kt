@@ -3,10 +3,10 @@ package ice.content
 import arc.func.Prov
 import ice.DeepSpace
 import mindustry.type.Item
-import universecore.world.Load
 import universecore.world.consumers.BaseConsumers
 
-object AtomSchematics :Load {
+object AtomSchematics {
+  fun load() = Unit
   var copper_schematic = AtomSchematic(IItems.铜锭, 14000).apply {
     request.medium(0.23f)
     request.time(30f)

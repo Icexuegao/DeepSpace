@@ -204,7 +204,7 @@ private fun checkPrimitiveFinal(field: Field) {
 
 inline fun <U, reified T> KClass<*>.accessField(name: String) = FieldAccessorStatic<U, T>(this.java.getDeclaredField(name).also {
   if (!it.type.isAssignableFrom(T::class.java)) throw IllegalArgumentException("field $it type is not instance of ${T::class.java}")
-  if (Modifier.isFinal(it.modifiers)) throw IllegalArgumentException("The static final field is always immutable, you shouldn't reflect these fields")
+  //if (Modifier.isFinal(it.modifiers)) throw IllegalArgumentException("The static final field is always immutable, you shouldn't reflect these fields")
   it.isAccessible = true
 })
 

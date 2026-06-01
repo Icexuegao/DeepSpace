@@ -1,10 +1,11 @@
 package ice.content.block
 
 import ice.content.block.turret.*
-import universecore.world.Load
 
 @Suppress("unused")
-object TurretBlocks :Load {
+object TurretBlocks {
+  fun load() = Unit
+
   val 碎冰 = 碎冰()
   val 双星 = 双星()
   val 泉涌 = 泉涌()

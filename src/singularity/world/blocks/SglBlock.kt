@@ -293,7 +293,10 @@ open class SglBlock(name: String) :IceBlock(name), ConsumerBlockComp {
     var lightningGenerator: VectorLightningGenerator? = null
     var drawAlphas: FloatArray = floatArrayOf()
     var CONTAINER: LightningContainer? = null
-    override lateinit var consumer: BaseConsumeModule
+    override  var consumer: BaseConsumeModule = let {
+      block=this@SglBlock
+      BaseConsumeModule(this)
+    }
     open var energyModule = NuclearEnergyModule(this)
     var recipeSelected: Boolean = false
     protected val displayLiquids: Seq<LiquidStack> = Seq<LiquidStack>()

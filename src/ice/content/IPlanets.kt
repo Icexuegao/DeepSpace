@@ -14,10 +14,10 @@ import mindustry.graphics.g3d.HexSkyMesh
 import mindustry.graphics.g3d.MultiMesh
 import mindustry.graphics.g3d.SunMesh
 import mindustry.type.ItemStack
-import universecore.world.Load
 import universecore.world.planet.IcePlanet
 
-object IPlanets :Load {
+object IPlanets {
+  fun load() = Unit
   val 伊甸 = IcePlanet("eden", null, 6f).apply {
     localization {
       zh_CN {
