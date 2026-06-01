@@ -1,10 +1,10 @@
 package ice.content.block
 
 import ice.content.block.product.*
-import universecore.world.Load
 
 @Suppress("unused")
-object ProductBlocks :Load {
+object ProductBlocks {
+  fun load() = Unit
   val 纤汲钻井 = 纤汲钻井()
   val 蛮荒钻井 = 蛮荒钻井()
   val 曼哈德钻井 = 曼哈德钻井()

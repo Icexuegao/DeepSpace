@@ -8,7 +8,6 @@ import ice.audio.IMusics
 import ice.entities.ModeDifficulty
 import mindustry.Vars
 import mindustry.ui.dialogs.PlanetDialog
-import universecore.world.Load
 import kotlin.properties.Delegates
 import kotlin.reflect.*
 import kotlin.reflect.full.createType
@@ -16,7 +15,7 @@ import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 
-object SettingValue : Load {
+object SettingValue {
   private var configs = SettingValue::class.memberProperties.filter { prop ->
     // 检查属性的可见性，只保留非私有属性
     prop.visibility != KVisibility.PRIVATE
@@ -42,7 +41,7 @@ object SettingValue : Load {
   }
 
   var 启用主菜单音乐 by observable(true) { _, _, new ->
-    if (!new)IMusics.title.stop()
+    if (!new) IMusics.title.stop()
   }
   var difficulty by observable(ModeDifficulty.洗礼)
   var menuMusicVolume by observable(1f)
@@ -88,10 +87,10 @@ object SettingValue : Load {
       scheduleSave()
     }
 
-  override fun setup() {
+  fun setup() {
     val get = DeepSpace.globals.getString("ice-SettingValue", write())
     val config: Jval = Jval.read(get)
-    for (cfg in configs) {
+    for(cfg in configs) {
       val name = cfg.name
       if (!config.has(name)) continue
       val temp = config.get(name).toString()
@@ -110,12 +109,12 @@ object SettingValue : Load {
     val tree = Jval.newObject()
     val map = tree.asObject()
     try {
-      for (cfg in configs) {
+      for(cfg in configs) {
         val key = cfg.name
         val obj = cfg.get(this) ?: continue
         map.put(key, pack(obj))
       }
-    } catch (e: Exception) {
+    } catch(e: Exception) {
       throw Exception("设置写入错误${this::class.simpleName}", e)
     }
 
@@ -141,7 +140,7 @@ object SettingValue : Load {
       classifier.isSubclassOf(CharSequence::class) -> value as T
       classifier.isSubclassOf(Array::class) -> toArray(type, value)
       classifier.isSubclassOf(Enum::class) -> {
-        classifier.java.enumConstants?.find { (it as Enum<*>).name == value } as? T ?:classifier.java.enumConstants.first() as T
+        classifier.java.enumConstants?.find { (it as Enum<*>).name == value } as? T ?: classifier.java.enumConstants.first() as T
       }
 
       else -> throw IllegalArgumentException("Invalid type: $type")
@@ -157,7 +156,7 @@ object SettingValue : Load {
     val elementType = classifier.java.componentType
     val res = java.lang.reflect.Array.newInstance(elementType, a.size)
 
-    for (i in 0 until a.size) {
+    for(i in 0 until a.size) {
       java.lang.reflect.Array.set(res, i, warp(elementType.kotlin.createType(), a[i].toString()))
     }
 
@@ -165,7 +164,7 @@ object SettingValue : Load {
   }
 
   private fun pack(value: Any): Jval {
-    return when (value) {
+    return when(value) {
       is Int -> Jval.valueOf(value)
       is Byte -> Jval.valueOf(value.toInt())
       is Short -> Jval.valueOf(value.toInt())
@@ -185,7 +184,7 @@ object SettingValue : Load {
     val len = java.lang.reflect.Array.getLength(array)
     val res = Jval.newArray()
     val arr = res.asArray()
-    for (i in 0..<len) {
+    for(i in 0..<len) {
       arr.add(pack(java.lang.reflect.Array.get(array, i)))
     }
     return res

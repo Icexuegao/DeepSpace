@@ -52,12 +52,12 @@ import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.CircleGenerator
 import universecore.graphics.lightnings.generator.ShrinkGenerator
 import universecore.struct.AttachedProperty
-import universecore.world.Load
 import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("unused")
-object IUnitTypes :Load {
+object IUnitTypes {
+  fun load()= Unit
   val 星光 = 星光()
   val 火花 = 火花()
   val 战斧 = 战斧()

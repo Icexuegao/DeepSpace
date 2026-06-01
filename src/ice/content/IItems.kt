@@ -3,10 +3,10 @@ package ice.content
 import ice.world.content.item.IceItem
 import ice.world.content.item.OreItem
 import universecore.ui.bundle.localization
-import universecore.world.Load
 
 @Suppress("unused")
-object IItems :Load {
+object IItems {
+  fun load() = Unit
   val 脊髓末梢 = IceItem("item_spinalCordEnding", "bf3e47") {
     nutrientConcentration = 0.2f
     localization {

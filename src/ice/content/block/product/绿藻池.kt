@@ -60,7 +60,7 @@ class 绿藻池 :SpliceCrafter("culturing_barn") {
         liquid(Liquids.water, 2.4f / 60f)
       }
       producers.apply {
-        liquids(ILiquids.氧气, 1.2f / 60f, ILiquids.藻泥, 0.8f / 60f)
+        liquids(ILiquids.氧气, 1.2f / 60f, ILiquids.藻泥, 0.8f / 60f).blockWhenFull=false
       }
     }
 

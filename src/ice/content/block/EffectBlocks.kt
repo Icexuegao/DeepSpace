@@ -1,10 +1,10 @@
 package ice.content.block
 
 import ice.content.block.effect.*
-import universecore.world.Load
 
 @Suppress("unused")
-object EffectBlocks :Load {
+object EffectBlocks {
+  fun load() = Unit
   val 虔信方垒 = 虔信方垒()
   val 传颂核心 = 传颂核心()
   val 永耀天枢 = 永耀天枢()
@@ -18,7 +18,7 @@ object EffectBlocks :Load {
   val 真菌塔 = 真菌塔()
 
   val 小型修理器 = 小型修理器()
-  val 修理器 =  修理器()
+  val 修理器 = 修理器()
   val 洛华 = 洛华()
   val 勘探雷达 = 勘探雷达()
   val 定向超速器 = 定向超速器()

@@ -51,12 +51,12 @@ import singularity.graphic.SglDrawConst
 import singularity.ui.UIUtils
 import singularity.world.SglFx
 import singularity.world.meta.SglStat
-import universecore.world.Load
 import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("unused")
-object IStatus :Load {
+object IStatus {
+  fun load() = Unit
   val lastHealth = ObjectMap<Unit, Float>()
   val rand: Rand = Rand()
   val 封冻 = IceStatusEffect("freeze") {

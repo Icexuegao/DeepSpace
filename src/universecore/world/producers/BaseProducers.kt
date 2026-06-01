@@ -53,7 +53,7 @@ open class BaseProducers {
   }
 
   fun liquids(vararg liquids: LiquidStack): ProduceLiquids<*> {
-    return add(ProduceLiquids(liquids,))
+    return add(ProduceLiquids(liquids))
   }
 
   fun liquids(vararg liquids: Any): ProduceLiquids<*> {
@@ -73,7 +73,7 @@ open class BaseProducers {
   }
 
   @Suppress("UNCHECKED_CAST")
-  open fun <T : BaseProduce<out ProducerBuildComp>> add(produce: T): T {
+  open fun <T :BaseProduce<out ProducerBuildComp>> add(produce: T): T {
     val p = prod.get(produce.type())
     if (p == null) {
       prod.put(produce.type(), produce)
@@ -89,14 +89,14 @@ open class BaseProducers {
   }
 
   @Suppress("UNCHECKED_CAST")
-  fun <T : BaseProduce<out ProducerBuildComp>> get(type: ProduceType<T>): T? {
+  fun <T :BaseProduce<out ProducerBuildComp>> get(type: ProduceType<T>): T? {
     return prod.get(type) as T?
   }
 
   fun all(): Iterable<BaseProduce<*>> {
     tmpProd.clear()
 
-    for (type in ProduceType.all()!!) {
+    for(type in ProduceType.all()!!) {
       val p = prod.get(type)
       if (p != null) tmpProd.add(p)
     }
@@ -109,7 +109,7 @@ open class BaseProducers {
   }
 
   fun display(stats: Stats) {
-    for (p in prod.values().toSeq().sort(Comparator {a: BaseProduce<*>, b: BaseProduce<*> -> a.type().id - b.type().id})) {
+    for(p in prod.values().toSeq().sort(Comparator { a: BaseProduce<*>, b: BaseProduce<*> -> a.type().id - b.type().id })) {
       p.display(stats)
     }
   }

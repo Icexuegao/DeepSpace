@@ -25,10 +25,10 @@ import mindustry.world.Block
 import mindustry.world.Tile
 import mindustry.world.meta.Attribute
 import universecore.ui.bundle.localization
-import universecore.world.Load
 
 @Suppress("unused")
-object EnvironmentBlocks :Load {
+object EnvironmentBlocks {
+  fun load() = Unit
   val 多叶草 = Prop("leafyGrass").apply {
     localization {
       zh_CN {

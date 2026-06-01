@@ -19,9 +19,8 @@ import mindustry.gen.Sounds
 import singularity.Sgl
 import singularity.ui.fragments.ToolBarFrag
 import singularity.ui.fragments.override.SglMenuFrag
-import universecore.world.Load
 
-object UI :Load {
+object UI {
   val cgwidth = Core.graphics.width.toFloat()
   val cgheight = Core.graphics.height.toFloat()
   val sfxVolume: Float get() = Core.settings.getInt("sfxvol") / 100f
@@ -37,7 +36,7 @@ object UI :Load {
     }
   }
 
-  override fun init() {
+  fun init() {
     Vars.ui.menufrag = SglMenuFrag()
 
     //if(!SettingValue.INSTANCE.get禁用mod主界面背景()){

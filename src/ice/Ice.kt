@@ -2,7 +2,7 @@ package ice
 
 import arc.Core
 import arc.Events
-import ice.audio.SoundControl
+import ice.audio.IceSoundControl
 import ice.content.*
 import ice.content.block.IBlocks
 import ice.core.IFiles
@@ -59,7 +59,7 @@ open class Ice :Mod() {
     IceBullet.setup()
     EventType.setup()
     IceTeam.setup()
-    Vars.control.sound = SoundControl
+    IceSoundControl.setup()
   }
 
   override fun init() {

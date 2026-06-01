@@ -15,21 +15,20 @@ import arc.util.Scaling
 import ice.audio.ISounds
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import universecore.scene.ui.iPaneG
-import universecore.struct.texture.asDrawable
-import universecore.world.Load
 import ice.ui.UI.showUISoundCloseV
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*
 import ice.world.meta.IceStats
+import universecore.scene.ui.iPaneG
+import universecore.struct.texture.asDrawable
 
-object MenusDialog :Dialog(), Load {
+object MenusDialog :Dialog() {
   const val backMargin = 10f
   val back = IStyles.background12
   var button: BaseMenusDialog = PublicInfoDialog
   lateinit var conts: Table
 
-  init {
+  fun init() {
     BaseMenusDialog.dalogs.add(PublicInfoDialog)
     BaseMenusDialog.dalogs.add(ResearchDialog)
     BaseMenusDialog.dalogs.add(DataDialog)
@@ -42,11 +41,12 @@ object MenusDialog :Dialog(), Load {
   }
 
   override fun show(): Dialog {
+    reBuild()
     showUISoundCloseV(ISounds.进入模组界面)
     return super.show()
   }
 
-  init {
+  fun reBuild() {
     reset()
     setFillParent(true)
     defaults().reset()
@@ -73,14 +73,14 @@ object MenusDialog :Dialog(), Load {
           it.iPaneG { pan ->
             pan.top()
 
-            fun Table.setbuttons(icon: Drawable,name: String,runnable: Runnable){
+            fun Table.setbuttons(icon: Drawable, name: String, runnable: Runnable) {
               image(icon).size(50f).color(IceColor.b5).expand()
               add(name).color(IceColor.b5).expand().padRight(10f)
               changed(runnable)
             }
             BaseMenusDialog.dalogs.forEach { mb ->
               pan.button({ b ->
-               b.setbuttons(mb.icon,mb.name) {
+                b.setbuttons(mb.icon, mb.name) {
                   if (button != mb) {
                     button.hide()
                     button = mb
@@ -95,12 +95,11 @@ object MenusDialog :Dialog(), Load {
               }.pad(2f).margin(20f).growX().row()
             }
             pan.button({ b ->
-              b.setbuttons(IStyles.menusButton_exit,IceStats.关闭.localized()){
+              b.setbuttons(IStyles.menusButton_exit, IceStats.关闭.localized()) {
                 hide()
                 showUISoundCloseV(ISounds.模组界面左侧按钮反馈)
               }
-            }, IStyles.rootCleanButton) {
-            }.pad(2f).margin(20f).growX().row()
+            }, IStyles.rootCleanButton) {}.pad(2f).margin(20f).growX().row()
           }
         }.width(200f).margin(10f).growY()
         it1.add(middle).grow().margin(backMargin)

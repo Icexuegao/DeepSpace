@@ -20,7 +20,8 @@ import mindustry.world.meta.Stats
 import universecore.components.blockcomp.ProducerBuildComp
 import universecore.world.consumers.cons.ConsumePayload
 
-class ProducePayload<T>(var payloads: Array<PayloadStack>, var valid: Boolf2<T, UnlockableContent>) : BaseProduce<T>() where T : Building, T : ProducerBuildComp {
+class ProducePayload<T>(var payloads: Array<PayloadStack>, var valid: Boolf2<T, UnlockableContent>) :
+  BaseProduce<T>() where T :Building, T :ProducerBuildComp {
   var displayLim: Int = 4
   var payloadMaker: Func2<T, UnlockableContent, Payload> = Func2 { ent: T, type: UnlockableContent -> this.makePayloadDef(ent, type) }
 
@@ -50,22 +51,22 @@ class ProducePayload<T>(var payloads: Array<PayloadStack>, var valid: Boolf2<T, 
   override fun merge(other: BaseProduce<T>) {
     if (other is ProducePayload<*>) {
       TMP.clear()
-      for (stack in payloads) {
+      for(stack in payloads) {
         TMP.put(stack.item, stack)
       }
 
-      for (stack in (other as ProducePayload<T>).payloads) {
+      for(stack in (other as ProducePayload<T>).payloads) {
         TMP.get(stack.item) { PayloadStack(stack.item, 0) }!!.amount += stack.amount
       }
 
-      payloads = TMP.values().toSeq().sort(Comparator { a: PayloadStack?, b: PayloadStack? -> a!!.item.id - b!!.item.id }).toArray(PayloadStack::class.java)
+      payloads = TMP.values().toSeq().sort(Comparator { a: PayloadStack?, b: PayloadStack? -> a!!.item.id - b!!.item.id })
+        .toArray(PayloadStack::class.java)
     } else throw IllegalArgumentException("only merge consume with same type")
   }
 
-
   override fun produce(entity: T) {
-    for (stack in payloads) {
-      for (i in 0..<stack.amount) {
+    for(stack in payloads) {
+      for(i in 0..<stack.amount) {
         val payload = payloadMaker.get(entity, stack.item)
         payload.set(entity.x, entity.y, entity.rotdeg())
         if (entity.acceptPayload(entity, payload)) entity.handlePayload(entity, payload)
@@ -74,7 +75,7 @@ class ProducePayload<T>(var payloads: Array<PayloadStack>, var valid: Boolf2<T, 
   }
 
   override fun valid(entity: T): Boolean {
-    for (stack in payloads) {
+    for(stack in payloads) {
       if (!valid.get(entity, stack.item)) return false
     }
     return true
@@ -83,7 +84,7 @@ class ProducePayload<T>(var payloads: Array<PayloadStack>, var valid: Boolf2<T, 
   override fun update(entity: T) {}
 
   override fun display(stats: Stats) {
-    for (stack in payloads) {
+    for(stack in payloads) {
       stats.add(Stat.output) { t: Table? ->
         t!!.add(StatValues.stack(stack))
         t.add(stack.item.localizedName).padLeft(4f).padRight(4f)

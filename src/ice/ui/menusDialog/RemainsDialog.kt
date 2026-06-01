@@ -23,7 +23,7 @@ object RemainsDialog :BaseMenusDialog(IceStats.遗物.localized(), IStyles.menus
   lateinit var enableTable: Table
   lateinit var remainsTable: Table
   var slotPos: Int = 8
-  override fun init() {
+   fun init() {
     Remains.remainsSeq.sort { it.level.toFloat() }.reversed().forEach {
       if (it.enabled) {
         it.enabled(true)

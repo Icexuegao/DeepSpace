@@ -16,7 +16,7 @@ import universecore.world.consumers.cons.ConsumePower
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-class ProducePower<T>(var powerProduction: Float) : BaseProduce<T>() where T : Building, T : ProducerBuildComp {
+class ProducePower<T>(var powerProduction: Float) :BaseProduce<T>() where T :Building, T :ProducerBuildComp {
   var showIcon: Boolean = true
 
   override fun type(): ProduceType<ProducePower<*>> {
@@ -51,14 +51,12 @@ class ProducePower<T>(var powerProduction: Float) : BaseProduce<T>() where T : B
     val prod = Floatp { entity.powerProdEfficiency * entity.producer!!.current!!.get(ProduceType.power)!!.powerProduction }
     val cons = Floatp {
       // 正确的写法
-      val cp =
-        if (entity.block.consumesPower && entity.consumer.current != null) entity.consumer.current!!.get(ConsumeType.power)
-        else null
+      val cp = if (entity.block.consumesPower && entity.consumer.current != null) entity.consumer.current!!.get(ConsumeType.power)
+      else null
       cp?.let {
-        @Suppress("UNCHECKED_CAST")
-        (it as ConsumePower<T>).usage * it.multiple(entity)
-      }?:0f
-        
+        @Suppress("UNCHECKED_CAST") (it as ConsumePower<T>).usage * it.multiple(entity)
+      } ?: 0f
+
     }
     bars.add(
       Bar(
