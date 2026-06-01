@@ -21,7 +21,7 @@ class 爆炸物混合器 :NormalCrafter("explosiveMixer") {
     size = 3
     itemCapacity = 36
     craftEffect = IceEffects.square(IItems.爆炸化合物.color)
-    requirements(Category.crafting, IItems.高碳钢, 80, IItems.铬锭, 50, IItems.单晶硅, 30)
+    requirements(Category.crafting, IItems.高碳钢, 80, IItems.铬锭, 50, IItems.陶钢, 30)
 
     newConsume().apply {
       time(45f)
