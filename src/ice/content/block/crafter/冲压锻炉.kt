@@ -42,7 +42,7 @@ class 冲压锻炉 :NormalCrafter("pressingForge") {
       glowScale = 3.53429f
       color = Color.valueOf("F0511D")
     })
-    requirements(Category.crafting, IItems.高碳钢, 250, IItems.锌锭, 180, IItems.钴锭, 120, IItems.铬锭, 80)
+    requirements(Category.crafting, IItems.高碳钢, 250, IItems.钴钢, 80, IItems.钴锭, 120, IItems.铬锭, 80)
 
     newConsume().apply {
       time(60f)
