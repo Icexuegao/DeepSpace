@@ -70,7 +70,9 @@ class 碎冰 :SglTurret("turret_trashIce") {
       items(IItems.高碳钢, 1)
     }
     newAmmo(getAmmoType(IItems.黄铜锭.color).apply {
-      damage = 18f
+      status = StatusEffects.blasted
+      statusDuration = 0.1 * 60f
+      damage = 16f
       rangeChange = 8f * 8f
     }).setReloadAmount(2)
     consume!!.apply {
@@ -78,7 +80,9 @@ class 碎冰 :SglTurret("turret_trashIce") {
       items(IItems.黄铜锭, 1)
     }
     newAmmo(getAmmoType(IItems.钴锭.color).apply {
-      damage = 24f
+      status = StatusEffects.freezing
+      statusDuration = 0.5 * 60f
+      damage = 22f
       rangeChange = 6f * 8f
     }).setReloadAmount(2)
     consume!!.apply {
@@ -86,6 +90,8 @@ class 碎冰 :SglTurret("turret_trashIce") {
       items(IItems.钴锭, 1)
     }
     newAmmo(getAmmoType(IItems.铬锭.color).apply {
+      status = StatusEffects.blasted
+      statusDuration = 0.1 * 60f
       damage = 24f
       rangeChange = 6f * 8f
     }).setReloadAmount(2)
