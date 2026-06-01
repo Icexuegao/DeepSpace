@@ -78,9 +78,9 @@ class 热泉 :SglTurret("turret_hotSprings") {
     }
 
     newAmmo(getBuller().apply {
-      damage = 280f
+      damage = 80f
       status = StatusEffects.burning
-      statusDuration = 0.5f * 60f
+      statusDuration = 1f * 60f
       EventType.addContentInitEvent {
         shootEffect = IceEffects.changeFlame(speed * lifetime, ILiquids.氢气.color, ILiquids.氢气.color.mul(1.2f), size1)
       }
@@ -91,9 +91,9 @@ class 热泉 :SglTurret("turret_hotSprings") {
     }
 
     newAmmo(getBuller().apply {
-      damage = 540f
+      damage = 100f
       status = StatusEffects.burning
-      statusDuration = 0.5f * 60f
+      statusDuration = 1f * 60f
       EventType.addContentInitEvent {
         shootEffect = IceEffects.changeFlame(speed * lifetime, size = size1)
       }
@@ -105,8 +105,8 @@ class 热泉 :SglTurret("turret_hotSprings") {
     }
 
     newAmmo(getBuller().apply {
-      damage = 360f
-      status = IStatus.蚀骨
+      damage = 120f
+      status = IStatus.corroded
       statusDuration = 1f * 60f
       EventType.addContentInitEvent {
         shootEffect = IceEffects.changeFlame(speed * lifetime, ILiquids.氯气.color, ILiquids.氢气.color, size1)
