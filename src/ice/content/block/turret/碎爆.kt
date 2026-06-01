@@ -44,7 +44,7 @@ class 碎爆 :SglTurret("turret_shatter") {
     newCoolant(1f, 0.4f, { l: Liquid? -> l!!.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
 
     requirements(
-      Category.turret, IItems.铜锭, 225, IItems.钍锭, 155, IItems.钴钢, 55,
+      Category.turret, IItems.铜锭, 225, IItems.铬锭, 55, IItems.钴钢, 55, IItems.铱板, 65,
     )
     setAmmo()
     limitRange()

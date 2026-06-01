@@ -36,7 +36,7 @@ class 贯通 :SglTurret("turret_penetrate") {
     shootEffect = Fx.bigShockwave
     ammoUseEffect = Fx.casing3Double
     newCoolant(1f, 0.4f, { l -> l.heatCapacity >= 0.4f && l.temperature <= 0.5f }, 0.25f, 20f)
-    requirements(Category.turret, IItems.铜锭, 135, IItems.钴锭, 95, IItems.钍锭, 65, IItems.爆炸化合物, 10)
+    requirements(Category.turret, IItems.铜锭, 135, IItems.钴锭, 95, IItems.爆炸化合物, 10)
     setAmmo()
     limitRange()
   }
