@@ -132,8 +132,8 @@ open class Entity : UnitEntity(), Legsc, Tankc {
   }
 
   override fun collisionLayer(): Int {
-   // if (isFlying) return PhysicsProcess.layerFlying
-  //  if (type.allowLegStep && type.legPhysicsLayer) PhysicsProcess.layerLegs
+    if (isFlying) return PhysicsProcess.layerFlying
+    if (type.allowLegStep && type.legPhysicsLayer) PhysicsProcess.layerLegs
     return PhysicsProcess.layerGround
   }
 

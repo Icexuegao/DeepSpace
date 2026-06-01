@@ -431,6 +431,7 @@ open class SglTurret(name: String) :SglBlock(name) {
       return true
     }
 
+
     override fun unit(): Unit {
       unit.tile(this)
       unit.team(team)
@@ -506,6 +507,10 @@ open class SglTurret(name: String) :SglBlock(name) {
     }
 
     override fun updateTile() {
+
+      if (unit.isPlayer) { //there's no reason to update this when a player isn't controlling it
+        unit.ammo((currentAmmo?.reloadAmount?.let { shotStack.toFloat()/it } ?:0f))
+      }
 
       soundLoop?.update(x, y, shouldActiveSound(), activeSoundVolume())
 

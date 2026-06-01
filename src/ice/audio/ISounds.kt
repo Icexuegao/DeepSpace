@@ -25,6 +25,8 @@ object ISounds {
   val 月隐发射 = getSound("moonhidelaunched")
   val 月隐蓄力 = getSound("月隐蓄力")
   val 灼烧=getSound("灼烧")
+  val 能量释放=getSound("能量释放")
+  val 能量聚合=getSound("能量聚合")
 
   val 进入模组界面=getUISound("进入模组界面")
   val 模组界面左侧按钮反馈=getUISound("模组界面左侧按钮反馈")

@@ -262,7 +262,7 @@ object ModInfoDialog :BaseMenusDialog(IceStats.模组.localized(), IStyles.menus
           openUrl(DeepSpace.qqGropsUrl)
         }.growX().row()
         SponsoredDialog.buildButton(it, Icon.discord, Pal.lightOrange, "Discord论坛", "DeepSpace的discord聊天室") {
-
+          openUrl(DeepSpace.discord)
         }.growX().row()
         SponsoredDialog.buildButton(it, SglDrawConst.telegramIcon, Color.valueOf("7289da"), "Telegram页面", "Telegram上的本mod群组") {}
           .growX().row()

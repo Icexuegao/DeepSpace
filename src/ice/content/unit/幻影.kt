@@ -1,0 +1,53 @@
+package ice.content.unit
+
+import arc.func.Prov
+import arc.graphics.Color
+import ice.content.IItems
+import ice.world.content.unit.IceUnitType
+import mindustry.Vars
+import mindustry.ai.types.MinerAI
+import mindustry.entities.bullet.LaserBoltBulletType
+import mindustry.gen.Sounds
+
+class 幻影 :IceUnitType("unit_phantom") {
+  init {
+    localization {
+      zh_CN {
+        localizedName = "幻影"
+        description = "轻型空中工程单位.具备不俗的挖掘速度与物品容量,可在采集途中应对零星威胁"
+      }
+    }
+    requirements(IItems.低碳钢, 300, IItems.铅锭, 10, IItems.单晶硅, 10)
+    flying = true
+    aiController = Prov(::MinerAI)
+    isEnemy = false
+    health = 160f
+    hitSize = 7.5f
+    speed = 4f
+    range = 200f
+    itemCapacity = 80
+    engineOffset = 6f
+    mineTier = 3
+    mineSpeed = 3f
+    mineItems.add(Vars.content.items())
+    setWeapon {
+      x = 3.5f
+      y = -2.4f
+      rotate = true
+      rotateSpeed = 6f
+      reload = 60f
+      shootSound = Sounds.shootLaser
+      inaccuracy = 3f
+      alternate = false
+      bullet = LaserBoltBulletType().apply {
+        damage = 13f
+        lifetime = 28f
+        speed = 8f
+        healPercent = 5f
+        collidesTeam = true
+        frontColor = Color.white
+        backColor = Color.valueOf("98FFA9")
+      }
+    }
+  }
+}

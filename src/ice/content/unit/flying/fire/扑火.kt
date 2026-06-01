@@ -1,0 +1,64 @@
+package ice.content.unit.flying.fire
+
+import ice.content.IItems
+import ice.entities.bullet.BombBulletType
+
+import ice.world.content.unit.IceUnitType
+import mindustry.content.Fx
+import mindustry.content.StatusEffects
+import mindustry.entities.abilities.ArmorPlateAbility
+import mindustry.entities.pattern.ShootPattern
+import mindustry.gen.Sounds
+
+class 扑火 :IceUnitType("putotFire") {
+  init {
+    localization {
+      zh_CN {
+        this.localizedName = "扑火"
+        description = "轻型空中突击单位.以极高的机动性持续骚扰敌军,开火时减少所受伤害"
+      }
+    }
+    requirements(IItems.低碳钢, 30, IItems.单晶硅, 10)
+    circleTarget = true
+    faceTarget = false
+    targetAir = false
+    flying = true
+    health = 70f
+    hitSize = 9f
+    armor = 0.5f
+    range = 40f
+    accel = 0.08f
+    drag = 0.04f
+    speed = 3.6f
+    rotateSpeed = 6f
+    engineSize = 2f
+    engineOffset = 4.5f
+    trailLength = 4
+    engineLayer = 110f
+    abilities.add(ArmorPlateAbility().apply {
+      healthMultiplier = 0.1f
+    })
+
+    setWeapon {
+      reload = 65f
+      shootCone = 360f
+      shoot = ShootPattern().apply {
+        shots = 3
+        shotDelay = 5f
+      }
+      ignoreRotation = true
+      minShootVelocity = 0.04f
+      shootSound = Sounds.none
+      bullet = BombBulletType(20f, 30f).apply {
+        lifetime = 30f
+        width = 9f
+        height = 15f
+        status = StatusEffects.blasted
+        shootEffect = Fx.none
+        smokeEffect = Fx.none
+        hitEffect = Fx.flakExplosion
+        despawnEffect = Fx.flakExplosion
+      }
+    }
+  }
+}

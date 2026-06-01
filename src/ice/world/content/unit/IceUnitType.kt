@@ -16,18 +16,17 @@ import ice.core.IFiles
 import ice.core.IFiles.appendModName
 import ice.entities.IceRegister
 import ice.graphics.IceColor
-import universecore.ui.bundle.Localizable
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars
 import mindustry.core.Renderer
 import mindustry.ctype.UnlockableContent
 import mindustry.entities.abilities.Ability
+import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.part.DrawPart
 import mindustry.gen.*
 import mindustry.gen.Unit
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
-import mindustry.graphics.MultiPacker
 import mindustry.graphics.Pal
 import mindustry.type.ItemStack
 import mindustry.type.UnitType
@@ -35,6 +34,7 @@ import mindustry.type.Weapon
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
 import universecore.struct.texture.LazyTextureSingleDelegate
+import universecore.ui.bundle.Localizable
 import kotlin.math.min
 import kotlin.Unit as KUnit
 
@@ -100,258 +100,226 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     return requirements
   }
 
-  override fun createIcons(packer: MultiPacker) {
-
-    /*if (!Core.atlas.has("$name-full") && Core.atlas.has("$name-treads")) {
-      val treadRegion = Pixmaps.outline(Core.atlas.getPixmap(treadRegion), outlineColor, outlineRadius)
-      val region = Pixmaps.outline(Core.atlas.getPixmap(region), outlineColor, outlineRadius)
-      val pixmap = Pixmap(region.width, region.height)
-      pixmap.each { x, y ->
-        val color = treadRegion.getRaw(x, y)
-        if (color != 0) {
-          pixmap.set(x, y, color)
-        }
-        val color1 = region.getRaw(x, y)
-        if (color1 != 0) {
-          pixmap.set(x, y, color1)
-        }
-      }
-
-      weapons.forEach { weapon ->
-        val wearegion = Pixmaps.outline(Core.atlas.getPixmap(weapon.region), outlineColor, outlineRadius)
-        pixmap.each { x, y ->
-          val color = wearegion.get(x, y)
-          if (color != 0) {
-            pixmap.set(x, y, color)
-          }
-        }
-      }
-      packer.add(MultiPacker.PageType.main, "$name-full", pixmap)
-      pixmap.dispose()
-    }*/
-    super.createIcons(packer)
-  }
-
   override fun load() {
     super.load()
     if (IFiles.hasPng(name + 1)) region = IFiles.findPng(name + 1)
     shadowRegion = region
   }
 
- /* override fun init() {
-    val example: Unit = constructor.get()
+  /* override fun init() {
+     val example: Unit = constructor.get()
 
-    checkEntityMapping(example)
-      allowLegStep = example is Legsc || example is Crawlc
-    //water preset
-    databaseTabs.add(IPlanets.阿德里)
-    stats.useCategories = true
-    if (example is WaterMovec || example is WaterCrawlc) {
-      naval = true
-      canDrown = false
-      emitWalkSound = false
-      omniMovement = false
-      immunities.add(StatusEffects.wet)
-      if (shadowElevation < 0f) {
-        shadowElevation = 0.11f
-      }
-    }
+     checkEntityMapping(example)
+       allowLegStep = example is Legsc || example is Crawlc
+     //water preset
+     databaseTabs.add(IPlanets.阿德里)
+     stats.useCategories = true
+     if (example is WaterMovec || example is WaterCrawlc) {
+       naval = true
+       canDrown = false
+       emitWalkSound = false
+       omniMovement = false
+       immunities.add(StatusEffects.wet)
+       if (shadowElevation < 0f) {
+         shadowElevation = 0.11f
+       }
+     }
 
-    if (flowfieldPathType == -1) {
-      flowfieldPathType =
-        if (naval) Pathfinder.costNaval else if (allowLegStep) Pathfinder.costLegs else if (flying) Pathfinder.costNone else if (hovering) Pathfinder.costHover else Pathfinder.costGround
-    }
+     if (flowfieldPathType == -1) {
+       flowfieldPathType =
+         if (naval) Pathfinder.costNaval else if (allowLegStep) Pathfinder.costLegs else if (flying) Pathfinder.costNone else if (hovering) Pathfinder.costHover else Pathfinder.costGround
+     }
 
-    if (pathCost == null) {
-      pathCost =
-        if (naval) ControlPathfinder.costNaval else if (allowLegStep) ControlPathfinder.costLegs else if (hovering) ControlPathfinder.costHover else ControlPathfinder.costGround
-    }
+     if (pathCost == null) {
+       pathCost =
+         if (naval) ControlPathfinder.costNaval else if (allowLegStep) ControlPathfinder.costLegs else if (hovering) ControlPathfinder.costHover else ControlPathfinder.costGround
+     }
 
-    pathCostId = ControlPathfinder.costTypes.indexOf(pathCost)
-    if (pathCostId == -1) pathCostId = 0
+     pathCostId = ControlPathfinder.costTypes.indexOf(pathCost)
+     if (pathCostId == -1) pathCostId = 0
 
-    if (flying) {
-      envEnabled = envEnabled or Env.space
-    }
+     if (flying) {
+       envEnabled = envEnabled or Env.space
+     }
 
-    if (lightRadius == -1f) {
-      lightRadius = max(60f, hitSize * 2.3f)
-    }
-    //if a status effects slows a unit when firing, don't shoot while moving.
-    if (autoFindTarget) {
-      autoFindTarget = !weapons.contains { w: Weapon? -> w!!.shootStatus.speedMultiplier < 0.99f } || alwaysShootWhenMoving
-    }
+     if (lightRadius == -1f) {
+       lightRadius = max(60f, hitSize * 2.3f)
+     }
+     //if a status effects slows a unit when firing, don't shoot while moving.
+     if (autoFindTarget) {
+       autoFindTarget = !weapons.contains { w: Weapon? -> w!!.shootStatus.speedMultiplier < 0.99f } || alwaysShootWhenMoving
+     }
 
-    if (flyingLayer < 0) flyingLayer = if (lowAltitude) Layer.flyingUnitLow else Layer.flyingUnit
-    clipSize = max(clipSize, lightRadius * 1.1f)
-    singleTarget = weapons.size <= 1 && !forceMultiTarget
+     if (flyingLayer < 0) flyingLayer = if (lowAltitude) Layer.flyingUnitLow else Layer.flyingUnit
+     clipSize = max(clipSize, lightRadius * 1.1f)
+     singleTarget = weapons.size <= 1 && !forceMultiTarget
 
-    if (itemCapacity < 0) {
-      itemCapacity = max(Mathf.round((hitSize * 4f).toInt(), 10), 10)
-    }
-    //assume slight range margin
-    val margin = 4f
-    //set up default range
-    if (range < 0) {
-      range = Float.MAX_VALUE
-      for(weapon in weapons) {
-        if (!weapon.useAttackRange) continue
+     if (itemCapacity < 0) {
+       itemCapacity = max(Mathf.round((hitSize * 4f).toInt(), 10), 10)
+     }
+     //assume slight range margin
+     val margin = 4f
+     //set up default range
+     if (range < 0) {
+       range = Float.MAX_VALUE
+       for(weapon in weapons) {
+         if (!weapon.useAttackRange) continue
 
-        range = min(range, weapon.range() - margin)
-        maxRange = max(maxRange, weapon.range() - margin)
-      }
-    }
+         range = min(range, weapon.range() - margin)
+         maxRange = max(maxRange, weapon.range() - margin)
+       }
+     }
 
-    if (maxRange < 0) {
-      maxRange = max(0f, range)
+     if (maxRange < 0) {
+       maxRange = max(0f, range)
 
-      for(weapon in weapons) {
-        if (!weapon.useAttackRange) continue
+       for(weapon in weapons) {
+         if (!weapon.useAttackRange) continue
 
-        maxRange = max(maxRange, weapon.range() - margin)
-      }
-    }
+         maxRange = max(maxRange, weapon.range() - margin)
+       }
+     }
 
-    if (fogRadius < 0) {
-      //TODO depend on range?
-      fogRadius = max(58f * 3f, hitSize * 2f) / 8f
-    }
+     if (fogRadius < 0) {
+       //TODO depend on range?
+       fogRadius = max(58f * 3f, hitSize * 2f) / 8f
+     }
 
-    if (!weapons.contains { w: Weapon? -> w!!.useAttackRange }) {
-      if (range < 0 || range == Float.MAX_VALUE) range = mineRange
-      if (maxRange < 0 || maxRange == Float.MAX_VALUE) maxRange = mineRange
-    }
+     if (!weapons.contains { w: Weapon? -> w!!.useAttackRange }) {
+       if (range < 0 || range == Float.MAX_VALUE) range = mineRange
+       if (maxRange < 0 || maxRange == Float.MAX_VALUE) maxRange = mineRange
+     }
 
-    if (mechStride < 0) {
-      mechStride = 4f + (hitSize - 8f) / 2.1f
-    }
+     if (mechStride < 0) {
+       mechStride = 4f + (hitSize - 8f) / 2.1f
+     }
 
-    if (segmentSpacing < 0) {
-      segmentSpacing = hitSize
-    }
-    if (aimDst < 0) {
-      aimDst = if (weapons.contains { w: Weapon? -> !w!!.rotate }) hitSize * 2f else hitSize / 2f
-    }
+     if (segmentSpacing < 0) {
+       segmentSpacing = hitSize
+     }
+     if (aimDst < 0) {
+       aimDst = if (weapons.contains { w: Weapon? -> !w!!.rotate }) hitSize * 2f else hitSize / 2f
+     }
 
-    if (stepShake < 0) {
-      stepShake = Mathf.round((hitSize - 11f) / 9f).toFloat()
-      mechStepParticles = hitSize > 15f
-    }
+     if (stepShake < 0) {
+       stepShake = Mathf.round((hitSize - 11f) / 9f).toFloat()
+       mechStepParticles = hitSize > 15f
+     }
 
-    if (engineSize > 0) {
-      engines.add(UnitEngine(0f, -engineOffset, engineSize, -90f))
-    }
+     if (engineSize > 0) {
+       engines.add(UnitEngine(0f, -engineOffset, engineSize, -90f))
+     }
 
-    if (treadEffect == null) {
-      treadEffect = Effect(50f) { e: EffectContainer? ->
-        Draw.color(Tmp.c1.set(e!!.color).mul(1.5f))
-        Fx.rand.setSeed(e.id.toLong())
-        repeat(3) {
-          Fx.v.trns(e.rotation + Fx.rand.range(40f), Fx.rand.random(6f * e.finpow()))
-          Fill.circle(
-            e.x + Fx.v.x + Fx.rand.range(4f),
-            e.y + Fx.v.y + Fx.rand.range(4f),
-            min(e.fout(), e.fin() * e.lifetime / 8f) * hitSize / 28f * 3f * Fx.rand.random(
-              0.8f, 1.1f
-            ) + 0.3f
-          )
-        }
-      }.layer(Layer.debris)
-    }
+     if (treadEffect == null) {
+       treadEffect = Effect(50f) { e: EffectContainer? ->
+         Draw.color(Tmp.c1.set(e!!.color).mul(1.5f))
+         Fx.rand.setSeed(e.id.toLong())
+         repeat(3) {
+           Fx.v.trns(e.rotation + Fx.rand.range(40f), Fx.rand.random(6f * e.finpow()))
+           Fill.circle(
+             e.x + Fx.v.x + Fx.rand.range(4f),
+             e.y + Fx.v.y + Fx.rand.range(4f),
+             min(e.fout(), e.fin() * e.lifetime / 8f) * hitSize / 28f * 3f * Fx.rand.random(
+               0.8f, 1.1f
+             ) + 0.3f
+           )
+         }
+       }.layer(Layer.debris)
+     }
 
-    if (mineBeamOffset == Float.NEGATIVE_INFINITY) mineBeamOffset = hitSize / 2
+     if (mineBeamOffset == Float.NEGATIVE_INFINITY) mineBeamOffset = hitSize / 2
 
-    for(ab in abilities) {
-      ab.init(this)
-    }
-    //add mirrored weapon variants
-    val mapped = Seq<Weapon>()
-    for(w in weapons) {
-      if (w.recoilTime < 0) w.recoilTime = w.reload
-      mapped.add(w)
-      //mirrors are copies with X values negated
-      if (w.mirror) {
-        val copy = w.copy()
-        copy.flip()
-        mapped.add(copy)
-        //since there are now two weapons, the reload and recoil time must be doubled
-        w.recoilTime *= 2f
-        copy.recoilTime *= 2f
-        w.reload *= 2f
-        copy.reload *= 2f
+     for(ab in abilities) {
+       ab.init(this)
+     }
+     //add mirrored weapon variants
+     val mapped = Seq<Weapon>()
+     for(w in weapons) {
+       if (w.recoilTime < 0) w.recoilTime = w.reload
+       mapped.add(w)
+       //mirrors are copies with X values negated
+       if (w.mirror) {
+         val copy = w.copy()
+         copy.flip()
+         mapped.add(copy)
+         //since there are now two weapons, the reload and recoil time must be doubled
+         w.recoilTime *= 2f
+         copy.recoilTime *= 2f
+         w.reload *= 2f
+         copy.reload *= 2f
 
-        w.otherSide = mapped.size - 1
-        copy.otherSide = mapped.size - 2
-      }
-    }
-    this.weapons = mapped
+         w.otherSide = mapped.size - 1
+         copy.otherSide = mapped.size - 2
+       }
+     }
+     this.weapons = mapped
 
-    weapons.each(Cons { obj: Weapon? -> obj!!.init() })
+     weapons.each(Cons { obj: Weapon? -> obj!!.init() })
 
-    canHeal = weapons.contains { w: Weapon? -> w!!.bullet.heals() }
+     canHeal = weapons.contains { w: Weapon? -> w!!.bullet.heals() }
 
-    canAttack = weapons.contains { w: Weapon? -> !w!!.noAttack }
-    //assign default commands.
-    if (commands.size == 0) {
-      commands.add(UnitCommand.moveCommand, UnitCommand.enterPayloadCommand)
+     canAttack = weapons.contains { w: Weapon? -> !w!!.noAttack }
+     //assign default commands.
+     if (commands.size == 0) {
+       commands.add(UnitCommand.moveCommand, UnitCommand.enterPayloadCommand)
 
-      if (canBoost) {
+       if (canBoost) {
 
-        if (buildSpeed > 0f) {
-          commands.add(UnitCommand.rebuildCommand, UnitCommand.assistCommand)
-        }
-        if (mineTier > 0) {
-          commands.add(UnitCommand.mineCommand)
-        }
-      }
-      //healing, mining and building is only supported for flying units; pathfinding to ambiguously reachable locations is hard.
-      if (flying) {
-        if (canHeal) {
-          commands.add(UnitCommand.repairCommand)
-        }
+         if (buildSpeed > 0f) {
+           commands.add(UnitCommand.rebuildCommand, UnitCommand.assistCommand)
+         }
+         if (mineTier > 0) {
+           commands.add(UnitCommand.mineCommand)
+         }
+       }
+       //healing, mining and building is only supported for flying units; pathfinding to ambiguously reachable locations is hard.
+       if (flying) {
+         if (canHeal) {
+           commands.add(UnitCommand.repairCommand)
+         }
 
-        if (buildSpeed > 0) {
-          commands.add(UnitCommand.rebuildCommand, UnitCommand.assistCommand)
-        }
+         if (buildSpeed > 0) {
+           commands.add(UnitCommand.rebuildCommand, UnitCommand.assistCommand)
+         }
 
-        if (mineTier > 0) {
-          commands.add(UnitCommand.mineCommand)
-        }
-        if (example is Payloadc) {
-          commands.addAll(
-            UnitCommand.loadUnitsCommand, UnitCommand.loadBlocksCommand, UnitCommand.unloadPayloadCommand, UnitCommand.loopPayloadCommand
-          )
-        }
-      }
-    }
+         if (mineTier > 0) {
+           commands.add(UnitCommand.mineCommand)
+         }
+         if (example is Payloadc) {
+           commands.addAll(
+             UnitCommand.loadUnitsCommand, UnitCommand.loadBlocksCommand, UnitCommand.unloadPayloadCommand, UnitCommand.loopPayloadCommand
+           )
+         }
+       }
+     }
 
-    if (defaultCommand == null && commands.size > 0) {
-      defaultCommand = commands.first()
-    }
+     if (defaultCommand == null && commands.size > 0) {
+       defaultCommand = commands.first()
+     }
 
-    if (stances.size == 0) {
-      if (canAttack) {
-        stances.addAll(UnitStance.stop, UnitStance.holdFire, UnitStance.pursueTarget, UnitStance.patrol)
-        if (!flying) {
-          stances.add(UnitStance.ram)
-        }
-      } else {
-        stances.addAll(UnitStance.stop, UnitStance.patrol)
-      }
-    }
-    //dynamically create ammo capacity based on firing rate
-    if (ammoCapacity < 0) {
-      val shotsPerSecond = weapons.sumf { w: Weapon? -> if (w!!.useAmmo) 60f / w.reload else 0f }
-      //duration of continuous fire without reload
-      val targetSeconds = 35f
+     if (stances.size == 0) {
+       if (canAttack) {
+         stances.addAll(UnitStance.stop, UnitStance.holdFire, UnitStance.pursueTarget, UnitStance.patrol)
+         if (!flying) {
+           stances.add(UnitStance.ram)
+         }
+       } else {
+         stances.addAll(UnitStance.stop, UnitStance.patrol)
+       }
+     }
+     //dynamically create ammo capacity based on firing rate
+     if (ammoCapacity < 0) {
+       val shotsPerSecond = weapons.sumf { w: Weapon? -> if (w!!.useAmmo) 60f / w.reload else 0f }
+       //duration of continuous fire without reload
+       val targetSeconds = 35f
 
-      ammoCapacity = max(1, (shotsPerSecond * targetSeconds).toInt())
-    }
+       ammoCapacity = max(1, (shotsPerSecond * targetSeconds).toInt())
+     }
 
-    estimateDps()
-    //only do this after everything else was initialized
-    sample = constructor.get()
-  }*/
+     estimateDps()
+     //only do this after everything else was initialized
+     sample = constructor.get()
+   }*/
 
   open fun setWeapon(weaponName: String = "", configurator: Weapon.() -> KUnit): Weapon {
     return Weapon(
@@ -472,6 +440,12 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
 
     if (drawCell && unit !is Crawlc) drawCell(unit)
     Draw.scl(scl) //TODO this is a hack for neoplasm turrets
+    if (unit.isAdded) {
+      for(a in unit.abilities) {
+        Draw.reset()
+        if (a is ArmorPlateAbility) a.draw(unit)
+      }
+    }
     drawWeapons(unit)
     if (drawItems) drawItems(unit)
     if (unit.isAdded) drawLight(unit)
@@ -512,7 +486,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
     if (unit.isAdded) {
       for(a in unit.abilities) {
         Draw.reset()
-        a.draw(unit)
+        if (a !is ArmorPlateAbility) a.draw(unit)
       }
     }
 

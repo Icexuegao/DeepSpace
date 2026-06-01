@@ -11,7 +11,7 @@ buildscript {
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
   extra["kotlinCompatibility"] = "2.3.20"
   extra["java"] = 25
-  extra["mdtVersion"] = "com.github.Anuken.Mindustry:core:v158"
+  extra["mdtVersion"] = "com.github.Anuken.Mindustry:core:v158.1"
   extra["modFileName"] ="mod.json"
   var mdtVersion: String by extra
 

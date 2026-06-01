@@ -114,6 +114,7 @@ class 聚合引力发生器 :NormalCrafter("polymer_gravitational_generator") {
 
         Draw.z(Layer.flyingUnit + 0.5f)
         dist.setStrength(-32 * e.workEfficiency() * Vars.renderer.scale)
+
         SglDraw.drawDistortion(taskID, e, dist) { b: NormalCrafterBuild ->
           Distortion.drawVoidDistortion(b.x, b.y, 24 + Mathf.absin(6f, 4f), 32 * b.workEfficiency())
         }
