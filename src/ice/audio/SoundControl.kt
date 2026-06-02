@@ -1,12 +1,9 @@
 package ice.audio
 
 import arc.Core
-import arc.Events
 import arc.audio.Filters
 import arc.audio.Music
-import arc.func.Cons
 import arc.math.Mathf
-import arc.struct.ObjectMap
 import arc.struct.Seq
 import arc.util.Time
 import ice.core.SettingValue
@@ -15,23 +12,14 @@ import mindustry.Vars
 import mindustry.audio.SoundControl
 import mindustry.game.EventType.*
 import mindustry.gen.Musics
-import universecore.reflection.accessField
+import universecore.util.EventRemover
 
 class IceSoundControl :SoundControl() {
   companion object {
     fun setup() {
-      val events: ObjectMap<Any, Seq<Cons<*>>> by Events::class.accessField("events")
-      //mindustry.audio.SoundControl$$Lambda/0x000000009750aa10@2b3d7075 pc
-      //mindustry.audio.SoundControl$$ExternalSyntheticLambda0@2e872cb  android
-      events.get(ClientLoadEvent::class.java).forEach {
-        if (it.toString().contains("SoundControl$$")) Events.remove(ClientLoadEvent::class.java, it as Cons<ClientLoadEvent>)
-      }
-      events.get(WaveEvent::class.java).forEach {
-        if (it.toString().contains("SoundControl$$")) Events.remove(WaveEvent::class.java, it as Cons<WaveEvent>)
-      }
-      Events.on(ResetEvent::class.java) {
-        if (it.toString().contains("SoundControl$$")) Events.remove(ResetEvent::class.java, it as Cons<ResetEvent>)
-      }
+      EventRemover.remove<SoundControl, ClientLoadEvent>()
+      EventRemover.remove<SoundControl, WaveEvent>()
+      EventRemover.remove<SoundControl, ResetEvent>()
       Vars.control.sound = IceSoundControl()
     }
   }

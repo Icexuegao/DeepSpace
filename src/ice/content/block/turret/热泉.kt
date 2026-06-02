@@ -106,7 +106,6 @@ class 热泉 :SglTurret("turret_hotSprings") {
 
     newAmmo(getBuller().apply {
       damage = 120f
-      status = IStatus.corroded
       statusDuration = 2f * 60f
       EventType.addContentInitEvent {
         shootEffect = IceEffects.changeFlame(speed * lifetime, ILiquids.氯气.color, ILiquids.氢气.color, size1)
