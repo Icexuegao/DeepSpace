@@ -31,7 +31,7 @@ import singularity.world.blocks.turrets.SglTurret
 import singularity.world.draw.DrawSglTurret
 import singularity.world.draw.part.CustomPart
 import singularity.world.particles.SglParticleModels
-import universecore.util.MathTransform
+import universecore.math.MathTransform
 import universecore.world.particles.models.HeatBulletParticleModel.Companion.bullet
 import universecore.world.particles.models.HeatBulletParticleModel.Companion.owner
 

@@ -5,7 +5,7 @@ import ice.core.IFiles.appendModName
 import ice.graphics.IceColor
 import ice.type.Remains
 import mindustry.world.meta.Stats
-import universecore.scene.style.DynamicTextureDrawable
+import universecore.ui.effects.DynamicTextureDrawable
 
 class 心跳鼓 :Remains("remains_heartbeat_drum") {
   init {

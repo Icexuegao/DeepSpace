@@ -13,7 +13,7 @@ import mindustry.gen.Building
 import mindustry.graphics.Pal
 import mindustry.ui.Bar
 import mindustry.world.modules.BlockModule
-import singularity.core.UpdatePool
+import universecore.core.UpdatePool
 import singularity.graphic.SglDrawConst
 import singularity.world.components.NuclearEnergyBuildComp
 import universecore.util.handler.FieldHandler

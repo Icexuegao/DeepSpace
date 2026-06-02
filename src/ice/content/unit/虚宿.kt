@@ -39,7 +39,7 @@ import singularity.world.unit.abilities.MirrorArmorAbility
 import singularity.world.unit.types.TrailMoveLightning
 import universecore.graphics.lightnings.LightningVertex
 import universecore.graphics.lightnings.generator.RandomGenerator
-import universecore.util.MathTransform
+import universecore.math.MathTransform
 import universecore.world.draw.part.CustomPart
 import kotlin.math.abs
 import kotlin.math.max

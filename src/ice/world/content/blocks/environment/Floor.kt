@@ -9,7 +9,7 @@ import mindustry.Vars
 import mindustry.graphics.BlockRenderer
 import mindustry.world.Tile
 import mindustry.world.blocks.environment.Floor
-import universecore.util.accessField
+import universecore.reflection.accessField
 
 open class Floor(name: String) :Floor(name) {
   var BlockRenderer.updateFloors: Seq<UpdateRenderState> by accessField("updateFloors")

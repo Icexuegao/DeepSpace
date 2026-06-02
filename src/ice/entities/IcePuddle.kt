@@ -6,25 +6,27 @@ import arc.util.pooling.Pools
 import mindustry.game.Team
 import mindustry.gen.Puddle
 
-class IcePuddle : Puddle() {
+class IcePuddle :Puddle() {
   companion object {
     fun create(): IcePuddle {
       return Pools.obtain(IcePuddle::class.java, ::IcePuddle)
     }
   }
 
+  override fun classId() = IceRegister.getId(IcePuddle::class.java)
+
   override fun reset() {
     super.reset()
-    team=Team.derelict
+    team = Team.derelict
   }
 
   var team: Team = Team.derelict
-  override fun read(read: Reads?) {
+  override fun read(read: Reads) {
     super.read(read)
-    this.team = mindustry.io.TypeIO.readTeam(read)
+    team = mindustry.io.TypeIO.readTeam(read)
   }
 
-  override fun write(write: Writes?) {
+  override fun write(write: Writes) {
     super.write(write)
     mindustry.io.TypeIO.writeTeam(write, team)
   }

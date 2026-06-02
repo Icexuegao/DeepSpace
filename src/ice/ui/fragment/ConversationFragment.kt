@@ -13,8 +13,8 @@ import arc.scene.ui.layout.WidgetGroup
 import ice.graphics.IceColor
 import ice.core.IFiles
 import ice.core.IFiles.appendModName
-import universecore.scene.action.IceActions
-import universecore.scene.element.typinglabel.TLabel
+import universecore.ui.actions.IceActions
+import universecore.ui.widgets.typinglabel.TLabel
 import universecore.struct.texture.asDrawable
 import ice.ui.UI
 import mindustry.Vars

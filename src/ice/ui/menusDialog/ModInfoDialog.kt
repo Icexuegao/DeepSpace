@@ -39,7 +39,11 @@ import mindustry.graphics.Pal
 import mindustry.ui.Styles
 import singularity.Singularity
 import singularity.graphic.SglDrawConst
-import universecore.scene.ui.*
+import universecore.ui.widgets.tables.addCR
+import universecore.ui.widgets.tables.addLine
+import universecore.ui.widgets.tables.iPaneG
+import universecore.ui.widgets.tables.iTable
+import universecore.ui.widgets.tables.itooltip
 import universecore.util.UrlDownloader
 import java.util.regex.Pattern
 

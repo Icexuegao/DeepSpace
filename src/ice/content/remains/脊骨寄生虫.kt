@@ -7,8 +7,8 @@ import ice.core.IFiles.appendModName
 import ice.graphics.IceColor
 import ice.type.Remains
 import mindustry.world.meta.Stats
-import universecore.scene.style.DynamicTextureDrawable
-import universecore.scene.ui.itooltip
+import universecore.ui.effects.DynamicTextureDrawable
+import universecore.ui.widgets.tables.itooltip
 
 class 脊骨寄生虫 :Remains("remains_spine_parasite") {
   init {

@@ -3,7 +3,6 @@ package singularity.ui;
 import arc.Core;
 import arc.Events;
 import arc.util.Time;
-import ice.core.SettingValue;
 import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.gen.Healthc;
@@ -12,7 +11,7 @@ import mindustry.gen.Unit;
 import mindustry.ui.Styles;
 import singularity.Sgl;
 import singularity.core.SglEventTypes;
-import singularity.core.UpdatePool;
+import universecore.core.UpdatePool;
 import singularity.graphic.Blur;
 import singularity.ui.dialogs.*;
 import singularity.ui.fragments.DebugInfos;
@@ -21,7 +20,6 @@ import singularity.ui.fragments.entityinfo.EntityInfoFrag;
 import singularity.ui.fragments.entityinfo.UnitStatusDisplay;
 import singularity.ui.fragments.notification.Notification;
 import singularity.ui.fragments.notification.NotificationFrag;
-import singularity.ui.fragments.override.SglMenuFrag;
 
 @SuppressWarnings("DuplicatedCode")
 public class SglUI {

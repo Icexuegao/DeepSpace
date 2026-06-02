@@ -5,8 +5,8 @@ import arc.scene.style.Drawable
 import arc.scene.ui.layout.Table
 import arc.struct.Seq
 import ice.ui.MenusDialog
-import universecore.scene.ui.actionsR
-import universecore.scene.ui.clearR
+import universecore.ui.widgets.tables.actionsR
+import universecore.ui.widgets.tables.clearR
 
 abstract class BaseMenusDialog(val name: String, val icon: Drawable) {
   companion object {

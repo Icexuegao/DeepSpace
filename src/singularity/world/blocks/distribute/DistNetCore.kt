@@ -35,7 +35,7 @@ import singularity.world.meta.SglStat
 import singularity.world.meta.SglStatUnit
 import singularity.world.modules.DistCoreModule
 import universecore.util.NumberStrify
-import universecore.util.colletion.TreeSeq
+import universecore.struct.collection.TreeSeq
 import kotlin.math.max
 
 open class DistNetCore(name: String) : NetPluginComp(name), DistMatrixUnitComp {

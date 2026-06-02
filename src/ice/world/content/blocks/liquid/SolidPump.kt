@@ -17,7 +17,7 @@ import mindustry.world.blocks.environment.Floor
 import mindustry.world.draw.DrawDefault
 import mindustry.world.meta.*
 import singularity.world.blocks.SglBlock
-import universecore.scene.ui.iTable
+import universecore.ui.widgets.tables.iTable
 import universecore.world.draw.DrawLiquidRegion
 import universecore.world.draw.DrawMulti
 import universecore.world.draw.DrawRegionNull

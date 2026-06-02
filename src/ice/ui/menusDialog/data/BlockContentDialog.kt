@@ -8,10 +8,10 @@ import ice.ui.UI
 import ice.world.content.BaseContentSeq
 import mindustry.type.Category
 import mindustry.world.Block
-import universecore.scene.ui.addLine
-import universecore.scene.ui.iTableG
-import universecore.scene.ui.itooltip
-import universecore.scene.ui.layout.ITable
+import universecore.ui.widgets.tables.addLine
+import universecore.ui.widgets.tables.iTableG
+import universecore.ui.widgets.tables.itooltip
+import universecore.ui.widgets.tables.ITable
 
 class BlockContentDialog :ContentDialogBase<Block>("建筑", BaseContentSeq.blocks) {
   override fun listTable(): Table {

@@ -25,13 +25,13 @@ import mindustry.Vars
 import mindustry.entities.Effect
 import mindustry.gen.Tex
 import mindustry.ui.Fonts
-import singularity.core.UpdatePool
+import universecore.core.UpdatePool
 import universecore.math.slope
-import universecore.scene.style.DynamicTextureDrawable
-import universecore.scene.ui.SceneEffect
-import universecore.scene.ui.colorR
+import universecore.ui.effects.DynamicTextureDrawable
+import universecore.ui.effects.SceneEffect
+import universecore.ui.widgets.tables.colorR
 import universecore.struct.ConfigPropertyDelegate
-import universecore.util.accessFloat
+import universecore.reflection.accessFloat
 import kotlin.math.max
 import kotlin.math.sin
 

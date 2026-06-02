@@ -37,7 +37,7 @@ import mindustry.world.draw.DrawDefault
 import singularity.graphic.MathRenderer
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
-import universecore.util.MathTransform
+import universecore.math.MathTransform
 import universecore.util.funcs.Floatc3
 import singularity.world.SglFx
 import universecore.world.producers.ProducePayload

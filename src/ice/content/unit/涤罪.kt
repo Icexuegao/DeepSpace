@@ -17,7 +17,7 @@ import mindustry.entities.effect.WaveEffect
 import mindustry.game.EventType
 import mindustry.gen.Bullet
 import mindustry.graphics.Drawf
-import singularity.core.UpdatePool
+import universecore.core.UpdatePool
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
 

@@ -18,7 +18,7 @@ import singularity.graphic.SglDrawConst
 import singularity.world.blocks.product.NormalCrafter
 import singularity.world.draw.DrawBottom
 import singularity.world.draw.DrawRegionDynamic
-import universecore.util.MathTransform
+import universecore.math.MathTransform
 import universecore.world.draw.DrawMulti
 
 class 矩阵切割机 :NormalCrafter("matrix_cutter") {

@@ -1,4 +1,4 @@
-package singularity.core
+package universecore.core
 
 import arc.Events
 import arc.struct.ObjectMap

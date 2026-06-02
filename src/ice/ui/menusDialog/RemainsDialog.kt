@@ -12,9 +12,9 @@ import ice.graphics.IceColor
 import ice.type.Remains
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
-import universecore.scene.ui.iTable
-import universecore.scene.ui.iTableG
-import universecore.scene.ui.icePane
+import universecore.ui.widgets.tables.iTable
+import universecore.ui.widgets.tables.iTableG
+import universecore.ui.widgets.tables.icePane
 
 object RemainsDialog :BaseMenusDialog(IceStats.遗物.localized(), IStyles.menusButton_remains) {
 

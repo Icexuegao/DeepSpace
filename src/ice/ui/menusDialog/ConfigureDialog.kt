@@ -17,7 +17,7 @@ import ice.audio.IMusics
 import ice.audio.ISounds
 import ice.content.AtomSchematics
 import ice.core.SettingValue
-import ice.entities.ModeDifficulty
+import ice.game.ModeDifficulty
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.ui.Documents
@@ -34,8 +34,8 @@ import singularity.ui.dialogs.ModConfigDialog
 import singularity.ui.dialogs.layout.*
 import singularity.ui.fragments.entityinfo.EntityInfoFrag
 import singularity.ui.fragments.entityinfo.HealthBarStyle
-import universecore.scene.element.ProgressBar
-import universecore.scene.element.typinglabel.TLabel
+import universecore.ui.widgets.progress.ProgressBar
+import universecore.ui.widgets.typinglabel.TLabel
 import universecore.util.toTrimmedString
 
 object ConfigureDialog :BaseMenusDialog(IceStats.设置.localized(), IStyles.menusButton_configure) {

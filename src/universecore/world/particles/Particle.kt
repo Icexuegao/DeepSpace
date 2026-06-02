@@ -14,7 +14,7 @@ import arc.util.pooling.Pool
 import arc.util.pooling.Pools
 import mindustry.gen.Decal
 import mindustry.gen.Groups
-import universecore.util.accessBoolean
+import universecore.reflection.accessBoolean
 import kotlin.math.max
 
 class Particle :Decal(), Iterable<Particle.Cloud> {

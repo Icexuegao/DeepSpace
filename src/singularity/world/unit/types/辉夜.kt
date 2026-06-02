@@ -40,7 +40,7 @@ import singularity.graphic.MathRenderer
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.ui.UIUtils
-import universecore.util.MathTransform
+import universecore.math.MathTransform
 import singularity.world.SglFx
 import singularity.world.blocks.turrets.MultiTrailBulletType
 import singularity.world.draw.part.CustomPart

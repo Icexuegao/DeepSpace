@@ -16,7 +16,7 @@ import mindustry.entities.Effect
 import mindustry.game.EventType
 import mindustry.graphics.Pal
 import universecore.math.slope
-import universecore.scene.style.DynamicTextureDrawable
+import universecore.ui.effects.DynamicTextureDrawable
 import universecore.world.particles.models.*
 
 class 胎生百合 :Remains("remains_tumor_bush") {

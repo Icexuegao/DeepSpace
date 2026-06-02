@@ -4,7 +4,7 @@ import ice.content.IUnitTypes
 import ice.core.IFiles.appendModName
 import ice.type.Remains
 import mindustry.world.meta.Stats
-import universecore.scene.style.DynamicTextureDrawable
+import universecore.ui.effects.DynamicTextureDrawable
 
 class 流光罗盘 :Remains("remains_flowing_compass") {
   init {

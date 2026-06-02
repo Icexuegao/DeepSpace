@@ -25,8 +25,8 @@ import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.BlockGroup
 import singularity.world.blocks.SglBlock
-import universecore.scene.ui.ItemSelection
-import universecore.scene.ui.itooltip
+import universecore.ui.widgets.tables.ItemSelection
+import universecore.ui.widgets.tables.itooltip
 import universecore.world.draw.DrawBuild
 import universecore.world.draw.DrawMulti
 

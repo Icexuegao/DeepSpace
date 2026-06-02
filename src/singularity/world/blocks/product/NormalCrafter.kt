@@ -23,7 +23,7 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.core.SettingValue
 import ice.graphics.IStyles
-import universecore.scene.element.display.TimeDisplay
+import universecore.ui.widgets.displays.TimeDisplay
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Effect

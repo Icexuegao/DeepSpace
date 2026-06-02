@@ -19,7 +19,7 @@ import ice.ui.UI.showUISoundCloseV
 import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.*
 import ice.world.meta.IceStats
-import universecore.scene.ui.iPaneG
+import universecore.ui.widgets.tables.iPaneG
 import universecore.struct.texture.asDrawable
 
 object MenusDialog :Dialog() {

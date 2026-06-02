@@ -12,7 +12,7 @@ import arc.scene.ui.TextButton.TextButtonStyle
 import arc.scene.ui.layout.Scl
 import ice.game.IceTeam
 import ice.core.IFiles
-import universecore.scene.layout.ProgressAttribute
+import universecore.ui.widgets.progress.ProgressAttribute
 import universecore.struct.texture.asDrawable
 import mindustry.gen.Tex
 import mindustry.ui.Fonts

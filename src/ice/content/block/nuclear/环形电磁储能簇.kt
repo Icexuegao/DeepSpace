@@ -31,7 +31,7 @@ import singularity.world.blocks.nuclear.EnergyContainer
 import singularity.world.draw.DrawBottom
 import singularity.world.meta.SglStat
 import singularity.world.particles.SglParticleModels
-import universecore.util.MathTransform
+import universecore.math.MathTransform
 
 class 环形电磁储能簇 :EnergyContainer("magnetic_energy_container") {
   init {

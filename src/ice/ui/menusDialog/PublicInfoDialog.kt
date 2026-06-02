@@ -7,7 +7,7 @@ import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
-import universecore.scene.ui.iPane
+import universecore.ui.widgets.tables.iPane
 import universecore.struct.texture.asDrawable
 
 object PublicInfoDialog :BaseMenusDialog(IceStats.公告.localized(), IStyles.menusButton_publicInfo) {

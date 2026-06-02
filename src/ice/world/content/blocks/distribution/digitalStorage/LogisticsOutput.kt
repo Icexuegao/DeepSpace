@@ -5,7 +5,7 @@ import arc.scene.ui.layout.Table
 import arc.util.Eachable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import universecore.scene.ui.ItemSelection
+import universecore.ui.widgets.tables.ItemSelection
 import universecore.world.draw.DrawMulti
 import universecore.world.draw.DrawRegionColor
 import mindustry.Vars

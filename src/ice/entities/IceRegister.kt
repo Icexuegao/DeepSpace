@@ -10,11 +10,11 @@ import mindustry.gen.Entityc
 import mindustry.gen.Unit
 import java.lang.reflect.Constructor
 
-object IceRegister  {
+object IceRegister {
   private val ids = ObjectIntMap<Class<out Entityc>>()
   private val map: ObjectMap<String, Prov<out Entityc>> = ObjectMap()
   private val TmpClassConstruntor = ObjectMap<Class<Unit>, Constructor<Unit>>()
-  private fun <T : Entityc> put(name: String, type: Class<T>, prov: Prov<out T>) {
+  private fun <T :Entityc> put(name: String, type: Class<T>, prov: Prov<out T>) {
     map.put(name, prov)
     ids.put(type, EntityMapping.register(name, prov))
   }

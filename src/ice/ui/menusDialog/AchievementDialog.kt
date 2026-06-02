@@ -15,8 +15,7 @@ import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.game.EventType
-import universecore.scene.action.IceActions
-import universecore.scene.ui.*
+import universecore.ui.actions.IceActions
 import universecore.struct.ConfigPropertyDelegate
 import universecore.struct.texture.asDrawable
 import ice.ui.MenusDialog
@@ -26,6 +25,14 @@ import mindustry.gen.Icon
 import mindustry.ui.Styles
 import singularity.Sgl
 import singularity.ui.fragments.notification.Notification
+import universecore.ui.widgets.tables.addCR
+import universecore.ui.widgets.tables.addLine
+import universecore.ui.widgets.tables.colorR
+import universecore.ui.widgets.tables.iPane
+import universecore.ui.widgets.tables.iPaneG
+import universecore.ui.widgets.tables.iTable
+import universecore.ui.widgets.tables.iTableG
+import universecore.ui.widgets.tables.iTableGX
 import universecore.util.DataPackable
 
 object AchievementDialog :BaseMenusDialog(IceStats.成就.localized(), IStyles.menusButton_host) {

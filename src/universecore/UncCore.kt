@@ -11,9 +11,9 @@ import mindustry.game.EventType
 import mindustry.game.EventType.UnlockEvent
 import mindustry.game.EventType.WorldLoadEvent
 import mindustry.world.Block
-import universecore.android.AndroidImpl
-import universecore.desktopcore.desktop.*
-import universecore.scene.fragments.SecondaryConfigureFragment
+import universecore.platform.android.AndroidImpl
+import universecore.platform.desktop.*
+import universecore.ui.fragments.SecondaryConfigureFragment
 import universecore.ui.bundle.LocalizationManager
 import universecore.util.handler.CategoryHandler
 import universecore.util.handler.FieldHandler

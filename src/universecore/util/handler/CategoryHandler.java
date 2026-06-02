@@ -14,7 +14,7 @@ import mindustry.Vars;
 import mindustry.gen.Icon;
 import mindustry.type.Category;
 import mindustry.ui.Styles;
-import singularity.core.UpdatePool;
+import universecore.core.UpdatePool;
 
 import java.util.Arrays;
 

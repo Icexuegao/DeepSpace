@@ -19,7 +19,7 @@ import mindustry.graphics.Trail
 import mindustry.type.UnitType
 import singularity.graphic.MathRenderer
 import singularity.graphic.SglDraw
-import universecore.util.MathTransform
+import universecore.math.MathTransform
 import singularity.world.SglFx
 import singularity.world.unit.DataWeapon
 import kotlin.math.min

@@ -29,10 +29,10 @@ import mindustry.graphics.Pal;
 import mindustry.input.Binding;
 import mindustry.ui.Fonts;
 import singularity.Sgl;
-import singularity.core.UpdatePool;
+import universecore.core.UpdatePool;
 import singularity.graphic.SglDraw;
 import singularity.graphic.SglDrawConst;
-import universecore.util.MathTransform;
+import universecore.math.MathTransform;
 
 import java.util.Iterator;
 import java.util.Objects;

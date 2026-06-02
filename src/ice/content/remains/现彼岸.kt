@@ -3,7 +3,7 @@ package ice.content.remains
 import ice.core.IFiles.appendModName
 import ice.graphics.IceColor
 import ice.type.Remains
-import universecore.scene.style.DynamicTextureDrawable
+import universecore.ui.effects.DynamicTextureDrawable
 
 class 现彼岸 :Remains("remains_higanbana") {
   init {

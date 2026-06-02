@@ -6,8 +6,8 @@ import ice.graphics.IceColor
 import ice.type.Remains
 import ice.ui.menusDialog.RemainsDialog.slotPos
 import mindustry.Vars
-import universecore.scene.element.typinglabel.TLabel
-import universecore.scene.style.DynamicTextureDrawable
+import universecore.ui.widgets.typinglabel.TLabel
+import universecore.ui.effects.DynamicTextureDrawable
 
 class 不朽者胚胎 :Remains("remains_immortal_embryo") {
   val pos = 2
