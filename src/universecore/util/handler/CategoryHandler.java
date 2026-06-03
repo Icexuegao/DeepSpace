@@ -115,9 +115,9 @@ public class CategoryHandler {
   public Category add(String name, int ordinal, KeyBind bind, String iconName) {
     hasNew = true;
     UncCategory category = new UncCategory(name, ordinal, bind, iconName);
-    newCats.put(category.cat, category);
+    newCats.put(category.getCat(), category);
 
-    return category.cat;
+    return category.getCat();
   }
 
   public void init() {
@@ -127,7 +127,7 @@ public class CategoryHandler {
       for (int i = 0; i < arr.length; i++) {
         UncCategory cat = newCats.get(Category.all[i]);
         if (arr[i] == null) {
-          arr[i] = cat != null ? cat.bind : empBind;
+          arr[i] = cat != null ? cat.getBind() : empBind;
         }
       }
     }
@@ -135,7 +135,7 @@ public class CategoryHandler {
     FieldHandler.setValueDefault(Vars.ui.hudfrag.blockfrag, "blockSelect", arr);
 
     for (ObjectMap.Entry<Category, UncCategory> cat : newCats) {
-      TextureRegion r = Core.atlas.find(cat.value.icon);
+      TextureRegion r = Core.atlas.find(cat.value.getIcon());
       Core.atlas.addRegion(cat.key.name(), r);
       Icon.icons.put(cat.key.name(), new TextureRegionDrawable(r) {
         @Override

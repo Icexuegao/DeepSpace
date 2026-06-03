@@ -25,4 +25,10 @@ public class EnergyMarker extends SingleItemMark {
   public TextureRegion getIcon() {
     return ((TextureRegionDrawable) SglDrawConst.nuclearIcon).getRegion();
   }
+
+  @NotNull
+  @Override
+  public String getOwnMod(){
+    return "";
+  }
 }

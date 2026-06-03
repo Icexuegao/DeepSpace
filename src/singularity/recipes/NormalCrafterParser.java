@@ -54,24 +54,14 @@ public class NormalCrafterParser extends RecipeParser<NormalCrafter> {
         }
       }
 
-      Recipe recipe = new Recipe(isGenerator ? RecipeType.generator : RecipeType.factory, getWrap(normalCrafter), crafter.getCons().getCraftTime());
+      Recipe recipe = new Recipe(isGenerator ? RecipeType.getGenerator() : RecipeType.getFactory(), getWrap(normalCrafter), crafter.getCons().getCraftTime());
 
       for (BaseConsume<?> consume : crafter.getCons().all()) {
         if (consParsers.containsKey(consume.type())) {
           consParsers.get(consume.type()).get(normalCrafter, recipe, consume, s -> {
           });
           if (consume instanceof ConsumeFloor<?> cf) {
-            recipe.setEff(new Recipe.EffFunc() {
-              @Override
-              public float calculateMultiple(@NotNull Recipe recipe, @NotNull InputTable envParameter) {
-                return 0;
-              }
-
-              @Override
-              public float calculateEff(@NotNull Recipe recipe, @NotNull InputTable envParameter, float v) {
-                return cf.getBaseEfficiency();
-              }
-            });
+            recipe.setBaseEff(cf.getBaseEfficiency());
           }
         }
       }
@@ -85,7 +75,7 @@ public class NormalCrafterParser extends RecipeParser<NormalCrafter> {
               AmountFormatter old = recipeItemStack.getAmountFormat();
               float eff = normalCrafter.getBoosts().get(consumers, 1f) * recipeItemStack.getEfficiency();
               if (eff == 1 && recipeItemStack.getGroup() == null) return;
-              recipeItemStack.setOptional().setEff(eff).setFormat(f -> old.format(f) + "\n[#98ffa9]" + Mathf.round(eff * 100) + "%");
+              recipeItemStack.setOptional().setEfficiency(eff).setFormat(f -> old.format(f) + "\n[#98ffa9]" + Mathf.round(eff * 100) + "%");
             });
         }
       }
@@ -105,7 +95,7 @@ public class NormalCrafterParser extends RecipeParser<NormalCrafter> {
     }
 
     for (ObjectMap.Entry<BaseConsumers, BaseProducers> product : normalCrafter.getOptionalProducts()) {
-      Recipe recipe = new Recipe(RecipeType.factory, getWrap(normalCrafter), product.key.getCraftTime());
+      Recipe recipe = new Recipe(RecipeType.getFactory(), getWrap(normalCrafter), product.key.getCraftTime());
       recipe.setSubInfo(t -> {
         t.add(Core.bundle.get("[accent]附加的次要生产项"));
         if (!product.key.getOptionalAlwaysValid())

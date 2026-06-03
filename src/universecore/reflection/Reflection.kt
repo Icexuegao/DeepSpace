@@ -2,7 +2,7 @@
 
 package universecore.reflection
 
-/**Kotlin reflection DSL utilities provide a range of convenient and type-safe reflection tools.
+/** Kotlin reflection DSL utilities provide a range of convenient and type-safe reflection tools.
  *
  * You can use those reflection wrappers in the same way as origin field access and method calls, just like:
  *
@@ -93,7 +93,7 @@ inline fun <reified O :Any> accessBoolean(name: String) = BooleanAccessor<O>(O::
 
 // static
 private fun checkPrimitiveFinal(field: Field) {
-  if (Modifier.isFinal(field.modifiers)) throw IllegalArgumentException("The static final field is always immutable, you shouldn't reflect these fields")
+  if (Modifier.isFinal(field.modifiers)) throw IllegalArgumentException("静态的最终场总是不可变的,你不应该反射这些场")
 }
 
 inline fun <U, reified T> KClass<*>.accessField(name: String) = FieldAccessorStatic<U, T>(this.java.getDeclaredField(name).also {

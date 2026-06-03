@@ -1,28 +1,20 @@
-package universecore.util.handler;
+package universecore.util.handler
 
-import arc.input.KeyBind;
-import arc.util.Nullable;
-import mindustry.type.Category;
+import arc.input.KeyBind
+import mindustry.type.Category
+import universe.util.reflect.accessEnum0
+import universe.util.reflect.accessField
 
-class UncCategory {
-  private static final EnumHandler<Category> handler = new EnumHandler<>(Category.class);
-
-  final Category cat;
-  @Nullable
-  final KeyBind bind;
-  int ordinal;
-  final String icon;
-
-  UncCategory(Category cat, KeyBind bind, String icon){
-    this.cat = cat;
-    this.icon = icon;
-    ordinal = cat.ordinal();
-    this.bind = bind;
+@Suppress("EnumValuesSoftDeprecate")
+internal class UncCategory(val cat: Category, val bind: KeyBind?, val icon: String) {
+  companion object {
+    val categoryHandler = Category::class.accessEnum0()
+    var all: Array<Category> by Category::class.accessField("all")
   }
 
-  UncCategory(String name, int ordinal, KeyBind bind, String icon){
-    this(handler.addEnumItem(name, ordinal), bind, icon);
-    FieldHandler.setValueDefault(Category.class, "all", Category.values());
-    this.ordinal = ordinal;
+  var ordinal = cat.ordinal
+
+  constructor(name: String, ordinal: Int, bind: KeyBind?, icon: String) :this(categoryHandler.newEnumInstance(name, ordinal), bind, icon) {
+    all = Category.values()
   }
 }

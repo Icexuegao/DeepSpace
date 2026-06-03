@@ -27,7 +27,6 @@ object EventRemover {
    */
   inline fun <reified T, reified E> remove(): Boolean {
     val qualifiedName = T::class.java.name
-    qualifiedName.log()
     for(lambda in events.get(E::class.java)) {
       // 匹配完整类名
       if (lambda.toString().contains("$qualifiedName$$")) {
