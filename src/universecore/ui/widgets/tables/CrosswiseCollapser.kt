@@ -12,7 +12,8 @@ import arc.util.ArcRuntimeException
 class CrosswiseCollapser(var cons: Cons<Table>, var collapsedFunc: Boolp) :WidgetGroup() {
   private var table: Table = Table()
   private val collapseAction = CollapseAction()
-  private var collapsed: Boolean = false
+  var collapsed: Boolean = false
+    private set
   private var actionRunning: Boolean = false
   private var currentWidth: Float = 0f
   var autoAnimate: Boolean = true
@@ -45,10 +46,6 @@ class CrosswiseCollapser(var cons: Cons<Table>, var collapsedFunc: Boolp) :Widge
       actionRunning = false
       invalidateHierarchy()
     }
-  }
-
-  fun isCollapsed(): Boolean {
-    return collapsed
   }
 
   private fun updateTouchable() {

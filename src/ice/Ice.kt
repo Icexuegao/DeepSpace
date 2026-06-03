@@ -69,8 +69,9 @@ open class Ice :Mod() {
     MenusDialog.init()
     SaveIO.init()
 
+
     Vars.content.each {
-      if ( it is UnlockableContent) it.unlock()
+      if ( it is UnlockableContent &&it.minfo.mod==null) it.unlock()
     }
   }
 
