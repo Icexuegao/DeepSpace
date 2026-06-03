@@ -19,6 +19,7 @@ import ice.content.unit.*
 import ice.content.unit.flying.fire.*
 import ice.content.unit.flying.rain.*
 import ice.content.unit.flying.否决
+import ice.content.unit.flying.沐风
 import ice.content.unit.flying.雨燕
 import ice.content.unit.mech.*
 import ice.content.unit.naval.履行
@@ -115,7 +116,9 @@ object IUnitTypes {
 
   val 幻影 = 幻影()
   val 弧光 = 弧光()
+  val 沐风 = 沐风()
   val 蜂后 = 蜂后()
+
   val 剑戟 = 剑戟()
   val 雨燕 = 雨燕()
   val 否决 = 否决()

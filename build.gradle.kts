@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 buildscript {
   extra["proUser"] = System.getProperty("user.name")
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
-  extra["kotlinCompatibility"] = "2.3.20"
+  extra["kotlinCompatibility"] = "2.3.21"
   extra["java"] = 25
   extra["mdtVersion"] = "com.github.Anuken.Mindustry:core:v158.1"
   extra["modFileName"] = "mod.json"
