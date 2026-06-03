@@ -58,7 +58,7 @@ import kotlin.math.min
 
 @Suppress("unused")
 object IUnitTypes {
-  fun load()= Unit
+  fun load() = Unit
   val 星光 = 星光()
   val 火花 = 火花()
   val 战斧 = 战斧()
@@ -204,29 +204,14 @@ object IUnitTypes {
 
       aiController = Prov {
         object :UnitController {
-          override fun unit(unit: Unit) {
-          }
-
-          override fun unit(): Unit? {
-            return null
-          }
-
-          override fun hit(bullet: Bullet) {
-          }
-
-          override fun isValidController(): Boolean {
-            return true
-          }
-
-          override fun isLogicControllable(): Boolean {
-            return false
-          }
-
-          override fun updateUnit() {}
-
-          override fun removed(unit: Unit) {}
-
-          override fun afterRead(unit: Unit) {}
+          override fun unit(unit: Unit) = kotlin.Unit
+          override fun unit() = null
+          override fun hit(bullet: Bullet) = kotlin.Unit
+          override fun isValidController() = true
+          override fun isLogicControllable() = false
+          override fun updateUnit() = kotlin.Unit
+          override fun removed(unit: Unit) = kotlin.Unit
+          override fun afterRead(unit: Unit) = kotlin.Unit
         }
       }
     }

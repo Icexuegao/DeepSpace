@@ -14,10 +14,7 @@ import singularity.Sgl
 import singularity.world.unit.abilities.ICollideBlockerAbility
 
 class SglUnitEntity : UnitEntity() {
-  override fun classId(): Int {
-    val id1 = IceRegister.getId(this::class.java)
-    return id1
-  }
+  override fun classId()=IceRegister.getId(this::class.java)
 
   override fun collides(other: Hitboxc?): Boolean {
     for (ability in abilities) {
