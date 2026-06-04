@@ -48,6 +48,7 @@ dependencies {
   implementation("com.github.EB-wilson.UniverseKit:reflection:1.4")
   implementation("com.github.EB-wilson.UniverseKit:markdown:1.4")
   implementation("com.github.EB-wilson.UniverseKit:graphic:1.4")
+  implementation("com.github.EB-wilson.UniverseKit:utilities:1.4")
   compileOnly(mdtVersion)
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")

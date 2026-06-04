@@ -4,7 +4,7 @@ import arc.graphics.Color
 import arc.scene.ui.layout.Table
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.entities.IceRegister
+import ice.entities.EntityRegistry
 import ice.graphics.IceColor
 import mindustry.entities.units.UnitController
 import mindustry.gen.Hitboxc
@@ -14,7 +14,7 @@ import singularity.Sgl
 import singularity.world.unit.abilities.ICollideBlockerAbility
 
 class SglUnitEntity : UnitEntity() {
-  override fun classId()=IceRegister.getId(this::class.java)
+  override fun classId()=EntityRegistry.getId(this::class.java)
 
   override fun collides(other: Hitboxc?): Boolean {
     for (ability in abilities) {

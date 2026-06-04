@@ -3,7 +3,7 @@ package singularity.world.unit
 import arc.util.Nullable
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.entities.IceRegister
+import ice.entities.EntityRegistry
 import mindustry.gen.Unit
 import mindustry.type.ItemStack
 import mindustry.type.UnitType
@@ -17,7 +17,7 @@ open class SglUnitType<T :Unit>(name: String, clazz: Class<T>) :UnitType(name) {
 
   init {
 
-    constructor = IceRegister.getPutUnits(clazz)
+    constructor = EntityRegistry.getPutUnits(clazz)
   }
 
   override fun getRequirements(prevReturn: Array<UnitType?>?, timeReturn: FloatArray?): Array<ItemStack>? {

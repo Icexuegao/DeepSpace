@@ -9,7 +9,7 @@ import arc.math.geom.Vec2
 import arc.util.Interval
 import arc.util.Time
 import arc.util.Tmp
-import ice.entities.IceRegister
+import ice.entities.EntityRegistry
 import ice.graphics.IceColor
 import ice.world.content.unit.IceUnitType
 import mindustry.Vars
@@ -138,7 +138,7 @@ open class Entity : UnitEntity(), Legsc, Tankc {
   }
 
   override fun classId(): Int {
-    return IceRegister.getId(this::class.java)
+    return EntityRegistry.getId(this::class.java)
   }
 
   override fun approach(vector: Vec2) {

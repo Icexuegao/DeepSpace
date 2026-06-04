@@ -14,7 +14,7 @@ import arc.util.Tmp
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.content.IStatus
-import ice.entities.IceRegister
+import ice.entities.EntityRegistry
 import ice.entities.bullet.BombBulletType
 import ice.entities.bullet.base.BasicBulletType
 import ice.graphics.IceColor
@@ -367,7 +367,7 @@ class 裂片集群 :IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
     }
 
     override fun classId(): Int {
-      return IceRegister.getId(this::class.java)
+      return EntityRegistry.getId(this::class.java)
     }
 
     override fun read(read: Reads) {
