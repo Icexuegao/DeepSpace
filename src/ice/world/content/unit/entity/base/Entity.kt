@@ -9,7 +9,7 @@ import arc.math.geom.Vec2
 import arc.util.Interval
 import arc.util.Time
 import arc.util.Tmp
-import ice.entities.IceRegister
+import ice.entities.EntityRegistry
 import ice.graphics.IceColor
 import ice.world.content.unit.IceUnitType
 import mindustry.Vars
@@ -30,15 +30,14 @@ import mindustry.world.blocks.ConstructBlock.ConstructBuild
 import mindustry.world.blocks.environment.Floor
 import universecore.world.ability.ICollideBlockerAbility
 import kotlin.math.abs
-import kotlin.math.max
 
-open class Entity : UnitEntity(), Legsc, Tankc {
+open class Entity :UnitEntity(), Legsc {
   companion object {
     val straightVec: Vec2 = Vec2()
   }
 
   override fun collides(other: Hitboxc): Boolean {
-    for (ability in abilities) {
+    for(ability in abilities) {
       if (ability is ICollideBlockerAbility && ability.blockedCollides(this, other)) return false
     }
 
@@ -47,9 +46,9 @@ open class Entity : UnitEntity(), Legsc, Tankc {
 
   open fun drawShadow() {
     val e: Float = Mathf.clamp(elevation, type.shadowElevation, 1f) * type.shadowElevationScl * (1f - drownTime)
-    val shadowX: Float =  UnitType.shadowTX * e
-    val shadowY: Float =  UnitType.shadowTY * e
-    val floor = Vars.world.floorWorld(x +shadowX, y +shadowY)
+    val shadowX: Float = UnitType.shadowTX * e
+    val shadowY: Float = UnitType.shadowTY * e
+    val floor = Vars.world.floorWorld(x + shadowX, y + shadowY)
     val dest = if (floor.canShadow) 1f else 0f
     //yes, this updates state in draw()... which isn't a problem, because I don't want it to be obvious anyway
     shadowAlpha = if (shadowAlpha < 0) dest else Mathf.approachDelta(shadowAlpha, dest, 0.11f)
@@ -59,7 +58,7 @@ open class Entity : UnitEntity(), Legsc, Tankc {
   }
 
   open fun drawShadowRegion(shadowX: Float, shadowY: Float, rotation: Float) {
-    Draw.rect(type.shadowRegion, x+shadowX, y+shadowY, rotation)
+    Draw.rect(type.shadowRegion, x + shadowX, y + shadowY, rotation)
   }
 
   open fun drawBody() {
@@ -138,7 +137,7 @@ open class Entity : UnitEntity(), Legsc, Tankc {
   }
 
   override fun classId(): Int {
-    return IceRegister.getId(this::class.java)
+    return EntityRegistry.getId(this::class.java)
   }
 
   override fun approach(vector: Vec2) {
@@ -157,7 +156,7 @@ open class Entity : UnitEntity(), Legsc, Tankc {
         EntityCollisions.legsSolid(x, y)
       }
     }
-    return EntityCollisions.SolidPred { x: Int, y: Int -> EntityCollisions.solid(x, y) }
+    return EntityCollisions.SolidPred(EntityCollisions::solid)
   }
 
   override fun moveAt(vector: Vec2, acceleration: Float) {
@@ -172,110 +171,14 @@ open class Entity : UnitEntity(), Legsc, Tankc {
   override fun update() {
     super.update()
     if (type.legRegion.found()) updateLegs()
-    if (type.treadRegion.found()) updateTank()
   }
 
-  override fun walked(walked: Boolean) {
-    this.walked = walked
-  }
 
-  @Transient
-  var walked = false
+  @Transient var walked = false
 
-  @Transient
-  var treadEffectTime = 0f
 
-  @Transient
-  var treadTime = 0f
-  var dawd = Interval()
 
-  @Transient
-  var lastSlowdown = 1f
-  fun updateTank() {
-    if ((walked || (Vars.net.client() && deltaLen() >= 0.01f)) && !Vars.headless && !inFogTo(
-        Vars.player.team()
-      )
-    ) {
-      treadEffectTime += Time.delta
-      if (treadEffectTime >= 6.0f && type.treadRects.size > 0) {
-        val treadRect = type.treadRects[0]
-        val xOffset = (-(treadRect.x + treadRect.width / 2.0f)) / 4.0f
-        val yOffset = (-(treadRect.y + treadRect.height / 2.0f)) / 4.0f
-        for (i in Mathf.signs) {
-          Tmp.v1.set(xOffset * i, yOffset - treadRect.height / 2.0f / 4.0f).rotate(rotation - 90)
-          Effect.floorDustAngle(type.treadEffect, Tmp.v1.x + x, Tmp.v1.y + y, rotation + 180.0f)
-        }
-        treadEffectTime = 0.0f
-      }
-    }
-    lastDeepFloor = null
-    var anyNonDeep = false
-    val r = max((hitSize * 0.6f / Vars.tilesize).toInt(), 0)
-    var solids = 0
-    val total = (r * 2 + 1) * (r * 2 + 1)
-    for (dx in -r..r) {
-      for (dy in -r..r) {
-        val t = Vars.world.tileWorld(x + dx * Vars.tilesize, y + dy * Vars.tilesize)
-        if (t == null || t.solid()) {
-          solids++
-        }
-        if (t != null && t.floor().isDeep) {
-          lastDeepFloor = t.floor()
-        } else {
-          anyNonDeep = true
-        }
 
-        if (type.crushDamage > 0 && !disarmed && (walked || deltaLen() >= 0.01f) && t != null && max(
-            abs(dx), abs(dy)
-          ) <= r //-1
-        ) {
-          if (t.build != null && t.build.team !== team) {
-            t.build.damage(
-              team, type.crushDamage * Time.delta * t.block().crushDamageMultiplier * Vars.state.rules.unitDamage(
-                team
-              )
-            )
-          } else if (t.block().unitMoveBreakable) {
-            ConstructBlock.deconstructFinish(t, t.block(), this)
-          }
-        }
-      }
-    }
-    if (anyNonDeep) {
-      lastDeepFloor = null
-    }
-    lastSlowdown = Mathf.lerp(
-      1.0f, type.crawlSlowdown, Mathf.clamp(solids.toFloat() / total / type.crawlSlowdownFrac)
-    )
-    if (walked || Vars.net.client()) {
-      val len = deltaLen()
-      treadTime += len
-      walked = false
-    }
-  }
-
-  fun drawTank() {
-    type.apply {
-      applyColor(this@Entity)
-      Draw.rect(treadRegion, this@Entity.x, this@Entity.y, this@Entity.rotation - 90)
-      if (treadRegion.found()) {
-        val frame = (this@Entity.treadTime()).toInt() % treadFrames
-        for (i in treadRects.indices) {
-          val region = treadRegions[i][frame]
-          val treadRect = treadRects[i]
-          val xOffset = -(treadRect.x + treadRect.width / 2f)
-          val yOffset = -(treadRect.y + treadRect.height / 2f)
-
-          for (side in Mathf.signs) {
-            Tmp.v1.set(xOffset * side, yOffset).rotate(this@Entity.rotation - 90)
-            Draw.rect(
-              region, this@Entity.x + Tmp.v1.x / 4f, this@Entity.y + Tmp.v1.y / 4f, treadRect.width / 4f, region.height * region.scale / 4f, this@Entity.rotation - 90
-            )
-          }
-        }
-      }
-    }
-  }
 
   fun updateLegs() {
     if (Mathf.dst(deltaX(), deltaY()) > 0.001f) {
@@ -300,7 +203,7 @@ open class Entity : UnitEntity(), Legsc, Tankc {
     moveOffset = curMoveOffset.lerpDelta(moveOffset, 0.1f)
     lastDeepFloor = null
     var deeps = 0
-    for (i in 0..<legs.size) {
+    for(i in 0..<legs.size) {
       val dstRot = legAngle(i)
       val baseOffset = legOffset(Tmp.v5, i).add(x, y)
       val l: Leg = legs[i]!!
@@ -377,13 +280,13 @@ open class Entity : UnitEntity(), Legsc, Tankc {
       val invDrown = 1f - drownTime
 
       if (footRegion.found()) {
-        for (leg in legs) {
+        for(leg in legs) {
           leg!!
           Drawf.shadow(leg.base.x, leg.base.y, ssize, invDrown)
         }
       }
       //腿先画在前面
-      for (j in legs.indices.reversed()) {
+      for(j in legs.indices.reversed()) {
         val i = (if (j % 2 == 0) j / 2 else legs.size - 1 - j / 2)
         val leg = legs[i]!!
         val flip = i >= legs.size / 2f
@@ -432,7 +335,7 @@ open class Entity : UnitEntity(), Legsc, Tankc {
       }
       //base joints are drawn after everything else
       if (baseJointRegion.found()) {
-        for (j in legs.indices.reversed()) {
+        for(j in legs.indices.reversed()) {
           //TODO does the index / draw order really matter?
           val position: Vec2 = legOffset(
             IceUnitType.legOffsetIce, (if (j % 2 == 0) j / 2 else legs.size - 1 - j / 2)
@@ -449,23 +352,17 @@ open class Entity : UnitEntity(), Legsc, Tankc {
     }
   }
 
-  @Transient
-  var baseRotation: Float = 0f
+  @Transient var baseRotation: Float = 0f
 
-  @Transient
-  var curMoveOffset: Vec2 = Vec2()
+  @Transient var curMoveOffset: Vec2 = Vec2()
 
-  @Transient
-  var legs = arrayOf<Leg?>()
+  @Transient var legs = arrayOf<Leg?>()
 
-  @Transient
-  var moveSpace: Float = 0f
+  @Transient var moveSpace: Float = 0f
 
-  @Transient
-  var totalLength: Float = 0f
+  @Transient var totalLength: Float = 0f
 
-  @Transient
-  var lastDeepFloor: Floor? = null
+  @Transient var lastDeepFloor: Floor? = null
   override fun legAngle(index: Int): Float {
     if (type.legStraightness > 0) {
       return Mathf.slerp(
@@ -495,8 +392,6 @@ open class Entity : UnitEntity(), Legsc, Tankc {
   override fun moveSpace(): Float = moveSpace
   override fun totalLength(): Float = totalLength
   override fun legs(): Array<out Leg?> = legs
-  override fun walked() = walked
-  override fun treadTime() = treadTime
   override fun lastDeepFloor(): Floor? = lastDeepFloor
   override fun baseRotation(baseRotation: Float) {
     this.baseRotation = baseRotation
@@ -510,9 +405,6 @@ open class Entity : UnitEntity(), Legsc, Tankc {
     this.lastDeepFloor = lastDeepFloor
   }
 
-  override fun treadTime(treadTime: Float) {
-    this.treadTime = treadTime
-  }
 
   override fun legs(legs: Array<Leg?>) {
     this.legs = legs
@@ -532,7 +424,7 @@ open class Entity : UnitEntity(), Legsc, Tankc {
     if (type.lockLegBase) {
       baseRotation = rotation
     }
-    for (i in legs.indices) {
+    for(i in legs.indices) {
       val l = Leg()
       val dstRot = legAngle(i)
       val baseOffset = legOffset(Tmp.v5, i).add(x, y)

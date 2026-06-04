@@ -13,7 +13,7 @@ class IcePuddle :Puddle() {
     }
   }
 
-  override fun classId() = IceRegister.getId(IcePuddle::class.java)
+  override fun classId() = EntityRegistry.getId(IcePuddle::class.java)
 
   override fun reset() {
     super.reset()

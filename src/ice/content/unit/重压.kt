@@ -9,10 +9,11 @@ import ice.world.content.unit.IceUnitType
 import mindustry.entities.abilities.Ability
 import mindustry.entities.abilities.ArmorPlateAbility
 import mindustry.entities.abilities.ShieldArcAbility
+import mindustry.gen.TankUnit
 import mindustry.gen.Unit
 import mindustry.world.meta.BlockFlag
 
-class 重压 :IceUnitType("heavyPress") {
+class 重压 :IceUnitType("heavyPress", TankUnit::class.java) {
   init {
     localization {
       zh_CN {

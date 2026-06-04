@@ -51,10 +51,10 @@ class 沐风 :IceUnitType("unit_bathedWind") {
     flying = true
     speed = 2.6f
     rotateSpeed = 4f
-    engineOffset = 26.5f
-    engineSize = 6f
+    engineOffset = 22.5f
+    engineSize = 5f
     setEnginesMirror(UnitEngine(-14.5f, -20f, 4f, -112.5f), UnitEngine(14.5f, -20f, 4f, -67.5f))
-    trailLength = 8
+    trailLength = 6
 
     drag = 0.05f
     accel = 0.1f

@@ -33,13 +33,14 @@ import mindustry.game.Team
 import mindustry.gen.Bullet
 import mindustry.gen.Entityc
 import mindustry.gen.Sounds
+import mindustry.gen.TankUnit
 import mindustry.gen.Teamc
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import singularity.world.SglFx
 import kotlin.math.min
 
-class 断业 :IceUnitType("breakUp") {
+class 断业 :IceUnitType("breakUp", TankUnit::class.java) {
   init {
     localization {
       zh_CN {
