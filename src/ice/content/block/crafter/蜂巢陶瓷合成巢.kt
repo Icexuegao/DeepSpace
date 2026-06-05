@@ -34,7 +34,7 @@ class 蜂巢陶瓷合成巢 :NormalCrafter("ceramicKiln") {
       plantColorLight = Color.valueOf("abbaff")
       spread = 2 * 8f - 6f
     }, DrawDefault())
-    requirements(Category.crafting, IItems.铬锭, 50, IItems.铜锭, 20, IItems.锌锭, 30, IItems.黄铜锭, 10)
+    requirements(Category.crafting, IItems.铬锭, 50, IItems.铜锭, 20, IItems.锌锭, 30, IItems.黄铜锭, 10, IItems.石英玻璃， 30)
     newFormula { consumers, producers ->
       consumers.apply {
         time(120f)
