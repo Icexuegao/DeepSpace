@@ -1,9 +1,8 @@
 package ice.world.meta
 
 import mindustry.world.meta.StatCat
-import universecore.world.Load
 
-object IceStats :Load {
+object IceStats {
   val 最大能量势 = getStat("maxEnergyPotential", IceStatCats.neutron) {
     localization {
       zh_CN {

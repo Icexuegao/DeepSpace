@@ -32,10 +32,10 @@ import mindustry.world.meta.BuildVisibility
 import mindustry.world.meta.Env
 import singularity.world.blocks.distribute.ItemNode
 import universecore.ui.bundle.localization
-import universecore.world.Load
 
 @Suppress("unused")
-object Distributions :Load {
+object Distributions {
+  fun load() = Unit
   val 基础传送带 = Conveyor("baseConveyor").apply {
     localization {
       zh_CN {
@@ -222,10 +222,7 @@ object Distributions :Load {
         val ang = e.rotation + Fx.rand.range(8f) + i
         Fx.v.trns(ang, Fx.rand.random(e.fin() * 10f))
         Lines.lineAngle(
-          e.x + Fx.v.x + Fx.rand.range(spread),
-          e.y + Fx.v.y + Fx.rand.range(spread),
-          ang,
-          e.fout() * Fx.rand.random(1f) + 1f
+          e.x + Fx.v.x + Fx.rand.range(spread), e.y + Fx.v.y + Fx.rand.range(spread), ang, e.fout() * Fx.rand.random(1f) + 1f
         )
       }
     }
@@ -274,7 +271,8 @@ object Distributions :Load {
       }
       en {
         localizedName = "Transform Sorter"
-        description = "Intelligently sorts items based on configured type, matching items pass through, non-matching items are diverted to sides. Supports normal/reverse sorting mode toggle"
+        description =
+          "Intelligently sorts items based on configured type, matching items pass through, non-matching items are diverted to sides. Supports normal/reverse sorting mode toggle"
       }
     }
     size = 1
@@ -383,7 +381,8 @@ object Distributions :Load {
       }
       en {
         localizedName = "Growth Conveyor Bridge"
-        description = "Transports items across any terrain or buildings, faster and longer range than armor bridge. Slowly regenerates health"
+        description =
+          "Transports items across any terrain or buildings, faster and longer range than armor bridge. Slowly regenerates health"
       }
     }
   }
@@ -457,7 +456,8 @@ object Distributions :Load {
       }
       en {
         localizedName = "Efficient Transport Node"
-        description = "Advanced conveyor bridge, has faster transport speed and longer connection range, node also has unloader function, can directly extract selected items from blocks in specified direction"
+        description =
+          "Advanced conveyor bridge, has faster transport speed and longer connection range, node also has unloader function, can directly extract selected items from blocks in specified direction"
       }
     }
     requirements(
@@ -570,7 +570,8 @@ object Distributions :Load {
       }
       en {
         localizedName = "Heavy Mass Driver"
-        description = "Ultra long-range item transport, collects items and launches them to another heavy mass driver, huge capacity but slow rotation and launch speed"
+        description =
+          "Ultra long-range item transport, collects items and launches them to another heavy mass driver, huge capacity but slow rotation and launch speed"
       }
     }
     size = 5

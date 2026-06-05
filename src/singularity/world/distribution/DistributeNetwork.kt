@@ -12,7 +12,7 @@ import singularity.world.components.distnet.DistElementBuildComp
 import singularity.world.components.distnet.DistMatrixUnitBuildComp
 import singularity.world.components.distnet.DistNetworkCoreComp
 import universecore.util.Empties
-import universecore.util.colletion.TreeSeq
+import universecore.struct.collection.TreeSeq
 import kotlin.math.min
 
 class DistributeNetwork : FinderContainerBase<DistElementBuildComp?>(), Iterable<DistElementBuildComp?> {

@@ -7,7 +7,7 @@ import ice.graphics.IceColor
 import ice.type.Remains
 import mindustry.content.StatusEffects
 import mindustry.world.meta.Stats
-import universecore.scene.style.DynamicTextureDrawable
+import universecore.ui.effects.DynamicTextureDrawable
 
 class 血腥玛丽 :Remains("remains_bloody_mary") {
   init {

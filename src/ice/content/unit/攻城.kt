@@ -15,9 +15,10 @@ import mindustry.entities.effect.WrapEffect
 import mindustry.entities.part.DrawPart
 import mindustry.entities.part.RegionPart
 import mindustry.gen.Sounds
+import mindustry.gen.TankUnit
 import mindustry.world.meta.BlockFlag
 
-class 攻城 :IceUnitType("siege") {
+class 攻城 :IceUnitType("siege", TankUnit::class.java) {
   init {
     localization {
       zh_CN {

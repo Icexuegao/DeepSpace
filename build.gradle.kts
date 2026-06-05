@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter
 buildscript {
   extra["proUser"] = System.getProperty("user.name")
   extra["sdkRoot"] = System.getenv("ANDROID_HOME")
-  extra["kotlinCompatibility"] = "2.3.20"
+  extra["kotlinCompatibility"] = "2.3.21"
   extra["java"] = 25
   extra["mdtVersion"] = "com.github.Anuken.Mindustry:core:v158.1"
-  extra["modFileName"] ="mod.json"
+  extra["modFileName"] = "mod.json"
   var mdtVersion: String by extra
 
   repositories {
@@ -24,7 +24,6 @@ buildscript {
     classpath(mdtVersion)
     classpath(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
   }
-
 }
 val kotlinCompatibility: String by extra
 val proUser: String by extra
@@ -44,10 +43,12 @@ repositories {
   maven { url = uri("https://jitpack.io") }
   maven { url = uri("https://www.jitpack.io") }
 }
+
 dependencies {
-  implementation("com.github.EB-wilson.UniverseKit:reflection:1.3a")
-  implementation("com.github.EB-wilson.UniverseKit:markdown:1.3a")
-  implementation("com.github.EB-wilson.UniverseKit:graphic:1.3a")
+  implementation("com.github.EB-wilson.UniverseKit:reflection:1.4")
+  implementation("com.github.EB-wilson.UniverseKit:markdown:1.4")
+  implementation("com.github.EB-wilson.UniverseKit:graphic:1.4")
+  implementation("com.github.EB-wilson.UniverseKit:utilities:1.4")
   compileOnly(mdtVersion)
   //compileOnly("com.github.EB-wilson:TooManyItems:2.5.1")
   implementation("org.commonmark:commonmark:0.20.0")
@@ -75,7 +76,7 @@ dependencies {
   //compileOnly("com.github.TinyLake:MindustryX:v2026.02.X27")
   // compileOnly("com.github.Anuken.Arc:flabel:v149")
   //compileOnly(mdtVersion)
-  compileOnly("com.github.EB-wilson:TooManyItems:3.1a")
+  compileOnly("com.github.EB-wilson:TooManyItems:3.2")
   implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinCompatibility")
 }
 

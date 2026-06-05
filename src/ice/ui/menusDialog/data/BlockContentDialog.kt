@@ -8,22 +8,21 @@ import ice.ui.UI
 import ice.world.content.BaseContentSeq
 import mindustry.type.Category
 import mindustry.world.Block
-import universecore.scene.ui.addLine
-import universecore.scene.ui.iTableG
-import universecore.scene.ui.itooltip
-import universecore.scene.ui.layout.ITable
+import universecore.ui.widgets.tables.ITable
+import universecore.ui.widgets.tables.addLine
+import universecore.ui.widgets.tables.iTableG
+import universecore.ui.widgets.tables.itooltip
 
 class BlockContentDialog :ContentDialogBase<Block>("建筑", BaseContentSeq.blocks) {
   override fun listTable(): Table {
     val list= ITable().apply { setRowsize(5) }
     val values = Category.entries.toTypedArray()
     val tables = Array(values.size) { ITable().apply { setRowsize(5) } }
-    contetnArray.select { content ->
-      searchSelect(content)
-    }.forEach { content ->
+
+    contetnArray.select { searchSelect(it) }.forEach { content ->
       values.forEach { category ->
         val child = tables[category.ordinal]
-        if (content.category.name == category.name) {
+        if (content.category == category) {
           child.button(TextureRegionDrawable(content.uiIcon), IStyles.button, 40f) {
             currentContent.update { content }
             UI.showUISoundCloseV(ISounds.数据板块内个体反馈)

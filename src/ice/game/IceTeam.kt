@@ -2,9 +2,9 @@ package ice.game
 
 import ice.graphics.IceColor
 import mindustry.game.Team
-import universecore.world.Load
 
-object IceTeam :Load {
+object IceTeam {
+  fun setup() = Unit
   val 教廷: Team = Team.blue.apply {
     name = "afehs"
     setPalette(IceColor.b4, IceColor.b6, IceColor.b7)

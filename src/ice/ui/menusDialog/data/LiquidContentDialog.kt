@@ -8,10 +8,10 @@ import ice.graphics.IStyles
 import ice.ui.UI
 import ice.world.content.BaseContentSeq
 import mindustry.type.Liquid
-import universecore.scene.ui.addLine
-import universecore.scene.ui.iTableGX
-import universecore.scene.ui.itooltip
-import universecore.scene.ui.layout.ITable
+import universecore.ui.widgets.tables.addLine
+import universecore.ui.widgets.tables.iTableGX
+import universecore.ui.widgets.tables.itooltip
+import universecore.ui.widgets.tables.ITable
 
 class LiquidContentDialog :ContentDialogBase<Liquid>("流体", BaseContentSeq.liquids) {
   override fun getColor(): Color {

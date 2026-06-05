@@ -31,7 +31,7 @@ import mindustry.world.blocks.environment.OreBlock
 import mindustry.world.draw.DrawDefault
 import mindustry.world.draw.DrawRegion
 import singularity.world.blocks.SglBlock
-import universecore.scene.ui.updateE
+import universecore.ui.widgets.tables.updateE
 import universecore.world.draw.DrawMulti
 import kotlin.math.absoluteValue
 import kotlin.math.max

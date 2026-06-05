@@ -5,11 +5,10 @@ import arc.util.pooling.Pools
 import ice.game.EventType
 import mindustry.gen.Bullet
 import mindustry.gen.Groups
-import universecore.world.Load
 
 class IceBullet :Bullet() {
-  companion object :Load {
-    override fun setup() {
+  companion object {
+    fun setup() {
       Pools.get(Bullet::class.java, ::IceBullet)
     }
   }
@@ -17,6 +16,7 @@ class IceBullet :Bullet() {
   override fun reset() {
     super.reset()
   }
+
   override fun add() {
     if (added) return
     index__all = Groups.all.addIndex(this)

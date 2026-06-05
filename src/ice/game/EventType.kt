@@ -5,17 +5,16 @@ import arc.struct.Seq
 import ice.entities.bullet.base.IceBullet
 import ice.ui.menusDialog.AchievementDialog
 import mindustry.game.EventType
-import singularity.core.UpdateTiles
-import universecore.world.Load
+import universecore.core.UpdateTiles
 
-object EventType :Load {
+object EventType {
   class AchievementUnlockEvent(var achievement: AchievementDialog.Achievement)
   class BulletInitEvent(val bullet: IceBullet)
 
   private val contentInitEvent = Seq<() -> Unit>()
   private val clientLoadEvent = Seq<() -> Unit>()
 
-  override fun setup() {
+  fun setup() {
 
     Events.on(EventType.ContentInitEvent::class.java) {
       contentInitEvent.forEach { it() }

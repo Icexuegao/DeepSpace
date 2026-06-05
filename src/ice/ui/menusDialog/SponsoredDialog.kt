@@ -25,8 +25,12 @@ import mindustry.gen.Tex
 import mindustry.graphics.Pal
 import singularity.graphic.SglDrawConst
 import singularity.ui.SglStyles
-import universecore.scene.ui.*
 import universecore.struct.texture.asDrawable
+import universecore.ui.widgets.tables.addCR
+import universecore.ui.widgets.tables.addLine
+import universecore.ui.widgets.tables.iPaneG
+import universecore.ui.widgets.tables.iTable
+import universecore.ui.widgets.tables.itooltip
 
 object SponsoredDialog :BaseMenusDialog(IceStats.捐赠.localized(), IStyles.menusButton_contribute) {
   private val hint = Seq<String>().apply {

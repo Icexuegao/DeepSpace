@@ -19,7 +19,7 @@ import singularity.world.distribution.MatrixGrid
 import singularity.world.distribution.buffers.BaseBuffer
 import singularity.world.distribution.request.DistRequestBase
 import universecore.util.Empties
-import universecore.util.colletion.TreeSeq
+import universecore.struct.collection.TreeSeq
 
 interface DistMatrixUnitBuildComp :DistElementBuildComp {
   // @Annotations.BindField(value = "tempFactories", initialize = "new arc.struct.ObjectMap<>()")

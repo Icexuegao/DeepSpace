@@ -13,8 +13,8 @@ import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.mod.Mods
 import singularity.Singularity
-import singularity.core.UpdatePool
-import universecore.graphic.WindField
+import universecore.core.UpdatePool
+import universecore.graphics.WindField
 import java.util.*
 
 object DeepSpace {
@@ -39,7 +39,7 @@ object DeepSpace {
   const val githubProjReleaseApi = "https://api.github.com/repos/Icexuegao/DeepSpace/releases/latest"
   /** 此mod的QQ群组 */
   const val qqGropsUrl = "https://qm.qq.com/q/3CR3cn2Wc8"
-  const val discord ="https://discord.com/channels/391020510269669376/1510276995181969579"
+  const val discord = "https://discord.com/channels/391020510269669376/1510276995181969579"
   /** 模组数据文件夹 */
   val modDirectory: Fi = Core.settings.getDataDirectory().child(modName).apply { if (!exists()) mkdirs() }
   /** 模组持久全局变量存储文件  */
@@ -54,17 +54,11 @@ object DeepSpace {
       UpdatePool.receive("autosaveGlobal", ::autosave)
     }
 
-    override fun getSettingsFile(): Fi {
-      return globalVars
-    }
+    override fun getSettingsFile() = globalVars
 
-    override fun getBackupFolder(): Fi {
-      return modDirectory.child("global_backups")
-    }
+    override fun getBackupFolder() = modDirectory.child("global_backups")
 
-    override fun getBackupSettingsFile(): Fi {
-      return globalVarsBackup
-    }
+    override fun getBackupSettingsFile() = globalVarsBackup
 
     @Synchronized
     override fun load() {

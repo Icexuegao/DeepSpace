@@ -34,8 +34,8 @@ import mindustry.gen.Unit
 import mindustry.type.UnitType
 import mindustry.ui.Styles
 import mindustry.world.meta.BuildVisibility
-import universecore.scene.listener.DragInputListener
-import universecore.scene.ui.*
+import universecore.ui.listeners.DragInputListener
+import universecore.ui.widgets.tables.*
 import universecore.util.isNumericWithSign
 
 object DeBugFragment {
@@ -88,7 +88,7 @@ object DeBugFragment {
   private fun buildPane(table: Table) {
     val pane = Table()
     pane.setPositions(500f, 100f).setSize(130f, 250f)
-    pane.add(Image(Tex.whiteui).addCaptureListeners(DragInputListener(table))).color(IceColor.b4).height(40f).growX().row()
+    pane.add(Image(Tex.whiteui).addListeners(DragInputListener(table))).color(IceColor.b4).height(40f).growX().row()
     pane.icePane {
       fun button(name: String, icon: Drawable, runnable: Runnable = Runnable {}) {
         it.image(Tex.underlineWhite, IceColor.b3).height(3f).growX().row()

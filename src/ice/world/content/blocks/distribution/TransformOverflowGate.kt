@@ -11,7 +11,7 @@ import arc.util.io.Writes
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 
-import universecore.scene.ui.itooltip
+import universecore.ui.widgets.tables.itooltip
 import universecore.struct.texture.LazyTextureSingleDelegate
 import universecore.world.draw.DrawBuild
 import universecore.world.draw.DrawMulti

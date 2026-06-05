@@ -12,10 +12,11 @@ import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.Effect
 import mindustry.gen.Sounds
+import mindustry.gen.TankUnit
 import mindustry.graphics.Drawf
 import mindustry.graphics.Pal
 
-class 破军 :IceUnitType("breakArmy") {
+class 破军 :IceUnitType("breakArmy", TankUnit::class.java) {
   init {
     localization {
       zh_CN {

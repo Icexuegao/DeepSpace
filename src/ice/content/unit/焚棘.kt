@@ -159,7 +159,7 @@ class 焚棘 :IceUnitType("unit_ardenThorn", ArdenThornUnit::class.java) {
 
   class ArdenThornUnit :Entity() {
     companion object {
-      val regions: TextureRegion by LazyTextureSingleDelegate("ardenThorn-propeller".appendModName())
+      val regions: TextureRegion by LazyTextureSingleDelegate("unit_ardenThorn-propeller".appendModName())
     }
 
     override fun drawBodyRegion(rotation: Float) {

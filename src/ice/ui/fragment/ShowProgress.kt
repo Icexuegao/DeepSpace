@@ -19,7 +19,7 @@ import ice.content.IUnitTypes
 import ice.graphics.Characters
 import ice.graphics.IStyles
 import ice.graphics.IceColor
-import universecore.scene.action.IceActions
+import universecore.ui.actions.IceActions
 import ice.world.meta.IceEffects
 import ice.ui.UI
 import mindustry.Vars

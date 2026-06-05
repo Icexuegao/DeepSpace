@@ -5,7 +5,7 @@ import ice.core.IFiles.appendModName
 import ice.graphics.IceColor
 import ice.type.Remains
 import mindustry.world.meta.Stats
-import universecore.scene.style.DynamicTextureDrawable
+import universecore.ui.effects.DynamicTextureDrawable
 
 class 多余的视线 :Remains("remains_extra_gaze") {
   init {

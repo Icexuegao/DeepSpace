@@ -25,13 +25,13 @@ import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.world.blocks.product.HoveringUnitFactory
 import singularity.world.blocks.product.SglUnitFactory
-import universecore.util.MathTransform
-import universecore.world.Load
+import universecore.math.MathTransform
 import universecore.world.consumers.BaseConsumers
 import universecore.world.producers.ProducePayload
 import universecore.world.producers.ProduceType
 
-object UnitBlocks :Load {
+object UnitBlocks {
+  fun load() = Unit
   val 起源构造器 = SglUnitFactory("cstr_1").apply {
 
     localization {

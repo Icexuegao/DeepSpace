@@ -20,10 +20,11 @@ import singularity.type.CellLiquid
 import singularity.type.ReactLiquid
 import singularity.type.ReactLiquid.Companion.effectWith
 import singularity.world.SglFx
-import universecore.world.Load
 
 @Suppress("unused")
-object ILiquids :Load {
+object ILiquids {
+  fun load() = Unit
+
   init {
     EventType.addContentInitEvent {
       Liquids.water.shownPlanets.add(IPlanets.阿德里)
@@ -81,7 +82,8 @@ object ILiquids :Load {
       }
       en {
         localizedName = "Wastewater"
-        description = "Highly radioactive wastewater discharged from industrial production. Areas contaminated by it are extremely difficult to reuse."
+        description =
+          "Highly radioactive wastewater discharged from industrial production. Areas contaminated by it are extremely difficult to reuse."
       }
     }
     incinerable = false
@@ -182,7 +184,8 @@ object ILiquids :Load {
       }
       en {
         localizedName = "Supercritical Fluid"
-        description = "A special fluid extracted through complex industrial processing, with excellent mass transfer, heat transfer and dissolving properties."
+        description =
+          "A special fluid extracted through complex industrial processing, with excellent mass transfer, heat transfer and dissolving properties."
       }
     }
     incinerable = false
@@ -217,7 +220,8 @@ object ILiquids :Load {
         en {
           localizedName = "Purified Water"
           description = "Water with impurities removed. It is necessary in many strict production processes."
-          details = "To avoid introducing impurities, water used as a solvent must be purified to remove other substances that may affect product quality."
+          details =
+            "To avoid introducing impurities, water used as a solvent must be purified to remove other substances that may affect product quality."
         }
       }
       heatCapacity = 0.45f
@@ -251,7 +255,8 @@ object ILiquids :Load {
       en {
         localizedName = "Algae Mud"
         description = "A colony of algae microorganisms with a wide range of uses."
-        details = "Microorganisms can dehydrate and enter dormancy under extremely harsh conditions, greatly improving their stress resistance."
+        details =
+          "Microorganisms can dehydrate and enter dormancy under extremely harsh conditions, greatly improving their stress resistance."
       }
     }
     heatCapacity = 0.4f
@@ -356,7 +361,8 @@ object ILiquids :Load {
       en {
         localizedName = "Mixed Ore Solution"
         description = "A salt solution containing various mineral ions. Electrolysis can yield various metal products."
-        details = "In general, metallic minerals in the natural crust tend to be enriched to some degree, and associated mineral groups usually do not contain too many metal types. This rule, however, seems not to apply near the upper asthenosphere. Magma flows mix all kinds of minerals together, so ores mined near there can contain almost anything."
+        details =
+          "In general, metallic minerals in the natural crust tend to be enriched to some degree, and associated mineral groups usually do not contain too many metal types. This rule, however, seems not to apply near the upper asthenosphere. Magma flows mix all kinds of minerals together, so ores mined near there can contain almost anything."
       }
     }
     heatCapacity = 0.6f
@@ -399,8 +405,10 @@ object ILiquids :Load {
         }
         en {
           localizedName = "FEX Fluid"
-          description = "The raw form of FEX after impurities are separated out. It is a semifluid that must crystallize into high-purity crystals to meet industrial requirements."
-          details = "The faster it flows, the slower it flows... Its flow speed determines its viscosity, and it enriches and weakly crystallizes on any dense medium it contacts."
+          description =
+            "The raw form of FEX after impurities are separated out. It is a semifluid that must crystallize into high-purity crystals to meet industrial requirements."
+          details =
+            "The faster it flows, the slower it flows... Its flow speed determines its viscosity, and it enriches and weakly crystallizes on any dense medium it contacts."
         }
       }
       heatCapacity = 1f
@@ -434,7 +442,8 @@ object ILiquids :Load {
         }
         en {
           localizedName = "Phased FEX Fluid"
-          description = "Phase-shifted FEX fluid with altered physical properties. Its surface tension fluctuates violently on its own and resonates with media it contacts, making it an excellent fluid energy carrier."
+          description =
+            "Phase-shifted FEX fluid with altered physical properties. Its surface tension fluctuates violently on its own and resonates with media it contacts, making it an excellent fluid energy carrier."
           details = "Do not approach tanks or reservoirs storing phased FEX without resonance protection."
         }
       }
@@ -486,7 +495,8 @@ object ILiquids :Load {
       }
       en {
         localizedName = "Carbon Dioxide"
-        description = "A greenhouse gas commonly present in the atmosphere. In industry, carbon dioxide is often used as a refrigerant and inert shielding gas."
+        description =
+          "A greenhouse gas commonly present in the atmosphere. In industry, carbon dioxide is often used as a refrigerant and inert shielding gas."
       }
     }
     gas = true
@@ -555,8 +565,10 @@ object ILiquids :Load {
       }
       en {
         localizedName = "Helium"
-        description = "A relatively common group 0 inert gas, often used as an industrial shielding gas or produced as fusion fuel through neutron bombardment."
-        details = "Helium is generally abundant in planetary rock layers. Because its atomic mass is too light, it is difficult for large amounts to remain on the surface of planets with atmospheres."
+        description =
+          "A relatively common group 0 inert gas, often used as an industrial shielding gas or produced as fusion fuel through neutron bombardment."
+        details =
+          "Helium is generally abundant in planetary rock layers. Because its atomic mass is too light, it is difficult for large amounts to remain on the surface of planets with atmospheres."
       }
     }
     gas = true
@@ -574,7 +586,8 @@ object ILiquids :Load {
       }
       en {
         localizedName = "Chlorine"
-        description = "A biologically toxic gas. Water systems often contain a certain amount of chlorine and chloride ions, making it very common in industry."
+        description =
+          "A biologically toxic gas. Water systems often contain a certain amount of chlorine and chloride ions, making it very common in industry."
       }
     }
     gas = true

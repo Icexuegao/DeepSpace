@@ -16,7 +16,7 @@ import mindustry.world.draw.DrawRegion
 import mindustry.world.meta.BlockGroup
 import mindustry.world.meta.Stat
 import singularity.world.blocks.SglBlock
-import universecore.scene.ui.ItemSelection
+import universecore.ui.widgets.tables.ItemSelection
 import universecore.struct.texture.LazyTextureSingleDelegate
 import universecore.world.draw.DrawBuild
 import universecore.world.draw.DrawMulti

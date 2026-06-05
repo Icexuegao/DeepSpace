@@ -1,10 +1,10 @@
 package ice.content.block
 
 import ice.content.block.logic.*
-import universecore.world.Load
 
 @Suppress("unused")
-object LogicBLocks :Load {
+object LogicBLocks {
+  fun load() = Unit
   val 信息板 = 信息板()
   val 开关 = 开关()
   val 微型处理器 = 微型处理器()

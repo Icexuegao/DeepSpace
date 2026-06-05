@@ -5,9 +5,10 @@ import ice.entities.bullet.base.BasicBulletType
 
 import ice.world.content.unit.IceUnitType
 import ice.world.meta.IceEffects
+import mindustry.gen.TankUnit
 import mindustry.graphics.Pal
 
-class 突刺 :IceUnitType("barbProtrusion") {
+class 突刺 :IceUnitType("barbProtrusion", TankUnit::class.java) {
   init {
     localization {
       zh_CN {

@@ -13,16 +13,15 @@ import arc.util.Log
 import ice.Ice
 import universecore.util.mods.ModGetter
 import universecore.util.mods.ModInfo
-import universecore.world.Load
 
-object IFiles :Load {
+object IFiles {
   private val rootDirectory = HashMap<String, Fi>()
   private val musics = HashMap<String, Fi>()
   private val sounds = HashMap<String, Fi>()
   private val shaders = HashMap<String, Fi>()
   private var initializer = false
   val modWithClass: ModInfo by lazy { ModGetter.getModWithClass(Ice::class.java)!! }
-  override fun setup() {
+  fun setup() {
     if (initializer) return
     initializer = true
     modWithClass.file.list().forEach {

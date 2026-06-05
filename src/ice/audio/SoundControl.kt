@@ -10,14 +10,18 @@ import ice.core.SettingValue
 import ice.ui.MenusDialog
 import mindustry.Vars
 import mindustry.audio.SoundControl
+import mindustry.game.EventType.*
 import mindustry.gen.Musics
-import universecore.world.Load
-import kotlin.math.log10
+import universecore.util.EventRemover
 
-object SoundControl : SoundControl(), Load {
-
-  init {
-    reload()
+class IceSoundControl :SoundControl() {
+  companion object {
+    fun setup() {
+      EventRemover.remove<SoundControl, ClientLoadEvent>()
+      EventRemover.remove<SoundControl, WaveEvent>()
+      EventRemover.remove<SoundControl, ResetEvent>()
+      Vars.control.sound = IceSoundControl()
+    }
   }
 
   override fun reload() {
@@ -34,21 +38,6 @@ object SoundControl : SoundControl(), Load {
     } else {
       playOnce(ambientMusic.random(lastRandomPlayed))
     }
-  }
-
-  override fun isDark(): Boolean {
-    if (Vars.player.team().data().hasCore() && Vars.player.team().data().core().healthf() < 0.85f) {
-      //core damaged -> dark
-      return true
-    }
-
-    //it may be dark based on wave
-    if (Mathf.chance(((log10(((Vars.state.wave - 17f) / 19f).toDouble()) + 1).toFloat() / 4f).toDouble())) {
-      return true
-    }
-
-    //dark based on enemies
-    return Mathf.chance((Vars.state.enemies / 70f + 0.1f).toDouble())
   }
 
   override fun update() {
@@ -144,7 +133,7 @@ object SoundControl : SoundControl(), Load {
       //开始在新曲目中演奏
       current = music
       current.isLooping = true
-      current.setVolume(0f.also {fade = it})
+      current.setVolume(0f.also { fade = it })
       current.play()
       silenced = false
     } else if (current === music) {

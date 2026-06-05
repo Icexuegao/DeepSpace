@@ -16,7 +16,6 @@ import arc.util.Strings
 import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.core.SettingValue
-import universecore.struct.AttachedProperty
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.game.Team
@@ -33,6 +32,7 @@ import mindustry.world.modules.ItemModule
 import mindustry.world.modules.LiquidModule
 import singularity.world.modules.SglLiquidModule
 import universecore.components.blockcomp.*
+import universecore.struct.AttachedProperty
 import universecore.world.blocks.chains.ChainsContainer
 import universecore.world.blocks.modules.BaseConsumeModule
 import universecore.world.blocks.modules.BaseProductModule
@@ -53,7 +53,7 @@ open class SpliceCrafter(name: String) :NormalCrafter(name), SpliceBlockComp {
 
   override var maxChainsWidth: Int = 10
   override var maxChainsHeight: Int = 10
-  var structUpdated: Cons<SpliceCrafterBuild?>? = null
+  var structUpdated: Cons<SpliceCrafterBuild>? = null
   override var interCorner: Boolean = false
   override var negativeSplice: Boolean = false
   var tempItemCapacity: Int = 0

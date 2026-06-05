@@ -20,7 +20,7 @@ import mindustry.world.blocks.storage.StorageBlock.StorageBuild
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
 import singularity.world.blocks.SglBlock
-import universecore.scene.ui.ItemSelection
+import universecore.ui.widgets.tables.ItemSelection
 import universecore.struct.texture.LazyTextureSingleDelegate
 import kotlin.math.min
 

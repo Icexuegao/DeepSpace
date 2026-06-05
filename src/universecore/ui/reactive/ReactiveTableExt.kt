@@ -3,7 +3,7 @@ package universecore.ui.reactive
 import arc.func.Cons
 import arc.scene.ui.layout.Cell
 import arc.scene.ui.layout.Table
-import universecore.scene.ui.layout.ITable
+import universecore.ui.widgets.tables.ITable
 
 fun Table.react(rs1: ReactiveState<*>, cons: Cons<ITable>): Cell<ITable> {
   return react(arrayOf(rs1), cons)

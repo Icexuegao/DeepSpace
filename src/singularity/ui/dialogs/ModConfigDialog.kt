@@ -26,7 +26,7 @@ import mindustry.graphics.Pal
 import mindustry.ui.Fonts
 import mindustry.ui.Styles
 import singularity.ui.dialogs.layout.ConfigLayout
-import universecore.scene.ui.icePane
+import universecore.ui.widgets.tables.icePane
 import universecore.util.Empties
 
 class ModConfigDialog :Table() {

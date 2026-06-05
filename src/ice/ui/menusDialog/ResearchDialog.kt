@@ -4,7 +4,7 @@ import arc.scene.event.Touchable
 import arc.scene.ui.layout.Stack
 import arc.scene.ui.layout.Table
 import ice.graphics.IStyles
-import universecore.scene.ui.iTableG
+import universecore.ui.widgets.tables.iTableG
 import ice.ui.dialog.BaseMenusDialog
 import ice.world.meta.IceStats
 import singularity.ui.dialogs.SglTechTreeDialog

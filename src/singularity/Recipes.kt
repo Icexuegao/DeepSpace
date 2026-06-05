@@ -11,9 +11,6 @@ import mindustry.world.blocks.environment.Floor
 import mindustry.world.meta.StatUnit
 import singularity.recipes.EnergyMarker
 import singularity.recipes.NormalCrafterParser
-import universecore.world.consumers.cons.ConsumeEnergy
-import universecore.world.consumers.cons.ConsumeFloor
-
 import singularity.world.meta.SglStatUnit
 import singularity.world.products.ProduceEnergy
 import tmi.RecipeEntry
@@ -22,14 +19,16 @@ import tmi.recipe.Recipe
 import tmi.recipe.RecipeItemGroup
 import tmi.recipe.RecipeItemStack
 import tmi.recipe.types.PowerMark
-import universecore.world.consumers.*
+import universecore.world.consumers.ConsumeType
+import universecore.world.consumers.cons.ConsumeEnergy
+import universecore.world.consumers.cons.ConsumeFloor
+import universecore.world.consumers.cons.ConsumePayload
+import universecore.world.consumers.cons.ConsumePower
 import universecore.world.consumers.cons.item.ConsumeItemBase
 import universecore.world.consumers.cons.item.ConsumeItemCond
 import universecore.world.consumers.cons.liquid.ConsumeLiquidBase
 import universecore.world.consumers.cons.liquid.ConsumeLiquidCond
 import universecore.world.consumers.cons.liquid.ConsumeLiquids
-import universecore.world.consumers.cons.ConsumePayload
-import universecore.world.consumers.cons.ConsumePower
 import universecore.world.producers.*
 
 class Recipes : RecipeEntry {
@@ -129,7 +128,7 @@ class Recipes : RecipeEntry {
     NormalCrafterParser.registerConsumeParser(ConsumeType.floor) { b: Block?, r: Recipe?, c: ConsumeFloor<*>?, h: Cons<RecipeItemStack<*>>? ->
       for (entry in c!!.floorEff) {
         val eff = entry.value * b!!.size * b.size
-        h!!.get(r!!.addMaterialInteger(TooManyItems.itemsManager.getItem<Floor?>(entry.key), b.size * b.size).setOptional(c.baseEfficiency > 0).setEff(c.baseEfficiency + eff)/*.setAttribute(c).setAttribute()*/)
+        h!!.get(r!!.addMaterialInteger(TooManyItems.itemsManager.getItem<Floor?>(entry.key), b.size * b.size).setOptional(c.baseEfficiency > 0).setEfficiency(c.baseEfficiency + eff))
       }
     }
   }

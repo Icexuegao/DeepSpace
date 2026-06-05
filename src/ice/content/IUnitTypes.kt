@@ -19,6 +19,7 @@ import ice.content.unit.*
 import ice.content.unit.flying.fire.*
 import ice.content.unit.flying.rain.*
 import ice.content.unit.flying.否决
+import ice.content.unit.flying.沐风
 import ice.content.unit.flying.雨燕
 import ice.content.unit.mech.*
 import ice.content.unit.naval.履行
@@ -52,12 +53,12 @@ import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.CircleGenerator
 import universecore.graphics.lightnings.generator.ShrinkGenerator
 import universecore.struct.AttachedProperty
-import universecore.world.Load
 import kotlin.math.max
 import kotlin.math.min
 
 @Suppress("unused")
-object IUnitTypes :Load {
+object IUnitTypes {
+  fun load() = Unit
   val 星光 = 星光()
   val 火花 = 火花()
   val 战斧 = 战斧()
@@ -115,7 +116,9 @@ object IUnitTypes :Load {
 
   val 幻影 = 幻影()
   val 弧光 = 弧光()
+  val 沐风 = 沐风()
   val 蜂后 = 蜂后()
+
   val 剑戟 = 剑戟()
   val 雨燕 = 雨燕()
   val 否决 = 否决()
@@ -201,29 +204,14 @@ object IUnitTypes :Load {
 
       aiController = Prov {
         object :UnitController {
-          override fun unit(unit: Unit) {
-          }
-
-          override fun unit(): Unit? {
-            return null
-          }
-
-          override fun hit(bullet: Bullet) {
-          }
-
-          override fun isValidController(): Boolean {
-            return true
-          }
-
-          override fun isLogicControllable(): Boolean {
-            return false
-          }
-
-          override fun updateUnit() {}
-
-          override fun removed(unit: Unit) {}
-
-          override fun afterRead(unit: Unit) {}
+          override fun unit(unit: Unit) = kotlin.Unit
+          override fun unit() = null
+          override fun hit(bullet: Bullet) = kotlin.Unit
+          override fun isValidController() = true
+          override fun isLogicControllable() = false
+          override fun updateUnit() = kotlin.Unit
+          override fun removed(unit: Unit) = kotlin.Unit
+          override fun afterRead(unit: Unit) = kotlin.Unit
         }
       }
     }

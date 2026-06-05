@@ -9,10 +9,10 @@ import mindustry.type.weather.ParticleWeather
 import mindustry.type.weather.RainWeather
 import mindustry.world.meta.Attribute
 import universecore.ui.bundle.Localizable
-import universecore.world.Load
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
-object IWeathers :Load {
+object IWeathers {
+  fun load() = Unit
   var 凌雪: ParticleWeather = object :ParticleWeather("tortureSnow"), Localizable {
     override var localizedName: String
       get() = super.localizedName

@@ -13,7 +13,7 @@ import mindustry.world.blocks.liquid.LiquidBlock
 import mindustry.world.modules.LiquidModule
 import singularity.world.blocks.liquid.LiquidUnloader
 import singularity.world.blocks.product.NormalCrafter
-import universecore.scene.ui.ItemSelection
+import universecore.ui.widgets.tables.ItemSelection
 import universecore.ui.bundle.localization
 import universecore.world.producers.ProduceType
 import kotlin.math.min

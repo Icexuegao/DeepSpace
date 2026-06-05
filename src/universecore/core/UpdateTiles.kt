@@ -1,4 +1,4 @@
-package singularity.core
+package universecore.core
 
 import arc.Events
 import arc.struct.ObjectMap
@@ -6,19 +6,18 @@ import mindustry.Vars
 import mindustry.game.EventType
 import mindustry.world.Tile
 import mindustry.world.Tiles
-import universecore.world.Load
 
-object UpdateTiles: Load {
+object UpdateTiles {
   val updaters = ObjectMap<Tile, Updatable>()
 
-  init {
+  fun setup() {
     Events.on(EventType.WorldLoadEvent::class.java) {
       loadAll(Vars.world.tiles)
     }
   }
 
   fun update() {
-    for (updater in updaters) {
+    for(updater in updaters) {
       updater.value.update(updater.key)
     }
   }

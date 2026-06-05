@@ -1,10 +1,10 @@
 package ice.content.block
 
 import ice.content.block.power.*
-import universecore.world.Load
 
 @Suppress("unused")
-object PowerBlocks :Load {
+object PowerBlocks {
+  fun load() = Unit
   val 能量节点 = 能量节点()
   val 大型能量节点 = 大型能量节点()
 

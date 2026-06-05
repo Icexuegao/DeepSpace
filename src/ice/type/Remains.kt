@@ -13,8 +13,8 @@ import ice.graphics.IceColor
 import ice.ui.UI
 import ice.ui.menusDialog.RemainsDialog
 import mindustry.Vars
-import universecore.scene.ui.addLine
-import universecore.scene.ui.itooltip
+import universecore.ui.widgets.tables.addLine
+import universecore.ui.widgets.tables.itooltip
 import universecore.struct.AttachedProperty
 import universecore.struct.ConfigPropertyDelegate
 import universecore.ui.bundle.Localizable

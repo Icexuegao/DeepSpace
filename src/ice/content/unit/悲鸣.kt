@@ -22,10 +22,11 @@ import mindustry.entities.part.RegionPart
 import mindustry.entities.part.ShapePart
 import mindustry.entities.pattern.ShootAlternate
 import mindustry.gen.Sounds
+import mindustry.gen.TankUnit
 import mindustry.graphics.Pal
 import universecore.world.ability.UnitSpawnAbility
 
-class 悲鸣 :IceUnitType("scream") {
+class 悲鸣 :IceUnitType("scream", TankUnit::class.java) {
   init {
     localization {
       zh_CN {

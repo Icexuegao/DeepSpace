@@ -15,7 +15,7 @@ import mindustry.world.draw.DrawDefault
 import singularity.graphic.SglDrawConst
 import singularity.world.blocks.drills.MatrixMinerComponent
 import singularity.world.blocks.drills.MatrixMinerSector.MatrixMinerSectorBuild
-import universecore.util.MathTransform
+import universecore.math.MathTransform
 import universecore.world.draw.DrawMulti
 
 class 量子隧穿仪 :MatrixMinerComponent("matrix_miner_pierce") {

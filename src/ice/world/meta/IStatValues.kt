@@ -28,9 +28,9 @@ import mindustry.world.blocks.defense.turrets.Turret
 import mindustry.world.meta.StatUnit
 import mindustry.world.meta.StatValue
 import mindustry.world.meta.StatValues
-import universecore.scene.element.display.ItemDisplay
-import universecore.scene.element.display.LiquidDisplay
-import universecore.scene.ui.itooltip
+import universecore.ui.widgets.displays.ItemDisplay
+import universecore.ui.widgets.displays.LiquidDisplay
+import universecore.ui.widgets.tables.itooltip
 import kotlin.math.max
 
 object IStatValues {

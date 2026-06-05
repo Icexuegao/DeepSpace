@@ -16,12 +16,13 @@ import mindustry.entities.effect.ParticleEffect
 import mindustry.entities.effect.WaveEffect
 import mindustry.game.EventType
 import mindustry.gen.Bullet
+import mindustry.gen.TankUnit
 import mindustry.graphics.Drawf
-import singularity.core.UpdatePool
+import universecore.core.UpdatePool
 import universecore.graphics.lightnings.LightningContainer
 import universecore.graphics.lightnings.generator.VectorLightningGenerator
 
-class 涤罪 :IceUnitType("unit_clearingGround") {
+class 涤罪 :IceUnitType("unit_clearingGround", TankUnit::class.java) {
   init {
     localization {
       zh_CN {

@@ -4,7 +4,6 @@ import arc.Events
 import arc.struct.Seq
 import arc.util.Log
 import arc.util.io.Reads
-import universecore.world.Load
 import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.ctype.ContentType
@@ -18,9 +17,9 @@ import java.io.DataInput
 import java.io.DataInputStream
 import java.io.DataOutput
 
-object SaveIO : Load {
-  override fun init() {
-    SaveIO.versionArray.set(10, object : Save11() {
+object SaveIO {
+  fun init() {
+    SaveIO.versionArray.set(10, object :Save11() {
       override fun readMap(stream: DataInput?, context: WorldContext?) {
         val width = stream!!.readUnsignedShort()
         val height = stream.readUnsignedShort()
@@ -34,7 +33,7 @@ object SaveIO : Load {
           //read floor and create tiles first
           run {
             var i = 0
-            while (i < width * height) {
+            while(i < width * height) {
               val x = i % width
               val y = i / width
               var floorid = stream.readShort()
@@ -44,7 +43,7 @@ object SaveIO : Load {
 
               context.create(x, y, floorid.toInt(), oreid.toInt(), 0.toShort().toInt())
 
-              for (j in i + 1..<i + 1 + consecutives) {
+              for(j in i + 1..<i + 1 + consecutives) {
                 val newx = j % width
                 val newy = j / width
                 context.create(newx, newy, floorid.toInt(), oreid.toInt(), 0.toShort().toInt())
@@ -57,7 +56,7 @@ object SaveIO : Load {
 
           //read blocks
           var i = 0
-          while (i < width * height) {
+          while(i < width * height) {
             var block = Vars.content.block(stream.readShort().toInt())
             val tile = context.tile(i)
             if (block == null) block = Blocks.air
@@ -111,7 +110,7 @@ object SaveIO : Load {
 
                     val revision = reads.b()
                     tile.build.readAll(reads, revision)
-                  } catch (e: Throwable) {
+                  } catch(e: Throwable) {
                     Log.warn("建筑 $block 读取失败，已跳过")
                   }
                 } else {
@@ -124,7 +123,7 @@ object SaveIO : Load {
             } else if (!hadData) { //never read consecutive blocks if there's data
               val consecutives = stream.readUnsignedByte()
 
-              for (j in i + 1..<i + 1 + consecutives) {
+              for(j in i + 1..<i + 1 + consecutives) {
                 context.tile(j).setBlock(block)
               }
 
@@ -148,14 +147,14 @@ object SaveIO : Load {
 
         for(i in 0..<mapped) {
           val toInt = stream.readByte().toInt()
-          val type = ContentType.all[toInt.coerceIn(0, ContentType.all.size-1)]
+          val type = ContentType.all[toInt.coerceIn(0, ContentType.all.size - 1)]
           val total = stream.readShort()
           map[type.ordinal] = arrayOfNulls(total.toInt())
 
           for(j in 0..<total) {
             val name = stream.readUTF()
             //fallback only for blocks
-            map[type.ordinal.coerceIn(type.ordinal,map.size)]!![j] =
+            map[type.ordinal.coerceIn(type.ordinal, map.size)]!![j] =
               Vars.content.getByName(type, if (type == ContentType.block) fallback.get(name, name) else name)
           }
         }
@@ -179,7 +178,7 @@ object SaveIO : Load {
       }
     })
     SaveIO.versions.clear()
-    for (version in SaveIO.versionArray) {
+    for(version in SaveIO.versionArray) {
       SaveIO.versions.put(version.version, version)
     }
   }

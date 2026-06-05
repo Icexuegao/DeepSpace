@@ -17,7 +17,7 @@ import universecore.world.consumers.cons.item.ConsumeItemBase.Companion.buildIte
 import kotlin.math.floor
 import kotlin.math.min
 
-class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where T : Building, T : ProducerBuildComp {
+class ProduceItems<T>(var items: Array<out ItemStack>) :BaseProduce<T>() where T :Building, T :ProducerBuildComp {
   var showPerSecond: Boolean = true
   var displayLim: Int = 4
 
@@ -38,7 +38,7 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
   override fun buildIcons(table: Table) {
     if (random) {
       val i = Seq<ItemStack>(ItemStack::class.java)
-      for (stack in items) {
+      for(stack in items) {
         val copy: ItemStack = stack.copy()
         copy.amount = 1
         i.add(copy)
@@ -50,15 +50,16 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
   override fun merge(other: BaseProduce<T>) {
     if (other is ProduceItems<*>) {
       TMP.clear()
-      for (stack in items) {
+      for(stack in items) {
         TMP.put(stack.item, stack)
       }
 
-      for (stack in other.items) {
-        TMP.get(stack.item) {ItemStack(stack.item, 0)}!!.amount += stack.amount
+      for(stack in other.items) {
+        TMP.get(stack.item) { ItemStack(stack.item, 0) }!!.amount += stack.amount
       }
 
-      items = TMP.values().toSeq().sort(Comparator {a: ItemStack?, b: ItemStack? -> a!!.item.id - b!!.item.id}).toArray(ItemStack::class.java)
+      items =
+        TMP.values().toSeq().sort(Comparator { a: ItemStack?, b: ItemStack? -> a!!.item.id - b!!.item.id }).toArray(ItemStack::class.java)
       return
     }
     throw IllegalArgumentException("only merge production with same type")
@@ -67,23 +68,23 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
   override fun produce(entity: T) {
     val f = multiple(entity)
     if (!random) {
-      for (stack in items) {
+      for(stack in items) {
         var amount = stack.amount * (floor(f.toDouble()).toInt()) + Mathf.num(Math.random() < f % 1)
         amount = min(amount, entity.block.itemCapacity - entity.items.get(stack.item))
-        for (i in 0..<amount) {
+        for(i in 0..<amount) {
           entity.handleItem(entity, stack.item)
         }
       }
     } else {
       var sum = 0
-      for (stack in items) {
+      for(stack in items) {
         sum += stack.amount
       }
       val i = Mathf.random(sum)
       var count = 0
       var item: Item? = null
 
-      for (stack in items) {
+      for(stack in items) {
         if (i >= count && i < count + stack.amount) {
           item = stack.item
           break
@@ -93,7 +94,7 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
       if (item != null) {
         var amount = (floor(f.toDouble()) + Mathf.num(Math.random() < f % 1)).toInt()
         amount = min(amount, entity.block.itemCapacity - entity.items.get(item))
-        for (l in 0..<amount) {
+        for(l in 0..<amount) {
           entity.handleItem(entity, item)
         }
       }
@@ -104,33 +105,37 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
   }
 
   override fun dump(entity: T) {
-    for (stack in items) {
+    for(stack in items) {
       if (entity.items.get(stack.item) > 0) entity.dump(stack.item)
     }
   }
 
   override fun display(stats: Stats) {
-    stats.add(Stat.output) {table ->
+    stats.add(Stat.output) { table ->
       table.row()
-      table.table {t ->
+      table.table { t ->
         t.defaults().left().fill().padLeft(6f)
         t.add("${IceStats.物品.localized()}:").left()
         if (!random) {
 
-          for (stack in items) {
-            t.add(if (showPerSecond) StatValues.displayItem(stack.item, stack.amount, parent!!.cons!!.craftTime, true) else StatValues.displayItem(stack.item, stack.amount, true))
+          for(stack in items) {
+            t.add(
+              if (showPerSecond) StatValues.displayItem(
+                stack.item, stack.amount, parent!!.cons!!.craftTime, true
+              ) else StatValues.displayItem(stack.item, stack.amount, true)
+            )
           }
         } else {
           val total = intArrayOf(0)
           val n = intArrayOf(items.size, items.size)
-          t.table {item: Table? ->
-            for (stack in items) {
+          t.table { item: Table? ->
+            for(stack in items) {
               item!!.add(StatValues.displayItem(stack.item, 0, true))
               total[0] += stack.amount
               if (--n[0] > 0) item.add("/")
             }
             item!!.row()
-            for (stack in items) {
+            for(stack in items) {
               item.add("[gray]" + ((stack.amount.toFloat()) / (total[0].toFloat()) * 100).toInt() + "%")
               if (--n[1] > 0) item.add()
             }
@@ -143,7 +148,7 @@ class ProduceItems<T>(var items: Array<out ItemStack>) : BaseProduce<T>() where 
   override fun valid(entity: T): Boolean {
     if (entity.items == null) return false
     var res = false
-    for (stack in items) {
+    for(stack in items) {
       if (entity.items.get(stack.item) + stack.amount * multiple(entity) > entity.block.itemCapacity) {
         if (blockWhenFull) return false
       } else res = true

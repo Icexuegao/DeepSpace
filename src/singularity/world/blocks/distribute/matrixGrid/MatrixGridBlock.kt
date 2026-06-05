@@ -41,7 +41,7 @@ import universecore.UncCore
 import universecore.components.blockcomp.SecondableConfigBuildComp
 import universecore.util.DataPackable
 import universecore.util.NumberStrify
-import universecore.util.colletion.TreeSeq
+import universecore.struct.collection.TreeSeq
 
 open class MatrixGridBlock(name: String) : DistNetBlock(name), DistMatrixUnitComp {
   override var bufferCapacity: Int = 256

@@ -8,7 +8,7 @@ import mindustry.world.modules.BlockModule
 import singularity.world.components.distnet.DistElementBuildComp
 import singularity.world.components.distnet.DistNetworkCoreComp
 import singularity.world.distribution.request.DistRequestBase
-import universecore.util.colletion.TreeSeq
+import universecore.struct.collection.TreeSeq
 import java.util.function.Function
 
 class DistCoreModule(entity: DistElementBuildComp) : BlockModule() {

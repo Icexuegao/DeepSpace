@@ -4,7 +4,7 @@ import arc.func.Prov
 import arc.math.Mathf
 import arc.util.io.Reads
 import arc.util.io.Writes
-import ice.entities.IceRegister
+import ice.entities.EntityRegistry
 import mindustry.Vars
 import mindustry.ai.ControlPathfinder
 import mindustry.ai.Pathfinder
@@ -153,7 +153,7 @@ open class AirSeaAmphibiousUnit(name: String) : SglUnitType<AirSeaAmphibiousUnit
       return !this.disarmed && (!this.type.canBoost || elevation < 0.09f || elevation > 0.9f)
     }
 
-    override fun classId() = IceRegister.getId(this::class.java)
+    override fun classId() = EntityRegistry.getId(this::class.java)
 
     override fun collides(other: Hitboxc?): Boolean {
       for (ability in abilities) {

@@ -20,10 +20,15 @@ import ice.world.content.blocks.environment.Floor
 import mindustry.ctype.UnlockableContent
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatValue
-import universecore.scene.ui.*
-import universecore.scene.ui.layout.ITable
+import universecore.ui.widgets.tables.ITable
 import universecore.ui.reactive.ReactiveState
 import universecore.ui.reactive.react
+import universecore.ui.widgets.tables.addCR
+import universecore.ui.widgets.tables.iPaneG
+import universecore.ui.widgets.tables.iTableG
+import universecore.ui.widgets.tables.iTableGX
+import universecore.ui.widgets.tables.icePane
+import universecore.ui.widgets.tables.itooltip
 
 abstract class ContentDialogBase<T :UnlockableContent>(val cName: String, val contetnArray: Seq<T>) {
   companion object {

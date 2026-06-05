@@ -8,9 +8,8 @@ import mindustry.Vars
 import mindustry.game.Schematic
 import mindustry.world.blocks.storage.CoreBlock
 import mindustry.world.meta.BuildVisibility
-import universecore.world.Load
 
-object Schematics :Load {
+object Schematics {
   val allSch = Seq<Schematic>()
   var 虔信方垒 = createSchematic(3, 3) { tiles, strings ->
     strings.put("name", "虔信方垒")
@@ -25,7 +24,7 @@ object Schematics :Load {
     tiles.add(Schematic.Stile(EffectBlocks.永耀天枢, 2, 2, EffectBlocks.永耀天枢.lastConfig, 0))
   }
 
-  override fun init() {
+  fun init() {
     allSch.forEach { schematic ->
       schematic.mod = DeepSpace.mod
       Vars.schematics.all().add(schematic)

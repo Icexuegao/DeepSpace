@@ -14,7 +14,7 @@ import arc.util.Tmp
 import ice.content.IItems
 import ice.core.IFiles
 import ice.core.IFiles.appendModName
-import ice.entities.IceRegister
+import ice.entities.EntityRegistry
 import ice.graphics.IceColor
 import ice.world.content.unit.entity.base.Entity
 import mindustry.Vars
@@ -39,8 +39,8 @@ import kotlin.math.min
 import kotlin.Unit as KUnit
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
-open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, applys: IceUnitType.() -> KUnit = {}) :UnitType(name),
-  Localizable {
+open class IceUnitType(name: String, clazz: Class<out Unit> = Entity::class.java, applys: IceUnitType.() -> KUnit = {}) :UnitType(name),
+ UnitConfigurator, Localizable {
   companion object {
     var imineLaserRegion: TextureRegion by LazyTextureSingleDelegate("minelaser".appendModName())
     var imineLaserEndRegion: TextureRegion by LazyTextureSingleDelegate("minelaser-end".appendModName())
@@ -55,7 +55,7 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
   private var requirements: Array<ItemStack> = arrayOf(ItemStack(IItems.低碳钢, 100))
 
   init {
-    constructor = IceRegister.getPutUnits(clazz)
+    constructor = EntityRegistry.getPutUnits(clazz)
     applys(this)
 
   }
@@ -404,8 +404,8 @@ open class IceUnitType(name: String, clazz: Class<*> = Entity::class.java, apply
       unit.trns(legOffsetIce.x, legOffsetIce.y)
     }
 
-    if (treadRegion.found() && unit is Entity) {
-      unit.drawTank()
+    if (unit is Tankc) {
+      drawTank(unit)
     }
 
     if (unit is Legsc && unit.isAdded) {

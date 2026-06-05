@@ -27,7 +27,7 @@ class 等离子蚀刻厂 :NormalCrafter("integratedFactory") {
     itemCapacity = 20
     newConsume().apply {
       time(160f)
-      items(IItems.单晶硅, 1, IItems.石墨烯, 2, IItems.石英玻璃, 1, IItems.金锭, 1)
+      items(IItems.钴钢, 35, IItems.铬锭, 30, IItems.钍锭, 15, IItems.铱板, 20,IItems.导能回路, 10)
       power(220 / 60f)
     }
     newProduce().apply {

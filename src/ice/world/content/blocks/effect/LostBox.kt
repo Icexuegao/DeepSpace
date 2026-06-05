@@ -10,7 +10,7 @@ import arc.scene.ui.layout.Scl
 import arc.util.Align
 import arc.util.pooling.Pools
 import ice.graphics.IceColor
-import universecore.scene.ui.getIceBaseDialog
+import universecore.ui.widgets.tables.getIceBaseDialog
 import ice.world.content.blocks.abstractBlocks.IceBlock
 import mindustry.Vars
 import mindustry.graphics.Pal

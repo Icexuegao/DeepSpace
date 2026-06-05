@@ -15,7 +15,7 @@ import ice.ui.dialog.BaseMenusDialog
 import ice.ui.menusDialog.data.*
 import ice.world.meta.IceStats
 import mindustry.ctype.UnlockableContent
-import universecore.scene.ui.iTableGX
+import universecore.ui.widgets.tables.iTableGX
 import universecore.ui.reactive.ReactiveState
 import universecore.ui.reactive.react
 

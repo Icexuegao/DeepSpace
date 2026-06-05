@@ -15,7 +15,7 @@ import mindustry.world.blocks.storage.CoreBlock
 import singularity.Sgl
 import singularity.world.blocks.distribute.TargetConfigure
 import singularity.world.components.distnet.DistMatrixUnitBuildComp
-import universecore.util.colletion.TreeSeq
+import universecore.struct.collection.TreeSeq
 
 class MatrixGrid(val owner: DistMatrixUnitBuildComp) {
   companion object {

@@ -20,7 +20,7 @@ class 弧光 :IceUnitType("unit_arcLight") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "弧光"
+        localizedName = "弧光"
         description = "中型空中支援单位.发射激光与湍能弹攻击附近敌人,会自动修复受损建筑,并对附近的友军提供迅疗效果"
       }
     }
@@ -91,7 +91,7 @@ class 弧光 :IceUnitType("unit_arcLight") {
           colorFrom = Color.valueOf("73FFAE")
           colorTo = Color.valueOf("73FFAE90")
         })
-        despawnEffect = Fx.none
+        despawnEffect =Fx.hitLaser
       }
     }
 

@@ -2,11 +2,10 @@ package universecore.ui.bundle
 
 import arc.Core
 import mindustry.ctype.UnlockableContent
-import universecore.world.Load
 
 /**本地化管理器 - 统一管理所有本地化 应当在 ModContentLoadEvent之后 init之前加载
  * @see mindustry.game.EventType.ModContentLoadEvent */
-object LocalizationManager :Load {
+object LocalizationManager {
   private val registry = mutableMapOf<Any, LocalizationMap>()
   private var loaded = false
   private val parserMap = HashMap<Class<*>, (Any, LocalizationData) -> Unit>()
@@ -24,7 +23,7 @@ object LocalizationManager :Load {
     }
   }
 
-  override fun load() {
+  fun load() {
     if (loaded) return
     registry.forEach(::parsing)
     loaded = true

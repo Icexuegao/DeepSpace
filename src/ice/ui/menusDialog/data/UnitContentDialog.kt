@@ -7,10 +7,10 @@ import ice.graphics.IStyles
 import ice.ui.UI
 import ice.world.content.BaseContentSeq
 import mindustry.type.UnitType
-import universecore.scene.ui.addLine
-import universecore.scene.ui.iTableG
-import universecore.scene.ui.itooltip
-import universecore.scene.ui.layout.ITable
+import universecore.ui.widgets.tables.addLine
+import universecore.ui.widgets.tables.iTableG
+import universecore.ui.widgets.tables.itooltip
+import universecore.ui.widgets.tables.ITable
 
 class UnitContentDialog :ContentDialogBase<UnitType>("单位", BaseContentSeq.units) {
   override fun listTable(): Table {
