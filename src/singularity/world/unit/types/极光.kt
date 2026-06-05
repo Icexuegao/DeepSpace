@@ -13,7 +13,6 @@ import arc.util.Time
 import arc.util.Tmp
 import arc.util.pooling.Pools
 import ice.DeepSpace
-import universecore.ui.bundle.localization
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.entities.Damage
@@ -43,15 +42,21 @@ import singularity.world.unit.AirSeaAmphibiousUnit
 import singularity.world.unit.RelatedWeapon
 import singularity.world.unit.SglWeapon
 import singularity.world.unit.abilities.MirrorArmorAbility
+import universecore.ui.bundle.localization
 import kotlin.math.max
 import kotlin.math.min
 
-class 极光 : AirSeaAmphibiousUnit("aurora") {
+class 极光 :AirSeaAmphibiousUnit("aurora") {
+  companion object {
+    private val rand = Rand()
+  }
+
   init {
     localization {
       zh_CN {
-        localizedName ="极光"
-        description="搭载光束引擎的战列旗舰,将引擎功率最大程度内化,其装载的两门'光锥'主炮能够贯穿任何强互作用材料之外的装甲,给敌人以毁灭性的打击"
+        localizedName = "极光"
+        description =
+          "搭载光束引擎的战列旗舰,将引擎功率最大程度内化,其装载的两门'光锥'主炮能够贯穿任何强互作用材料之外的装甲,给敌人以毁灭性的打击"
       }
     }
     armor = 10f
@@ -71,36 +76,9 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
     engineOffset = 50f
     engineSize = 16f
 
-    abilities.addAll(object : MirrorArmorAbility() {
-      init {
-        strength = 380f
-        maxShield = 9500f
-        recoverSpeed = 4f
-        cooldown = 6050f
-        minAlbedo = 0.6f
-        maxAlbedo = 0.9f
 
-        shieldArmor = 12f
-      }
-    })
 
-    setEnginesMirror(object : UnitEngine() {
-      init {
-        x = 38f
-        y = -12f
-        radius = 8f
-        rotation = -45f
-      }
-    }, object : UnitEngine() {
-      init {
-        x = 40f
-        y = -54f
-        radius = 10f
-        rotation = -45f
-      }
-    })
-
-    weapons.addAll(object : SglWeapon(DeepSpace.modName + "-aurora_lightcone") {
+    weapons.addAll(object :SglWeapon(DeepSpace.modName + "-aurora_lightcone") {
       init {
         shake = 5f
         shootSound = Sounds.blockExplode1
@@ -120,7 +98,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
 
         layerOffset = 1f
 
-        parts.addAll(object : CustomPart() {
+        parts.addAll(object :CustomPart() {
           init {
             x = 0f
             y = -16f
@@ -144,7 +122,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
               SglDraw.drawDiamond(x + Tmp.v2.x, y + Tmp.v2.y, 9 * p, 7f * p, Tmp.v2.angle())
             }
           }
-        }, object : CustomPart() {
+        }, object :CustomPart() {
           init {
             x = 0f
             y = -16f
@@ -173,7 +151,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
           }
         })
 
-        bullet = object : EmpBulletType() {
+        bullet = object :EmpBulletType() {
           init {
             trailLength = 36
             trailWidth = 2.2f
@@ -201,7 +179,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
             hitEffect = SglFx.lightConeHit
             hitColor = SglDrawConst.matrixNet
 
-            intervalBullet = object : BulletType() {
+            intervalBullet = object :BulletType() {
               init {
                 damage = 132f
                 speed = 8f
@@ -289,7 +267,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
             super.draw(b)
             Draw.color(SglDrawConst.matrixNet)
             Drawf.tri(b.x, b.y, 8f, 18f, b.rotation())
-            for (i in Mathf.signs) {
+            for(i in Mathf.signs) {
               Drawf.tri(b.x, b.y, 8f, 26f, b.rotation() + 156f * i)
             }
           }
@@ -300,7 +278,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
           }
         }
       }
-    }, object : SglWeapon(DeepSpace.modName + "-aurora_turret") {
+    }, object :SglWeapon(DeepSpace.modName + "-aurora_turret") {
       init {
         shake = 4f
         shootSound = Sounds.shootLaser
@@ -315,7 +293,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
         reload = 20f
         shadow = 25f
 
-        bullet = object : LightLaserBulletType() {
+        bullet = object :LightLaserBulletType() {
           init {
             damage = 625f
             empDamage = 96f
@@ -337,7 +315,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
           }
         }
       }
-    }, object : RelatedWeapon(DeepSpace.modName + "-lightedge") {
+    }, object :RelatedWeapon(DeepSpace.modName + "-lightedge") {
       init {
         x = 0f
         y = -22f
@@ -357,9 +335,9 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
 
         shoot.firstShotDelay = 80f
 
-        alternativeShoot = object : ShootPattern() {
+        alternativeShoot = object :ShootPattern() {
           override fun shoot(totalShots: Int, handler: BulletHandler) {
-            for (i in 0..<shots) {
+            for(i in 0..<shots) {
               handler.shoot(0f, 0f, Mathf.random(0f, 360f), firstShotDelay + i * shotDelay)
             }
           }
@@ -370,7 +348,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
         useAlternative = isFlying
         parentizeEffects = true
 
-        parts.addAll(object : HaloPart() {
+        parts.addAll(object :HaloPart() {
           init {
             progress = PartProgress.warmup
             color = SglDrawConst.matrixNet
@@ -384,7 +362,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
             tri = true
             radius = 6f
           }
-        }, object : HaloPart() {
+        }, object :HaloPart() {
           init {
             progress = PartProgress.warmup
             color = SglDrawConst.matrixNet
@@ -399,7 +377,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
             radius = 6f
             shapeRotation = 180f
           }
-        }, object : HaloPart() {
+        }, object :HaloPart() {
           init {
             progress = PartProgress.warmup
             color = SglDrawConst.matrixNet
@@ -412,7 +390,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
             tri = true
             radius = 8f
           }
-        }, object : HaloPart() {
+        }, object :HaloPart() {
           init {
             progress = PartProgress.warmup
             color = SglDrawConst.matrixNet
@@ -426,21 +404,30 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
             radius = 8f
             shapeRotation = 180f
           }
-        }, object : CustomPart() {
+        }, object :CustomPart() {
           init {
             layer = Layer.effect
             progress = PartProgress.warmup
 
             draw = Drawer { x: Float, y: Float, r: Float, p: Float ->
               Draw.color(SglDrawConst.matrixNet)
-              SglDraw.gapTri(x + Angles.trnsx(r + Time.time, 16f, 0f), y + Angles.trnsy(r + Time.time, 16f, 0f), 12 * p, 42f, 12f, r + Time.time)
-              SglDraw.gapTri(x + Angles.trnsx(r + Time.time + 180, 16f, 0f), y + Angles.trnsy(r + Time.time + 180, 16f, 0f), 12 * p, 42f, 12f, r + Time.time + 180)
+              SglDraw.gapTri(
+                x + Angles.trnsx(r + Time.time, 16f, 0f), y + Angles.trnsy(r + Time.time, 16f, 0f), 12 * p, 42f, 12f, r + Time.time
+              )
+              SglDraw.gapTri(
+                x + Angles.trnsx(r + Time.time + 180, 16f, 0f),
+                y + Angles.trnsy(r + Time.time + 180, 16f, 0f),
+                12 * p,
+                42f,
+                12f,
+                r + Time.time + 180
+              )
             }
           }
         })
 
         val s: Weapon = this
-        bullet = object : ContinuousLaserBulletType() {
+        bullet = object :ContinuousLaserBulletType() {
           init {
             damage = 290f
             lifetime = 180f
@@ -484,7 +471,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
               b.rotation(angle)
               b.set(bulletX, bulletY)
 
-              for (mount in owner.mounts) {
+              for(mount in owner.mounts) {
                 mount.reload = mount.weapon.reload
                 if (mount.weapon === s) {
                   mount.recoil = 1f
@@ -501,7 +488,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
             val baseLen = realLength * fout
             val rot = b.rotation()
 
-            for (i in colors.indices) {
+            for(i in colors.indices) {
               Draw.color(Tmp.c1.set(colors[i]).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)))
 
               val colorFin = i / (colors.size - 1).toFloat()
@@ -530,7 +517,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
             Tmp.v1.set(length, 0f).setAngle(b.rotation())
             val dx = Tmp.v1.x
             val dy = Tmp.v1.y
-            for (i in 0..44) {
+            for(i in 0..44) {
               if (i * step * length > realLength) break
 
               val lerp = Mathf.clamp(b.time / (fadeTime * step * i)) * Mathf.sin(Time.time / 2 - i * step * Mathf.pi * 6)
@@ -541,7 +528,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
           }
         }
 
-        alternativeBullet = object : BulletType() {
+        alternativeBullet = object :BulletType() {
           init {
             pierceArmor = true
             hitShake = 6f
@@ -572,7 +559,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
 
             homingDelay = 30f
 
-            fragBullet = object : BulletType() {
+            fragBullet = object :BulletType() {
               init {
                 collides = false
                 absorbable = false
@@ -596,7 +583,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
                 trailRotation = true
                 trailInterval = 15f
 
-                fragBullet = object : LightningBulletType() {
+                fragBullet = object :LightningBulletType() {
                   init {
                     lightningLength = 14
                     lightningLengthRand = 4
@@ -628,11 +615,18 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
             } else if (homingPower > 0.0001f && b.time >= homingDelay) {
               val realAimX = if (b.aimX < 0) b.x else b.aimX
               val realAimY = if (b.aimY < 0) b.y else b.aimY
-              val target = if (b.aimTile != null && b.aimTile.build != null && b.aimTile.build.team !== b.team && collidesGround && !b.hasCollided(b.aimTile.build.id)) {
-                b.aimTile.build
-              } else {
-                Units.closestTarget(b.team, realAimX, realAimY, homingRange, Boolf { e: Unit? -> e != null && e.checkTarget(collidesAir, collidesGround) && !b.hasCollided(e.id) }, Boolf { t: Building? -> t != null && collidesGround && !b.hasCollided(t.id) })
-              }
+              val target =
+                if (b.aimTile != null && b.aimTile.build != null && b.aimTile.build.team !== b.team && collidesGround && !b.hasCollided(b.aimTile.build.id)) {
+                  b.aimTile.build
+                } else {
+                  Units.closestTarget(
+                    b.team,
+                    realAimX,
+                    realAimY,
+                    homingRange,
+                    Boolf { e: Unit? -> e != null && e.checkTarget(collidesAir, collidesGround) && !b.hasCollided(e.id) },
+                    Boolf { t: Building? -> t != null && collidesGround && !b.hasCollided(t.id) })
+                }
 
               if (target != null) {
                 val v = Mathf.lerpDelta(b.vel.len(), speed, 0.08f)
@@ -688,7 +682,7 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
         val step = 1 / 30f
         val rel = (1 - mount.reload / reload) * mount.warmup * (1 - unit.elevation)
         var i = 0.001f
-        while (i <= 1) {
+        while(i <= 1) {
           Draw.alpha(if (rel > i) 1f else Mathf.maxZero(rel - (i - step)) / step)
           Drawf.tri(dx + distX * i, dy + distY * i, 3f, 2.598f, angle)
           i += step
@@ -734,11 +728,37 @@ class 极光 : AirSeaAmphibiousUnit("aurora") {
 
   override fun init() {
     super.init()
-
     omniMovement = true
   }
 
-  companion object {
-    private val rand = Rand()
+  init {
+    abilities.addAll(object :MirrorArmorAbility() {
+      init {
+        strength = 380f
+        maxShield = 9500f
+        recoverSpeed = 4f
+        cooldown = 6050f
+        minAlbedo = 0.6f
+        maxAlbedo = 0.9f
+
+        shieldArmor = 12f
+      }
+    })
+
+    setEnginesMirror(object :UnitEngine() {
+      init {
+        x = 38f
+        y = -12f
+        radius = 8f
+        rotation = -45f
+      }
+    }, object :UnitEngine() {
+      init {
+        x = 40f
+        y = -54f
+        radius = 10f
+        rotation = -45f
+      }
+    })
   }
 }

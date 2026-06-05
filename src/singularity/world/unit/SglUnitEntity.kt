@@ -6,7 +6,6 @@ import arc.util.io.Reads
 import arc.util.io.Writes
 import ice.entities.EntityRegistry
 import ice.graphics.IceColor
-import mindustry.entities.units.UnitController
 import mindustry.gen.Hitboxc
 import mindustry.gen.UnitEntity
 import mindustry.ui.Bar
@@ -42,10 +41,6 @@ class SglUnitEntity : UnitEntity() {
     if (type is SglUnitType<*>) {
       (type as SglUnitType<SglUnitEntity>).write(this, write)
     } else throw RuntimeException("Unit type must be SglUnitType")
-  }
-
-  override fun controller(): UnitController? {
-    return super.controller()
   }
 
   override fun display(table: Table) {

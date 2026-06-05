@@ -22,7 +22,7 @@ class 攻城 :IceUnitType("siege", TankUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "攻城"
+        localizedName = "攻城"
         description = "中型地面突击单位.使用冲击炮越过防御工事轰击敌方建筑.开火时无法移动"
         details = "炮平四海!!!"
       }
@@ -162,7 +162,6 @@ class 攻城 :IceUnitType("siege", TankUnit::class.java) {
           suffix = "-top"
           mirror = true
           under = true
-          x = 0.25f
           layerOffset = -0.0001f
         })
       })

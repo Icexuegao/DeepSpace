@@ -20,7 +20,7 @@ class 破军 :IceUnitType("breakArmy", TankUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "破军"
+        localizedName = "破军"
         description = "中型地面突击单位.发射高爆炮弹攻击敌人"
       }
     }
@@ -37,7 +37,7 @@ class 破军 :IceUnitType("breakArmy", TankUnit::class.java) {
     setWeapon("weapon") {
       x = 0f
       shootY += 8f
-      reload = 50f
+      reload = 150f
       recoil = 2.5f
       mirror = false
       rotate = true
@@ -45,6 +45,7 @@ class 破军 :IceUnitType("breakArmy", TankUnit::class.java) {
       shootSound = Sounds.explosionDull
       shootCone = 2f
       bullet = BombBulletType(50f, 8 * 5f, "missile-large").apply {
+        drag=0f
         makeFire = true
         collidesTiles = true
         collides = true

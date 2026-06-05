@@ -17,8 +17,6 @@ import arc.util.Interval
 import arc.util.Time
 import arc.util.Tmp
 import ice.DeepSpace
-import universecore.struct.AttachedProperty
-import universecore.ui.bundle.localization
 import mindustry.content.Fx
 import mindustry.entities.Units
 import mindustry.entities.bullet.BulletType
@@ -40,7 +38,6 @@ import singularity.graphic.MathRenderer
 import singularity.graphic.SglDraw
 import singularity.graphic.SglDrawConst
 import singularity.ui.UIUtils
-import universecore.math.MathTransform
 import singularity.world.SglFx
 import singularity.world.blocks.turrets.MultiTrailBulletType
 import singularity.world.draw.part.CustomPart
@@ -49,9 +46,12 @@ import singularity.world.unit.SglUnitEntity
 import singularity.world.unit.SglUnitType
 import singularity.world.unit.SglWeapon
 import singularity.world.unit.abilities.MirrorFieldAbility
+import universecore.math.MathTransform
+import universecore.struct.AttachedProperty
+import universecore.ui.bundle.localization
 import kotlin.math.max
 
-class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
+class 辉夜 :SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
   companion object {
     private val rand = Rand()
   }
@@ -79,7 +79,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
 
     engineSize = 0f
 
-    abilities.addAll(object : MirrorFieldAbility() {
+    abilities.addAll(object :MirrorFieldAbility() {
       init {
         strength = 350f
         maxShield = 15800f
@@ -93,16 +93,16 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
 
         nearRadius = 160f
 
-        val a: Func2<Float?, Float?, ShieldShape?> = Func2 { ofx: Float?, ofy: Float? ->
-          object : ShieldShape(6, 0f, 0f, 0f, 48f) {
+        val a: Func2<Float, Float, ShieldShape> = Func2 { ofx: Float?, ofy: Float? ->
+          object :ShieldShape(6, 0f, 0f, 0f, 48f) {
             init {
-              movement = object : ShapeMove() {
+              movement = object :ShapeMove() {
                 init {
                   x = ofx!!
                   y = ofy!!
                   rotateSpeed = 0.35f
 
-                  childMoving = object : ShapeMove() {
+                  childMoving = object :ShapeMove() {
                     init {
                       rotateSpeed = -0.2f
                     }
@@ -113,15 +113,15 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
           }
         }
         val b: Func2<Float?, Float?, ShieldShape?> = Func2 { ofx: Float?, ofy: Float? ->
-          object : ShieldShape(5, 0f, 0f, 0f, 48f) {
+          object :ShieldShape(5, 0f, 0f, 0f, 48f) {
             init {
-              movement = object : ShapeMove() {
+              movement = object :ShapeMove() {
                 init {
                   x = ofx!!
                   y = ofy!!
                   rotateSpeed = -0.25f
 
-                  childMoving = object : ShapeMove() {
+                  childMoving = object :ShapeMove() {
                     init {
                       rotateSpeed = 0.15f
                     }
@@ -133,21 +133,29 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
         }
 
         shapes.addAll(
-          object : ShieldShape(10, 0f, 0f, 0f, 112f) {
+          object :ShieldShape(10, 0f, 0f, 0f, 112f) {
             init {
-              movement = object : ShapeMove() {
+              movement = object :ShapeMove() {
                 init {
                   rotateSpeed = -0.1f
                 }
               }
             }
-          }, a.get(90f, 0f), a.get(-90f, 0f), a.get(0f, 90f), a.get(0f, -90f), b.get(100f, 0f), b.get(-100f, 0f), b.get(0f, 100f), b.get(0f, -100f)
+          },
+          a.get(90f, 0f),
+          a.get(-90f, 0f),
+          a.get(0f, 90f),
+          a.get(0f, -90f),
+          b.get(100f, 0f),
+          b.get(-100f, 0f),
+          b.get(0f, 100f),
+          b.get(0f, -100f)
         )
       }
     })
 
     val laser: Func2<Float?, Float?, Weapon?> = Func2 { dx: Float?, dy: Float? ->
-      object : SglWeapon(DeepSpace.modName + "-kaguya_laser") {
+      object :SglWeapon(DeepSpace.modName + "-kaguya_laser") {
         init {
           this.x = dx!!
           this.y = dy!!
@@ -162,7 +170,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
 
           shake = 3f
 
-          bullet = object : LaserBulletType() {
+          bullet = object :LaserBulletType() {
             init {
               damage = 165f
               lifetime = 20f
@@ -181,7 +189,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
       }
     }
 
-    weapons.addAll(laser.get(19.25f, 16f), laser.get(13.5f, 33.5f), object : SglWeapon(DeepSpace.modName + "-kaguya_cannon") {
+    weapons.addAll(laser.get(19.25f, 16f), laser.get(13.5f, 33.5f), object :SglWeapon(DeepSpace.modName + "-kaguya_cannon") {
       init {
         x = 30.5f
         y = -3.5f
@@ -207,7 +215,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
         shoot.shotDelay = 10f
 
         parts.addAll(
-          object : RegionPart("_shooter") {
+          object :RegionPart("_shooter") {
             init {
               heatColor = SglDrawConst.matrixNet
               heatProgress = PartProgress.heat
@@ -217,7 +225,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
           }, RegionPart("_body")
         )
 
-        bullet = object : MultiTrailBulletType() {
+        bullet = object :MultiTrailBulletType() {
           init {
             speed = 6f
             lifetime = 75f
@@ -259,7 +267,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
           }
         }
       }
-    }, object : PointDefenseWeapon(DeepSpace.modName + "-kaguya_point_laser") {
+    }, object :PointDefenseWeapon(DeepSpace.modName + "-kaguya_point_laser") {
       init {
         x = 30.5f
         y = -3.5f
@@ -272,14 +280,14 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
 
         layerOffset = 0.2f
 
-        bullet = object : BulletType() {
+        bullet = object :BulletType() {
           init {
             damage = 62f
             rangeOverride = 420f
           }
         }
       }
-    }, object : DataWeapon(DeepSpace.modName + "-lightedge") {
+    }, object :DataWeapon(DeepSpace.modName + "-lightedge") {
       init {
         x = 0f
         y = -14f
@@ -303,7 +311,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
 
         val s: Weapon = this
 
-        bullet = object : PointLaserBulletType() {
+        bullet = object :PointLaserBulletType() {
           init {
             damage = 240f
             damageInterval = 5f
@@ -323,7 +331,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
 
             val owner = b.owner
             if (owner is Unit) {
-              for (mount in owner.mounts) {
+              for(mount in owner.mounts) {
                 if (mount.weapon === s) {
                   val bulletX: Float = owner.x + Angles.trnsx(owner.rotation - 90, x + shootX, y + shootY)
                   val bulletY: Float = owner.y + Angles.trnsy(owner.rotation - 90, x + shootX, y + shootY)
@@ -354,14 +362,20 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
               rand.setSeed(b.id.toLong())
               repeat((0..2).count()) {
                 MathRenderer.drawSin(
-                  b.x, b.y, b.aimX, b.aimY, rand.random(4f, 6f) * b.fslope(), rand.random(360f, 720f), rand.random(360f) - Time.time * rand.random(4f, 7f)
+                  b.x,
+                  b.y,
+                  b.aimX,
+                  b.aimY,
+                  rand.random(4f, 6f) * b.fslope(),
+                  rand.random(360f, 720f),
+                  rand.random(360f) - Time.time * rand.random(4f, 7f)
                 )
               }
             }
           }
         }
 
-        parts.addAll(object : CustomPart() {
+        parts.addAll(object :CustomPart() {
           init {
             layer = Layer.effect
             progress = PartProgress.warmup
@@ -390,7 +404,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
         })
       }
 
-      val subBull: BulletType = object : BulletType() {
+      val subBull: BulletType = object :BulletType() {
         init {
           damage = 62f
           speed = 5f
@@ -422,11 +436,18 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
             val realAimX = if (b.aimX < 0) b.x else b.aimX
             val realAimY = if (b.aimY < 0) b.y else b.aimY
 
-            val target = if (b.aimTile != null && b.aimTile.build != null && b.aimTile.build.team !== b.team && collidesGround && !b.hasCollided(b.aimTile.build.id)) {
-              b.aimTile.build
-            } else {
-              Units.closestTarget(b.team, realAimX, realAimY, homingRange, Boolf { e: Unit? -> e != null && e.checkTarget(collidesAir, collidesGround) && !b.hasCollided(e.id) }, Boolf { t: Building? -> t != null && collidesGround && !b.hasCollided(t.id) })
-            }
+            val target =
+              if (b.aimTile != null && b.aimTile.build != null && b.aimTile.build.team !== b.team && collidesGround && !b.hasCollided(b.aimTile.build.id)) {
+                b.aimTile.build
+              } else {
+                Units.closestTarget(
+                  b.team,
+                  realAimX,
+                  realAimY,
+                  homingRange,
+                  Boolf { e: Unit? -> e != null && e.checkTarget(collidesAir, collidesGround) && !b.hasCollided(e.id) },
+                  Boolf { t: Building? -> t != null && collidesGround && !b.hasCollided(t.id) })
+              }
 
             if (target != null) {
               Tmp.v1.set(target).sub(b).setLength(homingPower).scl(Time.delta)
@@ -436,11 +457,11 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
           }
         }
       }
-      var DataWeaponMount.SHOOTERS: Array<Shooter?> by AttachedProperty{arrayOfNulls(3)}
-      var DataWeaponMount.TIMER: Interval by AttachedProperty{Interval()}
+      var DataWeaponMount.SHOOTERS: Array<Shooter?> by AttachedProperty { arrayOfNulls(3) }
+      var DataWeaponMount.TIMER: Interval by AttachedProperty { Interval() }
       override fun init(unit: Unit?, mount: DataWeaponMount) {
         val shooters: Array<Shooter?> = arrayOfNulls(3)
-        for (i in shooters.indices) {
+        for(i in shooters.indices) {
           shooters[i] = Shooter()
         }
         mount.SHOOTERS = shooters
@@ -449,7 +470,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
       override fun update(unit: Unit?, mount: DataWeaponMount) {
         val shooters: Array<Shooter?> = mount.SHOOTERS
         val timer: Interval = mount.TIMER
-        for (shooter in shooters) {
+        for(shooter in shooters) {
           val v: Vec2 = MathTransform.fourierSeries(Time.time, *shooter!!.param).scl(mount.warmup)
           Tmp.v1.set(mount.weapon.x, mount.weapon.y).rotate(unit!!.rotation - 90)
           shooter.x = Tmp.v1.x + v.x
@@ -458,11 +479,11 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
         }
 
         if (mount.warmup > 0.8f && timer.get(120f)) {
-          for (i in shooters.indices) {
+          for(i in shooters.indices) {
             val shooter = shooters[i]
             Time.run(i * 40f) {
               SglFx.explodeImpWaveMini.at(unit!!.x + shooter!!.x, unit.y + shooter.y, SglDrawConst.matrixNet)
-              for (l in 0..9) {
+              for(l in 0..9) {
                 Time.run(l * 4f) {
                   val v: Vec2 = MathTransform.fourierSeries(Time.time, *shooter.param).scl(mount.warmup)
                   subBull.create(unit, unit.team, unit.x + shooter.x, unit.y + shooter.y, Angles.angle(v.x, v.y), 0.2f)
@@ -485,7 +506,8 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
         t.table { it ->
           it.left().defaults().left()
           it.add(Core.bundle.format("bullet.interval", 15))
-          it.button(Icon.downOpen, Styles.emptyi) { coll.toggle(false) }.update { i -> i.style.imageUp = (if (!coll.isCollapsed) Icon.upOpen else Icon.downOpen) }.size(8f).padLeft(16f).expandX()
+          it.button(Icon.downOpen, Styles.emptyi) { coll.toggle(false) }
+            .update { i -> i.style.imageUp = (if (!coll.isCollapsed) Icon.upOpen else Icon.downOpen) }.size(8f).padLeft(16f).expandX()
         }
         t.row()
         t.add(coll).padLeft(16f)
@@ -555,7 +577,7 @@ class 辉夜 : SglUnitType<SglUnitEntity>("kaguya", SglUnitEntity::class.java) {
     var y: Float = 0f
 
     init {
-      for (d in 0..2) {
+      for(d in 0..2) {
         param[d * 3] = Mathf.random(0.5f, 3f) / (d + 1) * Mathf.randomSign()
         param[d * 3 + 1] = Mathf.random(0f, 360f)
         param[d * 3 + 2] = Mathf.random(18f, 48f) / ((d + 1) * (d + 1))

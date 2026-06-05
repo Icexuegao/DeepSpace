@@ -28,6 +28,7 @@ import mindustry.gen.Unit
 import mindustry.graphics.Drawf
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
+import mindustry.type.Item
 import mindustry.type.ItemStack
 import mindustry.type.UnitType
 import mindustry.type.Weapon
@@ -39,7 +40,7 @@ import kotlin.math.min
 import kotlin.Unit as KUnit
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
-open class IceUnitType(name: String, clazz: Class<out Unit> = Entity::class.java, applys: IceUnitType.() -> KUnit = {}) :UnitType(name),
+open class IceUnitType(name: String, clazz: Class<out Unit> = Entity::class.java) :UnitType(name),
  UnitConfigurator, Localizable {
   companion object {
     var imineLaserRegion: TextureRegion by LazyTextureSingleDelegate("minelaser".appendModName())
@@ -51,13 +52,14 @@ open class IceUnitType(name: String, clazz: Class<out Unit> = Entity::class.java
   override var localizedName: String by UnlockableContent::localizedName
   override var description: String by UnlockableContent::description
   override var details: String by UnlockableContent::details
+  private var requirements = arrayOf(IItems.低碳钢 to 100)
 
-  private var requirements: Array<ItemStack> = arrayOf(ItemStack(IItems.低碳钢, 100))
+  public infix fun  Item.to(that: Int): ItemStack = ItemStack(this, that)
 
   init {
-    constructor = EntityRegistry.getPutUnits(clazz)
-    applys(this)
 
+
+    constructor = EntityRegistry.getPutUnits(clazz)
   }
 
   fun requirements(vararg req: Any) {
@@ -438,7 +440,7 @@ open class IceUnitType(name: String, clazz: Class<out Unit> = Entity::class.java
       } else drawBody(unit)
     }
 
-    if (drawCell && unit !is Crawlc) drawCell(unit)
+
     Draw.scl(scl) //TODO this is a hack for neoplasm turrets
     if (unit.isAdded) {
       for(a in unit.abilities) {
@@ -446,6 +448,7 @@ open class IceUnitType(name: String, clazz: Class<out Unit> = Entity::class.java
         if (a is ArmorPlateAbility) a.draw(unit)
       }
     }
+    if (drawCell && unit !is Crawlc) drawCell(unit)
     drawWeapons(unit)
     if (drawItems) drawItems(unit)
     if (unit.isAdded) drawLight(unit)

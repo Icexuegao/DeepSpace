@@ -85,16 +85,18 @@ object SglTechThree :ResearchSDL() {
                     addContent(强化合金墙, 大型强化合金墙, 陶钢墙, 大型陶钢墙, 钴钢墙, 大型钴钢墙)
                   }
 
-                  research("皮肉之苦", 120) {
-                    addDependency(中阶防护2)
-                    addContent(生物钢墙, 大型生物钢墙)
-                  }
+
 
                   val 高阶防护1 = research("高阶防护1", 120) {
                     inspire = (PlaceBlockInspire(Blocks.daciteBoulder))
 
                     addDependency(中阶防护2)
                     addContent(相位合金墙, 大型相位合金墙, 装甲闸门)
+                  }
+
+                  research("皮肉之苦", 120) {
+                    addDependency(中阶防护2,高阶防护1)
+                    addContent(生物钢墙, 大型生物钢墙)
                   }
 
                   val researchReveal = ResearchReveal("reveal_test", 高阶防护1)
