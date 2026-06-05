@@ -87,7 +87,7 @@ class 甘霖 :IceUnitType("ganlin") {
     var b = object :BasicBulletType() {
       init {
         speed = 8f
-        damage = 213f
+        damage = 70f
         lifetime = 45f
         shrinkY = 0f
         ammoMultiplier = 1f
