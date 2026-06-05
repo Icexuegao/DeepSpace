@@ -24,7 +24,7 @@ class 萃取固化器 :NormalCrafter("concentrateSolidifier") {
     itemCapacity = 20
     craftEffect = IceEffects.square(IItems.铪锭.color, length = 8f)
     drawers = (DrawDefault())
-    requirements(Category.crafting, IItems.高碳钢, 100, IItems.铬锭, 80, IItems.黄铜锭, 50, IItems.铜锭, 30)
+    requirements(Category.crafting, IItems.高碳钢, 100, IItems.铱板, 80, IItems.黄铜锭, 50, IItems.钴钢, 30, IItems.单晶硅,30)
 
     newConsume().apply {
       time(90f)
