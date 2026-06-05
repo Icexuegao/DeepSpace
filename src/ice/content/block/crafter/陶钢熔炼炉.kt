@@ -29,7 +29,7 @@ class 陶钢熔炼炉 :NormalCrafter("ceramicSteelFurnace") {
     ambientSoundVolume = 0.02f
     ambientSound = ISounds.beamLoop
     drawers = DrawMulti(DrawDefault(), DrawFlame())
-    requirements(Category.crafting, IItems.铬锭, 130, IItems.钴钢, 45, IItems.铱板, 55, IItems.导能回路, 45)
+    requirements(Category.crafting, IItems.铬锭, 130, IItems.钴钢, 45, IItems.铱板, 55)
 
     newConsume().apply {
       time(60f)
