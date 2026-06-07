@@ -18,7 +18,7 @@ class 重创 :MissileUnitType("unit_heavyDamageMissile") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "重创"
+        localizedName = "重创"
       }
     }
 

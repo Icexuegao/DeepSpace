@@ -22,7 +22,7 @@ class 火狱 :MissileUnitType("unit_hellFire") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "火狱"
+        localizedName = "火狱"
       }
     }
 

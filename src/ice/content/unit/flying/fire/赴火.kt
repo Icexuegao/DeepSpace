@@ -19,7 +19,7 @@ class 赴火 :IceUnitType("fuFire") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "赴火"
+        localizedName = "赴火"
         description = "重型空中突击单位.投掷高爆航弹并辅以机炮攻击敌人,高级气动外壳保证飞行速度在大多数情况下不会降低,开火时减少所受伤害"
       }
     }

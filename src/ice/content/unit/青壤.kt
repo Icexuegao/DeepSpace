@@ -24,7 +24,7 @@ class 青壤 :IceUnitType("schizovegeta", SchizovegetaUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "青壤"
+        localizedName = "青壤"
         description = "小型陆行污染生物.无法攻击,只能笨拙地蠕行移动.死亡后会释放出数颗丰瘤."
       }
     }

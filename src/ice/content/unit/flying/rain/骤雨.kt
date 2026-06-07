@@ -10,7 +10,7 @@ class 骤雨 :IceUnitType("unit_torrentialRain") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "骤雨"
+        localizedName = "骤雨"
         description = "轻型空中突击单位.发射聚焦激光攻击敌人"
       }
     }

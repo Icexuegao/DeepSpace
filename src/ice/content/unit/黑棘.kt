@@ -26,7 +26,7 @@ class 黑棘 :IceUnitType("unit_blackThorns") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "黑棘"
+        localizedName = "黑棘"
         description = "重型空中突击单位.向远处敌人发射导弹与穿透激光,对近距离目标则切换为穿透激光与空爆火箭快速打击"
       }
     }
