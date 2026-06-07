@@ -32,7 +32,7 @@ class 毒刺 :IceUnitType("poisonBarb") {
     trailLength = 8
     outlineColor = "1F1F1F".toColor()
     targetFlags = arrayOf(BlockFlag.reactor, BlockFlag.generator, BlockFlag.factory)
-    abilities.add(UnitSpawnAbility(this, 1800f).apply {
+    abilities.add(UnitSpawnAbility(this, 1, 1800f).apply {
       color = Pal.remove
       alpha = 0.4f
     })

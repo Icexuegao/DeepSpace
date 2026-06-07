@@ -33,7 +33,6 @@ class 悲鸣 :IceUnitType("scream", TankUnit::class.java) {
         localizedName = "悲鸣"
         description =
           "重型地面突击单位.对远距离敌人发射集束弹轰击,对近距离敌人则切换为速射粒子炮与弧光冲击炮.对附近的友军提供庇护和突袭效果.配备单位构筑器,会随时间向战场投放\"重压\""
-        details = "战场沉默的天灾,\n可怜蝼蚁的悲鸣."
       }
     }
     squareShape = true
@@ -74,11 +73,10 @@ class 悲鸣 :IceUnitType("scream", TankUnit::class.java) {
     }, StatusFieldAbility(IStatus.突袭, 600f, 480f, 240f).apply {
       onShoot = true
       activeEffect = Fx.none
-    }, UnitSpawnAbility(重压, 1200f).apply {
+    }, UnitSpawnAbility(重压,5, 1200f).apply {
       color = Pal.remove
       alpha = 0.4f
-      spawnY = -41f
-      display = false
+      sY = -41f
     })
     setWeapon("速射") {
       x = -19.5f
@@ -148,37 +146,37 @@ class 悲鸣 :IceUnitType("scream", TankUnit::class.java) {
         despawnEffect = Fx.none
         hitEffect = MultiEffect(
           ParticleEffect().apply {
-            region = "blank"
-            particles = 3
-            lifetime = 33f
-            sizeFrom = 5f
-            sizeTo = 0f
-            cone = 360f
-            offset = 45f
-            length = 55f
-            baseLength = 33f
-            interp = Interp.pow5Out
-            sizeInterp = Interp.pow10In
-            colorFrom = Color.valueOf("FFD37F")
-            colorTo = Color.valueOf("F9C27A")
-          }, ParticleEffect().apply {
-            particles = 9
-            lifetime = 33f
-            line = true
-            strokeFrom = 2f
-            lenFrom = 11f
-            lenTo = 0f
-            cone = 360f
-            length = 80f
-            colorFrom = Color.valueOf("FFD37F")
-            colorTo = Color.valueOf("F9C27A")
-          }, WaveEffect().apply {
-            lifetime = 15f
-            sizeTo = 80f
-            strokeFrom = 4f
-            colorFrom = Color.valueOf("F9C27A")
-            colorTo = Color.valueOf("FFD37F")
-          }, Fx.hitSquaresColor
+          region = "blank"
+          particles = 3
+          lifetime = 33f
+          sizeFrom = 5f
+          sizeTo = 0f
+          cone = 360f
+          offset = 45f
+          length = 55f
+          baseLength = 33f
+          interp = Interp.pow5Out
+          sizeInterp = Interp.pow10In
+          colorFrom = Color.valueOf("FFD37F")
+          colorTo = Color.valueOf("F9C27A")
+        }, ParticleEffect().apply {
+          particles = 9
+          lifetime = 33f
+          line = true
+          strokeFrom = 2f
+          lenFrom = 11f
+          lenTo = 0f
+          cone = 360f
+          length = 80f
+          colorFrom = Color.valueOf("FFD37F")
+          colorTo = Color.valueOf("F9C27A")
+        }, WaveEffect().apply {
+          lifetime = 15f
+          sizeTo = 80f
+          strokeFrom = 4f
+          colorFrom = Color.valueOf("F9C27A")
+          colorTo = Color.valueOf("FFD37F")
+        }, Fx.hitSquaresColor
         )
       }
       parts.add(RegionPart().apply {
@@ -257,37 +255,37 @@ class 悲鸣 :IceUnitType("scream", TankUnit::class.java) {
         despawnEffect = Fx.none
         hitEffect = MultiEffect(
           ParticleEffect().apply {
-            region = "blank"
-            particles = 3
-            lifetime = 33f
-            sizeFrom = 5f
-            sizeTo = 0f
-            cone = 360f
-            offset = 45f
-            length = 55f
-            baseLength = 33f
-            interp = Interp.pow5Out
-            sizeInterp = Interp.pow10In
-            colorFrom = Color.valueOf("FFD37F")
-            colorTo = Color.valueOf("F9C27A")
-          }, ParticleEffect().apply {
-            particles = 9
-            lifetime = 33f
-            line = true
-            strokeFrom = 2f
-            lenFrom = 11f
-            lenTo = 0f
-            cone = 360f
-            length = 80f
-            colorFrom = Color.valueOf("FFD37F")
-            colorTo = Color.valueOf("F9C27A")
-          }, WaveEffect().apply {
-            lifetime = 15f
-            sizeTo = 80f
-            strokeFrom = 4f
-            colorFrom = Color.valueOf("F9C27A")
-            colorTo = Color.valueOf("FFD37F")
-          }, Fx.hitSquaresColor
+          region = "blank"
+          particles = 3
+          lifetime = 33f
+          sizeFrom = 5f
+          sizeTo = 0f
+          cone = 360f
+          offset = 45f
+          length = 55f
+          baseLength = 33f
+          interp = Interp.pow5Out
+          sizeInterp = Interp.pow10In
+          colorFrom = Color.valueOf("FFD37F")
+          colorTo = Color.valueOf("F9C27A")
+        }, ParticleEffect().apply {
+          particles = 9
+          lifetime = 33f
+          line = true
+          strokeFrom = 2f
+          lenFrom = 11f
+          lenTo = 0f
+          cone = 360f
+          length = 80f
+          colorFrom = Color.valueOf("FFD37F")
+          colorTo = Color.valueOf("F9C27A")
+        }, WaveEffect().apply {
+          lifetime = 15f
+          sizeTo = 80f
+          strokeFrom = 4f
+          colorFrom = Color.valueOf("F9C27A")
+          colorTo = Color.valueOf("FFD37F")
+        }, Fx.hitSquaresColor
         )
       }
       parts.add(RegionPart().apply {
