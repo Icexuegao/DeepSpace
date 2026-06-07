@@ -5,9 +5,7 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Lines
 import arc.math.Angles
 import arc.math.Mathf
-import arc.math.geom.Rect
 import ice.entities.bullet.BombBulletType
-
 import ice.world.content.unit.IceUnitType
 import mindustry.content.Fx
 import mindustry.entities.Effect
@@ -33,7 +31,7 @@ class 破军 :IceUnitType("breakArmy", TankUnit::class.java) {
     drawCell = false
     omniMovement = false
     rotateMoveFirst = true
-    treadRects = arrayOf(Rect(16f - (128 / 2), 11f - (149 / 2), 33f, 127f))
+    setTreadRects(16f, 11f, 33f, 127f, 128f, 150f)
     setWeapon("weapon") {
       x = 0f
       shootY += 8f
@@ -45,7 +43,7 @@ class 破军 :IceUnitType("breakArmy", TankUnit::class.java) {
       shootSound = Sounds.explosionDull
       shootCone = 2f
       bullet = BombBulletType(50f, 8 * 5f, "missile-large").apply {
-        drag=0f
+        drag = 0f
         makeFire = true
         collidesTiles = true
         collides = true
