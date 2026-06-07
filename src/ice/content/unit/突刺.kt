@@ -12,7 +12,7 @@ class 突刺 :IceUnitType("barbProtrusion", TankUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "突刺"
+        localizedName = "突刺"
         description = "轻型地面突击单位.发射炮弹攻击敌人"
       }
     }

@@ -21,7 +21,7 @@ class 冥 :IceUnitType("unit_pluto") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "冥"
+        localizedName = "冥"
       }
     }
     circleTarget = true

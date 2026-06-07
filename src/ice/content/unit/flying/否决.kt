@@ -44,7 +44,7 @@ class 否决 :IceUnitType("units_veto") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "否决"
+        localizedName = "否决"
         description =
           "重型空中突击单位.舰首舰尾发射导弹,四门近程激光与两门远程磁轨炮交替射击,中央主炮投送高爆弹.加装护盾辅助发生器以维持友军护盾持续作战"
         details = "否决,人类?"
