@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.func.Func
 import ice.ai.CarryTaskAI
@@ -25,7 +25,7 @@ class 和弦 :IceUnitType("chord") {
     controller = Func { CarryTaskAI() }
     localization {
       zh_CN {
-        this.localizedName = "和弦"
+        localizedName = "和弦"
         description = "轻型空中工程单位.配备大容量货舱与稳定悬挂系统,专精于物资运输任务.常三机编队协同作业"
       }
     }

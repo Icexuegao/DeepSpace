@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.Color
 import arc.math.Interp
@@ -16,7 +16,7 @@ class 火花 :MissileUnitType("unit_spark") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "火花"
+        localizedName = "火花"
       }
     }
     health = 385f

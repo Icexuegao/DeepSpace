@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.Color
 import ice.content.IStatus
@@ -15,7 +15,7 @@ class 爆蚊 :IceUnitType("explosiveMosquito") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "爆蚊"
+        localizedName = "爆蚊"
         description = "轻型空中突击单位.向敌人发起自杀式攻击"
         details = "因其酷似蚊虫的行为方式而得名."
       }

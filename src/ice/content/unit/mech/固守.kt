@@ -1,4 +1,4 @@
-package ice.content.unit.mech
+﻿package ice.content.unit.mech
 
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
@@ -13,7 +13,7 @@ class 固守 :IceUnitType("unit_hold", MechUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "固守"
+        localizedName = "固守"
         description = "中型地面突击单位.连续发射穿透性激光束攻击敌人,并以自身为中心投射一片立场护盾.会缓慢恢复生命值,开火时减少所受伤害"
       }
     }

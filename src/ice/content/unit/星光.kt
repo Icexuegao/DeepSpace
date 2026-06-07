@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.Color
 import arc.math.Interp
@@ -17,7 +17,7 @@ class 星光 :MissileUnitType("starlight") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "星光"
+        localizedName = "星光"
       }
     }
     health = 130f

@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.func.Cons
 import arc.graphics.Color
@@ -47,7 +47,7 @@ class 裂片集群 :IceUnitType("clusterLobes", ClusterLobesUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "裂片集群"
+        localizedName = "裂片集群"
         description = "超重型空中毁灭单位."
         details = "阴影宣告到来,\n灰白落定尘埃."
       }

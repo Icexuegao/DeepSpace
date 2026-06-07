@@ -1,4 +1,4 @@
-package ice.content.unit.flying
+﻿package ice.content.unit.flying
 
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType

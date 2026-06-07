@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.Color
 import arc.math.Interp
@@ -28,7 +28,7 @@ class 甘霖 :IceUnitType("ganlin") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "甘霖"
+        localizedName = "甘霖"
         description = "重型地面支援单位.交替发射机炮攻击敌人,同时对友军发射治疗光线.在场时会治疗附近的友军,缓慢恢复生命值"
       }
     }

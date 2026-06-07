@@ -1,4 +1,4 @@
-package ice.content.unit.mech
+﻿package ice.content.unit.mech
 
 import arc.graphics.Color
 import ice.world.content.unit.IceUnitType
@@ -14,7 +14,7 @@ class 围护 :IceUnitType("unit_enclosure", MechUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "围护"
+        localizedName = "围护"
         description = "轻型地面突击单位.快速发射散射激光打击敌人,对近距离目标尤为有效,会缓慢恢复生命值,并在开火时减少所受伤害"
       }
     }

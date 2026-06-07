@@ -1,4 +1,4 @@
-package ice.content.unit.flying.fire
+﻿package ice.content.unit.flying.fire
 
 import ice.content.IItems
 import ice.entities.bullet.BombBulletType
@@ -14,7 +14,7 @@ class 扑火 :IceUnitType("putotFire") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "扑火"
+        localizedName = "扑火"
         description = "轻型空中突击单位.以极高的机动性持续骚扰敌军,开火时减少所受伤害"
       }
     }

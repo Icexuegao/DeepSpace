@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.math.Interp
 import ice.content.IStatus
@@ -22,7 +22,7 @@ class 火狱 :MissileUnitType("unit_hellFire") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "火狱"
+        localizedName = "火狱"
       }
     }
 

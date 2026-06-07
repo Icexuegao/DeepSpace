@@ -1,4 +1,4 @@
-package ice.content.unit.flying.rain
+﻿package ice.content.unit.flying.rain
 
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
@@ -16,7 +16,7 @@ class 暴雨 :IceUnitType("unit_storm") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "暴雨"
+        localizedName = "暴雨"
         description = "中型空中突击单位.发射双联球状闪电攻击敌人"
       }
     }

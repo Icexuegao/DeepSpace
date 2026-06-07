@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.Color
 import arc.math.Interp
@@ -21,7 +21,7 @@ class 玄 :IceUnitType("unit_hyun") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "玄"
+        localizedName = "玄"
       }
     }
     circleTarget = true

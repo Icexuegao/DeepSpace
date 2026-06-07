@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.Color
 import ice.entities.bullet.LaserBulletType
@@ -16,7 +16,7 @@ class 伊普西龙 :IceUnitType("unit_ipsiglon") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "伊普西龙"
+        localizedName = "伊普西龙"
       }
     }
     coreUnitDock = true

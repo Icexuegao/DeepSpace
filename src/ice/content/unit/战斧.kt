@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.Color
 import ice.content.IUnitTypes
@@ -20,7 +20,7 @@ class 战斧 :MissileUnitType("unit_warAxe") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "战斧"
+        localizedName = "战斧"
       }
     }
     health = 360f

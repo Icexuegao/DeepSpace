@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import ice.content.IStatus
 import ice.content.IUnitTypes

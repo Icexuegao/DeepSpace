@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import ice.entities.bullet.base.BulletType
 import ice.graphics.IceColor
@@ -43,7 +43,7 @@ class 仆从 :IceUnitType("footman") {init {
   }
   localization {
     zh_CN {
-      this.localizedName = "仆从"
+      localizedName = "仆从"
       description = "中型空中突击单位.喷射大范围高温等离子体攻击敌人.多用于打击密集小型敌人"
       details = "传教者的专属防空护卫\n确定是护卫不是火刑柱?"
     }

@@ -1,4 +1,4 @@
-package ice.content.unit.naval
+﻿package ice.content.unit.naval
 
 import ice.entities.bullet.ArtilleryBulletType
 import ice.world.content.unit.IceUnitType
@@ -12,7 +12,7 @@ class 履行 :IceUnitType("unit_execution", UnitWaterMove::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "履行"
+        localizedName = "履行"
         description = "轻型海栖突击单位.发射炮弹与导弹攻击敌人,在见证的火力上进行了增强"
       }
     }

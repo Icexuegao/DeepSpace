@@ -1,4 +1,4 @@
-package ice.content.unit.flying
+﻿package ice.content.unit.flying
 
 import arc.Core
 import arc.graphics.g2d.Draw

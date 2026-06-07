@@ -1,4 +1,4 @@
-package ice.content.unit.flying.fire
+﻿package ice.content.unit.flying.fire
 
 import ice.content.IItems
 import ice.entities.bullet.BombBulletType
@@ -14,7 +14,7 @@ class 趋火 :IceUnitType("tuihuo") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "趋火"
+        localizedName = "趋火"
         description = "轻型空中突击单位.快速投掷航弹杀伤敌军,开火时减少所受伤害"
       }
     }

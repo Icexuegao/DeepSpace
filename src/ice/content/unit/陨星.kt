@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.Color
 import arc.struct.Seq
@@ -22,7 +22,7 @@ class 陨星 :IceUnitType("meteoricStar") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "陨星"
+        localizedName = "陨星"
         description =
           "重型空中突击单位.投送湍能弹并辅以四门机炮交替攻击敌人,侧翼分别投射弧形护盾抵御攻击.以闪电场电击附近敌军并治疗友军,配备裂解炮抵御敌人的攻击"
       }

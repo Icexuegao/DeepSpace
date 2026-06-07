@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.g2d.Draw
 import ice.entities.bullet.RandomDamageBulletType
@@ -16,7 +16,7 @@ class 路西法 :IceUnitType("lucifer") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "路西法"
+        localizedName = "路西法"
         description = " "
       }
     }

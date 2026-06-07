@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.scene.ui.layout.Table
 import ice.content.IStatus

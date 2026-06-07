@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.util.Time
 import arc.util.io.Reads
@@ -31,7 +31,7 @@ class 丰穰之瘤 :IceUnitType("richTumor", RichTumorUnit::class.java) {
     deathExplosionEffect = IceEffects.bloodNeoplasma
     localization {
       zh_CN {
-        this.localizedName = "丰瘤"
+        localizedName = "丰瘤"
         description = "小型陆行污染生物.无法移动与攻击,不会被任何单位视为目标.落地后进入短暂的潜伏期,随后将下方地表同化为活性肿瘤地"
       }
     }

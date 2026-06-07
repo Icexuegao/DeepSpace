@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import ice.entities.bullet.RailBulletType
 import ice.world.content.unit.IceUnitType
@@ -13,7 +13,7 @@ class 毒刺 :IceUnitType("poisonBarb") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "毒刺"
+        localizedName = "毒刺"
         description = "轻型空中突击单位.发射穿透性激光攻击敌人,每隔一段时间会克隆自身"
         details = "帝国科技的终极产物,几乎可以无限制地自我增殖"
       }

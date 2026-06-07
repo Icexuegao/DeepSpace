@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.math.Interp
 import ice.content.IStatus
@@ -18,7 +18,7 @@ class 重创 :MissileUnitType("unit_heavyDamageMissile") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "重创"
+        localizedName = "重创"
       }
     }
 

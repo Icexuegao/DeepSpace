@@ -1,4 +1,4 @@
-package ice.content.unit.flying.rain
+﻿package ice.content.unit.flying.rain
 
 import arc.func.Func2
 import arc.graphics.Color

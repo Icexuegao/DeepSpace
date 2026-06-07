@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.func.Prov
 import arc.graphics.g2d.Draw

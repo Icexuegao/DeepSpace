@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.Events
 import arc.graphics.Color
@@ -26,7 +26,7 @@ class 涤罪 :IceUnitType("unit_clearingGround", TankUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "涤罪"
+        localizedName = "涤罪"
         description = "涤罪是神殿[净罪计划]的产物"
       }
     }

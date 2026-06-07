@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.graphics.Color
 import ice.entities.bullet.base.BasicBulletType
@@ -17,7 +17,7 @@ class 陨石 :IceUnitType("meteorite") {
   init {
     localization {
       zh_CN {
-        this.localizedName = "陨石"
+        localizedName = "陨石"
         description = "轻型空中突击单位.以机炮持续扫射攻击敌人,以闪电场电击附近敌军并治疗友军.配备裂解炮抵御敌人的攻击"
       }
     }

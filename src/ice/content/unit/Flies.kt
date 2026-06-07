@@ -1,4 +1,4 @@
-package ice.content.unit
+﻿package ice.content.unit
 
 import arc.Core
 import arc.graphics.g2d.Draw
@@ -18,7 +18,7 @@ class Flies :IceUnitType("flies", FliesUnit::class.java) {
   init {
     localization {
       zh_CN {
-        this.localizedName = "糜蝇"
+        localizedName = "糜蝇"
         description = "小型飞行污染生物.常成群结队出现,并对任何被视作威胁的个体发动自杀式袭击"
       }
     }
