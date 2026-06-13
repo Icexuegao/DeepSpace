@@ -18,10 +18,10 @@ class ReactiveState<T>(private var value: T) {
 
   fun update(updater: (T) -> T) = set(updater(value))
 
-  fun subscribe(listener: (T) -> Unit): Subscription {
+  fun subscribe(immediately: Boolean = true, listener: (T) -> Unit): Subscription {
     listeners.add(listener)
     // 立即通知当前值
-    listener(value)
+    if (immediately) listener(value)
     return Subscription { listeners.remove(listener) }
   }
 

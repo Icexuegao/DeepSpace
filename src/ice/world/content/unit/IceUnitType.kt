@@ -40,8 +40,7 @@ import kotlin.math.min
 import kotlin.Unit as KUnit
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
-open class IceUnitType(name: String, clazz: Class<out Unit> = Entity::class.java) :UnitType(name),
- UnitConfigurator, Localizable {
+open class IceUnitType(name: String, clazz: Class<out Unit> = Entity::class.java) :UnitType(name), UnitConfigurator, Localizable {
   companion object {
     var imineLaserRegion: TextureRegion by LazyTextureSingleDelegate("minelaser".appendModName())
     var imineLaserEndRegion: TextureRegion by LazyTextureSingleDelegate("minelaser-end".appendModName())
@@ -54,11 +53,9 @@ open class IceUnitType(name: String, clazz: Class<out Unit> = Entity::class.java
   override var details: String by UnlockableContent::details
   private var requirements = arrayOf(IItems.低碳钢 to 100)
 
-  public infix fun  Item.to(that: Int): ItemStack = ItemStack(this, that)
+  infix fun Item.to(that: Int): ItemStack = ItemStack(this, that)
 
   init {
-
-
     constructor = EntityRegistry.getPutUnits(clazz)
   }
 

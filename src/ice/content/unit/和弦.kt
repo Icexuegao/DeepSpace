@@ -7,6 +7,12 @@ import ice.world.content.unit.IceUnitType
 
 class 和弦 :IceUnitType("chord") {
   init {
+    localization {
+      zh_CN {
+        localizedName = "和弦"
+        description = "轻型空中工程单位.配备大容量货舱与稳定悬挂系统,专精于物资运输任务.常三机编队协同作业"
+      }
+    }
     drag = 0.017f
     accel = 0.05f
     armor = 8f
@@ -23,11 +29,5 @@ class 和弦 :IceUnitType("chord") {
     logicControllable = false
     playerControllable = false
     controller = Func { CarryTaskAI() }
-    localization {
-      zh_CN {
-        localizedName = "和弦"
-        description = "轻型空中工程单位.配备大容量货舱与稳定悬挂系统,专精于物资运输任务.常三机编队协同作业"
-      }
-    }
   }
 }

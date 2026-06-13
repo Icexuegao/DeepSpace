@@ -25,12 +25,12 @@ object EntityRegistry {
     providers[name] ?: throw IllegalArgumentException("Unit $name 没有注册,请先调用 getPutUnits")
 
   /**根据实体类型获取其对应的ID
-   * @param type 实体类的Class对象,必须是Entityc或其子类
+   * @param clazz 实体类的Class对象,必须是Entityc或其子类
    * @return 该实体类型对应的ID
    * @throws Exception 如果该实体类型未注册（ID为-1时抛出）*/
-  fun getId(type: Class<out Entityc>): Int {
-    val id = ids[type, -1]
-    return if (id == -1) throw Exception("Unit ${type.canonicalName} 没有注册") else id
+  fun getId(clazz: Class<out Entityc>): Int {
+    val id = ids[clazz, -1]
+    return if (id == -1) throw Exception("Unit ${clazz.canonicalName} 没有注册") else id
   }
 
   /**获取并注册指定Unit类的提供者,会自动注册[EntityMapping]

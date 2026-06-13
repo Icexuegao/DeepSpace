@@ -4,8 +4,6 @@ import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
 import arc.graphics.g2d.Lines
 import ice.graphics.IceColor
-import universecore.util.toTrimmedString
-import universecore.ui.bundle.Localizable
 import ice.world.meta.IceStats
 import mindustry.Vars
 import mindustry.ctype.UnlockableContent
@@ -20,6 +18,8 @@ import mindustry.world.Block
 import mindustry.world.consumers.ConsumeItems
 import mindustry.world.consumers.ConsumeLiquids
 import mindustry.world.meta.BuildVisibility
+import universecore.ui.bundle.Localizable
+import universecore.util.toTrimmedString
 import kotlin.math.roundToInt
 
 @Suppress("PROPERTY_HIDES_JAVA_FIELD")
@@ -31,6 +31,9 @@ open class IceBlock(name: String) : Block(name), Localizable {
       })
     }
 
+    fun Block.requirements(category: Category, vararg items: ItemStack) {
+      requirements(category, items)
+    }
     fun Block.requirements(category: Category, vararg items: Any) {
       requirements(category, ItemStack.with(*items))
     }

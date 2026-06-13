@@ -17,7 +17,6 @@ import mindustry.graphics.Pal
 import mindustry.type.UnitType
 import universecore.struct.AttachedProperty
 import universecore.ui.bundle.Localizable
-import universecore.util.log
 import universecore.util.toTrimmedString
 import kotlin.math.roundToInt
 
@@ -50,7 +49,6 @@ open class UnitSpawnAbility(var u: UnitType, var size: Int = 1, var time: Float,
   }
 
   override fun update(unit: Unit) {
-    data.log()
     if (data.roundToInt() >= size) return
     timer += Time.delta * Vars.state.rules.unitBuildSpeed(unit.team)
 

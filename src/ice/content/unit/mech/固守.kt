@@ -30,7 +30,6 @@ class 固守 :IceUnitType("unit_hold", MechUnit::class.java) {
     mechLandShake = 3f
     riseSpeed = 0.05f
     mechFrontSway = 0.55f
-    ammoCapacity = 12
     abilities.add(ForceFieldAbility(60f, 1.5f, 450f, 240f).apply {
       sides = 4
     }, ArmorPlateAbility().apply {

@@ -19,6 +19,7 @@ import ice.core.SettingValue
 import ice.graphics.IStyles
 import ice.graphics.IceColor
 import ice.ui.fragment.ConversationFragment
+import ice.ui.galgame.DialogueEngineFragment
 import ice.ui.menusDialog.AchievementDialog
 import ice.world.meta.IceEffects
 import mindustry.Vars
@@ -166,6 +167,7 @@ object DeBugFragment {
         Groups.unit.find { it1 -> it1.type == IUnitTypes.青壤 }?.kill()
       }
       button("effect", Icon.effect) {
+        DialogueEngineFragment.showDialogue()
       }
     }.width(130f).height(211f)
     table.add(pane).expandY().top()

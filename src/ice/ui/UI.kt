@@ -11,6 +11,7 @@ import ice.core.IFiles
 import ice.core.SettingValue
 import ice.ui.dialog.IcePlanetDialog
 import ice.ui.fragment.ConversationFragment
+import ice.ui.galgame.DialogueEngineFragment
 import ice.ui.menusDialog.DataDialog
 import mindustry.Vars
 import mindustry.game.EventType
@@ -75,6 +76,7 @@ object UI {
     DeBugFragment.build(Vars.ui.hudGroup)
     //  BossHealthFragment.build(Vars.ui.hudGroup)
     ConversationFragment.build(Vars.ui.hudGroup)
+    DialogueEngineFragment.build(Vars.ui.hudGroup)
     //if (SettingValue.启用调试模式)// ShowProgress.build(Vars.ui.hudGroup)
     //  CharacterScenarioFragment.build(Vars.ui.hudGroup)
 
