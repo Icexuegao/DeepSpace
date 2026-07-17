@@ -6,7 +6,7 @@
 
 ---
 # ___DeepSpace___
-<img src="./assets/preview.png" alt = "icon" width = "200"/>
+<img src="./icon.png" alt = "icon" width = "200"/>
 
 一个 ___多方位内容___ 的 Mindustry __kotlin/java__ 模组.
 
