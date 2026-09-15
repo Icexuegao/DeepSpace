@@ -1,12 +1,12 @@
 [简体中文](README.md)|English 
 
 <div align="center">
-    <img src="./assets/spritese/ice/ui/icon/logo.png" alt="logo" width="750"/>
+    <img src="logo.png" alt="logo" width="750"/>
 </div>
 
 ---
 # ___DeepSpace___
-<img src="./assets/preview.png" alt = "icon" width = "200"/>
+<img src="icon.png" alt = "icon" width = "200"/>
 
 A ___multi-faceted content___ Mindustry __Kotlin/Java__ mod.
 
